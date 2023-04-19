@@ -1,218 +1,352 @@
-<!doctype html>
-
-<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-
-<link href="./simple.css" rel="stylesheet" type="text/css" />
-<script src="./pdf-lib.min.js"></script>
-<title>Michigan ID Form Collator</title>
-
-<style type="text/css">
-	form {
-		display: grid;
-		grid-template-columns: minmax(auto, 20ch) 1fr;
-		grid-gap: 1rem;
-		align-items: center;
-	}
-
-	form div {
-		text-align: right;
-		line-height: 1;
-	}
-
-	form span {
-		font-size: smaller;
-		color: #777;
-	}
-</style>
-
-<script type="text/javascript">
- let zips;
-
- // This should come in handy for documentation purposes.
- let sampleData = {
-     legalName: "Yaaaaaaaaay Newfriend",
-     chosenName: "",
-     maritalStatus: "",
-     reasonForNameChange: "",
-     sealBirthCertificate: true,
-     birthplace: {
-         city: "",
-         state: "",
-         foreignCountry: "",
-     }
-
-     dateOfBirth: {
-         day: 1,
-         month: 1,
-         year: 1970,
-     },
-
-     ethnicity: "",
-     race: "",
-
-     assignedSex: "",
-     gender: "",
-     mothersBirthName: "",
-     mothersDateOfBirth: {
-         day: 1,
-         month: 1,
-         year: 1970
-     },
-
-     fathersBirthName: "",
-     fathersDateOfBirth: {
-         day: 1,
-         month: 1,
-         year: 1970
-     },
-
-     phone: "",
-
-     streetAddress: "",
-
-     city: "",
-     state: "",
-     zip: "",
-};
-
- fetch("./michigan-zips.json")
- 	.then(response => response.json())
- 	.then(obj => {zips = obj})
- 	.then(useZipLookup);
-
- function zipLookup(zip) {
-	 for (county of Object.keys(zips)) {
-		 if (zips[county].includes(zip)) {
-			 if (county.includes(" - ")) {
-				 return county.split(" - ");
-			 }
-			 return [county, undefined];
-		 }
-	 }
-	 return [undefined, undefined];
- }
-
- function useZipLookup() {
-	 let zipField = document.getElementById("zip");
-	 let showCounty = document.getElementById("show-county");
-	 let showDistrict = document.getElementById("show-district");
-
-	 zipField.addEventListener("change", ev => {
-		 let [county, district] = zipLookup(zipField.value);
-		 showCounty.textContent = county;
-		 if (district) {
-			 showDistrict.textContent = `(${district} district)`;
-		 } else {
-             showDistrict.textContent = "";
-         }
-	 });
- }
-
-fetch("./ss-5.pdf")
- .then(response => response.arrayBuffer())
- .then(buf => PDFLib.PDFDocument.load(buf, {ignoreEncryption: true}))
- .then(console.log);
-
-</script>
-
-<header>
-	<h1>Michigan Gender Document Collator</h1>
-	<span>Fully automated trans rights</span>
-</header>
-<main>
-	<section>
-	<p><strong>What is this?</strong> In the wake of attacks on our rights, this tool exists to lessen the burden of filling out and filing all those forms to have the state legally affirm your gender. This may be necessary for your personal safety and/or to obtain affirming medical care.</p>
-
-	<p><strong>How do I use it?</strong> Select the forms that you require and fill in the necessary data. The forms will be filled and downloaded automatically. They should be reviewed for correctness and signed in black or blue ink before filing. You will also need to fill in your SSN and those of your parents, if known.</p>
-
-	<p><strong>How is my data secured?</strong> Everything happens client-side; that is to say, on your computer. Your personal data will not leave your browser. Filing location and fee information is determined by <a href="https://dhhs.michigan.gov/OLMWEB/EX/RF/Public/RFT/101.pdf">ZIP code lookup.</a></p>
-
-	<p>To protect against possible phishing attempts, this site will <strong>never ask for your or anyone else's SSN.</strong> You should also ensure that your browser points to <a href="https://transpapers.lgbt">https://transpapers.lgbt</a>; other addresses may not be secure.</p>
-	</section>
-
-	<section>
-		<fieldset>
-			<legend>I need to...</legend>
-			<input type="checkbox" name="change-name" id="change-name" checked /><label for="change-name">change my legal name.</label><br />
-			<input type="checkbox" name="change-gender-marker-id" id="change-gender-marker-id" checked /><label for="change-gender-marker-id">change the gender marker on my state ID/driver's license.</label><br />
-			<input type="checkbox" name="change-gender-marker-birth-cert" id="change-gender-marker-birth-cert" checked /><label for="change-gender-marker-birth-cert">change the gender marker on my birth certificate.</label>
-		</fieldset>
-	</section>
-
-	<form>
-		<div><label for="legal-name">Full legal name</label><span>(as it appears on your ID)</span></div><input id="legal-name" name="legal-name" />
-		<div><label for="chosen-name">Full chosen name</label><span>(as it will appear on your ID)</span></div><input id="chosen-name" name="chosen-name" />
-		<div><label for="marital-status">Marital status</label></div><select id="marital-status" name="marital-status">
-			<option value=""></option>
-			<option value="single">Single</option>
-			<option value="married">Married</option>
-			<option value="divorced">Divorced</option>
-		</select></div>
-		<div><label for="name-change-reason">Reason for name change</label></div><input id="name-change-reason" name="name-change-reason" value="Gender transition"/>
-		<div><label for="seal-birth-certificate">Seal previous birth certificate</label></div><input id="seal-birth-certificate" name="seal-birth-certificate" type="checkbox" />
-		<div><label for="birthplace">Place of birth</label><span>(city &amp; state/foreign country)</span></div><input name="birthplace" id="birthplace" />
-		<div><label for="birthdate">Date of birth</label></div><input id="birthdate" name="birthdate" type="date" min="1900-01-01" />
-		<!--  <div><label for="citizenship-status">Citizenship status</label></div><div>Need options here</div> -->
-		<div><label for="ethnicity">Ethnicity</label><span>(optional)</span></div><select id="ethnicity" name="ethnicity">
-			<option value=""></option>
-			<option value="not-hispanic-or-latino">Not Hispanic or Latino</option>
-			<option value="hispanic-or-latino">Hispanic or Latino</option>
-		</select>
-		<div><label for="race">Race</label><span>(optional)</span></div><select id="race" name="race">
-			<option value=""></option>
-			<option value="alaska-native">Alaska Native</option>
-			<option value="american-indian">American Indian</option>
-			<option value="asian">Asian</option>
-			<option value="black">Black/African-American</option>
-			<option value="native-hawaiian">Native Hawaiian</option>
-			<option value="other-pacific-islander">Other Pacific Islander</option>
-			<option value="white">White</option>
-		</select>
-		<div><label for="birth-sex">Sex assigned at birth</label></div><select id="birth-sex" name="birth-sex">
-			<option value=""></option>
-			<option value="m">M</option>
-			<option value="f">F</option>
-		</select>
-		<div><label for="gender">Gender</label><span>(as it will appear on your ID)</span></div> <select id="gender" name="gender">
-			<option value=""></option>
-			<option value="m">M</option>
-			<option value="f">F</option>
-			<option value="x">X</option>
-		</select>
-		<div><label for="mothers-maiden-name">Mother's name at birth</label></div><input id="mothers-maiden-name" name="mothers-maiden-name" />
-		<div><label for="mothers-birthdate">Mother's date of birth</label></div><input id="mothers-birthdate" name="mothers-birthdate" type="date" min="1850-01-01" />
-		<div><label for="fathers-maiden-name">Father's name at birth</label></div><input id="fathers-maiden-name" name="fathers-maiden-name" />
-		<div><label for="fathers-birthdate">Father's date of birth</label></div><input id="fathers-birthdate" name="fathers-birthdate" type="date" min="1850-01-01" />
-		<div><label for="phone">Phone</label><span>(format 123-456-7890)</span></div><input id="phone" name="phone" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
-		<div><label for="street-address">Street address</label><span>(including apartment/PO box)</span></div><input id="street-address" name="street-address" />
-		<div><label for="city">City</label></div><input id="city" name="city" />
-		<div><label for="state">State</label><span>(or foreign country; do not abbreviate)</span></div><input id="state" name="state" value="Michigan" />
-		<div><label for="zip">ZIP</label><span>(five digits)</span></div><input id="zip" name="zip" />
-	</form>
-
-	<section>
-	<h2>Dev test stuff</h2>
-	<div>Showing information for <span id="show-county"></span> County <span id="show-district"></div>
-	</section>
-
-	<h2>ASSUMPTIONS TO BE RELAXED LATER</h2>
-	Need to document how relaxing these changes the math:
-	<ol>
-		<li>Applicant is of age.</li>
-		<li>Applicant has lived in MI for at least one year. <em>(Only affects name change.)</em></li>
-		<li>Applicant has no criminal record.</li>
-		<li>Applicant has not filed for an SSN under a different DOB.</li>
-	</ol>
-	<h2>FORMS TO SUPPORT</h2>
-	<ol>
-		<li><a href="https://www.courts.michigan.gov/SCAO-forms/name-change/">State of Michigan Petition to Change Name</a></li>
-		<li><a href="https://www.courts.michigan.gov/SCAO-forms/name-change/">State of Michigan Publication of Notice of Hearing for Name Change</a></li>
-		<li><a href="https://www.michigan.gov/mdhhs/doing-business/vitalrecords/correct-a-birth-record/correct-a-birth-record-faqs">Application to Correct or Change a Michigan Birth Record</a></li>
-		<li><a href="https://www.ssa.gov/forms/">Application for a Social Security Card</a></li>
-		<li><a href="https://www.michigan.gov/sos/-/media/Project/Websites/sos/34lawens/MDOS_Sex_designation_form.pdf">Michigan Secretary of State Sex Designation Form</a></li>
-		<li>Updating name on state ID must be done in-person <a href="https://www.michigan.gov/mdhhs/doing-business/vitalrecords/correct-a-birth-record/correct-a-birth-record-faqs">State of Michigan Sex Designation Form</a>
-        </li>
-	</ol>
-</main>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Michigan Gender Document Collator</title>
+    <link href="./simple.css" rel="stylesheet" type="text/css">
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <script src="./pdf-lib.min.js"></script>
+    <script src="./data.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Michigan Gender Document
+        Collator</h1><span>Almost-fully automated trans
+        rights</span>
+    </header>
+    <main>
+        <section>
+            <p><strong>What is this?</strong> In the wake of
+            attacks on our rights, this tool exists to lessen the
+            burden of filling out and filing all those forms to
+            have the state legally affirm your gender. This may be
+            necessary for your personal safety and/or to obtain
+            affirming medical care.</p>
+            <p><strong>How do I use it?</strong> Select the forms
+            that you require and fill in the necessary data. The
+            forms will be filled and downloaded automatically. They
+            should be reviewed for correctness and signed in black
+            or blue ink before filing. You will also need to fill
+            in your SSN and those of your parents, if known.</p>
+            <p><strong>How is my data secured?</strong> Everything
+            happens client-side; that is to say, on your computer.
+            Your personal data will not leave your browser. Filing
+            location and fee information is determined by <a href=
+            "https://dhhs.michigan.gov/OLMWEB/EX/RF/Public/RFT/101.pdf">
+            ZIP code lookup.</a></p>
+            <p>To protect against possible phishing attempts, this
+            site will <strong>never ask for your or anyone else's
+            SSN.</strong> You should also ensure that your browser
+            points to <a href=
+            "https://transpapers.lgbt">https://transpapers.lgbt</a>;
+            other addresses may not be secure.</p>
+        </section>
+        <section>
+            <fieldset>
+                <legend>I need to...</legend> <input type=
+                "checkbox" name="change-name" id="change-name"
+                checked><label for="change-name">change my legal
+                name.</label><br>
+                <input type="checkbox" name=
+                "change-gender-marker-id" id=
+                "change-gender-marker-id" checked><label for=
+                "change-gender-marker-id">change the gender marker
+                on my state ID/driver's license.</label><br>
+                <input type="checkbox" name=
+                "change-gender-marker-birth-cert" id=
+                "change-gender-marker-birth-cert" checked
+                ><label for=
+                "change-gender-marker-birth-cert">change the gender
+                marker on my birth certificate.</label>
+            </fieldset>
+        </section>
+        <form>
+            <div>
+                <label for="legal-name">Full legal
+                name</label><span>(as it appears on your ID)</span>
+            </div><input id="legal-name" name="legal-name">
+            <div>
+                <label for="chosen-name">Full chosen
+                name</label><span>(as it will appear on your
+                ID)</span>
+            </div><input id="chosen-name" name="chosen-name">
+            <div>
+                <label for="marital-status">Marital status</label>
+            </div><select id="marital-status" name=
+            "marital-status">
+                <option value="">
+                </option>
+                <option value="single">
+                    Single
+                </option>
+                <option value="married">
+                    Married
+                </option>
+                <option value="divorced">
+                    Divorced
+                </option>
+            </select>
+            <div>
+                <label for="name-change-reason">Reason for name
+                change</label>
+            </div><input id="name-change-reason" name=
+            "name-change-reason" value="Gender transition">
+            <div>
+                <label for="seal-birth-certificate">Seal previous
+                birth certificate</label>
+            </div><input id="seal-birth-certificate" name=
+            "seal-birth-certificate" type="checkbox">
+            <div>
+                <label for="birthplace">Place of
+                birth</label><span>(city & state/foreign
+                country)</span>
+            </div><input name="birthplace" id="birthplace">
+            <div>
+                <label for="birthdate">Date of birth</label>
+            </div><input id="birthdate" name="birthdate" type=
+            "date" min="1900-01-01">
+            <!--  <div><label for="citizenship-status">Citizenship status</label></div><div>Need options here</div> -->
+            <div>
+                <label for=
+                "ethnicity">Ethnicity</label><span>(optional)</span>
+            </div><select id="ethnicity" name="ethnicity">
+                <option value="">
+                </option>
+                <option value="not-hispanic-or-latino">
+                    Not Hispanic or Latino
+                </option>
+                <option value="hispanic-or-latino">
+                    Hispanic or Latino
+                </option>
+            </select>
+            <div>
+                <label for=
+                "race">Race</label><span>(optional)</span>
+            </div><select id="race" name="race">
+                <option value="">
+                </option>
+                <option value="alaska-native">
+                    Alaska Native
+                </option>
+                <option value="american-indian">
+                    American Indian
+                </option>
+                <option value="asian">
+                    Asian
+                </option>
+                <option value="black">
+                    Black/African-American
+                </option>
+                <option value="native-hawaiian">
+                    Native Hawaiian
+                </option>
+                <option value="other-pacific-islander">
+                    Other Pacific Islander
+                </option>
+                <option value="white">
+                    White
+                </option>
+            </select>
+            <div>
+                <label for="birth-sex">Sex assigned at
+                birth</label>
+            </div><select id="birth-sex" name="birth-sex">
+                <option value="">
+                </option>
+                <option value="m">
+                    M
+                </option>
+                <option value="f">
+                    F
+                </option>
+            </select>
+            <div>
+                <label for="gender">Gender</label><span>(as it will
+                appear on your ID)</span>
+            </div><select id="gender" name="gender">
+                <option value="">
+                </option>
+                <option value="m">
+                    M
+                </option>
+                <option value="f">
+                    F
+                </option>
+                <option value="x">
+                    X
+                </option>
+            </select>
+            <div>
+                <label for="mothers-maiden-name">Mother's name at
+                birth</label>
+            </div><input id="mothers-maiden-name" name=
+            "mothers-maiden-name">
+            <div>
+                <label for="mothers-birthdate">Mother's date of
+                birth</label>
+            </div><input id="mothers-birthdate" name=
+            "mothers-birthdate" type="date" min="1850-01-01">
+            <div>
+                <label for="fathers-maiden-name">Father's name at
+                birth</label>
+            </div><input id="fathers-maiden-name" name=
+            "fathers-maiden-name">
+            <div>
+                <label for="fathers-birthdate">Father's date of
+                birth</label>
+            </div><input id="fathers-birthdate" name=
+            "fathers-birthdate" type="date" min="1850-01-01">
+            <div>
+                <label for="phone">Phone</label><span>(format
+                123-456-7890)</span>
+            </div><input id="phone" name="phone" type="tel"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            <div>
+                <label for="street-address">Street
+                address</label><span>(including apartment/PO
+                box)</span>
+            </div><input id="street-address" name="street-address">
+            <div>
+                <label for="city">City</label>
+            </div><input id="city" name="city">
+            <div>
+                <label for="state">State</label><span>(or foreign
+                country; do not abbreviate)</span>
+            </div><input id="state" name="state" value="Michigan">
+            <div>
+                <label for="county">County</label>
+                <span>(used to determine your filing location)</span>
+            </div>
+            <select id="county" name="county">
+                <option value=""></option>
+                <option value="Alcona">Alcona</option>
+                <option value="Alger">Alger</option>
+                <option value="Allegan">Allegan</option>
+                <option value="Alpena">Alpena</option>
+                <option value="Antrim">Antrim</option>
+                <option value="Arenac">Arenac</option>
+                <option value="Baraga">Baraga</option>
+                <option value="Barry">Barry</option>
+                <option value="Bay">Bay</option>
+                <option value="Benzie">Benzie</option>
+                <option value="Berrien">Berrien</option>
+                <option value="Branch">Branch</option>
+                <option value="Calhoun">Calhoun</option>
+                <option value="Cass">Cass</option>
+                <option value="Charlevoix">Charlevoix</option>
+                <option value="Cheboygan">Cheboygan</option>
+                <option value="Chippewa">Chippewa</option>
+                <option value="Clare">Clare</option>
+                <option value="Clinton">Clinton</option>
+                <option value="Crawford">Crawford</option>
+                <option value="Delta">Delta</option>
+                <option value="Dickinson">Dickinson</option>
+                <option value="Eaton">Eaton</option>
+                <option value="Emmet">Emmet</option>
+                <option value="Genesee">Genesee</option>
+                <option value="Gladwin">Gladwin</option>
+                <option value="Gogebic">Gogebic</option>
+                <option value="Grand Traverse">Grand Traverse</option>
+                <option value="Gratiot">Gratiot</option>
+                <option value="Hillsdale">Hillsdale</option>
+                <option value="Houghton">Houghton</option>
+                <option value="Huron">Huron</option>
+                <option value="Ingham">Ingham</option>
+                <option value="Ionia">Ionia</option>
+                <option value="Iosco">Iosco</option>
+                <option value="Iron">Iron</option>
+                <option value="Isabella">Isabella</option>
+                <option value="Jackson">Jackson</option>
+                <option value="Kalamazoo">Kalamazoo</option>
+                <option value="Kalkaska">Kalkaska</option>
+                <option value="Kent">Kent</option>
+                <option value="Keweenaw">Keweenaw</option>
+                <option value="Lake">Lake</option>
+                <option value="Lapeer">Lapeer</option>
+                <option value="Leelanau">Leelanau</option>
+                <option value="Lenawee">Lenawee</option>
+                <option value="Livingston">Livingston</option>
+                <option value="Luce">Luce</option>
+                <option value="Mackinac">Mackinac</option>
+                <option value="Macomb">Macomb</option>
+                <option value="Manistee">Manistee</option>
+                <option value="Marquette">Marquette</option>
+                <option value="Mason">Mason</option>
+                <option value="Mecosta">Mecosta</option>
+                <option value="Menominee">Menominee</option>
+                <option value="Midland">Midland</option>
+                <option value="Missaukee">Missaukee</option>
+                <option value="Monroe">Monroe</option>
+                <option value="Montcalm">Montcalm</option>
+                <option value="Montmorency">Montmorency</option>
+                <option value="Muskegon">Muskegon</option>
+                <option value="Newaygo">Newaygo</option>
+                <option value="Oakland">Oakland</option>
+                <option value="Oceana">Oceana</option>
+                <option value="Ogemaw">Ogemaw</option>
+                <option value="Ontonagon">Ontonagon</option>
+                <option value="Osceola">Osceola</option>
+                <option value="Oscoda">Oscoda</option>
+                <option value="Otsego">Otsego</option>
+                <option value="Ottawa">Ottawa</option>
+                <option value="Presque Isle">Presque Isle</option>
+                <option value="Roscommon">Roscommon</option>
+                <option value="Saginaw">Saginaw</option>
+                <option value="St. Clair">St. Clair</option>
+                <option value="St. Joseph">St. Joseph</option>
+                <option value="Sanilac">Sanilac</option>
+                <option value="Schoolcraft">Schoolcraft</option>
+                <option value="Shiawassee">Shiawassee</option>
+                <option value="Tuscola">Tuscola</option>
+                <option value="Van Buren">Van Buren</option>
+                <option value="Washtenaw">Washtenaw</option>
+                <option value="Wayne">Wayne</option>
+                <option value="Wexford">Wexford</option>
+            </select>
+            <div>
+                <label for="zip">ZIP</label><span>(five
+                digits)</span>
+            </div><input id="zip" name="zip">
+        </form>
+        <h2><span id="show-district">ASSUMPTIONS TO BE RELAXED
+        LATER</span></h2><span id="show-district">Need to document
+        how relaxing these changes the math:</span>
+        <ol>
+            <li><span id="show-district">Applicant is of
+            age.</span></li>
+            <li><span id="show-district">Applicant has lived in MI
+            for at least one year. <em>(Only affects name
+            change.)</em></span></li>
+            <li><span id="show-district">Applicant has no criminal
+            record.</span></li>
+            <li><span id="show-district">Applicant has not filed
+            for an SSN under a different DOB.</span></li>
+        </ol>
+        <h2><span id="show-district">FORMS TO SUPPORT</span></h2>
+        <ol>
+            <li><span id="show-district"><a href=
+            "https://www.courts.michigan.gov/SCAO-forms/name-change/">
+            State of Michigan Petition to Change
+            Name</a></span></li>
+            <li><span id="show-district"><a href=
+            "https://www.courts.michigan.gov/SCAO-forms/name-change/">
+            State of Michigan Publication of Notice of Hearing for
+            Name Change</a></span></li>
+            <li><span id="show-district"><a href=
+            "https://www.michigan.gov/mdhhs/doing-business/vitalrecords/correct-a-birth-record/correct-a-birth-record-faqs">
+            Application to Correct or Change a Michigan Birth
+            Record</a></span></li>
+            <li><span id="show-district"><a href=
+            "https://www.ssa.gov/forms/">Application for a Social
+            Security Card</a></span></li>
+            <li><span id="show-district"><a href=
+            "https://www.michigan.gov/sos/-/media/Project/Websites/sos/34lawens/MDOS_Sex_designation_form.pdf">
+            Michigan Secretary of State Sex Designation
+            Form</a></span></li>
+            <li><span id="show-district">Updating name on state ID
+            must be done in-person <a href=
+            "https://www.michigan.gov/mdhhs/doing-business/vitalrecords/correct-a-birth-record/correct-a-birth-record-faqs">
+            State of Michigan Sex Designation Form</a></span></li>
+        </ol>
+    </main>
+</body>
+</html>
