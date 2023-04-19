@@ -98,7 +98,7 @@
      return doc;
  }
 
- fetch("./ss-5-decrypted.pdf")
+ fetch("./forms/ss-5-decrypted.pdf")
      .then(response => response.arrayBuffer())
      .then(PDFLib.PDFDocument.load)
      .then(doc => doc.getForm())
