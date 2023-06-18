@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"strict": true,
+		"strictNullChecks": true
+	},
+	"lib": ["es2017"],
+}

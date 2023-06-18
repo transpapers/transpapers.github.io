@@ -2,10 +2,9 @@
 <html>
 <head>
     <title>Michigan Gender Document Collator</title>
-    <link href="./simple.css" rel="stylesheet" type="text/css">
-    <link href="./style.css" rel="stylesheet" type="text/css">
-    <script src="./pdf-lib.min.js"></script>
-    <script src="./data.js"></script>
+    <link href="/index.baf2ce9d.css" rel="stylesheet" type="text/css">
+    <link href="/index.c92073ef.css" rel="stylesheet" type="text/css">
+    <script src="/index.b7a05eb9.js" defer=""></script>
 </head>
 <body>
     <header>
@@ -21,58 +20,43 @@
             have the state legally affirm your gender. This may be
             necessary for your personal safety and/or to obtain
             affirming medical care.</p>
-            <p><strong>How do I use it?</strong> Select the forms
-            that you require and fill in the necessary data. The
-            forms will be filled and downloaded automatically. They
-            should be reviewed for correctness and signed in black
-            or blue ink before filing. You will also need to fill
-            in your SSN and those of your parents, if known.</p>
-            <p><strong>How is my data secured?</strong> Everything
+            <p><strong>How do I use it?</strong>
+                Complete the form below and press "Generate forms." Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be almost completely prefilled using the information you entered.</p>
+            <p>All fields are required by some form, but none are required by this web page. If you do not wish to enter some data, or if your data does not fit neatly into the form (e.g., if you have no surname,) simply leave the field blank.
+            </p>
+            <p><strong>Is it safe to enter my personal data?</strong> Yes. Everything
             happens client-side; that is to say, on your computer.
-            Your personal data will not leave your browser. Filing
-            location and fee information is determined by <a href=
-            "https://dhhs.michigan.gov/OLMWEB/EX/RF/Public/RFT/101.pdf">
-            ZIP code lookup.</a></p>
-            <p>To protect against possible phishing attempts, this
-            site will <strong>never ask for your or anyone else's
-            SSN.</strong> You should also ensure that your browser
-            points to <a href=
-            "https://transpapers.lgbt">https://transpapers.lgbt</a>;
+            Your personal data will not be transmitted over the Internet.</p>
+            <p>You should ensure that your browser
+            points to <a href="https://transpapers.lgbt">https://transpapers.lgbt</a>;
             other addresses may not be secure.</p>
-        </section>
-        <section>
-            <fieldset>
-                <legend>I need to...</legend> <input type=
-                "checkbox" name="change-name" id="change-name"
-                checked><label for="change-name">change my legal
-                name.</label><br>
-                <input type="checkbox" name=
-                "change-gender-marker-id" id=
-                "change-gender-marker-id" checked><label for=
-                "change-gender-marker-id">change the gender marker
-                on my state ID/driver's license.</label><br>
-                <input type="checkbox" name=
-                "change-gender-marker-birth-cert" id=
-                "change-gender-marker-birth-cert" checked
-                ><label for=
-                "change-gender-marker-birth-cert">change the gender
-                marker on my birth certificate.</label>
-            </fieldset>
         </section>
         <form>
             <div>
-                <label for="legal-name">Full legal
+                <label for="legal-name">Legal
                 name</label><span>(as it appears on your ID)</span>
-            </div><input id="legal-name" name="legal-name">
+            </div>
+            <div class="name-input">
+                <input size="1" id="legal-name-first" name="legal-name-first" placeholder="First">
+                <input size="1" id="legal-name-middle" name="legal-name-middle" placeholder="Middle">
+                <input size="1" id="legal-name-last" name="legal-name-last" placeholder="Last">
+                <input size="1" id="legal-suffix" name="legal-suffix" placeholder="Suffix">
+            </div>
             <div>
                 <label for="chosen-name">Full chosen
                 name</label><span>(as it will appear on your
                 ID)</span>
-            </div><input id="chosen-name" name="chosen-name">
+            </div>
+            <div class="name-input">
+                <input size="1" id="chosen-name-first" name="chosen-name-first" placeholder="First">
+                <input size="1" id="chosen-name-middle" name="chosen-name-middle" placeholder="Middle">
+                <input size="1" id="chosen-name-last" name="chosen-name-last" placeholder="Last">
+                <input size="1" id="chosen-suffix" name="chosen-suffix" placeholder="Suffix">
+            </div>
             <div>
                 <label for="marital-status">Marital status</label>
-            </div><select id="marital-status" name=
-            "marital-status">
+                <span>(if applicable)</span>
+            </div><select id="marital-status" name="marital-status">
                 <option value="">
                 </option>
                 <option value="single">
@@ -88,75 +72,34 @@
             <div>
                 <label for="name-change-reason">Reason for name
                 change</label>
-            </div><input id="name-change-reason" name=
-            "name-change-reason" value="Gender transition">
+            </div><input id="name-change-reason" name="name-change-reason" value="Gender transition">
             <div>
-                <label for="seal-birth-certificate">Seal previous
-                birth certificate</label>
-            </div><input id="seal-birth-certificate" name=
-            "seal-birth-certificate" type="checkbox">
+                <label for="seal-birth-certificate">Would you like to <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal your previous birth certificate?</a></label>
+            </div><input id="seal-birth-certificate" name="seal-birth-certificate" type="checkbox">
             <div>
-                <label for="birthplace">Place of
-                birth</label><span>(city & state/foreign
-                country)</span>
-            </div><input name="birthplace" id="birthplace">
+                <label for="birth-city">Birth city</label>
+            </div><input name="birth-city" id="birth-city">
+            <div>
+                <label for="birth-state">Birth state</label>
+                <span>(or foreign country)</span>
+            </div><input name="birth-state" id="birth-state">
             <div>
                 <label for="birthdate">Date of birth</label>
-            </div><input id="birthdate" name="birthdate" type=
-            "date" min="1900-01-01">
-            <!--  <div><label for="citizenship-status">Citizenship status</label></div><div>Need options here</div> -->
-            <div>
-                <label for=
-                "ethnicity">Ethnicity</label><span>(optional)</span>
-            </div><select id="ethnicity" name="ethnicity">
-                <option value="">
-                </option>
-                <option value="not-hispanic-or-latino">
-                    Not Hispanic or Latino
-                </option>
-                <option value="hispanic-or-latino">
-                    Hispanic or Latino
-                </option>
-            </select>
-            <div>
-                <label for=
-                "race">Race</label><span>(optional)</span>
-            </div><select id="race" name="race">
-                <option value="">
-                </option>
-                <option value="alaska-native">
-                    Alaska Native
-                </option>
-                <option value="american-indian">
-                    American Indian
-                </option>
-                <option value="asian">
-                    Asian
-                </option>
-                <option value="black">
-                    Black/African-American
-                </option>
-                <option value="native-hawaiian">
-                    Native Hawaiian
-                </option>
-                <option value="other-pacific-islander">
-                    Other Pacific Islander
-                </option>
-                <option value="white">
-                    White
-                </option>
-            </select>
+            </div><input id="birthdate" name="birthdate" type="date" min="1900-01-01">
             <div>
                 <label for="birth-sex">Sex assigned at
                 birth</label>
             </div><select id="birth-sex" name="birth-sex">
                 <option value="">
                 </option>
-                <option value="m">
+                <option value="M">
                     M
                 </option>
-                <option value="f">
+                <option value="F">
                     F
+                </option>
+                <option value="X">
+                    X
                 </option>
             </select>
             <div>
@@ -165,41 +108,58 @@
             </div><select id="gender" name="gender">
                 <option value="">
                 </option>
-                <option value="m">
+                <option value="M">
                     M
                 </option>
-                <option value="f">
+                <option value="F">
                     F
                 </option>
-                <option value="x">
+                <option value="X">
                     X
                 </option>
             </select>
             <div>
+                <label for="parents-are-not-okay">
+                    Are you a minor with deceased or divorced parents?
+                </label>
+            </div>
+            <input id="parents-are-not-okay" name="parents-are-not-okay" type="checkbox">
+            <div>
                 <label for="mothers-maiden-name">Mother's name at
                 birth</label>
-            </div><input id="mothers-maiden-name" name=
-            "mothers-maiden-name">
+            </div>
+            <div class="name-input">
+                <input size="1" id="mother-name-first" name="mother-name-first" placeholder="First">
+                <input size="1" id="mother-name-middle" name="mother-name-middle" placeholder="Middle">
+                <input size="1" id="mother-name-last" name="mother-name-last" placeholder="Last">
+                <input size="1" id="mother-suffix" name="mother-suffix" placeholder="Suffix">
+            </div>
             <div>
                 <label for="mothers-birthdate">Mother's date of
                 birth</label>
-            </div><input id="mothers-birthdate" name=
-            "mothers-birthdate" type="date" min="1850-01-01">
+            </div><input id="mothers-birthdate" name="mothers-birthdate" type="date" min="1850-01-01">
             <div>
                 <label for="fathers-maiden-name">Father's name at
                 birth</label>
-            </div><input id="fathers-maiden-name" name=
-            "fathers-maiden-name">
+            </div>
+            <div class="name-input">
+                <input size="1" id="father-name-first" name="father-name-first" placeholder="First">
+                <input size="1" id="father-name-middle" name="father-name-middle" placeholder="Middle">
+                <input size="1" id="father-name-last" name="father-name-last" placeholder="Last">
+                <input size="1" id="father-suffix" name="father-suffix" placeholder="Suffix">
+            </div>
             <div>
                 <label for="fathers-birthdate">Father's date of
                 birth</label>
-            </div><input id="fathers-birthdate" name=
-            "fathers-birthdate" type="date" min="1850-01-01">
+            </div><input id="fathers-birthdate" name="fathers-birthdate" type="date" min="1850-01-01">
             <div>
-                <label for="phone">Phone</label><span>(format
-                123-456-7890)</span>
-            </div><input id="phone" name="phone" type="tel"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                <label for="phone">Phone</label><span>(enter area code separately)</span>
+            </div>
+            <div>
+                <input id="area-code" name="area-code" type="tel" size="3">
+                <input id="phone" name="phone" type="tel" size="7">
+            </div>
+            
             <div>
                 <label for="street-address">Street
                 address</label><span>(including apartment/PO
@@ -306,47 +266,14 @@
                 <label for="zip">ZIP</label><span>(five
                 digits)</span>
             </div><input id="zip" name="zip">
+            <div>
+                <label for="email">Email address</label>
+                <span>We will not email you.</span>
+            </div><input id="email" name="email">
+
         </form>
-        <h2><span id="show-district">ASSUMPTIONS TO BE RELAXED
-        LATER</span></h2><span id="show-district">Need to document
-        how relaxing these changes the math:</span>
-        <ol>
-            <li><span id="show-district">Applicant is of
-            age.</span></li>
-            <li><span id="show-district">Applicant has lived in MI
-            for at least one year. <em>(Only affects name
-            change.)</em></span></li>
-            <li><span id="show-district">Applicant has no criminal
-            record.</span></li>
-            <li><span id="show-district">Applicant has not filed
-            for an SSN under a different DOB.</span></li>
-        </ol>
-        <h2><span id="show-district">FORMS TO SUPPORT</span></h2>
-        <ol>
-            <li><span id="show-district"><a href=
-            "https://www.courts.michigan.gov/SCAO-forms/name-change/">
-            State of Michigan Petition to Change
-            Name</a></span></li>
-            <li><span id="show-district"><a href=
-            "https://www.courts.michigan.gov/SCAO-forms/name-change/">
-            State of Michigan Publication of Notice of Hearing for
-            Name Change</a></span></li>
-            <li><span id="show-district"><a href=
-            "https://www.michigan.gov/mdhhs/doing-business/vitalrecords/correct-a-birth-record/correct-a-birth-record-faqs">
-            Application to Correct or Change a Michigan Birth
-            Record</a></span></li>
-            <li><span id="show-district"><a href=
-            "https://www.ssa.gov/forms/">Application for a Social
-            Security Card</a></span></li>
-            <li><span id="show-district"><a href=
-            "https://www.michigan.gov/sos/-/media/Project/Websites/sos/34lawens/MDOS_Sex_designation_form.pdf">
-            Michigan Secretary of State Sex Designation
-            Form</a></span></li>
-            <li><span id="show-district">Updating name on state ID
-            must be done in-person <a href=
-            "https://www.michigan.gov/mdhhs/doing-business/vitalrecords/correct-a-birth-record/correct-a-birth-record-faqs">
-            State of Michigan Sex Designation Form</a></span></li>
-        </ol>
+        <div style="text-align: center; padding: 1rem">
+            <input type="button" id="submit" value="Generate forms"></div>
     </main>
 </body>
 </html>

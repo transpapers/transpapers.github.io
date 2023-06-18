@@ -1,0 +1,23 @@
+ form {
+	 display: grid;
+	 grid-template-columns: minmax(auto, 15ch) 1fr;
+	 grid-gap: 1rem;
+	 align-items: center;
+ }
+
+ form div:nth-child(odd) {
+	 text-align: right;
+	 line-height: 1;
+ }
+
+ form span {
+	 font-size: smaller;
+	 color: #777;
+ }
+
+ .name-input {
+	 max-width: 100%;
+	 display: grid;
+	 grid-template-columns: 2fr 2fr 2fr 1fr;
+	 grid-gap: 0.5rem;
+ }
