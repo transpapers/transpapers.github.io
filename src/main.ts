@@ -71,8 +71,6 @@ async function fetchAndFill (formFilename: string, fills: Formfill[], data: Pers
 async function makeGuide(data: PersonalData): Promise<Uint8Array> {
   // Do any additional variable assignment here.
   const allData = Object.assign(data, countyInfo[data.county])
-  console.log(countyInfo[data.county])
-  console.log(allData)
 
   let renderedHtml = render("./guide.html.njk", allData)
 
@@ -221,7 +219,6 @@ function generate(data) {
         URL.revokeObjectURL(link.href)
       })
   } else {
-    console.log(data)
     fetchAll(data)
       .then(doc => {
         const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }))
