@@ -1,8 +1,12 @@
 import { PDFDocument, type PDFForm, type PDFField, PDFTextField, PDFCheckBox, PDFRadioGroup } from 'pdf-lib'
+import { render } from 'nunjucks'
+import { jsPDF } from 'jspdf'
+import html2pdf from 'html2pdf.js'
 
 import { type PersonalData, type Formfill } from './types'
 import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap } from './maps'
-import { sampleData } from './util'
+import { numericalAge, sampleData } from './util'
+import countyInfo from './countyInfo.json'
 
 function fillForm (doc: PDFDocument, fills: Formfill[], data: PersonalData): PDFDocument {
   const form: PDFForm = doc.getForm()
@@ -64,8 +68,26 @@ async function fetchAndFill (formFilename: string, fills: Formfill[], data: Pers
     .then(doc => fillForm(doc, fills, data))
 }
 
+async function makeGuide(data: PersonalData): Promise<Uint8Array> {
+  // Do any additional variable assignment here.
+  const allData = Object.assign(data, countyInfo[data.county])
+  console.log(countyInfo[data.county])
+  console.log(allData)
+
+  let renderedHtml = render("./guide.html.njk", allData)
+
+  let pdf = await html2pdf()
+     .set({
+       pagebreak: { mode: 'avoid-all' },
+       margin: 10,
+     }).from(renderedHtml).outputPdf("arraybuffer")
+
+  return pdf
+}
 
 async function fetchAll (data: PersonalData): Promise<Uint8Array> {
+  const guide = await PDFDocument.load(await makeGuide(data))
+
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
   const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)
@@ -73,25 +95,21 @@ async function fetchAll (data: PersonalData): Promise<Uint8Array> {
   const birthCert = await fetchAndFill('./forms/birth-cert.pdf', birthCertMap, data)
   const mdosSex = await fetchAndFill('./forms/mdos_sdf.pdf', mdosSexMap, data)
   const miSex = await fetchAndFill('./forms/mi_sdf.pdf', miSexMap, data)
+  const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
 
+  let allDocuments = [ guide, nameChange, pii, pubNotice, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity ]
+
   const result = await PDFDocument.create()
-  const nameChangePages = await result.copyPages(nameChange, [0, 1, 2])
-  const piiPages = await result.copyPages(pii, [0])
-  const feeWaiverPages = await result.copyPages(feeWaiver, [0])
-  const birthCertPages = await result.copyPages(birthCert, [0, 1])
-  const mdosSexPages = await result.copyPages(mdosSex, [0])
-  const miSexPages = await result.copyPages(miSex, [0])
-  const socialSecurityPages = await result.copyPages(socialSecurity, [0, 1, 2, 3, 4])
+  for (const doc of allDocuments) {
+    let numPages = doc.getPageCount()
 
-  const allDocs = [nameChangePages, piiPages, feeWaiverPages, birthCertPages, mdosSexPages, miSexPages, socialSecurityPages]
-
-  for (const doc of allDocs) {
-    for (const page of doc) {
-      result.addPage(page)
+    let pages = await result.copyPages(doc, [...Array(numPages).keys()])
+    for (const page of pages) {
+      result.addPage(page);
     }
   }
-
+  
   return await result.save()
 }
 
@@ -101,7 +119,7 @@ async function labelFields (doc: PDFDocument): Promise<Uint8Array> {
 
   for (const field of fields) {
     const type = field.constructor.name
-    const name = field.getName()
+
     console.log(`${String(type)}: ${String(name)}`)
     if (field instanceof PDFRadioGroup) {
       for (const option of field.getOptions()) {
@@ -117,7 +135,7 @@ async function labelFields (doc: PDFDocument): Promise<Uint8Array> {
   return await doc.save()
 }
 
-const debug = true 
+const debug = false
 
 function makeData(): PersonalData {
   return {
@@ -127,13 +145,14 @@ function makeData(): PersonalData {
       last: document.getElementById('legal-name-last').value,
       suffix: document.getElementById('legal-suffix').value,
     },
+
     chosenName: {
       first: document.getElementById('chosen-name-first').value,
       middle: document.getElementById('chosen-name-middle').value,
       last: document.getElementById('chosen-name-last').value,
       suffix: document.getElementById('chosen-suffix').value,
     },
-    maritalStatus: document.getElementById('marital-status').value,
+
     reasonForNameChange: document.getElementById('name-change-reason').value,
 
     sealBirthCertificate: document.getElementById('seal-birth-certificate').checked,
@@ -143,12 +162,13 @@ function makeData(): PersonalData {
       state: document.getElementById('birth-state').value,
     },
 
-    dateOfBirth: new Date(document.getElementById('birthdate').value),
+    dateOfBirth: document.getElementById('birthdate').value,
 
     assignedSex: document.getElementById('birth-sex').value,
     gender: document.getElementById('gender').value,
 
     parentsAreOkay: !(document.getElementById('parents-are-not-okay').checked),
+    age: document.getElementById('age').value || numericalAge(document.getElementById('birthdate').value),
 
     mothersBirthName: {
       first: document.getElementById('mother-name-first').value,
@@ -156,7 +176,7 @@ function makeData(): PersonalData {
       last: document.getElementById('mother-name-last').value,
       suffix: document.getElementById('mother-suffix').value,
     },
-    mothersDateOfBirth: new Date(document.getElementById('mothers-birthdate').value),
+    mothersDateOfBirth: document.getElementById('mothers-birthdate').value,
 
     fathersBirthName: {
       first: document.getElementById('father-name-first').value,
@@ -164,7 +184,7 @@ function makeData(): PersonalData {
       last: document.getElementById('father-name-last').value,
       suffix: document.getElementById('father-suffix').value,
     },
-    fathersDateOfBirth: new Date(document.getElementById('fathers-birthdate').value),
+    fathersDateOfBirth: document.getElementById('fathers-birthdate').value,
 
     areaCode: document.getElementById('area-code').value,
     phone: document.getElementById('phone').value,
@@ -178,10 +198,10 @@ function makeData(): PersonalData {
     email: document.getElementById('email').value,
 
     representativeName: {
-      first: document.getElementById('legal-name-first').value,
-      middle: document.getElementById('legal-name-middle').value,
-      last: document.getElementById('legal-name-last').value,
-      suffix: document.getElementById('legal-suffix').value,
+      first: document.getElementById('representative-name-first').value,
+      middle: document.getElementById('representative-name-middle').value,
+      last: document.getElementById('representative-name-last').value,
+      suffix: document.getElementById('representative-suffix').value,
     },
 
   }

@@ -1,4 +1,22 @@
-import { type Name, type PersonalData } from './types'
+import { type CourtData, type Name, type PersonalData } from './types'
+
+export function numericalAge(birthdate: string): number {
+  console.log(birthdate)
+  const thisYear = new Date().getFullYear()
+  const thisMonth = new Date().getMonth()
+  const thisDay = new Date().getDay()
+  const birthYear = Number.parseInt(birthdate.substring(0, 4))
+  const birthMonth = Number.parseInt(birthdate.substring(5, 7))
+  const birthDay = Number.parseInt(birthdate.substring(8))
+
+  if (thisMonth < birthMonth) {
+	  return thisYear - birthYear - 1
+  } else if (thisMonth === birthMonth && thisDay < birthDay) {
+	  return thisYear - birthYear - 1
+  } else {
+	  return thisYear - birthYear
+  }
+}
 
 export function fullName (name: Name): string {
   return [name.first, name.middle, name.last, name.suffix].filter(n => n.length > 0).join(' ')
@@ -20,11 +38,7 @@ ${String(data.areaCode)}${String(data.phone)}`
 }
 
 export function isMinor (data: PersonalData): boolean {
-  const now = new Date()
-  const maximumBirthYear = now.getFullYear() - 18
-  const maximumBirthDate = new Date(maximumBirthYear, now.getMonth(), now.getDay())
-
-  return data.dateOfBirth > maximumBirthDate
+  return numericalAge(data.dateOfBirth) < 18
 }
 
 // This should come in handy for documentation purposes.
@@ -50,8 +64,7 @@ export const sampleData: PersonalData = {
     foreignCountry: ''
   },
 
-  // dateOfBirth: new Date(1970, 1, 1),
-  dateOfBirth: new Date(2010, 1, 1),
+  dateOfBirth: "2010-01-01", 
 
   assignedSex: 'F',
   gender: 'X',
@@ -65,7 +78,7 @@ export const sampleData: PersonalData = {
 
   parentsAreOkay: true,
 
-  mothersDateOfBirth: new Date(1970, 1, 1),
+  mothersDateOfBirth: "1970-01-01",
 
   fathersBirthName: {
     first: 'John',
@@ -74,7 +87,7 @@ export const sampleData: PersonalData = {
     suffix: ''
   },
 
-  fathersDateOfBirth: new Date(1970, 1, 1),
+  fathersDateOfBirth: "1970-01-01",
 
   phone: '313-555-1234',
 

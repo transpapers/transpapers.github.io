@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Michigan Gender Document Collator</title>
-    <link href="./css/simple.css" rel="stylesheet" type="text/css">
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="./css/simple.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <script type="module" src="./main.ts"></script>
 </head>
 <body>
@@ -14,30 +14,36 @@
     </header>
     <main>
         <section>
-            <p><strong>What is this?</strong> In the wake of
-            attacks on our rights, this tool exists to lessen the
-            burden of filling out and filing all those forms to
-            have the state legally affirm your gender. This may be
-            necessary for your personal safety and/or to obtain
-            affirming medical care.</p>
-            <p><strong>How do I use it?</strong>
-                Complete the form below and press "Generate forms." Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be almost completely prefilled using the information you entered.</p>
-            <p>All fields are required by some form, but none are required by this web page. If you do not wish to enter some data, or if your data does not fit neatly into the form (e.g., if you have no surname,) simply leave the field blank and fill it in manually.
-            </p>
-            <p><strong>Is it safe to enter my personal data?</strong> Yes. Everything
-            happens client-side; that is to say, on your computer.
-            Your personal data will not be transmitted over the Internet.</p>
-            <p>You should ensure that your browser
-            points to <a href=
-            "https://transpapers.lgbt">https://transpapers.lgbt</a>;
-            other addresses may not be secure.</p>
+	    <details>
+		    <summary>What is this?</summary>
+	    In the wake of attacks on our rights, this tool exists to lessen
+	    the burden of filling out and filing all those forms to have the
+	    state legally affirm your gender. This may be necessary for your
+	    personal safety and/or to obtain affirming medical care.
+	    </details>
+
+	    <details>
+		    <summary>How do I use it?</summary>
+		    <p>Complete the form below and press "Generate forms." Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered.</p>
+		    <p>All fields are required by some form, but none are required by this web page; though note that to properly render the guide, you must enter at least your age and county of residence. If you do not wish to enter some data, or if your data does not fit neatly into the form (e.g., if you have no surname,) simply leave the field blank and fill it in manually. If you wish to leave every field blank, we recommend removing "Michigan" from the State field.</p>
+	    </details>
+	    <details>
+		    <summary>Is it safe to enter my personal data?</summary>
+		    <p>Yes. Everything happens client-side; that is to
+		    say, on your computer. Your personal data will not
+		    be transmitted over the Internet.</p>
+		    <p>You should ensure that your browser
+		    points to <a href=
+		    "https://transpapers.lgbt">https://transpapers.lgbt</a>;
+		    other addresses may not be secure.</p>
+	    </details>
         </section>
         <form>
             <div>
                 <label for="legal-name">Legal
-                name</label><span>(as it appears on your ID)</span>
+                name</label><span>as it appears on your ID</span>
             </div>
-            <div class="name-input">
+            <div class="name-input" id="legal-name">
                 <input size="1" id="legal-name-first" name="legal-name-first" placeholder="First">
                 <input size="1" id="legal-name-middle" name="legal-name-middle" placeholder="Middle">
                 <input size="1" id="legal-name-last" name="legal-name-last" placeholder="Last">
@@ -45,32 +51,24 @@
             </div>
             <div>
                 <label for="chosen-name">Full chosen
-                name</label><span>(as it will appear on your
-                ID)</span>
+                name</label><span>as it will appear on your
+                ID</span>
             </div>
-            <div class="name-input">
+            <div class="name-input" id="chosen-name">
                 <input size="1" id="chosen-name-first" name="chosen-name-first" placeholder="First">
                 <input size="1" id="chosen-name-middle" name="chosen-name-middle" placeholder="Middle">
                 <input size="1" id="chosen-name-last" name="chosen-name-last" placeholder="Last">
                 <input size="1" id="chosen-suffix" name="chosen-suffix" placeholder="Suffix">
             </div>
             <div>
-                <label for="marital-status">Marital status</label>
-                <span>(if applicable)</span>
-            </div><select id="marital-status" name=
-            "marital-status">
-                <option value="">
-                </option>
-                <option value="single">
-                    Single
-                </option>
-                <option value="married">
-                    Married
-                </option>
-                <option value="divorced">
-                    Divorced
-                </option>
-            </select>
+                <label for="representative-name">Name of your legal representative</label><span>Fill only if you are a legal minor. Enter the name of the adult that will appear with you in court.</span>
+            </div>
+            <div class="name-input">
+                <input size="1" id="representative-name-first" name="representative-name-first" placeholder="First">
+                <input size="1" id="representative-name-middle" name="representative-name-middle" placeholder="Middle">
+                <input size="1" id="representative-name-last" name="representative-name-last" placeholder="Last">
+                <input size="1" id="representative-suffix" name="representative-suffix" placeholder="Suffix">
+            </div>
             <div>
                 <label for="name-change-reason">Reason for name
                 change</label>
@@ -85,12 +83,16 @@
             </div><input name="birth-city" id="birth-city">
             <div>
                 <label for="birth-state">Birth state</label>
-                <span>(or foreign country)</span>
+                <span>or foreign country</span>
             </div><input name="birth-state" id="birth-state">
             <div>
                 <label for="birthdate">Date of birth</label>
             </div><input id="birthdate" name="birthdate" type=
             "date" min="1900-01-01">
+            <div>
+                <label for="age">Age at time of filing</label>
+		<span>Fill only if you are under 23.</span>
+	    </div><input id="age" name="age" type="number" />
             <div>
                 <label for="birth-sex">Sex assigned at
                 birth</label>
@@ -108,8 +110,8 @@
                 </option>
             </select>
             <div>
-                <label for="gender">Gender</label><span>(as it will
-                appear on your ID)</span>
+                <label for="gender">Gender</label><span>as it will
+                appear on your ID</span>
             </div><select id="gender" name="gender">
                 <option value="">
                 </option>
@@ -160,7 +162,7 @@
             </div><input id="fathers-birthdate" name=
             "fathers-birthdate" type="date" min="1850-01-01">
             <div>
-                <label for="phone">Phone</label><span>(enter area code separately)</span>
+                <label for="phone">Phone</label><span>enter area code separately</span>
             </div>
             <div>
                 <input id="area-code" name="area-code" type="tel" size="3">
@@ -169,19 +171,18 @@
             </div>
             <div>
                 <label for="street-address">Street
-                address</label><span>(including apartment/PO
-                box)</span>
+                address</label><span>including apartment/PO
+                box/"line 2"</span>
             </div><input id="street-address" name="street-address">
             <div>
                 <label for="city">City</label>
             </div><input id="city" name="city">
             <div>
-                <label for="state">State</label><span>(or foreign
-                country; do not abbreviate)</span>
+                <label for="state">State</label><span>or foreign
+                country; do not abbreviate</span>
             </div><input id="state" name="state" value="Michigan">
             <div>
                 <label for="county">County</label>
-                <span>(used to determine your filing location)</span>
             </div>
             <select id="county" name="county">
                 <option value=""></option>
@@ -259,7 +260,8 @@
                 <option value="Roscommon">Roscommon</option>
                 <option value="Saginaw">Saginaw</option>
                 <option value="St. Clair">St. Clair</option>
-                <option value="St. Joseph">St. Joseph</option>
+                <
+option value="St. Joseph">St. Joseph</option>
                 <option value="Sanilac">Sanilac</option>
                 <option value="Schoolcraft">Schoolcraft</option>
                 <option value="Shiawassee">Shiawassee</option>
@@ -270,8 +272,8 @@
                 <option value="Wexford">Wexford</option>
             </select>
             <div>
-                <label for="zip">ZIP</label><span>(five
-                digits)</span>
+                <label for="zip">ZIP</label><span>five
+                digits</span>
             </div><input id="zip" name="zip">
             <div>
                 <label for="email">Email address</label>

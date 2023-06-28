@@ -1,6 +1,6 @@
  form {
 	 display: grid;
-	 grid-template-columns: minmax(auto, 15ch) 1fr;
+	 grid-template-columns: minmax(auto, 20ch) 1fr;
 	 grid-gap: 1rem;
 	 align-items: center;
  }

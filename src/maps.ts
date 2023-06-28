@@ -33,7 +33,7 @@ export const piiMap: Formfill[] = [
   { text: () => 'Petition to Change Name (PC 51)', field: form => form.getField('Name of formdocument that this MC 97a is being filed with 1') },
   { text: data => `${String(fullName(representativeName(data)))} ${String(new Date().toLocaleDateString())}`, field: form => form.getField('Name of formdocument that this MC 97a is being filed with 2') },
   { text: data => fullName(data.legalName), field: form => form.getField('Name') },
-  { text: data => data.dateOfBirth.toLocaleDateString(), field: form => form.getField('DOB') }
+  { text: data => data.dateOfBirth, field: form => form.getField('DOB') }
 ]
 
 // Publication of Notice of Hearing for Name Change (Michigan form PC50.)
@@ -70,12 +70,12 @@ export const birthCertMap: Formfill[] = [
   { text: data => fullName(data.legalName), loc: { x: 48, y: 541 } },
   { text: data => fullName(data.legalName), loc: { x: 56, y: 800 } },
   { text: data => fullName(data.chosenName), loc: { x: 433, y: 800 } },
-  { text: data => data.dateOfBirth.toLocaleDateString(), loc: { x: 534, y: 541 } },
+  { text: data => data.dateOfBirth, loc: { x: 534, y: 541 } },
   { text: data => `${String(data.birthplace.city)}, ${String(data.birthplace.state)}`, loc: { x: 249, y: 636 } },
   { text: data => fullName(data.mothersBirthName), loc: { x: 48, y: 710 } },
-  { text: data => data.mothersDateOfBirth.toLocaleDateString(), loc: { x: 554, y: 710 } },
+  { text: data => data.mothersDateOfBirth, loc: { x: 554, y: 710 } },
   { text: data => fullName(data.fathersBirthName), loc: { x: 48, y: 754 } },
-  { text: data => data.fathersDateOfBirth.toLocaleDateString(), loc: { x: 554, y: 754 } },
+  { text: data => data.fathersDateOfBirth, loc: { x: 554, y: 754 } },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
 
   { text: data => isMinor(data) ? '' : 'X', loc: { x: 50, y: 329 } },
@@ -95,7 +95,7 @@ export const mdosSexMap: Formfill[] = [
     { text: data => data.streetAddress, field: form => form.getField('Street Apt') },
     { text: data => data.city, field: form => form.getField('City') },
     { text: data => data.zip, field: form => form.getField('ZIP code') },
-    { text: data => data.dateOfBirth.toLocaleDateString(), field: form => form.getField('DOB') },
+    { text: data => data.dateOfBirth, field: form => form.getField('DOB') },
     { text: data => fullName(data.legalName), field: form => form.getField('Full name') },
     { check: data => data.gender === 'F', field: form => form.getField('ChoiceA'), select: 'Choice1' },
     { check: data => data.gender === 'M', field: form => form.getField('ChoiceA'), select: 'Choice2' },
@@ -107,7 +107,7 @@ export const mdosSexMap: Formfill[] = [
 // COMPLETE.
 export const miSexMap: Formfill[] = [
   { text: data => fullName(data.legalName), loc: { x: 151, y: 299 }},
-  { text: data => data.dateOfBirth.toLocaleDateString(), loc: { x: 193, y: 367 }},
+  { text: data => data.dateOfBirth, loc: { x: 193, y: 367 }},
   { text: data => data.assignedSex === 'M' ? 'X' : '', loc: { x: 159, y: 539 }},
   { text: data => data.assignedSex === 'F' ? 'X' : '', loc: { x: 159, y: 559 }},
   { text: data => data.assignedSex === 'X' ? 'X' : '', loc: { x: 159, y: 579 }},
@@ -127,7 +127,7 @@ export const ssnMap: Formfill[] = [
   { text: data => data.legalName.last, field: form => form.getField('topmostSubform[0].Page5[0].Lastdiffname[0]') },
   { text: data => data.birthplace.city, field: form => form.getField('topmostSubform[0].Page5[0].cityofbirth[0]') },
   { text: data => data.birthplace.state, field: form => form.getField('topmostSubform[0].Page5[0].stateatbirth[0]') },
-  { text: data => data.dateOfBirth.toLocaleDateString(), field: form => form.getField('topmostSubform[0].Page5[0].DateTimeField1[0]') },
+  { text: data => data.dateOfBirth, field: form => form.getField('topmostSubform[0].Page5[0].DateTimeField1[0]') },
   { check: () => true, field: form => form.getField('topmostSubform[0].Page5[0].citizenship[0]') },
   { check: data => data.gender === 'M', field: form => form.getField('topmostSubform[0].Page5[0].Gender[0]') },
   { check: data => data.gender === 'F', field: form => form.getField('topmostSubform[0].Page5[0].Gender[1]') },
