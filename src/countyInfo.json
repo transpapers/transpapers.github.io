@@ -1776,9 +1776,19 @@
     },
     "fingerprintLocations": [
       {
-        "address": "",
-        "name": "Multiple Options",
-        "website": ""
+        "address": "1150 Canton Ctr Rd, Canton, MI 48188",
+        "name": "Canton Township Police Department",
+        "website": "https://www.canton-mi.org/743/Contacts/"
+      },
+      {
+        "address": "2937 E Grand Blvd, Detroit, MI 48202",
+        "name": "Zoom Fingerprints",
+        "website": "https://www.zoomfingerprints.com/"
+      },
+      {
+        "address": "22976 W Outer Dr, Dearborn, MI 48124",
+        "name": "IdentoGO",
+        "website": "https://www.identogo.com/services/fingerprint-card"
       }
     ],
     "publications": [
