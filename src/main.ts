@@ -84,7 +84,6 @@ async function makeGuide(data: PersonalData): Promise<Uint8Array> {
 }
 
 async function fetchAll (data: PersonalData): Promise<Uint8Array> {
-  const guide = await PDFDocument.load(await makeGuide(data))
 
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
@@ -96,7 +95,14 @@ async function fetchAll (data: PersonalData): Promise<Uint8Array> {
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
 
-  let allDocuments = [ guide, nameChange, pii, pubNotice, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity ]
+  let allDocuments = [ nameChange, pii, pubNotice, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity ]
+
+  if (data.age && data.county) {
+    const guide = await PDFDocument.load(await makeGuide(data))
+
+    // Append to front
+    allDocuments.unshift(guide)
+  }
 
   const result = await PDFDocument.create()
   for (const doc of allDocuments) {
