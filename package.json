@@ -5,18 +5,18 @@
   "main": "src/index.html",
   "scripts": {
     "dev": "vite",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trans-mi/trans-mi.github.io.git"
+    "url": "git+https://github.com/transpapers/transpapers.github.io.git"
   },
-  "author": "a dumbass",
+  "author": "Sasha Lišková",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/trans-mi/trans-mi.github.io/issues"
+    "url": "https://github.com/transpapers/transpapers.github.io/issues"
   },
-  "homepage": "https://github.com/trans-mi/trans-mi.github.io#readme",
+  "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
     "typescript": "^5.1.6",
     "vite": "^4.3.9"
