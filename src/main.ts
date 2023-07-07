@@ -29,7 +29,7 @@ function fillForm (doc: PDFDocument, fills: Formfill[], data: PersonalData): PDF
         }
       }
     } else if (fill.loc !== undefined) {
-      const pageIndex = 0 // FIXME
+      const pageIndex = fill.loc.page || 0;
 
       const page = pages[pageIndex]
 
@@ -107,6 +107,9 @@ async function fetchAll (data: PersonalData): Promise<Uint8Array> {
 
   const result = await PDFDocument.create()
   for (const doc of allDocuments) {
+    if (!doc) {
+      continue
+    }
     let numPages = doc.getPageCount()
 
     let pages = await result.copyPages(doc, [...Array(numPages).keys()])

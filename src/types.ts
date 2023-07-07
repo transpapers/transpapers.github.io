@@ -91,5 +91,5 @@ export interface Formfill {
   // To be used with a fillable PDF.
   field?: (f: PDFForm) => PDFField
   // To be used with a non-fillable PDF.
-  loc?: { x: number, y: number }
+  loc?: { page?: number, x: number, y: number }
 }
