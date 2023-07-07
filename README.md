@@ -1,6 +1,7 @@
-# Michigan Gender Document Collator
+# Transpapers
+*Almost-fully-automated trans rights.*
 
-The Michigan Gender Document Collator (MGDC) is a web tool designed by Stephanie Beckon and [Sasha Lišková](https://sverona.dev) which tries to automate as much of the process of legally affirming one's gender as possible. In the state of Michigan, this process is rather arduous, even after multiple rounds of lobbying for simplification.
+[Transpapers](https://transpapers.lgbt) is a web tool designed by Stephanie Beckon and [Sasha Lišková](https://sverona.dev) which tries to automate as much of the process of legally affirming one's gender as possible. In the state of Michigan, this process is rather arduous, even after multiple rounds of lobbying for simplification.
 
 Its methodology is documented here to be applicable to other states. Our goal is to spread almost-fully-automated trans rights as far as we can.
 
