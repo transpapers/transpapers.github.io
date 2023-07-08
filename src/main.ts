@@ -52,7 +52,10 @@ function fillForm (doc: PDFDocument, fills: Formfill[], data: PersonalData): PDF
         const text = fill.text(data)
         page.drawText(text, { x, y, size: fontSize })
       } else if (fill.check !== undefined) {
-        page.drawText('X', { x, y, size: fontSize })
+        const checked = fill.check(data)
+        if (checked) {
+          page.drawText('X', { x, y, size: fontSize })
+        }
       }
     }
   }
@@ -85,7 +88,6 @@ async function makeGuide(data: PersonalData): Promise<Uint8Array> {
 }
 
 async function fetchAll (data: PersonalData): Promise<Uint8Array> {
-
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
   const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)

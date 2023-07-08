@@ -89,18 +89,19 @@ export const birthCertMap: Formfill[] = [
 // Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
 // COMPLETE.
 export const mdosSexMap: Formfill[] = [
-    { text: data => data.legalName.last, field: form => form.getField('Last name') },
-    { text: data => data.legalName.first, field: form => form.getField('First name') },
-    { text: data => data.legalName.middle, field: form => form.getField('Middle name') },
-    { text: data => data.streetAddress, field: form => form.getField('Street Apt') },
-    { text: data => data.city, field: form => form.getField('City') },
-    { text: data => data.zip, field: form => form.getField('ZIP code') },
-    { text: data => data.dateOfBirth, field: form => form.getField('DOB') },
-    { text: data => fullName(data.legalName), field: form => form.getField('Full name') },
+    { text: data => data.legalName.last, loc: { x: 57, y: 388 } },
+    { text: data => data.legalName.first, loc: { x: 351, y: 388 } },
+    { text: data => data.legalName.middle, loc: { x: 600, y: 388 } },
+    { text: data => data.legalName.suffix || "" , loc: { x: 750, y: 388 } },
+    { text: data => data.streetAddress, loc: { x: 57, y: 441 } },
+    { text: data => data.city, loc: { x: 351, y: 441 } },
+    { text: data => data.zip, loc: { x: 701, y: 441 } },
+    { text: data => data.dateOfBirth, loc: { x: 351, y: 489 } },
+    { text: data => fullName(data.legalName), loc: { x: 67, y: 555 } },
     { check: data => data.gender === 'F', field: form => form.getField('ChoiceA'), select: 'Choice1' },
     { check: data => data.gender === 'M', field: form => form.getField('ChoiceA'), select: 'Choice2' },
     { check: data => data.gender === 'X', field: form => form.getField('ChoiceA'), select: 'Choice3' },
-    { text: () => new Date().toLocaleDateString(), field: form => form.getField("Today's date") }
+    { text: () => new Date().toLocaleDateString(), loc: { x: 649, y: 959 }},
 ]
 
 // State of Michigan Sex Designation Form (Michigan form, unnumbered.)
