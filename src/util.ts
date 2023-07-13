@@ -1,4 +1,4 @@
-import { type CourtData, type Name, type PersonalData } from './types'
+import { type Name, type PersonalData } from './types'
 
 export function numericalAge(birthdate: string): number {
   console.log(birthdate)
@@ -19,14 +19,16 @@ export function numericalAge(birthdate: string): number {
 }
 
 export function fullName (name: Name): string {
-  return [name.first, name.middle, name.last, name.suffix].filter(n => n.length > 0).join(' ')
+  return [name.first, name.middle, name.last, name.suffix].filter(n => n && n.length > 0).join(' ')
 }
 
 export function representativeName(data: PersonalData): Name {
   if (!isMinor(data)) {
     return data.legalName
-  } else {
+  } else if (data.representativeName){
     return data.representativeName
+  } else {
+    return { first: "", middle: "", last: "" }
   }
 }
 
@@ -55,13 +57,12 @@ export const sampleData: PersonalData = {
     last: 'Doe',
     suffix: ''
   },
-  maritalStatus: 'Single',
+
   reasonForNameChange: 'Gender transition',
   sealBirthCertificate: true,
   birthplace: {
     city: 'New York',
     state: 'New York',
-    foreignCountry: ''
   },
 
   dateOfBirth: "2010-01-01", 
