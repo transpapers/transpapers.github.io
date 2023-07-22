@@ -1,6 +1,6 @@
 import { PDFDocument, type PDFForm, type PDFField, PDFTextField, PDFCheckBox, PDFRadioGroup } from 'pdf-lib'
 import { render } from 'nunjucks'
-import * as html2pdf from 'html2pdf.js'
+import html2pdf from 'html2pdf.js'
 
 import { type PersonalData, type Formfill } from './types'
 import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap } from './maps'
