@@ -7,22 +7,64 @@ import { fullName, fullContactInfo, isMinor, representativeName } from './util'
 // then finally federal forms.
 
 // Petition to Change Name (Michigan form PC51.)
-// COMPLETE.
+// COMPLETE, and updated for 7/23 revision.
 export const nameChangeMap: Formfill[] = [
   { text: data => fullName(data.legalName), field: form => form.getField('In the matter of') },
   { text: fullContactInfo, field: form => form.getField('Petitioners name address and telephone no') },
   { check: data => !isMinor(data) , field: form => form.getField('b an adult') },
   { check: isMinor, field: form => form.getField('c a minor whose natural or adopted parents are') },
-  { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.mothersBirthName) : '', field: form => form.getField("Parent") },
-  { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.fathersBirthName) : '', field: form => form.getField("Parent") },
+  { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.mothersBirthName) : '', field: form => form.getField('Parent') },
+  { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.fathersBirthName) : '', field: form => form.getField('Parent') },
   { text: data => data.reasonForNameChange, field: form => form.getField('3 The name change is for the following reason') },
-  { text: data => isMinor(data) ? '' : fullName(data.legalName), field: form => form.getField('Text6') },
-  { text: data => isMinor(data) ? '' : fullName(data.chosenName), field: form => form.getField('TOPetitioner') },
-  { text: data => isMinor(data) ? fullName(data.legalName) : '', field: form => form.getField('Text8') },
-  { text: data => isMinor(data) ? fullName(data.chosenName) : '', field: form => form.getField('TOMinor child') },
+
+  { text: data => isMinor(data) ? '' : data.legalName.first, field: form => form.getField('First')},
+  { text: data => isMinor(data) ? '' : data.legalName.middle, field: form => form.getField('Middle')},
+  { text: data => isMinor(data) ? '' : data.legalName.last, field: form => form.getField('Last')},
+  { text: data => isMinor(data) ? '' : data.chosenName.first, field: form => form.getField('First_2')},
+  { text: data => isMinor(data) ? '' : data.chosenName.middle, field: form => form.getField('Middle_2')},
+  { text: data => isMinor(data) ? '' : data.chosenName.last, field: form => form.getField('Last_2')},
+
+  { text: data => isMinor(data) ? data.legalName.first : '', field: form => form.getField('First_5')},
+  { text: data => isMinor(data) ? data.legalName.middle : '', field: form => form.getField('Middle_5')},
+  { text: data => isMinor(data) ? data.legalName.last : '', field: form => form.getField('Last_5')},
+  { text: data => isMinor(data) ? data.chosenName.first : '', field: form => form.getField('First_6')},
+  { text: data => isMinor(data) ? data.chosenName.middle : '', field: form => form.getField('Middle_6')},
+  { text: data => isMinor(data) ? data.chosenName.last : '', field: form => form.getField('Last_6')},
+
   { check: data => data.sealBirthCertificate, field: form => form.getField('9 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the name of') },
   { text: data => data.sealBirthCertificate ? fullName(data.legalName) : '', field: form => form.getField('Name_2') },
-  { text: () => new Date().toLocaleDateString(), field: form => form.getField('of my information knowledge and belief') }
+  { text: () => new Date().toLocaleDateString(), field: form => form.getField('Date') }
+]
+
+// Petition to Change Name and Ex Parte Request for Nonpublication and
+// Confidential Record (Michigan form PC51.)
+// COMPLETE, and updated for 7/23 revision.
+export const nameChangePrivateMap: Formfill[] = [
+  { text: data => fullName(data.legalName), field: form => form.getField('In the matter of') },
+  { text: fullContactInfo, field: form => form.getField('Petitioners name address and telephone no') },
+  { check: data => !isMinor(data) , field: form => form.getField('b an adult') },
+  { check: isMinor, field: form => form.getField('c a minor whose natural or adopted parents are') },
+  { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.mothersBirthName) : '', field: form => form.getField('Parent') },
+  { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.fathersBirthName) : '', field: form => form.getField('Parent') },
+  { text: data => data.reasonForNameChange, field: form => form.getField('3 The name change is for the following reason') },
+
+  { text: data => isMinor(data) ? '' : data.legalName.first, field: form => form.getField('First')},
+  { text: data => isMinor(data) ? '' : data.legalName.middle, field: form => form.getField('Middle')},
+  { text: data => isMinor(data) ? '' : data.legalName.last, field: form => form.getField('Last')},
+  { text: data => isMinor(data) ? '' : data.chosenName.first, field: form => form.getField('First_2')},
+  { text: data => isMinor(data) ? '' : data.chosenName.middle, field: form => form.getField('Middle_2')},
+  { text: data => isMinor(data) ? '' : data.chosenName.last, field: form => form.getField('Last_2')},
+
+  { text: data => isMinor(data) ? data.legalName.first : '', field: form => form.getField('First_5')},
+  { text: data => isMinor(data) ? data.legalName.middle : '', field: form => form.getField('Middle_5')},
+  { text: data => isMinor(data) ? data.legalName.last : '', field: form => form.getField('Last_5')},
+  { text: data => isMinor(data) ? data.chosenName.first : '', field: form => form.getField('First_6')},
+  { text: data => isMinor(data) ? data.chosenName.middle : '', field: form => form.getField('Middle_6')},
+  { text: data => isMinor(data) ? data.chosenName.last : '', field: form => form.getField('Last_6')},
+
+  { check: data => data.sealBirthCertificate, field: form => form.getField('9 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the name of') },
+  { text: data => data.sealBirthCertificate ? fullName(data.legalName) : '', field: form => form.getField('Name_2') },
+  { text: () => new Date().toLocaleDateString(), field: form => form.getField('Date') }
 ]
 
 // Addendum to Personal Protected Identifying Information (Michigan form MC97a.)
@@ -37,15 +79,18 @@ export const piiMap: Formfill[] = [
 ]
 
 // Publication of Notice of Hearing for Name Change (Michigan form PC50.)
-// COMPLETE.
+// COMPLETE, and updated for 7/23 revision.
 export const noticeMap: Formfill[] = [
-  { text: data => fullName(data.legalName), field: form => form.getField('First and last name of children') },
+  { text: data => fullName(data.legalName), field: form => form.getField('Current first middle and last names type or print') },
   { text: data => fullName(data.legalName), field: form => form.getField('Current name') },
   { text: data => fullName(data.chosenName), field: form => form.getField('Proposed name') },
   { text: () => '1', field: form => form.getField('times in') },
   { text: () => '1', field: form => form.getField('copies to') },
+  { text: () => 'in', field: form => form.getField('in') },
   { text: () => 'Petitioner', field: form => form.getField('undefined') },
-  { text: fullContactInfo, field: form => form.getField('undefined_2') },
+  { check: () => true, field: form => form.getField('Forward statement for publication charges to') },
+  { text: () => 'Petitioner', field: form => form.getField('undefined_2') },
+  { text: fullContactInfo, field: form => form.getField('Text1') },
 ]
 
 // Fee Waiver Request (Michigan form MC20.)

@@ -7,7 +7,7 @@ import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, m
 import { numericalAge, sampleData } from './util'
 import countyInfo from './countyInfo.json'
 
-function fillForm (doc: PDFDocument, fills: Formfill[], data: PersonalData): PDFDocument {
+function fillForm(doc: PDFDocument, fills: Formfill[], data: PersonalData): PDFDocument {
   const form: PDFForm = doc.getForm()
   const pages = doc.getPages()
 
@@ -63,7 +63,7 @@ function fillForm (doc: PDFDocument, fills: Formfill[], data: PersonalData): PDF
   return doc
 }
 
-async function fetchAndFill (formFilename: string, fills: Formfill[], data: PersonalData): Promise<PDFDocument> {
+async function fetchAndFill(formFilename: string, fills: Formfill[], data: PersonalData): Promise<PDFDocument> {
   return await fetch(formFilename)
     .then(async response => await response.arrayBuffer())
     .then(PDFDocument.load)
@@ -77,20 +77,21 @@ async function makeGuide(data: PersonalData): Promise<Uint8Array> {
   let renderedHtml = render("./guide.html.njk", allData)
 
   let pdf = await html2pdf()
-     .set({
-       pagebreak: {
-         mode: [ 'avoid-all' ]
-       },
-       margin: 10,
-     }).from(renderedHtml).outputPdf("arraybuffer")
+    .set({
+      pagebreak: {
+        mode: ['avoid-all']
+      },
+      margin: 10,
+    }).from(renderedHtml).outputPdf("arraybuffer")
 
   return pdf
 }
 
-async function fetchAll (data: PersonalData): Promise<Uint8Array> {
+async function fetchAll(data: PersonalData): Promise<Uint8Array> {
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
   const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)
+  const pc51b = await fetch('./forms/pc51b.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const feeWaiver = await fetchAndFill('./forms/mc20.pdf', feeWaiverMap, data)
   const birthCert = await fetchAndFill('./forms/birth-cert.pdf', birthCertMap, data)
   const mdosSex = await fetchAndFill('./forms/mdos_sdf.pdf', mdosSexMap, data)
@@ -98,7 +99,7 @@ async function fetchAll (data: PersonalData): Promise<Uint8Array> {
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
 
-  let allDocuments = [ nameChange, pii, pubNotice, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity ]
+  let allDocuments = [nameChange, pii, pubNotice, pc51b, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity]
 
   if (data.age && data.county) {
     const guide = await PDFDocument.load(await makeGuide(data))
@@ -119,11 +120,11 @@ async function fetchAll (data: PersonalData): Promise<Uint8Array> {
       result.addPage(page);
     }
   }
-  
+
   return await result.save()
 }
 
-async function labelFields (doc: PDFDocument): Promise<Uint8Array> {
+async function labelFields(doc: PDFDocument): Promise<Uint8Array> {
   const form: PDFForm = doc.getForm()
   const fields: PDFField[] = form.getFields()
 
@@ -216,7 +217,7 @@ function makeData(): PersonalData {
 
   }
 }
-function generate(data) {
+function generate(data: PersonalData) {
   if (debug) {
     fetch('./forms/m97a.pdf')
       .then(async response => await response.arrayBuffer())
@@ -244,4 +245,4 @@ function generate(data) {
 }
 
 const submitButton = document.getElementById('submit');
-submitButton.addEventListener('click', ev => generate(makeData()));
+submitButton.addEventListener('click', () => generate(makeData()));
