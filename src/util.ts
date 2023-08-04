@@ -1,7 +1,6 @@
 import { type Name, type PersonalData } from './types'
 
 export function numericalAge(birthdate: string): number {
-  console.log(birthdate)
   const thisYear = new Date().getFullYear()
   const thisMonth = new Date().getMonth()
   const thisDay = new Date().getDay()
@@ -10,22 +9,22 @@ export function numericalAge(birthdate: string): number {
   const birthDay = Number.parseInt(birthdate.substring(8))
 
   if (thisMonth < birthMonth) {
-	  return thisYear - birthYear - 1
+    return thisYear - birthYear - 1
   } else if (thisMonth === birthMonth && thisDay < birthDay) {
-	  return thisYear - birthYear - 1
+    return thisYear - birthYear - 1
   } else {
-	  return thisYear - birthYear
+    return thisYear - birthYear
   }
 }
 
-export function fullName (name: Name): string {
+export function fullName(name: Name): string {
   return [name.first, name.middle, name.last, name.suffix].filter(n => n && n.length > 0).join(' ')
 }
 
 export function representativeName(data: PersonalData): Name {
   if (!isMinor(data)) {
     return data.legalName
-  } else if (data.representativeName){
+  } else if (data.representativeName) {
     return data.representativeName
   } else {
     return { first: "", middle: "", last: "" }
@@ -39,7 +38,7 @@ ${String(data.city)}, ${String(data.state)} ${String(data.zip)}
 ${String(data.areaCode)}${String(data.phone)}`
 }
 
-export function isMinor (data: PersonalData): boolean {
+export function isMinor(data: PersonalData): boolean {
   return numericalAge(data.dateOfBirth) < 18
 }
 
@@ -65,7 +64,7 @@ export const sampleData: PersonalData = {
     state: 'New York',
   },
 
-  dateOfBirth: "2010-01-01", 
+  dateOfBirth: "2010-01-01",
 
   assignedSex: 'F',
   gender: 'X',
@@ -77,6 +76,7 @@ export const sampleData: PersonalData = {
     suffix: ''
   },
 
+  doNotPublish: false,
   parentsAreOkay: true,
 
   mothersDateOfBirth: "1970-01-01",

@@ -89,9 +89,11 @@ async function makeGuide(data: PersonalData): Promise<Uint8Array> {
 
 async function fetchAll(data: PersonalData): Promise<Uint8Array> {
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
+  const nameChangeExParte = await fetchAndFill('./forms/pc51c.pdf', nameChangeMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
   const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)
   const pc51b = await fetch('./forms/pc51b.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
+  const pc50c = await fetch('./forms/pc50c.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const feeWaiver = await fetchAndFill('./forms/mc20.pdf', feeWaiverMap, data)
   const birthCert = await fetchAndFill('./forms/birth-cert.pdf', birthCertMap, data)
   const mdosSex = await fetchAndFill('./forms/mdos_sdf.pdf', mdosSexMap, data)
@@ -99,7 +101,15 @@ async function fetchAll(data: PersonalData): Promise<Uint8Array> {
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
 
-  let allDocuments = [nameChange, pii, pubNotice, pc51b, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity]
+  let allDocuments = [data.doNotPublish ? nameChangeExParte : nameChange, pii, pubNotice, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity]
+
+  if (data.age && 14 <= data.age && data.age < 18) {
+    allDocuments.splice(3, 0, pc51b)
+  }
+
+  if (data.doNotPublish && !data.parentsAreOkay) {
+    allDocuments.splice(3, 0, pc50c)
+  }
 
   if (data.age && data.county) {
     const guide = await PDFDocument.load(await makeGuide(data))
@@ -178,6 +188,7 @@ function makeData(): PersonalData {
     assignedSex: document.getElementById('birth-sex').value,
     gender: document.getElementById('gender').value,
 
+    doNotPublish: document.getElementById('do-not-publish').checked,
     parentsAreOkay: !(document.getElementById('parents-are-not-okay').checked),
     age: document.getElementById('age').value || numericalAge(document.getElementById('birthdate').value),
 

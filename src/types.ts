@@ -47,6 +47,7 @@ export interface PersonalData {
   assignedSex: string
   gender: string
 
+  doNotPublish: boolean
   parentsAreOkay: boolean
 
   mothersBirthName: Name
