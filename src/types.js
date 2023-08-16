@@ -59,10 +59,12 @@
  */
 
 /** @typedef {Object} Location - A pixel location in a PDF document.
+ *  FIXME Think of a better name for this now that fontSize is a parameter
  *  @property {number} x - The X coordinate, measured from top of page.
  *  @property {number} y - The Y coordinate, measured from left of page.
  *  @property {?number} page - The page number, indexed from 0. Defaults to 0.
- * */
+ *  @property {?number} fontSize - The font size in pixels. Defaults to 12.
+ */
 
 /**
  * @typedef {Object} Formfill - A specification for filling a single form field.

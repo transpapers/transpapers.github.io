@@ -52,11 +52,9 @@ export function representativeName(data) {
  * @param {PersonalData} data
  * @return {string}
  */
-export function fullContactInfo(data) {
-  return `${fullName(representativeName(data))}
-${data.streetAddress}
-${data.city}, ${data.state} ${data.zip}
-${data.areaCode}${data.phone}`
+export function fullContactInfo(data, separator='\n') {
+  const lines = [fullName(representativeName(data)), data.streetAddress, `${data.city}, ${data.state} ${data.zip}`, `(${data.areaCode}) ${data.phone}`]
+  return lines.join(separator)
 }
 
 /**

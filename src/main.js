@@ -39,7 +39,7 @@ function fillForm(doc, fills, data) {
 
       const page = pages[pageIndex]
 
-      const fontSize = 12
+      const fontSize = fill.loc.fontSize || 12;
 
       // Adjust the pixel location for DPI.
       const { height } = page.getSize()
