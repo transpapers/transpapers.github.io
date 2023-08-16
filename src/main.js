@@ -2,7 +2,6 @@ import { PDFDocument, PDFForm, PDFField, PDFTextField, PDFCheckBox, PDFRadioGrou
 import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
-import { PersonalData, Formfill } from './types'
 import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap } from './maps'
 import { numericalAge, sampleData } from './util'
 import countyInfo from './countyInfo.json'
