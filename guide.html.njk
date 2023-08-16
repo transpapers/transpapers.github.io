@@ -66,6 +66,10 @@ documents are deleted from the computer before you leave.</p>
 Name</strong> (form PC51.) If necessary, complete <strong>item
 1</strong> (concerning active court cases) and <strong>item 5</strong>
 (concerning criminal record.)
+{% if doNotPublish %}
+	Also complete page three to the best of your ability. 
+	If the request is granted skip the publication section.
+{% endif %}
 {% if age < 18 %}
 	Also fill out <strong>item
 	2c</strong> and <strong>item 7</strong> as applicable. Your parent(s)
@@ -85,19 +89,18 @@ meant to keep sensitive information (birth name, birth date, etc.) out
 of the (public) court records. This form should already be complete.</p>
 
 <p>The third form is the <strong>Publication of Notice of Hearing for
-Name Change</strong> (form PC50.) The state of Michigan requires name
-change hearings to be documented in a local newspaper (unless there is a
-concrete threat to your safety, such as a stalker or assailant, in which
-case you may request that the court make the process confidential and
-unpublished as per Michigan Compiled Laws 711.3, 750.411h, 750.411i; we
-recommend you contact an attorney should you wish to pursue this.) This
-will take the form of a notice containing the old and new legal names as
-well as the date, time, and location of the hearing.
+Name Change</strong> (form PC50.) The state of Michigan generally requires name
+change hearings to be documented in a local newspaper unless there are
+compelling reasons not to. This will take the form of a
+notice containing the old and new legal names as well as the date, time,
+and location of the hearing.
 {% if age < 18 and parentsAreOkay == false %}
 	List the legal names of any noncustodial parents under the heading
 	“TO ALL PERSONS, including:”.
 {% else %}
-	This form should already be complete.
+	You may need to write in the name of the publication that the notice will
+	be displayed in during filing. If so refer to our list of publications in section 3.
+	This form is otherwise complete.
 {% endif %}
 </p>
 
@@ -156,7 +159,7 @@ mail.</p>
 	<p>The following location(s) are recommended for fingerprinting in your county:
 	<ul>
 	{% for loc in fingerprintLocations %}
-		<li>{{ loc.name }}, {{ loc.address }} {{ loc.website }}</li>
+		<li>{{ loc.name }}, {{ loc.address }} <a href="{{ loc.website }}">{{ loc.website }}</a></li>
 	{% endfor %}
 	</ul>
 	</p>
@@ -169,7 +172,11 @@ mail.</p>
 	state fingerprint card; either is acceptable. Do not use live-scan
 	fingerprinting services unless so instructed by the court. <strong>Do
 	not bend or fold your fingerprint card.</strong></p>
-	<p>After receiving your fingerprint card, mail it to Michigan State Police, CJIC, PO Box 30266, Lansing, MI 48909; Enclose a copy of your Petition to Change Name and a check in the amount of $50.00 made out to the State of Michigan.</p>
+	<p>After receiving your fingerprint card, mail it to:</p>
+	<p>Michigan State Police</p>
+	<p>CJIC</p>
+	<p>PO Box 30266, Lansing, MI 48909</p>
+	<p>Enclose a copy of your Petition to Change Name and a check in the amount of $43.25 made out to the State of Michigan.</p>
 {% endif %}
 
 <p>Upon filing the Petition to Change Name, you may be instructed by the
@@ -183,7 +190,7 @@ hearing may be canceled or postponed.</p>
 court-approved newspapers in your county are as follows:</p>
 <ul>
 {% for paper in publications %}
-	<li>{{ paper.name }} ({{ paper.website }})</li>
+	<li>{{ paper.name }} (<a href"{{ paper.website }}">{{ paper.website }}</a>)</li>
 {% endfor %}
 </ul>
 
@@ -338,20 +345,25 @@ new legal name. You will be assessed a fee for each vehicle.</p>
 	{% if age < 18 %}
 		Your parent or guardian should complete the “Payment” section on page 2
 		as applicable. Then, they should mail the completed Application to Correct
-		or Change a Michigan Birth Record to Vital Records Changes, P.O. Box 30721,
-		Lansing, MI 48909. They should enclose photocopies of the court order and
+		or Change a Michigan Birth Record to:</p>
+		<p>Vital Records Changes</p>
+		<p>P.O. Box 30721</p>
+		<p>Lansing, MI 48909</p>
+		<p>They should enclose photocopies of the court order and
 		of their primary identification. <strong>Original documents will not be
 		returned.</strong> If they don't have a state ID or driver's license, they
-		should refer to the document in your printout titled "Acceptable ID".
+		should refer to the first link in our "Resources" section at the end of this guide.
 	{% else %}
 		Complete the “Payment” section on page 2 as applicable.
-		Mail the Application to Correct or Change a Michigan Birth Record to
-		Vital Records Changes, P.O. Box 30721, Lansing, MI 48909. Enclose
-		a check in the amount you entered under "TOTAL ENCLOSED", made out to
+		Mail the Application to Correct or Change a Michigan Birth Record to:</p>
+		<p>Vital Records Changes</p>
+		<p>P.O. Box 30721</p>
+		<p>Lansing, MI 48909</p>
+		<p>Enclose a check in the amount you entered under "TOTAL ENCLOSED", made out to
 		the State of Michigan, as well as photocopies of the court order and
 		your primary identification. <strong>Original documents will not be returned.
 		</strong> If you don't have a state ID or driver's
-		license, refer to the document in your printout titled "Acceptable ID".
+		license, refer to the first link in our "Resources" section at the end of this guide.
 	{% endif %}
 	</p>
 	<p>You should receive a copy of your updated birth certificate in 5 to 6 weeks.</p>
@@ -384,8 +396,8 @@ secretaries to have your name updated in the system. Be aware that
 certain medical professionals will need to know your transition
 status.</p>
 <p><strong>Gas/Heating Provider</strong>: DTE has a digital submission link for your scanned ID and court
-order at
-https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form.
+order at <a
+href="https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form">.</a>
 They will give you a call at some point after you submit the documents
 to confirm the change.</p>
 <p><strong>Electricity Provider</strong>: Consumers allows its customers to change the name on the billing
