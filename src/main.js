@@ -1,29 +1,36 @@
-import { PDFDocument, type PDFForm, type PDFField, PDFTextField, PDFCheckBox, PDFRadioGroup } from 'pdf-lib'
+import { PDFDocument, PDFForm, PDFField, PDFTextField, PDFCheckBox, PDFRadioGroup } from 'pdf-lib'
 import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
-import { type PersonalData, type Formfill } from './types'
+import { PersonalData, Formfill } from './types'
 import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap } from './maps'
 import { numericalAge, sampleData } from './util'
 import countyInfo from './countyInfo.json'
 
-function fillForm(doc: PDFDocument, fills: Formfill[], data: PersonalData): PDFDocument {
-  const form: PDFForm = doc.getForm()
+/**
+ * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
+ * @param {PDFDocumentdata} doc
+ * @param {Formfill[]} fills
+ * @param {PersonalData} data
+ * @return {PDFDocument} Filled PDF document
+ */
+function fillForm(doc, fills, data) {
+  const form = doc.getForm()
   const pages = doc.getPages()
 
   for (const fill of fills) {
     if (fill.field !== undefined) {
-      const field: PDFField = fill.field(form)
+      const field = fill.field(form)
       if (fill.text !== undefined && field instanceof PDFTextField) {
         const text = fill.text(data)
         field.setText(text)
       } else if (fill.check !== undefined && field instanceof PDFCheckBox) {
-        const checked: boolean = fill.check(data)
+        const checked = fill.check(data)
         if (checked) {
           field.check()
         }
       } else if (fill.select !== undefined && fill.check !== undefined && field instanceof PDFRadioGroup) {
-        const checked: boolean = fill.check(data)
+        const checked = fill.check(data)
         if (checked) {
           field.select(fill.select)
         }
@@ -63,14 +70,22 @@ function fillForm(doc: PDFDocument, fills: Formfill[], data: PersonalData): PDFD
   return doc
 }
 
-async function fetchAndFill(formFilename: string, fills: Formfill[], data: PersonalData): Promise<PDFDocument> {
+/**
+ * Do we still need this?
+ */
+async function fetchAndFill(formFilename, fills, data) {
   return await fetch(formFilename)
     .then(async response => await response.arrayBuffer())
     .then(PDFDocument.load)
     .then(doc => fillForm(doc, fills, data))
 }
 
-async function makeGuide(data: PersonalData): Promise<Uint8Array> {
+/**
+ * Generate the guide as a PDF ArrayBuffer from the given `data`.
+ * @param {PersonalData} data
+ * @return {Promise<Uint8Array>} Customized PDF guide
+ */
+async function makeGuide(data) {
   // Do any additional variable assignment here.
   const allData = Object.assign(data, countyInfo[data.county])
 
@@ -87,7 +102,14 @@ async function makeGuide(data: PersonalData): Promise<Uint8Array> {
   return pdf
 }
 
-async function fetchAll(data: PersonalData): Promise<Uint8Array> {
+/**
+ * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
+ * TODO Factor out the list.
+ *
+ * @param {PersonalData} data
+ * @return {Promise<Uint8Array>} Compiled documents
+ */
+async function fetchAll(data) {
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
   const nameChangeExParte = await fetchAndFill('./forms/pc51c.pdf', nameChangeMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
@@ -134,17 +156,24 @@ async function fetchAll(data: PersonalData): Promise<Uint8Array> {
   return await result.save()
 }
 
-async function labelFields(doc: PDFDocument): Promise<Uint8Array> {
-  const form: PDFForm = doc.getForm()
-  const fields: PDFField[] = form.getFields()
+/**
+ * Label the fillable form fields of a given `doc`ument.
+ * For dev purposes.
+ *
+ * @param {PDFDocument} doc
+ * @return {Promise<Uint8Array>} A labeled document.
+ */
+async function labelFields(doc) {
+  const form = doc.getForm()
+  const fields = form.getFields()
 
   for (const field of fields) {
     const type = field.constructor.name
 
-    console.log(`${String(type)}: ${String(name)}`)
+    console.log(`${type}: ${name}`)
     if (field instanceof PDFRadioGroup) {
       for (const option of field.getOptions()) {
-        console.log(`${String(type)}: ${String(option)}`)
+        console.log(`${type}: ${option}`)
       }
     }
     if (field instanceof PDFTextField) {
@@ -158,7 +187,12 @@ async function labelFields(doc: PDFDocument): Promise<Uint8Array> {
 
 const debug = false
 
-function makeData(): PersonalData {
+/**
+ * Generate a data object from index.html.
+ *
+ * @return {PersonalData}
+ */
+function makeData() {
   return {
     legalName: {
       first: document.getElementById('legal-name-first').value,
@@ -177,7 +211,6 @@ function makeData(): PersonalData {
     reasonForNameChange: document.getElementById('name-change-reason').value,
 
     sealBirthCertificate: document.getElementById('seal-birth-certificate').checked,
-
     birthplace: {
       city: document.getElementById('birth-city').value,
       state: document.getElementById('birth-state').value,
@@ -228,7 +261,13 @@ function makeData(): PersonalData {
 
   }
 }
-function generate(data: PersonalData) {
+
+/**
+ * Generate and download the documents from the given `data`.
+ *
+ * @param {PersonalData} data
+ */
+function generate(data) {
   if (debug) {
     fetch('./forms/m97a.pdf')
       .then(async response => await response.arrayBuffer())

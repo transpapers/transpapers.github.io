@@ -1,4 +1,3 @@
-import { type Formfill } from './types'
 import { fullName, fullContactInfo, isMinor, representativeName } from './util'
 
 // Maps appear in the order they will be collated.
@@ -6,9 +5,12 @@ import { fullName, fullContactInfo, isMinor, representativeName } from './util'
 // then state documents (which need no map information);
 // then finally federal forms.
 
-// Petition to Change Name (Michigan form PC51.)
-// COMPLETE, and updated for 7/23 revision.
-export const nameChangeMap: Formfill[] = [
+/**
+ * Petition to Change Name (Michigan form PC 51.)
+ * Updated 7/2023.
+ * @type {Formfill[]}
+ */
+export const nameChangeMap = [
     { text: data => fullName(data.legalName), field: form => form.getField('In the matter of') },
     { text: fullContactInfo, field: form => form.getField('Petitioners name address and telephone no') },
     { check: data => !isMinor(data), field: form => form.getField('b an adult') },
@@ -36,10 +38,13 @@ export const nameChangeMap: Formfill[] = [
     { text: () => new Date().toLocaleDateString(), field: form => form.getField('Date') }
 ]
 
-// Petition to Change Name and Ex Parte Request for Nonpublication and
-// Confidential Record (Michigan form PC51.)
-// COMPLETE, and updated for 7/23 revision.
-export const nameChangePrivateMap: Formfill[] = [
+/**
+ * Petition to Change Name and Ex Parte Request for Nonpublication and
+ * Confidential Record (Michigan form PC 51c.)
+ * Updated 7/2023.
+ * @type {Formfill[]}
+ */
+export const nameChangePrivateMap = [
     { text: data => fullName(data.legalName), field: form => form.getField('In the matter of') },
     { text: fullContactInfo, field: form => form.getField('Petitioners name address and telephone no') },
     { check: data => !isMinor(data), field: form => form.getField('b an adult') },
@@ -67,9 +72,11 @@ export const nameChangePrivateMap: Formfill[] = [
     { text: () => new Date().toLocaleDateString(), field: form => form.getField('Date') }
 ]
 
-// Addendum to Personal Protected Identifying Information (Michigan form MC97a.)
-// COMPLETE.
-export const piiMap: Formfill[] = [
+/**
+ * Addendum to Personal Protected Identifying Information (Michigan form MC 97a.)
+ * @type {Formfill[]}
+ */
+export const piiMap = [
     { text: data => fullName(representativeName(data)), field: form => form.getField('PlaintiffsPetitioners name') },
     { text: data => fullName(data.legalName), field: form => form.getField('In the matter of') },
     { text: data => data.doNotPublish ? 'PC 51c' : 'PC 51', field: form => form.getField('Name of formdocument that this MC 97a is being filed with 1') },
@@ -78,9 +85,12 @@ export const piiMap: Formfill[] = [
     { text: data => data.dateOfBirth, field: form => form.getField('DOB') }
 ]
 
-// Publication of Notice of Hearing for Name Change (Michigan form PC50.)
-// COMPLETE, and updated for 7/23 revision.
-export const noticeMap: Formfill[] = [
+/**
+ * Publication of Notice of Hearing for Name Change (Michigan form PC 50.)
+ * Updated 7/2023.
+ * @type {Formfill[]}
+ */
+export const noticeMap = [
     { text: data => fullName(data.legalName), field: form => form.getField('Current first middle and last names type or print') },
     { text: data => fullName(data.legalName), field: form => form.getField('Current name') },
     { text: data => fullName(data.chosenName), field: form => form.getField('Proposed name') },
@@ -93,17 +103,21 @@ export const noticeMap: Formfill[] = [
     { text: fullContactInfo, field: form => form.getField('Text1') },
 ]
 
-// Fee Waiver Request (Michigan form MC20.)
-// COMPLETE.
-export const feeWaiverMap: Formfill[] = [
+/**
+ * Fee Waiver Request (Michigan form MC 20.)
+ * @type {Formfill[]}
+ */
+export const feeWaiverMap = [
     { text: fullContactInfo, field: form => form.getField("PlaintiffPetitioners name address and telephone no") },
     { text: data => fullName(data.legalName), field: form => form.getField("In the matter of") },
     { text: () => new Date().toLocaleDateString(), field: form => form.getField("Date") }
 ]
 
-// Application to Change or Correct a Michigan Birth Record (Michigan form DCH-0847-CHGBX.)
-// COMPLETE.
-export const birthCertMap: Formfill[] = [
+/**
+ * Application to Change or Correct a Michigan Birth Record (Michigan form DCH-0847-CHGBX.)
+ * @type {Formfill[]}
+ */
+export const birthCertMap = [
     { text: data => isMinor(data) ? representativeName(data).first : data.chosenName.first, loc: { x: 48, y: 196 } },
     { text: data => isMinor(data) ? representativeName(data).middle : data.chosenName.middle, loc: { x: 337, y: 196 } },
     { text: data => isMinor(data) ? representativeName(data).last : data.chosenName.last, loc: { x: 588, y: 196 } },
@@ -131,9 +145,11 @@ export const birthCertMap: Formfill[] = [
     { text: data => data.assignedSex === 'X' ? 'X' : '', loc: { x: 769, y: 633 } },
 ]
 
-// Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
-// COMPLETE.
-export const mdosSexMap: Formfill[] = [
+/**
+ * Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
+ * @type {Formfill[]}
+ */
+export const mdosSexMap = [
     { text: data => data.legalName.last, loc: { x: 57, y: 388 } },
     { text: data => data.legalName.first, loc: { x: 351, y: 388 } },
     { text: data => data.legalName.middle, loc: { x: 600, y: 388 } },
@@ -149,9 +165,11 @@ export const mdosSexMap: Formfill[] = [
     { text: () => new Date().toLocaleDateString(), loc: { x: 649, y: 959 } },
 ]
 
-// State of Michigan Sex Designation Form (Michigan form, unnumbered.)
-// COMPLETE.
-export const miSexMap: Formfill[] = [
+/**
+ * State of Michigan Sex Designation Form (Michigan form, unnumbered.)
+ * @type {Formfill[]}
+ */
+export const miSexMap = [
     { text: data => fullName(data.legalName), loc: { x: 151, y: 299 } },
     { text: data => data.dateOfBirth, loc: { x: 193, y: 367 } },
     { text: data => data.assignedSex === 'M' ? 'X' : '', loc: { x: 159, y: 539 } },
@@ -162,9 +180,11 @@ export const miSexMap: Formfill[] = [
     { text: data => data.gender === 'X' ? 'X' : '', loc: { x: 486, y: 579 } },
 ]
 
-// Application for a Social Security Card (federal form SS-5.)
-// COMPLETE.
-export const ssnMap: Formfill[] = [
+/**
+ * Application for a Social Security Card (federal form SS-5.)
+ * @type {Formfill[]}
+ */
+export const ssnMap = [
     { text: data => data.chosenName.first, field: form => form.getField('topmostSubform[0].Page5[0].firstname[0]') },
     { text: data => data.chosenName.middle, field: form => form.getField('topmostSubform[0].Page5[0].Middlename[0]') },
     { text: data => data.chosenName.last, field: form => form.getField('topmostSubform[0].Page5[0].LastName[0]') },

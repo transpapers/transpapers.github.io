@@ -1,6 +1,11 @@
-import { type Name, type PersonalData } from './types'
-
-export function numericalAge(birthdate: string): number {
+/**
+ * Calculate a person's numerical age from their birthdate, as a string.
+ * Since a "date of birth" is a legal fiction and not a timestamp, we
+ * can do this without resorting to any funky time nonsense.
+ * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
+ * @return {number}
+ */
+export function numericalAge(birthdate) {
   const thisYear = new Date().getFullYear()
   const thisMonth = new Date().getMonth()
   const thisDay = new Date().getDay()
@@ -17,11 +22,22 @@ export function numericalAge(birthdate: string): number {
   }
 }
 
-export function fullName(name: Name): string {
+/**
+ * Format a full `name` as a string.
+ * @param {Name} name
+ * @return {string}
+ */
+export function fullName(name) {
   return [name.first, name.middle, name.last, name.suffix].filter(n => n && n.length > 0).join(' ')
 }
 
-export function representativeName(data: PersonalData): Name {
+/**
+ * Return the legal name of a person's legal representative (themself or their
+ * parent/guardian) from the given `data`.
+ * @param {PersonalData} data
+ * @return {Name}
+ */
+export function representativeName(data) {
   if (!isMinor(data)) {
     return data.legalName
   } else if (data.representativeName) {
@@ -31,19 +47,32 @@ export function representativeName(data: PersonalData): Name {
   }
 }
 
-export function fullContactInfo(data: PersonalData): string {
-  return `${String(fullName(representativeName(data)))}
-${String(data.streetAddress)}
-${String(data.city)}, ${String(data.state)} ${String(data.zip)}
-${String(data.areaCode)}${String(data.phone)}`
+/**
+ * Return a person's full contact info, i.e., full name, street address, and phone.
+ * @param {PersonalData} data
+ * @return {string}
+ */
+export function fullContactInfo(data) {
+  return `${fullName(representativeName(data))}
+${data.streetAddress}
+${data.city}, ${data.state} ${data.zip}
+${data.areaCode}${data.phone}`
 }
 
-export function isMinor(data: PersonalData): boolean {
+/**
+ * Determine whether a person is a minor (i.e., under 18.)
+ * @param {PersonalData} data
+ * @return {boolean}
+ */
+export function isMinor(data) {
   return numericalAge(data.dateOfBirth) < 18
 }
 
 // This should come in handy for documentation purposes.
-export const sampleData: PersonalData = {
+/**
+ * @type {PersonalData}
+ */
+export const sampleData = {
   legalName: {
     first: 'Jane',
     middle: 'Michelle',
