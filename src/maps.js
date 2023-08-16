@@ -96,7 +96,7 @@ export const noticeMap = [
     { text: data => fullName(data.chosenName), field: form => form.getField('Proposed name') },
     { text: () => '1', field: form => form.getField('times in') },
     { text: () => '1', field: form => form.getField('copies to') },
-    { text: () => 'in', field: form => form.getField('in') },
+    { text: data => data.county, field: form => form.getField('in') },
     { text: () => 'Petitioner', field: form => form.getField('undefined') },
     { check: () => true, field: form => form.getField('Forward statement for publication charges to') },
     { text: () => 'Petitioner', field: form => form.getField('undefined_2') },
