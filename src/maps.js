@@ -100,7 +100,7 @@ export const noticeMap = [
     { text: () => 'Petitioner', field: form => form.getField('undefined') },
     { check: () => true, field: form => form.getField('Forward statement for publication charges to') },
     { text: () => 'Petitioner', field: form => form.getField('undefined_2') },
-    { text: fullContactInfo, field: form => form.getField('Text1') },
+    { text: data => fullContactInfo(data, ', '), loc: { x: 55, y: 943, fontSize: 8 } },
 ]
 
 /**
