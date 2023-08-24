@@ -125,7 +125,17 @@ async function fetchAll(data) {
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
 
-  let allDocuments = [data.doNotPublish ? nameChangeExParte : nameChange, pii, pubNotice, feeWaiver, birthCert, mdosSex, miSex, acceptableId, socialSecurity]
+  let allDocuments = [
+    data.doNotPublish ? nameChangeExParte : nameChange,
+    pii,
+    pubNotice,
+    feeWaiver,
+    acceptableId,
+    socialSecurity,
+    mdosSex,
+    birthCert,
+    miSex,
+  ]
 
   if (data.age && 14 <= data.age && data.age < 18) {
     allDocuments.splice(3, 0, pc51b)
