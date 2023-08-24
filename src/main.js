@@ -66,6 +66,9 @@ function fillForm(doc, fills, data) {
     }
   }
 
+  // Flatten the form fields into the document.
+  form.flatten()
+
   return doc
 }
 
