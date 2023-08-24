@@ -117,7 +117,8 @@ export const sampleData = {
 
   fathersDateOfBirth: "1970-01-01",
 
-  phone: '313-555-1234',
+  areaCode: '313',
+  phone: '555-1234',
 
   streetAddress: '20 Monroe Street NW',
 
@@ -127,7 +128,8 @@ export const sampleData = {
 
   email: 'jdoe@goodmail.com',
 
-  county: 'Kent',
+
+county: 'Kent',
 
   representativeName: {
     first: 'John',
