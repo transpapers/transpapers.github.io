@@ -94,6 +94,7 @@ export const noticeMap = [
     { text: data => fullName(data.legalName), field: form => form.getField('Current first middle and last names type or print') },
     { text: data => fullName(data.legalName), field: form => form.getField('Current name') },
     { text: data => fullName(data.chosenName), field: form => form.getField('Proposed name') },
+    { text: data => fullName(data.legalName), field: form => form.getField('Petitioners name') },
     { text: () => '1', field: form => form.getField('times in') },
     { text: () => '1', field: form => form.getField('copies to') },
     { text: data => data.county, field: form => form.getField('in') },
