@@ -50,7 +50,7 @@ export const nameChangePrivateMap = [
     { check: data => !isMinor(data), field: form => form.getField('b an adult') },
     { check: isMinor, field: form => form.getField('c a minor whose natural or adopted parents are') },
     { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.mothersBirthName) : '', field: form => form.getField('Parent') },
-    { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.fathersBirthName) : '', field: form => form.getField('Parent') },
+    { text: data => (isMinor(data) && data.parentsAreOkay) ? fullName(data.fathersBirthName) : '', field: form => form.getField('and') },
     { text: data => data.reasonForNameChange, field: form => form.getField('3 The name change is for the following reason') },
 
     { text: data => isMinor(data) ? '' : data.legalName.first, field: form => form.getField('First') },
