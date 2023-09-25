@@ -896,7 +896,8 @@
       "address": "180 Ottawa Ave NW, Grand Rapids, MI 49503",
       "circuit": "17th",
       "phone": "(616) 632-5440",
-      "website": "https://www.accesskent.com/Courts/Probate/pdfs/Name_Change_Instructions.pdf"
+      "website": "https://www.accesskent.com/Courts/Probate/pdfs/Name_Change_Instructions.pdf",
+      "specificCourtInfo": "The courts front entrance is on the southwest side of the building, closer to the river. Once you get through the metal detector you can take any elevator to the second floor. On that floor you then turn and walk towards the large window then go down the hallway left from there. The Probate court counter, which you want, is the second counter further along the hall."
     },
     "fingerprintLocations": [
       {
@@ -907,8 +908,8 @@
     ],
     "publications": [
       {
-        "name": "Grand Rapids Legal News",
-        "website": ""
+        "name": "GR Press",
+        "website": "Email: legalads@mlive.com"
       }
     ]
   },
@@ -1579,7 +1580,8 @@
       "address": "111 S Michigan Ave, Saginaw, MI 48602",
       "circuit": "10th",
       "phone": "(989) 790-5544",
-      "website": "https://www.saginawcounty.com/media/x1ne1bik/name-change-guidelines.pdf"
+      "website": "https://www.saginawcounty.com/media/x1ne1bik/name-change-guidelines.pdf",
+      "specificCourtInfo": "Enter the Saginaw County Building using the main doors facing Michigan Ave. You will need to pass though a security checkpoint including a metal detector. Go straight ahead to the elevator bank and take the elevator to level B. Exit left from the elevator and then another left. Just before the end of the hall, on the right, is the 10th Circuit Court Clerk Records Office."
     },
     "fingerprintLocations": [
       {
@@ -1591,7 +1593,7 @@
     "publications": [
       {
         "name": "M-Live",
-        "website": "https://www.mlive.com/mlive_contacts/page/contact_home.html"
+        "website": "Email: legalads@mlive.com"
       }
     ]
   },
