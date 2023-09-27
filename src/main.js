@@ -2,7 +2,7 @@ import { PDFDocument, PDFForm, PDFField, PDFTextField, PDFCheckBox, PDFRadioGrou
 import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
-import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap } from './maps'
+import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap } from './maps'
 import { numericalAge, sampleData } from './util'
 import countyInfo from './countyInfo.json'
 
@@ -113,7 +113,7 @@ async function makeGuide(data) {
  */
 async function fetchAll(data) {
   const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
-  const nameChangeExParte = await fetchAndFill('./forms/pc51c.pdf', nameChangeMap, data)
+  const nameChangeExParte = await fetchAndFill('./forms/pc51c.pdf', nameChangePrivateMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
   const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)
   const pc51b = await fetch('./forms/pc51b.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
