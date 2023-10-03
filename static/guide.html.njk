@@ -104,7 +104,7 @@ be displayed in during filing. If so refer to our list of publications in sectio
 This form is otherwise complete.
 </p>
 
-<p>The fourth and final form is the <strong>Fee Waiver Request</strong>
+<p>The fourth form is the <strong>Fee Waiver Request</strong>
 (form MC20.) This form is optional. It is a request to waive the filing
 fee assessed upon submitting these documents to the court. It usually
 ranges from $175-200, depending on the county, and is the largest single
@@ -120,10 +120,21 @@ form, complete <strong>items 1 and 3</strong> as applicable.
 {% endif %}
 </p>
 
+{% if county == Saginaw %}
+<p> For Saginaw county they also require a fifth form, the <strong>
+Order Following Hearing Regarding Petition for Name Change</strong>
+(form PC 52). This form should already be complete.
+{% endif %}
+
 <p>Once you have completed all the initial forms, you are ready to
-file. Note: some counties may require multiple copies of these forms
+file. 
+{% if county == Saginaw %}
+Note: Saginaw County requires multiple copies of these forms
 to file it is recommended that you have 3 copies filled out of each 
-of the above forms not including the Fee Waiver Request.</p>
+of the above forms not including the Fee Waiver Request or the
+m97a form.
+{% endif %}
+</p>
 
 <h3 id="filing-initial-forms">2. Filing Initial Forms</h3>
 

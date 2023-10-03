@@ -105,8 +105,8 @@ export const noticeMap = [
 ]
 
 /**
- * pc 52.)
- * added 10/2023.
+ * Order Following Hearing Regarding Peition For Name Change PC 52.)
+ * added 10/2023 for Saginaw County Only.
  * @type {Formfill[]}
  */
 export const followingMap = [
