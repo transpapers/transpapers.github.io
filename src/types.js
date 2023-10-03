@@ -90,3 +90,10 @@
  * @property {?Location} loc - To be used with a non-fillable PDF. Contains the
  *    location at which the data should be inserted.
  */
+
+/**
+ * @typedef {Object} DateFormat - A format specification for dates
+ * FIXME We really should just use an external library for this...
+ * @property {Array} format - An array whose elements are either 'day',
+ * 'month', or 'year'
+ * @property {string} separator

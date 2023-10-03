@@ -1,4 +1,4 @@
-import { fullName, fullContactInfo, isMinor, representativeName } from './util'
+import { formatDate, fullName, fullContactInfo, isMinor, representativeName } from './util'
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
@@ -82,7 +82,7 @@ export const piiMap = [
     { text: data => data.doNotPublish ? 'PC 51c' : 'PC 51', field: form => form.getField('Name of formdocument that this MC 97a is being filed with 1') },
     { text: data => `${String(fullName(representativeName(data)))} ${String(new Date().toLocaleDateString())}`, field: form => form.getField('Name of formdocument that this MC 97a is being filed with 2') },
     { text: data => fullName(data.legalName), field: form => form.getField('Name') },
-    { text: data => data.dateOfBirth, field: form => form.getField('DOB') }
+    { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), field: form => form.getField('DOB') }
 ]
 
 /**

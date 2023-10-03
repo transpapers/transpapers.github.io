@@ -23,6 +23,25 @@ export function numericalAge(birthdate) {
 }
 
 /**
+ * Format a Date as a string 
+ * @param {string} date - date, formatted as YYYY-MM-DD.
+ * @param {DateFormat} fmt - Ugh
+ * @return {string}
+ */
+export function formatDate(date, fmt) {
+  const year = Number.parseInt(date.substring(0, 4))
+  const month = Number.parseInt(date.substring(5, 7))
+  const day = Number.parseInt(date.substring(8))
+
+  return fmt.format.map((part) => {
+	  if (part === 'month') { return month }
+	  if (part === 'day') { return day }
+	  if (part === 'year') { return year }
+	  return ''
+  }).join(fmt.separator)
+}
+
+/**
  * Format a full `name` as a string.
  * @param {Name} name
  * @return {string}
