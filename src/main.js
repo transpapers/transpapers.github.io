@@ -2,7 +2,7 @@ import { PDFDocument, PDFForm, PDFField, PDFTextField, PDFCheckBox, PDFRadioGrou
 import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
-import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap } from './maps'
+import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap, followingMap } from './maps'
 import { numericalAge, sampleData } from './util'
 import countyInfo from './countyInfo.json'
 
@@ -116,6 +116,7 @@ async function fetchAll(data) {
   const nameChangeExParte = await fetchAndFill('./forms/pc51c.pdf', nameChangePrivateMap, data)
   const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
   const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)
+  const pc52 = await fetchAndFill('./forms/pc52.pdf', followingMap, data)
   const pc51b = await fetch('./forms/pc51b.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const pc50c = await fetch('./forms/pc50c.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const feeWaiver = await fetchAndFill('./forms/mc20.pdf', feeWaiverMap, data)
@@ -143,6 +144,10 @@ async function fetchAll(data) {
 
   if (data.doNotPublish && !data.parentsAreOkay) {
     allDocuments.splice(3, 0, pc50c)
+  }
+
+  if (data.county === 'Saginaw') {
+    allDocuments.splice(4, 0, pc52)
   }
 
   if (data.age && data.county) {

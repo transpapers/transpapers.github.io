@@ -105,6 +105,15 @@ export const noticeMap = [
 ]
 
 /**
+ * pc 52.)
+ * added 10/2023.
+ * @type {Formfill[]}
+ */
+export const followingMap = [
+    { text: data => isMinor(data) ? fullName(representativeName(data)) : fullName(data.legalName), field: form => form.getField('Current first middle and last names type or print') }
+]
+
+/**
  * Fee Waiver Request (Michigan form MC 20.)
  * @type {Formfill[]}
  */
