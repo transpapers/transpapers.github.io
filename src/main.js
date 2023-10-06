@@ -279,21 +279,38 @@ function makeData() {
   }
 }
 
+const debug = false
+
 /**
  * Generate and download the documents from the given `data`.
  *
  * @param {PersonalData} data
  */
 function generate(data) {
-  fetchAll(data)
-    .then(doc => {
-      const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }))
-      const link = document.createElement('a')
-      link.download = 'gender_affirming_documents.pdf'
-      link.href = url
-      link.click()
-      URL.revokeObjectURL(link.href)
-    })
+  if (debug) {
+    fetch('./forms/m97a.pdf')
+      .then(async response => await response.arrayBuffer())
+      .then(PDFDocument.load)
+      .then(labelFields)
+      .then(doc => {
+        const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }))
+        const link = document.createElement('a')
+        link.download = 'result.pdf'
+        link.href = url
+        link.click()
+        URL.revokeObjectURL(link.href)
+      })
+  } else {
+    fetchAll(data)
+      .then(doc => {
+        const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }))
+        const link = document.createElement('a')
+        link.download = 'gender_affirming_documents.pdf'
+        link.href = url
+        link.click()
+        URL.revokeObjectURL(link.href)
+      })
+  }
 }
 
 const submitButton = document.getElementById('submit');
