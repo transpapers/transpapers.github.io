@@ -272,6 +272,8 @@ function makeData() {
       middle: document.getElementById('representative-name-middle').value,
       last: document.getElementById('representative-name-last').value,
       suffix: document.getElementById('representative-suffix').value,
+
+      passport: document.getElementById('passport').value,
     },
 
   }

@@ -184,7 +184,7 @@
             type="checkbox">
             <div>
                 <label for="mothers-maiden-name">Mother's name at
-                birth</label>
+                her birth</label>
             </div>
             <div class="name-input">
                 <input size="1" id="mother-name-first" name=
@@ -203,7 +203,7 @@
             "mothers-birthdate" type="date" min="1850-01-01">
             <div>
                 <label for="fathers-maiden-name">Father's name at
-                birth</label>
+                his birth</label>
             </div>
             <div class="name-input">
                 <input size="1" id="father-name-first" name=
@@ -504,6 +504,27 @@
                 <label for="email">Email address</label> <span>We
                 will not email you.</span>
             </div><input id="email" name="email">
+            <div>
+                <label for="passport">Select a statement relavant to you.</label><span>
+                    This determines which form you need for a passport, if any.
+                </span>
+            </div><select id="passport" name="passport">
+                <option value="">
+                </option>
+                <option value="Skip">
+                    I don't want/need to update a passport or apply for one.
+                </option>
+                <option value="ds5504">
+                    I have an undamaged passport issued when I was 16+ and within the last year to update.
+                </option>
+                <option value="ds82">
+                    I have an undamaged passport issued when I was 16+ and within the last 15 years to update.
+                </option>
+                <option value="ds11">
+                    I want to update my passport or apply for the first time and I don't meet the above criteria.
+                </option>
+            </select>
+            <div>
         </form>
         <div style="text-align: center; padding: 1rem;">
             <input type="button" id="submit" value=
