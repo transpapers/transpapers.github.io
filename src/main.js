@@ -2,7 +2,7 @@ import { PDFDocument, PDFForm, PDFField, PDFTextField, PDFCheckBox, PDFRadioGrou
 import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
-import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap, followingMap } from './maps'
+import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap, followingMap, ds5504Map, ds82Map, ds11Map } from './maps'
 import { numericalAge, sampleData } from './util'
 import countyInfo from './countyInfo.json'
 
@@ -125,6 +125,9 @@ async function fetchAll(data) {
   const miSex = await fetchAndFill('./forms/mi_sdf.pdf', miSexMap, data)
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
+  const ds5504 = await fetchAndFill('./forms/passport_ds5504.pdf', ds5504Map, data)
+  const ds82 = await fetchAndFill('./forms/passport_ds82.pdf', ds82Map, data)
+  const ds11 = await fetchAndFill('./forms/passport_ds11.pdf', ds11Map, data)
 
   let allDocuments = [
     data.doNotPublish ? nameChangeExParte : nameChange,
@@ -148,6 +151,18 @@ async function fetchAll(data) {
 
   if (data.county === 'Saginaw') {
     allDocuments.splice(4, 0, pc52)
+  }
+
+  if (data.passport === 'ds5504') {
+    allDocuments.Push(ds5504)
+  }
+
+  if (data.passport === 'ds82') {
+    allDocuments.Push(ds82)
+  }
+
+  if (data.passport === 'ds11') {
+    allDocuments.Push(ds11)
   }
 
   if (data.age && data.county) {

@@ -41,12 +41,16 @@ export function formatDate(date, fmt) {
   }).join(fmt.separator)
 }
 
-/** Split phone number into first three and last 4 digits */
-export function phoneSplit(phoneNumber) {
-  const phoneArray = []
-  phoneArray[1] = phoneNumber.substring(0,3)
-  phoneArray[2] = phoneNumber.substring(phoneNumber.length - 4)
-  return phoneArray
+/** Split phone number into first three digits */
+export function phoneStart(phoneNumber) {
+  const firstThree = phoneNumber.substring(0,3)
+  return firstThree
+}
+
+/** Split phone number into last 4 digits */
+export function phoneEnd(phoneNumber) {
+  const lastFour = phoneNumber.substring(phoneNumber.length - 4)
+  return lastFour
 }
 
 /**

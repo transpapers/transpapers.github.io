@@ -1,4 +1,4 @@
-import { formatDate, fullName, fullContactInfo, isMinor, representativeName } from './util'
+import { formatDate, fullName, fullContactInfo, isMinor, representativeName, phoneStart } from './util'
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
@@ -247,7 +247,8 @@ export const ds5504Map = [
     { text: data => `${String(data.city)} ${String(data.state)}`, field: form => form.getField('App Place of Birth') },
     { text: data => data.email, field: form => form.getField('App Email') },
     { text: data => data.areaCode, field: form => form.getField('App Phone 1') },
-    /**Place rest of phone number */
+    { text: data => phoneStart(data.phone), field: form => form.getField('App Phone 2') },
+    { text: data => phoneEnd(data.phone), field: form => form.getField('App Phone 3') },
     { text: data => data.streetAddress, field: form => form.getField('App Mailing Address Line 1 Street RFD PO Box or URB') },
     { text: data => isMinor(data) ? `In Care Of - ${String(fullName(representativeName(data)))}` : '', field: form => form.getField('App Mailing Address Line 2') },
     { text: data => data.city, field: form => form.getField('App Mailing City') },
@@ -286,7 +287,8 @@ export const ds82Map = [
     { text: data => `${String(data.city)} ${String(data.state)}`, field: form => form.getField('App Place of Birth') },
     { text: data => data.email, field: form => form.getField('App Email') },
     { text: data => data.areaCode, field: form => form.getField('App Phone 1') },
-    /**Place rest of phone number */
+    { text: data => phoneStart(data.phone), field: form => form.getField('App Phone 2') },
+    { text: data => phoneEnd(data.phone), field: form => form.getField('App Phone 3') },
     { text: data => data.streetAddress, field: form => form.getField('App Mailing Address Line 1') },
     { text: data => isMinor(data) ? `In Care Of - ${String(fullName(representativeName(data)))}` : '', field: form => form.getField('App Mailing Address Line 2') },
     { text: data => data.city, field: form => form.getField('App Mailing Address City') },
@@ -317,7 +319,8 @@ export const ds11Map = [
     { text: data => `${String(data.city)} ${String(data.state)}`, field: form => form.getField('Applicant Place of Birth') },
     { text: data => data.email, field: form => form.getField('Applicant Email') },
     { text: data => data.areaCode, field: form => form.getField('Applicant Phone 1') },
-    /**Place rest of phone number */
+    { text: data => phoneStart(data.phone), field: form => form.getField('Applicant Phone 2') },
+    { text: data => phoneEnd(data.phone), field: form => form.getField('Applicant Phone 3') },
     { text: data => data.streetAddress, field: form => form.getField('Applicant Address Street') },
     { text: data => isMinor(data) ? `In Care Of - ${String(fullName(representativeName(data)))}` : '', field: form => form.getField('Address Line 2') },
     { text: data => data.city, field: form => form.getField('Applicant Address CIty') },
