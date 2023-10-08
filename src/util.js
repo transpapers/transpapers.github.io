@@ -41,6 +41,14 @@ export function formatDate(date, fmt) {
   }).join(fmt.separator)
 }
 
+/** Split phone number into first three and last 4 digits */
+export function phoneSplit(phoneNumber) {
+  const phoneArray = []
+  phoneArray[1] = phoneNumber.substring(0,3)
+  phoneArray[2] = phoneNumber.substring(phoneNumber.length - 4)
+  return phoneArray
+}
+
 /**
  * Format a full `name` as a string.
  * @param {Name} name
