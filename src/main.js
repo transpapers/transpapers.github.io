@@ -201,6 +201,7 @@ async function labelFields(doc) {
 
   for (const field of fields) {
     const type = field.constructor.name
+    const name = field.getName()
 
     console.log(`${type}: ${name}`)
     if (field instanceof PDFRadioGroup) {
@@ -303,7 +304,7 @@ const debug = false
  */
 function generate(data) {
   if (debug) {
-    fetch('./forms/m97a.pdf')
+    fetch('./forms/mdos_sdf.pdf')
       .then(async response => await response.arrayBuffer())
       .then(PDFDocument.load)
       .then(labelFields)
