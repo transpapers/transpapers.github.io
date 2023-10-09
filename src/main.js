@@ -283,14 +283,14 @@ function makeData() {
     zip: document.getElementById('zip').value,
     email: document.getElementById('email').value,
 
+    passport: document.getElementById('passport').value,
+
     representativeName: {
       first: document.getElementById('representative-name-first').value,
       middle: document.getElementById('representative-name-middle').value,
       last: document.getElementById('representative-name-last').value,
       suffix: document.getElementById('representative-suffix').value,
-
-      passport: document.getElementById('passport').value,
-    },
+    }
 
   }
 }
