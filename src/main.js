@@ -125,8 +125,8 @@ async function fetchAll(data) {
   const miSex = await fetchAndFill('./forms/mi_sdf.pdf', miSexMap, data)
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
-  const ds5504 = await fetchAndFill('./forms/passport_ds5504.pdf', ds5504Map, data)
-  const ds82 = await fetchAndFill('./forms/passport_ds82.pdf', ds82Map, data)
+  const ds5504 = await fetchAndFill('./forms/passport_ds5504.PDF', ds5504Map, data)
+  const ds82 = await fetchAndFill('./forms/passport_ds82.PDF', ds82Map, data)
   const ds11 = await fetchAndFill('./forms/passport_ds11.pdf', ds11Map, data)
 
   let allDocuments = [
