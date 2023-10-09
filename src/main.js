@@ -154,15 +154,15 @@ async function fetchAll(data) {
   }
 
   if (data.passport === 'ds5504') {
-    allDocuments.Push(ds5504)
+    allDocuments.push(ds5504)
   }
 
   if (data.passport === 'ds82') {
-    allDocuments.Push(ds82)
+    allDocuments.push(ds82)
   }
 
   if (data.passport === 'ds11') {
-    allDocuments.Push(ds11)
+    allDocuments.push(ds11)
   }
 
   if (data.age && data.county) {
