@@ -258,7 +258,7 @@ export const ds5504Map = [
     { text: data => data.legalName, field: form => form.getField(' passport book and/or passport card') },
     { text: data => `${String(data.chosenName.last)} ${String(data.chosenName.first)} ${String(data.chosenName.middle)}`, field: form => form.getField('Name of Applicant 2') },
     { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), field: form => form.getField('Date Of Birth') },
-    { check: () => true, field: form => form.getField('Button14') },
+    { text: data => data.gender === 'X', loc: {page:5, x: 120, y: 592 } },
     { text: data => data.chosenName.last, field: form => form.getField('Changed Last Name') },
     { text: data => data.chosenName.first, field: form => form.getField('Changed First') },
     { text: data => data.chosenName.middle, field: form => form.getField('Changed Middle') }
