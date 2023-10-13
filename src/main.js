@@ -3,12 +3,13 @@ import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
 import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap, followingMap, ds5504Map, ds82Map, ds11Map } from './maps'
-import { numericalAge, sampleData } from './util'
+import { sampleData } from './person'
+import { numericalAge } from './util'
 import countyInfo from './countyInfo.json'
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
- * @param {PDFDocumentdata} doc
+ * @param {PDFDocument} doc
  * @param {Formfill[]} fills
  * @param {PersonalData} data
  * @return {PDFDocument} Filled PDF document
