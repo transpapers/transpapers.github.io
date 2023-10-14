@@ -20,7 +20,7 @@ function fillForm(doc, fills, data) {
 
   for (const fill of fills) {
     if (fill.field !== undefined) {
-      const field = fill.field(form)
+      const field = form.getField(fill.field)
       if (fill.text !== undefined && field instanceof PDFTextField) {
         const text = fill.text(data)
         field.setText(text)
