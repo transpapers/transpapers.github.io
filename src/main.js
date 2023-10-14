@@ -1,9 +1,8 @@
-import { PDFDocument, PDFForm, PDFField, PDFTextField, PDFCheckBox, PDFRadioGroup } from 'pdf-lib'
+import { PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup } from 'pdf-lib'
 import { render } from 'nunjucks'
 import html2pdf from 'html2pdf.js'
 
-import { nameChangeMap, ssnMap, birthCertMap, piiMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, nameChangePrivateMap, followingMap, ds5504Map, ds82Map, ds11Map } from './maps'
-import { sampleData } from './person'
+import { michiganNameChange } from './process'
 import { numericalAge } from './util'
 import countyInfo from './countyInfo.json'
 
@@ -11,7 +10,7 @@ import countyInfo from './countyInfo.json'
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
  * @param {PDFDocument} doc
  * @param {Formfill[]} fills
- * @param {PersonalData} data
+ * @param {Person} data
  * @return {PDFDocument} Filled PDF document
  */
 function fillForm(doc, fills, data) {
@@ -85,7 +84,7 @@ async function fetchAndFill(formFilename, fills, data) {
 
 /**
  * Generate the guide as a PDF ArrayBuffer from the given `data`.
- * @param {PersonalData} data
+ * @param {Person} data
  * @return {Promise<Uint8Array>} Customized PDF guide
  */
 async function makeGuide(data) {
@@ -109,62 +108,22 @@ async function makeGuide(data) {
  * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
  * TODO Factor out the list.
  *
- * @param {PersonalData} data
+ * @param {Process} process
+ * @param {Person} data
  * @return {Promise<Uint8Array>} Compiled documents
  */
-async function fetchAll(data) {
-  const nameChange = await fetchAndFill('./forms/name-change.pdf', nameChangeMap, data)
-  const nameChangeExParte = await fetchAndFill('./forms/pc51c.pdf', nameChangePrivateMap, data)
-  const pii = await fetchAndFill('./forms/m97a.pdf', piiMap, data)
-  const pubNotice = await fetchAndFill('./forms/pc50.pdf', noticeMap, data)
-  const pc52 = await fetchAndFill('./forms/pc52.pdf', followingMap, data)
-  const pc51b = await fetch('./forms/pc51b.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
-  const pc50c = await fetch('./forms/pc50c.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
-  const feeWaiver = await fetchAndFill('./forms/mc20.pdf', feeWaiverMap, data)
-  const birthCert = await fetchAndFill('./forms/birth-cert.pdf', birthCertMap, data)
-  const mdosSex = await fetchAndFill('./forms/mdos_sdf.pdf', mdosSexMap, data)
-  const miSex = await fetchAndFill('./forms/mi_sdf.pdf', miSexMap, data)
-  const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
-  const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
-  const ds5504 = await fetchAndFill('./forms/passport_ds5504.PDF', ds5504Map, data)
-  const ds82 = await fetchAndFill('./forms/passport_ds82.PDF', ds82Map, data)
-  const ds11 = await fetchAndFill('./forms/passport_ds11.pdf', ds11Map, data)
-
-  let allDocuments = [
-    data.doNotPublish ? nameChangeExParte : nameChange,
-    pii,
-    pubNotice,
-    feeWaiver,
-    acceptableId,
-    socialSecurity,
-    mdosSex,
-    birthCert,
-    miSex,
-  ]
-
-  if (data.age && 14 <= data.age && data.age < 18) {
-    allDocuments.splice(3, 0, pc51b)
-  }
-
-  if (data.doNotPublish && !data.parentsAreOkay) {
-    allDocuments.splice(3, 0, pc50c)
-  }
-
-  if (data.county === 'Saginaw') {
-    allDocuments.splice(4, 0, pc52)
-  }
-
-  if (data.passport === 'ds5504') {
-    allDocuments.push(ds5504)
-  }
-
-  if (data.passport === 'ds82') {
-    allDocuments.push(ds82)
-  }
-
-  if (data.passport === 'ds11') {
-    allDocuments.push(ds11)
-  }
+async function fetchAll(process, data) {
+  const allDocuments = await Promise.all(process.documents
+                              .filter(doc => !doc.hasOwnProperty('include') || doc.include(data))
+                              .map(async (doc) => {
+                                if (doc.hasOwnProperty('map')) {
+                                  return await fetchAndFill(`/forms/${doc.filename}`, doc.map, data)
+                                } else {
+                                  return await fetch(`/forms/${doc.filename}`)
+                                    .then(res => res.arrayBuffer())
+                                    .then(PDFDocument.load)
+                                }
+                              }))
 
   if (data.age && data.county) {
     const guide = await PDFDocument.load(await makeGuide(data))
@@ -222,7 +181,7 @@ async function labelFields(doc) {
 /**
  * Generate a data object from index.html.
  *
- * @return {PersonalData}
+ * @return {Person}
  */
 function makeData() {
   return {
@@ -301,7 +260,7 @@ const debug = false
 /**
  * Generate and download the documents from the given `data`.
  *
- * @param {PersonalData} data
+ * @param {Person} data
  */
 function generate(data) {
   if (debug) {
@@ -318,7 +277,7 @@ function generate(data) {
         URL.revokeObjectURL(link.href)
       })
   } else {
-    fetchAll(data)
+    fetchAll(michiganNameChange, data)
       .then(doc => {
         const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }))
         const link = document.createElement('a')

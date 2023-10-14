@@ -1,4 +1,4 @@
-import { nameChangeMap, followingMap, piiMap, ssnMap, noticeMap, feeWaiverMap } from './maps.js'
+import { nameChangeMap, nameChangePrivateMap, followingMap, piiMap, ssnMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, birthCertMap } from './maps.js'
 
 /**
  * @typedef {Object} Process - Procedural information for filing.
