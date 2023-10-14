@@ -6,51 +6,62 @@
  * @return {number}
  */
 export function numericalAge(birthdate) {
-  const thisYear = new Date().getFullYear()
-  const thisMonth = new Date().getMonth()
-  const thisDay = new Date().getDay()
-  const birthYear = Number.parseInt(birthdate.substring(0, 4))
-  const birthMonth = Number.parseInt(birthdate.substring(5, 7))
-  const birthDay = Number.parseInt(birthdate.substring(8))
+	const thisYear = new Date().getFullYear();
+	const thisMonth = new Date().getMonth();
+	const thisDay = new Date().getDay();
+	const birthYear = Number.parseInt(birthdate.substring(0, 4));
+	const birthMonth = Number.parseInt(birthdate.substring(5, 7));
+	const birthDay = Number.parseInt(birthdate.substring(8));
 
-  if (thisMonth < birthMonth) {
-    return thisYear - birthYear - 1
-  } else if (thisMonth === birthMonth && thisDay < birthDay) {
-    return thisYear - birthYear - 1
-  } else {
-    return thisYear - birthYear
-  }
+	if (thisMonth < birthMonth) {
+		return thisYear - birthYear - 1;
+	}
+
+	if (thisMonth === birthMonth && thisDay < birthDay) {
+		return thisYear - birthYear - 1;
+	}
+
+	return thisYear - birthYear;
 }
 
 /**
- * Format a Date as a string 
+ * Format a Date as a string
  * @param {string} date - date, formatted as YYYY-MM-DD.
  * @param {DateFormat} fmt - Ugh
  * @return {string}
  */
 export function formatDate(date, fmt) {
-  const year = Number.parseInt(date.substring(0, 4))
-  const month = Number.parseInt(date.substring(5, 7))
-  const day = Number.parseInt(date.substring(8))
+	const year = Number.parseInt(date.substring(0, 4));
+	const month = Number.parseInt(date.substring(5, 7));
+	const day = Number.parseInt(date.substring(8));
 
-  return fmt.format.map((part) => {
-	  if (part === 'month') { return month }
-	  if (part === 'day') { return day }
-	  if (part === 'year') { return year }
-	  return ''
-  }).join(fmt.separator)
+	return fmt.format.map(part => {
+	  if (part === 'month') {
+			return month;
+		}
+
+	  if (part === 'day') {
+			return day;
+		}
+
+	  if (part === 'year') {
+			return year;
+		}
+
+	  return '';
+	}).join(fmt.separator);
 }
 
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber) {
-  const firstThree = phoneNumber.substring(0,3)
-  return firstThree
+	const firstThree = phoneNumber.substring(0, 3);
+	return firstThree;
 }
 
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber) {
-  const lastFour = phoneNumber.substring(phoneNumber.length - 4)
-  return lastFour
+	const lastFour = phoneNumber.substring(phoneNumber.length - 4);
+	return lastFour;
 }
 
 /**
@@ -59,5 +70,5 @@ export function phoneEnd(phoneNumber) {
  * @return {string}
  */
 export function fullName(name) {
-  return [name.first, name.middle, name.last, name.suffix].filter(n => n && n.length > 0).join(' ')
+	return [name.first, name.middle, name.last, name.suffix].filter(n => n && n.length > 0).join(' ');
 }

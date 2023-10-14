@@ -18,14 +18,14 @@
  */
 
 const mockProcess = {
-  state: 'MI',
-  target: 'birth-record',
-  documents: [
-    { 
-      name: 'Petition to Change Name',
-      id: 'PC 51',
-      filename: 'mi/pc51.pdf',
-      map: nameChangeMap,
-    },
-  ],
+	state: 'MI',
+	target: 'birth-record',
+	documents: [
+		{
+			name: 'Petition to Change Name',
+			id: 'PC 51',
+			filename: 'mi/pc51.pdf',
+			map: nameChangeMap,
+		},
+	],
 };
