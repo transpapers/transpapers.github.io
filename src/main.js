@@ -2,8 +2,10 @@ import {PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup} from 'pdf-lib';
 import {render} from 'nunjucks';
 import html2pdf from 'html2pdf.js';
 
-import {michiganNameChange} from './process';
+import {michiganNameChange, targets, michiganProcesses} from './process';
 import {numericalAge} from './util';
+import {fields, renderField} from './fields';
+import shakeTree from './shakeTree';
 import countyInfo from './countyInfo.json';
 
 /**
@@ -205,10 +207,8 @@ function makeData() {
 		reasonForNameChange: document.getElementById('name-change-reason').value,
 
 		sealBirthCertificate: document.getElementById('seal-birth-certificate').checked,
-		birthplace: {
-			city: document.getElementById('birth-city').value,
-			state: document.getElementById('birth-state').value,
-		},
+		birthCity: document.getElementById('birth-city').value,
+		birthState: document.getElementById('birth-state').value,
 
 		dateOfBirth: document.getElementById('birthdate').value,
 
@@ -292,5 +292,53 @@ function generate(data) {
 	}
 }
 
-const submitButton = document.getElementById('submit');
-submitButton.addEventListener('click', () => generate(makeData()));
+function updateForm() {
+	const processes = document.getElementById('processes');
+	const allProcesses = Array.from(processes.querySelectorAll('input'));
+	const checkedProcesses = allProcesses
+		.filter(element => element.checked)
+		.map(element => {
+			const name = element.getAttribute('name');
+			return michiganProcesses[name];
+		});
+
+	const form = document.getElementById('main-form');
+	form.replaceChildren();
+
+	const neededFields = [];
+	for (const process of checkedProcesses) {
+		shakeTree(process, neededFields);
+	}
+
+	neededFields.forEach(fieldName => {
+		const field = fields[fieldName];
+		if (field) {
+			form.append(renderField(field));
+		}
+	});
+
+	if (checkedProcesses.length > 0) {
+		const submitButton = document.createElement('input');
+		submitButton.setAttribute('type', 'submit');
+
+		submitButton.addEventListener('click', () => generate(makeData()));
+		form.append(submitButton);
+	}
+}
+
+const targetsForm = document.getElementById('processes');
+Object.entries(targets).forEach(([name, description]) => {
+	const checkbox = document.createElement('input');
+	checkbox.setAttribute('type', 'checkbox');
+	checkbox.setAttribute('id', name);
+	checkbox.setAttribute('name', name);
+
+	checkbox.addEventListener('change', updateForm);
+
+	const descr = document.createElement('span');
+	descr.innerHTML = description;
+
+	const br = document.createElement('br');
+
+	targetsForm.append(checkbox, descr, br);
+});

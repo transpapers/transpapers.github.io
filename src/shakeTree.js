@@ -6,17 +6,17 @@ export default function shakeTree(object, accessed = []) {
 	const functionPropertyNames = ['include', 'text', 'check'];
 
 	const handler = {
-		get(_target, prop) {
+		get(_target, prop, ...args) {
 			if (!accessed.includes(prop)) {
 				accessed.push(prop);
 			}
 
-			return Reflect.get(...arguments);
+			return Reflect.get(args);
 		},
 	};
 
 	recursePropertyNames.forEach(name => {
-		if (object.hasOwnProperty(name)) {
+		if (Object.prototype.hasOwnProperty.call(object, name)) {
 			const subobject = object[name];
 			if (Array.isArray(subobject)) {
 				subobject.forEach(item => shakeTree(item, accessed));
@@ -27,7 +27,7 @@ export default function shakeTree(object, accessed = []) {
 	});
 
 	functionPropertyNames.forEach(name => {
-		if (object.hasOwnProperty(name)) {
+		if (Object.prototype.hasOwnProperty.call(object, name)) {
 			const func = object[name];
 			const proxiedDummy = new Proxy(sampleData, handler);
 

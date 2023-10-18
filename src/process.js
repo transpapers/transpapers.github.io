@@ -133,3 +133,10 @@ export const michiganBirthRecord = {
 		},
 	],
 };
+
+export const michiganProcesses = {
+	'birth-record': michiganBirthRecord,
+	'sex-designation': michiganSexDesignation,
+	'name-change': michiganNameChange,
+	'social-security': socialSecurity,
+};

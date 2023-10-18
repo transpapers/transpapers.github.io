@@ -6,7 +6,8 @@ import {fullName, numericalAge} from './util.js';
  * @property {Name} chosenName
  * @property {string} reasonForNameChange
  * @property {boolean} sealBirthCertificate
- * @property {Object} birthplace FIXME
+ * @property {string} birthCity
+ * @property {string} birthState
  * @property {string} dateOfBirth - A person's date of birth.
  *
  * This is Chesterton's fence!! Read before you modify. I got an earful about
@@ -108,10 +109,8 @@ export const sampleData = {
 
 	reasonForNameChange: 'Gender transition',
 	sealBirthCertificate: true,
-	birthplace: {
-		city: 'New York',
-		state: 'New York',
-	},
+	birthCity: 'New York',
+	birthState: 'New York',
 
 	dateOfBirth: '2010-01-01',
 

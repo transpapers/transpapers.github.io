@@ -1,23 +1,31 @@
- form {
-	 display: grid;
-	 grid-template-columns: minmax(auto, 20ch) 1fr;
-	 grid-gap: 1rem;
-	 align-items: center;
- }
+span.subtitle {
+    color: #777;
+    font-size: smaller;
+    line-height: 1;
+}
 
- form div:nth-child(odd) {
-	 text-align: right;
-	 line-height: 1;
- }
+form {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+}
 
- form span {
-	 font-size: smaller;
-	 color: #777;
- }
+label div {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0.25rem;
+    margin-bottom: 0.25rem;
+}
 
- .name-input {
-	 max-width: 100%;
-	 display: grid;
-	 grid-template-columns: 2fr 2fr 2fr 1fr;
-	 grid-gap: 0.5rem;
- }
+div.name {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr;
+    grid-gap: 0.25rem;
+}
+
+label.checkbox {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    grid-gap: 0.25rem;
+}
