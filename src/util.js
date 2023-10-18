@@ -9,9 +9,9 @@ export function numericalAge(birthdate) {
 	const thisYear = new Date().getFullYear();
 	const thisMonth = new Date().getMonth();
 	const thisDay = new Date().getDay();
-	const birthYear = Number.parseInt(birthdate.substring(0, 4));
-	const birthMonth = Number.parseInt(birthdate.substring(5, 7));
-	const birthDay = Number.parseInt(birthdate.substring(8));
+	const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
+	const birthMonth = Number.parseInt(birthdate.substring(5, 7), 10);
+	const birthDay = Number.parseInt(birthdate.substring(8), 10);
 
 	if (thisMonth < birthMonth) {
 		return thisYear - birthYear - 1;
@@ -31,24 +31,24 @@ export function numericalAge(birthdate) {
  * @return {string}
  */
 export function formatDate(date, fmt) {
-	const year = Number.parseInt(date.substring(0, 4));
-	const month = Number.parseInt(date.substring(5, 7));
-	const day = Number.parseInt(date.substring(8));
+	const year = Number.parseInt(date.substring(0, 4), 10);
+	const month = Number.parseInt(date.substring(5, 7), 10);
+	const day = Number.parseInt(date.substring(8), 10);
 
 	return fmt.format.map(part => {
-	  if (part === 'month') {
+		if (part === 'month') {
 			return month;
 		}
 
-	  if (part === 'day') {
+		if (part === 'day') {
 			return day;
 		}
 
-	  if (part === 'year') {
+		if (part === 'year') {
 			return year;
 		}
 
-	  return '';
+		return '';
 	}).join(fmt.separator);
 }
 
