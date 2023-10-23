@@ -6,12 +6,28 @@ export default function shakeTree(object, accessed = []) {
 	const functionPropertyNames = ['include', 'text', 'check'];
 
 	const handler = {
-		get(_target, prop, ...args) {
+		// Handle nested properties correctly.
+		// cf. https://stackoverflow.com/questions/41299642/
+		get(target, prop) {
+			if (prop === 'isProxy') {
+				return true;
+			}
+
+			const func = target[prop];
+
+			if (typeof func === 'undefined') {
+				return;
+			}
+
+			if (!func.isProxy && typeof func === 'object') {
+				target[prop] = new Proxy(func, handler);
+			}
+
 			if (!accessed.includes(prop)) {
 				accessed.push(prop);
 			}
 
-			return Reflect.get(args);
+			return target[prop];
 		},
 	};
 

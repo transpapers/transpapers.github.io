@@ -1,4 +1,4 @@
-import {formatDate, fullName, phoneStart, phoneEnd} from './util.js';
+import {formatDate, fullName, phoneAreaCode, phoneStart, phoneEnd} from './util.js';
 import {fullContactInfo, isMinor, representativeName} from './person.js';
 
 // Maps appear in the order they will be collated.
@@ -135,7 +135,7 @@ export const birthCertMap = [
 	{text: data => data.streetAddress, loc: {x: 48, y: 237}},
 	{text: data => `${data.city}, ${data.state}`, loc: {x: 388, y: 237}},
 	{text: data => data.zip, loc: {x: 662, y: 237}},
-	{text: data => data.areaCode + data.phone, loc: {x: 48, y: 283}},
+	{text: data => data.phone, loc: {x: 48, y: 283}},
 	{text: data => data.email, loc: {x: 426, y: 283}},
 	{text: data => fullName(data.legalName), loc: {x: 48, y: 541}},
 	{text: data => fullName(data.legalName), loc: {x: 56, y: 800}},
@@ -219,8 +219,8 @@ export const ssnMap = [
 	{text: data => data.legalName.middle, field: 'topmostSubform[0].Page5[0].middlenameonrecentcard[0]'},
 	{text: data => data.legalName.last, field: 'topmostSubform[0].Page5[0].lastnameonrecentcard[0]'},
 	{text: () => new Date().toLocaleDateString(), field: 'topmostSubform[0].Page5[0].DateTimeField2[1]'},
-	{text: data => data.areaCode, field: 'topmostSubform[0].Page5[0].areacode[0]'},
-	{text: data => data.phone, field: 'topmostSubform[0].Page5[0].phonenumber[0]'},
+	{text: data => phoneAreaCode(data.phone), field: 'topmostSubform[0].Page5[0].areacode[0]'},
+	{text: data => phoneStart(data.phone) + phoneEnd(data.phone), field: 'topmostSubform[0].Page5[0].phonenumber[0]'},
 	{text: data => data.streetAddress, field: 'topmostSubform[0].Page5[0].streetaddress[0]'},
 	{text: data => data.city, field: 'topmostSubform[0].Page5[0].mailingcity[0]'},
 	{text: data => data.state, field: 'topmostSubform[0].Page5[0].state[0]'},
@@ -247,7 +247,7 @@ export const ds5504Map = [
 	{check: () => true, field: 'Yes'},
 	{text: data => `${data.city} ${data.state}`, field: 'App Place of Birth'},
 	{text: data => data.email, field: 'App Email'},
-	{text: data => data.areaCode, field: 'App Phone 1'},
+	{text: data => phoneAreaCode(data.phone), field: 'App Phone 1'},
 	{text: data => phoneStart(data.phone), field: 'App Phone 2'},
 	{text: data => phoneEnd(data.phone), field: 'App Phone 3'},
 	{text: data => data.streetAddress, field: 'App Mailing Address Line 1 Street RFD PO Box or URB'},
@@ -286,7 +286,7 @@ export const ds82Map = [
 	{check: () => true, field: 'Yes'},
 	{text: data => `${data.city} ${data.state}`, field: 'App Place of Birth'},
 	{text: data => data.email, field: 'App Email'},
-	{text: data => data.areaCode, field: 'App Phone 1'},
+	{text: data => phoneAreaCode(data.phone), field: 'App Phone 1'},
 	{text: data => phoneStart(data.phone), field: 'App Phone 2'},
 	{text: data => phoneEnd(data.phone), field: 'App Phone 3'},
 	{text: data => data.streetAddress, field: 'App Mailing Address Line 1'},
@@ -318,7 +318,7 @@ export const ds11Map = [
 	{text: data => data.gender === 'X', loc: {page: 4, x: 319, y: 298}},
 	{text: data => `${data.city} ${data.state}`, field: 'Applicant Place of Birth'},
 	{text: data => data.email, field: 'Applicant Email'},
-	{text: data => data.areaCode, field: 'Applicant Phone 1'},
+	{text: data => phoneAreaCode(data.phone), field: 'Applicant Phone 1'},
 	{text: data => phoneStart(data.phone), field: 'Applicant Phone 2'},
 	{text: data => phoneEnd(data.phone), field: 'Applicant Phone 3'},
 	{text: data => data.streetAddress, field: 'Applicant Address Street'},

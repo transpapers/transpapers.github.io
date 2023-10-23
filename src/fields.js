@@ -107,10 +107,17 @@ export const fields = {
 		name: 'city',
 		type: 'string',
 	},
+	state: {
+		title: 'State',
+		name: 'state',
+		type: 'string',
+	},
 	county: {
 		title: 'County',
 		name: 'county',
+		// Type: 'select',
 		type: 'option',
+		options: ['Kent', 'Charlevoix', 'Wayne'],
 	},
 	zip: {
 		title: 'ZIP code',
@@ -155,6 +162,7 @@ export function renderField(field) {
 
 	if (field.type === 'string') { // Input.
 		const input = document.createElement('input');
+		input.setAttribute('id', field.name);
 		input.setAttribute('type', 'text');
 
 		if (Object.prototype.hasOwnProperty.call(field, 'default')) {
@@ -164,6 +172,7 @@ export function renderField(field) {
 		label.append(input);
 	} else if (field.type === 'boolean') { // Checkbox.
 		const input = document.createElement('input');
+		input.setAttribute('id', field.name);
 		input.setAttribute('type', 'checkbox');
 
 		if (Object.prototype.hasOwnProperty.call(field, 'default') && field.default) {
@@ -173,18 +182,40 @@ export function renderField(field) {
 		label.className = 'checkbox';
 		label.prepend(input);
 	} else if (field.type === 'option') {
-		const input = document.createElement('input');
-		input.setAttribute('type', '');
-		label.append(input);
+		label.remove();
+		const fieldset = document.createElement('fieldset');
+
+		const legend = document.createElement('legend');
+		legend.textContent = field.title;
+
+		fieldset.append(legend);
+
+		field.options.forEach(value => {
+			const radioLabel = document.createElement('label');
+			const input = document.createElement('input');
+			input.setAttribute('id', `${field.name}-${value}`);
+			input.setAttribute('name', field.name);
+			input.setAttribute('type', 'radio');
+			radioLabel.append(input, value);
+			fieldset.append(radioLabel);
+		});
+
+		return fieldset;
 	} else if (field.type === 'number') {
 		const input = document.createElement('input');
 		input.setAttribute('type', 'number');
+		input.setAttribute('id', field.name);
 		label.append(input);
 	} else if (field.type === 'Name') { //
 		const first = document.createElement('input');
 		const middle = document.createElement('input');
 		const last = document.createElement('input');
 		const suffix = document.createElement('input');
+
+		first.setAttribute('id', `${field.name}-first`);
+		middle.setAttribute('id', `${field.name}-middle`);
+		last.setAttribute('id', `${field.name}-last`);
+		suffix.setAttribute('id', `${field.name}-suffix`);
 
 		for (const element of [first, middle, last, suffix]) {
 			element.setAttribute('size', 1);
@@ -196,14 +227,17 @@ export function renderField(field) {
 		label.append(nameWrapper);
 	} else if (field.type === 'Date') {
 		const input = document.createElement('input');
+		input.setAttribute('id', field.name);
 		input.setAttribute('type', 'date');
 		label.append(input);
 	} else if (field.type === 'email') {
 		const input = document.createElement('input');
+		input.setAttribute('id', field.name);
 		input.setAttribute('type', 'email');
 		label.append(input);
 	} else if (field.type === 'tel') {
 		const input = document.createElement('input');
+		input.setAttribute('id', field.name);
 		input.setAttribute('type', 'tel');
 		label.append(input);
 	}

@@ -189,73 +189,44 @@ async function labelFields(doc) {
  * @return {Person}
  */
 function makeData() {
-	return {
-		legalName: {
-			first: document.getElementById('legal-name-first').value,
-			middle: document.getElementById('legal-name-middle').value,
-			last: document.getElementById('legal-name-last').value,
-			suffix: document.getElementById('legal-suffix').value,
-		},
+	const data = {};
 
-		chosenName: {
-			first: document.getElementById('chosen-name-first').value,
-			middle: document.getElementById('chosen-name-middle').value,
-			last: document.getElementById('chosen-name-last').value,
-			suffix: document.getElementById('chosen-suffix').value,
-		},
+	const neededFields = neededFieldNames();
 
-		reasonForNameChange: document.getElementById('name-change-reason').value,
+	neededFields.forEach(fieldName => {
+		console.log(fieldName);
+		const field = fields[fieldName];
 
-		sealBirthCertificate: document.getElementById('seal-birth-certificate').checked,
-		birthCity: document.getElementById('birth-city').value,
-		birthState: document.getElementById('birth-state').value,
+		switch (field.type) {
+			case 'boolean':
+				data[fieldName] = document.getElementById(field.name).checked;
+				break;
+			case 'option':
+				data[fieldName] = document.querySelector(`input[name="${fieldName}"]:checked`).value;
+				break;
+			case 'string':
+			case 'email':
+			case 'tel':
+			case 'number':
+			case 'Date':
+				data[fieldName] = document.getElementById(field.name).value;
+				break;
+			case 'Name':
+				// FIXME Sasha you goddamned whore. - future Sasha
+				data[fieldName] = {
+					first: document.getElementById(`${field.name}-first`),
+					middle: document.getElementById(`${field.name}-middle`),
+					last: document.getElementById(`${field.name}-last`),
+					suffix: document.getElementById(`${field.name}-suffix`),
+				};
+				break;
+			default:
+				console.log(`Missing field data for "${field.name}"`);
+				break;
+		}
+	});
 
-		dateOfBirth: document.getElementById('birthdate').value,
-
-		assignedSex: document.getElementById('birth-sex').value,
-		gender: document.getElementById('gender').value,
-
-		doNotPublish: document.getElementById('do-not-publish').checked,
-		parentsAreOkay: !(document.getElementById('parents-are-not-okay').checked),
-		age: document.getElementById('age').value || numericalAge(document.getElementById('birthdate').value),
-
-		mothersBirthName: {
-			first: document.getElementById('mother-name-first').value,
-			middle: document.getElementById('mother-name-middle').value,
-			last: document.getElementById('mother-name-last').value,
-			suffix: document.getElementById('mother-suffix').value,
-		},
-		mothersDateOfBirth: document.getElementById('mothers-birthdate').value,
-
-		fathersBirthName: {
-			first: document.getElementById('father-name-first').value,
-			middle: document.getElementById('father-name-middle').value,
-			last: document.getElementById('father-name-last').value,
-			suffix: document.getElementById('father-suffix').value,
-		},
-		fathersDateOfBirth: document.getElementById('fathers-birthdate').value,
-
-		areaCode: document.getElementById('area-code').value,
-		phone: document.getElementById('phone').value,
-
-		streetAddress: document.getElementById('street-address').value,
-		city: document.getElementById('city').value,
-		state: document.getElementById('state').value,
-
-		county: document.getElementById('county').value,
-		zip: document.getElementById('zip').value,
-		email: document.getElementById('email').value,
-
-		passport: document.getElementById('passport').value,
-
-		representativeName: {
-			first: document.getElementById('representative-name-first').value,
-			middle: document.getElementById('representative-name-middle').value,
-			last: document.getElementById('representative-name-last').value,
-			suffix: document.getElementById('representative-suffix').value,
-		},
-
-	};
+	return data;
 }
 
 const debug = false;
@@ -292,7 +263,7 @@ function generate(data) {
 	}
 }
 
-function updateForm() {
+function neededFieldNames() {
 	const processes = document.getElementById('processes');
 	const allProcesses = Array.from(processes.querySelectorAll('input'));
 	const checkedProcesses = allProcesses
@@ -302,13 +273,19 @@ function updateForm() {
 			return michiganProcesses[name];
 		});
 
+	const names = [];
+	for (const process of checkedProcesses) {
+		shakeTree(process, names);
+	}
+
+	return names;
+}
+
+function updateForm() {
 	const form = document.getElementById('main-form');
 	form.replaceChildren();
 
-	const neededFields = [];
-	for (const process of checkedProcesses) {
-		shakeTree(process, neededFields);
-	}
+	const neededFields = neededFieldNames();
 
 	neededFields.forEach(fieldName => {
 		const field = fields[fieldName];
@@ -317,11 +294,15 @@ function updateForm() {
 		}
 	});
 
-	if (checkedProcesses.length > 0) {
+	if (neededFields.length > 0) {
 		const submitButton = document.createElement('input');
 		submitButton.setAttribute('type', 'submit');
+		submitButton.textContent = 'Generate forms';
 
-		submitButton.addEventListener('click', () => generate(makeData()));
+		submitButton.addEventListener('click', ev => {
+			ev.preventDefault();
+			return generate(makeData());
+		});
 		form.append(submitButton);
 	}
 }

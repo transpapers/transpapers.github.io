@@ -1,4 +1,4 @@
-import {nameChangeMap, nameChangePrivateMap, followingMap, piiMap, ssnMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, birthCertMap} from './maps.js';
+import {nameChangeMap, nameChangePrivateMap, followingMap, piiMap, ssnMap, noticeMap, feeWaiverMap, mdosSexMap, miSexMap, birthCertMap, ds5504Map, ds82Map, ds11Map} from './maps.js';
 
 /**
  * @typedef {Object} Process - Procedural information for filing.
@@ -36,6 +36,33 @@ export const socialSecurity = {
 			id: 'SS-5',
 			filename: 'ss-5.pdf',
 			map: ssnMap,
+		},
+	],
+};
+
+export const passport = {
+	target: 'passport',
+	documents: [
+		{
+			name: 'Application for a Passport',
+			id: 'DS 5504',
+			filename: 'ds5504.pdf',
+			map: ds5504Map,
+			include: data => data.passport === 'ds5504',
+		},
+		{
+			name: 'Application for a Passport',
+			id: 'DS 82',
+			filename: 'ds82.pdf',
+			map: ds82Map,
+			include: data => data.passport === 'ds82',
+		},
+		{
+			name: 'Application for a Passport',
+			id: 'DS 11',
+			filename: 'ds11.pdf',
+			map: ds11Map,
+			include: data => data.passport === 'ds11',
 		},
 	],
 };
@@ -139,4 +166,5 @@ export const michiganProcesses = {
 	'sex-designation': michiganSexDesignation,
 	'name-change': michiganNameChange,
 	'social-security': socialSecurity,
+	passport,
 };
