@@ -1,3 +1,43 @@
+html {
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 0;
+    max-width: 80ch;
+    align-items: center;
+}
+
+body > * {
+    padding: 5px 1ch;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    grid-gap: 1ch;
+}
+
+h1 {
+    display: inline;
+    padding: 0;
+    margin: 0;
+
+    font-variant: all-small-caps;
+    letter-spacing: 0.125rem;
+    line-height: 1;
+    font-size: large;
+}
+
+header span {
+    text-transform: lowercase;
+    font-style: italic;
+}
+
 span.subtitle {
     color: #777;
     font-size: smaller;
