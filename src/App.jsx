@@ -117,14 +117,14 @@ async function makeGuide(data) {
 async function fetchAll(process, data) {
 	const allDocuments = await Promise.all(process.documents
 		.filter(doc => {
-			if (Object.prototype.hasOwnProperty.call(doc, 'include')) {
+			if (doc.hasOwnProperty('include')) {
 				return doc.include(data);
 			}
 
 			return false;
 		})
 		.map(async doc => {
-			if (Object.prototype.hasOwnProperty.call(doc, 'map')) {
+			if (doc.hasOwnProperty('map')) {
 				return fetchAndFill(`/forms/${doc.filename}`, doc.map, data);
 			}
 
@@ -141,14 +141,13 @@ async function fetchAll(process, data) {
 	}
 
 	const result = await PDFDocument.create();
-	allDocuments.filter(doc => doc)
-		.forEach(async doc => {
-			const numPages = doc.getPageCount();
-			const pages = await result.copyPages(doc, [...Array(numPages).keys()]);
-			for (const page of pages) {
-				result.addPage(page);
-			}
-		});
+    for (const doc of allDocuments) {
+		const numPages = doc.getPageCount();
+		const pages = await result.copyPages(doc, [...Array(numPages).keys()]);
+		for (const page of pages) {
+			result.addPage(page);
+		}
+	}
 
 	return result.save();
 }
@@ -195,7 +194,6 @@ function makeData() {
 	const neededFields = neededFieldNames();
 
 	neededFields.forEach(fieldName => {
-		console.log(fieldName);
 		const field = fields[fieldName];
 
 		switch (field.type) {
@@ -203,23 +201,24 @@ function makeData() {
 				data[fieldName] = document.getElementById(field.name).checked;
 				break;
 			case 'option':
-				data[fieldName] = document.querySelector(`input[name="${fieldName}"]:checked`).value;
+				data[fieldName] = document.querySelector(`input[name="${fieldName}"]:checked`).value || "";
 				break;
 			case 'string':
+            case 'select':
 			case 'email':
 			case 'tel':
 			case 'number':
 			case 'Date':
-				data[fieldName] = document.getElementById(field.name).value;
+				data[fieldName] = document.getElementById(field.name).value || "";
 				break;
 			case 'Name':
 				// FIXME Sasha you goddamned whore. - future Sasha
-				data[fieldName] = {
-					first: document.getElementById(`${field.name}-first`),
-					middle: document.getElementById(`${field.name}-middle`),
-					last: document.getElementById(`${field.name}-last`),
-					suffix: document.getElementById(`${field.name}-suffix`),
-				};
+				const keys = ['first', 'middle', 'last', 'suffix'];
+                data[fieldName] = {};
+                keys.forEach(key => {
+                    const el = document.getElementById(`${field.name}-${key}`);
+                    data[fieldName][key] = el ? el.value : '';
+                });
 				break;
 			default:
 				console.log(`Missing field data for "${field.name}"`);

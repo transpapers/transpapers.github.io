@@ -53,7 +53,7 @@ export function SelectField({ field }) {
                     id={field.name}>
                     <option defaultValue=''></option>
                     {field.options.map(value =>
-                      <option key={value} defaultValue='value'>{value}</option>
+                      <option key={value} value={value}>{value}</option>
                     )}
                   </select>;
 
