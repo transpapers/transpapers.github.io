@@ -6,22 +6,22 @@
  * @return {number}
  */
 export function numericalAge(birthdate) {
-	const thisYear = new Date().getFullYear();
-	const thisMonth = new Date().getMonth();
-	const thisDay = new Date().getDay();
-	const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
-	const birthMonth = Number.parseInt(birthdate.substring(5, 7), 10);
-	const birthDay = Number.parseInt(birthdate.substring(8), 10);
+  const thisYear = new Date().getFullYear();
+  const thisMonth = new Date().getMonth();
+  const thisDay = new Date().getDay();
+  const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
+  const birthMonth = Number.parseInt(birthdate.substring(5, 7), 10);
+  const birthDay = Number.parseInt(birthdate.substring(8), 10);
 
-	if (thisMonth < birthMonth) {
-		return thisYear - birthYear - 1;
-	}
+  if (thisMonth < birthMonth) {
+    return thisYear - birthYear - 1;
+  }
 
-	if (thisMonth === birthMonth && thisDay < birthDay) {
-		return thisYear - birthYear - 1;
-	}
+  if (thisMonth === birthMonth && thisDay < birthDay) {
+    return thisYear - birthYear - 1;
+  }
 
-	return thisYear - birthYear;
+  return thisYear - birthYear;
 }
 
 /**
@@ -31,39 +31,39 @@ export function numericalAge(birthdate) {
  * @return {string}
  */
 export function formatDate(date, fmt) {
-	const year = Number.parseInt(date.substring(0, 4), 10);
-	const month = Number.parseInt(date.substring(5, 7), 10);
-	const day = Number.parseInt(date.substring(8), 10);
+  const year = Number.parseInt(date.substring(0, 4), 10);
+  const month = Number.parseInt(date.substring(5, 7), 10);
+  const day = Number.parseInt(date.substring(8), 10);
 
-	return fmt.format.map(part => {
-		if (part === 'month') {
-			return month;
-		}
+  return fmt.format.map((part) => {
+    if (part === 'month') {
+      return month;
+    }
 
-		if (part === 'day') {
-			return day;
-		}
+    if (part === 'day') {
+      return day;
+    }
 
-		if (part === 'year') {
-			return year;
-		}
+    if (part === 'year') {
+      return year;
+    }
 
-		return '';
-	}).join(fmt.separator);
+    return '';
+  }).join(fmt.separator);
 }
 
 export function phoneAreaCode(phoneNumber) {
-	return phoneNumber.substring(0, 4);
+  return phoneNumber.substring(0, 4);
 }
 
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber) {
-	return phoneNumber.substring(4, 7);
+  return phoneNumber.substring(4, 7);
 }
 
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber) {
-	return phoneNumber.substring(7);
+  return phoneNumber.substring(7);
 }
 
 /**
@@ -72,5 +72,5 @@ export function phoneEnd(phoneNumber) {
  * @return {string}
  */
 export function fullName(name) {
-	return [name.first, name.middle, name.last, name.suffix].filter(n => n && n.length > 0).join(' ');
+  return [name.first, name.middle, name.last, name.suffix].filter((n) => n && n.length > 0).join(' ');
 }

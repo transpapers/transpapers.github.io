@@ -1,4 +1,4 @@
-import {fullName, numericalAge} from './util.js';
+import { fullName, numericalAge } from './util';
 
 /**
  * @typedef {Object} Person - A person's information
@@ -53,21 +53,30 @@ import {fullName, numericalAge} from './util.js';
  */
 
 /**
+* Determine whether a person is a minor (i.e., under 18.)
+* @param {Person} data
+* @return {boolean}
+*/
+export function isMinor(data) {
+  return numericalAge(data.dateOfBirth) < 18;
+}
+
+/**
  * Return the legal name of a person's legal representative (themself or their
  * parent/guardian) from the given `data`.
  * @param {Person} data
  * @return {Name}
  */
 export function representativeName(data) {
-	if (!isMinor(data)) {
-		return data.legalName;
-	}
+  if (!isMinor(data)) {
+    return data.legalName;
+  }
 
-	if (data.representativeName) {
-		return data.representativeName;
-	}
+  if (data.representativeName) {
+    return data.representativeName;
+  }
 
-	return {first: '', middle: '', last: ''};
+  return { first: '', middle: '', last: '' };
 }
 
 /**
@@ -76,17 +85,8 @@ export function representativeName(data) {
  * @return {string}
  */
 export function fullContactInfo(data, separator = '\n') {
-	const lines = [fullName(representativeName(data)), data.streetAddress, `${data.city}, ${data.state} ${data.zip}`, data.phone];
-	return lines.join(separator);
-}
-
-/**
-* Determine whether a person is a minor (i.e., under 18.)
-* @param {Person} data
-* @return {boolean}
-*/
-export function isMinor(data) {
-	return numericalAge(data.dateOfBirth) < 18;
+  const lines = [fullName(representativeName(data)), data.streetAddress, `${data.city}, ${data.state} ${data.zip}`, data.phone];
+  return lines.join(separator);
 }
 
 // This should come in handy for documentation purposes.
@@ -94,67 +94,67 @@ export function isMinor(data) {
  * @type {Person}
  */
 export const sampleData = {
-	legalName: {
-		first: 'Jane',
-		middle: 'Michelle',
-		last: 'Doe',
-		suffix: '',
-	},
-	chosenName: {
-		first: 'John',
-		middle: 'Michael',
-		last: 'Doe',
-		suffix: '',
-	},
+  legalName: {
+    first: 'Jane',
+    middle: 'Michelle',
+    last: 'Doe',
+    suffix: '',
+  },
+  chosenName: {
+    first: 'John',
+    middle: 'Michael',
+    last: 'Doe',
+    suffix: '',
+  },
 
-	reasonForNameChange: 'Gender transition',
-	sealBirthCertificate: true,
-	birthCity: 'New York',
-	birthState: 'New York',
+  reasonForNameChange: 'Gender transition',
+  sealBirthCertificate: true,
+  birthCity: 'New York',
+  birthState: 'New York',
 
-	dateOfBirth: '2010-01-01',
+  dateOfBirth: '2010-01-01',
 
-	assignedSex: 'F',
-	gender: 'X',
+  assignedSex: 'F',
+  gender: 'X',
 
-	mothersBirthName: {
-		first: 'Jane',
-		middle: 'Michelle',
-		last: 'Doe',
-		suffix: '',
-	},
+  mothersBirthName: {
+    first: 'Jane',
+    middle: 'Michelle',
+    last: 'Doe',
+    suffix: '',
+  },
 
-	doNotPublish: false,
-	parentsAreOkay: true,
+  doNotPublish: false,
+  parentsAreOkay: true,
 
-	mothersDateOfBirth: '1970-01-01',
+  mothersDateOfBirth: '1970-01-01',
 
-	fathersBirthName: {
-		first: 'John',
-		middle: 'Michael',
-		last: 'Doe',
-		suffix: '',
-	},
+  fathersBirthName: {
+    first: 'John',
+    middle: 'Michael',
+    last: 'Doe',
+    suffix: '',
+  },
 
-	fathersDateOfBirth: '1970-01-01',
+  fathersDateOfBirth: '1970-01-01',
 
-	areaCode: '313',
-	phone: '555-1234',
+  areaCode: '313',
+  phone: '555-1234',
 
-	streetAddress: '20 Monroe Street NW',
+  streetAddress: '20 Monroe Street NW',
 
-	city: 'Grand Rapids',
-	state: 'Michigan',
-	zip: '49503',
+  city: 'Grand Rapids',
+  state: 'Michigan',
+  zip: '49503',
 
-	email: 'jdoe@goodmail.com',
+  email: 'jdoe@goodmail.com',
 
-	county: 'Kent',
+  county: 'Kent',
 
-	representativeName: {
-		first: 'John',
-		middle: 'Michael',
-		last: 'Doe',
-		suffix: 'Sr.',
-	},
+  representativeName: {
+    first: 'John',
+    middle: 'Michael',
+    last: 'Doe',
+    suffix: 'Sr.',
+  },
 };

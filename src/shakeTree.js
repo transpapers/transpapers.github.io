@@ -1,55 +1,58 @@
-import {sampleData} from './person.js';
+import { sampleData } from './person';
 
 export default function shakeTree(object, accessed = []) {
-	const recursePropertyNames = ['documents', 'map'];
+  const recursePropertyNames = ['documents', 'map'];
 
-	const functionPropertyNames = ['include', 'text', 'check'];
+  const functionPropertyNames = ['include', 'text', 'check'];
 
-	const handler = {
-		// Handle nested properties correctly.
-		// cf. https://stackoverflow.com/questions/41299642/
-		get(target, prop) {
-			if (prop === 'isProxy') {
-				return true;
-			}
+  const handler = {
+    // Handle nested properties correctly.
+    // cf. https://stackoverflow.com/questions/41299642/
 
-			const func = target[prop];
+    get(target, prop) {
+      if (prop === 'isProxy') {
+        return true;
+      }
 
-			if (typeof func === 'undefined') {
-				return;
-			}
+      const func = target[prop];
 
-			if (!func.isProxy && typeof func === 'object') {
-				target[prop] = new Proxy(func, handler);
-			}
+      if (typeof func === 'undefined') {
+        return undefined;
+      }
 
-			if (!accessed.includes(prop)) {
-				accessed.push(prop);
-			}
+      if (!func.isProxy && typeof func === 'object') {
+        // Ignoring ESLint here because we do actually need to mutate `target`.
+        // The `no-param-reassign` rule is irrelevant since we aren't touching `arguments`.
+        target[prop] = new Proxy(func, handler); // eslint-disable-line no-param-reassign
+      }
 
-			return target[prop];
-		},
-	};
+      if (!accessed.includes(prop)) {
+        accessed.push(prop);
+      }
 
-	recursePropertyNames.forEach(name => {
-		if (Object.prototype.hasOwnProperty.call(object, name)) {
-			const subobject = object[name];
-			if (Array.isArray(subobject)) {
-				subobject.forEach(item => shakeTree(item, accessed));
-			} else {
-				shakeTree(subobject, accessed);
-			}
-		}
-	});
+      return target[prop];
+    },
+  };
 
-	functionPropertyNames.forEach(name => {
-		if (Object.prototype.hasOwnProperty.call(object, name)) {
-			const func = object[name];
-			const proxiedDummy = new Proxy(sampleData, handler);
+  recursePropertyNames.forEach((name) => {
+    if (Object.prototype.hasOwnProperty.call(object, name)) {
+      const subobject = object[name];
+      if (Array.isArray(subobject)) {
+        subobject.forEach((item) => shakeTree(item, accessed));
+      } else {
+        shakeTree(subobject, accessed);
+      }
+    }
+  });
 
-			func(proxiedDummy);
-		}
-	});
+  functionPropertyNames.forEach((name) => {
+    if (Object.prototype.hasOwnProperty.call(object, name)) {
+      const func = object[name];
+      const proxiedDummy = new Proxy(sampleData, handler);
 
-	return accessed;
+      func(proxiedDummy);
+    }
+  });
+
+  return accessed;
 }
