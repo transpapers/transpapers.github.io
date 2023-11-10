@@ -1,9 +1,10 @@
+import { useState } from 'react';
+
 import {PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup} from 'pdf-lib';
 import {render} from 'nunjucks';
 import html2pdf from 'html2pdf.js';
 
 import {michiganNameChange, targets, michiganProcesses} from './process';
-import {numericalAge} from './util';
 import {fields, renderField} from './fields';
 import shakeTree from './shakeTree';
 import countyInfo from './countyInfo.json';
@@ -281,45 +282,45 @@ function neededFieldNames() {
 	return names;
 }
 
-function updateForm() {
-	const form = document.getElementById('main-form');
-	form.replaceChildren();
+function App() {
+    const [visibleFields, setVisibleFields] = useState([]);
 
-	const neededFields = neededFieldNames();
+	function updateForm() {
+        const fieldNames = neededFieldNames();
+        const neededFields = Object.entries(fields).filter(([name, _]) => {
+            return fieldNames.includes(name);
+        }).map(([_, field]) => field);
 
-    Object.entries(fields).forEach(([fieldName, field]) => {
-        console.log(fieldName, field);
-        if (neededFields.includes(fieldName)) {
-            form.append(renderField(field));
-        }
-    });
-
-	if (neededFields.length > 0) {
-		const submitButton = document.createElement('input');
-		submitButton.setAttribute('type', 'submit');
-		submitButton.setAttribute('value', 'Generate forms');
-
-		submitButton.addEventListener('click', ev => {
-			ev.preventDefault();
-			return generate(makeData
-		});
-		form.append(submitButton);
+        setVisibleFields(neededFields);
 	}
+
+	return (
+        <ol>
+        <li>
+            <p>I live in <strong>Michigan.</strong> I was born in <strong>Michigan.</strong><br />(Other states coming soon.)</p>
+        </li>
+        <li>
+            <fieldset id="processes">
+                <legend>I need to...</legend>
+              <ul>
+              { Object.entries(targets).map(([name, description]) => <li key={name}>
+   				<input type="checkbox" id={name} name={name} onChange={updateForm} />
+				  <span>{description}</span>
+				  <br />
+                 </li>
+              ) }
+				</ul>
+            </fieldset>
+            <form id="main-form">
+				{ visibleFields.map(renderField) }
+              { (visibleFields.length > 0) && <input type="submit" value="Generate forms" onClick={ev => {
+                  ev.preventDefault();
+                  generate(makeData());
+              }}/> }
+            </form>
+        </li>
+        </ol>
+	);
 }
 
-const targetsForm = document.getElementById('processes');
-Object.entries(targets).forEach(([name, description]) => {
-	const checkbox = document.createElement('input');
-	checkbox.setAttribute('type', 'checkbox');
-	checkbox.setAttribute('id', name);
-	checkbox.setAttribute('name', name);
-
-	checkbox.addEventListener('change', updateForm);
-
-	const descr = document.createElement('span');
-	descr.innerHTML = description;
-
-	const br = document.createElement('br');
-
-	targetsForm.append(checkbox, descr, br);
-});
+export default App

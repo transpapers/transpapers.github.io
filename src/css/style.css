@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 14px;
     font-family: sans-serif;
@@ -17,9 +21,14 @@ body > * {
 }
 
 header {
+    margin: 1ch;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     grid-gap: 1ch;
+    box-shadow: 0px 2px #5bcefa, 0px 4px #f5a9b8, 0px 6px white, 0px 8px #f5a9b8, 0px 10px #5bcefa;
 }
 
 h1 {
@@ -38,6 +47,10 @@ header span {
     font-style: italic;
 }
 
+span.title {
+    font-weight: bold;
+}
+
 span.subtitle {
     color: #777;
     font-size: smaller;
@@ -47,7 +60,7 @@ span.subtitle {
 form {
     display: flex;
     flex-direction: column;
-    grid-gap: 1rem;
+    grid-gap: 2rem;
 }
 
 label div {
@@ -68,4 +81,42 @@ label.checkbox {
     grid-template-columns: auto 1fr;
     align-items: start;
     grid-gap: 0.25rem;
+}
+
+form {
+    margin: 1rem 0;
+}
+
+fieldset label:not(:last-of-type) {
+    margin-right: 2ch;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+fieldset legend {
+    font-weight: bold;
+}
+
+.subfield {
+    margin-top: 0.75rem;
+    position: relative;
+}
+
+.subfield label {
+    position: absolute;
+    font-size: smaller;
+    color: #777;
+    text-transform: capitalize;
+    top: -0.5rem;
+    background-color: white;
+    transition: top 0.2s, background-color 0.2s;
+}
+
+.subfield input:focus + label {
+    background-color: transparent;
+    top: -1.0rem;
 }

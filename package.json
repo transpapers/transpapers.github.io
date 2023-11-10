@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "test": "mocha"
   },
   "repository": {
@@ -20,17 +21,25 @@
   },
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
     "eslint": "^8.51.0",
     "eslint-config-xo": "^0.43.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "mocha": "^10.2.0",
     "typescript": "^5.1.6",
     "typescript-language-server": "^3.3.2",
-    "vite": "^4.3.9"
+    "vite": "^4.4.5"
   },
   "dependencies": {
     "@types/nunjucks": "^3.2.3",
     "html2pdf.js": "^0.10.1",
     "nunjucks": "^3.2.4",
-    "pdf-lib": "^1.17.1"
+    "pdf-lib": "^1.17.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
