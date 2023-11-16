@@ -21,7 +21,8 @@ function fillForm(doc, fills, data) {
     if (fill.field !== undefined) {
       const field = fill.field(form)
       if (fill.text !== undefined && field instanceof PDFTextField) {
-        const text = fill.text(data)
+        field.setMaxLength(undefined)
+        const text = fill.text(data) || ''
         field.setText(text)
       } else if (fill.check !== undefined && field instanceof PDFCheckBox) {
         const checked = fill.check(data)
@@ -55,7 +56,7 @@ function fillForm(doc, fills, data) {
       const y = height - fill.loc.y * scalingFactor - fontSize
 
       if (fill.text !== undefined) {
-        const text = fill.text(data)
+        const text = fill.text(data) || ''
         page.drawText(text, { x, y, size: fontSize })
       } else if (fill.check !== undefined) {
         const checked = fill.check(data)
@@ -125,9 +126,11 @@ async function fetchAll(data) {
   const miSex = await fetchAndFill('./forms/mi_sdf.pdf', miSexMap, data)
   const acceptableId = await fetch('./forms/acceptable-id.pdf').then(res => res.arrayBuffer()).then(PDFDocument.load)
   const socialSecurity = await fetchAndFill('./forms/ss-5-decrypted.pdf', ssnMap, data)
+  /*
   const ds5504 = await fetchAndFill('./forms/passport_ds5504.PDF', ds5504Map, data)
   const ds82 = await fetchAndFill('./forms/passport_ds82.PDF', ds82Map, data)
   const ds11 = await fetchAndFill('./forms/passport_ds11.pdf', ds11Map, data)
+  */
 
   let allDocuments = [
     data.doNotPublish ? nameChangeExParte : nameChange,
@@ -153,6 +156,7 @@ async function fetchAll(data) {
     allDocuments.splice(4, 0, pc52)
   }
 
+  /*
   if (data.passport === 'ds5504') {
     allDocuments.push(ds5504)
   }
@@ -164,6 +168,7 @@ async function fetchAll(data) {
   if (data.passport === 'ds11') {
     allDocuments.push(ds11)
   }
+  */
 
   if (data.age && data.county) {
     const guide = await PDFDocument.load(await makeGuide(data))

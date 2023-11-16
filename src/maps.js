@@ -1,4 +1,4 @@
-import { formatDate, fullName, fullContactInfo, isMinor, representativeName, phoneStart } from './util'
+import { formatDate, fullName, fullContactInfo, isMinor, representativeName, phoneStart, phoneEnd } from './util'
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
@@ -240,9 +240,9 @@ export const ds5504Map = [
     { text: data => formatDate(data.dateOfBirth, { format: ['month'], separator: '' }), field: form => form.getField('App DOB MM') },
     { text: data => formatDate(data.dateOfBirth, { format: ['day'], separator: '' }), field: form => form.getField('App DOB DD') },
     { text: data => formatDate(data.dateOfBirth, { format: ['year'], separator: '' }), field: form => form.getField('App DOB YYYY') },
-    { text: data => data.gender === 'M', loc: {page:4, x: 283, y: 298 } },
-    { text: data => data.gender === 'F', loc: {page:4, x: 301, y: 298 } },
-    { text: data => data.gender === 'X', loc: {page:4, x: 319, y: 298 } },
+    { check: data => data.gender === 'M', loc: {page:4, x: 283, y: 298 } },
+    { check: data => data.gender === 'F', loc: {page:4, x: 301, y: 298 } },
+    { check: data => data.gender === 'X', loc: {page:4, x: 319, y: 298 } },
     { check: () => true, field: form => form.getField('Yes') },
     { text: data => `${String(data.city)} ${String(data.state)}`, field: form => form.getField('App Place of Birth') },
     { text: data => data.email, field: form => form.getField('App Email') },
@@ -254,10 +254,10 @@ export const ds5504Map = [
     { text: data => data.city, field: form => form.getField('App Mailing City') },
     { text: data => data.state, field: form => form.getField('App Mailing State') },
     { text: data => data.zip, field: form => form.getField('App Mailing Zip') },
-    { text: data => data.legalName, field: form => form.getField('App List all other name you have used') },
-    { text: data => data.legalName, field: form => form.getField(' passport book and/or passport card') },
+	{ text: data => fullName(data.legalName), field: form => form.getField('App List all other name you have used') },
+	// { text: data => fullName(data.legalName), field: form => form.getField(' passport book and/or passport card') },
     { text: data => `${String(data.chosenName.last)} ${String(data.chosenName.first)} ${String(data.chosenName.middle)}`, field: form => form.getField('Name of Applicant 2') },
-    { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), field: form => form.getField('Date Of Birth') },
+    // { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), field: form => form.getField('Date Of Birth') },
     { check: () => true, field: form => form.getField('Button14') },
     { text: data => data.chosenName.last, field: form => form.getField('Changed Last Name') },
     { text: data => data.chosenName.first, field: form => form.getField('Changed First') },
@@ -279,9 +279,9 @@ export const ds82Map = [
     { text: data => formatDate(data.dateOfBirth, { format: ['month'], separator: '' }), field: form => form.getField('App DOB MM') },
     { text: data => formatDate(data.dateOfBirth, { format: ['day'], separator: '' }), field: form => form.getField('App DOB DD') },
     { text: data => formatDate(data.dateOfBirth, { format: ['year'], separator: '' }), field: form => form.getField('App DOB YYYY') },
-    { text: data => data.gender === 'M', loc: {page:4, x: 283, y: 298 } },
-    { text: data => data.gender === 'F', loc: {page:4, x: 301, y: 298 } },
-    { text: data => data.gender === 'X', loc: {page:4, x: 319, y: 298 } },
+    { check: data => data.gender === 'M', loc: {page:4, x: 283, y: 298 } },
+    { check: data => data.gender === 'F', loc: {page:4, x: 301, y: 298 } },
+    { check: data => data.gender === 'X', loc: {page:4, x: 319, y: 298 } },
     { check: () => true, field: form => form.getField('Yes') },
     { text: data => `${String(data.city)} ${String(data.state)}`, field: form => form.getField('App Place of Birth') },
     { text: data => data.email, field: form => form.getField('App Email') },
@@ -294,7 +294,7 @@ export const ds82Map = [
     { text: data => data.state, field: form => form.getField('App Mailing Address State') },
     { text: data => data.zip, field: form => form.getField('App Mailing Address Zip Code') },
     { text: data => data.legalName, field: form => form.getField('App List all other name you have used') },
-    { text: data => data.legalName, field: form => form.getField(' passport book and/or passport card') },
+    // { text: data => data.legalName, field: form => form.getField(' passport book and/or passport card') },
     { check: () => true, field: form => form.getField('Changed by Court Order') },
     /**Place name change location (city/state format) here */
     { text: data => `${String(data.chosenName.last)} ${String(data.chosenName.first)} ${String(data.chosenName.middle)}`, field: form => form.getField('Name of Applicant (Last, First, Middle) 2') },
@@ -325,7 +325,7 @@ export const ds11Map = [
     { text: data => data.city, field: form => form.getField('Applicant Address CIty') },
     { text: data => data.state, field: form => form.getField('Applicant Address State') },
     { text: data => data.zip, field: form => form.getField('Applicant Address Zip Code') },
-    { text: data => data.legalName, field: form => form.getField('List all other name you have used') },
+	{ text: data => fullName(data.legalName), field: form => form.getField('List all other name you have used') },
     { text: data => `${String(data.chosenName.last)} ${String(data.chosenName.first)} ${String(data.chosenName.middle)}`, field: form => form.getField('Name of Applicant 2') },
     { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), field: form => form.getField('Applicant DOB 2') },
     { text: data => `${String(data.mothersBirthName.first)} ${String(data.mothersBirthName.middle)}`, field: form => form.getField('Parent 1 FM Name') },
