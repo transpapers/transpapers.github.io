@@ -25,15 +25,21 @@ export function StringField({ field }) {
 }
 
 export function CheckboxField({ field }) {
-  const innards = (
-    <input
-      id={field.name}
-      type="checkbox"
-      defaultChecked={field.hasOwnProperty('default') && field.default}
-    />
+  return (
+    <label key={field.name} className="checkbox">
+      <input
+        id={field.name}
+        type="checkbox"
+        defaultChecked={field.hasOwnProperty('default') && field.default}
+      />
+      <div>
+        <span className="title">{ field.title }</span>
+        { field.hasOwnProperty('subtitle')
+          ? <span className="subtitle">{ field.subtitle }</span>
+          : ''}
+      </div>
+    </label>
   );
-
-  return GenericField(field, innards);
 }
 
 export function OptionField({ field }) {
@@ -79,8 +85,8 @@ export function NameField({ field }) {
       {keys.map((key) => (
         <div key={key} className="subfield">
           <input
-            id={`${field.name}-${key}}`}
-            name={`${field.name}-${key}}`}
+            id={`${field.name}-${key}`}
+            name={`${field.name}-${key}`}
             size="1"
           />
           <label htmlFor={`${field.name}-${key}`}>{key}</label>

@@ -164,10 +164,14 @@ export const michiganBirthRecord = {
   ],
 };
 
-export const michiganProcesses = {
+const michiganProcesses = {
   'birth-record': michiganBirthRecord,
   'sex-designation': michiganSexDesignation,
   'name-change': michiganNameChange,
   'social-security': socialSecurity,
   passport,
+};
+
+export const processes = {
+  'Michigan': michiganProcesses,
 };

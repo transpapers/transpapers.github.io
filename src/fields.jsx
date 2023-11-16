@@ -72,7 +72,12 @@ export const fields = {
     name: 'do-not-publish',
     type: 'boolean',
   },
-  parentsAreOkay: false,
+  parentsAreOkay: {
+    title: 'My parents are both alive and not divorced.',
+    name: 'parents-are-okay',
+    type: 'boolean',
+    default: true,
+  },
   mothersBirthName: {
     title: 'Mother\'s name',
     subtitle: 'at her birth',

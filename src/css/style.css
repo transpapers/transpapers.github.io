@@ -57,10 +57,10 @@ span.subtitle {
     line-height: 1;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
-    grid-gap: 2rem;
+    grid-gap: 1lh;
 }
 
 label div {
