@@ -173,5 +173,5 @@ const michiganProcesses = {
 };
 
 export const processes = {
-  'Michigan': michiganProcesses,
+  Michigan: michiganProcesses,
 };

@@ -1,4 +1,6 @@
-import {PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup,} from 'pdf-lib';
+import {
+  PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup,
+} from 'pdf-lib';
 
 import { render } from 'nunjucks';
 import html2pdf from 'html2pdf.js';
@@ -14,7 +16,7 @@ function fillForm(doc, fills, data) {
   const form = doc.getForm();
   const pages = doc.getPages();
 
-  for (const fill of fills) {
+  fills.forEach((fill) => {
     if (fill.field !== undefined) {
       const field = form.getField(fill.field);
       if (fill.text !== undefined && field instanceof PDFTextField) {
@@ -25,7 +27,9 @@ function fillForm(doc, fills, data) {
         if (checked) {
           field.check();
         }
-      } else if (fill.select !== undefined && fill.check !== undefined && field instanceof PDFRadioGroup) {
+      } else if (fill.select !== undefined
+                 && fill.check !== undefined
+                 && field instanceof PDFRadioGroup) {
         const checked = fill.check(data);
         if (checked) {
           field.select(fill.select);
@@ -48,7 +52,8 @@ function fillForm(doc, fills, data) {
 
       const x = fill.loc.x * scalingFactor;
 
-      // PDFlib uses a "Cartesian" coordinate system with 0 at the bottom left rather than the usual top left.
+      // PDFlib uses a "Cartesian" coordinate system with 0 at the bottom left
+      // rather than the usual top left.
       const y = height - (fill.loc.y * scalingFactor) - fontSize;
 
       if (fill.text !== undefined) {
@@ -61,7 +66,7 @@ function fillForm(doc, fills, data) {
         }
       }
     }
-  }
+  });
 
   // Flatten the form fields into the document.
   form.flatten();
@@ -108,18 +113,15 @@ async function makeGuide(data) {
  * @param {Person} data
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export async function fetchAll(processes, data) {
+export default async function fetchAll(processes, data) {
   const docs = [];
-  processes.forEach(proc => {
-    proc.documents.forEach(doc => {
+  processes.forEach((proc) => {
+    proc.documents.forEach((doc) => {
       if (!docs.includes(doc)) {
         docs.push(doc);
       }
     });
   });
-
-  console.log('processes', processes);
-  console.log('docs', docs);
 
   const allDocuments = await Promise.all(docs
     .filter((doc) => {
@@ -147,44 +149,13 @@ export async function fetchAll(processes, data) {
   }
 
   const result = await PDFDocument.create();
-  for (const doc of allDocuments) {
-    const numPages = doc.getPageCount();
-    const pages = await result.copyPages(doc, [...Array(numPages).keys()]);
-    for (const page of pages) {
-      result.addPage(page);
-    }
-  }
+  const pages = await Promise.all(
+    allDocuments.map((doc) => {
+      const numPages = doc.getPageCount();
+      return result.copyPages(doc, [...Array(numPages).keys()]);
+    }),
+  );
 
+  pages.forEach((page) => result.addPage(page));
   return result.save();
-}
-
-/**
- * Label the fillable form fields of a given `doc`ument.
- * For dev purposes.
- *
- * @param {PDFDocument} doc
- * @return {Promise<Uint8Array>} A labeled document.
- */
-export async function labelFields(doc) {
-  const form = doc.getForm();
-  const fields = form.getFields();
-
-  for (const field of fields) {
-    const type = field.constructor.name;
-    const name = field.getName();
-
-    console.log(`${type}: ${name}`);
-    if (field instanceof PDFRadioGroup) {
-      for (const option of field.getOptions()) {
-        console.log(`${type}: ${option}`);
-      }
-    }
-
-    if (field instanceof PDFTextField) {
-      field.setMaxLength(undefined);
-      field.setText(name);
-    }
-  }
-
-  return doc.save();
 }

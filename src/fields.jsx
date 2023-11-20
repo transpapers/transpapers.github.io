@@ -1,3 +1,5 @@
+import { React } from 'react';
+
 import {
   StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField, TelField,
 } from './fieldsHtml';
@@ -149,7 +151,7 @@ export const fields = {
 
 export function renderField(field) {
   if (!field || !field.hasOwnProperty('type')) {
-    return <></>;
+    return '';
   }
 
   if (field.type === 'string') {
@@ -170,5 +172,5 @@ export function renderField(field) {
     return <TelField field={field} />;
   }
 
-  return <></>;
+  return '';
 }

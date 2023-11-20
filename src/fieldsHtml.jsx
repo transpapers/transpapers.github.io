@@ -1,10 +1,12 @@
-function GenericField(field, innards) {
+import { React } from 'react';
+
+function GenericField({ name, title, subtitle }, innards) {
   return (
-    <label key={field.name}>
+    <label key={name} htmlFor={name}>
       <div>
-        <span className="title">{ field.title }</span>
-        { field.hasOwnProperty('subtitle')
-          ? <span className="subtitle">{ field.subtitle }</span>
+        <span className="title">{ title }</span>
+        { subtitle
+          ? <span className="subtitle">{ subtitle }</span>
           : ''}
       </div>
       { innards }
@@ -26,7 +28,7 @@ export function StringField({ field }) {
 
 export function CheckboxField({ field }) {
   return (
-    <label key={field.name} className="checkbox">
+    <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
         id={field.name}
         type="checkbox"
@@ -48,7 +50,7 @@ export function OptionField({ field }) {
       <legend>{field.title}</legend>
 
       {field.options.map((value) => (
-        <label>
+        <label htmlFor={`${field.name}-${value}`}>
           <input
             id={`${field.name}-${value}`}
             name={field.name}
@@ -67,7 +69,7 @@ export function SelectField({ field }) {
       name={field.name}
       id={field.name}
     >
-      <option defaultValue="" />
+      <option value="">---</option>
       {field.options.map((value) => <option key={value} value={value}>{value}</option>)}
     </select>
   );

@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 
 import { fields, renderField } from './fields';
-import { fetchAll } from './fill';
+import fetchAll from './fill';
 import { processes, targets } from './process';
 import shakeTree from './shakeTree';
 
 function neededFieldNames(procs) {
   const names = [];
-  console.log('procs:', procs);
-  procs.forEach(process => shakeTree(process, names));
+  procs.forEach((process) => shakeTree(process, names));
 
   return names;
 }
@@ -25,7 +24,6 @@ function makeData(procs) {
 
   neededFields.forEach((fieldName) => {
     const field = fields[fieldName];
-    console.log(fieldName, field);
 
     switch (field.type) {
       case 'boolean':
@@ -44,9 +42,8 @@ function makeData(procs) {
         break;
       case 'Name':
         // FIXME Sasha you goddamned whore. - future Sasha
-        const keys = ['first', 'middle', 'last', 'suffix'];
         data[fieldName] = {};
-        keys.forEach((key) => {
+        ['first', 'middle', 'last', 'suffix'].forEach((key) => {
           const el = document.getElementById(`${field.name}-${key}`);
           data[fieldName][key] = el ? el.value : '';
         });
@@ -66,7 +63,6 @@ function makeData(procs) {
  * @param {Person} data
  */
 function generate(procs, data) {
-  console.log(procs);
   fetchAll(procs, data)
     .then((doc) => {
       const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }));
@@ -90,25 +86,25 @@ function App() {
     const residentProcesses = processes[residentState];
     const birthProcesses = processes[birthState];
 
-    const allProcesses = {};
-    allProcesses['birth-record'] = birthProcesses['birth-record'];
+    const allProcs = {};
+    allProcs['birth-record'] = birthProcesses['birth-record'];
     Object.entries(residentProcesses).forEach(([target, proc]) => {
-      allProcesses[target] = proc;
+      allProcs[target] = proc;
     });
 
-    setAllProcesses(allProcesses);
+    setAllProcesses(allProcs);
   }, [residentState, birthState]);
 
   function updateForm() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
-    const selectedProcesses = Array.from(checkboxes).map(checkbox => allProcesses[checkbox['id']]);
-    console.log('selected:', selectedProcesses);
+    const selectedProcesses = Array.from(checkboxes).map((checkbox) => allProcesses[checkbox.id]);
 
     setNeededProcesses(selectedProcesses);
 
     const fieldNames = neededFieldNames(selectedProcesses);
-    console.log('fieldNames', fieldNames);
-    const neededFields = Object.entries(fields).filter(([name, _]) => fieldNames.includes(name)).map(([_, field]) => field);
+    const neededFields = Object.entries(fields)
+      .filter(([name]) => fieldNames.includes(name))
+      .map(([, field]) => field);
 
     setVisibleFields(neededFields);
   }
@@ -123,19 +119,17 @@ function App() {
             I live in
             {' '}
             <select
-              onChange={ev => setResidentState(ev.target.value)}>
-              { availableStates.map(state =>
-                <option key={state} value={state}>{state}</option>
-              )}
+              onChange={(ev) => setResidentState(ev.target.value)}
+            >
+              { availableStates.map((state) => <option key={state} value={state}>{state}</option>)}
             </select>
             {'. '}
             I was born in
             {' '}
             <select
-              onChange={ev => setBirthState(ev.target.value)}>
-              { availableStates.map(state =>
-                <option key={state} value={state}>{state}</option>
-              )}
+              onChange={(ev) => setBirthState(ev.target.value)}
+            >
+              { availableStates.map((state) => <option key={state} value={state}>{state}</option>)}
             </select>
             {'. '}
             <br />
