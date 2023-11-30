@@ -5,6 +5,8 @@ import {
 import { render } from 'nunjucks';
 import html2pdf from 'html2pdf.js';
 
+import { getCounties } from './counties';
+
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
  * @param {PDFDocument} doc
@@ -91,7 +93,8 @@ async function fetchAndFill(formFilename, fills, data) {
  */
 async function makeGuide(data) {
   // Do any additional variable assignment here.
-  const allData = Object.assign(data, countyInfo[data.county]);
+  const counties = getCounties(data.state);
+  const allData = Object.assign(data, counties[data.county]);
 
   const renderedHtml = render('./guide.html.njk', allData);
 
@@ -156,6 +159,7 @@ export default async function fetchAll(processes, data) {
     }),
   );
 
-  pages.forEach((page) => result.addPage(page));
+  pages.flat()
+    .forEach((page) => result.addPage(page));
   return result.save();
 }

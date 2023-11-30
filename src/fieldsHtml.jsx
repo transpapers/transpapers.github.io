@@ -1,5 +1,7 @@
 import { React } from 'react';
 
+import { getCounties } from './counties';
+
 function GenericField({ name, title, subtitle }, innards) {
   return (
     <label key={name} htmlFor={name}>
@@ -18,6 +20,7 @@ export function StringField({ field }) {
   const innards = (
     <input
       id={field.name}
+      name={field.name}
       type="text"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
     />
@@ -31,6 +34,7 @@ export function CheckboxField({ field }) {
     <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
         id={field.name}
+        name={field.name}
         type="checkbox"
         defaultChecked={field.hasOwnProperty('default') && field.default}
       />
@@ -104,6 +108,7 @@ export function NumberField({ field }) {
   const innards = (
     <input
       id={field.name}
+      name={field.name}
       type="number"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
     />
@@ -116,6 +121,7 @@ export function EmailField({ field }) {
   const innards = (
     <input
       id={field.name}
+      name={field.name}
       type="email"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
     />
@@ -128,6 +134,7 @@ export function DateField({ field }) {
   const innards = (
     <input
       id={field.name}
+      name={field.name}
       type="date"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
     />
@@ -140,10 +147,26 @@ export function TelField({ field }) {
   const innards = (
     <input
       id={field.name}
+      name={field.name}
       type="tel"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
     />
   );
 
   return GenericField(field, innards);
+}
+
+export function CountyField({ state }) {
+  const counties = getCounties(state);
+  if (!counties) {
+    return '';
+  }
+
+  const field = {
+    name: 'county',
+    title: 'County',
+    options: Object.keys(counties),
+  };
+
+  return SelectField({ field });
 }

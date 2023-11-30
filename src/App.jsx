@@ -38,6 +38,7 @@ function makeData(procs) {
       case 'tel':
       case 'number':
       case 'Date':
+      case 'county':
         data[fieldName] = document.getElementById(field.name).value || '';
         break;
       case 'Name':
@@ -81,6 +82,7 @@ function App() {
   const [allProcesses, setAllProcesses] = useState({});
   const [neededProcesses, setNeededProcesses] = useState([]);
   const [visibleFields, setVisibleFields] = useState([]);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const residentProcesses = processes[residentState];
@@ -109,10 +111,17 @@ function App() {
     setVisibleFields(neededFields);
   }
 
+  function handleFormChange(ev) {
+    const formData = new FormData(ev.currentTarget);
+    const formJson = Object.fromEntries(formData);
+
+    setData(formJson);
+  }
+
   const availableStates = Object.keys(processes);
 
   return (
-    <form id="main-form">
+    <div id="main-form">
       <ol>
         <li key="1">
           <p>
@@ -150,22 +159,24 @@ function App() {
           </fieldset>
         </li>
         <li key="3">
-          <div className="form">
-            { visibleFields.map(renderField) }
+          <form className="form" onChange={handleFormChange}>
+            { visibleFields.map((field) => renderField(field, residentState)) }
             { (visibleFields.length > 0) && (
             <input
               type="submit"
               value="Download gender-affirming documents"
               onClick={(ev) => {
                 ev.preventDefault();
-                generate(neededProcesses, makeData(neededProcesses));
+
+                console.log(data);
+                // generate(neededProcesses, makeData(neededProcesses));
               }}
             />
             ) }
-          </div>
+          </form>
         </li>
       </ol>
-    </form>
+    </div>
   );
 }
 

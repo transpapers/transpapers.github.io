@@ -1,7 +1,7 @@
 import { React } from 'react';
 
 import {
-  StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField, TelField,
+  StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField, TelField, CountyField,
 } from './fieldsHtml';
 
 export const fields = {
@@ -126,8 +126,7 @@ export const fields = {
   county: {
     title: 'County',
     name: 'county',
-    type: 'select',
-    options: ['Kent', 'Charlevoix', 'Wayne'],
+    type: 'county',
   },
   zip: {
     title: 'ZIP code',
@@ -149,7 +148,7 @@ export const fields = {
   },
 };
 
-export function renderField(field) {
+export function renderField(field, state) {
   if (!field || !field.hasOwnProperty('type')) {
     return '';
   }
@@ -170,6 +169,8 @@ export function renderField(field) {
     return <DateField field={field} />;
   } if (field.type === 'tel') {
     return <TelField field={field} />;
+  } if (field.type === 'county') {
+    return <CountyField state={state} />;
   }
 
   return '';
