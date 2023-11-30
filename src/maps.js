@@ -215,7 +215,7 @@ export const ssnMap = [
   { text: (data) => data.legalName.last, field: 'topmostSubform[0].Page5[0].Lastdiffname[0]' },
   { text: (data) => data.birthCity, field: 'topmostSubform[0].Page5[0].cityofbirth[0]' },
   { text: (data) => data.birthState, field: 'topmostSubform[0].Page5[0].stateatbirth[0]' },
-  { text: (data) => data.dateOfBirth, field: 'topmostSubform[0].Page5[0].DateTimeField1[0]' },
+  { text: (data) => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), field: 'topmostSubform[0].Page5[0].DateTimeField1[0]' },
   { check: () => true, field: 'topmostSubform[0].Page5[0].citizenship[0]' },
   { check: (data) => data.gender === 'M', field: 'topmostSubform[0].Page5[0].Gender[0]' },
   { check: (data) => data.gender === 'F', field: 'topmostSubform[0].Page5[0].Gender[1]' },
