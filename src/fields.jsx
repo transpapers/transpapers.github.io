@@ -142,7 +142,8 @@ export const fields = {
   representativeName: {
     // FIXME Should appear for minors only.
     title: 'Name of your legal representative',
-    subtitle: 'Fill only if you are a legal minor. Enter the name of the adult that will appear with you in court.',
+    subtitle: 'Fill only if you are a legal minor.'
+      + 'Enter the name of the adult that will appear with you in court.',
     name: 'representative-name',
     type: 'Name',
   },
