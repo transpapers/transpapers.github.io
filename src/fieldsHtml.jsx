@@ -54,11 +54,12 @@ export function OptionField({ field }) {
       <legend>{field.title}</legend>
 
       {field.options.map((value) => (
-        <label htmlFor={`${field.name}-${value}`}>
+        <label htmlFor={`${field.name}:${value}`}>
           <input
-            id={`${field.name}-${value}`}
+            id={`${field.name}:${value}`}
             name={field.name}
             type="radio"
+            value={value}
           />
           { value }
         </label>
@@ -91,11 +92,11 @@ export function NameField({ field }) {
       {keys.map((key) => (
         <div key={key} className="subfield">
           <input
-            id={`${field.name}-${key}`}
-            name={`${field.name}-${key}`}
+            id={`${field.name}:${key}`}
+            name={`${field.name}:${key}`}
             size="1"
           />
-          <label htmlFor={`${field.name}-${key}`}>{key}</label>
+          <label htmlFor={`${field.name}:${key}`}>{key}</label>
         </div>
       ))}
     </div>

@@ -5,9 +5,21 @@ import fetchAll from './fill';
 import { processes, targets } from './process';
 import shakeTree from './shakeTree';
 
-function neededFieldNames(procs) {
+function neededFieldNames(procs, data) {
   const names = [];
   procs.forEach((process) => shakeTree(process, names));
+
+  Object.entries(fields).forEach(([fieldName, field]) => {
+    if (field.hasOwnProperty('include')) {
+      console.log(data.birthdate, fieldName, field.include(data));
+    }
+
+    if (field.hasOwnProperty('include')
+        && field.include(data)
+        && !names.includes(fieldName)) {
+      names.push(fieldName);
+    }
+  });
 
   return names;
 }
@@ -58,6 +70,14 @@ function makeData(procs) {
   return data;
 }
 
+function beautifyData(formData) {
+  console.log(formData);
+
+  const data = {};
+
+  return data;
+}
+
 /**
  * Generate and download the documents from the given `data`.
  *
@@ -97,25 +117,31 @@ function App() {
     setAllProcesses(allProcs);
   }, [residentState, birthState]);
 
-  function updateForm() {
+  function neededFields() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
     const selectedProcesses = Array.from(checkboxes).map((checkbox) => allProcesses[checkbox.id]);
 
     setNeededProcesses(selectedProcesses);
 
-    const fieldNames = neededFieldNames(selectedProcesses);
-    const neededFields = Object.entries(fields)
+    const fieldNames = neededFieldNames(selectedProcesses, data);
+    return Object.entries(fields)
       .filter(([name]) => fieldNames.includes(name))
       .map(([, field]) => field);
+  }
 
-    setVisibleFields(neededFields);
+  function updateForm() {
+    setVisibleFields(neededFields());
   }
 
   function handleFormChange(ev) {
     const formData = new FormData(ev.currentTarget);
     const formJson = Object.fromEntries(formData);
 
+    const dataToUse = beautifyData(formJson);
+
+    //setData(dataToUse);
     setData(formJson);
+    setVisibleFields(neededFields());
   }
 
   const availableStates = Object.keys(processes);
@@ -160,7 +186,10 @@ function App() {
         </li>
         <li key="3">
           <form className="form" onChange={handleFormChange}>
-            { visibleFields.map((field) => renderField(field, residentState)) }
+            { visibleFields.map((field) => {
+              const notIncluded = field.hasOwnProperty('include') && !field.include(data);
+              return notIncluded ? '' : renderField(field, residentState);
+            })}
             { (visibleFields.length > 0) && (
             <input
               type="submit"

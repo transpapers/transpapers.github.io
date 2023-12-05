@@ -6,6 +6,9 @@
  * @return {number}
  */
 export function numericalAge(birthdate) {
+  if (!birthdate) {
+    return Infinity;
+  }
   const thisYear = new Date().getFullYear();
   const thisMonth = new Date().getMonth();
   const thisDay = new Date().getDay();
@@ -31,6 +34,10 @@ export function numericalAge(birthdate) {
  * @return {string}
  */
 export function formatDate(date, fmt) {
+  if (!date || !fmt) {
+    return '';
+  }
+
   const year = Number.parseInt(date.substring(0, 4), 10);
   const month = Number.parseInt(date.substring(5, 7), 10);
   const day = Number.parseInt(date.substring(8), 10);
@@ -53,16 +60,19 @@ export function formatDate(date, fmt) {
 }
 
 export function phoneAreaCode(phoneNumber) {
+  if (!phoneNumber) { return '' }
   return phoneNumber.substring(0, 4);
 }
 
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber) {
+  if (!phoneNumber) { return '' }
   return phoneNumber.substring(4, 7);
 }
 
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber) {
+  if (!phoneNumber) { return '' }
   return phoneNumber.substring(7);
 }
 
@@ -72,5 +82,6 @@ export function phoneEnd(phoneNumber) {
  * @return {string}
  */
 export function fullName(name) {
+  if (!name) { return '' };
   return [name.first, name.middle, name.last, name.suffix].filter((n) => n && n.length > 0).join(' ');
 }

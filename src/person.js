@@ -8,7 +8,7 @@ import { fullName, numericalAge } from './util';
  * @property {boolean} sealBirthCertificate
  * @property {string} birthCity
  * @property {string} birthState
- * @property {string} dateOfBirth - A person's date of birth.
+ * @property {string} birthdate - A person's date of birth.
  *
  * This is Chesterton's fence!! Read before you modify. I got an earful about
  * time/date handling from an alter and now you have to hear it too.
@@ -38,9 +38,9 @@ import { fullName, numericalAge } from './util';
  * @property {boolean} doNotPublish
  * @property {boolean} parentsAreOkay
  * @property {Name} mothersBirthName
- * @property {string} mothersDateOfBirth
+ * @property {string} mothersBirthdate
  * @property {Name} fathersBirthName
- * @property {string} fathersDateOfBirth
+ * @property {string} fathersBirthdate
  * @property {string} areaCode FIXME
  * @property {string} phone
  * @property {string} streetAddress
@@ -58,7 +58,8 @@ import { fullName, numericalAge } from './util';
 * @return {boolean}
 */
 export function isMinor(data) {
-  return numericalAge(data.dateOfBirth) < 18;
+  if (!data || !data.hasOwnProperty('birthdate')) { return false; }
+  return numericalAge(data.birthdate) < 18;
 }
 
 /**
@@ -112,7 +113,7 @@ export const sampleData = {
   birthCity: 'New York',
   birthState: 'New York',
 
-  dateOfBirth: '2010-01-01',
+  birthdate: '2010-01-01',
 
   assignedSex: 'F',
   gender: 'X',
@@ -128,7 +129,6 @@ export const sampleData = {
   parentsAreOkay: true,
 
   mothersDateOfBirth: '1970-01-01',
-
   fathersBirthName: {
     first: 'John',
     middle: 'Michael',

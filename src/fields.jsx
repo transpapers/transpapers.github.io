@@ -3,6 +3,7 @@ import { React } from 'react';
 import {
   StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField, TelField, CountyField,
 } from './fieldsHtml';
+import { isMinor } from './person'
 
 export const fields = {
   legalName: {
@@ -24,7 +25,7 @@ export const fields = {
     default: 'Gender transition',
   },
   sealBirthCertificate: {
-    title: 'I would like to <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate</a>.',
+    title: <>I would like to <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate</a>.</>,
     subtitle: 'This prevents third parties from accessing your deadname and AGAB.',
     name: 'seal-birth-certificate',
     type: 'boolean',
@@ -35,25 +36,17 @@ export const fields = {
     name: 'birth-city',
     type: 'string',
   },
-  birthState: {
-    // FIXME This needs to be handled up above.
-    title: 'State of birth',
-    subtitle: 'or foreign country',
-    name: 'birth-state',
-    type: 'string',
-    default: 'Michigan',
-  },
-  dateOfBirth: {
+  birthdate: {
     title: 'Date of birth',
     name: 'birthdate',
     type: 'Date',
   },
   age: {
-    // FIXME This should only appear if minor is set
     title: 'Age at time of filing',
     subtitle: 'Fill only if you are under 23.',
     name: 'age',
     type: 'number',
+    include: (data) => isMinor(data),
   },
   assignedSex: {
     title: 'Sex assigned at birth',
@@ -86,7 +79,7 @@ export const fields = {
     name: 'mothers-name',
     type: 'Name',
   },
-  mothersDateOfBirth: {
+  mothersBirthdate: {
     title: 'Mother\'s date of birth',
     name: 'mothers-birthdate',
     type: 'Date',
@@ -97,7 +90,7 @@ export const fields = {
     name: 'fathers-name',
     type: 'Name',
   },
-  fathersDateOfBirth: {
+  fathersBirthdate: {
     title: 'Father\'s date of birth',
     name: 'fathers-birthdate',
     type: 'Date',
@@ -118,11 +111,6 @@ export const fields = {
     name: 'city',
     type: 'string',
   },
-  state: {
-    title: 'State',
-    name: 'state',
-    type: 'string',
-  },
   county: {
     title: 'County',
     name: 'county',
@@ -140,12 +128,11 @@ export const fields = {
     type: 'email',
   },
   representativeName: {
-    // FIXME Should appear for minors only.
     title: 'Name of your legal representative',
-    subtitle: 'Fill only if you are a legal minor.'
-      + 'Enter the name of the adult that will appear with you in court.',
+    subtitle: 'Enter the name of the adult that will appear with you in court.',
     name: 'representative-name',
     type: 'Name',
+    include: (data) => isMinor(data),
   },
 };
 
