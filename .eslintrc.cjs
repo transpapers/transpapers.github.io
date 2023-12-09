@@ -22,6 +22,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-	    "no-prototype-builtins": "off"
+	    "no-prototype-builtins": "off",
+	    "react/prop-types": "off",
     }
 }
