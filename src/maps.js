@@ -139,7 +139,7 @@ export const birthCertMap = [
     { text: data => fullName(data.legalName), loc: { x: 48, y: 541 } },
     { text: data => fullName(data.legalName), loc: { x: 56, y: 800 } },
     { text: data => fullName(data.chosenName), loc: { x: 433, y: 800 } },
-    { text: data => data.dateOfBirth, loc: { x: 534, y: 541 } },
+    { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), loc: { x: 534, y: 541 } },
     { text: data => `${String(data.birthplace.city)}, ${String(data.birthplace.state)}`, loc: { x: 249, y: 636 } },
     { text: data => fullName(data.mothersBirthName), loc: { x: 48, y: 710 } },
     { text: data => data.mothersDateOfBirth, loc: { x: 554, y: 710 } },
@@ -167,7 +167,7 @@ export const mdosSexMap = [
     { text: data => data.streetAddress, loc: { x: 57, y: 441 } },
     { text: data => data.city, loc: { x: 351, y: 441 } },
     { text: data => data.zip, loc: { x: 701, y: 441 } },
-    { text: data => data.dateOfBirth, loc: { x: 351, y: 489 } },
+    { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), loc: { x: 351, y: 489 } },
     { text: data => fullName(data.legalName), loc: { x: 67, y: 555 } },
     { check: data => data.gender === 'F', field: form => form.getField('ChoiceA'), select: 'Choice1' },
     { check: data => data.gender === 'M', field: form => form.getField('ChoiceA'), select: 'Choice2' },
@@ -181,7 +181,7 @@ export const mdosSexMap = [
  */
 export const miSexMap = [
     { text: data => fullName(data.legalName), loc: { x: 151, y: 299 } },
-    { text: data => data.dateOfBirth, loc: { x: 193, y: 367 } },
+    { text: data => formatDate(data.dateOfBirth, { format: ['month', 'day', 'year'], separator: '/' }), loc: { x: 193, y: 367 } },
     { text: data => data.assignedSex === 'M' ? 'X' : '', loc: { x: 159, y: 539 } },
     { text: data => data.assignedSex === 'F' ? 'X' : '', loc: { x: 159, y: 559 } },
     { text: data => data.assignedSex === 'X' ? 'X' : '', loc: { x: 159, y: 579 } },
