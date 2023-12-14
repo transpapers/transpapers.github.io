@@ -1,7 +1,8 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "mocha": true
     },
     "extends": "airbnb",
     "overrides": [

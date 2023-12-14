@@ -10,10 +10,6 @@ function neededFieldNames(procs, data) {
   procs.forEach((process) => shakeTree(process, names));
 
   Object.entries(fields).forEach(([fieldName, field]) => {
-    if (field.hasOwnProperty('include')) {
-      console.log(data.birthdate, fieldName, field.include(data));
-    }
-
     if (field.hasOwnProperty('include')
         && field.include(data)
         && !names.includes(fieldName)) {
@@ -24,56 +20,25 @@ function neededFieldNames(procs, data) {
   return names;
 }
 
-/**
- * Generate a data object from index.html.
- *
- * @return {Person}
- */
-function makeData(procs) {
-  const data = {};
-
-  const neededFields = neededFieldNames(procs);
-
-  neededFields.forEach((fieldName) => {
-    const field = fields[fieldName];
-
-    switch (field.type) {
-      case 'boolean':
-        data[fieldName] = document.getElementById(field.name).checked;
-        break;
-      case 'option':
-        data[fieldName] = document.querySelector(`input[name="${fieldName}"]:checked`).value || '';
-        break;
-      case 'string':
-      case 'select':
-      case 'email':
-      case 'tel':
-      case 'number':
-      case 'Date':
-      case 'county':
-        data[fieldName] = document.getElementById(field.name).value || '';
-        break;
-      case 'Name':
-        // FIXME Sasha you goddamned whore. - future Sasha
-        data[fieldName] = {};
-        ['first', 'middle', 'last', 'suffix'].forEach((key) => {
-          const el = document.getElementById(`${field.name}-${key}`);
-          data[fieldName][key] = el ? el.value : '';
-        });
-        break;
-      default:
-        console.log(`Missing field data for "${field.name}"`);
-        break;
-    }
-  });
-
-  return data;
-}
-
 function beautifyData(formData) {
-  console.log(formData);
-
   const data = {};
+
+  Object.entries(formData).forEach(([name, value]) => {
+    let pointer = data;
+
+    const parts = name.split(':');
+    const directories = parts.slice(0, parts.length - 1);
+    const filename = parts[parts.length - 1];
+
+    directories.forEach((dir) => {
+      if (!pointer.hasOwnProperty(dir)) {
+        pointer[dir] = {};
+      }
+      pointer = pointer[dir];
+    });
+
+    pointer[filename] = value;
+  });
 
   return data;
 }
@@ -102,6 +67,7 @@ function App() {
   const [allProcesses, setAllProcesses] = useState({});
   const [neededProcesses, setNeededProcesses] = useState([]);
   const [visibleFields, setVisibleFields] = useState([]);
+  const [modified, setModified] = useState(false);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -137,11 +103,13 @@ function App() {
     const formData = new FormData(ev.currentTarget);
     const formJson = Object.fromEntries(formData);
 
-    const dataToUse = beautifyData(formJson);
+    let dataToUse = beautifyData(formJson);
 
-    //setData(dataToUse);
-    setData(formJson);
-    setVisibleFields(neededFields());
+    dataToUse = Object.assign(dataToUse, { birthState, residentState });
+
+    setData(dataToUse);
+    setModified(true);
+    updateForm();
   }
 
   const availableStates = Object.keys(processes);
@@ -185,20 +153,18 @@ function App() {
           </fieldset>
         </li>
         <li key="3">
-          <form className="form" onChange={handleFormChange}>
+          <form className="form" onSubmit={handleFormChange} onChange={handleFormChange}>
             { visibleFields.map((field) => {
               const notIncluded = field.hasOwnProperty('include') && !field.include(data);
               return notIncluded ? '' : renderField(field, residentState);
             })}
-            { (visibleFields.length > 0) && (
+            { (visibleFields.length > 0) && modified && (
             <input
               type="submit"
               value="Download gender-affirming documents"
               onClick={(ev) => {
                 ev.preventDefault();
-
-                console.log(data);
-                // generate(neededProcesses, makeData(neededProcesses));
+                generate(neededProcesses, data);
               }}
             />
             ) }

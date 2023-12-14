@@ -2,9 +2,10 @@ import {
   PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup,
 } from 'pdf-lib';
 
-import { render } from 'nunjucks';
 import html2pdf from 'html2pdf.js';
+import { render } from 'nunjucks';
 
+import { numericalAge } from './util';
 import { getCounties } from './counties';
 
 /**
@@ -93,18 +94,18 @@ async function fetchAndFill(formFilename, fills, data) {
  */
 async function makeGuide(data) {
   // Do any additional variable assignment here.
-  const counties = getCounties(data.state);
+  const counties = getCounties(data.residentState);
   const allData = Object.assign(data, counties[data.county]);
 
   const renderedHtml = render('./guide.html.njk', allData);
 
-  const pdf = await html2pdf()
-    .set({
-      pagebreak: {
-        mode: ['avoid-all'],
-      },
-      margin: 10,
-    }).from(renderedHtml).outputPdf('arraybuffer');
+	let pdf = await html2pdf()
+	    .set({
+	      pagebreak: {
+		mode: ['avoid-all'],
+	      },
+	      margin: 10,
+	    }).from(renderedHtml).outputPdf('arraybuffer');
 
   return pdf;
 }
@@ -118,6 +119,7 @@ async function makeGuide(data) {
  */
 export default async function fetchAll(processes, data) {
   const docs = [];
+
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
       if (!docs.includes(doc)) {
@@ -143,6 +145,11 @@ export default async function fetchAll(processes, data) {
         .then((res) => res.arrayBuffer())
         .then(PDFDocument.load);
     }));
+
+  // Do any additional data assignment here.
+  if (data.birthdate && !data.age) {
+    data.age = numericalAge(data.birthdate);
+  }
 
   if (data.age && data.county) {
     const guide = await PDFDocument.load(await makeGuide(data));

@@ -9,13 +9,13 @@ export const fields = {
   legalName: {
     title: 'Full legal name',
     subtitle: 'as it appears on your ID',
-    name: 'legal-name',
+    name: 'legalName',
     type: 'Name',
   },
   chosenName: {
     title: 'Full chosen name',
     subtitle: 'as it will appear on your ID',
-    name: 'chosen-name',
+    name: 'chosenName',
     type: 'Name',
   },
   reasonForNameChange: {
@@ -25,15 +25,18 @@ export const fields = {
     default: 'Gender transition',
   },
   sealBirthCertificate: {
-    title: <>I would like to <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate</a>.</>,
+    title: <>
+      I would like to&nbsp;
+      <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate.</a>
+    </>,
     subtitle: 'This prevents third parties from accessing your deadname and AGAB.',
-    name: 'seal-birth-certificate',
+    name: 'sealBirthCertificate',
     type: 'boolean',
     default: true,
   },
   birthCity: {
     title: 'City of birth',
-    name: 'birth-city',
+    name: 'birthCity',
     type: 'string',
   },
   birthdate: {
@@ -50,7 +53,7 @@ export const fields = {
   },
   assignedSex: {
     title: 'Sex assigned at birth',
-    name: 'birth-sex',
+    name: 'birthSex',
     type: 'option',
     options: ['M', 'F', 'X'],
   },
@@ -64,35 +67,35 @@ export const fields = {
   doNotPublish: {
     title: 'I have good cause not to publish notice of my name change proceeding.',
     subtitle: 'such as a known stalker or another such credible, specific threat',
-    name: 'do-not-publish',
+    name: 'doNotPublish',
     type: 'boolean',
   },
   parentsAreOkay: {
     title: 'My parents are both alive and not divorced.',
-    name: 'parents-are-okay',
+    name: 'parentsAreOkay',
     type: 'boolean',
     default: true,
   },
   mothersBirthName: {
     title: 'Mother\'s name',
     subtitle: 'at her birth',
-    name: 'mothers-name',
+    name: 'mothersName',
     type: 'Name',
   },
   mothersBirthdate: {
     title: 'Mother\'s date of birth',
-    name: 'mothers-birthdate',
+    name: 'mothersBirthdate',
     type: 'Date',
   },
   fathersBirthName: {
     title: 'Father\'s name',
     subtitle: 'at his birth',
-    name: 'fathers-name',
+    name: 'fathersName',
     type: 'Name',
   },
   fathersBirthdate: {
     title: 'Father\'s date of birth',
-    name: 'fathers-birthdate',
+    name: 'fathersBirthdate',
     type: 'Date',
   },
   phone: {
@@ -103,7 +106,7 @@ export const fields = {
   streetAddress: {
     title: 'Street address',
     subtitle: 'including apartment/PO box/"line 2"',
-    name: 'street-address',
+    name: 'streetAddress',
     type: 'string',
   },
   city: {
@@ -130,7 +133,7 @@ export const fields = {
   representativeName: {
     title: 'Name of your legal representative',
     subtitle: 'Enter the name of the adult that will appear with you in court.',
-    name: 'representative-name',
+    name: 'representativeName',
     type: 'Name',
     include: (data) => isMinor(data),
   },

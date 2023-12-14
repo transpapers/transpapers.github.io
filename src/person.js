@@ -86,7 +86,7 @@ export function representativeName(data) {
  * @return {string}
  */
 export function fullContactInfo(data, separator = '\n') {
-  const lines = [fullName(representativeName(data)), data.streetAddress, `${data.city}, ${data.state} ${data.zip}`, data.phone];
+  const lines = [fullName(representativeName(data)), data.streetAddress, `${data.city}, ${data.residentState} ${data.zip}`, data.phone];
   return lines.join(separator);
 }
 

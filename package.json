@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "test": "mocha"
+    "test": "mocha ./test/**/*.mjs"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,8 @@
     "mocha": "^10.2.0",
     "typescript": "^5.1.6",
     "typescript-language-server": "^3.3.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vitest": "^1.0.4"
   },
   "dependencies": {
     "@types/nunjucks": "^3.2.3",
