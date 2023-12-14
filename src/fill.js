@@ -6,7 +6,7 @@ import html2pdf from 'html2pdf.js';
 import { render } from 'nunjucks';
 
 import { numericalAge } from './util';
-import { getCounties } from './counties';
+import getCounties from './counties';
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -99,13 +99,13 @@ async function makeGuide(data) {
 
   const renderedHtml = render('./guide.html.njk', allData);
 
-	let pdf = await html2pdf()
-	    .set({
-	      pagebreak: {
-		mode: ['avoid-all'],
-	      },
-	      margin: 10,
-	    }).from(renderedHtml).outputPdf('arraybuffer');
+  const pdf = await html2pdf()
+    .set({
+      pagebreak: {
+        mode: ['avoid-all'],
+      },
+      margin: 10,
+    }).from(renderedHtml).outputPdf('arraybuffer');
 
   return pdf;
 }
@@ -118,6 +118,13 @@ async function makeGuide(data) {
  * @return {Promise<Uint8Array>} Compiled documents
  */
 export default async function fetchAll(processes, data) {
+  const finalData = { ...data };
+
+  // Do any additional Data assignment here.
+  if (finalData.birthdate && !finalData.age) {
+    finalData.age = numericalAge(finalData.birthdate);
+  }
+
   const docs = [];
 
   processes.forEach((proc) => {
@@ -131,14 +138,14 @@ export default async function fetchAll(processes, data) {
   const allDocuments = await Promise.all(docs
     .filter((doc) => {
       if (doc.hasOwnProperty('include')) {
-        return doc.include(data);
+        return doc.include(finalData);
       }
 
       return false;
     })
     .map(async (doc) => {
       if (doc.hasOwnProperty('map')) {
-        return fetchAndFill(`/forms/${doc.filename}`, doc.map, data);
+        return fetchAndFill(`/forms/${doc.filename}`, doc.map, finalData);
       }
 
       return fetch(`/forms/${doc.filename}`)
@@ -146,13 +153,8 @@ export default async function fetchAll(processes, data) {
         .then(PDFDocument.load);
     }));
 
-  // Do any additional data assignment here.
-  if (data.birthdate && !data.age) {
-    data.age = numericalAge(data.birthdate);
-  }
-
-  if (data.age && data.county) {
-    const guide = await PDFDocument.load(await makeGuide(data));
+  if (finalData.age && finalData.county) {
+    const guide = await PDFDocument.load(await makeGuide(finalData));
 
     // Append to front
     allDocuments.unshift(guide);

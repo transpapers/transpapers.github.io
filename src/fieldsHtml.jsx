@@ -1,6 +1,6 @@
 import { React } from 'react';
 
-import { getCounties } from './counties';
+import getCounties from './counties';
 
 function GenericField({ name, title, subtitle }, innards) {
   return (

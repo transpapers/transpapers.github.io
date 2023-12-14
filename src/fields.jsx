@@ -1,9 +1,10 @@
 import { React } from 'react';
 
 import {
-  StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField, TelField, CountyField,
+  StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField,
+  TelField, CountyField,
 } from './fieldsHtml';
-import { isMinor } from './person'
+import { isMinor } from './person';
 
 export const fields = {
   legalName: {
@@ -25,10 +26,12 @@ export const fields = {
     default: 'Gender transition',
   },
   sealBirthCertificate: {
-    title: <>
-      I would like to&nbsp;
-      <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate.</a>
-    </>,
+    title: (
+      <>
+        I would like to
+        {' '}
+        <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate.</a>
+      </>),
     subtitle: 'This prevents third parties from accessing your deadname and AGAB.',
     name: 'sealBirthCertificate',
     type: 'boolean',

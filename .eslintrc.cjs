@@ -1,29 +1,32 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "mocha": true
+  env: {
+    browser: true,
+    es2021: true,
+    mocha: true,
+  },
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+  ],
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: [
+        '.eslintrc.{js,cjs}',
+      ],
+      parserOptions: {
+        sourceType: 'script',
+      },
     },
-    "extends": "airbnb",
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "rules": {
-	    "no-prototype-builtins": "off",
-	    "react/prop-types": "off",
-    }
-}
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+    'no-prototype-builtins': 'off',
+    'react/prop-types': 'off',
+  },
+};

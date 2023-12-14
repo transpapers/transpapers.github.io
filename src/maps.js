@@ -346,4 +346,4 @@ export const ds11Map = [
   { text: (data) => `${data.fathersBirthName.first} ${data.fathersBirthName.middle}`, field: 'Parent 2 FM Name' },
   { text: (data) => data.fathersBirthName.last, field: 'Parent 2 Last Name' },
   { text: (data) => formatDate(data.fathersBirthdate, { format: ['month', 'day', 'year'], separator: '/' }), field: 'Parent 2 DOB' },
-]
+];

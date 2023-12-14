@@ -1905,7 +1905,7 @@ const michiganCounties = {
   },
 };
 
-export function getCounties(state) {
+export default function getCounties(state) {
   if (state === 'Michigan') {
     return michiganCounties;
   }

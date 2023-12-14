@@ -60,19 +60,19 @@ export function formatDate(date, fmt) {
 }
 
 export function phoneAreaCode(phoneNumber) {
-  if (!phoneNumber) { return '' }
+  if (!phoneNumber) { return ''; }
   return phoneNumber.substring(0, 4);
 }
 
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber) {
-  if (!phoneNumber) { return '' }
+  if (!phoneNumber) { return ''; }
   return phoneNumber.substring(4, 7);
 }
 
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber) {
-  if (!phoneNumber) { return '' }
+  if (!phoneNumber) { return ''; }
   return phoneNumber.substring(7);
 }
 
@@ -82,6 +82,6 @@ export function phoneEnd(phoneNumber) {
  * @return {string}
  */
 export function fullName(name) {
-  if (!name) { return '' };
+  if (!name) { return ''; }
   return [name.first, name.middle, name.last, name.suffix].filter((n) => n && n.length > 0).join(' ');
 }
