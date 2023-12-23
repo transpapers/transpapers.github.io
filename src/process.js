@@ -8,7 +8,7 @@ import {
  * @property {?string} state - State or territory. Leave empty for federal forms.
  * @property {string} target - The object of filing the documents; e.g., birth
  *     record, primary identification, passport, etc.
- * @property {?Process[]} depends - A list of other Processes required before or
+ * @property {?string[]} depends - A list of other targets required before or
  *     concurrently with this one. Any sort of dependency loop is assumed to be
  *     filed simultaneously.
  * @property {Document[]} documents - An ordered list of documents to attach.
@@ -25,7 +25,7 @@ import {
  */
 
 export const targets = {
-  'name-change': 'change my legal name.',
+  'name-change': 'change my legal name and primary identification.',
   'social-security': 'update my information with the Social Security Administration.',
   'birth-record': 'update my birth certificate.',
   passport: 'update my federal passport.',
@@ -33,6 +33,7 @@ export const targets = {
 
 export const socialSecurity = {
   target: 'social-security',
+  depends: ['name-change', 'sex-designation'],
   documents: [
     {
       name: 'Application for a Social Security Card',
@@ -45,6 +46,7 @@ export const socialSecurity = {
 
 export const passport = {
   target: 'passport',
+  depends: ['name-change', 'sex-designation'],
   documents: [
     {
       name: 'Application for a Passport',
@@ -73,6 +75,7 @@ export const passport = {
 export const michiganNameChange = {
   state: 'MI',
   target: 'name-change',
+  depends: ['sex-designation'],
   documents: [
     {
       name: 'Petition to Change Name',
@@ -149,7 +152,7 @@ export const michiganSexDesignation = {
 export const michiganBirthRecord = {
   state: 'MI',
   target: 'birth-record',
-  depends: [michiganNameChange, michiganSexDesignation],
+  depends: ['name-change', 'sex-designation'],
   documents: [
     {
       name: 'Application to Change or Correct a Michigan Birth Record',
@@ -168,10 +171,13 @@ const michiganProcesses = {
   'birth-record': michiganBirthRecord,
   'sex-designation': michiganSexDesignation,
   'name-change': michiganNameChange,
+};
+
+export const federalProcesses = {
   'social-security': socialSecurity,
   passport,
 };
 
-export const processes = {
+export const stateProcesses = {
   Michigan: michiganProcesses,
 };

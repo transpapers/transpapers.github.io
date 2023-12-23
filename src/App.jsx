@@ -1,13 +1,37 @@
-import { React, useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import { fields, renderField } from './fields';
 import fetchAll from './fill';
-import { processes, targets } from './process';
+import { federalProcesses, stateProcesses, targets } from './process';
 import shakeTree from './shakeTree';
 
-function neededFieldNames(procs, data) {
+function resolveDependencies(allProcs, selectedProcs) {
+  const procNames = [];
+
+  // Resolve dependencies.
+  let dependencies = selectedProcs;
+  do {
+    procNames.push(...dependencies);
+    dependencies = [];
+    procNames.forEach((procName) => {
+      const proc = allProcs[procName];
+      if (proc.hasOwnProperty('depends')) {
+        proc.depends.forEach((dependency) => {
+          if (!procNames.includes(dependency) && !dependencies.includes(dependency)) {
+            dependencies.push(dependency);
+          }
+        });
+      }
+    });
+  } while (dependencies.length > 0);
+
+  return procNames.map((procName) => allProcs[procName]);
+}
+
+function neededFieldNames(neededProcs, data) {
   const names = [];
-  procs.forEach((process) => shakeTree(process, names));
+  neededProcs.forEach((process) => shakeTree(process, names));
 
   Object.entries(fields).forEach(([fieldName, field]) => {
     if (field.hasOwnProperty('include')
@@ -71,25 +95,30 @@ function App() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    const residentProcesses = processes[residentState];
-    const birthProcesses = processes[birthState];
+    const residentProcesses = stateProcesses[residentState];
+    const birthProcesses = stateProcesses[birthState];
 
-    const allProcs = {};
+    let allProcs = {};
     allProcs['birth-record'] = birthProcesses['birth-record'];
-    Object.entries(residentProcesses).forEach(([target, proc]) => {
-      allProcs[target] = proc;
-    });
+    allProcs = Object.assign(allProcs, { ...residentProcesses });
+    allProcs = Object.assign(allProcs, { ...federalProcesses });
 
     setAllProcesses(allProcs);
   }, [residentState, birthState]);
 
   function neededFields() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
-    const selectedProcesses = Array.from(checkboxes).map((checkbox) => allProcesses[checkbox.id]);
+    const selectedProcesses = Array.from(checkboxes).map((checkbox) => checkbox.id);
 
-    setNeededProcesses(selectedProcesses);
+    console.log(selectedProcesses);
 
-    const fieldNames = neededFieldNames(selectedProcesses, data);
+    const allNeededProcesses = resolveDependencies(allProcesses, selectedProcesses);
+
+    console.log(allNeededProcesses);
+
+    setNeededProcesses(allNeededProcesses);
+
+    const fieldNames = neededFieldNames(neededProcesses, data);
     return Object.entries(fields)
       .filter(([name]) => fieldNames.includes(name))
       .map(([, field]) => field);
@@ -112,7 +141,7 @@ function App() {
     updateForm();
   }
 
-  const availableStates = Object.keys(processes);
+  const availableStates = Object.keys(stateProcesses);
 
   return (
     <div id="main-form">
@@ -124,6 +153,8 @@ function App() {
             <select
               onChange={(ev) => setResidentState(ev.target.value)}
             >
+
+              <option key="" value="">---</option>
               { availableStates.map((state) => <option key={state} value={state}>{state}</option>)}
             </select>
             {'. '}
@@ -132,6 +163,7 @@ function App() {
             <select
               onChange={(ev) => setBirthState(ev.target.value)}
             >
+              <option key="" value="">---</option>
               { availableStates.map((state) => <option key={state} value={state}>{state}</option>)}
             </select>
             {'. '}

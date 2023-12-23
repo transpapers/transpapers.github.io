@@ -1,4 +1,4 @@
-import { React } from 'react';
+import * as React from 'react';
 
 import {
   StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField,
@@ -26,12 +26,12 @@ export const fields = {
     default: 'Gender transition',
   },
   sealBirthCertificate: {
-    title: (
-      <>
-        I would like to
-        {' '}
-        <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate.</a>
-      </>),
+    title:
+  <>
+    I would like to
+    {' '}
+    <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate.</a>
+  </>,
     subtitle: 'This prevents third parties from accessing your deadname and AGAB.',
     name: 'sealBirthCertificate',
     type: 'boolean',
