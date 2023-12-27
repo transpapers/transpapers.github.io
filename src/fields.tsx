@@ -4,9 +4,19 @@ import {
   StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField,
   TelField, CountyField,
 } from './fieldsHtml';
-import { isMinor } from './person';
+import { Person, isMinor } from './person';
 
-export const fields = {
+export interface Field {
+  title: string | JSX.Element,
+  subtitle?: string | JSX.Element,
+  name: string,
+  type: string, // ENUM
+  default?: any,
+  include?: (applicant: Person) => boolean,
+  options?: string[],
+}
+
+export const fields: { [key: string]: Field } = {
   legalName: {
     title: 'Full legal name',
     subtitle: 'as it appears on your ID',
@@ -142,7 +152,7 @@ export const fields = {
   },
 };
 
-export function renderField(field, state) {
+export function renderField(field: Field, state: string) {
   if (!field || !field.hasOwnProperty('type')) {
     return '';
   }

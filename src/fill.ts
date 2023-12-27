@@ -6,35 +6,37 @@ import html2pdf from 'html2pdf.js';
 import { render } from 'nunjucks';
 
 import { numericalAge } from './util';
-import getCounties from './counties';
+import { Person } from './person';
+import { Process, Document } from './process';
+import { Formfill } from './types';
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
  * @param {PDFDocument} doc
  * @param {Formfill[]} fills
- * @param {Person} data
+ * @param {Person} applicant
  * @return {PDFDocument} Filled PDF document
  */
-function fillForm(doc, fills, data) {
+function fillForm(doc: PDFDocument, fills: Formfill[], applicant: Person): PDFDocument {
   const form = doc.getForm();
   const pages = doc.getPages();
 
   fills.forEach((fill) => {
-    if (fill.field !== undefined) {
+    if ('field' in fill) {
       const field = form.getField(fill.field);
-      if (fill.text !== undefined && field instanceof PDFTextField) {
-        const text = fill.text(data);
+      if ('text' in fill && field instanceof PDFTextField) {
+        const text = fill.text(applicant);
         field.setText(text);
-      } else if (fill.check !== undefined && field instanceof PDFCheckBox) {
-        const checked = fill.check(data);
+      } else if ('check' in fill && field instanceof PDFCheckBox) {
+        const checked = fill.check(applicant);
         if (checked) {
           field.check();
         }
-      } else if (fill.select !== undefined
-                 && fill.check !== undefined
+      } else if ('select' in fill
+                 && 'check' in fill
                  && field instanceof PDFRadioGroup) {
-        const checked = fill.check(data);
-        if (checked) {
+        const checked = fill.check(applicant);
+        if (checked && fill.select !== undefined) {
           field.select(fill.select);
         }
       }
@@ -59,11 +61,13 @@ function fillForm(doc, fills, data) {
       // rather than the usual top left.
       const y = height - (fill.loc.y * scalingFactor) - fontSize;
 
-      if (fill.text !== undefined) {
-        const text = fill.text(data);
-        page.drawText(text, { x, y, size: fontSize });
-      } else if (fill.check !== undefined) {
-        const checked = fill.check(data);
+      if ('text' in fill) {
+        const text = fill.text(applicant);
+        if (text !== undefined) {
+          page.drawText(text, { x, y, size: fontSize });
+        }
+      } else if ('check' in fill) {
+        const checked = fill.check(applicant);
         if (checked) {
           page.drawText('X', { x, y, size: fontSize });
         }
@@ -80,11 +84,11 @@ function fillForm(doc, fills, data) {
 /**
  * Do we still need this?
  */
-async function fetchAndFill(formFilename, fills, data) {
+async function fetchAndFill(formFilename: string, fills: Formfill[], applicant: Person) {
   return fetch(formFilename)
     .then(async (response) => response.arrayBuffer())
     .then(PDFDocument.load)
-    .then((doc) => fillForm(doc, fills, data));
+    .then((doc) => fillForm(doc, fills, applicant));
 }
 
 /**
@@ -92,10 +96,10 @@ async function fetchAndFill(formFilename, fills, data) {
  * @param {Person} data
  * @return {Promise<Uint8Array>} Customized PDF guide
  */
-async function makeGuide(data) {
+async function makeGuide(data: Person): Promise<Uint8Array> {
   // Do any additional variable assignment here.
-  const counties = getCounties(data.residentState);
-  const allData = Object.assign(data, counties[data.county]);
+  const counties = getCounties(data.residentJurisdiction);
+  const allData = Object.assign(data, counties[data.residentCounty]);
 
   const renderedHtml = render('./guide.html.njk', allData);
 
@@ -113,19 +117,19 @@ async function makeGuide(data) {
 /**
  * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
  *
- * @param {Process} process
- * @param {Person} data
+ * @param {Process} processes
+ * @param {Person} applicant
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export default async function fetchAll(processes, data) {
-  const finalData = { ...data };
+export default async function fetchAll(processes: Process[], applicant: Person): Promise<Uint8Array> {
+  const finalApplicant = { ...applicant };
 
-  // Do any additional Data assignment here.
-  if (finalData.birthdate && !finalData.age) {
-    finalData.age = numericalAge(finalData.birthdate);
+  // Do any additional Applicant assignment here.
+  if (finalApplicant.birthdate && !finalApplicant.age) {
+    finalApplicant.age = numericalAge(finalApplicant.birthdate);
   }
 
-  const docs = [];
+  const docs: Document[] = [];
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -137,15 +141,15 @@ export default async function fetchAll(processes, data) {
 
   const allDocuments = await Promise.all(docs
     .filter((doc) => {
-      if (doc.hasOwnProperty('include')) {
-        return doc.include(finalData);
+      if (doc.include !== undefined) {
+        return doc.include(finalApplicant);
       }
 
       return false;
     })
     .map(async (doc) => {
-      if (doc.hasOwnProperty('map')) {
-        return fetchAndFill(`/forms/${doc.filename}`, doc.map, finalData);
+      if (doc.map !== undefined) {
+        return fetchAndFill(`/forms/${doc.filename}`, doc.map, finalApplicant);
       }
 
       return fetch(`/forms/${doc.filename}`)
@@ -153,8 +157,8 @@ export default async function fetchAll(processes, data) {
         .then(PDFDocument.load);
     }));
 
-  if (finalData.age && finalData.county) {
-    const guide = await PDFDocument.load(await makeGuide(finalData));
+  if (finalApplicant.age && finalApplicant.residentCounty) {
+    const guide = await PDFDocument.load(await makeGuide(finalApplicant));
 
     // Append to front
     allDocuments.unshift(guide);
@@ -170,5 +174,6 @@ export default async function fetchAll(processes, data) {
 
   pages.flat()
     .forEach((page) => result.addPage(page));
+
   return result.save();
 }

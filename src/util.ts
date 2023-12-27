@@ -1,3 +1,5 @@
+import { Name, DateFormat, DateFormatPart } from './types';
+
 /**
  * Calculate a person's numerical age from their birthdate, as a string.
  * Since a "date of birth" is a legal fiction and not a timestamp, we can do
@@ -5,7 +7,7 @@
  * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
  * @return {number}
  */
-export function numericalAge(birthdate) {
+export function numericalAge(birthdate: string): number {
   if (!birthdate) {
     return Infinity;
   }
@@ -33,7 +35,7 @@ export function numericalAge(birthdate) {
  * @param {DateFormat} fmt - Ugh
  * @return {string}
  */
-export function formatDate(date, fmt) {
+export function formatDate(date: string, fmt: DateFormat): string {
   if (!date || !fmt) {
     return '';
   }
@@ -43,15 +45,15 @@ export function formatDate(date, fmt) {
   const day = Number.parseInt(date.substring(8), 10);
 
   return fmt.format.map((part) => {
-    if (part === 'month') {
+    if (part === DateFormatPart.MONTH) {
       return month;
     }
 
-    if (part === 'day') {
+    if (part === DateFormatPart.DAY) {
       return day;
     }
 
-    if (part === 'year') {
+    if (part === DateFormatPart.YEAR) {
       return year;
     }
 
@@ -59,19 +61,19 @@ export function formatDate(date, fmt) {
   }).join(fmt.separator);
 }
 
-export function phoneAreaCode(phoneNumber) {
+export function phoneAreaCode(phoneNumber: string): string {
   if (!phoneNumber) { return ''; }
   return phoneNumber.substring(0, 4);
 }
 
 /** Split phone number into first three digits */
-export function phoneStart(phoneNumber) {
+export function phoneStart(phoneNumber: string): string {
   if (!phoneNumber) { return ''; }
   return phoneNumber.substring(4, 7);
 }
 
 /** Split phone number into last 4 digits */
-export function phoneEnd(phoneNumber) {
+export function phoneEnd(phoneNumber: string): string {
   if (!phoneNumber) { return ''; }
   return phoneNumber.substring(7);
 }
@@ -81,7 +83,7 @@ export function phoneEnd(phoneNumber) {
  * @param {Name} name
  * @return {string}
  */
-export function fullName(name) {
+export function fullName(name: Name): string {
   if (!name) { return ''; }
   return [name.first, name.middle, name.last, name.suffix].filter((n) => n && n.length > 0).join(' ');
 }

@@ -1,4 +1,6 @@
-const michiganCounties = {
+import { County } from '../../county';
+
+const michiganCounties: { [key: string]: County } = {
   Alcona: {
     court: {
       address: '106 5th Street, Harrisville MI 48740',
@@ -1905,9 +1907,4 @@ const michiganCounties = {
   },
 };
 
-export default function getCounties(state) {
-  if (state === 'Michigan') {
-    return michiganCounties;
-  }
-  return undefined;
-}
+export default michiganCounties;

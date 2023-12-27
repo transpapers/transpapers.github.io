@@ -1,6 +1,13 @@
 import { sampleData } from './person';
 
-export default function shakeTree(object, accessed = []) {
+/**
+ * Determine the properties of a `Person` accessed by `object`.
+ *
+ * @remarks TODO is there a way to do this with just the interface?
+ *
+ * TODO Better documentation. Typing?
+ */
+export default function shakeTree(object: any, accessed: string[] = []) {
   const recursePropertyNames = ['documents', 'map'];
 
   const functionPropertyNames = ['include', 'text', 'check'];
@@ -9,7 +16,7 @@ export default function shakeTree(object, accessed = []) {
     // Handle nested properties correctly.
     // cf. https://stackoverflow.com/questions/41299642/
 
-    get(target, prop) {
+    get(target: any, prop: string) {
       if (prop === 'isProxy') {
         return true;
       }

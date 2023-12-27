@@ -6,27 +6,15 @@ module.exports = {
   },
   extends: [
     'airbnb',
+    'airbnb-typescript',
     'airbnb/hooks',
   ],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-  ],
   parserOptions: {
+    project: './tsconfig.json',
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   rules: {
     'no-prototype-builtins': 'off',
-    'react/prop-types': 'off',
   },
 };

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import getCounties from './counties';
+import { Field } from './fields';
 
-function GenericField({ name, title, subtitle }, innards) {
+function GenericField({ name, title, subtitle }: Field, innards: JSX.Element): JSX.Element {
   return (
     <label key={name} htmlFor={name}>
       <div>
@@ -16,7 +16,15 @@ function GenericField({ name, title, subtitle }, innards) {
   );
 }
 
-export function StringField({ field }) {
+interface FieldConstructorProps {
+  field: Field
+}
+
+interface CountyFieldConstructorProps {
+  state: string
+}
+
+export function StringField({ field }: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
       id={field.name}
@@ -29,7 +37,7 @@ export function StringField({ field }) {
   return GenericField(field, innards);
 }
 
-export function CheckboxField({ field }) {
+export function CheckboxField({ field }: FieldConstructorProps): JSX.Element {
   return (
     <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
@@ -48,13 +56,14 @@ export function CheckboxField({ field }) {
   );
 }
 
-export function OptionField({ field }) {
+export function OptionField({ field }: FieldConstructorProps): JSX.Element {
+  const options = field.options || [];
   return (
     <fieldset>
       <legend>{field.title}</legend>
 
-      {field.options.map((value) => (
-        <label htmlFor={`${field.name}:${value}`}>
+      {options.map((value) => (
+        <label key={`${field.name}:${value}`} htmlFor={`${field.name}:${value}`}>
           <input
             id={`${field.name}:${value}`}
             name={field.name}
@@ -68,21 +77,22 @@ export function OptionField({ field }) {
   );
 }
 
-export function SelectField({ field }) {
+export function SelectField({ field }: FieldConstructorProps) {
+  const options = field.options || [];
   const innards = (
     <select
       name={field.name}
       id={field.name}
     >
-      <option value="">---</option>
-      {field.options.map((value) => <option key={value} value={value}>{value}</option>)}
+      <option key="" value="">---</option>
+      {options.map((value) => <option key={value} value={value}>{value}</option>)}
     </select>
   );
 
   return GenericField(field, innards);
 }
 
-export function NameField({ field }) {
+export function NameField({ field }: FieldConstructorProps) {
   // FIXME Do this automatically, Sasha, you slut.
   const keys = ['first', 'middle', 'last', 'suffix'];
   const innards = (
@@ -92,11 +102,12 @@ export function NameField({ field }) {
       {keys.map((key) => (
         <div key={key} className="subfield">
           <input
+            key={`${field.name}:${key}-input`}
             id={`${field.name}:${key}`}
             name={`${field.name}:${key}`}
-            size="1"
+            size={1}
           />
-          <label htmlFor={`${field.name}:${key}`}>{key}</label>
+          <label key={`${field.name}:${key}-label`} htmlFor={`${field.name}:${key}`}>{key}</label>
         </div>
       ))}
     </div>
@@ -105,7 +116,7 @@ export function NameField({ field }) {
   return GenericField(field, innards);
 }
 
-export function NumberField({ field }) {
+export function NumberField({ field }: FieldConstructorProps) {
   const innards = (
     <input
       id={field.name}
@@ -118,7 +129,7 @@ export function NumberField({ field }) {
   return GenericField(field, innards);
 }
 
-export function EmailField({ field }) {
+export function EmailField({ field }: FieldConstructorProps) {
   const innards = (
     <input
       id={field.name}
@@ -131,7 +142,7 @@ export function EmailField({ field }) {
   return GenericField(field, innards);
 }
 
-export function DateField({ field }) {
+export function DateField({ field }: FieldConstructorProps) {
   const innards = (
     <input
       id={field.name}
@@ -144,7 +155,7 @@ export function DateField({ field }) {
   return GenericField(field, innards);
 }
 
-export function TelField({ field }) {
+export function TelField({ field }: FieldConstructorProps) {
   const innards = (
     <input
       id={field.name}
@@ -157,15 +168,16 @@ export function TelField({ field }) {
   return GenericField(field, innards);
 }
 
-export function CountyField({ state }) {
-  const counties = getCounties(state);
+export function CountyField({ jurisdiction }: CountyFieldConstructorProps) {
+  // const counties = getCounties();
   if (!counties) {
     return '';
   }
 
-  const field = {
+  const field: Field = {
     name: 'county',
     title: 'County',
+    type: 'select',
     options: Object.keys(counties),
   };
 
