@@ -33,7 +33,11 @@ export const michiganNameChange: Process = {
       name: 'Minor\'s Consent to Name Change',
       id: 'PC 51b',
       filename: 'pc51b.pdf',
-      include: (applicant) => (applicant.age !== undefined && applicant.age >= 14 && applicant.age < 18),
+      include: (applicant) => (
+        applicant.age !== undefined
+        && applicant.age >= 14
+        && applicant.age < 18
+      ),
     },
     {
       name: 'Publication of Notice of Hearing Regarding Petition for Name Change',

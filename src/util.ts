@@ -1,4 +1,5 @@
 import { Name, DateFormat, DateFormatPart } from './types';
+import { Person } from './person';
 
 /**
  * Calculate a person's numerical age from their birthdate, as a string.
@@ -35,7 +36,7 @@ export function numericalAge(birthdate: string): number {
  * @param {DateFormat} fmt - Ugh
  * @return {string}
  */
-export function formatDate(date: string, fmt: DateFormat): string {
+export function formatDate(date: string | undefined, fmt: DateFormat): string {
   if (!date || !fmt) {
     return '';
   }
@@ -61,19 +62,19 @@ export function formatDate(date: string, fmt: DateFormat): string {
   }).join(fmt.separator);
 }
 
-export function phoneAreaCode(phoneNumber: string): string {
+export function phoneAreaCode(phoneNumber: string | undefined): string {
   if (!phoneNumber) { return ''; }
   return phoneNumber.substring(0, 4);
 }
 
 /** Split phone number into first three digits */
-export function phoneStart(phoneNumber: string): string {
+export function phoneStart(phoneNumber: string | undefined): string {
   if (!phoneNumber) { return ''; }
   return phoneNumber.substring(4, 7);
 }
 
 /** Split phone number into last 4 digits */
-export function phoneEnd(phoneNumber: string): string {
+export function phoneEnd(phoneNumber: string | undefined): string {
   if (!phoneNumber) { return ''; }
   return phoneNumber.substring(7);
 }
@@ -83,7 +84,53 @@ export function phoneEnd(phoneNumber: string): string {
  * @param {Name} name
  * @return {string}
  */
-export function fullName(name: Name): string {
+export function fullName(name: Name | undefined): string {
   if (!name) { return ''; }
   return [name.first, name.middle, name.last, name.suffix].filter((n) => n && n.length > 0).join(' ');
+}
+
+/**
+* Determine whether a person is a minor (i.e., under 18.)
+* @param {Person} applicant
+* @return {boolean}
+*/
+export function isMinor(applicant: Person): boolean {
+  if (!applicant || applicant.birthdate === undefined) { return false; }
+  return numericalAge(applicant.birthdate) < 18;
+}
+
+/**
+ * Return the legal name of a person's legal representative (themself or their
+ * parent/guardian) from the given `data`.
+ * @param {Person} applicant
+ * @return {Name}
+ */
+export function representativeName(applicant: Person): Name {
+  if (!isMinor(applicant) && applicant.legalName) {
+    return applicant.legalName;
+  }
+
+  if (applicant.representativeName) {
+    return applicant.representativeName;
+  }
+
+  return {
+    first: '', middle: '', last: '', suffix: '',
+  };
+}
+
+/**
+ * Return a person's full contact info, i.e., full name, street address, and phone.
+ * @param {Person} applicant
+ * @return {string}
+ */
+export function fullContactInfo(applicant: Person, separator = '\n'): string {
+  const lines = [
+    fullName(representativeName(applicant)),
+    applicant.streetAddress,
+    `${applicant.residentCity}, ${applicant.residentJurisdiction} ${applicant.zip}`,
+    applicant.phone,
+  ];
+
+  return lines.join(separator);
 }

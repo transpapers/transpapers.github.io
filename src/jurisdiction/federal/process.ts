@@ -1,5 +1,7 @@
 import { Process, Target } from '../../process';
-import { ssnMap, ds5504Map, ds82Map, ds11Map } from './maps';
+import {
+  ssnMap, ds5504Map, ds82Map, ds11Map,
+} from './maps';
 
 export const socialSecurity: Process = {
   target: Target.SocialSecurity,

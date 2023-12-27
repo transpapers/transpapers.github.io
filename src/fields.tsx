@@ -4,17 +4,8 @@ import {
   StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField,
   TelField, CountyField,
 } from './fieldsHtml';
-import { Person, isMinor } from './person';
-
-export interface Field {
-  title: string | JSX.Element,
-  subtitle?: string | JSX.Element,
-  name: string,
-  type: string, // ENUM
-  default?: any,
-  include?: (applicant: Person) => boolean,
-  options?: string[],
-}
+import { isMinor } from './util';
+import { Field } from './field';
 
 export const fields: { [key: string]: Field } = {
   legalName: {
@@ -68,14 +59,14 @@ export const fields: { [key: string]: Field } = {
     title: 'Sex assigned at birth',
     name: 'birthSex',
     type: 'option',
-    options: ['M', 'F', 'X'],
+    options: { M: 'M', F: 'F', X: 'X' },
   },
   gender: {
     title: 'Gender',
     subtitle: 'as it will appear on your ID',
     name: 'gender',
     type: 'option',
-    options: ['M', 'F', 'X'],
+    options: { M: 'M', F: 'F', X: 'X' },
   },
   doNotPublish: {
     title: 'I have good cause not to publish notice of my name change proceeding.',
@@ -150,9 +141,19 @@ export const fields: { [key: string]: Field } = {
     type: 'Name',
     include: (data) => isMinor(data),
   },
+  passport: {
+    title: 'Passport status',
+    name: 'passport',
+    type: 'select',
+    options: {
+      ds5504: 'Passport undamaged and issued within last 12 months',
+      ds82: 'Passport undamaged and issued at age 16+ within last 15 years',
+      ds11: 'None of the above',
+    },
+  },
 };
 
-export function renderField(field: Field, state: string) {
+export function renderField(field: Field, jurisdiction: string) {
   if (!field || !field.hasOwnProperty('type')) {
     return '';
   }
@@ -174,7 +175,7 @@ export function renderField(field: Field, state: string) {
   } if (field.type === 'tel') {
     return <TelField field={field} />;
   } if (field.type === 'county') {
-    return <CountyField state={state} />;
+    return <CountyField jurisdiction={jurisdiction} />;
   }
 
   return '';

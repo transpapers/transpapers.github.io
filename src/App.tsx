@@ -1,38 +1,48 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { Field, fields, renderField } from './fields';
+import { Field } from './field';
+import { fields, renderField } from './fields';
 import fetchAll from './fill';
+import { allJurisdictions, getJurisdiction } from './jurisdiction/all';
 import { Person } from './person';
-import {
-  Target, Process, federalProcesses, stateProcesses, targets,
-} from './process';
+import { Target, Process, targets } from './process';
 import shakeTree from './shakeTree';
 
 /**
  * Pull in any needed dependencies of the selected processes.
  */
-function resolveDependencies(allProcs: {[key: string]: Process}, selectedProcs: Target[]): Process[] {
-  const procNames: Target[] = [];
+function resolveDependencies(
+  allProcs: { [key in Target]?: Process },
+  selectedProcs: Target[],
+): Process[] {
+  const allTargets: Set<Target> = new Set();
 
   // Resolve dependencies.
-  let dependencies = selectedProcs;
+  let newTargets: Set<Target> = new Set(selectedProcs);
   do {
-    procNames.push(...dependencies);
-    dependencies = [];
-    procNames.forEach((procName) => {
-      const proc = allProcs[procName];
-      if (proc.depends !== undefined) {
-        proc.depends.forEach((dependency) => {
-          if (!procNames.includes(dependency) && !dependencies.includes(dependency)) {
-            dependencies.push(dependency);
+    newTargets.forEach((dep) => allTargets.add(dep));
+
+    const currentTargets = [...allTargets].reduce((list, target) => {
+      const deps = allProcs[target]?.depends;
+      if (deps !== undefined) {
+        deps.forEach((thisDep) => {
+          if (!allTargets.has(thisDep)) {
+            list.push(thisDep);
           }
         });
       }
-    });
-  } while (dependencies.length > 0);
+      return list;
+    }, [] as Target[]);
 
-  return procNames.map((procName) => allProcs[procName]);
+    newTargets = new Set(currentTargets);
+  } while (newTargets.size > 0);
+
+  const procs: Process[] = [...allTargets]
+    .map((target) => allProcs[target])
+    .filter((proc: Process | undefined): proc is Process => !!proc);
+
+  return procs;
 }
 
 /**
@@ -108,8 +118,9 @@ function App() {
 
   // Step 2: generate allProcs from [birthJurisdiction, residentJurisdiction].
   useEffect(() => {
-    const residentProcesses = stateProcesses[residentJurisdiction];
-    const birthProcesses = stateProcesses[birthJurisdiction];
+    const residentProcesses = getJurisdiction(residentJurisdiction)?.processes ?? {};
+    const birthProcesses = getJurisdiction(birthJurisdiction)?.processes ?? {};
+    const federalProcesses = getJurisdiction('Federal')?.processes ?? {};
 
     let allProcs: { [key in Target]?: Process } = {};
     allProcs[Target.BirthRecord] = birthProcesses[Target.BirthRecord];
@@ -120,23 +131,24 @@ function App() {
   }, [residentJurisdiction, birthJurisdiction]);
 
   // Step 3: Generate form fields from selected processes.
-  function neededFields() {
+  function updateNeededProcesses() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
-    const selectedProcesses = Array.from(checkboxes).map((checkbox) => checkbox.id);
+    const selectedProcesses = Array.from(checkboxes)
+      .map((checkbox) => checkbox.id as Target);
 
     const allNeededProcesses = resolveDependencies(allProcesses, selectedProcesses);
 
     setNeededProcesses(allNeededProcesses);
+  }
 
+  useEffect(() => {
     const fieldNames = neededFieldNames(neededProcesses, data);
-    return Object.entries(fields)
+    const neededFields = Object.entries(fields)
       .filter(([name]) => fieldNames.includes(name))
       .map(([, field]) => field);
-  }
 
-  function updateForm() {
-    setVisibleFields(neededFields());
-  }
+    setVisibleFields(neededFields);
+  }, [neededProcesses, data]);
 
   // Step 3b: Generate dataToUse from filled form data.
   function handleFormChange(ev: React.ChangeEvent<HTMLFormElement>) {
@@ -148,10 +160,11 @@ function App() {
 
     setData(dataToUse);
     setModified(true);
-    updateForm();
   }
 
-  const availableStates = Object.keys(stateProcesses);
+  const availableJurisdictions = allJurisdictions
+    .filter((jurisdiction) => !jurisdiction.isFederal)
+    .map((jurisdiction) => jurisdiction.name);
 
   return (
     <div id="main-form">
@@ -164,7 +177,9 @@ function App() {
               onChange={(ev) => setResidentJurisdiction(ev.target.value)}
             >
               <option key="" value="">---</option>
-              { availableStates.map((state) => <option key={state} value={state}>{state}</option>)}
+              { availableJurisdictions.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
             </select>
             {'. '}
             I was born in
@@ -172,8 +187,9 @@ function App() {
             <select
               onChange={(ev) => setBirthJurisdiction(ev.target.value)}
             >
-              <option key="" value="">---</option>
-              { availableStates.map((state) => <option key={state} value={state}>{state}</option>)}
+              { availableJurisdictions.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
             </select>
             {'. '}
             <br />
@@ -184,12 +200,12 @@ function App() {
           <fieldset id="processes">
             <legend>I need to...</legend>
             <ul>
-              { Object.entries(targets).map(([name, description]) => (
-                <li key={name}>
-                  <input type="checkbox" id={name} name={name} onChange={updateForm} />
-                  <span>{description}</span>
+              { Object.values(Target).map((value) => (
+                <li key={value}>
+                  <input type="checkbox" id={value} name={value} onChange={updateNeededProcesses} />
+                  <span>{targets[value]}</span>
                 </li>
-              )) }
+              ))}
             </ul>
           </fieldset>
         </li>

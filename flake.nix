@@ -20,7 +20,7 @@
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ nodePackages.eslint node2nix nodejs pnpm yarn ];
+          packages = with pkgs; [ nodePackages.eslint node2nix nodejs pnpm yarn typescript ];
         };
       });
     };

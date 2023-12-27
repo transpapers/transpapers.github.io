@@ -1,6 +1,8 @@
-import { formatDate, fullName } from '../../util';
-import { fullContactInfo, isMinor, representativeName } from '../../person';
-import { GenderMarker, Formfill } from '../../types';
+import {
+  formatDate, fullContactInfo, fullName, isMinor, representativeName,
+} from '../../util';
+import { GenderMarker, DateFormatPart as DATE } from '../../types';
+import { Formfill } from '../../formfill';
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
@@ -21,19 +23,19 @@ export const nameChangeMap: Formfill[] = [
   { text: (applicant) => ((isMinor(applicant) && applicant.parentsAreOkay) ? fullName(applicant.fathersBirthName) : ''), field: 'and' },
   { text: (applicant) => applicant.reasonForNameChange, field: '3 The name change is for the following reason' },
 
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName.first), field: 'First' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName.middle), field: 'Middle' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName.last), field: 'Last' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName.first), field: 'First_2' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName.middle), field: 'Middle_2' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName.last), field: 'Last_2' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName?.first ?? ''), field: 'First' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName?.middle ?? ''), field: 'Middle' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName?.last ?? ''), field: 'Last' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName?.first ?? ''), field: 'First_2' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName?.middle ?? ''), field: 'Middle_2' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName?.last ?? ''), field: 'Last_2' },
 
-  { text: (applicant) => (isMinor(applicant) ? applicant.legalName.first : ''), field: 'First_5' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.legalName.middle : ''), field: 'Middle_5' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.legalName.last : ''), field: 'Last_5' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName.first : ''), field: 'First_6' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName.middle : ''), field: 'Middle_6' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName.last : ''), field: 'Last_6' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.legalName?.first ?? '' : ''), field: 'First_5' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.legalName?.middle ?? '' : ''), field: 'Middle_5' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.legalName?.last ?? '' : ''), field: 'Last_5' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName?.first ?? '' : ''), field: 'First_6' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName?.middle ?? '' : ''), field: 'Middle_6' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName?.last ?? '' : ''), field: 'Last_6' },
 
   { check: (applicant) => applicant.sealBirthCertificate, field: '9 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the name of' },
   { text: (applicant) => (applicant.sealBirthCertificate ? fullName(applicant.legalName) : ''), field: 'Name_2' },
@@ -55,19 +57,19 @@ export const nameChangePrivateMap: Formfill[] = [
   { text: (applicant) => ((isMinor(applicant) && applicant.parentsAreOkay) ? fullName(applicant.fathersBirthName) : ''), field: 'and' },
   { text: (applicant) => applicant.reasonForNameChange, field: '3 The name change is for the following reason' },
 
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName.first), field: 'First' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName.middle), field: 'Middle' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName.last), field: 'Last' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName.first), field: 'First_2' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName.middle), field: 'Middle_2' },
-  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName.last), field: 'Last_2' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName?.first ?? ''), field: 'First' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName?.middle ?? ''), field: 'Middle' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.legalName?.last ?? ''), field: 'Last' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName?.first ?? ''), field: 'First_2' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName?.middle ?? ''), field: 'Middle_2' },
+  { text: (applicant) => (isMinor(applicant) ? '' : applicant.chosenName?.last ?? ''), field: 'Last_2' },
 
-  { text: (applicant) => (isMinor(applicant) ? applicant.legalName.first : ''), field: 'First_5' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.legalName.middle : ''), field: 'Middle_5' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.legalName.last : ''), field: 'Last_5' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName.first : ''), field: 'First_6' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName.middle : ''), field: 'Middle_6' },
-  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName.last : ''), field: 'Last_6' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.legalName?.first ?? '' : ''), field: 'First_5' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.legalName?.middle ?? '' : ''), field: 'Middle_5' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.legalName?.last ?? '' : ''), field: 'Last_5' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName?.first ?? '' : ''), field: 'First_6' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName?.middle ?? '' : ''), field: 'Middle_6' },
+  { text: (applicant) => (isMinor(applicant) ? applicant.chosenName?.last ?? '' : ''), field: 'Last_6' },
 
   { check: (applicant) => applicant.sealBirthCertificate, field: '9 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the name of' },
   { text: (applicant) => (applicant.sealBirthCertificate ? fullName(applicant.legalName) : ''), field: 'Name_2' },
@@ -84,7 +86,7 @@ export const piiMap: Formfill[] = [
   { text: (applicant) => (applicant.doNotPublish ? 'PC 51c' : 'PC 51'), field: 'Name of formdocument that this MC 97a is being filed with 1' },
   { text: (applicant) => `${fullName(representativeName(applicant))} ${new Date().toLocaleDateString()}`, field: 'Name of formdocument that this MC 97a is being filed with 2' },
   { text: (applicant) => fullName(applicant.legalName), field: 'Name' },
-  { text: (applicant) => formatDate(applicant.birthdate, { format: ['month', 'day', 'year'], separator: '/' }), field: 'DOB' },
+  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), field: 'DOB' },
 ];
 
 /**
@@ -131,15 +133,15 @@ export const feeWaiverMap: Formfill[] = [
  */
 export const birthCertMap: Formfill[] = [
   {
-    text: (applicant) => (isMinor(applicant) ? representativeName(applicant).first : applicant.chosenName.first),
+    text: (applicant) => (isMinor(applicant) ? representativeName(applicant).first : applicant.chosenName?.first ?? ''),
     loc: { x: 48, y: 196 },
   },
   {
-    text: (applicant) => (isMinor(applicant) ? representativeName(applicant).middle : applicant.chosenName.middle),
+    text: (applicant) => (isMinor(applicant) ? representativeName(applicant).middle : applicant.chosenName?.middle ?? ''),
     loc: { x: 337, y: 196 },
   },
   {
-    text: (applicant) => (isMinor(applicant) ? representativeName(applicant).last : applicant.chosenName.last),
+    text: (applicant) => (isMinor(applicant) ? representativeName(applicant).last : applicant.chosenName?.last ?? ''),
     loc: { x: 588, y: 196 },
   },
   { text: (applicant) => applicant.streetAddress, loc: { x: 48, y: 237 } },
@@ -150,7 +152,7 @@ export const birthCertMap: Formfill[] = [
   { text: (applicant) => fullName(applicant.legalName), loc: { x: 48, y: 541 } },
   { text: (applicant) => fullName(applicant.legalName), loc: { x: 56, y: 800 } },
   { text: (applicant) => fullName(applicant.chosenName), loc: { x: 433, y: 800 } },
-  { text: (applicant) => formatDate(applicant.birthdate, { format: ['month', 'day', 'year'], separator: '/' }), loc: { x: 534, y: 541 } },
+  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), loc: { x: 534, y: 541 } },
   { text: (applicant) => `${applicant.birthCity}, ${applicant.birthJurisdiction}`, loc: { x: 249, y: 636 } },
   { text: (applicant) => fullName(applicant.mothersBirthName), loc: { x: 48, y: 710 } },
   { text: (applicant) => applicant.mothersBirthdate, loc: { x: 554, y: 710 } },
@@ -171,14 +173,14 @@ export const birthCertMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const mdosSexMap: Formfill[] = [
-  { text: (applicant) => applicant.legalName.last, loc: { x: 57, y: 388 } },
-  { text: (applicant) => applicant.legalName.first, loc: { x: 351, y: 388 } },
-  { text: (applicant) => applicant.legalName.middle, loc: { x: 600, y: 388 } },
-  { text: (applicant) => applicant.legalName.suffix || '', loc: { x: 750, y: 388 } },
+  { text: (applicant) => applicant.legalName?.last ?? '', loc: { x: 57, y: 388 } },
+  { text: (applicant) => applicant.legalName?.first ?? '', loc: { x: 351, y: 388 } },
+  { text: (applicant) => applicant.legalName?.middle ?? '', loc: { x: 600, y: 388 } },
+  { text: (applicant) => applicant.legalName?.suffix ?? '', loc: { x: 750, y: 388 } },
   { text: (applicant) => applicant.streetAddress, loc: { x: 57, y: 441 } },
   { text: (applicant) => applicant.residentCity, loc: { x: 351, y: 441 } },
   { text: (applicant) => applicant.zip, loc: { x: 701, y: 441 } },
-  { text: (applicant) => formatDate(applicant.birthdate, { format: ['month', 'day', 'year'], separator: '/' }), loc: { x: 351, y: 489 } },
+  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), loc: { x: 351, y: 489 } },
   { text: (applicant) => fullName(applicant.legalName), loc: { x: 67, y: 555 } },
   { check: (applicant) => applicant.gender === GenderMarker.F, field: 'ChoiceA', select: 'Choice1' },
   { check: (applicant) => applicant.gender === GenderMarker.M, field: 'ChoiceA', select: 'Choice2' },
@@ -192,7 +194,7 @@ export const mdosSexMap: Formfill[] = [
  */
 export const miSexMap: Formfill[] = [
   { text: (applicant) => fullName(applicant.legalName), loc: { x: 151, y: 299 } },
-  { text: (applicant) => formatDate(applicant.birthdate, { format: ['month', 'day', 'year'], separator: '/' }), loc: { x: 193, y: 367 } },
+  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), loc: { x: 193, y: 367 } },
   { text: (applicant) => (applicant.assignedSex === GenderMarker.M ? 'X' : ''), loc: { x: 159, y: 539 } },
   { text: (applicant) => (applicant.assignedSex === GenderMarker.F ? 'X' : ''), loc: { x: 159, y: 559 } },
   { text: (applicant) => (applicant.assignedSex === GenderMarker.X ? 'X' : ''), loc: { x: 159, y: 579 } },

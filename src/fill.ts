@@ -8,7 +8,8 @@ import { render } from 'nunjucks';
 import { numericalAge } from './util';
 import { Person } from './person';
 import { Process, Document } from './process';
-import { Formfill } from './types';
+import { Formfill } from './formfill';
+import { getJurisdiction } from './jurisdiction/all';
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -92,16 +93,30 @@ async function fetchAndFill(formFilename: string, fills: Formfill[], applicant: 
 }
 
 /**
- * Generate the guide as a PDF ArrayBuffer from the given `data`.
- * @param {Person} data
+ * Generate the guide as a PDF ArrayBuffer from the given `applicant`.
+ * @param {Person} applicant
  * @return {Promise<Uint8Array>} Customized PDF guide
  */
-async function makeGuide(data: Person): Promise<Uint8Array> {
-  // Do any additional variable assignment here.
-  const counties = getCounties(data.residentJurisdiction);
-  const allData = Object.assign(data, counties[data.residentCounty]);
+async function makeGuide(applicant: Person): Promise<Uint8Array | undefined> {
+  const jurisdiction = applicant.residentJurisdiction ?? '';
+  const jurisdictionObj = getJurisdiction(jurisdiction);
+  if (!jurisdictionObj) {
+    return undefined;
+  }
 
-  const renderedHtml = render('./guide.html.njk', allData);
+  const { counties } = jurisdictionObj;
+  if (!counties) {
+    return undefined;
+  }
+
+  const residentCounty = counties[applicant.residentCounty ?? ''];
+  if (!residentCounty) {
+    return undefined;
+  }
+
+  const applicantWithCountyInfo = Object.assign(applicant, residentCounty);
+
+  const renderedHtml = render('./guide.html.njk', applicantWithCountyInfo);
 
   const pdf = await html2pdf()
     .set({
@@ -121,7 +136,10 @@ async function makeGuide(data: Person): Promise<Uint8Array> {
  * @param {Person} applicant
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export default async function fetchAll(processes: Process[], applicant: Person): Promise<Uint8Array> {
+export default async function fetchAll(
+  processes: Process[],
+  applicant: Person,
+): Promise<Uint8Array> {
   const finalApplicant = { ...applicant };
 
   // Do any additional Applicant assignment here.
@@ -158,10 +176,11 @@ export default async function fetchAll(processes: Process[], applicant: Person):
     }));
 
   if (finalApplicant.age && finalApplicant.residentCounty) {
-    const guide = await PDFDocument.load(await makeGuide(finalApplicant));
-
-    // Append to front
-    allDocuments.unshift(guide);
+    const guide = await makeGuide(finalApplicant);
+    if (guide) {
+      // Append to front
+      allDocuments.unshift(await PDFDocument.load(guide));
+    }
   }
 
   const result = await PDFDocument.create();

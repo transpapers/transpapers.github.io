@@ -7,7 +7,7 @@ import { sampleData } from './person';
  *
  * TODO Better documentation. Typing?
  */
-export default function shakeTree(object: any, accessed: string[] = []) {
+export default function shakeTree(obj: any, accessed: string[] = []) {
   const recursePropertyNames = ['documents', 'map'];
 
   const functionPropertyNames = ['include', 'text', 'check'];
@@ -41,25 +41,27 @@ export default function shakeTree(object: any, accessed: string[] = []) {
     },
   };
 
-  recursePropertyNames.forEach((name) => {
-    if (Object.prototype.hasOwnProperty.call(object, name)) {
-      const subobject = object[name];
-      if (Array.isArray(subobject)) {
-        subobject.forEach((item) => shakeTree(item, accessed));
-      } else {
-        shakeTree(subobject, accessed);
+  if (obj) {
+    recursePropertyNames.forEach((name) => {
+      if (Object.prototype.hasOwnProperty.call(obj, name)) {
+        const subobj = obj[name];
+        if (Array.isArray(subobj)) {
+          subobj.forEach((item) => shakeTree(item, accessed));
+        } else {
+          shakeTree(subobj, accessed);
+        }
       }
-    }
-  });
+    });
 
-  functionPropertyNames.forEach((name) => {
-    if (Object.prototype.hasOwnProperty.call(object, name)) {
-      const func = object[name];
-      const proxiedDummy = new Proxy(sampleData, handler);
+    functionPropertyNames.forEach((name) => {
+      if (Object.prototype.hasOwnProperty.call(obj, name)) {
+        const func = obj[name];
+        const proxiedDummy = new Proxy(sampleData, handler);
 
-      func(proxiedDummy);
-    }
-  });
+        func(proxiedDummy);
+      }
+    });
+  }
 
   return accessed;
 }

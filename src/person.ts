@@ -1,5 +1,3 @@
-import { fullName, numericalAge } from './util';
-
 import { Name, GenderMarker } from './types';
 
 /**
@@ -185,52 +183,6 @@ export interface Person {
   passport?: string,
 }
 
-/**
-* Determine whether a person is a minor (i.e., under 18.)
-* @param {Person} applicant
-* @return {boolean}
-*/
-export function isMinor(applicant: Person): boolean {
-  if (!applicant || applicant.birthdate === undefined) { return false; }
-  return numericalAge(applicant.birthdate) < 18;
-}
-
-/**
- * Return the legal name of a person's legal representative (themself or their
- * parent/guardian) from the given `data`.
- * @param {Person} applicant
- * @return {Name}
- */
-export function representativeName(applicant: Person): Name {
-  if (!isMinor(applicant) && applicant.legalName) {
-    return applicant.legalName;
-  }
-
-  if (applicant.representativeName) {
-    return applicant.representativeName;
-  }
-
-  return {
-    first: '', middle: '', last: '', suffix: '',
-  };
-}
-
-/**
- * Return a person's full contact info, i.e., full name, street address, and phone.
- * @param {Person} applicant
- * @return {string}
- */
-export function fullContactInfo(applicant: Person, separator = '\n'): string {
-  const lines = [
-    fullName(representativeName(applicant)),
-    applicant.streetAddress,
-    `${applicant.residentCity}, ${applicant.residentJurisdiction} ${applicant.zip}`,
-    applicant.phone,
-  ];
-
-  return lines.join(separator);
-}
-
 // This should come in handy for documentation purposes.
 /**
  * @type {Person}
@@ -297,4 +249,6 @@ export const sampleData: Person = {
     last: 'Doe',
     suffix: 'Sr.',
   },
+
+  passport: 'ds11',
 };
