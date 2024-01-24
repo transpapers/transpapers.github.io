@@ -83,63 +83,23 @@ function fillForm(doc: PDFDocument, fills: Formfill[], applicant: Person): PDFDo
 }
 
 /**
- * Do we still need this?
- */
-async function fetchAndFill(formFilename: string, fills: Formfill[], applicant: Person) {
-  return fetch(formFilename)
-    .then(async (response) => response.arrayBuffer())
-    .then(PDFDocument.load)
-    .then((doc) => fillForm(doc, fills, applicant));
-}
-
-/**
- * Generate the guide as a PDF ArrayBuffer from the given `applicant`.
- * @param {Person} applicant
- * @return {Promise<Uint8Array>} Customized PDF guide
- */
-async function makeGuide(applicant: Person): Promise<Uint8Array | undefined> {
-  const jurisdiction = applicant.residentJurisdiction ?? '';
-  const jurisdictionObj = getJurisdiction(jurisdiction);
-  if (!jurisdictionObj) {
-    return undefined;
-  }
-
-  const { counties } = jurisdictionObj;
-  if (!counties) {
-    return undefined;
-  }
-
-  const residentCounty = counties[applicant.residentCounty ?? ''];
-  if (!residentCounty) {
-    return undefined;
-  }
-
-  const applicantWithCountyInfo = Object.assign(applicant, residentCounty);
-
-  const renderedHtml = render('./guide.html.njk', applicantWithCountyInfo);
-
-  const pdf = await html2pdf()
-    .set({
-      pagebreak: {
-        mode: ['avoid-all'],
-      },
-      margin: 10,
-    }).from(renderedHtml).outputPdf('arraybuffer');
-
-  return pdf;
-}
-
-/**
  * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
  *
  * @param {Process} processes
  * @param {Person} applicant
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export default async function fetchAll(
+export default async function makeFinalDocument(
   processes: Process[],
   applicant: Person,
 ): Promise<Uint8Array> {
+
+  const docs: Document[] = [];
+
+  /**
+   * Infer any extra values for the applicant as needed.
+   * Do any additional assignments here.
+   */
   const finalApplicant = { ...applicant };
 
   // Do any additional Applicant assignment here.
@@ -147,7 +107,14 @@ export default async function fetchAll(
     finalApplicant.age = numericalAge(finalApplicant.birthdate);
   }
 
-  const docs: Document[] = [];
+  const jurisdiction = applicant.residentJurisdiction ?? '';
+  const jurisdictionObj = getJurisdiction(jurisdiction);
+
+  const { counties } = jurisdictionObj;
+  console.log(finalApplicant, counties);
+  const residentCounty = counties[applicant.residentCounty ?? ''];
+
+  Object.assign(applicant, residentCounty);
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -157,31 +124,59 @@ export default async function fetchAll(
     });
   });
 
-  const allDocuments = await Promise.all(docs
-    .filter((doc) => {
-      if (doc.include !== undefined) {
-        return doc.include(finalApplicant);
-      }
+  // Build the constituent forms and guide parts.
+  // TODO This is a bit of a dirty hack, needs cleanup.
+  const formFilenamesAndMaps: [string, Formfill[]?][] = [];
+  const guideParts: string[] = [];
 
-      return false;
+  docs
+    .filter((doc) =>
+      doc.include === undefined || doc.include(finalApplicant)
+    )
+    .forEach((doc) => {
+      const filename = `/forms/${doc.filename}`;
+      formFilenamesAndMaps.push([filename, doc.map]);
+
+      if (doc.guide !== undefined) {
+        const guidePart = `/guides/${doc.guide}`;
+        guideParts.push(guidePart);
+      }
+    });
+
+  // Fill forms.
+  const forms = await Promise.all(
+    formFilenamesAndMaps
+      .map(async ([filename, map]) => {
+        return fetch(filename)
+          .then((response) => response.arrayBuffer())
+          .then(PDFDocument.load)
+          .then(form => {
+            if (map === undefined) {
+              return form;
+            } else {
+              return fillForm(form, map, finalApplicant)
+            }
+          })
+      })
+  );
+
+  // Fill and collate guides.
+  const guidePartsRendered = guideParts
+    .map((guidePart) => render(guidePart, finalApplicant));
+  const guide = guidePartsRendered.join('');
+
+  const guidePdf = await html2pdf()
+    .set({
+      pagebreak: {
+        mode: ['avoid-all'],
+      },
+      margin: 10,
     })
-    .map(async (doc) => {
-      if (doc.map !== undefined) {
-        return fetchAndFill(`/forms/${doc.filename}`, doc.map, finalApplicant);
-      }
+    .from(guide)
+    .outputPdf('arraybuffer');
 
-      return fetch(`/forms/${doc.filename}`)
-        .then((res) => res.arrayBuffer())
-        .then(PDFDocument.load);
-    }));
-
-  if (finalApplicant.age && finalApplicant.residentCounty) {
-    const guide = await makeGuide(finalApplicant);
-    if (guide) {
-      // Append to front
-      allDocuments.unshift(await PDFDocument.load(guide));
-    }
-  }
+  // Assemble final document.
+  const allDocuments: PDFDocument[] = guidePdf.concat(forms);
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
@@ -191,6 +186,7 @@ export default async function fetchAll(
     }),
   );
 
+  // Flatten form fields into document.
   pages.flat()
     .forEach((page) => result.addPage(page));
 

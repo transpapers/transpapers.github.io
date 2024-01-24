@@ -28,7 +28,6 @@ export interface Process {
   /**
    * A list of other targets required before or concurrently with this one.
    * Any sort of dependency loop is assumed to be filed simultaneously.
-   * FIXME ENUM
    */
   depends?: Target[],
 
@@ -45,7 +44,7 @@ export interface Document {
   /**
    * Human-readable name of document.
    */
-  name: string,
+  name?: string,
 
   /**
    * State or federal document ID, if one exists.
@@ -53,11 +52,16 @@ export interface Document {
   id?: string,
 
   /**
-   * Location of PDF file.
-   *
-   * FIXME From where?
+   * Location of PDF file, from root public/forms/ (dev tree) or forms/
+   * (served.)
    */
-  filename: string,
+  filename?: string,
+
+  /**
+   * Location of guide for this document, from root public/guides/ (dev tree)
+   * or guides/ (served.)
+   */
+  guide?: string,
 
   /**
    * Criterion for inclusion.
