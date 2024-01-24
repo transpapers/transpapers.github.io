@@ -10,7 +10,7 @@ export const socialSecurity: Process = {
     {
       name: 'Application for a Social Security Card',
       id: 'SS-5',
-      filename: 'ss-5.pdf',
+      filename: 'Federal/ss-5.pdf',
       map: ssnMap,
     },
   ],
@@ -23,21 +23,21 @@ export const passport: Process = {
     {
       name: 'Application for a Passport',
       id: 'DS 5504',
-      filename: 'ds5504.pdf',
+      filename: 'Federal/ds5504.pdf',
       map: ds5504Map,
       include: (applicant) => applicant.passport === 'ds5504',
     },
     {
       name: 'Application for a Passport',
       id: 'DS 82',
-      filename: 'ds82.pdf',
+      filename: 'Federal/ds82.pdf',
       map: ds82Map,
       include: (applicant) => applicant.passport === 'ds82',
     },
     {
       name: 'Application for a Passport',
       id: 'DS 11',
-      filename: 'ds11.pdf',
+      filename: 'Federal/ds11.pdf',
       map: ds11Map,
       include: (applicant) => applicant.passport === 'ds11',
     },
