@@ -1,4 +1,4 @@
-import { sampleData } from './person';
+import { sampleData } from '../types/person';
 
 /**
  * Determine the properties of a `Person` accessed by `object`.

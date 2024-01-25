@@ -4,8 +4,10 @@ import {
   StringField, CheckboxField, OptionField, SelectField, NumberField, NameField, DateField,
   TelField, CountyField,
 } from './fieldsHtml';
-import { isMinor } from './util';
-import { Field } from './field';
+
+import { isMinor } from '../lib/util';
+
+import { Field } from '../types/field';
 
 export const fields: { [key: string]: Field } = {
   legalName: {

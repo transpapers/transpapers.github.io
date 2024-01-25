@@ -1,5 +1,5 @@
-import { Name, DateFormat, DateFormatPart } from './types';
-import { Person } from './person';
+import { Name, DateFormat, DateFormatPart } from '../types/types';
+import { Person } from '../types/person';
 
 /**
  * Calculate a person's numerical age from their birthdate, as a string.

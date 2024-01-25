@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { Field } from './field';
-import { getJurisdiction } from './jurisdiction/all';
+import { getJurisdiction } from '../jurisdiction/all';
+
+import { Field } from '../types/field';
 
 function GenericField({ name, title, subtitle }: Field, innards: JSX.Element): JSX.Element {
   return (

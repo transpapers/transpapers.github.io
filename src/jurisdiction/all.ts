@@ -1,10 +1,10 @@
-import { Target, Process } from '../process';
-import { County } from '../county';
+import { Target, Process } from '../types/process';
+import { County } from '../types/county';
 
-import { michiganBirthRecord, michiganGenderMarker, michiganNameChange } from './MI/process';
-import michiganCounties from './MI/counties';
+import { michiganBirthRecord, michiganGenderMarker, michiganNameChange } from './Michigan/process';
+import michiganCounties from './Michigan/counties';
 
-import { passport, socialSecurity } from './federal/process';
+import { passport, socialSecurity } from './Federal/process';
 
 /**
  * A single US state or territory.
@@ -13,12 +13,19 @@ export interface Jurisdiction {
   /**
    * Human-readable name.
    *
-   * @remarks This will be shown to the user in Step 1. This is also the
-   * name of the directories under which the requisite forms and guides are
-   * located. For instance, Michigan forms are served under `forms/Michigan`
-   * and appear under `public/forms/Michigan`.
+   * @remarks This will be shown to the user in Step 1.
+   * Unless folderName is set, this is also the name of the directories under
+   * which the requisite forms and guides are located. For instance, Michigan
+   * forms are served under `forms/Michigan` and appear under
+   * `public/forms/Michigan`.
    */
   name: string,
+
+  /**
+   * Name of the folder under which the requisite forms and guides are located.
+   * Defaults to being the same as `name`.
+   */
+  folderName?: string,
 
   /**
    * Map from `Target`s to `Process`es.

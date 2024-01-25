@@ -6,10 +6,12 @@ import html2pdf from 'html2pdf.js';
 import { render } from 'nunjucks';
 
 import { numericalAge } from './util';
-import { Person } from './person';
-import { Process, Document } from './process';
-import { Formfill } from './formfill';
-import { getJurisdiction } from './jurisdiction/all';
+
+import { getJurisdiction } from '../jurisdiction/all';
+
+import { Person } from '../types/person';
+import { Process, Document } from '../types/process';
+import { Formfill } from '../types/formfill';
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -93,7 +95,6 @@ export default async function makeFinalDocument(
   processes: Process[],
   applicant: Person,
 ): Promise<Uint8Array> {
-
   const docs: Document[] = [];
 
   /**
@@ -111,7 +112,6 @@ export default async function makeFinalDocument(
   const jurisdictionObj = getJurisdiction(jurisdiction);
 
   const { counties } = jurisdictionObj;
-  console.log(finalApplicant, counties);
   const residentCounty = counties[applicant.residentCounty ?? ''];
 
   Object.assign(applicant, residentCounty);
@@ -130,9 +130,7 @@ export default async function makeFinalDocument(
   const guideParts: string[] = [];
 
   docs
-    .filter((doc) =>
-      doc.include === undefined || doc.include(finalApplicant)
-    )
+    .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
     .forEach((doc) => {
       const filename = `/forms/${doc.filename}`;
       formFilenamesAndMaps.push([filename, doc.map]);
@@ -146,18 +144,15 @@ export default async function makeFinalDocument(
   // Fill forms.
   const forms = await Promise.all(
     formFilenamesAndMaps
-      .map(async ([filename, map]) => {
-        return fetch(filename)
-          .then((response) => response.arrayBuffer())
-          .then(PDFDocument.load)
-          .then(form => {
-            if (map === undefined) {
-              return form;
-            } else {
-              return fillForm(form, map, finalApplicant)
-            }
-          })
-      })
+      .map(async ([filename, map]) => fetch(filename)
+        .then((response) => response.arrayBuffer())
+        .then(PDFDocument.load)
+        .then((form) => {
+          if (map === undefined) {
+            return form;
+          }
+          return fillForm(form, map, finalApplicant);
+        })),
   );
 
   // Fill and collate guides.

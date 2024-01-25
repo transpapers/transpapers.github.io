@@ -1,4 +1,4 @@
-import { County } from '../../county';
+import { County } from '../../types/county';
 
 const michiganCounties: { [key: string]: County } = {
   Alcona: {

@@ -1,9 +1,10 @@
 import {
   formatDate, fullName, phoneAreaCode, phoneStart, phoneEnd,
   isMinor, representativeName,
-} from '../../util';
-import { GenderMarker, DateFormatPart as DATE } from '../../types';
-import { Formfill } from '../../formfill';
+} from '../../lib/util';
+
+import { GenderMarker, DateFormatPart as DATE } from '../../types/types';
+import { Formfill } from '../../types/formfill';
 
 /**
  * Application for a Social Security Card (federal form SS-5.)

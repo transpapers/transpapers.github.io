@@ -1,8 +1,9 @@
 import {
   formatDate, fullContactInfo, fullName, isMinor, representativeName,
-} from '../../util';
-import { GenderMarker, DateFormatPart as DATE } from '../../types';
-import { Formfill } from '../../formfill';
+} from '../../lib/util';
+
+import { GenderMarker, DateFormatPart as DATE } from '../../types/types';
+import { Formfill } from '../../types/formfill';
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
