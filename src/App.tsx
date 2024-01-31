@@ -34,15 +34,16 @@ function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
 }
 
 function App() {
-  const [residentJurisdiction, setResidentJurisdiction] = useState('Michigan');
-  const [birthJurisdiction, setBirthJurisdiction] = useState('Michigan');
+  const [residentJurisdiction, setResidentJurisdiction] = useState(undefined);
+  const [birthJurisdiction, setBirthJurisdiction] = useState(undefined);
+  const [county, setCounty] = useState(undefined);
 
   const [allProcesses, setAllProcesses] = useState<{ [key in Target]?: Process }>({});
   const [neededProcesses, setNeededProcesses] = useState<Process[]>([]);
   const [visibleFields, setVisibleFields] = useState<Field[]>([]);
   const [data, setData] = useState({});
 
-  // const [stepNo, setStepNo] = useState(0);
+  const [stepNo, setStepNo] = useState(0);
 
   // Step 2: generate allProcs from [birthJurisdiction, residentJurisdiction].
   useEffect(() => {
@@ -72,24 +73,51 @@ function App() {
     .filter((jurisdiction) => !jurisdiction.isFederal)
     .map((jurisdiction) => jurisdiction.name);
 
+  const thisStepComponent = () => {
+    switch (stepNo) {
+      case 1:
+        return (
+          <Step2
+            allProcesses={allProcesses}
+            setNeededProcesses={setNeededProcesses}
+          />
+        );
+      case 2:
+        return (
+          <Step3
+            neededProcesses={neededProcesses}
+            visibleFields={visibleFields}
+            data={data}
+            setData={setData}
+            birthJurisdiction={birthJurisdiction}
+            residentJurisdiction={residentJurisdiction}
+            county={county}
+          />
+        );
+      case 0:
+      default:
+        return (
+          <Step1
+            residentJurisdiction={residentJurisdiction}
+            getJurisdiction={getJurisdiction}
+            setResidentJurisdiction={setResidentJurisdiction}
+            setBirthJurisdiction={setBirthJurisdiction}
+            availableJurisdictions={availableJurisdictions}
+            setCounty={setCounty}
+          />
+        );
+    }
+  };
+
   return (
     <div id="main-form">
-      <Step1
-        setResidentJurisdiction={setResidentJurisdiction}
-        setBirthJurisdiction={setBirthJurisdiction}
-        availableJurisdictions={availableJurisdictions}
-      />
-      <Step2
-        allProcesses={allProcesses}
-        setNeededProcesses={setNeededProcesses}
-      />
-      <Step3
-        visibleFields={visibleFields}
-        data={data}
-        setData={setData}
-        birthJurisdiction={birthJurisdiction}
-        residentJurisdiction={residentJurisdiction}
-      />
+      { thisStepComponent() }
+      <footer className="step-nav">
+        { (stepNo > 0)
+          && <button className="back" type="button" onClick={() => { if (stepNo > 0) setStepNo(stepNo - 1); }}> Back </button>}
+        { (stepNo < 2)
+          && <button className="next" type="button" onClick={() => { if (stepNo < 2) setStepNo(stepNo + 1); }}> Next </button>}
+      </footer>
     </div>
   );
 }

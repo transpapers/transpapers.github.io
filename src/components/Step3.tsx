@@ -3,22 +3,28 @@ import { useState } from 'react';
 
 import makeFinalDocument from '../lib/fill';
 
+import { County } from '../types/county';
 import { Person } from '../types/person';
+import { Process } from '../types/process';
 
 import { renderField } from './fields';
 
 interface Step3Props {
+  neededProcesses: Process[]
   visibleFields: Field[],
   data: object,
   setData: React.Dispatch<React.SetStateAction<object>>,
   birthJurisdiction: string,
   residentJurisdiction: string,
+  county: County,
 }
 
 function beautifyData(formData: FormData): Person {
   const data: Person = {};
 
-  formData.entries().forEach(([name, value]) => {
+  // Spread the .entries() into an array so we can iterate over it.
+  // This seems like a hole in JS but whatever...
+  [...formData.entries()].forEach(([name, value]) => {
     let pointer: { [key: string]: any } = data;
 
     const parts = name.split(':');
@@ -59,7 +65,7 @@ export default function Step3(props: Step3Props) {
   const [modified, setModified] = useState(false);
 
   const {
-    visibleFields, data, setData, birthJurisdiction, residentJurisdiction,
+    neededProcesses, visibleFields, data, setData, birthJurisdiction, residentJurisdiction, county,
   } = props;
 
   function handleFormChange(ev: React.ChangeEvent<HTMLFormElement>) {
@@ -68,6 +74,9 @@ export default function Step3(props: Step3Props) {
     let dataToUse = beautifyData(formData);
 
     dataToUse = Object.assign(dataToUse, { birthJurisdiction, residentJurisdiction });
+    if (county) {
+      dataToUse = Object.assign(dataToUse, county);
+    }
 
     setData(dataToUse);
     setModified(true);

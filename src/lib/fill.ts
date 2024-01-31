@@ -111,6 +111,7 @@ export default async function makeFinalDocument(
   const jurisdiction = applicant.residentJurisdiction ?? '';
   const jurisdictionObj = getJurisdiction(jurisdiction);
 
+  // TODO Handle null.
   const { counties } = jurisdictionObj;
   const residentCounty = counties[applicant.residentCounty ?? ''];
 
@@ -127,24 +128,29 @@ export default async function makeFinalDocument(
   // Build the constituent forms and guide parts.
   // TODO This is a bit of a dirty hack, needs cleanup.
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
-  const guideParts: string[] = [];
+  const guideTitlesAndParts: [string, string][] = [];
 
   docs
     .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
     .forEach((doc) => {
-      const filename = `/forms/${doc.filename}`;
-      formFilenamesAndMaps.push([filename, doc.map]);
+      if (doc.filename !== undefined) {
+        const filename = `/forms/${doc.filename}`;
+        formFilenamesAndMaps.push([filename, doc.map]);
+      }
 
       if (doc.guide !== undefined) {
         const guidePart = `/guides/${doc.guide}`;
-        guideParts.push(guidePart);
+        const guideTitle = doc.name || '';
+        guideTitlesAndParts.push([guideTitle, guidePart]);
       }
     });
 
   // Fill forms.
   const forms = await Promise.all(
     formFilenamesAndMaps
-      .map(async ([filename, map]) => fetch(filename)
+      .map(async ([filename, map]) => {
+       console.log(filename);
+       return fetch(filename)
         .then((response) => response.arrayBuffer())
         .then(PDFDocument.load)
         .then((form) => {
@@ -152,12 +158,13 @@ export default async function makeFinalDocument(
             return form;
           }
           return fillForm(form, map, finalApplicant);
-        })),
+        })}),
   );
 
   // Fill and collate guides.
-  const guidePartsRendered = guideParts
-    .map((guidePart) => render(guidePart, finalApplicant));
+  // const guideHeaders =
+  const guidePartsRendered = guideTitlesAndParts
+    .map(([guideTitle, guidePart], i) => `<h3>${i + 1}. ${guideTitle}</h3>` + render(guidePart, finalApplicant));
   const guide = guidePartsRendered.join('');
 
   const guidePdf = await html2pdf()
@@ -168,10 +175,11 @@ export default async function makeFinalDocument(
       margin: 10,
     })
     .from(guide)
-    .outputPdf('arraybuffer');
+    .outputPdf('arraybuffer')
+    .then(PDFDocument.load);
 
   // Assemble final document.
-  const allDocuments: PDFDocument[] = guidePdf.concat(forms);
+  const allDocuments: PDFDocument[] = [guidePdf].concat(forms);
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(

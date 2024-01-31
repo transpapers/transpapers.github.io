@@ -56,6 +56,7 @@ export const fields: { [key: string]: Field } = {
     name: 'age',
     type: 'number',
     include: (data) => isMinor(data),
+    required: true,
   },
   assignedSex: {
     title: 'Sex assigned at birth',
@@ -124,6 +125,7 @@ export const fields: { [key: string]: Field } = {
     title: 'County',
     name: 'county',
     type: 'county',
+    required: true,
   },
   zip: {
     title: 'ZIP code',

@@ -73,8 +73,14 @@ export const michiganNameChange: Process = {
       guide: 'Michigan/mc20.html.njk',
       map: feeWaiverMap,
     },
-    { guide: 'Michigan/filing.html.njk' },
-    { guide: 'Michigan/court-hearing.html.njk' },
+    {
+      name: 'Filing Initial Documents',
+      guide: 'Michigan/filing.html.njk',
+    },
+    {
+      name: 'Court Hearing',
+      guide: 'Michigan/court-hearing.html.njk',
+    },
   ],
 };
 
@@ -100,7 +106,10 @@ export const michiganBirthRecord: Process = {
   target: Target.BirthRecord,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
-    { guide: 'Michigan/birth-cert.html.njk' },
+    {
+      name: 'Birth Certificate',
+      guide: 'Michigan/birth-cert.html.njk',
+    },
     {
       name: 'Application to Change or Correct a Michigan Birth Record',
       id: 'DCH-0847-CHGBX',

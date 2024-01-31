@@ -4,7 +4,8 @@ import { getJurisdiction } from '../jurisdiction/all';
 
 import { Field } from '../types/field';
 
-function GenericField({ name, title, subtitle }: Field, innards: JSX.Element): JSX.Element {
+function GenericField(field: Field, innards: JSX.Element): JSX.Element {
+  const { name, title, subtitle, required } = field;
   return (
     <label key={name} htmlFor={name}>
       <div key={`${name}-meta`}>
@@ -12,6 +13,8 @@ function GenericField({ name, title, subtitle }: Field, innards: JSX.Element): J
         { subtitle
           ? <span className="subtitle">{ subtitle }</span>
           : ''}
+        { required
+          && <span className="required">*</span>}
       </div>
       { innards }
     </label>
@@ -185,6 +188,7 @@ export function CountyField({ jurisdiction }: CountyFieldConstructorProps) {
     return '';
   }
 
+  // TODO Fix this??
   const field: Field = {
     name: 'county',
     title: 'County',
@@ -193,6 +197,7 @@ export function CountyField({ jurisdiction }: CountyFieldConstructorProps) {
       Object.keys(counties)
         .map((key) => [key, key]),
     ),
+    required: true,
   };
 
   return SelectField({ field });

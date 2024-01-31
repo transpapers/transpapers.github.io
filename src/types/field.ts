@@ -8,4 +8,5 @@ export interface Field {
   default?: any,
   include?: (applicant: Person) => boolean,
   options?: { [key: string]: string },
+  required?: boolean,
 }
