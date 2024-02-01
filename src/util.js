@@ -7,7 +7,7 @@
  */
 export function numericalAge(birthdate) {
   const thisYear = new Date().getFullYear()
-  const thisMonth = new Date().getMonth()
+  const thisMonth = new Date().getMonth() + 1
   const thisDay = new Date().getDay()
   const birthYear = Number.parseInt(birthdate.substring(0, 4))
   const birthMonth = Number.parseInt(birthdate.substring(5, 7))
@@ -94,6 +94,7 @@ export function fullContactInfo(data, separator='\n') {
  * @return {boolean}
  */
 export function isMinor(data) {
+  if (data.hasOwnProperty('age')) { return data.age < 18 }
   return numericalAge(data.dateOfBirth) < 18
 }
 
