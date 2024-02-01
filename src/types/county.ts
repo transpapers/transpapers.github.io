@@ -7,7 +7,7 @@ export interface County {
 export interface Court {
   address: string,
   city: string,
-  circuit: string,
+  circuit?: string,
   phone: string,
   website: string,
   specificCourtInfo?: string,

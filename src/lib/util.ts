@@ -13,7 +13,7 @@ export function numericalAge(birthdate: string): number {
     return Infinity;
   }
   const thisYear = new Date().getFullYear();
-  const thisMonth = new Date().getMonth();
+  const thisMonth = new Date().getMonth() + 1;
   const thisDay = new Date().getDay();
   const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
   const birthMonth = Number.parseInt(birthdate.substring(5, 7), 10);
@@ -95,7 +95,15 @@ export function fullName(name: Name | undefined): string {
 * @return {boolean}
 */
 export function isMinor(applicant: Person): boolean {
-  if (!applicant || applicant.birthdate === undefined) { return false; }
+  if (!applicant) { return false; }
+
+  if (applicant.age !== undefined) {
+    return applicant.age < 18;
+  }
+
+  // Age was not set.
+  if (applicant.birthdate === undefined) { return false; }
+
   return numericalAge(applicant.birthdate) < 18;
 }
 
