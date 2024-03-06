@@ -40,11 +40,12 @@ function resolveDependencies(
 
 interface Step2Props {
   allProcesses: { [key in Target]?: Process },
+  neededProcesses: Process[],
   setNeededProcesses: React.Dispatch<React.SetStateAction<Process[]>>
 }
 
 export default function Step2(props: Step2Props) {
-  const { allProcesses, setNeededProcesses } = props;
+  const { allProcesses, neededProcesses, setNeededProcesses } = props;
 
   function updateNeededProcesses() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
@@ -57,16 +58,20 @@ export default function Step2(props: Step2Props) {
   }
 
   return (
-    <fieldset id="processes">
-      <legend>I need to...</legend>
-      <ul>
-        { Object.values(Target).map((value) => (
-          <li key={value}>
-            <input type="checkbox" id={value} name={value} onChange={updateNeededProcesses} />
-            <span>{targets[value]}</span>
-          </li>
-        ))}
-      </ul>
-    </fieldset>
+    <>
+      <h2>What do you need to do?</h2>
+      <p>If you're not sure, leave everything checked.</p>
+      <fieldset id="processes">
+        <legend>I need to...</legend>
+        <ul>
+          { Object.values(Target).map((value) => (
+            <li key={value}>
+              <input type="checkbox" id={value} name={value} onChange={updateNeededProcesses} checked={neededProcesses.some((proc) => (proc.target === value))} />
+              <label htmlFor={value}>{targets[value]}</label>
+            </li>
+          ))}
+        </ul>
+      </fieldset>
+    </>
   );
 }

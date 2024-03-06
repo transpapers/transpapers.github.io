@@ -57,6 +57,7 @@ function App() {
     allProcs = Object.assign(allProcs, { ...federalProcesses });
 
     setAllProcesses(allProcs);
+    setNeededProcesses(Object.values(allProcs));
   }, [residentJurisdiction, birthJurisdiction]);
 
   // Step 3: Generate form fields from selected processes.
@@ -79,6 +80,7 @@ function App() {
         return (
           <Step2
             allProcesses={allProcesses}
+            neededProcesses={neededProcesses}
             setNeededProcesses={setNeededProcesses}
           />
         );
@@ -109,6 +111,17 @@ function App() {
     }
   };
 
+  const nextStepIsReady = () => {
+    switch (stepNo) {
+      case 1:
+        return neededProcesses.length > 0;
+      case 0:
+        return birthJurisdiction !== undefined && residentJurisdiction !== undefined && county !== undefined;
+      default:
+        return false;
+    }
+  };
+
   return (
     <div id="main-form">
       { thisStepComponent() }
@@ -116,7 +129,7 @@ function App() {
         { (stepNo > 0)
           && <button className="back" type="button" onClick={() => { if (stepNo > 0) setStepNo(stepNo - 1); }}> Back </button>}
         { (stepNo < 2)
-          && <button className="next" type="button" onClick={() => { if (stepNo < 2) setStepNo(stepNo + 1); }}> Next </button>}
+          && <button className="next" type="button" disabled={!nextStepIsReady()} onClick={() => { if (stepNo < 2) setStepNo(stepNo + 1); }}> Next </button>}
       </footer>
     </div>
   );

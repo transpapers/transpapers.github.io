@@ -15,7 +15,9 @@ interface Step1Props {
 }
 
 export default function Step1(props: Step1Props) {
-  const { residentJurisdiction, getJurisdiction, setResidentJurisdiction, setBirthJurisdiction, setCounty, availableJurisdictions } = props;
+  const {
+    residentJurisdiction, getJurisdiction, setResidentJurisdiction, setBirthJurisdiction, setCounty, availableJurisdictions,
+  } = props;
 
   const [countyNames, setCountyNames] = useState<string[]>([]);
 
@@ -36,7 +38,6 @@ export default function Step1(props: Step1Props) {
       const jurisdiction = getJurisdiction(residentJurisdiction);
       if (jurisdiction && 'counties' in jurisdiction) {
         const county = jurisdiction.counties[countyName];
-        console.log(county);
         setCounty(county);
       }
     }
@@ -44,17 +45,17 @@ export default function Step1(props: Step1Props) {
 
   return (
     <>
-      I live in
-      {' '}
-      <select
-        onChange={(ev) => setResidentJurisdiction(ev.target.value)}
-      >
-        <option key="" value="">---</option>
+      <h2>Where are you?</h2>
+      <p>Other states are in development.</p>
+      <fieldset>
+        <legend>I live in...</legend>
         { availableJurisdictions.map((state) => (
-          <option key={state} value={state}>{state}</option>
+          <div key={`resident-${state}`}>
+            <input type="radio" id={`resident-${state}`} name="resident" value={state} onChange={(ev) => setResidentJurisdiction(ev.target.value)} />
+            <label htmlFor={`resident-${state}`}>{state}</label>
+          </div>
         ))}
-      </select>
-      {'. '}
+      </fieldset>
 
       { residentJurisdiction && (
         <>
@@ -68,18 +69,15 @@ export default function Step1(props: Step1Props) {
           {' County. '}
         </>
       )}
-      I was born in
-      {' '}
-      <select
-        onChange={(ev) => setBirthJurisdiction(ev.target.value)}
-      >
+      <fieldset>
+        <legend>I was born in...</legend>
         { availableJurisdictions.map((state) => (
-          <option key={state} value={state}>{state}</option>
+          <div key={`birth-${state}`}>
+            <input type="radio" id={`birth-${state}`} name="birth" value={state} onChange={(ev) => setBirthJurisdiction(ev.target.value)} />
+            <label htmlFor={`birth-${state}`}>{state}</label>
+          </div>
         ))}
-      </select>
-      {'. '}
-      <br />
-      (Other states coming soon.)
+      </fieldset>
     </>
   );
 }

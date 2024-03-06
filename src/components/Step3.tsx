@@ -4,6 +4,7 @@ import { useState } from 'react';
 import makeFinalDocument from '../lib/fill';
 
 import { County } from '../types/county';
+import { Field } from '../types/field';
 import { Person } from '../types/person';
 import { Process } from '../types/process';
 
@@ -83,21 +84,24 @@ export default function Step3(props: Step3Props) {
   }
 
   return (
-    <form className="form" onSubmit={handleFormChange} onChange={handleFormChange}>
-      { visibleFields.map((field) => {
-        const notIncluded = field.include !== undefined && !field.include(data);
-        return notIncluded ? '' : renderField(field, residentJurisdiction);
-      })}
-      { (visibleFields.length > 0) && modified && (
-      <input
-        type="submit"
-        value="Download gender-affirming documents"
-        onClick={(ev) => {
-          ev.preventDefault();
-          generate(neededProcesses, data);
-        }}
-      />
-      ) }
-    </form>
+    <>
+      <h2>Enter your data</h2>
+      <form className="form" onSubmit={handleFormChange} onChange={handleFormChange}>
+        { visibleFields.map((field) => {
+          const notIncluded = 'include' in field && !field.include(data);
+          return notIncluded ? '' : renderField(field, residentJurisdiction);
+        })}
+        { (visibleFields.length > 0) && modified && (
+        <input
+          type="submit"
+          value="Download gender-affirming documents"
+          onClick={(ev) => {
+            ev.preventDefault();
+            generate(neededProcesses, data);
+          }}
+        />
+        ) }
+      </form>
+    </>
   );
 }

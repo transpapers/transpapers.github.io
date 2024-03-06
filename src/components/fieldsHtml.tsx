@@ -5,7 +5,9 @@ import { getJurisdiction } from '../jurisdiction/all';
 import { Field } from '../types/field';
 
 function GenericField(field: Field, innards: JSX.Element): JSX.Element {
-  const { name, title, subtitle, required } = field;
+  const {
+    name, title, subtitle, required,
+  } = field;
   return (
     <label key={name} htmlFor={name}>
       <div key={`${name}-meta`}>
@@ -73,7 +75,7 @@ export function OptionField({ field }: FieldConstructorProps): JSX.Element {
             id={`${field.name}:${key}`}
             name={field.name}
             type="radio"
-            value={value}
+            value={key}
           />
           { value }
         </label>
@@ -91,7 +93,7 @@ export function SelectField({ field }: FieldConstructorProps): JSX.Element {
     >
       <option key="" value="">---</option>
       {Object.entries(options).map(([key, value]) => (
-        <option key={key} value={value}>{value}</option>
+        <option key={key} value={key}>{value}</option>
       ))}
     </select>
   );

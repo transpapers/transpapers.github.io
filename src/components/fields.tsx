@@ -35,7 +35,7 @@ export const fields: { [key: string]: Field } = {
     {' '}
     <a href="https://en.wikipedia.org/wiki/Sealed_birth_records">seal my previous birth certificate.</a>
   </>,
-    subtitle: 'This prevents third parties from accessing your deadname and AGAB.',
+    subtitle: 'This prevents third parties from accessing your deadname and assigned gender.',
     name: 'sealBirthCertificate',
     type: 'boolean',
     default: true,
