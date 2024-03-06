@@ -1,6 +1,6 @@
 import {
   PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup,
-} from 'pdf-lib';
+} from '@cantoo/pdf-lib';
 
 import html2pdf from 'html2pdf.js';
 import { render } from 'nunjucks';
@@ -29,6 +29,10 @@ function fillForm(doc: PDFDocument, fills: Formfill[], applicant: Person): PDFDo
       const field = form.getField(fill.field);
       if ('text' in fill && field instanceof PDFTextField) {
         const text = fill.text(applicant);
+
+        // Disable maximum length.
+        field.setMaxLength(undefined);
+
         field.setText(text);
       } else if ('check' in fill && field instanceof PDFCheckBox) {
         const checked = fill.check(applicant);
@@ -145,12 +149,12 @@ export default async function makeFinalDocument(
       }
     });
 
+  guideTitlesAndParts.unshift(['Preamble and Table of Contents', '/guides/preamble.html.njk']);
+
   // Fill forms.
   const forms = await Promise.all(
     formFilenamesAndMaps
-      .map(async ([filename, map]) => {
-       console.log(filename);
-       return fetch(filename)
+      .map(async ([filename, map]) => fetch(filename)
         .then((response) => response.arrayBuffer())
         .then(PDFDocument.load)
         .then((form) => {
@@ -158,13 +162,13 @@ export default async function makeFinalDocument(
             return form;
           }
           return fillForm(form, map, finalApplicant);
-        })}),
+        })),
   );
 
   // Fill and collate guides.
   // const guideHeaders =
   const guidePartsRendered = guideTitlesAndParts
-    .map(([guideTitle, guidePart], i) => `<h3>${i + 1}. ${guideTitle}</h3>` + render(guidePart, finalApplicant));
+    .map(([guideTitle, guidePart], i) => `<h3>${i + 1}. ${guideTitle}</h3>${render(guidePart, finalApplicant)}`);
   const guide = guidePartsRendered.join('');
 
   const guidePdf = await html2pdf()
