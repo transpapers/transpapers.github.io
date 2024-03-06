@@ -178,7 +178,7 @@ export interface Person {
   representativeName?: Name,
 
   /**
-   * DOCUMENT THIS
+   * TODO DOCUMENT THIS
    */
   passport?: string,
 }
