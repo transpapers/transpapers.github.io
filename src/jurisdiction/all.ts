@@ -1,7 +1,9 @@
 import { Target, Process } from '../types/process';
 import { County } from '../types/county';
 
-import { michiganBirthRecord, michiganGenderMarker, michiganNameChange } from './Michigan/process';
+import {
+  michiganBirthRecord, michiganGenderMarker, michiganNameChange, michiganPrimaryIdentification,
+} from './Michigan/process';
 import michiganCounties from './Michigan/counties';
 
 import { passport, socialSecurity } from './Federal/process';
@@ -49,6 +51,7 @@ export const michigan: Jurisdiction = {
     [Target.BirthRecord]: michiganBirthRecord,
     [Target.GenderMarker]: michiganGenderMarker,
     [Target.NameChange]: michiganNameChange,
+    [Target.PrimaryIdentification]: michiganPrimaryIdentification,
   },
   counties: michiganCounties,
 };

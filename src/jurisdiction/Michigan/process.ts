@@ -101,6 +101,13 @@ export const michiganGenderMarker: Process = {
   ],
 };
 
+export const michiganPrimaryIdentification: Process = {
+  jurisdiction: 'MI',
+  target: Target.PrimaryIdentification,
+  depends: [Target.NameChange, Target.GenderMarker],
+  documents: [],
+};
+
 export const michiganBirthRecord: Process = {
   jurisdiction: 'MI',
   target: Target.BirthRecord,

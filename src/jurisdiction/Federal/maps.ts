@@ -1,5 +1,6 @@
 import {
   formatDate, fullName, phoneAreaCode, phoneStart, phoneEnd,
+  abbreviateJurisdiction,
   isMinor, representativeName,
 } from '../../lib/util';
 
@@ -68,12 +69,12 @@ export const ds5504Map: Formfill[] = [
   { text: (applicant) => applicant.streetAddress, field: 'App Mailing Address Line 1 Street RFD PO Box or URB' },
   { text: (applicant) => (isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : ''), field: 'App Mailing Address Line 2' },
   { text: (applicant) => applicant.residentCity, field: 'App Mailing City' },
-  { text: (applicant) => applicant.residentJurisdiction, field: 'App Mailing State' },
+  { text: (applicant) => abbreviateJurisdiction(applicant.residentJurisdiction || '') || '', field: 'App Mailing State' },
   { text: (applicant) => applicant.zip, field: 'App Mailing Zip' },
   { text: (applicant) => fullName(applicant.legalName), field: 'App List all other name you have used' },
-  { text: (applicant) => fullName(applicant.legalName), field: 'Your name as printed on your most reent U.S. passport book and/or passport card' },
+  { text: (applicant) => fullName(applicant.legalName), field: 'Your name as printed on your most recent U.S. passport book and/or passport card' },
   { text: (applicant) => `${applicant.chosenName?.last ?? ''} ${applicant.chosenName?.first ?? ''} ${applicant.chosenName?.middle ?? ''}`, field: 'Name of Applicant 2' },
-  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), field: 'Date Of Birth' },
+  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), field: 'Date of Birth' },
   { check: (applicant) => applicant.gender === GenderMarker.X, loc: { page: 5, x: 120, y: 592 } },
   { text: (applicant) => applicant.chosenName?.last ?? '', field: 'Changed Last Name' },
   { text: (applicant) => applicant.chosenName?.first ?? '', field: 'Changed First' },
@@ -107,14 +108,14 @@ export const ds82Map: Formfill[] = [
   { text: (applicant) => applicant.streetAddress, field: 'App Mailing Address Line 1' },
   { text: (applicant) => (isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : ''), field: 'App Mailing Address Line 2' },
   { text: (applicant) => applicant.residentCity, field: 'App Mailing Address City' },
-  { text: (applicant) => applicant.residentJurisdiction, field: 'App Mailing Address State' },
+  { text: (applicant) => abbreviateJurisdiction(applicant.residentJurisdiction || '') || '', field: 'App Mailing Address State' },
   { text: (applicant) => applicant.zip, field: 'App Mailing Address Zip Code' },
   { text: (applicant) => fullName(applicant.legalName), field: 'App List all other name you have used' },
-  { text: (applicant) => fullName(applicant.legalName), field: 'Your name as printed on your most reent U.S. passport book and/or passport card' },
+  { text: (applicant) => fullName(applicant.legalName), field: 'Your name as printed on your most recent U.S. passport book and/or passport card' },
   { check: () => true, field: 'Changed by Court Order' },
   /** Place name change location (city/state format) here */
   { text: (applicant) => `${applicant.chosenName?.last ?? ''} ${applicant.chosenName?.first ?? ''} ${applicant.chosenName?.middle ?? ''}`, field: 'Name of Applicant (Last, First, Middle) 2' },
-  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), field: 'Date Of Birth 2' },
+  { text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH, DATE.DAY, DATE.YEAR], separator: '/' }), field: 'Date of Birth 2' },
 ];
 
 /**
@@ -139,7 +140,7 @@ export const ds11Map: Formfill[] = [
   { text: (applicant) => applicant.streetAddress, field: 'Applicant Address Street' },
   { text: (applicant) => (isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : ''), field: 'Address Line 2' },
   { text: (applicant) => applicant.residentCity, field: 'Applicant Address CIty' },
-  { text: (applicant) => applicant.residentJurisdiction, field: 'Applicant Address State' },
+  { text: (applicant) => abbreviateJurisdiction(applicant.residentJurisdiction || '') || '', field: 'Applicant Address State' },
   { text: (applicant) => applicant.zip, field: 'Applicant Address Zip Code' },
   { text: (applicant) => fullName(applicant.legalName), field: 'List all other name you have used' },
   { text: (applicant) => `${applicant.chosenName?.last ?? ''} ${applicant.chosenName?.first ?? ''} ${applicant.chosenName?.middle ?? ''}`, field: 'Name of Applicant 2' },
