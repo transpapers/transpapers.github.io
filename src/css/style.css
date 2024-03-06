@@ -3,7 +3,7 @@
 }
 
 html {
-    font-size: 14px;
+    font-size: 20px;
     font-family: sans-serif;
 }
 
@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     margin: auto;
     padding: 0;
-    max-width: 80ch;
+    max-width: 60ch;
     align-items: center;
 }
 
@@ -134,13 +134,19 @@ fieldset legend {
 
 .step-nav {
     width: 100%;
-    display: grid;
+    display: flex;
+    justify-content: space-between;
+    margin-block: 1rem;
 }
 
-.step-nav .back {
-    justify-self: flex-start;
-}
+ h2 {
+     font-size: 200%;
+     text-align: center;
+ }
 
-.step-nav .next {
-    justify-self: flex-end;
-}
+ button {
+     font-size: 100%;
+     padding: 0.5rem 0.9rem;
+     line-height: normal;
+     ;
+ }
