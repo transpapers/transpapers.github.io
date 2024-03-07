@@ -113,7 +113,7 @@ export default function Step3(props: Step3Props) {
         { (visibleFields.length > 0) && modified && (
         <input
           type="submit"
-          value="Download gender-affirming documents"
+          value="Download my gender-affirming documents"
           onClick={(ev) => {
             ev.preventDefault();
             generate(neededProcesses, data);

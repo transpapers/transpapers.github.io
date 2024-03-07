@@ -145,10 +145,14 @@ function App() {
     <div id="main-form">
       { thisStepComponent() }
       <footer className="step-nav">
-        { (stepNo > 0)
-          && <button className="back" type="button" onClick={() => { if (stepNo > 0) setStepNo(stepNo - 1); }}> Back </button>}
-        { (stepNo < 2)
-          && <button className="next" type="button" disabled={!nextStepIsReady()} onClick={() => { if (stepNo < 2) setStepNo(stepNo + 1); }}> Next </button>}
+        <div className="prev">
+          { (stepNo > 0)
+            && <button className="prev" type="button" onClick={() => { if (stepNo > 0) setStepNo(stepNo - 1); }}> Back </button>}
+        </div>
+        <div className="next">
+          { (stepNo < 2)
+            && <button className="next" type="button" disabled={!nextStepIsReady()} onClick={() => { if (stepNo < 2) setStepNo(stepNo + 1); }}> Next </button>}
+        </div>
       </footer>
     </div>
   );
