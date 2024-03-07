@@ -17,26 +17,26 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
-import { useState } from 'react';
+import * as React from "react";
+import { useState } from "react";
 
-import makeFinalDocument from '../lib/fill';
+import makeFinalDocument from "../lib/fill";
 
-import { County } from '../types/county';
-import { Field } from '../types/field';
-import { Person } from '../types/person';
-import { Process } from '../types/process';
+import { County } from "../types/county";
+import { Field } from "../types/field";
+import { Person } from "../types/person";
+import { Process } from "../types/process";
 
-import { renderField } from './fields';
+import { renderField } from "./fields";
 
 interface Step3Props {
-  neededProcesses: Process[]
-  visibleFields: Field[],
-  data: object,
-  setData: React.Dispatch<React.SetStateAction<object>>,
-  birthJurisdiction: string,
-  residentJurisdiction: string,
-  county: County,
+  neededProcesses: Process[];
+  visibleFields: Field[];
+  data: object;
+  setData: React.Dispatch<React.SetStateAction<object>>;
+  birthJurisdiction: string;
+  residentJurisdiction: string;
+  county: County;
 }
 
 function beautifyData(formData: FormData): Person {
@@ -47,7 +47,7 @@ function beautifyData(formData: FormData): Person {
   [...formData.entries()].forEach(([name, value]) => {
     let pointer: { [key: string]: any } = data;
 
-    const parts = name.split(':');
+    const parts = name.split(":");
     const directories = parts.slice(0, parts.length - 1);
     const filename = parts[parts.length - 1];
 
@@ -70,22 +70,29 @@ function beautifyData(formData: FormData): Person {
  * @param {Person} applicant
  */
 function generate(procs: Process[], applicant: Person) {
-  makeFinalDocument(procs, applicant)
-    .then((doc) => {
-      const url = URL.createObjectURL(new Blob([doc], { type: 'application/pdf' }));
-      const link = document.createElement('a');
-      link.download = 'gender_affirming_documents.pdf';
-      link.href = url;
-      link.click();
-      URL.revokeObjectURL(link.href);
-    });
+  makeFinalDocument(procs, applicant).then((doc) => {
+    const url = URL.createObjectURL(
+      new Blob([doc], { type: "application/pdf" }),
+    );
+    const link = document.createElement("a");
+    link.download = "gender_affirming_documents.pdf";
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
 }
 
 export default function Step3(props: Step3Props) {
   const [modified, setModified] = useState(false);
 
   const {
-    neededProcesses, visibleFields, data, setData, birthJurisdiction, residentJurisdiction, county,
+    neededProcesses,
+    visibleFields,
+    data,
+    setData,
+    birthJurisdiction,
+    residentJurisdiction,
+    county,
   } = props;
 
   function handleFormChange(ev: React.ChangeEvent<HTMLFormElement>) {
@@ -93,7 +100,10 @@ export default function Step3(props: Step3Props) {
 
     let dataToUse = beautifyData(formData);
 
-    dataToUse = Object.assign(dataToUse, { birthJurisdiction, residentJurisdiction });
+    dataToUse = Object.assign(dataToUse, {
+      birthJurisdiction,
+      residentJurisdiction,
+    });
     if (county) {
       dataToUse = Object.assign(dataToUse, county);
     }
@@ -105,21 +115,25 @@ export default function Step3(props: Step3Props) {
   return (
     <>
       <h2>Enter your data</h2>
-      <form className="form" onSubmit={handleFormChange} onChange={handleFormChange}>
-        { visibleFields.map((field) => {
-          const notIncluded = 'include' in field && !field.include(data);
-          return notIncluded ? '' : renderField(field, residentJurisdiction);
+      <form
+        className="form"
+        onSubmit={handleFormChange}
+        onChange={handleFormChange}
+      >
+        {visibleFields.map((field) => {
+          const notIncluded = "include" in field && !field.include(data);
+          return notIncluded ? "" : renderField(field, residentJurisdiction);
         })}
-        { (visibleFields.length > 0) && modified && (
-        <input
-          type="submit"
-          value="Download my gender-affirming documents"
-          onClick={(ev) => {
-            ev.preventDefault();
-            generate(neededProcesses, data);
-          }}
-        />
-        ) }
+        {visibleFields.length > 0 && modified && (
+          <input
+            type="submit"
+            value="Download my gender-affirming documents"
+            onClick={(ev) => {
+              ev.preventDefault();
+              generate(neededProcesses, data);
+            }}
+          />
+        )}
       </form>
     </>
   );

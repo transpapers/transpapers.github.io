@@ -17,22 +17,22 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import * as React from "react";
+import { useEffect, useState } from "react";
 
-import { fields } from './components/fields';
+import { fields } from "./components/fields";
 
-import { allJurisdictions, getJurisdiction } from './jurisdiction/all';
+import { allJurisdictions, getJurisdiction } from "./jurisdiction/all";
 
-import shakeTree from './lib/shakeTree';
+import shakeTree from "./lib/shakeTree";
 
-import { Field } from './types/field';
-import { Person } from './types/person';
-import { Target, Process } from './types/process';
+import { Field } from "./types/field";
+import { Person } from "./types/person";
+import { Target, Process } from "./types/process";
 
-import Step1 from './components/Step1';
-import Step2 from './components/Step2';
-import Step3 from './components/Step3';
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
+import Step3 from "./components/Step3";
 
 /**
  * Convert the list of needed procedures into a list of needed field names.
@@ -42,9 +42,11 @@ function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
   neededProcs.forEach((process) => shakeTree(process, names));
 
   Object.entries(fields).forEach(([fieldName, field]) => {
-    if (field.include !== undefined
-        && field.include(applicant)
-        && !names.includes(fieldName)) {
+    if (
+      field.include !== undefined &&
+      field.include(applicant) &&
+      !names.includes(fieldName)
+    ) {
       names.push(fieldName);
     }
   });
@@ -57,7 +59,9 @@ function App() {
   const [birthJurisdiction, setBirthJurisdiction] = useState(undefined);
   const [county, setCounty] = useState(undefined);
 
-  const [allProcesses, setAllProcesses] = useState<{ [key in Target]?: Process }>({});
+  const [allProcesses, setAllProcesses] = useState<{
+    [key in Target]?: Process;
+  }>({});
   const [neededProcesses, setNeededProcesses] = useState<Process[]>([]);
   const [visibleFields, setVisibleFields] = useState<Field[]>([]);
   const [data, setData] = useState({});
@@ -66,9 +70,10 @@ function App() {
 
   // Step 2: generate allProcs from [birthJurisdiction, residentJurisdiction].
   useEffect(() => {
-    const residentProcesses = getJurisdiction(residentJurisdiction)?.processes ?? {};
+    const residentProcesses =
+      getJurisdiction(residentJurisdiction)?.processes ?? {};
     const birthProcesses = getJurisdiction(birthJurisdiction)?.processes ?? {};
-    const federalProcesses = getJurisdiction('Federal')?.processes ?? {};
+    const federalProcesses = getJurisdiction("Federal")?.processes ?? {};
 
     let allProcs: { [key in Target]?: Process } = {};
     allProcs[Target.BirthRecord] = birthProcesses[Target.BirthRecord];
@@ -135,7 +140,11 @@ function App() {
       case 1:
         return neededProcesses.length > 0;
       case 0:
-        return birthJurisdiction !== undefined && residentJurisdiction !== undefined && county !== undefined;
+        return (
+          birthJurisdiction !== undefined &&
+          residentJurisdiction !== undefined &&
+          county !== undefined
+        );
       default:
         return false;
     }
@@ -143,15 +152,36 @@ function App() {
 
   return (
     <div id="main-form">
-      { thisStepComponent() }
+      {thisStepComponent()}
       <footer className="step-nav">
         <div className="prev">
-          { (stepNo > 0)
-            && <button className="prev" type="button" onClick={() => { if (stepNo > 0) setStepNo(stepNo - 1); }}> Back </button>}
+          {stepNo > 0 && (
+            <button
+              className="prev"
+              type="button"
+              onClick={() => {
+                if (stepNo > 0) setStepNo(stepNo - 1);
+              }}
+            >
+              {" "}
+              Back{" "}
+            </button>
+          )}
         </div>
         <div className="next">
-          { (stepNo < 2)
-            && <button className="next" type="button" disabled={!nextStepIsReady()} onClick={() => { if (stepNo < 2) setStepNo(stepNo + 1); }}> Next </button>}
+          {stepNo < 2 && (
+            <button
+              className="next"
+              type="button"
+              disabled={!nextStepIsReady()}
+              onClick={() => {
+                if (stepNo < 2) setStepNo(stepNo + 1);
+              }}
+            >
+              {" "}
+              Next{" "}
+            </button>
+          )}
         </div>
       </footer>
     </div>

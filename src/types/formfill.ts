@@ -17,8 +17,8 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person } from './person';
-import { Location } from './types';
+import { Person } from "./person";
+import { Location } from "./types";
 
 /**
  * A specification for filling a single form field.
@@ -38,70 +38,69 @@ import { Location } from './types';
  * Setting `select` and `loc` is an error.
  */
 export type Formfill =
-    | FormfillFillableText
-    | FormfillFillableCheck
-    | FormfillNonfillableText
-    | FormfillNonfillableCheck;
+  | FormfillFillableText
+  | FormfillFillableCheck
+  | FormfillNonfillableText
+  | FormfillNonfillableCheck;
 
 export interface FormfillFillableText {
   /**
-     * Returns the information to be contained in the field.
-     */
-  text: (applicant: Person) => string | undefined,
+   * Returns the information to be contained in the field.
+   */
+  text: (applicant: Person) => string | undefined;
 
   /**
-     * Contains the internal name of the field to be filled.
-     */
-  field: string,
+   * Contains the internal name of the field to be filled.
+   */
+  field: string;
 }
 
 export interface FormfillFillableCheck {
   /**
-     * Connotes a checkbox, or if `select` is also set, a radio group; contains
-     * the internal name of the choice to select.
-     */
-  check: (applicant: Person) => boolean | undefined,
+   * Connotes a checkbox, or if `select` is also set, a radio group; contains
+   * the internal name of the choice to select.
+   */
+  check: (applicant: Person) => boolean | undefined;
 
   /**
-     * Connotes a radio group together with `check`. Contains the internal name
-     * of the choice to select.
-     */
-  select?: string,
+   * Connotes a radio group together with `check`. Contains the internal name
+   * of the choice to select.
+   */
+  select?: string;
 
   /**
-     * Contains the internal name of the field to be filled.
-     */
-  field: string,
+   * Contains the internal name of the field to be filled.
+   */
+  field: string;
 }
 
 export interface FormfillNonfillableText {
   /**
-     * Returns the information to be contained in the field.
-     */
-  text: (applicant: Person) => string | undefined,
+   * Returns the information to be contained in the field.
+   */
+  text: (applicant: Person) => string | undefined;
 
   /**
-     * Contains the location at which the data should be inserted.
-     */
-  loc: Location,
-
+   * Contains the location at which the data should be inserted.
+   */
+  loc: Location;
 }
 
 export interface FormfillNonfillableCheck {
   /**
-     * Connotes a checkbox, or if `select` is also set, a radio group; contains
-     * the internal name of the choice to select.
-     */
-  check: (applicant: Person) => boolean | undefined,
+   * Connotes a checkbox, or if `select` is also set, a radio group; contains
+   * the internal name of the choice to select.
+   */
+  check: (applicant: Person) => boolean | undefined;
 
   /**
-     * Connotes a radio group together with `check`. Contains the internal name
-     * of the choice to select.
-     */
-  select?: string,
+   * Connotes a radio group together with `check`. Contains the internal name
+   * of the choice to select.
+   */
+  select?: string;
 
   /**
-     * Contains the location at which the data should be inserted.
-     */
-  loc: Location,
+   * Contains the location at which the data should be inserted.
+   */
+  loc: Location;
 }

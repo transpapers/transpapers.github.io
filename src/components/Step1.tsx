@@ -17,25 +17,30 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import * as React from "react";
+import { useEffect, useState } from "react";
 
-import { County } from '../types/county';
+import { County } from "../types/county";
 
-import { Jurisdiction } from '../jurisdiction/all';
+import { Jurisdiction } from "../jurisdiction/all";
 
 interface Step1Props {
-  residentJurisdiction: string,
-  getJurisdiction: (name: string) => Jurisdiction | undefined,
-  setResidentJurisdiction: React.Dispatch<React.SetStateAction<string>>,
-  setBirthJurisdiction: React.Dispatch<React.SetStateAction<string>>,
-  setCounty: React.Dispatch<React.SetStateAction<County>>,
-  availableJurisdictions: string[],
+  residentJurisdiction: string;
+  getJurisdiction: (name: string) => Jurisdiction | undefined;
+  setResidentJurisdiction: React.Dispatch<React.SetStateAction<string>>;
+  setBirthJurisdiction: React.Dispatch<React.SetStateAction<string>>;
+  setCounty: React.Dispatch<React.SetStateAction<County>>;
+  availableJurisdictions: string[];
 }
 
 export default function Step1(props: Step1Props) {
   const {
-    residentJurisdiction, getJurisdiction, setResidentJurisdiction, setBirthJurisdiction, setCounty, availableJurisdictions,
+    residentJurisdiction,
+    getJurisdiction,
+    setResidentJurisdiction,
+    setBirthJurisdiction,
+    setCounty,
+    availableJurisdictions,
   } = props;
 
   const [countyNames, setCountyNames] = useState<string[]>([]);
@@ -43,7 +48,7 @@ export default function Step1(props: Step1Props) {
   useEffect(() => {
     setCounty(undefined);
     const jurisdiction = getJurisdiction(residentJurisdiction);
-    if (jurisdiction && 'counties' in jurisdiction) {
+    if (jurisdiction && "counties" in jurisdiction) {
       const names = Object.keys(jurisdiction.counties);
       setCountyNames(names);
     }
@@ -51,11 +56,11 @@ export default function Step1(props: Step1Props) {
 
   function updateCounty(ev) {
     const countyName = ev.target.value;
-    if (countyName === '') {
+    if (countyName === "") {
       setCounty(undefined);
     } else {
       const jurisdiction = getJurisdiction(residentJurisdiction);
-      if (jurisdiction && 'counties' in jurisdiction) {
+      if (jurisdiction && "counties" in jurisdiction) {
         const county = jurisdiction.counties[countyName];
         setCounty(county);
       }
@@ -68,31 +73,47 @@ export default function Step1(props: Step1Props) {
       <p>Other states are in development.</p>
       <fieldset>
         <legend>I live in...</legend>
-        { availableJurisdictions.map((state) => (
+        {availableJurisdictions.map((state) => (
           <div key={`resident-${state}`}>
-            <input type="radio" id={`resident-${state}`} name="resident" value={state} onChange={(ev) => setResidentJurisdiction(ev.target.value)} />
+            <input
+              type="radio"
+              id={`resident-${state}`}
+              name="resident"
+              value={state}
+              onChange={(ev) => setResidentJurisdiction(ev.target.value)}
+            />
             <label htmlFor={`resident-${state}`}>{state}</label>
           </div>
         ))}
       </fieldset>
 
-      { residentJurisdiction && (
+      {residentJurisdiction && (
         <>
-          {'I live in '}
+          {"I live in "}
           <select onChange={updateCounty}>
-            <option key="" value="">---</option>
+            <option key="" value="">
+              ---
+            </option>
             {countyNames.map((county) => (
-              <option key={county} value={county}>{county}</option>
+              <option key={county} value={county}>
+                {county}
+              </option>
             ))}
           </select>
-          {' County. '}
+          {" County. "}
         </>
       )}
       <fieldset>
         <legend>I was born in...</legend>
-        { availableJurisdictions.map((state) => (
+        {availableJurisdictions.map((state) => (
           <div key={`birth-${state}`}>
-            <input type="radio" id={`birth-${state}`} name="birth" value={state} onChange={(ev) => setBirthJurisdiction(ev.target.value)} />
+            <input
+              type="radio"
+              id={`birth-${state}`}
+              name="birth"
+              value={state}
+              onChange={(ev) => setBirthJurisdiction(ev.target.value)}
+            />
             <label htmlFor={`birth-${state}`}>{state}</label>
           </div>
         ))}

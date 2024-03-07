@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Name, GenderMarker } from './types';
+import { Name, GenderMarker } from "./types";
 
 /**
  * Applicant's personal information.
@@ -29,19 +29,19 @@ export interface Person {
   /**
    * Applicant's legal name.
    */
-  legalName?: Name,
+  legalName?: Name;
 
   /**
    * Applicant's chosen name.
    */
-  chosenName?: Name,
+  chosenName?: Name;
 
   /**
    * Reason for applicant's name change.
    *
    * @remarks Required by Michigan form ??.
    */
-  reasonForNameChange?: string,
+  reasonForNameChange?: string;
 
   /**
    * Whether to seal applicant's previous birth certificate to prevent access by
@@ -49,17 +49,17 @@ export interface Person {
    *
    * @remarks Required by Michigan form ??.
    */
-  sealBirthCertificate?: boolean,
+  sealBirthCertificate?: boolean;
 
   /**
    * Applicant's city of birth.
    */
-  birthCity?: string,
+  birthCity?: string;
 
   /**
    * Applicant's jurisdiction of birth; state, territory, or foreign country.
    */
-  birthJurisdiction?: string,
+  birthJurisdiction?: string;
 
   /**
    * Applicant's date of birth.
@@ -89,7 +89,7 @@ export interface Person {
    * that the MI process is particularly onerous, the last breakpoint is
    * most likely 18 in other states.
    */
-  birthdate?: string,
+  birthdate?: string;
 
   /**
    * The age applicant will be on filing.
@@ -97,17 +97,17 @@ export interface Person {
    * @remarks Autofilled from `birthdate` if not provided. May be provided for
    * minors who may cross a "breakpoint" between filling and filing forms.
    */
-  age?: number,
+  age?: number;
 
   /**
    * Applicant's assigned sex at birth.
    */
-  assignedSex?: GenderMarker,
+  assignedSex?: GenderMarker;
 
   /**
    * Applicant's self-identified gender.
    */
-  gender?: GenderMarker,
+  gender?: GenderMarker;
 
   /**
    * Whether to withhold publication of the newspaper notice.
@@ -115,7 +115,7 @@ export interface Person {
    * @remarks Required to determine which forms should be filed for
    * Michiganders.
    */
-  doNotPublish?: boolean,
+  doNotPublish?: boolean;
 
   /**
    * Should be `true` if applicant is a minor with two living, married parents.
@@ -123,70 +123,70 @@ export interface Person {
    * @remarks Required to determine which forms should be filed for Michigan
    * minors.
    */
-  parentsAreOkay?: boolean,
+  parentsAreOkay?: boolean;
 
   /**
    * Applicant's mother's birth name.
    */
-  mothersBirthName?: Name,
+  mothersBirthName?: Name;
 
   /**
    * Applicant's mother's birthdate.
    *
    * @remarks Cf. `birthdate` field.
    */
-  mothersBirthdate?: string,
+  mothersBirthdate?: string;
 
   /**
    * Applicant's father's birth name.
    */
-  fathersBirthName?: Name,
+  fathersBirthName?: Name;
 
   /**
    * Applicant's father's birthdate.
    *
    * @remarks Cf. `birthdate` field.
    */
-  fathersBirthdate?: string,
+  fathersBirthdate?: string;
 
   /**
    * Applicant's daytime phone number.
    */
-  phone?: string,
+  phone?: string;
 
   /**
    * Applicant's current street address, including "line 2."
    */
-  streetAddress?: string,
+  streetAddress?: string;
 
   /**
    * Applicant's city of residence.
    */
-  residentCity?: string,
+  residentCity?: string;
 
   /**
    * Applicant's jurisdiction (state or US territory) of residence.
    *
    * @remarks Filled from step 1.
    */
-  residentJurisdiction?: string,
+  residentJurisdiction?: string;
 
   /**
    * Applicant's county (or equivalent) of residence.
    *
    * @remarks Required for court locations, etc. Filled from Jurisdiction data.
    */
-  residentCounty?: string,
+  residentCounty?: string;
 
   /**
    * Applicant's ZIP code.
    */
-  zip?: string,
+  zip?: string;
 
   /**
    * Applicant's email address.
    */
-  email?: string,
+  email?: string;
 
   /**
    * Name of applicant's legal representative (parent, guardian, etc.), if
@@ -194,12 +194,12 @@ export interface Person {
    *
    * @remarks Only applicable for minors.
    */
-  representativeName?: Name,
+  representativeName?: Name;
 
   /**
    * TODO DOCUMENT THIS
    */
-  passport?: string,
+  passport?: string;
 }
 
 // This should come in handy for documentation purposes.
@@ -208,66 +208,66 @@ export interface Person {
  */
 export const sampleData: Person = {
   legalName: {
-    first: 'Jane',
-    middle: 'Michelle',
-    last: 'Doe',
-    suffix: '',
+    first: "Jane",
+    middle: "Michelle",
+    last: "Doe",
+    suffix: "",
   },
   chosenName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: '',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "",
   },
 
-  reasonForNameChange: 'Gender transition',
+  reasonForNameChange: "Gender transition",
   sealBirthCertificate: true,
-  birthCity: 'New York',
-  birthJurisdiction: 'New York',
+  birthCity: "New York",
+  birthJurisdiction: "New York",
 
-  birthdate: '2010-01-01',
+  birthdate: "2010-01-01",
 
   assignedSex: GenderMarker.F,
   gender: GenderMarker.X,
 
   mothersBirthName: {
-    first: 'Jane',
-    middle: 'Michelle',
-    last: 'Doe',
-    suffix: '',
+    first: "Jane",
+    middle: "Michelle",
+    last: "Doe",
+    suffix: "",
   },
 
   doNotPublish: false,
   parentsAreOkay: true,
 
-  mothersBirthdate: '1970-01-01',
+  mothersBirthdate: "1970-01-01",
   fathersBirthName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: '',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "",
   },
 
-  fathersBirthdate: '1970-01-01',
+  fathersBirthdate: "1970-01-01",
 
-  phone: '313-555-1234',
+  phone: "313-555-1234",
 
-  streetAddress: '20 Monroe Street NW',
+  streetAddress: "20 Monroe Street NW",
 
-  residentCity: 'Grand Rapids',
-  residentJurisdiction: 'Michigan',
-  residentCounty: 'Kent',
+  residentCity: "Grand Rapids",
+  residentJurisdiction: "Michigan",
+  residentCounty: "Kent",
 
-  zip: '49503',
+  zip: "49503",
 
-  email: 'jdoe@goodmail.com',
+  email: "jdoe@goodmail.com",
 
   representativeName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: 'Sr.',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "Sr.",
   },
 
-  passport: 'ds11',
+  passport: "ds11",
 };

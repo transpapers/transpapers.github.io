@@ -21,10 +21,10 @@
  * A person's name.
  */
 export interface Name {
-  first: string,
-  middle: string,
-  last: string,
-  suffix?: string,
+  first: string;
+  middle: string;
+  last: string;
+  suffix?: string;
 }
 
 export enum GenderMarker {
@@ -40,21 +40,21 @@ export enum GenderMarker {
  */
 export interface Location {
   /**
-     * The X coordinate, measured from left of page.
-     */
-  x: number,
+   * The X coordinate, measured from left of page.
+   */
+  x: number;
 
   /**
-     * The Y coordinate, measured from top of page.
-     */
-  y: number,
+   * The Y coordinate, measured from top of page.
+   */
+  y: number;
 
   /**
-     * The page number, zero-indexed. Defaults to 0.
-     */
-  page?: number,
+   * The page number, zero-indexed. Defaults to 0.
+   */
+  page?: number;
 
-  fontSize?: number,
+  fontSize?: number;
 }
 
 export enum DateFormatPart {
@@ -67,6 +67,6 @@ export enum DateFormatPart {
  * A format specification for dates.
  */
 export interface DateFormat {
-  format: DateFormatPart[],
-  separator?: string,
+  format: DateFormatPart[];
+  separator?: string;
 }

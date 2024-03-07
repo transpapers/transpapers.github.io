@@ -17,15 +17,18 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Target, Process } from '../types/process';
-import { County } from '../types/county';
+import { Target, Process } from "../types/process";
+import { County } from "../types/county";
 
 import {
-  michiganBirthRecord, michiganGenderMarker, michiganNameChange, michiganPrimaryIdentification,
-} from './Michigan/process';
-import michiganCounties from './Michigan/counties';
+  michiganBirthRecord,
+  michiganGenderMarker,
+  michiganNameChange,
+  michiganPrimaryIdentification,
+} from "./Michigan/process";
+import michiganCounties from "./Michigan/counties";
 
-import { passport, socialSecurity } from './Federal/process';
+import { passport, socialSecurity } from "./Federal/process";
 
 /**
  * A single US state or territory.
@@ -40,32 +43,32 @@ export interface Jurisdiction {
    * forms are served under `forms/Michigan` and appear under
    * `public/forms/Michigan`.
    */
-  name: string,
+  name: string;
 
   /**
    * Name of the folder under which the requisite forms and guides are located.
    * Defaults to being the same as `name`.
    */
-  folderName?: string,
+  folderName?: string;
 
   /**
    * Map from `Target`s to `Process`es.
    */
-  processes?: { [key in Target]?: Process },
+  processes?: { [key in Target]?: Process };
 
   /**
    * Map of counties (or county equivalents.)
    */
-  counties?: { [key: string]: County },
+  counties?: { [key: string]: County };
 
   /**
    * `true` if this is the dummy `Jurisdiction` used for federal processes.
    */
-  isFederal?: boolean,
+  isFederal?: boolean;
 }
 
 export const michigan: Jurisdiction = {
-  name: 'Michigan',
+  name: "Michigan",
   processes: {
     [Target.BirthRecord]: michiganBirthRecord,
     [Target.GenderMarker]: michiganGenderMarker,
@@ -76,7 +79,7 @@ export const michigan: Jurisdiction = {
 };
 
 export const federal: Jurisdiction = {
-  name: 'Federal',
+  name: "Federal",
   processes: {
     [Target.SocialSecurity]: socialSecurity,
     [Target.Passport]: passport,
@@ -84,10 +87,7 @@ export const federal: Jurisdiction = {
   isFederal: true,
 };
 
-export const allJurisdictions = [
-  federal,
-  michigan,
-];
+export const allJurisdictions = [federal, michigan];
 
 export function getJurisdiction(name: string): Jurisdiction | undefined {
   return allJurisdictions.find((jurisdiction) => jurisdiction.name === name);

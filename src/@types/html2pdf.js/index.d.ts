@@ -17,5 +17,4 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-declare module 'html2pdf.js';
-
+declare module "html2pdf.js";

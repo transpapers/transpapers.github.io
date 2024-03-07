@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { Process, Target, targets } from '../types/process';
+import { Process, Target, targets } from "../types/process";
 
 /**
  * Pull in any needed dependencies of the selected processes.
@@ -58,20 +58,24 @@ function resolveDependencies(
 }
 
 interface Step2Props {
-  allProcesses: { [key in Target]?: Process },
-  neededProcesses: Process[],
-  setNeededProcesses: React.Dispatch<React.SetStateAction<Process[]>>
+  allProcesses: { [key in Target]?: Process };
+  neededProcesses: Process[];
+  setNeededProcesses: React.Dispatch<React.SetStateAction<Process[]>>;
 }
 
 export default function Step2(props: Step2Props) {
   const { allProcesses, neededProcesses, setNeededProcesses } = props;
 
   function updateNeededProcesses() {
-    const checkboxes = document.querySelectorAll('#processes input:checked');
-    const selectedProcesses = Array.from(checkboxes)
-      .map((checkbox) => checkbox.id as Target);
+    const checkboxes = document.querySelectorAll("#processes input:checked");
+    const selectedProcesses = Array.from(checkboxes).map(
+      (checkbox) => checkbox.id as Target,
+    );
 
-    const allNeededProcesses = resolveDependencies(allProcesses, selectedProcesses);
+    const allNeededProcesses = resolveDependencies(
+      allProcesses,
+      selectedProcesses,
+    );
 
     setNeededProcesses(allNeededProcesses);
   }
@@ -79,13 +83,19 @@ export default function Step2(props: Step2Props) {
   return (
     <>
       <h2>What do you need to do?</h2>
-      <p>If you're not sure, leave everything checked.</p>
+      <p>If you&apos;re not sure, leave everything checked.</p>
       <fieldset id="processes">
         <legend>I need to...</legend>
         <ul>
-          { Object.values(Target).map((value) => (
+          {Object.values(Target).map((value) => (
             <li key={value}>
-              <input type="checkbox" id={value} name={value} onChange={updateNeededProcesses} checked={neededProcesses.some((proc) => (proc.target === value))} />
+              <input
+                type="checkbox"
+                id={value}
+                name={value}
+                onChange={updateNeededProcesses}
+                checked={neededProcesses.some((proc) => proc.target === value)}
+              />
               <label htmlFor={value}>{targets[value]}</label>
             </li>
           ))}
