@@ -10,9 +10,11 @@ module.exports = {
     'airbnb/hooks',
   ],
   parserOptions: {
+    parser: '@typescript-eslint/parser',
     project: './tsconfig.json',
     ecmaVersion: 'latest',
     sourceType: 'module',
+    tsConfigRootDir: __dirname,
   },
   rules: {
     'no-prototype-builtins': 'off',

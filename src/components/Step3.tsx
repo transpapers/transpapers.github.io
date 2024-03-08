@@ -126,7 +126,7 @@ export default function Step3(props: Step3Props) {
           if (field.include !== undefined) {
             const notIncluded = !field.include(data);
             // TODO Fix this, Sasha, you slut. - Sasha
-            return notIncluded ? '' : renderField(field, residentJurisdiction ?? "");
+            return notIncluded ? '' : renderField(field, residentJurisdiction ?? '');
           }
           return true;
         })}

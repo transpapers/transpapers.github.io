@@ -1,7 +1,7 @@
 import { expect, describe, test } from 'vitest';
+import { axe } from 'vitest-axe';
 
 import * as React from 'react';
-import { axe } from 'vitest-axe';
 import { render } from '@testing-library/react';
 
 import shakeTree from '../src/lib/shakeTree';
@@ -13,7 +13,6 @@ import mockData from './mockData';
 import Step1 from '../src/components/Step1';
 import Step2 from '../src/components/Step2';
 import Step3 from '../src/components/Step3';
-
 describe('shakeTree()', () => {
   test('regression test', () => {
     const expected = [
@@ -53,14 +52,40 @@ describe('fetchAll()', () => {
 
 describe('components pass basic a11y tests', async () => {
   const allComponents = [
-    <Step1 />,
-    <Step2 />,
-    <Step3 />,
+    <Step1
+      residentJurisdiction="Michigan"
+
+      // Mock out setters.
+      setCounty={() => undefined}
+      setResidentJurisdiction={() => undefined}
+      setBirthJurisdiction={() => undefined}
+    />,
+
+    <Step2
+      neededProcesses={[]}
+      // allProcesses
+
+      // Mock out setters.
+      setNeededProcesses={() => undefined}
+    />,
+
+    <Step3
+      data={{}}
+      birthJurisdiction={undefined}
+      residentJurisdiction={undefined}
+      county={undefined}
+      neededProcesses={[]}
+      visibleFields={[]}
+
+      // Mock out setters.
+      setData={() => undefined}
+    />,
   ];
-  console.log(allComponents);
+
   test.each(allComponents)('', async (component) => {
     const { container } = render(component);
     const markup = await axe(container);
     expect(markup).toHaveNoViolations();
   })
+
 });

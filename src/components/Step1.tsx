@@ -22,25 +22,21 @@ import { useEffect, useState } from 'react';
 
 import { County } from '../types/county';
 
-import { Jurisdiction } from '../jurisdiction/all';
+import { allJurisdictions, getJurisdiction } from '../jurisdiction/all';
 
 interface Step1Props {
   residentJurisdiction: string | undefined;
-  getJurisdiction: (name: string) => Jurisdiction | undefined;
   setResidentJurisdiction: React.Dispatch<React.SetStateAction<string | undefined>>;
   setBirthJurisdiction: React.Dispatch<React.SetStateAction<string | undefined>>;
   setCounty: React.Dispatch<React.SetStateAction<County | undefined>>;
-  availableJurisdictions: string[];
 }
 
 export default function Step1(props: Step1Props) {
   const {
     residentJurisdiction,
-    getJurisdiction,
     setResidentJurisdiction,
     setBirthJurisdiction,
     setCounty,
-    availableJurisdictions,
   } = props;
 
   const [countyNames, setCountyNames] = useState<string[]>([]);
@@ -53,7 +49,7 @@ export default function Step1(props: Step1Props) {
       const names = Object.keys(jurisdiction.counties ?? {});
       setCountyNames(names);
     }
-  }, [residentJurisdiction, getJurisdiction, setCounty, setCountyNames]);
+  }, [residentJurisdiction, setCounty, setCountyNames]);
 
   function updateCounty(ev: React.ChangeEvent<HTMLSelectElement>) {
     const countyName = ev.target.value;
@@ -67,6 +63,9 @@ export default function Step1(props: Step1Props) {
       }
     }
   }
+  const availableJurisdictions = allJurisdictions
+    .filter((jurisdiction) => !jurisdiction.isFederal)
+    .map((jurisdiction) => jurisdiction.name);
 
   return (
     <>
@@ -89,9 +88,11 @@ export default function Step1(props: Step1Props) {
       </fieldset>
 
       {residentJurisdiction && (
-        <>
-          {'I live in '}
-          <select onChange={updateCounty}>
+        <div key="county-select">
+          <label htmlFor="county-select">
+            {'My county of residence is... '}
+          </label>
+          <select onChange={updateCounty} id="county-select">
             <option key="" value="">
               ---
             </option>
@@ -101,8 +102,7 @@ export default function Step1(props: Step1Props) {
               </option>
             ))}
           </select>
-          {' County. '}
-        </>
+        </div>
       )}
       <fieldset>
         <legend>I was born in...</legend>

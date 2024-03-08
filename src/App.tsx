@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react';
 
 import { fields } from './components/fields';
 
-import { allJurisdictions, getJurisdiction } from './jurisdiction/all';
+import { getJurisdiction } from './jurisdiction/all';
 
 import shakeTree from './lib/shakeTree';
 
@@ -94,10 +94,6 @@ function App() {
     setVisibleFields(neededFields);
   }, [neededProcesses, data]);
 
-  const availableJurisdictions = allJurisdictions
-    .filter((jurisdiction) => !jurisdiction.isFederal)
-    .map((jurisdiction) => jurisdiction.name);
-
   const thisStepComponent = () => {
     switch (stepNo) {
       case 1:
@@ -125,10 +121,8 @@ function App() {
         return (
           <Step1
             residentJurisdiction={residentJurisdiction}
-            getJurisdiction={getJurisdiction}
             setResidentJurisdiction={setResidentJurisdiction}
             setBirthJurisdiction={setBirthJurisdiction}
-            availableJurisdictions={availableJurisdictions}
             setCounty={setCounty}
           />
         );
