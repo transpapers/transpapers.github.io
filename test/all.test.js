@@ -1,8 +1,8 @@
 import { expect, describe, test } from 'vitest';
 
-import shakeTree from '../src/shakeTree';
-import { michiganNameChange } from '../src/process';
-import fetchAll from '../src/fill';
+import shakeTree from '../src/lib/shakeTree';
+import { michiganNameChange } from '../src/jurisdiction/Michigan/process';
+import fetchAll from '../src/lib/fill';
 
 import mockData from './mockData';
 

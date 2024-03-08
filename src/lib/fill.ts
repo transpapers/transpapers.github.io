@@ -24,7 +24,6 @@ import {
   PDFRadioGroup,
 } from "@cantoo/pdf-lib";
 
-import html2pdf from "html2pdf.js";
 import { render } from "nunjucks";
 
 import { numericalAge } from "./util";
@@ -202,19 +201,24 @@ export default async function makeFinalDocument(
   );
   const guide = guidePartsRendered.join("");
 
-  const guidePdf = await html2pdf()
-    .set({
-      pagebreak: {
-        mode: ["avoid-all"],
-      },
-      margin: 10,
-    })
-    .from(guide)
-    .outputPdf("arraybuffer")
-    .then(PDFDocument.load);
+  const allDocuments: PDFDocument[] = [...forms];
 
-  // Assemble final document.
-  const allDocuments: PDFDocument[] = [guidePdf].concat(forms);
+  const { default: html2pdf } = await import("html2pdf.js");
+
+  if (html2pdf) {
+    const guidePdf = await html2pdf()
+      .set({
+        pagebreak: {
+          mode: ["avoid-all"],
+        },
+        margin: 10,
+      })
+      .from(guide)
+      .outputPdf("arraybuffer")
+      .then(PDFDocument.load);
+
+    allDocuments.unshift(guidePdf);
+  }
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
