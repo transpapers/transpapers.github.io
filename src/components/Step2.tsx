@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { Process, Target, targets } from "../types/process";
+import { Process, Target, targets } from '../types/process';
 
 /**
  * Pull in any needed dependencies of the selected processes.
@@ -67,7 +67,7 @@ export default function Step2(props: Step2Props) {
   const { allProcesses, neededProcesses, setNeededProcesses } = props;
 
   function updateNeededProcesses() {
-    const checkboxes = document.querySelectorAll("#processes input:checked");
+    const checkboxes = document.querySelectorAll('#processes input:checked');
     const selectedProcesses = Array.from(checkboxes).map(
       (checkbox) => checkbox.id as Target,
     );

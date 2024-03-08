@@ -17,8 +17,8 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person } from "./person";
-import { Location } from "./types";
+import { Person } from './person';
+import { Location } from './types';
 
 /**
  * A specification for filling a single form field.

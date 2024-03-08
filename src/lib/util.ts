@@ -17,70 +17,70 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Name, DateFormat, DateFormatPart } from "../types/types";
-import { Person } from "../types/person";
+import { Name, DateFormat, DateFormatPart } from '../types/types';
+import { Person } from '../types/person';
 
 export function abbreviateJurisdiction(
   jurisdiction: string,
 ): string | undefined {
   const map: { [name: string]: string } = {
-    Alabama: "AL",
-    Alaska: "AK",
-    Arizona: "AZ",
-    Arkansas: "AR",
-    California: "CA",
-    Colorado: "CO",
-    Connecticut: "CT",
-    Delaware: "DE",
-    "District of Columbia": "DC",
-    Florida: "FL",
-    Georgia: "GA",
-    Hawaii: "HI",
-    Idaho: "ID",
-    Illinois: "IL",
-    Indiana: "IN",
-    Iowa: "IA",
-    Kansas: "KS",
-    Kentucky: "KY",
-    Louisiana: "LA",
-    Maine: "ME",
-    Maryland: "MD",
-    Massachusetts: "MA",
-    Michigan: "MI",
-    Minnesota: "MN",
-    Mississippi: "MS",
-    Missouri: "MO",
-    Montana: "MT",
-    Nebraska: "NE",
-    Nevada: "NV",
-    "New Hampshire": "NH",
-    "New Jersey": "NJ",
-    "New Mexico": "NM",
-    "New York": "NY",
-    "North Carolina": "NC",
-    "North Dakota": "ND",
-    Ohio: "OH",
-    Oklahoma: "OK",
-    Oregon: "OR",
-    Pennsylvania: "PA",
-    "Rhode Island": "RI",
-    "South Carolina": "SC",
-    "South Dakota": "SD",
-    Tennessee: "TN",
-    Texas: "TX",
-    Utah: "UT",
-    Vermont: "VT",
-    Virginia: "VA",
-    Washington: "WA",
-    "West Virginia": "WV",
-    Wisconsin: "WI",
-    Wyoming: "WY",
-    "American Samoa": "AS",
-    Guam: "GU",
-    "Northern Mariana Islands": "MP",
-    "Puerto Rico": "PR",
-    "US Virgin Islands": "VI",
-    "US Minor Outlying Islands": "UM",
+    Alabama: 'AL',
+    Alaska: 'AK',
+    Arizona: 'AZ',
+    Arkansas: 'AR',
+    California: 'CA',
+    Colorado: 'CO',
+    Connecticut: 'CT',
+    Delaware: 'DE',
+    'District of Columbia': 'DC',
+    Florida: 'FL',
+    Georgia: 'GA',
+    Hawaii: 'HI',
+    Idaho: 'ID',
+    Illinois: 'IL',
+    Indiana: 'IN',
+    Iowa: 'IA',
+    Kansas: 'KS',
+    Kentucky: 'KY',
+    Louisiana: 'LA',
+    Maine: 'ME',
+    Maryland: 'MD',
+    Massachusetts: 'MA',
+    Michigan: 'MI',
+    Minnesota: 'MN',
+    Mississippi: 'MS',
+    Missouri: 'MO',
+    Montana: 'MT',
+    Nebraska: 'NE',
+    Nevada: 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    Ohio: 'OH',
+    Oklahoma: 'OK',
+    Oregon: 'OR',
+    Pennsylvania: 'PA',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    Tennessee: 'TN',
+    Texas: 'TX',
+    Utah: 'UT',
+    Vermont: 'VT',
+    Virginia: 'VA',
+    Washington: 'WA',
+    'West Virginia': 'WV',
+    Wisconsin: 'WI',
+    Wyoming: 'WY',
+    'American Samoa': 'AS',
+    Guam: 'GU',
+    'Northern Mariana Islands': 'MP',
+    'Puerto Rico': 'PR',
+    'US Virgin Islands': 'VI',
+    'US Minor Outlying Islands': 'UM',
   };
 
   return map[jurisdiction];
@@ -123,7 +123,7 @@ export function numericalAge(birthdate: string): number {
  */
 export function formatDate(date: string | undefined, fmt: DateFormat): string {
   if (!date || !fmt) {
-    return "";
+    return '';
   }
 
   const year = Number.parseInt(date.substring(0, 4), 10);
@@ -144,14 +144,14 @@ export function formatDate(date: string | undefined, fmt: DateFormat): string {
         return year;
       }
 
-      return "";
+      return '';
     })
     .join(fmt.separator);
 }
 
 export function phoneAreaCode(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
-    return "";
+    return '';
   }
   return phoneNumber.substring(0, 4);
 }
@@ -159,7 +159,7 @@ export function phoneAreaCode(phoneNumber: string | undefined): string {
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
-    return "";
+    return '';
   }
   return phoneNumber.substring(4, 7);
 }
@@ -167,7 +167,7 @@ export function phoneStart(phoneNumber: string | undefined): string {
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
-    return "";
+    return '';
   }
   return phoneNumber.substring(7);
 }
@@ -179,11 +179,11 @@ export function phoneEnd(phoneNumber: string | undefined): string {
  */
 export function fullName(name: Name | undefined): string {
   if (!name) {
-    return "";
+    return '';
   }
   return [name.first, name.middle, name.last, name.suffix]
     .filter((n) => n && n.length > 0)
-    .join(" ");
+    .join(' ');
 }
 
 /**
@@ -224,10 +224,10 @@ export function representativeName(applicant: Person): Name {
   }
 
   return {
-    first: "",
-    middle: "",
-    last: "",
-    suffix: "",
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
   };
 }
 
@@ -236,7 +236,7 @@ export function representativeName(applicant: Person): Name {
  * @param {Person} applicant
  * @return {string}
  */
-export function fullContactInfo(applicant: Person, separator = "\n"): string {
+export function fullContactInfo(applicant: Person, separator = '\n'): string {
   const lines = [
     fullName(representativeName(applicant)),
     applicant.streetAddress,

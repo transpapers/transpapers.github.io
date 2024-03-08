@@ -17,26 +17,26 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
-import { useState } from "react";
+import * as React from 'react';
+import { useState } from 'react';
 
-import makeFinalDocument from "../lib/fill";
+import makeFinalDocument from '../lib/fill';
 
-import { County } from "../types/county";
-import { Field } from "../types/field";
-import { Person } from "../types/person";
-import { Process } from "../types/process";
+import { County } from '../types/county';
+import { Field } from '../types/field';
+import { Person } from '../types/person';
+import { Process } from '../types/process';
 
-import { renderField } from "./fields";
+import { renderField } from './fields';
 
 interface Step3Props {
   neededProcesses: Process[];
   visibleFields: Field[];
   data: object;
   setData: React.Dispatch<React.SetStateAction<object>>;
-  birthJurisdiction: string;
-  residentJurisdiction: string;
-  county: County;
+  birthJurisdiction: string | undefined;
+  residentJurisdiction: string | undefined;
+  county: County | undefined;
 }
 
 function beautifyData(formData: FormData): Person {
@@ -47,7 +47,7 @@ function beautifyData(formData: FormData): Person {
   [...formData.entries()].forEach(([name, value]) => {
     let pointer: { [key: string]: any } = data;
 
-    const parts = name.split(":");
+    const parts = name.split(':');
     const directories = parts.slice(0, parts.length - 1);
     const filename = parts[parts.length - 1];
 
@@ -71,14 +71,16 @@ function beautifyData(formData: FormData): Person {
  */
 function generate(procs: Process[], applicant: Person) {
   makeFinalDocument(procs, applicant).then((doc) => {
-    const url = URL.createObjectURL(
-      new Blob([doc], { type: "application/pdf" }),
-    );
-    const link = document.createElement("a");
-    link.download = "gender_affirming_documents.pdf";
-    link.href = url;
-    link.click();
-    URL.revokeObjectURL(link.href);
+    if (doc !== undefined) {
+      const url = URL.createObjectURL(
+        new Blob([doc], { type: 'application/pdf' }),
+      );
+      const link = document.createElement('a');
+      link.download = 'gender_affirming_documents.pdf';
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
   });
 }
 
@@ -121,8 +123,12 @@ export default function Step3(props: Step3Props) {
         onChange={handleFormChange}
       >
         {visibleFields.map((field) => {
-          const notIncluded = "include" in field && !field.include(data);
-          return notIncluded ? "" : renderField(field, residentJurisdiction);
+          if (field.include !== undefined) {
+            const notIncluded = !field.include(data);
+            // TODO Fix this, Sasha, you slut. - Sasha
+            return notIncluded ? '' : renderField(field, residentJurisdiction ?? "");
+          }
+          return true;
         })}
         {visibleFields.length > 0 && modified && (
           <input

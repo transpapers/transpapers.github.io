@@ -17,19 +17,19 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
-import { useEffect, useState } from "react";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
-import { County } from "../types/county";
+import { County } from '../types/county';
 
-import { Jurisdiction } from "../jurisdiction/all";
+import { Jurisdiction } from '../jurisdiction/all';
 
 interface Step1Props {
-  residentJurisdiction: string;
+  residentJurisdiction: string | undefined;
   getJurisdiction: (name: string) => Jurisdiction | undefined;
-  setResidentJurisdiction: React.Dispatch<React.SetStateAction<string>>;
-  setBirthJurisdiction: React.Dispatch<React.SetStateAction<string>>;
-  setCounty: React.Dispatch<React.SetStateAction<County>>;
+  setResidentJurisdiction: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setBirthJurisdiction: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setCounty: React.Dispatch<React.SetStateAction<County | undefined>>;
   availableJurisdictions: string[];
 }
 
@@ -48,19 +48,20 @@ export default function Step1(props: Step1Props) {
   useEffect(() => {
     setCounty(undefined);
     const jurisdiction = getJurisdiction(residentJurisdiction);
-    if (jurisdiction && "counties" in jurisdiction) {
-      const names = Object.keys(jurisdiction.counties);
+    if (jurisdiction && 'counties' in jurisdiction) {
+      // TODO Fix this, Sasha, you slut.
+      const names = Object.keys(jurisdiction.counties ?? {});
       setCountyNames(names);
     }
   }, [residentJurisdiction, getJurisdiction, setCounty, setCountyNames]);
 
-  function updateCounty(ev) {
+  function updateCounty(ev: React.ChangeEvent<HTMLSelectElement>) {
     const countyName = ev.target.value;
-    if (countyName === "") {
+    if (countyName === '') {
       setCounty(undefined);
     } else {
       const jurisdiction = getJurisdiction(residentJurisdiction);
-      if (jurisdiction && "counties" in jurisdiction) {
+      if (jurisdiction && jurisdiction.counties !== undefined) {
         const county = jurisdiction.counties[countyName];
         setCounty(county);
       }
@@ -89,7 +90,7 @@ export default function Step1(props: Step1Props) {
 
       {residentJurisdiction && (
         <>
-          {"I live in "}
+          {'I live in '}
           <select onChange={updateCounty}>
             <option key="" value="">
               ---
@@ -100,7 +101,7 @@ export default function Step1(props: Step1Props) {
               </option>
             ))}
           </select>
-          {" County. "}
+          {' County. '}
         </>
       )}
       <fieldset>

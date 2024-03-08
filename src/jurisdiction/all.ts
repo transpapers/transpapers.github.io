@@ -17,18 +17,18 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Target, Process } from "../types/process";
-import { County } from "../types/county";
+import { Target, Process } from '../types/process';
+import { County } from '../types/county';
 
 import {
   michiganBirthRecord,
   michiganGenderMarker,
   michiganNameChange,
   michiganPrimaryIdentification,
-} from "./Michigan/process";
-import michiganCounties from "./Michigan/counties";
+} from './Michigan/process';
+import michiganCounties from './Michigan/counties';
 
-import { passport, socialSecurity } from "./Federal/process";
+import { passport, socialSecurity } from './Federal/process';
 
 /**
  * A single US state or territory.
@@ -68,7 +68,7 @@ export interface Jurisdiction {
 }
 
 export const michigan: Jurisdiction = {
-  name: "Michigan",
+  name: 'Michigan',
   processes: {
     [Target.BirthRecord]: michiganBirthRecord,
     [Target.GenderMarker]: michiganGenderMarker,
@@ -79,7 +79,7 @@ export const michigan: Jurisdiction = {
 };
 
 export const federal: Jurisdiction = {
-  name: "Federal",
+  name: 'Federal',
   processes: {
     [Target.SocialSecurity]: socialSecurity,
     [Target.Passport]: passport,
@@ -89,6 +89,9 @@ export const federal: Jurisdiction = {
 
 export const allJurisdictions = [federal, michigan];
 
-export function getJurisdiction(name: string): Jurisdiction | undefined {
+export function getJurisdiction(name: string | undefined): Jurisdiction | undefined {
+  if (name === undefined) {
+    return undefined;
+  }
   return allJurisdictions.find((jurisdiction) => jurisdiction.name === name);
 }

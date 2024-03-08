@@ -17,16 +17,16 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person } from "./person";
-import { Formfill } from "./formfill";
+import { Person } from './person';
+import { Formfill } from './formfill';
 
 export enum Target {
-  BirthRecord = "birth-record",
-  GenderMarker = "gender-marker",
-  NameChange = "name-change",
-  Passport = "passport",
-  PrimaryIdentification = "primary-identification",
-  SocialSecurity = "social-security",
+  BirthRecord = 'birth-record',
+  GenderMarker = 'gender-marker',
+  NameChange = 'name-change',
+  Passport = 'passport',
+  PrimaryIdentification = 'primary-identification',
+  SocialSecurity = 'social-security',
 }
 
 /**
@@ -96,11 +96,11 @@ export interface Document {
 }
 
 export const targets: { [key in Target]?: string } = {
-  [Target.BirthRecord]: "update my birth certificate.",
-  [Target.GenderMarker]: "update my gender marker.",
-  [Target.NameChange]: "change my legal name.",
-  [Target.PrimaryIdentification]: "update my primary identification.",
-  [Target.Passport]: "update my federal passport.",
+  [Target.BirthRecord]: 'update my birth certificate.',
+  [Target.GenderMarker]: 'update my gender marker.',
+  [Target.NameChange]: 'change my legal name.',
+  [Target.PrimaryIdentification]: 'update my primary identification.',
+  [Target.Passport]: 'update my federal passport.',
   [Target.SocialSecurity]:
-    "update my information with the Social Security Administration.",
+    'update my information with the Social Security Administration.',
 };

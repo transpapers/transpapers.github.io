@@ -22,17 +22,17 @@ import {
   PDFTextField,
   PDFCheckBox,
   PDFRadioGroup,
-} from "@cantoo/pdf-lib";
+} from '@cantoo/pdf-lib';
 
-import { render } from "nunjucks";
+import { render } from 'nunjucks';
 
-import { numericalAge } from "./util";
+import { numericalAge } from './util';
 
-import { getJurisdiction } from "../jurisdiction/all";
+import { getJurisdiction } from '../jurisdiction/all';
 
-import { Person } from "../types/person";
-import { Process, Document } from "../types/process";
-import { Formfill } from "../types/formfill";
+import { Person } from '../types/person';
+import { Process, Document } from '../types/process';
+import { Formfill } from '../types/formfill';
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -50,24 +50,24 @@ function fillForm(
   const pages = doc.getPages();
 
   fills.forEach((fill) => {
-    if ("field" in fill) {
+    if ('field' in fill) {
       const field = form.getField(fill.field);
-      if ("text" in fill && field instanceof PDFTextField) {
+      if ('text' in fill && field instanceof PDFTextField) {
         const text = fill.text(applicant);
 
         // Disable maximum length.
         field.setMaxLength(undefined);
 
         field.setText(text);
-      } else if ("check" in fill && field instanceof PDFCheckBox) {
+      } else if ('check' in fill && field instanceof PDFCheckBox) {
         const checked = fill.check(applicant);
         if (checked) {
           field.check();
         }
       } else if (
-        "select" in fill &&
-        "check" in fill &&
-        field instanceof PDFRadioGroup
+        'select' in fill
+        && 'check' in fill
+        && field instanceof PDFRadioGroup
       ) {
         const checked = fill.check(applicant);
         if (checked && fill.select !== undefined) {
@@ -95,15 +95,15 @@ function fillForm(
       // rather than the usual top left.
       const y = height - fill.loc.y * scalingFactor - fontSize;
 
-      if ("text" in fill) {
+      if ('text' in fill) {
         const text = fill.text(applicant);
         if (text !== undefined) {
           page.drawText(text, { x, y, size: fontSize });
         }
-      } else if ("check" in fill) {
+      } else if ('check' in fill) {
         const checked = fill.check(applicant);
         if (checked) {
-          page.drawText("X", { x, y, size: fontSize });
+          page.drawText('X', { x, y, size: fontSize });
         }
       }
     }
@@ -113,6 +113,32 @@ function fillForm(
   form.flatten();
 
   return doc;
+}
+
+function makeFinalApplicant(applicant: Person): Person | undefined {
+  /**
+   * Infer any extra values for the applicant as needed.
+   * Do any additional assignments here.
+   */
+  const finalApplicant = { ...applicant };
+
+  // Do any additional Applicant assignment here.
+  if (finalApplicant.birthdate && !finalApplicant.age) {
+    finalApplicant.age = numericalAge(finalApplicant.birthdate);
+  }
+
+  const jurisdiction = applicant.residentJurisdiction ?? '';
+  const jurisdictionObj = getJurisdiction(jurisdiction);
+
+  if (jurisdictionObj === undefined || jurisdictionObj.counties === undefined) {
+    return undefined;
+  }
+  const { counties } = jurisdictionObj;
+  const residentCounty = counties[applicant.residentCounty ?? ''];
+
+  Object.assign(finalApplicant, residentCounty);
+
+  return finalApplicant;
 }
 
 /**
@@ -125,28 +151,13 @@ function fillForm(
 export default async function makeFinalDocument(
   processes: Process[],
   applicant: Person,
-): Promise<Uint8Array> {
+): Promise<Uint8Array | undefined> {
   const docs: Document[] = [];
+  const finalApplicant = makeFinalApplicant(applicant);
 
-  /**
-   * Infer any extra values for the applicant as needed.
-   * Do any additional assignments here.
-   */
-  const finalApplicant = { ...applicant };
-
-  // Do any additional Applicant assignment here.
-  if (finalApplicant.birthdate && !finalApplicant.age) {
-    finalApplicant.age = numericalAge(finalApplicant.birthdate);
+  if (finalApplicant === undefined) {
+    return undefined;
   }
-
-  const jurisdiction = applicant.residentJurisdiction ?? "";
-  const jurisdictionObj = getJurisdiction(jurisdiction);
-
-  // TODO Handle null.
-  const { counties } = jurisdictionObj;
-  const residentCounty = counties[applicant.residentCounty ?? ""];
-
-  Object.assign(applicant, residentCounty);
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -171,50 +182,47 @@ export default async function makeFinalDocument(
 
       if (doc.guide !== undefined) {
         const guidePart = `/guides/${doc.guide}`;
-        const guideTitle = doc.name || "";
+        const guideTitle = doc.name || '';
         guideTitlesAndParts.push([guideTitle, guidePart]);
       }
     });
 
-  guideTitlesAndParts.unshift(["Preamble", "/guides/preamble.html.njk"]);
+  guideTitlesAndParts.unshift(['Preamble', '/guides/preamble.html.njk']);
 
   // Fill forms.
   const forms = await Promise.all(
-    formFilenamesAndMaps.map(async ([filename, map]) =>
-      fetch(filename)
-        .then((response) => response.arrayBuffer())
-        .then(PDFDocument.load)
-        .then((form) => {
-          if (map === undefined) {
-            return form;
-          }
-          return fillForm(form, map, finalApplicant);
-        }),
-    ),
+    formFilenamesAndMaps.map(async ([filename, map]) => fetch(filename)
+      .then((response) => response.arrayBuffer())
+      .then(PDFDocument.load)
+      .then((form) => {
+        if (map === undefined) {
+          return form;
+        }
+        return fillForm(form, map, finalApplicant);
+      })),
   );
 
   // Fill and collate guides.
   // const guideHeaders =
   const guidePartsRendered = guideTitlesAndParts.map(
-    ([guideTitle, guidePart], i) =>
-      `<h3>${i + 1}. ${guideTitle}</h3>${render(guidePart, finalApplicant)}`,
+    ([guideTitle, guidePart], i) => `<h3>${i + 1}. ${guideTitle}</h3>${render(guidePart, finalApplicant)}`,
   );
-  const guide = guidePartsRendered.join("");
+  const guide = guidePartsRendered.join('');
 
   const allDocuments: PDFDocument[] = [...forms];
 
-  const { default: html2pdf } = await import("html2pdf.js");
+  const { default: html2pdf } = await import('html2pdf.js');
 
   if (html2pdf) {
     const guidePdf = await html2pdf()
       .set({
         pagebreak: {
-          mode: ["avoid-all"],
+          mode: ['avoid-all'],
         },
         margin: 10,
       })
       .from(guide)
-      .outputPdf("arraybuffer")
+      .outputPdf('arraybuffer')
       .then(PDFDocument.load);
 
     allDocuments.unshift(guidePdf);

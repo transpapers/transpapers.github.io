@@ -4,11 +4,11 @@ import { configDefaults, defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), isoImport()],
-	test: {
-		exclude: [
-			...configDefaults.exclude,
-			'**/.*/**',
-		]
-	}
+  plugins: [react(), isoImport()],
+  test: {
+    exclude: [
+      ...configDefaults.exclude,
+      '**/.*/**',
+    ],
+  },
 });

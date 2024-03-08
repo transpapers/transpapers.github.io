@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { sampleData } from "../types/person";
+import { sampleData } from '../types/person';
 
 /**
  * Determine the properties of a `Person` accessed by `object`.
@@ -27,26 +27,26 @@ import { sampleData } from "../types/person";
  * TODO Better documentation. Typing?
  */
 export default function shakeTree(obj: any, accessed: string[] = []) {
-  const recursePropertyNames = ["documents", "map"];
+  const recursePropertyNames = ['documents', 'map'];
 
-  const functionPropertyNames = ["include", "text", "check"];
+  const functionPropertyNames = ['include', 'text', 'check'];
 
   const handler = {
     // Handle nested properties correctly.
     // cf. https://stackoverflow.com/questions/41299642/
 
     get(target: any, prop: string) {
-      if (prop === "isProxy") {
+      if (prop === 'isProxy') {
         return true;
       }
 
       const func = target[prop];
 
-      if (typeof func === "undefined") {
+      if (typeof func === 'undefined') {
         return undefined;
       }
 
-      if (!func.isProxy && typeof func === "object") {
+      if (!func.isProxy && typeof func === 'object') {
         // Ignoring ESLint here because we do actually need to mutate `target`.
         // The `no-param-reassign` rule is irrelevant since we aren't touching `arguments`.
         target[prop] = new Proxy(func, handler); // eslint-disable-line no-param-reassign

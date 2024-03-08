@@ -18,6 +18,11 @@
   "bugs": {
     "url": "https://github.com/transpapers/transpapers.github.io/issues"
   },
+  "jest": {
+    "setupFiles": [
+      "./test/vitest-setup.js"
+    ]
+  },
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
     "@types/react": "^18.2.15",
@@ -34,19 +39,20 @@
     "mocha": "^10.2.0",
     "prettier": "3.2.5",
     "typescript": "^5.1.6",
-    "typescript-language-server": "^3.3.2",
-    "vite-plugin-iso-import": "^1.1.0",
-    "vitest": "^1.0.4",
-    "vitest-axe": "^0.1.0"
+    "typescript-language-server": "^3.3.2"
   },
   "dependencies": {
     "@cantoo/pdf-lib": "^1.20.3",
+    "@testing-library/react": "^14.2.1",
     "@types/nunjucks": "^3.2.3",
     "@vitejs/plugin-react": "^4.0.3",
     "html2pdf.js": "^0.10.1",
     "nunjucks": "^3.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-iso-import": "^1.1.0",
+    "vitest": "^1.0.4",
+    "vitest-axe": "^0.1.0"
   }
 }

@@ -17,22 +17,23 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
-import { useEffect, useState } from "react";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 
-import { fields } from "./components/fields";
+import { fields } from './components/fields';
 
-import { allJurisdictions, getJurisdiction } from "./jurisdiction/all";
+import { allJurisdictions, getJurisdiction } from './jurisdiction/all';
 
-import shakeTree from "./lib/shakeTree";
+import shakeTree from './lib/shakeTree';
 
-import { Field } from "./types/field";
-import { Person } from "./types/person";
-import { Target, Process } from "./types/process";
+import { Field } from './types/field';
+import { Person } from './types/person';
+import { Target, Process } from './types/process';
+import { County } from './types/county';
 
-import Step1 from "./components/Step1";
-import Step2 from "./components/Step2";
-import Step3 from "./components/Step3";
+import Step1 from './components/Step1';
+import Step2 from './components/Step2';
+import Step3 from './components/Step3';
 
 /**
  * Convert the list of needed procedures into a list of needed field names.
@@ -43,9 +44,9 @@ function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
 
   Object.entries(fields).forEach(([fieldName, field]) => {
     if (
-      field.include !== undefined &&
-      field.include(applicant) &&
-      !names.includes(fieldName)
+      field.include !== undefined
+      && field.include(applicant)
+      && !names.includes(fieldName)
     ) {
       names.push(fieldName);
     }
@@ -55,9 +56,9 @@ function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
 }
 
 function App() {
-  const [residentJurisdiction, setResidentJurisdiction] = useState(undefined);
-  const [birthJurisdiction, setBirthJurisdiction] = useState(undefined);
-  const [county, setCounty] = useState(undefined);
+  const [residentJurisdiction, setResidentJurisdiction] = useState<string | undefined>(undefined);
+  const [birthJurisdiction, setBirthJurisdiction] = useState<string | undefined>(undefined);
+  const [county, setCounty] = useState<County | undefined>(undefined);
 
   const [allProcesses, setAllProcesses] = useState<{
     [key in Target]?: Process;
@@ -70,10 +71,9 @@ function App() {
 
   // Step 2: generate allProcs from [birthJurisdiction, residentJurisdiction].
   useEffect(() => {
-    const residentProcesses =
-      getJurisdiction(residentJurisdiction)?.processes ?? {};
+    const residentProcesses = getJurisdiction(residentJurisdiction)?.processes ?? {};
     const birthProcesses = getJurisdiction(birthJurisdiction)?.processes ?? {};
-    const federalProcesses = getJurisdiction("Federal")?.processes ?? {};
+    const federalProcesses = getJurisdiction('Federal')?.processes ?? {};
 
     let allProcs: { [key in Target]?: Process } = {};
     allProcs[Target.BirthRecord] = birthProcesses[Target.BirthRecord];
@@ -141,9 +141,9 @@ function App() {
         return neededProcesses.length > 0;
       case 0:
         return (
-          birthJurisdiction !== undefined &&
-          residentJurisdiction !== undefined &&
-          county !== undefined
+          birthJurisdiction !== undefined
+          && residentJurisdiction !== undefined
+          && county !== undefined
         );
       default:
         return false;
@@ -163,8 +163,9 @@ function App() {
                 if (stepNo > 0) setStepNo(stepNo - 1);
               }}
             >
-              {" "}
-              Back{" "}
+              {' '}
+              Back
+              {' '}
             </button>
           )}
         </div>
@@ -178,8 +179,9 @@ function App() {
                 if (stepNo < 2) setStepNo(stepNo + 1);
               }}
             >
-              {" "}
-              Next{" "}
+              {' '}
+              Next
+              {' '}
             </button>
           )}
         </div>
