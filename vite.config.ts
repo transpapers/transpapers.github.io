@@ -8,11 +8,20 @@ import { configDefaults, defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [react()],
   test: {
+    deps: {
+      optimizer: {
+        web: {
+          include: ['vitest-canvas-mock'],
+        },
+      },
+    },
     environment: 'jsdom',
     exclude: [
       ...configDefaults.exclude,
       '**/.*/**',
     ],
+    passWithNoTests: true,
     setupFiles: ['test/vitest-setup.ts'],
+    threads: false,
   },
 });

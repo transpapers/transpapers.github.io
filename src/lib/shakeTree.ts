@@ -17,7 +17,10 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { sampleData } from '../types/person';
+import { Person, sampleData } from '../types/person';
+import { Process } from '../types/process';
+
+import { fields } from '../components/fields';
 
 /**
  * Determine the properties of a `Person` accessed by `object`.
@@ -26,7 +29,7 @@ import { sampleData } from '../types/person';
  *
  * TODO Better documentation. Typing?
  */
-export default function shakeTree(obj: any, accessed: string[] = []) {
+export function shakeTree(obj: any, accessed: string[] = []) {
   const recursePropertyNames = ['documents', 'map'];
 
   const functionPropertyNames = ['include', 'text', 'check'];
@@ -83,4 +86,24 @@ export default function shakeTree(obj: any, accessed: string[] = []) {
   }
 
   return accessed;
+}
+
+/**
+ * Convert the list of needed procedures into a list of needed field names.
+ */
+export function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
+  const names: string[] = [];
+  neededProcs.forEach((process) => shakeTree(process, names));
+
+  Object.entries(fields).forEach(([fieldName, field]) => {
+    if (
+      field.include !== undefined
+      && field.include(applicant)
+      && !names.includes(fieldName)
+    ) {
+      names.push(fieldName);
+    }
+  });
+
+  return names;
 }

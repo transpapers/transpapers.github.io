@@ -41,7 +41,7 @@ import { Formfill } from '../types/formfill';
  * @param {Person} applicant
  * @return {PDFDocument} Filled PDF document
  */
-function fillForm(
+export function fillForm(
   doc: PDFDocument,
   fills: Formfill[],
   applicant: Person,
@@ -110,7 +110,9 @@ function fillForm(
   });
 
   // Flatten the form fields into the document.
-  form.flatten();
+  try {
+    form.flatten();
+  } catch {}
 
   return doc;
 }
@@ -148,7 +150,7 @@ function makeFinalApplicant(applicant: Person): Person | undefined {
  * @param {Person} applicant
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export default async function makeFinalDocument(
+export async function makeFinalDocument(
   processes: Process[],
   applicant: Person,
 ): Promise<Uint8Array | undefined> {

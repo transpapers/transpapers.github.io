@@ -380,15 +380,15 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: '' }),
-    field: 'App DOB M',
+    field: 'Applicant DOB M',
   },
   {
     text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.DAY], separator: '' }),
-    field: 'App DOB D',
+    field: 'Applicant DOB D',
   },
   {
     text: (applicant) => formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: '' }),
-    field: 'App DOB Y',
+    field: 'Applicant DOB Y',
   },
   {
     check: (applicant) => applicant.gender === GenderMarker.M,

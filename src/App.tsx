@@ -24,36 +24,15 @@ import { fields } from './components/fields';
 
 import { getJurisdiction } from './jurisdiction/all';
 
-import shakeTree from './lib/shakeTree';
+import { neededFieldNames } from './lib/shakeTree';
 
 import { Field } from './types/field';
-import { Person } from './types/person';
 import { Target, Process } from './types/process';
 import { County } from './types/county';
 
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
-
-/**
- * Convert the list of needed procedures into a list of needed field names.
- */
-function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
-  const names: string[] = [];
-  neededProcs.forEach((process) => shakeTree(process, names));
-
-  Object.entries(fields).forEach(([fieldName, field]) => {
-    if (
-      field.include !== undefined
-      && field.include(applicant)
-      && !names.includes(fieldName)
-    ) {
-      names.push(fieldName);
-    }
-  });
-
-  return names;
-}
 
 function App() {
   const [residentJurisdiction, setResidentJurisdiction] = useState<string | undefined>(undefined);

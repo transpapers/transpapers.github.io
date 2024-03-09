@@ -20,7 +20,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import makeFinalDocument from '../lib/fill';
+import { makeFinalDocument } from '../lib/fill';
 
 import { County } from '../types/county';
 import { Field } from '../types/field';
