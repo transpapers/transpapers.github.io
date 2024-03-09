@@ -50,6 +50,7 @@ export const fields: { [key: string]: Field } = {
   },
   reasonForNameChange: {
     title: 'Reason for name change',
+    subtitle: 'If you want to avoid mentioning transition we recommend “I want to be known legally as I am by my family and friends”.',
     name: 'name-change-reason',
     type: 'string',
     default: 'Gender transition',
@@ -65,7 +66,7 @@ export const fields: { [key: string]: Field } = {
       </>
     ),
     subtitle:
-      'This prevents third parties from accessing your deadname and assigned gender.',
+      'This prevents third parties from accessing your deadname and assigned gender at birth.',
     name: 'sealBirthCertificate',
     type: 'boolean',
     default: true,
