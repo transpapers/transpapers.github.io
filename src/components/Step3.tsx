@@ -122,14 +122,8 @@ export default function Step3(props: Step3Props) {
         onSubmit={handleFormChange}
         onChange={handleFormChange}
       >
-        {visibleFields.map((field) => {
-          if (field.include !== undefined) {
-            const notIncluded = !field.include(data);
-            // TODO Fix this, Sasha, you slut. - Sasha
-            return notIncluded ? '' : renderField(field, residentJurisdiction ?? '');
-          }
-          return true;
-        })}
+        { /* TODO Fix the null-coalesce Sasha you slut - Sasha */ }
+        {visibleFields.map((field) => renderField(field, residentJurisdiction ?? ''))}
         {visibleFields.length > 0 && modified && (
           <input
             type="submit"
