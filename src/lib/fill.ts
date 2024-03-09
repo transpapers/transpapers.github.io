@@ -112,7 +112,13 @@ export function fillForm(
   // Flatten the form fields into the document.
   try {
     form.flatten();
-  } catch {}
+  } catch {
+    // We get some ignorable errors in flattening forms here because of an
+    // upstream bug.
+    // TODO Fork and fix this.
+    //
+    // Cf. https://github.com/Hopding/pdf-lib/issues/1281
+  }
 
   return doc;
 }
