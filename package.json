@@ -5,27 +5,69 @@
   "main": "src/index.html",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0; tsc --noEmit --pretty",
+    "test": "vitest run",
+    "cov": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/transpapers/transpapers.github.io.git"
   },
+  "type": "module",
   "author": "Sasha Lišková",
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/transpapers/transpapers.github.io/issues"
   },
+  "jest": {
+    "setupFiles": [
+      "./test/vitest-setup.js"
+    ]
+  },
+  "pre-commit": [
+    "build",
+    "lint",
+    "test"
+  ],
+
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
+    "@testing-library/dom": "^9.3.4",
+    "@types/jest-axe": "^3.5.9",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "@vitest/coverage-v8": "^1.3.1",
+    "axe-core": "^4.8.4",
+    "eslint": "^8.51.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "jsdom": "^24.0.0",
+    "mocha": "^10.2.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "3.2.5",
     "typescript": "^5.1.6",
     "typescript-language-server": "^3.3.2",
-    "vite": "^4.3.9"
+    "vitest-canvas-mock": "^0.3.3"
   },
   "dependencies": {
+    "@cantoo/pdf-lib": "^1.20.3",
+    "@testing-library/react": "^14.2.1",
     "@types/nunjucks": "^3.2.3",
+    "@vitejs/plugin-react": "^4.0.3",
     "html2pdf.js": "^0.10.1",
     "nunjucks": "^3.2.4",
-    "pdf-lib": "^1.17.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^4.4.5",
+    "vite-plugin-iso-import": "^1.1.0",
+    "vitest": "^1.0.4",
+    "vitest-axe": "^0.1.0"
   }
 }
