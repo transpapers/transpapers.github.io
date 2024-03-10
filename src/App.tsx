@@ -34,14 +34,39 @@ import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 
+function toposort(procs: Process[]): Process[] | undefined {
+  const sorted: Process[] = [];
+  const filledDependencies: (Target | undefined)[] = [];
+
+  while (sorted.length < procs.length) {
+    const nextProc = procs.find((proc) => {
+      if (filledDependencies.includes(proc.target)) {
+        return false;
+      }
+
+      if (proc.depends === undefined) {
+        return true;
+      }
+
+      return proc.depends.every((target) => filledDependencies.includes(target));
+    });
+
+    if (nextProc === undefined) {
+      // No topological sort exists.
+      return undefined;
+    }
+    sorted.push(nextProc);
+    filledDependencies.push(nextProc.target);
+  }
+  return sorted;
+}
+
 function App() {
   const [residentJurisdiction, setResidentJurisdiction] = useState<string | undefined>(undefined);
   const [birthJurisdiction, setBirthJurisdiction] = useState<string | undefined>(undefined);
   const [county, setCounty] = useState<County | undefined>(undefined);
 
-  const [allProcesses, setAllProcesses] = useState<{
-    [key in Target]?: Process;
-  }>({});
+  const [allProcesses, setAllProcesses] = useState<Process[]>([]);
   const [neededProcesses, setNeededProcesses] = useState<Process[]>([]);
   const [visibleFields, setVisibleFields] = useState<Field[]>([]);
   const [data, setData] = useState({});
@@ -50,17 +75,19 @@ function App() {
 
   // Step 2: generate allProcs from [birthJurisdiction, residentJurisdiction].
   useEffect(() => {
-    const residentProcesses = getJurisdiction(residentJurisdiction)?.processes ?? {};
-    const birthProcesses = getJurisdiction(birthJurisdiction)?.processes ?? {};
-    const federalProcesses = getJurisdiction('Federal')?.processes ?? {};
+    const residentProcesses = getJurisdiction(residentJurisdiction)?.processes ?? [];
+    const birthProcesses = getJurisdiction(birthJurisdiction)?.processes ?? [];
+    const federalProcesses = getJurisdiction('Federal')?.processes ?? [];
 
-    let allProcs: { [key in Target]?: Process } = {};
-    allProcs[Target.BirthRecord] = birthProcesses[Target.BirthRecord];
-    allProcs = Object.assign(allProcs, { ...residentProcesses });
-    allProcs = Object.assign(allProcs, { ...federalProcesses });
+    const allProcs: Process[] = [...residentProcesses, ...birthProcesses, ...federalProcesses];
 
-    setAllProcesses(allProcs);
-    setNeededProcesses(Object.values(allProcs));
+    const sorted = toposort(allProcs);
+    if (sorted === undefined) {
+      // Topological sort failed.
+    } else {
+      setAllProcesses(sorted);
+      setNeededProcesses(sorted);
+    }
   }, [residentJurisdiction, birthJurisdiction]);
 
   // Step 3: Generate form fields from selected processes.

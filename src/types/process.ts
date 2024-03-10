@@ -42,7 +42,7 @@ export interface Process {
    * The object of filing the documents; e.g., birth record, primary
    * identification, passport, etc.
    */
-  target: Target;
+  target?: Target;
 
   /**
    * A list of other targets required before or concurrently with this one.
