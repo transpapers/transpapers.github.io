@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Target, Process } from '../types/process';
+import { Process } from '../types/process';
 import { County } from '../types/county';
 
 import {
@@ -25,6 +25,7 @@ import {
   michiganGenderMarker,
   michiganNameChange,
   michiganPrimaryIdentification,
+  michiganPostamble,
 } from './Michigan/process';
 import michiganCounties from './Michigan/counties';
 
@@ -54,7 +55,7 @@ export interface Jurisdiction {
   /**
    * Map from `Target`s to `Process`es.
    */
-  processes?: { [key in Target]?: Process };
+  processes?: Process[];
 
   /**
    * Map of counties (or county equivalents.)
@@ -69,21 +70,22 @@ export interface Jurisdiction {
 
 export const michigan: Jurisdiction = {
   name: 'Michigan',
-  processes: {
-    [Target.BirthRecord]: michiganBirthRecord,
-    [Target.GenderMarker]: michiganGenderMarker,
-    [Target.NameChange]: michiganNameChange,
-    [Target.PrimaryIdentification]: michiganPrimaryIdentification,
-  },
+  processes: [
+    michiganBirthRecord,
+    michiganGenderMarker,
+    michiganNameChange,
+    michiganPrimaryIdentification,
+    michiganPostamble,
+  ],
   counties: michiganCounties,
 };
 
 export const federal: Jurisdiction = {
   name: 'Federal',
-  processes: {
-    [Target.SocialSecurity]: socialSecurity,
-    [Target.Passport]: passport,
-  },
+  processes: [
+    socialSecurity,
+    passport,
+  ],
   isFederal: true,
 };
 

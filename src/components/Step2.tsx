@@ -25,40 +25,46 @@ import { Process, Target, targets } from '../types/process';
  * Pull in any needed dependencies of the selected processes.
  */
 function resolveDependencies(
-  allProcs: { [key in Target]?: Process },
-  selectedProcs: Target[],
-): Process[] {
-  const allTargets: Set<Target> = new Set();
+  allProcs: Process[],
+  selectedProcs: Process[],
+): Process[] | undefined {
+  const neededProcs: Process[] = [];
 
-  // Resolve dependencies.
-  let newTargets: Set<Target> = new Set(selectedProcs);
-  do {
-    newTargets.forEach((dep) => allTargets.add(dep));
+  const procsToResolve: Process[] = [...selectedProcs];
+  let resolutionFailed = false;
+  while (!resolutionFailed && procsToResolve.length > 0) {
+    const proc = procsToResolve.pop();
+    const depends: Target[] = proc?.depends || [];
 
-    const currentTargets = [...allTargets].reduce((list, target) => {
-      const deps = allProcs[target]?.depends;
-      if (deps !== undefined) {
-        deps.forEach((thisDep) => {
-          if (!allTargets.has(thisDep)) {
-            list.push(thisDep);
-          }
-        });
+    const thisResolutionFailed = depends.reduce((failed, depend) => {
+      if (failed) {
+        return true;
       }
-      return list;
-    }, [] as Target[]);
+      const alreadySatisfied = neededProcs.some((p) => p.target === depend);
 
-    newTargets = new Set(currentTargets);
-  } while (newTargets.size > 0);
+      if (!alreadySatisfied) {
+        const satisfiesIt = allProcs.find((p) => p.target === depend);
+        if (satisfiesIt === undefined) {
+          // Could not satisfy this dependency.
+          return true;
+        }
+        procsToResolve.push(satisfiesIt);
+      }
 
-  const procs: Process[] = [...allTargets]
-    .map((target) => allProcs[target])
-    .filter((proc: Process | undefined): proc is Process => !!proc);
+      return false;
+    }, false);
 
-  return procs;
+    resolutionFailed ||= thisResolutionFailed;
+  }
+
+  if (resolutionFailed) {
+    return undefined;
+  }
+  return neededProcs;
 }
 
 interface Step2Props {
-  allProcesses: { [key in Target]?: Process };
+  allProcesses: Process[];
   neededProcesses: Process[];
   setNeededProcesses: React.Dispatch<React.SetStateAction<Process[]>>;
 }
@@ -68,16 +74,22 @@ export default function Step2(props: Step2Props) {
 
   function updateNeededProcesses() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
-    const selectedProcesses = Array.from(checkboxes).map(
+    const selectedTargets = Array.from(checkboxes).map(
       (checkbox) => checkbox.id as Target,
     );
+    const selectedProcesses = allProcesses
+      .filter((proc) => proc.target && selectedTargets.includes(proc.target));
 
     const allNeededProcesses = resolveDependencies(
       allProcesses,
       selectedProcesses,
     );
 
-    setNeededProcesses(allNeededProcesses);
+    if (allNeededProcesses === undefined) {
+      // console.log('Could not resolve all dependencies.');
+    } else {
+      setNeededProcesses(allNeededProcesses);
+    }
   }
 
   return (
