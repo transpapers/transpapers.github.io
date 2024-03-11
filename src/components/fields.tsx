@@ -52,7 +52,7 @@ export const fields: { [key: string]: Field } = {
   reasonForNameChange: {
     title: 'Reason for name change',
     subtitle: 'If you want to avoid mentioning transition we recommend “I want to be known legally as I am by my family and friends”.',
-    name: 'name-change-reason',
+    name: 'nameChangeReason',
     type: 'string',
     default: 'Gender transition',
   },
