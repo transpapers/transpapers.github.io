@@ -28,6 +28,7 @@ import {
   NameField,
   DateField,
   TelField,
+  EmailField,
   CountyField,
 } from './fieldsHtml';
 
@@ -150,8 +151,8 @@ export const fields: { [key: string]: Field } = {
     type: 'string',
   },
   city: {
-    title: 'City',
-    name: 'city',
+    title: 'City of residence',
+    name: 'residentCity',
     type: 'string',
   },
   county: {
@@ -221,6 +222,9 @@ export function renderField(field: Field, jurisdiction: string) {
   }
   if (field.type === 'county') {
     return <CountyField jurisdiction={jurisdiction} />;
+  }
+  if (field.type === 'email') {
+    return <EmailField field={field} />;
   }
 
   return '';

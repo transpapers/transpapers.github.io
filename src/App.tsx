@@ -93,6 +93,7 @@ function App() {
   // Step 3: Generate form fields from selected processes.
   useEffect(() => {
     const fieldNames = neededFieldNames(neededProcesses, data);
+    console.log(fieldNames);
     const neededFields = Object.entries(fields)
       .filter(([name]) => fieldNames.includes(name))
       .map(([, field]) => field);
