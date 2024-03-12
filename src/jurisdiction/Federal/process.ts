@@ -31,6 +31,7 @@ export const socialSecurity: Process = {
       name: 'Application for a Social Security Card',
       id: 'SS-5',
       filename: 'Federal/ss-5.pdf',
+      guide: 'Federal/ss-5.html.njk',
       map: ssnMap,
     },
   ],
