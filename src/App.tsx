@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react';
 
 import { fields } from './components/fields';
 
-import { getJurisdiction } from './jurisdiction/all';
+import { getProcesses } from './jurisdiction/all';
 
 import { neededFieldNames } from './lib/shakeTree';
 
@@ -75,11 +75,17 @@ function App() {
 
   // Step 2: generate allProcs from [birthJurisdiction, residentJurisdiction].
   useEffect(() => {
-    const residentProcesses = getJurisdiction(residentJurisdiction)?.processes ?? [];
-    const birthProcesses = getJurisdiction(birthJurisdiction)?.processes ?? [];
-    const federalProcesses = getJurisdiction('Federal')?.processes ?? [];
+    const residentProcesses = getProcesses(residentJurisdiction)
+      .filter((proc) => !proc.isBirth);
+
+    const birthProcesses = getProcesses(birthJurisdiction)
+      .filter((proc) => proc.isBirth);
+
+    const federalProcesses = getProcesses('Federal');
 
     const allProcs: Process[] = [...residentProcesses, ...birthProcesses, ...federalProcesses];
+
+    console.log(residentProcesses, birthProcesses, federalProcesses);
 
     const sorted = toposort(allProcs);
     if (sorted === undefined) {
@@ -106,6 +112,7 @@ function App() {
       case 1:
         return (
           <Step2
+            birthJurisdiction={birthJurisdiction}
             allProcesses={allProcesses}
             neededProcesses={neededProcesses}
             setNeededProcesses={setNeededProcesses}
@@ -142,8 +149,7 @@ function App() {
         return neededProcesses.length > 0;
       case 0:
         return (
-          birthJurisdiction !== undefined
-          && residentJurisdiction !== undefined
+          residentJurisdiction !== undefined
           && county !== undefined
         );
       default:

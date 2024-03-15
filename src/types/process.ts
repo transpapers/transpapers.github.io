@@ -54,6 +54,12 @@ export interface Process {
    * An ordered list of documents to attach.
    */
   documents: Document[];
+
+  /**
+   * `true` if this process requires its applicant to be born in its
+   * jurisdiction.
+   */
+  isBirth?: boolean;
 }
 
 /**

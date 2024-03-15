@@ -30,7 +30,6 @@
     "lint",
     "test"
   ],
-
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
     "@testing-library/dom": "^9.3.4",
@@ -62,9 +61,11 @@
     "@types/nunjucks": "^3.2.3",
     "@vitejs/plugin-react": "^4.0.3",
     "html2pdf.js": "^0.10.1",
+    "jspdf": "^2.5.1",
     "nunjucks": "^3.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.0",
     "vite": "^4.4.5",
     "vite-plugin-iso-import": "^1.1.0",
     "vitest": "^1.0.4",

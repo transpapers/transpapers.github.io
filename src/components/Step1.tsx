@@ -118,6 +118,15 @@ export default function Step1(props: Step1Props) {
             <label htmlFor={`birth-${state}`}>{state}</label>
           </div>
         ))}
+        <div key={`birth-other`}>
+          <input
+            type="radio"
+            id={`birth-other`}
+            name="birth"
+            onChange={() => setBirthJurisdiction(undefined)}
+          />
+          <label htmlFor={`birth-other`}>somewhere else</label>
+        </div>
       </fieldset>
     </>
   );

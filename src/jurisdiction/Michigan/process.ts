@@ -152,6 +152,7 @@ export const michiganBirthRecord: Process = {
       filename: 'Michigan/acceptable-id.pdf',
     },
   ],
+  isBirth: true,
 };
 
 export const michiganPostamble: Process = {

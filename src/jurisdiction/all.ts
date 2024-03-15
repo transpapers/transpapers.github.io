@@ -97,3 +97,21 @@ export function getJurisdiction(name: string | undefined): Jurisdiction | undefi
   }
   return allJurisdictions.find((jurisdiction) => jurisdiction.name === name);
 }
+
+export function getProcesses(name: string | undefined): Process[] {
+  if (name === undefined) {
+    return [];
+  }
+
+  const jurisdiction = getJurisdiction(name);
+
+  if (jurisdiction === undefined) {
+    return [];
+  }
+
+  if (jurisdiction.processes === undefined) {
+    return [];
+  }
+
+  return jurisdiction.processes;
+}

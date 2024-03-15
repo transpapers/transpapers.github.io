@@ -64,13 +64,14 @@ function resolveDependencies(
 }
 
 interface Step2Props {
+  birthJurisdiction: string | undefined
   allProcesses: Process[];
   neededProcesses: Process[];
   setNeededProcesses: React.Dispatch<React.SetStateAction<Process[]>>;
 }
 
 export default function Step2(props: Step2Props) {
-  const { allProcesses, neededProcesses, setNeededProcesses } = props;
+  const { birthJurisdiction, allProcesses, neededProcesses, setNeededProcesses } = props;
 
   function updateNeededProcesses() {
     const checkboxes = document.querySelectorAll('#processes input:checked');
@@ -85,11 +86,14 @@ export default function Step2(props: Step2Props) {
       selectedProcesses,
     );
 
-    if (allNeededProcesses === undefined) {
-      // console.log('Could not resolve all dependencies.');
-    } else {
+    if (allNeededProcesses !== undefined) {
       setNeededProcesses(allNeededProcesses);
     }
+  }
+
+  let availableTargets = Object.values(Target);
+  if (birthJurisdiction === undefined) {
+    availableTargets = availableTargets.filter((target) => target !== Target.BirthRecord);
   }
 
   return (
@@ -99,7 +103,7 @@ export default function Step2(props: Step2Props) {
       <fieldset id="processes">
         <legend>I need to...</legend>
         <ul>
-          {Object.values(Target).map((value) => (
+          {availableTargets.map((value) => (
             <li key={value}>
               <input
                 type="checkbox"

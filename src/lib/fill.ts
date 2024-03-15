@@ -206,6 +206,7 @@ export async function makeFinalDocument(
         if (map === undefined) {
           return form;
         }
+
         return fillForm(form, map, finalApplicant);
       })),
   );
@@ -219,21 +220,25 @@ export async function makeFinalDocument(
 
   const allDocuments: PDFDocument[] = [...forms];
 
-  const { default: html2pdf } = await import('html2pdf.js');
 
-  if (html2pdf) {
-    const guidePdf = await html2pdf()
-      .set({
-        pagebreak: {
-          mode: ['avoid-all'],
+  const { default: jsPDF } = await import('jspdf');
+  // const { default: html2pdf } = await import('html2pdf.js');
+
+  if (jsPDF) {
+    const guidePDF = new jsPDF();
+
+    console.log(guide);
+    const document = await guidePDF
+      .html(guide, {
+        callback: async (d) => {
+          let doc = d.output('arraybuffer');
+          console.log(doc);
+          return await PDFDocument.load(doc);
         },
-        margin: 10,
-      })
-      .from(guide)
-      .outputPdf('arraybuffer')
-      .then(PDFDocument.load);
+        autoPaging: 'text'
+      });
 
-    allDocuments.unshift(guidePdf);
+    allDocuments.unshift(document);
   }
 
   const result = await PDFDocument.create();
