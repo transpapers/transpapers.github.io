@@ -19,14 +19,44 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { Provider as StoreProvider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const app = document.getElementById('app');
+import store from './store';
 
-if (app !== null) {
-  ReactDOM.createRoot(app).render(
+import Root from './components/Root';
+import Step1 from './components/Step1';
+import Step2 from './components/Step2';
+import Step3 from './components/Step3';
+
+
+const root = document.getElementById('root');
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+  },
+  {
+    path: '/step1',
+    element: <Step1 />,
+  },
+  {
+    path: 'step2',
+    element: <Step2 />,
+  },
+  {
+    path: 'step3',
+    element: <Step3 />,
+  }
+]);
+
+if (root !== null) {
+  ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <App />
+      <StoreProvider store={store}>
+        <RouterProvider router={router} />
+      </StoreProvider>
     </React.StrictMode>,
   );
 }

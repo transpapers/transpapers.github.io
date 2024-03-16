@@ -19,33 +19,19 @@
 
 import * as React from 'react';
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
-import reducers from '../slice';
-import { updatePerson } from '../slice';
-
-
-const personReducer = reducers.person;
-
-const Step1 = () => {
-  const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    dispatch(updatePerson(data));
-    // navigate('/step2');
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('residentState')} />
-      <input type='submit' />
-    </form>
-  );
-};
-
-export default Step1;
+export default function Noscript() {
+    return (
+    <noscript style={{border: '2px solid red', borderRadius: '10px', margin: '1lh'}}>
+      <h2>Please enable JavaScript.</h2>
+      <p>
+        'Transpapers requires JavaScript to function. It&apos;s licensed freely under GPLv3, with a '
+        <a href='https://github.com/transpapers/transpapers.github.io/wiki#local-usage'>
+        'self-hosted option.'
+        </a>
+        {' '}If you are encountering issues with GNU LibreJS, please open a GitHub
+        issue or email the maintainers.
+      </p>
+    </noscript>
+    );
+}

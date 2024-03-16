@@ -20,6 +20,10 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { StateMachineProvider, createStore } from 'little-state-machine';
+
 import { fields } from './components/fields';
 
 import { getProcesses } from './jurisdiction/all';
@@ -60,6 +64,10 @@ function toposort(procs: Process[]): Process[] | undefined {
   }
   return sorted;
 }
+
+createStore({
+  data: {},
+});
 
 function App() {
   const [residentJurisdiction, setResidentJurisdiction] = useState<string | undefined>(undefined);
@@ -158,42 +166,13 @@ function App() {
   };
 
   return (
-    <div id="main-form">
-      {thisStepComponent()}
-      <footer className="step-nav">
-        <div className="prev">
-          {stepNo > 0 && (
-            <button
-              className="prev"
-              type="button"
-              onClick={() => {
-                if (stepNo > 0) setStepNo(stepNo - 1);
-              }}
-            >
-              {' '}
-              Back
-              {' '}
-            </button>
-          )}
-        </div>
-        <div className="next">
-          {stepNo < 2 && (
-            <button
-              className="next"
-              type="button"
-              disabled={!nextStepIsReady()}
-              onClick={() => {
-                if (stepNo < 2) setStepNo(stepNo + 1);
-              }}
-            >
-              {' '}
-              Next
-              {' '}
-            </button>
-          )}
-        </div>
-      </footer>
-    </div>
+    <StateMachineProvider>
+      <Router>
+        <Route exact path="/" component={Step1} />
+        <Route path="/step2" component={Step2} />
+        <Route path="/step3" component={Step3} />
+      </Router>
+    </StateMachineProvider>
   );
 }
 

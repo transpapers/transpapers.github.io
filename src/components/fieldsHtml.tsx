@@ -41,33 +41,31 @@ function GenericField(field: Field, innards: JSX.Element): JSX.Element {
 
 interface FieldConstructorProps {
   field: Field;
+  register: (name: string) => Object;
 }
 
 interface CountyFieldConstructorProps {
   jurisdiction: string;
 }
 
-export function StringField({ field }: FieldConstructorProps): JSX.Element {
+export function StringField({ field, register }: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
-      id={field.name}
-      name={field.name}
       type="text"
-      defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+      {...register(field.name)}
     />
   );
 
   return GenericField(field, innards);
 }
 
-export function CheckboxField({ field }: FieldConstructorProps): JSX.Element {
+export function CheckboxField({ field, register }: FieldConstructorProps): JSX.Element {
   return (
     <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
-        id={field.name}
-        name={field.name}
         type="checkbox"
         defaultChecked={field.hasOwnProperty('default') && field.default}
+        {...register(field.name)}
       />
       <div>
         <span className="title">{field.title}</span>
@@ -81,7 +79,7 @@ export function CheckboxField({ field }: FieldConstructorProps): JSX.Element {
   );
 }
 
-export function OptionField({ field }: FieldConstructorProps): JSX.Element {
+export function OptionField({ field, register }: FieldConstructorProps): JSX.Element {
   const options = field.options || {};
   return (
     <fieldset>
@@ -90,10 +88,8 @@ export function OptionField({ field }: FieldConstructorProps): JSX.Element {
       {Object.entries(options).map(([key, value]) => (
         <label key={`${field.name}:${key}`} htmlFor={`${field.name}:${key}`}>
           <input
-            id={`${field.name}:${key}`}
-            name={field.name}
             type="radio"
-            value={key}
+            {...register(field.name)}
           />
           {value}
         </label>
@@ -102,7 +98,7 @@ export function OptionField({ field }: FieldConstructorProps): JSX.Element {
   );
 }
 
-export function SelectField({ field }: FieldConstructorProps): JSX.Element {
+export function SelectField({ field, register }: FieldConstructorProps): JSX.Element {
   const options = field.options || {};
   const innards = (
     <select name={field.name} id={field.name}>

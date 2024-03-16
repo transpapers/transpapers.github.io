@@ -17,35 +17,37 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+const stepSlice = createSlice({
+  name: 'step',
+  initialState: {stepNo: 0}, // TODO Need a variable for this.
+  reducers: {
+    nextStep: (state) => {
+      state.stepNo += 1
+    },
+    prevStep: (state) => {
+      state.stepNo -= 1
+    },
+  },
+});
 
-import reducers from '../slice';
-import { updatePerson } from '../slice';
+const personSlice = createSlice({
+    name: 'person',
+    initialState: {},
+    reducers: {
+        updatePerson: (state, action) => {
+            const data = action.payload;
+            Object.assign(state, data);
+        },
+    },
+});
 
-
-const personReducer = reducers.person;
-
-const Step1 = () => {
-  const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    dispatch(updatePerson(data));
-    // navigate('/step2');
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('residentState')} />
-      <input type='submit' />
-    </form>
-  );
+const reducers = {
+    step: stepSlice.reducer,
+    person: personSlice.reducer
 };
 
-export default Step1;
+export const { updatePerson } = personSlice.actions;
+
+export default reducers;

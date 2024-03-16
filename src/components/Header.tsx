@@ -19,33 +19,11 @@
 
 import * as React from 'react';
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import reducers from '../slice';
-import { updatePerson } from '../slice';
-
-
-const personReducer = reducers.person;
-
-const Step1 = () => {
-  const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    dispatch(updatePerson(data));
-    // navigate('/step2');
-  };
-
+export default function Header() {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('residentState')} />
-      <input type='submit' />
-    </form>
-  );
-};
-
-export default Step1;
+    <header>
+      <h1>&#x26a7; Transpapers</h1>
+      <span>Almost-fully automated trans rights</span>
+    </header>
+  )
+}
