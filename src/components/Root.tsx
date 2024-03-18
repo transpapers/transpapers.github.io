@@ -34,13 +34,7 @@ export default function Root() {
   };
 
   return (
-    <>
-        <Header />
-        <Noscript />
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input type="submit" />
-        </form>
-        <main>
+    <main>
         <section>
             <p>
             <strong>In the news:</strong>
@@ -127,7 +121,9 @@ export default function Root() {
             >
             </p>
         </section>
-        </main>
-    </>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input type="submit" value="Ready to get started?"/>
+        </form>
+    </main>
   );
 }

@@ -24,8 +24,6 @@ import {
   PDFRadioGroup,
 } from '@cantoo/pdf-lib';
 
-import { render } from 'nunjucks';
-
 import { numericalAge } from './util';
 
 import { getJurisdiction } from '../jurisdiction/all';
@@ -123,7 +121,7 @@ export function fillForm(
   return doc;
 }
 
-function makeFinalApplicant(applicant: Person): Person | undefined {
+function finalizeApplicant(applicant: Person): Person | undefined {
   /**
    * Infer any extra values for the applicant as needed.
    * Do any additional assignments here.
@@ -156,12 +154,12 @@ function makeFinalApplicant(applicant: Person): Person | undefined {
  * @param {Person} applicant
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export async function makeFinalDocument(
+export async function compileDocuments(
   processes: Process[],
   applicant: Person,
 ): Promise<Uint8Array | undefined> {
   const docs: Document[] = [];
-  const finalApplicant = makeFinalApplicant(applicant);
+  const finalApplicant = finalizeApplicant(applicant);
 
   if (finalApplicant === undefined) {
     return undefined;
@@ -175,10 +173,7 @@ export async function makeFinalDocument(
     });
   });
 
-  // Build the constituent forms and guide parts.
-  // TODO This is a bit of a dirty hack, needs cleanup.
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
-  const guideTitlesAndParts: [string, string][] = [];
 
   docs
     .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
@@ -187,15 +182,7 @@ export async function makeFinalDocument(
         const filename = `/forms/${doc.filename}`;
         formFilenamesAndMaps.push([filename, doc.map]);
       }
-
-      if (doc.guide !== undefined) {
-        const guidePart = `/guides/${doc.guide}`;
-        const guideTitle = doc.name || '';
-        guideTitlesAndParts.push([guideTitle, guidePart]);
-      }
     });
-
-  guideTitlesAndParts.unshift(['Preamble', '/guides/preamble.html.njk']);
 
   // Fill forms.
   const forms = await Promise.all(
@@ -211,41 +198,15 @@ export async function makeFinalDocument(
       })),
   );
 
-  // Fill and collate guides.
-  // const guideHeaders =
-  const guidePartsRendered = guideTitlesAndParts.map(
-    ([guideTitle, guidePart], i) => `<h3>${i + 1}. ${guideTitle}</h3>${render(guidePart, finalApplicant)}`,
-  );
-  const guide = guidePartsRendered.join('');
-
   const allDocuments: PDFDocument[] = [...forms];
-
-
-  const { default: jsPDF } = await import('jspdf');
-  // const { default: html2pdf } = await import('html2pdf.js');
-
-  if (jsPDF) {
-    const guidePDF = new jsPDF();
-
-    console.log(guide);
-    const document = await guidePDF
-      .html(guide, {
-        callback: async (d) => {
-          let doc = d.output('arraybuffer');
-          console.log(doc);
-          return await PDFDocument.load(doc);
-        },
-        autoPaging: 'text'
-      });
-
-    allDocuments.unshift(document);
-  }
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
-    allDocuments.map((doc) => {
-      const numPages = doc.getPageCount();
-      return result.copyPages(doc, [...Array(numPages).keys()]);
+    allDocuments
+      .filter((doc) => doc !== undefined)
+      .map((doc) => {
+        const numPages = doc.getPageCount();
+        return result.copyPages(doc, [...Array(numPages).keys()]);
     }),
   );
 

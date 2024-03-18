@@ -21,46 +21,34 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { isMinor } from '../lib/util';
 
 import { updatePerson } from '../slice';
 
-import { allJurisdictions } from '../jurisdiction/all';
-
-const Step3 = () => {
+const Step4 = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     dispatch(updatePerson(data));
-    navigate('/step4');
-  };
 
-  const { residentJurisdiction } = useSelector((state) => state.person);
+	if (isMinor(data)) {
+        navigate('/step4b');
+	} else {
+        navigate('/step5');
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Where were you born?</h2>
-      <ul>
-      {allJurisdictions
-        .filter((jurisdiction) => !jurisdiction.isFederal)
-        .map((jurisdiction) =>
-        <li key={jurisdiction.name}><label>
-        <input {...register('birthJurisdiction', { required: true })} type='radio' value={jurisdiction.name}
-          defaultChecked={jurisdiction.name === residentJurisdiction} />
-        { jurisdiction.name }
-        </label></li>
-      )}
-        <li key={undefined}><label>
-        <input {...register('birthJurisdiction', { required: true })} type='radio' value={undefined}
-          defaultChecked={residentJurisdiction === undefined}/>
-        { "Somewhere else" }
-        </label></li>
-      </ul>
+      <h2>When were you born?</h2>
+	  <input {...register('birthdate', { required: true })} type='date' />
       <input type='submit' />
     </form>
   );
 };
 
-export default Step3;
+export default Step4;

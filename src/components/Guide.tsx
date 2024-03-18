@@ -23,44 +23,21 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updatePerson } from '../slice';
-
-import { allJurisdictions } from '../jurisdiction/all';
-
-const Step1 = () => {
+const Guide = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    dispatch(updatePerson(data));
-    navigate('/step2');
-  };
-
-  const { residentJurisdiction } = useSelector((state) => state.person);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>What state do you live in?</h2>
+      <>
+      <h2>Thank you for using Transpapers!</h2>
 
-      <ul>
-        {allJurisdictions
-            .filter((jurisdiction) => !jurisdiction.isFederal)
-            .map((jurisdiction) =>
-                <li><label>
-                    <input {...register('residentJurisdiction', {required: true})}
-                           type='radio'
-                           value={jurisdiction.name}
-                           defaultChecked={jurisdiction.name === residentJurisdiction}
-                    />
-                    { jurisdiction.name }
-                </label></li>)
-          }
-      </ul>
-
-      <input type='submit' />
-    </form>
-  );
+      <p>Your gender-affirming documents have been compiled and automatically downloaded.
+          What follows is a personalized guide to filing them. <strong>You should print both this webpage
+          and the PDF containing your compiled documents.</strong></p>
+      </>
+  )
 };
 
-export default Step1;
+export default Guide;

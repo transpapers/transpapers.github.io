@@ -24,41 +24,54 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updatePerson } from '../slice';
+import { setProcessNames } from '../slice';
 
+import { targets } from '../types/process';
 import { getJurisdiction } from '../jurisdiction/all';
 
-const Step2 = () => {
+const Step5 = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { residentJurisdiction, birthJurisdiction } = useSelector((state) => state.person);
+
+  const residentJurisdictionProcesses = getJurisdiction(residentJurisdiction)?.processes || [];
+  const residentProcesses = residentJurisdictionProcesses
+    .filter((proc) => !proc.isBirth && !proc.isJustGuide);
+
+  const birthJurisdictionProcesses = getJurisdiction(birthJurisdiction)?.processes || [];
+  const birthProcesses = birthJurisdictionProcesses
+    .filter((proc) => proc.isBirth && !proc.isJustGuide);
+
+  const federalProcesses = getJurisdiction('Federal')?.processes || [];
+
+  const allProcesses = [...residentProcesses, ...birthProcesses, ...federalProcesses];
+
   const onSubmit = (data) => {
-    dispatch(updatePerson(data));
-    navigate('/step3');
+      console.log(data);
+      dispatch(setProcessNames(data.neededProcesses));
+      navigate('/step6');
   };
 
-  const { residentJurisdiction, county } = useSelector((state) => state.person);
 
-  const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>What {residentJurisdiction} county do you live in?</h2>
-      <ul className='wrap'>
-      {Object.keys(counties).map((countyName) =>
-          <li key={countyName}><label>
-            <input {...register('county', {required: true})}
-                   type='radio'
-                   value={countyName}
-                   defaultChecked={countyName === county}
-            />
-            {countyName}
+      <h2>What do you need to do?</h2>
+      <fieldset>
+          <legend>I need to...</legend>
+      <ul>
+        {allProcesses.map((proc) =>
+        <li><label>
+            <input {...register('neededProcesses')} type='checkbox' value={proc.target}/>
+            {targets[proc.target] || ''}
         </label></li>
-      )}
+        )}
       </ul>
+      </fieldset>
       <input type='submit' />
     </form>
   );
 };
 
-export default Step2;
+export default Step5;

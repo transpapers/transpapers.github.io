@@ -46,6 +46,7 @@ interface FieldConstructorProps {
 
 interface CountyFieldConstructorProps {
   jurisdiction: string;
+  register: (name: string) => Object;
 }
 
 export function StringField({ field, register }: FieldConstructorProps): JSX.Element {
@@ -143,39 +144,39 @@ export function NameField({ field }: FieldConstructorProps): JSX.Element {
   return GenericField(field, innards);
 }
 
-export function NumberField({ field }: FieldConstructorProps): JSX.Element {
+export function NumberField({ field, register }: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
-      id={field.name}
-      name={field.name}
       type="number"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+
+      {...register(field.name)}
     />
   );
 
   return GenericField(field, innards);
 }
 
-export function EmailField({ field }: FieldConstructorProps): JSX.Element {
+export function EmailField({ field, register }: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
-      id={field.name}
-      name={field.name}
       type="email"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+
+      {...register(field.name)}
     />
   );
 
   return GenericField(field, innards);
 }
 
-export function DateField({ field }: FieldConstructorProps): JSX.Element {
+export function DateField({ field, register }: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
-      id={field.name}
-      name={field.name}
       type="date"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+
+      {...register(field.name)}
     />
   );
 
@@ -195,7 +196,7 @@ export function TelField({ field }: FieldConstructorProps): JSX.Element {
   return GenericField(field, innards);
 }
 
-export function CountyField({ jurisdiction }: CountyFieldConstructorProps) {
+export function CountyField({ jurisdiction, register }: CountyFieldConstructorProps) {
   const jurisdictionObj = getJurisdiction(jurisdiction);
 
   if (!jurisdictionObj) {
@@ -216,5 +217,5 @@ export function CountyField({ jurisdiction }: CountyFieldConstructorProps) {
     required: true,
   };
 
-  return SelectField({ field });
+  return SelectField({ field, register });
 }

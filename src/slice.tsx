@@ -17,7 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, combineReducers } from '@reduxjs/toolkit';
+
+import { blankData } from './types/person';
 
 const stepSlice = createSlice({
   name: 'step',
@@ -34,7 +36,7 @@ const stepSlice = createSlice({
 
 const personSlice = createSlice({
     name: 'person',
-    initialState: {},
+    initialState: blankData,
     reducers: {
         updatePerson: (state, action) => {
             const data = action.payload;
@@ -43,11 +45,24 @@ const personSlice = createSlice({
     },
 });
 
-const reducers = {
+const processSlice = createSlice({
+    name: 'process',
+    initialState: { processNames: [] },
+    reducers: {
+        setProcessNames: (state, action) => {
+            const procNames = action.payload;
+            state.processNames = procNames;
+        }
+    }
+});
+
+const reducers = combineReducers({
     step: stepSlice.reducer,
-    person: personSlice.reducer
-};
+    person: personSlice.reducer,
+    process: processSlice.reducer,
+});
 
 export const { updatePerson } = personSlice.actions;
+export const { setProcessNames } = processSlice.actions;
 
 export default reducers;

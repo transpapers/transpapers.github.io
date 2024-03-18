@@ -60,6 +60,12 @@ export interface Process {
    * jurisdiction.
    */
   isBirth?: boolean;
+
+  /**
+   * `true` if this process is just guide documents and should be excluded
+   * from the list of selectable processes.
+   */
+  isJustGuide?: boolean;
 }
 
 /**

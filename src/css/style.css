@@ -4,6 +4,7 @@
 
 html {
   font-family: sans-serif;
+  font-size: 20px;
 }
 
 body {
@@ -119,27 +120,24 @@ fieldset legend {
   font-size: smaller;
   color: #777;
   text-transform: capitalize;
-  top: -0.5rem;
-  background-color: white;
+  top: -1rem;
   transition:
     top 0.2s,
     background-color 0.2s;
 }
 
-.subfield input:focus + label {
-  background-color: transparent;
-  top: -1rem;
-}
-
-#processes ul {
+ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.required::after {
-  content: "*";
-  color: red;
+ul.spaced li {
+  margin-block: 1.5lh;
+}
+
+ul.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .step-nav {
@@ -164,7 +162,9 @@ h2 {
 
 button,
 input[type="submit"] {
+  display: block;
   font-size: 100%;
   padding: 0.5rem 0.9rem;
   line-height: normal;
+  margin-block: 1lh;
 }

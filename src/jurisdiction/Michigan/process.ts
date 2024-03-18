@@ -167,5 +167,5 @@ export const michiganPostamble: Process = {
       guide: 'Michigan/resources.html.njk',
     },
   ],
-
+  isJustGuide: true,
 };

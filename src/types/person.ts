@@ -29,19 +29,19 @@ export interface Person {
   /**
    * Applicant's legal name.
    */
-  legalName?: Name;
+  legalName: Name | undefined;
 
   /**
    * Applicant's chosen name.
    */
-  chosenName?: Name;
+  chosenName: Name | undefined;
 
   /**
    * Reason for applicant's name change.
    *
    * @remarks Required by Michigan form ??.
    */
-  reasonForNameChange?: string;
+  reasonForNameChange: string | undefined;
 
   /**
    * Whether to seal applicant's previous birth certificate to prevent access by
@@ -49,17 +49,17 @@ export interface Person {
    *
    * @remarks Required by Michigan form ??.
    */
-  sealBirthCertificate?: boolean;
+  sealBirthCertificate: boolean | undefined;
 
   /**
    * Applicant's city of birth.
    */
-  birthCity?: string;
+  birthCity: string | undefined;
 
   /**
    * Applicant's jurisdiction of birth; state, territory, or foreign country.
    */
-  birthJurisdiction?: string;
+  birthJurisdiction: string | undefined;
 
   /**
    * Applicant's date of birth.
@@ -89,7 +89,7 @@ export interface Person {
    * that the MI process is particularly onerous, the last breakpoint is
    * most likely 18 in other states.
    */
-  birthdate?: string;
+  birthdate: string | undefined;
 
   /**
    * The age applicant will be on filing.
@@ -97,17 +97,17 @@ export interface Person {
    * @remarks Autofilled from `birthdate` if not provided. May be provided for
    * minors who may cross a "breakpoint" between filling and filing forms.
    */
-  age?: number;
+  age: number | undefined;
 
   /**
    * Applicant's assigned sex at birth.
    */
-  assignedSex?: GenderMarker;
+  assignedSex: GenderMarker | undefined;
 
   /**
    * Applicant's self-identified gender.
    */
-  gender?: GenderMarker;
+  gender: GenderMarker | undefined;
 
   /**
    * Whether to withhold publication of the newspaper notice.
@@ -115,7 +115,7 @@ export interface Person {
    * @remarks Required to determine which forms should be filed for
    * Michiganders.
    */
-  doNotPublish?: boolean;
+  doNotPublish: boolean | undefined;
 
   /**
    * Should be `true` if applicant is a minor with two living, married parents.
@@ -123,70 +123,70 @@ export interface Person {
    * @remarks Required to determine which forms should be filed for Michigan
    * minors.
    */
-  parentsAreOkay?: boolean;
+  parentsAreOkay: boolean | undefined;
 
   /**
    * Applicant's mother's birth name.
    */
-  mothersBirthName?: Name;
+  mothersBirthName: Name | undefined;
 
   /**
    * Applicant's mother's birthdate.
    *
    * @remarks Cf. `birthdate` field.
    */
-  mothersBirthdate?: string;
+  mothersBirthdate: string | undefined;
 
   /**
    * Applicant's father's birth name.
    */
-  fathersBirthName?: Name;
+  fathersBirthName: Name | undefined;
 
   /**
    * Applicant's father's birthdate.
    *
    * @remarks Cf. `birthdate` field.
    */
-  fathersBirthdate?: string;
+  fathersBirthdate: string | undefined;
 
   /**
    * Applicant's daytime phone number.
    */
-  phone?: string;
+  phone: string | undefined;
 
   /**
    * Applicant's current street address, including "line 2."
    */
-  streetAddress?: string;
+  streetAddress: string | undefined;
 
   /**
    * Applicant's city of residence.
    */
-  residentCity?: string;
+  residentCity: string | undefined;
 
   /**
    * Applicant's jurisdiction (state or US territory) of residence.
    *
    * @remarks Filled from step 1.
    */
-  residentJurisdiction?: string;
+  residentJurisdiction: string | undefined;
 
   /**
    * Applicant's county (or equivalent) of residence.
    *
    * @remarks Required for court locations, etc. Filled from Jurisdiction data.
    */
-  residentCounty?: string;
+  residentCounty: string | undefined;
 
   /**
    * Applicant's ZIP code.
    */
-  zip?: string;
+  zip: string | undefined;
 
   /**
    * Applicant's email address.
    */
-  email?: string;
+  email: string | undefined;
 
   /**
    * Name of applicant's legal representative (parent, guardian, etc.), if
@@ -194,13 +194,82 @@ export interface Person {
    *
    * @remarks Only applicable for minors.
    */
-  representativeName?: Name;
+  representativeName: Name | undefined;
 
   /**
    * TODO DOCUMENT THIS
    */
-  passport?: string;
+  passport: string | undefined;
 }
+
+export const blankData: Person = {
+  legalName: {
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
+  },
+
+  chosenName: {
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
+  },
+
+  reasonForNameChange: undefined,
+
+  sealBirthCertificate: undefined,
+  birthCity: undefined,
+  birthJurisdiction: undefined,
+
+  birthdate: undefined,
+
+  age: undefined,
+
+  assignedSex: undefined,
+  gender: undefined,
+
+  doNotPublish: undefined,
+  parentsAreOkay: undefined,
+
+  mothersBirthName: {
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
+  },
+
+  mothersBirthdate: undefined,
+
+  fathersBirthName: {
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
+  },
+
+  fathersBirthdate: undefined,
+
+  phone: undefined,
+  streetAddress: undefined,
+
+  residentCity: undefined,
+  residentJurisdiction: undefined,
+  residentCounty: undefined,
+
+  zip: undefined,
+  email: undefined,
+
+  representativeName: {
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
+  },
+
+  passport: undefined,
+};
 
 // This should come in handy for documentation purposes.
 /**
@@ -226,6 +295,8 @@ export const sampleData: Person = {
   birthJurisdiction: 'New York',
 
   birthdate: '2010-01-01',
+
+  age: 13,
 
   assignedSex: GenderMarker.F,
   gender: GenderMarker.X,

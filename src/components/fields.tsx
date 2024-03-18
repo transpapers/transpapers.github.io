@@ -191,40 +191,41 @@ export const fields: { [key: string]: Field } = {
   },
 };
 
-export function renderField(field: Field, jurisdiction: string) {
+export function renderField(field: Field, jurisdiction: string, register: (name: string) => Object) {
   if (!field || !field.hasOwnProperty('type')) {
-    return '';
+    console.log('Illegal field:', field);
+    return undefined;
   }
 
   if (field.type === 'string') {
-    return <StringField field={field} />;
+    return <StringField field={field} register={register}/>;
   }
   if (field.type === 'boolean') {
-    return <CheckboxField field={field} />;
+    return <CheckboxField field={field} register={register}/>;
   }
   if (field.type === 'option') {
-    return <OptionField field={field} />;
+    return <OptionField field={field} register={register}/>;
   }
   if (field.type === 'select') {
-    return <SelectField field={field} />;
+    return <SelectField field={field} register={register}/>;
   }
   if (field.type === 'number') {
-    return <NumberField field={field} />;
+    return <NumberField field={field} register={register}/>;
   }
   if (field.type === 'Name') {
-    return <NameField field={field} />;
+    return <NameField field={field} register={register}/>;
   }
   if (field.type === 'Date') {
-    return <DateField field={field} />;
+    return <DateField field={field} register={register}/>;
   }
   if (field.type === 'tel') {
-    return <TelField field={field} />;
+    return <TelField field={field} register={register}/>;
   }
   if (field.type === 'county') {
-    return <CountyField jurisdiction={jurisdiction} />;
+    return <CountyField jurisdiction={jurisdiction} register={register}/>;
   }
   if (field.type === 'email') {
-    return <EmailField field={field} />;
+    return <EmailField field={field} register={register}/>;
   }
 
   return '';
