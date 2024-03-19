@@ -29,7 +29,7 @@ function SocialSecurityGuide() {
 
   return (
     <section>
-      <h2>Updating Your Social Security Card</h2>
+      <h3>Updating Your Social Security Card</h3>
       <p>
         Since all government databases use data from the Social Security
         administration, you must change your information with them first before

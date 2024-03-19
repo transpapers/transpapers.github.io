@@ -24,6 +24,7 @@ import {
 
 import DS5504Guide from '../../components/guides/Federal/ds5504';
 import DS82Guide from '../../components/guides/Federal/ds82';
+import DS11Guide from '../../components/guides/Federal/ds11';
 import SocialSecurityGuide from '../../components/guides/Federal/SocialSecurity';
 
 import { Process, Target } from '../../types/process';
@@ -67,7 +68,7 @@ export const passport: Process = {
       id: 'DS 11',
       filename: 'Federal/passport_ds11.pdf',
       map: ds11Map,
-      // guide: <DS1Guide />,
+      guide: <DS11Guide />,
       include: (applicant) => applicant.passport === 'ds11',
     },
   ],

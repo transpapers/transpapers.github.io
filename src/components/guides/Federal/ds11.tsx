@@ -62,3 +62,5 @@ function DS11Guide() {
     </section>
   );
 }
+
+export default DS11Guide;
