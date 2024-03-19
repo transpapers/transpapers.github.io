@@ -27,7 +27,7 @@ import { isMinor } from '../lib/util';
 
 import { updatePerson } from '../slice';
 
-const Step4 = () => {
+function Step4() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,20 +35,20 @@ const Step4 = () => {
   const onSubmit = (data) => {
     dispatch(updatePerson(data));
 
-	if (isMinor(data)) {
-        navigate('/step4b');
-	} else {
-        navigate('/step5');
+    if (isMinor(data)) {
+      navigate('/step4b');
+    } else {
+      navigate('/step5');
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>When were you born?</h2>
-	  <input {...register('birthdate', { required: true })} type='date' />
-      <input type='submit' />
+      <input {...register('birthdate', { required: true })} type="date" />
+      <input type="submit" />
     </form>
   );
-};
+}
 
 export default Step4;

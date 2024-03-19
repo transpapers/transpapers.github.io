@@ -27,7 +27,7 @@ import { updatePerson } from '../slice';
 
 import { allJurisdictions } from '../jurisdiction/all';
 
-const Step3 = () => {
+function Step3() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,24 +43,36 @@ const Step3 = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Where were you born?</h2>
       <ul>
-      {allJurisdictions
-        .filter((jurisdiction) => !jurisdiction.isFederal)
-        .map((jurisdiction) =>
-        <li key={jurisdiction.name}><label>
-        <input {...register('birthJurisdiction', { required: true })} type='radio' value={jurisdiction.name}
-          defaultChecked={jurisdiction.name === residentJurisdiction} />
-        { jurisdiction.name }
-        </label></li>
-      )}
-        <li key={undefined}><label>
-        <input {...register('birthJurisdiction', { required: true })} type='radio' value={undefined}
-          defaultChecked={residentJurisdiction === undefined}/>
-        { "Somewhere else" }
-        </label></li>
+        {allJurisdictions
+          .filter((jurisdiction) => !jurisdiction.isFederal)
+          .map((jurisdiction) => (
+            <li key={jurisdiction.name}>
+              <label>
+                <input
+                  {...register('birthJurisdiction', { required: true })}
+                  type="radio"
+                  value={jurisdiction.name}
+                  defaultChecked={jurisdiction.name === residentJurisdiction}
+                />
+                { jurisdiction.name }
+              </label>
+            </li>
+          ))}
+        <li key={undefined}>
+          <label>
+            <input
+              {...register('birthJurisdiction', { required: true })}
+              type="radio"
+              value={undefined}
+              defaultChecked={residentJurisdiction === undefined}
+            />
+            Somewhere else
+          </label>
+        </li>
       </ul>
-      <input type='submit' />
+      <input type="submit" />
     </form>
   );
-};
+}
 
 export default Step3;

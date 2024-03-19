@@ -21,40 +21,42 @@ import * as React from 'react';
 
 import { useSelector } from 'react-redux';
 
-const PassportGuide = () => {
-    const { passport } = useSelector((state) => state.person);
+function PassportGuide() {
+  const { passport } = useSelector((state) => state.person);
 
-    let passportForm, isInPerson;
-    switch (passport) {
-        case 'ds11':
-            passportForm = 'DS 11';
-            isInPerson = true;
-            break;
-        case 'ds82':
-            passportForm = 'DS 82';
-            isInPerson = false;
-            break;
-        case 'ds5504':
-            passportForm = 'DS 5504';
-            isInPerson = false;
-    }
+  let passportForm; let
+    isInPerson;
+  switch (passport) {
+    case 'ds11':
+      passportForm = 'DS 11';
+      isInPerson = true;
+      break;
+    case 'ds82':
+      passportForm = 'DS 82';
+      isInPerson = false;
+      break;
+    case 'ds5504':
+      passportForm = 'DS 5504';
+      isInPerson = false;
+  }
 
-    return (
-        <section>
-            <h3>Updating Your Passport</h3>
-            <p>You will need to file form
-                <strong>{ passportForm }</strong>.
-                { isInPerson ?
-                    'This form must be filed in-person. Filing locations near you are available at <a href="https://iafdb.travel.state.gov">https://iafdb.travel.state.gov</a>.' :
-                    'This form should be mailed in.'
-                }
-            </p>
+  return (
+    <section>
+      <h3>Updating Your Passport</h3>
+      <p>
+        You will need to file form
+        <strong>{ passportForm }</strong>
+        .
+        { isInPerson
+          ? 'This form must be filed in-person. Filing locations near you are available at <a href="https://iafdb.travel.state.gov">https://iafdb.travel.state.gov</a>.'
+          : 'This form should be mailed in.'}
+      </p>
 
-            <p>
-                On page 5, indicate the documents for which you are submitting fees.
-                On page 6, complete items 11-21 as applicable.
+      <p>
+        On page 5, indicate the documents for which you are submitting fees.
+        On page 6, complete items 11-21 as applicable.
 
-            </p>
-        </section>
-    )
-};
+      </p>
+    </section>
+  );
+}

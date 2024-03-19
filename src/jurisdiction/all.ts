@@ -115,3 +115,20 @@ export function getProcesses(name: string | undefined): Process[] {
 
   return jurisdiction.processes;
 }
+
+export function allProcesses(
+  residentJurisdiction: string | undefined,
+  birthJurisdiction: string | undefined,
+): Process[] {
+  const residentJurisdictionProcesses = getJurisdiction(residentJurisdiction)?.processes || [];
+  const residentProcesses = residentJurisdictionProcesses
+    .filter((proc) => !proc.isBirth && !proc.isJustGuide);
+
+  const birthJurisdictionProcesses = getJurisdiction(birthJurisdiction)?.processes || [];
+  const birthProcesses = birthJurisdictionProcesses
+    .filter((proc) => proc.isBirth && !proc.isJustGuide);
+
+  const federalProcesses = getJurisdiction('Federal')?.processes || [];
+
+  return [...residentProcesses, ...birthProcesses, ...federalProcesses];
+}

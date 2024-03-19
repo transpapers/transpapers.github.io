@@ -19,25 +19,41 @@
 
 import * as React from 'react';
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Guide = () => {
-  const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+import { compileGuides, finalizeApplicant } from '../lib/fill';
+import { allProcesses } from '../jurisdiction/all';
 
+function Guide() {
+
+  let applicant = useSelector((state) => state.person);
+  applicant = finalizeApplicant(applicant);
+
+  const { residentJurisdiction, birthJurisdiction } = applicant;
+
+  const processes = allProcesses(residentJurisdiction, birthJurisdiction);
+
+  console.log(applicant);
+
+  const guides = compileGuides(processes, applicant);
 
   return (
-      <>
+    <>
       <h2>Thank you for using Transpapers!</h2>
 
-      <p>Your gender-affirming documents have been compiled and automatically downloaded.
-          What follows is a personalized guide to filing them. <strong>You should print both this webpage
-          and the PDF containing your compiled documents.</strong></p>
-      </>
-  )
-};
+      <p>
+        Your gender-affirming documents have been compiled and automatically downloaded.
+        What follows is a personalized guide to filing them.
+        <strong>
+          You should print both this webpage
+          and the PDF containing your compiled documents.
+        </strong>
+      </p>
+
+      {guides}
+
+    </>
+  );
+}
 
 export default Guide;

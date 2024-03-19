@@ -19,34 +19,16 @@
 
 import * as React from 'react';
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { numericalAge } from '../lib/util';
-
-import { updatePerson } from '../slice';
-
-function Step4b() {
-  const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const onSubmit = (data) => {
-    dispatch(updatePerson(data));
-
-    navigate('/step5');
-  };
-
-  const { birthdate } = useSelector((state) => state.person);
-
+function MichiganM97aGuide() {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>How old will you be when you file?</h2>
-      <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate)} />
-      <input type="submit" />
-    </form>
+    <section>
+      <h3>Addendum to Protected Personal Identifying Information (MI, M97a)</h3>
+      <p>
+        This form is meant to keep sensitive information (birth name, birth date,
+        etc.) out of the (public) court records. This form should already be complete.
+      </p>
+    </section>
   );
 }
 
-export default Step4b;
+export default MichiganM97aGuide;

@@ -1,4 +1,3 @@
-
 /**
  * Copyright 2023, 2024 Sasha Lišková and Stephanie Beckon
  *
@@ -27,51 +26,41 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProcessNames } from '../slice';
 
 import { targets } from '../types/process';
-import { getJurisdiction } from '../jurisdiction/all';
+import { allProcesses } from '../jurisdiction/all';
 
-const Step5 = () => {
+function Step5() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { residentJurisdiction, birthJurisdiction } = useSelector((state) => state.person);
 
-  const residentJurisdictionProcesses = getJurisdiction(residentJurisdiction)?.processes || [];
-  const residentProcesses = residentJurisdictionProcesses
-    .filter((proc) => !proc.isBirth && !proc.isJustGuide);
-
-  const birthJurisdictionProcesses = getJurisdiction(birthJurisdiction)?.processes || [];
-  const birthProcesses = birthJurisdictionProcesses
-    .filter((proc) => proc.isBirth && !proc.isJustGuide);
-
-  const federalProcesses = getJurisdiction('Federal')?.processes || [];
-
-  const allProcesses = [...residentProcesses, ...birthProcesses, ...federalProcesses];
+  const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
   const onSubmit = (data) => {
-      console.log(data);
-      dispatch(setProcessNames(data.neededProcesses));
-      navigate('/step6');
+    dispatch(setProcessNames(data.neededProcesses));
+    navigate('/step6');
   };
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>What do you need to do?</h2>
       <fieldset>
-          <legend>I need to...</legend>
-      <ul>
-        {allProcesses.map((proc) =>
-        <li><label>
-            <input {...register('neededProcesses')} type='checkbox' value={proc.target}/>
-            {targets[proc.target] || ''}
-        </label></li>
-        )}
-      </ul>
+        <legend>I need to...</legend>
+        <ul>
+          {processes.map((proc) => (
+            <li>
+              <label>
+                <input {...register('neededProcesses')} type="checkbox" value={proc.target} />
+                {targets[proc.target] || ''}
+              </label>
+            </li>
+          ))}
+        </ul>
       </fieldset>
-      <input type='submit' />
+      <input type="submit" />
     </form>
   );
-};
+}
 
 export default Step5;

@@ -17,6 +17,8 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import * as React from 'react';
+
 import { Person } from './person';
 import { Formfill } from './formfill';
 
@@ -92,7 +94,7 @@ export interface Document {
    * Location of guide for this document, from root public/guides/ (dev tree)
    * or guides/ (served.)
    */
-  guide?: string;
+  guide?: React.JSX.Element;
 
   /**
    * Criterion for inclusion.

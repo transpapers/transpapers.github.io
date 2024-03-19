@@ -25,5 +25,5 @@ export default function Header() {
       <h1>&#x26a7; Transpapers</h1>
       <span>Almost-fully automated trans rights</span>
     </header>
-  )
+  );
 }

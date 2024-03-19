@@ -27,12 +27,13 @@ import { neededFieldNames } from '../lib/shakeTree';
 
 import { fields, renderField } from './fields';
 
+import { updatePerson } from '../slice';
 import { targets } from '../types/process';
 import { getJurisdiction } from '../jurisdiction/all';
 
-import { compileDocuments } from '../lib/fill';
+import { compileDocuments, finalizeApplicant } from '../lib/fill';
 
-const Step6 = () => {
+function Step6() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -61,44 +62,45 @@ const Step6 = () => {
   const fieldNamesToShow = neededFieldNames(processes, applicant);
 
   const onSubmit = (data) => {
-      console.log(data);
-      navigate('/guide');
+    const finalApplicant = finalizeApplicant(applicant);
 
-      /*
-      compileDocuments(processes, applicant)
-          .then((doc) => {
-              if (doc !== undefined) {
-                const url = URL.createObjectURL(
-                    new Blob([doc], { type: 'application/pdf' }),
-                );
-                const link = document.createElement('a');
-                link.download = 'gender_affirming_documents.pdf';
-                link.href = url;
-                link.click();
-                URL.revokeObjectURL(link.href);
-              }
-          });
-      */
+    dispatch(updatePerson(finalApplicant));
+
+    navigate('/guide');
+
+    compileDocuments(processes, applicant)
+        .then((doc) => {
+            if (doc !== undefined) {
+              const url = URL.createObjectURL(
+                  new Blob([doc], { type: 'application/pdf' }),
+              );
+              const link = document.createElement('a');
+              link.download = 'gender_affirming_documents.pdf';
+              link.href = url;
+              link.click();
+              URL.revokeObjectURL(link.href);
+            }
+        });
   };
 
   // We do it this way to maintain ordering.
   const fieldsToShow = Object.entries(fields)
-      .filter(([fieldName,]) => fieldNamesToShow.includes(fieldName))
-      .map(([,field]) => field);
+    .filter(([fieldName]) => fieldNamesToShow.includes(fieldName))
+    .map(([,field]) => field);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Tell us about yourself...</h2>
-      <ul className='spaced'>
-        {fieldsToShow.map((field) =>
-            <li>
+      <ul className="spaced">
+        {fieldsToShow.map((field) => (
+          <li>
             {renderField(field, applicant.residentJurisdiction, register)}
-            </li>
-        )}
+          </li>
+        ))}
       </ul>
-      <input type='submit' value='Get my gender-affirming forms' />
+      <input type="submit" value="Get my gender-affirming forms" />
     </form>
   );
-};
+}
 
 export default Step6;

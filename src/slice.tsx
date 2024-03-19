@@ -23,43 +23,43 @@ import { blankData } from './types/person';
 
 const stepSlice = createSlice({
   name: 'step',
-  initialState: {stepNo: 0}, // TODO Need a variable for this.
+  initialState: { stepNo: 0 }, // TODO Need a variable for this.
   reducers: {
     nextStep: (state) => {
-      state.stepNo += 1
+      state.stepNo += 1;
     },
     prevStep: (state) => {
-      state.stepNo -= 1
+      state.stepNo -= 1;
     },
   },
 });
 
 const personSlice = createSlice({
-    name: 'person',
-    initialState: blankData,
-    reducers: {
-        updatePerson: (state, action) => {
-            const data = action.payload;
-            Object.assign(state, data);
-        },
+  name: 'person',
+  initialState: blankData,
+  reducers: {
+    updatePerson: (state, action) => {
+      const data = action.payload;
+      Object.assign(state, data);
     },
+  },
 });
 
 const processSlice = createSlice({
-    name: 'process',
-    initialState: { processNames: [] },
-    reducers: {
-        setProcessNames: (state, action) => {
-            const procNames = action.payload;
-            state.processNames = procNames;
-        }
-    }
+  name: 'process',
+  initialState: { processNames: [] },
+  reducers: {
+    setProcessNames: (state, action) => {
+      const procNames = action.payload;
+      state.processNames = procNames;
+    },
+  },
 });
 
 const reducers = combineReducers({
-    step: stepSlice.reducer,
-    person: personSlice.reducer,
-    process: processSlice.reducer,
+  step: stepSlice.reducer,
+  person: personSlice.reducer,
+  process: processSlice.reducer,
 });
 
 export const { updatePerson } = personSlice.actions;

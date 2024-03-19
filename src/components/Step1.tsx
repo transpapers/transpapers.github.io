@@ -27,7 +27,7 @@ import { updatePerson } from '../slice';
 
 import { allJurisdictions } from '../jurisdiction/all';
 
-const Step1 = () => {
+function Step1() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,22 +45,25 @@ const Step1 = () => {
 
       <ul>
         {allJurisdictions
-            .filter((jurisdiction) => !jurisdiction.isFederal)
-            .map((jurisdiction) =>
-                <li><label>
-                    <input {...register('residentJurisdiction', {required: true})}
-                           type='radio'
-                           value={jurisdiction.name}
-                           defaultChecked={jurisdiction.name === residentJurisdiction}
-                    />
-                    { jurisdiction.name }
-                </label></li>)
-          }
+          .filter((jurisdiction) => !jurisdiction.isFederal)
+          .map((jurisdiction) => (
+            <li>
+              <label>
+                <input
+                  {...register('residentJurisdiction', { required: true })}
+                  type="radio"
+                  value={jurisdiction.name}
+                  defaultChecked={jurisdiction.name === residentJurisdiction}
+                />
+                { jurisdiction.name }
+              </label>
+            </li>
+          ))}
       </ul>
 
-      <input type='submit' />
+      <input type="submit" />
     </form>
   );
-};
+}
 
 export default Step1;

@@ -75,8 +75,8 @@ const router = createBrowserRouter([
     element: <Step6 />,
   },
   {
-      path: 'guide',
-      element: <Guide />,
+    path: 'guide',
+    element: <Guide />,
   },
 ]);
 
@@ -86,9 +86,9 @@ if (root !== null) {
       <Header />
       <Noscript />
       <StoreProvider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <RouterProvider router={router} />
-          </PersistGate>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate>
       </StoreProvider>
     </React.StrictMode>,
   );

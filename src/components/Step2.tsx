@@ -1,4 +1,3 @@
-
 /**
  * Copyright 2023, 2024 Sasha Lišková and Stephanie Beckon
  *
@@ -28,7 +27,7 @@ import { updatePerson } from '../slice';
 
 import { getJurisdiction } from '../jurisdiction/all';
 
-const Step2 = () => {
+function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,27 +37,35 @@ const Step2 = () => {
     navigate('/step3');
   };
 
-  const { residentJurisdiction, county } = useSelector((state) => state.person);
+  const { residentJurisdiction, residentCounty } = useSelector((state) => state.person);
 
   const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>What {residentJurisdiction} county do you live in?</h2>
-      <ul className='wrap'>
-      {Object.keys(counties).map((countyName) =>
-          <li key={countyName}><label>
-            <input {...register('county', {required: true})}
-                   type='radio'
-                   value={countyName}
-                   defaultChecked={countyName === county}
-            />
-            {countyName}
-        </label></li>
-      )}
+      <h2>
+        What
+        {residentJurisdiction}
+        {' '}
+        county do you live in?
+      </h2>
+      <ul className="wrap">
+        {Object.keys(counties).map((countyName) => (
+          <li key={countyName}>
+            <label>
+              <input
+                {...register('residentCounty', { required: true })}
+                type="radio"
+                value={countyName}
+                defaultChecked={countyName === residentCounty}
+              />
+              {countyName}
+            </label>
+          </li>
+        ))}
       </ul>
-      <input type='submit' />
+      <input type="submit" />
     </form>
   );
-};
+}
 
 export default Step2;

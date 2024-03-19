@@ -21,65 +21,96 @@ import * as React from 'react';
 
 import { useSelector } from 'react-redux';
 
-const MichiganBirthCertificateGuide = () => {
+function MichiganBirthCertificateGuide() {
+  const { age } = useSelector((state) => state.person);
 
-    const { age } = useSelector((state) => state.person);
+  return (
+    <section>
+      <p>
+        This process is done by mail only, so you will need a large envelope
+        in which to send the paperwork. You will need to complete the
+        <strong>
+          Application to Correct or Change a Michigan Birth
+          Record
+        </strong>
+        {' '}
+        (form DCH-0847-CHGBX) and the
+        <strong>
+          State of Michigan
+          Sex Designation Form
+        </strong>
+        .
+      </p>
 
-    return (
-        <section>
-<p>This process is done by mail only, so you will need a large envelope
-in which to send the paperwork. You will need to complete the
-<strong>Application to Correct or Change a Michigan Birth
-Record</strong> (form DCH-0847-CHGBX) and the <strong>State of Michigan
-Sex Designation Form</strong>.</p>
-
-    <p>
-    {
-        (age < 15) ?
-            'Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
-        : (age < 18) ?
-        'You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your old name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
-        :
-        'You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name.'
+      <p>
+        {
+        (age < 15)
+          ? 'Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
+          : (age < 18)
+            ? 'You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your old name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
+            : 'You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name.'
     }
-    { ' ' }
-    If at any point you have undergone a name change, such as part of an adoption,
-    you will need to fill out the "Other Names Used:" section on
-    the <strong>Application to Correct or Change a Michigan Birth Record</strong>
-    and check the applicable box underneath.
-    </p>
+        { ' ' }
+        If at any point you have undergone a name change, such as part of an adoption,
+        you will need to fill out the "Other Names Used:" section on
+        the
+        {' '}
+        <strong>Application to Correct or Change a Michigan Birth Record</strong>
+        and check the applicable box underneath.
+      </p>
 
-    {
-        (age < 18) ? (<>
-            <p>Your parent or guardian should complete the “Payment” section on page 2
-            as applicable. Then, they should mail the completed Application to Correct
-            or Change a Michigan Birth Record to:</p>
+      {
+        (age < 18) ? (
+          <>
+            <p>
+              Your parent or guardian should complete the “Payment” section on page 2
+              as applicable. Then, they should mail the completed Application to Correct
+              or Change a Michigan Birth Record to:
+            </p>
             <p>Vital Records Changes</p>
             <p>P.O. Box 30721</p>
             <p>Lansing, MI 48909</p>
-            <p>They should enclose photocopies of the court order and
-            of their primary identification. <strong>Original documents will not be
-            returned.</strong> If they don't have a state ID or driver's license, they
-            should refer to the first link in our "Resources" section at the end of this guide.
-            Then they should enclose a check in the amount entered under "TOTAL ENCLOSED"
-            made out to the State of Michigan.</p>
-        </>)
-        : (<>
-            <p>Complete the “Payment” section on page 2 as applicable.
-            Mail the Application to Correct or Change a Michigan Birth Record to:</p>
-            <p>Vital Records Changes</p>
-            <p>P.O. Box 30721</p>
-            <p>Lansing, MI 48909</p>
-            <p>Enclose a check in the amount you entered under "TOTAL ENCLOSED", made out to
-            the State of Michigan, as well as photocopies of the court order and
-            your primary identification. <strong>Original documents will not be returned.
-            </strong> If you don't have a state ID or driver's
-            license, refer to the first link in our "Resources" section at the end of this guide.</p>
-        </>)
+            <p>
+              They should enclose photocopies of the court order and
+              of their primary identification.
+              <strong>
+                Original documents will not be
+                returned.
+              </strong>
+              {' '}
+              If they don't have a state ID or driver's license, they
+              should refer to the first link in our "Resources" section at the end of this guide.
+              Then they should enclose a check in the amount entered under "TOTAL ENCLOSED"
+              made out to the State of Michigan.
+            </p>
+          </>
+        )
+          : (
+            <>
+              <p>
+                Complete the “Payment” section on page 2 as applicable.
+                Mail the Application to Correct or Change a Michigan Birth Record to:
+              </p>
+              <p>Vital Records Changes</p>
+              <p>P.O. Box 30721</p>
+              <p>Lansing, MI 48909</p>
+              <p>
+                Enclose a check in the amount you entered under "TOTAL ENCLOSED", made out to
+                the State of Michigan, as well as photocopies of the court order and
+                your primary identification.
+                <strong>
+                  Original documents will not be returned.
+                </strong>
+                {' '}
+                If you don't have a state ID or driver's
+                license, refer to the first link in our "Resources" section at the end of this guide.
+              </p>
+            </>
+          )
     }
-    <p>You should receive a copy of your updated birth certificate in 5 to 6 weeks.</p>
+      <p>You should receive a copy of your updated birth certificate in 5 to 6 weeks.</p>
     </section>
-    )
+  );
 }
 
 export default MichiganBirthCertificateGuide;

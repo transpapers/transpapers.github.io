@@ -17,6 +17,8 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import * as React from 'react';
+
 import {
   PDFDocument,
   PDFTextField,
@@ -121,12 +123,12 @@ export function fillForm(
   return doc;
 }
 
-function finalizeApplicant(applicant: Person): Person | undefined {
+export function finalizeApplicant(applicant: Person): Person | undefined {
   /**
    * Infer any extra values for the applicant as needed.
    * Do any additional assignments here.
    */
-  const finalApplicant = { ...applicant };
+  let finalApplicant = { ...applicant };
 
   // Do any additional Applicant assignment here.
   if (finalApplicant.birthdate && !finalApplicant.age) {
@@ -142,9 +144,42 @@ function finalizeApplicant(applicant: Person): Person | undefined {
   const { counties } = jurisdictionObj;
   const residentCounty = counties[applicant.residentCounty ?? ''];
 
-  Object.assign(finalApplicant, residentCounty);
+  finalApplicant = Object.assign(finalApplicant, residentCounty);
 
   return finalApplicant;
+}
+
+export function compileGuides(
+  processes: Process[],
+  applicant: Person,
+): React.JSX.Element[] | undefined {
+  const docs: Document[] = [];
+
+  const finalApplicant = finalizeApplicant(applicant);
+
+  if (finalApplicant === undefined) {
+    return undefined;
+  }
+
+  processes.forEach((proc) => {
+    proc.documents.forEach((doc) => {
+      if (!docs.includes(doc)) {
+        docs.push(doc);
+      }
+    });
+  });
+
+  const guides: React.JSX.Element[] = [];
+
+  docs
+    .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
+    .forEach((doc) => {
+      if (doc.guide !== undefined) {
+        guides.push(doc.guide);
+      }
+    });
+
+  return guides;
 }
 
 /**
@@ -207,7 +242,7 @@ export async function compileDocuments(
       .map((doc) => {
         const numPages = doc.getPageCount();
         return result.copyPages(doc, [...Array(numPages).keys()]);
-    }),
+      }),
   );
 
   // Flatten form fields into document.
