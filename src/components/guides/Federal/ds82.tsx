@@ -24,6 +24,7 @@ import * as React from 'react';
 function DS82Guide() {
   return (
     <section>
+        <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.  Your
         form is the DS 82 which is a mail-in form. Pages 1-4 contain instructions

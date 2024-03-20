@@ -62,6 +62,8 @@ function Step6() {
   const fieldNamesToShow = neededFieldNames(processes, applicant);
 
   const onSubmit = (data) => {
+    dispatch(updatePerson(data));
+
     const finalApplicant = finalizeApplicant(applicant);
 
     dispatch(updatePerson(finalApplicant));
