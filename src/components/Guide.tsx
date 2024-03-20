@@ -25,15 +25,12 @@ import { compileGuides, finalizeApplicant } from '../lib/fill';
 import { allProcesses } from '../jurisdiction/all';
 
 function Guide() {
-
   let applicant = useSelector((state) => state.person);
   applicant = finalizeApplicant(applicant);
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
-
-  console.log(applicant);
 
   const guides = compileGuides(processes, applicant);
 
@@ -51,7 +48,6 @@ function Guide() {
       </p>
 
       {guides}
-
     </>
   );
 }

@@ -23,6 +23,7 @@ import * as React from 'react';
 function DS11Guide() {
   return (
     <section>
+        <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.
         Your form is the DS 11 which is an in-person appointment form. Pages 1-4

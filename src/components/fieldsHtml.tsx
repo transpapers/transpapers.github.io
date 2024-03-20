@@ -87,10 +87,11 @@ export function OptionField({ field, register }: FieldConstructorProps): JSX.Ele
       <legend>{field.title}</legend>
 
       {Object.entries(options).map(([key, value]) => (
-        <label key={`${field.name}:${key}`} htmlFor={`${field.name}:${key}`}>
+        <label key={`${field.name}:${key}`}>
           <input
             type="radio"
             {...register(field.name)}
+            value={key}
           />
           {value}
         </label>
@@ -102,7 +103,7 @@ export function OptionField({ field, register }: FieldConstructorProps): JSX.Ele
 export function SelectField({ field, register }: FieldConstructorProps): JSX.Element {
   const options = field.options || {};
   const innards = (
-    <select name={field.name} id={field.name}>
+    <select {...register(field.name)}>
       <option key="" value="">
         ---
       </option>
