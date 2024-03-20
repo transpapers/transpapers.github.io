@@ -182,18 +182,3 @@ export const michiganPostamble: Process = {
   ],
   isJustGuide: true,
 };
-
-export const michiganPostamble: Process = {
-  depends: [Target.BirthRecord, Target.PrimaryIdentification],
-  documents: [
-    {
-      name: 'Everything Else',
-      guide: 'Michigan/everything-else.html.njk',
-    },
-    {
-      name: 'Resources',
-      guide: 'Michigan/resources.html.njk',
-    },
-  ],
-
-};
