@@ -23,56 +23,44 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updatePerson } from '../slice';
+import { setProcessNames } from '../slice';
 
-import { allJurisdictions } from '../jurisdiction/all';
+import { targets } from '../types/process';
+import { allProcesses } from '../jurisdiction/all';
 
-function Step3() {
+function Step5() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    dispatch(updatePerson(data));
-    navigate('/step4');
-  };
+  const { residentJurisdiction, birthJurisdiction } = useSelector((state) => state.person);
 
-  const { residentJurisdiction } = useSelector((state) => state.person);
+  const processes = allProcesses(residentJurisdiction, birthJurisdiction);
+
+  const onSubmit = (data) => {
+    dispatch(setProcessNames(data.neededProcesses));
+    navigate('/step6');
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Where were you born?</h2>
-      <ul>
-        {allJurisdictions
-          .filter((jurisdiction) => !jurisdiction.isFederal)
-          .map((jurisdiction) => (
-            <li key={jurisdiction.name}>
+      <h2>What do you need to do?</h2>
+      <fieldset>
+        <legend>I need to...</legend>
+        <ul>
+          {processes.map((proc) => (
+            <li>
               <label>
-                <input
-                  {...register('birthJurisdiction', { required: true })}
-                  type="radio"
-                  value={jurisdiction.name}
-                  defaultChecked={jurisdiction.name === residentJurisdiction}
-                />
-                { jurisdiction.name }
+                <input {...register('neededProcesses')} type="checkbox" value={proc.target} />
+                {targets[proc.target] || ''}
               </label>
             </li>
           ))}
-        <li key={undefined}>
-          <label>
-            <input
-              {...register('birthJurisdiction', { required: true })}
-              type="radio"
-              value={undefined}
-              defaultChecked={residentJurisdiction === undefined}
-            />
-            Somewhere else
-          </label>
-        </li>
-      </ul>
+        </ul>
+      </fieldset>
       <input type="submit" />
     </form>
   );
 }
 
-export default Step3;
+export default Step5;

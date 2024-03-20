@@ -18,107 +18,52 @@
  */
 
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 
-import { County } from '../types/county';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { allJurisdictions, getJurisdiction } from '../jurisdiction/all';
+import { updatePerson } from '../slice';
 
-interface Step1Props {
-  residentJurisdiction: string | undefined;
-  setResidentJurisdiction: React.Dispatch<React.SetStateAction<string | undefined>>;
-  setBirthJurisdiction: React.Dispatch<React.SetStateAction<string | undefined>>;
-  setCounty: React.Dispatch<React.SetStateAction<County | undefined>>;
-}
+import { allJurisdictions } from '../jurisdiction/all';
 
-export default function Step1(props: Step1Props) {
-  const {
-    residentJurisdiction,
-    setResidentJurisdiction,
-    setBirthJurisdiction,
-    setCounty,
-  } = props;
+function Step1() {
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [countyNames, setCountyNames] = useState<string[]>([]);
+  const onSubmit = (data) => {
+    dispatch(updatePerson(data));
+    navigate('/step2');
+  };
 
-  useEffect(() => {
-    setCounty(undefined);
-    const jurisdiction = getJurisdiction(residentJurisdiction);
-    if (jurisdiction && 'counties' in jurisdiction) {
-      // TODO Fix this, Sasha, you slut.
-      const names = Object.keys(jurisdiction.counties ?? {});
-      setCountyNames(names);
-    }
-  }, [residentJurisdiction, setCounty, setCountyNames]);
-
-  function updateCounty(ev: React.ChangeEvent<HTMLSelectElement>) {
-    const countyName = ev.target.value;
-    if (countyName === '') {
-      setCounty(undefined);
-    } else {
-      const jurisdiction = getJurisdiction(residentJurisdiction);
-      if (jurisdiction && jurisdiction.counties !== undefined) {
-        const county = jurisdiction.counties[countyName];
-        setCounty(county);
-      }
-    }
-  }
-  const availableJurisdictions = allJurisdictions
-    .filter((jurisdiction) => !jurisdiction.isFederal)
-    .map((jurisdiction) => jurisdiction.name);
+  const { residentJurisdiction } = useSelector((state) => state.person);
 
   return (
-    <>
-      <h2>Where are you?</h2>
-      <p>Other states are in development.</p>
-      <fieldset>
-        <legend>I live in...</legend>
-        {availableJurisdictions.map((state) => (
-          <div key={`resident-${state}`}>
-            <input
-              type="radio"
-              id={`resident-${state}`}
-              name="resident"
-              value={state}
-              onChange={(ev) => setResidentJurisdiction(ev.target.value)}
-            />
-            <label htmlFor={`resident-${state}`}>{state}</label>
-          </div>
-        ))}
-      </fieldset>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>What state do you live in?</h2>
 
-      {residentJurisdiction && (
-        <div key="county-select">
-          <label htmlFor="county-select">
-            {'My county of residence is... '}
-          </label>
-          <select onChange={updateCounty} id="county-select">
-            <option key="" value="">
-              ---
-            </option>
-            {countyNames.map((county) => (
-              <option key={county} value={county}>
-                {county}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <fieldset>
-        <legend>I was born in...</legend>
-        {availableJurisdictions.map((state) => (
-          <div key={`birth-${state}`}>
-            <input
-              type="radio"
-              id={`birth-${state}`}
-              name="birth"
-              value={state}
-              onChange={(ev) => setBirthJurisdiction(ev.target.value)}
-            />
-            <label htmlFor={`birth-${state}`}>{state}</label>
-          </div>
-        ))}
-      </fieldset>
-    </>
+      <ul>
+        {allJurisdictions
+          .filter((jurisdiction) => !jurisdiction.isFederal)
+          .map((jurisdiction) => (
+            <li>
+              <label>
+                <input
+                  {...register('residentJurisdiction', { required: true })}
+                  type="radio"
+                  value={jurisdiction.name}
+                  defaultChecked={jurisdiction.name === residentJurisdiction}
+                />
+                { jurisdiction.name }
+              </label>
+            </li>
+          ))}
+      </ul>
+
+      <input type="submit" />
+    </form>
   );
 }
+
+export default Step1;

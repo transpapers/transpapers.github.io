@@ -23,56 +23,30 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { numericalAge } from '../lib/util';
+
 import { updatePerson } from '../slice';
 
-import { allJurisdictions } from '../jurisdiction/all';
-
-function Step3() {
+function Step4b() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     dispatch(updatePerson(data));
-    navigate('/step4');
+
+    navigate('/step5');
   };
 
-  const { residentJurisdiction } = useSelector((state) => state.person);
+  const { birthdate } = useSelector((state) => state.person);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Where were you born?</h2>
-      <ul>
-        {allJurisdictions
-          .filter((jurisdiction) => !jurisdiction.isFederal)
-          .map((jurisdiction) => (
-            <li key={jurisdiction.name}>
-              <label>
-                <input
-                  {...register('birthJurisdiction', { required: true })}
-                  type="radio"
-                  value={jurisdiction.name}
-                  defaultChecked={jurisdiction.name === residentJurisdiction}
-                />
-                { jurisdiction.name }
-              </label>
-            </li>
-          ))}
-        <li key={undefined}>
-          <label>
-            <input
-              {...register('birthJurisdiction', { required: true })}
-              type="radio"
-              value={undefined}
-              defaultChecked={residentJurisdiction === undefined}
-            />
-            Somewhere else
-          </label>
-        </li>
-      </ul>
+      <h2>How old will you be when you file?</h2>
+      <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate)} />
       <input type="submit" />
     </form>
   );
 }
 
-export default Step3;
+export default Step4b;

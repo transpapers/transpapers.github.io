@@ -17,14 +17,14 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import * as React from 'react';
+
 import {
   PDFDocument,
   PDFTextField,
   PDFCheckBox,
   PDFRadioGroup,
 } from '@cantoo/pdf-lib';
-
-import { render } from 'nunjucks';
 
 import { numericalAge } from './util';
 
@@ -123,12 +123,12 @@ export function fillForm(
   return doc;
 }
 
-function makeFinalApplicant(applicant: Person): Person | undefined {
+export function finalizeApplicant(applicant: Person): Person | undefined {
   /**
    * Infer any extra values for the applicant as needed.
    * Do any additional assignments here.
    */
-  const finalApplicant = { ...applicant };
+  let finalApplicant = { ...applicant };
 
   // Do any additional Applicant assignment here.
   if (finalApplicant.birthdate && !finalApplicant.age) {
@@ -144,24 +144,18 @@ function makeFinalApplicant(applicant: Person): Person | undefined {
   const { counties } = jurisdictionObj;
   const residentCounty = counties[applicant.residentCounty ?? ''];
 
-  Object.assign(finalApplicant, residentCounty);
+  finalApplicant = Object.assign(finalApplicant, residentCounty);
 
   return finalApplicant;
 }
 
-/**
- * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
- *
- * @param {Process} processes
- * @param {Person} applicant
- * @return {Promise<Uint8Array>} Compiled documents
- */
-export async function makeFinalDocument(
+export function compileGuides(
   processes: Process[],
   applicant: Person,
-): Promise<Uint8Array | undefined> {
+): React.JSX.Element[] | undefined {
   const docs: Document[] = [];
-  const finalApplicant = makeFinalApplicant(applicant);
+
+  const finalApplicant = finalizeApplicant(applicant);
 
   if (finalApplicant === undefined) {
     return undefined;
@@ -175,10 +169,46 @@ export async function makeFinalDocument(
     });
   });
 
-  // Build the constituent forms and guide parts.
-  // TODO This is a bit of a dirty hack, needs cleanup.
+  const guides: React.JSX.Element[] = [];
+
+  docs
+    .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
+    .forEach((doc) => {
+      if (doc.guide !== undefined) {
+        guides.push(doc.guide);
+      }
+    });
+
+  return guides;
+}
+
+/**
+ * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
+ *
+ * @param {Process} processes
+ * @param {Person} applicant
+ * @return {Promise<Uint8Array>} Compiled documents
+ */
+export async function compileDocuments(
+  processes: Process[],
+  applicant: Person,
+): Promise<Uint8Array | undefined> {
+  const docs: Document[] = [];
+  const finalApplicant = finalizeApplicant(applicant);
+
+  if (finalApplicant === undefined) {
+    return undefined;
+  }
+
+  processes.forEach((proc) => {
+    proc.documents.forEach((doc) => {
+      if (!docs.includes(doc)) {
+        docs.push(doc);
+      }
+    });
+  });
+
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
-  const guideTitlesAndParts: [string, string][] = [];
 
   docs
     .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
@@ -187,15 +217,7 @@ export async function makeFinalDocument(
         const filename = `/forms/${doc.filename}`;
         formFilenamesAndMaps.push([filename, doc.map]);
       }
-
-      if (doc.guide !== undefined) {
-        const guidePart = `/guides/${doc.guide}`;
-        const guideTitle = doc.name || '';
-        guideTitlesAndParts.push([guideTitle, guidePart]);
-      }
     });
-
-  guideTitlesAndParts.unshift(['Preamble', '/guides/preamble.html.njk']);
 
   // Fill forms.
   const forms = await Promise.all(
@@ -206,42 +228,21 @@ export async function makeFinalDocument(
         if (map === undefined) {
           return form;
         }
+
         return fillForm(form, map, finalApplicant);
       })),
   );
 
-  // Fill and collate guides.
-  // const guideHeaders =
-  const guidePartsRendered = guideTitlesAndParts.map(
-    ([guideTitle, guidePart], i) => `<h3>${i + 1}. ${guideTitle}</h3>${render(guidePart, finalApplicant)}`,
-  );
-  const guide = guidePartsRendered.join('');
-
   const allDocuments: PDFDocument[] = [...forms];
-
-  const { default: html2pdf } = await import('html2pdf.js');
-
-  if (html2pdf) {
-    const guidePdf = await html2pdf()
-      .set({
-        pagebreak: {
-          mode: ['avoid-all'],
-        },
-        margin: 10,
-      })
-      .from(guide)
-      .outputPdf('arraybuffer')
-      .then(PDFDocument.load);
-
-    allDocuments.unshift(guidePdf);
-  }
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
-    allDocuments.map((doc) => {
-      const numPages = doc.getPageCount();
-      return result.copyPages(doc, [...Array(numPages).keys()]);
-    }),
+    allDocuments
+      .filter((doc) => doc !== undefined)
+      .map((doc) => {
+        const numPages = doc.getPageCount();
+        return result.copyPages(doc, [...Array(numPages).keys()]);
+      }),
   );
 
   // Flatten form fields into document.

@@ -21,50 +21,34 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { isMinor } from '../lib/util';
+
 import { updatePerson } from '../slice';
 
-import { getJurisdiction } from '../jurisdiction/all';
-
-function Step2() {
+function Step4() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     dispatch(updatePerson(data));
-    navigate('/step3');
+
+    if (isMinor(data)) {
+      navigate('/step4b');
+    } else {
+      navigate('/step5');
+    }
   };
 
-  const { residentJurisdiction, residentCounty } = useSelector((state) => state.person);
-
-  const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>
-        What
-        {residentJurisdiction}
-        {' '}
-        county do you live in?
-      </h2>
-      <ul className="wrap">
-        {Object.keys(counties).map((countyName) => (
-          <li key={countyName}>
-            <label>
-              <input
-                {...register('residentCounty', { required: true })}
-                type="radio"
-                value={countyName}
-                defaultChecked={countyName === residentCounty}
-              />
-              {countyName}
-            </label>
-          </li>
-        ))}
-      </ul>
+      <h2>When were you born?</h2>
+      <input {...register('birthdate', { required: true })} type="date" />
       <input type="submit" />
     </form>
   );
 }
 
-export default Step2;
+export default Step4;

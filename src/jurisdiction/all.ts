@@ -97,3 +97,38 @@ export function getJurisdiction(name: string | undefined): Jurisdiction | undefi
   }
   return allJurisdictions.find((jurisdiction) => jurisdiction.name === name);
 }
+
+export function getProcesses(name: string | undefined): Process[] {
+  if (name === undefined) {
+    return [];
+  }
+
+  const jurisdiction = getJurisdiction(name);
+
+  if (jurisdiction === undefined) {
+    return [];
+  }
+
+  if (jurisdiction.processes === undefined) {
+    return [];
+  }
+
+  return jurisdiction.processes;
+}
+
+export function allProcesses(
+  residentJurisdiction: string | undefined,
+  birthJurisdiction: string | undefined,
+): Process[] {
+  const residentJurisdictionProcesses = getJurisdiction(residentJurisdiction)?.processes || [];
+  const residentProcesses = residentJurisdictionProcesses
+    .filter((proc) => !proc.isBirth && !proc.isJustGuide);
+
+  const birthJurisdictionProcesses = getJurisdiction(birthJurisdiction)?.processes || [];
+  const birthProcesses = birthJurisdictionProcesses
+    .filter((proc) => proc.isBirth && !proc.isJustGuide);
+
+  const federalProcesses = getJurisdiction('Federal')?.processes || [];
+
+  return [...residentProcesses, ...birthProcesses, ...federalProcesses];
+}

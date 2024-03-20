@@ -14,7 +14,9 @@ import { neededFieldNames, shakeTree } from '../src/lib/shakeTree';
 
 import { michiganNameChange } from '../src/jurisdiction/Michigan/process';
 import { allJurisdictions } from '../src/jurisdiction/all';
+
 import { fillForm } from '../src/lib/fill';
+import { numericalAge, isMinor } from '../src/lib/util';
 
 import { sampleData } from '../src/types/person';
 
@@ -110,4 +112,12 @@ describe('documents render properly with sampleData', async () => {
       });
     });
   });
+});
+
+describe('numericalAge()/isMinor()', () => {
+  test('recognizes me as an adult', () => {
+    const me = { birthdate: '1997-10-07' };
+
+    expect(isMinor(me)).toBe(false)
+  })
 });

@@ -17,6 +17,8 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import * as React from 'react';
+
 import { Person } from './person';
 import { Formfill } from './formfill';
 
@@ -54,6 +56,18 @@ export interface Process {
    * An ordered list of documents to attach.
    */
   documents: Document[];
+
+  /**
+   * `true` if this process requires its applicant to be born in its
+   * jurisdiction.
+   */
+  isBirth?: boolean;
+
+  /**
+   * `true` if this process is just guide documents and should be excluded
+   * from the list of selectable processes.
+   */
+  isJustGuide?: boolean;
 }
 
 /**
@@ -80,7 +94,7 @@ export interface Document {
    * Location of guide for this document, from root public/guides/ (dev tree)
    * or guides/ (served.)
    */
-  guide?: string;
+  guide?: React.JSX.Element;
 
   /**
    * Criterion for inclusion.
