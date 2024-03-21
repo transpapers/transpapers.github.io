@@ -53,12 +53,14 @@ export function fillForm(
     if ('field' in fill) {
       const field = form.getField(fill.field);
       if ('text' in fill && field instanceof PDFTextField) {
-        const text = fill.text(applicant);
+        const text = (fill.text)(applicant);
 
-        // Disable maximum length.
-        field.setMaxLength(undefined);
+        if (typeof text === 'string') {
+          // Disable maximum length.
+          field.setMaxLength(undefined);
 
-        field.setText(text);
+          field.setText(text);
+        }
       } else if ('check' in fill && field instanceof PDFCheckBox) {
         const checked = fill.check(applicant);
         if (checked) {
@@ -96,8 +98,8 @@ export function fillForm(
       const y = height - fill.loc.y * scalingFactor - fontSize;
 
       if ('text' in fill) {
-        const text = fill.text(applicant);
-        if (text !== undefined) {
+        const text = (fill.text)(applicant);
+        if (typeof text === 'string') {
           page.drawText(text, { x, y, size: fontSize });
         }
       } else if ('check' in fill) {

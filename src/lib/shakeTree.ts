@@ -19,8 +19,18 @@
 
 import { Person, sampleData } from '../types/person';
 import { Process } from '../types/process';
+import { Name } from '../types/types';
 
 import { fields } from '../components/fields';
+
+/**
+ * Union of the types we want shakeTree() to ignore/not descend to.
+ */
+type Opaque = Name;
+
+function isOpaque(obj: any): obj is Opaque {
+  return (obj as Name).first !== undefined;
+}
 
 /**
  * Determine the properties of a `Person` accessed by `object`.
@@ -34,11 +44,15 @@ export function shakeTree(obj: any, accessed: string[] = []) {
 
   const functionPropertyNames = ['include', 'text', 'check'];
 
+
   const handler = {
     // Handle nested properties correctly.
     // cf. https://stackoverflow.com/questions/41299642/
-
     get(target: any, prop: string) {
+      if (isOpaque(target)) {
+        return true;
+      }
+
       if (prop === 'isProxy') {
         return true;
       }
@@ -70,7 +84,7 @@ export function shakeTree(obj: any, accessed: string[] = []) {
         if (Array.isArray(subobj)) {
           subobj.forEach((item) => shakeTree(item, accessed));
         } else {
-          shakeTree(subobj, accessed);
+            shakeTree(subobj, accessed);
         }
       }
     });
