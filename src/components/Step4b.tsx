@@ -43,7 +43,10 @@ function Step4b() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>How old will you be when you file?</h2>
-      <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate)} />
+      <label>
+        'age '
+        <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate)} />
+      </label>
       <input type="submit" />
     </form>
   );

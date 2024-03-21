@@ -45,7 +45,10 @@ function Step4() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>When were you born?</h2>
+      <label>
+      'My birthdate is '
       <input {...register('birthdate', { required: true })} type="date" />
+      </label>
       <input type="submit" />
     </form>
   );
