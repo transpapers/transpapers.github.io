@@ -21,9 +21,11 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { updatePerson } from '../slice';
+import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
+
+import { Person } from '../types/person';
 
 import { allJurisdictions } from '../jurisdiction/all';
 
@@ -32,12 +34,12 @@ function Step1() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Partial<Person>) => {
     dispatch(updatePerson(data));
     navigate('/step2');
   };
 
-  const { residentJurisdiction } = useSelector((state) => state.person);
+  const { residentJurisdiction } = useSelector((state) => state.person)!;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

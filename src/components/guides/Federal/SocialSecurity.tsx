@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 import { GenderMarker } from '../../../types/types';
 
@@ -53,7 +53,7 @@ function SocialSecurityGuide() {
         </p>
         )}
 
-      { (age < 18)
+      { (age && age < 18)
         ? (
           <p>
             Your parent/guardian should sign in section 17.

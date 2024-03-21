@@ -21,9 +21,9 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
 
-import { setProcessNames } from '../slice';
+import { setProcessNames, ProcessState } from '../slice';
 
 import { targets } from '../types/process';
 import { allProcesses } from '../jurisdiction/all';
@@ -37,7 +37,7 @@ function Step5() {
 
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: ProcessState) => {
     dispatch(setProcessNames(data.neededProcesses));
     navigate('/step6');
   };
@@ -52,7 +52,7 @@ function Step5() {
             <li>
               <label>
                 <input {...register('neededProcesses')} type="checkbox" value={proc.target} />
-                {targets[proc.target] || ''}
+                {targets[proc.target!] || ''}
               </label>
             </li>
           ))}

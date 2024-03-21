@@ -22,7 +22,7 @@ import * as React from 'react';
 function DS5504Guide() {
   return (
     <section>
-        <h3>Obtaining Your Passport</h3>
+      <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.
         Your form is the DS 5504 which is a mail-in form. Pages 1-4 contain
@@ -36,7 +36,7 @@ function DS5504Guide() {
         parent/guardian sign on the second line instead. Write in the current date
         to the right of the signatures in the indicated section. On page 6 complete
         sections 11 through 19 as they apply to you. For section 19 if you have no
-        current travel plans write "none" in every box.
+        current travel plans write &ldquo;none&rdquo; in every box.
       </p>
 
       <p>

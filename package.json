@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0; tsc --noEmit --pretty",
     "test": "vitest run",
-    "cov": "vitest run --coverage"
+    "cov": "vitest run --coverage",
+    "fix": "eslint . --ext ts,tsx --fix"
   },
   "repository": {
     "type": "git",

@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function MichiganFilingInitialFormsGuide() {
   const {
@@ -73,15 +73,15 @@ function MichiganFilingInitialFormsGuide() {
             <ul>
               { fingerprintLocations.map(({ name, address, website }) => (
                 <li>
-      { name }
-      ,
-      {' '}
-      { address }
-      {' '}
-      (
-      <a href={website}>{ website }</a>
-      )
-    </li>
+                  { name }
+                  ,
+                  {' '}
+                  { address }
+                  {' '}
+                  (
+                  <a href={website}>{ website }</a>
+                  )
+                </li>
               ))}
             </ul>
           </p>
@@ -97,15 +97,17 @@ function MichiganFilingInitialFormsGuide() {
             state fingerprint card; either is acceptable. Do not use live-scan
             fingerprinting services unless so instructed by the court.
             <strong>
-              Do
-              not bend or fold your fingerprint card.
-</strong>
+              Do not bend or fold your fingerprint card.
+            </strong>
           </p>
           <p>After receiving your fingerprint card, mail it to:</p>
           <p>Michigan State Police</p>
           <p>CJIC</p>
           <p>PO Box 30266, Lansing, MI 48909</p>
-          <p>Enclose a copy of your Petition to Change Name and a check in the amount of $43.25 made out to the State of Michigan.</p>
+          <p>
+            Enclose a copy of your Petition to Change Name and a check in the
+            amount of $43.25 made out to the State of Michigan.
+          </p>
         </>
         )}
 

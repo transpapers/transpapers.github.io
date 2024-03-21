@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function MichiganMC20Guide() {
   const { age } = useSelector((state) => state.person);
@@ -39,7 +39,7 @@ function MichiganMC20Guide() {
         {' '}
         as
         applicable.
-        { (age < 18)
+        { age && (age < 18)
           ? 'Your parent should sign at the bottom of the first page.'
           : 'Sign at the bottom of the first page.'}
       </p>

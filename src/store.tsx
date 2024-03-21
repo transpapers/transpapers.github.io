@@ -19,6 +19,8 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+
 import {
   persistStore,
   persistReducer,
@@ -53,3 +55,11 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+// https://stackoverflow.com/questions/72039694/parameter-state-unknown-object-is-of-type-unknown-redux-ts
+type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -44,13 +44,12 @@ export function shakeTree(obj: any, accessed: string[] = []) {
 
   const functionPropertyNames = ['include', 'text', 'check'];
 
-
   const handler = {
     // Handle nested properties correctly.
     // cf. https://stackoverflow.com/questions/41299642/
     get(target: any, prop: string) {
       if (isOpaque(target)) {
-        return true;
+        return undefined;
       }
 
       if (prop === 'isProxy') {
@@ -64,9 +63,7 @@ export function shakeTree(obj: any, accessed: string[] = []) {
       }
 
       if (!func.isProxy && typeof func === 'object') {
-        // Ignoring ESLint here because we do actually need to mutate `target`.
-        // The `no-param-reassign` rule is irrelevant since we aren't touching `arguments`.
-        target[prop] = new Proxy(func, handler); // eslint-disable-line no-param-reassign
+        target[prop] = new Proxy(func, handler);
       }
 
       if (!accessed.includes(prop)) {
@@ -84,7 +81,7 @@ export function shakeTree(obj: any, accessed: string[] = []) {
         if (Array.isArray(subobj)) {
           subobj.forEach((item) => shakeTree(item, accessed));
         } else {
-            shakeTree(subobj, accessed);
+          shakeTree(subobj, accessed);
         }
       }
     });

@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function MichiganPC51Guide() {
   const { age, doNotPublish } = useSelector((state) => state.person);
@@ -38,7 +38,7 @@ function MichiganPC51Guide() {
       (concerning criminal record.)
       { doNotPublish
             && 'Also complete page 3 to the best of your ability. If your request for nonpublication has been granted, skip the publication section.'}
-      { (age < 18)
+      { age && (age < 18)
         ? (
           <p>
             Also fill out
@@ -47,7 +47,12 @@ function MichiganPC51Guide() {
             and
             <strong>item 7</strong>
             {' '}
-            as applicable. Your parent(s) should complete and sign under the heading “Signature of Parent/Guardian for Minor.” If one of your parent(s) is deceased or noncustodial, only one parent should sign on page 2 in the field labeled “Petitioner Signature.” If both are deceased your guardian should do the above instead and attach letters of guardianship to this form.
+            as applicable. Your parent(s) should complete and sign under the
+            heading “Signature of Parent/Guardian for Minor.” If one of your
+            parent(s) is deceased or noncustodial, only one parent should sign
+            on page 2 in the field labeled “Petitioner Signature.” If both are
+            deceased your guardian should do the above instead and attach
+            letters of guardianship to this form.
           </p>
         )
         : 'Sign with your legal name on page 2, in the field labeled “Petitioner Signature.”'}

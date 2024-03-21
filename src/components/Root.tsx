@@ -22,9 +22,6 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import Header from './Header';
-import Noscript from './Noscript';
-
 export default function Root() {
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -80,7 +77,7 @@ export default function Root() {
           {' '}
           Select your birth state, current state of residence, and the
           information you wish to change. Fill out the form that appears and
-          press "Download gender-affirming documents". Your browser will then
+          press &ldquo;Download gender-affirming documents&rdquo;. Your browser will then
           download a PDF file comprising the forms you need to file, as well as
           a personalized guide to filing them. The forms will be prefilled using
           the information you entered.
@@ -107,12 +104,12 @@ export default function Root() {
           addresses may not be secure.)
         </p>
         <p>
-          <strong>My state isn't listed.</strong>
+          <strong>My state isn&apos;t listed.</strong>
           {' '}
           Transpapers is developed by
-          two people with day jobs. It's a lot of work to automate the legal
+          two people with day jobs. It&apos;s a lot of work to automate the legal
           processes of fifty-five states and territories. Send us a request at
-          the feedback form below and we'll add it to the list. If you're a
+          the feedback form below and we&apos;ll add it to the list. If you&apos;re a
           programmer, send us a pull request.
         </p>
         <p>

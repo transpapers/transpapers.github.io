@@ -150,7 +150,6 @@ export function NumberField({ field, register }: FieldConstructorProps): JSX.Ele
     <input
       type="number"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
-
       {...register(field.name)}
     />
   );
@@ -163,7 +162,6 @@ export function EmailField({ field, register }: FieldConstructorProps): JSX.Elem
     <input
       type="email"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
-
       {...register(field.name)}
     />
   );
@@ -176,7 +174,6 @@ export function DateField({ field, register }: FieldConstructorProps): JSX.Eleme
     <input
       type="date"
       defaultValue={field.hasOwnProperty('default') ? field.default : ''}
-
       {...register(field.name)}
     />
   );

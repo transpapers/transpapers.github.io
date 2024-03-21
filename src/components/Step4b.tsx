@@ -21,9 +21,12 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { numericalAge } from '../lib/util';
+
+import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
+
+import { Person } from '../types/person';
 
 import { updatePerson } from '../slice';
 
@@ -32,7 +35,7 @@ function Step4b() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Partial<Person>) => {
     dispatch(updatePerson(data));
 
     navigate('/step5');
@@ -44,8 +47,9 @@ function Step4b() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>How old will you be when you file?</h2>
       <label>
-        'age '
-        <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate)} />
+        age
+        {' '}
+        <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate!)} />
       </label>
       <input type="submit" />
     </form>

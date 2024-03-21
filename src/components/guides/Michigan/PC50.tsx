@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function MichiganPC50Guide() {
   const { age, parentsAreOkay } = useSelector((state) => state.person);
@@ -32,7 +32,7 @@ function MichiganPC50Guide() {
         in a local newspaper unless there are compelling reasons not to. This will take
         the form of a notice containing the old and new legal names as well as the date,
         time, and location of the hearing.
-        { (age < 18 && !parentsAreOkay)
+        { age && (age < 18 && !parentsAreOkay)
             && 'List the legal names of any noncustodial parents under the heading “TO ALL PERSONS, including:”.'}
         You may need to write in the name of the publication that the notice will be
         displayed in during filing; if so, refer to the list above. This form is

@@ -21,14 +21,14 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
 
 import { neededFieldNames } from '../lib/shakeTree';
 
 import { fields, renderField } from './fields';
 
+import { Person } from '../types/person';
 import { updatePerson } from '../slice';
-import { targets } from '../types/process';
 import { getJurisdiction } from '../jurisdiction/all';
 
 import { compileDocuments, finalizeApplicant } from '../lib/fill';
@@ -57,11 +57,12 @@ function Step6() {
 
   const processes = processNames
     .map((procName) => allProcesses.find((proc) => proc.target === procName))
-    .filter((proc) => proc !== undefined);
+    .filter((proc) => proc !== undefined)
+    .map((proc) => proc!);
 
   const fieldNamesToShow = neededFieldNames(processes, applicant);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Partial<Person>) => {
     dispatch(updatePerson(data));
 
     const finalApplicant = finalizeApplicant(applicant);
@@ -71,18 +72,18 @@ function Step6() {
     navigate('/guide');
 
     compileDocuments(processes, applicant)
-        .then((doc) => {
-            if (doc !== undefined) {
-              const url = URL.createObjectURL(
-                  new Blob([doc], { type: 'application/pdf' }),
-              );
-              const link = document.createElement('a');
-              link.download = 'gender_affirming_documents.pdf';
-              link.href = url;
-              link.click();
-              URL.revokeObjectURL(link.href);
-            }
-        });
+      .then((doc) => {
+        if (doc !== undefined) {
+          const url = URL.createObjectURL(
+            new Blob([doc], { type: 'application/pdf' }),
+          );
+          const link = document.createElement('a');
+          link.download = 'gender_affirming_documents.pdf';
+          link.href = url;
+          link.click();
+          URL.revokeObjectURL(link.href);
+        }
+      });
   };
 
   // We do it this way to maintain ordering.
@@ -96,7 +97,7 @@ function Step6() {
       <ul className="spaced">
         {fieldsToShow.map((field) => (
           <li>
-            {renderField(field, applicant.residentJurisdiction, register)}
+            {renderField(field, applicant.residentJurisdiction!, register)}
           </li>
         ))}
       </ul>

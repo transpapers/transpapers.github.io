@@ -191,9 +191,12 @@ export const fields: { [key: string]: Field } = {
   },
 };
 
-export function renderField(field: Field, jurisdiction: string, register: (name: string) => Object) {
+export function renderField(
+  field: Field,
+  jurisdiction: string,
+  register: (name: string) => Object,
+) {
   if (!field || !field.hasOwnProperty('type')) {
-    console.log('Illegal field:', field);
     return undefined;
   }
 

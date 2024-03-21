@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function MichiganBirthCertificateGuide() {
   const { age } = useSelector((state) => state.person);
@@ -43,16 +43,16 @@ function MichiganBirthCertificateGuide() {
       </p>
 
       <p>
-        {
-        (age < 15)
+        {/* The other options for doing this inside a JSX component are all worse. */}
+        {/* eslint-disable-next-line no-nested-ternary */}
+        {(age && age < 15)
           ? 'Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
-          : (age < 18)
+          : (age && age < 18)
             ? 'You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your old name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
-            : 'You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name.'
-    }
+            : 'You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name.'}
         { ' ' }
         If at any point you have undergone a name change, such as part of an adoption,
-        you will need to fill out the "Other Names Used:" section on
+        you will need to fill out the &ldquo;Other Names Used:&rdquo; section on
         the
         {' '}
         <strong>Application to Correct or Change a Michigan Birth Record</strong>
@@ -60,7 +60,7 @@ function MichiganBirthCertificateGuide() {
       </p>
 
       {
-        (age < 18) ? (
+        (age && age < 18) ? (
           <>
             <p>
               Your parent or guardian should complete the “Payment” section on page 2
@@ -78,9 +78,10 @@ function MichiganBirthCertificateGuide() {
                 returned.
               </strong>
               {' '}
-              If they don't have a state ID or driver's license, they
-              should refer to the first link in our "Resources" section at the end of this guide.
-              Then they should enclose a check in the amount entered under "TOTAL ENCLOSED"
+              If they don&apos;t have a state ID or driver&apos;s license, they
+              should refer to the first link in our &ldquo;Resources&rdquo;
+              section at the end of this guide. Then they should enclose a
+              check in the amount entered under &ldquo;TOTAL ENCLOSED&rdquo;
               made out to the State of Michigan.
             </p>
           </>
@@ -95,15 +96,17 @@ function MichiganBirthCertificateGuide() {
               <p>P.O. Box 30721</p>
               <p>Lansing, MI 48909</p>
               <p>
-                Enclose a check in the amount you entered under "TOTAL ENCLOSED", made out to
+                Enclose a check in the amount you entered under &ldquo;TOTAL
+                ENCLOSED&rdquo;, made out to
                 the State of Michigan, as well as photocopies of the court order and
                 your primary identification.
                 <strong>
                   Original documents will not be returned.
                 </strong>
                 {' '}
-                If you don't have a state ID or driver's
-                license, refer to the first link in our "Resources" section at the end of this guide.
+                If you don&apos;t have a state ID or driver&apos;s license,
+                refer to the first link in our &ldquo;Resources&rdquo section at the end of
+                this guide.
               </p>
             </>
           )

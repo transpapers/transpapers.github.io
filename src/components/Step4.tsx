@@ -21,7 +21,9 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+
+import { useAppDispatch as useDispatch } from '../store';
+import { Person } from '../types/person';
 
 import { isMinor } from '../lib/util';
 
@@ -32,7 +34,7 @@ function Step4() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Partial<Person>) => {
     dispatch(updatePerson(data));
 
     if (isMinor(data)) {
@@ -46,8 +48,9 @@ function Step4() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>When were you born?</h2>
       <label>
-      'My birthdate is '
-      <input {...register('birthdate', { required: true })} type="date" />
+        My birthdate is
+        {' '}
+        <input {...register('birthdate', { required: true })} type="date" />
       </label>
       <input type="submit" />
     </form>

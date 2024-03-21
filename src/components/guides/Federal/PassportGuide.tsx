@@ -19,18 +19,13 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function PassportGuide() {
   const { passport } = useSelector((state) => state.person);
 
-  let passportForm; let
-    isInPerson;
+  let passportForm; let isInPerson;
   switch (passport) {
-    case 'ds11':
-      passportForm = 'DS 11';
-      isInPerson = true;
-      break;
     case 'ds82':
       passportForm = 'DS 82';
       isInPerson = false;
@@ -38,6 +33,11 @@ function PassportGuide() {
     case 'ds5504':
       passportForm = 'DS 5504';
       isInPerson = false;
+      break;
+    case 'ds11':
+    default:
+      passportForm = 'DS 11';
+      isInPerson = true;
   }
 
   return (
@@ -60,3 +60,5 @@ function PassportGuide() {
     </section>
   );
 }
+
+export default PassportGuide;

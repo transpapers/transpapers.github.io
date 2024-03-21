@@ -18,5 +18,12 @@ module.exports = {
   },
   rules: {
     'no-prototype-builtins': 'off',
+    'jsx-a11y/label-has-associated-control': [ 'error', {
+      'assert': 'either',
+    }],
+    'react/jsx-props-no-spreading': 'off',
+    'no-param-reassign': [ 'error', {
+      'props': false,
+    }],
   },
 };

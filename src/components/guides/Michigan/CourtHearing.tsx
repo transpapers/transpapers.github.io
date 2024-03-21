@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../../../store';
 
 function MichiganCourtHearingGuide() {
   const { age } = useSelector((state) => state.person);
@@ -28,7 +28,7 @@ function MichiganCourtHearingGuide() {
     <section>
       <p>
         On the day of your hearing, you
-        { (age < 18) && 'and your parent(s)' }
+        { age && (age < 18) && 'and your parent(s)' }
         {' '}
         should dress appropriately for a courtroom, even if the hearing
         is virtual. The hearing may begin late, but it should only take a few
@@ -41,7 +41,7 @@ function MichiganCourtHearingGuide() {
       </p>
       <p>
         You
-        { (age < 18) && 'r parent(s)' }
+        { age && (age < 18) && 'r parent(s)' }
         {' '}
         will be sworn in and
         questioned. The questions vary between courts, but you can expect

@@ -19,14 +19,14 @@
 
 import * as React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector as useSelector } from '../store';
 
 import { compileGuides, finalizeApplicant } from '../lib/fill';
 import { allProcesses } from '../jurisdiction/all';
 
 function Guide() {
   let applicant = useSelector((state) => state.person);
-  applicant = finalizeApplicant(applicant);
+  applicant = finalizeApplicant(applicant)!;
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 

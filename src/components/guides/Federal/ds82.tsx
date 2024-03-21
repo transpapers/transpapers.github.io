@@ -24,7 +24,7 @@ import * as React from 'react';
 function DS82Guide() {
   return (
     <section>
-        <h3>Obtaining Your Passport</h3>
+      <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.  Your
         form is the DS 82 which is a mail-in form. Pages 1-4 contain instructions
@@ -38,7 +38,7 @@ function DS82Guide() {
         below the blue section then write in the current date to the right of the
         signature in the indicated section. On page 6 complete sections 12 through
         20 as they apply to you. For section 20 if you have no current travel plans
-        write "none" in every box.
+        write &ldquo;none&rdquo; in every box.
       </p>
 
       <p>

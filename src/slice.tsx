@@ -45,9 +45,17 @@ const personSlice = createSlice({
   },
 });
 
+export interface ProcessState {
+  processNames: string[];
+}
+
+const initialProcessState: ProcessState = {
+  processNames: [],
+};
+
 const processSlice = createSlice({
   name: 'process',
-  initialState: { processNames: [] },
+  initialState: initialProcessState,
   reducers: {
     setProcessNames: (state, action) => {
       const procNames = action.payload;

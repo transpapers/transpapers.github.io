@@ -191,7 +191,7 @@ export function fullName(name: Name | undefined): string {
  * @param {Person} applicant
  * @return {boolean}
  */
-export function isMinor(applicant: Person): boolean {
+export function isMinor(applicant: Partial<Person>): boolean {
   if (!applicant) {
     return false;
   }

@@ -23,21 +23,24 @@ import * as React from 'react';
 function DS11Guide() {
   return (
     <section>
-        <h3>Obtaining Your Passport</h3>
+      <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.
         Your form is the DS 11 which is an in-person appointment form. Pages 1-4
         contain instructions and clarification, on page 5 at the top you will need
         to select which documents you want. If you never had a passport before then
-        skip the "Changing gender marker" checkbox otherwise check it. Then fill out
-        your social security number in section 5. If you have changed your name multiple times before
-        then you will need to add them to section 9. For the photo we suggest going to a
+        skip the &ldquo;Changing gender marker&rdquo; checkbox otherwise check it. Then fill out
+        your social security number in section 5. If you have changed your name
+        multiple times before then you will need to add them to section 9. For
+        the photo we suggest going to a
         business for the highest chance of success.
+        {' '}
         <strong>Do not staple it to the form.</strong>
+        {' '}
         For section 10 on page 6 please fill out your parents place of birth,
         legal gender, and citizenship. On page 6 complete sections 11 through 21
         as they apply to you. For section 18 if you have no current travel plans
-        write "none" in every box.
+        write &ldquo;none&rdquo; in every box.
       </p>
 
       <p>
