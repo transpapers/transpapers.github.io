@@ -19,6 +19,23 @@
 
 import { Name, GenderMarker } from './types';
 
+export interface Court {
+  address: string;
+  phone: string;
+  specificCourtInfo: string | undefined;
+}
+
+export interface FingerprintLocation {
+  name: string;
+  address: string;
+  website: string;
+}
+
+export interface Publication {
+  name: string;
+  website: string;
+}
+
 /**
  * Applicant's personal information.
  *
@@ -200,6 +217,10 @@ export interface Person {
    * TODO DOCUMENT THIS
    */
   passport: string | undefined;
+
+  court: Court | undefined;
+  fingerprintLocations: FingerprintLocation[] | undefined;
+  publications: Publication[] | undefined;
 }
 
 export const blankData: Person = {
@@ -269,6 +290,10 @@ export const blankData: Person = {
   },
 
   passport: undefined,
+
+  court: undefined,
+  fingerprintLocations: undefined,
+  publications: undefined,
 };
 
 // This should come in handy for documentation purposes.
@@ -341,4 +366,8 @@ export const sampleData: Person = {
   },
 
   passport: 'ds11',
+
+  court: undefined,
+  publications: undefined,
+  fingerprintLocations: undefined,
 };

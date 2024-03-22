@@ -31,20 +31,20 @@ function MichiganFilingInitialFormsGuide() {
       <p>
         Your filing location is
         {' '}
-        { court.address }
+        { court?.address }
         .
         You may file by mail or in person; in either case, include all the forms
         listed in Part 1, as well as payment. If you are filing by mail, you
         must pay by check or money order. If you are filing in person, we
         recommend that you call the court at
-        { court.phone }
+        { court?.phone }
         {' '}
         to confirm their
         open hours and accepted payment types.
       </p>
 
-      { court.specificCourtInfo
-        && <p>{ court.specificCourtInfo }</p>}
+      { court?.specificCourtInfo
+        && <p>{ court?.specificCourtInfo }</p>}
 
       <p>
         <strong>
@@ -65,13 +65,13 @@ function MichiganFilingInitialFormsGuide() {
         mail.
       </p>
 
-      { (age >= 22)
+      { age && (age >= 22)
         && (
         <>
           <p>
             The following location(s) are recommended for fingerprinting in your county:
             <ul>
-              { fingerprintLocations.map(({ name, address, website }) => (
+              { fingerprintLocations?.map(({ name, address, website }) => (
                 <li>
                   { name }
                   ,
@@ -125,7 +125,7 @@ function MichiganFilingInitialFormsGuide() {
         court-approved newspapers in your county are as follows:
       </p>
       <ul>
-        { publications.map(({ name, website }) => (
+        { publications?.map(({ name, website }) => (
           <li>
             { name }
             {' '}

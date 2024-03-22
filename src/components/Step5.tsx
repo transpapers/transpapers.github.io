@@ -37,8 +37,8 @@ function Step5() {
 
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
-  const onSubmit = (data: ProcessState) => {
-    dispatch(setProcessNames(data.neededProcesses));
+  const onSubmit = (data: Partial<ProcessState>) => {
+    dispatch(setProcessNames(data));
     navigate('/step6');
   };
 
@@ -51,7 +51,7 @@ function Step5() {
           {processes.map((proc) => (
             <li>
               <label>
-                <input {...register('neededProcesses')} type="checkbox" value={proc.target} />
+                <input {...register('processNames')} type="checkbox" value={proc.target} />
                 {targets[proc.target!] || ''}
               </label>
             </li>
