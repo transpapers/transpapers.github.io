@@ -1675,9 +1675,17 @@ const michiganCounties: { [key: string]: County } = {
     ],
     publications: [
       {
-        name: 'Ottawa Legal News',
-        website: '',
+        name: 'Holland Sentinel',
+        website: 'https://help.hollandsentinel.com/contact-us/',
       },
+      {
+        name: 'Grand Haven Tribune',
+        website: 'https://www.grandhaventribune.com/',
+      },
+      {
+        name: 'MLive',
+        website: 'https://classifieds.mlive.com/mlive/',
+      }
     ],
   },
   'Presque Isle': {
