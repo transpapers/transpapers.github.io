@@ -38,7 +38,7 @@ function Step5() {
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
   const onSubmit = (data: Partial<ProcessState>) => {
-    dispatch(setProcessNames(data));
+    dispatch(setProcessNames(data.processNames));
     navigate('/step6');
   };
 
