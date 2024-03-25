@@ -125,13 +125,13 @@ function MichiganFilingInitialFormsGuide() {
         court-approved newspapers in your county are as follows:
       </p>
       <ul>
-        { publications?.map(({ name, website }) => (
+        { publications?.map(({ name, website, email }) => (
           <li>
-            { name }
+            { name },
             {' '}
-            (
-            <a href={website}>{ website }</a>
-            )
+            { website && <a href={website}>{ website }</a>}
+            {' '}
+            { email && <a href={email}>{ email }</a>}
           </li>
         ))}
       </ul>
