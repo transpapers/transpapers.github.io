@@ -19,22 +19,7 @@
 
 import { Name, GenderMarker } from './types';
 
-export interface Court {
-  address: string;
-  phone: string;
-  specificCourtInfo: string | undefined;
-}
-
-export interface FingerprintLocation {
-  name: string;
-  address: string;
-  website: string;
-}
-
-export interface Publication {
-  name: string;
-  website: string;
-}
+import { Court, FingerprintLocation, Publication } from './county';
 
 /**
  * Applicant's personal information.

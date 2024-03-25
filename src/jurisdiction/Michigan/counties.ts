@@ -1684,8 +1684,8 @@ const michiganCounties: { [key: string]: County } = {
       },
       {
         name: 'MLive',
-        website: 'https://classifieds.mlive.com/mlive/',
-      }
+        email: 'legalads@mlive.com',
+      },
     ],
   },
   'Presque Isle': {

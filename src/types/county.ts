@@ -28,17 +28,26 @@ export interface Court {
   city: string;
   circuit?: string;
   phone: string;
-  website: string;
+  website?: string;
   specificCourtInfo?: string;
 }
 
 export interface FingerprintLocation {
-  address: string;
   name: string;
+  address: string;
   website: string;
 }
 
-export interface Publication {
+interface PublicationWebsite {
   name: string;
   website: string;
+  email?: string;
 }
+
+interface PublicationEmail {
+  name: string;
+  email: string;
+  website?: string;
+}
+
+export type Publication = PublicationWebsite | PublicationEmail;
