@@ -20,7 +20,16 @@
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ nodePackages.eslint node2nix nodejs pnpm yarn typescript ];
+          packages = with pkgs; [
+            nodePackages.eslint node2nix nodejs pnpm yarn typescript
+          ];
+	  nativeBuildInputs = with pkgs; [ cypress ];
+
+	  shellHook = ''
+	  	export CYPRESS_INSTALL_BINARY=0;
+		export CYPRESS_RUN_BINARY=${pkgs.cypress}/bin/Cypress;
+		export NODE_OPTIONS=--openssl-legacy-provider;
+	  '';
         };
       });
     };

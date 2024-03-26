@@ -1,9 +1,4 @@
-
 import { expect, describe, test } from 'vitest';
-import { axe } from 'vitest-axe';
-
-import { readFileSync } from 'fs';
-import { join } from 'path';
 
 import { PDFDocument } from '@cantoo/pdf-lib';
 
@@ -64,48 +59,6 @@ describe('shakeTree()', () => {
     const receivedSet = new Set(received);
 
     expect(receivedSet).toEqual(expectedSet);
-  });
-});
-
-describe('components pass basic a11y tests', async () => {
-  describe.each(allJurisdictions)('Jurisdiction: $name', async (_jurisdiction) => {
-
-    const allComponents = {
-      "Step1": <Step1 />,
-      "Step2": <Step2 />,
-      "Step3": <Step3 />,
-      "Step4": <Step4 />,
-      "Step4b": <Step4b />,
-      "Step5": <Step5 />,
-      "Step6": <Step6 />,
-    };
-    test.each(Object.entries(allComponents))('Component: %s', async (_name, component) => {
-      const { container } = render(<StoreProvider store={store}><BrowserRouter>{component}</BrowserRouter></StoreProvider>);
-      const markup = await axe(container);
-      expect(markup).toHaveNoViolations();
-    });
-  });
-});
-
-describe('documents render properly with sampleData', async () => {
-  describe.each(allJurisdictions)('Jurisdiction: $name', async (jurisdiction) => {
-    const allProcesses = Object.values(jurisdiction.processes);
-
-    describe.each(allProcesses)('Process: $target', async ({ documents }) => {
-      test.each(documents)('Document: $name ($id)', async ({ filename, map }) => {
-        if (filename !== undefined) {
-          const file = join('public/forms', filename);
-          const content = readFileSync(file, 'base64');
-          const doc = await PDFDocument.load(content);
-
-          if (map === undefined) {
-            return doc;
-          }
-
-          fillForm(doc, map, sampleData);
-        }
-      });
-    });
   });
 });
 

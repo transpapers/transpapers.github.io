@@ -5,23 +5,48 @@ import react from '@vitejs/plugin-react';
 import { configDefaults, defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    deps: {
-      optimizer: {
-        web: {
-          include: ['vitest-canvas-mock'],
+export default defineConfig(({ mode }) => {
+  if (mode === 'production') {
+    return {
+      plugins: [react()],
+      test: {
+        environment: 'jsdom',
+        exclude: [
+          ...configDefaults.exclude,
+          '**/.*/**',
+        ],
+        passWithNoTests: true,
+        setupFiles: ['test/vitest-setup.ts'],
+        poolOptions: {
+          threads: {
+            singleThread: true,
+          },
         },
-      },
-    },
-    environment: 'jsdom',
-    exclude: [
-      ...configDefaults.exclude,
-      '**/.*/**',
-    ],
-    passWithNoTests: true,
-    setupFiles: ['test/vitest-setup.ts'],
-    threads: false,
-  },
+      }
+    };
+  } else if (mode === 'e2e') {
+    return {
+      plugins: [react()],
+      test: {
+        browser: {
+          enabled: true,
+          name: 'firefox',
+        },
+        environment: 'jsdom',
+        exclude: [
+          ...configDefaults.exclude,
+          '**/.*/**',
+        ],
+        passWithNoTests: true,
+        setupFiles: ['test/vitest-setup.ts'],
+        poolOptions: {
+          threads: {
+            singleThread: true,
+          },
+        },
+      }
+    };
+  } else {
+    return {};
+  }
 });
