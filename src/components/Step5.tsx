@@ -45,13 +45,14 @@ function Step5() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>What do you need to do?</h2>
+      <p>If you&apos;re not sure, leave everything checked.</p>
       <fieldset>
         <legend>I need to...</legend>
         <ul>
           {processes.map((proc) => (
-            <li>
+            <li key={proc.target}>
               <label>
-                <input {...register('processNames')} type="checkbox" value={proc.target} />
+                <input {...register('processNames')} type="checkbox" value={proc.target} defaultChecked />
                 {targets[proc.target!] || ''}
               </label>
             </li>
