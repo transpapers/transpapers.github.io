@@ -26,7 +26,7 @@ function MichiganFilingInitialFormsGuide() {
     court, age, fingerprintLocations, publications,
   } = useSelector((state) => state.person);
   return (
-    <section>
+    <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>
       <p>
         Your filing location is
@@ -72,7 +72,7 @@ function MichiganFilingInitialFormsGuide() {
             The following location(s) are recommended for fingerprinting in your county:
             <ul>
               { fingerprintLocations?.map(({ name, address, website }) => (
-                <li>
+                <li key={name}>
                   { name }
                   ,
                   {' '}
@@ -126,8 +126,9 @@ function MichiganFilingInitialFormsGuide() {
       </p>
       <ul>
         { publications?.map(({ name, website, email }) => (
-          <li>
-            { name },
+          <li key={name}>
+            { name }
+            ,
             {' '}
             { website && <a href={website}>{ website }</a>}
             {' '}
