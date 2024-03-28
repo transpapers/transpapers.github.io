@@ -288,7 +288,7 @@ function makeData() {
     zip: document.getElementById('zip').value,
     email: document.getElementById('email').value,
 
-    passport: document.getElementById('passport').value,
+    // passport: document.getElementById('passport').value,
 
     representativeName: {
       first: document.getElementById('representative-name-first').value,
