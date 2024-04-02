@@ -51,7 +51,7 @@ function Step4() {
         {' '}
         <input {...register('birthdate', { required: true })} type="date" />
       </label>
-      <input type="submit" />
+      <input type="submit" value="Next"/>
     </form>
   );
 }

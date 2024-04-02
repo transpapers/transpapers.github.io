@@ -48,7 +48,7 @@ function Step4b() {
         {' '}
         <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate!)} />
       </label>
-      <input type="submit" />
+      <input type="submit" value="Next" />
     </form>
   );
 }

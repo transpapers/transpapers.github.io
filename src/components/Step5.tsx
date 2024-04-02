@@ -58,7 +58,7 @@ function Step5() {
           ))}
         </ul>
       </fieldset>
-      <input type="submit" />
+      <input type="submit" value="Next" />
     </form>
   );
 }
