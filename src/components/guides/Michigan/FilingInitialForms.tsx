@@ -38,6 +38,7 @@ function MichiganFilingInitialFormsGuide() {
         listed in Part 1, as well as payment. If you are filing by mail, you
         must pay by check or money order. If you are filing in person, we
         recommend that you call the court at
+        {' '}
         { court?.phone }
         {' '}
         to confirm their
@@ -71,22 +72,16 @@ function MichiganFilingInitialFormsGuide() {
         <>
           <p>
             The following location(s) are recommended for fingerprinting in your county:
-            <ul>
-              { fingerprintLocations?.map(({ name, address, website }) => (
-                <li key={name}>
-                  { name }
-                  ,
-                  {' '}
-                  { address }
-                  {' '}
-                  (
-                  <a href={website}>{ website }</a>
-                  )
-                </li>
-              ))}
-            </ul>
           </p>
-
+          <ul>
+            { fingerprintLocations?.map(({ name, address, website }) => (
+              <li key={name}>
+                <span>{ name }</span><br />
+                <span>{ address }</span><br />
+                <a href={website}>{ website }</a>
+              </li>
+            ))}
+          </ul>
           <p>
             If you cannot schedule an appointment online at the listed URL, you
             will need to schedule by phone or email, using the information listed on
@@ -97,14 +92,17 @@ function MichiganFilingInitialFormsGuide() {
             At your appointment, you will probably be asked if you want an FBI or
             state fingerprint card; either is acceptable. Do not use live-scan
             fingerprinting services unless so instructed by the court.
+            {' '}
             <strong>
               Do not bend or fold your fingerprint card.
             </strong>
           </p>
           <p>After receiving your fingerprint card, mail it to:</p>
-          <p>Michigan State Police</p>
-          <p>CJIC</p>
-          <p>PO Box 30266, Lansing, MI 48909</p>
+          <p>
+            <span>Michigan State Police</span><br />
+            <span>CJIC</span><br />
+            <span>PO Box 30266, Lansing, MI 48909</span><br />
+          </p>
           <p>
             Enclose a copy of your Petition to Change Name and a check in the
             amount of $43.25 made out to the State of Michigan.

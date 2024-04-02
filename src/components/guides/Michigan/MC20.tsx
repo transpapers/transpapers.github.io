@@ -33,12 +33,15 @@ function MichiganMC20Guide(person: Person) {
         depending on the county, and is the largest single fee in the process. Courts
         will typically not grant your waiver request unless you are on public assistance
         or your annual income is below 125% of the federal poverty line. However, you
-        may file the request at your discretion; the worst they can do is deny it. If
-        you choose to file this form, complete
+        may file the request at your discretion; the worst they can do is deny it.
+      </p>
+
+      <p>If you choose to file this form, complete
+        {' '}
         <strong>items 1 and 3</strong>
         {' '}
-        as
-        applicable.
+        as applicable.
+        {' '}
         { age && (age < 18)
           ? 'Your parent should sign at the bottom of the first page.'
           : 'Sign at the bottom of the first page.'}

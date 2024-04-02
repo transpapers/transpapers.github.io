@@ -63,6 +63,7 @@ function SocialSecurityGuide(person: Person) {
 
       <p>
         You can find the nearest Social Security office at
+        {' '}
         <a
           href="https://secure.ssa.gov/ICON/main.jsp"
         >
@@ -83,6 +84,7 @@ function SocialSecurityGuide(person: Person) {
         and court order. You should be informed that, as of 20 October 2022, the
         administration’s policy allows you to update your gender marker at any
         time without giving a reason. (See
+        {' '}
         <a
           href="https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/"
         >

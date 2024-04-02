@@ -40,6 +40,7 @@ function Guide() {
       <p>
         Your gender-affirming documents have been compiled and automatically downloaded.
         What follows is a personalized guide to filing them.
+        {' '}
         <strong>
           You should print both this webpage
           and the PDF containing your compiled documents.

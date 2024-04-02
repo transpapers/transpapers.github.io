@@ -29,17 +29,16 @@ function MichiganBirthCertificateGuide(person: Person) {
       <p>
         This process is done by mail only, so you will need a large envelope
         in which to send the paperwork. You will need to complete the
+        {' '}
         <strong>
-          Application to Correct or Change a Michigan Birth
-          Record
+          Application to Correct or Change a Michigan Birth Record
         </strong>
         {' '}
         (form DCH-0847-CHGBX) and the
+        {' '}
         <strong>
-          State of Michigan
-          Sex Designation Form
+          State of Michigan Sex Designation Form.
         </strong>
-        .
       </p>
 
       <p>
@@ -50,12 +49,13 @@ function MichiganBirthCertificateGuide(person: Person) {
           : (age && age < 18)
             ? 'You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your old name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively.'
             : 'You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name.'}
-        { ' ' }
+        {' '}
         If at any point you have undergone a name change, such as part of an adoption,
         you will need to fill out the &ldquo;Other Names Used:&rdquo; section on
         the
         {' '}
         <strong>Application to Correct or Change a Michigan Birth Record</strong>
+        {' '}
         and check the applicable box underneath.
       </p>
 
@@ -67,15 +67,17 @@ function MichiganBirthCertificateGuide(person: Person) {
               as applicable. Then, they should mail the completed Application to Correct
               or Change a Michigan Birth Record to:
             </p>
-            <p>Vital Records Changes</p>
-            <p>P.O. Box 30721</p>
-            <p>Lansing, MI 48909</p>
             <p>
-              They should enclose photocopies of the court order and
-              of their primary identification.
+              <span>Vital Records Changes</span><br />
+              <span>P.O. Box 30721</span><br />
+              <span>Lansing, MI 48909</span>
+            </p>
+            <p>
+              They should enclose photocopies of the court order and of their
+              primary identification.
+              {' '}
               <strong>
-                Original documents will not be
-                returned.
+                Original documents will not be returned.
               </strong>
               {' '}
               If they don&apos;t have a state ID or driver&apos;s license, they
@@ -92,20 +94,23 @@ function MichiganBirthCertificateGuide(person: Person) {
                 Complete the “Payment” section on page 2 as applicable.
                 Mail the Application to Correct or Change a Michigan Birth Record to:
               </p>
-              <p>Vital Records Changes</p>
-              <p>P.O. Box 30721</p>
-              <p>Lansing, MI 48909</p>
+              <p>
+                <span>Vital Records Changes</span><br />
+                <span>P.O. Box 30721</span><br />
+                <span>Lansing, MI 48909</span>
+              </p>
               <p>
                 Enclose a check in the amount you entered under &ldquo;TOTAL
                 ENCLOSED&rdquo;, made out to
                 the State of Michigan, as well as photocopies of the court order and
                 your primary identification.
+                {' '}
                 <strong>
                   Original documents will not be returned.
                 </strong>
                 {' '}
                 If you don&apos;t have a state ID or driver&apos;s license,
-                refer to the first link in our &ldquo;Resources&rdquo section at the end of
+                refer to the first link in our &ldquo;Resources&rdquo; section at the end of
                 this guide.
               </p>
             </>
