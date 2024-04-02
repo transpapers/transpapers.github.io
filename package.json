@@ -54,8 +54,6 @@
   "dependencies": {
     "@cantoo/pdf-lib": "^1.21.0",
     "@testing-library/react": "^14.2.2",
-    "@types/react-redux": "^7.1.33",
-    "@types/redux-persist": "^4.3.1",
     "@vitejs/plugin-react": "^4.2.1",
     "immer": "^10.0.4",
     "react": "^18.2.0",
