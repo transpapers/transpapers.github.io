@@ -21,25 +21,24 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
+import useStore from '../store';
 
 import { neededFieldNames } from '../lib/shakeTree';
 
 import { fields, renderField } from './fields';
 
-import { Person } from '../types/person';
-import { updatePerson } from '../slice';
+import { type Person } from '../types/person';
 import { getJurisdiction } from '../jurisdiction/all';
 
-import { compileDocuments, finalizeApplicant } from '../lib/fill';
+import { compileDocuments } from '../lib/fill';
 
 function Step6() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const { processNames } = useSelector((state) => state.process);
-  const applicant = useSelector((state) => state.person);
+  const processNames = useStore((state) => state.processNames);
+  const applicant = useStore((state) => state.person);
+  const updatePerson = useStore((state) => state.updatePerson);
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
@@ -63,11 +62,11 @@ function Step6() {
   const fieldNamesToShow = neededFieldNames(processes, applicant);
 
   const onSubmit = (data: Partial<Person>) => {
-    dispatch(updatePerson(data));
+    updatePerson(data);
 
-    const finalApplicant = finalizeApplicant(applicant);
+    // const finalApplicant = finalizeApplicant(applicant)!;
 
-    dispatch(updatePerson(finalApplicant));
+    // updatePerson(finalApplicant);
 
     navigate('/guide');
 

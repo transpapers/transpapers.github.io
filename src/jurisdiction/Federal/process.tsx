@@ -27,7 +27,7 @@ import DS82Guide from '../../components/guides/Federal/ds82';
 import DS11Guide from '../../components/guides/Federal/ds11';
 import SocialSecurityGuide from '../../components/guides/Federal/SocialSecurity';
 
-import { Process, Target } from '../../types/process';
+import { type Process, Target } from '../../types/process';
 
 export const socialSecurity: Process = {
   target: Target.SocialSecurity,

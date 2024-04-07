@@ -17,49 +17,74 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { configureStore } from '@reduxjs/toolkit';
+import { produce } from 'immer';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { blankData, type Person } from './types/person';
 
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { numericalAge } from './lib/util';
+import { getJurisdiction } from './types/jurisdiction';
 
-import storage from 'redux-persist/lib/storage';
-import reducers from './slice';
+import { allJurisdictions } from './jurisdiction/all';
 
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage,
-};
+interface ApplicationState {
+  person: Person;
+  processNames: string[];
+}
 
-const persistedReducers = persistReducer(persistConfig, reducers);
+interface Action {
+  updatePerson: (newData: Partial<ApplicationState['person']>) => void;
+  updateProcessNames: (newProcessNames: string[]) => void;
+  finalizeApplicant: () => void;
+}
 
-const store = configureStore({
-  reducer: persistedReducers,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+const useStore = create<ApplicationState & Action>()(
+  persist(
+    (set) => ({
+      // Initial state.
+      person: blankData,
+      processNames: [],
+
+      // Actions.
+      updatePerson: (newData) => set(produce((state: ApplicationState) => {
+        Object.assign(state.person, newData);
+      })),
+
+      updateProcessNames: (newProcessNames) => set(() => ({ processNames: newProcessNames })),
+
+      finalizeApplicant: () => set(produce((state: ApplicationState) => {
+        /**
+        * Infer any extra values for the applicant as needed.
+        * Do any additional assignments here.
+        */
+        const {
+          birthdate, age, residentJurisdiction, residentCounty,
+        } = state.person;
+
+        const extraData: Partial<ApplicationState['person']> = {};
+
+        // Do any additional Applicant assignment here.
+        if (birthdate && !age) {
+          extraData.age = numericalAge(birthdate);
+        }
+
+        const jurisdiction = residentJurisdiction ?? '';
+        const jurisdictionObj = getJurisdiction(jurisdiction);
+
+        if (jurisdictionObj !== undefined && jurisdictionObj.counties !== undefined) {
+          const { counties } = jurisdictionObj;
+          const county = counties[residentCounty ?? ''];
+
+          Object.assign(extraData, county);
+          Object.assign(state.person, extraData);
+        }
+      })),
+    }),
+    {
+      name: 'transpapers-storage',
     },
-  }),
-});
+  ),
+);
 
-const persistor = persistStore(store);
-
-export { store, persistor };
-
-// Infer the `RootState` and `AppDispatch` types from the store itself
-// https://stackoverflow.com/questions/72039694/parameter-state-unknown-object-is-of-type-unknown-redux-ts
-type RootState = ReturnType<typeof store.getState>;
-type AppDispatch = typeof store.dispatch;
-
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export default useStore;

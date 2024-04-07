@@ -19,10 +19,8 @@
 
 import * as React from 'react';
 
-import { useAppSelector as useSelector } from '../../../store';
-
-function MichiganPC50Guide() {
-  const { age, parentsAreOkay } = useSelector((state) => state.person);
+function MichiganPC50Guide(person: Person) {
+  const { age, parentsAreOkay } = person;
 
   return (
     <section>

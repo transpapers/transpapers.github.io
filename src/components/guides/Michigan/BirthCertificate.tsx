@@ -19,10 +19,10 @@
 
 import * as React from 'react';
 
-import { useAppSelector as useSelector } from '../../../store';
+import { type Person } from '../../../types/person';
 
-function MichiganBirthCertificateGuide() {
-  const { age } = useSelector((state) => state.person);
+function MichiganBirthCertificateGuide(person: Person) {
+  const { age } = person;
 
   return (
     <section>

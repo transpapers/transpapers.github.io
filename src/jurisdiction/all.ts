@@ -17,8 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Process } from '../types/process';
-import { County } from '../types/county';
+import { type Jurisdiction } from '../types/jurisdiction';
 
 import {
   michiganBirthRecord,
@@ -30,43 +29,6 @@ import {
 import michiganCounties from './Michigan/counties';
 
 import { passport, socialSecurity } from './Federal/process';
-
-/**
- * A single US state or territory.
- */
-export interface Jurisdiction {
-  /**
-   * Human-readable name.
-   *
-   * @remarks This will be shown to the user in Step 1.
-   * Unless folderName is set, this is also the name of the directories under
-   * which the requisite forms and guides are located. For instance, Michigan
-   * forms are served under `forms/Michigan` and appear under
-   * `public/forms/Michigan`.
-   */
-  name: string;
-
-  /**
-   * Name of the folder under which the requisite forms and guides are located.
-   * Defaults to being the same as `name`.
-   */
-  folderName?: string;
-
-  /**
-   * Map from `Target`s to `Process`es.
-   */
-  processes?: Process[];
-
-  /**
-   * Map of counties (or county equivalents.)
-   */
-  counties?: { [key: string]: County };
-
-  /**
-   * `true` if this is the dummy `Jurisdiction` used for federal processes.
-   */
-  isFederal?: boolean;
-}
 
 export const michigan: Jurisdiction = {
   name: 'Michigan',
@@ -90,45 +52,3 @@ export const federal: Jurisdiction = {
 };
 
 export const allJurisdictions = [federal, michigan];
-
-export function getJurisdiction(name: string | undefined): Jurisdiction | undefined {
-  if (name === undefined) {
-    return undefined;
-  }
-  return allJurisdictions.find((jurisdiction) => jurisdiction.name === name);
-}
-
-export function getProcesses(name: string | undefined): Process[] {
-  if (name === undefined) {
-    return [];
-  }
-
-  const jurisdiction = getJurisdiction(name);
-
-  if (jurisdiction === undefined) {
-    return [];
-  }
-
-  if (jurisdiction.processes === undefined) {
-    return [];
-  }
-
-  return jurisdiction.processes;
-}
-
-export function allProcesses(
-  residentJurisdiction: string | undefined,
-  birthJurisdiction: string | undefined,
-): Process[] {
-  const residentJurisdictionProcesses = getJurisdiction(residentJurisdiction)?.processes || [];
-  const residentProcesses = residentJurisdictionProcesses
-    .filter((proc) => !proc.isBirth && !proc.isJustGuide);
-
-  const birthJurisdictionProcesses = getJurisdiction(birthJurisdiction)?.processes || [];
-  const birthProcesses = birthJurisdictionProcesses
-    .filter((proc) => proc.isBirth && !proc.isJustGuide);
-
-  const federalProcesses = getJurisdiction('Federal')?.processes || [];
-
-  return [...residentProcesses, ...birthProcesses, ...federalProcesses];
-}

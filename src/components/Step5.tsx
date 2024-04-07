@@ -21,24 +21,23 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
 
-import { setProcessNames, ProcessState } from '../slice';
-
+import useStore from '../store';
 import { targets } from '../types/process';
 import { allProcesses } from '../jurisdiction/all';
 
 function Step5() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const { residentJurisdiction, birthJurisdiction } = useSelector((state) => state.person);
+  const updateProcessNames = useStore((state) => state.updateProcessNames);
+  // const processNames = useStore((state) => state.processNames);
+  const { residentJurisdiction, birthJurisdiction } = useStore((state) => state.person);
 
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
-  const onSubmit = (data: Partial<ProcessState>) => {
-    dispatch(setProcessNames(data.processNames));
+  const onSubmit = ({ processNames }: { processNames?: string[] }) => {
+    updateProcessNames(processNames!);
     navigate('/step6');
   };
 

@@ -22,20 +22,19 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch as useDispatch } from '../store';
-import { Person } from '../types/person';
+import useStore from '../store';
+import { type Person } from '../types/person';
 
 import { isMinor } from '../lib/util';
-
-import { updatePerson } from '../slice';
 
 function Step4() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const updatePerson = useStore((state) => state.updatePerson);
 
   const onSubmit = (data: Partial<Person>) => {
-    dispatch(updatePerson(data));
+    updatePerson(data);
 
     if (isMinor(data)) {
       navigate('/step4b');

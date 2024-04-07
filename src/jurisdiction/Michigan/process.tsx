@@ -42,7 +42,7 @@ import MichiganPC51Guide from '../../components/guides/Michigan/PC51';
 import MichiganPC52Guide from '../../components/guides/Michigan/PC52';
 import MichiganResourcesGuide from '../../components/guides/Michigan/Resources';
 
-import { Process, Target } from '../../types/process';
+import { type Process, Target } from '../../types/process';
 
 export const michiganNameChange: Process = {
   jurisdiction: 'MI',

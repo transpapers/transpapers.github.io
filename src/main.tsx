@@ -19,12 +19,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider as StoreProvider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import { PersistGate } from 'redux-persist/integration/react';
-
-import { store, persistor } from './store';
 
 import Header from './components/Header';
 import Noscript from './components/Noscript';
@@ -85,11 +80,7 @@ if (root !== null) {
     <React.StrictMode>
       <Header />
       <Noscript />
-      <StoreProvider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <RouterProvider router={router} />
-        </PersistGate>
-      </StoreProvider>
+      <RouterProvider router={router} />
     </React.StrictMode>,
   );
 }

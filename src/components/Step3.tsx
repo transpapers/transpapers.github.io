@@ -21,24 +21,23 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
 
-import { Person } from '../types/person';
-import { updatePerson } from '../slice';
+import useStore from '../store';
+import { type Person } from '../types/person';
 
 import { allJurisdictions } from '../jurisdiction/all';
 
 function Step3() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const updatePerson = useStore((state) => state.updatePerson);
+  const { residentJurisdiction } = useStore((state) => state.person);
 
   const onSubmit = (data: Partial<Person>) => {
-    dispatch(updatePerson(data));
+    updatePerson(data);
     navigate('/step4');
   };
-
-  const { residentJurisdiction } = useSelector((state) => state.person);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

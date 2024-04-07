@@ -19,14 +19,13 @@
 
 import * as React from 'react';
 
-import { useAppSelector as useSelector } from '../store';
+import useStore from '../store';
 
-import { compileGuides, finalizeApplicant } from '../lib/fill';
+import { compileGuides } from '../lib/fill';
 import { allProcesses } from '../jurisdiction/all';
 
 function Guide() {
-  let applicant = useSelector((state) => state.person);
-  applicant = finalizeApplicant(applicant)!;
+  const applicant = useStore((state) => state.person);
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 

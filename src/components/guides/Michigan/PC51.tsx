@@ -19,10 +19,10 @@
 
 import * as React from 'react';
 
-import { useAppSelector as useSelector } from '../../../store';
+import { type Person } from '../../../types/person';
 
-function MichiganPC51Guide() {
-  const { age, doNotPublish } = useSelector((state) => state.person);
+function MichiganPC51Guide(person: Person) {
+  const { age, doNotPublish } = person;
 
   return (
     <section>

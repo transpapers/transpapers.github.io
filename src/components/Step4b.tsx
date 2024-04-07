@@ -24,24 +24,21 @@ import { useNavigate } from 'react-router-dom';
 
 import { numericalAge } from '../lib/util';
 
-import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
+import useStore from '../store';
 
-import { Person } from '../types/person';
-
-import { updatePerson } from '../slice';
+import { type Person } from '../types/person';
 
 function Step4b() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const updatePerson = useStore((state) => state.updatePerson);
+  const { birthdate } = useStore((state) => state.person);
 
   const onSubmit = (data: Partial<Person>) => {
-    dispatch(updatePerson(data));
-
+    updatePerson(data);
     navigate('/step5');
   };
-
-  const { birthdate } = useSelector((state) => state.person);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

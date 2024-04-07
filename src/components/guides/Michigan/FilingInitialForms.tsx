@@ -19,12 +19,13 @@
 
 import * as React from 'react';
 
-import { useAppSelector as useSelector } from '../../../store';
+import useStore from '../../../store';
 
 function MichiganFilingInitialFormsGuide() {
   const {
     court, age, fingerprintLocations, publications,
-  } = useSelector((state) => state.person);
+  } = useStore((state) => state.person);
+
   return (
     <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>

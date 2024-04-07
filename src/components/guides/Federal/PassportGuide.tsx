@@ -19,10 +19,10 @@
 
 import * as React from 'react';
 
-import { useAppSelector as useSelector } from '../../../store';
+import useStore from '../../../store';
 
 function PassportGuide() {
-  const { passport } = useSelector((state) => state.person);
+  const { passport } = useStore((state) => state.person);
 
   let passportForm; let isInPerson;
   switch (passport) {

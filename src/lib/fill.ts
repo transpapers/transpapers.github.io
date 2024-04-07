@@ -26,10 +26,6 @@ import {
   PDFRadioGroup,
 } from '@cantoo/pdf-lib';
 
-import { numericalAge } from './util';
-
-import { getJurisdiction } from '../jurisdiction/all';
-
 import { Person } from '../types/person';
 import { Process, Document } from '../types/process';
 import { Formfill } from '../types/formfill';
@@ -125,43 +121,11 @@ export function fillForm(
   return doc;
 }
 
-export function finalizeApplicant(applicant: Person): Person | undefined {
-  /**
-   * Infer any extra values for the applicant as needed.
-   * Do any additional assignments here.
-   */
-  let finalApplicant = { ...applicant };
-
-  // Do any additional Applicant assignment here.
-  if (finalApplicant.birthdate && !finalApplicant.age) {
-    finalApplicant.age = numericalAge(finalApplicant.birthdate);
-  }
-
-  const jurisdiction = applicant.residentJurisdiction ?? '';
-  const jurisdictionObj = getJurisdiction(jurisdiction);
-
-  if (jurisdictionObj === undefined || jurisdictionObj.counties === undefined) {
-    return undefined;
-  }
-  const { counties } = jurisdictionObj;
-  const residentCounty = counties[applicant.residentCounty ?? ''];
-
-  finalApplicant = Object.assign(finalApplicant, residentCounty);
-
-  return finalApplicant;
-}
-
 export function compileGuides(
   processes: Process[],
   applicant: Person,
 ): React.JSX.Element[] | undefined {
   const docs: Document[] = [];
-
-  const finalApplicant = finalizeApplicant(applicant);
-
-  if (finalApplicant === undefined) {
-    return undefined;
-  }
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -174,7 +138,7 @@ export function compileGuides(
   const guides: React.JSX.Element[] = [];
 
   docs
-    .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
+    .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.guide !== undefined) {
         guides.push(doc.guide);
@@ -196,11 +160,6 @@ export async function compileDocuments(
   applicant: Person,
 ): Promise<Uint8Array | undefined> {
   const docs: Document[] = [];
-  const finalApplicant = finalizeApplicant(applicant);
-
-  if (finalApplicant === undefined) {
-    return undefined;
-  }
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -213,7 +172,7 @@ export async function compileDocuments(
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
 
   docs
-    .filter((doc) => doc.include === undefined || doc.include(finalApplicant))
+    .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.filename !== undefined) {
         const filename = `/forms/${doc.filename}`;
@@ -231,7 +190,7 @@ export async function compileDocuments(
           return form;
         }
 
-        return fillForm(form, map, finalApplicant);
+        return fillForm(form, map, applicant);
       })),
   );
 

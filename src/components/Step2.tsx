@@ -21,30 +21,30 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch as useDispatch, useAppSelector as useSelector } from '../store';
-import { updatePerson } from '../slice';
+import useStore from '../store';
 
-import { Person } from '../types/person';
+import { type Person } from '../types/person';
 
 import { getJurisdiction } from '../jurisdiction/all';
 
 function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const updatePerson = useStore((state) => state.updatePerson);
+  const { residentJurisdiction, residentCounty } = useStore((state) => state.person);
 
   const onSubmit = (data: Partial<Person>) => {
-    dispatch(updatePerson(data));
+    updatePerson(data);
     navigate('/step3');
   };
-
-  const { residentJurisdiction, residentCounty } = useSelector((state) => state.person);
 
   const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>
         What
+        {' '}
         {residentJurisdiction}
         {' '}
         county do you live in?
