@@ -21,7 +21,7 @@ import * as React from 'react';
 
 import { type Person } from '../../../types/person';
 
-function MichiganMC20Guide(person: Person) {
+function MichiganMC20Guide({ person }: { person: Person }) {
   const { age } = person;
 
   return (
@@ -36,7 +36,8 @@ function MichiganMC20Guide(person: Person) {
         may file the request at your discretion; the worst they can do is deny it.
       </p>
 
-      <p>If you choose to file this form, complete
+      <p>
+        If you choose to file this form, complete
         {' '}
         <strong>items 1 and 3</strong>
         {' '}

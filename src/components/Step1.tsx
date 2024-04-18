@@ -62,7 +62,7 @@ function Step1() {
           ))}
       </ul>
 
-      <input type="submit" value="Next"/>
+      <input type="submit" value="Next" />
     </form>
   );
 }

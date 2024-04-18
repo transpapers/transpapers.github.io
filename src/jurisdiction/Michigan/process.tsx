@@ -17,8 +17,6 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
-
 import {
   nameChangeMap,
   nameChangePrivateMap,
@@ -53,7 +51,7 @@ export const michiganNameChange: Process = {
       name: 'Petition to Change Name',
       id: 'PC 51',
       filename: 'Michigan/pc51.pdf',
-      guide: <MichiganPC51Guide />,
+      guide: MichiganPC51Guide,
       map: nameChangeMap,
       include: (applicant) => !applicant.doNotPublish,
     },
@@ -61,7 +59,7 @@ export const michiganNameChange: Process = {
       name: 'Petition to Change Name and Ex Parte Request for Nonpublication and Confidential Record',
       id: 'PC 51c',
       filename: 'Michigan/pc51c.pdf',
-      guide: <MichiganPC51Guide />,
+      guide: MichiganPC51Guide,
       map: nameChangePrivateMap,
       include: (applicant) => applicant.doNotPublish,
     },
@@ -69,7 +67,7 @@ export const michiganNameChange: Process = {
       name: 'Addendum to Protected Personal Identifying Information',
       id: 'M 97a',
       filename: 'Michigan/m97a.pdf',
-      guide: <MichiganM97aGuide />,
+      guide: MichiganM97aGuide,
       map: piiMap,
     },
     {
@@ -84,7 +82,7 @@ export const michiganNameChange: Process = {
       name: 'Publication of Notice of Hearing Regarding Petition for Name Change',
       id: 'PC 50',
       filename: 'Michigan/pc50.pdf',
-      guide: <MichiganPC50Guide />,
+      guide: MichiganPC50Guide,
       map: noticeMap,
       include: (applicant) => !(applicant.doNotPublish && !applicant.parentsAreOkay),
     },
@@ -92,14 +90,14 @@ export const michiganNameChange: Process = {
       name: 'Publication of Notice of Hearing Regarding Petition for Name Change (Noncustodial Parent)',
       id: 'PC 50c',
       filename: 'Michigan/pc50c.pdf',
-      guide: <MichiganPC50Guide />,
+      guide: MichiganPC50Guide,
       include: (applicant) => applicant.doNotPublish && !applicant.parentsAreOkay,
     },
     {
       name: 'Order Following Hearing Regarding Petition For Name Change',
       id: 'PC 52',
       filename: 'Michigan/pc52.pdf',
-      guide: <MichiganPC52Guide />,
+      guide: MichiganPC52Guide,
       map: followingMap,
       include: (applicant) => applicant.residentCounty === 'Saginaw',
     },
@@ -107,16 +105,16 @@ export const michiganNameChange: Process = {
       name: 'Fee Waiver Request',
       id: 'MC 20',
       filename: 'Michigan/mc20.pdf',
-      guide: <MichiganMC20Guide />,
+      guide: MichiganMC20Guide,
       map: feeWaiverMap,
     },
     {
       name: 'Filing Initial Documents',
-      guide: <MichiganFilingInitialFormsGuide />,
+      guide: MichiganFilingInitialFormsGuide,
     },
     {
       name: 'Court Hearing',
-      guide: <MichiganCourtHearingGuide />,
+      guide: MichiganCourtHearingGuide,
     },
   ],
 };
@@ -152,7 +150,7 @@ export const michiganBirthRecord: Process = {
   documents: [
     {
       name: 'Birth Certificate',
-      guide: <MichiganBirthCertificateGuide />,
+      guide: MichiganBirthCertificateGuide,
     },
     {
       name: 'Application to Change or Correct a Michigan Birth Record',
@@ -173,11 +171,11 @@ export const michiganPostamble: Process = {
   documents: [
     {
       name: 'Everything Else',
-      guide: <MichiganEverythingElseGuide />,
+      guide: MichiganEverythingElseGuide,
     },
     {
       name: 'Resources',
-      guide: <MichiganResourcesGuide />,
+      guide: MichiganResourcesGuide,
     },
   ],
   isJustGuide: true,

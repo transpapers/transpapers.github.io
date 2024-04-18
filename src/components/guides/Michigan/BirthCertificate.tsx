@@ -21,7 +21,7 @@ import * as React from 'react';
 
 import { type Person } from '../../../types/person';
 
-function MichiganBirthCertificateGuide(person: Person) {
+function MichiganBirthCertificateGuide({ person }: { person: Person }) {
   const { age } = person;
 
   return (
@@ -68,8 +68,10 @@ function MichiganBirthCertificateGuide(person: Person) {
               or Change a Michigan Birth Record to:
             </p>
             <p>
-              <span>Vital Records Changes</span><br />
-              <span>P.O. Box 30721</span><br />
+              <span>Vital Records Changes</span>
+              <br />
+              <span>P.O. Box 30721</span>
+              <br />
               <span>Lansing, MI 48909</span>
             </p>
             <p>
@@ -95,8 +97,10 @@ function MichiganBirthCertificateGuide(person: Person) {
                 Mail the Application to Correct or Change a Michigan Birth Record to:
               </p>
               <p>
-                <span>Vital Records Changes</span><br />
-                <span>P.O. Box 30721</span><br />
+                <span>Vital Records Changes</span>
+                <br />
+                <span>P.O. Box 30721</span>
+                <br />
                 <span>Lansing, MI 48909</span>
               </p>
               <p>

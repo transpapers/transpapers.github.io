@@ -70,7 +70,7 @@ function Step3() {
           </label>
         </li>
       </ul>
-      <input type="submit" value="Next"/>
+      <input type="submit" value="Next" />
     </form>
   );
 }

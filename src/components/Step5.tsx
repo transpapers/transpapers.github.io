@@ -24,7 +24,7 @@ import { useNavigate } from 'react-router-dom';
 
 import useStore from '../store';
 import { targets } from '../types/process';
-import { allProcesses } from '../jurisdiction/all';
+import { allProcesses } from '../types/jurisdiction';
 
 function Step5() {
   const { register, handleSubmit } = useForm();

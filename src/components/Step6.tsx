@@ -21,16 +21,15 @@ import * as React from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import useStore from '../store';
 
-import { neededFieldNames } from '../lib/shakeTree';
+import useStore from '../store';
 
 import { fields, renderField } from './fields';
 
-import { type Person } from '../types/person';
-import { getJurisdiction } from '../jurisdiction/all';
+import { neededFieldNames } from '../lib/shakeTree';
 
-import { compileDocuments } from '../lib/fill';
+import { getJurisdiction } from '../types/jurisdiction';
+import { type Person } from '../types/person';
 
 function Step6() {
   const { register, handleSubmit } = useForm();
@@ -39,6 +38,7 @@ function Step6() {
   const processNames = useStore((state) => state.processNames);
   const applicant = useStore((state) => state.person);
   const updatePerson = useStore((state) => state.updatePerson);
+  const finalizeApplicant = useStore((state) => state.finalizeApplicant);
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
@@ -63,26 +63,9 @@ function Step6() {
 
   const onSubmit = (data: Partial<Person>) => {
     updatePerson(data);
-
-    // const finalApplicant = finalizeApplicant(applicant)!;
-
-    // updatePerson(finalApplicant);
+    finalizeApplicant();
 
     navigate('/guide');
-
-    compileDocuments(processes, applicant)
-      .then((doc) => {
-        if (doc !== undefined) {
-          const url = URL.createObjectURL(
-            new Blob([doc], { type: 'application/pdf' }),
-          );
-          const link = document.createElement('a');
-          link.download = 'gender_affirming_documents.pdf';
-          link.href = url;
-          link.click();
-          URL.revokeObjectURL(link.href);
-        }
-      });
   };
 
   // We do it this way to maintain ordering.

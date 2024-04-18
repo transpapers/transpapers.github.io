@@ -75,7 +75,7 @@ export function getProcesses(
     return [];
   }
 
-  const jurisdiction = getJurisdiction(name, allJurisdictions);
+  const jurisdiction = getJurisdiction(name);
 
   if (jurisdiction === undefined) {
     return [];

@@ -19,7 +19,9 @@
 
 import * as React from 'react';
 
-function MichiganPC50Guide(person: Person) {
+import { type Person } from '../../../types/person';
+
+function MichiganPC50Guide({ person }: { person: Person }) {
   const { age, parentsAreOkay } = person;
 
   return (

@@ -94,7 +94,7 @@ export interface Document {
    * Location of guide for this document, from root public/guides/ (dev tree)
    * or guides/ (served.)
    */
-  guide?: React.JSX.Element;
+  guide?: ({ person }: { person: Person }) => React.JSX.Element;
 
   /**
    * Criterion for inclusion.

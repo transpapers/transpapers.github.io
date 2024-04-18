@@ -23,9 +23,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../store';
 
+import { getJurisdiction } from '../types/jurisdiction';
 import { type Person } from '../types/person';
-
-import { getJurisdiction } from '../jurisdiction/all';
 
 function Step2() {
   const { register, handleSubmit } = useForm();
@@ -64,7 +63,7 @@ function Step2() {
           </li>
         ))}
       </ul>
-      <input type="submit" value="Next"/>
+      <input type="submit" value="Next" />
     </form>
   );
 }

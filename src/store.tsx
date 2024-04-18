@@ -26,8 +26,6 @@ import { blankData, type Person } from './types/person';
 import { numericalAge } from './lib/util';
 import { getJurisdiction } from './types/jurisdiction';
 
-import { allJurisdictions } from './jurisdiction/all';
-
 interface ApplicationState {
   person: Person;
   processNames: string[];
@@ -48,7 +46,26 @@ const useStore = create<ApplicationState & Action>()(
 
       // Actions.
       updatePerson: (newData) => set(produce((state: ApplicationState) => {
-        Object.assign(state.person, newData);
+        const dataToAssign = {};
+
+        Object.entries(newData).forEach(([key, value]) => {
+          const path = key.split(':');
+
+          const dirs = path.slice(0, -1);
+          const file = path.at(-1)!;
+
+          let pointer: any = dataToAssign;
+          dirs.forEach((dirname) => {
+            if (!pointer.hasOwnProperty(dirname)) {
+              pointer[dirname] = {};
+            }
+
+            pointer = pointer[dirname];
+          });
+
+          pointer[file] = value;
+        });
+        Object.assign(state.person, dataToAssign);
       })),
 
       updateProcessNames: (newProcessNames) => set(() => ({ processNames: newProcessNames })),
@@ -77,8 +94,8 @@ const useStore = create<ApplicationState & Action>()(
           const county = counties[residentCounty ?? ''];
 
           Object.assign(extraData, county);
-          Object.assign(state.person, extraData);
         }
+        Object.assign(state.person, extraData);
       })),
     }),
     {

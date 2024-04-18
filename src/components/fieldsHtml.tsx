@@ -19,9 +19,8 @@
 
 import * as React from 'react';
 
-import { getJurisdiction } from '../jurisdiction/all';
-
 import { Field } from '../types/field';
+import { getJurisdiction } from '../types/jurisdiction';
 
 function GenericField(field: Field, innards: JSX.Element): JSX.Element {
   const {
@@ -118,7 +117,7 @@ export function SelectField({ field, register }: FieldConstructorProps): JSX.Ele
   return GenericField(field, innards);
 }
 
-export function NameField({ field }: FieldConstructorProps): JSX.Element {
+export function NameField({ field, register }: FieldConstructorProps): JSX.Element {
   // FIXME Do this automatically, Sasha, you slut.
   const keys = ['first', 'middle', 'last', 'suffix'];
   const innards = (
@@ -130,6 +129,7 @@ export function NameField({ field }: FieldConstructorProps): JSX.Element {
             id={`${field.name}:${key}`}
             name={`${field.name}:${key}`}
             size={1}
+            {...register(`${field.name}:${key}`)}
           />
           <label
             key={`${field.name}:${key}-label`}

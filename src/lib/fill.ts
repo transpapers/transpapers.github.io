@@ -141,7 +141,8 @@ export function compileGuides(
     .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.guide !== undefined) {
-        guides.push(doc.guide);
+        const guide = React.createElement(doc.guide, { person: applicant });
+        guides.push(guide);
       }
     });
 

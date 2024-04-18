@@ -19,12 +19,12 @@
 
 import * as React from 'react';
 
-import useStore from '../../../store';
+import { type Person } from '../../../types/person';
 
-function MichiganFilingInitialFormsGuide() {
+function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
   const {
     court, age, fingerprintLocations, publications,
-  } = useStore((state) => state.person);
+  } = person;
 
   return (
     <section key="MI-InitialForms">
@@ -76,8 +76,10 @@ function MichiganFilingInitialFormsGuide() {
           <ul>
             { fingerprintLocations?.map(({ name, address, website }) => (
               <li key={name}>
-                <span>{ name }</span><br />
-                <span>{ address }</span><br />
+                <span>{ name }</span>
+                <br />
+                <span>{ address }</span>
+                <br />
                 <a href={website}>{ website }</a>
               </li>
             ))}
@@ -99,9 +101,11 @@ function MichiganFilingInitialFormsGuide() {
           </p>
           <p>After receiving your fingerprint card, mail it to:</p>
           <p>
-            <span>Michigan State Police</span><br />
-            <span>CJIC</span><br />
-            <span>PO Box 30266, Lansing, MI 48909</span><br />
+            <span>Michigan State Police</span>
+            <br />
+            <span>CJIC</span>
+            <br />
+            <span>PO Box 30266, Lansing, MI 48909</span>
           </p>
           <p>
             Enclose a copy of your Petition to Change Name and a check in the

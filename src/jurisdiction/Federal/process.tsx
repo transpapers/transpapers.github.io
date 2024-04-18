@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License along with
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
-import * as React from 'react';
 
 import {
   ssnMap, ds5504Map, ds82Map, ds11Map,
@@ -37,7 +36,7 @@ export const socialSecurity: Process = {
       name: 'Application for a Social Security Card',
       id: 'SS-5',
       filename: 'Federal/ss-5.pdf',
-      guide: <SocialSecurityGuide />,
+      guide: SocialSecurityGuide,
       map: ssnMap,
     },
   ],
@@ -52,7 +51,7 @@ export const passport: Process = {
       id: 'DS 5504',
       filename: 'Federal/passport_ds5504.pdf',
       map: ds5504Map,
-      guide: <DS5504Guide />,
+      guide: DS5504Guide,
       include: (applicant) => applicant.passport === 'ds5504',
     },
     {
@@ -60,7 +59,7 @@ export const passport: Process = {
       id: 'DS 82',
       filename: 'Federal/passport_ds82.pdf',
       map: ds82Map,
-      guide: <DS82Guide />,
+      guide: DS82Guide,
       include: (applicant) => applicant.passport === 'ds82',
     },
     {
@@ -68,7 +67,7 @@ export const passport: Process = {
       id: 'DS 11',
       filename: 'Federal/passport_ds11.pdf',
       map: ds11Map,
-      guide: <DS11Guide />,
+      guide: DS11Guide,
       include: (applicant) => applicant.passport === 'ds11',
     },
   ],

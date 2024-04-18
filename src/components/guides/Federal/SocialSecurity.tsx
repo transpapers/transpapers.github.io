@@ -23,7 +23,7 @@ import { GenderMarker } from '../../../types/types';
 import { type Person } from '../../../types/person';
 
 // TODO Give this a once-over for style.
-function SocialSecurityGuide(person: Person) {
+function SocialSecurityGuide({ person }: { person: Person }) {
   const { gender, age, parentsAreOkay } = person;
 
   return (
