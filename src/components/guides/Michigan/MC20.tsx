@@ -25,7 +25,7 @@ function MichiganMC20Guide({ person }: { person: Person }) {
   const { age } = person;
 
   return (
-    <section>
+    <section key="Michigan-MC20">
       <h3>Fee Waiver Request (MI, MC20)</h3>
       <p>
         This form is optional. It is a request to waive the filing fee assessed upon

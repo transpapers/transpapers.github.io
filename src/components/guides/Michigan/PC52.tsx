@@ -21,7 +21,7 @@ import * as React from 'react';
 
 function MichiganPC52Guide() {
   return (
-    <section>
+    <section key="Michigan-PC52">
       <h3>Order Following Hearing Regarding Petition for Name Change (MI, PC52)</h3>
       <p>
         This form is required by Saginaw County. It should already be complete.

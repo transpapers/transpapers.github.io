@@ -21,7 +21,7 @@ import * as React from 'react';
 
 function MichiganEverythingElseGuide() {
   return (
-    <section>
+    <section key="MI-EverythingElse">
       <h3>Everything Else (MI)</h3>
       <p>
         Once you have the court order and primary identification in your new

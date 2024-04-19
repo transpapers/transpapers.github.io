@@ -22,7 +22,7 @@ import * as React from 'react';
 // TODO Give this a once-over for style.
 function DS11Guide() {
   return (
-    <section>
+    <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.

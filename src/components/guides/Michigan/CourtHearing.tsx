@@ -25,7 +25,7 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
   const { age } = person;
 
   return (
-    <section>
+    <section key="MI-CourtHearing">
       <p>
         On the day of your hearing, you
         { age && (age < 18) && 'and your parent(s)' }

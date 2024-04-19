@@ -78,7 +78,7 @@ function Step6() {
       <h2>Tell us about yourself...</h2>
       <ul className="spaced">
         {fieldsToShow.map((field) => (
-          <li>
+          <li key={field.name}>
             {renderField(field, applicant.residentJurisdiction!, register)}
           </li>
         ))}

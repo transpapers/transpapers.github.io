@@ -21,7 +21,7 @@ import * as React from 'react';
 
 function MichiganM97aGuide() {
   return (
-    <section>
+    <section key="Michigan-M97a">
       <h3>Addendum to Protected Personal Identifying Information (MI, M97a)</h3>
       <p>
         This form is meant to keep sensitive information (birth name, birth date,

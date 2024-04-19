@@ -21,7 +21,7 @@ import * as React from 'react';
 
 function DS5504Guide() {
   return (
-    <section>
+    <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.

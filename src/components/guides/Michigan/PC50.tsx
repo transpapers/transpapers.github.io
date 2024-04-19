@@ -25,7 +25,7 @@ function MichiganPC50Guide({ person }: { person: Person }) {
   const { age, parentsAreOkay } = person;
 
   return (
-    <section>
+    <section key="Michigan-PC50">
       <h3>Publication of Notice of Hearing Regarding Petition for Name Change (MI, PC50)</h3>
       <p>
         The state of Michigan generally requires name change hearings to be documented

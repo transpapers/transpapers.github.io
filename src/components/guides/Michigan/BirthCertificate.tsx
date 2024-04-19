@@ -25,7 +25,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
   const { age } = person;
 
   return (
-    <section>
+    <section key="Michigan-BirthCertificate">
       <p>
         This process is done by mail only, so you will need a large envelope
         in which to send the paperwork. You will need to complete the

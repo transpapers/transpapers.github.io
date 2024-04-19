@@ -48,7 +48,7 @@ function Step1() {
         {allJurisdictions
           .filter((jurisdiction) => !jurisdiction.isFederal)
           .map((jurisdiction) => (
-            <li>
+            <li key={jurisdiction.name}>
               <label>
                 <input
                   {...register('residentJurisdiction', { required: true })}

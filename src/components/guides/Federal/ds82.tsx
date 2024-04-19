@@ -23,7 +23,7 @@ import * as React from 'react';
 // TODO Unify this with the other two passport forms.
 function DS82Guide() {
   return (
-    <section>
+    <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
       <p>
         This step should be started after you have updated your primary ID.  Your

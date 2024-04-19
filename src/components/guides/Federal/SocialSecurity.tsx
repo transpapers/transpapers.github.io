@@ -27,7 +27,7 @@ function SocialSecurityGuide({ person }: { person: Person }) {
   const { gender, age, parentsAreOkay } = person;
 
   return (
-    <section>
+    <section key="Federal-SocialSecurity">
       <h3>Updating Your Social Security Card</h3>
       <p>
         Since all government databases use data from the Social Security

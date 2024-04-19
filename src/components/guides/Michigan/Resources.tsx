@@ -21,7 +21,7 @@ import * as React from 'react';
 
 function MichiganResourcesGuide() {
   return (
-    <section>
+    <section key="MI-Resources">
       <h3>Resources (MI)</h3>
       <ul>
         <li>

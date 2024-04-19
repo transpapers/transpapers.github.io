@@ -1,4 +1,5 @@
-export default [{
+export default [
+{
   legalName: { first: 'Vitia', middle: 'Leonardo', last: 'Top' }, chosenName: { first: 'Zachariah', middle: 'Sibylla', last: 'Critcher' }, reasonForNameChange: 'Duis bibendum. Morbi non quam nec dui luctus rutrum.', sealBirthCertificate: true, birthCity: 'Daytona Beach', birthState: 'Florida', birthdate: '2022-09-14', age: 23, assignedSex: 'M', gender: 'X', doNotPublish: true, parentsAreOkay: true, mothersName: { first: 'Mead', middle: 'Emlynn', last: 'Zealy' }, mothersBirthdate: '1999-01-28', fathersName: { first: 'Scottie', middle: 'Anatole', last: 'Tugwell' }, fathersBirthdate: null, phone: '(407) 6822846', streetAddress: '3790 Fulton Street', city: 'Detroit', residentState: 'Michigan', county: 'Allegan', zip: '32118', email: 'atouret0@biblegateway.com', representativeName: { first: 'Timmy', middle: 'Fergus', last: 'Touret' },
 },
 {

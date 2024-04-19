@@ -19,7 +19,7 @@
 
 import * as React from 'react';
 
-import { compileDocuments, compileGuides } from '../lib/fill';
+import { compileDocuments } from '../lib/fill';
 
 import useStore from '../store';
 
@@ -29,7 +29,7 @@ function Guide() {
   const applicant = useStore((state) => state.person);
   const { residentJurisdiction, birthJurisdiction } = applicant;
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
-  const guides = compileGuides(processes, applicant);
+  // const guides = compileGuides(processes, applicant);
 
   compileDocuments(processes, applicant)
     .then((doc) => {
@@ -45,6 +45,11 @@ function Guide() {
       }
     });
 
+  let documents = processes.map((proc) => proc.documents)
+    .flat();
+
+  documents = [...new Set(documents)];
+
   return (
     <>
       <h2>Thank you for using Transpapers!</h2>
@@ -59,7 +64,15 @@ function Guide() {
         </strong>
       </p>
 
-      {guides}
+      {
+        documents.filter((doc) => doc.include === undefined || doc.include(applicant))
+          .filter((doc) => doc.guide !== undefined)
+          .map((doc) => (
+            <section key={doc.id || doc.name}>
+              {React.createElement(doc.guide!, { person: applicant })}
+            </section>
+          ))
+      }
     </>
   );
 }
