@@ -49,6 +49,12 @@ export const fields: { [key: string]: Field } = {
     name: 'chosenName',
     type: 'Name',
   },
+  birthName: {
+    title: 'Name at birth',
+    subtitle: 'if different from legal name',
+    name: 'birthName',
+    type: 'Name',
+  },
   reasonForNameChange: {
     title: 'Reason for name change',
     subtitle: 'If you want to avoid mentioning transition we recommend “I want to be known legally as I am by my family and friends”.',

@@ -23,9 +23,6 @@ import { Court, FingerprintLocation, Publication } from './county';
 
 /**
  * Applicant's personal information.
- *
- * @remarks The union of every property that may be required by any `Process`.
- * This is why every field is optional.
  */
 export interface Person {
   /**
@@ -37,6 +34,11 @@ export interface Person {
    * Applicant's chosen name.
    */
   chosenName: Name | undefined;
+
+  /**
+   * Applicant's birth name, if different from legal name.
+   */
+  birthName: Name | undefined;
 
   /**
    * Reason for applicant's name change.
@@ -83,7 +85,7 @@ export interface Person {
    * so avoid philosophically perplexing questions of time by shunting them to
    * whatever remedy the user and the legal system may have.
    *
-
+   * [0] Cf. "Some oddities of the law on age: So you thought you reached age 21
    * on your 21st birthday?", Wilberforce Chambers.
    *
    * [1] In the state of Michigan, this is the last "breakpoint" at which the
@@ -223,6 +225,8 @@ export const blankData: Person = {
     suffix: '',
   },
 
+  birthName: undefined,
+
   reasonForNameChange: undefined,
 
   sealBirthCertificate: undefined,
@@ -298,6 +302,8 @@ export const sampleData: Person = {
     last: 'Doe',
     suffix: '',
   },
+
+  birthName: undefined,
 
   reasonForNameChange: 'Gender transition',
   sealBirthCertificate: true,

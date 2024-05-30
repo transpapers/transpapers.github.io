@@ -49,16 +49,20 @@ export const ssnMap: Formfill[] = [
     field: 'topmostSubform[0].Page5[0].LastName[0]',
   },
   {
-    text: (applicant) => applicant.legalName?.first ?? '',
+    text: (applicant) => (applicant.birthName || applicant.legalName)?.first ?? '',
     field: 'topmostSubform[0].Page5[0].firstdiffname[0]',
   },
   {
-    text: (applicant) => applicant.legalName?.middle ?? '',
+    text: (applicant) => (applicant.birthName || applicant.legalName)?.middle ?? '',
     field: 'topmostSubform[0].Page5[0].Middlediffname[0]',
   },
   {
-    text: (applicant) => applicant.legalName?.last ?? '',
+    text: (applicant) => (applicant.birthName || applicant.legalName)?.last ?? '',
     field: 'topmostSubform[0].Page5[0].Lastdiffname[0]',
+  },
+  {
+    text: (applicant) => (applicant.birthName ? fullName(applicant.legalName) : ''),
+    field: 'topmostSubform[0].Page5[0].Othername[0]',
   },
   {
     text: (applicant) => applicant.birthCity,

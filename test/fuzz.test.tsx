@@ -45,6 +45,8 @@ const generatePersonForTesting: () => Person = () => {
   const person = {
     legalName: generateNameForTesting(),
     chosenName: generateNameForTesting(),
+    birthName: undefined,
+
     reasonForNameChange: faker.lorem.sentence(),
     sealBirthCertificate: faker.datatype.boolean(),
     birthdate: generateDateForTesting(),
