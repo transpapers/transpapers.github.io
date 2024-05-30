@@ -83,11 +83,13 @@ export const fields: { [key: string]: Field } = {
     name: 'birthCity',
     type: 'string',
   },
+  /*
   birthdate: {
     title: 'Date of birth',
     name: 'birthdate',
     type: 'Date',
   },
+  */
   age: {
     title: 'Age at time of filing',
     subtitle: 'Fill only if you are under 23.',
@@ -97,7 +99,7 @@ export const fields: { [key: string]: Field } = {
   },
   assignedSex: {
     title: 'Sex assigned at birth',
-    name: 'birthSex',
+    name: 'assignedSex',
     type: 'option',
     options: { M: 'M', F: 'F', X: 'X' },
   },
@@ -121,6 +123,7 @@ export const fields: { [key: string]: Field } = {
     name: 'parentsAreOkay',
     type: 'boolean',
     default: true,
+    include: (data) => isMinor(data),
   },
   mothersBirthName: {
     title: "Mother's name",

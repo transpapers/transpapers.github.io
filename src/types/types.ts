@@ -28,9 +28,9 @@ export interface Name {
 }
 
 export enum GenderMarker {
-  M,
-  F,
-  X,
+  M = 'M',
+  F = 'F',
+  X = 'X',
 }
 
 /**
