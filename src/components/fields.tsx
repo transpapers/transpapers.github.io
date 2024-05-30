@@ -88,7 +88,6 @@ export const fields: { [key: string]: Field } = {
     name: 'age',
     type: 'number',
     include: (data) => isMinor(data),
-    required: true,
   },
   assignedSex: {
     title: 'Sex assigned at birth',
@@ -120,7 +119,7 @@ export const fields: { [key: string]: Field } = {
   mothersBirthName: {
     title: "Mother's name",
     subtitle: 'at her birth',
-    name: 'mothersName',
+    name: 'mothersBirthName',
     type: 'Name',
   },
   mothersBirthdate: {
@@ -131,7 +130,7 @@ export const fields: { [key: string]: Field } = {
   fathersBirthName: {
     title: "Father's name",
     subtitle: 'at his birth',
-    name: 'fathersName',
+    name: 'fathersBirthName',
     type: 'Name',
   },
   fathersBirthdate: {
@@ -150,17 +149,19 @@ export const fields: { [key: string]: Field } = {
     name: 'streetAddress',
     type: 'string',
   },
-  city: {
+  residentCity: {
     title: 'City of residence',
     name: 'residentCity',
     type: 'string',
   },
+  /*
   county: {
     title: 'County',
     name: 'county',
     type: 'county',
     required: true,
   },
+  */
   zip: {
     title: 'ZIP code',
     name: 'zip',

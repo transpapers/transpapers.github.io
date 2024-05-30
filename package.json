@@ -32,11 +32,11 @@
     "build",
     "eslint",
     "tsc",
-    "test",
-    "e2e"
+    "test"
   ],
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
@@ -51,9 +51,11 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "jsdom": "^24.0.0",
+    "jsdom": "^24.1.0",
     "pre-commit": "^1.2.2",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.4",
+    "vitest-axe": "^0.1.0",
+    "vitest-canvas-mock": "^0.3.3"
   },
   "dependencies": {
     "@cantoo/pdf-lib": "^1.21.0",

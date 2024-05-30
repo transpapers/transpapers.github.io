@@ -71,7 +71,8 @@ function Step6() {
   // We do it this way to maintain ordering.
   const fieldsToShow = Object.entries(fields)
     .filter(([fieldName]) => fieldNamesToShow.includes(fieldName))
-    .map(([,field]) => field);
+    .map(([,field]) => field)
+    .filter((field) => !field.include || field.include(applicant));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
