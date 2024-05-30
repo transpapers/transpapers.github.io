@@ -303,7 +303,12 @@ export const sampleData: Person = {
     suffix: '',
   },
 
-  birthName: undefined,
+  birthName: {
+    first: 'John',
+    middle: 'Michael',
+    last: 'Doe',
+    suffix: '',
+  },
 
   reasonForNameChange: 'Gender transition',
   sealBirthCertificate: true,

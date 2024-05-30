@@ -347,6 +347,10 @@ export const birthCertMap: Formfill[] = [
       : applicant.chosenName?.last ?? ''),
     loc: { x: 588, y: 196 },
   },
+  {
+    text: (applicant) => (applicant.birthName ? fullName(applicant.legalName) : ''),
+    loc: { x: 178, y: 565 },
+  },
   { text: (applicant) => applicant.streetAddress, loc: { x: 48, y: 237 } },
   {
     text: (applicant) => `${applicant.residentCity}, ${applicant.residentJurisdiction}`,
@@ -356,7 +360,7 @@ export const birthCertMap: Formfill[] = [
   { text: (applicant) => applicant.phone, loc: { x: 48, y: 283 } },
   { text: (applicant) => applicant.email, loc: { x: 426, y: 283 } },
   {
-    text: (applicant) => fullName(applicant.legalName),
+    text: (applicant) => fullName(applicant.birthName || applicant.legalName),
     loc: { x: 48, y: 541 },
   },
   {
