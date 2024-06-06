@@ -152,17 +152,16 @@ function MichiganEverythingElseGuide() {
         register to vote.
       </p>
       <p>
-        <strong>Some other places to consider</strong>
-        :
-        <ul>
-          <li>Retirement account</li>
-          <li>Clubs/memberships</li>
-          <li>Municipal tax authorities</li>
-          <li>Online payment services (Venmo, Paypal, etc…)</li>
-          <li>Public transit accounts</li>
-          <li>Monthly subscriptions (Netflix, Hulu, etc…)</li>
-        </ul>
+        <strong>Some other places to consider:</strong>
       </p>
+      <ul>
+        <li>Retirement account</li>
+        <li>Clubs/memberships</li>
+        <li>Municipal tax authorities</li>
+        <li>Online payment services (Venmo, Paypal, etc…)</li>
+        <li>Public transit accounts</li>
+        <li>Monthly subscriptions (Netflix, Hulu, etc…)</li>
+      </ul>
     </section>
   );
 }
