@@ -17,14 +17,14 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  vi, expect, describe, test,
-} from 'vitest';
-import { axe } from 'vitest-axe';
-
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+
+import {
+  vi, expect, describe, test,
+} from 'vitest';
+import axe from './axe-setup';
 
 import Step1 from '../src/components/Step1';
 import Step2 from '../src/components/Step2';
