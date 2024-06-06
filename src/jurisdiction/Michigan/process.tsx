@@ -39,6 +39,7 @@ import MichiganPC50Guide from '../../components/guides/Michigan/PC50';
 import MichiganPC51Guide from '../../components/guides/Michigan/PC51';
 import MichiganPC52Guide from '../../components/guides/Michigan/PC52';
 import MichiganResourcesGuide from '../../components/guides/Michigan/Resources';
+import MichiganSecretaryOfStateGuide from '../../components/guides/Michigan/SecretaryOfState';
 
 import { type Process, Target } from '../../types/process';
 
@@ -140,7 +141,12 @@ export const michiganPrimaryIdentification: Process = {
   jurisdiction: 'MI',
   target: Target.PrimaryIdentification,
   depends: [Target.NameChange, Target.GenderMarker],
-  documents: [],
+  documents: [
+    {
+      name: 'Secretary of State',
+      guide: MichiganSecretaryOfStateGuide,
+    },
+  ],
 };
 
 export const michiganBirthRecord: Process = {

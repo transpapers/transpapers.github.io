@@ -25,7 +25,7 @@ import {
   representativeName,
 } from '../../lib/util';
 
-import { GenderMarker, DateFormatPart as DATE } from '../../types/types';
+import { GenderMarker, isEmptyName, DateFormatPart as DATE } from '../../types/types';
 import { Formfill } from '../../types/formfill';
 
 // Maps appear in the order they will be collated.
@@ -348,7 +348,7 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 588, y: 196 },
   },
   {
-    text: (applicant) => (applicant.birthName ? fullName(applicant.legalName) : ''),
+    text: (applicant) => (isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : ''),
     loc: { x: 178, y: 565 },
   },
   { text: (applicant) => applicant.streetAddress, loc: { x: 48, y: 237 } },
@@ -360,7 +360,12 @@ export const birthCertMap: Formfill[] = [
   { text: (applicant) => applicant.phone, loc: { x: 48, y: 283 } },
   { text: (applicant) => applicant.email, loc: { x: 426, y: 283 } },
   {
-    text: (applicant) => fullName(applicant.birthName || applicant.legalName),
+    text: (applicant) => {
+      if (isEmptyName(applicant.birthName)) {
+        return fullName(applicant.legalName);
+      }
+      return fullName(applicant.birthName);
+    },
     loc: { x: 48, y: 541 },
   },
   {

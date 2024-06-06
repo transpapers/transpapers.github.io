@@ -27,6 +27,19 @@ export interface Name {
   suffix?: string;
 }
 
+/**
+ * Determine whether `name` is empty.
+ */
+export function isEmptyName(name: Name | undefined): boolean {
+  if (name === undefined) {
+    return false;
+  }
+  const {
+    first, middle, last, suffix,
+  } = name;
+  return !(first && middle && last && suffix);
+}
+
 export enum GenderMarker {
   M = 'M',
   F = 'F',
