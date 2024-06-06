@@ -2,3 +2,4 @@ node_modules/
 .parcel_cache/
 dist/
 .direnv/
+cypress/screenshots/
