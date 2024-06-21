@@ -34,16 +34,14 @@ export function isEmptyName(name: Name | undefined): boolean {
   if (name === undefined) {
     return false;
   }
-  const {
-    first, middle, last, suffix,
-  } = name;
+  const { first, middle, last, suffix } = name;
   return !(first && middle && last && suffix);
 }
 
 export enum GenderMarker {
-  M = 'M',
-  F = 'F',
-  X = 'X',
+  M = "M",
+  F = "F",
+  X = "X",
 }
 
 /**
@@ -67,7 +65,26 @@ export interface Location {
    */
   page?: number;
 
+  /**
+   * Font options.
+   */
+  font?: FontOptions;
+}
+
+export interface FontOptions {
+  /**
+   * Font size, in points.
+   * TODO I think????
+   */
   fontSize?: number;
+
+  /**
+   * If undefined, the field will be set in sans-serif.
+   * If a positive number, the field will be rendered in monospace with
+   * `pitch` pixels between each character.
+   * To be used for those fields with boxes for each individual letter.
+   */
+  pitch?: number;
 }
 
 export enum DateFormatPart {

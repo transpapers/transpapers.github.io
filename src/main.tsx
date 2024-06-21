@@ -17,60 +17,60 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Header from './components/Header';
-import Noscript from './components/Noscript';
+import Header from "./components/Header";
+import Noscript from "./components/Noscript";
 
-import Root from './components/Root';
-import Step1 from './components/Step1';
-import Step2 from './components/Step2';
-import Step3 from './components/Step3';
-import Step4 from './components/Step4';
-import Step4b from './components/Step4b';
-import Step5 from './components/Step5';
-import Step6 from './components/Step6';
-import Guide from './components/Guide';
+import Root from "./components/Root";
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
+import Step3 from "./components/Step3";
+import Step4 from "./components/Step4";
+import Step4b from "./components/Step4b";
+import Step5 from "./components/Step5";
+import Step6 from "./components/Step6";
+import Guide from "./components/Guide";
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Root />,
   },
   {
-    path: '/step1',
+    path: "/step1",
     element: <Step1 />,
   },
   {
-    path: 'step2',
+    path: "step2",
     element: <Step2 />,
   },
   {
-    path: 'step3',
+    path: "step3",
     element: <Step3 />,
   },
   {
-    path: 'step4',
+    path: "step4",
     element: <Step4 />,
   },
   {
-    path: 'step4b',
+    path: "step4b",
     element: <Step4b />,
   },
   {
-    path: 'step5',
+    path: "step5",
     element: <Step5 />,
   },
   {
-    path: 'step6',
+    path: "step6",
     element: <Step6 />,
   },
   {
-    path: 'guide',
+    path: "guide",
     element: <Guide />,
   },
 ]);

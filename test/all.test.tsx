@@ -17,34 +17,34 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { expect, describe, test } from 'vitest';
+import { expect, describe, test } from "vitest";
 
-import { shakeTree } from '../src/lib/shakeTree';
+import { shakeTree } from "../src/lib/shakeTree";
 
-import { michiganNameChange } from '../src/jurisdiction/Michigan/process';
+import { michiganNameChange } from "../src/jurisdiction/Michigan/process";
 
-import { isMinor } from '../src/lib/util';
+import { isMinor } from "../src/lib/util";
 
-describe('shakeTree()', () => {
-  test('regression test', () => {
+describe("shakeTree()", () => {
+  test("regression test", () => {
     const expected = [
-      'legalName',
-      'birthdate',
-      'representativeName',
-      'streetAddress',
-      'residentCity',
-      'residentJurisdiction',
-      'zip',
-      'phone',
-      'parentsAreOkay',
-      'mothersBirthName',
-      'fathersBirthName',
-      'reasonForNameChange',
-      'chosenName',
-      'sealBirthCertificate',
-      'doNotPublish',
-      'residentCounty',
-      'age',
+      "legalName",
+      "birthdate",
+      "representativeName",
+      "streetAddress",
+      "residentCity",
+      "residentJurisdiction",
+      "zip",
+      "phone",
+      "parentsAreOkay",
+      "mothersBirthName",
+      "fathersBirthName",
+      "reasonForNameChange",
+      "chosenName",
+      "sealBirthCertificate",
+      "doNotPublish",
+      "residentCounty",
+      "age",
     ];
 
     const received = shakeTree(michiganNameChange);
@@ -56,9 +56,9 @@ describe('shakeTree()', () => {
   });
 });
 
-describe('numericalAge()/isMinor()', () => {
-  test('recognizes me as an adult', () => {
-    const me = { birthdate: '1997-10-07' };
+describe("numericalAge()/isMinor()", () => {
+  test("recognizes me as an adult", () => {
+    const me = { birthdate: "1997-10-07" };
 
     expect(isMinor(me)).toBe(false);
   });

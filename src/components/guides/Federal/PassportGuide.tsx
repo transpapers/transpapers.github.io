@@ -17,26 +17,27 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import useStore from '../../../store';
+import useStore from "../../../store";
 
 function PassportGuide() {
   const { passport } = useStore((state) => state.person);
 
-  let passportForm; let isInPerson;
+  let passportForm;
+  let isInPerson;
   switch (passport) {
-    case 'ds82':
-      passportForm = 'DS 82';
+    case "ds82":
+      passportForm = "DS 82";
       isInPerson = false;
       break;
-    case 'ds5504':
-      passportForm = 'DS 5504';
+    case "ds5504":
+      passportForm = "DS 5504";
       isInPerson = false;
       break;
-    case 'ds11':
+    case "ds11":
     default:
-      passportForm = 'DS 11';
+      passportForm = "DS 11";
       isInPerson = true;
   }
 
@@ -45,17 +46,15 @@ function PassportGuide() {
       <h3>Updating Your Passport</h3>
       <p>
         You will need to file form
-        <strong>{ passportForm }</strong>
-        .
-        { isInPerson
+        <strong>{passportForm}</strong>.
+        {isInPerson
           ? 'This form must be filed in-person. Filing locations near you are available at <a href="https://iafdb.travel.state.gov">https://iafdb.travel.state.gov</a>.'
-          : 'This form should be mailed in.'}
+          : "This form should be mailed in."}
       </p>
 
       <p>
-        On page 5, indicate the documents for which you are submitting fees.
-        On page 6, complete items 11-21 as applicable.
-
+        On page 5, indicate the documents for which you are submitting fees. On
+        page 6, complete items 11-21 as applicable.
       </p>
     </section>
   );

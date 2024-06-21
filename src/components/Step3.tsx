@@ -17,15 +17,15 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import useStore from '../store';
-import { type Person } from '../types/person';
+import useStore from "../store";
+import { type Person } from "../types/person";
 
-import { allJurisdictions } from '../jurisdiction/all';
+import { allJurisdictions } from "../jurisdiction/all";
 
 function Step3() {
   const { register, handleSubmit } = useForm();
@@ -36,7 +36,7 @@ function Step3() {
 
   const onSubmit = (data: Partial<Person>) => {
     updatePerson(data);
-    navigate('/step4');
+    navigate("/step4");
   };
 
   return (
@@ -49,19 +49,19 @@ function Step3() {
             <li key={jurisdiction.name}>
               <label>
                 <input
-                  {...register('birthJurisdiction', { required: true })}
+                  {...register("birthJurisdiction", { required: true })}
                   type="radio"
                   value={jurisdiction.name}
                   defaultChecked={jurisdiction.name === residentJurisdiction}
                 />
-                { jurisdiction.name }
+                {jurisdiction.name}
               </label>
             </li>
           ))}
         <li key={undefined}>
           <label>
             <input
-              {...register('birthJurisdiction', { required: true })}
+              {...register("birthJurisdiction", { required: true })}
               type="radio"
               value={undefined}
               defaultChecked={residentJurisdiction === undefined}

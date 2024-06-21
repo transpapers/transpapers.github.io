@@ -17,8 +17,8 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person } from './person';
-import { Location } from './types';
+import { Person } from "./person";
+import { Location, FontOptions } from "./types";
 
 /**
  * A specification for filling a single form field.
@@ -84,6 +84,11 @@ export interface FormfillNonfillableText {
    * Contains the location at which the data should be inserted.
    */
   loc: Location;
+
+  /**
+   * Font options.
+   */
+  font?: FontOptions;
 }
 
 export interface FormfillNonfillableCheck {

@@ -17,16 +17,16 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import { numericalAge } from '../lib/util';
+import { numericalAge } from "../lib/util";
 
-import useStore from '../store';
+import useStore from "../store";
 
-import { type Person } from '../types/person';
+import { type Person } from "../types/person";
 
 function Step4b() {
   const { register, handleSubmit } = useForm();
@@ -37,16 +37,19 @@ function Step4b() {
 
   const onSubmit = (data: Partial<Person>) => {
     updatePerson(data);
-    navigate('/step5');
+    navigate("/step5");
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>How old will you be when you file?</h2>
       <label>
-        age
-        {' '}
-        <input {...register('age', { required: true })} type="number" defaultValue={numericalAge(birthdate!)} />
+        age{" "}
+        <input
+          {...register("age", { required: true })}
+          type="number"
+          defaultValue={numericalAge(birthdate!)}
+        />
       </label>
       <input type="submit" value="Next" />
     </form>

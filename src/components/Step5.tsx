@@ -17,14 +17,14 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import useStore from '../store';
-import { targets } from '../types/process';
-import { allProcesses } from '../types/jurisdiction';
+import useStore from "../store";
+import { targets } from "../types/process";
+import { allProcesses } from "../types/jurisdiction";
 
 function Step5() {
   const { register, handleSubmit } = useForm();
@@ -32,13 +32,15 @@ function Step5() {
 
   const updateProcessNames = useStore((state) => state.updateProcessNames);
   // const processNames = useStore((state) => state.processNames);
-  const { residentJurisdiction, birthJurisdiction } = useStore((state) => state.person);
+  const { residentJurisdiction, birthJurisdiction } = useStore(
+    (state) => state.person,
+  );
 
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
   const onSubmit = ({ processNames }: { processNames?: string[] }) => {
     updateProcessNames(processNames!);
-    navigate('/step6');
+    navigate("/step6");
   };
 
   return (
@@ -51,8 +53,13 @@ function Step5() {
           {processes.map((proc) => (
             <li key={proc.target}>
               <label>
-                <input {...register('processNames')} type="checkbox" value={proc.target} defaultChecked />
-                {targets[proc.target!] || ''}
+                <input
+                  {...register("processNames")}
+                  type="checkbox"
+                  value={proc.target}
+                  defaultChecked
+                />
+                {targets[proc.target!] || ""}
               </label>
             </li>
           ))}

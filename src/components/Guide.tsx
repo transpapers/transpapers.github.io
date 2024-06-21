@@ -17,13 +17,13 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { compileDocuments } from '../lib/fill';
+import { compileDocuments } from "../lib/fill";
 
-import useStore from '../store';
+import useStore from "../store";
 
-import { allProcesses } from '../types/jurisdiction';
+import { allProcesses } from "../types/jurisdiction";
 
 function Guide() {
   const applicant = useStore((state) => state.person);
@@ -31,22 +31,20 @@ function Guide() {
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
   // const guides = compileGuides(processes, applicant);
 
-  compileDocuments(processes, applicant)
-    .then((doc) => {
-      if (doc !== undefined) {
-        const url = URL.createObjectURL(
-          new Blob([doc], { type: 'application/pdf' }),
-        );
-        const link = document.createElement('a');
-        link.download = 'gender_affirming_documents.pdf';
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(link.href);
-      }
-    });
+  compileDocuments(processes, applicant).then((doc) => {
+    if (doc !== undefined) {
+      const url = URL.createObjectURL(
+        new Blob([doc], { type: "application/pdf" }),
+      );
+      const link = document.createElement("a");
+      link.download = "gender_affirming_documents.pdf";
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+  });
 
-  let documents = processes.map((proc) => proc.documents)
-    .flat();
+  let documents = processes.map((proc) => proc.documents).flat();
 
   documents = [...new Set(documents)];
 
@@ -55,24 +53,22 @@ function Guide() {
       <h2>Thank you for using Transpapers!</h2>
 
       <p>
-        Your gender-affirming documents have been compiled and automatically downloaded.
-        What follows is a personalized guide to filing them.
-        {' '}
+        Your gender-affirming documents have been compiled and automatically
+        downloaded. What follows is a personalized guide to filing them.{" "}
         <strong>
-          You should print both this webpage
-          and the PDF containing your compiled documents.
+          You should print both this webpage and the PDF containing your
+          compiled documents.
         </strong>
       </p>
 
-      {
-        documents.filter((doc) => doc.include === undefined || doc.include(applicant))
-          .filter((doc) => doc.guide !== undefined)
-          .map((doc) => (
-            <section key={doc.id || doc.name}>
-              {React.createElement(doc.guide!, { person: applicant })}
-            </section>
-          ))
-      }
+      {documents
+        .filter((doc) => doc.include === undefined || doc.include(applicant))
+        .filter((doc) => doc.guide !== undefined)
+        .map((doc) => (
+          <section key={doc.id || doc.name}>
+            {React.createElement(doc.guide!, { person: applicant })}
+          </section>
+        ))}
     </>
   );
 }

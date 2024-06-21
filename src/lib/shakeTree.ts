@@ -17,11 +17,11 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person, sampleData } from '../types/person';
-import { Process } from '../types/process';
-import { Name } from '../types/types';
+import { Person, sampleData } from "../types/person";
+import { Process } from "../types/process";
+import { Name } from "../types/types";
 
-import { fields } from '../components/fields';
+import { fields } from "../components/fields";
 
 /**
  * Union of the types we want shakeTree() to ignore/not descend to.
@@ -40,9 +40,9 @@ function isOpaque(obj: any): obj is Opaque {
  * TODO Better documentation. Typing?
  */
 export function shakeTree(obj: any, accessed: string[] = []) {
-  const recursePropertyNames = ['documents', 'map'];
+  const recursePropertyNames = ["documents", "map"];
 
-  const functionPropertyNames = ['include', 'text', 'check'];
+  const functionPropertyNames = ["include", "text", "check"];
 
   const handler = {
     // Handle nested properties correctly.
@@ -52,17 +52,17 @@ export function shakeTree(obj: any, accessed: string[] = []) {
         return undefined;
       }
 
-      if (prop === 'isProxy') {
+      if (prop === "isProxy") {
         return true;
       }
 
       const func = target[prop];
 
-      if (typeof func === 'undefined') {
+      if (typeof func === "undefined") {
         return undefined;
       }
 
-      if (!func.isProxy && typeof func === 'object') {
+      if (!func.isProxy && typeof func === "object") {
         target[prop] = new Proxy(func, handler);
       }
 
@@ -102,15 +102,18 @@ export function shakeTree(obj: any, accessed: string[] = []) {
 /**
  * Convert the list of needed procedures into a list of needed field names.
  */
-export function neededFieldNames(neededProcs: Process[], applicant: Person): string[] {
+export function neededFieldNames(
+  neededProcs: Process[],
+  applicant: Person,
+): string[] {
   const names: string[] = [];
   neededProcs.forEach((process) => shakeTree(process, names));
 
   Object.entries(fields).forEach(([fieldName, field]) => {
     if (
-      field.include !== undefined
-      && field.include(applicant)
-      && !names.includes(fieldName)
+      field.include !== undefined &&
+      field.include(applicant) &&
+      !names.includes(fieldName)
     ) {
       names.push(fieldName);
     }

@@ -17,26 +17,31 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { type Person } from '../../../types/person';
+import { type Person } from "../../../types/person";
 
 function MichiganPC50Guide({ person }: { person: Person }) {
   const { age, parentsAreOkay } = person;
 
   return (
     <section key="Michigan-PC50">
-      <h3>Publication of Notice of Hearing Regarding Petition for Name Change (MI, PC50)</h3>
+      <h3>
+        Publication of Notice of Hearing Regarding Petition for Name Change (MI,
+        PC50)
+      </h3>
       <p>
-        The state of Michigan generally requires name change hearings to be documented
-        in a local newspaper unless there are compelling reasons not to. This will take
-        the form of a notice containing the old and new legal names as well as the date,
-        time, and location of the hearing.
-        { age && (age < 18 && !parentsAreOkay)
-            && 'List the legal names of any noncustodial parents under the heading “TO ALL PERSONS, including:”.'}
-        You may need to write in the name of the publication that the notice will be
-        displayed in during filing; if so, refer to the list above. This form is
-        otherwise complete.
+        The state of Michigan generally requires name change hearings to be
+        documented in a local newspaper unless there are compelling reasons not
+        to. This will take the form of a notice containing the old and new legal
+        names as well as the date, time, and location of the hearing.
+        {age &&
+          age < 18 &&
+          !parentsAreOkay &&
+          "List the legal names of any noncustodial parents under the heading “TO ALL PERSONS, including:”."}
+        You may need to write in the name of the publication that the notice
+        will be displayed in during filing; if so, refer to the list above. This
+        form is otherwise complete.
       </p>
     </section>
   );
