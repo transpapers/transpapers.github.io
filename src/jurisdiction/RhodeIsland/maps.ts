@@ -62,8 +62,7 @@ import {
         field: "8",
     },
     {
-        /**Needs a hardcoded "RI" in "State" field, I think this is correct. */
-        text: () => "RI",
+        text: (applicant) => applicant.residentJurisdiction,
         field: "9",
     },
     {
@@ -204,8 +203,8 @@ export const bciMap: Formfill[] = [
       loc: { x: 1330, y: 1479 },
     },
     {
-      text: (applicant) => applicant.streetAddress && " " && applicant.residentCity && ", RI "
-      && applicant.zip ,
+      text: (applicant) => applicant.streetAddress && " " && applicant.residentCity && ", "
+      && applicant.residentJurisdiction && " " && applicant.zip ,
       loc: { x: 430, y: 1575 },
     },
   ];
@@ -214,7 +213,7 @@ export const bciMap: Formfill[] = [
  * State of Rhode Island Application for License, Identification Card and Permit Form (Rhode Island form, LI-1.)
  * @type {Formfill[]}
  */
-  export const primaryIDMap: Formfill[] = [
+  export const primaryIDRhodeIslandMap: Formfill[] = [
     {
       text: (applicant) => applicant.legalName?.last,
       field: "LAST NAME",
@@ -260,7 +259,7 @@ export const bciMap: Formfill[] = [
       field: "CITYTOWN",
     },
     {
-      text: () => "RI",
+      text: (applicant) => applicant.residentJurisdiction,
       field: "STATE",
     },
     {
@@ -316,7 +315,7 @@ export const bciMap: Formfill[] = [
         field: "CITYTOWN",
       },
       {
-        text: () => "RI",
+        text: (applicant) => applicant.residentJurisdiction,
         field: "STATE",
       },
       {
@@ -407,8 +406,8 @@ export const bciMap: Formfill[] = [
       loc: { x: 1330, y: 1479 },
     },
     {
-      text: (applicant) => applicant.streetAddress && " " && applicant.residentCity && ", RI "
-      && applicant.zip ,
+      text: (applicant) => applicant.streetAddress && " " && applicant.residentCity && ", "
+      && applicant.residentJurisdiction && " " && applicant.zip ,
       loc: { x: 430, y: 1575 },
     },
   ];
