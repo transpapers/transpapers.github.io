@@ -19,14 +19,12 @@
 
 import {
     formatDate,
-    fullContactInfo,
     fullName,
     isMinor,
     numericalAge,
     phoneAreaCode,
     phoneEnd,
     phoneStart,
-    representativeName,
   } from "../../lib/util";
   
   import {
@@ -46,8 +44,11 @@ import {
  * @type {Formfill[]}
  */
   export const changeOfNameMap: Formfill[] = [
-    /** Place "County of" data from counties.ts here */
-    /** Place "City or Town of" data from counties.ts here */
+    /** Place "County of" data from counties.ts here (applicant.residentCounty is Town/City for RI.) */
+    {
+      text: (applicant) => applicant.residentCounty,
+      field: "Combo Box 4",
+    },
     {
         text: (applicant) => fullName(applicant.legalName),
         field: "6",
@@ -73,9 +74,11 @@ import {
         text: (applicant) => applicant.phone,
         field: "11",
     },
+    /** Please verify that I have the if statement for below the right way round. */
     {
-        text: (applicant) => isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : "",
-        field: "17",
+        text: (applicant) => isEmptyName(applicant.birthName) ? 
+          fullName(applicant.legalName) : fullName(applicant.birthName),
+          field: "17",
     },
     {
         text: (applicant) => formatDate(applicant.birthdate, 
@@ -151,8 +154,9 @@ export const bciMap: Formfill[] = [
       loc: { x: 1245, y: 420 },
     },
     {
-      text: (applicant) => isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : "",
-      loc: { x: 805, y: 453 },
+      text: (applicant) => isEmptyName(applicant.birthName) ? 
+        fullName(applicant.legalName) : fullName(applicant.birthName),
+        loc: { x: 805, y: 453 },
     },
     {
       text: (applicant) => formatDate(applicant.birthdate, 
@@ -176,15 +180,15 @@ export const bciMap: Formfill[] = [
       loc: { x: 204, y: 674 },
     },
     {
-      text: (applicant) => ("X"),
+      text: () => ("X"),
       loc: { x: 596, y: 1106 },
     },
     {
-      text: (applicant) => ("Name Change"),
+      text: () => ("Name Change"),
       loc: { x: 879, y: 1115 },
     },
     {
-      text: (applicant) => ("1"),
+      text: () => ("1"),
       loc: { x: 337, y: 1257 },
     },
     {
@@ -256,7 +260,7 @@ export const bciMap: Formfill[] = [
       field: "CITYTOWN",
     },
     {
-      text: (applicant) => "RI",
+      text: () => "RI",
       field: "STATE",
     },
     {
@@ -271,7 +275,7 @@ export const bciMap: Formfill[] = [
       text: (applicant) => phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
       field: "TELEPHONE",
     },
-    /** ask about birth jusisdiction to check state/country */
+    /** ask Sasha about birth jusisdiction to check state/country */
     {
       text: (applicant) => applicant.birthCity,
       field: "CITY",
@@ -312,7 +316,7 @@ export const bciMap: Formfill[] = [
         field: "CITYTOWN",
       },
       {
-        text: (applicant) => "RI",
+        text: () => "RI",
         field: "STATE",
       },
       {
@@ -353,8 +357,9 @@ export const bciMap: Formfill[] = [
       loc: { x: 1245, y: 420 },
     },
     {
-      text: (applicant) => isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : "",
-      loc: { x: 805, y: 453 },
+      text: (applicant) => isEmptyName(applicant.birthName) ? 
+        fullName(applicant.legalName) : fullName(applicant.birthName),
+        loc: { x: 805, y: 453 },
     },
     {
       text: (applicant) => formatDate(applicant.birthdate, 
@@ -378,15 +383,15 @@ export const bciMap: Formfill[] = [
       loc: { x: 204, y: 674 },
     },
     {
-      text: (applicant) => ("X"),
+      text: () => ("X"),
       loc: { x: 596, y: 1106 },
     },
     {
-      text: (applicant) => ("Updating record to match new legal name."),
+      text: () => ("Updating record to match new legal name."),
       loc: { x: 879, y: 1115 },
     },
     {
-      text: (applicant) => ("1"),
+      text: () => ("1"),
       loc: { x: 337, y: 1257 },
     },
     {
