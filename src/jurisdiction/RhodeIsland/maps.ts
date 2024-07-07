@@ -25,6 +25,7 @@ import {
     phoneAreaCode,
     phoneEnd,
     phoneStart,
+    abbreviateJurisdiction,
   } from "../../lib/util";
   
   import {
@@ -62,7 +63,8 @@ import {
         field: "8",
     },
     {
-        text: (applicant) => applicant.residentJurisdiction,
+        /** I think this is correct? */
+        text: (applicant) => abbreviateJurisdiction(applicant.residentJurisdiction || ""),
         field: "9",
     },
     {
@@ -259,7 +261,7 @@ export const bciMap: Formfill[] = [
       field: "CITYTOWN",
     },
     {
-      text: (applicant) => applicant.residentJurisdiction,
+      text: (applicant) => abbreviateJurisdiction(applicant.residentJurisdiction || ""),
       field: "STATE",
     },
     {
@@ -315,7 +317,7 @@ export const bciMap: Formfill[] = [
         field: "CITYTOWN",
       },
       {
-        text: (applicant) => applicant.residentJurisdiction,
+        text: (applicant) => abbreviateJurisdiction(applicant.residentJurisdiction || ""),
         field: "STATE",
       },
       {
