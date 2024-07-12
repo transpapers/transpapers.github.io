@@ -59,6 +59,9 @@ const generatePersonForTesting: () => Person = () => {
     doNotPublish: faker.datatype.boolean(),
     parentsAreOkay: faker.datatype.boolean(),
 
+    isChangingLegalName: true,
+    isChangingLegalSex: true,
+
     mothersBirthName: generateNameForTesting(),
     mothersBirthdate: generateDateForTesting(),
 

@@ -17,21 +17,31 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { County } from "../../types/county";
+import { RhodeIslandCityOrTown } from "../../types/county";
 
-const rhodeislandCounties: { [key: string]: County } = {
+const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
     Barrington: {
+        county: "Bristol",
         court: {
             address: "",
             city: "",
             phone: "",
             website: "",
-            bci: "",
         },
-        countyname: "",
-        pubication: "",
-    },
+        advertisementRequired: true,
+        courtDoesAdvertisement: true,
 
+        backgroundCheckRequired: true,
+        courtDoesBackgroundCheck: false,
+
+        publications: [
+            {
+                name: "Barrington Times",
+                website: "https://www.eastbayri.com/contact/index.html",
+            },
+        ],
+        filingCost: "$87.00",
+    },
 };
 
 export default rhodeislandCounties;

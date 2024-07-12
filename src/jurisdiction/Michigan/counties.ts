@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { County } from "../../types/county";
+import { MichiganCounty } from "../../types/county";
 
-const michiganCounties: { [key: string]: County } = {
+const michiganCounties: { [key: string]: MichiganCounty } = {
   Alcona: {
     court: {
       address: "106 5th Street, Harrisville MI 48740",

@@ -17,7 +17,45 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export interface County {
+export type County =
+  | AlaskaAdministrativeDivision
+  | MichiganCounty
+  | RhodeIslandCityOrTown
+  | OtherCounty;
+
+export interface AlaskaAdministrativeDivision {
+  court: Court;
+  doesNameChange: boolean;
+
+  inPersonFiling: boolean;
+  emailFiling: boolean;
+  faxFiling: boolean;
+  faxNumber: string;
+  trueFiling: boolean;
+
+  forwardsTo?: AlaskaAdministrativeDivision;
+}
+
+export interface OtherCounty {
+  court: Court;
+}
+
+export interface RhodeIslandCityOrTown {
+  county: string;
+  court: Court;
+
+  advertisementRequired: boolean;
+  courtDoesAdvertisement: boolean;
+
+  backgroundCheckRequired: boolean;
+  courtDoesBackgroundCheck: boolean;
+
+  publications: Publication[];
+
+  filingCost: string;
+}
+
+export interface MichiganCounty {
   court: Court;
   fingerprintLocations: FingerprintLocation[];
   publications: Publication[];

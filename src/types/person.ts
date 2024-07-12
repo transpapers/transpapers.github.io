@@ -114,6 +114,20 @@ export interface Person {
   gender: GenderMarker | undefined;
 
   /**
+   * Whether applicant is changing legal name.
+   *
+   * @remarks To be filled from [...]
+   */
+  isChangingLegalName: boolean | undefined;
+
+  /**
+   * Whether applicant is changing legal sex.
+   *
+   * @remarks To be filled from [...]
+   */
+  isChangingLegalSex: boolean | undefined;
+
+  /**
    * Whether to withhold publication of the newspaper notice.
    *
    * @remarks Required to determine which forms should be filed for
@@ -240,6 +254,9 @@ export const blankData: Person = {
   assignedSex: undefined,
   gender: undefined,
 
+  isChangingLegalName: undefined,
+  isChangingLegalSex: undefined,
+
   doNotPublish: undefined,
   parentsAreOkay: undefined,
 
@@ -321,6 +338,9 @@ export const sampleData: Person = {
 
   assignedSex: GenderMarker.F,
   gender: GenderMarker.X,
+
+  isChangingLegalName: true,
+  isChangingLegalSex: true,
 
   mothersBirthName: {
     first: "Jane",

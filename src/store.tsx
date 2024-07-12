@@ -22,6 +22,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { blankData, type Person } from "./types/person";
+import { Target } from "./types/process";
 
 import { numericalAge } from "./lib/util";
 import { getJurisdiction } from "./types/jurisdiction";
@@ -86,7 +87,6 @@ const useStore = create<ApplicationState & Action>()(
 
             const extraData: Partial<ApplicationState["person"]> = {};
 
-            // Do any additional Applicant assignment here.
             if (birthdate && !age) {
               extraData.age = numericalAge(birthdate);
             }
@@ -103,6 +103,18 @@ const useStore = create<ApplicationState & Action>()(
 
               Object.assign(extraData, county);
             }
+
+            const isChangingLegalName = state.processNames.includes(
+              Target.NameChange,
+            );
+            const isChangingLegalSex = state.processNames.includes(
+              Target.GenderMarker,
+            );
+            Object.assign(extraData, {
+              isChangingLegalName,
+              isChangingLegalSex,
+            });
+
             Object.assign(state.person, extraData);
           }),
         ),
