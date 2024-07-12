@@ -56,25 +56,34 @@ export const adultNameSexPetitionMap: Formfill[] = [
     text: (applicant) => fullName(applicant.legalName),
     field: "PetitionerName",
   },
-  /** There are seperate name change and sex designation change checkboxes here that I am not sure on. */
+  {
+    check: (applicant) => applicant.isChangingLegalName,
+    field: "NameChange",
+  },
+  {
+    check: (applicant) => applicant.isChangingLegalSex,
+    field: "SexDesignationChange",
+  },
   /** There is a radio button for do not publish that I made an attempt at below */
   {
     check: (applicant) => applicant.doNotPublish,
     field: "SealingRequest_group_2",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "NewName",
+    text: (applicant) => applicant.isChangingLegalName ? 
+      fullName(applicant.chosenName) : "",
+      field: "NewName",
   },
   {
-    text: (applicant) =>
-      applicant.birthCity && ", " && applicant.birthJurisdiction,
-    field: "PlaceOfBirth",
+    text: (applicant) => applicant.isChangingLegalName ?
+      applicant.birthCity && ", " && applicant.birthJurisdiction : "",
+      field: "PlaceOfBirth",
   },
   {
     /** New York seperates Name & Sex change request reasons may need new field. */
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "ReasonsForNameChangeRequest-specify",
+    text: (applicant) => applicant.isChangingLegalName ? 
+      applicant.reasonForNameChange : "",
+      field: "ReasonsForNameChangeRequest-specify",
   },
   {
     text: (applicant) =>
@@ -91,7 +100,6 @@ export const adultNameSexPetitionMap: Formfill[] = [
     field: "NewSexDesignation",
   },
   {
-    /** Not sure how to get it to correctly spit out applicants age for everyone. */
     text: (applicant) => numericalAge(applicant.birthdate!).toString(),
     field: "Age",
   },
@@ -131,7 +139,7 @@ export const MinorNameSexPetitionMap: Formfill[] = [
     field: "County",
   },
   {
-    // This form field can have both parent names, it matters. we will need an additoinal field
+    // This form field can have both parent names, it matters. we will need an additional field
     text: (applicant) =>
       isMinor(applicant) ? fullName(applicant.representativeName) : "",
     field: "PetitionerName",
@@ -141,27 +149,37 @@ export const MinorNameSexPetitionMap: Formfill[] = [
     field: "MinorName",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "NewName",
+    check: (applicant) => applicant.isChangingLegalName,
+    field: "NameChange",
   },
   {
-    text: (applicant) =>
-      applicant.birthCity && ", " && applicant.birthJurisdiction,
-    field: "PlaceOfBirth",
+    check: (applicant) => applicant.isChangingLegalSex,
+    field: "SexDesignationChange",
   },
   {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "ReasonsForNameChangeRequest-specify",
+    text: (applicant) => applicant.isChangingLegalName ? 
+      fullName(applicant.chosenName) : "",
+      field: "NewName",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ?
+      applicant.birthCity && ", " && applicant.birthJurisdiction : "",
+      field: "PlaceOfBirth",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ? 
+      applicant.reasonForNameChange : "",
+      field: "ReasonsForNameChangeRequest-specify",
   },
   {
     text: (applicant) =>
       applicant.assignedSex === GenderMarker.M ? "Male" : "",
-    field: "NewSexDesignation",
+      field: "NewSexDesignation",
   },
   {
     text: (applicant) =>
       applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    field: "NewSexDesignation",
+      field: "NewSexDesignation",
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
@@ -169,7 +187,6 @@ export const MinorNameSexPetitionMap: Formfill[] = [
   },
   /** I think we need a larger discussion for item #22 */
   {
-    /** still can't get age to work right. */
     text: (applicant) => applicant.age!.toString(),
     field: "Age",
   },
@@ -205,7 +222,6 @@ export const MinorNameSexPetitionMap: Formfill[] = [
 export const primaryIDNewYorkMap: Formfill[] = [
   {
     /** Radio button should select "Update Info" */
-    // select: () =>
     check: () => true,
     field: "PURPOSE FOR APPLICATION",
   },
@@ -248,8 +264,8 @@ export const primaryIDNewYorkMap: Formfill[] = [
       "If Yes print your former name exactly as it appears on your present license or nondriver ID Identification card",
   },
   {
-    /** need additional checks for if changing sex */
-    text: () => "New sex designation for a legal sex designation change.",
+    text: (applicant) => applicant.isChangingLegalSex ?
+      "New sex designation for a legal sex designation change." : "",
     field:
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
   },
