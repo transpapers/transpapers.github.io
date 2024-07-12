@@ -63,7 +63,6 @@ export const changeOfNameMap: Formfill[] = [
     field: "8",
   },
   {
-    /** I think this is correct? */
     text: (applicant) =>
       abbreviateJurisdiction(applicant.residentJurisdiction || ""),
     field: "9",
@@ -76,7 +75,6 @@ export const changeOfNameMap: Formfill[] = [
     text: (applicant) => applicant.phone,
     field: "11",
   },
-  /** Please verify that I have the if statement for below the right way round. */
   {
     text: (applicant) =>
       isEmptyName(applicant.birthName)
@@ -92,7 +90,11 @@ export const changeOfNameMap: Formfill[] = [
       }),
     field: "18",
   },
-  // Place of birth to be added here, not sure if they mean city, state, country or a combo
+  {
+    text: (applicant) => applicant.birthCity && ", " &&
+    applicant.birthJurisdiction,
+    field: "19",
+  },
   {
     text: (applicant) => fullName(applicant.mothersBirthName),
     field: "20",
@@ -102,7 +104,10 @@ export const changeOfNameMap: Formfill[] = [
     field: "21",
   },
   {
-    /** This should check the box if the birth name is blank indicating no other name change(s) */
+    check: (applicant) => isEmptyName!(applicant.birthName),
+    field: "Check Box1",
+  },
+  {
     check: (applicant) => isEmptyName(applicant.birthName),
     field: "Check Box2",
   },
@@ -381,7 +386,6 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 365, y: 427 },
   },
   {
-    /** Not sure how to get it to correctly spit out applicants age for everyone. */
     text: (applicant) => numericalAge(applicant.birthdate!).toString(),
     loc: { x: 1245, y: 420 },
   },
