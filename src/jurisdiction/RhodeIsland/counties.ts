@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { RhodeIslandCityOrTown } from "../../types/county";
+import { RhodeIslandCityOrTown } from "../../types/locality";
 
 const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
     Barrington: {

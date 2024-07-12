@@ -19,7 +19,7 @@
 
 import { Name, GenderMarker } from "./types";
 
-import { Court, FingerprintLocation, Publication } from "./county";
+import { Court, FingerprintLocation, Publication } from "./locality";
 
 /**
  * Applicant's personal information.

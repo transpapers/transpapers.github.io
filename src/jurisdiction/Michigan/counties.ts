@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { MichiganCounty } from "../../types/county";
+import { MichiganCounty } from "../../types/locality";
 
 const michiganCounties: { [key: string]: MichiganCounty } = {
   Alcona: {

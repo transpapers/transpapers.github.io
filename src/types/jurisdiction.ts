@@ -18,7 +18,7 @@
  */
 
 import { type Process } from "./process";
-import { type County } from "./county";
+import { type Locality } from "./locality";
 
 import { allJurisdictions } from "../jurisdiction/all";
 
@@ -51,7 +51,7 @@ export interface Jurisdiction {
   /**
    * Map of counties (or county equivalents.)
    */
-  counties?: { [key: string]: County };
+  counties?: { [key: string]: Locality };
 
   /**
    * `true` if this is the dummy `Jurisdiction` used for federal processes.
