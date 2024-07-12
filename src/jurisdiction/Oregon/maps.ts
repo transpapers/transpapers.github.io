@@ -44,56 +44,56 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     text: (applicant) => fullName(applicant.legalName),
     loc: { x: 210, y: 457 },
   },
-  /** Name & sex checkboxes here. */
-  /** Ideally I would change these to detect if someone hit the
-   * name or sex change checkboxes rather than checking if a field is blank. */
   {
-    text: (applicant) => (isEmptyName(applicant.chosenName) ? "X" : ""),
+    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 1076, y: 458 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    loc: { x: 1240, y: 458 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
     loc: { x: 305, y: 705 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? fullName(applicant.legalName) : "",
+      applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
     loc: { x: 445, y: 770 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.first : "",
+      applicant.isChangingLegalName ? applicant.chosenName?.first : "",
     loc: { x: 386, y: 838 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.middle : "",
+      applicant.isChangingLegalName ? applicant.chosenName?.middle : "",
     loc: { x: 740, y: 838 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.last : "",
+      applicant.isChangingLegalName ? applicant.chosenName?.last : "",
     loc: { x: 1145, y: 838 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
+    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
     loc: { x: 303, y: 912 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
-    loc: { x: 303, y: 912 },
+    text: (applicant) => applicant.isChangingLegalSex ? 
+      (applicant.gender === GenderMarker.M ? "X" : "") : "",
+      loc: { x: 448, y: 948 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    loc: { x: 303, y: 912 },
+    text: (applicant) => applicant.isChangingLegalSex ? 
+      (applicant.gender === GenderMarker.F ? "X" : "") : "",
+      loc: { x: 565, y: 948 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
-    loc: { x: 448, y: 948 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
-    loc: { x: 565, y: 948 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    loc: { x: 702, y: 948 },
+    text: (applicant) => applicant.isChangingLegalSex ?
+      (applicant.gender === GenderMarker.X ? "X" : "") : "",
+      loc: { x: 702, y: 948 },
   },
   {
     text: (applicant) => (isEmptyName(applicant.birthName) ? "" : "X"),
@@ -143,7 +143,14 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     text: (applicant) => fullName(applicant.legalName),
     loc: { x: 210, y: 415 },
   },
-  /** Name & sex checkboxes here. */
+  {
+    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 1186, y: 458 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    loc: { x: 1353, y: 458 },
+  },
 ];
 
 /**
@@ -164,56 +171,56 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     text: (applicant) => fullName(applicant.representativeName),
     loc: { x: 330, y: 640 },
   },
-  /** Name & sex checkboxes here. */
-  /** Ideally I would change these to detect if someone hit the
-   * name or sex change checkboxes rather than checking if a field is blank. */
   {
-    text: (applicant) => (isEmptyName(applicant.chosenName) ? "X" : ""),
+    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 1076, y: 458 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    loc: { x: 1240, y: 458 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
     loc: { x: 252, y: 803 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? fullName(applicant.legalName) : "",
+      applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
     loc: { x: 495, y: 859 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.first : "",
+      applicant.isChangingLegalName ? applicant.chosenName?.first : "",
     loc: { x: 450, y: 920 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.middle : "",
+      applicant.isChangingLegalName ? applicant.chosenName?.middle : "",
     loc: { x: 840, y: 920 },
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.last : "",
+      applicant.isChangingLegalName ? applicant.chosenName?.last : "",
     loc: { x: 1140, y: 920 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
+    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
     loc: { x: 253, y: 1760 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
-    loc: { x: 253, y: 1760 },
+    text: (applicant) => applicant.isChangingLegalSex ? 
+      (applicant.gender === GenderMarker.M ? "X" : "") : "",
+      loc: { x: 355, y: 1793 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    loc: { x: 253, y: 1760 },
+    text: (applicant) => applicant.isChangingLegalSex ?
+      (applicant.gender === GenderMarker.F ? "X" : "") : "",
+      loc: { x: 478, y: 1793 },
   },
   {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
-    loc: { x: 355, y: 1793 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
-    loc: { x: 478, y: 1793 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    loc: { x: 619, y: 1793 },
+    text: (applicant) => applicant.isChangingLegalSex ?
+      (applicant.gender === GenderMarker.X ? "X" : "") : "",
+      loc: { x: 619, y: 1793 },
   },
   {
     text: (applicant) => (applicant.doNotPublish ? "X" : ""),
@@ -313,6 +320,18 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   {
     text: (applicant) => applicant.phone,
     loc: { x: 1180, y: 630 },
+  },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    loc: { x: 205, y: 457 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 1188, y: 458 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    loc: { x: 1355, y: 458 },
   },
 ];
 
@@ -570,30 +589,39 @@ export const birthCertOregonMap: Formfill[] = [
   /** Ideally I would change these to detect if someone hit the
    * name or sex change checkboxes rather than checking if a field is blank. */
   {
-    text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.first : "",
-    field: "Updated first",
+    check: (applicant) => applicant.isChangingLegalName,
+    field: "Change name",
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.middle : "",
-    field: "Updated middle",
+      applicant.isChangingLegalName ? applicant.chosenName?.first : "",
+      field: "Updated first",
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.chosenName) ? applicant.chosenName?.last : "",
-    field: "Updated last",
+      applicant.isChangingLegalName ? applicant.chosenName?.middle : "",
+      field: "Updated middle",
   },
   {
-    check: (applicant) => applicant.assignedSex === GenderMarker.M,
+    text: (applicant) =>
+      applicant.isChangingLegalName ? applicant.chosenName?.last : "",
+      field: "Updated last",
+  },
+  {
+    check: (applicant) => applicant.isChangingLegalSex,
+    field: "Change sex",
+  },
+  /** Need double if statement on the three checks below.*/
+  {
+    check: (applicant) => applicant.gender === GenderMarker.M,
     field: "Male",
   },
   {
-    check: (applicant) => applicant.assignedSex === GenderMarker.F,
+    check: (applicant) => applicant.gender === GenderMarker.F,
     field: "Female",
   },
   {
-    check: (applicant) => applicant.assignedSex === GenderMarker.X,
+    check: (applicant) => applicant.gender === GenderMarker.X,
     field: "X Non-Binary",
   },
   {
@@ -612,7 +640,7 @@ export const voterOregonMap: Formfill[] = [
     check: () => true,
     field: "Citizen",
   },
-  /** Check should be for if person is 16+ */
+  /** Check below should really be for if person is 16+ */
   {
     check: (applicant) => isMinor(applicant),
     field: "Age",
