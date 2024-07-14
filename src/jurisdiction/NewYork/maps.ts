@@ -673,15 +673,15 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
 export const selfAttestationAdultNYCMap: Formfill[] = [
   {
     text: (applicant) => applicant.legalName?.first,
-    loc: { x: 202, y: 305 },
+    loc: { page: 2, x: 202, y: 305 },
   },
   {
     text: (applicant) => applicant.legalName?.middle,
-    loc: { x: 705, y: 305 },
+    loc: { page: 2, x: 705, y: 305 },
   },
   {
     text: (applicant) => applicant.legalName?.last,
-    loc: { x: 1082, y: 305 },
+    loc: { page: 2, x: 1082, y: 305 },
   },
   {
     text: (applicant) =>
@@ -689,56 +689,56 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 205, y: 435 },
+    loc: { page: 2, x: 205, y: 435 },
   },
   {
     text: (applicant) => applicant.streetAddress,
-    loc: { x: 701, y: 435 },
+    loc: { page: 2, x: 701, y: 435 },
   },
   {
     text: (applicant) => applicant.residentCity,
-    loc: { x: 202, y: 560 },
+    loc: { page: 2, x: 202, y: 560 },
   },
   {
     text: (applicant) =>
       abbreviateJurisdiction(applicant.residentJurisdiction || ""),
-    loc: { x: 880, y: 560 },
+    loc: { page: 2, x: 880, y: 560 },
   },
   {
     text: (applicant) => applicant.zip,
-    loc: { x: 315, y: 560 },
+    loc: { page: 2, x: 315, y: 560 },
   },
   {
     text: (applicant) => applicant.phone,
-    loc: { x: 975, y: 701 },
+    loc: { page: 2, x: 975, y: 701 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 230, y: 963 },
+    loc: { page: 2, x: 230, y: 963 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "M" : ""),
-    loc: { x: 855, y: 1129 },
+    loc: { page: 2, x: 855, y: 1129 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "F" : ""),
-    loc: { x: 855, y: 1129 },
+    loc: { page: 2, x: 855, y: 1129 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    loc: { x: 855, y: 1129 },
+    loc: { page: 2, x: 855, y: 1129 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.M ? "M" : ""),
-    loc: { x: 1165, y: 1129 },
+    loc: { page: 2, x: 1165, y: 1129 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.F ? "F" : ""),
-    loc: { x: 1165, y: 1129 },
+    loc: { page: 2, x: 1165, y: 1129 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    loc: { x: 1165, y: 1129 },
+    loc: { page: 2, x: 1165, y: 1129 },
   },
 ];
 
@@ -750,27 +750,27 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
 export const selfAttestationMinorNYCMap: Formfill[] = [
   {
     text: (applicant) => applicant.representativeName?.first,
-    loc: { x: 205, y: 320 },
+    loc: { page: 2, x: 205, y: 320 },
   },
   {
     text: (applicant) => applicant.representativeName?.middle,
-    loc: { x: 705, y: 320 },
+    loc: { page: 2, x: 705, y: 320 },
   },
   {
     text: (applicant) => applicant.representativeName?.last,
-    loc: { x: 1085, y: 320 },
+    loc: { page: 2, x: 1085, y: 320 },
   },
   {
     text: (applicant) => applicant.legalName?.first,
-    loc: { x: 205, y: 1611 },
+    loc: { page: 2, x: 205, y: 1611 },
   },
   {
     text: (applicant) => applicant.legalName?.middle,
-    loc: { x: 705, y: 1611 },
+    loc: { page: 2, x: 705, y: 1611 },
   },
   {
     text: (applicant) => applicant.legalName?.last,
-    loc: { x: 1085, y: 1611 },
+    loc: { page: 2, x: 1085, y: 1611 },
   },
   {
     text: (applicant) =>
@@ -778,34 +778,34 @@ export const selfAttestationMinorNYCMap: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 720, y: 1770 },
+    loc: { page: 2, x: 720, y: 1770 },
   },
   {
     text: (applicant) => fullName(applicant.representativeName),
-    loc: { x: 230, y: 318 },
+    loc: { page: 3, x: 230, y: 318 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "M" : ""),
-    loc: { x: 960, y: 488 },
+    loc: { page: 3, x: 960, y: 488 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "F" : ""),
-    loc: { x: 960, y: 488 },
+    loc: { page: 3, x: 960, y: 488 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    loc: { x: 960, y: 488 },
+    loc: { page: 3, x: 960, y: 488 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.M ? "M" : ""),
-    loc: { x: 1265, y: 488 },
+    loc: { page: 3, x: 1265, y: 488 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.F ? "F" : ""),
-    loc: { x: 1265, y: 488 },
+    loc: { page: 3, x: 1265, y: 488 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    loc: { x: 1265, y: 488 },
+    loc: { page: 3, x: 1265, y: 488 },
   },
 ];
