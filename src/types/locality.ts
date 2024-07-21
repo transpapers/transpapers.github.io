@@ -29,8 +29,9 @@ export interface AlaskaAdministrativeDivision {
 
   inPersonFiling: boolean;
   emailFiling: boolean;
+  emailCourt?: string;
   faxFiling: boolean;
-  faxNumber: string;
+  faxNumber?: string;
   trueFiling: boolean;
 
   forwardsTo?: AlaskaAdministrativeDivision;
