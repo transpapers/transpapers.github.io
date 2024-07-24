@@ -1635,6 +1635,30 @@ const michiganCounties: { [key: string]: MichiganCounty } = {
       },
     ],
   },
+  Oscoda: {
+    court: {
+      address: "105 Court St, Mio, MI 48647",
+      city: "Mio",
+      circuit: "23rd",
+      phone: "(989) 826-1111",
+      website:
+        "https://www.oscodacountymi.com/circuit-court/",
+    },
+    fingerprintLocations: [
+      {
+        address: "301 Morenci Ave, Mio, MI 48647",
+        name: "Oscoda County Sheriff",
+        website:
+          "https://www.oscodacountymi.com/sheriff-department/",
+      },
+    ],
+    publications: [
+      {
+        name: "Oscoda County Herald",
+        website: "https://oscodacountyherald.column.us/place/BRCmjSmku0C6qs419Xbh?step=confirm-filer",
+      },
+    ],
+  },
   Otsego: {
     court: {
       address: "800 Livingston Blvd #1d, Gaylord, MI 49735",
