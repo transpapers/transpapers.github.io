@@ -458,3 +458,5 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         trueFiling: true,
     },
 };
+
+export default alaskanAdministrativeDivisions;
