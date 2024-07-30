@@ -51,7 +51,7 @@ export interface RhodeIslandCityOrTown {
   backgroundCheckRequired: boolean;
   courtDoesBackgroundCheck: boolean;
 
-  publications: Publication[];
+  publications?: Publication[];
 
   filingCost: string;
 }
