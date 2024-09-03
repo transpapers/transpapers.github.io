@@ -1,0 +1,86 @@
+<p>
+{% if age < 18 %}
+    In order to file a name change in Rhode Island you will need a 
+notary to sign off on your BCI disclaimer form and Change of 
+Name petition. You then need to get a background check report 
+using that BCI disclaimer form and a certified copy of your 
+birth certificate, then you can file.
+{% else %}
+    In order to file a name change in Rhode Island your 
+parent/guardian will need a notary to sign off on the 
+BCI disclaimer form and Change of Name petition. They 
+then need to get a background check report 
+using that BCI disclaimer form and a certified copy of your 
+birth certificate, then they can file on your behalf.
+{% endif %}
+</p>
+
+<p>
+    The following methods of obtaining the certified copy of your birth
+certificate are listed from most to least expensive. You can go 
+through <a
+href="VitalChek">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a> 
+online, you can mail the application form, or you can deliver 
+the applicationform in-person. To mail it, make out a check or money 
+order for the amount listed in section 4 of the form addressed to the 
+“General Treasurer of RI”. Then place the form, check, and a photocopy 
+of your ID into an envelope and mail it to:
+</p>
+
+<p><a
+href="Rhode Island Department of Health - Office of Vital Records">https://health.ri.gov/records/</a></p>
+<p>6 Harrington Road</p>
+<p>Cranston, Rhode Island 02920</p>
+
+<p>
+    For an in-person delivery, do the same steps as mailing it but skip 
+the envelope and call them to set up an appointment at (401) 222-2811. 
+Then go to the address listed above for your appointment and hand the 
+clerk the documents & your ID. If you do an in-person appointment for 
+this it is recommended that you get your background check done 
+in-person as well. The buildings are near each other and you won’t 
+need another appointment as the Office of the Attorney General only 
+does walk-ins.
+</p>
+
+{% if courtDoesBackgroundCheck == False %}
+<p>
+    For the background check you have options for in-person or 
+mail-in. For mail-in you will need to notarize the BCI disclaimer 
+form, preferably at the same time as the Change of Name form. Once 
+that is done you can mail the notarized form with a photocopy of 
+your ID, a self-addressed stamped envelope, and a check/money order 
+for $5 made out to “BCI”. If you go in-person then you should know 
+that they only do walk-ins so just bring a photo ID and a credit/debit 
+card. The address for both mailing and in-person is:
+</p>
+
+<p><a
+href="Rhode Island Office of the Attorney General">http://www.riag.ri.gov/BCI/index.php</a></p>
+<p>4 Howard Avenue</p>
+<p>Cranston, Rhode Island 02920</p>
+
+{% else %}
+<p>
+    Our records show that this court either does the background 
+check report for you when you file or gives its own instructions 
+for one. In either case double check with the court that this 
+is true by calling them at this phone number {{ court.phone }} 
+and following the instructions that they give you.
+</p>
+{% endif %}
+
+<p>
+    You will need a notary to witness your signatures and provide 
+their own. Rhode Island maintains a list of notaries <a
+href="here">https://business.sos.ri.gov/PublicNotarySearch/Home</a>. 
+Notaries can also be found in court buildings, banks, some 
+<a
+href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>, 
+or <a
+href="online">https://www.notarize.com/</a>. You will be charged a 
+fee for this service, make sure that you bring a photo ID. Once 
+you have the certified copy of your birth certificate, notarized 
+change of name petition, and a notarized background check report 
+you are ready to file.
+</p>
