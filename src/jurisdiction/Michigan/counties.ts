@@ -1637,25 +1637,25 @@ const michiganCounties: { [key: string]: County } = {
   },
   Oscoda: {
     court: {
-      address: "105 Court St, Mio, MI 48647",
-      city: "Mio",
-      circuit: "23rd",
-      phone: "(989) 826-1111",
+      address: '105 Court St, Mio, MI 48647',
+      city: 'Mio',
+      circuit: '23rd',
+      phone: '(989) 826-1111',
       website:
-        "https://www.oscodacountymi.com/circuit-court/",
+        'https://www.oscodacountymi.com/circuit-court/',
     },
     fingerprintLocations: [
       {
-        address: "301 Morenci Ave, Mio, MI 48647",
-        name: "Oscoda County Sheriff",
+        address: '301 Morenci Ave, Mio, MI 48647',
+        name: 'Oscoda County Sheriff',
         website:
-          "https://www.oscodacountymi.com/sheriff-department/",
+          'https://www.oscodacountymi.com/sheriff-department/',
       },
     ],
     publications: [
       {
-        name: "Oscoda County Herald",
-        website: "https://oscodacountyherald.column.us/place/BRCmjSmku0C6qs419Xbh?step=confirm-filer",
+        name: 'Oscoda County Herald',
+        website: 'https://oscodacountyherald.column.us/place/BRCmjSmku0C6qs419Xbh?step=confirm-filer',
       },
     ],
   },
