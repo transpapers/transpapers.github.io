@@ -9,10 +9,10 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: node --version
     - name: Cache node modules
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         path: ~/.npm
         key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
