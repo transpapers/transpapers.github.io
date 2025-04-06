@@ -85,14 +85,17 @@ export const ssnMap: Formfill[] = [
     field: "topmostSubform[0].Page5[0].DateTimeField1[0]",
   },
   { check: () => true, field: "topmostSubform[0].Page5[0].citizenship[0]" },
+
+  /** Switch back these two fields to applicant.gender when Feds change policy */
   {
-    check: (applicant) => applicant.gender === GenderMarker.M,
+    check: (applicant) => applicant.assignedSex === GenderMarker.M,
     field: "topmostSubform[0].Page5[0].Gender[0]",
   },
   {
-    check: (applicant) => applicant.gender === GenderMarker.F,
+    check: (applicant) => applicant.assignedSex === GenderMarker.F,
     field: "topmostSubform[0].Page5[0].Gender[1]",
   },
+
   {
     text: (applicant) => applicant.mothersBirthName?.first ?? "",
     field: "topmostSubform[0].Page5[0].mothersfirstname[0]",
@@ -202,19 +205,15 @@ export const ds5504Map: Formfill[] = [
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     field: "App DOB YYYY",
   },
+  /** Changed gender checkmarks to match new federal forms */
   {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    loc: { page: 4, x: 283, y: 298 },
+    check: (applicant) => applicant.assignedSex === GenderMarker.M,
+    loc: { page: 5, x: 587, y: 597 },
   },
   {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    loc: { page: 4, x: 301, y: 298 },
+    check: (applicant) => applicant.assignedSex === GenderMarker.F,
+    loc: { page: 5, x: 649, y: 597 },
   },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    loc: { page: 4, x: 319, y: 298 },
-  },
-  { check: () => true, field: "Yes" },
   {
     text: (applicant) =>
       `${applicant.birthCity} ${applicant.birthJurisdiction}`,
@@ -256,18 +255,7 @@ export const ds5504Map: Formfill[] = [
       `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
     field: "Name of Applicant 2",
   },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "Date of Birth",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    loc: { page: 5, x: 120, y: 592 },
-  },
+  /** Double check below form fields and add DOB for new form */
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
     field: "Changed Last Name",
@@ -318,19 +306,15 @@ export const ds82Map: Formfill[] = [
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     field: "App DOB YYYY",
   },
+  /** Changed gender checkmarks to match new federal forms */
   {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    loc: { page: 4, x: 283, y: 298 },
+    check: (applicant) => applicant.assignedSex === GenderMarker.M,
+    loc: { page: 5, x: 587, y: 574 },
   },
   {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    loc: { page: 4, x: 301, y: 298 },
+    check: (applicant) => applicant.assignedSex === GenderMarker.F,
+    loc: { page: 5, x: 650, y: 574 },
   },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    loc: { page: 4, x: 319, y: 298 },
-  },
-  { check: () => true, field: "Yes" },
   {
     text: (applicant) =>
       `${applicant.birthCity} ${applicant.birthJurisdiction}`,
@@ -419,18 +403,7 @@ export const ds11Map: Formfill[] = [
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     field: "Applicant DOB Y",
   },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    loc: { page: 4, x: 283, y: 298 },
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    loc: { page: 4, x: 301, y: 298 },
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    loc: { page: 4, x: 319, y: 298 },
-  },
+  /** removed gender check marks and added a warning to guide instead */
   {
     text: (applicant) =>
       `${applicant.birthCity} ${applicant.birthJurisdiction}`,
