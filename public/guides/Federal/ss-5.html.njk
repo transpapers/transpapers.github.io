@@ -5,20 +5,14 @@ and are coming back to change your name you should be safe to do so.</p>
 <p>Since all government databases use data from the Social Security
 administration, you must change your information with them first before
 you can change it anywhere else.</p>
+
 <p>First, complete the “Application for a Social Security Card” (form
-SS-5.) Enter your SSN in section 2, and those of your parents in
+SS-5.) Enter your Social Security Number in section 2, and those of your parents in
 sections 9-10. If you do not know and/or cannot obtain their SSNs, mark
 “Unknown” in the appropriate section. The “Race” and “Ethnicity” fields
 are optional, and left blank; you may fill them in at your
-discretion.</p>
+discretion.
 
-{% if gender == “X” %}
-	<p>Unfortunately, the SSA does not currently
-	recognize non-binary individuals. You will need to check your assigned
-	gender at birth in section 8.</p>
-{% endif %}
-
-<p>
 {% if age < 18 %}
 	Your parent/guardian should sign in section 17.
     	{% if parentsAreOkay == false %}
@@ -31,7 +25,7 @@ discretion.</p>
 
 <p>You can find the nearest Social Security office at <a
 href="https://secure.ssa.gov/ICON/main.jsp">https://secure.ssa.gov/ICON/main.jsp</a>.
-Social Security will only do name changes by appointment only so call the number
+Social Security will only do name changes by appointment so call the number
 of the local office you selected using the above link and say you want a name change appointment.
 You will need identification to prove your identity,
 age, and citizenship. A state ID, drivers license, or passport will be
@@ -39,7 +33,8 @@ acceptable. If you do not have those, refer to page two of form SS-5 for
 other accepted forms of ID. You will also need to bring your completed
 Application for a Social Security Card (SS-5), as well as your court order.
 This service is provided free of charge.</p>
-<p>Tell the clerk that you are updating your Social Security
+
+<p>At your appointment tell the clerk that you are updating your Social Security
 information. They will request the Social Security form, ID documents,
 and court order. They should then approve the name change and give you a receipt, which you should
 check for accuracy and keep for your records. This receipt is sufficient to update your primary
