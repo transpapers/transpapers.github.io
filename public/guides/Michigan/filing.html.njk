@@ -1,14 +1,16 @@
 <p> Your filing location is {{ court.address }}.
 You may file by mail or in person; in either case, include the Petition
 (pc51c) the Addendum (m97a), the optional Fee Waiver (mc20), as well
-as payment. If you are filing by mail, you must pay by check or money
-order. If you are filing in person, we recommend that you call the
-court at {{ court.phone }} to confirm their open hours and accepted
-payment types.
+as payment. Even if the fee waiver is granted you still need to provide
+payment for at least one certified copy. No matter how you file we
+recommend that you call the court at {{ court.phone }} or visit their 
+website at {{ court.website }}. This is to confirm their accepted 
+payment types, Name Change Petition fee, and Certified Copy fee
+as these vary by county and are updated regularly.
 
 {% if age < 18 %}
 	Whoever filled out the paperwork as your petitioner has to be the
-	one who files the paperwork at court if you are doing in-person.
+	one who files the paperwork at court if you are doing in-person filing.
 {% endif %}
 </p>
 
@@ -25,19 +27,19 @@ Petition to Change Name with a case number.</p>
 <p> Once the paperwork has been filed it will be several weeks before
 you get a response. From this point you just need to wait. The vast
 majority of cases will not even have a hearing you will simply recieve
-your court order in the mail. The few cases that may get a hearing are
-usually due to a judge wanting clarification on a criminal record. To
-be clear they are only allowed to deny a name change if they have reason
-to believe that it is to escape the law or creditors.
+your court order and certified copy in the mail. The few cases that 
+may get a hearing are usually due to a judge wanting clarification on 
+a criminal record although judges can technically call a hearing for any 
+reason. To be clear they are only allowed to deny a name 
+change if they have reason to believe that it is to escape the law 
+or creditors.
 
 {% if age < 18 %}
-	If you want an update on your case the petitioner has to go to court
+	If you want an update on your case your petitioner has to go to court
 	and show an ID, they will not confirm anything on the phone to protect
 	your privacy.
 {% else %}
 	If you want an update on your case you have to go to court and show ID,
 	they will not confirm anything over the phone to protect your privacy.
 {% endif %}
-	
-Also write about the extra certified copy and payment for that
 </p>
