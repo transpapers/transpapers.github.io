@@ -45,6 +45,10 @@ import { Formfill } from "../../types/formfill";
  */
 export const nameChangePrivateMap: Formfill[] = [
   {
+    text: (applicant) => applicant.residentCounty,
+    field: "County",
+  },
+  {
     text: (applicant) => fullName(applicant.legalName),
     field: "Current first middle and last names type or print",
   },
