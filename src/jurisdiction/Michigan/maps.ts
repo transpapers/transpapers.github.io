@@ -195,8 +195,8 @@ export const nameChangePrivateMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? "" : fullName(applicant.legalName),
-      field: "Name type or print",
+        isMinor(applicant) ? fullName(representativeName(applicant)) : fullName(applicant.legalName),
+    field: "Name type or print",
   },
 ];
 
@@ -214,7 +214,7 @@ export const piiMap: Formfill[] = [
     field: "In the matter of",
   },
   {
-    text: (applicant) => (applicant.doNotPublish ? "PC 51c" : "PC 51"),
+    text: (applicant) => ("PC 51c"),
     field: "Name of formdocument that this MC 97a is being filed with 1",
   },
   {
