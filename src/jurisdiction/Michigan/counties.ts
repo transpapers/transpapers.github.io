@@ -995,7 +995,7 @@ const michiganCounties: { [key: string]: MichiganCounty } = {
       website:
         "https://www.accesskent.com/Courts/Probate/pdfs/Name_Change_Instructions.pdf",
       specificCourtInfo:
-        "The courts front entrance is on the southwest side of the building, closer to the river. Once you get through the metal detector you can take any elevator to the second floor. On that floor you then turn and walk towards the large window then go down the hallway left from there. The Probate court counter, which you want, is the second counter further along the hall. They accept cash, credit cards, cashiers checks, or money orders.",
+        "The courts front entrance is on the southwest side of the building, closer to the river. Once you get through the metal detector you can take any elevator to the second floor. On that floor you then turn and walk towards the large window then go down the hallway left from there. The Probate court counter, which you want, is the second counter further along the hall. They accept cash, checks, credit cards, cashiers checks, or money orders.",
     },
     fingerprintLocations: [
       {
