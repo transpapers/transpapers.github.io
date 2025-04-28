@@ -92,7 +92,7 @@ export const fields: { [key: string]: Field } = {
   */
   age: {
     title: "Age at time of filing",
-    subtitle: "Fill only if you are under 23.",
+    subtitle: "Fill only if you are less than 19 years old.",
     name: "age",
     type: "number",
     include: (data) => isMinor(data),
@@ -110,6 +110,8 @@ export const fields: { [key: string]: Field } = {
     type: "option",
     options: { M: "M", F: "F", X: "X" },
   },
+    /* We need an update on this doNotPublish variable as it no longer applies to MI but might in other states. */
+    /* We Should also add a criminal history/record checkbox and make that a variable to section parts of the guide for clarity. */
   doNotPublish: {
     title:
       "I have good cause not to publish notice of my name change proceeding.",
