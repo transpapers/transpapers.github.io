@@ -38,119 +38,6 @@ import { Formfill } from "../../types/formfill";
 // then finally federal forms.
 
 /**
- * Petition to Change Name (Michigan form PC 51.)
- * Updated 7/2023.
- * @type {Formfill[]}
- */
-export const nameChangeMap: Formfill[] = [
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "In the matter of",
-  },
-  {
-    text: (applicant) => fullContactInfo(applicant),
-    field: "Petitioners name address and telephone no",
-  },
-  { check: (applicant) => !isMinor(applicant), field: "b an adult" },
-  {
-    check: (applicant) => isMinor(applicant),
-    field: "c a minor whose natural or adopted parents are",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) && applicant.parentsAreOkay
-        ? fullName(applicant.mothersBirthName)
-        : "",
-    field: "Parent",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) && applicant.parentsAreOkay
-        ? fullName(applicant.fathersBirthName)
-        : "",
-    field: "and",
-  },
-  {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "3 The name change is for the following reason",
-  },
-
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.first ?? "",
-    field: "First",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.middle ?? "",
-    field: "Middle",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.last ?? "",
-    field: "Last",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
-    field: "First_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
-    field: "Middle_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
-    field: "Last_2",
-  },
-
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.first ?? "" : "",
-    field: "First_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.middle ?? "" : "",
-    field: "Middle_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.last ?? "" : "",
-    field: "Last_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
-    field: "First_6",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
-    field: "Middle_6",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
-    field: "Last_6",
-  },
-
-  {
-    check: (applicant) => applicant.sealBirthCertificate,
-    field:
-      "9 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the name of",
-  },
-  {
-    text: (applicant) =>
-      applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
-    field: "Name_2",
-  },
-  { text: () => new Date().toLocaleDateString(), field: "Date" },
-];
-
-/**
  * Petition to Change Name and Ex Parte Request for Nonpublication and
  * Confidential Record (Michigan form PC 51c.)
  * Updated 7/2023.
@@ -159,16 +46,25 @@ export const nameChangeMap: Formfill[] = [
 export const nameChangePrivateMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.legalName),
-    field: "In the matter of",
+    field: "Current first middle and last names type or print",
   },
   {
     text: (applicant) => fullContactInfo(applicant),
     field: "Petitioners name address and telephone no",
   },
-  { check: (applicant) => !isMinor(applicant), field: "b an adult" },
+  {
+    check: () => true,
+    field: "3 The name change is for",
+  },
+  { check: (applicant) => !isMinor(applicant), field: "b an adult only" },
   {
     check: (applicant) => isMinor(applicant),
-    field: "c a minor whose natural or adopted parents are",
+      field: "c a minor only",
+  },
+  {
+    check: (applicant) =>
+    isMinor(applicant) && applicant.parentsAreOkay,
+      field: "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
   },
   {
     text: (applicant) =>
@@ -182,13 +78,16 @@ export const nameChangePrivateMap: Formfill[] = [
       isMinor(applicant) && applicant.parentsAreOkay
         ? fullName(applicant.fathersBirthName)
         : "",
-    field: "and",
+      field: "Parent_2",
+  },
+  {
+    check: (applicant) => isMinor(applicant),
+      field: "5  As to a minor one or more of the following is the petitioner or consents to the guardianship Check all that apply",
   },
   {
     text: (applicant) => applicant.reasonForNameChange,
-    field: "3 The name change is for the following reason",
+      field: "#6 reason for name change",
   },
-
   {
     text: (applicant) =>
       isMinor(applicant) ? "" : applicant.legalName?.first ?? "",
@@ -219,7 +118,6 @@ export const nameChangePrivateMap: Formfill[] = [
       isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
     field: "Last_2",
   },
-
   {
     text: (applicant) =>
       isMinor(applicant) ? applicant.legalName?.first ?? "" : "",
@@ -250,18 +148,56 @@ export const nameChangePrivateMap: Formfill[] = [
       isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
     field: "Last_6",
   },
-
   {
     check: (applicant) => applicant.sealBirthCertificate,
     field:
-      "9 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the name of",
+      "11 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the names",
   },
   {
     text: (applicant) =>
       applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
-    field: "Name_2",
+      field: "Names_2",
   },
   { text: () => new Date().toLocaleDateString(), field: "Date" },
+  {
+    check: () => true, field: "1 Publication of notice",
+  },
+  {
+    check: (applicant) => !isMinor(applicant), field: "Item 1 checkbox me",
+  },
+  {
+    check: (applicant) => isMinor(applicant), field: "Endangered individual checkbox",
+  },
+  {
+    text: (applicant) =>
+        isMinor(applicant) ? fullName(applicant.legalName) : "",
+      field: "Endangered individual",
+  },
+  {
+    check: () => true, field: "discrimination",
+  },
+  {
+    check: () => true, field: "2 basis of fear checkbox",
+  },
+  {
+    check: (applicant) => !isMinor(applicant), field: "2 checkbox I",
+  },
+  {
+    check: (applicant) => isMinor(applicant), field: "Endangered individual checkbox2",
+  },
+  {
+    text: (applicant) =>
+        isMinor(applicant) ? fullName(applicant.legalName) : "",
+      field: "Endangered individual_2",
+  },
+  {
+    check: () => true, field: "b. checkbox seek to affirm gender identity",
+  },
+  {
+    text: (applicant) =>
+        isMinor(applicant) ? "" : fullName(applicant.legalName),
+      field: "Name type or print",
+  },
 ];
 
 /**
@@ -294,56 +230,6 @@ export const piiMap: Formfill[] = [
         separator: "/",
       }),
     field: "DOB",
-  },
-];
-
-/**
- * Publication of Notice of Hearing for Name Change (Michigan form PC 50.)
- * Updated 7/2023.
- * @type {Formfill[]}
- */
-export const noticeMap: Formfill[] = [
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "Current first middle and last names type or print",
-  },
-  { text: (applicant) => fullName(applicant.legalName), field: "Current name" },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "Proposed name",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(representativeName(applicant))
-        : fullName(applicant.legalName),
-    field: "Petitioners name",
-  },
-  { text: () => "1", field: "times in" },
-  { text: () => "1", field: "copies to" },
-  { text: (applicant) => applicant.residentCounty, field: "in" },
-  { text: () => "Petitioner", field: "undefined" },
-  { check: () => true, field: "Forward statement for publication charges to" },
-  { text: () => "Petitioner", field: "undefined_2" },
-  {
-    text: (applicant) => fullContactInfo(applicant, ", "),
-    loc: { x: 55, y: 943 },
-    font: { fontSize: 8 },
-  },
-];
-
-/**
- * Order Following Hearing Regarding Peition For Name Change PC 52.)
- * added 10/2023 for Saginaw County Only.
- * @type {Formfill[]}
- */
-export const followingMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(representativeName(applicant))
-        : fullName(applicant.legalName),
-    field: "Current first middle and last names type or print",
   },
 ];
 

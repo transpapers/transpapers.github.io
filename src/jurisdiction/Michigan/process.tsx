@@ -18,11 +18,8 @@
  */
 
 import {
-  nameChangeMap,
   nameChangePrivateMap,
-  followingMap,
   piiMap,
-  noticeMap,
   feeWaiverMap,
   mdosSexMap,
   miSexMap,
@@ -35,9 +32,7 @@ import MichiganEverythingElseGuide from "../../components/guides/Michigan/Everyt
 import MichiganFilingInitialFormsGuide from "../../components/guides/Michigan/FilingInitialForms";
 import MichiganM97aGuide from "../../components/guides/Michigan/M97a";
 import MichiganMC20Guide from "../../components/guides/Michigan/MC20";
-import MichiganPC50Guide from "../../components/guides/Michigan/PC50";
 import MichiganPC51Guide from "../../components/guides/Michigan/PC51";
-import MichiganPC52Guide from "../../components/guides/Michigan/PC52";
 import MichiganResourcesGuide from "../../components/guides/Michigan/Resources";
 import MichiganSecretaryOfStateGuide from "../../components/guides/Michigan/SecretaryOfState";
 
@@ -49,20 +44,11 @@ export const michiganNameChange: Process = {
   depends: [Target.GenderMarker],
   documents: [
     {
-      name: "Petition to Change Name",
-      id: "PC 51",
-      filename: "Michigan/pc51.pdf",
-      guide: MichiganPC51Guide,
-      map: nameChangeMap,
-      include: (applicant) => !applicant.doNotPublish,
-    },
-    {
       name: "Petition to Change Name and Ex Parte Request for Nonpublication and Confidential Record",
       id: "PC 51c",
       filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51Guide,
       map: nameChangePrivateMap,
-      include: (applicant) => applicant.doNotPublish,
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -70,40 +56,6 @@ export const michiganNameChange: Process = {
       filename: "Michigan/m97a.pdf",
       guide: MichiganM97aGuide,
       map: piiMap,
-    },
-    {
-      name: "Minor's Consent to Name Change",
-      id: "PC 51b",
-      filename: "Michigan/pc51b.pdf",
-      include: (applicant) =>
-        applicant.age !== undefined &&
-        applicant.age >= 14 &&
-        applicant.age < 18,
-    },
-    {
-      name: "Publication of Notice of Hearing Regarding Petition for Name Change",
-      id: "PC 50",
-      filename: "Michigan/pc50.pdf",
-      guide: MichiganPC50Guide,
-      map: noticeMap,
-      include: (applicant) =>
-        !(applicant.doNotPublish && !applicant.parentsAreOkay),
-    },
-    {
-      name: "Publication of Notice of Hearing Regarding Petition for Name Change (Noncustodial Parent)",
-      id: "PC 50c",
-      filename: "Michigan/pc50c.pdf",
-      guide: MichiganPC50Guide,
-      include: (applicant) =>
-        applicant.doNotPublish && !applicant.parentsAreOkay,
-    },
-    {
-      name: "Order Following Hearing Regarding Petition For Name Change",
-      id: "PC 52",
-      filename: "Michigan/pc52.pdf",
-      guide: MichiganPC52Guide,
-      map: followingMap,
-      include: (applicant) => applicant.residentCounty === "Saginaw",
     },
     {
       name: "Fee Waiver Request",
