@@ -83,13 +83,11 @@ export const fields: { [key: string]: Field } = {
     name: "birthCity",
     type: "string",
   },
-  /*
   birthdate: {
     title: 'Date of birth',
     name: 'birthdate',
     type: 'Date',
   },
-  */
   age: {
     title: "Age at time of filing",
     subtitle: "Fill only if you are less than 19 years old.",
