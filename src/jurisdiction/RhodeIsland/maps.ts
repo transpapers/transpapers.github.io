@@ -76,6 +76,10 @@ export const changeOfNameMap: Formfill[] = [
     field: "11",
   },
   {
+    text: (applicant) => applicant.email,
+    field: "15",
+  },
+  {
     text: (applicant) =>
       isEmptyName(applicant.birthName)
         ? fullName(applicant.legalName)
@@ -105,23 +109,39 @@ export const changeOfNameMap: Formfill[] = [
   },
   {
     check: (applicant) => isEmptyName!(applicant.birthName),
-    field: "Check Box1",
+    loc: { x: 886, y: 1312 },
   },
   {
     check: (applicant) => isEmptyName(applicant.birthName),
-    field: "Check Box2",
+    loc: { x: 981, y: 1312 },
   },
   {
     text: (applicant) => applicant.reasonForNameChange,
     field: "27",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName),
+    text: (applicant) => applicant.chosenName?.first ?? "",
+    field: "29",
+  },
+  {
+    text: (applicant) => applicant.chosenName?.middle ?? "",
     field: "30",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName),
+    text: (applicant) => applicant.chosenName?.last ?? "",
     field: "31",
+  },
+  {
+    text: (applicant) => applicant.chosenName?.first ?? "",
+    field: "32",
+  },
+  {
+    text: (applicant) => applicant.chosenName?.middle ?? "",
+    field: "33",
+  },
+  {
+    text: (applicant) => applicant.chosenName?.last ?? "",
+    field: "34",
   },
 ];
 
