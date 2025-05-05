@@ -30,13 +30,6 @@ function MichiganResourcesGuide() {
           </a>
         </li>
         <li>
-          The Social Security Administration’s policy on self-attestation of
-          gender:
-          <a href="https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/">
-            https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/
-          </a>
-        </li>
-        <li>
           <a href="https://grtransfoundation.org/update-program/">
             Grand Rapids Trans Foundation
           </a>

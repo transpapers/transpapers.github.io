@@ -23,21 +23,42 @@ function DS5504Guide() {
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
+
       <p>
-        This step should be started after you have updated your primary ID. Your
-        form is the DS 5504 which is a mail-in form. Pages 1-4 contain
+        Warning, do not attempt to update your gender marker on this form,
+        it will be rejected. Do not renew your passport if you have an updated
+        gender marker unless absolutely necessary as it will be reverted upon renewal.
+        There is an active court case to restore your abilty to update your marker
+        and we will update this message when a ruling is reached.
+      </p>
+
+      <p>
+        This step should be started after you have updated your primary ID. Pages 1-4 contain
         instructions and clarification, on page 5 at the top you will need to
         select which documents you want. Then fill out your social security
         number in section 5. If you have changed your name multiple times before
         then you will need to add them to section 9. Fill out section 10 using
         your passports information. For the photo we suggest going to a business
-        for the highest chance of success and stapling that to the form. If you
-        are 16 or older sign on the first line below the blue section otherwise
-        have your parent/guardian sign on the second line instead. Write in the
-        current date to the right of the signatures in the indicated section. On
-        page 6 complete sections 11 through 19 as they apply to you. For section
-        19 if you have no current travel plans write &ldquo;none&rdquo; in every
-        box.
+        for the highest chance of success and stapling that to the form.
+      </p>
+
+        {age && age < 18 ? (
+            <p>
+                {age && age < 16 ? (
+                    " A parent/guardian should sign on the second line below the picture section."
+                ) : (
+                    " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line."
+                )}
+            </p>
+        ) : (
+            " Sign the document on the first line below the picture section."
+        )}
+
+      <p>
+        Write in the current date to the right of the signatures in the indicated
+        section. On page 6 complete sections 11 through 19 as they apply to you.
+        For section 19 if you have no current travel plans write &ldquo;none&rdquo;
+        in every box.
       </p>
 
       <p>

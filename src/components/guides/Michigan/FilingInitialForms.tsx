@@ -22,18 +22,30 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
-  const { court, age, fingerprintLocations, publications } = person;
+  const { court, age } = person;
 
   return (
     <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>
       <p>
         Your filing location is {court?.address}. You may file by mail or in
-        person; in either case, include all the forms listed in Part 1, as well
-        as payment. If you are filing by mail, you must pay by check or money
-        order. If you are filing in person, we recommend that you call the court
-        at {court?.phone} to confirm their open hours and accepted payment
-        types.
+        person; in either case, include the Petition
+        (pc51c) the Addendum (m97a), the optional Fee Waiver (mc20), as well
+        as payment. Even if the fee waiver is granted you still need to provide
+        payment for at least one certified copy. No matter how you file we
+        recommend that you call the court at {court?.phone} or visit their
+        website at {court?.website} This is to confirm their accepted
+        payment types, Name Change Petition fee, and Certified Copy fee
+        as these vary by county and are updated frequently.
+      </p>
+
+      <p>
+       {age && age < 18 && (
+       <>
+        Whoever filled out the paperwork as your petitioner has to be the
+        one who files the paperwork at court if you are doing in-person filing.
+       </>
+       )}
       </p>
 
       {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
@@ -44,91 +56,34 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
           the forms.
         </strong>{" "}
         We recommend that you direct any questions you may have to the court’s
-        legal assistance center, a local LGBT organization, or an attorney. The
-        clerk will return a copy of the Petition to Change Name with a case
-        number.
+        legal assistance center, a local LGBT organization, or an attorney.
       </p>
 
       <p>
-        While you do these next steps, we recommend that you call the court
-        every few weeks until you receive your court hearing date to make sure
-        that there were no mistakes. Do not simply wait for a notice in the
-        mail.
+        Once the paperwork has been filed it will be several weeks before
+        you get a response. From this point you just need to wait. The vast
+        majority of cases will not even have a hearing you will simply recieve
+        your “Order Following Hearing On Petition To Change Name” and certified
+        copy in the mail. We call those documents the "Court Order". If you
+        recieved notice of a hearing instead read the next section, otherwise
+        skip it.
       </p>
 
-      {age && age >= 22 && (
+      <p>
+      {age && age < 18 ? (
         <>
-          <p>
-            The following location(s) are recommended for fingerprinting in your
-            county:
-          </p>
-          <ul>
-            {fingerprintLocations?.map(({ name, address, website }) => (
-              <li key={name}>
-                <span>{name}</span>
-                <br />
-                <span>{address}</span>
-                <br />
-                <a href={website}>{website}</a>
-              </li>
-            ))}
-          </ul>
-          <p>
-            If you cannot schedule an appointment online at the listed URL, you
-            will need to schedule by phone or email, using the information
-            listed on their website. We also recommend that you check their
-            accepted payment options.
-          </p>
-          <p>
-            At your appointment, you will probably be asked if you want an FBI
-            or state fingerprint card; either is acceptable. Do not use
-            live-scan fingerprinting services unless so instructed by the court.{" "}
-            <strong>Do not bend or fold your fingerprint card.</strong>
-          </p>
-          <p>After receiving your fingerprint card, mail it to:</p>
-          <p>
-            <span>Michigan State Police</span>
-            <br />
-            <span>CJIC</span>
-            <br />
-            <span>PO Box 30266, Lansing, MI 48909</span>
-          </p>
-          <p>
-            Enclose a copy of your Petition to Change Name and a check in the
-            amount of $43.25 made out to the State of Michigan.
-          </p>
+        If you want an update on your case your petitioner has to go to court
+        and show an ID, they will not confirm anything on the phone to protect
+        your privacy.
+        </>
+      ) : (
+        <>
+        If you want an update on your case you have to go to court and show ID,
+        they will not confirm anything over the phone to protect your privacy.
         </>
       )}
+      </p>
 
-      <p>
-        Upon filing the Petition to Change Name, you may be instructed by the
-        clerk to place a legal notice with a local newspaper. If you were not,
-        we recommend that you confirm that the court is handling this, as well
-        as in which paper they are publishing. If they are, wait for an invoice
-        from that paper. Remit payment by check at your earliest convenience. If
-        you do not pay at least seven days in advance of your hearing date, your
-        hearing may be canceled or postponed.
-      </p>
-      <p>
-        If you were instructed to place the notice yourself, the court-approved
-        newspapers in your county are as follows:
-      </p>
-      <ul>
-        {publications?.map(({ name, website, email }) => (
-          <li key={name}>
-            {name}, {website && <a href={website}>{website}</a>}{" "}
-            {email && <a href={email}>{email}</a>}
-          </li>
-        ))}
-      </ul>
-
-      <p>
-        At the provided link, contact the newspaper about placing a legal notice
-        for your name change hearing. Make sure the publication date is more
-        than seven days before your court date. After a few days, confirm with
-        the court that they have received the necessary paperwork from the
-        newspaper.
-      </p>
     </section>
   );
 }

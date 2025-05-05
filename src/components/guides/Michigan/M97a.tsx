@@ -25,7 +25,7 @@ function MichiganM97aGuide() {
       <h3>Addendum to Protected Personal Identifying Information (MI, M97a)</h3>
       <p>
         This form is meant to keep sensitive information (birth name, birth
-        date, etc.) out of the (public) court records. This form should already
+        date, etc.) out of the public court records. This form should already
         be complete.
       </p>
     </section>

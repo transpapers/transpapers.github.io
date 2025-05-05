@@ -25,17 +25,25 @@ function DS82Guide() {
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
+
       <p>
-        This step should be started after you have updated your primary ID. Your
-        form is the DS 82 which is a mail-in form. Pages 1-4 contain
+        Warning, do not attempt to update your gender marker on this form,
+        it will be rejected. Do not renew your passport if you have an updated
+        gender marker unless absolutely necessary as it will be reverted upon renewal.
+        There is an active court case to restore your abilty to update your marker
+        and we will update this message when a ruling is reached.
+      </p>
+
+      <p>
+        This step should be started after you have updated your primary ID. Pages 1-4 contain
         instructions and clarification, on page 5 at the top you will need to
         select which documents you want. Then fill out your social security
         number in section 5. If you have changed your name multiple times before
         then you will need to add them to section 9. Fill out section 10 using
-        your passports information. In section 11 write in the date of your name
+        your old passports information. In section 11 write in the date of your name
         change as it appears on your court order. For the photo we suggest going
         to a business for the highest chance of success and stapling that to the
-        form. Sign on the signature line below the blue section then write in
+        form. Sign on the signature line below the picture section then write in
         the current date to the right of the signature in the indicated section.
         On page 6 complete sections 12 through 20 as they apply to you. For
         section 20 if you have no current travel plans write &ldquo;none&rdquo;

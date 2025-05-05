@@ -28,7 +28,7 @@ function MichiganMC20Guide({ person }: { person: Person }) {
     <section key="Michigan-MC20">
       <h3>Fee Waiver Request (MI, MC20)</h3>
       <p>
-        This form is optional. It is a request to waive the filing fee assessed
+        This form is optional. It is a request to waive the filing fee charged
         upon submitting these documents to the court. It usually ranges from
         $175-200, depending on the county, and is the largest single fee in the
         process. Courts will typically not grant your waiver request unless you

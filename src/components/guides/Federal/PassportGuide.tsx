@@ -49,13 +49,9 @@ function PassportGuide() {
         <strong>{passportForm}</strong>.
         {isInPerson
           ? 'This form must be filed in-person. Filing locations near you are available at <a href="https://iafdb.travel.state.gov">https://iafdb.travel.state.gov</a>.'
-          : "This form should be mailed in."}
+          : "This form should be mailed in to the appropriate address listed at the bottom of page 1."}
       </p>
 
-      <p>
-        On page 5, indicate the documents for which you are submitting fees. On
-        page 6, complete items 11-21 as applicable.
-      </p>
     </section>
   );
 }
