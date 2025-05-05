@@ -362,7 +362,11 @@ export const ds82Map: Formfill[] = [
       loc: { page: 5, x: 520, y: 1148 },
   },
   { check: () => true, loc: { page: 5, x: 522, y: 1439 } },
-  /** Place name change location (city/state format) here */
+  {
+    text: (applicant) =>
+    `${applicant.court?.city} \ ${abbreviateJurisdiction(applicant.residentJurisdiction || "") || ""}`,
+    loc: { page: 5, x: 778, y: 1448 },
+  },
   {
     text: (applicant) =>
       `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,

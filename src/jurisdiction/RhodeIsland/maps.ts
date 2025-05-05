@@ -45,7 +45,6 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
-  /** Place "County of" data from counties.ts here (applicant.residentCounty is Town/City for RI.) */
   {
     text: (applicant) => applicant.residentCounty,
     field: "Combo Box 4",

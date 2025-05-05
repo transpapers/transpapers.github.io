@@ -49,6 +49,14 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "County",
   },
   {
+    text: (applicant) => applicant.court?.address,
+    field: "Court address",
+  },
+  {
+    text: (applicant) => applicant.court?.phone,
+    field: "Court telephone no",
+  },
+  {
     text: (applicant) => fullName(applicant.legalName),
     field: "Current first middle and last names type or print",
   },
@@ -210,6 +218,14 @@ export const nameChangePrivateMap: Formfill[] = [
  */
 export const piiMap: Formfill[] = [
   {
+    text: (applicant) => applicant.court?.address,
+    field: "Text6",
+  },
+  {
+    text: (applicant) => applicant.court?.phone,
+    field: "Text5",
+  },
+  {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "PlaintiffsPetitioners name",
   },
@@ -242,6 +258,14 @@ export const piiMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const feeWaiverMap: Formfill[] = [
+  {
+    text: (applicant) => applicant.court?.address,
+    field: "Text6",
+  },
+  {
+    text: (applicant) => applicant.court?.phone,
+    field: "Text5",
+  },
   {
     text: (applicant) => fullContactInfo(applicant),
     field: "PlaintiffPetitioners name address and telephone no",
