@@ -17,16 +17,16 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import useStore from '../store';
+import useStore from "../store";
 
-import { type Person } from '../types/person';
+import { type Person } from "../types/person";
 
-import { allJurisdictions } from '../jurisdiction/all';
+import { allJurisdictions } from "../jurisdiction/all";
 
 function Step1() {
   const { register, handleSubmit } = useForm();
@@ -37,7 +37,7 @@ function Step1() {
 
   const onSubmit = (data: Partial<Person>) => {
     updatePerson(data);
-    navigate('/step2');
+    navigate("/step2");
   };
 
   return (
@@ -51,12 +51,12 @@ function Step1() {
             <li key={jurisdiction.name}>
               <label>
                 <input
-                  {...register('residentJurisdiction', { required: true })}
+                  {...register("residentJurisdiction", { required: true })}
                   type="radio"
                   value={jurisdiction.name}
                   defaultChecked={jurisdiction.name === residentJurisdiction}
                 />
-                { jurisdiction.name }
+                {jurisdiction.name}
               </label>
             </li>
           ))}

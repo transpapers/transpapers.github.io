@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { type Jurisdiction } from '../types/jurisdiction';
+import { type Jurisdiction } from "../types/jurisdiction";
 
 import {
   michiganBirthRecord,
@@ -25,13 +25,13 @@ import {
   michiganNameChange,
   michiganPrimaryIdentification,
   michiganPostamble,
-} from './Michigan/process';
-import michiganCounties from './Michigan/counties';
+} from "./Michigan/process";
+import michiganCounties from "./Michigan/counties";
 
-import { passport, socialSecurity } from './Federal/process';
+import { passport, socialSecurity } from "./Federal/process";
 
 export const michigan: Jurisdiction = {
-  name: 'Michigan',
+  name: "Michigan",
   processes: [
     michiganBirthRecord,
     michiganGenderMarker,
@@ -43,11 +43,8 @@ export const michigan: Jurisdiction = {
 };
 
 export const federal: Jurisdiction = {
-  name: 'Federal',
-  processes: [
-    socialSecurity,
-    passport,
-  ],
+  name: "Federal",
+  processes: [socialSecurity, passport],
   isFederal: true,
 };
 

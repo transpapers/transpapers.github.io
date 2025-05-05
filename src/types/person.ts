@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Name, GenderMarker } from './types';
+import { Name, GenderMarker } from "./types";
 
-import { Court, FingerprintLocation, Publication } from './county';
+import { Court, FingerprintLocation, Publication } from "./locality";
 
 /**
  * Applicant's personal information.
@@ -112,6 +112,20 @@ export interface Person {
    * Applicant's self-identified gender.
    */
   gender: GenderMarker | undefined;
+
+  /**
+   * Whether applicant is changing legal name.
+   *
+   * @remarks To be filled from [...]
+   */
+  isChangingLegalName: boolean | undefined;
+
+  /**
+   * Whether applicant is changing legal sex.
+   *
+   * @remarks To be filled from [...]
+   */
+  isChangingLegalSex: boolean | undefined;
 
   /**
    * Whether to withhold publication of the newspaper notice.
@@ -212,17 +226,17 @@ export interface Person {
 
 export const blankData: Person = {
   legalName: {
-    first: '',
-    middle: '',
-    last: '',
-    suffix: '',
+    first: "",
+    middle: "",
+    last: "",
+    suffix: "",
   },
 
   chosenName: {
-    first: '',
-    middle: '',
-    last: '',
-    suffix: '',
+    first: "",
+    middle: "",
+    last: "",
+    suffix: "",
   },
 
   birthName: undefined,
@@ -240,23 +254,26 @@ export const blankData: Person = {
   assignedSex: undefined,
   gender: undefined,
 
+  isChangingLegalName: undefined,
+  isChangingLegalSex: undefined,
+
   doNotPublish: undefined,
   parentsAreOkay: undefined,
 
   mothersBirthName: {
-    first: '',
-    middle: '',
-    last: '',
-    suffix: '',
+    first: "",
+    middle: "",
+    last: "",
+    suffix: "",
   },
 
   mothersBirthdate: undefined,
 
   fathersBirthName: {
-    first: '',
-    middle: '',
-    last: '',
-    suffix: '',
+    first: "",
+    middle: "",
+    last: "",
+    suffix: "",
   },
 
   fathersBirthdate: undefined,
@@ -272,10 +289,10 @@ export const blankData: Person = {
   email: undefined,
 
   representativeName: {
-    first: '',
-    middle: '',
-    last: '',
-    suffix: '',
+    first: "",
+    middle: "",
+    last: "",
+    suffix: "",
   },
 
   passport: undefined,
@@ -291,77 +308,80 @@ export const blankData: Person = {
  */
 export const sampleData: Person = {
   legalName: {
-    first: 'Jane',
-    middle: 'Michelle',
-    last: 'Doe',
-    suffix: '',
+    first: "Jane",
+    middle: "Michelle",
+    last: "Doe",
+    suffix: "",
   },
   chosenName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: '',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "",
   },
 
   birthName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: '',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "",
   },
 
-  reasonForNameChange: 'Gender transition',
+  reasonForNameChange: "Gender transition",
   sealBirthCertificate: true,
-  birthCity: 'New York',
-  birthJurisdiction: 'New York',
+  birthCity: "New York",
+  birthJurisdiction: "New York",
 
-  birthdate: '2010-01-01',
+  birthdate: "2010-01-01",
 
   age: 13,
 
   assignedSex: GenderMarker.F,
   gender: GenderMarker.X,
 
+  isChangingLegalName: true,
+  isChangingLegalSex: true,
+
   mothersBirthName: {
-    first: 'Jane',
-    middle: 'Michelle',
-    last: 'Doe',
-    suffix: '',
+    first: "Jane",
+    middle: "Michelle",
+    last: "Doe",
+    suffix: "",
   },
 
   doNotPublish: false,
   parentsAreOkay: true,
 
-  mothersBirthdate: '1970-01-01',
+  mothersBirthdate: "1970-01-01",
   fathersBirthName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: '',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "",
   },
 
-  fathersBirthdate: '1970-01-01',
+  fathersBirthdate: "1970-01-01",
 
-  phone: '313-555-1234',
+  phone: "313-555-1234",
 
-  streetAddress: '20 Monroe Street NW',
+  streetAddress: "20 Monroe Street NW",
 
-  residentCity: 'Grand Rapids',
-  residentJurisdiction: 'Michigan',
-  residentCounty: 'Kent',
+  residentCity: "Grand Rapids",
+  residentJurisdiction: "Michigan",
+  residentCounty: "Kent",
 
-  zip: '49503',
+  zip: "49503",
 
-  email: 'jdoe@goodmail.com',
+  email: "jdoe@goodmail.com",
 
   representativeName: {
-    first: 'John',
-    middle: 'Michael',
-    last: 'Doe',
-    suffix: 'Sr.',
+    first: "John",
+    middle: "Michael",
+    last: "Doe",
+    suffix: "Sr.",
   },
 
-  passport: 'ds11',
+  passport: "ds11",
 
   court: undefined,
   publications: undefined,

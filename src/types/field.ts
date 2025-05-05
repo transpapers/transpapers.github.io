@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person } from './person';
+import { Person } from "./person";
 
 export interface Field {
   title: string | JSX.Element;

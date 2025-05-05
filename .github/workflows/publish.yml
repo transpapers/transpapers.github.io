@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     branches: # triggers on any push to master
-    - master
+      - master
 
 jobs:
   build-deploy:

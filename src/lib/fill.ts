@@ -17,18 +17,18 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
 import {
   PDFDocument,
   PDFTextField,
   PDFCheckBox,
   PDFRadioGroup,
-} from '@cantoo/pdf-lib';
+} from "@cantoo/pdf-lib";
 
-import { Person } from '../types/person';
-import { Process, Document } from '../types/process';
-import { Formfill } from '../types/formfill';
+import { Person } from "../types/person";
+import { Process, Document } from "../types/process";
+import { Formfill } from "../types/formfill";
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -46,26 +46,26 @@ export function fillForm(
   const pages = doc.getPages();
 
   fills.forEach((fill) => {
-    if ('field' in fill) {
+    if ("field" in fill) {
       const field = form.getField(fill.field);
-      if ('text' in fill && field instanceof PDFTextField) {
-        const text = (fill.text)(applicant);
+      if ("text" in fill && field instanceof PDFTextField) {
+        const text = fill.text(applicant);
 
-        if (typeof text === 'string') {
+        if (typeof text === "string") {
           // Disable maximum length.
           field.setMaxLength(undefined);
 
           field.setText(text);
         }
-      } else if ('check' in fill && field instanceof PDFCheckBox) {
+      } else if ("check" in fill && field instanceof PDFCheckBox) {
         const checked = fill.check(applicant);
         if (checked) {
           field.check();
         }
       } else if (
-        'select' in fill
-        && 'check' in fill
-        && field instanceof PDFRadioGroup
+        "select" in fill &&
+        "check" in fill &&
+        field instanceof PDFRadioGroup
       ) {
         const checked = fill.check(applicant);
         if (checked && fill.select !== undefined) {
@@ -77,31 +77,46 @@ export function fillForm(
 
       const page = pages[pageIndex];
 
-      const fontSize = fill.loc.fontSize || 12;
-
       // Adjust the pixel location for DPI.
       const { height } = page.getSize();
       const dpi = height / 11.0;
 
-      // NOTE this needs to be mentioned in the documentation.
       const referenceDpi = 100;
       const scalingFactor = dpi / referenceDpi;
 
       const x = fill.loc.x * scalingFactor;
+      let fontSize = 12;
+      if ("font" in fill) {
+        fontSize = fill.font?.fontSize ?? 12;
+      }
 
       // PDFlib uses a "Cartesian" coordinate system with 0 at the bottom left
       // rather than the usual top left.
       const y = height - fill.loc.y * scalingFactor - fontSize;
 
-      if ('text' in fill) {
-        const text = (fill.text)(applicant);
-        if (typeof text === 'string') {
-          page.drawText(text, { x, y, size: fontSize });
+      if ("text" in fill) {
+        const text = fill.text(applicant);
+        const pitch = fill.font?.pitch;
+
+        if (typeof text === "string") {
+          if (pitch === undefined) {
+            page.drawText(text, { x, y, size: fontSize });
+          } else {
+            let currentX = x;
+            text.split("").forEach((char) => {
+              page.drawText(char, {
+                x: currentX,
+                y,
+                size: fontSize,
+              });
+              currentX += pitch;
+            });
+          }
         }
-      } else if ('check' in fill) {
+      } else if ("check" in fill) {
         const checked = fill.check(applicant);
         if (checked) {
-          page.drawText('X', { x, y, size: fontSize });
+          page.drawText("X", { x, y });
         }
       }
     }
@@ -183,16 +198,18 @@ export async function compileDocuments(
 
   // Fill forms.
   const forms = await Promise.all(
-    formFilenamesAndMaps.map(async ([filename, map]) => fetch(filename)
-      .then((response) => response.arrayBuffer())
-      .then(PDFDocument.load)
-      .then((form) => {
-        if (map === undefined) {
-          return form;
-        }
+    formFilenamesAndMaps.map(async ([filename, map]) =>
+      fetch(filename)
+        .then((response) => response.arrayBuffer())
+        .then(PDFDocument.load)
+        .then((form) => {
+          if (map === undefined) {
+            return form;
+          }
 
-        return fillForm(form, map, applicant);
-      })),
+          return fillForm(form, map, applicant);
+        }),
+    ),
   );
 
   const allDocuments: PDFDocument[] = [...forms];

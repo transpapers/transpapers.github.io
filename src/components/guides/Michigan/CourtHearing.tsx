@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { type Person } from '../../../types/person';
+import { type Person } from "../../../types/person";
 
 function MichiganCourtHearingGuide({ person }: { person: Person }) {
   const { age } = person;
@@ -28,24 +28,14 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
     <section key="MI-CourtHearing">
       <p>
         On the day of your hearing, you
-        { age && (age < 18) && 'and your parent(s)' }
-        {' '}
-        should dress appropriately for a courtroom, even if the hearing
-        is virtual. The hearing may begin late, but it should only take a few
-        minutes once it starts.
-      </p>
-      <p>
-        Please note that your hearing is public, and it is possible for
-        others to attend, including objectors. If this is a concern for you,
-        consider an in-person hearing, and bring supportive friends.
+        {age && age < 18 && "and your parent(s)"} should dress appropriately for
+        a courtroom, even if the hearing is virtual. The hearing may begin late,
+        but it should only take a few minutes once it starts.
       </p>
       <p>
         You
-        { age && (age < 18) && 'r parent(s)' }
-        {' '}
-        will be sworn in and
-        questioned. The questions vary between courts, but you can expect
-        some of the following:
+        {age && age < 18 && "and/or your parent(s)"} will be sworn in and questioned. The
+        questions vary between courts, but you can expect some of the following:
       </p>
       <ul>
         <li>What is your current legal name?</li>
@@ -58,28 +48,26 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
         <li>Is there anything else you’d like the court to know?</li>
         <li>
           You may also be asked “Do you know of anyone who would oppose this
-          name change?” The authors of this guide are not lawyers, but our understanding is
-          that, having answered “no” to the “fraudulent reasons” question,
-          you can answer “no” to this one. In particular,
+          name change?” The authors of this guide are not lawyers, but our
+          understanding is that, having answered “no” to the “fraudulent
+          reasons” question, you can answer “no” to this one. In particular,
           <strong>
-            you
-            can safely disregard any “opposition” on purely transphobic
+            you can safely disregard any “opposition” on purely transphobic
             grounds.
-          </strong>
-          {' '}
-          (Compare the history of the phrase “speak now or
-          forever hold your peace.”)
+          </strong>{" "}
+          (Compare the history of the phrase “speak now or forever hold your
+          peace.”)
         </li>
       </ul>
       <p>
-        At this point the name change should be granted and the hearing
-        should end promptly. The document that you will need to get afterward is
-        called the “Order Following Hearing On Petition To Change Name,” but we
-        will call it the “court order”. You will probably be asked whether you
-        want to pick up your court order at the court or have it mailed. The
-        court should have the order ready for pickup within a few hours or the
-        next day. Mailing the order will take several days. Be sure to request a
-        certified copy of your court order.
+        At this point the name change should be granted and the hearing should
+        end promptly. The document that you will need to get afterward is called
+        the “Order Following Hearing On Petition To Change Name,” but we will
+        call it the “court order”. You will probably be asked whether you want
+        to pick up your court order at the court or have it mailed. The court
+        should have the order ready for pickup within a few hours or the next
+        day. Mailing the order will take several days. Be sure to request a
+        certified copy of your court order if you haven't already.
       </p>
       <p>
         Once you have the certified copy of the court order, you are ready to

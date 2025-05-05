@@ -17,14 +17,15 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { produce } from 'immer';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { produce } from "immer";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-import { blankData, type Person } from './types/person';
+import { blankData, type Person } from "./types/person";
+import { Target } from "./types/process";
 
-import { numericalAge } from './lib/util';
-import { getJurisdiction } from './types/jurisdiction';
+import { numericalAge } from "./lib/util";
+import { getJurisdiction } from "./types/jurisdiction";
 
 interface ApplicationState {
   person: Person;
@@ -32,7 +33,7 @@ interface ApplicationState {
 }
 
 interface Action {
-  updatePerson: (newData: Partial<ApplicationState['person']>) => void;
+  updatePerson: (newData: Partial<ApplicationState["person"]>) => void;
   updateProcessNames: (newProcessNames: string[]) => void;
   finalizeApplicant: () => void;
 }
@@ -45,61 +46,81 @@ const useStore = create<ApplicationState & Action>()(
       processNames: [],
 
       // Actions.
-      updatePerson: (newData) => set(produce((state: ApplicationState) => {
-        const dataToAssign = {};
+      updatePerson: (newData) =>
+        set(
+          produce((state: ApplicationState) => {
+            const dataToAssign = {};
 
-        Object.entries(newData).forEach(([key, value]) => {
-          const path = key.split(':');
+            Object.entries(newData).forEach(([key, value]) => {
+              const path = key.split(":");
 
-          const dirs = path.slice(0, -1);
-          const file = path.at(-1)!;
+              const dirs = path.slice(0, -1);
+              const file = path.at(-1)!;
 
-          let pointer: any = dataToAssign;
-          dirs.forEach((dirname) => {
-            if (!pointer.hasOwnProperty(dirname)) {
-              pointer[dirname] = {};
+              let pointer: any = dataToAssign;
+              dirs.forEach((dirname) => {
+                if (!pointer.hasOwnProperty(dirname)) {
+                  pointer[dirname] = {};
+                }
+
+                pointer = pointer[dirname];
+              });
+
+              pointer[file] = value;
+            });
+            Object.assign(state.person, dataToAssign);
+          }),
+        ),
+
+      updateProcessNames: (newProcessNames) =>
+        set(() => ({ processNames: newProcessNames })),
+
+      finalizeApplicant: () =>
+        set(
+          produce((state: ApplicationState) => {
+            /**
+             * Infer any extra values for the applicant as needed.
+             * Do any additional assignments here.
+             */
+            const { birthdate, age, residentJurisdiction, residentCounty } =
+              state.person;
+
+            const extraData: Partial<ApplicationState["person"]> = {};
+
+            if (birthdate && !age) {
+              extraData.age = numericalAge(birthdate);
             }
 
-            pointer = pointer[dirname];
-          });
+            const jurisdiction = residentJurisdiction ?? "";
+            const jurisdictionObj = getJurisdiction(jurisdiction);
 
-          pointer[file] = value;
-        });
-        Object.assign(state.person, dataToAssign);
-      })),
+            if (
+              jurisdictionObj !== undefined &&
+              jurisdictionObj.counties !== undefined
+            ) {
+              const { counties } = jurisdictionObj;
+              const county = counties[residentCounty ?? ""];
 
-      updateProcessNames: (newProcessNames) => set(() => ({ processNames: newProcessNames })),
+              Object.assign(extraData, county);
+            }
 
-      finalizeApplicant: () => set(produce((state: ApplicationState) => {
-        /**
-        * Infer any extra values for the applicant as needed.
-        * Do any additional assignments here.
-        */
-        const {
-          birthdate, age, residentJurisdiction, residentCounty,
-        } = state.person;
+            const isChangingLegalName = state.processNames.includes(
+              Target.NameChange,
+            );
+            const isChangingLegalSex = state.processNames.includes(
+              Target.GenderMarker,
+            );
+            Object.assign(extraData, {
+              isChangingLegalName,
+              isChangingLegalSex,
+            });
 
-        const extraData: Partial<ApplicationState['person']> = {};
-
-        // Do any additional Applicant assignment here.
-        if (birthdate && !age) {
-          extraData.age = numericalAge(birthdate);
-        }
-
-        const jurisdiction = residentJurisdiction ?? '';
-        const jurisdictionObj = getJurisdiction(jurisdiction);
-
-        if (jurisdictionObj !== undefined && jurisdictionObj.counties !== undefined) {
-          const { counties } = jurisdictionObj;
-          const county = counties[residentCounty ?? ''];
-
-          Object.assign(extraData, county);
-        }
-        Object.assign(state.person, extraData);
-      })),
+            Object.assign(state.person, extraData);
+          }),
+        ),
     }),
     {
-      name: 'transpapers-storage',
+      name: "transpapers-storage",
     },
   ),
 );

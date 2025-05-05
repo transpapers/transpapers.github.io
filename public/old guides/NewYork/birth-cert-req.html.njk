@@ -1,0 +1,20 @@
+<p>
+In order to file you will need proof of birth.
+
+{% if birthJurisdiction == 'New York' %}
+    You can get a copy of your birth certificate <a
+href="online">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a> 
+no matter where in New York state you were born. There is 
+an in-person option if you were born in one of the five 
+NYC boroughs, you can set up an appointment at this <a
+href="link">https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/</a>. 
+They accept credit/debit cards, checks, or money orders. 
+No Cash.
+{% else %}
+    You can get a copy of your birth certificate <a
+href="online">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a>  
+if you were born in the US. If you were born in another 
+country you will need to contact your home country's 
+records department to get proof of birth.
+{% endif %}
+</p>

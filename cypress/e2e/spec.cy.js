@@ -1,52 +1,50 @@
 const someone = {
   legalName: {
-    first: 'Vitia',
-    middle: 'Leonardo',
-    last: 'Top' },
- chosenName:
-{ first: 'Zachariah',
- middle: 'Sibylla',
- last: 'Critcher' },
- reasonForNameChange: 'Duis bibendum. Morbi non quam nec dui luctus rutrum.',
- sealBirthCertificate: true,
- birthCity: 'Grand Rapids',
- birthJurisdiction: 'Michigan',
- birthdate: '1992-09-14',
- age: null,
- assignedSex: 'M',
- gender: 'X',
- doNotPublish: true,
- parentsAreOkay: true,
- mothersName: {
-   first: 'Mead',
-   middle: 'Emlynn',
-   last: 'Zealy'
- },
- mothersBirthdate: '1999-01-28',
- fathersName: {
-   first: 'Scottie',
-   middle: 'Anatole',
-   last: 'Tugwell'
- },
- fathersBirthdate: null,
- phone: '(407) 6822846',
- streetAddress: '3790 Fulton Street',
- city: 'Detroit',
- residentJurisdiction: 'Michigan',
- residentCounty: 'Allegan',
- zip: '32118',
- email: 'atouret0@biblegateway.com',
- representativeName: {
-   first: 'Timmy',
-   middle: 'Fergus',
-   last: 'Touret'
- },
+    first: "Vitia",
+    middle: "Leonardo",
+    last: "Top",
+  },
+  chosenName: { first: "Zachariah", middle: "Sibylla", last: "Critcher" },
+  reasonForNameChange: "Duis bibendum. Morbi non quam nec dui luctus rutrum.",
+  sealBirthCertificate: true,
+  birthCity: "Grand Rapids",
+  birthJurisdiction: "Michigan",
+  birthdate: "1992-09-14",
+  age: null,
+  assignedSex: "M",
+  gender: "X",
+  doNotPublish: true,
+  parentsAreOkay: true,
+  mothersName: {
+    first: "Mead",
+    middle: "Emlynn",
+    last: "Zealy",
+  },
+  mothersBirthdate: "1999-01-28",
+  fathersName: {
+    first: "Scottie",
+    middle: "Anatole",
+    last: "Tugwell",
+  },
+  fathersBirthdate: null,
+  phone: "(407) 6822846",
+  streetAddress: "3790 Fulton Street",
+  city: "Detroit",
+  residentJurisdiction: "Michigan",
+  residentCounty: "Allegan",
+  zip: "32118",
+  email: "atouret0@biblegateway.com",
+  representativeName: {
+    first: "Timmy",
+    middle: "Fergus",
+    last: "Touret",
+  },
 };
 
-describe('template spec', () => {
-  it('passes', () => {
+describe("template spec", () => {
+  it("passes", () => {
     // Visit Transpapers.
-    cy.visit('localhost:5173');
+    cy.visit("localhost:5173");
 
     // Click on "Ready to get started?".
     cy.document().find('input[type="submit"]').click();
@@ -55,7 +53,9 @@ describe('template spec', () => {
     const { residentJurisdiction } = someone;
 
     cy.document()
-      .find(`input[name="residentJurisdiction"][value="${residentJurisdiction}"]`)
+      .find(
+        `input[name="residentJurisdiction"][value="${residentJurisdiction}"]`,
+      )
       .click();
 
     cy.document().find('input[type="submit"]').click();
@@ -78,13 +78,10 @@ describe('template spec', () => {
 
     cy.document().find('input[type="submit"]').click();
 
-
     // STEP 4: Birthdate.
     const { birthdate } = someone;
 
-    cy.document()
-      .find(`input[name="birthdate"]`)
-      .type(birthdate);
+    cy.document().find(`input[name="birthdate"]`).type(birthdate);
 
     cy.document().find('input[type="submit"]').click();
 
@@ -96,9 +93,11 @@ describe('template spec', () => {
 
     // Normal inputs.
     cy.document()
-      .find('input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])')
+      .find(
+        'input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])',
+      )
       .each((input) => {
-        const path = input.attr('name').split(":");
+        const path = input.attr("name").split(":");
         const dirs = path.slice(0, -1);
         const name = path.at(-1);
 
@@ -112,15 +111,15 @@ describe('template spec', () => {
 
         const value = pointer[name];
         if (value) {
-            cy.get(input).type(value);
+          cy.get(input).type(value);
         }
       });
 
     // And <select>.
     cy.document()
-      .find('select')
+      .find("select")
       .each((select) => {
-        const path = select.attr('name').split(":");
+        const path = select.attr("name").split(":");
         const dirs = path.slice(0, -1);
         const name = path.at(-1);
 
@@ -134,7 +133,7 @@ describe('template spec', () => {
 
         const value = pointer[name];
         if (value) {
-            cy.get(select).select(value);
+          cy.get(select).select(value);
         }
       });
 
@@ -142,7 +141,7 @@ describe('template spec', () => {
     cy.document()
       .find('input[type="radio"]')
       .each((radio) => {
-        const path = radio.attr('name').split(":");
+        const path = radio.attr("name").split(":");
         const dirs = path.slice(0, -1);
         const name = path.at(-1);
 
@@ -164,7 +163,7 @@ describe('template spec', () => {
     cy.document()
       .find('input[type="checkbox"]')
       .each((checkbox) => {
-        const path = checkbox.attr('name').split(":");
+        const path = checkbox.attr("name").split(":");
         const dirs = path.slice(0, -1);
         const name = path.at(-1);
 
@@ -183,5 +182,5 @@ describe('template spec', () => {
       });
 
     cy.document().find('input[type="submit"]').click();
-  })
-})
+  });
+});

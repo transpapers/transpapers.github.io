@@ -17,20 +17,18 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { Field } from '../types/field';
-import { getJurisdiction } from '../types/jurisdiction';
+import { Field } from "../types/field";
+import { getJurisdiction } from "../types/jurisdiction";
 
 function GenericField(field: Field, innards: JSX.Element): JSX.Element {
-  const {
-    name, title, subtitle, required,
-  } = field;
+  const { name, title, subtitle, required } = field;
   return (
     <label key={name} htmlFor={name}>
       <div key={`${name}-meta`}>
         <span className="title">{title}</span>
-        {subtitle ? <span className="subtitle">{subtitle}</span> : ''}
+        {subtitle ? <span className="subtitle">{subtitle}</span> : ""}
         {required && <span className="required">*</span>}
       </div>
       {innards}
@@ -48,38 +46,42 @@ interface CountyFieldConstructorProps {
   register: (name: string) => Object;
 }
 
-export function StringField({ field, register }: FieldConstructorProps): JSX.Element {
-  const innards = (
-    <input
-      type="text"
-      {...register(field.name)}
-    />
-  );
+export function StringField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
+  const innards = <input type="text" {...register(field.name)} />;
 
   return GenericField(field, innards);
 }
 
-export function CheckboxField({ field, register }: FieldConstructorProps): JSX.Element {
+export function CheckboxField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   return (
     <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
         type="checkbox"
-        defaultChecked={field.hasOwnProperty('default') && field.default}
+        defaultChecked={field.hasOwnProperty("default") && field.default}
         {...register(field.name)}
       />
       <div>
         <span className="title">{field.title}</span>
-        {field.hasOwnProperty('subtitle') ? (
+        {field.hasOwnProperty("subtitle") ? (
           <span className="subtitle">{field.subtitle}</span>
         ) : (
-          ''
+          ""
         )}
       </div>
     </label>
   );
 }
 
-export function OptionField({ field, register }: FieldConstructorProps): JSX.Element {
+export function OptionField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   const options = field.options || {};
   return (
     <fieldset>
@@ -87,11 +89,7 @@ export function OptionField({ field, register }: FieldConstructorProps): JSX.Ele
 
       {Object.entries(options).map(([key, value]) => (
         <label key={`${field.name}:${key}`}>
-          <input
-            type="radio"
-            {...register(field.name)}
-            value={key}
-          />
+          <input type="radio" {...register(field.name)} value={key} />
           {value}
         </label>
       ))}
@@ -99,7 +97,10 @@ export function OptionField({ field, register }: FieldConstructorProps): JSX.Ele
   );
 }
 
-export function SelectField({ field, register }: FieldConstructorProps): JSX.Element {
+export function SelectField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   const options = field.options || {};
   const innards = (
     <select {...register(field.name)}>
@@ -117,9 +118,12 @@ export function SelectField({ field, register }: FieldConstructorProps): JSX.Ele
   return GenericField(field, innards);
 }
 
-export function NameField({ field, register }: FieldConstructorProps): JSX.Element {
+export function NameField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   // FIXME Do this automatically, Sasha, you slut.
-  const keys = ['first', 'middle', 'last', 'suffix'];
+  const keys = ["first", "middle", "last", "suffix"];
   const innards = (
     <div className="name" key={`${field.name}-field`}>
       {keys.map((key) => (
@@ -145,11 +149,14 @@ export function NameField({ field, register }: FieldConstructorProps): JSX.Eleme
   return GenericField(field, innards);
 }
 
-export function NumberField({ field, register }: FieldConstructorProps): JSX.Element {
+export function NumberField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
       type="number"
-      defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
       {...register(field.name)}
     />
   );
@@ -157,11 +164,14 @@ export function NumberField({ field, register }: FieldConstructorProps): JSX.Ele
   return GenericField(field, innards);
 }
 
-export function EmailField({ field, register }: FieldConstructorProps): JSX.Element {
+export function EmailField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
       type="email"
-      defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
       {...register(field.name)}
     />
   );
@@ -169,11 +179,14 @@ export function EmailField({ field, register }: FieldConstructorProps): JSX.Elem
   return GenericField(field, innards);
 }
 
-export function DateField({ field, register }: FieldConstructorProps): JSX.Element {
+export function DateField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
       type="date"
-      defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
       {...register(field.name)}
     />
   );
@@ -187,30 +200,33 @@ export function TelField({ field }: FieldConstructorProps): JSX.Element {
       id={field.name}
       name={field.name}
       type="tel"
-      defaultValue={field.hasOwnProperty('default') ? field.default : ''}
+      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
     />
   );
 
   return GenericField(field, innards);
 }
 
-export function CountyField({ jurisdiction, register }: CountyFieldConstructorProps) {
+export function CountyField({
+  jurisdiction,
+  register,
+}: CountyFieldConstructorProps) {
   const jurisdictionObj = getJurisdiction(jurisdiction);
 
   if (!jurisdictionObj) {
-    return '';
+    return "";
   }
 
   const { counties } = jurisdictionObj;
   if (!counties) {
-    return '';
+    return "";
   }
 
   // TODO Fix this??
   const field: Field = {
-    name: 'county',
-    title: 'County',
-    type: 'select',
+    name: "county",
+    title: "County",
+    type: "select",
     options: Object.fromEntries(Object.keys(counties).map((key) => [key, key])),
     required: true,
   };

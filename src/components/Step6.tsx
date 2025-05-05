@@ -17,19 +17,19 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import useStore from '../store';
+import useStore from "../store";
 
-import { fields, renderField } from './fields';
+import { fields, renderField } from "./fields";
 
-import { neededFieldNames } from '../lib/shakeTree';
+import { neededFieldNames } from "../lib/shakeTree";
 
-import { getJurisdiction } from '../types/jurisdiction';
-import { type Person } from '../types/person';
+import { getJurisdiction } from "../types/jurisdiction";
+import { type Person } from "../types/person";
 
 function Step6() {
   const { register, handleSubmit } = useForm();
@@ -42,17 +42,25 @@ function Step6() {
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
-  const residentJurisdictionProcesses = getJurisdiction(residentJurisdiction)?.processes || [];
-  const residentProcesses = residentJurisdictionProcesses
-    .filter((proc) => !proc.isBirth && !proc.isJustGuide);
+  const residentJurisdictionProcesses =
+    getJurisdiction(residentJurisdiction)?.processes || [];
+  const residentProcesses = residentJurisdictionProcesses.filter(
+    (proc) => !proc.isBirth && !proc.isJustGuide,
+  );
 
-  const birthJurisdictionProcesses = getJurisdiction(birthJurisdiction)?.processes || [];
-  const birthProcesses = birthJurisdictionProcesses
-    .filter((proc) => proc.isBirth && !proc.isJustGuide);
+  const birthJurisdictionProcesses =
+    getJurisdiction(birthJurisdiction)?.processes || [];
+  const birthProcesses = birthJurisdictionProcesses.filter(
+    (proc) => proc.isBirth && !proc.isJustGuide,
+  );
 
-  const federalProcesses = getJurisdiction('Federal')?.processes || [];
+  const federalProcesses = getJurisdiction("Federal")?.processes || [];
 
-  const allProcesses = [...residentProcesses, ...birthProcesses, ...federalProcesses];
+  const allProcesses = [
+    ...residentProcesses,
+    ...birthProcesses,
+    ...federalProcesses,
+  ];
 
   const processes = processNames
     .map((procName) => allProcesses.find((proc) => proc.target === procName))
@@ -65,13 +73,13 @@ function Step6() {
     updatePerson(data);
     finalizeApplicant();
 
-    navigate('/guide');
+    navigate("/guide");
   };
 
   // We do it this way to maintain ordering.
   const fieldsToShow = Object.entries(fields)
     .filter(([fieldName]) => fieldNamesToShow.includes(fieldName))
-    .map(([,field]) => field)
+    .map(([, field]) => field)
     .filter((field) => !field.include || field.include(applicant));
 
   return (

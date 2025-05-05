@@ -1,0 +1,45 @@
+<p>
+{% if birthJurisdiction == 'Rhode Island' %}
+    {% if age < 18 %}
+            The third form that you may need is the Application for a Certified Copy 
+        of a Birth Record. If you don’t have a recent certified copy of your birth 
+        certificate to file with your petition this form requests one. The alternative 
+        to using this form is requesting it online through <a
+        href="VitalChek">https://www.vitalchek.com/v/vital-records/rhode-island</a> instead. We 
+        included two copies of this form as another is needed later to update your birth 
+        certificate in section 8. The one you need for now has “Name Change” listed 
+        in section 3. For this form you will need to fill out the hospital of your birth 
+        in section 1 then sign in section 5 in your current legal name.
+    {% else %}
+            The third form that your parent/guardian may need is the Application for a 
+        Certified Copy of a Birth Record. If they don’t have a recent certified copy of 
+        your birth certificate to file with your petition this form requests one. The 
+        alternative to using this form is requesting it online through <a
+        href="VitalChek">https://www.vitalchek.com/v/vital-records/rhode-island</a> instead. 
+        We included two copies of this form as another is needed later to update your birth 
+        certificate in section 8. The one you need for now has “Name Change” listed 
+        in section 3. For this form your parent/guardian will need to fill out the 
+        hospital of your birth in section 1. Your parent/guardian needs to check the 
+        applicable box in section 2 and sign in section 5 for you.
+    {% endif %}
+{% else %}
+    {% if age < 18 % }
+            You will need to contact the Vital Records department of your birth state/territory 
+        to request a copy of your birth certificate if you do not have one already. You 
+        can also order one online through <a
+        href="VitalChek">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a>. If you 
+        were born in another country you will need to contact your home country's 
+        records department to get proof of birth. Some courts may require a certified copy of 
+        your birth certificate that is less than 6 months old, you can call ahead to be sure.
+    {% else %}
+            Your parent/guradian will need to contact the Vital Records department of 
+        your home state/territory to request a copy of your birth certificate if they do 
+        not have one already. They can also order one online through <a
+        href="VitalChek">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a>. 
+        If you were born in another country they will need to contact your home country's 
+        records department to get proof of birth. Some courts may require a certified 
+        copy of your birth certificate that is less than 6 months old, you can call 
+        ahead to be sure.
+    {% endif %}
+{% endif %}
+</p>

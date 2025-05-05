@@ -17,13 +17,13 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { configureAxe } from 'vitest-axe';
+import { configureAxe } from "vitest-axe";
 
 const axe = configureAxe({
   globalOptions: {
     checks: [
       {
-        id: 'color-contrast',
+        id: "color-contrast",
         enabled: false,
       },
     ],

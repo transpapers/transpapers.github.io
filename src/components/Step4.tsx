@@ -17,15 +17,15 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import useStore from '../store';
-import { type Person } from '../types/person';
+import useStore from "../store";
+import { type Person } from "../types/person";
 
-import { isMinor } from '../lib/util';
+import { isMinor } from "../lib/util";
 
 function Step4() {
   const { register, handleSubmit } = useForm();
@@ -37,9 +37,9 @@ function Step4() {
     updatePerson(data);
 
     if (isMinor(data)) {
-      navigate('/step4b');
+      navigate("/step4b");
     } else {
-      navigate('/step5');
+      navigate("/step5");
     }
   };
 
@@ -47,9 +47,8 @@ function Step4() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>When were you born?</h2>
       <label>
-        My birthdate is
-        {' '}
-        <input {...register('birthdate', { required: true })} type="date" />
+        My birthdate is{" "}
+        <input {...register("birthdate", { required: true })} type="date" />
       </label>
       <input type="submit" value="Next" />
     </form>

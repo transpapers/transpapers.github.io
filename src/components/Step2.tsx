@@ -17,43 +17,39 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import useStore from '../store';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import useStore from "../store";
 
-import { getJurisdiction } from '../types/jurisdiction';
-import { type Person } from '../types/person';
+import { getJurisdiction } from "../types/jurisdiction";
+import { type Person } from "../types/person";
 
 function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const updatePerson = useStore((state) => state.updatePerson);
-  const { residentJurisdiction, residentCounty } = useStore((state) => state.person);
+  const { residentJurisdiction, residentCounty } = useStore(
+    (state) => state.person,
+  );
 
   const onSubmit = (data: Partial<Person>) => {
     updatePerson(data);
-    navigate('/step3');
+    navigate("/step3");
   };
 
   const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>
-        What
-        {' '}
-        {residentJurisdiction}
-        {' '}
-        county do you live in?
-      </h2>
+      <h2>What {residentJurisdiction} county do you live in?</h2>
       <ul className="wrap">
         {Object.keys(counties).map((countyName) => (
           <li key={countyName}>
             <label>
               <input
-                {...register('residentCounty', { required: true })}
+                {...register("residentCounty", { required: true })}
                 type="radio"
                 value={countyName}
                 defaultChecked={countyName === residentCounty}
