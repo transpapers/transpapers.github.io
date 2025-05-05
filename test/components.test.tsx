@@ -38,7 +38,6 @@ import MichiganEverythingElseGuide from "../src/components/guides/Michigan/Every
 import MichiganFilingInitialFormsGuide from "../src/components/guides/Michigan/FilingInitialForms";
 import MichiganM97aGuide from "../src/components/guides/Michigan/M97a";
 import MichiganMC20Guide from "../src/components/guides/Michigan/MC20";
-import MichiganPC50Guide from "../src/components/guides/Michigan/PC50";
 import MichiganPC51Guide from "../src/components/guides/Michigan/PC51";
 import MichiganPC52Guide from "../src/components/guides/Michigan/PC52";
 import MichiganResourcesGuide from "../src/components/guides/Michigan/Resources";
@@ -82,10 +81,6 @@ const michiganGuideComponents = [
   {
     name: "MichiganMC20Guide",
     component: <MichiganMC20Guide person={sampleData} />,
-  },
-  {
-    name: "MichiganPC50Guide",
-    component: <MichiganPC50Guide person={sampleData} />,
   },
   {
     name: "MichiganPC51Guide",
