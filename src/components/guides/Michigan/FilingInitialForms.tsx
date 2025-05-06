@@ -34,7 +34,7 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         as payment. Even if the fee waiver is granted you still need to provide
         payment for at least one certified copy. No matter how you file we
         recommend that you call the court at {court?.phone} or visit their
-        website at this <a href="link"> {court?.website} </a>. This is to
+        website here {court?.website}. This is to
         confirm their accepted payment types, Name Change Petition fee,
         and Certified Copy fee as these vary by county and are updated frequently.
       </p>
