@@ -110,14 +110,14 @@ export const fields: { [key: string]: Field } = {
   },
     /* We need an update on this doNotPublish variable as it no longer applies to MI but might in other states. */
     /* We Should also add a criminal history/record checkbox and make that a variable to section parts of the guide for clarity. */
-  /* doNotPublish: {
+  doNotPublish: {
     title:
       "I have good cause not to publish notice of my name change proceeding.",
     subtitle:
       "such as a known stalker or another such credible, specific threat",
     name: "doNotPublish",
     type: "boolean",
-  }, */
+  },
   parentsAreOkay: {
     title: "My parents are both alive and not divorced.",
     name: "parentsAreOkay",

@@ -42,7 +42,6 @@ describe("shakeTree()", () => {
       "reasonForNameChange",
       "chosenName",
       "sealBirthCertificate",
-      "doNotPublish",
       "residentCounty",
       "age",
     ];
