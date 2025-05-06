@@ -28,10 +28,10 @@ function SocialSecurityGuide({ person }: { person: Person }) {
 
   return (
     <section key="Federal-SocialSecurity">
-      <h3>Updating Your Social Security Card</h3>
+      <h3>Updating Your Social Security Info</h3>
 
       <p>
-        Warning, do not attempt to update your gender marker on this form,
+        <strong>Warning</strong>, do not attempt to update your gender marker on this form,
         it will be rejected. If you changed your marker before January 31st 2025
         and are coming back to change your name you should be safe to do so.
       </p>
@@ -78,9 +78,9 @@ function SocialSecurityGuide({ person }: { person: Person }) {
         information. They will request the Social Security form, ID documents,
         and court order. They should then approve the name change and give you a
         receipt, which you should check for accuracy and keep for your records.
-        This receipt is sufficient to update your primary identification with the
-        Secretary of State as early as the next business day; you do not need to
-        wait for the new Social Security card in the mail.
+        This receipt is sufficient to update your Drivers License or State ID as
+        early as the next business day; you do <strong>not</strong> need to wait
+        for the new Social Security card in the mail.
       </p>
     </section>
   );

@@ -27,7 +27,7 @@ function DS82Guide() {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        Warning, do not attempt to update your gender marker on this form,
+        <strong>Warning</strong>, do not attempt to update your gender marker on this form,
         it will be rejected. Do not renew your passport if you have an updated
         gender marker unless absolutely necessary as it will be reverted upon renewal.
         There is an active court case to restore your abilty to update your marker

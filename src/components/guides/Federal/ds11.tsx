@@ -29,7 +29,7 @@ function DS11Guide({ person }: { person: Person }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        Warning, do not attempt to update your gender marker on this form unless
+        <strong>Warning</strong>, do not attempt to update your gender marker on this form unless
         you meet these conditions. You need an updated social security gender marker
         from before January 31st 2025, an updated drivers license or state ID,
         and an updated birth certificate that does not have your original sex at birth on it.

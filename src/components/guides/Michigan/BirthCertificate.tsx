@@ -45,7 +45,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
           : age && age < 18
             ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your old name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
             : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name."}{" "}
-        If at any point you have undergone a name change, such as part of an
+        If at any point in the past you have undergone a different name change, such as part of an
         adoption, you will need to fill out the &ldquo;Other Names Used:&rdquo;
         section on the{" "}
         <strong>
