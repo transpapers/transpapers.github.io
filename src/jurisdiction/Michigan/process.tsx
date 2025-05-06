@@ -46,7 +46,7 @@ export const michiganNameChange: Process = {
     {
       name: "Petition to Change Name and Ex Parte Request for Nonpublication and Confidential Record",
       id: "PC 51c",
-      filename: "../public/forms/Michigan/pc51c.pdf",
+      filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51Guide,
       map: nameChangePrivateMap,
     },
