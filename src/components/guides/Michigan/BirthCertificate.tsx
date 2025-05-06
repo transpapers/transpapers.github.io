@@ -26,6 +26,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
 
   return (
     <section key="Michigan-BirthCertificate">
+      <h3>Updating your Birth Certificate (MI)</h3>
       <p>
         This process is done by mail only, so you will need a large envelope in
         which to send the paperwork. You will need to complete the{" "}

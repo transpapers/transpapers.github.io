@@ -22,12 +22,13 @@ import * as React from "react";
 function MichiganSecretaryOfStateGuide() {
   return (
     <section key="Michigan-SecretaryOfState">
+      <h3>Updating your Primary ID (MI)</h3>
       <p>
         This section covers the process of updating your primary identification
         (driver’s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, proceed to the next section. You will
         need to schedule an in-person appointment at your local Secretary of
-        State office, which can be done at
+        State office, which can be done here 
         <a href="https://dsvsesvc.sos.state.mi.us/TAP/_/">
           https://dsvsesvc.sos.state.mi.us/TAP/_/
         </a>
@@ -37,7 +38,7 @@ function MichiganSecretaryOfStateGuide() {
       <p>
         If you already have a driver’s license or state ID bring it to the appointment
         as well as the <strong>Michigan Secretary of State Sex Designation</strong> form.
-        For that form if you have a drivers license add the license number in section A.
+        For that form, if you have a drivers license, add the license number in section A.
         If not, bring the forms of identification you used for Social Security. Arrive
         a few minutes early and check in at the kiosk.
       </p>

@@ -26,6 +26,7 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
 
   return (
     <section key="MI-CourtHearing">
+      <h3>Court Hearing (MI)</h3>
       <p>
         On the day of your hearing, you
         {age && age < 18 && "and your parent(s)"} should dress appropriately for

@@ -32,11 +32,11 @@ function MichiganPC51Guide({ person }: { person: Person }) {
           This form will keep
           the process confidential and make sure that even if there is a hearing
           it will be private with no publication of your information. You do need to
-          have lived in {residentCounty} for at least a year to file this
+          have lived in {residentCounty} county for at least a year to file this
           form though.
         </p>
 
-      If necessary, complete <strong>item 1</strong> (concerning active court
+      If necessary complete <strong>item 1</strong> (concerning active court
       cases), <strong>item 8</strong>, and <strong>item 9</strong> (concerning criminal record.)
 
       {age && age < 18 ? (

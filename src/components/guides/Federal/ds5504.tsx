@@ -36,7 +36,8 @@ function DS5504Guide({ person }: { person: Person }) {
       </p>
 
       <p>
-        This step should be started after you have updated your primary ID. Pages 1-4 contain
+        This step should be started after you have updated your primary ID.
+        Pages 1-4 of your passport application (DS-5504) contain
         instructions and clarification, on page 5 at the top you will need to
         select which documents you want. Then fill out your social security
         number in section 5. If you have changed your name multiple times before
