@@ -19,7 +19,10 @@
 
 import * as React from "react";
 
-function DS5504Guide() {
+import { type Person } from "../../../types/person";
+
+function DS5504Guide({ person }: { person: Person }) {
+  const { age } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
