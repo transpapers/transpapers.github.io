@@ -993,7 +993,7 @@ const michiganCounties: { [key: string]: MichiganCounty } = {
       circuit: "17th",
       phone: "(616) 632-5440",
       website:
-        "https://www.accesskent.com/Courts/Probate/pdfs/Name_Change_Instructions.pdf",
+        "https://www.kentcountymi.gov/1102/Name-Changes",
       specificCourtInfo:
         "The courts front entrance is on the southwest side of the building, closer to the river. Once you get through the metal detector you can take any elevator to the second floor. On that floor you then turn and walk towards the large window then go down the hallway left from there. The Probate court counter, which you want, is the second counter further along the hall. They accept cash, checks, credit cards, cashiers checks, or money orders.",
     },
