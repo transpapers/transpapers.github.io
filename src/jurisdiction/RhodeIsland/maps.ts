@@ -151,11 +151,11 @@ export const changeOfNameMap: Formfill[] = [
 export const bciMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 355, y: 555 },
+    loc: { x: 347, y: 557 },
   },
   {
     text: (applicant) => fullName(applicant.birthName),
-    loc: { x: 465, y: 670 },
+    loc: { x: 458, y: 672 },
   },
   {
     text: (applicant) =>
@@ -163,13 +163,13 @@ export const bciMap: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 365, y: 748 },
+    loc: { x: 349, y: 749 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 275, y: 925 },
+    loc: { x: 275, y: 928 },
   },
-  // Something else goes on this form, not sure what though
+  // The name of the entity you are making these records available to need to be added as well
 ];
 
 /**
@@ -318,14 +318,19 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
   },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
-    field: "Text5",
+    field: "Text2",
   },
   {
     text: (applicant) =>
       phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
-    field: "TELEPHONE",
+    field: "Text3",
   },
-  /** ask Sasha about birth jusisdiction to check state/country */
+  /** ask Sasha about birth jurisdiction to check state/country */
+  {
+    text: (applicant) =>
+        abbreviateJurisdiction(applicant.birthJurisdiction || ""),
+    field: "STATEPROVINCE",
+  },
   {
     text: (applicant) => applicant.birthCity,
     field: "CITY",
