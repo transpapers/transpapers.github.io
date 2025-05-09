@@ -60,13 +60,23 @@ First, obtain the needed XY coordinates.
    good choices; we use the former.)
 2. Type some dummy text (asdfasdfasdf, etc.) where the filled text should
    appear.
-3. Record the pixel coordinates `(YOUR_X_COORDINATE, YOUR_Y_COORDINATE)` of the
+4. Record the pixel coordinates `(YOUR_X_COORDINATE, YOUR_Y_COORDINATE)` of the
    top-left corner of this text layer.
-4. Add the formfill as follows:
+5. Add the formfill as follows:
 
 ```javascript
 {
     text: YOUR_FUNCTION,
-    loc: { x: YOUR_X_COORDINATE, y: YOUR_Y_COORDINATE },
+    loc: {x: YOUR_X_COORDINATE, y: YOUR_Y_COORDINATE },
+},
+```
+6. If the coordinates are not on the first page of the document add a page
+   variable. Counter starts at "0" so take the documents page # and subtract
+   1 to get the proper page variable.
+
+```javascript
+{
+    text: YOUR_FUNCTION,
+    loc: { page: YOUR_PAGE, x: YOUR_X_COORDINATE, y: YOUR_Y_COORDINATE },
 },
 ```
