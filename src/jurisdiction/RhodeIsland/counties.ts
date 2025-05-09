@@ -753,7 +753,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$34.00",
+        filingCost: "$39.00",
     },
     "West Greenwich": {
         county: "Kent",
