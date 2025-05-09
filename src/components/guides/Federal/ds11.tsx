@@ -56,7 +56,7 @@ function DS11Guide({ person }: { person: Person }) {
       <p>
         Now you will need to go to a location that you can apply in with this
         form, your primary id, a checkbook for fees, and your photo. You can find
-        application locations at his URL:
+        application locations at his URL:{" "}
         <a href="https://iafdb.travel.state.gov/">
           https://iafdb.travel.state.gov/
         </a>.
@@ -68,13 +68,15 @@ function DS11Guide({ person }: { person: Person }) {
                 <>
                     Federal policy states that both parents must be present for you to apply for a passport.
                     If one or more of your parent(s)/guardian(s) cannot attend for any reason
-                    go to this <a href="webpage">https://travel.state.gov/content/travel/en/passports/need-passport/under-16.html</a>
+                    go to this{" "}
+                    <a href="webpage">https://travel.state.gov/content/travel/en/passports/need-passport/under-16.html</a>
                     and click on step #5 to see a list of potential workarounds for all situations.
                 </>
                 ) : (
                 <>
                     You will need to appear with at least one parent/guardian. If no one can appear with you
-                    see this <a href="webpage">https://travel.state.gov/content/travel/en/passports/need-passport/16-17.html</a>
+                    see this{" "}
+                    <a href="webpage">https://travel.state.gov/content/travel/en/passports/need-passport/16-17.html</a>
                     and click on step #3 to see a list of potential workarounds for all situations.
                 </>
                 )}
@@ -86,7 +88,7 @@ function DS11Guide({ person }: { person: Person }) {
       <p>
         If you have had a passport in the past then you should bring it and a certified
         copy of your court order. It will likely take a few months for them to
-        process a nonexpedited request, you can keep tabs on it using this url:
+        process a nonexpedited request, you can keep tabs on it using this url:{" "}
         <a href="https://passportstatus.state.gov/">
           https://passportstatus.state.gov/
         </a>

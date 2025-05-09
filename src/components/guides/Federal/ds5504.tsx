@@ -73,7 +73,7 @@ function DS5504Guide({ person }: { person: Person }) {
         US Department of State. Otherwise place all of the above documents in
         the envelope and locate the mailing address you need on the form (page
         3). It will likely take a few months for them to process a nonexpedited
-        request, you can keep tabs on it using this url:
+        request, you can keep tabs on it using this url:{" "}
         <a href="https://passportstatus.state.gov/">
           https://passportstatus.state.gov/
         </a>

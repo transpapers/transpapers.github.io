@@ -55,9 +55,9 @@ function RhodeIslandNotaryGuide({ person }: { person: Person }, { RIcityortown }
 
         <p>
             To do the process in-person {age && age < 18 ? (" a parent/guardian ") : (" you ")}
-            will need to make an appointment at
-            this <a href="link">https://outlook.office365.com/book/VitalRecordsAppointments@health.ri.gov/</a> and
-            click "Record Request". Then fill out the requested info and go to
+            will need to make an appointment at this{" "}
+            <a href="link">https://outlook.office365.com/book/VitalRecordsAppointments@health.ri.gov/</a>
+            {" "}and click "Record Request". Then fill out the requested info and go to
             the Cranston address listed above when it's time. Just bring photo ID,
             the completed form, and a payment method for the fee (cash, check, or card).
             Additionally the Attorney General's office is located very close to this 
@@ -70,12 +70,12 @@ function RhodeIslandNotaryGuide({ person }: { person: Person }, { RIcityortown }
         Notaries are needed to witness {age && age < 18 ? (" both parent(s)/guardian(s) ") : (" your ")}
         signatures and provide their own. The Change of Name form and (optionally) the
         Background Check Authorization form both need a notary and can be done
-        during the same appointment. Rhode Island maintains a list of
-        notaries <a href="here">https://business.sos.ri.gov/PublicNotarySearch/Home</a>.
-        Notaries can also be found in court buildings, banks, some
-        <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>,
-        or <a href="online">https://www.notarize.com/</a>. All of these services have
-        different fees and payment methods, all of them require a photo ID though.
+        during the same appointment. Rhode Island maintains a list of notaries{" "}
+        <a href="here">https://business.sos.ri.gov/PublicNotarySearch/Home</a>.
+        Notaries can also be found in court buildings, banks, some{" "}
+        <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>, or{" "}
+        <a href="online">https://www.notarize.com/</a>. All of these services have
+        different fees and payment methods but all of them require a photo ID.
       </p>
 
     {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true ? (

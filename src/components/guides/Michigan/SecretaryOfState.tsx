@@ -28,7 +28,7 @@ function MichiganSecretaryOfStateGuide() {
         (driver’s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, proceed to the next section. You will
         need to schedule an in-person appointment at your local Secretary of
-        State office, which can be done here 
+        State office, which can be done here{" "}
         <a href="https://dsvsesvc.sos.state.mi.us/TAP/_/">
           https://dsvsesvc.sos.state.mi.us/TAP/_/
         </a>

@@ -31,11 +31,15 @@ function RhodeIslandFilingGuide({ person }: { person: Person }, { RIcityortown }
   <h3>Filing Initial Forms (RI)</h3>
 
   <p>
-    A recent law was passed called <a href="H8155">https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf</a>.
+    A recent law was passed called{" "}
+    <a href="H8155">https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf</a>.
     In section D (line 12) it states that there will be no publication
-    required which means you shouldn't be charged for that. Also if you
-    can show that you can't pay the filing fee they may reduce or waive
-    that as well.
+    required which means you shouldn't be charged for that. Some courts
+    haven't yet updated their pricing to reflect that. If the amount they
+    charge you is significantly higher than what we list ask about it and
+    politely insist that it be changed or{" "}
+    <a href="report">https://tinyurl.com/mgdc-feedback</a>
+    {" "}it to us as a tip.
   </p>
 
     {age && age < 18 ? (

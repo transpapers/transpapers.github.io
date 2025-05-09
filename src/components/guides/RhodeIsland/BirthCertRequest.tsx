@@ -39,9 +39,9 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
 
       {birthJurisdiction && birthJurisdiction == "RI" ? (
         <p>
-            If you don't have a useable copy you can either request one online through 
+            If you don't have a useable copy you can either request one online through{" "}
             <a href="VitalChek">https://www.vitalchek.com/v/vital-records/rhode-island</a> 
-            or by mail using the "Application for a Certified Copy of a Birth Record" form 
+            {" "}or by mail using the "Application for a Certified Copy of a Birth Record" form 
             we provided. Specifically the one with "name change" written in the bottom 
             right of section 3. If you want to use this form finish filling out the section 
             1 "hospital" field. If you have had your name changed by court order before 
@@ -57,10 +57,11 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
         <p>
             If you don't have a useable copy you will need to either
             {age && age < 18 ? (" have a parent/guardian") : ("")} order one online
-            through <a href="VitalChek">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a> or
-            go through your birth state/territory's Vital Records department. If you were born in
-            another country it will be through your home country's records department instead to get
-            proof of birth.
+            through{" "}
+            <a href="VitalChek">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a>
+            {" "}or go through your birth state/territory's Vital Records department. If you
+            were born in another country it will be through your home country's records
+            department instead to get proof of birth.
         </p>
       )}
     </section>

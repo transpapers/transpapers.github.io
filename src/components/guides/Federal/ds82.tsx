@@ -56,10 +56,13 @@ function DS82Guide() {
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is a fee involved which is
         dependent on your choices go to section 5 of the following URL to see
-        the breakdown:
+        the breakdown:{" "}
         <a href="https://travel.state.gov/content/travel/en/passports/have-passport/renew.html">
           https://travel.state.gov/content/travel/en/passports/have-passport/renew.html
-        </a>
+      </a>
+      </p>
+
+      <p>
         Make out a check to the US Department of State and place all of the
         above documents in the envelope and locate the mailing address you need
         on the form (page 3). It will likely take a few months for them to
