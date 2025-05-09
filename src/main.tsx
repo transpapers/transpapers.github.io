@@ -36,51 +36,58 @@ import Guide from "./components/Guide";
 
 const root = document.getElementById("root");
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Root />,
+    },
+    {
+      path: "/step1",
+      element: <Step1 />,
+    },
+    {
+      path: "step2",
+      element: <Step2 />,
+    },
+    {
+      path: "step3",
+      element: <Step3 />,
+    },
+    {
+      path: "step4",
+      element: <Step4 />,
+    },
+    {
+      path: "step4b",
+      element: <Step4b />,
+    },
+    {
+      path: "step5",
+      element: <Step5 />,
+    },
+    {
+      path: "step6",
+      element: <Step6 />,
+    },
+    {
+      path: "guide",
+      element: <Guide />,
+    },
+  ],
   {
-    path: "/",
-    element: <Root />,
+    future: {
+      v7_relativeSplatPath: true,
+    },
   },
-  {
-    path: "/step1",
-    element: <Step1 />,
-  },
-  {
-    path: "step2",
-    element: <Step2 />,
-  },
-  {
-    path: "step3",
-    element: <Step3 />,
-  },
-  {
-    path: "step4",
-    element: <Step4 />,
-  },
-  {
-    path: "step4b",
-    element: <Step4b />,
-  },
-  {
-    path: "step5",
-    element: <Step5 />,
-  },
-  {
-    path: "step6",
-    element: <Step6 />,
-  },
-  {
-    path: "guide",
-    element: <Guide />,
-  },
-]);
+);
 
 if (root !== null) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
       <Header />
       <Noscript />
-      <RouterProvider router={router} />
+      <RouterProvider future={{ v7_startTransition: true }} router={router} />
     </React.StrictMode>,
   );
 }
