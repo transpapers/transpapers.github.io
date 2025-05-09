@@ -42,9 +42,15 @@ const someone = {
 };
 
 describe("template spec", () => {
-  it("passes", () => {
+  it("passes with no console output", () => {
     // Visit Transpapers.
     cy.visit("localhost:5173");
+
+    /*
+    cy.window().then((win) => {
+      win.console.error("This should fail the test");
+    });
+    */
 
     // Click on "Ready to get started?".
     cy.document().find('input[type="submit"]').click();
@@ -182,5 +188,7 @@ describe("template spec", () => {
       });
 
     cy.document().find('input[type="submit"]').click();
+
+    cy.wait(10000);
   });
 });
