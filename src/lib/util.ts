@@ -152,24 +152,60 @@ export function formatDate(date: string | undefined, fmt: DateFormat): string {
 export function phoneAreaCode(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
     return "";
-  }
-  return phoneNumber.substring(0, 4);
+    }
+    /** if phone # is typed like this: 888-888-8888*/
+    if (phoneNumber.length == 12) {
+        return phoneNumber.substring(0, 3);
+    }
+    /** if phone # is typed like this: 8888888888*/
+    if (phoneNumber.length == 10) {
+        return phoneNumber.substring(0, 3);
+    }
+    /** if phone # is typed like this: (888) 888-8888*/
+    if (phoneNumber.length == 14) {
+        return phoneNumber.substring(1, 4);
+    }
+  return "";
 }
 
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
     return "";
-  }
-  return phoneNumber.substring(4, 7);
+    }
+    /** if phone # is typed like this: 888-888-8888*/
+    if (phoneNumber.length == 12) {
+        return phoneNumber.substring(4, 7);
+    }
+    /** if phone # is typed like this: 8888888888*/
+    if (phoneNumber.length == 10) {
+        return phoneNumber.substring(3, 6);
+    }
+    /** if phone # is typed like this: (888) 888-8888*/
+    if (phoneNumber.length == 14) {
+        return phoneNumber.substring(6, 9);
+    }
+    return "";
 }
 
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
     return "";
-  }
-  return phoneNumber.substring(7);
+    }
+    /** if phone # is typed like this: 888-888-8888*/
+    if (phoneNumber.length == 12) {
+        return phoneNumber.substring(8);
+    }
+    /** if phone # is typed like this: 8888888888*/
+    if (phoneNumber.length == 10) {
+        return phoneNumber.substring(6);
+    }
+    /** if phone # is typed like this: (888) 888-8888*/
+    if (phoneNumber.length == 14) {
+        return phoneNumber.substring(10);
+    }
+  return "";
 }
 
 /**
