@@ -40,7 +40,7 @@ function MichiganResourcesGuide() {
           <a href="https://corktownhealth.org/transgender-name-clinic-available/">
             Transgender Name Change Clinic
           </a>
-          : Helps low income trans people changing their name &amp; gender
+          : Helps low income trans people changing their name and gender
           markers in Oakland, Macomb, and Wayne Counties.
         </li>
       </ul>

@@ -57,7 +57,7 @@ function MichiganEverythingElseGuide() {
         certain medical professionals will need to know your transition status.
       </p>
       <p>
-        <strong>Gas/Heating Provider</strong>: DTE has a digital submission link
+        <strong>Gas/Heating/Electricity Provider</strong>: DTE has a digital submission link
         for your scanned ID and court order at{" "}
         <a href="https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form">
           https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form.
@@ -66,9 +66,9 @@ function MichiganEverythingElseGuide() {
         to confirm the change.
       </p>
       <p>
-        <strong>Electricity Provider</strong>: Consumers allows its customers to
+        Consumers allows its customers to
         change the name on the billing account over the phone; their service
-        number is (800) 477-5050. You will need to confirm your old name &amp;
+        number is (800) 477-5050. You will need to confirm your old name and
         address on the account.
       </p>
       <p>
@@ -97,7 +97,7 @@ function MichiganEverythingElseGuide() {
       </p>
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
-        change when you update your information with Social Security. You do not
+        change when you update your information with Social Security. You do <strong>not</strong>
         need to contact them.
       </p>
       <p>
@@ -108,8 +108,8 @@ function MichiganEverythingElseGuide() {
       </p>
       <p>
         <strong>College Records</strong>: Contact the Student Records Department
-        of your university. Required documents will vary by institution. You may
-        also consider updating your school profile and email, if applicable.
+        of your university. Your court order and new ID should work. You may
+        also consider asking about updating your school profile and email.
       </p>
       <p>
         <strong>Insurance</strong>: Contact your insurer(s). Requirements will
@@ -123,9 +123,9 @@ function MichiganEverythingElseGuide() {
       <p>
         <strong>Voter Registration</strong>: Michigan has automatic voter
         registration, so no action is required unless you opted out when
-        renewing your primary ID. If you were too young for that step, then it
-        will be put in your correct name &amp; gender the first time you
-        register to vote.
+        renewing your primary ID. If you were too young for that step, they
+        should have your correct name and gender the first time you
+        apply for a license, state ID, or register to vote.
       </p>
       <p>
         <strong>Some other places to consider:</strong>
