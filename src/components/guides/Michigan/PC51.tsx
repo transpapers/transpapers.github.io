@@ -50,11 +50,11 @@ function MichiganPC51Guide({ person }: { person: Person }) {
           If both are deceased or noncustodial your legal guardian should do the above
           instead and attach copies of their letters of guardianship to this form.
 
-            {age && age < 14 ? (
-                " Since you are below the age of 14 you should not sign the first “Consent by Minor” section, sign the second instead."
-            ) : (
-                "Finally you should sign in both of the “Consent by Minor” sections on page 4."
-            )}
+        {age && age < 14 ? (
+            " Since you are below the age of 14 you should not sign the first “Consent by Minor” section, sign the second instead."
+        ) : (
+            " Since you are over the age of 13 you should sign the first “Consent by Minor” section and ignore the second."
+        )}
         </p>
       ) : (
           " Sign with your legal name and date on page 2, in the field labeled “Petitioner's Signature.” Do the same on the bottom of page 3."

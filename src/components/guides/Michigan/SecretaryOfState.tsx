@@ -54,6 +54,8 @@ function MichiganSecretaryOfStateGuide() {
         updating the name and/or gender marker on it. They will ask for
         identification, your court-ordered name change, and the Sex Designation
         Form. Sign and date it in front of them with your new legal name.
+        If at any point you experience issues or pushback politely inisist
+        on speaking to a supervisor for assistence.
       </p>
 
       <p>
