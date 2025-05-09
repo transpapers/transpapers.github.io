@@ -39,16 +39,6 @@
 {% endif %}
 </p>
 
-<p>
-{% if advertisementRequired == True %}
-        The court will publish details regarding your name change for 
-    you in one of the following paper(s):
-    {% for loc in publications %}
-            <li>{{ loc.name }}, <a href="{{ loc.website }}">{{ loc.website }}</a></li>
-    {% endfor %}`
-{% endif %}
-</p>
-
 {% if court.specificCourtInfo %}
 	<p>{{ court.specificCourtInfo }}</p>
 {% endif %}
