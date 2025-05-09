@@ -26,6 +26,7 @@ import {
   phoneEnd,
   phoneStart,
   abbreviateJurisdiction,
+  representativeName
 } from "../../lib/util";
 
 import {
@@ -50,7 +51,7 @@ export const changeOfNameMap: Formfill[] = [
     field: "Combo Box 4",
   },
   {
-    text: (applicant) => fullName(applicant.legalName),
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "6",
   },
   {
@@ -119,27 +120,33 @@ export const changeOfNameMap: Formfill[] = [
     field: "27",
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) =>
+        isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
     field: "29",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) =>
+        isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
     field: "30",
   },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) =>
+        isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
     field: "31",
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) =>
+        isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
     field: "32",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) =>
+        isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
     field: "33",
   },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) =>
+        isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
     field: "34",
   },
 ];
@@ -150,26 +157,35 @@ export const changeOfNameMap: Formfill[] = [
  */
 export const bciMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 347, y: 557 },
-  },
-  {
-    text: (applicant) => fullName(applicant.birthName),
-    loc: { x: 458, y: 672 },
+    text: (applicant) => fullName(representativeName(applicant)),
+    loc: { x: 532, y: 438 },
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    loc: { x: 349, y: 749 },
+        isMinor(applicant) ? "" : fullName(applicant.birthName) ?? "",
+    loc: { x: 678, y: 489 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 275, y: 928 },
+    text: (applicant) =>
+        isMinor(applicant) ? "" : formatDate(applicant.birthdate, {
+            format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+            separator: "/",
+        }) ?? "",
+    loc: { x: 401, y: 542 },
   },
-  // The name of the entity you are making these records available to need to be added as well
+  {
+    text: (applicant) =>
+        `${applicant.streetAddress}, ${applicant.residentCity}, 
+        ${applicant.residentJurisdiction} ${applicant.zip}`,
+    loc: { x: 500, y: 594 },
+  },
+  {
+    text: (applicant) => ("name change"), loc: { x: 332, y: 699 },
+  },
+  {
+    text: (applicant) => fullName(representativeName(applicant)),
+    loc: { x: 226, y: 896 },
+  },
 ];
 
 /**
@@ -187,13 +203,6 @@ export const birthCertOneMap: Formfill[] = [
   {
     text: (applicant) => numericalAge(applicant.birthdate!).toString(),
     loc: { x: 1245, y: 420 },
-  },
-  {
-    text: (applicant) =>
-      isEmptyName(applicant.birthName)
-        ? fullName(applicant.legalName)
-        : fullName(applicant.birthName),
-    loc: { x: 805, y: 453 },
   },
   {
     text: (applicant) =>
@@ -232,8 +241,7 @@ export const birthCertOneMap: Formfill[] = [
     loc: { x: 337, y: 1257 },
   },
   {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : fullName(applicant.legalName),
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { x: 405, y: 1480 },
   },
   {
@@ -414,11 +422,8 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 1245, y: 420 },
   },
   {
-    text: (applicant) =>
-      isEmptyName(applicant.birthName)
-        ? fullName(applicant.legalName)
-        : fullName(applicant.birthName),
-    loc: { x: 805, y: 453 },
+    text: (applicant) => fullName(applicant.chosenName),
+    loc: { x: 803, y: 454 },
   },
   {
     text: (applicant) =>
@@ -457,8 +462,7 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 337, y: 1257 },
   },
   {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : fullName(applicant.legalName),
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { x: 405, y: 1480 },
   },
   {
