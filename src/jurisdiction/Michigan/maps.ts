@@ -384,6 +384,7 @@ export const birthCertMap: Formfill[] = [
 
 /**
  * Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
+ * This is for the Primary ID at the Secretary of State step.
  * @type {Formfill[]}
  */
 export const mdosSexMap: Formfill[] = [
@@ -438,6 +439,7 @@ export const mdosSexMap: Formfill[] = [
 
 /**
  * State of Michigan Sex Designation Form (Michigan form, unnumbered.)
+ * This is for the Birth Certificate Update step.
  * @type {Formfill[]}
  */
 export const miSexMap: Formfill[] = [
