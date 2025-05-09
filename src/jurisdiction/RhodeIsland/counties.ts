@@ -40,7 +40,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.eastbayri.com/contact/index.html",
             },
         ],
-        filingCost: "$87.00",
+        filingCost: "$34.00",
     },
     Bristol: {
         county: "Bristol",
@@ -77,7 +77,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.woonsocketcall.com/site/contact.html",
             },
         ],
-        filingCost: "$85.00",
+        filingCost: "$40.00",
     },
     "Central Falls": {
         county: "Providence",
@@ -99,7 +99,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.pawtuckettimes.com/site/contact.html",
             },
         ],
-        filingCost: "$113.00",
+        filingCost: "$39.00",
     },
     Charlestown: {
         county: "Washington",
@@ -121,7 +121,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.woonsocketcall.com/site/contact.htmlhttps://www.thewesterlysun.com/site/contact.html",
             },
         ],
-        filingCost: "$50.00",
+        filingCost: "$34.00",
     },
     Coventry: {
         county: "Kent",
@@ -143,7 +143,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$89.00",
+        filingCost: "$50.00",
     },
     Cranston: {
         county: "Providence",
@@ -181,7 +181,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.woonsocketcall.com/site/contact.htmlhttps://www.thewesterlysun.com/site/contact.html",
             },
         ],
-        filingCost: "$126.00",
+        filingCost: "$34.00",
     },
     "East Greenwich": {
         county: "Kent",
@@ -203,7 +203,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$59.00",
+        filingCost: "$39.00",
     },
     "East Providence": {
         county: "Providence",
@@ -225,7 +225,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.providencejournal.com/contact/staff/",
             },
         ],
-        filingCost: "$104.00",
+        filingCost: "$34.00",
     },
     Exeter: {
         county: "Washington",
@@ -239,7 +239,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
         courtDoesAdvertisement: true,
 
         backgroundCheckRequired: true,
-        courtDoesBackgroundCheck: false,
+        courtDoesBackgroundCheck: true,
 
         publications: [
             {
@@ -247,7 +247,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$149.00",
+        filingCost: "$39.00",
     },
     Foster: {
         county: "Providence",
@@ -269,7 +269,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.providencejournal.com/contact/staff/",
             },
         ],
-        filingCost: "$184.00",
+        filingCost: "$34.00",
     },
     Glocester: {
         county: "Providence",
@@ -291,7 +291,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.providencejournal.com/contact/staff/",
             },
         ],
-        filingCost: "unknown",
+        filingCost: "$184.00",
     },
     Hopkinton: {
         county: "Washington",
@@ -313,7 +313,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.thewesterlysun.com/site/contact.html",
             },
         ],
-        filingCost: "$84.00",
+        filingCost: "$34.00",
     },
     Jamestown: {
         county: "Newport",
@@ -351,7 +351,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$124.00",
+        filingCost: "$34.00",
     },
     Lincoln: {
         county: "Providence",
@@ -373,7 +373,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.newportri.com/contact/staff/",
             },
         ],
-        filingCost: "$164.00",
+        filingCost: "$34.00",
     },
     "Little Compton": {
         county: "Newport",
@@ -395,7 +395,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.thewesterlysun.com/site/contact.html",
             },
         ],
-        filingCost: "$86.50",
+        filingCost: "$34.00",
     },
     Middletown: {
         county: "Newport",
@@ -417,7 +417,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.independentri.com/site/contact.html",
             },
         ],
-        filingCost: "unknown",
+        filingCost: "$34.00",
     },
     Narragansett: {
         county: "Washington",
@@ -439,7 +439,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.providencejournal.com/contact/staff/",
             },
         ],
-        filingCost: "$94.00",
+        filingCost: "$34.00",
     },
     Newport: {
         county: "Newport",
@@ -461,7 +461,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.woonsocketcall.com/site/contact.html",
             },
         ],
-        filingCost: "$94.00",
+        filingCost: "$40.00",
     },
     "New Shoreham": {
         county: "Washington",
@@ -483,7 +483,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.pawtuckettimes.com/site/contact.html",
             },
         ],
-        filingCost: "$103.00",
+        filingCost: "$34.00",
     },
     "North Kingstown": {
         county: "Washington",
@@ -505,7 +505,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.newportri.com/contact/staff/",
             },
         ],
-        filingCost: "$55.00",
+        filingCost: "$34.00",
     },
     "North Providence": {
         county: "Providence",
@@ -527,7 +527,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.providencejournal.com/contact/staff/",
             },
         ],
-        filingCost: "$99.00",
+        filingCost: "$39.00",
     },
     "North Smithfield": {
         county: "Providence",
@@ -549,7 +549,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.woonsocketcall.com/site/contact.html",
             },
         ],
-        filingCost: "$109.00",
+        filingCost: "$39.00",
     },
     Pawtucket: {
         county: "Providence",
@@ -571,7 +571,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.pawtuckettimes.com/site/contact.html",
             },
         ],
-        filingCost: "$89.00",
+        filingCost: "$34.00",
     },
     Portsmouth: {
         county: "Newport",
@@ -603,7 +603,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
         backgroundCheckRequired: true,
         courtDoesBackgroundCheck: false,
 
-        filingCost: "$38.50",
+        filingCost: "$39.00",
     },
     Richmond: {
         county: "Washington",
@@ -629,7 +629,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.thewesterlysun.com/site/contact.html",
             },
         ],
-        filingCost: "$64.00",
+        filingCost: "$34.00",
     },
     Scituate: {
         county: "Providence",
@@ -651,7 +651,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.providencejournal.com/contact/staff/",
             },
         ],
-        filingCost: "$139.00",
+        filingCost: "$39.00",
     },
     Smithfield: {
         county: "Providence",
@@ -705,7 +705,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.eastbayri.com/contact/index.html",
             },
         ],
-        filingCost: "$86.50",
+        filingCost: "$34.00",
     },
     Warren: {
         county: "Bristol",
@@ -753,7 +753,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$74.00",
+        filingCost: "$34.00",
     },
     "West Greenwich": {
         county: "Kent",
@@ -775,7 +775,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "$69.00",
+        filingCost: "$34.00",
     },
     "West Warwick": {
         county: "Kent",
@@ -797,7 +797,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.ricentral.com/site/contact.html",
             },
         ],
-        filingCost: "unknown",
+        filingCost: "$34.00",
     },
     Westerly: {
         county: "Washington",
@@ -841,7 +841,7 @@ const rhodeislandCounties: { [key: string]: RhodeIslandCityOrTown } = {
                 website: "https://www.woonsocketcall.com/site/contact.html",
             },
         ],
-        filingCost: "unknown",
+        filingCost: "$30.00",
     },
 };
 
