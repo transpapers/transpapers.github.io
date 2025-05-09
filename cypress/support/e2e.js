@@ -18,4 +18,10 @@ import "./commands";
 
 import failOnConsoleError from "cypress-fail-on-console-error";
 
+const config = {
+	/* Put error messages we can't get rid of easily here */
+	consoleMessages: [ "DevTools", "XFA" ],
+	consoleTypes: [ "error", "warn", "info" ],
+}
+
 failOnConsoleError();
