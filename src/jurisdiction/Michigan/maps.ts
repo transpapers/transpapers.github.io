@@ -358,7 +358,6 @@ export const birthCertMap: Formfill[] = [
   },
   { text: (applicant) => applicant.fathersBirthdate, loc: { x: 554, y: 754 } },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
-
   {
     text: (applicant) => (isMinor(applicant) ? "" : "X"),
     loc: { x: 52, y: 327 },
@@ -420,6 +419,19 @@ export const mdosSexMap: Formfill[] = [
     loc: { x: 67, y: 555 },
   },
   {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
+    loc: { x: 478, y: 616 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
+    loc: { x: 598, y: 616 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+    loc: { x: 749, y: 616 },
+  },
+  /**
+  {
     check: (applicant) => applicant.gender === GenderMarker.F,
     field: "ChoiceA",
     select: "Choice1",
@@ -434,6 +446,7 @@ export const mdosSexMap: Formfill[] = [
     field: "ChoiceA",
     select: "Choice3",
   },
+  */
   { text: () => new Date().toLocaleDateString(), loc: { x: 649, y: 959 } },
 ];
 
