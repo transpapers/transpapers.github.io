@@ -177,82 +177,82 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
-  { text: () => "X", loc: { x: 31, y: 175 } },
+  { text: () => "X", loc: { x: 45, y: 263 } },
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
-    loc: { page: 4, x: 65, y: 140 },
+    loc: { page: 4, x: 97, y: 210 },
   },
   {
     text: (applicant) => applicant.chosenName?.first ?? "",
-    loc: { page: 4, x: 65, y: 169 },
+    loc: { page: 4, x: 97, y: 254 },
   },
   {
     text: (applicant) => applicant.chosenName?.middle ?? "",
-    loc: { page: 4, x: 313, y: 169 },
+    loc: { page: 4, x: 469, y: 254 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" }),
-      loc: { page: 4, x: 65, y: 199 },
+      loc: { page: 4, x: 97, y: 299 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
-      loc: { page: 4, x: 97, y: 199 },
+      loc: { page: 4, x: 145, y: 299 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
-      loc: { page: 4, x: 128, y: 199 },
+      loc: { page: 4, x: 191, y: 299 },
   },
   /** Changed gender checkmarks to match new federal forms */
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.M,
-    loc: { page: 4, x: 196, y: 199 },
+    loc: { page: 4, x: 294, y: 299 },
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.F,
-    loc: { page: 4, x: 217, y: 199 },
+    loc: { page: 4, x: 325, y: 299 },
   },
   {
     text: (applicant) =>
       `${applicant.birthCity} ${applicant.birthJurisdiction}`,
-      loc: { page: 4, x: 242, y: 199 },
+      loc: { page: 4, x: 362, y: 299 },
   },
-  { text: (applicant) => applicant.email, loc: { page: 4, x: 205, y: 229 } },
-  { text: (applicant) => phoneAreaCode(applicant.phone), loc: { page: 4, x: 394, y: 229 } },
-  { text: (applicant) => phoneStart(applicant.phone), loc: { page: 4, x: 439, y: 229 } },
-  { text: (applicant) => phoneEnd(applicant.phone), loc: { page: 4, x: 483, y: 229 } },
+  { text: (applicant) => applicant.email, loc: { page: 4, x: 307, y: 344 } },
+  { text: (applicant) => phoneAreaCode(applicant.phone), loc: { page: 4, x: 591, y: 344 } },
+  { text: (applicant) => phoneStart(applicant.phone), loc: { page: 4, x: 658, y: 344 } },
+  { text: (applicant) => phoneEnd(applicant.phone), loc: { page: 4, x: 724, y: 344 } },
   {
     text: (applicant) => applicant.streetAddress,
-      loc: { page: 4, x: 25, y: 75 },
+      loc: { page: 4, x: 38, y: 389 },
   },
   {
     text: (applicant) =>
       isMinor(applicant)
         ? `In Care Of - ${fullName(representativeName(applicant))}`
         : "",
-      loc: { page: 4, x: 25, y: 289 },
+      loc: { page: 4, x: 38, y: 434 },
   },
-  { text: (applicant) => applicant.residentCity, loc: { page: 4, x: 25, y: 319 } },
+  { text: (applicant) => applicant.residentCity, loc: { page: 4, x: 38, y: 478 } },
   {
     text: (applicant) =>
       abbreviateJurisdiction(applicant.residentJurisdiction || "") || "",
-      loc: { page: 4, x: 251, y: 319 },
+      loc: { page: 4, x: 376, y: 478 },
   },
-  { text: (applicant) => applicant.zip, loc: { page: 4, x: 290, y: 319 } },
+  { text: (applicant) => applicant.zip, loc: { page: 4, x: 434, y: 478 } },
   {
     text: (applicant) => fullName(applicant.legalName),
-      loc: { page: 4, x: 32, y: 349 },
+      loc: { page: 4, x: 48, y: 522 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-      loc: { page: 4, x: 180, y: 407 },
+      loc: { page: 4, x: 269, y: 610 },
   },
   {
     text: (applicant) =>
       `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
-      loc: { page: 5, x: 26, y: 51 },
+      loc: { page: 5, x: 39, y: 76 },
   },
   {
     text: (applicant) =>
@@ -260,20 +260,20 @@ export const ds5504Map: Formfill[] = [
             format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
             separator: "/",
         }),
-    loc: { page: 5, x: 437, y: 51 },
+    loc: { page: 5, x: 654, y: 76 },
   },
-  { check: () => true, loc: { page: 5, x: 83, y: 393 }, },
+  { check: () => true, loc: { page: 5, x: 125, y: 590 }, },
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
-    loc: { page: 5, x: 208, y: 386 },
+    loc: { page: 5, x: 311, y: 579 },
   },
   {
     text: (applicant) => applicant.chosenName?.first ?? "",
-    loc: { page: 5, x: 208, y: 420 },
+    loc: { page: 5, x: 311, y: 630 },
   },
   {
     text: (applicant) => applicant.chosenName?.middle ?? "",
-    loc: { page: 5, x: 377, y: 420 },
+    loc: { page: 5, x: 566, y: 630 },
   },
 ];
 
@@ -282,95 +282,95 @@ export const ds5504Map: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds82Map: Formfill[] = [
-  { text: () => "X", loc: { x: 33, y: 128 } },
-  { text: () => "X", loc: { x: 33, y: 156 } },
-  { text: () => "X", loc: { x: 33, y: 183 } },
-  { text: () => "X", loc: { x: 33, y: 211 } },
-  { text: () => "X", loc: { x: 33, y: 250 } },
-  { text: () => "X", loc: { x: 33, y: 315 } },
+  { text: () => "X", loc: { x: 49, y: 193 } },
+  { text: () => "X", loc: { x: 49, y: 234 } },
+  { text: () => "X", loc: { x: 49, y: 277 } },
+  { text: () => "X", loc: { x: 49, y: 318 } },
+  { text: () => "X", loc: { x: 49, y: 376 } },
+  { text: () => "X", loc: { x: 49, y: 473 } },
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
-    loc: { page: 4, x: 67, y: 131 },
+    loc: { page: 4, x: 99, y: 196 },
   },
   {
     text: (applicant) => applicant.chosenName?.first ?? "",
-    loc: { page: 4, x: 65, y: 161 },
+    loc: { page: 4, x: 99, y: 242 },
   },
   {
     text: (applicant) => applicant.chosenName?.middle ?? "",
-    loc: { page: 4, x: 312, y: 161 },
+    loc: { page: 4, x: 468, y: 242 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" }),
-      loc: { page: 4, x: 65, y: 192 },
+      loc: { page: 4, x: 99, y: 287 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
-      loc: { page: 4, x: 97, y: 192 },
+      loc: { page: 4, x: 145, y: 287 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
-      loc: { page: 4, x: 127, y: 192 },
+      loc: { page: 4, x: 191, y: 287 },
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.M,
-    loc: { page: 4, x: 196, y: 191 },
+    loc: { page: 4, x: 293, y: 287 },
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.F,
-    loc: { page: 4, x: 217, y: 191 },
+    loc: { page: 4, x: 324, y: 287 },
   },
   {
     text: (applicant) =>
         `${applicant.birthCity} ${applicant.birthJurisdiction}`,
-    loc: { page: 4, x: 242, y: 192 },
+    loc: { page: 4, x: 362, y: 287 },
   },
-  { text: (applicant) => applicant.email, loc: { page: 4, x: 205, y: 222 } },
-  { text: (applicant) => phoneAreaCode(applicant.phone), loc: { page: 4, x: 394, y: 222 } },
-  { text: (applicant) => phoneStart(applicant.phone), loc: { page: 4, x: 440, y: 222 } },
-  { text: (applicant) => phoneEnd(applicant.phone), loc: { page: 4, x: 484, y: 222 } },
+  { text: (applicant) => applicant.email, loc: { page: 4, x: 307, y: 333 } },
+  { text: (applicant) => phoneAreaCode(applicant.phone), loc: { page: 4, x: 591, y: 333 } },
+  { text: (applicant) => phoneStart(applicant.phone), loc: { page: 4, x: 659, y: 333 } },
+  { text: (applicant) => phoneEnd(applicant.phone), loc: { page: 4, x: 725, y: 333 } },
   {
     text: (applicant) => applicant.streetAddress,
-    loc: { page: 4, x: 25, y: 251 },
+    loc: { page: 4, x: 37, y: 377 },
   },
   {
     text: (applicant) =>
       isMinor(applicant)
         ? `In Care Of - ${fullName(representativeName(applicant))}`
         : "",
-    loc: { page: 4, x: 25, y: 281 },
+    loc: { page: 4, x: 37, y: 422 },
   },
   {
     text: (applicant) => applicant.residentCity,
-    loc: { page: 4, x: 25, y: 310 },
+    loc: { page: 4, x: 37, y: 465 },
   },
   {
     text: (applicant) =>
       abbreviateJurisdiction(applicant.residentJurisdiction || "") || "",
-    loc: { page: 4, x: 250, y: 310 },
+    loc: { page: 4, x: 376, y: 465 },
   },
-  { text: (applicant) => applicant.zip, loc: { page: 4, x: 290, y: 310 } },
+  { text: (applicant) => applicant.zip, loc: { page: 4, x: 434, y: 465 } },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { page: 4, x: 32, y: 340 },
+    loc: { page: 4, x: 48, y: 510 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-      loc: { page: 4, x: 173, y: 383 },
+      loc: { page: 4, x: 259, y: 574 },
   },
-  { check: () => true, loc: { page: 4, x: 174, y: 480 } },
+  { check: () => true, loc: { page: 4, x: 260, y: 720 } },
   {
     text: (applicant) =>
     `${applicant.court?.city} \ ${abbreviateJurisdiction(applicant.residentJurisdiction || "") || ""}`,
-    loc: { page: 4, x: 259, y: 483 },
+    loc: { page: 4, x: 389, y: 724 },
   },
   {
     text: (applicant) =>
       `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
-    loc: { page: 5, x: 27, y: 51 },
+    loc: { page: 5, x: 40, y: 76 },
   },
   {
     text: (applicant) =>
@@ -378,7 +378,7 @@ export const ds82Map: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { page: 5, x: 437, y: 51 },
+    loc: { page: 5, x: 655, y: 76 },
   },
 ];
 
@@ -389,79 +389,79 @@ export const ds82Map: Formfill[] = [
 export const ds11Map: Formfill[] = [
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
-    loc: { page: 4, x: 66, y: 135 },
+    loc: { page: 4, x: 99, y: 203 },
   },
   {
     text: (applicant) => applicant.chosenName?.first ?? "",
-    loc: { page: 4, x: 66, y: 165 },
+    loc: { page: 4, x: 99, y: 247 },
   },
   {
     text: (applicant) => applicant.chosenName?.middle ?? "",
-    loc: { page: 4, x: 105, y: 165 },
+    loc: { page: 4, x: 471, y: 247 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" }),
-      loc: { page: 4, x: 66, y: 195 },
+      loc: { page: 4, x: 99, y: 292 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
-      loc: { page: 4, x: 98, y: 195 },
+      loc: { page: 4, x: 147, y: 292 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
-      loc: { page: 4, x: 129, y: 195 },
+      loc: { page: 4, x: 194, y: 292 },
   },
   /** removed gender check marks and added a warning to guide instead */
   {
     text: (applicant) =>
       `${applicant.birthCity} ${applicant.birthJurisdiction}`,
-      loc: { page: 4, x: 243, y: 195 },
+      loc: { page: 4, x: 364, y: 292 },
   },
-  { text: (applicant) => applicant.email, loc: { page: 4, x: 207, y: 227 } },
+  { text: (applicant) => applicant.email, loc: { page: 4, x: 310, y: 340 } },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
-    loc: { page: 4, x: 396, y: 227 },
+    loc: { page: 4, x: 594, y: 340 },
   },
   {
     text: (applicant) => phoneStart(applicant.phone),
-    loc: { page: 4, x: 442, y: 227 },
+    loc: { page: 4, x: 662, y: 340 },
   },
   {
     text: (applicant) => phoneEnd(applicant.phone),
-    loc: { page: 4, x: 485, y: 227 },
+    loc: { page: 4, x: 727, y: 340 },
   },
   {
     text: (applicant) => applicant.streetAddress,
-      loc: { page: 4, x: 27, y: 256 },
+      loc: { page: 4, x: 39, y: 384 },
   },
   {
     text: (applicant) =>
       isMinor(applicant)
         ? `In Care Of - ${fullName(representativeName(applicant))}`
         : "",
-    loc: { page: 4, x: 27, y: 286 },
+    loc: { page: 4, x: 39, y: 429 },
   },
   {
     text: (applicant) => applicant.residentCity,
-    loc: { page: 4, x: 27, y: 314 },
+    loc: { page: 4, x: 39, y: 471 },
   },
   {
     text: (applicant) =>
       abbreviateJurisdiction(applicant.residentJurisdiction || "") || "",
-    loc: { page: 4, x: 252, y: 314 },
+    loc: { page: 4, x: 378, y: 471 },
   },
-  { text: (applicant) => applicant.zip, loc: { page: 4, x: 291, y: 314 } },
+  { text: (applicant) => applicant.zip, loc: { page: 4, x: 436, y: 471 } },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { page: 4, x: 34, y: 345 },
+    loc: { page: 4, x: 51, y: 517 },
   },
   {
     text: (applicant) =>
       `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
-    loc: { page: 5, x: 27, y: 49 },
+    loc: { page: 5, x: 40, y: 73 },
   },
   {
     text: (applicant) =>
@@ -469,67 +469,67 @@ export const ds11Map: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { page: 5, x: 422, y: 49 },
+    loc: { page: 5, x: 633, y: 73 },
   },
   {
     text: (applicant) =>
       `${applicant.mothersBirthName?.first ?? ""} ${applicant.mothersBirthName?.middle ?? ""}`,
-    loc: { page: 5, x: 27, y: 87 },
+    loc: { page: 5, x: 40, y: 130 },
   },
   {
     text: (applicant) => applicant.mothersBirthName?.last ?? "",
-    loc: { page: 5, x: 316, y: 87 },
+    loc: { page: 5, x: 473, y: 130 },
   },
   {
     text: (applicant) =>
       formatDate(applicant.mothersBirthdate, {
         format: [DATE.MONTH], separator: "" }),
-    loc: { page: 5, x: 27, y: 117 },
+    loc: { page: 5, x: 40, y: 175 },
   },
   {
     text: (applicant) =>
         formatDate(applicant.mothersBirthdate, {
             format: [DATE.DAY], separator: ""
         }),
-    loc: { page: 5, x: 58, y: 117 },
+    loc: { page: 5, x: 87, y: 175 },
   },
   {
     text: (applicant) =>
         formatDate(applicant.mothersBirthdate, {
             format: [DATE.YEAR], separator: ""
         }),
-    loc: { page: 5, x: 89, y: 117 },
+    loc: { page: 5, x: 133, y: 175 },
   },
-  { check: () => true, loc: { page: 5, x: 458, y: 118 }, },
+  { check: () => true, loc: { page: 5, x: 687, y: 178 }, },
   {
     text: (applicant) =>
       `${applicant.fathersBirthName?.first ?? ""} ${applicant.fathersBirthName?.middle ?? ""}`,
-      loc: { page: 5, x: 27, y: 146 },
+      loc: { page: 5, x: 39, y: 219 },
   },
   {
     text: (applicant) => applicant.fathersBirthName?.last ?? "",
-    loc: { page: 5, x: 316, y: 117 },
+    loc: { page: 5, x: 473, y: 219 },
   },
   {
     text: (applicant) =>
         formatDate(applicant.fathersBirthdate, {
             format: [DATE.MONTH], separator: ""
         }),
-    loc: { page: 5, x: 27, y: 177 },
+    loc: { page: 5, x: 40, y: 265 },
   },
   {
     text: (applicant) =>
         formatDate(applicant.fathersBirthdate, {
             format: [DATE.DAY], separator: ""
         }),
-    loc: { page: 5, x: 58, y: 177 },
+    loc: { page: 5, x: 87, y: 265 },
   },
   {
     text: (applicant) =>
         formatDate(applicant.fathersBirthdate, {
             format: [DATE.YEAR], separator: ""
         }),
-    loc: { page: 5, x: 89, y: 177 },
+    loc: { page: 5, x: 134, y: 265 },
   },
-  { check: () => true, loc: { page: 5, x: 458, y: 169 }, },
+  { check: () => true, loc: { page: 5, x: 686, y: 253 }, },
 ];

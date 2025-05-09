@@ -361,24 +361,24 @@ export const birthCertMap: Formfill[] = [
 
   {
     text: (applicant) => (isMinor(applicant) ? "" : "X"),
-    loc: { x: 55, y: 326 },
+    loc: { x: 52, y: 327 },
   },
   {
     text: (applicant) => (isMinor(applicant) ? "X" : ""),
-    loc: { x: 55, y: 355 },
+    loc: { x: 52, y: 355 },
   },
-  { text: () => "X", loc: { x: 317, y: 409 } },
+  { text: () => "X", loc: { x: 314, y: 409 } },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
-    loc: { x: 599, y: 630 },
+    loc: { x: 596, y: 630 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
-    loc: { x: 680, y: 630 },
+    loc: { x: 677, y: 630 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    loc: { x: 774, y: 630 },
+    loc: { x: 771, y: 630 },
   },
 ];
 
