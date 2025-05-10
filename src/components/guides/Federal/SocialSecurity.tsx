@@ -19,21 +19,21 @@
 
 import * as React from "react";
 
-import { GenderMarker } from "../../../types/types";
 import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
 function SocialSecurityGuide({ person }: { person: Person }) {
-  const { gender, age, parentsAreOkay } = person;
+  const { age, parentsAreOkay } = person;
 
   return (
     <section key="Federal-SocialSecurity">
       <h3>Updating Your Social Security Info</h3>
 
       <p>
-        <strong>Warning</strong>, do not attempt to update your gender marker on this form,
-        it will be rejected. If you changed your marker before January 31st 2025
-        and are coming back to change your name you should be safe to do so.
+        <strong>Warning</strong>, do not attempt to update your gender marker on
+        this form, it will be rejected. If you changed your marker before
+        January 31st 2025 and are coming back to change your name you should be
+        safe to do so.
       </p>
 
       <p>
@@ -64,23 +64,25 @@ function SocialSecurityGuide({ person }: { person: Person }) {
         <a href="https://secure.ssa.gov/ICON/main.jsp">
           https://secure.ssa.gov/ICON/main.jsp
         </a>
-        . Social Security will only do name changes by appointment so call the number
-        of the local office you selected using the above link and say you want a name
-        change appointment. You will need identification to prove your identity,
-        age, and citizenship. A state ID, drivers license, or passport will be
-        acceptable. If you do not have those, refer to page 2 of form SS-5 for
-        other accepted forms of ID. You will also need to bring your completed
-        Application for a Social Security Card (SS-5), as well as your court order.
-        You will not be charged a fee for updating your information, it's free.
+        . Social Security will only do name changes by appointment so call the
+        number of the local office you selected using the above link and say you
+        want a name change appointment. You will need identification to prove
+        your identity, age, and citizenship. A state ID, drivers license, or
+        passport will be acceptable. If you do not have those, refer to page 2
+        of form SS-5 for other accepted forms of ID. You will also need to bring
+        your completed Application for a Social Security Card (SS-5), as well as
+        your court order. You will not be charged a fee for updating your
+        information, it&apos;s free.
       </p>
       <p>
-        At your appointment tell the clerk that you are updating your Social Security
-        information. They will request the Social Security form, ID documents,
-        and court order. They should then approve the name change and give you a
-        receipt, which you should check for accuracy and keep for your records.
-        This receipt is sufficient to update your Drivers License or State ID as
-        early as the next business day; you do <strong>not</strong> need to wait
-        for the new Social Security card in the mail.
+        At your appointment tell the clerk that you are updating your Social
+        Security information. They will request the Social Security form, ID
+        documents, and court order. They should then approve the name change and
+        give you a receipt, which you should check for accuracy and keep for
+        your records. This receipt is sufficient to update your Drivers License
+        or State ID as early as the next business day; you do{" "}
+        <strong>not</strong> need to wait for the new Social Security card in
+        the mail.
       </p>
     </section>
   );

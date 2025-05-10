@@ -35,8 +35,9 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
       </p>
       <p>
         You
-        {age && age < 18 && "and/or your parent(s)"} will be sworn in and questioned. The
-        questions vary between courts, but you can expect some of the following:
+        {age && age < 18 && "and/or your parent(s)"} will be sworn in and
+        questioned. The questions vary between courts, but you can expect some
+        of the following:
       </p>
       <ul>
         <li>What is your current legal name?</li>
@@ -68,7 +69,7 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
         to pick up your court order at the court or have it mailed. The court
         should have the order ready for pickup within a few hours or the next
         day. Mailing the order will take several days. Be sure to request a
-        certified copy of your court order if you haven't already.
+        certified copy of your court order if you haven&apos;t already.
       </p>
       <p>
         Once you have the certified copy of the court order, you are ready to

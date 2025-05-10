@@ -108,8 +108,8 @@ export const fields: { [key: string]: Field } = {
     type: "option",
     options: { M: "M", F: "F", X: "X" },
   },
-    /* We need an update on this doNotPublish variable as it no longer applies to MI but might in other states. */
-    /* We Should also add a criminal history/record checkbox and make that a variable to section parts of the guide for clarity. */
+  /* We need an update on this doNotPublish variable as it no longer applies to MI but might in other states. */
+  /* We Should also add a criminal history/record checkbox and make that a variable to section parts of the guide for clarity. */
   doNotPublish: {
     title:
       "I have good cause not to publish notice of my name change proceeding.",
@@ -204,9 +204,9 @@ export const fields: { [key: string]: Field } = {
 export function renderField(
   field: Field,
   jurisdiction: string,
-  register: (name: string) => Object,
+  register: (name: string) => object,
 ) {
-  if (!field || !field.hasOwnProperty("type")) {
+  if (!field || !Object.prototype.hasOwnProperty.call(field, "type")) {
     return undefined;
   }
 

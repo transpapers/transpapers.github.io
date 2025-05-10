@@ -26,7 +26,7 @@ import {
   phoneEnd,
   phoneStart,
   abbreviateJurisdiction,
-  representativeName
+  representativeName,
 } from "../../lib/util";
 
 import {
@@ -95,8 +95,8 @@ export const changeOfNameMap: Formfill[] = [
     field: "18",
   },
   {
-    text: (applicant) => applicant.birthCity && ", " &&
-    applicant.birthJurisdiction,
+    text: (applicant) =>
+      applicant.birthCity && ", " && applicant.birthJurisdiction,
     field: "19",
   },
   {
@@ -121,32 +121,32 @@ export const changeOfNameMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
+      isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
     field: "29",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
+      isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
     field: "30",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
+      isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
     field: "31",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
+      isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
     field: "32",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
+      isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
     field: "33",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
+      isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
     field: "34",
   },
 ];
@@ -162,25 +162,28 @@ export const bciMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? "" : fullName(applicant.birthName) ?? "",
+      isMinor(applicant) ? "" : fullName(applicant.birthName) ?? "",
     loc: { x: 337, y: 244 },
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? "" : formatDate(applicant.birthdate, {
+      isMinor(applicant)
+        ? ""
+        : formatDate(applicant.birthdate, {
             format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
             separator: "/",
-        }) ?? "",
+          }) ?? "",
     loc: { x: 199, y: 270 },
   },
   {
     text: (applicant) =>
-        `${applicant.streetAddress}, ${applicant.residentCity}, 
+      `${applicant.streetAddress}, ${applicant.residentCity},
         ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 249, y: 296 },
   },
   {
-    text: (applicant) => ("name change"), loc: { x: 164, y: 348 },
+    text: () => "name change",
+    loc: { x: 164, y: 348 },
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
@@ -336,7 +339,7 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
   /** ask Sasha about birth jurisdiction to check state/country */
   {
     text: (applicant) =>
-        abbreviateJurisdiction(applicant.birthJurisdiction || ""),
+      abbreviateJurisdiction(applicant.birthJurisdiction || ""),
     field: "STATEPROVINCE",
   },
   {

@@ -39,7 +39,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
 
       <p>
         {/* The other options for doing this inside a JSX component are all worse. */}
-        {/* eslint-disable-next-line no-nested-ternary */}
+        { }
         {age && age < 15
           ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
           : age && age < 18

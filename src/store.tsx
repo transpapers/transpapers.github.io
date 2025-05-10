@@ -59,7 +59,7 @@ const useStore = create<ApplicationState & Action>()(
 
               let pointer: any = dataToAssign;
               dirs.forEach((dirname) => {
-                if (!pointer.hasOwnProperty(dirname)) {
+                if (!Object.prototype.hasOwnProperty.call(pointer, dirname)) {
                   pointer[dirname] = {};
                 }
 

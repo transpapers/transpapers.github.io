@@ -26,7 +26,7 @@ import {
   birthCertMap,
 } from "./maps";
 
-import RhodeIslandBirthCertificateGuide from "../../components/guides/Michigan/BirthCertificate";
+// import RhodeIslandBirthCertificateGuide from "../../components/guides/Michigan/BirthCertificate";
 import MichiganCourtHearingGuide from "../../components/guides/Michigan/CourtHearing";
 import MichiganEverythingElseGuide from "../../components/guides/Michigan/EverythingElse";
 import MichiganFilingInitialFormsGuide from "../../components/guides/Michigan/FilingInitialForms";

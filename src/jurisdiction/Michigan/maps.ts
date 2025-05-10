@@ -71,12 +71,12 @@ export const nameChangePrivateMap: Formfill[] = [
   { check: (applicant) => !isMinor(applicant), field: "b an adult only" },
   {
     check: (applicant) => isMinor(applicant),
-      field: "c a minor only",
+    field: "c a minor only",
   },
   {
-    check: (applicant) =>
-    isMinor(applicant) && applicant.parentsAreOkay,
-      field: "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
+    check: (applicant) => isMinor(applicant) && applicant.parentsAreOkay,
+    field:
+      "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
   },
   {
     text: (applicant) =>
@@ -90,15 +90,16 @@ export const nameChangePrivateMap: Formfill[] = [
       isMinor(applicant) && applicant.parentsAreOkay
         ? fullName(applicant.fathersBirthName)
         : "",
-      field: "Parent_2",
+    field: "Parent_2",
   },
   {
     check: (applicant) => isMinor(applicant),
-      field: "5  As to a minor one or more of the following is the petitioner or consents to the guardianship Check all that apply",
+    field:
+      "5  As to a minor one or more of the following is the petitioner or consents to the guardianship Check all that apply",
   },
   {
     text: (applicant) => applicant.reasonForNameChange,
-      field: "#6 reason for name change",
+    field: "#6 reason for name change",
   },
   {
     text: (applicant) =>
@@ -168,46 +169,56 @@ export const nameChangePrivateMap: Formfill[] = [
   {
     text: (applicant) =>
       applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
-      field: "Names_2",
+    field: "Names_2",
   },
   { text: () => new Date().toLocaleDateString(), field: "Date" },
   {
-    check: () => true, field: "1 Publication of notice",
+    check: () => true,
+    field: "1 Publication of notice",
   },
   {
-    check: (applicant) => !isMinor(applicant), field: "Item 1 checkbox me",
+    check: (applicant) => !isMinor(applicant),
+    field: "Item 1 checkbox me",
   },
   {
-    check: (applicant) => isMinor(applicant), field: "Endangered individual checkbox",
-  },
-  {
-    text: (applicant) =>
-        isMinor(applicant) ? fullName(applicant.legalName) : "",
-      field: "Endangered individual",
-  },
-  {
-    check: () => true, field: "discrimination",
-  },
-  {
-    check: () => true, field: "2 basis of fear checkbox",
-  },
-  {
-    check: (applicant) => !isMinor(applicant), field: "2 checkbox I",
-  },
-  {
-    check: (applicant) => isMinor(applicant), field: "Endangered individual checkbox2",
+    check: (applicant) => isMinor(applicant),
+    field: "Endangered individual checkbox",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? fullName(applicant.legalName) : "",
-      field: "Endangered individual_2",
+      isMinor(applicant) ? fullName(applicant.legalName) : "",
+    field: "Endangered individual",
   },
   {
-    check: () => true, field: "b. checkbox seek to affirm gender identity",
+    check: () => true,
+    field: "discrimination",
+  },
+  {
+    check: () => true,
+    field: "2 basis of fear checkbox",
+  },
+  {
+    check: (applicant) => !isMinor(applicant),
+    field: "2 checkbox I",
+  },
+  {
+    check: (applicant) => isMinor(applicant),
+    field: "Endangered individual checkbox2",
   },
   {
     text: (applicant) =>
-        isMinor(applicant) ? fullName(representativeName(applicant)) : fullName(applicant.legalName),
+      isMinor(applicant) ? fullName(applicant.legalName) : "",
+    field: "Endangered individual_2",
+  },
+  {
+    check: () => true,
+    field: "b. checkbox seek to affirm gender identity",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant)
+        ? fullName(representativeName(applicant))
+        : fullName(applicant.legalName),
     field: "Name type or print",
   },
 ];
@@ -234,7 +245,7 @@ export const piiMap: Formfill[] = [
     field: "In the matter of",
   },
   {
-    text: (applicant) => ("PC 51c"),
+    text: () => "PC 51c",
     field: "Name of formdocument that this MC 97a is being filed with 1",
   },
   {

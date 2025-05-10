@@ -38,12 +38,12 @@ function GenericField(field: Field, innards: JSX.Element): JSX.Element {
 
 interface FieldConstructorProps {
   field: Field;
-  register: (name: string) => Object;
+  register: (name: string) => object;
 }
 
 interface CountyFieldConstructorProps {
   jurisdiction: string;
-  register: (name: string) => Object;
+  register: (name: string) => object;
 }
 
 export function StringField({
@@ -63,12 +63,15 @@ export function CheckboxField({
     <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
         type="checkbox"
-        defaultChecked={field.hasOwnProperty("default") && field.default}
+        defaultChecked={
+          Object.prototype.hasOwnProperty.call(field, "default") &&
+          field.default
+        }
         {...register(field.name)}
       />
       <div>
         <span className="title">{field.title}</span>
-        {field.hasOwnProperty("subtitle") ? (
+        {Object.prototype.hasOwnProperty.call(field, "subtitle") ? (
           <span className="subtitle">{field.subtitle}</span>
         ) : (
           ""
@@ -156,7 +159,11 @@ export function NumberField({
   const innards = (
     <input
       type="number"
-      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
+      defaultValue={
+        Object.prototype.hasOwnProperty.call(field, "default")
+          ? field.default
+          : ""
+      }
       {...register(field.name)}
     />
   );
@@ -171,7 +178,11 @@ export function EmailField({
   const innards = (
     <input
       type="email"
-      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
+      defaultValue={
+        Object.prototype.hasOwnProperty.call(field, "default")
+          ? field.default
+          : ""
+      }
       {...register(field.name)}
     />
   );
@@ -186,7 +197,11 @@ export function DateField({
   const innards = (
     <input
       type="date"
-      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
+      defaultValue={
+        Object.prototype.hasOwnProperty.call(field, "default")
+          ? field.default
+          : ""
+      }
       {...register(field.name)}
     />
   );
@@ -200,7 +215,11 @@ export function TelField({ field }: FieldConstructorProps): JSX.Element {
       id={field.name}
       name={field.name}
       type="tel"
-      defaultValue={field.hasOwnProperty("default") ? field.default : ""}
+      defaultValue={
+        Object.prototype.hasOwnProperty.call(field, "default")
+          ? field.default
+          : ""
+      }
     />
   );
 

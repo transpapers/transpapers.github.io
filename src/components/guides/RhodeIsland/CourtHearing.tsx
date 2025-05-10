@@ -35,8 +35,9 @@ function RhodeIslandCourtHearingGuide({ person }: { person: Person }) {
       </p>
       <p>
         You
-        {age && age < 18 && "and/or your parent(s)"} will be sworn in and questioned. The
-        questions vary between courts, but you can expect some of the following:
+        {age && age < 18 && "and/or your parent(s)"} will be sworn in and
+        questioned. The questions vary between courts, but you can expect some
+        of the following:
       </p>
       <ul>
         <li>What is your current legal name?</li>
@@ -63,22 +64,22 @@ function RhodeIslandCourtHearingGuide({ person }: { person: Person }) {
 
       <p>
         You may also ask that the court seal the records relating to your name
-        change and this hearing from the public. If you want that you will 
-        need to explain why, specifically relating to your safety or 
-        discrimmination risks. Examples relating to you specifically are
-        not strictly required, general transgender risks will also work.
+        change and this hearing from the public. If you want that you will need
+        to explain why, specifically relating to your safety or discrimmination
+        risks. Examples relating to you specifically are not strictly required,
+        general transgender risks will also work.
       </p>
 
       <p>
         At this point the name change should be granted and the hearing should
         end promptly. The document that you will get afterward is the exact
-        "Change of Name" petition that was submitted earlier but with page 2
-        filled out, we will call it the “court order” from here on. You will
-        probably be asked whether you want to pick up your court order at the
-        court or have it mailed. The court should have the order ready for
-        pickup within a few hours or the next day. Mailing the order will
-        take several days. Be sure to request a certified copy of your court
-        order if you haven't done so yet and the court does not automatically
+        &quot;Change of Name&quot; petition that was submitted earlier but with
+        page 2 filled out, we will call it the “court order” from here on. You
+        will probably be asked whether you want to pick up your court order at
+        the court or have it mailed. The court should have the order ready for
+        pickup within a few hours or the next day. Mailing the order will take
+        several days. Be sure to request a certified copy of your court order if
+        you haven&apos;t done so yet and the court does not automatically
         provide one.
       </p>
       <p>
