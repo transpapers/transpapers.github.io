@@ -34,8 +34,7 @@ export function isEmptyName(name: Name | undefined): boolean {
   if (name === undefined) {
     return false;
   }
-  const { first, middle, last, suffix } = name;
-  return !(first && middle && last && suffix);
+  return true;
 }
 
 export enum GenderMarker {
