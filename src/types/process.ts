@@ -29,6 +29,7 @@ export enum Target {
   Passport = "passport",
   PrimaryIdentification = "primary-identification",
   SocialSecurity = "social-security",
+  Postamble = "postamble"
 }
 
 /**
