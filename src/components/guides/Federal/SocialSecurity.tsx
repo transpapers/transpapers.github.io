@@ -43,8 +43,9 @@ function SocialSecurityGuide({ person }: { person: Person }) {
       </p>
       <p>
         First, complete the “Application for a Social Security Card” (form
-        SS-5.) Enter your SSN in section 2, and those of your parents in
-        sections 9-10. If you do not know and/or cannot obtain their SSNs, mark
+        SS-5.) If you have had a legal name not shown in section 1 write it in
+        "Other Names Used". Enter your SSN in section 2, and those of your parents
+        in sections 9-10. If you do not know and/or cannot obtain their SSNs, mark
         “Unknown” in the appropriate section. The “Race” and “Ethnicity” fields
         are optional, and left blank; you may fill them in at your discretion.
       </p>
