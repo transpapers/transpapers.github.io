@@ -49,8 +49,7 @@ export const ssnMap: Formfill[] = [
     field: "topmostSubform[0].Page5[0].LastName[0]",
   },
   {
-    text: (applicant) =>
-    isEmptyName(applicant.birthName) ? applicant.legalName?.first : applicant.birthName?.first,
+    text: (applicant) => applicant.birthName?.first,
     field: "topmostSubform[0].Page5[0].firstdiffname[0]",
   },
   {
