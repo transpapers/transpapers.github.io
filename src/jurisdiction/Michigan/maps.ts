@@ -314,11 +314,6 @@ export const birthCertMap: Formfill[] = [
         : applicant.chosenName?.last ?? "",
     loc: { x: 588, y: 196 },
   },
-  {
-    text: (applicant) =>
-      isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : "",
-    loc: { x: 178, y: 565 },
-  },
   { text: (applicant) => applicant.streetAddress, loc: { x: 48, y: 237 } },
   {
     text: (applicant) =>
@@ -329,6 +324,15 @@ export const birthCertMap: Formfill[] = [
   { text: (applicant) => applicant.phone, loc: { x: 48, y: 283 } },
   { text: (applicant) => applicant.email, loc: { x: 426, y: 283 } },
   {
+    text: (applicant) => (isMinor(applicant) ? "" : "X"),
+    loc: { x: 52, y: 327 },
+  },
+  {
+    text: (applicant) => isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
+    loc: { x: 52, y: 355 },
+  },
+  { text: () => "X", loc: { x: 314, y: 409 } },
+  {
     text: (applicant) => {
       if (isEmptyName(applicant.birthName)) {
         return fullName(applicant.legalName);
@@ -336,14 +340,6 @@ export const birthCertMap: Formfill[] = [
       return fullName(applicant.birthName);
     },
     loc: { x: 48, y: 541 },
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 56, y: 800 },
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    loc: { x: 433, y: 800 },
   },
   {
     text: (applicant) =>
@@ -355,8 +351,25 @@ export const birthCertMap: Formfill[] = [
   },
   {
     text: (applicant) =>
+        isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : "",
+    loc: { x: 178, y: 565 },
+  },
+  {
+    text: (applicant) =>
       `${applicant.birthCity}, ${applicant.birthJurisdiction}`,
     loc: { x: 249, y: 636 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
+    loc: { x: 595, y: 630 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
+    loc: { x: 676, y: 630 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+    loc: { x: 770, y: 630 },
   },
   {
     text: (applicant) => fullName(applicant.mothersBirthName),
@@ -368,28 +381,15 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 48, y: 754 },
   },
   { text: (applicant) => applicant.fathersBirthdate, loc: { x: 554, y: 754 } },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    loc: { x: 56, y: 800 },
+  },
+  {
+    text: (applicant) => fullName(applicant.chosenName),
+    loc: { x: 433, y: 800 },
+  },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
-  {
-    text: (applicant) => (isMinor(applicant) ? "" : "X"),
-    loc: { x: 52, y: 327 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? "X" : ""),
-    loc: { x: 52, y: 355 },
-  },
-  { text: () => "X", loc: { x: 314, y: 409 } },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
-    loc: { x: 596, y: 630 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
-    loc: { x: 677, y: 630 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    loc: { x: 771, y: 630 },
-  },
 ];
 
 /**
