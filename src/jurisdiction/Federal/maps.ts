@@ -28,7 +28,7 @@ import {
   representativeName,
 } from "../../lib/util";
 
-import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
+import { GenderMarker, isEmptyName, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 /**
@@ -49,7 +49,7 @@ export const ssnMap: Formfill[] = [
     field: "topmostSubform[0].Page5[0].LastName[0]",
   },
   {
-    text: (applicant) => applicant.birthName?.first,
+    text: (applicant) => isEmptyName(applicant.birthName) ? applicant.birthName?.first : applicant.legalName?.first,
     field: "topmostSubform[0].Page5[0].firstdiffname[0]",
   },
   {
