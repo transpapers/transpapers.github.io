@@ -123,19 +123,12 @@ export const michiganBirthRecord: Process = {
       name: "Acceptable ID",
       filename: "Michigan/acceptable-id.pdf",
     },
-    {
-      name: "Everything Else",
-      guide: MichiganEverythingElseGuide,
-    },
-    {
-      name: "Resources",
-      guide: MichiganResourcesGuide,
-    },
   ],
   isBirth: true,
 };
 
 export const michiganPostamble: Process = {
+  jurisdiction: "MI",
   depends: [Target.BirthRecord, Target.PrimaryIdentification],
   documents: [
     {
