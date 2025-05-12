@@ -42,7 +42,6 @@ export const socialSecurity: Process = {
 
 export const passport: Process = {
   target: Target.Passport,
-  depends: [Target.NameChange, Target.GenderMarker],
   documents: [
     {
       name: "Application for a Passport",
