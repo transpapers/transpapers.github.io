@@ -31,7 +31,6 @@ import {
 
 import {
   GenderMarker,
-  isEmptyName,
   DateFormatPart as DATE,
 } from "../../types/types";
 import { Formfill } from "../../types/formfill";
@@ -81,9 +80,7 @@ export const changeOfNameMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isEmptyName(applicant.birthName)
-        ? fullName(applicant.legalName)
-        : fullName(applicant.birthName),
+          fullName(applicant.birthName),
     field: "17",
   },
   {
@@ -106,14 +103,6 @@ export const changeOfNameMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.fathersBirthName),
     field: "21",
-  },
-  {
-    check: (applicant) => isEmptyName!(applicant.birthName),
-    loc: { x: 886, y: 1312 },
-  },
-  {
-    check: (applicant) => isEmptyName(applicant.birthName),
-    loc: { x: 981, y: 1312 },
   },
   {
     text: (applicant) => applicant.reasonForNameChange,
@@ -197,10 +186,7 @@ export const bciMap: Formfill[] = [
  */
 export const birthCertOneMap: Formfill[] = [
   {
-    text: (applicant) =>
-      isEmptyName(applicant.birthName)
-        ? fullName(applicant.legalName)
-        : fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName),
     loc: { x: 184, y: 213 },
   },
   {
@@ -414,10 +400,7 @@ export const genderIDMap: Formfill[] = [
  */
 export const birthCertTwoMap: Formfill[] = [
   {
-    text: (applicant) =>
-      isEmptyName(applicant.birthName)
-        ? fullName(applicant.legalName)
-        : fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName),
     loc: { x: 184, y: 213 },
   },
   {

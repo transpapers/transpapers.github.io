@@ -27,7 +27,6 @@ import {
 
 import {
   GenderMarker,
-  isEmptyName,
   DateFormatPart as DATE,
 } from "../../types/types";
 import { Formfill } from "../../types/formfill";
@@ -333,12 +332,7 @@ export const birthCertMap: Formfill[] = [
   },
   { text: () => "X", loc: { x: 314, y: 409 } },
   {
-    text: (applicant) => {
-      if (isEmptyName(applicant.birthName)) {
-        return fullName(applicant.legalName);
-      }
-      return fullName(applicant.birthName);
-    },
+    text: (applicant) => fullName(applicant.birthName),
     loc: { x: 48, y: 541 },
   },
   {
@@ -348,11 +342,6 @@ export const birthCertMap: Formfill[] = [
         separator: "/",
       }),
     loc: { x: 534, y: 541 },
-  },
-  {
-    text: (applicant) =>
-        isEmptyName(applicant.birthName) ? fullName(applicant.legalName) : "",
-    loc: { x: 178, y: 565 },
   },
   {
     text: (applicant) =>
@@ -382,7 +371,7 @@ export const birthCertMap: Formfill[] = [
   },
   { text: (applicant) => applicant.fathersBirthdate, loc: { x: 554, y: 754 } },
   {
-    text: (applicant) => fullName(applicant.legalName),
+    text: (applicant) => fullName(applicant.birthName),
     loc: { x: 56, y: 800 },
   },
   {
