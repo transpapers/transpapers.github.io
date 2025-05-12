@@ -33,10 +33,12 @@ import { passport, socialSecurity } from "./Federal/process";
 export const michigan: Jurisdiction = {
   name: "Michigan",
   processes: [
-    michiganBirthRecord,
-    michiganGenderMarker,
     michiganNameChange,
+    socialSecurity,
     michiganPrimaryIdentification,
+    michiganGenderMarker,
+    michiganBirthRecord,
+    passport,
     michiganPostamble,
   ],
   counties: michiganCounties,
