@@ -43,7 +43,7 @@ export interface Person {
   /**
    * Reason for applicant's name change.
    *
-   * @remarks Required by Michigan form ??.
+   * @remarks Required by most Change of Name petitions.
    */
   reasonForNameChange: string | undefined;
 
@@ -51,7 +51,7 @@ export interface Person {
    * Whether to seal applicant's previous birth certificate to prevent access by
    * third parties.
    *
-   * @remarks Required by Michigan form ??.
+   * @remarks Required by Michigan form PC 51c.
    */
   sealBirthCertificate: boolean | undefined;
 
@@ -130,8 +130,9 @@ export interface Person {
   /**
    * Whether to withhold publication of the newspaper notice.
    *
-   * @remarks Required to determine which forms should be filed for
-   * Michiganders.
+   * @remarks Required to determine between confidential and public
+   * court forms in most states. Potentially skips publication step
+   * in some state guides as well.
    */
   doNotPublish: boolean | undefined;
 
