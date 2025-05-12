@@ -129,6 +129,7 @@ export const michiganBirthRecord: Process = {
 
 export const michiganPostamble: Process = {
   jurisdiction: "MI",
+  target: Target.Postamble,
   depends: [Target.BirthRecord, Target.PrimaryIdentification],
   documents: [
     {
