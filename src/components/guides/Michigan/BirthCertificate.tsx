@@ -38,20 +38,20 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
       </p>
 
       <p>
+        If at any point in the past you have undergone a different name change, such as part of an
+        adoption, you will need to fill out the &ldquo;Other Names Used:&rdquo;
+        field on the Child's Info section of the{" "}
+        <strong>
+            Application to Correct or Change a Michigan Birth Record
+        </strong>{" "}
+        and check the applicable box underneath.
         {/* The other options for doing this inside a JSX component are all worse. */}
         { }
         {age && age < 15
           ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
           : age && age < 18
-            ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your old name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
-            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your old name."}{" "}
-        If at any point in the past you have undergone a different name change, such as part of an
-        adoption, you will need to fill out the &ldquo;Other Names Used:&rdquo;
-        section on the{" "}
-        <strong>
-          Application to Correct or Change a Michigan Birth Record
-        </strong>{" "}
-        and check the applicable box underneath.
+            ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your new name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
+            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your new name."}{" "}
       </p>
 
       {age && age < 18 ? (
@@ -59,7 +59,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
           <p>
             Your parent or guardian should complete the “Payment” section on
             page 2 as applicable. Then, they should mail the completed
-            Application to Correct or Change a Michigan Birth Record to:
+            forms to:
           </p>
           <p>
             <span>Vital Records Changes</span>
@@ -69,12 +69,12 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
             <span>Lansing, MI 48909</span>
           </p>
           <p>
-            They should enclose photocopies of the court order and of their
+            They should also enclose photocopies of the court order and of their
             primary identification.{" "}
             <strong>Original documents will not be returned.</strong> If they
             don&apos;t have a state ID or driver&apos;s license, they should
-            refer to the first link in our &ldquo;Resources&rdquo; section at
-            the end of this guide. Then they should enclose a check in the
+            refer to the &ldquo;Acceptable ID&rdquo; page we included in
+            the downloaded forms. Then they should enclose a check in the
             amount entered under &ldquo;TOTAL ENCLOSED&rdquo; made out to the
             State of Michigan.
           </p>
@@ -83,7 +83,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         <>
           <p>
             Complete the “Payment” section on page 2 as applicable. Mail the
-            Application to Correct or Change a Michigan Birth Record to:
+            completed forms to:
           </p>
           <p>
             <span>Vital Records Changes</span>
@@ -98,8 +98,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
             photocopies of the court order and your primary identification.{" "}
             <strong>Original documents will not be returned.</strong> If you
             don&apos;t have a state ID or driver&apos;s license, refer to the
-            first link in our &ldquo;Resources&rdquo; section at the end of this
-            guide.
+            &ldquo;Acceptable ID&rdquo; page we included in the downloaded forms.
           </p>
         </>
       )}
