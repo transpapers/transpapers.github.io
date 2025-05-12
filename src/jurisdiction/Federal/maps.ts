@@ -28,7 +28,7 @@ import {
   representativeName,
 } from "../../lib/util";
 
-import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
+import { GenderMarker, isEmptyName, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 /**
@@ -50,23 +50,18 @@ export const ssnMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      (applicant.birthName || applicant.legalName)?.first ?? "",
+    isEmptyName(applicant.birthName) ? applicant.legalName?.first : applicant.birthName?.first,
     field: "topmostSubform[0].Page5[0].firstdiffname[0]",
   },
   {
     text: (applicant) =>
-      (applicant.birthName || applicant.legalName)?.middle ?? "",
+    isEmptyName(applicant.birthName) ? applicant.legalName?.middle : applicant.birthName?.middle,
     field: "topmostSubform[0].Page5[0].Middlediffname[0]",
   },
   {
     text: (applicant) =>
-      (applicant.birthName || applicant.legalName)?.last ?? "",
+    isEmptyName(applicant.birthName) ? applicant.legalName?.last : applicant.birthName?.last,
     field: "topmostSubform[0].Page5[0].Lastdiffname[0]",
-  },
-  {
-    text: (applicant) =>
-      applicant.birthName ? fullName(applicant.legalName) : "",
-    field: "topmostSubform[0].Page5[0].Othername[0]",
   },
   {
     text: (applicant) => applicant.birthCity,
@@ -274,7 +269,7 @@ export const ds5504Map: Formfill[] = [
       }),
     loc: { page: 5, x: 661, y: 60 },
   },
-  { text: () => "x", loc: { page: 5, x: 133, y: 572 } },
+  { text: () => "x", loc: { page: 5, x: 132, y: 573 } },
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
     loc: { page: 5, x: 319, y: 562 },
@@ -294,12 +289,12 @@ export const ds5504Map: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds82Map: Formfill[] = [
-  { text: () => "X", loc: { x: 49, y: 178 } },
-  { text: () => "X", loc: { x: 49, y: 219 } },
-  { text: () => "X", loc: { x: 49, y: 262 } },
-  { text: () => "X", loc: { x: 49, y: 303 } },
-  { text: () => "X", loc: { x: 49, y: 361 } },
-  { text: () => "X", loc: { x: 49, y: 458 } },
+  { text: () => "X", loc: { x: 52, y: 175 } },
+  { text: () => "X", loc: { x: 52, y: 216 } },
+  { text: () => "X", loc: { x: 52, y: 259 } },
+  { text: () => "X", loc: { x: 52, y: 300 } },
+  { text: () => "X", loc: { x: 52, y: 358 } },
+  { text: () => "X", loc: { x: 52, y: 455 } },
   {
     text: (applicant) => applicant.chosenName?.last ?? "",
     loc: { page: 4, x: 101, y: 179 },
@@ -382,7 +377,7 @@ export const ds82Map: Formfill[] = [
     text: (applicant) => fullName(applicant.legalName),
     loc: { page: 4, x: 261, y: 557 },
   },
-  { text: () => "x", loc: { page: 4, x: 263, y: 702 } },
+  { text: () => "x", loc: { page: 4, x: 262, y: 703 } },
   {
     text: (applicant) =>
       `${applicant.court?.city}  ${abbreviateJurisdiction(applicant.residentJurisdiction || "") || ""}`,
@@ -525,7 +520,7 @@ export const ds11Map: Formfill[] = [
       }),
     loc: { page: 5, x: 140, y: 158 },
   },
-  { text: () => "x", loc: { page: 5, x: 695, y: 160 } },
+  { text: () => "x", loc: { page: 5, x: 694, y: 160 } },
   {
     text: (applicant) =>
       `${applicant.fathersBirthName?.first ?? ""} ${applicant.fathersBirthName?.middle ?? ""}`,
@@ -533,7 +528,7 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) => applicant.fathersBirthName?.last ?? "",
-    loc: { page: 5, x: 478, y: 202 },
+    loc: { page: 5, x: 481, y: 202 },
   },
   {
     text: (applicant) =>
@@ -559,5 +554,5 @@ export const ds11Map: Formfill[] = [
       }),
     loc: { page: 5, x: 141, y: 248 },
   },
-  { text: () => "x", loc: { page: 5, x: 694, y: 235 } },
+  { text: () => "x", loc: { page: 5, x: 694, y: 236 } },
 ];
