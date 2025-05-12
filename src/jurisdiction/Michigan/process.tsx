@@ -123,6 +123,14 @@ export const michiganBirthRecord: Process = {
       name: "Acceptable ID",
       filename: "Michigan/acceptable-id.pdf",
     },
+    {
+      name: "Everything Else",
+      guide: MichiganEverythingElseGuide,
+    },
+    {
+      name: "Resources",
+      guide: MichiganResourcesGuide,
+    },
   ],
   isBirth: true,
 };
