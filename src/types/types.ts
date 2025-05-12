@@ -32,9 +32,9 @@ export interface Name {
  */
 export function isEmptyName(name: Name | undefined): boolean {
   if (name === undefined) {
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
 export enum GenderMarker {
