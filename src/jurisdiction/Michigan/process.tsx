@@ -141,5 +141,4 @@ export const michiganPostamble: Process = {
       guide: MichiganResourcesGuide,
     },
   ],
-  /**isJustGuide: true,*/
 };
