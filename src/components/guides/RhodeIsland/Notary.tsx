@@ -93,14 +93,14 @@ function RhodeIslandNotaryGuide(
         <a href="UPS locations">
           https://www.theupsstore.com/tools/find-a-store
         </a>
-        , or <a href="online">https://www.notarize.com/</a>. All of these
+              , or{" "} <a href="online">https://www.notarize.com/</a>. All of these
         services have different fees and payment methods but all of them require
         a photo ID.
       </p>
 
       {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true ? (
         <p>
-          Our records show that the {court?.city} court either does the
+          Our records show that the{" "} {court?.city} {" "}court either does the
           background check report for you when you file or gives its own unique
           instructions for one upon filing.
         </p>
@@ -144,7 +144,7 @@ function RhodeIslandNotaryGuide(
           : "Once you "}
         have a useable copy of the birth certificate
         {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true
-          ? "and a notarized Change of Name petition you are ready to file. The court should take care of the background check when you file."
+          ? " and a notarized Change of Name petition you are ready to file. The court should take care of the background check when you file."
           : ", a notarized Change of Name petition, and the background check results you are ready to file."}
       </p>
     </section>

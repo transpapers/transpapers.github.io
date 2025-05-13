@@ -55,13 +55,13 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
           well.
           {age && age < 18
             ? " Then have the parent/guardian whose name is listed in section 5 check the appropriate box in section 2 and sign/date section 5. "
-            : " Then sign and date section 5. "}
+            : " Then sign and date section 5 with your current legal name. "}
           Instructions for in-person or mail ordering are in the next section.
         </p>
       ) : (
         <p>
           If you don&apos;t have a useable copy you will need to either
-          {age && age < 18 ? " have a parent/guardian" : ""} order one online
+          {age && age < 18 ? " have a parent/guardian" : " "} order one online
           through{" "}
           <a href="VitalChek">
             https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH

@@ -29,13 +29,13 @@ function RhodeIslandCourtHearingGuide({ person }: { person: Person }) {
       <h3>Court Hearing (RI)</h3>
       <p>
         On the day of your hearing, you
-        {age && age < 18 && "and your parent(s)"} should dress appropriately for
+        {age && age < 18 && " and your parent(s)/guardian(s) "} should dress appropriately for
         a courtroom, even if the hearing is virtual. The hearing may begin late,
         but it should only take a few minutes once it starts.
       </p>
       <p>
         You
-        {age && age < 18 && "and/or your parent(s)"} will be sworn in and
+        {age && age < 18 && " and/or your parent(s)/guardian(s) "} will be sworn in and
         questioned. The questions vary between courts, but you can expect some
         of the following:
       </p>

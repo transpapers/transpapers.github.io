@@ -61,13 +61,13 @@ function RhodeIslandDMVGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        When you {age && age < 18 ? " and a parent/guardian " : ""} arrive, tell
+        When you {age && age < 18 ? " and a parent/guardian " : " "} arrive, tell
         the clerk that you want to update the name and/or gender marker on your
         ID and present the above documents to the clerk. Sign and date both
         forms in front of the clerk.
         {age && age < 18
           ? " A parent/guardian will need to sign the LI-1 form as well just below section G. "
-          : ""}
+          : " "}
         If you do not already have a driver’s license or state ID, tell the
         clerk that you are applying for one and take the same steps. Make sure
         the gender marker is set correctly before you leave. If you experience

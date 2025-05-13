@@ -62,11 +62,11 @@ function RhodeIslandFilingGuide(
           )}
           <p>
             A parent/guardian will need to bring the notarized Change of Name
-            petition, useable copy of your birth certificate,
+            petition, useable copy of your birth certificate
             {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true
-              ? ""
-              : ", BCI report"}
-            , and photo ID. According to our data the filing fee will be{" "}
+              ? ", "
+              : ", BCI report, "}
+            and photo ID. According to our data the filing fee will be{" "}
             {filingCost}. The courts are not in session every day so the clerk
             will tell them when your hearing date will be when they file. Each
             court is specific with what payment types they accept so they need
@@ -77,11 +77,11 @@ function RhodeIslandFilingGuide(
       ) : (
         <p>
           The filing location is at {court?.address}. Bring the notarized Change
-          of Name petition, useable copy of your birth certificate,
+          of Name petition, useable copy of your birth certificate
           {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true
-            ? ""
-            : ", BCI report"}
-          , and photo ID. According to our data the filing fee will be{" "}
+            ? ", "
+            : ", BCI report, "}
+          and photo ID. According to our data the filing fee will be{" "}
           {filingCost}. The courts are not in session every day so the clerk
           will tell you when your hearing date will be when you file. Each court
           is specific with what payment types they accept so either call to ask
