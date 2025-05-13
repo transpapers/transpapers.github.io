@@ -20,6 +20,7 @@
 import * as React from "react";
 
 import { Person } from "./person";
+import { Locality } from "./locality";
 import { Formfill } from "./formfill";
 
 export enum Target {
@@ -94,7 +95,7 @@ export interface Document {
    * Location of guide for this document, from root public/guides/ (dev tree)
    * or guides/ (served.)
    */
-  guide?: ({ person }: { person: Person }) => React.JSX.Element;
+    guide?: ({ person }: { person: Person }, { locality }: { locality: Locality }) => React.JSX.Element;
 
   /**
    * Criterion for inclusion.

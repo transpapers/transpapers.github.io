@@ -17,8 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export type Locality =
-  | AlaskaAdministrativeDivision
+export type Locality = AlaskaAdministrativeDivision
   | MichiganCounty
   | RhodeIslandCityOrTown
   | OtherCounty;

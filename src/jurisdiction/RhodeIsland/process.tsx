@@ -18,59 +18,62 @@
  */
 
 import {
-  nameChangePrivateMap,
-  piiMap,
-  feeWaiverMap,
-  mdosSexMap,
-  miSexMap,
-  birthCertMap,
+  changeOfNameMap,
+  bciMap,
+  birthCertOneMap,
+  primaryIDRhodeIslandMap,
+  genderIDMap,
+  birthCertTwoMap,
 } from "./maps";
 
-// import RhodeIslandBirthCertificateGuide from "../../components/guides/Michigan/BirthCertificate";
-import MichiganCourtHearingGuide from "../../components/guides/Michigan/CourtHearing";
-import MichiganEverythingElseGuide from "../../components/guides/Michigan/EverythingElse";
-import MichiganFilingInitialFormsGuide from "../../components/guides/Michigan/FilingInitialForms";
-import MichiganM97aGuide from "../../components/guides/Michigan/M97a";
-import MichiganMC20Guide from "../../components/guides/Michigan/MC20";
-import MichiganPC51Guide from "../../components/guides/Michigan/PC51";
-import MichiganResourcesGuide from "../../components/guides/Michigan/Resources";
-import MichiganSecretaryOfStateGuide from "../../components/guides/Michigan/SecretaryOfState";
+import RhodeIslandBCIGuide from "../../components/guides/RhodeIsland/BCI";
+import RhodeIslandBirthCertRequestGuide from "../../components/guides/RhodeIsland/BirthCertRequest";
+import RhodeIslandBirthCertUpdateGuide from "../../components/guides/RhodeIsland/BirthCertUpdate";
+import RhodeIslandCourtHearingGuide from "../../components/guides/RhodeIsland/CourtHearing";
+import RhodeIslandDMVGuide from "../../components/guides/RhodeIsland/DMV";
+import RhodeIslandEverythingElseGuide from "../../components/guides/RhodeIsland/EverythingElse";
+import RhodeIslandFilingGuide from "../../components/guides/RhodeIsland/FilingInitialForms";
+import RhodeIslandNotaryGuide from "../../components/guides/RhodeIsland/Notary";
+import RhodeIslandPC8_1Guide from "../../components/guides/RhodeIsland/PC8-1";
+import RhodeIslandResourcesGuide from "../../components/guides/RhodeIsland/Resources";
 
 import { type Process, Target } from "../../types/process";
 
-export const michiganNameChange: Process = {
-  jurisdiction: "MI",
+export const rhodeislandNameChange: Process = {
+  jurisdiction: "RI",
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
     {
-      name: "Petition to Change Name and Ex Parte Request for Nonpublication and Confidential Record",
-      id: "PC 51c",
-      filename: "Michigan/pc51c.pdf",
-      guide: MichiganPC51Guide,
-      map: nameChangePrivateMap,
+      name: "Change of Name",
+      id: "PC8.1",
+      filename: "RhodeIsland/PC8.1-change-of-name.pdf",
+      guide: RhodeIslandPC8_1Guide,
+      map: changeOfNameMap,
     },
     {
-      name: "Addendum to Protected Personal Identifying Information",
-      id: "M 97a",
-      filename: "Michigan/m97a.pdf",
-      guide: MichiganM97aGuide,
-      map: piiMap,
+      name: "Authorization to Release Information",
+      filename: "RhodeIsland/BCI_BackgroundCheck.pdf",
+      guide: RhodeIslandBCIGuide,
+      map: bciMap,
     },
     {
-      name: "Fee Waiver Request",
-      id: "MC 20",
-      filename: "Michigan/mc20.pdf",
-      guide: MichiganMC20Guide,
-      map: feeWaiverMap,
+      name: "Application for a Certified Copy of a Birth Record",
+      filename: "RhodeIsland/Birth Cert Request.pdf",
+      guide: RhodeIslandBirthCertRequestGuide,
+      map: birthCertOneMap,
+    },
+    {
+      name: "Getting Documents and a Notary",
+      guide: RhodeIslandNotaryGuide,
     },
     {
       name: "Filing Initial Documents",
-      guide: MichiganFilingInitialFormsGuide,
+      guide: RhodeIslandFilingGuide,
     },
     {
       name: "Court Hearing",
-      guide: MichiganCourtHearingGuide,
+      guide: RhodeIslandCourtHearingGuide,
     },
   ],
 };
