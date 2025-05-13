@@ -79,8 +79,7 @@ export const changeOfNameMap: Formfill[] = [
     field: "15",
   },
   {
-    text: (applicant) =>
-          fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
     field: "17",
   },
   {
@@ -151,7 +150,7 @@ export const bciMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant) ? "" : fullName(applicant.birthName) ?? "",
+      isMinor(applicant) ? "" : fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
     loc: { x: 337, y: 244 },
   },
   {
@@ -186,7 +185,7 @@ export const bciMap: Formfill[] = [
  */
 export const birthCertOneMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
     loc: { x: 184, y: 213 },
   },
   {
@@ -400,7 +399,7 @@ export const genderIDMap: Formfill[] = [
  */
 export const birthCertTwoMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
     loc: { x: 184, y: 213 },
   },
   {
