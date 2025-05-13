@@ -59,6 +59,7 @@ function Guide() {
           You should print both this webpage and the PDF containing your
           compiled documents.
         </strong>
+        Please review the forms and guide side by side.
       </p>
 
       {documents
