@@ -332,7 +332,7 @@ export const birthCertMap: Formfill[] = [
   },
   { text: () => "X", loc: { x: 314, y: 409 } },
   {
-    text: (applicant) => fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
     loc: { x: 48, y: 541 },
   },
   {
@@ -371,7 +371,7 @@ export const birthCertMap: Formfill[] = [
   },
   { text: (applicant) => applicant.fathersBirthdate, loc: { x: 554, y: 754 } },
   {
-    text: (applicant) => fullName(applicant.birthName),
+    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
     loc: { x: 56, y: 800 },
   },
   {
