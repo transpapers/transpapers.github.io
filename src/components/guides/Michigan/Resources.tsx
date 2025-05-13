@@ -25,11 +25,6 @@ function MichiganResourcesGuide() {
       <h3>Resources (MI)</h3>
       <ul>
         <li>
-          <a href="https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Doing-Business-with-MDHHS/Birth-Death-Marriage-and-Divorce-Records/Photo_ID_Alternative_Documents.pdf">
-            https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Doing-Business-with-MDHHS/Birth-Death-Marriage-and-Divorce-Records/Photo_ID_Alternative_Documents.pdf
-          </a>
-        </li>
-        <li>
           <a href="https://grtransfoundation.org/update-program/">
             Grand Rapids Trans Foundation
           </a>
