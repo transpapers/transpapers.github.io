@@ -282,3 +282,20 @@ export function fullContactInfo(applicant: Person, separator = "\n"): string {
 
   return lines.join(separator);
 }
+
+/**
+ * Return entered string with leading "0" if it was single digit.
+ * This is for adding 0's to the day or month for particular forms.
+ * @param {Person} applicant
+ * @return {string}
+ */
+export function addZero(zeroString: string | undefined): string {
+    if (!zeroString) {
+        return "";
+    }
+
+    if (zeroString.length == 1) {
+        return "0" && zeroString;
+    }
+    return zeroString;
+}

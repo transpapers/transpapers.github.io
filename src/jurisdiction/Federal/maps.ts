@@ -26,9 +26,10 @@ import {
   abbreviateJurisdiction,
   isMinor,
   representativeName,
+  addZero,
 } from "../../lib/util";
 
-import { GenderMarker, isEmptyName, DateFormatPart as DATE } from "../../types/types";
+import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 /**
@@ -184,12 +185,12 @@ export const ds5504Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" }),
+      addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
     loc: { page: 4, x: 99, y: 281 },
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
     loc: { page: 4, x: 147, y: 281 },
   },
   {
@@ -306,12 +307,12 @@ export const ds82Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" }),
+      addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
     loc: { page: 4, x: 99, y: 270 },
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
     loc: { page: 4, x: 147, y: 270 },
   },
   {
@@ -414,12 +415,12 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" }),
+      addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
     loc: { page: 4, x: 100, y: 275 },
   },
   {
     text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
     loc: { page: 4, x: 148, y: 275 },
   },
   {
