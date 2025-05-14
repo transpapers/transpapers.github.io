@@ -28,6 +28,15 @@ import {
 } from "./Michigan/process";
 import michiganCounties from "./Michigan/counties";
 
+import {
+    rhodeislandBirthRecord,
+    rhodeislandGenderMarker,
+    rhodeislandNameChange,
+    rhodeislandPrimaryIdentification,
+    rhodeislandPostamble,
+} from "./RhodeIsland/process";
+import rhodeislandCounties from "./RhodeIsland/counties";
+
 import { passport, socialSecurity } from "./Federal/process";
 
 export const michigan: Jurisdiction = {
@@ -44,10 +53,24 @@ export const michigan: Jurisdiction = {
   counties: michiganCounties,
 };
 
+export const rhodeisland: Jurisdiction = {
+    name: "Rhode Island",
+    processes: [
+        rhodeislandNameChange,
+        socialSecurity,
+        rhodeislandPrimaryIdentification,
+        rhodeislandGenderMarker,
+        rhodeislandBirthRecord,
+        passport,
+        rhodeislandPostamble,
+    ],
+    counties: rhodeislandCounties,
+};
+
 export const federal: Jurisdiction = {
   name: "Federal",
   processes: [socialSecurity, passport],
   isFederal: true,
 };
 
-export const allJurisdictions = [federal, michigan];
+export const allJurisdictions = [federal, michigan, rhodeisland];
