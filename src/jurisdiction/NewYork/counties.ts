@@ -17,15 +17,16 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { OtherCounty } from "../../types/locality";
+import { NewYorkCounty } from "../../types/locality";
 
-const newyorkCounties: { [key: string]: OtherCounty } = {
+const newyorkCounties: { [key: string]: NewYorkCounty } = {
     Albany: {
         court: {
         address: "6 Lodge St, Albany, NY 12207",
         city: "Albany",
         phone: "(518) 285-8777",
         },
+        courtType: "County",
     },
     Allegany: {
         court: {
@@ -33,6 +34,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Belmont",
         phone: "(585) 449-3416",
         },
+        courtType: "County",
     },
     Bronx: {
         court: {
@@ -40,6 +42,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Bronx",
         phone: "(646) 386-5700",
         },
+        courtType: "New York City Civil",
     },
     Broome: {
         court: {
@@ -47,6 +50,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Binghamton",
         phone: "(607) 240-5800",
         },
+        courtType: "County",
     },
     Cattaraugus: {
         court: {
@@ -54,6 +58,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Little Valley",
         phone: "(716) 379-6636",
         },
+        courtType: "County",
     },
     Cayuga: {
         court: {
@@ -61,6 +66,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Auburn",
         phone: "(315) 237-6450",
         },
+        courtType: "County",
     },
     Chautauqua: {
         court: {
@@ -68,6 +74,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Mayville",
         phone: "(716) 753-4266",
         },
+        courtType: "County",
     },
     Chemung: {
         court: {
@@ -75,6 +82,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Elmira",
         phone: "(607) 216-6610",
         },
+        courtType: "County",
     },
     Chenango: {
         court: {
@@ -82,6 +90,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Norwich",
         phone: "(607) 371-7160",
         },
+        courtType: "County",
     },
     Clinton: {
         court: {
@@ -89,6 +98,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Plattsburgh",
         phone: "(518) 536-3840",
         },
+        courtType: "County",
     },
     Columbia: {
         court: {
@@ -96,6 +106,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Hudson",
         phone: "(518) 267-3150",
         },
+        courtType: "County",
     },
     Cortland: {
         court: {
@@ -103,6 +114,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Cortland",
         phone: "(607) 218-3320",
         },
+        courtType: "County",
     },
     Delaware: {
         court: {
@@ -110,6 +122,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Delhi",
         phone: "(607) 376-5400",
         },
+        courtType: "County",
     },
     Dutchess: {
         court: {
@@ -117,6 +130,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Poughkeepsie",
         phone: "(845) 431-1710",
         },
+        courtType: "County",
     },
     Erie: {
         court: {
@@ -124,6 +138,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Buffalo",
         phone: "(716) 845-9301",
         },
+        courtType: "County",
     },
     Essex: {
         court: {
@@ -131,6 +146,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Elizabethtown",
         phone: "(518) 873-3370",
         },
+        courtType: "County",
     },
     Franklin: {
         court: {
@@ -138,6 +154,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Malone",
         phone: "(518) 353-7340",
         },
+        courtType: "County",
     },
     Fulton: {
         court: {
@@ -145,6 +162,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Johnstown",
         phone: "(518) 706-3290",
         },
+        courtType: "County",
     },
     Genesee: {
         court: {
@@ -152,6 +170,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Batavia",
         phone: "(585) 201-5715",
         },
+        courtType: "County",
     },
     Greene: {
         court: {
@@ -159,6 +178,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Catskill",
         phone: "(518) 625-3160",
         },
+        courtType: "County",
     },
     Hamilton: {
         court: {
@@ -166,6 +186,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Lake Pleasant",
         phone: "(518) 648-5411",
         },
+        courtType: "County",
     },
     Herkimer: {
         court: {
@@ -173,6 +194,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Herkimer",
         phone: "(315) 619-3400",
         },
+        courtType: "County",
     },
     Jefferson: {
         court: {
@@ -180,6 +202,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Watertown",
         phone: "(315) 570-2950",
         },
+        courtType: "County",
     },
     Kings: {
         court: {
@@ -187,6 +210,8 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Brooklyn",
         phone: "(646) 386-5700",
         },
+        courtType: "New York City Civil",
+        isNYC: true,
     },
     Lewis: {
         court: {
@@ -194,6 +219,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Lowville",
         phone: "(315) 570-2435",
         },
+        courtType: "County",
     },
     Livingston: {
         court: {
@@ -201,6 +227,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Geneseo",
         phone: "(585) 371-3920",
         },
+        courtType: "County",
     },
     Madison: {
         court: {
@@ -208,6 +235,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Wampsville",
         phone: "(315) 231-5301",
         },
+        courtType: "County",
     },
     Monroe: {
         court: {
@@ -215,6 +243,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Rochester",
         phone: "(585) 371-3758",
         },
+        courtType: "County",
     },
     Montgomery: {
         court: {
@@ -222,6 +251,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Fonda",
         phone: "(518) 853-4516",
         },
+        courtType: "County",
     },
     Nassau: {
         court: {
@@ -229,6 +259,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Garden City",
         phone: "(516) 493-3710",
         },
+        courtType: "County",
     },
     Niagara: {
         court: {
@@ -236,6 +267,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Niagara Falls",
         phone: "(716) 280-6400",
         },
+        courtType: "County",
     },
     "New York": {
         court: {
@@ -243,6 +275,8 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "New York",
         phone: "(646) 386-5750",
         },
+        courtType: "New York City Civil",
+        isNYC: true,
     },
     Oneida: {
         court: {
@@ -250,6 +284,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Utica",
         phone: "(315) 266-4444",
         },
+        courtType: "County",
     },
     Onondaga: {
         court: {
@@ -257,6 +292,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Syracuse",
         phone: "(315) 671-1020",
         },
+        courtType: "County",
     },
     Ontario: {
         court: {
@@ -264,6 +300,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Canandaigua",
         phone: "(585) 412-5300",
         },
+        courtType: "County",
     },
     Orange: {
         court: {
@@ -271,6 +308,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Goshen",
         phone: "(845) 476-3500",
         },
+        courtType: "County",
     },
     Orleans: {
         court: {
@@ -278,6 +316,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Albion",
         phone: "(585) 283-6622",
         },
+        courtType: "County",
     },
     Oswego: {
         court: {
@@ -285,6 +324,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Oswego",
         phone: "(315) 207-7504",
         },
+        courtType: "County",
     },
     Otsego: {
         court: {
@@ -292,6 +332,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Cooperstown",
         phone: "(607) 322-3175",
         },
+        courtType: "County",
     },
     Putnam: {
         court: {
@@ -299,6 +340,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Carmel Hamlet",
         phone: "(845) 208-7800",
         },
+        courtType: "County",
     },
     Queens: {
         court: {
@@ -306,6 +348,8 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Queens",
         phone: "(718) 262-7100",
         },
+        courtType: "New York City Civil",
+        isNYC: true,
     },
     Rensselaer: {
         court: {
@@ -313,6 +357,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Troy",
         phone: "(518) 285-5025",
         },
+        courtType: "County",
     },
     Richmond: {
         court: {
@@ -320,6 +365,8 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Staten Island",
         phone: "(646) 386-5700",
         },
+        courtType: "New York City Civil",
+        isNYC: true,
     },
     Rockland: {
         court: {
@@ -327,6 +374,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "New City",
         phone: "(845) 483-8310",
         },
+        courtType: "County",
     },
     Saratoga: {
         court: {
@@ -334,6 +382,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Ballston Spa",
         phone: "(518) 451-8840",
         },
+        courtType: "County",
     },
     Schenectady: {
         court: {
@@ -341,6 +390,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Schenectady",
         phone: "(518) 285-8401",
         },
+        courtType: "County",
     },
     Schoharie: {
         court: {
@@ -348,6 +398,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Schoharie",
         phone: "(518) 453-6998",
         },
+        courtType: "County",
     },
     Schuyler: {
         court: {
@@ -355,6 +406,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Watkins Glen",
         phone: "(607) 228-3350",
         },
+        courtType: "County",
     },
     Seneca: {
         court: {
@@ -362,6 +414,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Waterloo",
         phone: "(315) 835-6229",
         },
+        courtType: "County",
     },
     "St. Lawrence": {
         court: {
@@ -369,6 +422,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Canton",
         phone: "(315) 379-2219",
         },
+        courtType: "County",
     },
     Steuben: {
         court: {
@@ -376,6 +430,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Bath",
         phone: "(607) 622-8219",
         },
+        courtType: "County",
     },
     Suffolk: {
         court: {
@@ -383,6 +438,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Riverhead",
         phone: "(631) 852-1462",
         },
+        courtType: "County",
     },
     Sullivan: {
         court: {
@@ -390,6 +446,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Monticello",
         phone: "(845) 791-3540",
         },
+        courtType: "County",
     },
     Tioga: {
         court: {
@@ -397,6 +454,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Owego",
         phone: "(607) 689-6107",
         },
+        courtType: "County",
     },
     Tompkins: {
         court: {
@@ -404,6 +462,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Ithaca",
         phone: "(607) 216-6610",
         },
+        courtType: "County",
     },
     Ulster: {
         court: {
@@ -411,6 +470,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Kingston",
         phone: "(845) 481-9375",
         },
+        courtType: "County",
     },
     Warren: {
         court: {
@@ -418,6 +478,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Lake George",
         phone: "(518) 480-6335",
         },
+        courtType: "County",
     },
     Washington: {
         court: {
@@ -425,6 +486,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Fort Edward",
         phone: "(518) 480-6920",
         },
+        courtType: "County",
     },
     Wayne: {
         court: {
@@ -432,6 +494,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Lyons",
         phone: "(315) 665-8117",
         },
+        courtType: "County",
     },
     Westchester: {
         court: {
@@ -439,6 +502,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "White Plains",
         phone: "(914) 824-5300",
         },
+        courtType: "County",
     },
     Wyoming: {
         court: {
@@ -446,6 +510,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Warsaw",
         phone: "(585) 228-3200",
         },
+        courtType: "County",
     },
     Yates: {
         court: {
@@ -453,6 +518,7 @@ const newyorkCounties: { [key: string]: OtherCounty } = {
         city: "Penn Yan",
         phone: "(315) 835-6308",
         },
+        courtType: "County",
     },
 };
 

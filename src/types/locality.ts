@@ -20,6 +20,7 @@
 export type Locality = AlaskaAdministrativeDivision
   | MichiganCounty
   | RhodeIslandCityOrTown
+  | NewYorkCounty
   | OtherCounty;
 
 export interface AlaskaAdministrativeDivision {
@@ -38,6 +39,11 @@ export interface AlaskaAdministrativeDivision {
 
 export interface OtherCounty {
   court: Court;
+}
+export interface NewYorkCounty {
+    court: Court;
+    courtType: string;
+    isNYC?: boolean;
 }
 
 export interface RhodeIslandCityOrTown {
