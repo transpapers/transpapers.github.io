@@ -26,6 +26,7 @@ import {
   phoneEnd,
   phoneStart,
   abbreviateJurisdiction,
+  addZero,
 } from "../../lib/util";
 
 import {
@@ -41,7 +42,7 @@ import { Formfill } from "../../types/formfill";
 
 /**
  * Name Change Petition Adult (New York form UCS-NC1.)
- * Updated 7/2024.
+ * Updated 5/2025.
  * @type {Formfill[]}
  */
 export const adultNameSexPetitionMap: Formfill[] = [
@@ -63,11 +64,6 @@ export const adultNameSexPetitionMap: Formfill[] = [
   {
     check: (applicant) => applicant.isChangingLegalSex,
     field: "SexDesignationChange",
-  },
-  /** There is a radio button for do not publish that I made an attempt at below */
-  {
-    check: (applicant) => applicant.doNotPublish,
-    field: "SealingRequest_group_2",
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? 
@@ -118,16 +114,18 @@ export const adultNameSexPetitionMap: Formfill[] = [
       applicant.residentCity &&
       ", " &&
       applicant.residentJurisdiction &&
-      " " &&
-      applicant.zip,
+      ", " &&
+      applicant.zip
+      && ", USA",
     field: "CurrentAddress",
   },
+  { text: () => new Date().toLocaleDateString(), field: "SignatureDate" },
   /** #28 also has a do not publish radio button with a reason text box below */
 ];
 
 /**
  * Name Change Petition Minor (New York form UCS-NC2.)
- * Updated 7/2024.
+ * Updated 5/2025.
  * @type {Formfill[]}
  */
 export const MinorNameSexPetitionMap: Formfill[] = [
@@ -147,6 +145,12 @@ export const MinorNameSexPetitionMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.legalName),
     field: "MinorName",
+  },
+  {
+    // Radio button attempt
+    check: (applicant) => isMinor(applicant) && applicant.parentsAreOkay,
+    field: "RelationshipToMinor",
+    select: "Parent(s)",
   },
   {
     check: (applicant) => applicant.isChangingLegalName,
@@ -169,7 +173,7 @@ export const MinorNameSexPetitionMap: Formfill[] = [
   {
     text: (applicant) => applicant.isChangingLegalName ? 
       applicant.reasonForNameChange : "",
-      field: "ReasonsForNameChangeRequest-specify",
+      field: "ReasonsForNameChangeRequest",
   },
   {
     text: (applicant) =>
@@ -185,7 +189,6 @@ export const MinorNameSexPetitionMap: Formfill[] = [
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
     field: "NewSexDesignation",
   },
-  /** I think we need a larger discussion for item #22 */
   {
     text: (applicant) => applicant.age!.toString(),
     field: "Age",
@@ -205,13 +208,20 @@ export const MinorNameSexPetitionMap: Formfill[] = [
       applicant.residentCity &&
       ", " &&
       applicant.residentJurisdiction &&
-      " " &&
-      applicant.zip,
+      ", " &&
+      applicant.zip
+      && ", USA",
     field: "CurrentAddress",
   },
-  /** Do not publish item #30 radio button and text box here. */
-  /** Non-Consenting parent permission section needs a talk through together */
-  /** Minors consent section is for minors 14+ and I don't know how to do those if statements */
+    /** Do not publish item #28 radio button and text box here. */
+  { text: () => new Date().toLocaleDateString(), field: "SignatureDatePetitioner" },
+  { text: () => new Date().toLocaleDateString(), field: "SignatureDateCoPetitioner" },
+  /** Below is Steph's attempt if Age < 14. This is the only one we need. 
+   *  We can drop the check and just autofill it if there is an error.*/
+  {
+    text: (applicant) => numericalAge(applicant.birthdate!) < 14 ? applicant.residentCounty : "",
+    field: "MinorConsentCounty",
+  },
 ];
 
 /**
@@ -221,33 +231,62 @@ export const MinorNameSexPetitionMap: Formfill[] = [
  */
 export const primaryIDNewYorkMap: Formfill[] = [
   {
-    /** Radio button should select "Update Info" */
+    /** Radio button attempt */
     check: () => true,
     field: "PURPOSE FOR APPLICATION",
+    select: "UPDATE INFO",
   },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) => applicant.isChangingLegalName ?
+      applicant.chosenName?.last ?? "" : applicant.legalName?.last ?? "",
     field: "FULL LAST NAME",
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+      text: (applicant) => applicant.isChangingLegalName ?
+          applicant.chosenName?.first ?? "" : applicant.legalName?.first ?? "",
     field: "FULL FIRST NAME",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+      text: (applicant) => applicant.isChangingLegalName ?
+          applicant.chosenName?.middle ?? "" : applicant.legalName?.middle ?? "",
     field: "FULL MIDDLE NAME",
   },
   {
-    text: (applicant) => applicant.chosenName?.suffix ?? "",
+      text: (applicant) => applicant.isChangingLegalName ?
+          applicant.chosenName?.suffix ?? "" : applicant.legalName?.suffix ?? "",
     field: "SUFFIX",
   },
-  /** Date of birth Month & Day on this form is weird. */
+  {
+    text: (applicant) =>
+        addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
+    field: "DATE OF BIRTH Month",
+  },
+  {
+    text: (applicant) =>
+        addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
+    field: "DATE OF BIRTH Day",
+  },
   {
     text: (applicant) =>
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     field: "DATE OF BIRTH Year",
   },
-  /** Sex is a radio button that I don't have the selection field for. */
+  /** Radio Button attempt */
+  {
+    check: (applicant) => applicant.gender === GenderMarker.M,
+    field: "SEX",
+    select: "M",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.F,
+    field: "SEX",
+    select: "F",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.X,
+    field: "SEX",
+    select: "X",
+  },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
     field: "TELEPHONE NUMBER Home Mobile Area Code",
@@ -257,9 +296,19 @@ export const primaryIDNewYorkMap: Formfill[] = [
       phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
     field: "TELEPHONE NUMBER Home Mobile",
   },
-  /** Radio button for "Has you name changed" should go here */
+    /** Radio button attempt */
   {
-    text: (applicant) => fullName(applicant.legalName),
+    check: (applicant) => applicant.isChangingLegalName,
+    field: "Has your name changed",
+    select: "Yes",
+  },
+  {
+    check: (applicant) => !applicant.isChangingLegalName,
+    field: "Has your name changed",
+    select: "No",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ? fullName(applicant.legalName) ?? "" : "",
     field:
       "If Yes print your former name exactly as it appears on your present license or nondriver ID Identification card",
   },
@@ -292,10 +341,10 @@ export const primaryIDNewYorkMap: Formfill[] = [
     field: "ADDRESS WHERE YOU LIVE County",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName),
+    text: (applicant) => applicant.isChangingLegalName ?
+      fullName(applicant.chosenName) ?? "" : fullName(applicant.legalName) ?? "",
     field: "PLEASE PRINT NAME",
   },
-  /** we need to chat about the voter registration section */
 ];
 
 /**
