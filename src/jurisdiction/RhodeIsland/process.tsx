@@ -78,69 +78,61 @@ export const rhodeislandNameChange: Process = {
   ],
 };
 
-export const michiganGenderMarker: Process = {
-  jurisdiction: "MI",
+export const rhodeislandGenderMarker: Process = {
+  jurisdiction: "RI",
   target: Target.GenderMarker,
   documents: [
     {
-      name: "Michigan Dept. of State Sex Designation Form",
-      filename: "Michigan/mdos_sdf.pdf",
-      map: mdosSexMap,
-    },
-    {
-      name: "State of Michigan Sex Designation Form",
-      filename: "Michigan/mi_sdf.pdf",
-      map: miSexMap,
+      name: "Gender Designation on a License or Identification Card",
+      filename: "RhodeIsland/DMV Gender Designation.pdf",
+      map: genderIDMap,
     },
   ],
 };
 
-export const michiganPrimaryIdentification: Process = {
-  jurisdiction: "MI",
+export const rhodeislandPrimaryIdentification: Process = {
+  jurisdiction: "RI",
   target: Target.PrimaryIdentification,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
     {
-      name: "Secretary of State",
-      guide: MichiganSecretaryOfStateGuide,
+      name: "DMV",
+      filename: "RhodeIsland/DMV LI-1.pdf",
+      id: "LI-1",
+      guide: RhodeIslandDMVGuide,
+      map: primaryIDRhodeIslandMap,
     },
   ],
 };
 
-export const michiganBirthRecord: Process = {
-  jurisdiction: "MI",
+export const rhodeislandBirthRecord: Process = {
+  jurisdiction: "RI",
   target: Target.BirthRecord,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
     {
       name: "Birth Certificate",
-      guide: MichiganBirthCertificateGuide,
+      guide: RhodeIslandBirthCertUpdateGuide,
     },
     {
-      name: "Application to Change or Correct a Michigan Birth Record",
-      id: "DCH-0847-CHGBX",
-      filename: "Michigan/birth-cert.pdf",
-      map: birthCertMap,
-    },
-    {
-      name: "Acceptable ID",
-      filename: "Michigan/acceptable-id.pdf",
+      name: "Application for a Certified Copy of a Birth Record",
+      filename: "RhodeIsland/Birth Cert Request.pdf",
+      map: birthCertTwoMap,
     },
   ],
   isBirth: true,
 };
 
-export const michiganPostamble: Process = {
+export const rhodeislandPostamble: Process = {
   depends: [Target.BirthRecord, Target.PrimaryIdentification],
   documents: [
     {
       name: "Everything Else",
-      guide: MichiganEverythingElseGuide,
+      guide: RhodeIslandEverythingElseGuide,
     },
     {
       name: "Resources",
-      guide: MichiganResourcesGuide,
+      guide: RhodeIslandResourcesGuide,
     },
   ],
-  isJustGuide: true,
 };
