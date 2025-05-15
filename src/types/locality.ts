@@ -41,6 +41,7 @@ export interface OtherCounty {
   court: Court;
 }
 export interface NewYorkCounty {
+    borough?: string;
     court: Court;
     courtType: string;
     isNYC?: boolean;

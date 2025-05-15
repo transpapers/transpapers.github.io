@@ -37,6 +37,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         courtType: "County",
     },
     Bronx: {
+        borough: "the Bronx",
         court: {
         address: "851 Grand Concourse, Bronx, NY 10451",
         city: "Bronx",
@@ -205,6 +206,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         courtType: "County",
     },
     Kings: {
+        borough: "Brooklyn",
         court: {
         address: "141 Livingston St, Brooklyn, NY 11201",
         city: "Brooklyn",
@@ -270,6 +272,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         courtType: "County",
     },
     "New York": {
+        borough : "Manhatten",
         court: {
         address: "111 Centre St, New York, NY 10013",
         city: "New York",
@@ -343,6 +346,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         courtType: "County",
     },
     Queens: {
+        borough: "Queens",
         court: {
         address: "89-17 Sutphin Blvd, Queens, NY 11435",
         city: "Queens",
@@ -360,6 +364,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         courtType: "County",
     },
     Richmond: {
+        borough: "Staten Island",
         court: {
         address: "927 Castleton Ave, Staten Island, NY 10310",
         city: "Staten Island",
