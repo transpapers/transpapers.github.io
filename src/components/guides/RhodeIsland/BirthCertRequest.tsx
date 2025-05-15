@@ -68,7 +68,7 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
           </a>{" "}
           or go through your birth state/territory&apos;s Vital Records
           department. If you were born in another country it will be through
-          your home country&apos;s records department instead to get proof of
+          your birth country&apos;s records department instead to get proof of
           birth.
         </p>
       )}
