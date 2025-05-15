@@ -45,8 +45,7 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const adultNameSexPetitionMap: Formfill[] = [
-  /** for 'CourtType' field it should return "County" for all but the 5 NYC counties
-   * Those should return as "New York City Civil"
+  /** 'courtType' field from counties.ts should go here.
    */
   {
     text: (applicant) => applicant.residentCounty,
@@ -75,7 +74,6 @@ export const adultNameSexPetitionMap: Formfill[] = [
       field: "PlaceOfBirth",
   },
   {
-    /** New York seperates Name & Sex change request reasons may need new field. */
     text: (applicant) => applicant.isChangingLegalName ? 
       applicant.reasonForNameChange : "",
       field: "ReasonsForNameChangeRequest-specify",
@@ -128,15 +126,13 @@ export const adultNameSexPetitionMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const MinorNameSexPetitionMap: Formfill[] = [
-  /** for 'CourtType' field it should return "County" for all but the 5 NYC counties
-   * Those should return as "New York City Civil"
+  /** 'courtType' field from counties.ts should go here.
    */
   {
     text: (applicant) => applicant.residentCounty,
     field: "County",
   },
   {
-    // This form field can have both parent names, it matters. we will need an additional field
     text: (applicant) =>
       isMinor(applicant) ? fullName(applicant.representativeName) : "",
     field: "PetitionerName",
