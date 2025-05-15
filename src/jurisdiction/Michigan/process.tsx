@@ -20,6 +20,7 @@
 import {
   nameChangePrivateMap,
   piiMap,
+  orderFollowingMap,
   feeWaiverMap,
   mdosSexMap,
   miSexMap,
@@ -33,6 +34,7 @@ import MichiganFilingInitialFormsGuide from "../../components/guides/Michigan/Fi
 import MichiganM97aGuide from "../../components/guides/Michigan/M97a";
 import MichiganMC20Guide from "../../components/guides/Michigan/MC20";
 import MichiganPC51Guide from "../../components/guides/Michigan/PC51";
+import MichiganPC52Guide from "../../components/guides/Michigan/PC52";
 import MichiganResourcesGuide from "../../components/guides/Michigan/Resources";
 import MichiganSecretaryOfStateGuide from "../../components/guides/Michigan/SecretaryOfState";
 
@@ -56,6 +58,15 @@ export const michiganNameChange: Process = {
       filename: "Michigan/m97a.pdf",
       guide: MichiganM97aGuide,
       map: piiMap,
+    },
+
+      {
+      name: "Order Following Hearing Regarding Petition For Name Change",
+      id: "PC 52",
+      filename: "Michigan/pc52.pdf",
+      guide: MichiganPC52Guide,
+      map: orderFollowingMap,
+      include: (applicant) => applicant.residentCounty === "Saginaw"
     },
     {
       name: "Fee Waiver Request",

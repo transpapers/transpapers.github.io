@@ -264,6 +264,30 @@ export const piiMap: Formfill[] = [
 ];
 
 /**
+ * Order Following Hearing Regarding Petition For Name Change (Michigan form PC 52.)
+ * Only required in Saginaw County
+ * @type {Formfill[]}
+ */
+export const orderFollowingMap: Formfill[] = [
+  {
+    text: (applicant) => applicant.residentCounty,
+    field: "County",
+  },
+  {
+    text: (applicant) => applicant.court?.address,
+    field: "Court address",
+  },
+  {
+    text: (applicant) => applicant.court?.phone,
+    field: "Court telephone no",
+  },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "Current first middle and last names type or print",
+  },
+];
+
+/**
  * Fee Waiver Request (Michigan form MC 20.)
  * @type {Formfill[]}
  */

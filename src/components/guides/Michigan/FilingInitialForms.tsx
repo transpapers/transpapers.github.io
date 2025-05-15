@@ -22,15 +22,16 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
-  const { court, age } = person;
+  const { court, age, residentCounty } = person;
 
   return (
     <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>
       <p>
         Your filing location is {court?.address}. You may file by mail or in
-        person; in either case, include the Petition (pc51c) the Addendum
-        (m97a), the optional Fee Waiver (mc20), as well as payment. Even if the
+        person; in either case, include the Petition (pc51c), the Addendum (m97a),
+        {residentCounty && residentCounty == "Saginaw" ? (" the Order Following (pc52), ") : (" ")}
+        the optional Fee Waiver (mc20), as well as payment. Even if the
         fee waiver is granted you still need to provide payment for at least one
         certified copy. To ask for one when you are filing by mail either write
         "Certified copy fee" in a checks memo line or include a letter stating
