@@ -74,6 +74,7 @@ function RhodeIslandFilingGuide(
             to either call to ask or cover their bases by bringing cash, check,
             and card.
           </p>
+            {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
         </>
       ) : (
         <p>
