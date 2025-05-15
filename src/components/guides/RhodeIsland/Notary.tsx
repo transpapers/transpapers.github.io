@@ -38,7 +38,7 @@ function RhodeIslandNotaryGuide(
         convinient.
       </p>
 
-      {birthJurisdiction && birthJurisdiction == "RI" ? (
+      {birthJurisdiction && birthJurisdiction === "Rhode Island" ? (
         <>
           <p>
             To do the birth certificate request by mail have a check or money

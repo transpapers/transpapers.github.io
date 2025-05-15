@@ -39,7 +39,7 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
         a recent certified copy.
       </p>
 
-      {birthJurisdiction && birthJurisdiction == "RI" ? (
+      {birthJurisdiction && birthJurisdiction === "Rhode Island" ? (
         <p>
           If you don&apos;t have a useable copy you can either request one
           online through{" "}
