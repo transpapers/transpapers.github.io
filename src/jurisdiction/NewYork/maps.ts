@@ -220,6 +220,86 @@ export const MinorNameSexPetitionMap: Formfill[] = [
 ];
 
 /**
+ * Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees (NYC form CIV-GP-15-i.)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+export const feeWaiverNYCMap: Formfill[] = [
+  {
+    text: (applicant) => applicant.residentCounty,
+    loc: { x: 141, y: 44 },
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? fullName(applicant.representativeName) ?? ""
+      : fullName(applicant.representativeName) ?? "",
+    loc: { x: 65, y: 109 },
+  },
+  {
+    text: (applicant) => applicant.residentCounty,
+    loc: { x: 237, y: 215 },
+  },
+  {
+    text: (applicant) =>
+        isMinor(applicant) ? fullName(applicant.representativeName) ?? ""
+            : fullName(applicant.representativeName) ?? "",
+    loc: { x: 65, y: 247 },
+  },
+  {
+    text: (applicant) =>
+        isMinor(applicant) ? fullName(applicant.representativeName) ?? ""
+            : fullName(applicant.representativeName) ?? "",
+    loc: { x: 223, y: 282 },
+  },
+  {
+    text: (applicant) =>
+        applicant.streetAddress &&
+        " " &&
+        applicant.residentCity &&
+        ", " &&
+        applicant.residentJurisdiction &&
+        ", " &&
+        applicant.zip,
+    loc: { x: 143, y: 314 },
+  },
+  {
+    text: () => "X", loc: { x: 150, y: 490 },
+  },
+  {
+    text: (applicant) => isMinor(applicant) ?
+      "waiving the fee for the filing of UCS-NC2" :
+      "waiving the fee for the filing of UCS-NC1",
+    loc: { x: 261, y: 488 },
+  },
+  {
+    text: () => "X", loc: { x: 123, y: 768 },
+  },
+  {
+    text: (applicant) =>
+        isMinor(applicant) ? fullName(applicant.representativeName) ?? ""
+            : fullName(applicant.representativeName) ?? "",
+    loc: { x: 154, y: 914 },
+  },
+  {
+    text: (applicant) => applicant.streetAddress,
+    loc: { x: 500, y: 914 },
+  },
+  {
+    text: (applicant) =>
+        applicant.residentCity &&
+        ", " &&
+        applicant.residentJurisdiction &&
+        ", " &&
+        applicant.zip,
+    loc: { x: 500, y: 947 },
+  },
+  {
+    text: (applicant) => applicant.phone,
+    loc: { x: 564, y: 972 },
+  },
+];
+
+/**
  * Application for Permit, Driver License or Non-Driver ID Card (New York form MV-44.)
  * Updated 7/2024.
  * @type {Formfill[]}
