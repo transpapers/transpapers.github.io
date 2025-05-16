@@ -58,7 +58,7 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
             <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>
             , or{" "} <a href="online">https://www.notarize.com/</a>. There will
             be a fee for this required service.
-            {age && age < 13 ? (" ") :
+            {age && age > 13 ? (" ") :
               (" You and the petitioner need to meet with the notary together to sign.")}
             Once all signatures are signed, witnessed, and stamped the form is ready
             to be filed at court.
