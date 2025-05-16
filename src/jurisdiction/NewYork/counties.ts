@@ -37,7 +37,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         courtType: "County",
     },
     Bronx: {
-        borough: "the Bronx",
+        borough: "The Bronx",
         court: {
         address: "851 Grand Concourse, Bronx, NY 10451",
         city: "Bronx",
