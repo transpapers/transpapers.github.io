@@ -776,6 +776,15 @@ export const birthCertNYCMap: Formfill[] = [
     text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
     field: "S3: What should it say on the birth record? 1",
   },
+  {
+    check: () => true, field: "S5: Completed",
+  },
+  {
+    check: () => true, field: "S5: Payment if applicable",
+  },
+  {
+    check: () => true, field: "S5: Original or certified documents",
+  },
 ];
 
 /**
