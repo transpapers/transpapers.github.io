@@ -343,6 +343,95 @@ export const primaryIDNewYorkMap: Formfill[] = [
 ];
 
 /**
+ * Vehicle Registration/Title of Application (MV-82)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+export const vehicleRegistrationMap: Formfill[] = [
+  {
+    /** Radio button attempt */
+    check: () => true,
+    field: "I WANT TO",
+    select: "CHANGE A REGISTRATION",
+    },
+  {
+    text: (applicant) => applicant.isChangingLegalName ?
+      `${applicant.chosenName?.last ?? ""} 
+      ${applicant.chosenName?.first ?? ""} 
+      ${applicant.chosenName?.middle ?? ""}` :
+      `${applicant.legalName?.last ?? ""} 
+      ${applicant.legalName?.first ?? ""} 
+      ${applicant.legalName?.middle ?? ""}`,
+    field: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
+  },
+    /** Radio button attempt */
+  {
+    check: (applicant) => applicant.isChangingLegalName,
+    field: "PRIMARY REGISTRANT Name Change",
+    select: "Yes",
+  },
+  {
+    check: (applicant) => !applicant.isChangingLegalName,
+    field: "PRIMARY REGISTRANT Name Change",
+    select: "No",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ?
+        fullName(applicant.legalName) ?? "" : "",
+    field: "PRIMARY REGISTRANT FORMER NAME",
+  },
+  {
+    text: (applicant) =>
+        addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
+    field: "PRIMARY REGISTRANT DATE OF BIRTH Month",
+  },
+  {
+    text: (applicant) =>
+        addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
+    field: "PRIMARY REGISTRANT DATE OF BIRTH Day",
+  },
+  {
+    text: (applicant) =>
+        formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
+    field: "PRIMARY REGISTRANT DATE OF BIRTH Year",
+  },
+  /** Radio Button attempt */
+  {
+    check: (applicant) => applicant.gender === GenderMarker.M,
+    field: "PRIMARY REGISTRANT SEX",
+    select: "M",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.F,
+    field: "PRIMARY REGISTRANT SEX",
+    select: "F",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.X,
+    field: "PRIMARY REGISTRANT SEX",
+    select: "X",
+  },
+  {
+    text: (applicant) => phoneAreaCode(applicant.phone),
+    field: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER Area Code",
+  },
+  {
+    text: (applicant) =>
+        phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
+    field: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
+  },
+  {
+    text: (applicant) => applicant.residentCounty,
+    field: "County of Residence",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName ?
+        fullName(applicant.legalName) ?? "" : "",
+    field: "Print Name Here",
+  },
+];
+
+/**
  * BC Update 17 and up NY State (New York State form DOH-5305.)
  * Updated 7/2024.
  * @type {Formfill[]}
