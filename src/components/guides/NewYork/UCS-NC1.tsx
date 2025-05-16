@@ -30,16 +30,16 @@ function NewYorkUCS_NC1Guide({ person }: { person: Person }) {
   <p>
     The first form to be filled out is the "Name Change and/or Sex
     Designation Change Petition for an Individual Adult" (UCS-NC1).
-    In order to file this you need to have lived in{" "}
-    {residentCounty} {" "}for at least 6 months. It has some sections
-    that you will need to review. Look through sections A, B, and C
-    to see if the information we filled in is accurate for your
-    circumstances. If it's not then type in the missing info or write
-    with black ink if it's already printed. You will need to sign with
-    your current legal name below item 30 on the last page but
-    do <strong>not</strong> additionally sign on the line that reads
-    “Petitioner Signature in Presence of Notary” until you meet with
-    one.
+    In order to file this you need to live in{" "} {residentCounty}
+    {" "}and have lived in New York State for at least 6 months. It
+    has some sections that you will need to review. Look through
+    sections A, B, and C to see if the information we filled in is
+    accurate for your circumstances. If it's not then type in the
+    missing info or write with black ink if it's already printed.
+    You will need to sign with your current legal name below item 30
+    on the last page but do <strong>not</strong> additionally sign on
+    the line that reads “Petitioner Signature in Presence of Notary”
+    until you meet with one.
   </p>
     </section>
   );
