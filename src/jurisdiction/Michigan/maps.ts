@@ -402,6 +402,30 @@ export const birthCertMap: Formfill[] = [
     text: (applicant) => fullName(applicant.chosenName),
     loc: { x: 433, y: 800 },
   },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "Sex: M" : ""),
+    loc: { x: 56, y: 836 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "Sex: F" : ""),
+    loc: { x: 56, y: 836 },
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "Sex: X" : ""),
+    loc: { x: 56, y: 836 },
+  },
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.M ? "Sex: M" : ""),
+    loc: { x: 433, y: 836 },
+  },
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.F ? "Sex: F" : ""),
+    loc: { x: 433, y: 836 },
+  },
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.X ? "Sex: X" : ""),
+    loc: { x: 433, y: 836 },
+  },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
 ];
 
