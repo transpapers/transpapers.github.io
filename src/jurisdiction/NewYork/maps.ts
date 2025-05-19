@@ -142,10 +142,9 @@ export const MinorNameSexPetitionMap: Formfill[] = [
     field: "MinorName",
   },
   {
-    // Radio button attempt
     check: (applicant) => isMinor(applicant) && applicant.parentsAreOkay,
     field: "RelationshipToMinor",
-    select: "Parent(s)",
+    select: "0",
   },
   {
     check: (applicant) => applicant.isChangingLegalName,
@@ -306,7 +305,6 @@ export const feeWaiverNYCMap: Formfill[] = [
  */
 export const primaryIDNewYorkMap: Formfill[] = [
   {
-    /** Radio button attempt */
     check: () => true,
     field: "PURPOSE FOR APPLICATION",
     select: "UPDATE INFO",
@@ -346,21 +344,20 @@ export const primaryIDNewYorkMap: Formfill[] = [
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     field: "DATE OF BIRTH Year",
   },
-  /** Radio Button attempt */
   {
     check: (applicant) => applicant.gender === GenderMarker.M,
     field: "SEX",
-    select: "M",
+    select: "M (Male)",
   },
   {
     check: (applicant) => applicant.gender === GenderMarker.F,
     field: "SEX",
-    select: "F",
+    select: "F (Female)",
   },
   {
     check: (applicant) => applicant.gender === GenderMarker.X,
     field: "SEX",
-    select: "X",
+    select: "X (Indeterminate/unspecified)",
   },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
@@ -371,7 +368,6 @@ export const primaryIDNewYorkMap: Formfill[] = [
       phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
     field: "TELEPHONE NUMBER Home Mobile",
   },
-    /** Radio button attempt */
   {
     check: (applicant) => applicant.isChangingLegalName,
     field: "Has your name changed",
@@ -429,7 +425,6 @@ export const primaryIDNewYorkMap: Formfill[] = [
  */
 export const vehicleRegistrationMap: Formfill[] = [
   {
-    /** Radio button attempt */
     check: () => true,
     field: "I WANT TO",
     select: "CHANGE A REGISTRATION",
@@ -444,7 +439,6 @@ export const vehicleRegistrationMap: Formfill[] = [
       ${applicant.legalName?.middle ?? ""}`,
     field: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
   },
-    /** Radio button attempt */
   {
     check: (applicant) => applicant.isChangingLegalName,
     field: "PRIMARY REGISTRANT Name Change",
@@ -479,17 +473,17 @@ export const vehicleRegistrationMap: Formfill[] = [
   {
     check: (applicant) => applicant.gender === GenderMarker.M,
     field: "PRIMARY REGISTRANT SEX",
-    select: "M",
+    select: "M (Male)",
   },
   {
     check: (applicant) => applicant.gender === GenderMarker.F,
     field: "PRIMARY REGISTRANT SEX",
-    select: "F",
+    select: "F (Female)",
   },
   {
     check: (applicant) => applicant.gender === GenderMarker.X,
     field: "PRIMARY REGISTRANT SEX",
-    select: "X",
+    select: "X (indeterminate/unspecified) ",
   },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
@@ -786,21 +780,20 @@ export const birthCertNYCMap: Formfill[] = [
       }),
     field: "S2: Date of Birth",
   },
-  /** Radio Button Attempt */
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.M,
     field: "S2: Gender",
-    select: "Male",
+    select: "0",
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.F,
     field: "S2: Gender",
-    select: "Female",
+    select: "1",
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.X,
     field: "S2: Gender",
-    select: "X",
+    select: "2",
   },
   {
     text: (applicant) => applicant.mothersBirthName?.first,
