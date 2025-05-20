@@ -217,25 +217,20 @@ export const nameChangePrivateMap: Formfill[] = [
   {
     text: (applicant) =>
       isMinor(applicant)
-        ? fullName(representativeName(applicant))
-        : fullName(applicant.legalName),
+        ? fullName(representativeName(applicant)) ?? "" : "",
     field: "Name type or print",
   },
   {
-    text: (applicant) => applicant.streetAddress,
+    text: (applicant) => isMinor(applicant) ? applicant.streetAddress : "",
     field: "Address",
   },
   {
-    text: (applicant) =>
-        applicant.residentCity &&
-        ", " &&
-        applicant.residentJurisdiction &&
-        ", " &&
-        applicant.zip,
+    text: (applicant) => isMinor(applicant) ?
+      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}` : "",
     field: "City state zip",
   },
   {
-    text: (applicant) => applicant.phone,
+    text: (applicant) => isMinor(applicant) ? applicant.phone : "",
     field: "Telephone no",
   },
   {
@@ -387,25 +382,20 @@ export const nameChangeMap: Formfill[] = [
   {
     text: (applicant) =>
       isMinor(applicant)
-        ? fullName(representativeName(applicant))
-        : fullName(applicant.legalName),
+        ? fullName(representativeName(applicant)) ?? "" : "",
     field: "Name type or print",
   },
   {
-    text: (applicant) => applicant.streetAddress,
+    text: (applicant) => isMinor(applicant) ? applicant.streetAddress : "",
     field: "Address",
   },
   {
-    text: (applicant) =>
-        applicant.residentCity &&
-        ", " &&
-        applicant.residentJurisdiction &&
-        ", " &&
-        applicant.zip,
+    text: (applicant) => isMinor(applicant) ?
+      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}` : "",
     field: "City state zip",
   },
   {
-    text: (applicant) => applicant.phone,
+    text: (applicant) => isMinor(applicant) ? applicant.phone : "",
     field: "Telephone no",
   },
   {
@@ -602,27 +592,27 @@ export const birthCertMap: Formfill[] = [
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "Sex: M" : ""),
-    loc: { x: 56, y: 836 },
+    loc: { x: 56, y: 834 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "Sex: F" : ""),
-    loc: { x: 56, y: 836 },
+    loc: { x: 56, y: 834 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "Sex: X" : ""),
-    loc: { x: 56, y: 836 },
+    loc: { x: 56, y: 834 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.M ? "Sex: M" : ""),
-    loc: { x: 433, y: 836 },
+    loc: { x: 433, y: 834 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.F ? "Sex: F" : ""),
-    loc: { x: 433, y: 836 },
+    loc: { x: 433, y: 834 },
   },
   {
     text: (applicant) => (applicant.gender === GenderMarker.X ? "Sex: X" : ""),
-    loc: { x: 433, y: 836 },
+    loc: { x: 433, y: 834 },
   },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
 ];
