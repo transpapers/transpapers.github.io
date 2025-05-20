@@ -29,15 +29,15 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
       <h3>Getting Documents and a Notary (NY)</h3>
 
 
-    {birthJurisdiction && birthJurisdiction == "NY" ? (
+    {birthJurisdiction && birthJurisdiction === "New York" ? (
         <p>
             In order to file {age && age < 18 ? (" a parent/guardian ") : (" you ")}
             will need a certified copy of your birth certificate. If you don't have
             one you can get one{" "}
-            <a href="online">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a>
+            <a href="https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH">online</a>
             {" "}no matter where in New York state you were born. There is an in-person
             option if you were born in New York City. Appointments can be made at this{" "}
-            <a href="link">https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/</a>
+            <a href="https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/">link</a>
             and selecting "Purchase a Birth Certificate". They accept credit/debit cards,
             checks, or money orders. <strong>No Cash.</strong>
         </p>
@@ -45,7 +45,7 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
         <p>
             {age && age < 18 ? ("A parent/guardian ") : ("You ")} can get a copy of
             your birth certificate{" "}
-            <a href="online">https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH</a>
+            <a href="https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH">online</a>
             {" "}if you were born in the US. If you were born in another country
             {age && age < 18 ? (" a parent/guardian ") : (" you ")} will need to
             contact your birth country's records department to get proof of birth.
@@ -55,8 +55,8 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
     {age && age < 18 ? (
         <p>
             Notaries can be found in court buildings, banks, some{" "}
-            <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>
-            , or{" "} <a href="online">https://www.notarize.com/</a>. There will
+            <a href="https://www.theupsstore.com/tools/find-a-store">UPS locations</a>
+            , or{" "} <a href="https://www.notarize.com/">online</a>. There will
             be a fee for this required service.
             {age && age > 13 ? (" ") :
               (" You and the petitioner need to meet with the notary together to sign.")}
@@ -67,8 +67,8 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
         <p>
             You will need a notary to witness your signature and provide
             their own. Notaries can be found in court buildings, banks, some{" "}
-            <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>
-            , or{" "} <a href="online">https://www.notarize.com/</a>. You will
+            <a href="https://www.theupsstore.com/tools/find-a-store">UPS locations</a>
+            , or{" "} <a href="https://www.notarize.com/">online</a>. You will
             be charged a fee for this required service. Once you have met with
             one to get the required signature and stamp you are ready to file.
         </p>

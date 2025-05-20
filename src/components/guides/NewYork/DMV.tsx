@@ -49,7 +49,7 @@ function NewYorkDMVGuide({ person }: { person: Person }) {
         Registration/Title Application" (MV-82) filled out
         <strong>for each vehicle</strong> you want updated. We have included a
         partially filled out form that assumes you are the "Primary Registrant"
-        if this is not true{" "} <a href="here">https://dmv.ny.gov/forms/mv82.pdf</a>
+        if this is not true{" "} <a href="https://dmv.ny.gov/forms/mv82.pdf">here</a>
          {" "}is a blank form you can print. In any case, fill out the instructions
         as well as any blanks we left in sections 1 thru 4. If you are updating a
         commericial vehicle do section 5 as well. Do <strong>not</strong> sign
@@ -58,7 +58,7 @@ function NewYorkDMVGuide({ person }: { person: Person }) {
 
       <p>
         You can go to any DMV in the state, you can find close locations{" "}
-        <a href="here">https://dmv.ny.gov/offices/county-offices</a>{" "} to
+        <a href="https://dmv.ny.gov/offices/county-offices">here</a>{" "} to
         make an appointment. You will need to bring a certified copy of the
         court order, the receipt from Social Security, payment, the MV-44 form,
         and (optionally) any MV-82 forms. If you have a photo ID or passport

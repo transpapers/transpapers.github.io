@@ -95,8 +95,8 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
       {residentJurisdiction && residentJurisdiction === "New York" ? ("") : (
         <p>
             Notaries can be found in court buildings, banks, some{" "}
-            <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>
-            , or{" "} <a href="online">https://www.notarize.com/</a>. There will
+            <a href="https://www.theupsstore.com/tools/find-a-store">UPS Locations</a>
+            , or{" "} <a href="https://www.notarize.com/">online</a>. There will
             be a fee for this required service.
         </p>
       )}
@@ -128,7 +128,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
 
       <p>
         If you prefer an in-person appointment use this{" "}
-        <a href="link">https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/</a> \
+        <a href="https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/">link</a>
         {" "}to schedule one.
         {age && age < 18 ? (
             " Any living parents listed on the birth certificate will need to go and bring photo ID "
@@ -182,8 +182,8 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
       {residentJurisdiction && residentJurisdiction === "New York" ? ("") : (
         <p>
             Notaries can be found in court buildings, banks, some{" "}
-            <a href="UPS locations">https://www.theupsstore.com/tools/find-a-store</a>
-            , or{" "} <a href="online">https://www.notarize.com/</a>. There will
+            <a href="https://www.theupsstore.com/tools/find-a-store">UPS Locations</a>
+            , or{" "} <a href="https://www.notarize.com/">online</a>. There will
             be a fee for this required service.
         </p>
       )}

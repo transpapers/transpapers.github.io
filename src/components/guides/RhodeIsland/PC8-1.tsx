@@ -74,10 +74,10 @@ function RhodeIslandPC8_1Guide({ person }: { person: Person }) {
 
       <p>
         {residentCounty && residentCounty == "Providence"
-          ? "You need to have lived in Providence for at least 6 months to file this form."
+          ? "You need to have lived in Providence for at least 6 months to file this form. "
           : "You need to have lived in " +
             residentCounty +
-           " for at least a year to file this form."}{" "}
+           " for at least a year to file this form. "}
         Do <strong>not</strong> sign it or fill out anything on page 2,
         that&apos;s for a notary later.
       </p>

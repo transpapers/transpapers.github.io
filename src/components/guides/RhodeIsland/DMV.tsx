@@ -49,7 +49,7 @@ function RhodeIslandDMVGuide({ person }: { person: Person }) {
       <p>
         You will need to schedule an in-person appointment at your local DMV,
         all Rhode Island locations are listed{" "}
-        <a href="here">https://dmv.ri.gov/locations-hours</a>. You will need
+        <a href="https://dmv.ri.gov/locations-hours">here</a>. You will need
         both forms, your current ID, your court order, and the receipt from
         social security. If you don’t have a current ID then bring the ID
         documents you used for Social Security. If you selected &quot;REAL

@@ -34,7 +34,9 @@ function RhodeIslandBCIGuide({ person }: { person: Person }) {
           Change of Name form for you will need a background check.
         </p>
       ) : (
-        <p>For a Rhode Island name change you will need a background check.</p>
+        <p>
+          For a Rhode Island name change you will need a background check.
+        </p>
       )}
 
       <p>

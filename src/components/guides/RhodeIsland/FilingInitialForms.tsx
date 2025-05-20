@@ -36,15 +36,13 @@ function RhodeIslandFilingGuide(
 
       <p>
         A recent law was passed called{" "}
-        <a href="H8155">
-          https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf
-        </a>
+        <a href="https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf">H8155</a>
         . In section D (line 12) it states that there will be no publication
         required which means you shouldn&apos;t be charged for that. Some courts
         haven&apos;t yet updated their pricing to reflect that. If the amount
         they charge you is significantly higher than what we list ask about it
         and politely insist that it be changed or{" "}
-        <a href="report">https://tinyurl.com/mgdc-feedback</a> it to us as a
+        <a href="https://tinyurl.com/mgdc-feedback">report</a> it to us as a
         tip.
       </p>
 

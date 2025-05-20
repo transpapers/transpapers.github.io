@@ -58,11 +58,11 @@ function MichiganEverythingElseGuide() {
       </p>
       <p>
         <strong>Gas/Heating/Electricity Provider</strong>: DTE has a digital submission link
-        for your scanned ID and court order at{" "}
+        for your scanned ID and court order at this{" "}
         <a href="https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form">
-          https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form.
+          https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form
         </a>
-        They will give you a call at some point after you submit the documents
+        . They will give you a call at some point after you submit the documents
         to confirm the change.
       </p>
       <p>
@@ -98,7 +98,7 @@ function MichiganEverythingElseGuide() {
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
         change when you update your information with Social Security. You do <strong>not</strong>
-        need to contact them.
+        {" "}need to contact them.
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different

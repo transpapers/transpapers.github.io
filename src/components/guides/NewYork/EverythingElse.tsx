@@ -48,8 +48,7 @@ function NewYorkEverythingElseGuide() {
         <strong>Work</strong>: If you have an HR system, bring your new ID, new
         social security card, and court order to them and ask them to update
         your information. If you get your health insurance through your work, you can
-        have them send the updated information to them on your behalf. Some can do
-        it online at this{" "}<a href="link"> https://healthsourceri.com/ </a>.
+        have them send the updated information to them on your behalf.
       </p>
       <p>
         <strong>Healthcare Providers</strong>: You should be able to bring in
@@ -89,7 +88,7 @@ function NewYorkEverythingElseGuide() {
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
         change when you update your information with Social Security. You do <strong>not</strong>
-        need to contact them.
+        {" "}need to contact them.
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different
@@ -129,4 +128,4 @@ function NewYorkEverythingElseGuide() {
   );
 }
 
-export default RhodeIslandEverythingElseGuide;
+export default NewYorkEverythingElseGuide;
