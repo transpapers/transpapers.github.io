@@ -239,12 +239,12 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "Telephone no",
   },
   {
-    text: (applicant) => numericalAge(applicant.birthdate!) > 13 ?
+    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) > 13 ?
           fullName(applicant.legalName) ?? "" : "",
     field: "Name type or print_5",
   },
   {
-    text: (applicant) => numericalAge(applicant.birthdate!) < 14 ?
+    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) < 14 ?
         fullName(applicant.legalName) ?? "" : "",
     field: "Name type or print_6",
   },
@@ -409,12 +409,12 @@ export const nameChangeMap: Formfill[] = [
     field: "Telephone no",
   },
   {
-    text: (applicant) => numericalAge(applicant.birthdate!) > 13 ?
+    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) > 13 ?
           fullName(applicant.legalName) ?? "" : "",
     field: "Name type or print_4",
   },
   {
-    text: (applicant) => numericalAge(applicant.birthdate!) < 14 ?
+    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) < 14 ?
         fullName(applicant.legalName) ?? "" : "",
     field: "Name type or print_5",
   },
