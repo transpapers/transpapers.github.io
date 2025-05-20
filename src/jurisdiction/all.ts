@@ -53,7 +53,7 @@ export const michigan: Jurisdiction = {
   counties: michiganCounties,
 };
 
-export const rhodeisland: Jurisdiction = {
+/**export const rhodeisland: Jurisdiction = {
     name: "Rhode Island",
     processes: [
         rhodeislandNameChange,
@@ -65,7 +65,7 @@ export const rhodeisland: Jurisdiction = {
         rhodeislandPostamble,
     ],
     counties: rhodeislandCounties,
-};
+};*/
 
 export const federal: Jurisdiction = {
   name: "Federal",
@@ -73,4 +73,4 @@ export const federal: Jurisdiction = {
   isFederal: true,
 };
 
-export const allJurisdictions = [federal, michigan, rhodeisland];
+export const allJurisdictions = [federal, michigan, /**rhodeisland*/];
