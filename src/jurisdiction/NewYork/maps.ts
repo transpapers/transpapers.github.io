@@ -106,14 +106,8 @@ export const adultNameSexPetitionMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      applicant.streetAddress &&
-      " " &&
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      ", " &&
-      applicant.zip
-      && ", USA",
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}, USA`,
     field: "CurrentAddress",
   },
   { text: () => new Date().toLocaleDateString(), field: "SignatureDate" },
@@ -197,14 +191,8 @@ export const MinorNameSexPetitionMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      applicant.streetAddress &&
-      " " &&
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      ", " &&
-      applicant.zip
-      && ", USA",
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}, USA`,
     field: "CurrentAddress",
   },
     /** Do not publish item #28 radio button and text box here. */
@@ -213,7 +201,7 @@ export const MinorNameSexPetitionMap: Formfill[] = [
   /** Below is Steph's attempt if Age < 14. This is the only one we need. 
    *  We can drop the check and just autofill it if there is an error.*/
   {
-    text: (applicant) => numericalAge(applicant.birthdate!) < 14 ? applicant.residentCounty : "",
+    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) < 14 ? applicant.residentCounty : "",
     field: "MinorConsentCounty",
   },
 ];
@@ -252,13 +240,8 @@ export const feeWaiverNYCMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-        applicant.streetAddress &&
-        " " &&
-        applicant.residentCity &&
-        ", " &&
-        applicant.residentJurisdiction &&
-        ", " &&
-        applicant.zip,
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 143, y: 314 },
   },
   {
@@ -285,11 +268,8 @@ export const feeWaiverNYCMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-        applicant.residentCity &&
-        ", " &&
-        applicant.residentJurisdiction &&
-        ", " &&
-        applicant.zip,
+      `${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 500, y: 947 },
   },
   {
@@ -600,13 +580,8 @@ export const birthCertAdultNYStateMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      applicant.streetAddress &&
-      " " &&
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      " " &&
-      applicant.zip,
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 103, y: 946 },
   },
 ];
@@ -873,13 +848,8 @@ export const genderAffidavitAdultNYStateMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      applicant.streetAddress &&
-      " " &&
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      " " &&
-      applicant.zip,
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 106, y: 746 },
   },
 ];
@@ -900,13 +870,8 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-        applicant.streetAddress &&
-        " " &&
-        applicant.residentCity &&
-        ", " &&
-        applicant.residentJurisdiction &&
-        " " &&
-        applicant.zip,
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 103, y: 746 },
   },
 ];
