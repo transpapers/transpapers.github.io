@@ -109,17 +109,17 @@ export const changeOfNameMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
+      !isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
     field: "29",
   },
   {
     text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
+      !isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
     field: "30",
   },
   {
     text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
+      !isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
     field: "31",
   },
   {
@@ -150,8 +150,8 @@ export const bciMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant) ? "" : fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
-    loc: { x: 337, y: 229 },
+      !isMinor(applicant) && fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : "",
+    loc: { x: 337, y: 227 },
   },
   {
     text: (applicant) =>
@@ -171,7 +171,7 @@ export const bciMap: Formfill[] = [
   },
   {
     text: () => "name change",
-    loc: { x: 164, y: 333 },
+    loc: { x: 167, y: 331 },
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
@@ -186,11 +186,11 @@ export const bciMap: Formfill[] = [
 export const birthCertOneMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
-    loc: { x: 184, y: 198 },
+    loc: { x: 184, y: 194 },
   },
   {
     text: (applicant) => numericalAge(applicant.birthdate!).toString(),
-    loc: { x: 621, y: 198 },
+    loc: { x: 621, y: 194 },
   },
   {
     text: (applicant) =>
@@ -198,31 +198,31 @@ export const birthCertOneMap: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 150, y: 231 },
+    loc: { x: 150, y: 227 },
   },
   {
     text: (applicant) => applicant.birthCity,
-    loc: { x: 415, y: 229 },
+    loc: { x: 415, y: 225 },
   },
   {
     text: (applicant) => fullName(applicant.mothersBirthName),
-    loc: { x: 289, y: 245 },
+    loc: { x: 289, y: 241 },
   },
   {
     text: (applicant) => fullName(applicant.fathersBirthName),
-    loc: { x: 289, y: 262 },
+    loc: { x: 289, y: 258 },
   },
   {
-    text: (applicant) => (isMinor(applicant) ? "" : "X"),
+    text: (applicant) => !isMinor(applicant) ? "x" : "",
     loc: { x: 102, y: 322 },
   },
   {
-    text: () => "X",
-    loc: { x: 297, y: 538 },
+    text: () => "x",
+    loc: { x: 297, y: 537 },
   },
   {
     text: () => "Name Change",
-    loc: { x: 442, y: 539 },
+    loc: { x: 442, y: 537 },
   },
   {
     text: () => "One",
@@ -230,26 +230,21 @@ export const birthCertOneMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
-    loc: { x: 203, y: 725 },
+    loc: { x: 203, y: 720 },
   },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
-    loc: { x: 608, y: 723 },
+    loc: { x: 608, y: 720 },
   },
   {
     text: (applicant) =>
       phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
-    loc: { x: 659, y: 723 },
+    loc: { x: 659, y: 720 },
   },
   {
     text: (applicant) =>
-      applicant.streetAddress &&
-      " " &&
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      " " &&
-      applicant.zip,
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 219, y: 772 },
   },
 ];
@@ -381,15 +376,15 @@ export const genderIDMap: Formfill[] = [
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
-    loc: { x: 50, y: 849 },
+    loc: { x: 51, y: 848 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
-    loc: { x: 113, y: 849 },
+    loc: { x: 114, y: 848 },
   },
   {
     text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    loc: { x: 175, y: 849 },
+    loc: { x: 176, y: 848 },
   },
 ];
 
@@ -400,15 +395,15 @@ export const genderIDMap: Formfill[] = [
 export const birthCertTwoMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
-    loc: { x: 184, y: 198 },
+    loc: { x: 184, y: 194 },
   },
   {
     text: (applicant) => numericalAge(applicant.birthdate!).toString(),
-    loc: { x: 621, y: 197 },
+    loc: { x: 621, y: 194 },
   },
   {
     text: (applicant) => fullName(applicant.chosenName),
-    loc: { x: 400, y: 213 },
+    loc: { x: 400, y: 209 },
   },
   {
     text: (applicant) =>
@@ -416,27 +411,27 @@ export const birthCertTwoMap: Formfill[] = [
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 150, y: 231 },
+    loc: { x: 150, y: 227 },
   },
   {
     text: (applicant) => applicant.birthCity,
-    loc: { x: 415, y: 229 },
+    loc: { x: 415, y: 225 },
   },
   {
     text: (applicant) => fullName(applicant.mothersBirthName),
-    loc: { x: 289, y: 245 },
+    loc: { x: 289, y: 241 },
   },
   {
     text: (applicant) => fullName(applicant.fathersBirthName),
-    loc: { x: 289, y: 262 },
+    loc: { x: 289, y: 258 },
   },
   {
-    text: (applicant) => (isMinor(applicant) ? "" : "X"),
+    text: (applicant) => !isMinor(applicant) ? "x" : "",
     loc: { x: 102, y: 322 },
   },
   {
-    text: () => "X",
-    loc: { x: 297, y: 538 },
+    text: () => "x",
+    loc: { x: 297, y: 537 },
   },
   {
     text: () => "Updating record to match new legal name.",
@@ -448,26 +443,21 @@ export const birthCertTwoMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
-    loc: { x: 203, y: 725 },
+    loc: { x: 203, y: 720 },
   },
   {
     text: (applicant) => phoneAreaCode(applicant.phone),
-    loc: { x: 608, y: 723 },
+    loc: { x: 608, y: 720 },
   },
   {
     text: (applicant) =>
       phoneStart(applicant.phone) && "-" && phoneEnd(applicant.phone),
-    loc: { x: 659, y: 723 },
+    loc: { x: 659, y: 720 },
   },
   {
     text: (applicant) =>
-      applicant.streetAddress &&
-      " " &&
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      " " &&
-      applicant.zip,
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
     loc: { x: 219, y: 772 },
   },
 ];

@@ -43,8 +43,15 @@ function RhodeIslandBCIGuide({ person }: { person: Person }) {
         This form, from the State of Rhode Island Office of the Attorney
         General, is specifically for requesting a background check{" "}
         <strong>by mail</strong>. Going in-person doesn&apos;t require a form.
-        If you want to use this form it&apos;s already filled out and ready for
-        a notary.
+        {age && age < 18 ? (
+          " If the parent/guardian filing the Name Change has "
+        ) : (
+          " If you have "
+        )}
+        ever had any other legal names those names need to be listed on the
+        "Maiden Name / other names used" line if they aren't already listed. 
+        After that this form is ready for a notary, do <strong>not</strong> fill
+        anything else out.
       </p>
     </section>
   );
