@@ -23,6 +23,7 @@ import {
   fullName,
   isMinor,
   representativeName,
+  numericalAge,
 } from "../../lib/util";
 
 import {
@@ -37,9 +38,9 @@ import { Formfill } from "../../types/formfill";
 // then finally federal forms.
 
 /**
- * Petition to Change Name and Ex Parte Request for Nonpublication and
+ * Petition for Name Change and Ex Parte Request for Nonpublication and
  * Confidential Record (Michigan form PC 51c.)
- * Updated 7/2023.
+ * Updated 5/2025.
  * @type {Formfill[]}
  */
 export const nameChangePrivateMap: Formfill[] = [
@@ -73,7 +74,7 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "c a minor only",
   },
   {
-    check: (applicant) => isMinor(applicant) && applicant.parentsAreOkay,
+    check: (applicant) => isMinor(applicant),
     field:
       "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
   },
@@ -219,6 +220,203 @@ export const nameChangePrivateMap: Formfill[] = [
         ? fullName(representativeName(applicant))
         : fullName(applicant.legalName),
     field: "Name type or print",
+  },
+  {
+    text: (applicant) => applicant.streetAddress,
+    field: "Address",
+  },
+  {
+    text: (applicant) =>
+        applicant.residentCity &&
+        ", " &&
+        applicant.residentJurisdiction &&
+        ", " &&
+        applicant.zip,
+    field: "City state zip",
+  },
+  {
+    text: (applicant) => applicant.phone,
+    field: "Telephone no",
+  },
+  {
+    text: (applicant) => numericalAge(applicant.birthdate!) > 13 ?
+          fullName(applicant.legalName) ?? "" : "",
+    field: "Name type or print_5",
+  },
+  {
+    text: (applicant) => numericalAge(applicant.birthdate!) < 14 ?
+        fullName(applicant.legalName) ?? "" : "",
+    field: "Name type or print_6",
+  },
+];
+
+/**
+ * Petition for Name Change (Michigan form PC 51.)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+export const nameChangeMap: Formfill[] = [
+  {
+    text: (applicant) => applicant.residentCounty,
+    field: "County",
+  },
+  {
+    text: (applicant) => applicant.court?.address,
+    field: "Court addres",
+  },
+  {
+    text: (applicant) => applicant.court?.phone,
+    field: "Court telephone no",
+  },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "Current first middle and last names type or print",
+  },
+  {
+    text: (applicant) => fullContactInfo(applicant),
+    field: "Petitioners name address and telephone no",
+  },
+  {
+    check: () => true,
+    field: "3 The name change is for",
+  },
+  { check: (applicant) => !isMinor(applicant), field: "b an adult only" },
+  {
+    check: (applicant) => isMinor(applicant),
+    field: "c a minor only",
+  },
+  {
+    check: (applicant) => isMinor(applicant),
+    field:
+      "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) && applicant.parentsAreOkay
+        ? fullName(applicant.mothersBirthName)
+        : "",
+    field: "Parent",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) && applicant.parentsAreOkay
+        ? fullName(applicant.fathersBirthName)
+        : "",
+    field: "Parent_2",
+  },
+  {
+    check: (applicant) => isMinor(applicant),
+    field:
+      "5  As to a minor one or more of the following is the petitioner or consents to the guardianship Check all that apply",
+  },
+  {
+    text: (applicant) => applicant.reasonForNameChange,
+    field: "7 The name change is not sought for any fraudulent intent",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? "" : applicant.legalName?.first ?? "",
+    field: "First",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? "" : applicant.legalName?.middle ?? "",
+    field: "Middle",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? "" : applicant.legalName?.last ?? "",
+    field: "Last",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
+    field: "First_2",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
+    field: "Middle_2",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
+    field: "Last_2",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? applicant.legalName?.first ?? "" : "",
+    field: "First_5",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? applicant.legalName?.middle ?? "" : "",
+    field: "Middle_5",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? applicant.legalName?.last ?? "" : "",
+    field: "Last_5",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
+    field: "First_6",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
+    field: "Middle_6",
+  },
+  {
+    text: (applicant) =>
+      isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
+    field: "Last_6",
+  },
+  {
+    check: (applicant) => applicant.sealBirthCertificate,
+    field:
+      "11 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the names",
+  },
+  {
+    text: (applicant) =>
+      applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
+    field: "Names_2",
+  },
+  { text: () => new Date().toLocaleDateString(), field: "Date" },
+  {
+    text: (applicant) =>
+      isMinor(applicant)
+        ? fullName(representativeName(applicant))
+        : fullName(applicant.legalName),
+    field: "Name type or print",
+  },
+  {
+    text: (applicant) => applicant.streetAddress,
+    field: "Address",
+  },
+  {
+    text: (applicant) =>
+        applicant.residentCity &&
+        ", " &&
+        applicant.residentJurisdiction &&
+        ", " &&
+        applicant.zip,
+    field: "City state zip",
+  },
+  {
+    text: (applicant) => applicant.phone,
+    field: "Telephone no",
+  },
+  {
+    text: (applicant) => numericalAge(applicant.birthdate!) > 13 ?
+          fullName(applicant.legalName) ?? "" : "",
+    field: "Name type or print_4",
+  },
+  {
+    text: (applicant) => numericalAge(applicant.birthdate!) < 14 ?
+        fullName(applicant.legalName) ?? "" : "",
+    field: "Name type or print_5",
   },
 ];
 

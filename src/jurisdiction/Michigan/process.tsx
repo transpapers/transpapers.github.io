@@ -19,6 +19,7 @@
 
 import {
   nameChangePrivateMap,
+  nameChangeMap,
   piiMap,
   orderFollowingMap,
   feeWaiverMap,
@@ -33,6 +34,7 @@ import MichiganEverythingElseGuide from "../../components/guides/Michigan/Everyt
 import MichiganFilingInitialFormsGuide from "../../components/guides/Michigan/FilingInitialForms";
 import MichiganM97aGuide from "../../components/guides/Michigan/M97a";
 import MichiganMC20Guide from "../../components/guides/Michigan/MC20";
+import MichiganPC51cGuide from "../../components/guides/Michigan/PC51c";
 import MichiganPC51Guide from "../../components/guides/Michigan/PC51";
 import MichiganPC52Guide from "../../components/guides/Michigan/PC52";
 import MichiganResourcesGuide from "../../components/guides/Michigan/Resources";
@@ -46,11 +48,20 @@ export const michiganNameChange: Process = {
   depends: [Target.GenderMarker],
   documents: [
     {
-      name: "Petition to Change Name and Ex Parte Request for Nonpublication and Confidential Record",
+      name: "Petition for Name Change and Ex Parte Request for Nonpublication and Confidential Record",
       id: "PC 51c",
       filename: "Michigan/pc51c.pdf",
-      guide: MichiganPC51Guide,
+      guide: MichiganPC51cGuide,
       map: nameChangePrivateMap,
+      include: (applicant) => applicant.residentCounty !== "Kent"
+    },
+    {
+      name: "Petition for Name Change",
+      id: "PC 51",
+      filename: "Michigan/pc51.pdf",
+      guide: MichiganPC51Guide,
+      map: nameChangeMap,
+      include: (applicant) => applicant.residentCounty === "Kent"
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
