@@ -37,7 +37,7 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         "Certified copy fee" in a checks memo line or include a letter stating
         thats what the extra money is for. No matter how you file we recommend that
         you call the court at {court?.phone} or visit their website{" "}
-        <a href="here">{court?.website}</a>. This is to confirm their accepted
+        {court?.website}. This is to confirm their accepted
         payment types, Name Change Petition fee, and Certified Copy fee as these
         vary by county and are updated frequently.
       </p>
