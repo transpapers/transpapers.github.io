@@ -29,15 +29,15 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
       <h3>Filing Initial Forms (MI)</h3>
       <p>
         Your filing location is {court?.address}. You may file by mail or in
-        person; in either case, include the Petition (pc51c), the Addendum (m97a),
+        person; in either case, include the Petition, the Addendum (m97a),
         {residentCounty && residentCounty == "Saginaw" ? (" the Order Following (pc52), ") : (" ")}
         the optional Fee Waiver (mc20), as well as payment. Even if the
         fee waiver is granted you still need to provide payment for at least one
         certified copy. To ask for one when you are filing by mail either write
         "Certified copy fee" in a checks memo line or include a letter stating
         thats what the extra money is for. No matter how you file we recommend that
-        you call the court at {court?.phone} or visit their website{" "}
-        {court?.website}. This is to confirm their accepted
+        you call the court at {court?.phone} or visit their website at{" "}
+        <a href="javascript:court?.website">{court?.website}</a>. This is to confirm their accepted
         payment types, Name Change Petition fee, and Certified Copy fee as these
         vary by county and are updated frequently.
       </p>
