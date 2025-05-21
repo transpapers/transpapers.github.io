@@ -31,125 +31,125 @@ import { Formfill } from "../../types/formfill";
 // then state documents (which need no map information);
 
 /**
- * Name and Sex Change Petition Adult (Oregon form unnumbered.)
+ * Change of Name or Sex (Oregon form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
 export const adultNameSexPetitionOregonMap: Formfill[] = [
   {
     text: (applicant) => applicant.residentCounty,
-    loc: { page: 2, x: 860, y: 266 },
+    loc: { page: 1, x: 430, y: 116 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { page: 2, x: 210, y: 457 },
+    loc: { page: 1, x: 103, y: 212 },
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 2, x: 1076, y: 458 },
+    loc: { page: 1, x: 538, y: 210 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 2, x: 1240, y: 458 },
+    loc: { page: 1, x: 621, y: 210 },
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 2, x: 305, y: 705 },
+    loc: { page: 1, x: 152, y: 335 },
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    loc: { page: 2, x: 445, y: 770 },
+    loc: { page: 1, x: 222, y: 368 },
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? applicant.chosenName?.first : "",
-    loc: { page: 2, x: 386, y: 838 },
+    loc: { page: 1, x: 194, y: 403 },
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? applicant.chosenName?.middle : "",
-    loc: { page: 2, x: 740, y: 838 },
+    loc: { page: 1, x: 375, y: 403 },
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? applicant.chosenName?.last : "",
-    loc: { page: 2, x: 1145, y: 838 },
+    loc: { page: 1, x: 579, y: 403 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 2, x: 303, y: 912 },
+    loc: { page: 1, x: 152, y: 438 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? 
       (applicant.gender === GenderMarker.M ? "X" : "") : "",
-      loc: { page: 2, x: 448, y: 948 },
+      loc: { page: 1, x: 225, y: 456 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? 
       (applicant.gender === GenderMarker.F ? "X" : "") : "",
-      loc: { page: 2, x: 565, y: 948 },
+      loc: { page: 1, x: 283, y: 456 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ?
       (applicant.gender === GenderMarker.X ? "X" : "") : "",
-      loc: { page: 2, x: 702, y: 948 },
+      loc: { page: 1, x: 352, y: 456 },
   },
   {
-    text: (applicant) => (isEmptyName(applicant.birthName) ? "" : "X"),
-    loc: { page: 2, x: 201, y: 1576 },
-  },
-  {
-    text: (applicant) =>
-      isEmptyName(applicant.birthName) ? "" : fullName(applicant.birthName),
-    loc: { page: 2, x: 305, y: 1675 },
+    text: (applicant) => fullName(applicant.birthName) ? "X" : "",
+    loc: { page: 1, x: 102, y: 769 },
   },
   {
     text: (applicant) =>
-      applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
-    loc: { page: 2, x: 204, y: 1834 },
+      fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+    loc: { page: 1, x: 154, y: 820 },
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
-    loc: { page: 2, x: 301, y: 1938 },
+    loc: { page: 1, x: 102, y: 898 },
+  },
+  {
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
+    loc: { page: 1, x: 152, y: 968 },
+  },
+  { 
+    text: () => new Date().toLocaleDateString(), 
+    loc: { page: 2, x: 105, y: 221 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { page: 3, x: 803, y: 503 },
+    loc: { page: 2, x: 105, y: 326 },
   },
   {
     text: (applicant) => applicant.streetAddress,
-    loc: { page: 3, x: 200, y: 688 },
+    loc: { page: 2, x: 200, y: 326 },
   },
   {
     text: (applicant) =>
-      applicant.residentCity &&
-      ", " &&
-      applicant.residentJurisdiction &&
-      ", " &&
-      applicant.zip,
-    loc: { page: 3, x: 685, y: 688 },
+      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`,
+    loc: { page: 2, x: 350, y: 326 },
   },
   {
     text: (applicant) => applicant.phone,
-    loc: { page: 3, x: 1180, y: 688 },
+    loc: { page: 2, x: 604, y: 326 },
   },
   {
     text: (applicant) => applicant.residentCounty,
-    loc: { page: 4, x: 860, y: 266 },
+    loc: { page: 3, x: 431, y: 117 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { page: 4, x: 210, y: 415 },
+    loc: { page: 3, x: 102, y: 209 },
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 4, x: 1186, y: 458 },
+    loc: { page: 3, x: 594, y: 211 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 4, x: 1353, y: 458 },
+    loc: { page: 3, x: 677, y: 211 },
   },
 ];
 
