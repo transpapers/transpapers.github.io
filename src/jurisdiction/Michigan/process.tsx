@@ -129,7 +129,7 @@ export const michiganPrimaryIdentification: Process = {
 export const michiganBirthRecord: Process = {
   jurisdiction: "MI",
   target: Target.BirthRecord,
-    depends: [Target.NameChange],
+  depends: [Target.NameChange],
   documents: [
     {
       name: "Birth Certificate",
