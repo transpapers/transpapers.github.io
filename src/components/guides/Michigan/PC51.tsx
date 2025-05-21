@@ -27,11 +27,12 @@ function MichiganPC51Guide({ person }: { person: Person }) {
   return (
     <section key="Michigan-PC51">
       <h3>Petition for Name Change (MI, PC51)</h3>
-      In {residentCounty} county the court will not hold hearings for name changes 
-      meaning the process will not be published in a newspaper even when filing 
-      with the standard petition like this. You need to have lived in{" "}
-      {residentCounty} county for at least a year to file this form. If necessary 
-      complete item 1 for any active court cases.
+      In {residentCounty} county the court will <strong>not</strong> hold 
+      hearings for name changes meaning the process will not be published 
+      in a newspaper even when filing with the standard petition like this. 
+      You need to have lived in {residentCounty} county for at least one 
+      year to file this form. If necessary complete item 1 for any active 
+      court cases.
       {hasCriminalRecord && hasCriminalRecord === true ? (
         <p>
           {age && age < 18 ? (" Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. "): (
