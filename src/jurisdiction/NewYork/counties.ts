@@ -44,6 +44,7 @@ const newyorkCounties: { [key: string]: NewYorkCounty } = {
         phone: "(646) 386-5700",
         },
         courtType: "New York City Civil",
+        isNYC: true,
     },
     Broome: {
         court: {

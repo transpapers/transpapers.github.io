@@ -37,11 +37,11 @@ import {
 import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
-// State/NYC forms come first, in the order they should be filed;
+// It's NY State and then NYC forms first, in the order they should be filed;
 // then state documents (which need no map information);
 
 /**
- * Name Change Petition Adult (New York form UCS-NC1.)
+ * Name Change and/or Sex Designation Change Petition for Individual Adult (New York form UCS-NC1.)
  * Updated 5/2025.
  * @type {Formfill[]}
  */
@@ -116,11 +116,11 @@ export const adultNameSexPetitionMap: Formfill[] = [
 ];
 
 /**
- * Name Change Petition Minor (New York form UCS-NC2.)
+ * Name Change and/or Sex Designation Change Petition for Individual Minor (New York form UCS-NC2.)
  * Updated 5/2025.
  * @type {Formfill[]}
  */
-export const MinorNameSexPetitionMap: Formfill[] = [
+export const minorNameSexPetitionMap: Formfill[] = [
   /** 'courtType' field from counties.ts should go here.
    */
   {
@@ -543,7 +543,7 @@ export const vehicleRegistrationMap: Formfill[] = [
 ];
 
 /**
- * BC Update 17 and up NY State (New York State form DOH-5305.)
+ * Application for Amendment of Certificate of Birth for Gender Designation for an Adult (New York State form DOH-5305.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -644,7 +644,7 @@ export const birthCertAdultNYStateMap: Formfill[] = [
 ];
 
 /**
- * BC Update Under 17 NY State (New York State form DOH-5306.)
+ * Parent/Legal Guardian Application for Amendment of Certificate of Birth for Gender Designation for a Minor (New York State form DOH-5306.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -739,7 +739,7 @@ export const birthCertMinorNYStateMap: Formfill[] = [
 ];
 
 /**
- * BC Update NYC (NYC form VR 172.)
+ * Application for the Correction of a NYC Birth Certificate (NYC form VR 172.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -893,7 +893,7 @@ export const birthCertNYCMap: Formfill[] = [
 ];
 
 /**
- * BC Affidavit 17 and up NY State (New York State form DOH-5303.)
+ * Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older (New York State form DOH-5303.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -912,7 +912,7 @@ export const genderAffidavitAdultNYStateMap: Formfill[] = [
 ];
 
 /**
- * BC Affidavit Under 17 NY State (New York State form DOH-5304.)
+ * Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under (New York State form DOH-5304.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -934,7 +934,7 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
 ];
 
 /**
- * BC Self Attestation Adult NYC (NYC form unnumbered.)
+ * Self-Attestation Form for Registrants 18 Years of Age and Older (NYC form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -1015,7 +1015,7 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
 ];
 
 /**
- * BC Self Attestation Minor NYC (NYC form unnumbered.)
+ * Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old (NYC form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
