@@ -44,7 +44,7 @@ function MichiganPC51cGuide({ person }: { person: Person }) {
       ): ("")} If you would like for the judge to see personal details 
       of why you may be at risk of discrimination or retaliation add them to
       the bottom of page 3, this is optional.
-    <p>
+    </p>
 
     <p>
       {age && age < 18 ? (
