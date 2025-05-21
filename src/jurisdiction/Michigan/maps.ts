@@ -102,11 +102,11 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "#6 reason for name change",
   },
   {
-    check: (applicant) => applicant.hasCriminalRecord === true && !isMinor(applicant),
+    check: (applicant) => applicant.hasCriminalRecord && !isMinor(applicant),
     field: "has",
   },
   {
-    check: (applicant) => applicant.hasCriminalRecord === false,
+    check: (applicant) => !applicant.hasCriminalRecord,
     field: "does not have",
   },
   {
@@ -315,6 +315,14 @@ export const nameChangeMap: Formfill[] = [
   {
     text: (applicant) => applicant.reasonForNameChange,
     field: "7 The name change is not sought for any fraudulent intent",
+  },
+  {
+    check: (applicant) => applicant.hasCriminalRecord && !isMinor(applicant),
+    field: "has",
+  },
+  {
+    check: (applicant) => !applicant.hasCriminalRecord,
+    field: "does not have",
   },
   {
     text: (applicant) =>
