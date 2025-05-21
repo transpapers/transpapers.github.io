@@ -139,7 +139,10 @@ export interface Person {
   /**
    * Applicant checks this to indicate criminal record.
    *
-   * @remarks Required for certain forms and guide sections as courts
+   * @remarks 
+   * Should be 'true' if there is a criminal record.
+   * 
+   * Required for certain forms and guide sections as courts
    * often ask this to check for statutory fraud. We use it to determine
    * if the appliant needs additional advice in the guides and to mark
    * forms appropriately. For minors it can be either them or their

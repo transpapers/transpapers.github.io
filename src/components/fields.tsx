@@ -120,7 +120,7 @@ export const fields: { [key: string]: Field } = {
   },
   hasCriminalRecord: {
     title:
-      "I do not have a criminal record or pending charges.",
+      "I have a criminal record or pending charges.",
     subtitle:
       "Minors need to check the box if they or the adult filing the paperwork for them has a criminal record or pending charges.",
     name: "hasCriminalRecord",
