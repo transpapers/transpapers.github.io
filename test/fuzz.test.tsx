@@ -57,6 +57,7 @@ const generatePersonForTesting: () => Person = () => {
     gender: faker.helpers.enumValue(GenderMarker),
 
     doNotPublish: faker.datatype.boolean(),
+    hasCriminalRecord: faker.datatype.boolean(),
     parentsAreOkay: faker.datatype.boolean(),
 
     isChangingLegalName: true,

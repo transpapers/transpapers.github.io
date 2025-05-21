@@ -102,6 +102,14 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "#6 reason for name change",
   },
   {
+    check: (applicant) => !isMinor(applicant) && applicant.hasCriminalRecord,
+    field: "has",
+  },
+  {
+    check: (applicant) => !applicant.hasCriminalRecord,
+    field: "does not have",
+  },
+  {
     text: (applicant) =>
       isMinor(applicant) ? "" : applicant.legalName?.first ?? "",
     field: "First",

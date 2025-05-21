@@ -118,6 +118,14 @@ export const fields: { [key: string]: Field } = {
     name: "doNotPublish",
     type: "boolean",
   },
+  hasCriminalRecord: {
+    title:
+      "I do not have a criminal record or pending charges.",
+    subtitle:
+      "Minors need to check the box if they or the adult filing the paperwork for them has a criminal record or pending charges.",
+    name: "hasCriminalRecord",
+    type: "boolean",
+  },
   parentsAreOkay: {
     title: "My parents are both alive and not divorced.",
     name: "parentsAreOkay",

@@ -137,6 +137,17 @@ export interface Person {
   doNotPublish: boolean | undefined;
 
   /**
+   * Applicant checks this to indicate criminal record.
+   *
+   * @remarks Required for certain forms and guide sections as courts
+   * often ask this to check for statutory fraud. We use it to determine
+   * if the appliant needs additional advice in the guides and to mark
+   * forms appropriately. For minors it can be either them or their
+   * representative who has one.
+   */
+  hasCriminalRecord: boolean | undefined;
+
+  /**
    * Should be `true` if applicant is a minor with two living, married parents.
    *
    * @remarks Required to determine which forms should be filed for Michigan
@@ -259,6 +270,7 @@ export const blankData: Person = {
   isChangingLegalSex: undefined,
 
   doNotPublish: undefined,
+  hasCriminalRecord: undefined,
   parentsAreOkay: undefined,
 
   mothersBirthName: {
@@ -351,6 +363,7 @@ export const sampleData: Person = {
   },
 
   doNotPublish: false,
+  hasCriminalRecord: false,
   parentsAreOkay: true,
 
   mothersBirthdate: "1970-01-01",

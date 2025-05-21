@@ -44,6 +44,7 @@ describe("shakeTree()", () => {
       "sealBirthCertificate",
       "residentCounty",
       "age",
+      "hasCriminalRecord",
     ];
 
     const received = shakeTree(michiganNameChange);

@@ -22,22 +22,29 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganPC51Guide({ person }: { person: Person }) {
-  const { age, residentCounty, parentsAreOkay } = person;
+  const { age, residentCounty, parentsAreOkay, hasCriminalRecord } = person;
 
   return (
     <section key="Michigan-PC51">
       <h3>Petition for Name Change (MI, PC51)</h3>
-      You need to have lived in {residentCounty} county for at least a year to 
-      file this form. If necessary complete <strong>item 1</strong> (concerning 
-      active court cases), <strong>item 8</strong>, and <strong>item 9</strong> (
-      concerning criminal record).
+      In {residentCounty} county the court will not hold hearings for name changes 
+      meaning the process will not be published in a newspaper even when filing 
+      with the standard petition like this. You need to have lived in{" "}
+      {residentCounty} county for at least a year to file this form. If necessary 
+      complete item 1 for any active court cases.
+      {hasCriminalRecord && hasCriminalRecord === true ? (
+        <p>
+          {age && age < 18 ? (" Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. "): (
+              " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. ")}
+        </p>
+      ): ("")}
       {age && age < 18 ? (
         <p>
           Also fill out <strong>item 4</strong>, <strong>item 5</strong>, and
-          <strong>item 10</strong> as applicable. The parent that is filing this
-          at court should date and sign the bottom of page 2 and the left
-          side of the “Signature of Parent/Guardian for Minor” section on page 
-          3.
+          <strong>item 10</strong> as applicable. The parent/guardian that is 
+          filing this at court should date and sign the bottom of page 2 and 
+          the left side of the “Signature of Parent/Guardian for Minor” 
+          section on page 3.
           {parentsAreOkay && parentsAreOkay === true ? (" The other should complete the right side of the same section.") : (
             " If one of your parents is deceased or noncustodial then only the first signature is needed. If both are deceased or noncustodial your legal guardian(s) should do the above instead and attach copies of their letters of guardianship to this form.")}
           {age && age < 14
