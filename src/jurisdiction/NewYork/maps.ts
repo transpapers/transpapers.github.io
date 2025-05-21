@@ -27,6 +27,7 @@ import {
   phoneStart,
   abbreviateJurisdiction,
   addZero,
+  representativeName,
 } from "../../lib/util";
 
 import {
@@ -203,6 +204,62 @@ export const MinorNameSexPetitionMap: Formfill[] = [
   {
     text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) < 14 ? applicant.residentCounty : "",
     field: "MinorConsentCounty",
+  },
+];
+
+/**
+ * Application to Waive Court Costs, Fees, and Expenses (NY State form UCS-FW1.)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+export const feeWaiverNYStateMap: Formfill[] = [
+  {
+    text: (applicant) => `${applicant.residentCounty} county`,
+    field: "CourtName",
+  },
+  {
+    text: (applicant) => applicant.residentCounty,
+    field: "CourtCounty",
+  },
+  {
+    text: (applicant) => fullName(representativeName(applicant)),
+    field: "Plaintiffs",
+  },
+  {
+    text: (applicant) =>
+      `${applicant.streetAddress}, ${applicant.residentCity},
+      ${applicant.residentJurisdiction} ${applicant.zip}`,
+    field: "ApplicantAddress",
+  },
+  {
+    check: () => true,
+    field: "Request",
+    select: "2",
+  },
+  {
+    text: (applicant) => isMinor(applicant) ?
+      "Waiving the fee for the filing of UCS-NC2" :
+      "Waiving the fee for the filing of UCS-NC1",
+    field: "CourtOrderOtherSpecify",
+  },
+  {
+    check: () => true,
+    field: "PreviousFiling",
+    select: "No",
+  },
+  {
+    check: () => true,
+    field: "Facts",
+    select: "0",
+  },
+  {
+    check: () => true,
+    field: "PreviousApplication",
+    select: "3",
+  },
+  {
+    text: (applicant) => fullName(representativeName(applicant)),
+    field: "ApplicantName",
   },
 ];
 
