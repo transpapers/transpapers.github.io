@@ -131,7 +131,8 @@ export const rhodeislandBirthRecord: Process = {
 };
 
 export const rhodeislandPostamble: Process = {
-  depends: [Target.BirthRecord, Target.PrimaryIdentification],
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",
