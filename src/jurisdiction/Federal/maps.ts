@@ -50,15 +50,24 @@ export const ssnMap: Formfill[] = [
     field: "topmostSubform[0].Page5[0].LastName[0]",
   },
   {
-    text: (applicant) => applicant.birthName?.first ? applicant.birthName?.first ?? "" : applicant.legalName?.first ?? "",
+    text: (applicant) =>
+      applicant.birthName?.first
+        ? applicant.birthName?.first ?? ""
+        : applicant.legalName?.first ?? "",
     field: "topmostSubform[0].Page5[0].firstdiffname[0]",
   },
   {
-    text: (applicant) => applicant.birthName?.middle ? applicant.birthName?.middle ?? "" : applicant.legalName?.middle ?? "",
+    text: (applicant) =>
+      applicant.birthName?.middle
+        ? applicant.birthName?.middle ?? ""
+        : applicant.legalName?.middle ?? "",
     field: "topmostSubform[0].Page5[0].Middlediffname[0]",
   },
   {
-    text: (applicant) => applicant.birthName?.last ? applicant.birthName?.last ?? "" : applicant.legalName?.last ?? "",
+    text: (applicant) =>
+      applicant.birthName?.last
+        ? applicant.birthName?.last ?? ""
+        : applicant.legalName?.last ?? "",
     field: "topmostSubform[0].Page5[0].Lastdiffname[0]",
   },
   {

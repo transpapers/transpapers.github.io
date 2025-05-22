@@ -28,17 +28,17 @@ import { fields } from "../components/fields";
  */
 type Opaque = Name;
 
+// TODO better-tree-shaker branch
+// eslint-disable-next-line
 function isOpaque(obj: any): obj is Opaque {
   return (obj as Name).first !== undefined;
 }
 
 /**
  * Determine the properties of a `Person` accessed by `object`.
- *
- * @remarks TODO is there a way to do this with just the interface?
- *
- * TODO Better documentation. Typing?
  */
+// TODO better-tree-shaker branch
+// eslint-disable-next-line
 export function shakeTree(obj: any, accessed: string[] = []) {
   const recursePropertyNames = ["documents", "map"];
 
@@ -47,6 +47,8 @@ export function shakeTree(obj: any, accessed: string[] = []) {
   const handler = {
     // Handle nested properties correctly.
     // cf. https://stackoverflow.com/questions/41299642/
+    // TODO better-tree-shaker branch
+    // eslint-disable-next-line
     get(target: any, prop: string) {
       if (isOpaque(target)) {
         return undefined;
@@ -56,13 +58,19 @@ export function shakeTree(obj: any, accessed: string[] = []) {
         return true;
       }
 
+      // TODO better-tree-shaker branch
+      // eslint-disable-next-line
       const func = target[prop];
 
       if (typeof func === "undefined") {
         return undefined;
       }
 
+      // TODO better-tree-shaker branch
+      // eslint-disable-next-line
       if (!func.isProxy && typeof func === "object") {
+        // TODO better-tree-shaker branch
+        // eslint-disable-next-line
         target[prop] = new Proxy(func, handler);
       }
 
@@ -70,6 +78,8 @@ export function shakeTree(obj: any, accessed: string[] = []) {
         accessed.push(prop);
       }
 
+      // TODO better-tree-shaker branch
+      // eslint-disable-next-line
       return target[prop];
     },
   };
@@ -77,6 +87,8 @@ export function shakeTree(obj: any, accessed: string[] = []) {
   if (obj) {
     recursePropertyNames.forEach((name) => {
       if (Object.prototype.hasOwnProperty.call(obj, name)) {
+        // TODO better-tree-shaker branch
+        // eslint-disable-next-line
         const subobj = obj[name];
         if (Array.isArray(subobj)) {
           subobj.forEach((item) => shakeTree(item, accessed));
@@ -88,9 +100,15 @@ export function shakeTree(obj: any, accessed: string[] = []) {
 
     functionPropertyNames.forEach((name) => {
       if (Object.prototype.hasOwnProperty.call(obj, name)) {
+        // TODO better-tree-shaker branch
+        // eslint-disable-next-line
         const func = obj[name];
+        // TODO better-tree-shaker branch
+        // eslint-disable-next-line
         const proxiedDummy = new Proxy(sampleData, handler);
 
+        // TODO better-tree-shaker branch
+        // eslint-disable-next-line
         func(proxiedDummy);
       }
     });

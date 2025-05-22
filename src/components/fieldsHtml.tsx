@@ -18,6 +18,7 @@
  */
 
 import * as React from "react";
+import { JSX } from "react";
 
 import { Field } from "../types/field";
 import { getJurisdiction } from "../types/jurisdiction";
@@ -63,9 +64,11 @@ export function CheckboxField({
     <label key={field.name} htmlFor={field.name} className="checkbox">
       <input
         type="checkbox"
-        defaultChecked={
+        defaultValue={
           Object.prototype.hasOwnProperty.call(field, "default") &&
-          field.default
+          field.default !== undefined
+            ? field.default.toString()
+            : ""
         }
         {...register(field.name)}
       />
@@ -160,8 +163,9 @@ export function NumberField({
     <input
       type="number"
       defaultValue={
-        Object.prototype.hasOwnProperty.call(field, "default")
-          ? field.default
+        Object.prototype.hasOwnProperty.call(field, "default") &&
+        field.default !== undefined
+          ? field.default.toString()
           : ""
       }
       {...register(field.name)}
@@ -179,8 +183,9 @@ export function EmailField({
     <input
       type="email"
       defaultValue={
-        Object.prototype.hasOwnProperty.call(field, "default")
-          ? field.default
+        Object.prototype.hasOwnProperty.call(field, "default") &&
+        field.default !== undefined
+          ? field.default.toString()
           : ""
       }
       {...register(field.name)}
@@ -198,8 +203,9 @@ export function DateField({
     <input
       type="date"
       defaultValue={
-        Object.prototype.hasOwnProperty.call(field, "default")
-          ? field.default
+        Object.prototype.hasOwnProperty.call(field, "default") &&
+        field.default !== undefined
+          ? field.default.toString()
           : ""
       }
       {...register(field.name)}
@@ -216,8 +222,9 @@ export function TelField({ field }: FieldConstructorProps): JSX.Element {
       name={field.name}
       type="tel"
       defaultValue={
-        Object.prototype.hasOwnProperty.call(field, "default")
-          ? field.default
+        Object.prototype.hasOwnProperty.call(field, "default") &&
+        field.default !== undefined
+          ? field.default.toString()
           : ""
       }
     />

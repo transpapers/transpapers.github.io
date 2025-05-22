@@ -35,14 +35,18 @@ function Step2() {
     (state) => state.person,
   );
 
-  const onSubmit = (data: Partial<Person>) => {
+  const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
-    navigate("/step3");
+    await navigate("/step3");
   };
 
   const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>What {residentJurisdiction} county do you live in?</h2>
       <ul className="wrap">
         {Object.keys(counties).map((countyName) => (

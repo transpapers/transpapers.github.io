@@ -38,13 +38,17 @@ function Step5() {
 
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
-  const onSubmit = ({ processNames }: { processNames?: string[] }) => {
+  const onSubmit = async ({ processNames }: { processNames?: string[] }) => {
     updateProcessNames(processNames!);
-    navigate("/step6");
+    await navigate("/step6");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>What do you need to do?</h2>
       <p>If you&apos;re not sure, leave everything checked.</p>
       <fieldset>

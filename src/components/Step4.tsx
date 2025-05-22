@@ -33,18 +33,22 @@ function Step4() {
 
   const updatePerson = useStore((state) => state.updatePerson);
 
-  const onSubmit = (data: Partial<Person>) => {
+  const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
 
     if (isMinor(data)) {
-      navigate("/step4b");
+      await navigate("/step4b");
     } else {
-      navigate("/step5");
+      await navigate("/step5");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>When were you born?</h2>
       <label>
         My birthdate is{" "}

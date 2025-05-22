@@ -32,16 +32,20 @@ function Step1() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const { residentJurisdiction } = useStore((state) => state.person)!;
+  const { residentJurisdiction } = useStore((state) => state.person);
   const updatePerson = useStore((state) => state.updatePerson);
 
-  const onSubmit = (data: Partial<Person>) => {
+  const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
-    navigate("/step2");
+    await navigate("/step2");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>What state do you live in?</h2>
 
       <ul>

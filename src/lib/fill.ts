@@ -156,7 +156,9 @@ export function compileGuides(
     .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.guide !== undefined) {
-        const guide = React.createElement(doc.guide, { person: applicant });
+        const guide = React.createElement(doc.guide, {
+          person: applicant,
+        });
         guides.push(guide);
       }
     });
@@ -201,7 +203,7 @@ export async function compileDocuments(
     formFilenamesAndMaps.map(async ([filename, map]) =>
       fetch(filename)
         .then((response) => response.arrayBuffer())
-        .then(PDFDocument.load)
+        .then((buf) => PDFDocument.load(buf))
         .then((form) => {
           if (map === undefined) {
             return form;

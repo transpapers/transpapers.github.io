@@ -63,17 +63,18 @@ function Step6() {
   ];
 
   const processes = processNames
-    .map((procName) => allProcesses.find((proc) => proc.target === procName))
-    .filter((proc) => proc !== undefined)
-    .map((proc) => proc!);
+    .map((procName) =>
+      allProcesses.find((proc) => proc.target!.toString() === procName),
+    )
+    .filter((proc) => proc !== undefined);
 
   const fieldNamesToShow = neededFieldNames(processes, applicant);
 
-  const onSubmit = (data: Partial<Person>) => {
+  const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
     finalizeApplicant();
 
-    navigate("/guide");
+    await navigate("/guide");
   };
 
   // We do it this way to maintain ordering.
@@ -83,7 +84,11 @@ function Step6() {
     .filter((field) => !field.include || field.include(applicant));
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>Tell us about yourself...</h2>
       <ul className="spaced">
         {fieldsToShow.map((field) => (

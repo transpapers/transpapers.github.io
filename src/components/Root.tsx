@@ -26,8 +26,8 @@ export default function Root() {
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = () => {
-    navigate("./step1");
+  const onSubmit = async () => {
+    await navigate("./step1");
   };
 
   return (
@@ -101,7 +101,11 @@ export default function Root() {
           </a>
         </p>
       </section>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={() => {
+          void handleSubmit(onSubmit);
+        }}
+      >
         <input type="submit" value="Ready to get started?" />
       </form>
     </main>

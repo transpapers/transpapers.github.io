@@ -29,20 +29,24 @@ function Guide() {
   const applicant = useStore((state) => state.person);
   const { residentJurisdiction, birthJurisdiction } = applicant;
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
-  // const guides = compileGuides(processes, applicant);
 
-  compileDocuments(processes, applicant).then((doc) => {
-    if (doc !== undefined) {
-      const url = URL.createObjectURL(
-        new Blob([doc], { type: "application/pdf" }),
-      );
-      const link = document.createElement("a");
-      link.download = "gender_affirming_documents.pdf";
-      link.href = url;
-      link.click();
-      URL.revokeObjectURL(link.href);
-    }
-  });
+  compileDocuments(processes, applicant).then(
+    (doc) => {
+      if (doc !== undefined) {
+        const url = URL.createObjectURL(
+          new Blob([doc], { type: "application/pdf" }),
+        );
+        const link = document.createElement("a");
+        link.download = "gender_affirming_documents.pdf";
+        link.href = url;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      }
+    },
+    () => {
+      console.error("Error in compileDocuments().");
+    },
+  );
 
   let documents = processes.map((proc) => proc.documents).flat();
 
@@ -66,7 +70,7 @@ function Guide() {
         .filter((doc) => doc.include === undefined || doc.include(applicant))
         .filter((doc) => doc.guide !== undefined)
         .map((doc) => (
-          <section key={doc.id || doc.name}>
+          <section key={doc.id ?? doc.name}>
             {React.createElement(doc.guide!, { person: applicant })}
           </section>
         ))}

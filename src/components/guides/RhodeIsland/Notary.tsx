@@ -20,14 +20,15 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
-import { type RhodeIslandCityOrTown } from "../../../types/locality";
+// import { type RhodeIslandCityOrTown } from "../../../types/locality";
 
 function RhodeIslandNotaryGuide(
   { person }: { person: Person },
-  { RIcityortown }: { RIcityortown: RhodeIslandCityOrTown },
+  // { RIcityortown }: { RIcityortown: RhodeIslandCityOrTown },
 ) {
   const { court, age, birthJurisdiction } = person;
-  const { courtDoesBackgroundCheck } = RIcityortown;
+  const courtDoesBackgroundCheck = true;
+  // const { courtDoesBackgroundCheck } = RIcityortown;
 
   return (
     <section key="RhodeIsland-Notary">
@@ -67,8 +68,9 @@ function RhodeIslandNotaryGuide(
             {age && age < 18 ? " a parent/guardian " : " you "}
             will need to make an appointment at this{" "}
             <a href="https://outlook.office365.com/book/VitalRecordsAppointments@health.ri.gov/">
-              link</a>
-            {" "}and click &quot;Record Request&quot;. Then fill out the requested
+              link
+            </a>{" "}
+            and click &quot;Record Request&quot;. Then fill out the requested
             info and go to the Cranston address listed above when it&apos;s
             time. Just bring photo ID, the completed form, and a payment method
             for the fee (cash, check, or card). Additionally the Attorney
@@ -89,8 +91,10 @@ function RhodeIslandNotaryGuide(
         list of notaries{" "}
         <a href="https://business.sos.ri.gov/PublicNotarySearch/Home">here</a>.
         Notaries can also be found in court buildings, banks, some{" "}
-        <a href="https://www.theupsstore.com/tools/find-a-store">UPS locations</a>
-        , or <a href="https://www.notarize.com/">online</a>. All of these
+        <a href="UPS locations">
+          https://www.theupsstore.com/tools/find-a-store
+        </a>
+        , or <a href="online">https://www.notarize.com/</a>. All of these
         services have different fees and payment methods but all of them require
         a photo ID.
       </p>

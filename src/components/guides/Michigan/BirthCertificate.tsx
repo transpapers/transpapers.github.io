@@ -38,15 +38,15 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        If at any point in the past you have undergone a different name change, such as part of an
-        adoption, you will need to fill out the &ldquo;Other Names Used:&rdquo;
-        field on the Child's Info section of the{" "}
+        If at any point in the past you have undergone a different name change,
+        such as part of an adoption, you will need to fill out the &ldquo;Other
+        Names Used:&rdquo; field on the Child&apos;s Info section of the{" "}
         <strong>
-            Application to Correct or Change a Michigan Birth Record
+          Application to Correct or Change a Michigan Birth Record
         </strong>{" "}
         and check the applicable box underneath.
         {/* The other options for doing this inside a JSX component are all worse. */}
-        { }
+        {}
         {age && age < 15
           ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
           : age && age < 18
@@ -58,8 +58,7 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         <>
           <p>
             Your parent or guardian should complete the “Payment” section on
-            page 2 as applicable. Then, they should mail the completed
-            forms to:
+            page 2 as applicable. Then, they should mail the completed forms to:
           </p>
           <p>
             <span>Vital Records Changes</span>
@@ -73,10 +72,10 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
             primary identification.{" "}
             <strong>Original documents will not be returned.</strong> If they
             don&apos;t have a state ID or driver&apos;s license, they should
-            refer to the &ldquo;Acceptable ID&rdquo; page we included in
-            the downloaded forms. Then they should enclose a check in the
-            amount entered under &ldquo;TOTAL ENCLOSED&rdquo; made out to the
-            State of Michigan.
+            refer to the &ldquo;Acceptable ID&rdquo; page we included in the
+            downloaded forms. Then they should enclose a check in the amount
+            entered under &ldquo;TOTAL ENCLOSED&rdquo; made out to the State of
+            Michigan.
           </p>
         </>
       ) : (
@@ -98,7 +97,8 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
             photocopies of the court order and your primary identification.{" "}
             <strong>Original documents will not be returned.</strong> If you
             don&apos;t have a state ID or driver&apos;s license, refer to the
-            &ldquo;Acceptable ID&rdquo; page we included in the downloaded forms.
+            &ldquo;Acceptable ID&rdquo; page we included in the downloaded
+            forms.
           </p>
         </>
       )}

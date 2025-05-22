@@ -18,13 +18,14 @@
  */
 
 import { Person } from "./person";
+import { JSX } from "react";
 
 export interface Field {
   title: string | JSX.Element;
   subtitle?: string | JSX.Element;
   name: string;
-  type: string; // ENUM
-  default?: any;
+  type: string; // ENUM>
+  default?: boolean | number | string;
   include?: (applicant: Person) => boolean;
   options?: { [key: string]: string };
   required?: boolean;

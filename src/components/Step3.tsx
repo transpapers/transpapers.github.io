@@ -34,13 +34,17 @@ function Step3() {
   const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdiction } = useStore((state) => state.person);
 
-  const onSubmit = (data: Partial<Person>) => {
+  const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
-    navigate("/step4");
+    await navigate("/step4");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>Where were you born?</h2>
       <ul>
         {allJurisdictions

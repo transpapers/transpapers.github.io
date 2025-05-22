@@ -38,6 +38,35 @@ interface Action {
   finalizeApplicant: () => void;
 }
 
+// Type for pointer walk code
+type Node<T = unknown> = {
+  [key: string]: Node | T;
+};
+
+function assignDeepProperty<T>(root: Node<T>, key: string, value: T): boolean {
+  const path = key.split(":");
+
+  const dirs = path.slice(0, -1);
+  const file = path.at(-1)!;
+
+  let pointer: Node<unknown> = root;
+  dirs.forEach((dirname) => {
+    if (!Object.prototype.hasOwnProperty.call(pointer, dirname)) {
+      pointer[dirname] = {};
+    }
+
+    if (pointer[dirname] as Node) {
+      pointer = pointer[dirname] as Node;
+    } else {
+      return false;
+    }
+  });
+
+  pointer[file] = value;
+
+  return true;
+}
+
 const useStore = create<ApplicationState & Action>()(
   persist(
     (set) => ({
@@ -51,23 +80,10 @@ const useStore = create<ApplicationState & Action>()(
           produce((state: ApplicationState) => {
             const dataToAssign = {};
 
-            Object.entries(newData).forEach(([key, value]) => {
-              const path = key.split(":");
+            Object.entries(newData).forEach(([key, value]) =>
+              assignDeepProperty(dataToAssign, key, value),
+            );
 
-              const dirs = path.slice(0, -1);
-              const file = path.at(-1)!;
-
-              let pointer: any = dataToAssign;
-              dirs.forEach((dirname) => {
-                if (!Object.prototype.hasOwnProperty.call(pointer, dirname)) {
-                  pointer[dirname] = {};
-                }
-
-                pointer = pointer[dirname];
-              });
-
-              pointer[file] = value;
-            });
             Object.assign(state.person, dataToAssign);
           }),
         ),

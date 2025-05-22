@@ -35,13 +35,17 @@ function Step4b() {
   const updatePerson = useStore((state) => state.updatePerson);
   const { birthdate } = useStore((state) => state.person);
 
-  const onSubmit = (data: Partial<Person>) => {
+  const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
-    navigate("/step5");
+    await navigate("/step5");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={() => {
+        void handleSubmit(onSubmit);
+      }}
+    >
       <h2>How old will you be when you file?</h2>
       <label>
         age{" "}
