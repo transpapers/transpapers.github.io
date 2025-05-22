@@ -254,7 +254,7 @@ const oregonCounties: { [key: string]: OtherCounty } = {
     },
     Umatilla: {
         court: {
-        address: "915 SE Columbia Drive, Hermiston, OR 97838 & 216 SE Fourth Street Pendleton, OR 97801",
+        address: "915 SE Columbia Drive, Hermiston, OR 97838 as well as 216 SE Fourth Street Pendleton, OR 97801",
         city: "Hermiston or Pendleton",
         phone: "(541) 667-3020 or (541) 278-0341",
         website: "https://www.courts.oregon.gov/courts/umatilla/Pages/default.aspx",
