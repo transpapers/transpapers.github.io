@@ -95,32 +95,41 @@ function NewYorkFilingGuide(
       </>
     )}
 
+  <p>
+    <strong>
+        By state law, court clerks are barred from answering questions about
+        the forms.
+    </strong>{" "}
+    We recommend that you direct any questions you may have to the court’s
+    legal assistance center, a local LGBT organization, or an attorney.
+  </p>
+
     {age && age < 18 ? (
       <p>
         After the clerk receives the filled out & notarized petition, your
         parent/guardian(s) ID, the certified copy of the minors birth certificate,
-        and the filing fee they should then give a reference number. The clerk
-        should also tell your parent/guardian(s) when to come back for the court
-        order confirming the changes. There shouldn’t be a hearing unless there is
-        a parent/guardian who refused to give consent for the change. When they
-        return they only need their ID(s) and the reference slip that the clerk
-        gave them. Finally a document called "Order Granting Name Change and/or
-        Sex Designation Change for an Individual Minor" (UCS-NC02) will be given
-        that we will refer to as the court order. We recommend requesting and
-        paying for an additional certified copy or 2 of the order for later use.
-        Have the original kept in a safe place.
+        and the filing fee (or optional fee waiver) they should then give a 
+        reference number. The clerk should also tell your parent/guardian(s) when 
+        to come back for the court order confirming the changes. There shouldn’t 
+        be a hearing unless there is a parent/guardian who refused to give consent 
+        for the change. When they return they only need their ID(s) and the 
+        reference slip that the clerk gave them. Finally a document called "Order 
+        Granting Name Change and/or Sex Designation Change for an Individual Minor" 
+        (UCS-NC02) will be given that we will refer to as the court order. We 
+        recommend requesting and paying for an additional certified copy or 2 of 
+        the order for later use. Have the original kept in a safe place.
       </p>
     ) : (
       <p>
         After the clerk recieves your notarized UCS-NC1 form, your ID, a copy
-        of your birth certificate, and the filing fee they should give you a
-        reference number. They will also tell you when to return for your court
-        order confirming the changes. When you return you only need your ID and
-        the reference slip they gave you. You should recieve a document called
-        "Order Granting Name Change and/or Sex Designation Change for an
-        Individual Adult" (UCS-NC01) that we will refer to as the court order.
-        We recommend paying for an additional certified copy or 2 for later use.
-        Keep the original in a safe space.
+        of your birth certificate, and the filing fee (or optional fee waiver) 
+        they should give you a reference number. They will also tell you when to 
+        return for your court order confirming the changes as there will not be a 
+        hearing. When you return you only need your ID and the reference slip they 
+        gave you. You should recieve a document called "Order Granting Name Change 
+        and/or Sex Designation Change for an Individual Adult" (UCS-NC01) that we 
+        will refer to as the court order. We recommend paying for an additional 
+        certified copy or 2 for later use. Keep the original in a safe space.
       </p>
     )}
     </section>

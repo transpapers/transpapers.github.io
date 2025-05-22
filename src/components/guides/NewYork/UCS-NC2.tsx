@@ -35,7 +35,7 @@ function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
     if the information we filled in is accurate for your
     circumstances. If it's not the missing info needs to be typed
     or written with black ink. You need to live in{" "}
-    {residentCounty} and have lived in New York State for
+    {residentCounty} county and have lived in New York State for
     at least 6 months before a parent/guardian can file this on
     your behalf.
   </p>

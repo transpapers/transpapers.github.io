@@ -39,7 +39,7 @@ function NYCFeeWaiverGuide({ person }: { person: Person }) {
 
       {age && age < 18 ? (
         <p>
-            If a parent/guradian chooses to file this form, they need to circle
+            If a parent/guardian chooses to file this form, they need to circle
             "I am" or "am not" on item number 7. They also need to fill out items
             8 & 9 then sign and date at the bottom.
         </p>
