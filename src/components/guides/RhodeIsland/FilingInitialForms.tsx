@@ -46,9 +46,18 @@ function RhodeIslandFilingGuide(
         tip.
       </p>
 
+      <p>
+        <strong>
+            By state law, court clerks are barred from answering questions about
+            the forms.
+        </strong>{" "}
+        We recommend that you direct any questions you may have to the court’s
+        legal assistance center, a local LGBT organization, or an attorney.
+      </p>
+
       {age && age < 18 ? (
         <>
-          {residentCounty && residentCounty == "East Providence" ? (
+          {residentCounty && residentCounty === "East Providence" ? (
             <p>
               The filing location is the East Providence Family court which is
               located at 1 Dorrance St, Providence, RI 02903.
