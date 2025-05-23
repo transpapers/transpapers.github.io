@@ -496,18 +496,18 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.mothersBirthdate, {
+      addZero(formatDate(applicant.mothersBirthdate, {
         format: [DATE.MONTH],
         separator: "",
-      }),
+      })),
     loc: { page: 5, x: 47, y: 158 },
   },
   {
     text: (applicant) =>
-      formatDate(applicant.mothersBirthdate, {
+      addZero(formatDate(applicant.mothersBirthdate, {
         format: [DATE.DAY],
         separator: "",
-      }),
+      })),
     loc: { page: 5, x: 94, y: 158 },
   },
   {
@@ -530,10 +530,10 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.fathersBirthdate, {
+      addZero(formatDate(applicant.fathersBirthdate, {
         format: [DATE.MONTH],
         separator: "",
-      }),
+      })),
     loc: { page: 5, x: 48, y: 248 },
   },
   {
@@ -546,10 +546,10 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.fathersBirthdate, {
+      addZero(formatDate(applicant.fathersBirthdate, {
         format: [DATE.YEAR],
         separator: "",
-      }),
+      })),
     loc: { page: 5, x: 141, y: 248 },
   },
   { text: () => "x", loc: { page: 5, x: 694, y: 236 } },
