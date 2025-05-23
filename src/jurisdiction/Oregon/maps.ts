@@ -55,7 +55,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 1, x: 621, y: 211 },
+    loc: { page: 1, x: 622, y: 211 },
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? "X" : "",
@@ -83,22 +83,22 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 1, x: 152, y: 438 },
+    loc: { page: 1, x: 153, y: 439 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? 
       (applicant.gender === GenderMarker.M ? "X" : "") : "",
-      loc: { page: 1, x: 225, y: 456 },
+      loc: { page: 1, x: 226, y: 457 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? 
       (applicant.gender === GenderMarker.F ? "X" : "") : "",
-      loc: { page: 1, x: 283, y: 456 },
+      loc: { page: 1, x: 284, y: 457 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ?
       (applicant.gender === GenderMarker.X ? "X" : "") : "",
-      loc: { page: 1, x: 352, y: 456 },
+      loc: { page: 1, x: 353, y: 457 },
   },
   {
     text: (applicant) => fullName(applicant.birthName) ? "X" : "",
@@ -112,16 +112,16 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   {
     text: (applicant) =>
       applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
-    loc: { page: 1, x: 102, y: 898 },
+    loc: { page: 1, x: 103, y: 899 },
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
-    loc: { page: 1, x: 152, y: 968 },
+    loc: { page: 1, x: 153, y: 952 },
   },
   { 
     text: () => new Date().toLocaleDateString(), 
-    loc: { page: 2, x: 105, y: 221 },
+    loc: { page: 2, x: 103, y: 221 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
@@ -129,7 +129,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.streetAddress,
-    loc: { page: 2, x: 105, y: 326 },
+    loc: { page: 2, x: 103, y: 326 },
   },
   {
     text: (applicant) =>
@@ -154,7 +154,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 3, x: 677, y: 211 },
+    loc: { page: 3, x: 679, y: 211 },
   },
 ];
 
@@ -174,11 +174,11 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 1, x: 539, y: 211 },
+    loc: { page: 1, x: 539, y: 212 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 1, x: 621, y: 211 },
+    loc: { page: 1, x: 622, y: 212 },
   },
   {
     text: (applicant) => fullName(applicant.representativeName),
@@ -186,7 +186,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 1, x: 126, y: 384 },
+    loc: { page: 1, x: 127, y: 385 },
   },
   {
     text: (applicant) =>
@@ -210,26 +210,26 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
-    loc: { page: 1, x: 126, y: 862 },
+    loc: { page: 1, x: 127, y: 863 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ? 
       (applicant.gender === GenderMarker.M ? "X" : "") : "",
-      loc: { page: 1, x: 179, y: 879 },
+      loc: { page: 1, x: 179, y: 880 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ?
       (applicant.gender === GenderMarker.F ? "X" : "") : "",
-      loc: { page: 1, x: 240, y: 879 },
+      loc: { page: 1, x: 241, y: 880 },
   },
   {
     text: (applicant) => applicant.isChangingLegalSex ?
       (applicant.gender === GenderMarker.X ? "X" : "") : "",
-      loc: { page: 1, x: 310, y: 879 },
+      loc: { page: 1, x: 311, y: 880 },
   },
   {
     text: (applicant) => (applicant.doNotPublish ? "X" : ""),
-    loc: { page: 1, x: 182, y: 949 },
+    loc: { page: 1, x: 183, y: 949 },
   },
   { 
     text: () => new Date().toLocaleDateString(), 
@@ -364,7 +364,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   },
   {
     text: () => "X",
-    loc: { page: 2, x: 155, y: 341 },
+    loc: { page: 2, x: 156, y: 341 },
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
@@ -397,7 +397,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   },
   {
     text: () => "X",
-    loc: { page: 4, x: 150, y: 344 },
+    loc: { page: 4, x: 151, y: 346 },
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
