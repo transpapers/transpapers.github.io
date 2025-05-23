@@ -151,7 +151,6 @@ export const michiganBirthRecord: Process = {
 
 export const michiganPostamble: Process = {
   jurisdiction: "MI",
-  target: Target.BirthRecord,
   depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
@@ -163,4 +162,5 @@ export const michiganPostamble: Process = {
       guide: MichiganResourcesGuide,
     },
   ],
+  isJustGuide: true,
 };

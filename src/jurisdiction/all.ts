@@ -61,11 +61,9 @@ export const michigan: Jurisdiction = {
   name: "Michigan",
   processes: [
     michiganNameChange,
-    socialSecurity,
     michiganPrimaryIdentification,
     michiganGenderMarker,
     michiganBirthRecord,
-    passport,
     michiganPostamble,
   ],
   counties: michiganCounties,
