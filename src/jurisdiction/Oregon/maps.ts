@@ -563,15 +563,15 @@ export const birthCertOregonMap: Formfill[] = [
     field: "Change sex",
   },
   {
-    check: (applicant) => applicant.isChangingLegalSex ? applicant.gender === GenderMarker.M,
+    check: (applicant) => applicant.isChangingLegalSex && applicant.gender === GenderMarker.M,
     field: "Male",
   },
   {
-    check: (applicant) => applicant.isChangingLegalSex ? applicant.gender === GenderMarker.F,
+    check: (applicant) => applicant.isChangingLegalSex && applicant.gender === GenderMarker.F,
     field: "Female",
   },
   {
-    check: (applicant) => applicant.isChangingLegalSex ? applicant.gender === GenderMarker.X,
+    check: (applicant) => applicant.isChangingLegalSex && applicant.gender === GenderMarker.X,
     field: "X Non-Binary",
   },
   {
