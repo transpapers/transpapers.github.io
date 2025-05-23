@@ -105,7 +105,7 @@ export const oregon: Jurisdiction = {
         oregonNameChange,
         socialSecurity,
         oregonPrimaryIdentification,
-        oregonBirthRecord,
+        /**oregonBirthRecord,*/
         oregonGenderMarker,
         passport,
         oregonPostamble,
