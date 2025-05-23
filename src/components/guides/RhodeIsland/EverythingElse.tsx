@@ -78,7 +78,8 @@ function RhodeIslandEverythingElseGuide() {
       </p>
       <p>
         <strong>Property/House Title</strong>: Contact your county’s Registry of
-        Deeds. ID and court order are both required.
+        Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and 
+        court order.
       </p>
       <p>
         <strong>Phone Service</strong>: Go to the nearest store of your carrier
