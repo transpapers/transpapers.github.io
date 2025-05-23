@@ -121,8 +121,7 @@ export const oregonBirthRecord: Process = {
 
 export const oregonPostamble: Process = {
   jurisdiction: "OR",
-  target: Target.BirthRecord,
-  depends: [Target.PrimaryIdentification, Target.Passport],
+  depends: [Target.BirthRecord, Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",

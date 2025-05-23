@@ -30,9 +30,9 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
 
     {isChangingLegalSex && isChangingLegalSex === true ? (
       <p>
-        Your county court is at {court?.address}. However the petition can be filed at 
-        any other Oregon circuit court as well. We have provided a map of all Oregon 
-        circuit courts{" "}
+        Your county's circuit court is at {court?.address}. However the petition can be 
+        filed at any other Oregon circuit court as well. We have provided a map of all 
+        Oregon circuit courts{" "}
         <a href="https://www.google.com/maps/d/u/0/viewer?mid=11l4y7lcd51YLjlNXl2Qcbb4Fmg_1aaI&hl=en&ll=44.22287483137777%2C-120.8304999&z=7">here</a> 
         {" "}and if another court is more safe/convenient then file there instead. 
         Every circuit court in Oregon has their info on this{" "}
@@ -42,7 +42,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
         of every page on all of the forms with the name of whatever county they will be 
         filed at. If the filing method is in-person or by mail
         {age && age < 18 ? (" your petitioner ") : (" you ")} will need the petition 
-        forms, photo ID, payment, and (optinally) the fee waiver forms. To find out 
+        forms, photo ID, payment, and (optionally) the fee waiver forms. To find out 
         what payment methods the court accepts check the link or call them to ask.
       </p>
     ) : (
@@ -50,7 +50,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
         {residentCounty && residentCounty === "Umatilla" ? (
           " Umatilla county has two valid circuit court locations to file at " + court?.address + ". Pick whichever is most convenient."
         ) : (
-          " The filing location is the" + residentCounty + " circuit court at " + court?.address + "."
+          " The filing location is the " + residentCounty + " circuit court at " + court?.address + "."
         )}
         They have a webpage with their open hours and other information here{" "} 
         {court?.website}. That link may also show what filing methods the court 
@@ -58,7 +58,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
         in-person only. It may also show accepted payment types. If not it will 
         have a phone number to call for questions. If the filing method is in-person 
         or by mail {age && age < 18 ? (" your petitioner ") : (" you ")} will need 
-        the petition forms, photo ID, payment, and (optinally) the fee waiver forms.
+        the petition forms, photo ID, payment, and (optionally) the fee waiver forms.
       </p>
     )}
 
@@ -94,7 +94,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
       </p>
     ) : (
       <p>
-        Once you have filed the court will likely make a judgment without 
+        Once you have filed, the court will likely make a judgment without 
         a hearing and will mail you the results. If so skip the "Court Hearing" 
         section. There are a few exceptions such as a paperwork mishap or some types 
         of criminal record that could cause a hearing though. Assuming there isn't 

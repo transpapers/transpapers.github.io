@@ -31,6 +31,14 @@ function OregonResourcesGuide() {
           : They can help you find an LGBT supportive lawyer if needed.
         </li>
         <li>
+            <a href="https://www.basicrights.org/resources">
+                Basic Rights Oregon
+            </a>
+            : They provide a wide range of resources and help connect 
+            LGBT Oregon residents to other resources for their specific 
+            situation.
+        </li>
+        <li>
           <a href="https://outsidein.org/health-services/transgender-and-gender-non-conforming/">
             Outside In
           </a>
@@ -40,7 +48,7 @@ function OregonResourcesGuide() {
         </li>
         <li>
           <a href="https://transponder.community/legal-id-change-program/">
-            Outside In
+            Transponder
           </a>
           : Helps provide financial aid and other resources for 
           name/gender marker changes anywhere in Oregon.

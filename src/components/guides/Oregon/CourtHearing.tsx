@@ -47,10 +47,10 @@ function OregonCourtHearingGuide({ person }: { person: Person }) {
         ) : (
         <>
             The judge cannot deny the change unless they think the attempt is 
-            for fraudulant reasons. For more details see this
+            for fraudulant reasons. For more details see this{" "}
             <a href="https://samuelslaw.com/2022/02/oregon-appellate-court-requires-that-a-judge-give-specific-reasons-before-denying-a-name-or-gender-marker-change/">link</a>
-            . If your petition is denied we strongly recommend hiring a lawyer 
-            for an appeal if you have not already done so.
+            . If your petition is denied we <strong>strongly</strong> recommend 
+            hiring a lawyer for an appeal if you have not already done so.
         </>
         )}
       </p>

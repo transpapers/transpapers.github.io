@@ -88,7 +88,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
 
           <p>
             After your form is notarized you will need a large envelope, a copy of your court 
-            order, a photocopy of your ID (both sides), and payment. If you do not have a \
+            order, a photocopy of your ID (both sides), and payment. If you do not have a 
             driver's license or state ID the “Oregon Vital Records Acceptable Proofs of Identity” 
             we included has a list of acceptable alternatives to photocopy. For payment they take 
             either checks or money orders made out to “Oregon Vital Records”. Mail the 
