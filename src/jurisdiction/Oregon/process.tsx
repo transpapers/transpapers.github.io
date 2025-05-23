@@ -107,7 +107,7 @@ export const oregonPrimaryIdentification: Process = {
 export const oregonBirthRecord: Process = {
   jurisdiction: "OR",
   target: Target.BirthRecord,
-  depends: [Target.NameChange],
+  depends: [Target.NameChange, Target.PrimaryIdentification, Target.SocialSecurity],
   documents: [
     {
       name: "Birth Certificate",
