@@ -33,7 +33,7 @@ function OregonCourtHearingGuide({ person }: { person: Person }) {
         appropriately for a courtroom, even if the hearing is virtual. You
         {age && age < 18 && "and/or your parent(s)/guardian(s)"} will be 
         sworn in and questioned. The questions and process vary between 
-        courts.
+        courts.{" "}
 
         {age && age < 18 ? (
           <>
