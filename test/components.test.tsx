@@ -43,6 +43,16 @@ import MichiganPC52Guide from "../src/components/guides/Michigan/PC52";
 import MichiganResourcesGuide from "../src/components/guides/Michigan/Resources";
 import MichiganSecretaryOfStateGuide from "../src/components/guides/Michigan/SecretaryOfState";
 
+import OregonAdultPetitionGuide from "../src/components/guides/Oregon/AdultPetition";
+import OregonBirthCertUpdateGuide from "../src/components/guides/Oregon/BirthCertUpdate";
+import OregonCourtHearingGuide from "../src/components/guides/Oregon/CourtHearing";
+import OregonDMVGuide from "../src/components/guides/Oregon/DMV";
+import OregonEverythingElseGuide from "../src/components/guides/Oregon/EverythingElse";
+import OregonFeeWaiverGuide from "../src/components/guides/Oregon/FeeWaiver";
+import OregonFilingInitialFormsGuide from "../src/components/guides/Oregon/FilingInitialForms";
+import OregonMinorPetitionGuide from "../src/components/guides/Oregon/MinorPetition";
+import OregonResourcesGuide from "../src/components/guides/Oregon/Resources";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -94,6 +104,42 @@ const michiganGuideComponents = [
   },
 ];
 
+const oregonGuideComponents = [
+    {
+        name: "OregonAdultPetitionGuide",
+        component: <OregonAdultPetitionGuide person={sampleData} />,
+    },
+    {
+        name: "OregonBirthCertificateGuide",
+        component: <OregonBirthCertUpdateGuide person={sampleData} />,
+    },
+    {
+        name: "OregonCourtHearingGuide",
+        component: <OregonCourtHearingGuide person={sampleData} />,
+    },
+    {
+        name: "OregonDMVGuide",
+        component: <OregonDMVGuide person={sampleData} />,
+    },
+    {
+        name: "OregonEverythingElseGuide",
+        component: <OregonEverythingElseGuide />,
+    },
+    {
+        name: "OregonFeeWaiverGuide",
+        component: <OregonFeeWaiverGuide person={sampleData} />,
+    },
+    {
+        name: "OregonFilingInitialFormsGuide",
+        component: <OregonFilingInitialFormsGuide person={sampleData} />,
+    },
+    {
+        name: "OregonMinorPetitionGuide",
+        component: <OregonMinorPetitionGuide person={sampleData} />,
+    },
+    { name: "OregonResourcesGuide", component: <OregonResourcesGuide /> },
+];
+
 const federalGuideComponents = [
   { name: "DS5504Guide", component: <DS5504Guide person={sampleData} /> },
   { name: "DS82Guide", component: <DS82Guide /> },
@@ -107,6 +153,7 @@ const federalGuideComponents = [
 const allComponents = [
   ...formComponents,
   ...michiganGuideComponents,
+  ...oregonGuideComponents,
   ...federalGuideComponents,
 ];
 
