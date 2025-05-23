@@ -108,13 +108,11 @@ export const fields: { [key: string]: Field } = {
     type: "option",
     options: { M: "M", F: "F", X: "X" },
   },
-  /* We need an update on this doNotPublish variable as it no longer applies to MI but might in other states. */
-  /* We Should also add a criminal history/record checkbox and make that a variable to section parts of the guide for clarity. */
   doNotPublish: {
     title:
-      "I have good cause not to publish notice of my name change proceeding.",
+      "Request that the case be sealed or otherwise not published.",
     subtitle:
-      "such as a known stalker or another such credible, specific threat",
+      "Some states have more stringent requirements than others, we will cover any of those in the guide.",
     name: "doNotPublish",
     type: "boolean",
   },
