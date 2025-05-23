@@ -22,6 +22,7 @@ import {
     fullName,
     isMinor,
     representativeName,
+    numericalBirthYear,
 } from "../../lib/util";
 
 import {
@@ -572,6 +573,10 @@ export const birthCertOregonMap: Formfill[] = [
   {
     check: () => true,
     field: "Request updated certificates",
+  },
+  {
+    check: (applicant) => numericalBirthYear(applicant.birthdate) > 2007,
+    field: "Computer Issued",
   },
 ];
 

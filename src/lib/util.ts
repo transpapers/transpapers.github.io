@@ -289,13 +289,22 @@ export function fullContactInfo(applicant: Person, separator = "\n"): string {
  * @param {Person} applicant
  * @return {string}
  */
-export function addZero(zeroString: string | undefined): string {
+export function addZero(zeroString: string): string {
     if (!zeroString) {
         return "";
     }
 
     if (zeroString.length == 1) {
-        return "0" && zeroString;
+        return "0" + zeroString;
     }
     return zeroString;
+}
+
+export function numericalBirthYear(birthdate: string | undefined): number {
+    if (!birthdate) {
+        return Infinity;
+    }
+    const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
+
+    return birthYear;
 }
