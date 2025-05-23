@@ -30,7 +30,7 @@ function OregonDMVGuide({ person }: { person: Person }) {
       <p>
         This section covers the process of updating your primary identification
         (driver’s license/state ID) and any vehicle registrations you may have.
-        If this is not relevant to you, proceed to the next section. You will
+        If this is not relevant to you, then skip this section. You will
         need to schedule an in-person appointment at any DMV in the state,
         which can be done by hitting the "Let's get started" button at this{" "}
         <a href="https://www.oregon.gov/odot/DMV/pages/appointments.aspx">link</a>.

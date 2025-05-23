@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
-  const { age, parentsAreOkay, birthJurisdiction } = person;
+  const { age, parentsAreOkay, birthJurisdiction} = person;
 
   return (
     <section key="Oregon-BC-Update">
@@ -33,7 +33,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
         <>
           <p>
             {birthJurisdiction && birthJurisdiction === "Oregon" ? (
-              " A court case is not needed to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that. "
+              " A court case is not required to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that. "
             ) : ("")}
             The form used to update a birth certificate is the "Application to Change the Name
             and/or Sex on a Record of Live Birth to Support Gender Identity". If your 
