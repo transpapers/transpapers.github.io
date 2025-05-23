@@ -84,8 +84,10 @@ export const oregonNameChange: Process = {
   ],
 };
 
-/** Testing empty process because Oregon has no solo 
- * Gender Marker forms or processes*/
+/** This process is empty because Oregon has no solo 
+ * Gender Marker forms or processes but without a
+ * Gender Marker process the isChangingLegalSex variable
+ * reads false.*/
 export const oregonGenderMarker: Process = {
     jurisdiction: "OR",
     target: Target.GenderMarker,
