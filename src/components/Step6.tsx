@@ -84,11 +84,7 @@ function Step6() {
     .filter((field) => !field.include || field.include(applicant));
 
   return (
-    <form
-      onSubmit={() => {
-        void handleSubmit(onSubmit);
-      }}
-    >
+    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>Tell us about yourself...</h2>
       <ul className="spaced">
         {fieldsToShow.map((field) => (

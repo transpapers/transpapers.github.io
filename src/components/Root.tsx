@@ -26,8 +26,8 @@ export default function Root() {
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = async () => {
-    await navigate("./step1");
+  const onSubmit = () => {
+    Promise.resolve(navigate("./step1")).catch(console.error);
   };
 
   return (
@@ -101,11 +101,7 @@ export default function Root() {
           </a>
         </p>
       </section>
-      <form
-        onSubmit={() => {
-          void handleSubmit(onSubmit);
-        }}
-      >
+      <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <input type="submit" value="Ready to get started?" />
       </form>
     </main>

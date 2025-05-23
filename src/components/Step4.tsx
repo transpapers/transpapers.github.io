@@ -44,11 +44,7 @@ function Step4() {
   };
 
   return (
-    <form
-      onSubmit={() => {
-        void handleSubmit(onSubmit);
-      }}
-    >
+    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>When were you born?</h2>
       <label>
         My birthdate is{" "}

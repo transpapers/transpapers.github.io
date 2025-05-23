@@ -40,11 +40,7 @@ function Step3() {
   };
 
   return (
-    <form
-      onSubmit={() => {
-        void handleSubmit(onSubmit);
-      }}
-    >
+    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>Where were you born?</h2>
       <ul>
         {allJurisdictions

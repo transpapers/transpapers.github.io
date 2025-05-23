@@ -42,11 +42,7 @@ function Step2() {
 
   const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
   return (
-    <form
-      onSubmit={() => {
-        void handleSubmit(onSubmit);
-      }}
-    >
+    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>What {residentJurisdiction} county do you live in?</h2>
       <ul className="wrap">
         {Object.keys(counties).map((countyName) => (

@@ -41,11 +41,7 @@ function Step1() {
   };
 
   return (
-    <form
-      onSubmit={() => {
-        void handleSubmit(onSubmit);
-      }}
-    >
+    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>What state do you live in?</h2>
 
       <ul>

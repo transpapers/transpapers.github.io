@@ -44,13 +44,7 @@ const someone = {
 describe("template spec", () => {
   it("passes with no console output", () => {
     // Visit Transpapers.
-    cy.visit("localhost:5173");
-
-    /*
-    cy.window().then((win) => {
-      win.console.error("This should fail the test");
-    });
-    */
+    cy.visit("localhost:5720");
 
     // Click on "Ready to get started?".
     cy.document().find('input[type="submit"]').click();
@@ -189,6 +183,7 @@ describe("template spec", () => {
 
     cy.document().find('input[type="submit"]').click();
 
+    // Wait around to make sure no post-submit console output ensues.
     cy.wait(10000);
   });
 });

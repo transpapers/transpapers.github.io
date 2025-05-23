@@ -44,11 +44,7 @@ function Step5() {
   };
 
   return (
-    <form
-      onSubmit={() => {
-        void handleSubmit(onSubmit);
-      }}
-    >
+    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>What do you need to do?</h2>
       <p>If you&apos;re not sure, leave everything checked.</p>
       <fieldset>

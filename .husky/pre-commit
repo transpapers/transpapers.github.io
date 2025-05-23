@@ -1,0 +1,50 @@
+#!/bin/sh
+PORT=5720
+
+function test() {
+	suitename=$1
+	cmd=$2
+
+	$cmd
+	status=$?
+	if [ $status == 0 ]; then
+		echo "$suitename passed."
+	else
+		echo "$suitename FAILED with exit code $status."
+	fi
+}
+
+function eslint() {
+	npm run eslint
+}
+
+function unit() {
+	npm run unit
+}
+
+function tsc() {
+	npm run tsc
+}
+
+function killport() {
+	port=$1
+	for pid in $(ps aux | grep vite | grep "$port" | awk '{print $2}'); do
+		kill -9 $pid
+		echo "Killed process $pid on port $port."
+	done
+}
+
+function e2e() {
+	killport $PORT
+	npx vite --port $PORT &
+	npm run e2e
+	status=$?
+	killport $PORT
+	
+	exit $status
+}
+
+test "ESLint" eslint
+test "Unit tests" unit
+test "TypeScript checks" tsc
+test "End-to-end tests" e2e
