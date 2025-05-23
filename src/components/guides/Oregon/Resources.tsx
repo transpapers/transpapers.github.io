@@ -50,4 +50,4 @@ function OregonResourcesGuide() {
   );
 }
 
-export default MichiganResourcesGuide;
+export default OregonResourcesGuide;
