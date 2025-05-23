@@ -50,6 +50,7 @@ import {
     oregonBirthRecord,
     oregonNameChange,
     oregonPrimaryIdentification,
+    oregonGenderMarker,
     oregonPostamble,
 } from "./Oregon/process";
 import oregonCounties from "./Oregon/counties";
@@ -105,6 +106,7 @@ export const oregon: Jurisdiction = {
         socialSecurity,
         oregonPrimaryIdentification,
         oregonBirthRecord,
+        oregonGenderMarker,
         passport,
         oregonPostamble,
     ],
