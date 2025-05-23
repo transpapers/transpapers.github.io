@@ -589,12 +589,12 @@ export const voterOregonMap: Formfill[] = [
   {
     check: () => true,
     field: "Citizen",
-    select: "0",
+    select: "Yes",
   },
   {
     check: () => true,
     field: "Age",
-    select: "0",
+    select: "Yes",
   },
   {
     text: (applicant) => applicant.chosenName?.last,
