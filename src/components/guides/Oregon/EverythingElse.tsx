@@ -111,7 +111,8 @@ function OregonEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: You can update online at this{" "}
+        <strong>Voter Registration</strong>: If you are 16 or older you can 
+        update online at this{" "}
         <a href="https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS">link</a>
         {" "}or by completing the Oregon Voter Registration Card (SEL 500) and 
         hand delivering it to your county’s local election office. If there are 
