@@ -538,18 +538,18 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      formatDate(applicant.fathersBirthdate, {
+      addZero(formatDate(applicant.fathersBirthdate, {
         format: [DATE.DAY],
         separator: "",
-      }),
+      })),
     loc: { page: 5, x: 95, y: 248 },
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.fathersBirthdate, {
+      formatDate(applicant.fathersBirthdate, {
         format: [DATE.YEAR],
         separator: "",
-      })),
+      }),
     loc: { page: 5, x: 141, y: 248 },
   },
   { text: () => "x", loc: { page: 5, x: 694, y: 236 } },
