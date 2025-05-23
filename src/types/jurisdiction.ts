@@ -1,5 +1,5 @@
 /**
- * Copyright 2023, 2024 Sasha Lišková and Stephanie Beckon
+ * Copyright 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
