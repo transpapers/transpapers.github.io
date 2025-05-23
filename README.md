@@ -16,7 +16,7 @@ To ensure data security, everything runs client-side. To protect against phishin
 
 ## Data
 
-In the process of developing this tool, we gathered court and sheriff locations at the county level. This data is available in this repository as `countyInfo.tsv`.
+In the process of developing this tool, we gathered court and sheriff locations (among other data) at the county level for multiple states. This data is available in each states folder as `counties.tsv`.
 
 ## Replication
 
