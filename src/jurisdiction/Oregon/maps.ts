@@ -581,7 +581,7 @@ export const birthCertOregonMap: Formfill[] = [
 ];
 
 /**
- * Voter Registration Form (Oregon form unnumbered.)
+ * Oregon Voter Registration Card (Oregon form SEL 500.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */

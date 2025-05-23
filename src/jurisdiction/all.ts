@@ -46,6 +46,14 @@ import {
 } from "./NewYork/process";
 import newyorkCounties from "./NewYork/counties";
 
+import {
+    oregonBirthRecord,
+    oregonNameChange,
+    oregonPrimaryIdentification,
+    oregonPostamble,
+} from "./Oregon/process";
+import oregonCounties from "./Oregon/counties";
+
 import { passport, socialSecurity } from "./Federal/process";
 
 export const michigan: Jurisdiction = {
@@ -90,10 +98,23 @@ export const michigan: Jurisdiction = {
     counties: newyorkCounties,
 };*/
 
+export const oregon: Jurisdiction = {
+    name: "Oregon",
+    processes: [
+        oregonNameChange,
+        socialSecurity,
+        oregonPrimaryIdentification,
+        oregonBirthRecord,
+        passport,
+        oregonPostamble,
+    ],
+    counties: oregonCounties,
+};
+
 export const federal: Jurisdiction = {
   name: "Federal",
   processes: [socialSecurity, passport],
   isFederal: true,
 };
 
-export const allJurisdictions = [federal, michigan, /**rhodeisland*/];
+export const allJurisdictions = [federal, michigan, oregon];
