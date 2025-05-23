@@ -103,11 +103,11 @@ export const oregon: Jurisdiction = {
     name: "Oregon",
     processes: [
         oregonNameChange,
-        socialSecurity,
+        /**socialSecurity,*/
         oregonPrimaryIdentification,
         oregonBirthRecord,
         oregonGenderMarker,
-        passport,
+        /**passport,*/
         oregonPostamble,
     ],
     counties: oregonCounties,
