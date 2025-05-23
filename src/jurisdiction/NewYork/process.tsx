@@ -61,7 +61,7 @@ export const newyorkNameChange: Process = {
       filename: "NewYork/UCS-NC1 Adult.pdf",
       guide: NewYorkUCS_NC1Guide,
       map: adultNameSexPetitionMap,
-      include: (applicant) => isMinor(applicant) !== true
+      include: (applicant) => isMinor(applicant) === false
     },
     {
       name: "Name Change and/or Sex Designation Change Petition for Individual Minor",

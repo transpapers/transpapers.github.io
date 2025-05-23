@@ -56,10 +56,7 @@ export const rhodeislandNameChange: Process = {
       filename: "RhodeIsland/BCI_BackgroundCheck.pdf",
       guide: RhodeIslandBCIGuide,
       map: bciMap,
-      },
-    /** The Birth Cert Request guide is written for all but
-     * only those born in RI need the PDF and map file.
-     */
+    },
     {
       name: "Application for a Certified Copy of a Birth Record",
       filename: "RhodeIsland/Birth Cert Request.pdf",
