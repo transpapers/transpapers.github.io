@@ -26,10 +26,7 @@ import {
   numericalAge,
 } from "../../lib/util";
 
-import {
-  GenderMarker,
-  DateFormatPart as DATE,
-} from "../../types/types";
+import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
@@ -225,31 +222,36 @@ export const nameChangePrivateMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(representativeName(applicant)) ?? "" : "",
+      isMinor(applicant) ? fullName(representativeName(applicant)) ?? "" : "",
     field: "Name type or print",
   },
   {
-    text: (applicant) => isMinor(applicant) ? applicant.streetAddress : "",
+    text: (applicant) => (isMinor(applicant) ? applicant.streetAddress : ""),
     field: "Address",
   },
   {
-    text: (applicant) => isMinor(applicant) ?
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}` : "",
+    text: (applicant) =>
+      isMinor(applicant)
+        ? `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`
+        : "",
     field: "City state zip",
   },
   {
-    text: (applicant) => isMinor(applicant) ? applicant.phone : "",
+    text: (applicant) => (isMinor(applicant) ? applicant.phone : ""),
     field: "Telephone no",
   },
   {
-    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) > 13 ?
-          fullName(applicant.legalName) ?? "" : "",
+    text: (applicant) =>
+      isMinor(applicant) && numericalAge(applicant.birthdate!) > 13
+        ? fullName(applicant.legalName) ?? ""
+        : "",
     field: "Name type or print_5",
   },
   {
-    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) < 14 ?
-        fullName(applicant.legalName) ?? "" : "",
+    text: (applicant) =>
+      isMinor(applicant) && numericalAge(applicant.birthdate!) < 14
+        ? fullName(applicant.legalName) ?? ""
+        : "",
     field: "Name type or print_6",
   },
 ];
@@ -398,31 +400,36 @@ export const nameChangeMap: Formfill[] = [
   { text: () => new Date().toLocaleDateString(), field: "Date" },
   {
     text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(representativeName(applicant)) ?? "" : "",
+      isMinor(applicant) ? fullName(representativeName(applicant)) ?? "" : "",
     field: "Name type or print",
   },
   {
-    text: (applicant) => isMinor(applicant) ? applicant.streetAddress : "",
+    text: (applicant) => (isMinor(applicant) ? applicant.streetAddress : ""),
     field: "Address",
   },
   {
-    text: (applicant) => isMinor(applicant) ?
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}` : "",
+    text: (applicant) =>
+      isMinor(applicant)
+        ? `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`
+        : "",
     field: "City state zip",
   },
   {
-    text: (applicant) => isMinor(applicant) ? applicant.phone : "",
+    text: (applicant) => (isMinor(applicant) ? applicant.phone : ""),
     field: "Telephone no",
   },
   {
-    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) > 13 ?
-          fullName(applicant.legalName) ?? "" : "",
+    text: (applicant) =>
+      isMinor(applicant) && numericalAge(applicant.birthdate!) > 13
+        ? fullName(applicant.legalName) ?? ""
+        : "",
     field: "Name type or print_4",
   },
   {
-    text: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate!) < 14 ?
-        fullName(applicant.legalName) ?? "" : "",
+    text: (applicant) =>
+      isMinor(applicant) && numericalAge(applicant.birthdate!) < 14
+        ? fullName(applicant.legalName) ?? ""
+        : "",
     field: "Name type or print_5",
   },
 ];
@@ -556,12 +563,16 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 52, y: 327 },
   },
   {
-    text: (applicant) => isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
+    text: (applicant) =>
+      isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
     loc: { x: 52, y: 355 },
   },
   { text: () => "X", loc: { x: 314, y: 409 } },
   {
-    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+    text: (applicant) =>
+      fullName(applicant.birthName)
+        ? fullName(applicant.birthName) ?? ""
+        : fullName(applicant.legalName) ?? "",
     loc: { x: 48, y: 541 },
   },
   {
@@ -600,7 +611,10 @@ export const birthCertMap: Formfill[] = [
   },
   { text: (applicant) => applicant.fathersBirthdate, loc: { x: 554, y: 754 } },
   {
-    text: (applicant) => fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+    text: (applicant) =>
+      fullName(applicant.birthName)
+        ? fullName(applicant.birthName) ?? ""
+        : fullName(applicant.legalName) ?? "",
     loc: { x: 56, y: 800 },
   },
   {
@@ -608,15 +622,18 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 433, y: 800 },
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "Sex: M" : ""),
+    text: (applicant) =>
+      applicant.assignedSex === GenderMarker.M ? "Sex: M" : "",
     loc: { x: 56, y: 834 },
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "Sex: F" : ""),
+    text: (applicant) =>
+      applicant.assignedSex === GenderMarker.F ? "Sex: F" : "",
     loc: { x: 56, y: 834 },
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "Sex: X" : ""),
+    text: (applicant) =>
+      applicant.assignedSex === GenderMarker.X ? "Sex: X" : "",
     loc: { x: 56, y: 834 },
   },
   {

@@ -30,23 +30,18 @@ function Guide() {
   const { residentJurisdiction, birthJurisdiction } = applicant;
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
-  compileDocuments(processes, applicant).then(
-    (doc) => {
-      if (doc !== undefined) {
-        const url = URL.createObjectURL(
-          new Blob([doc], { type: "application/pdf" }),
-        );
-        const link = document.createElement("a");
-        link.download = "gender_affirming_documents.pdf";
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(link.href);
-      }
-    },
-    () => {
-      console.error("Error in compileDocuments().");
-    },
-  );
+  compileDocuments(processes, applicant).then((doc) => {
+    if (doc !== undefined) {
+      const url = URL.createObjectURL(
+        new Blob([doc], { type: "application/pdf" }),
+      );
+      const link = document.createElement("a");
+      link.download = "gender_affirming_documents.pdf";
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+  }, console.error);
 
   let documents = processes.map((proc) => proc.documents).flat();
 
@@ -62,8 +57,8 @@ function Guide() {
         <strong>
           You should print both this webpage and the PDF containing your
           compiled documents.
-        </strong>
-        {" "}Please review the forms and guide side by side.
+        </strong>{" "}
+        Please review the forms and guide side by side.
       </p>
 
       {documents
