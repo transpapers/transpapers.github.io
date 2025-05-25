@@ -34,24 +34,20 @@ function RhodeIslandBCIGuide({ person }: { person: Person }) {
           Change of Name form for you will need a background check.
         </p>
       ) : (
-        <p>
-          For a Rhode Island name change you will need a background check.
-        </p>
+        <p>For a Rhode Island name change you will need a background check.</p>
       )}
 
       <p>
         This form, from the State of Rhode Island Office of the Attorney
         General, is specifically for requesting a background check{" "}
         <strong>by mail</strong>. Going in-person doesn&apos;t require a form.
-        {age && age < 18 ? (
-          " If the parent/guardian filing the Name Change has "
-        ) : (
-          " If you have "
-        )}
+        {age && age < 18
+          ? " If the parent/guardian filing the Name Change has "
+          : " If you have "}
         ever had any other legal names those names need to be listed on the
-        "Maiden Name / other names used" line if they aren't already listed. 
-        After that this form is ready for a notary, do <strong>not</strong> fill
-        anything else out.
+        &lquot;Maiden Name / other names used&rquot; line if they aren&apos;t
+        already listed. After that this form is ready for a notary, do{" "}
+        <strong>not</strong> fill anything else out.
       </p>
     </section>
   );

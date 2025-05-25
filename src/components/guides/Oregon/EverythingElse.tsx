@@ -57,8 +57,8 @@ function OregonEverythingElseGuide() {
         certain medical professionals will need to know your transition status.
       </p>
       <p>
-        <strong>Gas/Heating/Electricity Provider</strong>: Should be
-        able to be done by phone, email, or online.
+        <strong>Gas/Heating/Electricity Provider</strong>: Should be able to be
+        done by phone, email, or online.
       </p>
       <p>
         <strong>Water/Sewer</strong>: Should be able to be done by phone, email,
@@ -76,8 +76,8 @@ function OregonEverythingElseGuide() {
         mail.
       </p>
       <p>
-        <strong>Property/House Title</strong>: Contact your local county 
-        Recorder's Office. A Grant or Quitclaim deed will need to be filed. 
+        <strong>Property/House Title</strong>: Contact your local county
+        Recorder&apos;s Office. A Grant or Quitclaim deed will need to be filed.
         Bring ID and court order.
       </p>
       <p>
@@ -87,8 +87,8 @@ function OregonEverythingElseGuide() {
       </p>
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
-        change when you update your information with Social Security. You do <strong>not</strong>
-        {" "}need to contact them.
+        change when you update your information with Social Security. You do{" "}
+        <strong>not</strong> need to contact them.
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different
@@ -111,15 +111,17 @@ function OregonEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: If you are 16 or older you can 
+        <strong>Voter Registration</strong>: If you are 16 or older you can
         update online at this{" "}
-        <a href="https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS">link</a>
-        {" "}or by completing the Oregon Voter Registration Card (SEL 500) and 
-        hand delivering it to your county’s local election office. If there are 
-        only a few days until an election that you want to vote in we recommend 
-        the second option. We have attached a partially filled form to this guide 
-        if you need it, fill in any blanks on page 1. Page 2 contains the 
-        addresses for all local election offices.
+        <a href="https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS">
+          link
+        </a>{" "}
+        or by completing the Oregon Voter Registration Card (SEL 500) and hand
+        delivering it to your county’s local election office. If there are only
+        a few days until an election that you want to vote in we recommend the
+        second option. We have attached a partially filled form to this guide if
+        you need it, fill in any blanks on page 1. Page 2 contains the addresses
+        for all local election offices.
       </p>
       <p>
         <strong>Some other places to consider:</strong>

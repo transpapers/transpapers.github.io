@@ -48,12 +48,13 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         sending an email to doh.website@health.ri.gov. During this contact they
         need to be told that you want an updated gender marker on your birth
         certificate. They need to know your new legal name, your name at birth,
-        date of birth, place of birth, old gender marker, and what the new marker
-        will be. They accept M, F, or X as options. Finally make sure they have a
-        good phone number and email address so they can send you a sworn affidavit.{" "}
-        Leave this document <strong>unsigned</strong> until directed otherwise.
-        {" "}Once you have the affidavit you are ready to file with the RI Office
-        of Vital Records, this can be done either in person or by mail.
+        date of birth, place of birth, old gender marker, and what the new
+        marker will be. They accept M, F, or X as options. Finally make sure
+        they have a good phone number and email address so they can send you a
+        sworn affidavit. Leave this document <strong>unsigned</strong> until
+        directed otherwise. Once you have the affidavit you are ready to file
+        with the RI Office of Vital Records, this can be done either in person
+        or by mail.
       </p>
 
       <p>
@@ -84,17 +85,6 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         For in-person filing
         {age && age < 18 ? " have a parent/guardian call " : " call "}
         (401) 222-5339 to make an appointment. Then
-<<<<<<< HEAD
-        {age && age < 18
-            ? " a parent/guardian will need to "
-            : " "}
-        bring the <strong>unsigned</strong> sworn affidavit, Application 
-        for a Certified Copy of a Birth Certificate, the court order, and 
-        a photo ID. The address is the same as the mailing address above 
-        but the fee is $32.00 for in-person. The affidavit can be signed 
-        in front of a notary at the Office of Vital Records when they say 
-        to. They will then check ID, collect the forms, and ask for the fee. 
-=======
         {age && age < 18 ? " a parent/guardian will need to " : " "}
         bring the <strong>unsigned</strong> sworn affidavit, Application for a
         Certified Copy of a Birth Certificate, the court order, and a photo ID.
@@ -102,7 +92,6 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         $32.00 for in-person. The affidavit can be signed in front of a notary
         at the Office of Vital Records when they say to. They will then check
         ID, collect the forms, and ask for the fee.
->>>>>>> e4695ba (Fix TS errors)
       </p>
 
       <p>

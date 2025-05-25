@@ -28,6 +28,7 @@ import {
 } from "./Michigan/process";
 import michiganCounties from "./Michigan/counties";
 
+/*
 import {
     rhodeislandBirthRecord,
     rhodeislandGenderMarker,
@@ -45,13 +46,14 @@ import {
     newyorkPostamble,
 } from "./NewYork/process";
 import newyorkCounties from "./NewYork/counties";
+*/
 
 import {
-    oregonBirthRecord,
-    oregonNameChange,
-    oregonPrimaryIdentification,
-    oregonGenderMarker,
-    oregonPostamble,
+  oregonBirthRecord,
+  oregonNameChange,
+  oregonPrimaryIdentification,
+  oregonGenderMarker,
+  oregonPostamble,
 } from "./Oregon/process";
 import oregonCounties from "./Oregon/counties";
 
@@ -98,17 +100,15 @@ export const michigan: Jurisdiction = {
 };*/
 
 export const oregon: Jurisdiction = {
-    name: "Oregon",
-    processes: [
-        oregonNameChange,
-        socialSecurity,
-        oregonPrimaryIdentification,
-        oregonBirthRecord,
-        oregonGenderMarker,
-        passport,
-        oregonPostamble,
-    ],
-    counties: oregonCounties,
+  name: "Oregon",
+  processes: [
+    oregonNameChange,
+    oregonPrimaryIdentification,
+    oregonBirthRecord,
+    oregonGenderMarker,
+    oregonPostamble,
+  ],
+  counties: oregonCounties,
 };
 
 export const federal: Jurisdiction = {
