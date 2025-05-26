@@ -109,16 +109,14 @@ export const fields: { [key: string]: Field } = {
     options: { M: "M", F: "F", X: "X" },
   },
   doNotPublish: {
-    title:
-      "Request that the case be sealed or otherwise not published.",
+    title: "Request that the case be sealed or otherwise not published.",
     subtitle:
       "Some states have more stringent requirements than others, we will cover any of those in the guide.",
     name: "doNotPublish",
     type: "boolean",
   },
   hasCriminalRecord: {
-    title:
-      "I have a criminal record or pending charges.",
+    title: "I have a criminal record or pending charges.",
     subtitle:
       "Minors need to check the box if they or the adult filing the paperwork for them has a criminal record or pending charges.",
     name: "hasCriminalRecord",
