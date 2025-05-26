@@ -93,13 +93,13 @@ export function allProcesses(
   const residentJurisdictionProcesses =
     getJurisdiction(residentJurisdiction)?.processes || [];
   const residentProcesses = residentJurisdictionProcesses.filter(
-    (proc) => !proc.isBirth && !proc.isJustGuide,
+    (proc) => !proc.isBirth,
   );
 
   const birthJurisdictionProcesses =
     getJurisdiction(birthJurisdiction)?.processes || [];
   const birthProcesses = birthJurisdictionProcesses.filter(
-    (proc) => proc.isBirth && !proc.isJustGuide,
+    (proc) => proc.isBirth,
   );
 
   const federalProcesses = getJurisdiction("Federal")?.processes || [];

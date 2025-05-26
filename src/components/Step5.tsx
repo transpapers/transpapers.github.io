@@ -50,19 +50,21 @@ function Step5() {
       <fieldset>
         <legend>I need to...</legend>
         <ul>
-          {processes.map((proc) => (
-            <li key={proc.target}>
-              <label>
-                <input
-                  {...register("processNames")}
-                  type="checkbox"
-                  value={proc.target}
-                  defaultChecked
-                />
-                {targets[proc.target!] || ""}
-              </label>
-            </li>
-          ))}
+          {processes
+            .filter((proc) => !proc.isJustGuide)
+            .map((proc) => (
+              <li key={proc.target}>
+                <label>
+                  <input
+                    {...register("processNames")}
+                    type="checkbox"
+                    value={proc.target}
+                    defaultChecked
+                  />
+                  {targets[proc.target!] || ""}
+                </label>
+              </li>
+            ))}
         </ul>
       </fieldset>
       <input type="submit" value="Next" />
