@@ -117,4 +117,4 @@ export const federal: Jurisdiction = {
   isFederal: true,
 };
 
-export const allJurisdictions = [michigan, oregon];
+export const allJurisdictions = [michigan, oregon, federal];

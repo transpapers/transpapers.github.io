@@ -17,9 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    isMinor,
-} from "../../lib/util";
+import { isMinor } from "../../lib/util";
 
 import {
   adultNameSexPetitionOregonMap,
@@ -51,47 +49,50 @@ export const oregonNameChange: Process = {
       filename: "Oregon/Name and Sex Change Petition Adult.pdf",
       guide: OregonAdultPetitionGuide,
       map: adultNameSexPetitionOregonMap,
-      include: (applicant) => isMinor(applicant) === false
+      include: (applicant) => isMinor(applicant) === false,
     },
     {
       name: "Change of Name or Sex (Minor)",
       filename: "Oregon/Name and Sex Change Petition Minor.pdf",
       guide: OregonMinorPetitionGuide,
       map: minorNameSexPetitionOregonMap,
-      include: (applicant) => isMinor(applicant) === true && 
-        applicant.birthJurisdiction !== "Oregon"
+      include: (applicant) =>
+        isMinor(applicant) === true && applicant.birthJurisdiction !== "Oregon",
     },
     {
       name: "Application for Deferral or Waiver of Fees and Declaration in Support",
       filename: "Oregon/Fee Waiver Form.pdf",
       guide: OregonFeeWaiverGuide,
       map: feeWaiverOregonMap,
-      include: (applicant) => isMinor(applicant) === false || 
-        applicant.birthJurisdiction !== "Oregon"
+      include: (applicant) =>
+        isMinor(applicant) === false ||
+        applicant.birthJurisdiction !== "Oregon",
     },
     {
       name: "Filing Initial Documents",
       guide: OregonFilingInitialFormsGuide,
-      include: (applicant) => isMinor(applicant) === false || 
-        applicant.birthJurisdiction !== "Oregon"
+      include: (applicant) =>
+        isMinor(applicant) === false ||
+        applicant.birthJurisdiction !== "Oregon",
     },
     {
       name: "Court Hearing",
       guide: OregonCourtHearingGuide,
-      include: (applicant) => isMinor(applicant) === false || 
-        applicant.birthJurisdiction !== "Oregon"
+      include: (applicant) =>
+        isMinor(applicant) === false ||
+        applicant.birthJurisdiction !== "Oregon",
     },
   ],
 };
 
-/** This process is empty because Oregon has no solo 
+/** This process is empty because Oregon has no solo
  * Gender Marker forms or processes but without a
  * Gender Marker process the isChangingLegalSex variable
  * reads false.*/
 export const oregonGenderMarker: Process = {
-    jurisdiction: "OR",
-    target: Target.GenderMarker,
-    documents: [],
+  jurisdiction: "OR",
+  target: Target.GenderMarker,
+  documents: [],
 };
 
 export const oregonPrimaryIdentification: Process = {
@@ -109,7 +110,11 @@ export const oregonPrimaryIdentification: Process = {
 export const oregonBirthRecord: Process = {
   jurisdiction: "OR",
   target: Target.BirthRecord,
-  depends: [Target.NameChange, Target.PrimaryIdentification, Target.SocialSecurity],
+  depends: [
+    Target.NameChange,
+    Target.PrimaryIdentification,
+    Target.SocialSecurity,
+  ],
   documents: [
     {
       name: "Birth Certificate",
@@ -131,7 +136,6 @@ export const oregonBirthRecord: Process = {
 
 export const oregonPostamble: Process = {
   jurisdiction: "OR",
-  target: Target.BirthRecord,
   documents: [
     {
       name: "Everything Else",
@@ -148,4 +152,5 @@ export const oregonPostamble: Process = {
       guide: OregonResourcesGuide,
     },
   ],
+  isJustGuide: true,
 };
