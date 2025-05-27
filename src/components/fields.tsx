@@ -156,6 +156,7 @@ export const fields: { [key: string]: Field } = {
   phone: {
     title: "Daytime phone",
     name: "phone",
+    /** change type from string when react-phone-number-input added.*/
     type: "string",
   },
   streetAddress: {
