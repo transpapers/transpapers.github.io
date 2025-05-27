@@ -320,7 +320,8 @@ export const nameChangeMap: Formfill[] = [
     field: "7 The name change is not sought for any fraudulent intent",
   },
   {
-    check: (applicant) => applicant.hasCriminalRecord && !isMinor(applicant),
+    check: (applicant) => 
+        applicant.hasCriminalRecord ? !isMinor(applicant) : false,
     field: "has",
   },
   {
