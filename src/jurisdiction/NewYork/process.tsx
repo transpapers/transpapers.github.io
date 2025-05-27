@@ -245,5 +245,6 @@ export const newyorkPostamble: Process = {
       name: "Resources",
       guide: NewYorkResourcesGuide,
     },
-  ],
+    ],
+  isJustGuide: true,
 };
