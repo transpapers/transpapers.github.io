@@ -42,7 +42,7 @@ function OregonDMVGuide({ person }: { person: Person }) {
 
       <p>
         When you {age && age < 18 && "and a parent/guardian"} go to your
-        appointment you will need to bring your old license if you have one or
+        appointment you will need to bring your old license, if you have one, or
         another proof of ID if you don&apos;t.{" "}
         <a href="https://www.oregon.gov/odot/dmv/pages/driverid/idproof.aspx">
           Here

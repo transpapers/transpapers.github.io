@@ -49,7 +49,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
           {age && age < 18 ? " your petitioner " : " you "} will need the
           petition forms, photo ID, payment, and (optionally) the fee waiver
           forms. To find out what payment methods the court accepts check the
-          link or call them to ask.
+          link or call them.
         </p>
       ) : (
         <p>

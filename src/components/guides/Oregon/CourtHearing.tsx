@@ -29,9 +29,9 @@ function OregonCourtHearingGuide({ person }: { person: Person }) {
       <h3>Court Hearing (OR)</h3>
       <p>
         On the day of your hearing, you
-        {age && age < 18 && "and your parent(s)/guardian(s)"} should dress 
+        {age && age < 18 && " and your parent(s)/guardian(s)"} should dress 
         appropriately for a courtroom, even if the hearing is virtual. You
-        {age && age < 18 && "and/or your parent(s)/guardian(s)"} will be 
+        {age && age < 18 && " and/or your parent(s)/guardian(s)"} will be 
         sworn in and questioned. The questions and process vary between 
         courts.{" "}
 

@@ -31,7 +31,7 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
         The Petition for Change of Name/Sex allows for name and/or gender
         changes all in one form. Any parent or legal guardian can fill this form
         out and file it on your behalf. Whoever does becomes your petitioner and
-        will be going through this process with you.
+        will be going through this process with you.{" "}
         {isChangingLegalSex && isChangingLegalSex === true ? (
           <>
             In order to file this your petitioner needs to be a resident of
@@ -65,7 +65,7 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
             page 3 then sign and the form is ready to file.
           </>
         )}
-        The “General Judgement” is on pages 6 and 7 should already be set, file 
+        {" "}The “General Judgement” is on pages 6 and 7 should already be set, file 
         it with the petition.
       </p>
     </section>
