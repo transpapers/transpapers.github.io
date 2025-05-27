@@ -73,7 +73,7 @@ export const fields: { [key: string]: Field } = {
       </>
     ),
     subtitle:
-      "This prevents third parties from accessing your deadname and assigned gender at birth.",
+      "This prevents third parties from accessing your deadname and assigned gender at birth on your original birth certificate.",
     name: "sealBirthCertificate",
     type: "boolean",
     default: true,
