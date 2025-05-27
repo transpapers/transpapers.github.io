@@ -215,7 +215,10 @@ export function DateField({
   return GenericField(field, innards);
 }
 
-export function TelField({ field }: FieldConstructorProps): JSX.Element {
+export function TelField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
   const innards = (
     <input
       id={field.name}
@@ -227,6 +230,7 @@ export function TelField({ field }: FieldConstructorProps): JSX.Element {
           ? field.default.toString()
           : ""
       }
+      {...register(field.name)}
     />
   );
 
