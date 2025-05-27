@@ -145,7 +145,7 @@ export const ssnMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      phoneStart(applicant.phone) + phoneEnd(applicant.phone),
+      `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
     field: "topmostSubform[0].Page5[0].phonenumber[0]",
   },
   {
