@@ -106,11 +106,6 @@ export const michiganGenderMarker: Process = {
       filename: "Michigan/mdos_sdf.pdf",
       map: mdosSexMap,
     },
-    {
-      name: "State of Michigan Sex Designation Form",
-      filename: "Michigan/mi_sdf.pdf",
-      map: miSexMap,
-    },
   ],
 };
 
@@ -140,6 +135,11 @@ export const michiganBirthRecord: Process = {
       id: "DCH-0847-CHGBX",
       filename: "Michigan/birth-cert.pdf",
       map: birthCertMap,
+    },
+    {
+      name: "State of Michigan Sex Designation Form",
+      filename: "Michigan/mi_sdf.pdf",
+      map: miSexMap,
     },
     {
       name: "Acceptable ID",
