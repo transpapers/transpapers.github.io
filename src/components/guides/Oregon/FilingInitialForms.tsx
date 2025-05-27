@@ -43,9 +43,9 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
           </a>
           . Some courts accept filing by mail or even online, the web link we
           provided will have the details for those. Make sure to fill in the
-          “County” field at the top of every page on all of the
-          forms with the name of whatever county they will be filed at. If the
-          filing method is in-person or by mail
+          “County” field at the top of every page on all of the forms with the
+          name of whatever county they will be filed at. If the filing method is
+          in-person or by mail
           {age && age < 18 ? " your petitioner " : " you "} will need the
           petition forms, photo ID, payment, and (optionally) the fee waiver
           forms. To find out what payment methods the court accepts check the
@@ -62,12 +62,12 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
               " circuit court at " +
               court?.address +
               "."}
-          They have a webpage with their open hours and other information here{" "}
-          {court?.website}. That link may also show what filing methods the
-          court accepts, some will accept filing by mail or even online, others
-          are in-person only. It may also show accepted payment types. If not it
-          will have a phone number to call for questions. If the filing method
-          is in-person or by mail{" "}
+          They have a webpage with their open hours and other information at{" "}
+          <a href="{court?.website}">{court?.website}</a>. That link may also
+          show what filing methods the court accepts, some will accept filing by
+          mail or even online, others are in-person only. It may also show
+          accepted payment types. If not it will have a phone number to call for
+          questions. If the filing method is in-person or by mail{" "}
           {age && age < 18 ? " your petitioner " : " you "} will need the
           petition forms, photo ID, payment, and (optionally) the fee waiver
           forms.
@@ -94,31 +94,30 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
           if they have an issue they can contact the court using the notice. A
           copy of that notice has been provided; your petitioner simply needs to
           add the case number. Once notice has been sent your petitioner can
-          fill out the table in the “Declaration of Notice” form
-          with everyone they contacted. At that point they can sign it and send
-          it to the court, then the court will likely make a judgment without a
-          hearing and mail the results. If so skip the “Court
-          Hearing” section. Assuming there isn&apos;t a hearing you will
-          need to wait for the “General Judgement”, which we will
-          call the court order, to arrive. Once it does your petitioner will
-          also need to order 2 or 3 certified copies of the court order for use
-          later in this process as some places will not return them. Keep the
-          original in a safe place. If there is a hearing your petitioner will
-          recieve a court date instead and we recommend getting help from a
-          lawyer or our “Resources” section.
+          fill out the table in the “Declaration of Notice” form with everyone
+          they contacted. At that point they can sign it and send it to the
+          court, then the court will likely make a judgment without a hearing
+          and mail the results. If so skip the “Court Hearing” section. Assuming
+          there isn&apos;t a hearing you will need to wait for the “General
+          Judgement”, which we will call the court order, to arrive. Once it
+          does your petitioner will also need to order 2 or 3 certified copies
+          of the court order for use later in this process as some places will
+          not return them. Keep the original in a safe place. If there is a
+          hearing your petitioner will recieve a court date instead and we
+          recommend getting help from a lawyer or our “Resources” section.
         </p>
       ) : (
         <p>
           Once you have filed, the court will likely make a judgment without a
-          hearing and will mail you the results. If so skip the “Court
-          Hearing” section. There are a few exceptions such as a paperwork
-          mishap or some types of criminal record that could cause a hearing
-          though. Assuming there isn&apos;t one you will need to wait for the
-          “General Judgement”, which we will call the court order,
-          to arrive. Once it does you will also need to order 2 or 3 certified
-          copies of the court order for use later in the process as some places
-          will not return them. Keep the original in a safe place. If there is a
-          hearing you will recieve a court date instead.
+          hearing and will mail you the results. If so skip the “Court Hearing”
+          section. There are a few exceptions such as a paperwork mishap or some
+          types of criminal record that could cause a hearing though. Assuming
+          there isn&apos;t one you will need to wait for the “General
+          Judgement”, which we will call the court order, to arrive. Once it
+          does you will also need to order 2 or 3 certified copies of the court
+          order for use later in the process as some places will not return
+          them. Keep the original in a safe place. If there is a hearing you
+          will recieve a court date instead.
         </p>
       )}
     </section>
