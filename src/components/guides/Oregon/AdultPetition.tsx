@@ -31,7 +31,7 @@ function OregonAdultPetitionGuide({ person }: { person: Person }) {
       {isChangingLegalSex && isChangingLegalSex === true ? (
         <p>
           In order to file this you need to be a resident of Oregon, which just
-          means you need an ID or some mail with your legal name and Oregon
+          means you need an ID or some mail with your legal name and an Oregon
           address on it.
         </p>
       ) : (
@@ -48,8 +48,8 @@ function OregonAdultPetitionGuide({ person }: { person: Person }) {
         Interest” section. If you are in the Address Confidentiality Program you
         can check the box on page 1 near the bottom to seal this court record.
         You then need to sign the form with your current legal name on page 3.
-        The &lquot;General Judgement&rquot; on page 4 should already be set,
-        file it with your petition.
+        The “General Judgement” on page 4 should already be set, file it with 
+        your petition.
       </p>
     </section>
   );

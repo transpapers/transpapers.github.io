@@ -32,7 +32,7 @@ function OregonDMVGuide({ person }: { person: Person }) {
         (driver’s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, then skip this section. You will need to
         schedule an in-person appointment at any DMV in the state, which can be
-        done by hitting the &lquot;Let&apos;s get started&rquot; button at this{" "}
+        done by hitting the &ldquo;Let&apos;s get started&rdquo; button at this{" "}
         <a href="https://www.oregon.gov/odot/DMV/pages/appointments.aspx">
           link
         </a>

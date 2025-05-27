@@ -28,8 +28,8 @@ function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
       <h3>Name and/or Sex Change Petition (NY, UCS-NC2)</h3>
 
       <p>
-        The first form to be filled out is the &lquot;Name Change and/or Sex
-        Designation Change Petition for Individual Minor&rquot; (UCS-NC2). It
+        The first form to be filled out is the &ldquo;Name Change and/or Sex
+        Designation Change Petition for Individual Minor&rdquo; (UCS-NC2). It
         has some sections that a parent/legal guardian will need to review. They
         need to look through sections A, B, and C to see if the information we
         filled in is accurate for your circumstances. If it&apos;s not the

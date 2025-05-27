@@ -28,30 +28,30 @@ function NewYorkDMVGuide({ person }: { person: Person }) {
     <section key="NY-DMV">
       <h3>Updating Primary ID (NY)</h3>
       <p>
-        To update your primary ID you will need the &lquot;Application for
-        Permit, Driver License or Non-Driver ID Card&rquot; (MV-44). Fill it out
+        To update your primary ID you will need the &ldquo;Application for
+        Permit, Driver License or Non-Driver ID Card&rdquo; (MV-44). Fill it out
         any blanks in the following sections digitally or using black ink. Check
         the box for what ID you want in the top left. If you have or ever had a
-        New York ID fill out the &lquot;Identification Information&rquot;
+        New York ID fill out the &ldquo;Identification Information&rdquo;
         section. For any other state fill out the boxes just below and to the
         right of that section. Fill out the Height, Eye Color, and Social
-        Security boxes. We left the &lquot;Address where you get your
-        Mail&rquot; box intentionally blank just in case it&apos;s different
+        Security boxes. We left the &ldquo;Address where you get your
+        Mail&rdquo; box intentionally blank just in case it&apos;s different
         than your lived address, please fill it in. If either address is
         different than the one they have on file check the boxes below that
         section. We have also left the veteran status, organ donor, and
         selective service boxes blank for you to fill as needed. On Page 2
         answer questions 1 through 4. Do <strong>not</strong> sign the
-        &lquot;Certification&rquot; section yet. The fee to change info on an ID
+        &ldquo;Certification&rdquo; section yet. The fee to change info on an ID
         is $12.50.
       </p>
 
       <p>
-        For updating vehicle titles/registrations you need a &lquot;Vehicle
-        Registration/Title Application&rquot; (MV-82) filled out
+        For updating vehicle titles/registrations you need a &ldquo;Vehicle
+        Registration/Title Application&rdquo; (MV-82) filled out
         <strong>for each vehicle</strong> you want updated. We have included a
-        partially filled out form that assumes you are the &lquot;Primary
-        Registrant&rquot; if this is not true{" "}
+        partially filled out form that assumes you are the &ldquo;Primary
+        Registrant&rdquo; if this is not true{" "}
         <a href="https://dmv.ny.gov/forms/mv82.pdf">here</a> is a blank form you
         can print. In any case, fill out the instructions as well as any blanks
         we left in sections 1 thru 4. If you are updating a commericial vehicle
@@ -78,7 +78,7 @@ function NewYorkDMVGuide({ person }: { person: Person }) {
         {age && age < 18
           ? " have a parent/guardian fill out the consent section on page 2, then you "
           : " "}
-        sign and date the &lquot;Certification&rquot; section. Sign any MV-82
+        sign and date the &ldquo;Certification&rdquo; section. Sign any MV-82
         forms as well.
       </p>
     </section>

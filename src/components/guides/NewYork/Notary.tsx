@@ -42,7 +42,7 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
           <a href="https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/">
             link
           </a>
-          and selecting &lquot;Purchase a Birth Certificate&rquot;. They accept
+          and selecting &ldquo;Purchase a Birth Certificate&rdquo;. They accept
           credit/debit cards, checks, or money orders. <strong>No Cash.</strong>
         </p>
       ) : (

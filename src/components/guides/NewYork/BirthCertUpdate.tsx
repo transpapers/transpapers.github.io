@@ -41,10 +41,10 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
             </span>
             <br />
             To change the name and/or gender marker on your birth certificate
-            you will need a copy of the court order, the &lquot;Application for
-            the Correction of a NYC Birth Certificate&rquot; (VR 172), and the
-            &lquot;Attestation Form for Named Parents or Legal Guardians or a
-            Registrant Younger Than 18 Years Old&rquot;. For the application a
+            you will need a copy of the court order, the &ldquo;Application for
+            the Correction of a NYC Birth Certificate&rdquo; (VR 172), and the
+            &ldquo;Attestation Form for Named Parents or Legal Guardians or a
+            Registrant Younger Than 18 Years Old&rdquo;. For the application a
             parent/guardian will need to fill out their apartment number (if
             applicable), marital status, and your birth certificate number at
             the top of page 2. They will also need to fill out your place of
@@ -77,10 +77,10 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
             </span>
             <br />
             To change the name and/or gender marker on your birth certificate
-            you will need a copy of your court order, the &lquot;Application for
-            the Correction of a NYC Birth Certificate&rquot; (VR 172), and the
-            &lquot;Self-Attestation Form for Registrants 18 Years of Age and
-            Older&rquot;. Use black ink when filling out the forms. For the
+            you will need a copy of your court order, the &ldquo;Application for
+            the Correction of a NYC Birth Certificate&rdquo; (VR 172), and the
+            &ldquo;Self-Attestation Form for Registrants 18 Years of Age and
+            Older&rdquo;. Use black ink when filling out the forms. For the
             Application you will need to fill out your mailing address,
             apartment number (if applicable), Marital status, and birth
             certificate number at the top of page 2. You will also need to fill
@@ -163,10 +163,10 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
           <br />
           To change the name and/or gender marker on your birth certificate your
           parent/guardian(s) will need a copy of the court order, a certified
-          copy of your birth certificate, the &lquot;Application for Amendment
-          of Certificate of Birth for Gender Designation for a Minor&rquot;
-          (DOH-5306), and the &lquot;Notarized Affidavit of Gender Change for a
-          Person 16 Years of Age or Under&rquot; (DOH-5304). Use black ink when
+          copy of your birth certificate, the &ldquo;Application for Amendment
+          of Certificate of Birth for Gender Designation for a Minor&rdquo;
+          (DOH-5306), and the &ldquo;Notarized Affidavit of Gender Change for a
+          Person 16 Years of Age or Under&rdquo; (DOH-5304). Use black ink when
           filling out the forms. For the DOH-5306 Application there is a section
           asking for information from your current birth certificate that they
           can fill out. Both parents/guardians will need to sign and date at the
@@ -189,10 +189,10 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
           <br />
           To change the name and/or gender marker on your birth certificate you
           will need a copy of your court order, a copy certified of your birth
-          certificate, the &lquot;Application for Amendment of Certificate of
-          Birth for Gender Designation for an Adult&rquot; (DOH-5305), and the
-          &lquot;Notarized Affidavit of Gender Change for a Person 17 Years of
-          Age or Older&rquot; (DOH-5303). Use black ink when filling out the
+          certificate, the &ldquo;Application for Amendment of Certificate of
+          Birth for Gender Designation for an Adult&rdquo; (DOH-5305), and the
+          &ldquo;Notarized Affidavit of Gender Change for a Person 17 Years of
+          Age or Older&rdquo; (DOH-5303). Use black ink when filling out the
           forms. For the DOH-5305 Application there is an optional section
           asking for information from your current birth certificate that you
           can fill out or you can give them a copy of the birth certificate

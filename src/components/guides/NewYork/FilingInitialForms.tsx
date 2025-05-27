@@ -142,8 +142,8 @@ function NewYorkFilingGuide(
           the changes. There shouldn’t be a hearing unless there is a
           parent/guardian who refused to give consent for the change. When they
           return they only need their ID(s) and the reference slip that the
-          clerk gave them. Finally a document called &lquot;Order Granting Name
-          Change and/or Sex Designation Change for an Individual Minor&rquot;
+          clerk gave them. Finally a document called &ldquo;Order Granting Name
+          Change and/or Sex Designation Change for an Individual Minor&rdquo;
           (UCS-NC02) will be given that we will refer to as the court order. We
           recommend requesting and paying for an additional certified copy or 2
           of the order for later use. Have the original kept in a safe place.
@@ -156,8 +156,8 @@ function NewYorkFilingGuide(
           to return for your court order confirming the changes as there will
           not be a hearing. When you return you only need your ID and the
           reference slip they gave you. You should recieve a document called
-          &lquot;Order Granting Name Change and/or Sex Designation Change for an
-          Individual Adult&rquot; (UCS-NC01) that we will refer to as the court
+          &ldquo;Order Granting Name Change and/or Sex Designation Change for an
+          Individual Adult&rdquo; (UCS-NC01) that we will refer to as the court
           order. We recommend paying for an additional certified copy or 2 for
           later use. Keep the original in a safe space.
         </p>

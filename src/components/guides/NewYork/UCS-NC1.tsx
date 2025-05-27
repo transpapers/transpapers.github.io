@@ -28,8 +28,8 @@ function NewYorkUCS_NC1Guide({ person }: { person: Person }) {
       <h3>Name and/or Sex Change Petition (NY, UCS-NC1)</h3>
 
       <p>
-        The first form to be filled out is the &lquot;Name Change and/or Sex
-        Designation Change Petition for an Individual Adult&rquot; (UCS-NC1). In
+        The first form to be filled out is the &ldquo;Name Change and/or Sex
+        Designation Change Petition for an Individual Adult&rdquo; (UCS-NC1). In
         order to file this you need to live in {residentCounty} county and have
         lived in New York State for at least 6 months. It has some sections that
         you will need to review. Look through sections A, B, and C to see if the

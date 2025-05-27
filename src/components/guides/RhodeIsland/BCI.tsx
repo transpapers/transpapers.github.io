@@ -45,7 +45,7 @@ function RhodeIslandBCIGuide({ person }: { person: Person }) {
           ? " If the parent/guardian filing the Name Change has "
           : " If you have "}
         ever had any other legal names those names need to be listed on the
-        &lquot;Maiden Name / other names used&rquot; line if they aren&apos;t
+        &ldquo;Maiden Name / other names used&rdquo; line if they aren&apos;t
         already listed. After that this form is ready for a notary, do{" "}
         <strong>not</strong> fill anything else out.
       </p>

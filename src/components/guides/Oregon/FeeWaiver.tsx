@@ -29,7 +29,7 @@ function FeeWaiverGuide({ person }: { person: Person }) {
       <h3>Fee Waiver Application (OR)</h3>
       <p>
         This form is optional. It is a request to waive the filing fee charged
-        upon submitting the &lquot;Change of Name or Sex&rquot; petition to the
+        upon submitting the “Change of Name or Sex” petition to the
         court. In Oregon the filing fee for that petition is around $125. Courts
         will typically not grant the waiver unless your household is on public
         assistance, is enrolled in the Oregon Health Plan (OHP), or the
@@ -38,8 +38,8 @@ function FeeWaiverGuide({ person }: { person: Person }) {
         do is deny it. On the second page
         {age && age < 18 ? " your petitioner should " : " "}
         fill in any remaining blanks in sections 1 through 7 and then sign/date
-        at the bottom of page 3. The &lquot;Order Re: Referal or Waiver of
-        Fees&rquot; is already set and should be filed with the waiver.
+        at the bottom of page 3. The “Order Re: Referal or Waiver of
+        Fees” is already set and should be filed with the waiver.
       </p>
     </section>
   );

@@ -50,7 +50,9 @@ function OregonCourtHearingGuide({ person }: { person: Person }) {
             for fraudulant reasons. For more details see this{" "}
             <a href="https://samuelslaw.com/2022/02/oregon-appellate-court-requires-that-a-judge-give-specific-reasons-before-denying-a-name-or-gender-marker-change/">link</a>
             . If your petition is denied we <strong>strongly</strong> recommend 
-            hiring a lawyer for an appeal if you have not already done so.
+            hiring a lawyer for an appeal if you have not already done so. The
+            “Resources” section will have some potenitally helpful links for 
+            this.
         </>
         )}
       </p>

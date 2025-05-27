@@ -36,7 +36,7 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
           <>
             In order to file this your petitioner needs to be a resident of
             Oregon, which just means they need an ID or some mail with their
-            name and Oregon address on it.
+            name and an Oregon address on it.
           </>
         ) : (
           <>
@@ -65,8 +65,8 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
             page 3 then sign and the form is ready to file.
           </>
         )}
-        The &lquot;General Judgement&rquot; is on pages 6 and 7 should already
-        be set, file it with the petition.
+        The “General Judgement” is on pages 6 and 7 should already be set, file 
+        it with the petition.
       </p>
     </section>
   );

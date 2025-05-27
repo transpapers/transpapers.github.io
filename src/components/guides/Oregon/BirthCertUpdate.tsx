@@ -35,8 +35,8 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
               ? " A court case is not required to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that. "
               : ""}
             The form used to update a birth certificate is the
-            &lquot;Application to Change the Name and/or Sex on a Record of Live
-            Birth to Support Gender Identity&rquot;. If your parents/guardians
+            &ldquo;Application to Change the Name and/or Sex on a Record of Live
+            Birth to Support Gender Identity&rdquo;. If your parents/guardians
             mailing address is different from their listed address they will
             need to put it in number 3. They will also need to fill out items 6
             and 15. Do <strong>not</strong> sign/date the form until a notary
