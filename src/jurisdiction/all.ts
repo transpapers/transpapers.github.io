@@ -63,9 +63,11 @@ export const michigan: Jurisdiction = {
   name: "Michigan",
   processes: [
     michiganNameChange,
+    socialSecurity,
     michiganPrimaryIdentification,
     michiganGenderMarker,
     michiganBirthRecord,
+    passport,
     michiganPostamble,
   ],
   counties: michiganCounties,
@@ -75,7 +77,7 @@ export const michigan: Jurisdiction = {
     name: "Rhode Island",
     processes: [
         rhodeislandNameChange,
-        socialSecurity,
+        socialsecurity,
         rhodeislandPrimaryIdentification,
         rhodeislandGenderMarker,
         rhodeislandBirthRecord,
@@ -89,7 +91,7 @@ export const michigan: Jurisdiction = {
     name: "New York",
     processes: [
         newyorkNameChange,
-        socialSecurity,
+        socialsecurity,
         newyorkPrimaryIdentification,
         newyorkBirthRecord,
         newyorkGenderMarker,
@@ -103,9 +105,11 @@ export const oregon: Jurisdiction = {
   name: "Oregon",
   processes: [
     oregonNameChange,
+    socialSecurity,
     oregonPrimaryIdentification,
     oregonBirthRecord,
     oregonGenderMarker,
+    passport,
     oregonPostamble,
   ],
   counties: oregonCounties,
@@ -117,4 +121,4 @@ export const federal: Jurisdiction = {
   isFederal: true,
 };
 
-export const allJurisdictions = [michigan, oregon, federal];
+export const allJurisdictions = [michigan, oregon];
