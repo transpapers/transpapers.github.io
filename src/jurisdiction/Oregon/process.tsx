@@ -131,7 +131,7 @@ export const oregonBirthRecord: Process = {
       filename: "Oregon/Alternate ID List Birth Certificate.pdf",
     },
   ],
-  isBirth: true,
+  /**isBirth: true,*/
 };
 
 export const oregonPostamble: Process = {
