@@ -43,6 +43,7 @@ function Step4b() {
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>How old will you be when you file?</h2>
+      <p>If you went through the emancipation process put &ldquo;18&rdquo; here and have copies of your emancipation order ready for every filing and appointment.</p>
       <label>
         age{" "}
         <input
