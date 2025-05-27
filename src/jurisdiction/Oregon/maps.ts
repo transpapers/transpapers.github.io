@@ -18,17 +18,14 @@
  */
 
 import {
-    formatDate,
-    fullName,
-    isMinor,
-    representativeName,
-    numericalBirthYear,
+  formatDate,
+  fullName,
+  isMinor,
+  representativeName,
+  numericalBirthYear,
 } from "../../lib/util";
 
-import {
-  GenderMarker,
-  DateFormatPart as DATE,
-} from "../../types/types";
+import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
@@ -42,7 +39,8 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultNameSexPetitionOregonMap: Formfill[] = [
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 1, x: 430, y: 116 },
   },
   {
@@ -50,15 +48,15 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 1, x: 103, y: 212 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "X" : ""),
     loc: { page: 1, x: 539, y: 211 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
     loc: { page: 1, x: 622, y: 211 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "X" : ""),
     loc: { page: 1, x: 153, y: 335 },
   },
   {
@@ -82,31 +80,45 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 1, x: 579, y: 403 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
     loc: { page: 1, x: 153, y: 439 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? 
-      (applicant.gender === GenderMarker.M ? "X" : "") : "",
-      loc: { page: 1, x: 226, y: 457 },
+    text: (applicant) =>
+      applicant.isChangingLegalSex
+        ? applicant.gender === GenderMarker.M
+          ? "X"
+          : ""
+        : "",
+    loc: { page: 1, x: 226, y: 457 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? 
-      (applicant.gender === GenderMarker.F ? "X" : "") : "",
-      loc: { page: 1, x: 284, y: 457 },
+    text: (applicant) =>
+      applicant.isChangingLegalSex
+        ? applicant.gender === GenderMarker.F
+          ? "X"
+          : ""
+        : "",
+    loc: { page: 1, x: 284, y: 457 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ?
-      (applicant.gender === GenderMarker.X ? "X" : "") : "",
-      loc: { page: 1, x: 353, y: 457 },
+    text: (applicant) =>
+      applicant.isChangingLegalSex
+        ? applicant.gender === GenderMarker.X
+          ? "X"
+          : ""
+        : "",
+    loc: { page: 1, x: 353, y: 457 },
   },
   {
-    text: (applicant) => fullName(applicant.birthName) ? "X" : "",
+    text: (applicant) => (fullName(applicant.birthName) ? "X" : ""),
     loc: { page: 1, x: 102, y: 769 },
   },
   {
     text: (applicant) =>
-      fullName(applicant.birthName) ? fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+      fullName(applicant.birthName)
+        ? fullName(applicant.birthName) ?? ""
+        : fullName(applicant.legalName) ?? "",
     loc: { page: 1, x: 154, y: 820 },
   },
   {
@@ -119,13 +131,13 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
       applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
     loc: { page: 1, x: 153, y: 952 },
   },
-  { 
-    text: () => new Date().toLocaleDateString(), 
+  {
+    text: () => new Date().toLocaleDateString(),
     loc: { page: 2, x: 103, y: 221 },
   },
   {
     text: (applicant) => fullName(applicant.legalName),
-    loc: { page: 2, x: 403, y: 275},
+    loc: { page: 2, x: 403, y: 275 },
   },
   {
     text: (applicant) => applicant.streetAddress,
@@ -141,7 +153,8 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 604, y: 326 },
   },
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 3, x: 431, y: 117 },
   },
   {
@@ -149,11 +162,11 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 3, x: 102, y: 192 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "X" : ""),
     loc: { page: 3, x: 596, y: 211 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
     loc: { page: 3, x: 679, y: 211 },
   },
 ];
@@ -165,7 +178,8 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
  */
 export const minorNameSexPetitionOregonMap: Formfill[] = [
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 1, x: 430, y: 116 },
   },
   {
@@ -173,11 +187,11 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 1, x: 102, y: 218 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "X" : ""),
     loc: { page: 1, x: 540, y: 211 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
     loc: { page: 1, x: 623, y: 211 },
   },
   {
@@ -185,7 +199,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 1, x: 166, y: 304 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "X" : ""),
     loc: { page: 1, x: 128, y: 385 },
   },
   {
@@ -209,30 +223,42 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 1, x: 580, y: 443 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
     loc: { page: 1, x: 128, y: 861 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? 
-      (applicant.gender === GenderMarker.M ? "X" : "") : "",
-      loc: { page: 1, x: 179, y: 879 },
+    text: (applicant) =>
+      applicant.isChangingLegalSex
+        ? applicant.gender === GenderMarker.M
+          ? "X"
+          : ""
+        : "",
+    loc: { page: 1, x: 179, y: 879 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ?
-      (applicant.gender === GenderMarker.F ? "X" : "") : "",
-      loc: { page: 1, x: 241, y: 879 },
+    text: (applicant) =>
+      applicant.isChangingLegalSex
+        ? applicant.gender === GenderMarker.F
+          ? "X"
+          : ""
+        : "",
+    loc: { page: 1, x: 241, y: 879 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ?
-      (applicant.gender === GenderMarker.X ? "X" : "") : "",
-      loc: { page: 1, x: 311, y: 879 },
+    text: (applicant) =>
+      applicant.isChangingLegalSex
+        ? applicant.gender === GenderMarker.X
+          ? "X"
+          : ""
+        : "",
+    loc: { page: 1, x: 311, y: 879 },
   },
   {
     text: (applicant) => (applicant.doNotPublish ? "X" : ""),
     loc: { page: 1, x: 184, y: 948 },
   },
-  { 
-    text: () => new Date().toLocaleDateString(), 
+  {
+    text: () => new Date().toLocaleDateString(),
     loc: { page: 2, x: 105, y: 343 },
   },
   {
@@ -253,7 +279,8 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 601, y: 482 },
   },
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 3, x: 430, y: 117 },
   },
   {
@@ -265,7 +292,8 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 3, x: 241, y: 298 },
   },
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 4, x: 430, y: 117 },
   },
   {
@@ -290,7 +318,8 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 4, x: 637, y: 762 },
   },
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 5, x: 430, y: 117 },
   },
   {
@@ -298,11 +327,11 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 5, x: 103, y: 212 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "X" : ""),
     loc: { page: 5, x: 596, y: 211 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex ? "X" : "",
+    text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
     loc: { page: 5, x: 681, y: 211 },
   },
 ];
@@ -314,7 +343,8 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
  */
 export const feeWaiverOregonMap: Formfill[] = [
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 1, x: 420, y: 117 },
   },
   {
@@ -384,7 +414,8 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 3, x: 601, y: 688 },
   },
   {
-    text: (applicant) => !applicant.isChangingLegalSex ? applicant.residentCounty : "",
+    text: (applicant) =>
+      !applicant.isChangingLegalSex ? applicant.residentCounty : "",
     loc: { page: 4, x: 420, y: 117 },
   },
   {
@@ -470,24 +501,27 @@ export const birthCertOregonMap: Formfill[] = [
     field: "Email of applicant",
   },
   {
-    text: (applicant) => !isMinor(applicant) ? "Self" : "",
+    text: (applicant) => (!isMinor(applicant) ? "Self" : ""),
     field: "Relationship to registrant",
   },
   {
-    text: (applicant) => applicant.birthName?.first ?
-        applicant.birthName?.first ?? ""
+    text: (applicant) =>
+      applicant.birthName?.first
+        ? applicant.birthName?.first ?? ""
         : applicant.legalName?.first ?? "",
     field: "Current first",
   },
   {
-    text: (applicant) =>applicant.birthName?.middle ?
-        applicant.birthName?.middle ?? ""
+    text: (applicant) =>
+      applicant.birthName?.middle
+        ? applicant.birthName?.middle ?? ""
         : applicant.legalName?.middle ?? "",
     field: "Current middle",
   },
   {
-    text: (applicant) =>applicant.birthName?.last ?
-        applicant.birthName?.last ?? ""
+    text: (applicant) =>
+      applicant.birthName?.last
+        ? applicant.birthName?.last ?? ""
         : applicant.legalName?.last ?? "",
     field: "Current last",
   },
@@ -500,10 +534,18 @@ export const birthCertOregonMap: Formfill[] = [
     field: "Date of birth",
   },
   {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.M ? "M" : "" ||
-      applicant.assignedSex === GenderMarker.F ? "F" : "" ||
-      applicant.assignedSex === GenderMarker.X ? "X" : "",
+    text: (applicant) => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+        default:
+          return "";
+      }
+    },
     field: "Sex as it appears on the certificate",
   },
   {
@@ -541,32 +583,35 @@ export const birthCertOregonMap: Formfill[] = [
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? applicant.chosenName?.first : "",
-      field: "Updated first",
+    field: "Updated first",
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? applicant.chosenName?.middle : "",
-      field: "Updated middle",
+    field: "Updated middle",
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName ? applicant.chosenName?.last : "",
-      field: "Updated last",
+    field: "Updated last",
   },
   {
     check: (applicant) => applicant.isChangingLegalSex,
     field: "Change sex",
   },
   {
-    check: (applicant) => applicant.isChangingLegalSex && applicant.gender === GenderMarker.M,
+    check: (applicant) =>
+      applicant.isChangingLegalSex && applicant.gender === GenderMarker.M,
     field: "Male",
   },
   {
-    check: (applicant) => applicant.isChangingLegalSex && applicant.gender === GenderMarker.F,
+    check: (applicant) =>
+      applicant.isChangingLegalSex && applicant.gender === GenderMarker.F,
     field: "Female",
   },
   {
-    check: (applicant) => applicant.isChangingLegalSex && applicant.gender === GenderMarker.X,
+    check: (applicant) =>
+      applicant.isChangingLegalSex && applicant.gender === GenderMarker.X,
     field: "X Non-Binary",
   },
   {
