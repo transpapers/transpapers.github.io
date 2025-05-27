@@ -23,7 +23,7 @@ import { shakeTree } from "../src/lib/shakeTree";
 
 import { michiganNameChange } from "../src/jurisdiction/Michigan/process";
 
-import { isMinor } from "../src/lib/util";
+import { isMinor, phoneAreaCode, phoneStart, phoneEnd } from "../src/lib/util";
 
 describe("shakeTree()", () => {
   test("regression test", () => {
@@ -53,6 +53,35 @@ describe("shakeTree()", () => {
     const receivedSet = new Set(received);
 
     expect(receivedSet).toEqual(expectedSet);
+  });
+});
+
+describe("phone number handling", () => {
+  test("phoneAreaCode()", () => {
+    expect(phoneAreaCode("6065551110")).toBe("606");
+    expect(phoneAreaCode("606 555 1110")).toBe("606");
+    expect(phoneAreaCode("(606) 555 1110")).toBe("606");
+    expect(phoneAreaCode("(606)-555-1110")).toBe("606");
+    expect(phoneAreaCode("606-555-1110")).toBe("606");
+    expect(phoneAreaCode("+16065551110")).toBe("606");
+  });
+
+  test("phoneStart()", () => {
+    expect(phoneStart("6065551110")).toBe("555");
+    expect(phoneStart("606 555 1110")).toBe("555");
+    expect(phoneStart("(606) 555 1110")).toBe("555");
+    expect(phoneStart("(606)-555-1110")).toBe("555");
+    expect(phoneStart("606-555-1110")).toBe("555");
+    expect(phoneStart("+16065551110")).toBe("555");
+  });
+
+  test("phoneEnd()", () => {
+    expect(phoneEnd("6065551110")).toBe("1110");
+    expect(phoneEnd("606 555 1110")).toBe("1110");
+    expect(phoneEnd("(606) 555 1110")).toBe("1110");
+    expect(phoneEnd("(606)-555-1110")).toBe("1110");
+    expect(phoneEnd("606-555-1110")).toBe("1110");
+    expect(phoneEnd("+16065551110")).toBe("1110");
   });
 });
 

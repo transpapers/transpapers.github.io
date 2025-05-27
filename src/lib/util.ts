@@ -20,6 +20,8 @@
 import { Name, DateFormat, DateFormatPart } from "../types/types";
 import { Person } from "../types/person";
 
+import { type PhoneNumber, parsePhoneNumber } from "react-phone-number-input";
+
 export function abbreviateJurisdiction(
   jurisdiction: string,
 ): string | undefined {
@@ -149,63 +151,41 @@ export function formatDate(date: string | undefined, fmt: DateFormat): string {
     .join(fmt.separator);
 }
 
+function phoneDigits(phoneNumber: string): string {
+  const phone = parsePhoneNumber(phoneNumber, {
+    defaultCountry: "US",
+  }) as PhoneNumber;
+  if (phone) {
+    return phone.nationalNumber.replaceAll(/[^\d]/g, "");
+  } else {
+    return "";
+  }
+}
+
 export function phoneAreaCode(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
     return "";
-    }
-    /** if phone # is typed like this: 888-888-8888*/
-    if (phoneNumber.length == 12) {
-        return phoneNumber.substring(0, 3);
-    }
-    /** if phone # is typed like this: 8888888888*/
-    if (phoneNumber.length == 10) {
-        return phoneNumber.substring(0, 3);
-    }
-    /** if phone # is typed like this: (888) 888-8888*/
-    if (phoneNumber.length == 14) {
-        return phoneNumber.substring(1, 4);
-    }
-  return "";
+  }
+
+  return phoneDigits(phoneNumber).substring(0, 3) ?? "";
 }
 
 /** Split phone number into first three digits */
 export function phoneStart(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
     return "";
-    }
-    /** if phone # is typed like this: 888-888-8888*/
-    if (phoneNumber.length == 12) {
-        return phoneNumber.substring(4, 7);
-    }
-    /** if phone # is typed like this: 8888888888*/
-    if (phoneNumber.length == 10) {
-        return phoneNumber.substring(3, 6);
-    }
-    /** if phone # is typed like this: (888) 888-8888*/
-    if (phoneNumber.length == 14) {
-        return phoneNumber.substring(6, 9);
-    }
-    return "";
+  }
+
+  return phoneDigits(phoneNumber).substring(3, 6) ?? "";
 }
 
 /** Split phone number into last 4 digits */
 export function phoneEnd(phoneNumber: string | undefined): string {
   if (!phoneNumber) {
     return "";
-    }
-    /** if phone # is typed like this: 888-888-8888*/
-    if (phoneNumber.length == 12) {
-        return phoneNumber.substring(8);
-    }
-    /** if phone # is typed like this: 8888888888*/
-    if (phoneNumber.length == 10) {
-        return phoneNumber.substring(6);
-    }
-    /** if phone # is typed like this: (888) 888-8888*/
-    if (phoneNumber.length == 14) {
-        return phoneNumber.substring(10);
-    }
-  return "";
+  }
+
+  return phoneDigits(phoneNumber).substring(6) ?? "";
 }
 
 /**
@@ -290,21 +270,21 @@ export function fullContactInfo(applicant: Person, separator = "\n"): string {
  * @return {string}
  */
 export function addZero(zeroString: string): string {
-    if (!zeroString) {
-        return "";
-    }
+  if (!zeroString) {
+    return "";
+  }
 
-    if (zeroString.length == 1) {
-        return "0" + zeroString;
-    }
-    return zeroString;
+  if (zeroString.length == 1) {
+    return "0" + zeroString;
+  }
+  return zeroString;
 }
 
 export function numericalBirthYear(birthdate: string | undefined): number {
-    if (!birthdate) {
-        return Infinity;
-    }
-    const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
+  if (!birthdate) {
+    return Infinity;
+  }
+  const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
 
-    return birthYear;
+  return birthYear;
 }
