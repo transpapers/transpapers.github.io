@@ -56,12 +56,12 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
           {residentCounty && residentCounty === "Umatilla"
             ? " Umatilla county has two valid circuit court locations to file at " +
               court?.address +
-              ". Pick whichever is most convenient."
+              ". Pick whichever is most convenient. "
             : " The filing location is the " +
               residentCounty +
               " circuit court at " +
               court?.address +
-              "."}
+              ". "}
           They have a webpage with their open hours and other information at{" "}
           <a href="{court?.website}">{court?.website}</a>. That link may also
           show what filing methods the court accepts, some will accept filing by
@@ -114,7 +114,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
           types of criminal record that could cause a hearing though. Assuming
           there isn&apos;t one you will need to wait for the “General
           Judgement”, which we will call the court order, to arrive. Once it
-          does you will also need to order 2 or 3 certified copies of the court
+          does you will need to order 2 or 3 certified copies of the court
           order for use later in the process as some places will not return
           them. Keep the original in a safe place. If there is a hearing you
           will recieve a court date instead.

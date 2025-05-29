@@ -31,18 +31,21 @@ function MichiganMC20Guide({ person }: { person: Person }) {
         This form is optional. It is a request to waive the filing fee charged
         upon submitting these documents to the court. It usually ranges from
         $175-200, depending on the county, and is the largest single fee in the
-        process. Courts will typically not grant your waiver request unless you
-        are on public assistance or your annual income is below 125% of the
-        federal poverty line. However, you may file the request at your
+        process. Courts will typically not grant a waiver request unless your
+        household is on public assistance or annual income is below 125% of the
+        federal poverty line. However, 
+        {age && age < 18 
+            ? " a parent/guardian may file the request at their " 
+            : " you may file the request at your "}
         discretion; the worst they can do is deny it.
       </p>
 
       <p>
         If you choose to file this form, complete <strong>items 1 and 3</strong>{" "}
-        as applicable.{" "}
+        as applicable.
         {age && age < 18
-          ? "Your parent should sign at the bottom of the first page."
-          : "Sign at the bottom of the first page."}
+          ? " Your parent should sign at the bottom of the first page."
+          : " Sign at the bottom of the first page."}
       </p>
     </section>
   );

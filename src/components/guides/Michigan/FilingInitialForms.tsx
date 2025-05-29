@@ -28,18 +28,19 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
     <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>
       <p>
-        Your filing location is {court?.address}. You may file by mail or in
-        person; in either case, include the Petition, the Addendum (m97a),
+        Your filing location is the { residentCounty } court {court?.address}. 
+        {age && age < 18 ? " A parent/guardian " : " You "} may file by mail or 
+        in person; in either case, include the Petition, the Addendum (m97a),
         {residentCounty && residentCounty == "Saginaw"
           ? " the Order Following (pc52), "
           : " "}
         the optional Fee Waiver (mc20), as well as payment. Even if the fee
-        waiver is granted you still need to provide payment for at least one
-        certified copy. To ask for one when you are filing by mail either write
+        waiver is granted payment still needs to be provided for at least one
+        certified copy. To ask for one when filing by mail either write
         &ldquo;Certified copy fee&rdquo; in a checks memo line or include a
-        letter stating thats what the extra money is for. No matter how you file
-        we recommend that you call the court at {court?.phone} or visit their
-        website:{" "}
+        letter stating thats what the extra money is for. No matter what the 
+        filing method we recommend calling the court at {court?.phone} or 
+        visiting their website:{" "}
         <a href="{court?.website}" title="website">
           {court?.website}
         </a>
@@ -52,7 +53,7 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         {age && age < 18 && (
           <>
             Whoever filled out the paperwork as your petitioner has to be the
-            one who files the paperwork at court if you are doing in-person
+            one who files the paperwork at court if they are doing in-person
             filing.
           </>
         )}
@@ -79,21 +80,14 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         skip it.
       </p>
 
-      <p>
-        {age && age < 18 ? (
-          <>
-            If you want an update on your case your petitioner has to go to
+        {residentCounty && residentCounty !== "Kent" ? (
+          <p>
+            If you want an update on your case{" "}
+            {age && age < 18 ? " your petitioner has " : " you have to "} to go to
             court and show an ID, they will not confirm anything on the phone to
-            protect your privacy.
-          </>
-        ) : (
-          <>
-            If you want an update on your case you have to go to court and show
-            ID, they will not confirm anything over the phone to protect your
-            privacy.
-          </>
-        )}
-      </p>
+            protect privacy.
+          </p>
+        ) : ("")}
     </section>
   );
 }

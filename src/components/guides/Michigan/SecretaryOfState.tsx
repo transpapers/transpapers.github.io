@@ -19,8 +19,12 @@
 
 import * as React from "react";
 
-function MichiganSecretaryOfStateGuide() {
-  return (
+import { type Person } from "../../../types/person";
+
+function MichiganSecretaryOfStateGuide({ person }: { person: Person }) {
+    const { age } = person;
+
+    return (
     <section key="Michigan-SecretaryOfState">
       <h3>Updating your Primary ID (MI)</h3>
       <p>
@@ -32,15 +36,16 @@ function MichiganSecretaryOfStateGuide() {
         <a href="https://dsvsesvc.sos.state.mi.us/TAP/_/">
           https://dsvsesvc.sos.state.mi.us/TAP/_/
         </a>
-        .
+        . {age && age < 18 ?
+            " A parent/guardian will need to go with you to this appointment." : ""}
       </p>
 
       <p>
         If you already have a driver’s license or state ID bring it to the appointment
         as well as the <strong>Michigan Secretary of State Sex Designation</strong> form.
-        For that form, if you have a drivers license, add the license number in section A.
-        If not, bring the forms of identification you used for Social Security. Arrive
-        a few minutes early and check in at the kiosk.
+        For that form, if you have a drivers license, write the license number in 
+        section A. If not, bring the forms of identification you used for Social 
+        Security. Arrive a few minutes early and check in at the kiosk.
       </p>
 
       <p>

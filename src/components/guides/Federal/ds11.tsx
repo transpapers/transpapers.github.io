@@ -51,8 +51,8 @@ function DS11Guide({ person }: { person: Person }) {
         business for the highest chance of success.{" "}
         <strong>Do not staple it to the form.</strong> For section 10 on page 6
         please fill out your parents place of birth, legal gender, and
-        citizenship. On page 6 complete sections 11 through 21 as they apply to
-        you. For section 18 if you have no current travel plans write
+        citizenship status. On page 6 complete sections 11 through 21 as they 
+        apply to you. For section 18 if you have no current travel plans write
         &quot;none&quot; in every box.
       </p>
 
@@ -76,7 +76,7 @@ function DS11Guide({ person }: { person: Person }) {
               <a href="webpage">
                 https://travel.state.gov/content/travel/en/passports/need-passport/under-16.html
               </a>
-              and click on step #5 to see a list of potential workarounds for
+              {" "}and click on step #5 to see a list of potential workarounds for
               all situations.
             </>
           ) : (
@@ -86,7 +86,7 @@ function DS11Guide({ person }: { person: Person }) {
               <a href="webpage">
                 https://travel.state.gov/content/travel/en/passports/need-passport/16-17.html
               </a>
-              and click on step #3 to see a list of potential workarounds for
+              {" "}and click on step #3 to see a list of potential workarounds for
               all situations.
             </>
           )}
@@ -97,7 +97,7 @@ function DS11Guide({ person }: { person: Person }) {
 
       <p>
         If you have had a passport in the past then you should bring it and a
-        certified copy of your court order. It will likely take a few months for
+        certified copy of the court order. It will likely take a few months for
         them to process a nonexpedited request, you can keep tabs on it using
         this url:{" "}
         <a href="https://passportstatus.state.gov/">
