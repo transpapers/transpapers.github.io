@@ -21,7 +21,6 @@ import {
   formatDate,
   fullName,
   isMinor,
-  guaranteeAge,
   phoneAreaCode,
   phoneEnd,
   phoneStart,
@@ -94,7 +93,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
     field: "NewSexDesignation",
   },
   {
-    text: (applicant) => guaranteeAge(applicant.age, applicant.birthdate!).toString(),
+    text: (applicant) => applicant.age!.toString(),
     field: "Age",
   },
   {
@@ -179,7 +178,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
     field: "NewSexDesignation",
   },
   {
-    text: (applicant) => guaranteeAge(applicant.age, applicant.birthdate!).toString(),
+    text: (applicant) => applicant.age!.toString(),
     field: "Age",
   },
   {
@@ -203,7 +202,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
    *  We can drop the check and just autofill it if there is an error.*/
   {
     text: (applicant) => 
-      isMinor(applicant) && (guaranteeAge(applicant.age, applicant.birthdate!) < 14)
+      isMinor(applicant) && applicant.age! < 14
         ? applicant.residentCounty : "",
     field: "MinorConsentCounty",
   },

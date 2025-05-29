@@ -23,7 +23,6 @@ import {
   fullName,
   isMinor,
   representativeName,
-  guaranteeAge,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -242,14 +241,14 @@ export const nameChangePrivateMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant) && (guaranteeAge(applicant.age, applicant.birthdate!) > 13)
+      isMinor(applicant) && applicant.age! > 13
         ? fullName(applicant.legalName) ?? ""
         : "",
     field: "Name type or print_5",
   },
   {
     text: (applicant) =>
-      isMinor(applicant) && (guaranteeAge(applicant.age, applicant.birthdate!) < 14)
+      isMinor(applicant) && applicant.age! < 14
         ? fullName(applicant.legalName) ?? ""
         : "",
     field: "Name type or print_6",
@@ -421,14 +420,14 @@ export const nameChangeMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant) && (guaranteeAge(applicant.age, applicant.birthdate!) > 13)
+      isMinor(applicant) && applicant.age! > 13
         ? fullName(applicant.legalName) ?? ""
         : "",
     field: "Name type or print_4",
   },
   {
     text: (applicant) =>
-      isMinor(applicant) && (guaranteeAge(applicant.age, applicant.birthdate!) < 14)
+      isMinor(applicant) && applicant.age! < 14
         ? fullName(applicant.legalName) ?? ""
         : "",
     field: "Name type or print_5",

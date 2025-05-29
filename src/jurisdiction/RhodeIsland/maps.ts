@@ -21,7 +21,6 @@ import {
   formatDate,
   fullName,
   isMinor,
-  guaranteeAge,
   phoneAreaCode,
   phoneEnd,
   phoneStart,
@@ -189,7 +188,7 @@ export const birthCertOneMap: Formfill[] = [
     loc: { x: 184, y: 194 },
   },
   {
-    text: (applicant) => guaranteeAge(applicant.age, applicant.birthdate!).toString(),
+    text: (applicant) => applicant.age!.toString(),
     loc: { x: 621, y: 194 },
   },
   {
@@ -398,7 +397,7 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 184, y: 194 },
   },
   {
-    text: (applicant) => guaranteeAge(applicant.age, applicant.birthdate!).toString(),
+    text: (applicant) => applicant.age!.toString(),
     loc: { x: 621, y: 194 },
   },
   {
