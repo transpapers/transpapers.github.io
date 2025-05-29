@@ -90,7 +90,7 @@ export default function Root() {
           <a href="https://tinyurl.com/mgdc-feedback">our feedback form.</a> Any
           bugs, issues, tips, etc. relating to the codebase should be reported
           on{" "}
-          <a href="https://github.com/transpapers/transpapers.github.io">
+          <a href="https://github.com/transpapers/transpapers.github.io/issues">
             GitHub.
           </a>
         </p>
