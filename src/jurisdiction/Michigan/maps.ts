@@ -584,8 +584,7 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 534, y: 541 },
   },
   {
-    text: (applicant) =>
-      `${applicant.birthCity}, ${applicant.birthJurisdiction}`,
+    text: (applicant) => `${applicant.birthCity},`,
     loc: { x: 249, y: 636 },
   },
   {
@@ -604,12 +603,26 @@ export const birthCertMap: Formfill[] = [
     text: (applicant) => fullName(applicant.mothersBirthName),
     loc: { x: 48, y: 710 },
   },
-  { text: (applicant) => applicant.mothersBirthdate, loc: { x: 554, y: 710 } },
+  {
+    text: (applicant) => 
+      formatDate(applicant.mothersBirthdate, {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    loc: { x: 554, y: 710 }
+  },
   {
     text: (applicant) => fullName(applicant.fathersBirthName),
     loc: { x: 48, y: 754 },
   },
-  { text: (applicant) => applicant.fathersBirthdate, loc: { x: 554, y: 754 } },
+  {
+    text: (applicant) => 
+      formatDate(applicant.fathersBirthdate, {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    loc: { x: 554, y: 754 }
+  },
   {
     text: (applicant) =>
       fullName(applicant.birthName)

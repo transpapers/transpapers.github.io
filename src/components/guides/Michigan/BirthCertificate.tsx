@@ -44,7 +44,8 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         <strong>
           Application to Correct or Change a Michigan Birth Record
         </strong>{" "}
-        and check the applicable box underneath.
+        and check the applicable box underneath. Write your birth county in the
+        same section just below those checkboxes.
         {/* The other options for doing this inside a JSX component are all worse. */}
         {}
         {age && age < 15
