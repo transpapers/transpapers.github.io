@@ -61,7 +61,7 @@ export const fields: { [key: string]: Field } = {
       "If you want to avoid mentioning transition we recommend “I want to be known legally as I am by my family and friends”.",
     name: "reasonForNameChange",
     type: "string",
-    default: "Gender transition",
+    default: "Gender Transition"
   },
   sealBirthCertificate: {
     title: (
@@ -76,7 +76,6 @@ export const fields: { [key: string]: Field } = {
       "This prevents third parties from accessing your deadname and assigned gender at birth on your original birth certificate.",
     name: "sealBirthCertificate",
     type: "boolean",
-    default: true,
   },
   birthCity: {
     title: "City of birth",
