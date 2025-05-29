@@ -118,6 +118,21 @@ export function numericalAge(birthdate: string): number {
 }
 
 /**
+ * Guarantees that the persons age is checked first before 
+ * calculating age from birthdate, this is because it is possible 
+ * for someone to enter an age that they are not yet at in 
+ * anticipation of being that age or for emancipation reasons.
+ * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
+ * @return {number}
+ */
+export function guaranteeAge(age: number | undefined, birthdate: string): number {
+    if (typeof age === "undefined") {
+        return numericalAge(birthdate);
+    }
+    return age;
+}
+
+/**
  * Format a Date as a string
  * @param {string} date - date, formatted as YYYY-MM-DD.
  * @param {DateFormat} fmt - Ugh
