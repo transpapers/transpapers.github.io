@@ -41,7 +41,7 @@ function MichiganPC51Guide({ person }: { person: Person }) {
       ): ("")}
       {age && age < 18 ? (
         <p>
-          Also fill out <strong>item 4</strong>, <strong>item 5</strong>, and
+          Also fill out <strong>item 4</strong>, <strong>item 5</strong>, and{" "}
           <strong>item 10</strong> as applicable. The parent/guardian that is 
           filing this at court should date and sign the bottom of page 2 and 
           the left side of the “Signature of Parent/Guardian for Minor” 

@@ -44,7 +44,7 @@ function MichiganMC20Guide({ person }: { person: Person }) {
         If you choose to file this form, complete <strong>items 1 and 3</strong>{" "}
         as applicable.
         {age && age < 18
-          ? " Your parent should sign at the bottom of the first page."
+          ? " Your parent/guardian should sign at the bottom of the first page."
           : " Sign at the bottom of the first page."}
       </p>
     </section>
