@@ -167,7 +167,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) => (applicant.isChangingLegalSex ? "X" : ""),
-    loc: { page: 3, x: 679, y: 211 },
+    loc: { page: 3, x: 677, y: 211 },
   },
 ];
 
@@ -385,11 +385,11 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 1, x: 248, y: 424 },
   },
   {
-    text: (applicant) =>
+    text: (applicant) => !isMinor(applicant) ?
       formatDate(applicant.birthdate, {
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
-      }),
+      }) : "",
     loc: { page: 2, x: 303, y: 144 },
   },
   {

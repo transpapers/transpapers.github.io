@@ -123,7 +123,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        Alternatively the letter can be placed in a dropbox at 800 NE Oregon St,
+        Alternatively the envelope can be placed in a dropbox at 800 NE Oregon St,
         Portland. It may take up to six months to process once the letter is
         sent.
         {age && age < 18 ? (
@@ -133,7 +133,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
                 "<a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'> rules </a>" +
                 " when the new birth certificate and correspondence letter arrive a " +
                 " parent/guardian can update your information at Social Security using " +
-                " those documents. Ignore any mention of the court order in those guides."
+                " those documents. Any mention of the court order in those guides means the correspondence letter for you."
               : ""}
           </>
         ) : (
