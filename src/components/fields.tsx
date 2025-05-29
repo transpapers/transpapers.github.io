@@ -88,13 +88,13 @@ export const fields: { [key: string]: Field } = {
     name: 'birthdate',
     type: 'Date',
   }, */
-  age: {
+  /* age: {
     title: "Age at time of filing",
     subtitle: "Fill only if you are less than 19 years old.",
     name: "age",
     type: "number",
     include: (data) => isMinor(data),
-  },
+  }, */
   assignedSex: {
     title: "Sex assigned at birth",
     name: "assignedSex",
