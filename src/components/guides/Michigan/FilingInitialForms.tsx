@@ -28,7 +28,8 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
     <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>
       <p>
-        Your filing location is the { residentCounty } court {court?.address}. 
+        Your filing location is the {residentCounty} county court at{" "}
+        {court?.address}. 
         {age && age < 18 ? " A parent/guardian " : " You "} may file by mail or 
         in person; in either case, include the Petition, the Addendum (m97a),
         {residentCounty && residentCounty == "Saginaw"
