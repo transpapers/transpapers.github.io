@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
-  const { age, parentsAreOkay, birthJurisdiction } = person;
+  const { age, parentsAreOkay, birthJurisdiction, residentJurisdiction } = person;
 
   return (
     <section key="Oregon-BC-Update">
@@ -128,10 +128,10 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
         sent.
         {age && age < 18 ? (
           <>
-            {birthJurisdiction && birthJurisdiction === "Oregon"
+            {(birthJurisdiction && birthJurisdiction === "Oregon") && (residentJurisdiction && residentJurisdiction === "Oregon")
               ? " According to the Social Security Administration's" +
-                "<a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'>" +
-                "rules </a> when the new birth certificate and correspondence letter arrive a " +
+                "<a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'> rules </a>" +
+                " when the new birth certificate and correspondence letter arrive a " +
                 " parent/guardian can update your information at Social Security using " +
                 " those documents. Ignore any mention of the court order in those guides."
               : ""}
