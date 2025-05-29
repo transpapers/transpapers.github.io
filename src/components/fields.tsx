@@ -126,7 +126,6 @@ export const fields: { [key: string]: Field } = {
     title: "My parents are both alive and not divorced.",
     name: "parentsAreOkay",
     type: "boolean",
-    default: true,
     include: (data) => isMinor(data),
   },
   mothersBirthName: {
