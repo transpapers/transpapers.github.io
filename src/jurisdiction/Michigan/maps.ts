@@ -456,7 +456,7 @@ export const piiMap: Formfill[] = [
     field: "In the matter of",
   },
   {
-    text: () => "PC 51c",
+    text: (applicant) => applicant.residentCounty === "Kent" ? "PC 51" : "PC 51c",
     field: "Name of formdocument that this MC 97a is being filed with 1",
   },
   {
