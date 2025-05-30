@@ -34,7 +34,18 @@ export interface AlaskaAdministrativeDivision {
   faxNumber?: string;
   trueFiling: boolean;
 
-  forwardsTo?: AlaskaAdministrativeDivision;
+  forwardsTo?: ForwardsTo;
+}
+
+export interface ForwardsTo {
+  court: Court;
+
+  inPersonFiling: boolean;
+  emailFiling: boolean;
+  emailCourt?: string;
+  faxFiling: boolean;
+  faxNumber?: string;
+  trueFiling: boolean;
 }
 
 export interface OtherCounty {

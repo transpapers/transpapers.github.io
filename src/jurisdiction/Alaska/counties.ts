@@ -48,7 +48,19 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         emailCourt: "1SImailbox@akcourts.gov",
         faxFiling: false,
         trueFiling: true,
-        /**forwardsTo: "Sitka",*/
+        forwardsTo: {
+          court: {
+            address: "304 Lake St #203, Sitka, AK 99835",
+            city: "Sitka",
+            phone: "(907) 747-3291",
+            website: "https://courts.alaska.gov/courtdir/1si.htm",
+          },
+          inPersonFiling: false,
+          emailFiling: true,
+          emailCourt: "1SImailbox@akcourts.gov",
+          faxFiling: false,
+          trueFiling: true,
+        },
     },
     Bethel: {
         court: {
@@ -109,6 +121,7 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         trueFiling: true,
     },
     Fairbanks: {
+        /** If this data updates, update the forwardsTo for Fort Yukon and Galena as well.*/
         court: {
           address: "101 Lacey St, Fairbanks, AK 99701",
           city: "Fairbanks",
@@ -137,7 +150,20 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         faxFiling: true,
         faxNumber: "(907) 452-9330",
         trueFiling: true,
-        /**forwardsTo: Fairbanks,*/
+        forwardsTo: {
+          court: {
+            address: "101 Lacey St, Fairbanks, AK 99701",
+            city: "Fairbanks",
+            phone: "(907) 452-9277",
+            website: "https://courts.alaska.gov/courtdir/4fa.htm",
+          },
+          inPersonFiling: true,
+          emailFiling: true,
+          emailCourt: "4FAcivil@akcourts.gov",
+          faxFiling: true,
+          faxNumber: "(907) 452-9330",
+          trueFiling: true,
+        },
     },
     Galena: {
         court: {
@@ -153,7 +179,20 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         faxFiling: true,
         faxNumber: "(907) 452-9330",
         trueFiling: true,
-        /**forwardsTo: Fairbanks,*/
+        forwardsTo: {
+          court: {
+            address: "101 Lacey St, Fairbanks, AK 99701",
+            city: "Fairbanks",
+            phone: "(907) 452-9277",
+            website: "https://courts.alaska.gov/courtdir/4fa.htm",
+          },
+          inPersonFiling: true,
+          emailFiling: true,
+          emailCourt: "4FAcivil@akcourts.gov",
+          faxFiling: true,
+          faxNumber: "(907) 452-9330",
+          trueFiling: true,
+        },
     },
     Glennallen: {
         court: {
@@ -199,9 +238,23 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         faxFiling: true,
         faxNumber: "(907) 463-3788",
         trueFiling: true,
-        /**forwardsTo: Juneau,*/
+        forwardsTo: {        
+          court: {
+            address: "123 W 4th St #2, Juneau, AK 99801",
+            city: "Juneau",
+            phone: "(907) 463-4700",
+            website: "https://courts.alaska.gov/courtdir/1ju.htm",
+          },
+          inPersonFiling: true,
+          emailFiling: true,
+          emailCourt: "1JUMailbox@akcourts.gov",
+          faxFiling: true,
+          faxNumber: "(907) 463-3788",
+          trueFiling: true,
+        },
     },
     Juneau: {
+        /** If this data updates, update the forwardsTo for Hoonah as well.*/
         court: {
           address: "123 W 4th St #2, Juneau, AK 99801",
           city: "Juneau",
@@ -372,6 +425,7 @@ const alaskanAdministrativeDivisions: { [key: string]: AlaskaAdministrativeDivis
         trueFiling: true,
     },
     Sitka: {
+        /** If this data updates, update the forwardsTo for Angoon as well.*/
         court: {
           address: "304 Lake St #203, Sitka, AK 99835",
           city: "Sitka",
