@@ -21,11 +21,11 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function FeeWaiverGuide({ person }: { person: Person }) {
+function OregonFeeWaiverGuide({ person }: { person: Person }) {
   const { age } = person;
 
   return (
-    <section key="NYC-Fee-Waiver">
+    <section key="Oregon-Fee-Waiver">
       <h3>Fee Waiver Application (OR)</h3>
       <p>
         This form is optional. It is a request to waive the filing fee charged
@@ -45,4 +45,4 @@ function FeeWaiverGuide({ person }: { person: Person }) {
   );
 }
 
-export default FeeWaiverGuide;
+export default OregonFeeWaiverGuide;
