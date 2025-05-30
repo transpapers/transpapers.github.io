@@ -461,7 +461,7 @@ export const additionalServiceAlaskaMap: Formfill[] = [
  */
 export const primaryIDAlaskaMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName) ?? "",
     field: "Text1",
   },
   {
@@ -505,15 +505,27 @@ export const primaryIDAlaskaMap: Formfill[] = [
     field: "Text15",
   },
   {
-    check: (applicant) => !fullName(applicant.birthName),
+    check: (applicant) => applicant.isChangingLegalName,
     field: "Check Box41",
   },
   {
-    check: (applicant) => !fullName(applicant.birthName),
+    check: (applicant) => 
+      !applicant.isChangingLegalName && !fullName(applicant.birthName),
     field: "Check Box42",
   },
   {
-    text: (applicant) => fullName(applicant.birthName) ?? "",
+    text: (applicant) => {
+      switch (applicant.isChangingLegalName) {
+        case applicant.isChangingLegalName === true:
+            return fullName(applicant.birthName) ?? ""
+              ? `${fullName(applicant.legalName)}, ${fullName(applicant.birthName)}`
+              : fullName(applicant.legalName) ?? "";
+        case applicant.isChangingLegalName === false:
+            return fullName(applicant.birthName) ?? "";
+        default:
+            return "";
+      }
+    },
     field: "Text43",
   },
   {
