@@ -113,7 +113,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
             UPS Locations
           </a>
           , or <a href="https://www.notarize.com/">online</a>. There will be a
-          fee for this required service.
+          fee for this required service and photo ID is required.
         </p>
       )}
 
