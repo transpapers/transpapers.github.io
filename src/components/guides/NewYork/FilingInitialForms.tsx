@@ -29,12 +29,12 @@ function NewYorkFilingGuide(
   const { court, age, residentCounty } = person;
   // const { isNYC, borough } = NYcounty;
   const isNYC = true;
-  const borough = "BOROUGh";
+  const borough = "BOROUGH";
   return (
     <section key="NewYork-Filing">
       <h3>Filing Initial Forms (NY)</h3>
 
-      {isNYC && isNYC == true ? (
+      {isNYC && isNYC === true ? (
         <>
           <p>
             {age && age < 18 ? "A parent/guardian " : "You "} can file in any of
