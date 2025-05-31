@@ -22,11 +22,20 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function AlaskaCourtHearingGuide({ person }: { person: Person }) {
-  const { age } = person;
+  const { age, residentCounty } = person;
 
   return (
     <section key="AK-CourtHearing">
       <h3>Court Hearing (AK)</h3>
+      
+      {residentCounty && residentCounty === "Anchorage" ? (
+        <p>
+          For Anchorage, hearings are held in one of two locations. On weekdays 
+          they are at { court?.address } but on weekends they are at the Boney
+          courthouse, 303 K St, Anchorage, AK 99501.
+        </p>
+      ) : ("")}
+      
       <p>
         On the day of your hearing, you
         {age && age < 18 && "and your petitioner"} should dress appropriately for
