@@ -111,7 +111,16 @@ export const adultNameSexPetitionMap: Formfill[] = [
     field: "CurrentAddress",
   },
   { text: () => new Date().toLocaleDateString(), field: "SignatureDate" },
-  /** #28 also has a do not publish radio button with a reason text box below */
+  {
+    check: (applicant) => applicant.doNotPublish,
+    field: "SealingRequest",
+    select: "Yes",
+  },
+  {
+    check: (applicant) => !applicant.doNotPublish,
+    field: "SealingRequest",
+    select: "No",
+  },
 ];
 
 /**
@@ -195,11 +204,18 @@ export const minorNameSexPetitionMap: Formfill[] = [
       ${applicant.residentJurisdiction} ${applicant.zip}, USA`,
     field: "CurrentAddress",
   },
-    /** Do not publish item #28 radio button and text box here. */
+  {
+    check: (applicant) => applicant.doNotPublish,
+    field: "SealingRequest",
+    select: "Yes",
+  },
+  {
+    check: (applicant) => !applicant.doNotPublish,
+    field: "SealingRequest",
+    select: "No",
+  },
   { text: () => new Date().toLocaleDateString(), field: "SignatureDatePetitioner" },
   { text: () => new Date().toLocaleDateString(), field: "SignatureDateCoPetitioner" },
-  /** Below is Steph's attempt if Age < 14. This is the only one we need. 
-   *  We can drop the check and just autofill it if there is an error.*/
   {
     text: (applicant) => 
       isMinor(applicant) && applicant.age! < 14
@@ -469,11 +485,11 @@ export const vehicleRegistrationMap: Formfill[] = [
     },
   {
     text: (applicant) => applicant.isChangingLegalName ?
-      `${applicant.chosenName?.last ?? ""} 
-      ${applicant.chosenName?.first ?? ""} 
+      `${applicant.chosenName?.last ?? ""}, 
+      ${applicant.chosenName?.first ?? ""}, 
       ${applicant.chosenName?.middle ?? ""}` :
-      `${applicant.legalName?.last ?? ""} 
-      ${applicant.legalName?.first ?? ""} 
+      `${applicant.legalName?.last ?? ""}, 
+      ${applicant.legalName?.first ?? ""}, 
       ${applicant.legalName?.middle ?? ""}`,
     field: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
   },
@@ -507,7 +523,6 @@ export const vehicleRegistrationMap: Formfill[] = [
         formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     field: "PRIMARY REGISTRANT DATE OF BIRTH Year",
   },
-  /** Radio Button attempt */
   {
     check: (applicant) => applicant.gender === GenderMarker.M,
     field: "PRIMARY REGISTRANT SEX",

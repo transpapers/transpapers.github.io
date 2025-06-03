@@ -38,6 +38,19 @@ function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
         least 6 months before a parent/guardian can file this on your behalf.
       </p>
 
+      { doNotPublish && doNotPublish === true ? (
+        <p>
+            For #28 the court wants to know  if making these court records 
+            available to the public will cause you or your petitioner harm. 
+            This can take the form of either discrimmination or a personal threat 
+            such as a known stalker. For discrimmination that can be either 
+            state or federal threats. Be sure to elaborate and potentially 
+            attach evidence. Your petitioner should also fill out #29 if they 
+            do attach anything. In any case the record will be sealed 
+            automatically until the judge makes a decision.
+        </p>
+      ):("")}
+
       {parentsAreOkay && parentsAreOkay == true ? (
         <p>
           If both parents are able to meet with a notary at the same time they
