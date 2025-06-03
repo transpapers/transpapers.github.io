@@ -641,15 +641,21 @@ export const voterOregonMap: Formfill[] = [
     select: "Yes",
   },
   {
-    text: (applicant) => applicant.chosenName?.last,
+    text: (applicant) => applicant.isChangingLegalName 
+      ? applicant.chosenName?.last ?? ""
+      : applicant.legalName?.last ?? "",
     field: "Last Name",
   },
   {
-    text: (applicant) => applicant.chosenName?.first,
+    text: (applicant) => applicant.isChangingLegalName 
+      ? applicant.chosenName?.first ?? ""
+      : applicant.legalName?.first ?? "",
     field: "First Name",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle,
+    text: (applicant) => applicant.isChangingLegalName 
+      ? applicant.chosenName?.middle ?? "" 
+      : applicant.legalName?.middle ?? "",
     field: "Middle Name",
   },
   {
@@ -678,7 +684,7 @@ export const voterOregonMap: Formfill[] = [
     field: "Email",
   },
   {
-    text: (applicant) => fullName(applicant.legalName),
+    text: (applicant) => fullName(applicant.legalName) ?? "",
     field: "Preious Registration Name",
   },
 ];
