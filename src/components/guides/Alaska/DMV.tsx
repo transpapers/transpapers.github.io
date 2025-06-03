@@ -63,13 +63,7 @@ function AlaskaDMVGuide({ person }: { person: Person }) {
       <p>
         To change your gender marker on your ID as well you will need the 
         “Certification For Change Of Sex Designator On Driver License Or 
-        Identification Card” (Form 427).
-      </p>
-      ) : ("")}
-
-      {isChangingLegalSex && isChangingLegalSex === true ? (
-      <p>
-        {gender && gender === "X" ? (
+        Identification Card” (Form 427). {gender && gender === "X" ? (
           " Alaska does not have an “X” option for ID's, you will need to check either “Male” or “Female” in section A. "
         ) : ("")}
         Fill out your driver's license or ID number, if applicable, in section A 
@@ -77,7 +71,9 @@ function AlaskaDMVGuide({ person }: { person: Person }) {
         well in section B and then take it to a medical professional or therapist 
         who is giving you trans-related care. A full list of qualifying 
         individuals is listed in section C of the form. Have them fill out 
-        section C and then you are ready to head to a DMV location.
+        section C and then you are ready to head to a DMV location. If you are 
+        also updating your birth certificate you can have them do the letter for 
+        that section at the same time.
       </p>
       ) : ("")}
 

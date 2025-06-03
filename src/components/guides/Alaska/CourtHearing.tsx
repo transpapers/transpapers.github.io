@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function AlaskaCourtHearingGuide({ person }: { person: Person }) {
-  const { age, residentCounty } = person;
+  const { age, residentCounty, court } = person;
 
   return (
     <section key="AK-CourtHearing">
