@@ -152,5 +152,5 @@ export const oregonPostamble: Process = {
       guide: OregonResourcesGuide,
     },
   ],
-  isJustGuide: true,
+   isJustGuide: true,
 };

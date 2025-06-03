@@ -140,6 +140,7 @@ export const michiganBirthRecord: Process = {
       name: "State of Michigan Sex Designation Form",
       filename: "Michigan/mi_sdf.pdf",
       map: miSexMap,
+      include: (applicant) => applicant.isChangingLegalSex === true,
     },
     {
       name: "Acceptable ID",
