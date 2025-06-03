@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Person, sampleData } from "../types/person";
-import { Process } from "../types/process";
-import { Name } from "../types/types";
+import { type Person, sampleData } from "../types/person";
+import { type ProcessType } from "../types/generic";
+import { type Name } from "../types/types";
 
 import { fields } from "../components/fields";
 
@@ -121,7 +121,7 @@ export function shakeTree(obj: any, accessed: string[] = []) {
  * Convert the list of needed procedures into a list of needed field names.
  */
 export function neededFieldNames(
-  neededProcs: Process[],
+  neededProcs: ProcessType[],
   applicant: Person,
 ): string[] {
   const names: string[] = [];

@@ -19,13 +19,14 @@
 
 import { type Process } from "./process";
 import { type Locality } from "./locality";
+import { type ProcessType } from "./generic";
 
 import { allJurisdictions } from "../jurisdiction/all";
 
 /**
  * A single US state or territory.
  */
-export interface Jurisdiction {
+export interface Jurisdiction<T extends Locality> {
   /**
    * Human-readable name.
    *
@@ -46,12 +47,12 @@ export interface Jurisdiction {
   /**
    * Map from `Target`s to `Process`es.
    */
-  processes?: Process[];
+  processes?: Process<T>[];
 
   /**
    * Map of counties (or county equivalents.)
    */
-  counties?: { [key: string]: Locality };
+  localities?: { [key: string]: T };
 
   /**
    * `true` if this is the dummy `Jurisdiction` used for federal processes.
@@ -59,50 +60,29 @@ export interface Jurisdiction {
   isFederal?: boolean;
 }
 
-export function getJurisdiction(
-  name: string | undefined,
-): Jurisdiction | undefined {
-  if (name === undefined) {
-    return undefined;
-  }
-  return allJurisdictions.find((jurisdiction) => jurisdiction.name === name);
-}
-
-export function getProcesses(name: string | undefined): Process[] {
+export function getProcesses(name: string | undefined): ProcessType[] {
   if (name === undefined) {
     return [];
   }
 
-  const jurisdiction = getJurisdiction(name);
-
-  if (jurisdiction === undefined) {
-    return [];
-  }
-
-  if (jurisdiction.processes === undefined) {
-    return [];
-  }
-
-  return jurisdiction.processes;
+  return allJurisdictions.get(name)?.processes ?? [];
 }
 
 export function allProcesses(
   residentJurisdiction: string | undefined,
   birthJurisdiction: string | undefined,
-): Process[] {
-  const residentJurisdictionProcesses =
-    getJurisdiction(residentJurisdiction)?.processes || [];
+): ProcessType[] {
+  const residentJurisdictionProcesses = getProcesses(residentJurisdiction);
   const residentProcesses = residentJurisdictionProcesses.filter(
     (proc) => !proc.isBirth,
   );
 
-  const birthJurisdictionProcesses =
-    getJurisdiction(birthJurisdiction)?.processes || [];
+  const birthJurisdictionProcesses = getProcesses(birthJurisdiction);
   const birthProcesses = birthJurisdictionProcesses.filter(
     (proc) => proc.isBirth,
   );
 
-  const federalProcesses = getJurisdiction("Federal")?.processes || [];
+  const federalProcesses = allJurisdictions.get("Federal")?.processes ?? [];
 
   return [...residentProcesses, ...birthProcesses, ...federalProcesses];
 }

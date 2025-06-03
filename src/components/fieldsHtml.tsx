@@ -21,7 +21,7 @@ import * as React from "react";
 import { JSX } from "react";
 
 import { Field } from "../types/field";
-import { getJurisdiction } from "../types/jurisdiction";
+import { allJurisdictions } from "../jurisdiction/all";
 
 function GenericField(field: Field, innards: JSX.Element): JSX.Element {
   const { name, title, subtitle, required } = field;
@@ -241,14 +241,14 @@ export function CountyField({
   jurisdiction,
   register,
 }: CountyFieldConstructorProps) {
-  const jurisdictionObj = getJurisdiction(jurisdiction);
+  const jurisdictionObj = allJurisdictions.get(jurisdiction);
 
   if (!jurisdictionObj) {
     return "";
   }
 
-  const { counties } = jurisdictionObj;
-  if (!counties) {
+  const { localities } = jurisdictionObj;
+  if (!localities) {
     return "";
   }
 
@@ -257,7 +257,9 @@ export function CountyField({
     name: "county",
     title: "County",
     type: "select",
-    options: Object.fromEntries(Object.keys(counties).map((key) => [key, key])),
+    options: Object.fromEntries(
+      Object.keys(localities).map((key) => [key, key]),
+    ),
     required: true,
   };
 

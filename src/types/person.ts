@@ -139,9 +139,9 @@ export interface Person {
   /**
    * Applicant checks this to indicate criminal record.
    *
-   * @remarks 
+   * @remarks
    * Should be 'true' if there is a criminal record.
-   * 
+   *
    * Required for certain forms and guide sections as courts
    * often ask this to check for statutory fraud. We use it to determine
    * if the appliant needs additional advice in the guides and to mark
@@ -209,7 +209,7 @@ export interface Person {
    *
    * @remarks Required for court locations, etc. Filled from Jurisdiction data.
    */
-  residentCounty: string | undefined;
+  residentLocality: string | undefined;
 
   /**
    * Applicant's ZIP code.
@@ -299,7 +299,7 @@ export const blankData: Person = {
 
   residentCity: undefined,
   residentJurisdiction: undefined,
-  residentCounty: undefined,
+  residentLocality: undefined,
 
   zip: undefined,
   email: undefined,
@@ -385,7 +385,7 @@ export const sampleData: Person = {
 
   residentCity: "Grand Rapids",
   residentJurisdiction: "Michigan",
-  residentCounty: "Kent",
+  residentLocality: "Kent",
 
   zip: "49503",
 

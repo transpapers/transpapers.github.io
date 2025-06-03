@@ -39,25 +39,30 @@ function Step3() {
     await navigate("/step4");
   };
 
+  const bornValues = Array.from(
+    allJurisdictions
+      .values()
+      .filter((jurisdiction) => !jurisdiction.isFederal)
+      .map((jurisdiction) => (
+        <li key={jurisdiction.name}>
+          <label>
+            <input
+              {...register("birthJurisdiction", { required: true })}
+              type="radio"
+              value={jurisdiction.name}
+              defaultChecked={jurisdiction.name === residentJurisdiction}
+            />
+            {jurisdiction.name}
+          </label>
+        </li>
+      )),
+  );
+
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>Where were you born?</h2>
       <ul>
-        {allJurisdictions
-          .filter((jurisdiction) => !jurisdiction.isFederal)
-          .map((jurisdiction) => (
-            <li key={jurisdiction.name}>
-              <label>
-                <input
-                  {...register("birthJurisdiction", { required: true })}
-                  type="radio"
-                  value={jurisdiction.name}
-                  defaultChecked={jurisdiction.name === residentJurisdiction}
-                />
-                {jurisdiction.name}
-              </label>
-            </li>
-          ))}
+        {...bornValues}
         <li key={undefined}>
           <label>
             <input

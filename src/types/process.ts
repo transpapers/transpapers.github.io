@@ -20,7 +20,7 @@
 import * as React from "react";
 
 import { Person } from "./person";
-// import { Locality } from "./locality";
+import { Locality } from "./locality";
 import { Formfill } from "./formfill";
 
 export enum Target {
@@ -35,11 +35,10 @@ export enum Target {
 /**
  * Procedural information for filing.
  */
-export interface Process {
+export interface Process<T extends Locality> {
   /**
    * State or territory. Leave empty for federal forms.
    */
-  jurisdiction?: string;
 
   /**
    * The object of filing the documents; e.g., birth record, primary
@@ -56,7 +55,7 @@ export interface Process {
   /**
    * An ordered list of documents to attach.
    */
-  documents: Document[];
+  documents: Document<T>[];
 
   /**
    * `true` if this process requires its applicant to be born in its
@@ -74,7 +73,7 @@ export interface Process {
 /**
  * A single document to be filed.
  */
-export interface Document {
+export interface Document<T extends Locality> {
   /**
    * Human-readable name of document.
    */
@@ -95,7 +94,10 @@ export interface Document {
    * Location of guide for this document, from root public/guides/ (dev tree)
    * or guides/ (served.)
    */
-  guide?: ({ person }: { person: Person }) => React.JSX.Element;
+  guide?: React.FunctionComponent<{
+    person: Person;
+    locality: T;
+  }>;
 
   /**
    * Criterion for inclusion.

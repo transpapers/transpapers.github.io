@@ -20,17 +20,17 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
-// import { type Locality, RhodeIslandCityOrTown } from "../../../types/locality";
+import { RhodeIslandCityOrTown } from "../../../types/locality";
 
-function RhodeIslandFilingGuide(
-  { person }: { person: Person },
-  // { RIcityortown }: { RIcityortown: RhodeIslandCityOrTown },
-  // { locality }: { locality: Locality },
-) {
-  const { court, age, residentCounty } = person;
-  // const { courtDoesBackgroundCheck, filingCost } = RIcityortown;
-  const courtDoesBackgroundCheck = true;
-  const filingCost = "$$$$$";
+function RhodeIslandFilingGuide({
+  person,
+  locality,
+}: {
+  person: Person;
+  locality: RhodeIslandCityOrTown;
+}) {
+  const { court, age, residentLocality } = person;
+  const { courtDoesBackgroundCheck, filingCost } = locality;
 
   return (
     <section key="RhodeIsland-Filing">

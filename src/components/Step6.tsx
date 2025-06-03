@@ -28,7 +28,7 @@ import { fields, renderField } from "./fields";
 
 import { neededFieldNames } from "../lib/shakeTree";
 
-import { getJurisdiction } from "../types/jurisdiction";
+import { allProcesses } from "../types/jurisdiction";
 import { type Person } from "../types/person";
 
 function Step6() {
@@ -42,29 +42,11 @@ function Step6() {
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
-  const residentJurisdictionProcesses =
-    getJurisdiction(residentJurisdiction)?.processes || [];
-  const residentProcesses = residentJurisdictionProcesses.filter(
-    (proc) => !proc.isBirth && !proc.isJustGuide,
-  );
-
-  const birthJurisdictionProcesses =
-    getJurisdiction(birthJurisdiction)?.processes || [];
-  const birthProcesses = birthJurisdictionProcesses.filter(
-    (proc) => proc.isBirth && !proc.isJustGuide,
-  );
-
-  const federalProcesses = getJurisdiction("Federal")?.processes || [];
-
-  const allProcesses = [
-    ...residentProcesses,
-    ...birthProcesses,
-    ...federalProcesses,
-  ];
+  const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
 
   const processes = processNames
     .map((procName) =>
-      allProcesses.find((proc) => proc.target!.toString() === procName),
+      allProcs.find((proc) => (proc.target as string) === procName),
     )
     .filter((proc) => proc !== undefined);
 

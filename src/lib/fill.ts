@@ -26,9 +26,17 @@ import {
   PDFRadioGroup,
 } from "@cantoo/pdf-lib";
 
+import { allJurisdictions } from "../jurisdiction/all";
+
+import {
+  type LocalityType,
+  type JurisdictionType,
+  type ProcessType,
+  type DocumentType,
+} from "../types/generic";
 import { Person } from "../types/person";
-import { Process, Document } from "../types/process";
 import { Formfill } from "../types/formfill";
+import { Locality } from "../types/locality";
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -136,34 +144,100 @@ export function fillForm(
   return doc;
 }
 
-export function compileGuides(
-  processes: Process[],
+export function compileGuidesFor(
+  process: ProcessType,
   applicant: Person,
 ): React.JSX.Element[] | undefined {
-  const docs: Document[] = [];
+  const jurisdictionName: string | undefined = process.isBirth
+    ? applicant.birthJurisdiction
+    : applicant.residentJurisdiction;
 
-  processes.forEach((proc) => {
-    proc.documents.forEach((doc) => {
-      if (!docs.includes(doc)) {
-        docs.push(doc);
-      }
-    });
+  if (jurisdictionName === undefined) {
+    console.error("Called compileGuidesFor() with no jurisdiction name.");
+    return undefined;
+  }
+
+  const jurisdiction = allJurisdictions.get(jurisdictionName);
+  if (jurisdiction === undefined) {
+    console.error("Called compileGuidesFor() with a nonexistent jurisdiction.");
+    return undefined;
+  }
+
+  if (applicant.residentLocality === undefined) {
+    console.error("Called compileGuidesFor() with no locality name.");
+    return undefined;
+  }
+
+  const locality = getLocality(jurisdiction, applicant.residentLocality);
+
+  if (locality === undefined) {
+    console.error("Called compileGuidesFor() with a nonexistent locality.");
+    return undefined;
+  }
+
+  const docs: DocumentType[] = [];
+
+  process.documents.forEach((doc) => {
+    if (!docs.includes(doc)) {
+      docs.push(doc);
+    }
   });
 
   const guides: React.JSX.Element[] = [];
 
   docs
-    .filter((doc) => doc.include === undefined || doc.include(applicant))
+    .filter(
+      (doc) =>
+        !("include" in doc) ||
+        doc.include === undefined ||
+        doc.include(applicant),
+    )
     .forEach((doc) => {
       if (doc.guide !== undefined) {
-        const guide = React.createElement(doc.guide, {
-          person: applicant,
-        });
-        guides.push(guide);
+        type theRightType = React.FunctionComponent<{
+          person: Person;
+          locality: typeof locality;
+        }>;
+        if ((doc.guide as theRightType) !== undefined) {
+          const guide = React.createElement(doc.guide as theRightType, {
+            person: applicant,
+            locality,
+          });
+          guides.push(guide);
+        }
       }
     });
 
   return guides;
+}
+
+export function getLocality(
+  jurisdiction: JurisdictionType,
+  localityName: string,
+): LocalityType | undefined {
+  const localities: { [key: string]: Locality } | undefined =
+    jurisdiction.localities;
+
+  if (localities === undefined) {
+    console.error(
+      "Called compileGuidesFor() on a jurisdiction with no localities.",
+    );
+    return undefined;
+  }
+
+  if (localityName === undefined) {
+    console.error("Called compileGuidesFor() with no locality name.");
+    return undefined;
+  }
+
+  const locality = localities[localityName];
+
+  if (locality === undefined) {
+    console.error("Called compileGuidesFor() with a nonexistent locality.");
+    return undefined;
+  }
+
+  return locality;
 }
 
 /**
@@ -174,10 +248,10 @@ export function compileGuides(
  * @return {Promise<Uint8Array>} Compiled documents
  */
 export async function compileDocuments(
-  processes: Process[],
+  processes: ProcessType[],
   applicant: Person,
 ): Promise<Uint8Array | undefined> {
-  const docs: Document[] = [];
+  const docs: DocumentType[] = [];
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {

@@ -17,14 +17,13 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export type Locality = AlaskaAdministrativeDivision
-  | MichiganCounty
-  | RhodeIslandCityOrTown
-  | NewYorkCounty
-  | OtherCounty;
-
-export interface AlaskaAdministrativeDivision {
+export type Locality = {
   court: Court;
+};
+
+export type OregonCounty = Locality;
+
+export type AlaskaAdministrativeDivision = Locality & {
   doesNameChange: boolean;
 
   inPersonFiling: boolean;
@@ -33,9 +32,8 @@ export interface AlaskaAdministrativeDivision {
   faxFiling: boolean;
   faxNumber?: string;
   trueFiling: boolean;
-
   forwardsTo?: ForwardsTo;
-}
+};
 
 export interface ForwardsTo {
   court: Court;
@@ -48,20 +46,14 @@ export interface ForwardsTo {
   trueFiling: boolean;
 }
 
-export interface OtherCounty {
-  court: Court;
-}
-export interface NewYorkCounty {
-    borough?: string;
-    court: Court;
-    courtType: string;
-    isNYC?: boolean;
-}
+export type NewYorkCounty = Locality & {
+  borough?: string;
+  courtType: string;
+  isNYC?: boolean;
+};
 
-export interface RhodeIslandCityOrTown {
+export type RhodeIslandCityOrTown = Locality & {
   county: string;
-  court: Court;
-
   advertisementRequired: boolean;
   courtDoesAdvertisement: boolean;
 
@@ -71,13 +63,12 @@ export interface RhodeIslandCityOrTown {
   publications?: Publication[];
 
   filingCost: string;
-}
+};
 
-export interface MichiganCounty {
-  court: Court;
+export type MichiganCounty = Locality & {
   fingerprintLocations: FingerprintLocation[];
   publications: Publication[];
-}
+};
 
 export interface Court {
   address: string;

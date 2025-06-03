@@ -40,27 +40,30 @@ function Step1() {
     await navigate("/step2");
   };
 
+  const choicesElements = Array.from(
+    allJurisdictions
+      .values()
+      .filter((jurisdiction) => !jurisdiction.isFederal)
+      .map(({ name }) => (
+        <li key={name}>
+          <label>
+            <input
+              {...register("residentJurisdiction", { required: true })}
+              type="radio"
+              value={name}
+              defaultChecked={name === residentJurisdiction}
+            />
+            {name}
+          </label>
+        </li>
+      )),
+  );
+
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>What state do you live in?</h2>
 
-      <ul>
-        {allJurisdictions
-          .filter((jurisdiction) => !jurisdiction.isFederal)
-          .map((jurisdiction) => (
-            <li key={jurisdiction.name}>
-              <label>
-                <input
-                  {...register("residentJurisdiction", { required: true })}
-                  type="radio"
-                  value={jurisdiction.name}
-                  defaultChecked={jurisdiction.name === residentJurisdiction}
-                />
-                {jurisdiction.name}
-              </label>
-            </li>
-          ))}
-      </ul>
+      <ul>{...choicesElements}</ul>
 
       <input type="submit" value="Next" />
     </form>

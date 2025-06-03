@@ -19,11 +19,16 @@
 
 import * as React from "react";
 
-import { compileDocuments } from "../lib/fill";
+import { allJurisdictions } from "../jurisdiction/all";
+
+import { compileDocuments, getLocality } from "../lib/fill";
 
 import useStore from "../store";
 
+import { type Person } from "../types/person";
 import { allProcesses } from "../types/jurisdiction";
+
+import { type DocumentType, type LocalityType } from "../types/generic";
 
 function Guide() {
   const applicant = useStore((state) => state.person);
@@ -43,9 +48,47 @@ function Guide() {
     }
   }, console.error);
 
-  let documents = processes.map((proc) => proc.documents).flat();
+  const documentDict = processes.reduce((dict, proc) => {
+    const jurisdictionName = proc.isBirth
+      ? applicant.birthJurisdiction
+      : applicant.residentJurisdiction;
+    const localityName = !proc.isBirth ? applicant.residentLocality : null;
 
-  documents = [...new Set(documents)];
+    if (jurisdictionName) {
+      const jurisdiction = allJurisdictions.get(jurisdictionName);
+      if (jurisdiction && localityName) {
+        const locality = getLocality(jurisdiction, localityName);
+        if (locality) {
+          const entry = dict.get(locality);
+          if (entry && proc.documents) {
+            proc.documents.forEach((doc) => {
+              if (!entry.includes(doc)) entry.push(doc);
+            });
+          } else {
+            dict.set(locality, []);
+          }
+        }
+      }
+    }
+    return dict;
+  }, new Map<LocalityType, DocumentType[]>());
+
+  const guideElements = documentDict.entries().flatMap(([locality, docs]) => {
+    return [
+      ...docs.map((doc) => {
+        type theRightType = React.FunctionComponent<{
+          person: Person;
+          locality: typeof locality;
+        }>;
+        if (doc.guide as theRightType) {
+          return React.createElement(doc.guide as theRightType, {
+            person: applicant,
+            locality,
+          });
+        }
+      }),
+    ];
+  });
 
   return (
     <>
@@ -60,15 +103,7 @@ function Guide() {
         </strong>{" "}
         Please review the forms and guide side by side.
       </p>
-
-      {documents
-        .filter((doc) => doc.include === undefined || doc.include(applicant))
-        .filter((doc) => doc.guide !== undefined)
-        .map((doc) => (
-          <section key={doc.id ?? doc.name}>
-            {React.createElement(doc.guide!, { person: applicant })}
-          </section>
-        ))}
+      {...Array.from(guideElements)}
     </>
   );
 }
