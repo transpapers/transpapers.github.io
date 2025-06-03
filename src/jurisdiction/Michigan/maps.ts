@@ -524,6 +524,61 @@ export const feeWaiverMap: Formfill[] = [
 ];
 
 /**
+ * Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
+ * This is for the Primary ID at the Secretary of State step.
+ * @type {Formfill[]}
+ */
+export const mdosSexMap: Formfill[] = [
+  {
+    text: (applicant) => applicant.legalName?.last ?? "",
+    loc: { x: 57, y: 388 },
+  },
+  {
+    text: (applicant) => applicant.legalName?.first ?? "",
+    loc: { x: 351, y: 388 },
+  },
+  {
+    text: (applicant) => applicant.legalName?.middle ?? "",
+    loc: { x: 600, y: 388 },
+  },
+  {
+    text: (applicant) => applicant.legalName?.suffix ?? "",
+    loc: { x: 750, y: 388 },
+  },
+  { text: (applicant) => applicant.streetAddress, loc: { x: 57, y: 441 } },
+  { text: (applicant) => applicant.residentCity, loc: { x: 351, y: 441 } },
+  { text: (applicant) => applicant.zip, loc: { x: 701, y: 441 } },
+  {
+    text: (applicant) =>
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    loc: { x: 351, y: 489 },
+  },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    loc: { x: 67, y: 555 },
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.F,
+    field: "ChoiceA",
+    select: "Choice1",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.M,
+    field: "ChoiceA",
+    select: "Choice2",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.X,
+    field: "ChoiceA",
+    select: "Choice3",
+  },
+  { text: () => new Date().toLocaleDateString(), loc: { x: 649, y: 959 } },
+];
+
+/**
  * Application to Change or Correct a Michigan Birth Record (Michigan form DCH-0847-CHGBX.)
  * @type {Formfill[]}
  */
@@ -662,61 +717,6 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 433, y: 834 },
   },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
-];
-
-/**
- * Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
- * This is for the Primary ID at the Secretary of State step.
- * @type {Formfill[]}
- */
-export const mdosSexMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.legalName?.last ?? "",
-    loc: { x: 57, y: 388 },
-  },
-  {
-    text: (applicant) => applicant.legalName?.first ?? "",
-    loc: { x: 351, y: 388 },
-  },
-  {
-    text: (applicant) => applicant.legalName?.middle ?? "",
-    loc: { x: 600, y: 388 },
-  },
-  {
-    text: (applicant) => applicant.legalName?.suffix ?? "",
-    loc: { x: 750, y: 388 },
-  },
-  { text: (applicant) => applicant.streetAddress, loc: { x: 57, y: 441 } },
-  { text: (applicant) => applicant.residentCity, loc: { x: 351, y: 441 } },
-  { text: (applicant) => applicant.zip, loc: { x: 701, y: 441 } },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    loc: { x: 351, y: 489 },
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    loc: { x: 67, y: 555 },
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    field: "ChoiceA",
-    select: "Choice1",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    field: "ChoiceA",
-    select: "Choice2",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    field: "ChoiceA",
-    select: "Choice3",
-  },
-  { text: () => new Date().toLocaleDateString(), loc: { x: 649, y: 959 } },
 ];
 
 /**
