@@ -57,6 +57,15 @@ import {
 } from "./Oregon/process";
 import oregonCounties from "./Oregon/counties";
 
+/**import {
+  alaskaBirthRecord,
+  alaskaNameChange,
+  alaskaPrimaryIdentification,
+  alaskaGenderMarker,
+  alaskaPostamble,
+} from "./Alaska/process";
+import alaskaCounties from "./Alaska/counties";*/
+
 import { passport, socialSecurity } from "./Federal/process";
 
 export const michigan: Jurisdiction = {
@@ -114,6 +123,20 @@ export const oregon: Jurisdiction = {
   ],
   counties: oregonCounties,
 };
+
+/**export const alaska: Jurisdiction = {
+  name: "Alaska",
+  processes: [
+    alaskaNameChange,
+    socialSecurity,
+    alaskaPrimaryIdentification,
+    alaskaGenderMarker,
+    alaskaBirthRecord,
+    passport,
+    alaskaPostamble,
+  ],
+  counties: alaskaCounties,
+};*/
 
 export const federal: Jurisdiction = {
   name: "Federal",
