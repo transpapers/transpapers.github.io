@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganBirthCertificateGuide({ person }: { person: Person }) {
-  const { age, isChangingLegalSex } = person;
+  const { age, isChangingLegalSex, isChangingLegalName } = person;
 
   return (
     <section key="Michigan-BirthCertificate">
@@ -52,12 +52,13 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         and check the applicable box underneath. Write your birth county in the
         same section just below those checkboxes.
         {/* The other options for doing this inside a JSX component are all worse. */}
-        {}
+        { isChangingLegalName && isChangingLegalName === true ? 
+          (" All signatures from now on can be done in your new name. "):("")}
         {age && age < 15
           ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
           : age && age < 18
             ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
-            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively."}{" "}
+            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively."}
       </p>
 
       {age && age < 18 ? (
