@@ -108,7 +108,7 @@ export const fields: { [key: string]: Field } = {
     options: { M: "M", F: "F", X: "X" },
   },
   doNotPublish: {
-    title: "Request that the case be sealed or otherwise not published.",
+    title: "Request that the court case records be sealed or otherwise not published.",
     subtitle:
       "Some states have more stringent requirements than others, we will cover any of those in the guide.",
     name: "doNotPublish",
