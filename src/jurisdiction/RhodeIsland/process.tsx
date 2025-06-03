@@ -39,10 +39,10 @@ import RhodeIslandNotaryGuide from "../../components/guides/RhodeIsland/Notary";
 import RhodeIslandPC8_1Guide from "../../components/guides/RhodeIsland/PC8-1";
 // import RhodeIslandResourcesGuide from "../../components/guides/RhodeIsland/Resources";
 
+import { type RhodeIslandCityOrTown } from "../../types/locality";
 import { type Process, Target } from "../../types/process";
 
-export const rhodeislandNameChange: Process = {
-  jurisdiction: "RI",
+export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [

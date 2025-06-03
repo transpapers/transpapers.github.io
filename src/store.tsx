@@ -25,7 +25,7 @@ import { blankData, type Person } from "./types/person";
 import { Target } from "./types/process";
 
 import { numericalAge } from "./lib/util";
-import { getJurisdiction } from "./types/jurisdiction";
+import { allJurisdictions } from "./jurisdiction/all";
 
 interface ApplicationState {
   person: Person;
@@ -98,7 +98,7 @@ const useStore = create<ApplicationState & Action>()(
              * Infer any extra values for the applicant as needed.
              * Do any additional assignments here.
              */
-            const { birthdate, age, residentJurisdiction, residentCounty } =
+            const { birthdate, age, residentJurisdiction, residentLocality } =
               state.person;
 
             const extraData: Partial<ApplicationState["person"]> = {};
@@ -108,16 +108,16 @@ const useStore = create<ApplicationState & Action>()(
             }
 
             const jurisdiction = residentJurisdiction ?? "";
-            const jurisdictionObj = getJurisdiction(jurisdiction);
+            const jurisdictionObj = allJurisdictions.get(jurisdiction);
 
             if (
               jurisdictionObj !== undefined &&
-              jurisdictionObj.counties !== undefined
+              jurisdictionObj.localities !== undefined
             ) {
-              const { counties } = jurisdictionObj;
-              const county = counties[residentCounty ?? ""];
+              const { localities } = jurisdictionObj;
+              const locality = localities[residentLocality ?? ""];
 
-              Object.assign(extraData, county);
+              Object.assign(extraData, locality);
             }
 
             const isChangingLegalName = state.processNames.includes(

@@ -17,7 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { type JurisdictionType } from "../types/generic";
 import { type Jurisdiction } from "../types/jurisdiction";
+import { type Locality } from "../types/locality";
 
 import {
   michiganBirthRecord,
@@ -27,26 +29,27 @@ import {
   michiganPostamble,
 } from "./Michigan/process";
 import michiganCounties from "./Michigan/counties";
+import { MichiganCounty } from "../types/locality";
 
-/*
 import {
-    rhodeislandBirthRecord,
-    rhodeislandGenderMarker,
-    rhodeislandNameChange,
-    rhodeislandPrimaryIdentification,
-    rhodeislandPostamble,
+  // rhodeislandBirthRecord,
+  // rhodeislandGenderMarker,
+  rhodeislandNameChange,
+  // rhodeislandPrimaryIdentification,
+  // rhodeislandPostamble,
 } from "./RhodeIsland/process";
 import rhodeislandCounties from "./RhodeIsland/counties";
+import { RhodeIslandCityOrTown } from "../types/locality";
 
 import {
-    newyorkBirthRecord,
-    newyorkGenderMarker,
-    newyorkNameChange,
-    newyorkPrimaryIdentification,
-    newyorkPostamble,
+  newyorkBirthRecord,
+  newyorkGenderMarker,
+  newyorkNameChange,
+  newyorkPrimaryIdentification,
+  newyorkPostamble,
 } from "./NewYork/process";
 import newyorkCounties from "./NewYork/counties";
-*/
+import { NewYorkCounty } from "../types/locality";
 
 import {
   oregonBirthRecord,
@@ -56,92 +59,90 @@ import {
   oregonPostamble,
 } from "./Oregon/process";
 import oregonCounties from "./Oregon/counties";
+import { OregonCounty } from "../types/locality";
 
-/**import {
+import {
   alaskaBirthRecord,
   alaskaNameChange,
   alaskaPrimaryIdentification,
   alaskaGenderMarker,
   alaskaPostamble,
 } from "./Alaska/process";
-import alaskaCounties from "./Alaska/counties";*/
+import alaskaCounties from "./Alaska/counties";
+import { AlaskaAdministrativeDivision } from "../types/locality";
 
 import { passport, socialSecurity } from "./Federal/process";
 
-export const michigan: Jurisdiction = {
+export const michigan: Jurisdiction<MichiganCounty> = {
   name: "Michigan",
   processes: [
     michiganNameChange,
-    socialSecurity,
     michiganPrimaryIdentification,
     michiganGenderMarker,
     michiganBirthRecord,
-    passport,
     michiganPostamble,
   ],
-  counties: michiganCounties,
+  localities: michiganCounties,
 };
 
-/**export const rhodeisland: Jurisdiction = {
-    name: "Rhode Island",
-    processes: [
-        rhodeislandNameChange,
-        socialsecurity,
-        rhodeislandPrimaryIdentification,
-        rhodeislandGenderMarker,
-        rhodeislandBirthRecord,
-        passport,
-        rhodeislandPostamble,
-    ],
-    counties: rhodeislandCounties,
-};*/
+export const rhodeIsland: Jurisdiction<RhodeIslandCityOrTown> = {
+  name: "Rhode Island",
+  processes: [
+    rhodeislandNameChange,
+    // rhodeislandPrimaryIdentification,
+    // rhodeislandGenderMarker,
+    // rhodeislandBirthRecord,
+    // rhodeislandPostamble,
+  ],
+  localities: rhodeislandCounties,
+};
 
-/**export const newyork: Jurisdiction = {
-    name: "New York",
-    processes: [
-        newyorkNameChange,
-        socialsecurity,
-        newyorkPrimaryIdentification,
-        newyorkBirthRecord,
-        newyorkGenderMarker,
-        passport,
-        newyorkPostamble,
-    ],
-    counties: newyorkCounties,
-};*/
+export const newYork: Jurisdiction<NewYorkCounty> = {
+  name: "New York",
+  processes: [
+    newyorkNameChange,
+    newyorkPrimaryIdentification,
+    newyorkBirthRecord,
+    newyorkGenderMarker,
+    newyorkPostamble,
+  ],
+  localities: newyorkCounties,
+};
 
-export const oregon: Jurisdiction = {
+export const oregon: Jurisdiction<OregonCounty> = {
   name: "Oregon",
   processes: [
     oregonNameChange,
-    socialSecurity,
     oregonPrimaryIdentification,
     oregonBirthRecord,
     oregonGenderMarker,
-    passport,
     oregonPostamble,
   ],
-  counties: oregonCounties,
+  localities: oregonCounties,
 };
 
-/**export const alaska: Jurisdiction = {
+export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   name: "Alaska",
   processes: [
     alaskaNameChange,
-    socialSecurity,
     alaskaPrimaryIdentification,
     alaskaGenderMarker,
     alaskaBirthRecord,
-    passport,
     alaskaPostamble,
   ],
   counties: alaskaCounties,
-};*/
+};
 
-export const federal: Jurisdiction = {
+export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   processes: [socialSecurity, passport],
   isFederal: true,
 };
 
-export const allJurisdictions = [michigan, oregon];
+// FIXME is there a nicer way to do this?
+export const allJurisdictions = new Map<string, JurisdictionType>();
+allJurisdictions.set("Michigan", michigan);
+allJurisdictions.set("Oregon", oregon);
+allJurisdictions.set("Rhode Island", rhodeIsland);
+allJurisdictions.set("New York", newYork);
+allJurisdictions.set("Federal", federal);

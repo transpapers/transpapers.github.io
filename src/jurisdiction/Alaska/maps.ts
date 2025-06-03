@@ -18,10 +18,10 @@
  */
 
 import {
-    formatDate,
-    fullName,
-    isMinor,
-    representativeName,
+  formatDate,
+  fullName,
+  isMinor,
+  representativeName,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -402,13 +402,11 @@ export const feeWaiverAlaskaMap: Formfill[] = [
     field: "location",
   },
   {
-    text: (applicant) =>
-      fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)) ?? "",
     field: "plaintiff",
   },
   {
-    text: (applicant) =>
-      fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)) ?? "",
     field: "requestor",
   },
   {
@@ -442,8 +440,7 @@ export const additionalServiceAlaskaMap: Formfill[] = [
     select: "Choice2",
   },
   {
-    text: (applicant) =>
-      fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)) ?? "",
     field: "yourName",
   },
   {
@@ -476,15 +473,15 @@ export const primaryIDAlaskaMap: Formfill[] = [
     text: (applicant) => {
       switch (applicant.assignedSex) {
         case GenderMarker.M:
-            return "M";
+          return "M";
         case GenderMarker.F:
-            return "F";
+          return "F";
         default:
-            return "";
+          return "";
       }
     },
     field: "Text5",
-    },
+  },
   {
     text: (applicant) => applicant.email,
     field: "Text10",
@@ -509,7 +506,7 @@ export const primaryIDAlaskaMap: Formfill[] = [
     field: "Check Box41",
   },
   {
-    check: (applicant) => 
+    check: (applicant) =>
       !applicant.isChangingLegalName && !fullName(applicant.birthName),
     field: "Check Box42",
   },
@@ -517,13 +514,13 @@ export const primaryIDAlaskaMap: Formfill[] = [
     text: (applicant) => {
       switch (applicant.isChangingLegalName) {
         case applicant.isChangingLegalName === true:
-            return fullName(applicant.birthName) ?? ""
-              ? `${fullName(applicant.legalName)}, ${fullName(applicant.birthName)}`
-              : fullName(applicant.legalName) ?? "";
+          return fullName(applicant.birthName) ?? ""
+            ? `${fullName(applicant.legalName)}, ${fullName(applicant.birthName)}`
+            : fullName(applicant.legalName) ?? "";
         case applicant.isChangingLegalName === false:
-            return fullName(applicant.birthName) ?? "";
+          return fullName(applicant.birthName) ?? "";
         default:
-            return "";
+          return "";
       }
     },
     field: "Text43",
@@ -576,8 +573,7 @@ export const primaryIDSexDesignationAlaskaMap: Formfill[] = [
  */
 export const birthCertRequestAlaskaMap: Formfill[] = [
   {
-    text: (applicant) =>
-      fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)) ?? "",
     field: "Applicant Name",
   },
   {

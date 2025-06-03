@@ -41,9 +41,9 @@ import MichiganResourcesGuide from "../../components/guides/Michigan/Resources";
 import MichiganSecretaryOfStateGuide from "../../components/guides/Michigan/SecretaryOfState";
 
 import { type Process, Target } from "../../types/process";
+import { MichiganCounty } from "../../types/locality";
 
-export const michiganNameChange: Process = {
-  jurisdiction: "MI",
+export const michiganNameChange: Process<MichiganCounty> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
@@ -53,7 +53,7 @@ export const michiganNameChange: Process = {
       filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51cGuide,
       map: nameChangePrivateMap,
-      include: (applicant) => applicant.residentCounty !== "Kent"
+      include: (applicant) => applicant.residentLocality !== "Kent",
     },
     {
       name: "Petition for Name Change",
@@ -61,7 +61,7 @@ export const michiganNameChange: Process = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => applicant.residentCounty === "Kent"
+      include: (applicant) => applicant.residentLocality === "Kent",
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -71,13 +71,13 @@ export const michiganNameChange: Process = {
       map: piiMap,
     },
 
-      {
+    {
       name: "Order Following Hearing Regarding Petition For Name Change",
       id: "PC 52",
       filename: "Michigan/pc52.pdf",
       guide: MichiganPC52Guide,
       map: orderFollowingMap,
-      include: (applicant) => applicant.residentCounty === "Saginaw"
+      include: (applicant) => applicant.residentLocality === "Saginaw",
     },
     {
       name: "Fee Waiver Request",
@@ -97,8 +97,7 @@ export const michiganNameChange: Process = {
   ],
 };
 
-export const michiganGenderMarker: Process = {
-  jurisdiction: "MI",
+export const michiganGenderMarker: Process<MichiganCounty> = {
   target: Target.GenderMarker,
   documents: [
     {
@@ -109,8 +108,7 @@ export const michiganGenderMarker: Process = {
   ],
 };
 
-export const michiganPrimaryIdentification: Process = {
-  jurisdiction: "MI",
+export const michiganPrimaryIdentification: Process<MichiganCounty> = {
   target: Target.PrimaryIdentification,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
@@ -121,8 +119,7 @@ export const michiganPrimaryIdentification: Process = {
   ],
 };
 
-export const michiganBirthRecord: Process = {
-  jurisdiction: "MI",
+export const michiganBirthRecord: Process<MichiganCounty> = {
   target: Target.BirthRecord,
   depends: [Target.NameChange],
   documents: [
@@ -150,8 +147,7 @@ export const michiganBirthRecord: Process = {
   isBirth: true,
 };
 
-export const michiganPostamble: Process = {
-  jurisdiction: "MI",
+export const michiganPostamble: Process<MichiganCounty> = {
   depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {

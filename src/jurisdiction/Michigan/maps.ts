@@ -41,7 +41,7 @@ import { Formfill } from "../../types/formfill";
  */
 export const nameChangePrivateMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "County",
   },
   {
@@ -262,7 +262,7 @@ export const nameChangePrivateMap: Formfill[] = [
  */
 export const nameChangeMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "County",
   },
   {
@@ -482,7 +482,7 @@ export const piiMap: Formfill[] = [
  */
 export const orderFollowingMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "County",
   },
   {

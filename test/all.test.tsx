@@ -42,7 +42,7 @@ describe("shakeTree()", () => {
       "reasonForNameChange",
       "chosenName",
       "sealBirthCertificate",
-      "residentCounty",
+      "residentLocality",
       "age",
       "hasCriminalRecord",
     ];

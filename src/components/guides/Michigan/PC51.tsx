@@ -22,15 +22,15 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganPC51Guide({ person }: { person: Person }) {
-  const { age, residentCounty, parentsAreOkay, hasCriminalRecord } = person;
+  const { age, residentLocality, parentsAreOkay, hasCriminalRecord } = person;
 
   return (
     <section key="Michigan-PC51">
       <h3>Petition for Name Change (MI, PC51)</h3>
-      In {residentCounty} county the court will <strong>not</strong> hold 
+      In {residentLocality} county the court will <strong>not</strong> hold 
       hearings for name changes meaning the process will not be published 
       in a newspaper even when filing with the standard petition like this. 
-      You need to have lived in {residentCounty} county for at least one 
+      You need to have lived in {residentLocality} county for at least one 
       year to file this form. If necessary complete item 1 for any active 
       court cases.
       {hasCriminalRecord && hasCriminalRecord === true ? (

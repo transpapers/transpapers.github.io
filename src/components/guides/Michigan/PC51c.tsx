@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganPC51cGuide({ person }: { person: Person }) {
-  const { age, residentCounty, parentsAreOkay, hasCriminalRecord } = person;
+  const { age, residentLocality, parentsAreOkay, hasCriminalRecord } = person;
 
   return (
     <section key="Michigan-PC51c">
@@ -30,7 +30,7 @@ function MichiganPC51cGuide({ person }: { person: Person }) {
     <p>
       This form will keep the process confidential and make sure that even if
       there is a hearing it will be private with no publication of your
-      information. You do need to have lived in {residentCounty} county for at
+      information. You do need to have lived in {residentLocality} county for at
       least a year to file this form though.
     </p>
 

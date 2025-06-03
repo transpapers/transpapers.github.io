@@ -35,26 +35,28 @@ function NewYorkUCS_NC1Guide({ person }: { person: Person }) {
         you will need to review. Look through sections A, B, and C to see if the
         information we filled in is accurate for your circumstances. If
         it&apos;s not then type in the missing info or write with black ink if
-        it&apos;s already printed. 
-        </p>
+        it&apos;s already printed.
+      </p>
 
-        { doNotPublish && doNotPublish === true ? (
-          <p>
-            For #28 the court wants to know if making these court records 
-            available to the public will cause you harm. This can take the form of 
-            either discrimmination or a personal threat such as a known stalker. 
-            For discrimmination that can be either state or federal threats. Be 
-            sure to elaborate and potentially attach evidence, fill out #29 if 
-            you do attach anything. In any case the record will be sealed 
-            automatically until the judge makes a decision.
-          </p>
-        ):("")}
-
+      {doNotPublish && doNotPublish === true ? (
         <p>
-        You will need to sign with your current legal
-        name below item 30 on the last page but do <strong>not</strong>{" "}
-        additionally sign on the line that reads “Petitioner Signature in
-        Presence of Notary” until you meet with one.
+          For #28 the court wants to know if making these court records
+          available to the public will cause you harm. This can take the form of
+          either discrimmination or a personal threat such as a known stalker.
+          For discrimmination that can be either state or federal threats. Be
+          sure to elaborate and potentially attach evidence, fill out #29 if you
+          do attach anything. In any case the record will be sealed
+          automatically until the judge makes a decision.
+        </p>
+      ) : (
+        ""
+      )}
+
+      <p>
+        You will need to sign with your current legal name below item 30 on the
+        last page but do <strong>not</strong> additionally sign on the line that
+        reads “Petitioner Signature in Presence of Notary” until you meet with
+        one.
       </p>
     </section>
   );

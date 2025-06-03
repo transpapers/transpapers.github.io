@@ -38,7 +38,9 @@ function RhodeIslandFilingGuide(
 
       <p>
         A recent law was passed called{" "}
-        <a href="https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf">H8155</a>
+        <a href="https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf">
+          H8155
+        </a>
         . In section D (line 12) it states that there will be no publication
         required which means you shouldn&apos;t be charged for that. Some courts
         haven&apos;t yet updated their pricing to reflect that. If the amount
@@ -50,8 +52,8 @@ function RhodeIslandFilingGuide(
 
       <p>
         <strong>
-            By state law, court clerks are barred from answering questions about
-            the forms.
+          By state law, court clerks are barred from answering questions about
+          the forms.
         </strong>{" "}
         We recommend that you direct any questions you may have to the court’s
         legal assistance center, a local LGBT organization, or an attorney.
@@ -59,14 +61,14 @@ function RhodeIslandFilingGuide(
 
       {age && age < 18 ? (
         <>
-          {residentCounty && residentCounty === "East Providence" ? (
+          {residentLocality && residentLocality === "East Providence" ? (
             <p>
               The filing location is the East Providence Family court which is
               located at 1 Dorrance St, Providence, RI 02903.
             </p>
           ) : (
             <p>
-              The filing location is the {residentCounty} court at{" "}
+              The filing location is the {residentLocality} court at{" "}
               {court?.address}.
             </p>
           )}
@@ -83,7 +85,7 @@ function RhodeIslandFilingGuide(
             to either call to ask or cover their bases by bringing cash, check,
             and card.
           </p>
-            {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
+          {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
         </>
       ) : (
         <p>

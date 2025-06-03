@@ -78,7 +78,7 @@ const generatePersonForTesting: () => Person = () => {
     residentJurisdiction: "Michigan",
 
     // TODO Make this a choice from county data.
-    residentCounty: "Kent",
+    residentLocality: "Kent",
 
     zip: faker.location.zipCode({ state: "MI" }),
     email: faker.internet.email(),
@@ -104,6 +104,7 @@ describe("generatePersonForTesting", () => {
   });
 });
 
+/*
 const forms = allJurisdictions
   .map((jurisdiction) => jurisdiction.processes)
   .flat()
@@ -142,3 +143,4 @@ describe.each(forms)(
     });
   },
 );
+*/

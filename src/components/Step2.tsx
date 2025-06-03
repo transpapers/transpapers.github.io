@@ -23,7 +23,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store";
 
-import { getJurisdiction } from "../types/jurisdiction";
+import { allJurisdictions } from "../jurisdiction/all";
 import { type Person } from "../types/person";
 
 function Step2() {
@@ -31,7 +31,7 @@ function Step2() {
   const navigate = useNavigate();
 
   const updatePerson = useStore((state) => state.updatePerson);
-  const { residentJurisdiction, residentCounty } = useStore(
+  const { residentJurisdiction, residentLocality } = useStore(
     (state) => state.person,
   );
 
@@ -40,21 +40,23 @@ function Step2() {
     await navigate("/step3");
   };
 
-  const counties = getJurisdiction(residentJurisdiction)?.counties ?? {};
+  const localities =
+    allJurisdictions.get(residentJurisdiction || "")?.localities ?? {};
+
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
       <h2>What {residentJurisdiction} county do you live in?</h2>
       <ul className="wrap">
-        {Object.keys(counties).map((countyName) => (
-          <li key={countyName}>
+        {Object.keys(localities).map((localityName) => (
+          <li key={localityName}>
             <label>
               <input
-                {...register("residentCounty", { required: true })}
+                {...register("residentLocality", { required: true })}
                 type="radio"
-                value={countyName}
-                defaultChecked={countyName === residentCounty}
+                value={localityName}
+                defaultChecked={localityName === residentLocality}
               />
-              {countyName}
+              {localityName}
             </label>
           </li>
         ))}

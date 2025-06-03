@@ -26,7 +26,9 @@ import SocialSecurityGuide from "../../components/guides/Federal/SocialSecurity"
 
 import { type Process, Target } from "../../types/process";
 
-export const socialSecurity: Process = {
+import { Locality } from "../../types/locality";
+
+export const socialSecurity: Process<Locality> = {
   target: Target.SocialSecurity,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
@@ -40,7 +42,7 @@ export const socialSecurity: Process = {
   ],
 };
 
-export const passport: Process = {
+export const passport: Process<Locality> = {
   target: Target.Passport,
   documents: [
     {

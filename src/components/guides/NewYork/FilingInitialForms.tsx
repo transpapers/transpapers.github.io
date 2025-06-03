@@ -26,7 +26,7 @@ function NewYorkFilingGuide(
   { person }: { person: Person },
   // { NYcounty }: { NYcounty: NewYorkCounty },
 ) {
-  const { court, age, residentCounty } = person;
+  const { court, age, residentLocality } = person;
   // const { isNYC, borough } = NYcounty;
   const isNYC = true;
   const borough = "BOROUGH";
@@ -43,7 +43,7 @@ function NewYorkFilingGuide(
           </p>
           {/** Is there a way to list these courts by direct calling from
                counties.ts?*/}
-          {residentCounty && residentCounty == "Bronx" ? (
+          {residentLocality && residentLocality == "Bronx" ? (
             <span>
               <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
               {court?.phone}
@@ -55,7 +55,7 @@ function NewYorkFilingGuide(
             </span>
           )}
           <br />
-          {residentCounty && residentCounty == "Kings" ? (
+          {residentLocality && residentLocality == "Kings" ? (
             <span>
               <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
               {court?.phone}
@@ -67,7 +67,7 @@ function NewYorkFilingGuide(
             </span>
           )}
           <br />
-          {residentCounty && residentCounty == "New York" ? (
+          {residentLocality && residentLocality == "New York" ? (
             <span>
               <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
               {court?.phone}
@@ -79,7 +79,7 @@ function NewYorkFilingGuide(
             </span>
           )}
           <br />
-          {residentCounty && residentCounty == "Queens" ? (
+          {residentLocality && residentLocality == "Queens" ? (
             <span>
               <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
               {court?.phone}
@@ -91,7 +91,7 @@ function NewYorkFilingGuide(
             </span>
           )}
           <br />
-          {residentCounty && residentCounty == "Richmond" ? (
+          {residentLocality && residentLocality == "Richmond" ? (
             <span>
               <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
               {court?.phone}
@@ -111,7 +111,7 @@ function NewYorkFilingGuide(
       ) : (
         <>
           <p>
-            The filing location is the {residentCounty} county court at{" "}
+            The filing location is the {residentLocality} county court at{" "}
             {court?.address}.{age && age < 18 ? "A parent/guardian " : "You "}{" "}
             may want to call ahead to check accepted payment types, their phone
             number is {court?.phone}. Generally speaking though as long as you

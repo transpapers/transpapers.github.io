@@ -45,7 +45,7 @@ import { Formfill } from "../../types/formfill";
  */
 export const changeOfNameMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "Combo Box 4",
   },
   {

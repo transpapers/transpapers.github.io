@@ -38,9 +38,9 @@ import OregonMinorPetitionGuide from "../../components/guides/Oregon/MinorPetiti
 import OregonResourcesGuide from "../../components/guides/Oregon/Resources";
 
 import { type Process, Target } from "../../types/process";
+import { Locality } from "../../types/locality";
 
-export const oregonNameChange: Process = {
-  jurisdiction: "OR",
+export const oregonNameChange: Process<Locality> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
@@ -89,14 +89,12 @@ export const oregonNameChange: Process = {
  * Gender Marker forms or processes but without a
  * Gender Marker process the isChangingLegalSex variable
  * reads false.*/
-export const oregonGenderMarker: Process = {
-  jurisdiction: "OR",
+export const oregonGenderMarker: Process<Locality> = {
   target: Target.GenderMarker,
   documents: [],
 };
 
-export const oregonPrimaryIdentification: Process = {
-  jurisdiction: "OR",
+export const oregonPrimaryIdentification: Process<Locality> = {
   target: Target.PrimaryIdentification,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
@@ -107,8 +105,7 @@ export const oregonPrimaryIdentification: Process = {
   ],
 };
 
-export const oregonBirthRecord: Process = {
-  jurisdiction: "OR",
+export const oregonBirthRecord: Process<Locality> = {
   target: Target.BirthRecord,
   depends: [
     Target.NameChange,
@@ -134,8 +131,7 @@ export const oregonBirthRecord: Process = {
   isBirth: true,
 };
 
-export const oregonPostamble: Process = {
-  jurisdiction: "OR",
+export const oregonPostamble: Process<Locality> = {
   documents: [
     {
       name: "Everything Else",

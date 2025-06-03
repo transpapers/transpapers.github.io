@@ -17,9 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    isMinor,
-} from "../../lib/util";
+import { isMinor } from "../../lib/util";
 
 import {
   adultNameSexPetitionMap,
@@ -49,9 +47,9 @@ import NewYorkUCS_NC1Guide from "../../components/guides/NewYork/UCS-NC1";
 import NewYorkUCS_NC2Guide from "../../components/guides/NewYork/UCS-NC2";
 
 import { type Process, Target } from "../../types/process";
+import { NewYorkCounty } from "../../types/locality";
 
-export const newyorkNameChange: Process = { 
-  jurisdiction: "NY",
+export const newyorkNameChange: Process<NewYorkCounty> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
@@ -61,7 +59,7 @@ export const newyorkNameChange: Process = {
       filename: "NewYork/UCS-NC1 Adult.pdf",
       guide: NewYorkUCS_NC1Guide,
       map: adultNameSexPetitionMap,
-      include: (applicant) => isMinor(applicant) === false
+      include: (applicant) => isMinor(applicant) === false,
     },
     {
       name: "Name Change and/or Sex Designation Change Petition for Individual Minor",
@@ -69,7 +67,7 @@ export const newyorkNameChange: Process = {
       filename: "NewYork/UCS-NC2 Minor.pdf",
       guide: NewYorkUCS_NC2Guide,
       map: minorNameSexPetitionMap,
-      include: (applicant) => isMinor(applicant) === true
+      include: (applicant) => isMinor(applicant) === true,
     },
     {
       name: "Application to Waive Court Costs, Fees, and Expenses",
@@ -78,11 +76,13 @@ export const newyorkNameChange: Process = {
       guide: NYSFeeWaiverGuide,
       map: feeWaiverNYStateMap,
       include: (applicant) =>
-        !(applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        !(
+          applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"
+        ),
     },
     {
       name: "Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees",
@@ -90,12 +90,12 @@ export const newyorkNameChange: Process = {
       filename: "NewYork/NYC Fee Waiver.pdf",
       guide: NYCFeeWaiverGuide,
       map: feeWaiverNYCMap,
-      include: (applicant) => 
-        applicant.residentCounty === "Bronx" || 
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond"
+      include: (applicant) =>
+        applicant.residentLocality === "Bronx" ||
+        applicant.residentLocality === "Kings" ||
+        applicant.residentLocality === "New York" ||
+        applicant.residentLocality === "Queens" ||
+        applicant.residentLocality === "Richmond",
     },
     {
       name: "Notary",
@@ -108,8 +108,7 @@ export const newyorkNameChange: Process = {
   ],
 };
 
-export const newyorkGenderMarker: Process = {
-  jurisdiction: "NY",
+export const newyorkGenderMarker: Process<NewYorkCounty> = {
   target: Target.GenderMarker,
   depends: [Target.BirthRecord],
   documents: [
@@ -119,11 +118,14 @@ export const newyorkGenderMarker: Process = {
       filename: "NewYork/Gender Affidavit 17 and up NY State.pdf",
       map: genderAffidavitAdultNYStateMap,
       include: (applicant) =>
-        !isMinor(applicant) && !(applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        !isMinor(applicant) &&
+        !(
+          applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"
+        ),
     },
     {
       name: "Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under",
@@ -131,39 +133,43 @@ export const newyorkGenderMarker: Process = {
       filename: "NewYork/Gender Affidavit Under 17 NY State.pdf",
       map: genderAffidavitMinorNYStateMap,
       include: (applicant) =>
-        isMinor(applicant) && !(applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        isMinor(applicant) &&
+        !(
+          applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"
+        ),
     },
     {
       name: "Self-Attestation Form for Registrants 18 Years of Age and Older",
       filename: "NewYork/BC Self-attestation Adult NYC.pdf",
       map: selfAttestationAdultNYCMap,
       include: (applicant) =>
-        !isMinor(applicant) && (applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        !isMinor(applicant) &&
+        (applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"),
     },
     {
       name: "Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old",
       filename: "NewYork/BC Self-attestation Minor NYC.pdf",
       map: selfAttestationMinorNYCMap,
       include: (applicant) =>
-        isMinor(applicant) && (applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        isMinor(applicant) &&
+        (applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"),
     },
   ],
 };
 
-export const newyorkPrimaryIdentification: Process = {
-  jurisdiction: "NY",
+export const newyorkPrimaryIdentification: Process<NewYorkCounty> = {
   target: Target.PrimaryIdentification,
   depends: [Target.NameChange, Target.GenderMarker],
   documents: [
@@ -183,8 +189,7 @@ export const newyorkPrimaryIdentification: Process = {
   ],
 };
 
-export const newyorkBirthRecord: Process = {
-  jurisdiction: "NY",
+export const newyorkBirthRecord: Process<NewYorkCounty> = {
   target: Target.BirthRecord,
   depends: [Target.NameChange],
   documents: [
@@ -198,11 +203,14 @@ export const newyorkBirthRecord: Process = {
       filename: "NewYork/BC Update 17 and up NY State.pdf",
       map: birthCertAdultNYStateMap,
       include: (applicant) =>
-        !isMinor(applicant) && !(applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        !isMinor(applicant) &&
+        !(
+          applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"
+        ),
     },
     {
       name: "Parent/Legal Guardian Application for Amendment of Certificate of Birth for Gender Designation for a Minor",
@@ -210,11 +218,14 @@ export const newyorkBirthRecord: Process = {
       filename: "NewYork/BC Update 17 and up NY State.pdf",
       map: birthCertMinorNYStateMap,
       include: (applicant) =>
-        isMinor(applicant) && !(applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond")
+        isMinor(applicant) &&
+        !(
+          applicant.residentLocality === "Bronx" ||
+          applicant.residentLocality === "Kings" ||
+          applicant.residentLocality === "New York" ||
+          applicant.residentLocality === "Queens" ||
+          applicant.residentLocality === "Richmond"
+        ),
     },
     {
       name: "Application for the Correction of a NYC Birth Certificate",
@@ -222,18 +233,17 @@ export const newyorkBirthRecord: Process = {
       filename: "NewYork/BC Update NYC.pdf",
       map: birthCertNYCMap,
       include: (applicant) =>
-        applicant.residentCounty === "Bronx" ||
-        applicant.residentCounty === "Kings" ||
-        applicant.residentCounty === "New York" ||
-        applicant.residentCounty === "Queens" ||
-        applicant.residentCounty === "Richmond"
+        applicant.residentLocality === "Bronx" ||
+        applicant.residentLocality === "Kings" ||
+        applicant.residentLocality === "New York" ||
+        applicant.residentLocality === "Queens" ||
+        applicant.residentLocality === "Richmond",
     },
   ],
   isBirth: true,
 };
 
-export const newyorkPostamble: Process = {
-  jurisdiction: "NY",
+export const newyorkPostamble: Process<NewYorkCounty> = {
   target: Target.BirthRecord,
   depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
@@ -245,6 +255,6 @@ export const newyorkPostamble: Process = {
       name: "Resources",
       guide: NewYorkResourcesGuide,
     },
-    ],
+  ],
   isJustGuide: true,
 };

@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
-  const { age, residentCounty, parentsAreOkay } = person;
+  const { age, residentLocality, parentsAreOkay } = person;
   return (
     <section key="NewYork-UCS-NC2">
       <h3>Name and/or Sex Change Petition (NY, UCS-NC2)</h3>
@@ -34,7 +34,7 @@ function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
         need to look through sections A, B, and C to see if the information we
         filled in is accurate for your circumstances. If it&apos;s not the
         missing info needs to be typed or written with black ink. You need to
-        live in {residentCounty} county and have lived in New York State for at
+        live in {residentLocality} county and have lived in New York State for at
         least 6 months before a parent/guardian can file this on your behalf.
       </p>
 

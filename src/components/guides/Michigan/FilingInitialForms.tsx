@@ -29,9 +29,9 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
       <h3>Filing Initial Forms (MI)</h3>
       <p>
         Your filing location is the {residentCounty} county court at{" "}
-        {court?.address}. 
-        {age && age < 18 ? " A parent/guardian " : " You "} may file by mail or 
-        in person; in either case, include the Petition, the Addendum (m97a),
+        {court?.address}.{age && age < 18 ? " A parent/guardian " : " You "} may
+        file by mail or in person; in either case, include the Petition, the
+        Addendum (m97a),
         {residentCounty && residentCounty == "Saginaw"
           ? " the Order Following (pc52), "
           : " "}
@@ -39,8 +39,8 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         waiver is granted payment still needs to be provided for at least one
         certified copy. To ask for one when filing by mail either write
         &ldquo;Certified copy fee&rdquo; in a checks memo line or include a
-        letter stating thats what the extra money is for. No matter what the 
-        filing method we recommend calling the court at {court?.phone} or 
+        letter stating thats what the extra money is for. No matter what the
+        filing method we recommend calling the court at {court?.phone} or
         visiting their website:{" "}
         <a href="{court?.website}" title="website">
           {court?.website}
@@ -81,14 +81,16 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         skip it.
       </p>
 
-        {residentCounty && residentCounty !== "Kent" ? (
-          <p>
-            If you want an update on your case{" "}
-            {age && age < 18 ? " your petitioner has " : " you have to "} to go to
-            court and show an ID, they will not confirm anything on the phone to
-            protect privacy.
-          </p>
-        ) : ("")}
+      {residentCounty && residentCounty !== "Kent" ? (
+        <p>
+          If you want an update on your case{" "}
+          {age && age < 18 ? " your petitioner has " : " you have to "} to go to
+          court and show an ID, they will not confirm anything on the phone to
+          protect privacy.
+        </p>
+      ) : (
+        ""
+      )}
     </section>
   );
 }

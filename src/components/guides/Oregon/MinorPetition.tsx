@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonMinorPetitionGuide({ person }: { person: Person }) {
-  const { residentCounty, isChangingLegalSex, isChangingLegalName } = person;
+  const { residentLocality, isChangingLegalSex, isChangingLegalName } = person;
   return (
     <section key="Oregon-Minor-Petition">
       <h3>Name and/or Sex Change Petition (OR)</h3>
@@ -41,8 +41,8 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
         ) : (
           <>
             In order to file this your petitioner needs to be a resident of{" "}
-            {residentCounty} county, which just means you need an ID or some
-            mail with their name and an address within {residentCounty} county
+            {residentLocality} county, which just means you need an ID or some
+            mail with their name and an address within {residentLocality} county
             on it.
           </>
         )}

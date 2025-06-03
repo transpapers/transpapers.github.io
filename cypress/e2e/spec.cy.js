@@ -31,7 +31,7 @@ const someone = {
   streetAddress: "3790 Fulton Street",
   city: "Detroit",
   residentJurisdiction: "Michigan",
-  residentCounty: "Allegan",
+  residentLocality: "Allegan",
   zip: "32118",
   email: "atouret0@biblegateway.com",
   representativeName: {
@@ -61,10 +61,10 @@ describe("template spec", () => {
     cy.document().find('input[type="submit"]').click();
 
     // STEP 2: County.
-    const { residentCounty } = someone;
+    const { residentLocality } = someone;
 
     cy.document()
-      .find(`input[name="residentCounty"][value="${residentCounty}"]`)
+      .find(`input[name="residentLocality"][value="${residentLocality}"]`)
       .click();
 
     cy.document().find('input[type="submit"]').click();

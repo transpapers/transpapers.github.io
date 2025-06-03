@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
-  const { court, age, residentCounty, isChangingLegalSex } = person;
+  const { court, age, residentLocality, isChangingLegalSex } = person;
 
   return (
     <section key="OR-InitialForms">
@@ -53,12 +53,12 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
         </p>
       ) : (
         <p>
-          {residentCounty && residentCounty === "Umatilla"
+          {residentLocality && residentLocality === "Umatilla"
             ? " Umatilla county has two valid circuit court locations to file at " +
               court?.address +
               ". Pick whichever is most convenient. "
             : " The filing location is the " +
-              residentCounty +
+              residentLocality +
               " circuit court at " +
               court?.address +
               ". "}
