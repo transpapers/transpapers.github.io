@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganBirthCertificateGuide({ person }: { person: Person }) {
-  const { age } = person;
+  const { age, isChangingLegalSex } = person;
 
   return (
     <section key="Michigan-BirthCertificate">
@@ -33,8 +33,13 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         <strong>
           Application to Correct or Change a Michigan Birth Record
         </strong>{" "}
-        (form DCH-0847-CHGBX) and the{" "}
-        <strong>State of Michigan Sex Designation Form.</strong>
+        (form DCH-0847-CHGBX)
+        { isChangingLegalSex && isChangingLegalSex === true ? (
+          <>
+            and the{" "}
+            <strong>State of Michigan Sex Designation Form</strong>.
+          </>
+        ):(".")}
       </p>
 
       <p>
@@ -51,8 +56,8 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         {age && age < 15
           ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
           : age && age < 18
-            ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line using your new name. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
-            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively using your new name."}{" "}
+            ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
+            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively."}{" "}
       </p>
 
       {age && age < 18 ? (

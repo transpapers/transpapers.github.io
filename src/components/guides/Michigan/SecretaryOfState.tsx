@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganSecretaryOfStateGuide({ person }: { person: Person }) {
-    const { age } = person;
+    const { age, isChangingLegalSex, isChangingLegalName } = person;
 
     return (
     <section key="Michigan-SecretaryOfState">
@@ -41,32 +41,44 @@ function MichiganSecretaryOfStateGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        If you already have a driver’s license or state ID bring it to the appointment
-        as well as the <strong>Michigan Secretary of State Sex Designation</strong> form.
-        For that form, if you have a drivers license, write the license number in 
-        section A. If not, bring the forms of identification you used for Social 
-        Security. Arrive a few minutes early and check in at the kiosk.
+        If you already have a driver’s license or state ID bring it to the appointment.
+        { isChangingLegalSex && isChangingLegalSex === true ? (
+          <>
+            Also bring the <strong>Michigan Secretary of State Sex Designation</strong> form.
+            For that form, if you have a drivers license, write the license number in 
+            section A.
+          </>
+        ):("")}
+        Arrive a few minutes early and check in at the kiosk.
       </p>
 
       <p>
-        If you do not already have a driver’s license or state ID, tell the
-        clerk that you are applying for one; the appointment should proceed
-        normally. Make sure the gender marker is set correctly.
+        If you do not already have a driver’s license or state ID, tell the clerk that 
+        you are applying for one and bring the forms of identification you used for 
+        Social Security. The appointment should proceed normally but make sure the 
+        gender marker is set correctly before you leave.
       </p>
 
       <p>
         If you do have primary identification, tell the clerk that you are
-        updating the name and/or gender marker on it. They will ask for
-        identification, your court-ordered name change, and the Sex Designation
-        Form. Sign and date it in front of them with your new legal name.
+        updating the name and/or gender marker on it. They will ask for the
+        { isChangingLegalName && isChangingLegalName === true ? 
+          (" court-ordered name change, "):("")}
+        { isChangingLegalSex && isChangingLegalSex === true ? 
+          (" the Sex Designation Form, "):("")}
+        and ID. Sign and date it in front of them
+        { isChangingLegalName && isChangingLegalName === true ? 
+          (" with your new legal name. "):(". ")}
         If at any point you experience issues or pushback politely inisist
         on speaking to a supervisor for assistence.
       </p>
 
       <p>
         Optionally, you may also update your vehicle registration(s). You
-        will be given another form, which you should sign and initial in your
-        new legal name. You will be charged a fee for each vehicle.
+        will be given another form, which you should sign and initial
+        { isChangingLegalName && isChangingLegalName === true ? 
+          (" in your new legal name. "):(". ")}
+        You will be charged a fee for each vehicle.
       </p>
     </section>
   );
