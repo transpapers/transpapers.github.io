@@ -20,13 +20,31 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
+import { RhodeIslandCityOrTown } from "../../../types/locality";
 
-function RhodeIslandBCIGuide({ person }: { person: Person }) {
+function RhodeIslandBCIGuide({
+  person,
+  locality,
+}: {
+  person: Person;
+  locality: RhodeIslandCityOrTown;
+}) {
   const { age } = person;
+  const { courtDoesBackgroundCheck } = locality;
 
   return (
     <section key="RhodeIsland-BCI">
       <h3>Background Check Authorization Form (RI)</h3>
+
+      {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true ? (
+        <p>
+          Our records show that the {court?.city} court either does the
+          background check report for you when you file or gives its own unique
+          instructions for one upon filing. You can ignore this section and 
+          that form for the time being. We have included this form and it's 
+          instructions just in case we are wrong.
+        </p>
+      ) : ("")}
 
       {age && age < 18 ? (
         <p>

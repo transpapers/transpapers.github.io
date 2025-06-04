@@ -20,15 +20,17 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
-// import { type RhodeIslandCityOrTown } from "../../../types/locality";
+import { RhodeIslandCityOrTown } from "../../../types/locality";
 
-function RhodeIslandNotaryGuide(
-  { person }: { person: Person },
-  // { RIcityortown }: { RIcityortown: RhodeIslandCityOrTown },
-) {
+function RhodeIslandNotaryGuide({
+  person,
+  locality,
+}: {
+  person: Person;
+  locality: RhodeIslandCityOrTown;
+}) {
   const { court, age, birthJurisdiction } = person;
-  const courtDoesBackgroundCheck = true;
-  // const { courtDoesBackgroundCheck } = RIcityortown;
+  const { courtDoesBackgroundCheck } = locality;
 
   return (
     <section key="RhodeIsland-Notary">

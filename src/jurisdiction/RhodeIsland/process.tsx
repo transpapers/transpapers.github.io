@@ -21,23 +21,21 @@ import {
   changeOfNameMap,
   bciMap,
   birthCertOneMap,
-  /*
   primaryIDRhodeIslandMap,
   genderIDMap,
   birthCertTwoMap,
-  */
 } from "./maps";
 
 import RhodeIslandBCIGuide from "../../components/guides/RhodeIsland/BCI";
 import RhodeIslandBirthCertRequestGuide from "../../components/guides/RhodeIsland/BirthCertRequest";
-// import RhodeIslandBirthCertUpdateGuide from "../../components/guides/RhodeIsland/BirthCertUpdate";
+import RhodeIslandBirthCertUpdateGuide from "../../components/guides/RhodeIsland/BirthCertUpdate";
 import RhodeIslandCourtHearingGuide from "../../components/guides/RhodeIsland/CourtHearing";
-// import RhodeIslandDMVGuide from "../../components/guides/RhodeIsland/DMV";
-// import RhodeIslandEverythingElseGuide from "../../components/guides/RhodeIsland/EverythingElse";
+import RhodeIslandDMVGuide from "../../components/guides/RhodeIsland/DMV";
+import RhodeIslandEverythingElseGuide from "../../components/guides/RhodeIsland/EverythingElse";
 import RhodeIslandFilingGuide from "../../components/guides/RhodeIsland/FilingInitialForms";
 import RhodeIslandNotaryGuide from "../../components/guides/RhodeIsland/Notary";
 import RhodeIslandPC8_1Guide from "../../components/guides/RhodeIsland/PC8-1";
-// import RhodeIslandResourcesGuide from "../../components/guides/RhodeIsland/Resources";
+import RhodeIslandResourcesGuide from "../../components/guides/RhodeIsland/Resources";
 
 import { type RhodeIslandCityOrTown } from "../../types/locality";
 import { type Process, Target } from "../../types/process";
@@ -82,4 +80,65 @@ export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
       guide: RhodeIslandCourtHearingGuide,
     },
   ],
+};
+
+export const rhodeislandGenderMarker: Process<RhodeIslandCityOrTown> = {
+  target: Target.GenderMarker,
+  depends: [Target.PrimaryIdentification],
+  documents: [
+    {
+      name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
+      filename: "RhodeIsland/DMV Gender Designation.pdf",
+      map: genderIDMap,
+    },
+  ],
+};
+
+export const rhodeislandPrimaryIdentification: Process<RhodeIslandCityOrTown> = {
+  target: Target.PrimaryIdentification,
+  depends: [Target.NameChange, Target.GenderMarker],
+  documents: [
+    {
+      name: "State of Rhode Island Application for License, Identification Card and Permit Form",
+      id: "LI-1",
+      filename: "RhodeIsland/DMV LI-1.pdf",
+      guide: RhodeIslandDMVGuide,
+      map: primaryIDRhodeIslandMap,
+    },
+  ],
+};
+
+export const rhodeislandBirthRecord: Process<RhodeIslandCityOrTown> = {
+  target: Target.BirthRecord,
+  depends: [
+    Target.NameChange,
+    Target.PrimaryIdentification,
+    Target.SocialSecurity,
+  ],
+  documents: [
+    {
+      name: "Birth Certificate",
+      guide: RhodeIslandBirthCertUpdateGuide,
+    },
+    {
+      name: "State of Rhode Island Application for a Certified Copy of a Birth Record Form",
+      filename: "RhodeIsland/Birth Cert Request.pdf",
+      map: birthCertTwoMap,
+    },
+  ],
+  isBirth: true,
+};
+
+export const rhodeislandPostamble: Process<RhodeIslandCityOrTown> = {
+  documents: [
+    {
+      name: "Everything Else",
+      guide: RhodeIslandEverythingElseGuide,
+    },
+    {
+      name: "Resources",
+      guide: RhodeIslandResourcesGuide,
+    },
+  ],
+   isJustGuide: true,
 };
