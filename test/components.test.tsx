@@ -53,6 +53,21 @@ import OregonFilingInitialFormsGuide from "../src/components/guides/Oregon/Filin
 import OregonMinorPetitionGuide from "../src/components/guides/Oregon/MinorPetition";
 import OregonResourcesGuide from "../src/components/guides/Oregon/Resources";
 
+import AlaskaAdultPetitionGuide from "../src/components/guides/Alaska/AdultPetition";
+import AlaskaBirthCertificateGuide from "../src/components/guides/Alaska/BirthCertificate";
+import AlaskaCIV695Guide from "../src/components/guides/Alaska/CIV695";
+import AlaskaCIV708Guide from "../src/components/guides/Alaska/CIV708";
+import AlaskaCIV709Guide from "../src/components/guides/Alaska/CIV709";
+import AlaskaCourtHearingGuide from "../src/components/guides/Alaska/CourtHearing";
+import AlaskaDMVGuide from "../src/components/guides/Alaska/DMV";
+import AlaskaEverythingElseGuide from "../src/components/guides/Alaska/EverythingElse";
+import AlaskaFeeWaiverGuide from "../src/components/guides/Alaska/FeeWaiver";
+import AlaskaFilingInitialFormsGuide from "../src/components/guides/Alaska/FilingInitialForms";
+import AlaskaMinorPetitionGuide from "../src/components/guides/Alaska/MinorPetition";
+import AlaskaResourcesGuide from "../src/components/guides/Alaska/Resources";
+import AlaskaVS405Guide from "../src/components/guides/Alaska/VS405";
+import { alaska } from "../src/jurisdiction/all";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -140,6 +155,62 @@ const oregonGuideComponents = [
   { name: "OregonResourcesGuide", component: <OregonResourcesGuide /> },
 ];
 
+const alaskaGuideComponents = [
+  {
+    name: "AlaskaAdultPetitionGuide",
+    component: <AlaskaAdultPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "AlaskaMinorPetitionGuide",
+    component: <AlaskaMinorPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "AlaskaCIV695Guide",
+    component: <AlaskaCIV695Guide />,
+  },
+  {
+    name: "AlaskaVS405Guide",
+    component: <AlaskaVS405Guide />,
+  },
+  {
+    name: "AlaskaCIV708Guide",
+    component: <AlaskaCIV708Guide />,
+  },
+  {
+    name: "AlaskaCIV709Guide",
+    component: <AlaskaCIV709Guide />,
+  },
+  {
+    name: "AlaskaFeeWaiverGuide",
+    component: <AlaskaFeeWaiverGuide person={sampleData} />,
+  },
+  {
+    name: "AlaskaFilingInitialFormsGuide",
+    component: (
+      <AlaskaFilingInitialFormsGuide
+        person={sampleData}
+        locality={alaska.localities!["Seward"]}
+      />
+    ),
+  },
+  {
+    name: "AlaskaCourtHearingGuide",
+    component: <AlaskaCourtHearingGuide person={sampleData} />,
+  },
+  {
+    name: "AlaskaBirthCertificateGuide",
+    component: <AlaskaBirthCertificateGuide person={sampleData} />,
+  },
+  {
+    name: "AlaskaEverythingElseGuide",
+    component: <AlaskaEverythingElseGuide />,
+  },
+  {
+    name: "AlaskaResourcesGuide",
+    component: <AlaskaResourcesGuide />,
+  },
+];
+
 const federalGuideComponents = [
   { name: "DS5504Guide", component: <DS5504Guide person={sampleData} /> },
   { name: "DS82Guide", component: <DS82Guide /> },
@@ -154,6 +225,7 @@ const allComponents = [
   ...formComponents,
   ...michiganGuideComponents,
   ...oregonGuideComponents,
+  ...alaskaGuideComponents,
   ...federalGuideComponents,
 ];
 

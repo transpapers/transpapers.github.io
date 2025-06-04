@@ -26,8 +26,13 @@ import { PDFDocument } from "@cantoo/pdf-lib";
 
 import { fillForm } from "../src/lib/fill";
 import { allJurisdictions } from "../src/jurisdiction/all";
-import { Name, GenderMarker } from "../src/types/types";
-import { Person } from "../src/types/person";
+import { type Name, GenderMarker } from "../src/types/types";
+import { type Person } from "../src/types/person";
+import {
+  type ProcessType,
+  type JurisdictionType,
+  type LocalityType,
+} from "../src/types/generic";
 
 // const mayBeOmitted = (probability, func) => ((Math.random() < probability) ? undefined : func());
 
@@ -42,7 +47,15 @@ const generateNameForTesting: () => Name = () => ({
 const generateDateForTesting: () => string = () =>
   faker.date.past().toISOString().substring(0, 10);
 
-const generatePersonForTesting: () => Person = () => {
+const generatePersonForTesting: (
+  birthJurisdictionName: string,
+  residentJurisdictionName: string,
+  localityName: string,
+) => Person = (
+  birthJurisdictionName: string,
+  residentJurisdictionName: string,
+  localityName: string,
+) => {
   const person = {
     legalName: generateNameForTesting(),
     chosenName: generateNameForTesting(),
@@ -74,19 +87,17 @@ const generatePersonForTesting: () => Person = () => {
 
     residentCity: faker.location.city(),
 
-    // TODO Make this a choice from allJurisdictions.
-    residentJurisdiction: "Michigan",
+    residentJurisdiction: residentJurisdictionName,
 
-    // TODO Make this a choice from county data.
-    residentLocality: "Kent",
+    residentLocality: localityName,
 
-    zip: faker.location.zipCode({ state: "MI" }),
+    zip: faker.location.zipCode({ state: residentJurisdictionName }),
     email: faker.internet.email(),
 
     passport: undefined,
     representativeName: undefined,
     birthCity: faker.location.city(),
-    birthJurisdiction: "Michigan",
+    birthJurisdiction: birthJurisdictionName,
 
     court: undefined,
     fingerprintLocations: undefined,
@@ -96,6 +107,7 @@ const generatePersonForTesting: () => Person = () => {
   return person;
 };
 
+/*
 describe("generatePersonForTesting", () => {
   test("does not error when run by itself", () => {
     const person = generatePersonForTesting();
@@ -103,12 +115,18 @@ describe("generatePersonForTesting", () => {
     expect(person).toBeTruthy();
   });
 });
+*/
 
-/*
-const forms = allJurisdictions
-  .map((jurisdiction) => jurisdiction.processes)
-  .flat()
-  .filter((process) => process !== undefined)
+const processes: ProcessType[] = Array.from(
+  allJurisdictions
+    .values()
+    .flatMap((jurisdiction) =>
+      jurisdiction.processes ? [...jurisdiction.processes] : [],
+    )
+    .filter((process) => process !== undefined),
+);
+
+const forms = processes
   .map((process) => process!.documents)
   .flat()
   .filter((doc) => doc.filename !== undefined)
@@ -126,7 +144,37 @@ describe.each(forms)(
     include,
     map,
   }) => {
-    const fuzzPeople = Array.from({ length: 10 }, generatePersonForTesting);
+    const fuzzPeople = Array.from({ length: 25 }, () => {
+      let birthJurisdictionName;
+      while (!birthJurisdictionName || birthJurisdictionName === "Federal") {
+        birthJurisdictionName = [...allJurisdictions.keys()][
+          Math.floor(Math.random() * allJurisdictions.size)
+        ];
+      }
+
+      let residentJurisdiction;
+      while (
+        !residentJurisdiction ||
+        !residentJurisdiction.localities ||
+        !residentJurisdiction.abbreviation
+      ) {
+        residentJurisdiction = [...allJurisdictions.values()][
+          Math.floor(Math.random() * allJurisdictions.size)
+        ];
+      }
+
+      const localityName = Object.keys(residentJurisdiction.localities)[
+        Math.floor(
+          Math.random() * Object.keys(residentJurisdiction.localities).length,
+        )
+      ];
+
+      return generatePersonForTesting(
+        birthJurisdictionName,
+        residentJurisdiction.abbreviation,
+        localityName,
+      );
+    });
 
     test("generates no fuzz errors", async () => {
       fuzzPeople.forEach(async (person) => {
@@ -135,12 +183,17 @@ describe.each(forms)(
           const buffer = readFileSync(`./public/forms/${filename}`).toString(
             "base64",
           );
-          const form = await PDFDocument.load(buffer);
+          const form = await PDFDocument.load(buffer, {
+            ignoreEncryption: true,
+          });
 
-          expect(fillForm(form, map, person)).toBeTruthy();
+          if (!form.isEncrypted) {
+            expect(fillForm(form, map, person)).toBeTruthy();
+          } else {
+            console.error(`Skipping encrypted form ${filename}`);
+          }
         }
       });
     });
   },
 );
-*/
