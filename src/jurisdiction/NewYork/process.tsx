@@ -176,14 +176,14 @@ export const newyorkPrimaryIdentification: Process<NewYorkCounty> = {
     {
       name: "Application for Permit, Driver License or Non-Driver ID Card",
       id: "MV 44",
-      filename: "NewYork/Primary ID MV44.pdf",
+      filename: "NewYork/Primary ID MV44 Decrypted.pdf",
       guide: NewYorkDMVGuide,
       map: primaryIDNewYorkMap,
     },
     {
       name: "Vehicle Registration/Title of Application",
       id: "MV 82",
-      filename: "NewYork/Primary ID Vehicle Title MV82.pdf",
+      filename: "NewYork/Primary ID Vehicle Title MV82 Decrypted.pdf",
       map: vehicleRegistrationMap,
     },
   ],
