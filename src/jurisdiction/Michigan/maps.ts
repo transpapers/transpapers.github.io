@@ -319,8 +319,8 @@ export const nameChangeMap: Formfill[] = [
     field: "7 The name change is not sought for any fraudulent intent",
   },
   {
-    check: (applicant) => 
-        applicant.hasCriminalRecord ? !isMinor(applicant) : false,
+    check: (applicant) =>
+      applicant.hasCriminalRecord ? !isMinor(applicant) : false,
     field: "has",
   },
   {
@@ -456,7 +456,8 @@ export const piiMap: Formfill[] = [
     field: "In the matter of",
   },
   {
-    text: (applicant) => applicant.residentCounty === "Kent" ? "PC 51" : "PC 51c",
+    text: (applicant) =>
+      applicant.residentLocality === "Kent" ? "PC 51" : "PC 51c",
     field: "Name of formdocument that this MC 97a is being filed with 1",
   },
   {
@@ -584,24 +585,24 @@ export const mdosSexMap: Formfill[] = [
  */
 export const birthCertMap: Formfill[] = [
   {
-    text: (applicant) => 
-      applicant.isChangingLegalName && !isMinor(applicant) 
-      ? applicant.chosenName?.first ?? "" 
-      : representativeName(applicant).first ?? "",
+    text: (applicant) =>
+      applicant.isChangingLegalName && !isMinor(applicant)
+        ? applicant.chosenName?.first ?? ""
+        : representativeName(applicant).first ?? "",
     loc: { x: 48, y: 196 },
   },
   {
-    text: (applicant) => 
-      applicant.isChangingLegalName && !isMinor(applicant) 
-      ? applicant.chosenName?.middle ?? "" 
-      : representativeName(applicant).middle ?? "",
+    text: (applicant) =>
+      applicant.isChangingLegalName && !isMinor(applicant)
+        ? applicant.chosenName?.middle ?? ""
+        : representativeName(applicant).middle ?? "",
     loc: { x: 337, y: 196 },
   },
   {
-    text: (applicant) => 
-      applicant.isChangingLegalName && !isMinor(applicant) 
-      ? applicant.chosenName?.last ?? "" 
-      : representativeName(applicant).last ?? "",
+    text: (applicant) =>
+      applicant.isChangingLegalName && !isMinor(applicant)
+        ? applicant.chosenName?.last ?? ""
+        : representativeName(applicant).last ?? "",
     loc: { x: 588, y: 196 },
   },
   { text: (applicant) => applicant.streetAddress, loc: { x: 48, y: 237 } },
@@ -659,65 +660,77 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 48, y: 710 },
   },
   {
-    text: (applicant) => 
+    text: (applicant) =>
       formatDate(applicant.mothersBirthdate, {
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 554, y: 710 }
+    loc: { x: 554, y: 710 },
   },
   {
     text: (applicant) => fullName(applicant.fathersBirthName),
     loc: { x: 48, y: 754 },
   },
   {
-    text: (applicant) => 
+    text: (applicant) =>
       formatDate(applicant.fathersBirthdate, {
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
       }),
-    loc: { x: 554, y: 754 }
+    loc: { x: 554, y: 754 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName &&
-      fullName(applicant.birthName)
+    text: (applicant) =>
+      applicant.isChangingLegalName && fullName(applicant.birthName)
         ? fullName(applicant.birthName) ?? ""
         : fullName(applicant.legalName) ?? "",
     loc: { x: 56, y: 800 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName ?
-     fullName(applicant.chosenName) ?? "" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalName ? fullName(applicant.chosenName) ?? "" : "",
     loc: { x: 433, y: 800 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex &&
-      applicant.assignedSex === GenderMarker.M ? "Sex: M" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.M
+        ? "Sex: M"
+        : "",
     loc: { x: 56, y: 834 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex &&
-      applicant.assignedSex === GenderMarker.F ? "Sex: F" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.F
+        ? "Sex: F"
+        : "",
     loc: { x: 56, y: 834 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex &&
-      applicant.assignedSex === GenderMarker.X ? "Sex: X" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.X
+        ? "Sex: X"
+        : "",
     loc: { x: 56, y: 834 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex &&
-      applicant.gender === GenderMarker.M ? "Sex: M" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.gender === GenderMarker.M
+        ? "Sex: M"
+        : "",
     loc: { x: 433, y: 834 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex &&
-      applicant.gender === GenderMarker.F ? "Sex: F" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.gender === GenderMarker.F
+        ? "Sex: F"
+        : "",
     loc: { x: 433, y: 834 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex &&
-      applicant.gender === GenderMarker.X ? "Sex: X" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex && applicant.gender === GenderMarker.X
+        ? "Sex: X"
+        : "",
     loc: { x: 433, y: 834 },
   },
   { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },

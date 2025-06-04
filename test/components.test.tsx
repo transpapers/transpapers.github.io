@@ -100,44 +100,44 @@ const michiganGuideComponents = [
   { name: "MichiganResourcesGuide", component: <MichiganResourcesGuide /> },
   {
     name: "MichiganSecretaryOfStateGuide",
-    component: <MichiganSecretaryOfStateGuide />,
+    component: <MichiganSecretaryOfStateGuide person={sampleData} />,
   },
 ];
 
 const oregonGuideComponents = [
-    {
-        name: "OregonAdultPetitionGuide",
-        component: <OregonAdultPetitionGuide person={sampleData} />,
-    },
-    {
-        name: "OregonBirthCertificateGuide",
-        component: <OregonBirthCertUpdateGuide person={sampleData} />,
-    },
-    {
-        name: "OregonCourtHearingGuide",
-        component: <OregonCourtHearingGuide person={sampleData} />,
-    },
-    {
-        name: "OregonDMVGuide",
-        component: <OregonDMVGuide person={sampleData} />,
-    },
-    {
-        name: "OregonEverythingElseGuide",
-        component: <OregonEverythingElseGuide />,
-    },
-    {
-        name: "OregonFeeWaiverGuide",
-        component: <OregonFeeWaiverGuide person={sampleData} />,
-    },
-    {
-        name: "OregonFilingInitialFormsGuide",
-        component: <OregonFilingInitialFormsGuide person={sampleData} />,
-    },
-    {
-        name: "OregonMinorPetitionGuide",
-        component: <OregonMinorPetitionGuide person={sampleData} />,
-    },
-    { name: "OregonResourcesGuide", component: <OregonResourcesGuide /> },
+  {
+    name: "OregonAdultPetitionGuide",
+    component: <OregonAdultPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "OregonBirthCertificateGuide",
+    component: <OregonBirthCertUpdateGuide person={sampleData} />,
+  },
+  {
+    name: "OregonCourtHearingGuide",
+    component: <OregonCourtHearingGuide person={sampleData} />,
+  },
+  {
+    name: "OregonDMVGuide",
+    component: <OregonDMVGuide person={sampleData} />,
+  },
+  {
+    name: "OregonEverythingElseGuide",
+    component: <OregonEverythingElseGuide />,
+  },
+  {
+    name: "OregonFeeWaiverGuide",
+    component: <OregonFeeWaiverGuide person={sampleData} />,
+  },
+  {
+    name: "OregonFilingInitialFormsGuide",
+    component: <OregonFilingInitialFormsGuide person={sampleData} />,
+  },
+  {
+    name: "OregonMinorPetitionGuide",
+    component: <OregonMinorPetitionGuide person={sampleData} />,
+  },
+  { name: "OregonResourcesGuide", component: <OregonResourcesGuide /> },
 ];
 
 const federalGuideComponents = [

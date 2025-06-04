@@ -130,7 +130,7 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
     alaskaBirthRecord,
     alaskaPostamble,
   ],
-  counties: alaskaCounties,
+  localities: alaskaCounties,
 };
 
 export const federal: Jurisdiction<Locality> = {

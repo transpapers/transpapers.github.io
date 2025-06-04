@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function NewYorkUCS_NC1Guide({ person }: { person: Person }) {
-  const { residentCounty, doNotPublish } = person;
+  const { residentLocality, doNotPublish } = person;
   return (
     <section key="NewYork-UCS-NC1">
       <h3>Name and/or Sex Change Petition (NY, UCS-NC1)</h3>
@@ -30,10 +30,10 @@ function NewYorkUCS_NC1Guide({ person }: { person: Person }) {
       <p>
         The first form to be filled out is the &ldquo;Name Change and/or Sex
         Designation Change Petition for an Individual Adult&rdquo; (UCS-NC1). In
-        order to file this you need to live in {residentCounty} county and have
-        lived in New York State for at least 6 months. It has some sections that
-        you will need to review. Look through sections A, B, and C to see if the
-        information we filled in is accurate for your circumstances. If
+        order to file this you need to live in {residentLocality} county and
+        have lived in New York State for at least 6 months. It has some sections
+        that you will need to review. Look through sections A, B, and C to see
+        if the information we filled in is accurate for your circumstances. If
         it&apos;s not then type in the missing info or write with black ink if
         it&apos;s already printed.
       </p>

@@ -22,25 +22,27 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function AlaskaCourtHearingGuide({ person }: { person: Person }) {
-  const { age, residentCounty, court } = person;
+  const { age, residentLocality, court } = person;
 
   return (
     <section key="AK-CourtHearing">
       <h3>Court Hearing (AK)</h3>
-      
-      {residentCounty && residentCounty === "Anchorage" ? (
+
+      {residentLocality && residentLocality === "Anchorage" ? (
         <p>
-          For Anchorage, hearings are held in one of two locations. On weekdays 
-          they are at { court?.address } but on weekends they are at the Boney
+          For Anchorage, hearings are held in one of two locations. On weekdays
+          they are at {court?.address} but on weekends they are at the Boney
           courthouse, 303 K St, Anchorage, AK 99501.
         </p>
-      ) : ("")}
-      
+      ) : (
+        ""
+      )}
+
       <p>
         On the day of your hearing, you
-        {age && age < 18 && "and your petitioner"} should dress appropriately for
-        a courtroom, even if the hearing is virtual. The hearing may begin late,
-        but it should only take a few minutes once it starts.
+        {age && age < 18 && "and your petitioner"} should dress appropriately
+        for a courtroom, even if the hearing is virtual. The hearing may begin
+        late, but it should only take a few minutes once it starts.
       </p>
       <p>
         You
@@ -71,23 +73,23 @@ function AlaskaCourtHearingGuide({ person }: { person: Person }) {
         </li>
       </ul>
       <p>
-        At this point the name change should be granted and the hearing should 
-        end promptly. In rare cases 
-        {age && age < 18 ? " your petitioner " : " you "} may also be told to 
-        send notice to individuals that the name change was granted. If so, 
-        inform whoever the court says to and use the copy of the “Affidavit of 
-        Additional Service” (CIV-702) we provided and return a completed and 
-        notarized copy to the court within 20 days. 
-        {age && age < 18 ? "Your petitioner " : "You "} will receive two 
-        copies of the “Certificate of Name Change” (CIV-705) which we will 
-        call the court order. You will likely want to order an additional 1 or 
-        2 copies if you plan on updating the rest of your information by mail. 
-        The date listed on the certificate is the day when you can begin using 
-        our new legal name, it is also the date by which you have to notify the 
-        DMV of the change which is covered in the “Primary ID” section below.
+        At this point the name change should be granted and the hearing should
+        end promptly. In rare cases
+        {age && age < 18 ? " your petitioner " : " you "} may also be told to
+        send notice to individuals that the name change was granted. If so,
+        inform whoever the court says to and use the copy of the “Affidavit of
+        Additional Service” (CIV-702) we provided and return a completed and
+        notarized copy to the court within 20 days.
+        {age && age < 18 ? "Your petitioner " : "You "} will receive two copies
+        of the “Certificate of Name Change” (CIV-705) which we will call the
+        court order. You will likely want to order an additional 1 or 2 copies
+        if you plan on updating the rest of your information by mail. The date
+        listed on the certificate is the day when you can begin using our new
+        legal name, it is also the date by which you have to notify the DMV of
+        the change which is covered in the “Primary ID” section below.
       </p>
       <p>
-        Once you have the court order, you are ready to file with the Social 
+        Once you have the court order, you are ready to file with the Social
         Security administration. Keep the original court order in a safe place.
       </p>
     </section>

@@ -47,10 +47,11 @@ import AlaskaMinorPetitionGuide from "../../components/guides/Alaska/MinorPetiti
 import AlaskaResourcesGuide from "../../components/guides/Alaska/Resources";
 import AlaskaVS405Guide from "../../components/guides/Alaska/VS405";
 
+import { type AlaskaAdministrativeDivision } from "../../types/locality";
+
 import { type Process, Target } from "../../types/process";
 
-export const alaskaNameChange: Process = {
-  jurisdiction: "AK",
+export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
@@ -91,7 +92,7 @@ export const alaskaNameChange: Process = {
       filename: "Alaska/Waive Publication Adult.pdf",
       guide: AlaskaCIV708Guide,
       map: adultWaivePublicationAlaskaMap,
-      include: (applicant) => 
+      include: (applicant) =>
         isMinor(applicant) === false && applicant.doNotPublish === true,
     },
     {
@@ -100,7 +101,7 @@ export const alaskaNameChange: Process = {
       filename: "Alaska/Waive Publication Minor.pdf",
       guide: AlaskaCIV709Guide,
       map: minorWaivePublicationAlaskaMap,
-      include: (applicant) => 
+      include: (applicant) =>
         isMinor(applicant) === true && applicant.doNotPublish === true,
     },
     {
@@ -127,8 +128,7 @@ export const alaskaNameChange: Process = {
   ],
 };
 
-export const alaskaGenderMarker: Process = {
-  jurisdiction: "AK",
+export const alaskaGenderMarker: Process<AlaskaAdministrativeDivision> = {
   target: Target.GenderMarker,
   documents: [
     {
@@ -140,23 +140,22 @@ export const alaskaGenderMarker: Process = {
   ],
 };
 
-export const alaskaPrimaryIdentification: Process = {
-  jurisdiction: "AK",
-  target: Target.PrimaryIdentification,
-  depends: [Target.NameChange, Target.GenderMarker],
-  documents: [
-    {
-      name: "Drivers License, Permit, or Identification Card Transaction Application",
-      id: "D1",
-      filename: "Alaska/Primary ID.pdf",
-      guide: AlaskaDMVGuide,
-      map: primaryIDAlaskaMap,
-    },
-  ],
-};
+export const alaskaPrimaryIdentification: Process<AlaskaAdministrativeDivision> =
+  {
+    target: Target.PrimaryIdentification,
+    depends: [Target.NameChange, Target.GenderMarker],
+    documents: [
+      {
+        name: "Drivers License, Permit, or Identification Card Transaction Application",
+        id: "D1",
+        filename: "Alaska/Primary ID.pdf",
+        guide: AlaskaDMVGuide,
+        map: primaryIDAlaskaMap,
+      },
+    ],
+  };
 
-export const alaskaBirthRecord: Process = {
-  jurisdiction: "AK",
+export const alaskaBirthRecord: Process<AlaskaAdministrativeDivision> = {
   target: Target.BirthRecord,
   depends: [
     Target.NameChange,
@@ -182,8 +181,7 @@ export const alaskaBirthRecord: Process = {
   isBirth: true,
 };
 
-export const alaskaPostamble: Process = {
-  jurisdiction: "AK",
+export const alaskaPostamble: Process<AlaskaAdministrativeDivision> = {
   documents: [
     {
       name: "Everything Else",

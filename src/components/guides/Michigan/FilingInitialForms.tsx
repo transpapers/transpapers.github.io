@@ -22,17 +22,17 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
-  const { court, age, residentCounty } = person;
+  const { court, age, residentLocality } = person;
 
   return (
     <section key="MI-InitialForms">
       <h3>Filing Initial Forms (MI)</h3>
       <p>
-        Your filing location is the {residentCounty} county court at{" "}
+        Your filing location is the {residentLocality} county court at{" "}
         {court?.address}.{age && age < 18 ? " A parent/guardian " : " You "} may
         file by mail or in person; in either case, include the Petition, the
         Addendum (m97a),
-        {residentCounty && residentCounty == "Saginaw"
+        {residentLocality && residentLocality == "Saginaw"
           ? " the Order Following (pc52), "
           : " "}
         the optional Fee Waiver (mc20), as well as payment. Even if the fee
@@ -81,7 +81,7 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         skip it.
       </p>
 
-      {residentCounty && residentCounty !== "Kent" ? (
+      {residentLocality && residentLocality !== "Kent" ? (
         <p>
           If you want an update on your case{" "}
           {age && age < 18 ? " your petitioner has " : " you have to "} to go to

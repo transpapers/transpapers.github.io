@@ -45,7 +45,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
   /** 'courtType' field from counties.ts should go here.
    */
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "County",
   },
   {
@@ -131,7 +131,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
   /** 'courtType' field from counties.ts should go here.
    */
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "County",
   },
   {
@@ -225,7 +225,9 @@ export const minorNameSexPetitionMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      isMinor(applicant) && applicant.age! < 14 ? applicant.residentCounty : "",
+      isMinor(applicant) && applicant.age! < 14
+        ? applicant.residentLocality
+        : "",
     field: "MinorConsentCounty",
   },
 ];
@@ -237,11 +239,11 @@ export const minorNameSexPetitionMap: Formfill[] = [
  */
 export const feeWaiverNYStateMap: Formfill[] = [
   {
-    text: (applicant) => `${applicant.residentCounty} county`,
+    text: (applicant) => `${applicant.residentLocality} county`,
     field: "CourtName",
   },
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "CourtCounty",
   },
   {
@@ -294,7 +296,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
  */
 export const feeWaiverNYCMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     loc: { x: 141, y: 44 },
   },
   {
@@ -305,7 +307,7 @@ export const feeWaiverNYCMap: Formfill[] = [
     loc: { x: 65, y: 109 },
   },
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     loc: { x: 237, y: 215 },
   },
   {
@@ -494,7 +496,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
     field: "ADDRESS WHERE YOU LIVE Zip Code",
   },
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "ADDRESS WHERE YOU LIVE County",
   },
   {
@@ -590,7 +592,7 @@ export const vehicleRegistrationMap: Formfill[] = [
     field: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
   },
   {
-    text: (applicant) => applicant.residentCounty,
+    text: (applicant) => applicant.residentLocality,
     field: "County of Residence",
   },
   {
