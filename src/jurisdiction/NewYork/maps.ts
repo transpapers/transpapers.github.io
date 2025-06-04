@@ -259,7 +259,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
   {
     check: () => true,
     field: "Request",
-    select: "2",
+    select: "Choice2",
   },
   {
     text: (applicant) =>
@@ -281,7 +281,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
   {
     check: () => true,
     field: "PreviousApplication",
-    select: "3",
+    select: "Choice3",
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),
@@ -882,17 +882,17 @@ export const birthCertNYCMap: Formfill[] = [
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.M,
     field: "S2: Gender",
-    select: "0",
+    select: "Choice0",
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.F,
     field: "S2: Gender",
-    select: "1",
+    select: "Choice1",
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.X,
     field: "S2: Gender",
-    select: "2",
+    select: "Choice2",
   },
   {
     text: (applicant) => applicant.mothersBirthName?.first,
