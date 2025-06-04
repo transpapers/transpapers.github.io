@@ -32,11 +32,11 @@ import michiganCounties from "./Michigan/counties";
 import { MichiganCounty } from "../types/locality";
 
 import {
-  // rhodeislandBirthRecord,
-  // rhodeislandGenderMarker,
+  rhodeislandBirthRecord,
+  rhodeislandGenderMarker,
   rhodeislandNameChange,
-  // rhodeislandPrimaryIdentification,
-  // rhodeislandPostamble,
+  rhodeislandPrimaryIdentification,
+  rhodeislandPostamble,
 } from "./RhodeIsland/process";
 import rhodeislandCounties from "./RhodeIsland/counties";
 import { RhodeIslandCityOrTown } from "../types/locality";
@@ -91,10 +91,10 @@ export const rhodeIsland: Jurisdiction<RhodeIslandCityOrTown> = {
   abbreviation: "RI",
   processes: [
     rhodeislandNameChange,
-    // rhodeislandPrimaryIdentification,
-    // rhodeislandGenderMarker,
-    // rhodeislandBirthRecord,
-    // rhodeislandPostamble,
+    rhodeislandPrimaryIdentification,
+    rhodeislandGenderMarker,
+    rhodeislandBirthRecord,
+    rhodeislandPostamble,
   ],
   localities: rhodeislandCounties,
 };
