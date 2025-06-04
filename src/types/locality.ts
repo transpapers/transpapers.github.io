@@ -25,7 +25,6 @@ export type OregonCounty = Locality;
 
 export type AlaskaAdministrativeDivision = Locality & {
   doesNameChange: boolean;
-
   inPersonFiling: boolean;
   emailFiling: boolean;
   emailCourt?: string;
