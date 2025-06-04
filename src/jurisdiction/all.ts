@@ -75,6 +75,7 @@ import { passport, socialSecurity } from "./Federal/process";
 
 export const michigan: Jurisdiction<MichiganCounty> = {
   name: "Michigan",
+  abbreviation: "MI",
   processes: [
     michiganNameChange,
     michiganPrimaryIdentification,
@@ -87,6 +88,7 @@ export const michigan: Jurisdiction<MichiganCounty> = {
 
 export const rhodeIsland: Jurisdiction<RhodeIslandCityOrTown> = {
   name: "Rhode Island",
+  abbreviation: "RI",
   processes: [
     rhodeislandNameChange,
     // rhodeislandPrimaryIdentification,
@@ -99,6 +101,7 @@ export const rhodeIsland: Jurisdiction<RhodeIslandCityOrTown> = {
 
 export const newYork: Jurisdiction<NewYorkCounty> = {
   name: "New York",
+  abbreviation: "NY",
   processes: [
     newyorkNameChange,
     newyorkPrimaryIdentification,
@@ -111,6 +114,7 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
 
 export const oregon: Jurisdiction<OregonCounty> = {
   name: "Oregon",
+  abbreviation: "OR",
   processes: [
     oregonNameChange,
     oregonPrimaryIdentification,
@@ -123,6 +127,7 @@ export const oregon: Jurisdiction<OregonCounty> = {
 
 export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   name: "Alaska",
+  abbreviation: "AK",
   processes: [
     alaskaNameChange,
     alaskaPrimaryIdentification,
@@ -135,6 +140,7 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
 
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
+  abbreviation: "DC",
   processes: [socialSecurity, passport],
   isFederal: true,
 };

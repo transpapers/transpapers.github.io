@@ -39,6 +39,13 @@ export interface Jurisdiction<T extends Locality> {
   name: string;
 
   /**
+   * Two-letter postal abbreviation.
+   *
+   * @remarks At this time, only used for testing. We may need it later, though.
+   */
+  abbreviation: string;
+
+  /**
    * Name of the folder under which the requisite forms and guides are located.
    * Defaults to being the same as `name`.
    */
