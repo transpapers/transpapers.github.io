@@ -34,7 +34,9 @@ export type LocalityType =
   | RhodeIslandCityOrTown
   | NewYorkCounty;
 
-// FIXME I don't know how to genericize this.
+// NOTE This cannot be effectively genericized (yet) because TypeScript does not
+// properly support higher-kinded types. (2025-06-05, but unlikely to ever happen.)
+// Cf. https://github.com/microsoft/TypeScript/issues/1213
 type JurisdictionDistribute<U> = U extends Locality ? Jurisdiction<U> : never;
 export type JurisdictionType = JurisdictionDistribute<LocalityType>;
 
