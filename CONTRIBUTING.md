@@ -33,7 +33,11 @@ First, obtain the name of the PDF field.
    [PDFYeah](https://www.pdfyeah.com/view-pdf-metadata/). If you desire a
    _libre_ solution, we recommend
    [pdftk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/), which has
-   been ported to most Linux distributions.
+   been ported to most Linux distributions. As a final option there is a PDF 
+   metadata scraper available in public/forms called Extract_Field_Data.py which 
+   works. Simply install the pymupdf library with a python pip tool then run it 
+   and select which PDf you want data from. The output is Field Name, Field Type, 
+   and any Radio Button States.
 2. Record the PDF field's internal name. This appears under the metadata tag
    `FieldName`. This may be set to a sensible value by the author of the PDF,
    or it may be automatically generated from the nearest text element. _Nota
