@@ -29,10 +29,10 @@ import {
 import { allJurisdictions } from "../jurisdiction/all";
 
 import {
-  type LocalityType,
-  type JurisdictionType,
-  type ProcessType,
-  type DocumentType,
+  type AnyLocality,
+  type AnyJurisdiction,
+  type AnyProcess,
+  type AnyDocument,
 } from "../types/generic";
 import { Person } from "../types/person";
 import { Formfill } from "../types/formfill";
@@ -145,7 +145,7 @@ export function fillForm(
 }
 
 export function compileGuidesFor(
-  process: ProcessType,
+  process: AnyProcess,
   applicant: Person,
 ): React.JSX.Element[] | undefined {
   const jurisdictionName: string | undefined = process.isBirth
@@ -175,7 +175,7 @@ export function compileGuidesFor(
     return undefined;
   }
 
-  const docs: DocumentType[] = [];
+  const docs: AnyDocument[] = [];
 
   process.documents.forEach((doc) => {
     if (!docs.includes(doc)) {
@@ -212,9 +212,9 @@ export function compileGuidesFor(
 }
 
 export function getLocality(
-  jurisdiction: JurisdictionType,
+  jurisdiction: AnyJurisdiction,
   localityName: string,
-): LocalityType | undefined {
+): AnyLocality | undefined {
   const localities: { [key: string]: Locality } | undefined =
     jurisdiction.localities;
 
@@ -248,10 +248,10 @@ export function getLocality(
  * @return {Promise<Uint8Array>} Compiled documents
  */
 export async function compileDocuments(
-  processes: ProcessType[],
+  processes: AnyProcess[],
   applicant: Person,
 ): Promise<Uint8Array | undefined> {
-  const docs: DocumentType[] = [];
+  const docs: AnyDocument[] = [];
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {

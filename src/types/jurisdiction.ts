@@ -19,7 +19,7 @@
 
 import { type Process } from "./process";
 import { type Locality } from "./locality";
-import { type ProcessType } from "./generic";
+import { type AnyProcess } from "./generic";
 
 import { allJurisdictions } from "../jurisdiction/all";
 
@@ -67,7 +67,7 @@ export interface Jurisdiction<T extends Locality> {
   isFederal?: boolean;
 }
 
-export function getProcesses(name: string | undefined): ProcessType[] {
+export function getProcesses(name: string | undefined): AnyProcess[] {
   if (name === undefined) {
     return [];
   }
@@ -78,7 +78,7 @@ export function getProcesses(name: string | undefined): ProcessType[] {
 export function allProcesses(
   residentJurisdiction: string | undefined,
   birthJurisdiction: string | undefined,
-): ProcessType[] {
+): AnyProcess[] {
   const residentJurisdictionProcesses = getProcesses(residentJurisdiction);
   const residentProcesses = residentJurisdictionProcesses.filter(
     (proc) => !proc.isBirth,

@@ -28,7 +28,7 @@ import useStore from "../store";
 import { type Person } from "../types/person";
 import { allProcesses } from "../types/jurisdiction";
 
-import { type DocumentType, type LocalityType } from "../types/generic";
+import { type AnyDocument, type AnyLocality } from "../types/generic";
 
 function Guide() {
   const applicant = useStore((state) => state.person);
@@ -71,7 +71,7 @@ function Guide() {
       }
     }
     return dict;
-  }, new Map<LocalityType, DocumentType[]>());
+  }, new Map<AnyLocality, AnyDocument[]>());
 
   const guideElements = documentDict.entries().flatMap(([locality, docs]) => {
     return [

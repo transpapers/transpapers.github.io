@@ -29,9 +29,9 @@ import { allJurisdictions } from "../src/jurisdiction/all";
 import { type Name, GenderMarker } from "../src/types/types";
 import { type Person } from "../src/types/person";
 import {
-  type ProcessType,
-  type JurisdictionType,
-  type LocalityType,
+  type AnyProcess,
+  type AnyJurisdiction,
+  type AnyLocality,
 } from "../src/types/generic";
 
 // const mayBeOmitted = (probability, func) => ((Math.random() < probability) ? undefined : func());
@@ -117,7 +117,7 @@ describe("generatePersonForTesting", () => {
 });
 */
 
-const processes: ProcessType[] = Array.from(
+const processes: AnyProcess[] = Array.from(
   allJurisdictions
     .values()
     .flatMap((jurisdiction) =>

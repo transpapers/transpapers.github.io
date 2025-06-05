@@ -28,7 +28,7 @@ import {
   RhodeIslandCityOrTown,
 } from "../types/locality";
 
-export type LocalityType =
+export type AnyLocality =
   | MichiganCounty
   | OregonCounty
   | RhodeIslandCityOrTown
@@ -38,10 +38,10 @@ export type LocalityType =
 // properly support higher-kinded types. (2025-06-05, but unlikely to ever happen.)
 // Cf. https://github.com/microsoft/TypeScript/issues/1213
 type JurisdictionDistribute<U> = U extends Locality ? Jurisdiction<U> : never;
-export type JurisdictionType = JurisdictionDistribute<LocalityType>;
+export type AnyJurisdiction = JurisdictionDistribute<AnyLocality>;
 
 type ProcessDistribute<U> = U extends Locality ? Process<U> : never;
-export type ProcessType = ProcessDistribute<LocalityType>;
+export type AnyProcess = ProcessDistribute<AnyLocality>;
 
 type DocumentDistribute<U> = U extends Locality ? Document<U> : never;
-export type DocumentType = DocumentDistribute<LocalityType>;
+export type AnyDocument = DocumentDistribute<AnyLocality>;
