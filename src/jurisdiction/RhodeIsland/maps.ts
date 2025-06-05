@@ -407,7 +407,7 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 184, y: 194 },
   },
   {
-    text: (applicant) => applicant.age!.toString(),
+    text: (applicant) => String(applicant.age),
     loc: { x: 621, y: 194 },
   },
   {
