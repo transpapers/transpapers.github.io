@@ -36,19 +36,52 @@ function RhodeIslandFilingGuide({
     <section key="RhodeIsland-Filing">
       <h3>Filing Initial Forms (RI)</h3>
 
-      <p>
-        A recent law was passed called{" "}
-        <a href="https://webserver.rilegislature.gov/BillText/BillText24/HouseText24/H8155A.pdf">
-          H8155
-        </a>
-        . In section D (line 12) it states that there will be no publication
-        required which means you shouldn&apos;t be charged for that. Some courts
-        haven&apos;t yet updated their pricing to reflect that. If the amount
-        they charge you is significantly higher than what we list ask about it
-        and politely insist that it be changed or{" "}
-        <a href="https://tinyurl.com/mgdc-feedback">report</a> it to us as a
-        tip.
-      </p>
+      {residentLocality && residentLocality === "West Greenwich" ? (
+        <p>
+            A recent law was passed called{" "}
+            <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
+              §33-22-28
+            </a>
+            . In section D it states that there will be no publication required 
+            before a hearing. The West Greenwich court is openly defying that law 
+            by still requiring publications for everyone before their hearings and 
+            charging for it. If you have the will and ability{" "}
+            <a href="https://tinyurl.com/mgdc-feedback">notify</a> us with a tip and
+            send <a href="https://tinyurl.com/mgdc-feedback">GLAD Law</a> an email.
+        </p>
+      ):("")}
+
+      {residentLocality && residentLocality === "Glocester" ? (
+        <p>
+            A recent law was passed called{" "}
+            <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
+              §33-22-28
+            </a>
+            . In section D it states that there will be no publication required 
+            before a hearing. The Glocester court has decided to instead publicize 
+            your case after the name change hearing and charge for it. Due to this 
+            their price is roughly triple what it should be. If you have the will 
+            and ability send your state house{" "}
+            <a href="https://www.rilegislature.gov/representatives/default.aspx">representative</a> 
+            {" "}an email asking for this loophole to be closed.
+        </p>
+      ):("")}
+
+      {residentLocality && residentLocality === "Warren" ? (
+        <p>
+            A recent law was passed called{" "}
+            <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
+              §33-22-28
+            </a>
+            . In section D it states that there will be no publication required 
+            before a hearing. The Warren court has decided to instead publicize 
+            your case after the name change hearing and charge for it. Due to this 
+            their price is roughly triple what it should be. If you have the will 
+            and ability send your state house{" "}
+            <a href="https://www.rilegislature.gov/representatives/default.aspx">representative</a> 
+            {" "}an email asking for this loophole to be closed.
+        </p>
+      ):("")}
 
       <p>
         <strong>
