@@ -50,8 +50,8 @@ function RhodeIslandBCIGuide({
 
       {age && age < 18 ? (
         <p>
-          For a Rhode Island name change the parent/guardian who is filing the
-          Change of Name form for you will need a background check.
+          For a Rhode Island name change you and the parent/guardian who is 
+          filing the Change of Name form for you will need a background check.
         </p>
       ) : (
         <p>For a Rhode Island name change you will need a background check.</p>
