@@ -65,19 +65,27 @@ function Step6() {
     .map(([, field]) => field)
     .filter((field) => !field.include || field.include(applicant));
 
-  return (
-    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
-      <h2>Tell us about yourself...</h2>
-      <ul className="spaced">
-        {fieldsToShow.map((field) => (
-          <li key={field.name}>
-            {renderField(field, applicant.residentJurisdiction!, register)}
-          </li>
-        ))}
-      </ul>
-      <input type="submit" value="Get my gender-affirming forms" />
-    </form>
-  );
+  if (applicant.residentJurisdiction) {
+    return (
+      <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
+        <h2>Tell us about yourself...</h2>
+        <ul className="spaced">
+          {fieldsToShow.map((field) => (
+            <li key={field.name}>
+              {renderField(
+                field,
+                applicant.residentJurisdiction ?? "",
+                register,
+              )}
+            </li>
+          ))}
+        </ul>
+        <input type="submit" value="Get my gender-affirming forms" />
+      </form>
+    );
+  } else {
+    return <p>Please go back and select your state of residence.</p>;
+  }
 }
 
 export default Step6;

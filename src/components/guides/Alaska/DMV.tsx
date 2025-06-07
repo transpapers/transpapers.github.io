@@ -61,7 +61,7 @@ function AlaskaDMVGuide({ person }: { person: Person }) {
           " Your parent/guardian will need to fill out the top of page 2 in front of the DMV employee."}
       </p>
 
-      {isChangingLegalSex && isChangingLegalSex === true ? (
+      {isChangingLegalSex ? (
         <p>
           To change your gender marker on your ID as well you will need the
           “Certification For Change Of Sex Designator On Driver License Or
@@ -85,13 +85,11 @@ function AlaskaDMVGuide({ person }: { person: Person }) {
       <p>
         When you {age && age < 18 && "and a parent/guardian"} go in for the
         appointment be sure to bring
-        {isChangingLegalSex && isChangingLegalSex === true
-          ? " both forms, "
-          : " the D1 form "}{" "}
-        a certified copy of your court order and payment. Optionally, you may
-        also update your vehicle registration(s). You will be given another
-        form, which you should sign and initial in your new legal name. You will
-        be charged a fee for each vehicle.
+        {isChangingLegalSex ? " both forms, " : " the D1 form "} a certified
+        copy of your court order and payment. Optionally, you may also update
+        your vehicle registration(s). You will be given another form, which you
+        should sign and initial in your new legal name. You will be charged a
+        fee for each vehicle.
       </p>
     </section>
   );

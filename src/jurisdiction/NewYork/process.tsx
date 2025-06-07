@@ -59,7 +59,7 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
       filename: "NewYork/UCS-NC1 Adult.pdf",
       guide: NewYorkUCS_NC1Guide,
       map: adultNameSexPetitionMap,
-      include: (applicant) => isMinor(applicant) === false,
+      include: (applicant) => !isMinor(applicant),
     },
     {
       name: "Name Change and/or Sex Designation Change Petition for Individual Minor",
@@ -67,7 +67,7 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
       filename: "NewYork/UCS-NC2 Minor.pdf",
       guide: NewYorkUCS_NC2Guide,
       map: minorNameSexPetitionMap,
-      include: (applicant) => isMinor(applicant) === true,
+      include: (applicant) => isMinor(applicant),
     },
     {
       name: "Application to Waive Court Costs, Fees, and Expenses",

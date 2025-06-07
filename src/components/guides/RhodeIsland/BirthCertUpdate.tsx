@@ -29,8 +29,8 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
       <h3>Birth Certificate Update (RI)</h3>
 
       <p>
-        To update a birth certificate you need the &quot;Application for a 
-        Certified Copy of a Birth Record&quot; form we provided. Specifically 
+        To update a birth certificate you need the &quot;Application for a
+        Certified Copy of a Birth Record&quot; form we provided. Specifically
         the one with &quot;Updating record information&quot; written in the
         bottom right of section 3. Finish filling out the section 1
         &quot;hospital&quot; field. If you have had your name changed by court
@@ -38,33 +38,33 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         court&quot; field as well.
         {age && age < 18
           ? " Then have the parent/guardian whose name is listed in section 5 check the appropriate box in section 2 and sign/date section 5. "
-          : isChangingLegalName && isChangingLegalName === true 
-          ? " Then sign and date section 5 in your new name. " 
-          : " Then sign and date section 5. "}
+          : isChangingLegalName
+            ? " Then sign and date section 5 in your new name. "
+            : " Then sign and date section 5. "}
       </p>
 
-      { isChangingLegalSex && isChangingLegalSex === true ? (
+      {isChangingLegalSex ? (
         <p>
-            To update the gender marker of a birth certificate you need to
-            {age && age < 18 ? " have a parent/guardian " : " "} contact the RI
-            Office of Vital Records directly by either calling (401) 222-2811 or
-            sending an email to doh.website@health.ri.gov. During this contact they
-            need to be told that you want an updated gender marker on your birth
-            certificate. They need to know your 
-            { isChangingLegalName && isChangingLegalName === true ? (
-              " new legal name, your name at birth, "
-            ):(
-              " legal name, your name at birth (if different),"
-            )}
-            date of birth, place of birth, old gender marker, and what the new
-            marker will be. They accept M, F, or X as options. Finally make sure
-            they have a good phone number and email address so they can send you a
-            sworn affidavit. Leave this document <strong>unsigned</strong> until
-            directed otherwise. Once you have the affidavit you are ready to file
-            with the RI Office of Vital Records, this can be done either in person
-            or by mail.
+          To update the gender marker of a birth certificate you need to
+          {age && age < 18 ? " have a parent/guardian " : " "} contact the RI
+          Office of Vital Records directly by either calling (401) 222-2811 or
+          sending an email to doh.website@health.ri.gov. During this contact
+          they need to be told that you want an updated gender marker on your
+          birth certificate. They need to know your
+          {isChangingLegalName
+            ? " new legal name, your name at birth, "
+            : " legal name, your name at birth (if different),"}
+          date of birth, place of birth, old gender marker, and what the new
+          marker will be. They accept M, F, or X as options. Finally make sure
+          they have a good phone number and email address so they can send you a
+          sworn affidavit. Leave this document <strong>unsigned</strong> until
+          directed otherwise. Once you have the affidavit you are ready to file
+          with the RI Office of Vital Records, this can be done either in person
+          or by mail.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
       <p>
         For mail filing
@@ -72,17 +72,15 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
           ? " a parent/guardian that is listed on the court order will "
           : " you will "}
         need to make a photocopy of a photo ID, such as a drivers license.
-        { isChangingLegalSex && isChangingLegalSex === true ? (
-          " The sworn affidavit will also need to be signed in front of a notary (see previous notary section for instructions). "
-        ):("")}
-        Finally place the 
-        { isChangingLegalSex && isChangingLegalSex === true ? (
-          " notarized sworn affidavit, "):("")}
+        {isChangingLegalSex
+          ? " The sworn affidavit will also need to be signed in front of a notary (see previous notary section for instructions). "
+          : ""}
+        Finally place the
+        {isChangingLegalSex ? " notarized sworn affidavit, " : ""}
         Application for a Certified Copy of a Birth Certificate,
-        { isChangingLegalName && isChangingLegalName === true ? (
-          " certified copy of the Court Order, "):("")} 
-        and payment into an envelope. The fee is $35.00. They take cash, check, 
-        or money order. Make any checks payable to &ldquo;General Treasurer, 
+        {isChangingLegalName ? " certified copy of the Court Order, " : ""}
+        and payment into an envelope. The fee is $35.00. They take cash, check,
+        or money order. Make any checks payable to &ldquo;General Treasurer,
         State of Rhode Island&rdquo;. Then mail it to:
         <p>
           <span>Rhode Island Department of Health</span>
@@ -100,22 +98,22 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         {age && age < 18 ? " have a parent/guardian call " : " call "}
         (401) 222-5339 to make an appointment. Then
         {age && age < 18 ? " a parent/guardian will need to " : " "}
-        bring the 
-        { isChangingLegalSex && isChangingLegalSex === true ? (
-          " <strong>unsigned</strong> sworn affidavit, "):("")}
+        bring the
+        {isChangingLegalSex
+          ? " <strong>unsigned</strong> sworn affidavit, "
+          : ""}
         Application for a Certified Copy of a Birth Certificate,
-        { isChangingLegalName && isChangingLegalName === true ? (
-          " certified copy of the Court Order, "):("")} 
-        and a photo ID. The address is the same as the mailing address above but 
-        the fee is $32.00 for in-person. The affidavit can be signed in front of 
-        a notary at the Office of Vital Records when they say to. They will then 
+        {isChangingLegalName ? " certified copy of the Court Order, " : ""}
+        and a photo ID. The address is the same as the mailing address above but
+        the fee is $32.00 for in-person. The affidavit can be signed in front of
+        a notary at the Office of Vital Records when they say to. They will then
         check ID, collect the forms, and ask for the fee.
       </p>
 
       <p>
         The updated birth certificate will arrive in the mail a few weeks later.
-        Rhode Island birth certificates have a marker showing if the name was 
-        updated but there is <strong>no</strong> such mark for gender marker 
+        Rhode Island birth certificates have a marker showing if the name was
+        updated but there is <strong>no</strong> such mark for gender marker
         updates.
       </p>
     </section>

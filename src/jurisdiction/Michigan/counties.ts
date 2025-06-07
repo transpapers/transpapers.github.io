@@ -19,7 +19,7 @@
 
 import { MichiganCounty } from "../../types/locality";
 
-const michiganCounties: { [key: string]: MichiganCounty } = {
+const michiganCounties: Record<string, MichiganCounty> = {
   Alcona: {
     court: {
       address: "106 5th Street, Harrisville MI 48740",
@@ -992,8 +992,7 @@ const michiganCounties: { [key: string]: MichiganCounty } = {
       city: "Grand Rapids",
       circuit: "17th",
       phone: "(616) 632-5440",
-      website:
-        "https://www.kentcountymi.gov/1102/Name-Changes",
+      website: "https://www.kentcountymi.gov/1102/Name-Changes",
       specificCourtInfo:
         "The courts front entrance is on the southwest side of the building, closer to the river. Once you get through the metal detector you can take any elevator to the second floor. On that floor you then turn and walk towards the large window then go down the hallway left from there. The Probate court counter, which you want, is the second counter further along the hall. They accept cash, checks, credit cards, cashiers checks, or money orders.",
     },
@@ -1641,21 +1640,20 @@ const michiganCounties: { [key: string]: MichiganCounty } = {
       city: "Mio",
       circuit: "23rd",
       phone: "(989) 826-1111",
-      website:
-        "https://www.oscodacountymi.com/circuit-court/",
+      website: "https://www.oscodacountymi.com/circuit-court/",
     },
     fingerprintLocations: [
       {
         address: "301 Morenci Ave, Mio, MI 48647",
         name: "Oscoda County Sheriff",
-        website:
-          "https://www.oscodacountymi.com/sheriff-department/",
+        website: "https://www.oscodacountymi.com/sheriff-department/",
       },
     ],
     publications: [
       {
         name: "Oscoda County Herald",
-        website: "https://oscodacountyherald.column.us/place/BRCmjSmku0C6qs419Xbh?step=confirm-filer",
+        website:
+          "https://oscodacountyherald.column.us/place/BRCmjSmku0C6qs419Xbh?step=confirm-filer",
       },
     ],
   },

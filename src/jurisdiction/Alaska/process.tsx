@@ -61,7 +61,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       filename: "Alaska/Petition for Change of Name Adult.pdf",
       guide: AlaskaAdultPetitionGuide,
       map: adultNamePetitionAlaskaMap,
-      include: (applicant) => isMinor(applicant) === false,
+      include: (applicant) => !isMinor(applicant),
     },
     {
       name: "Petition to Change Child's Name",
@@ -69,7 +69,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       filename: "Alaska/Petition for Change of Name Minor.pdf",
       guide: AlaskaMinorPetitionGuide,
       map: minorNamePetitionAlaskaMap,
-      include: (applicant) => isMinor(applicant) === true,
+      include: (applicant) => isMinor(applicant),
     },
     {
       name: "Parental Consent from Non-Petitioning Parent",
@@ -77,7 +77,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       filename: "Alaska/Non-petitioning Parental Consent.pdf",
       guide: AlaskaCIV695Guide,
       map: nonpetitionParentalConsentAlaskaMap,
-      include: (applicant) => isMinor(applicant) === true,
+      include: (applicant) => isMinor(applicant),
     },
     {
       name: "Application for Legal Name Change",
@@ -93,7 +93,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       guide: AlaskaCIV708Guide,
       map: adultWaivePublicationAlaskaMap,
       include: (applicant) =>
-        isMinor(applicant) === false && applicant.doNotPublish === true,
+        isMinor(applicant) && applicant.doNotPublish === true,
     },
     {
       name: "Request to Waive Posting in Child's Change of Name Case",
@@ -102,7 +102,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       guide: AlaskaCIV709Guide,
       map: minorWaivePublicationAlaskaMap,
       include: (applicant) =>
-        isMinor(applicant) === true && applicant.doNotPublish === true,
+        isMinor(applicant) && applicant.doNotPublish === true,
     },
     {
       name: "Request for Exemption from Payment of Fees",

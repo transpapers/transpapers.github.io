@@ -112,7 +112,7 @@ export interface Document<T extends Locality> {
   map?: Formfill[];
 }
 
-export const targets: { [key in Target]?: string } = {
+export const targets: Record<Target, string> = {
   [Target.BirthRecord]: "update my birth certificate.",
   [Target.GenderMarker]: "update my gender marker.",
   [Target.NameChange]: "change my legal name.",

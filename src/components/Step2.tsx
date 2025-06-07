@@ -41,7 +41,7 @@ function Step2() {
   };
 
   const localities =
-    allJurisdictions.get(residentJurisdiction || "")?.localities ?? {};
+    allJurisdictions.get(residentJurisdiction ?? "")?.localities ?? {};
 
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>

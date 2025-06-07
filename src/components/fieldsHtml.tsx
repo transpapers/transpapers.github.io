@@ -88,7 +88,7 @@ export function OptionField({
   field,
   register,
 }: FieldConstructorProps): JSX.Element {
-  const options = field.options || {};
+  const options = field.options ?? {};
   return (
     <fieldset>
       <legend>{field.title}</legend>
@@ -107,7 +107,7 @@ export function SelectField({
   field,
   register,
 }: FieldConstructorProps): JSX.Element {
-  const options = field.options || {};
+  const options = field.options ?? {};
   const innards = (
     <select {...register(field.name)}>
       <option key="" value="">

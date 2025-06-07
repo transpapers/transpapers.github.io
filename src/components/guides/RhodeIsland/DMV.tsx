@@ -28,53 +28,52 @@ function RhodeIslandDMVGuide({ person }: { person: Person }) {
     <section key="RI-DMV">
       <h3>Updating Primary ID (RI)</h3>
       <p>
-        To update your primary ID you will need the
-        &quot;Application for a License, Identification Card and Permit&quot;
-        (LI-1) 
-        { isChangingLegalSex && isChangingLegalSex === true ? (
-          " and the “Gender Designation on a License or Identification Card” for changing gender. "
-        ):(". ")}
-        For the LI-1 form you will need to select what type of primary ID you 
-        want in the first two sections of the &quot;Transaction Type&quot; 
-        category. From there review section A and fill in any blanks that are 
-        applicable to you (such as social security and/or driver&apos;s 
-        license number). Complete sections C & D as it pertains to you and 
-        ignore sections E & F. Do<strong>not</strong> sign in section G yet.
+        To update your primary ID you will need the &quot;Application for a
+        License, Identification Card and Permit&quot; (LI-1)
+        {isChangingLegalSex
+          ? " and the “Gender Designation on a License or Identification Card” for changing gender. "
+          : ". "}
+        For the LI-1 form you will need to select what type of primary ID you
+        want in the first two sections of the &quot;Transaction Type&quot;
+        category. From there review section A and fill in any blanks that are
+        applicable to you (such as social security and/or driver&apos;s license
+        number). Complete sections C & D as it pertains to you and ignore
+        sections E & F. Do<strong>not</strong> sign in section G yet.
       </p>
 
-      { isChangingLegalSex && isChangingLegalSex === true ? (
-      <p>
-        As for the gender designation form, fill in your social security number
-        and driver&apos;s license number (if applicable). Do{" "}
-        <strong>not</strong> sign yet.
-      </p>
-      ):("")}
+      {isChangingLegalSex ? (
+        <p>
+          As for the gender designation form, fill in your social security
+          number and driver&apos;s license number (if applicable). Do{" "}
+          <strong>not</strong> sign yet.
+        </p>
+      ) : (
+        ""
+      )}
 
       <p>
         You will need to schedule an in-person appointment at your local DMV,
         all Rhode Island locations are listed{" "}
         <a href="https://dmv.ri.gov/locations-hours">here</a>. You will need
-        { isChangingLegalSex && isChangingLegalSex === true ? (
-          " both forms, "):(" the LI-1 form, ")}
-        { isChangingLegalName && isChangingLegalName === true ? (
-          " your court order, "):("")}
-        your current ID, and the receipt from social security. If you don’t 
-        have a current ID then bring the ID documents you used for Social 
-        Security. If you selected &quot;REAL ID&quot; you will also need an 
-        additional document, pick one on page 3 of the LI-1 form under &quot;Proof 
-        of Identity&quot;. It is unusual but not impossible for them to ask for 
-        Proof of Residency documents which are also listed on page 3 of the LI-1 
-        form. 
-        { isChangingLegalSex && isChangingLegalSex === true ? (
-          " You <strong>don&apos;t</strong> need any proof or medical records for the gender form."
-        ):("")}
+        {isChangingLegalSex ? " both forms, " : " the LI-1 form, "}
+        {isChangingLegalName ? " your court order, " : ""}
+        your current ID, and the receipt from social security. If you don’t have
+        a current ID then bring the ID documents you used for Social Security.
+        If you selected &quot;REAL ID&quot; you will also need an additional
+        document, pick one on page 3 of the LI-1 form under &quot;Proof of
+        Identity&quot;. It is unusual but not impossible for them to ask for
+        Proof of Residency documents which are also listed on page 3 of the LI-1
+        form.
+        {isChangingLegalSex
+          ? " You <strong>don&apos;t</strong> need any proof or medical records for the gender form."
+          : ""}
       </p>
 
       <p>
-        When you {age && age < 18 ? " and a parent/guardian " : " "} arrive, tell
-        the clerk that you want to update the name and/or gender marker on your
-        ID and present the above documents to the clerk. Sign and date in front 
-        of the clerk.
+        When you {age && age < 18 ? " and a parent/guardian " : " "} arrive,
+        tell the clerk that you want to update the name and/or gender marker on
+        your ID and present the above documents to the clerk. Sign and date in
+        front of the clerk.
         {age && age < 18
           ? " A parent/guardian will need to sign the LI-1 form as well just below section G. "
           : " "}
@@ -89,8 +88,7 @@ function RhodeIslandDMVGuide({ person }: { person: Person }) {
       <p>
         Optionally, you may also update your vehicle registration(s). You will
         be given another form, which you should sign
-        { isChangingLegalName && isChangingLegalName === true ? (
-          " in your new legal name. "):(". ")}
+        {isChangingLegalName ? " in your new legal name. " : ". "}
         You will be charged a fee for each vehicle.
       </p>
     </section>

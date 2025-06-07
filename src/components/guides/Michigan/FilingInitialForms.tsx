@@ -60,7 +60,7 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         )}
       </p>
 
-      {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
+      {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
 
       <p>
         <strong>

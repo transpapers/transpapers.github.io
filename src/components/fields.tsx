@@ -36,7 +36,7 @@ import { isMinor } from "../lib/util";
 
 import { Field } from "../types/field";
 
-export const fields: { [key: string]: Field } = {
+export const fields: Record<string, Field> = {
   legalName: {
     title: "Full legal name",
     subtitle: "as it appears on your ID",
@@ -61,7 +61,7 @@ export const fields: { [key: string]: Field } = {
       "If you want to avoid mentioning transition we recommend “I want to be known legally as I am by my family and friends”.",
     name: "reasonForNameChange",
     type: "string",
-    default: "Gender Transition"
+    default: "Gender Transition",
   },
   sealBirthCertificate: {
     title: (
@@ -108,7 +108,8 @@ export const fields: { [key: string]: Field } = {
     options: { M: "M", F: "F", X: "X" },
   },
   doNotPublish: {
-    title: "Request that the court case records be sealed or otherwise not published.",
+    title:
+      "Request that the court case records be sealed or otherwise not published.",
     subtitle:
       "Some states have more stringent requirements than others, we will cover any of those in the guide.",
     name: "doNotPublish",
@@ -209,7 +210,7 @@ export function renderField(
   jurisdiction: string,
   register: (name: string) => object,
 ) {
-  if (!field || !Object.prototype.hasOwnProperty.call(field, "type")) {
+  if (!("type" in field)) {
     return undefined;
   }
 

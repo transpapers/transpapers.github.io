@@ -108,9 +108,7 @@ function RhodeIslandFilingGuide({
           <p>
             A parent/guardian will need to bring the notarized Change of Name
             petition, useable copy of your birth certificate
-            {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true
-              ? ", "
-              : ", BCI report, "}
+            {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
             and photo ID. According to our data the filing fee will be{" "}
             {filingCost}. The courts are not in session every day so the clerk
             will tell them when your hearing date will be when they file. Each
@@ -118,15 +116,13 @@ function RhodeIslandFilingGuide({
             to either call to ask or cover their bases by bringing cash, check,
             and card.
           </p>
-          {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
+          {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
         </>
       ) : (
         <p>
           The filing location is at {court?.address}. Bring the notarized Change
           of Name petition, useable copy of your birth certificate
-          {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true
-            ? ", "
-            : ", BCI report, "}
+          {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
           and photo ID. According to our data the filing fee will be{" "}
           {filingCost}. The courts are not in session every day so the clerk
           will tell you when your hearing date will be when you file. Each court
@@ -135,7 +131,7 @@ function RhodeIslandFilingGuide({
         </p>
       )}
 
-      {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
+      {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
 
       <p>
         If the clerk doesn&apos;t give a hearing date then ask about it. Some

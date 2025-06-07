@@ -34,12 +34,13 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
           Application to Correct or Change a Michigan Birth Record
         </strong>{" "}
         (form DCH-0847-CHGBX)
-        { isChangingLegalSex && isChangingLegalSex === true ? (
+        {isChangingLegalSex ? (
           <>
-            and the{" "}
-            <strong>State of Michigan Sex Designation Form</strong>.
+            and the <strong>State of Michigan Sex Designation Form</strong>.
           </>
-        ):(".")}
+        ) : (
+          "."
+        )}
       </p>
 
       <p>
@@ -52,8 +53,9 @@ function MichiganBirthCertificateGuide({ person }: { person: Person }) {
         and check the applicable box underneath. Write your birth county in the
         same section just below those checkboxes.
         {/* The other options for doing this inside a JSX component are all worse. */}
-        { isChangingLegalName && isChangingLegalName === true ? 
-          (" All signatures from now on can be done in your new name. "):("")}
+        {isChangingLegalName
+          ? " All signatures from now on can be done in your new name. "
+          : ""}
         {age && age < 15
           ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
           : age && age < 18

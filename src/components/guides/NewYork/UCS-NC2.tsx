@@ -38,7 +38,7 @@ function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
         at least 6 months before a parent/guardian can file this on your behalf.
       </p>
 
-      {doNotPublish && doNotPublish === true ? (
+      {doNotPublish ? (
         <p>
           For #28 the court wants to know if making these court records
           available to the public will cause you or your petitioner harm. This
@@ -53,7 +53,7 @@ function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
         ""
       )}
 
-      {parentsAreOkay && parentsAreOkay == true ? (
+      {parentsAreOkay ? (
         <p>
           If both parents are able to meet with a notary at the same time they
           will need to have both of their names present on page 1 and signed

@@ -28,7 +28,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
     <section key="OR-InitialForms">
       <h3>Filing Initial Forms (OR)</h3>
 
-      {isChangingLegalSex && isChangingLegalSex === true ? (
+      {isChangingLegalSex ? (
         <p>
           Your county&apos;s circuit court is at {court?.address}. However the
           petition can be filed at any other Oregon circuit court as well. We
@@ -55,12 +55,12 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
         <p>
           {residentLocality && residentLocality === "Umatilla"
             ? " Umatilla county has two valid circuit court locations to file at " +
-              court?.address +
+              (court?.address ?? "") +
               ". Pick whichever is most convenient. "
             : " The filing location is the " +
-              residentLocality +
+              (residentLocality ?? "") +
               " circuit court at " +
-              court?.address +
+              (court?.address ?? "") +
               ". "}
           They have a webpage with their open hours and other information at{" "}
           <a href="{court?.website}">{court?.website}</a>. That link may also
@@ -83,7 +83,7 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
         assistance center, a local LGBT organization, or an attorney.
       </p>
 
-      {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
+      {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
 
       {age && age < 18 ? (
         <p>
@@ -114,10 +114,10 @@ function OregonFilingInitialFormsGuide({ person }: { person: Person }) {
           types of criminal record that could cause a hearing though. Assuming
           there isn&apos;t one you will need to wait for the “General
           Judgement”, which we will call the court order, to arrive. Once it
-          does you will need to order 2 or 3 certified copies of the court
-          order for use later in the process as some places will not return
-          them. Keep the original in a safe place. If there is a hearing you
-          will recieve a court date instead.
+          does you will need to order 2 or 3 certified copies of the court order
+          for use later in the process as some places will not return them. Keep
+          the original in a safe place. If there is a hearing you will recieve a
+          court date instead.
         </p>
       )}
     </section>

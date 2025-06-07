@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { type JurisdictionType } from "../types/generic";
+import { type AnyJurisdiction } from "../types/generic";
 import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
 
@@ -146,7 +146,7 @@ export const federal: Jurisdiction<Locality> = {
 };
 
 // FIXME is there a nicer way to do this?
-export const allJurisdictions = new Map<string, JurisdictionType>();
+export const allJurisdictions = new Map<string, AnyJurisdiction>();
 allJurisdictions.set("Michigan", michigan);
 allJurisdictions.set("Oregon", oregon);
 allJurisdictions.set("Rhode Island", rhodeIsland);

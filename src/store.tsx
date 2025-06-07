@@ -39,23 +39,26 @@ interface Action {
 }
 
 // Type for pointer walk code
-type Node<T = unknown> = {
+interface Node<T = unknown> {
   [key: string]: Node | T;
-};
+}
 
 function assignDeepProperty<T>(root: Node<T>, key: string, value: T): boolean {
   const path = key.split(":");
 
   const dirs = path.slice(0, -1);
-  const file = path.at(-1)!;
+  const file = path.at(-1);
+  if (!file) {
+    return false;
+  }
 
-  let pointer: Node<unknown> = root;
+  let pointer: Node = root;
   dirs.forEach((dirname) => {
     if (!Object.prototype.hasOwnProperty.call(pointer, dirname)) {
       pointer[dirname] = {};
     }
 
-    if (pointer[dirname] as Node) {
+    if (pointer[dirname]) {
       pointer = pointer[dirname] as Node;
     } else {
       return false;
@@ -75,7 +78,7 @@ const useStore = create<ApplicationState & Action>()(
       processNames: [],
 
       // Actions.
-      updatePerson: (newData) =>
+      updatePerson: (newData) => {
         set(
           produce((state: ApplicationState) => {
             const dataToAssign = {};
@@ -86,12 +89,14 @@ const useStore = create<ApplicationState & Action>()(
 
             Object.assign(state.person, dataToAssign);
           }),
-        ),
+        );
+      },
 
-      updateProcessNames: (newProcessNames) =>
-        set(() => ({ processNames: newProcessNames })),
+      updateProcessNames: (newProcessNames) => {
+        set(() => ({ processNames: newProcessNames }));
+      },
 
-      finalizeApplicant: () =>
+      finalizeApplicant: () => {
         set(
           produce((state: ApplicationState) => {
             /**
@@ -110,10 +115,7 @@ const useStore = create<ApplicationState & Action>()(
             const jurisdiction = residentJurisdiction ?? "";
             const jurisdictionObj = allJurisdictions.get(jurisdiction);
 
-            if (
-              jurisdictionObj !== undefined &&
-              jurisdictionObj.localities !== undefined
-            ) {
+            if (jurisdictionObj?.localities) {
               const { localities } = jurisdictionObj;
               const locality = localities[residentLocality ?? ""];
 
@@ -133,7 +135,8 @@ const useStore = create<ApplicationState & Action>()(
 
             Object.assign(state.person, extraData);
           }),
-        ),
+        );
+      },
     }),
     {
       name: "transpapers-storage",
