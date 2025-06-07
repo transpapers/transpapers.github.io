@@ -117,8 +117,8 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   {
     text: (applicant) =>
       fullName(applicant.birthName)
-        ? fullName(applicant.birthName) ?? ""
-        : fullName(applicant.legalName) ?? "",
+        ? fullName(applicant.birthName)
+        : fullName(applicant.legalName),
     loc: { page: 1, x: 154, y: 820 },
   },
   {
@@ -145,7 +145,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`,
+      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
     loc: { page: 2, x: 350, y: 326 },
   },
   {
@@ -271,7 +271,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`,
+      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
     loc: { page: 2, x: 350, y: 482 },
   },
   {
@@ -310,7 +310,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`,
+      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
     loc: { page: 4, x: 350, y: 762 },
   },
   {
@@ -385,11 +385,13 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 1, x: 248, y: 424 },
   },
   {
-    text: (applicant) => !isMinor(applicant) ?
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }) : "",
+    text: (applicant) =>
+      !isMinor(applicant)
+        ? formatDate(applicant.birthdate, {
+            format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+            separator: "/",
+          })
+        : "",
     loc: { page: 2, x: 303, y: 144 },
   },
   {
@@ -406,7 +408,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`,
+      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
     loc: { page: 3, x: 350, y: 688 },
   },
   {
@@ -440,7 +442,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.residentCity}, ${applicant.residentJurisdiction}, ${applicant.zip}`,
+      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
     loc: { page: 5, x: 350, y: 443 },
   },
   {
@@ -506,23 +508,17 @@ export const birthCertOregonMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      applicant.birthName?.first
-        ? applicant.birthName?.first ?? ""
-        : applicant.legalName?.first ?? "",
+      applicant.birthName?.first ?? applicant.legalName?.first ?? "",
     field: "Current first",
   },
   {
     text: (applicant) =>
-      applicant.birthName?.middle
-        ? applicant.birthName?.middle ?? ""
-        : applicant.legalName?.middle ?? "",
+      applicant.birthName?.middle ?? applicant.legalName?.middle ?? "",
     field: "Current middle",
   },
   {
     text: (applicant) =>
-      applicant.birthName?.last
-        ? applicant.birthName?.last ?? ""
-        : applicant.legalName?.last ?? "",
+      applicant.birthName?.last ?? applicant.legalName?.last ?? "",
     field: "Current last",
   },
   {
@@ -641,26 +637,29 @@ export const voterOregonMap: Formfill[] = [
     select: "Yes",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? applicant.chosenName?.last ?? ""
-      : applicant.legalName?.last ?? "",
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? applicant.chosenName?.last ?? ""
+        : applicant.legalName?.last ?? "",
     field: "Last Name",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? applicant.chosenName?.first ?? ""
-      : applicant.legalName?.first ?? "",
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? applicant.chosenName?.first ?? ""
+        : applicant.legalName?.first ?? "",
     field: "First Name",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? applicant.chosenName?.middle ?? "" 
-      : applicant.legalName?.middle ?? "",
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? applicant.chosenName?.middle ?? ""
+        : applicant.legalName?.middle ?? "",
     field: "Middle Name",
   },
   {
     text: (applicant) =>
-      `${applicant.streetAddress}, ${applicant.residentCity} ${applicant.zip}`,
+      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""} ${applicant.zip ?? ""}`,
     field: "Residence Address",
   },
   {
@@ -684,7 +683,7 @@ export const voterOregonMap: Formfill[] = [
     field: "Email",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Preious Registration Name",
   },
 ];

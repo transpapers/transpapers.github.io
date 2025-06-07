@@ -38,7 +38,7 @@ function NewYorkUCS_NC1Guide({ person }: { person: Person }) {
         it&apos;s already printed.
       </p>
 
-      {doNotPublish && doNotPublish === true ? (
+      {doNotPublish ? (
         <p>
           For #28 the court wants to know if making these court records
           available to the public will cause you harm. This can take the form of

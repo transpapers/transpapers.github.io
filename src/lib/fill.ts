@@ -29,10 +29,10 @@ import {
 import { allJurisdictions } from "../jurisdiction/all";
 
 import {
-  type LocalityType,
-  type JurisdictionType,
-  type ProcessType,
-  type DocumentType,
+  type AnyLocality,
+  type AnyJurisdiction,
+  type AnyProcess,
+  type AnyDocument,
 } from "../types/generic";
 import { Person } from "../types/person";
 import { Formfill } from "../types/formfill";
@@ -80,8 +80,8 @@ export function fillForm(
           field.select(fill.select);
         }
       }
-    } else if (fill.loc !== undefined) {
-      const pageIndex = fill.loc.page || 0;
+    } else {
+      const pageIndex = fill.loc.page ?? 0;
 
       const page = pages[pageIndex];
 
@@ -145,7 +145,7 @@ export function fillForm(
 }
 
 export function compileGuidesFor(
-  process: ProcessType,
+  process: AnyProcess,
   applicant: Person,
 ): React.JSX.Element[] | undefined {
   const jurisdictionName: string | undefined = process.isBirth
@@ -175,7 +175,7 @@ export function compileGuidesFor(
     return undefined;
   }
 
-  const docs: DocumentType[] = [];
+  const docs: AnyDocument[] = [];
 
   process.documents.forEach((doc) => {
     if (!docs.includes(doc)) {
@@ -198,13 +198,11 @@ export function compileGuidesFor(
           person: Person;
           locality: typeof locality;
         }>;
-        if ((doc.guide as theRightType) !== undefined) {
-          const guide = React.createElement(doc.guide as theRightType, {
-            person: applicant,
-            locality,
-          });
-          guides.push(guide);
-        }
+        const guide = React.createElement(doc.guide as theRightType, {
+          person: applicant,
+          locality,
+        });
+        guides.push(guide);
       }
     });
 
@@ -212,10 +210,10 @@ export function compileGuidesFor(
 }
 
 export function getLocality(
-  jurisdiction: JurisdictionType,
+  jurisdiction: AnyJurisdiction,
   localityName: string,
-): LocalityType | undefined {
-  const localities: { [key: string]: Locality } | undefined =
+): AnyLocality | undefined {
+  const localities: Record<string, Locality> | undefined =
     jurisdiction.localities;
 
   if (localities === undefined) {
@@ -225,19 +223,7 @@ export function getLocality(
     return undefined;
   }
 
-  if (localityName === undefined) {
-    console.error("Called compileGuidesFor() with no locality name.");
-    return undefined;
-  }
-
-  const locality = localities[localityName];
-
-  if (locality === undefined) {
-    console.error("Called compileGuidesFor() with a nonexistent locality.");
-    return undefined;
-  }
-
-  return locality;
+  return localities[localityName];
 }
 
 /**
@@ -248,10 +234,10 @@ export function getLocality(
  * @return {Promise<Uint8Array>} Compiled documents
  */
 export async function compileDocuments(
-  processes: ProcessType[],
+  processes: AnyProcess[],
   applicant: Person,
 ): Promise<Uint8Array | undefined> {
-  const docs: DocumentType[] = [];
+  const docs: AnyDocument[] = [];
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -292,12 +278,10 @@ export async function compileDocuments(
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
-    allDocuments
-      .filter((doc) => doc !== undefined)
-      .map((doc) => {
-        const numPages = doc.getPageCount();
-        return result.copyPages(doc, [...Array(numPages).keys()]);
-      }),
+    allDocuments.map((doc) => {
+      const numPages = doc.getPageCount();
+      return result.copyPages(doc, [...Array(numPages).keys()]);
+    }),
   );
 
   // Flatten form fields into document.

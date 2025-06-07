@@ -32,7 +32,7 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
         changes all in one form. Any parent or legal guardian can fill this form
         out and file it on your behalf. Whoever does becomes your petitioner and
         will be going through this process with you.{" "}
-        {isChangingLegalSex && isChangingLegalSex === true ? (
+        {isChangingLegalSex ? (
           <>
             In order to file this your petitioner needs to be a resident of
             Oregon, which just means they need an ID or some mail with their
@@ -49,7 +49,7 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        {isChangingLegalName && isChangingLegalName === true ? (
+        {isChangingLegalName ? (
           <>
             Your petitioner will <strong>not</strong> need to fill out the legal
             notice section on page 2 yet, thats for after filing. Your
@@ -64,8 +64,8 @@ function OregonMinorPetitionGuide({ person }: { person: Person }) {
             Your petitioner can fill out why this is in your best interest on
             page 3 then sign and the form is ready to file.
           </>
-        )}
-        {" "}The “General Judgement” is on pages 6 and 7 should already be set, file 
+        )}{" "}
+        The “General Judgement” is on pages 6 and 7 should already be set, file
         it with the petition.
       </p>
     </section>

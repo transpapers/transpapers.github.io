@@ -20,12 +20,12 @@
 import { Name, DateFormat, DateFormatPart } from "../types/types";
 import { Person } from "../types/person";
 
-import { type PhoneNumber, parsePhoneNumber } from "react-phone-number-input";
+import { parsePhoneNumber } from "react-phone-number-input";
 
 export function abbreviateJurisdiction(
   jurisdiction: string,
 ): string | undefined {
-  const map: { [name: string]: string } = {
+  const map: Record<string, string> = {
     Alabama: "AL",
     Alaska: "AK",
     Arizona: "AZ",
@@ -124,7 +124,7 @@ export function numericalAge(birthdate: string): number {
  * @return {string}
  */
 export function formatDate(date: string | undefined, fmt: DateFormat): string {
-  if (!date || !fmt) {
+  if (!date) {
     return "";
   }
 
@@ -142,19 +142,13 @@ export function formatDate(date: string | undefined, fmt: DateFormat): string {
         return day;
       }
 
-      if (part === DateFormatPart.YEAR) {
-        return year;
-      }
-
-      return "";
+      return year;
     })
     .join(fmt.separator);
 }
 
 function phoneDigits(phoneNumber: string): string {
-  const phone = parsePhoneNumber(phoneNumber, {
-    defaultCountry: "US",
-  }) as PhoneNumber;
+  const phone = parsePhoneNumber(phoneNumber, { defaultCountry: "US" });
   if (phone) {
     return phone.nationalNumber.replaceAll(/[^\d]/g, "");
   } else {
@@ -167,7 +161,7 @@ export function phoneAreaCode(phoneNumber: string | undefined): string {
     return "";
   }
 
-  return phoneDigits(phoneNumber).substring(0, 3) ?? "";
+  return phoneDigits(phoneNumber).substring(0, 3);
 }
 
 /** Split phone number into first three digits */
@@ -176,7 +170,7 @@ export function phoneStart(phoneNumber: string | undefined): string {
     return "";
   }
 
-  return phoneDigits(phoneNumber).substring(3, 6) ?? "";
+  return phoneDigits(phoneNumber).substring(3, 6);
 }
 
 /** Split phone number into last 4 digits */
@@ -185,7 +179,7 @@ export function phoneEnd(phoneNumber: string | undefined): string {
     return "";
   }
 
-  return phoneDigits(phoneNumber).substring(6) ?? "";
+  return phoneDigits(phoneNumber).substring(6);
 }
 
 /**
@@ -208,10 +202,6 @@ export function fullName(name: Name | undefined): string {
  * @return {boolean}
  */
 export function isMinor(applicant: Partial<Person>): boolean {
-  if (!applicant) {
-    return false;
-  }
-
   if (applicant.age !== undefined) {
     return applicant.age < 18;
   }
@@ -256,7 +246,7 @@ export function fullContactInfo(applicant: Person, separator = "\n"): string {
   const lines = [
     fullName(representativeName(applicant)),
     applicant.streetAddress,
-    `${applicant.residentCity}, ${applicant.residentJurisdiction} ${applicant.zip}`,
+    `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
     applicant.phone,
   ];
 
@@ -266,7 +256,7 @@ export function fullContactInfo(applicant: Person, separator = "\n"): string {
 /**
  * Return entered string with leading "0" if it was single digit.
  * This is for adding 0's to the day or month for particular forms.
- * @param {Person} applicant
+ * @param {string} zeroString
  * @return {string}
  */
 export function addZero(zeroString: string): string {

@@ -51,23 +51,17 @@ export const ssnMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      applicant.birthName?.first
-        ? applicant.birthName?.first ?? ""
-        : applicant.legalName?.first ?? "",
+      applicant.birthName?.first ?? applicant.legalName?.first ?? "",
     field: "topmostSubform[0].Page5[0].firstdiffname[0]",
   },
   {
     text: (applicant) =>
-      applicant.birthName?.middle
-        ? applicant.birthName?.middle ?? ""
-        : applicant.legalName?.middle ?? "",
+      applicant.birthName?.middle ?? applicant.legalName?.middle ?? "",
     field: "topmostSubform[0].Page5[0].Middlediffname[0]",
   },
   {
     text: (applicant) =>
-      applicant.birthName?.last
-        ? applicant.birthName?.last ?? ""
-        : applicant.legalName?.last ?? "",
+      applicant.birthName?.last ?? applicant.legalName?.last ?? "",
     field: "topmostSubform[0].Page5[0].Lastdiffname[0]",
   },
   {
@@ -194,12 +188,19 @@ export const ds5504Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
+      addZero(
+        formatDate(applicant.birthdate, {
+          format: [DATE.MONTH],
+          separator: "",
+        }),
+      ),
     loc: { page: 4, x: 99, y: 281 },
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
+      addZero(
+        formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      ),
     loc: { page: 4, x: 147, y: 281 },
   },
   {
@@ -218,7 +219,7 @@ export const ds5504Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.birthCity} ${applicant.birthJurisdiction}`,
+      `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
     loc: { page: 4, x: 364, y: 281 },
   },
   { text: (applicant) => applicant.email, loc: { page: 4, x: 309, y: 326 } },
@@ -251,7 +252,7 @@ export const ds5504Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction || "") || "",
+      abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? "",
     loc: { page: 4, x: 378, y: 461 },
   },
   { text: (applicant) => applicant.zip, loc: { page: 4, x: 436, y: 461 } },
@@ -316,12 +317,19 @@ export const ds82Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
+      addZero(
+        formatDate(applicant.birthdate, {
+          format: [DATE.MONTH],
+          separator: "",
+        }),
+      ),
     loc: { page: 4, x: 99, y: 270 },
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
+      addZero(
+        formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      ),
     loc: { page: 4, x: 147, y: 270 },
   },
   {
@@ -339,7 +347,7 @@ export const ds82Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.birthCity} ${applicant.birthJurisdiction}`,
+      `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
     loc: { page: 4, x: 364, y: 270 },
   },
   { text: (applicant) => applicant.email, loc: { page: 4, x: 309, y: 316 } },
@@ -372,7 +380,7 @@ export const ds82Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction || "") || "",
+      abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? "",
     loc: { page: 4, x: 376, y: 448 },
   },
   { text: (applicant) => applicant.zip, loc: { page: 4, x: 436, y: 448 } },
@@ -387,7 +395,7 @@ export const ds82Map: Formfill[] = [
   { text: () => "x", loc: { page: 4, x: 262, y: 703 } },
   {
     text: (applicant) =>
-      `${applicant.court?.city}  ${abbreviateJurisdiction(applicant.residentJurisdiction || "") || ""}`,
+      `${applicant.court?.city ?? ""}  ${abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? ""}`,
     loc: { page: 4, x: 390, y: 707 },
   },
   {
@@ -424,12 +432,19 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.birthdate, { format: [DATE.MONTH], separator: "" })),
+      addZero(
+        formatDate(applicant.birthdate, {
+          format: [DATE.MONTH],
+          separator: "",
+        }),
+      ),
     loc: { page: 4, x: 100, y: 275 },
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" })),
+      addZero(
+        formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      ),
     loc: { page: 4, x: 148, y: 275 },
   },
   {
@@ -440,7 +455,7 @@ export const ds11Map: Formfill[] = [
   /** removed gender check marks and added a warning to guide instead */
   {
     text: (applicant) =>
-      `${applicant.birthCity} ${applicant.birthJurisdiction}`,
+      `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
     loc: { page: 4, x: 365, y: 275 },
   },
   { text: (applicant) => applicant.email, loc: { page: 4, x: 313, y: 323 } },
@@ -473,7 +488,7 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction || "") || "",
+      abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? "",
     loc: { page: 4, x: 379, y: 454 },
   },
   { text: (applicant) => applicant.zip, loc: { page: 4, x: 439, y: 454 } },
@@ -505,18 +520,22 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.mothersBirthdate, {
-        format: [DATE.MONTH],
-        separator: "",
-      })),
+      addZero(
+        formatDate(applicant.mothersBirthdate, {
+          format: [DATE.MONTH],
+          separator: "",
+        }),
+      ),
     loc: { page: 5, x: 47, y: 158 },
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.mothersBirthdate, {
-        format: [DATE.DAY],
-        separator: "",
-      })),
+      addZero(
+        formatDate(applicant.mothersBirthdate, {
+          format: [DATE.DAY],
+          separator: "",
+        }),
+      ),
     loc: { page: 5, x: 94, y: 158 },
   },
   {
@@ -539,18 +558,22 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.fathersBirthdate, {
-        format: [DATE.MONTH],
-        separator: "",
-      })),
+      addZero(
+        formatDate(applicant.fathersBirthdate, {
+          format: [DATE.MONTH],
+          separator: "",
+        }),
+      ),
     loc: { page: 5, x: 48, y: 248 },
   },
   {
     text: (applicant) =>
-      addZero(formatDate(applicant.fathersBirthdate, {
-        format: [DATE.DAY],
-        separator: "",
-      })),
+      addZero(
+        formatDate(applicant.fathersBirthdate, {
+          format: [DATE.DAY],
+          separator: "",
+        }),
+      ),
     loc: { page: 5, x: 95, y: 248 },
   },
   {

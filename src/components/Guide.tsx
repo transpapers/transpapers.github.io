@@ -28,7 +28,7 @@ import useStore from "../store";
 import { type Person } from "../types/person";
 import { allProcesses } from "../types/jurisdiction";
 
-import { type DocumentType, type LocalityType } from "../types/generic";
+import { type AnyDocument, type AnyLocality } from "../types/generic";
 
 function Guide() {
   const applicant = useStore((state) => state.person);
@@ -48,47 +48,57 @@ function Guide() {
     }
   }, console.error);
 
-  const documentDict = processes.reduce((dict, proc) => {
-    const jurisdictionName = proc.isBirth
-      ? applicant.birthJurisdiction
-      : applicant.residentJurisdiction;
-    const localityName = !proc.isBirth ? applicant.residentLocality : null;
+  const documentDict = new Map<AnyLocality, AnyDocument[]>();
+  // Write this like a not idiot.
+  for (const proc of processes) {
+    let jurisdictionName, localityName;
+
+    if (proc.isBirth) {
+      jurisdictionName = applicant.birthJurisdiction;
+      localityName = null;
+    } else {
+      jurisdictionName = applicant.residentJurisdiction;
+      localityName = applicant.residentLocality;
+    }
 
     if (jurisdictionName) {
       const jurisdiction = allJurisdictions.get(jurisdictionName);
       if (jurisdiction && localityName) {
         const locality = getLocality(jurisdiction, localityName);
         if (locality) {
-          const entry = dict.get(locality);
-          if (entry && proc.documents) {
+          const entry = documentDict.get(locality);
+          if (entry) {
             proc.documents.forEach((doc) => {
               if (!entry.includes(doc)) entry.push(doc);
             });
           } else {
-            dict.set(locality, []);
+            documentDict.set(locality, []);
           }
         }
       }
     }
-    return dict;
-  }, new Map<LocalityType, DocumentType[]>());
+  }
 
-  const guideElements = documentDict.entries().flatMap(([locality, docs]) => {
-    return [
-      ...docs.map((doc) => {
-        type theRightType = React.FunctionComponent<{
-          person: Person;
-          locality: typeof locality;
-        }>;
-        if (doc.guide as theRightType) {
-          return React.createElement(doc.guide as theRightType, {
-            person: applicant,
-            locality,
-          });
-        }
-      }),
-    ];
-  });
+  const guideElements = [];
+  for (const [locality, docs] of documentDict.entries()) {
+    for (const doc of docs) {
+      type theRightType = React.FunctionComponent<{
+        person: Person;
+        locality: typeof locality;
+      }>;
+
+      const correctlyTypedGuide = doc.guide as theRightType;
+
+      if (typeof correctlyTypedGuide === "function") {
+        const element = React.createElement(correctlyTypedGuide, {
+          person: applicant,
+          locality,
+        });
+
+        guideElements.push(element);
+      }
+    }
+  }
 
   return (
     <>
@@ -103,7 +113,7 @@ function Guide() {
         </strong>{" "}
         Please review the forms and guide side by side.
       </p>
-      {...Array.from(guideElements)}
+      {...guideElements}
     </>
   );
 }

@@ -22,7 +22,8 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
-  const { age, parentsAreOkay, birthJurisdiction, residentJurisdiction } = person;
+  const { age, parentsAreOkay, birthJurisdiction, residentJurisdiction } =
+    person;
 
   return (
     <section key="Oregon-BC-Update">
@@ -67,7 +68,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
             certificate they will need to attach documentation of the change
             (e.g. marriage certificate, divorce certificate, court order, etc…){" "}
             <strong>photocopies only</strong>.
-            {parentsAreOkay && parentsAreOkay === true
+            {parentsAreOkay
               ? ""
               : " Legal guardians need to provide proof of guardianship. "}
             If they do not have a driver&apos;s license or state ID the “Oregon
@@ -123,12 +124,15 @@ function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        Alternatively the envelope can be placed in a dropbox at 800 NE Oregon St,
-        Portland. It may take up to six months to process once the letter is
+        Alternatively the envelope can be placed in a dropbox at 800 NE Oregon
+        St, Portland. It may take up to six months to process once the letter is
         sent.
         {age && age < 18 ? (
           <>
-            {(birthJurisdiction && birthJurisdiction === "Oregon") && (residentJurisdiction && residentJurisdiction === "Oregon")
+            {birthJurisdiction &&
+            birthJurisdiction === "Oregon" &&
+            residentJurisdiction &&
+            residentJurisdiction === "Oregon"
               ? " According to the Social Security Administration's" +
                 "<a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'> rules </a>" +
                 " when the new birth certificate and correspondence letter arrive a " +

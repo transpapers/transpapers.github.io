@@ -20,21 +20,22 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
-// import { type NewYorkCounty } from "../../../types/locality";
+import { type NewYorkCounty } from "../../../types/locality";
 
-function NewYorkFilingGuide(
-  { person }: { person: Person },
-  // { NYcounty }: { NYcounty: NewYorkCounty },
-) {
+function NewYorkFilingGuide({
+  person,
+  locality,
+}: {
+  person: Person;
+  locality: NewYorkCounty;
+}) {
   const { court, age, residentLocality } = person;
-  // const { isNYC, borough } = NYcounty;
-  const isNYC = true;
-  const borough = "BOROUGH";
+  const { isNYC, borough } = locality;
   return (
     <section key="NewYork-Filing">
       <h3>Filing Initial Forms (NY)</h3>
 
-      {isNYC && isNYC === true ? (
+      {isNYC ? (
         <>
           <p>
             {age && age < 18 ? "A parent/guardian " : "You "} can file in any of
@@ -103,7 +104,7 @@ function NewYorkFilingGuide(
             </span>
           )}
           <p>
-            {court?.specificCourtInfo && court?.specificCourtInfo}
+            {court?.specificCourtInfo && court.specificCourtInfo}
             The cost to file is currently $65. If you bring cash make sure
             it&apos;s exact as they probably won&apos;t make change for you.
           </p>
@@ -119,7 +120,7 @@ function NewYorkFilingGuide(
             cost to file is currently $210, there will not be a hearing.
           </p>
 
-          {court?.specificCourtInfo && <p>{court?.specificCourtInfo}</p>}
+          {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
         </>
       )}
 
