@@ -27,14 +27,15 @@ function AlaskaAdultPetitionGuide({ person }: { person: Person }) {
     <section key="Alaska-Adult-Petition">
       <h3>Petition for Change of Name (AK, CIV-700)</h3>
       <p>
-        The “Petition for Change of Name” (CIV-700) is the primary name change 
+        The “Petition for Change of Name” (CIV-700) is the primary name change
         document. You may need to fill out
-        {hasCriminalRecord && hasCriminalRecord === true ? 
-            (" items 6-10 as they apply to you. "): (" item 6, ignore the rest. ")}
-        Also at the bottom you will need to decide if you would like to check the box 
-        to have the court email your documents rather than snail mail them. Do{" "}
-        <strong>not</strong> sign and date the form until a notary or court clerk 
-        instructs you to do so.
+        {hasCriminalRecord
+          ? " items 6-10 as they apply to you. "
+          : " item 6, ignore the rest. "}
+        Also at the bottom you will need to decide if you would like to check
+        the box to have the court email your documents rather than snail mail
+        them. Do <strong>not</strong> sign and date the form until a notary or
+        court clerk instructs you to do so.
       </p>
     </section>
   );

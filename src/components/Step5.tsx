@@ -31,7 +31,6 @@ function Step5() {
   const navigate = useNavigate();
 
   const updateProcessNames = useStore((state) => state.updateProcessNames);
-  // const processNames = useStore((state) => state.processNames);
   const { residentJurisdiction, birthJurisdiction } = useStore(
     (state) => state.person,
   );
@@ -39,7 +38,7 @@ function Step5() {
   const processes = allProcesses(residentJurisdiction, birthJurisdiction);
 
   const onSubmit = async ({ processNames }: { processNames?: string[] }) => {
-    updateProcessNames(processNames!);
+    updateProcessNames(processNames ?? []);
     await navigate("/step6");
   };
 
@@ -61,7 +60,7 @@ function Step5() {
                     value={proc.target}
                     defaultChecked
                   />
-                  {targets[proc.target!] || ""}
+                  {(proc.target && targets[proc.target]) ?? ""}
                 </label>
               </li>
             ))}

@@ -101,7 +101,7 @@ function RhodeIslandNotaryGuide({
         a photo ID.
       </p>
 
-      {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true ? (
+      {courtDoesBackgroundCheck ? (
         <p>
           Our records show that the {court?.city} court either does the
           background check report for you when you file or gives its own unique
@@ -146,7 +146,7 @@ function RhodeIslandNotaryGuide({
           ? "Once you and your parent(s)/guardian(s) "
           : "Once you "}
         have a useable copy of the birth certificate
-        {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true
+        {courtDoesBackgroundCheck
           ? " and a notarized Change of Name petition you are ready to file. The court should take care of the background check when you file."
           : ", a notarized Change of Name petition, and the background check results you are ready to file."}
       </p>

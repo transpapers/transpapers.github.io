@@ -34,13 +34,13 @@ function AlaskaMinorPetitionGuide({ person }: { person: Person }) {
         going through this process with you. Your parent/guardian will need to
         decide whether to check the box at the top to receive court documents to
         an email account instead of regular mail.
-        {parentsAreOkay && parentsAreOkay === true
+        {parentsAreOkay
           ? ""
           : " Afterwards they will need to check a box for item 4. "}
         Item 5 is talking about the “Parental Consent From Non-Petitioning
         Parent” (CIV-695) form which we have included. Any parent/guardian needs
         to sign one of those forms unless they are deceased or are non-custodial
-        {parentsAreOkay && parentsAreOkay === true
+        {parentsAreOkay
           ? ". "
           : " in which case attach certified copies of a death certificate or custody order. Legal Guardians also need to provide a certified copy of their letter of guardianship. "}
         If a parent/guardian with custody of you refuses to sign that form in

@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export type Locality = {
+export interface Locality {
   court: Court;
-};
+}
 
 export type OregonCounty = Locality;
 

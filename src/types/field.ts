@@ -27,6 +27,6 @@ export interface Field {
   type: string; // ENUM>
   default?: boolean | number | string;
   include?: (applicant: Person) => boolean;
-  options?: { [key: string]: string };
+  options?: Record<string, string>;
   required?: boolean;
 }

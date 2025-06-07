@@ -49,7 +49,7 @@ export const oregonNameChange: Process<Locality> = {
       filename: "Oregon/Name and Sex Change Petition Adult.pdf",
       guide: OregonAdultPetitionGuide,
       map: adultNameSexPetitionOregonMap,
-      include: (applicant) => isMinor(applicant) === false,
+      include: (applicant) => !isMinor(applicant),
     },
     {
       name: "Change of Name or Sex (Minor)",
@@ -57,7 +57,7 @@ export const oregonNameChange: Process<Locality> = {
       guide: OregonMinorPetitionGuide,
       map: minorNameSexPetitionOregonMap,
       include: (applicant) =>
-        isMinor(applicant) === true && applicant.birthJurisdiction !== "Oregon",
+        isMinor(applicant) && applicant.birthJurisdiction !== "Oregon",
     },
     {
       name: "Application for Deferral or Waiver of Fees and Declaration in Support",
@@ -65,22 +65,19 @@ export const oregonNameChange: Process<Locality> = {
       guide: OregonFeeWaiverGuide,
       map: feeWaiverOregonMap,
       include: (applicant) =>
-        isMinor(applicant) === false ||
-        applicant.birthJurisdiction !== "Oregon",
+        !isMinor(applicant) || applicant.birthJurisdiction !== "Oregon",
     },
     {
       name: "Filing Initial Documents",
       guide: OregonFilingInitialFormsGuide,
       include: (applicant) =>
-        isMinor(applicant) === false ||
-        applicant.birthJurisdiction !== "Oregon",
+        !isMinor(applicant) || applicant.birthJurisdiction !== "Oregon",
     },
     {
       name: "Court Hearing",
       guide: OregonCourtHearingGuide,
       include: (applicant) =>
-        isMinor(applicant) === false ||
-        applicant.birthJurisdiction !== "Oregon",
+        !isMinor(applicant) || applicant.birthJurisdiction !== "Oregon",
     },
   ],
 };
@@ -148,5 +145,5 @@ export const oregonPostamble: Process<Locality> = {
       guide: OregonResourcesGuide,
     },
   ],
-   isJustGuide: true,
+  isJustGuide: true,
 };

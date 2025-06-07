@@ -57,14 +57,14 @@ function AlaskaFilingInitialFormsGuide({
         No matter what method is used a valid photo ID is needed to notarize the
         forms. Below is a list of filing methods for the {residentLocality}{" "}
         court.
-        {doesNameChange && doesNameChange === true
+        {doesNameChange && forwardsTo?.court
           ? ""
           : " This court only forwards to the " +
-            forwardsTo?.court?.city +
+            (forwardsTo?.court.city ?? "") +
             " superior court whose methods are also listed, file at either."}
       </p>
 
-      {inPersonFiling && inPersonFiling === true ? (
+      {inPersonFiling ? (
         <p>
           <span> In-person - </span>
           <br />
@@ -82,7 +82,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {trueFiling && trueFiling === true ? (
+      {trueFiling ? (
         <p>
           <span> True Filing - </span>
           <br />
@@ -101,7 +101,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {trueFiling && trueFiling === true ? (
+      {trueFiling ? (
         <p>
           You can fill out the form to register an account and begin the filing
           process. Log in, click on “File” in the upper right hand section, and
@@ -128,7 +128,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {emailFiling && emailFiling === true ? (
+      {emailFiling ? (
         <p>
           <span> Email - </span>
           <br />
@@ -155,7 +155,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {faxFiling && faxFiling === true ? (
+      {faxFiling ? (
         <p>
           <span> Fax - </span>
           <br />
@@ -177,21 +177,21 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {doesNameChange && doesNameChange === true ? (
+      {doesNameChange ? (
         ""
       ) : (
         <p>
-          The {forwardsTo?.court?.city} superior court allows for the following
+          The {forwardsTo?.court.city} superior court allows for the following
           filing methods:
-          {forwardsTo?.inPersonFiling && forwardsTo?.inPersonFiling === true ? (
+          {forwardsTo?.inPersonFiling ? (
             <>
-              <span>In-person - at {forwardsTo?.court?.address}.</span>
+              <span>In-person - at {forwardsTo.court.address}.</span>
               <br />
             </>
           ) : (
             ""
           )}
-          {forwardsTo?.trueFiling && forwardsTo?.trueFiling === true ? (
+          {forwardsTo?.trueFiling ? (
             <>
               <span>
                 True Filing - at this{" "}
@@ -202,17 +202,17 @@ function AlaskaFilingInitialFormsGuide({
           ) : (
             ""
           )}
-          {forwardsTo?.emailFiling && forwardsTo?.emailFiling === true ? (
+          {forwardsTo?.emailFiling ? (
             <>
-              <span>Email - at {forwardsTo?.emailCourt}.</span>
+              <span>Email - at {forwardsTo.emailCourt}.</span>
               <br />
             </>
           ) : (
             ""
           )}
-          {forwardsTo?.faxFiling && forwardsTo?.faxFiling === true ? (
+          {forwardsTo?.faxFiling ? (
             <>
-              <span>Fax - at {forwardsTo?.faxNumber}.</span>
+              <span>Fax - at {forwardsTo.faxNumber}.</span>
               <br />
             </>
           ) : (

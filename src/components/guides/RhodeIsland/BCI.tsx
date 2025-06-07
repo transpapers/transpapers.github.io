@@ -36,9 +36,9 @@ function RhodeIslandBCIGuide({
     <section key="RhodeIsland-BCI">
       <h3>Background Check Authorization Form (RI)</h3>
 
-      {courtDoesBackgroundCheck && courtDoesBackgroundCheck == true ? (
+      {courtDoesBackgroundCheck ? (
         <p>
-          Our records show that the {court?.city} court either does the
+          Our records show that the {court.city} court either does the
           background check report for you when you file or gives its own unique
           instructions for one upon filing. You can ignore this section and that
           form for the time being. We have included this form and its

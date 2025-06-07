@@ -17,9 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Locality } from "../../types/locality";
+import { OregonCounty } from "../../types/locality";
 
-const oregonCounties: { [key: string]: Locality } = {
+const oregonCounties: Record<string, OregonCounty> = {
   Baker: {
     court: {
       address: "1995 3rd St #220, Baker City, OR 97814",

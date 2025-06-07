@@ -22,9 +22,9 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganSecretaryOfStateGuide({ person }: { person: Person }) {
-    const { age, isChangingLegalSex, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, isChangingLegalName } = person;
 
-    return (
+  return (
     <section key="Michigan-SecretaryOfState">
       <h3>Updating your Primary ID (MI)</h3>
       <p>
@@ -36,48 +36,51 @@ function MichiganSecretaryOfStateGuide({ person }: { person: Person }) {
         <a href="https://dsvsesvc.sos.state.mi.us/TAP/_/">
           https://dsvsesvc.sos.state.mi.us/TAP/_/
         </a>
-        . {age && age < 18 ?
-            " A parent/guardian will need to go with you to this appointment." : ""}
+        .{" "}
+        {age && age < 18
+          ? " A parent/guardian will need to go with you to this appointment."
+          : ""}
       </p>
 
       <p>
-        If you already have a driver’s license or state ID bring it to the appointment.
-        { isChangingLegalSex && isChangingLegalSex === true ? (
+        If you already have a driver’s license or state ID bring it to the
+        appointment.
+        {isChangingLegalSex ? (
           <>
-            Also bring the <strong>Michigan Secretary of State Sex Designation</strong> form.
-            For that form, if you have a drivers license, write the license number in 
-            section A.
+            Also bring the{" "}
+            <strong>Michigan Secretary of State Sex Designation</strong> form.
+            For that form, if you have a drivers license, write the license
+            number in section A.
           </>
-        ):("")}
+        ) : (
+          ""
+        )}
         Arrive a few minutes early and check in at the kiosk.
       </p>
 
       <p>
-        If you do not already have a driver’s license or state ID, tell the clerk that 
-        you are applying for one and bring the forms of identification you used for 
-        Social Security. The appointment should proceed normally but make sure the 
-        gender marker is set correctly before you leave.
+        If you do not already have a driver’s license or state ID, tell the
+        clerk that you are applying for one and bring the forms of
+        identification you used for Social Security. The appointment should
+        proceed normally but make sure the gender marker is set correctly before
+        you leave.
       </p>
 
       <p>
         If you do have primary identification, tell the clerk that you are
         updating the name and/or gender marker on it. They will ask for the
-        { isChangingLegalName && isChangingLegalName === true ? 
-          (" court-ordered name change, "):("")}
-        { isChangingLegalSex && isChangingLegalSex === true ? 
-          (" the Sex Designation Form, "):("")}
+        {isChangingLegalName ? " court-ordered name change, " : ""}
+        {isChangingLegalSex ? " the Sex Designation Form, " : ""}
         and ID. Sign and date it in front of them
-        { isChangingLegalName && isChangingLegalName === true ? 
-          (" with your new legal name. "):(". ")}
-        If at any point you experience issues or pushback politely inisist
-        on speaking to a supervisor for assistence.
+        {isChangingLegalName ? " with your new legal name. " : ". "}
+        If at any point you experience issues or pushback politely inisist on
+        speaking to a supervisor for assistence.
       </p>
 
       <p>
-        Optionally, you may also update your vehicle registration(s). You
-        will be given another form, which you should sign and initial
-        { isChangingLegalName && isChangingLegalName === true ? 
-          (" in your new legal name. "):(". ")}
+        Optionally, you may also update your vehicle registration(s). You will
+        be given another form, which you should sign and initial
+        {isChangingLegalName ? " in your new legal name. " : ". "}
         You will be charged a fee for each vehicle.
       </p>
     </section>

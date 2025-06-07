@@ -31,6 +31,8 @@ type Opaque = Name;
 // TODO better-tree-shaker branch
 // eslint-disable-next-line
 function isOpaque(obj: any): obj is Opaque {
+  // TODO better-tree-shaker branch
+  // eslint-disable-next-line
   return (obj as Name).first !== undefined;
 }
 

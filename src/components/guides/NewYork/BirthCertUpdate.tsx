@@ -125,7 +125,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
         {age && age < 18
           ? " Any living parents listed on the birth certificate will need to provide photocopies of a drivers license or state ID (front and back)"
           : " You will need to make a photocopy of a state ID or drivers license (front and back). "}
-        {parentsAreOkay && parentsAreOkay === true
+        {parentsAreOkay
           ? ". "
           : ", otherwise provide a certified copy of a death certificate. If you have no living parents a legal guardian can send a photocopy of their ID, letter of guardianship, and both death certificates. "}
         Place everything into an envelope and mail it to:
@@ -148,7 +148,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
         {age && age < 18
           ? " Any living parents listed on the birth certificate will need to go and bring photo ID "
           : " You will need to bring photo ID. "}
-        {parentsAreOkay && parentsAreOkay === true
+        {parentsAreOkay
           ? ". "
           : " or a death certificate for the other parent. If you have no living parents a legal guardian can bring both death certificates and their photo ID. "}
         They accept credit/debit cards, checks, or money orders.{" "}
@@ -171,7 +171,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
           asking for information from your current birth certificate that they
           can fill out. Both parents/guardians will need to sign and date at the
           bottom.
-          {parentsAreOkay && parentsAreOkay === true
+          {parentsAreOkay
             ? ""
             : " If you only have one parent/guardian they need to check the box above the signature line indicating that. "}
           The DOH-5304 Affidavit will need to be filled out in front of a

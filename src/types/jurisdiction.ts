@@ -59,7 +59,7 @@ export interface Jurisdiction<T extends Locality> {
   /**
    * Map of counties (or county equivalents.)
    */
-  localities?: { [key: string]: T };
+  localities?: Record<string, T>;
 
   /**
    * `true` if this is the dummy `Jurisdiction` used for federal processes.

@@ -80,8 +80,8 @@ export function fillForm(
           field.select(fill.select);
         }
       }
-    } else if (fill.loc !== undefined) {
-      const pageIndex = fill.loc.page || 0;
+    } else {
+      const pageIndex = fill.loc.page ?? 0;
 
       const page = pages[pageIndex];
 
@@ -198,13 +198,11 @@ export function compileGuidesFor(
           person: Person;
           locality: typeof locality;
         }>;
-        if ((doc.guide as theRightType) !== undefined) {
-          const guide = React.createElement(doc.guide as theRightType, {
-            person: applicant,
-            locality,
-          });
-          guides.push(guide);
-        }
+        const guide = React.createElement(doc.guide as theRightType, {
+          person: applicant,
+          locality,
+        });
+        guides.push(guide);
       }
     });
 
@@ -215,7 +213,7 @@ export function getLocality(
   jurisdiction: AnyJurisdiction,
   localityName: string,
 ): AnyLocality | undefined {
-  const localities: { [key: string]: Locality } | undefined =
+  const localities: Record<string, Locality> | undefined =
     jurisdiction.localities;
 
   if (localities === undefined) {
@@ -225,19 +223,7 @@ export function getLocality(
     return undefined;
   }
 
-  if (localityName === undefined) {
-    console.error("Called compileGuidesFor() with no locality name.");
-    return undefined;
-  }
-
-  const locality = localities[localityName];
-
-  if (locality === undefined) {
-    console.error("Called compileGuidesFor() with a nonexistent locality.");
-    return undefined;
-  }
-
-  return locality;
+  return localities[localityName];
 }
 
 /**
@@ -292,12 +278,10 @@ export async function compileDocuments(
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
-    allDocuments
-      .filter((doc) => doc !== undefined)
-      .map((doc) => {
-        const numPages = doc.getPageCount();
-        return result.copyPages(doc, [...Array(numPages).keys()]);
-      }),
+    allDocuments.map((doc) => {
+      const numPages = doc.getPageCount();
+      return result.copyPages(doc, [...Array(numPages).keys()]);
+    }),
   );
 
   // Flatten form fields into document.
