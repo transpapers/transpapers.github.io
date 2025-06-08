@@ -881,17 +881,17 @@ export const birthCertNYCMap: Formfill[] = [
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.M,
     field: "S2: Gender",
-    select: "Choice0",
+    select: "Choice1",
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.F,
     field: "S2: Gender",
-    select: "Choice1",
+    select: "Choice2",
   },
   {
     check: (applicant) => applicant.assignedSex === GenderMarker.X,
     field: "S2: Gender",
-    select: "Choice2",
+    select: "Choice3",
   },
   {
     text: (applicant) => applicant.mothersBirthName?.first,
