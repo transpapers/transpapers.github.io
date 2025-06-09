@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Preflight checks
-        run: sh ./.husky/pre-commit
+        run: bash .husky/pre-commit
       - name: Build
         run: npm run build --if-present
       - name: Deploy

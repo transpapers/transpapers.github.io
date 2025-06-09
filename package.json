@@ -26,9 +26,16 @@
     "url": "https://github.com/transpapers/transpapers.github.io/issues"
   },
   "jest": {
-    "setupFiles": ["./test/vitest-setup.js"]
+    "setupFiles": [
+      "./test/vitest-setup.js"
+    ]
   },
-  "pre-commit": ["eslint", "tsc", "unit", "build"],
+  "pre-commit": [
+    "eslint",
+    "tsc",
+    "unit",
+    "build"
+  ],
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -37,7 +44,6 @@
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
-    "@types/react-phone-number-input": "^3.1.37",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
     "@vitejs/plugin-react": "^4.5.1",
