@@ -391,7 +391,7 @@ export const minorWaivePublicationAlaskaMap: Formfill[] = [
 export const feeWaiverAlaskaMap: Formfill[] = [
   {
     text: (applicant) => applicant.residentLocality,
-    field: "location",
+    field: "courtLocation",
   },
   {
     text: (applicant) => fullName(representativeName(applicant)),

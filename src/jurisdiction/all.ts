@@ -145,10 +145,11 @@ export const federal: Jurisdiction<Locality> = {
   isFederal: true,
 };
 
-// FIXME is there a nicer way to do this?
-export const allJurisdictions = new Map<string, AnyJurisdiction>();
-allJurisdictions.set("Michigan", michigan);
-allJurisdictions.set("Oregon", oregon);
-allJurisdictions.set("Rhode Island", rhodeIsland);
-allJurisdictions.set("New York", newYork);
-allJurisdictions.set("Federal", federal);
+export const allJurisdictions = new Map<string, AnyJurisdiction>([
+  ["Michigan", michigan],
+  ["Oregon", oregon],
+  ["Rhode Island", rhodeIsland],
+  ["New York", newYork],
+  ["Alaska", alaska],
+  ["Federal", federal],
+]);

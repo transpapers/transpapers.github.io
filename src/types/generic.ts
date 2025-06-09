@@ -26,13 +26,15 @@ import {
   NewYorkCounty,
   OregonCounty,
   RhodeIslandCityOrTown,
+  AlaskaAdministrativeDivision,
 } from "../types/locality";
 
 export type AnyLocality =
   | MichiganCounty
   | OregonCounty
   | RhodeIslandCityOrTown
-  | NewYorkCounty;
+  | NewYorkCounty
+  | AlaskaAdministrativeDivision;
 
 // NOTE This cannot be effectively genericized (yet) because TypeScript does not
 // properly support higher-kinded types. (2025-06-05, but unlikely to ever happen.)
