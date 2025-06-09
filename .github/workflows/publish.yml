@@ -4,6 +4,7 @@ on:
   push:
     branches: # triggers on any push to master
       - master
+      - develop
 
 jobs:
   build-deploy:
@@ -20,8 +21,8 @@ jobs:
             ${{ runner.os }}-npm-
       - name: Install dependencies
         run: npm ci
-      - name: Pre-flight checks
-        run: ./.husky/pre-commit
+      - name: Preflight checks
+        run: sh ./.husky/pre-commit
       - name: Build
         run: npm run build --if-present
       - name: Deploy
