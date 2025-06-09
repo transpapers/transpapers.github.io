@@ -11,6 +11,7 @@ function test() {
 		echo "$suitename passed."
 	else
 		echo "$suitename FAILED with exit code $status."
+		exit $status
 	fi
 }
 
@@ -40,7 +41,7 @@ function e2e() {
 	npm run e2e
 	status=$?
 	killport $PORT
-	
+
 	exit $status
 }
 
