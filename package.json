@@ -26,16 +26,8 @@
     "url": "https://github.com/transpapers/transpapers.github.io/issues"
   },
   "jest": {
-    "setupFiles": [
-      "./test/vitest-setup.js"
-    ]
+    "setupFiles": ["./test/vitest-setup.js"]
   },
-  "pre-commit": [
-    "eslint",
-    "tsc",
-    "test",
-    "build"
-  ],
   "homepage": "https://github.com/transpapers/transpapers.github.io#readme",
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
