@@ -118,13 +118,10 @@ describe("generatePersonForTesting", () => {
 */
 
 const processes: AnyProcess[] = Array.from(
-  allJurisdictions
-    .values()
-    .flatMap((jurisdiction) =>
-      jurisdiction.processes ? [...jurisdiction.processes] : [],
-    )
-    .filter((process) => process !== undefined),
-);
+  allJurisdictions.values().map((jurisdiction) => jurisdiction.processes),
+)
+  .flat()
+  .filter((process) => process !== undefined);
 
 const forms = processes
   .map((process) => process!.documents)
