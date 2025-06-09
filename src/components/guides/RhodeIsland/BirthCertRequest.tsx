@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
-  const { court, age, birthJurisdiction } = person;
+  const { court, age, birthJurisdiction, parentsAreOkay } = person;
 
   return (
     <section key="RhodeIsland-BC-Req">
@@ -52,7 +52,7 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
           then fill out the &quot;New name if changed in court&quot; field as
           well.
           {age && age < 18
-            ? " Then have the parent/guardian whose name is listed in section 5 check the appropriate box in section 2 and sign/date section 5. "
+            ? " Then have the parent/guardian whose name is listed in section 5 sign and date that section. "
             : " Then sign and date section 5 with your current legal name. "}
           Instructions for in-person or mail ordering are in the next section.
         </p>
