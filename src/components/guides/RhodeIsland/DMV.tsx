@@ -38,7 +38,7 @@ function RhodeIslandDMVGuide({ person }: { person: Person }) {
         category. From there review section A and fill in any blanks that are
         applicable to you (such as social security and/or driver&apos;s license
         number). Complete sections C & D as it pertains to you and ignore
-        sections E & F. Do<strong>not</strong> sign in section G yet.
+        sections E & F. Do <strong>not</strong> sign in section G yet.
       </p>
 
       {isChangingLegalSex ? (
@@ -65,7 +65,7 @@ function RhodeIslandDMVGuide({ person }: { person: Person }) {
         Proof of Residency documents which are also listed on page 3 of the LI-1
         form.
         {isChangingLegalSex
-          ? " You <strong>don&apos;t</strong> need any proof or medical records for the gender form."
+          ? " You do not need any proof or medical records for the gender form."
           : ""}
       </p>
 

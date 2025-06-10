@@ -237,14 +237,6 @@ export const birthCertOneMap: Formfill[] = [
     loc: { x: 353, y: 323 },
   },
   {
-    text: (applicant) => (isMinor(applicant) && !applicant.parentsAreOkay ? "x" : ""),
-    loc: { x: 101, y: 415 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) && !applicant.parentsAreOkay ? "Legal Guardian" : ""),
-    loc: { x: 384, y: 421 },
-  },
-  {
     text: () => "x",
     loc: { x: 298, y: 537 },
   },
@@ -474,14 +466,6 @@ export const birthCertTwoMap: Formfill[] = [
   {
     text: (applicant) => (!isMinor(applicant) ? "x" : ""),
     loc: { x: 101, y: 323 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) && !applicant.parentsAreOkay ? "x" : ""),
-    loc: { x: 101, y: 415 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) && !applicant.parentsAreOkay ? "Legal Guardian" : ""),
-    loc: { x: 384, y: 421 },
   },
   {
     text: () => "x",

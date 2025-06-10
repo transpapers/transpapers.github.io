@@ -48,7 +48,7 @@ function NewYorkDMVGuide({ person }: { person: Person }) {
 
       <p>
         For updating vehicle titles/registrations you need a &ldquo;Vehicle
-        Registration/Title Application&rdquo; (MV-82) filled out
+        Registration/Title Application&rdquo; (MV-82) filled out{" "}
         <strong>for each vehicle</strong> you want updated. We have included a
         partially filled out form that assumes you are the &ldquo;Primary
         Registrant&rdquo; if this is not true{" "}
