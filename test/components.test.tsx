@@ -198,6 +198,10 @@ const alaskaGuideComponents = [
     component: <AlaskaCourtHearingGuide person={sampleData} />,
   },
   {
+    name: "AlaskaDMVGuide",
+    component: <AlaskaDMVGuide person={sampleData} />,
+  },
+  {
     name: "AlaskaBirthCertificateGuide",
     component: <AlaskaBirthCertificateGuide person={sampleData} />,
   },
