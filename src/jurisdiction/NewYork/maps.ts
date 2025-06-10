@@ -146,11 +146,6 @@ export const minorNameSexPetitionMap: Formfill[] = [
     field: "MinorName",
   },
   {
-    check: (applicant) => isMinor(applicant) && applicant.parentsAreOkay,
-    field: "RelationshipToMinor",
-    select: "Off",
-  },
-  {
     check: (applicant) => isMinor(applicant) && !applicant.parentsAreOkay,
     field: "RelationshipToMinor",
     select: "Guardian",
