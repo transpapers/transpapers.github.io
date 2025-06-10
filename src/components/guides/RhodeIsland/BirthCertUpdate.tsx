@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
-  const { age, isChangingLegalName, isChangingLegalSex } = person;
+  const { age, isChangingLegalName, isChangingLegalSex, parentsAreOkay } = person;
 
   return (
     <section key="RhodeIsland-BC-Update">
@@ -36,6 +36,9 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         &quot;hospital&quot; field. If you have had your name changed by court
         order before this time then fill out the &quot;New name if changed in
         court&quot; field as well.
+        {parentsAreOkay && parentsAreOkay === true ? "" : 
+            " In section 2 a parent should check the “my child” box. Legal guardians" + 
+            " should check “another person” and write “Legal Guardian” to the right. "}
         {age && age < 18
           ? " Then have the parent/guardian whose name is listed in section 5 check the appropriate box in section 2 and sign/date section 5. "
           : isChangingLegalName
