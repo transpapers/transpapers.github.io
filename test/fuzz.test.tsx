@@ -25,7 +25,7 @@ import { fakerEN_US as faker } from "@faker-js/faker";
 import { PDFDocument } from "@cantoo/pdf-lib";
 
 import { fillForm } from "../src/lib/fill";
-import { allJurisdictions } from "../src/jurisdiction/all";
+import { allJurisdictions, jurisdictionNames } from "../src/jurisdiction/all";
 import { type Name, GenderMarker } from "../src/types/types";
 import { type Person } from "../src/types/person";
 import {
@@ -118,7 +118,7 @@ describe("generatePersonForTesting", () => {
 */
 
 const processes: AnyProcess[] = Array.from(
-  allJurisdictions.values().map((jurisdiction) => jurisdiction.processes),
+  jurisdictionNames.map(([, jurisdiction]) => jurisdiction.processes),
 )
   .flat()
   .filter((process) => process !== undefined);

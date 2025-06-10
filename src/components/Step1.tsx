@@ -26,7 +26,7 @@ import useStore from "../store";
 
 import { type Person } from "../types/person";
 
-import { allJurisdictions } from "../jurisdiction/all";
+import { jurisdictionNames } from "../jurisdiction/all";
 
 function Step1() {
   const { register, handleSubmit } = useForm();
@@ -41,10 +41,9 @@ function Step1() {
   };
 
   const choicesElements = Array.from(
-    allJurisdictions
-      .values()
-      .filter((jurisdiction) => !jurisdiction.isFederal)
-      .map(({ name }) => (
+    jurisdictionNames
+      .filter(([, jurisdiction]) => !jurisdiction.isFederal)
+      .map(([name]) => (
         <li key={name}>
           <label>
             <input

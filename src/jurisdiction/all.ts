@@ -145,11 +145,16 @@ export const federal: Jurisdiction<Locality> = {
   isFederal: true,
 };
 
-export const allJurisdictions = new Map<string, AnyJurisdiction>([
+export const jurisdictionNames: [string, AnyJurisdiction][] = [
   ["Michigan", michigan],
   ["Oregon", oregon],
   ["Rhode Island", rhodeIsland],
   ["New York", newYork],
   ["Alaska", alaska],
   ["Federal", federal],
-]);
+];
+
+// FIXME We're running into polyfill issues with GitHub here.
+export const allJurisdictions = new Map<string, AnyJurisdiction>(
+  jurisdictionNames,
+);
