@@ -36,7 +36,7 @@ function RhodeIslandBirthCertUpdateGuide({ person }: { person: Person }) {
         &quot;hospital&quot; field. If you have had your name changed by court
         order before this time then fill out the &quot;New name if changed in
         court&quot; field as well.
-        {parentsAreOkay && parentsAreOkay === true ? "" : 
+        {parentsAreOkay && parentsAreOkay ? "" : 
             " In section 2 a parent should check the “my child” box. Legal guardians" + 
             " should check “another person” and write “Legal Guardian” to the right. "}
         {age && age < 18
