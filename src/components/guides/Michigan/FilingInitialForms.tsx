@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
-  const { court, age, residentLocality } = person;
+  const { court, age, residentLocality, isChangingLegalSex, doNotPublish } = person;
 
   return (
     <section key="MI-InitialForms">
@@ -72,25 +72,30 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
       </p>
 
       <p>
-        Once the paperwork has been filed it will be several weeks before you
-        get a response. From this point you just need to wait. The vast majority
-        of cases will not even have a hearing you will simply recieve your
-        “Order Following Hearing On Petition To Change Name” and certified copy
-        in the mail. We call those documents the &quot;Court Order&quot;. If you
-        recieved notice of a hearing instead read the next section, otherwise
-        skip it.
+        {isChangingLegalSex || doNotPublish ? (
+          <>
+            Once the paperwork has been filed it may be several weeks before 
+            you get a response. From this point you just need to wait. The 
+            vast majority of cases will not even have a hearing you will 
+            simply recieve your “Order Following Hearing On Petition To Change 
+            Name” and certified copy in the mail. We call those documents the 
+            &quot;Court Order&quot;. If you recieved notice of a hearing 
+            instead read the next section, otherwise skip it.
+          </>
+        ):(
+          <>
+            Upon filing ask the clerk if you need to place a legal 
+            notice with a local newspaper. If so read the next section 
+            otherwise skip it. Also if you recieved notice of a hearing 
+            read the &quot;Court Hearing&quot; section, otherwise skip that 
+            as well. If you don't need to place a legal notice or attend a 
+            hearing you can expect to recieve an “Order Following Hearing On 
+            Petition To Change Name” and certified copy in the mail. It may 
+            take several weeks to arrive. We will call the the &quot;Court 
+            Order&quot; from here on.
+          </>
+        )}
       </p>
-
-      {residentLocality && residentLocality !== "Kent" ? (
-        <p>
-          If you want an update on your case{" "}
-          {age && age < 18 ? " your petitioner has " : " you have to "} to go to
-          court and show an ID, they will not confirm anything on the phone to
-          protect privacy.
-        </p>
-      ) : (
-        ""
-      )}
     </section>
   );
 }

@@ -53,7 +53,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51cGuide,
       map: nameChangePrivateMap,
-      include: (applicant) => applicant.residentLocality !== "Kent",
+      include: (applicant) => (applicant.isChangingLegalSex && applicant.residentLocality !== "Kent") || applicant.doNotPublish,
     },
     {
       name: "Petition for Name Change",
@@ -61,7 +61,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => applicant.residentLocality === "Kent",
+      include: (applicant) => !applicant.isChangingLegalSex || applicant.residentLocality === "Kent" || !applicant.doNotPublish,
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -70,7 +70,6 @@ export const michiganNameChange: Process<MichiganCounty> = {
       guide: MichiganM97aGuide,
       map: piiMap,
     },
-
     {
       name: "Order Following Hearing Regarding Petition For Name Change",
       id: "PC 52",

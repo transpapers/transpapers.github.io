@@ -111,7 +111,7 @@ export const fields: Record<string, Field> = {
     title:
       "Request that the court case records be sealed or otherwise not published.",
     subtitle:
-      "Some states have more stringent requirements than others, we will cover any of those in the guide.",
+      "This usually requires proof that you would be either placed in potential danger or would be discrimminated against if the case was published. Some states have more stringent requirements than others, we will cover any of those in the guide.",
     name: "doNotPublish",
     type: "boolean",
   },

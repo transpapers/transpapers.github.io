@@ -195,7 +195,7 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "Endangered individual",
   },
   {
-    check: () => true,
+    check: (applicant) => applicant.isChangingLegalSex,
     field: "discrimination",
   },
   {
@@ -216,7 +216,7 @@ export const nameChangePrivateMap: Formfill[] = [
     field: "Endangered individual_2",
   },
   {
-    check: () => true,
+    check: (applicant) => applicant.isChangingLegalSex,
     field: "b. checkbox seek to affirm gender identity",
   },
   {

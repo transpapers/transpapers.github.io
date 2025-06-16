@@ -569,28 +569,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
     ],
     publications: [
       {
-        name: "Charlotte Shopping Guide",
-        website: "",
-      },
-      {
         name: "The County Journal",
         website: "https://county-journal.com/contact",
-      },
-      {
-        name: "Grand Ledge Independent",
-        website: "",
-      },
-      {
-        name: "Eaton Rapids Community News",
-        website: "",
-      },
-      {
-        name: "Delta-Waverly News",
-        website: "",
-      },
-      {
-        name: "Eaton Rapids Flashes",
-        website: "",
       },
     ],
   },
@@ -634,7 +614,7 @@ const michiganCounties: Record<string, MichiganCounty> = {
     publications: [
       {
         name: "Genesee County Legal News",
-        website: "",
+        website: "https://legalnews.com/County/ContactUs?location=flintgenesee",
       },
     ],
   },
@@ -1006,7 +986,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
     publications: [
       {
         name: "GR Press",
-        website: "Email: legalads@mlive.com",
+        website: "https://www.mlivemediagroup.com/contact/",
+        email: "legalads@mlive.com",
       },
     ],
   },
@@ -1704,10 +1685,6 @@ const michiganCounties: Record<string, MichiganCounty> = {
         name: "Grand Haven Tribune",
         website: "https://www.grandhaventribune.com/",
       },
-      {
-        name: "MLive",
-        email: "legalads@mlive.com",
-      },
     ],
   },
   "Presque Isle": {
@@ -1775,8 +1752,9 @@ const michiganCounties: Record<string, MichiganCounty> = {
     ],
     publications: [
       {
-        name: "M-Live",
-        website: "Email: legalads@mlive.com",
+        name: "M-Live Saginaw",
+        website: "https://www.mlivemediagroup.com/contact/",
+        email: "legalads@mlive.com",
       },
     ],
   },

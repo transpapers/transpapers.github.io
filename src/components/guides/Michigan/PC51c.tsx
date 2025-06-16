@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganPC51cGuide({ person }: { person: Person }) {
-  const { age, residentLocality, parentsAreOkay, hasCriminalRecord } = person;
+  const { age, residentLocality, parentsAreOkay, hasCriminalRecord, isChangingLegalSex } = person;
 
   return (
     <section key="Michigan-PC51c">
@@ -37,17 +37,28 @@ function MichiganPC51cGuide({ person }: { person: Person }) {
       <p>
         If necessary complete item 1 for any active court cases.
         {hasCriminalRecord ? (
-          <p>
+          <>
             {age && age < 18
               ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. "
               : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. "}
-          </p>
+          </>
         ) : (
           ""
         )}{" "}
-        If you would like for the judge to see personal details of why you may
-        be at risk of discrimination or retaliation add them to the bottom of
-        page 3, this is optional.
+        {isChangingLegalSex ? (
+          <>
+            If you would like for the judge to see personal details of why you may
+            be at risk of discrimination or retaliation add them to the bottom of
+            page 3, this is optional.
+          </>
+        ):(
+          <>
+            On page 3 you will need to check at least one of the boxes for each of 
+            the first two sections. Then fill out section 3 with the reasons why 
+            you checked those boxes. You can add evidence as seperate sheets with 
+            the petition if you need to just state so in section 3.
+          </>
+        )}
       </p>
 
       <p>
@@ -68,6 +79,13 @@ function MichiganPC51cGuide({ person }: { person: Person }) {
         ) : (
           " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature.” Do the same on the bottom of page 3."
         )}
+      </p>
+
+      <p>
+        Note: When this form gets filed if you want an update on your case{" "}
+        {age && age < 18 ? " your petitioner has " : " you have to "} to go to
+        court and show an ID, they will not confirm anything on the phone to
+        protect privacy.
       </p>
     </section>
   );

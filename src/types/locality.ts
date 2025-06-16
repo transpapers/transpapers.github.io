@@ -84,16 +84,9 @@ export interface FingerprintLocation {
   website: string;
 }
 
-interface PublicationWebsite {
+export interface Publication {
   name: string;
-  website: string;
+  website?: string;
   email?: string;
 }
 
-interface PublicationEmail {
-  name: string;
-  email: string;
-  website?: string;
-}
-
-export type Publication = PublicationWebsite | PublicationEmail;
