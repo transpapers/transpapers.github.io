@@ -37,6 +37,7 @@ import MichiganMC20Guide from "../../components/guides/Michigan/MC20";
 import MichiganPC51cGuide from "../../components/guides/Michigan/PC51c";
 import MichiganPC51Guide from "../../components/guides/Michigan/PC51";
 import MichiganPC52Guide from "../../components/guides/Michigan/PC52";
+import MichiganPublicationGuide from "../../components/guides/Michigan/Publication";
 import MichiganResourcesGuide from "../../components/guides/Michigan/Resources";
 import MichiganSecretaryOfStateGuide from "../../components/guides/Michigan/SecretaryOfState";
 
@@ -53,7 +54,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51cGuide,
       map: nameChangePrivateMap,
-      include: (applicant) => ((applicant.isChangingLegalSex && applicant.residentLocality !== "Kent") ?? applicant.doNotPublish),
+      include: (applicant) => (applicant.isChangingLegalSex || applicant.doNotPublish) && applicant.residentLocality !== "Kent",
     },
     {
       name: "Petition for Name Change",
@@ -61,7 +62,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => (!applicant.isChangingLegalSex ?? applicant.residentLocality === "Kent" ?? !applicant.doNotPublish),
+      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish || applicant.residentLocality === "Kent",
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -88,6 +89,11 @@ export const michiganNameChange: Process<MichiganCounty> = {
     {
       name: "Filing Initial Documents",
       guide: MichiganFilingInitialFormsGuide,
+    },
+    {
+      name: "Publication",
+      guide: MichiganPublicationGuide,
+      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish,
     },
     {
       name: "Court Hearing",
