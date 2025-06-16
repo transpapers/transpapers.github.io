@@ -39,7 +39,7 @@ function MichiganPC51cGuide({ person }: { person: Person }) {
         {hasCriminalRecord ? (
           <>
             {age && age < 18
-              ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. "
+              ? " Fill out items 8 and/or 9 as needed for both yourself and the parent/guardian filing as your petitioner. Be sure to include any pending charges. "
               : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. "}
           </>
         ) : (
