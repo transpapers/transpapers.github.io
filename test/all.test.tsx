@@ -45,6 +45,8 @@ describe("shakeTree()", () => {
       "residentLocality",
       "age",
       "hasCriminalRecord",
+      "doNotPublish",
+      "isChangingLegalSex",
     ];
 
     const received = shakeTree(michiganNameChange);

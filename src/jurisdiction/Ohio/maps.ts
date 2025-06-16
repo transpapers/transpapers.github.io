@@ -17,23 +17,3 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  formatDate,
-  fullName,
-  isMinor,
-  representativeName,
-  numericalBirthYear,
-} from "../../lib/util";
-
-import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
-import { Formfill } from "../../types/formfill";
-
-// Maps appear in the order they will be collated.
-// State forms come first, in the order they should be filed;
-// then state documents (which need no map information);
-
-/**
- * Change of Name or Sex (Adult) (Oregon form unnumbered.)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
