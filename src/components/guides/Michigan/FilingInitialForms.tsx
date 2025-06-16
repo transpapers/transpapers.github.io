@@ -88,7 +88,7 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
             notice with a local newspaper. If so read the next section 
             otherwise skip it. Also if you recieved notice of a hearing 
             read the &quot;Court Hearing&quot; section, otherwise skip that 
-            as well. If you don't need to place a legal notice or attend a 
+            as well. If you don&apos;t need to place a legal notice or attend a 
             hearing you can expect to recieve an “Order Following Hearing On 
             Petition To Change Name” and certified copy in the mail. It may 
             take several weeks to arrive. We will call the the &quot;Court 
