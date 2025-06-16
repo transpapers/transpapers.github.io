@@ -62,7 +62,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => !applicant.isChangingLegalSex === true || !applicant.doNotPublish === true || applicant.residentLocality === "Kent",
+      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish || applicant.residentLocality === "Kent",
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
