@@ -47,7 +47,7 @@ function RhodeIslandFilingGuide({
             by still requiring publications for everyone before their hearings and 
             charging for it. If you have the will and ability{" "}
             <a href="https://tinyurl.com/mgdc-feedback">notify</a> us with a tip and
-            send <a href="https://tinyurl.com/mgdc-feedback">GLAD Law</a> an email.
+            send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org.
         </p>
       ):("")}
 
@@ -61,9 +61,9 @@ function RhodeIslandFilingGuide({
             before a hearing. The Glocester court has decided to instead publicize 
             your case after the name change hearing and charge for it. Due to this 
             their price is roughly triple what it should be. If you have the will 
-            and ability send your state house{" "}
-            <a href="https://www.rilegislature.gov/representatives/default.aspx">representative</a> 
-            {" "}an email asking for this loophole to be closed.
+            and ability <a href="https://tinyurl.com/mgdc-feedback">notify</a> us 
+            with a tip and send Patience Crozier at GLAD Law an email at 
+            pcrozier@gladlaw.org.
         </p>
       ):("")}
 
@@ -77,9 +77,9 @@ function RhodeIslandFilingGuide({
             before a hearing. The Warren court has decided to instead publicize 
             your case after the name change hearing and charge for it. Due to this 
             their price is roughly triple what it should be. If you have the will 
-            and ability send your state house{" "}
-            <a href="https://www.rilegislature.gov/representatives/default.aspx">representative</a> 
-            {" "}an email asking for this loophole to be closed.
+            and ability <a href="https://tinyurl.com/mgdc-feedback">notify</a> us 
+            with a tip and send Patience Crozier at GLAD Law an email at 
+            pcrozier@gladlaw.org.
         </p>
       ):("")}
 
