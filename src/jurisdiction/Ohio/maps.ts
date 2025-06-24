@@ -750,7 +750,7 @@ export const feeWaiverMap: Formfill[] = [
     loc: { x: 590, y: 672 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { page: 1, x: 90, y: 610 },
   },
 ];
@@ -766,7 +766,7 @@ export const birthCertOrderMap: Formfill[] = [
     field: "Birth Certificate",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicant Name",
   },
   {
@@ -920,7 +920,7 @@ export const birthCertUpdateMap: Formfill[] = [
     field: "Birth Certificate",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicant Name",
   },
   {
@@ -1943,11 +1943,11 @@ export const butlerAdultMap: Formfill[] = [
 export const butlerMinorMap: Formfill[] = [
   /** Self-Representation Acknowledgment (BCPC 638)*/
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "IN THE MATTER OF",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed Printed Name",
   },
   {
@@ -1969,7 +1969,7 @@ export const butlerMinorMap: Formfill[] = [
   },
   /** Application Addendum (BCPC 639)*/
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "IN THE MATTER OF",
   },
   {
@@ -1977,7 +1977,7 @@ export const butlerMinorMap: Formfill[] = [
     loc: { page: 1, x: 101, y: 330 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "AddendumPg1Bx1.7",
   },
   {
@@ -2011,7 +2011,7 @@ export const butlerMinorMap: Formfill[] = [
     field: "Text11" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Text12",
   },
   /** Waiver of Notice of Hearing and Consent to Change of Name of Minor (BCPC 21.4L)*/
@@ -2095,7 +2095,7 @@ export const champaignMap: Formfill[] = [
     loc: { x: 103, y: 239 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { x: 103, y: 256 },
   },
   {
@@ -2185,7 +2185,7 @@ export const clermontMinorMap: Formfill[] = [
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Parent",
   },
   {
@@ -2303,7 +2303,7 @@ export const coshoctonMinorMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicants Printed Name",
   },
   /** Applicant Information */
@@ -2316,7 +2316,7 @@ export const coshoctonMinorMap: Formfill[] = [
     field: "CASE NO_2",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "First",
   },
   {
@@ -2345,7 +2345,7 @@ export const coshoctonMinorMap: Formfill[] = [
     field: "Date_2" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicants Printed Name_2",
   },
   /** Certificate of Service of Notice of Hearing of Change of Name of Minor */
@@ -2435,7 +2435,7 @@ export const delawareMap: Formfill[] = [
     field: "Text11" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Text12",
   },
   /** Non-Public Record Social Security Information (DCPC 17.11)*/
@@ -2452,7 +2452,7 @@ export const delawareMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or legibly printed Name",
   },
 ];
@@ -2557,7 +2557,7 @@ export const fairfieldMinorMap: Formfill[] = [
     field: "IN THE MATTER OF",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or Printed Name",
   },
   {
@@ -2590,7 +2590,7 @@ export const fairfieldMinorMap: Formfill[] = [
     field: "Check Box1",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "1_2",
   },
   {
@@ -2624,7 +2624,7 @@ export const fairfieldMinorMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Printed Name",
   },
   /** Waiver of Notice of Hearing and Consent to Change of Name of Minor (21.4)*/
@@ -2825,7 +2825,7 @@ export const franklinMinorMap: Formfill[] = [
     field: "Check Box19",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or Printed Name",
   },
   {
@@ -2946,7 +2946,7 @@ export const geaugaMap: Formfill[] = [
     field: "Text13",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { page: 1, x: 90, y: 647 },
   },
 ];
@@ -2967,7 +2967,7 @@ export const greeneMap: Formfill[] = [
     field: "Check Box1",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "1_2",
   },
   {
@@ -2993,7 +2993,7 @@ export const greeneMap: Formfill[] = [
     field: "Present Legal Name",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or Printed Name",
   },
   {
@@ -3034,7 +3034,7 @@ export const hamiltonMap: Formfill[] = [
     field: "CASE_NAME",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "APPLICANT",
   },
   {
@@ -3073,7 +3073,7 @@ export const hardinMap: Formfill[] = [
     loc: { x: 530, y: 114 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { x: 100, y: 203 },
   },
   {
@@ -3146,7 +3146,7 @@ export const hardinMap: Formfill[] = [
     loc: { page: 1, x: 206, y: 192 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { page: 1, x: 53, y: 314 },
   },
 ];
@@ -3242,7 +3242,7 @@ export const lakeMinorMap: Formfill[] = [
     field: "Original Contact",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicants Name",
   },
   {
@@ -3272,7 +3272,7 @@ export const lakeMinorMap: Formfill[] = [
     field: "Name Requested",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or Printed Name",
   },
   {
@@ -3473,7 +3473,7 @@ export const lickingMinorMap: Formfill[] = [
     loc: { page: 1, x: 140, y: 398 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { page: 1, x: 135, y: 566 },
   },
   {
@@ -3508,7 +3508,7 @@ export const lickingMinorMap: Formfill[] = [
     loc: { page: 3, x: 105, y: 481 }, 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { page: 3, x: 510, y: 558 },
   },
   {
@@ -3723,7 +3723,7 @@ export const madisonMap: Formfill[] = [
     field: "Name Requested",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or Printed Name_3",
   },
   {
@@ -3767,7 +3767,7 @@ export const mahoningMap: Formfill[] = [
     field: "Name",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Printed Name",
   },
   {
@@ -3796,7 +3796,7 @@ export const medinaMap: Formfill[] = [
     field: "IN THE MATTER OF",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or printed Name",
   },
   {
@@ -4077,7 +4077,7 @@ export const montgomeryMinorMap: Formfill[] = [
     field: "Parent 1",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Parent 1 Name",
   },
   {
@@ -4145,7 +4145,7 @@ export const montgomeryMinorMap: Formfill[] = [
     field: "Driver's License",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicant's printed name",
   },
   {
@@ -4487,7 +4487,7 @@ export const pikeMinorMap: Formfill[] = [
     loc: { x: 110, y: 113 },
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     loc: { x: 455, y: 890 },
   },
   {
@@ -4580,7 +4580,7 @@ export const richlandMinorMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or legibly printed Name",
   },
 ];
@@ -4597,7 +4597,7 @@ export const rossMap: Formfill[] = [
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Typed or Printed Name",
   },
   {
@@ -4631,7 +4631,7 @@ export const rossMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Printed",
   },
 ];
@@ -4688,7 +4688,7 @@ export const sanduskyMinorMap: Formfill[] = [
   },
   /** Ohio Court Network Background Check Application for Change of Name */
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "First Middle Last",
   },
   {
@@ -4902,7 +4902,7 @@ export const summitMinorMap: Formfill[] = [
     field: "reason-0",
   },
   {
-    text: (applicant) => fullName(representativeName(applicant)) ?? "",
+    text: (applicant) => fullName(representativeName(applicant)),
     field: "Applicants Typed or Printed Name",
   },
   {

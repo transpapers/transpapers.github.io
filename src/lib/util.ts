@@ -282,9 +282,9 @@ export function nameInitials(name: Name | undefined): string {
     return "";
   }
 
-  const firstInitial = new String;
-  const middleInitial = new String;
-  const lastInitial = new String;
+  let firstInitial = new String;
+  let middleInitial = new String;
+  let lastInitial = new String;
 
   if (name.first) {
     firstInitial === name.first.substring(0, 1).toUpperCase();
