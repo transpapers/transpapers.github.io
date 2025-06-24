@@ -38,7 +38,7 @@ function RhodeIslandNotaryGuide({
 
       <p>
         Everything in this section can be done in whatever order is most
-        convinient.
+        convenient.
       </p>
 
       {birthJurisdiction && birthJurisdiction === "Rhode Island" ? (

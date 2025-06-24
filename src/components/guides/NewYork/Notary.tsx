@@ -55,7 +55,7 @@ function NewYorkNotaryGuide({ person }: { person: Person }) {
           if you were born in the US. If you were born in another country
           {age && age < 18 ? " a parent/guardian " : " you "} will need to
           contact your birth country&apos;s records department to get proof of
-          birth.
+          birth. Any document not in English needs a professional translation.
         </p>
       )}
 

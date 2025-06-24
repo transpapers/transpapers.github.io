@@ -38,10 +38,10 @@ function MichiganFilingInitialFormsGuide({ person }: { person: Person }) {
         the optional Fee Waiver (mc20), as well as payment. Even if the fee
         waiver is granted payment still needs to be provided for at least one
         certified copy. To ask for one when filing by mail either write
-        &ldquo;Certified copy fee&rdquo; in a checks memo line or include a
-        letter stating thats what the extra money is for. No matter what the
-        filing method we recommend calling the court at {court?.phone} or
-        visiting their website:{" "}
+        &ldquo;Petion fee and one extra Certified copy&rdquo; in a checks memo 
+        line or include a letter stating thats what the extra money is for. 
+        No matter what the filing method we recommend calling the court at{" "}
+        {court?.phone} or visiting their website:{" "}
         <a href="{court?.website}" title="website">
           {court?.website}
         </a>

@@ -65,10 +65,11 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Person }) {
           {age && age < 18 ? " have a parent/guardian" : " "} order one online
           through{" "}
           <a href="https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH">VitalChek</a>
-          {" "}or go through your birth state/territory&apos;s Vital Records
-          department. If you were born in another country it will be through
-          your birth country&apos;s records department instead to get proof of
-          birth.
+          {" "}or go through your birth state/territory&apos;s{" "}
+          <a href="https://www.cdc.gov/nchs/w2w/index.htm">Vital Records department</a>. 
+          If you were born in another country it will be through your birth country&apos;s 
+          records department instead to get proof of birth. Any document not in English 
+          needs a professional translation.
         </p>
       )}
     </section>
