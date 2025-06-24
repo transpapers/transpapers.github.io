@@ -282,9 +282,9 @@ export function nameInitials(name: Name | undefined, fmt: NameFormat): string {
     return "";
   }
   
-  const firstInitial:String = name.first.substring(0, 1).toUpperCase();
-  const middleInitial:String = name.middle.substring(0, 1).toUpperCase();
-  const lastInitial:String = name.last.substring(0, 1).toUpperCase();
+  const firstInitial:string = name.first.substring(0, 1).toUpperCase();
+  const middleInitial:string = name.middle.substring(0, 1).toUpperCase();
+  const lastInitial:string = name.last.substring(0, 1).toUpperCase();
 
   return fmt.format
     .map((part) => {
@@ -296,9 +296,8 @@ export function nameInitials(name: Name | undefined, fmt: NameFormat): string {
         return middleInitial;
       }
 
-      if (part === NameFormatPart.LAST) {
-        return lastInitial;
-      }
+      return lastInitial;
+
     })
     .join();
 }
