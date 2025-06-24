@@ -286,25 +286,16 @@ export function nameInitials(name: Name | undefined): string {
   const middleInitial = new String;
   const lastInitial = new String;
 
-  if (!name.first) {
-    firstInitial === "";
-    } else {
-    firstInitial === name.first.substring(0, 1);
-    firstInitial.toUpperCase();
+  if (name.first) {
+    firstInitial === name.first.substring(0, 1).toUpperCase();
   }
 
-  if (!name.middle) {
-    middleInitial === "";
-    } else {
-    middleInitial === name.middle.substring(0, 1);
-    middleInitial.toUpperCase();
+  if (name.middle) {
+    middleInitial === name.middle.substring(0, 1).toUpperCase();
   }
 
-  if (!name.last) {
-    lastInitial === "";
-    } else {
-    lastInitial === name.last.substring(0, 1);
-    lastInitial.toUpperCase();
+  if (name.last) {
+    lastInitial === name.last.substring(0, 1).toUpperCase();
   }
 
   return [firstInitial, middleInitial, lastInitial]

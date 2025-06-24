@@ -57,7 +57,7 @@ export const adultChangeOfNameMap: Formfill[] = [
             ? `${applicant.legalName?.first ?? ""} ${applicant.legalName?.middle ?? ""} ${applicant.birthName?.last ?? ""} (maiden) ${applicant.legalName?.last ?? ""} (married)` 
             : `${applicant.legalName?.first ?? ""} ${applicant.legalName?.middle ?? ""} ${applicant.birthName?.last ?? ""} (maiden)`;
         case false:
-          return fullName(applicant.legalName) ?? "";
+          return fullName(applicant.legalName);
         default:
           return "";
       }
@@ -65,7 +65,7 @@ export const adultChangeOfNameMap: Formfill[] = [
     field: "NAME BEFORE CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "NAME AFTER CHANGE",
   },
   {
@@ -102,7 +102,7 @@ export const adultChangeOfNameMap: Formfill[] = [
   },
   /** For typed only docs do /S/ then the name in the signature field. */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "TYPE OF PRINTED NAME_2",
   },
   {
@@ -143,11 +143,11 @@ export const minorChangeOfNameMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PRESENT NAME",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME CHANGE",
   },
   {
@@ -252,11 +252,11 @@ export const adultChangeOfNameAffidavitMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CHANGE OF NAME PRIOR TO CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "CHANGE OF NAME AFTER",
   },
   {
@@ -297,11 +297,11 @@ export const minorChangeOfNameAffidavitMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "NAME BEFORE REQUESTED CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED CHANGE OF NAME",
   },
   {
@@ -350,11 +350,11 @@ export const adultChangeOfNameJudgementMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "NAME PRIOR TO REQUESTED CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME CHANGE",
   },
   {
@@ -411,11 +411,11 @@ export const minorChangeOfNameJudgementMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "NAME BEFORE REQUESTED CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME CHANGE",
   },
   {
@@ -479,11 +479,11 @@ export const minorChangeOfNameConsentMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CURRENT NAME BEFORE CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME CHANGE",
   },
   {
@@ -491,11 +491,11 @@ export const minorChangeOfNameConsentMap: Formfill[] = [
     field: "PARENT",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CURRENT NAME BEFORE CHANGE_2",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME CHANGE_2",
   },
 ];
@@ -512,11 +512,11 @@ export const judgementSettingHearingMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "NAME PRIOR TO REQUEST",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME",
   },
   {
@@ -537,11 +537,11 @@ export const hearingNoticeMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PRESENT NAME",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME",
   },
   {
@@ -610,7 +610,7 @@ export const hearingNoticeMap: Formfill[] = [
  */
 export const backgroundCheckReleaseMap: Formfill[] = [
   {
-    text: (applicant) =>
+    text: () =>
       formatDate(new Date().toLocaleDateString(), {
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
@@ -618,7 +618,7 @@ export const backgroundCheckReleaseMap: Formfill[] = [
     field: "DATE (MM/DD/YYYY)",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PRINTED NAME",
   },
   /** For typed only docs do /S/ then the name in the signature field. */
@@ -636,15 +636,15 @@ export const waivePublicationOneMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PRESENT NAME",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PURSUANT TO R.C. 2717.11",
   },
 ];
@@ -661,15 +661,15 @@ export const waivePublicationTwoMap: Formfill[] = [
   },
   /** Add Judges Name Here.*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "NAME BEFORE REQUESTED CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "REQUESTED NAME CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PURSUANT R.C. 2717.11, REQUESTS COURT WAIVE PUBLICATION",
   },
 ];
@@ -1005,7 +1005,7 @@ export const birthCorrectionMap: Formfill[] = [
   /** Add Judges Name Here.*/
   /** Adjust several fields to chosen name if this is done after a legal name change*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "BirthRecordName",
   },
   {
@@ -1015,7 +1015,7 @@ export const birthCorrectionMap: Formfill[] = [
   {
     text: (applicant) => isMinor(applicant) 
       ? fullName(applicant.representativeName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "FormSubject Name",
   },
   {
@@ -1117,7 +1117,7 @@ export const birthCorrectionMap: Formfill[] = [
   {
     text: (applicant) => isMinor(applicant) 
       ? fullName(applicant.representativeName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "ApplicantName",
   },
 ];
@@ -1468,11 +1468,11 @@ export const adamsMinorMap: Formfill[] = [
  */
 export const ashlandAdultMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text1",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Text2",
   },
   {
@@ -1480,7 +1480,7 @@ export const ashlandAdultMap: Formfill[] = [
     field: "Text10",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text21",
   },
   {
@@ -1492,7 +1492,7 @@ export const ashlandAdultMap: Formfill[] = [
     field: "CheckBox4",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text22",
   },
 ];
@@ -1509,11 +1509,11 @@ export const ashtabulaAdultMap: Formfill[] = [
     field: "Check Box1",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CURRENT",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "NEW",
   },
   {
@@ -1635,11 +1635,11 @@ export const ashtabulaMinorMap: Formfill[] = [
     field: "Check Box2",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CURRENT",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "NEW",
   },
   {
@@ -1801,11 +1801,11 @@ export const auglaizeMinorMap: Formfill[] = [
 export const butlerAdultMap: Formfill[] = [
   /** Self-Representation Acknowledgment (BCPC 638)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Typed Printed Name",
   },
   {
@@ -1827,7 +1827,7 @@ export const butlerAdultMap: Formfill[] = [
   },
   /** Application Addendum (BCPC 639)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   {
@@ -1835,7 +1835,7 @@ export const butlerAdultMap: Formfill[] = [
     loc: { page: 1, x: 101, y: 330 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "AddendumPg1Bx1.7",
   },
   {
@@ -2003,7 +2003,7 @@ export const butlerMinorMap: Formfill[] = [
     field: "Check Box3",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text7",
   },
   { 
@@ -2016,7 +2016,7 @@ export const butlerMinorMap: Formfill[] = [
   },
   /** Waiver of Notice of Hearing and Consent to Change of Name of Minor (BCPC 21.4L)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Legal Name",
   },
 ];
@@ -2029,7 +2029,7 @@ export const butlerMinorMap: Formfill[] = [
 export const champaignMap: Formfill[] = [
   /** Personal Information Sheet */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 247, y: 244 },
   },
   {
@@ -2091,7 +2091,7 @@ export const champaignMap: Formfill[] = [
   },
   /** Exhibit C */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 103, y: 239 },
   },
   {
@@ -2099,7 +2099,7 @@ export const champaignMap: Formfill[] = [
     loc: { x: 103, y: 256 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 134, y: 786 },
   },
   {
@@ -2125,7 +2125,7 @@ export const champaignMap: Formfill[] = [
  */
 export const clermontAdultMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
@@ -2147,7 +2147,7 @@ export const clermontAdultMap: Formfill[] = [
     field: "Address",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Printed Name",
   },
 ];
@@ -2160,28 +2160,28 @@ export const clermontAdultMap: Formfill[] = [
 export const clermontMinorMap: Formfill[] = [
   /** Minor's Consent to Change of Name (21.4A)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text1",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "TO",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "The undersigned",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "of",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "to",
   },
   /** Release for Criminal Background Check of Minor (21.24)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
@@ -2211,7 +2211,7 @@ export const clermontMinorMap: Formfill[] = [
     field: "Minors Address",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Minors Printed Name",
   },
 ];
@@ -2228,7 +2228,7 @@ export const coshoctonAdultMap: Formfill[] = [
     field: "NAME CHANGE OF",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "undefined_3",
   },
   { 
@@ -2236,7 +2236,7 @@ export const coshoctonAdultMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants Printed Name",
   },
   /** Applicant Information */
@@ -2245,11 +2245,11 @@ export const coshoctonAdultMap: Formfill[] = [
     field: "NAME CHANGE OF_2",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CASE NO_2",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "First_3",
   },
   {
@@ -2278,7 +2278,7 @@ export const coshoctonAdultMap: Formfill[] = [
     field: "Date_2" 
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants Printed Name_2",
   },
 ];
@@ -2295,7 +2295,7 @@ export const coshoctonMinorMap: Formfill[] = [
     field: "NAME CHANGE OF",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "undefined_3",
   },
   { 
@@ -2312,7 +2312,7 @@ export const coshoctonMinorMap: Formfill[] = [
     field: "NAME CHANGE OF_2",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CASE NO_2",
   },
   {
@@ -2350,11 +2350,11 @@ export const coshoctonMinorMap: Formfill[] = [
   },
   /** Certificate of Service of Notice of Hearing of Change of Name of Minor */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CHANGE OF NAME OF Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "TO  Name Requested",
   },
   {
@@ -2383,7 +2383,7 @@ export const coshoctonMinorMap: Formfill[] = [
 export const cuyahogaMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
     field: "Original Name",
   },
   {
@@ -2427,7 +2427,7 @@ export const delawareMap: Formfill[] = [
     field: "Check Box3",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text7",
   },
   { 
@@ -2444,7 +2444,7 @@ export const delawareMap: Formfill[] = [
     field: "Check Box13",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "undefined_2",
   },
   { 
@@ -2465,11 +2465,11 @@ export const delawareMap: Formfill[] = [
 export const fairfieldAdultMap: Formfill[] = [
   /** Self-Representation Acknowledgment (FC 75.1)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Typed or Printed Name",
   },
   {
@@ -2498,7 +2498,7 @@ export const fairfieldAdultMap: Formfill[] = [
   },
   /** Contact Information Form (FC 75.3-A)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   {
@@ -2506,7 +2506,7 @@ export const fairfieldAdultMap: Formfill[] = [
     field: "Check Box1",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "1_2",
   },
   {
@@ -2528,11 +2528,11 @@ export const fairfieldAdultMap: Formfill[] = [
   },
   /** Record Check Authorization, Waiver, and Consent */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Requested Name",
   },
   { 
@@ -2540,7 +2540,7 @@ export const fairfieldAdultMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Printed Name",
   },
 ];
@@ -2553,7 +2553,7 @@ export const fairfieldAdultMap: Formfill[] = [
 export const fairfieldMinorMap: Formfill[] = [
   /** Self-Representation Acknowledgment (FC 75.1)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   {
@@ -2612,11 +2612,11 @@ export const fairfieldMinorMap: Formfill[] = [
   },
   /** Record Check Authorization, Waiver, and Consent */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Requested Name",
   },
   { 
@@ -2629,17 +2629,17 @@ export const fairfieldMinorMap: Formfill[] = [
   },
   /** Waiver of Notice of Hearing and Consent to Change of Name of Minor (21.4)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN RE CHANGE OF NAME OF",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Text1",
   },
   /** Judgment Entry/Magistrate's Decision Change of Name of Minor (21.3)*/
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
     field: "Name at Birth",
   },
   {
@@ -2651,11 +2651,11 @@ export const fairfieldMinorMap: Formfill[] = [
     loc: { page: 4, x: 585, y: 446 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Old Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "New Name",
   },
   {
@@ -2672,19 +2672,19 @@ export const fairfieldMinorMap: Formfill[] = [
 export const franklinAdultMap: Formfill[] = [
   /** Application for Change of Name of Adult (NC-21.0)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicant requests a change of name from",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "to",
   },
   {
@@ -2701,7 +2701,7 @@ export const franklinAdultMap: Formfill[] = [
     field: "All other provide detailed reason for all other name changes 2",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Typed or Printed Name",
   },
   {
@@ -2724,15 +2724,15 @@ export const franklinAdultMap: Formfill[] = [
   /** Judgment Entry Changing Name of Adult (NC-21.1)*/
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
     field: "Applicants name at birth",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants current legal name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Applicants new legal name",
   },
   {
@@ -2757,19 +2757,19 @@ export const franklinAdultMap: Formfill[] = [
 export const franklinMinorMap: Formfill[] = [
   /** Application and Affidavit for Change of Name of a Minor (21.2)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicant requests a change of name of the minor from",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "to",
   },
   {
@@ -2849,15 +2849,15 @@ export const franklinMinorMap: Formfill[] = [
   /** Judgment Entry Changing Name of Adult (NC-21.3)*/
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName) ?? "",
+      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
     field: "Minors name at birth",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Minors current name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Minors new name",
   },
   {
@@ -2881,7 +2881,7 @@ export const franklinMinorMap: Formfill[] = [
  */
 export const geaugaMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text1a",
   },
   {
@@ -2959,7 +2959,7 @@ export const geaugaMap: Formfill[] = [
 export const greeneMap: Formfill[] = [
   /** Contact Information Form (G.C. 75.3-A)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF THE NAME OF",
   },
   {
@@ -2989,7 +2989,7 @@ export const greeneMap: Formfill[] = [
   },
   /** Self-Representation Acknowledgment (GC 75.1)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Legal Name",
   },
   {
@@ -3030,7 +3030,7 @@ export const greeneMap: Formfill[] = [
 export const hamiltonMap: Formfill[] = [
   /** Self-Representation Acknowledgment (H.C. 270.01)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CASE_NAME",
   },
   {
@@ -3056,7 +3056,7 @@ export const hamiltonMap: Formfill[] = [
   },
   /** Entry Dispensing With Hearing on Application to Change or Conform Name (H.C. 121.12)*/
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
 ];
@@ -3159,7 +3159,7 @@ export const hardinMap: Formfill[] = [
 export const lakeAdultMap: Formfill[] = [
   /** Contact Information Form */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "In the Matter of",
   },
   {
@@ -3167,7 +3167,7 @@ export const lakeAdultMap: Formfill[] = [
     field: "Original Contact",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants Name",
   },
   {
@@ -3189,15 +3189,15 @@ export const lakeAdultMap: Formfill[] = [
   },
   /** Self-Representation Acknowledgment */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Typed or Printed Name",
   },
   {
@@ -3234,7 +3234,7 @@ export const lakeAdultMap: Formfill[] = [
 export const lakeMinorMap: Formfill[] = [
   /** Contact Information Form */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "In the Matter of",
   },
   {
@@ -3264,11 +3264,11 @@ export const lakeMinorMap: Formfill[] = [
   },
   /** Self-Representation Acknowledgment */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
@@ -3301,15 +3301,15 @@ export const lakeMinorMap: Formfill[] = [
   },
   /** Waiver of Notice of Hearing and Consent to Change of Name of Minor (LCPC 21.41)*/
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Requested Name",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Change from",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "To Name",
   },
 ];
@@ -3322,11 +3322,11 @@ export const lakeMinorMap: Formfill[] = [
 export const lickingAdultMap: Formfill[] = [
   /** Supplement to Application for Change of Name of Adult (21.0A) */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 1, x: 283, y: 130 },
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     loc: { page: 1, x: 75, y: 164 },
   },
   {
@@ -3392,11 +3392,11 @@ export const lickingAdultMap: Formfill[] = [
   },
   /** Release for Criminal Background Check - Adult (21.14)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 3, x: 305, y: 132 },
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     loc: { page: 3, x: 90, y: 185 },
   },
   { 
@@ -3404,7 +3404,7 @@ export const lickingAdultMap: Formfill[] = [
     loc: { page: 3, x: 105, y: 452 }, 
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 3, x: 510, y: 452 },
   },
 ];
@@ -3417,11 +3417,11 @@ export const lickingAdultMap: Formfill[] = [
 export const lickingMinorMap: Formfill[] = [
   /** Supplement to Application for Change of Name of Minor (21.2A) */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 1, x: 283, y: 123 },
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     loc: { page: 1, x: 75, y: 158 },
   },
   {
@@ -3496,11 +3496,11 @@ export const lickingMinorMap: Formfill[] = [
   },
   /** Release for Criminal Background Check - Adult (21.14A)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 3, x: 305, y: 132 },
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     loc: { page: 3, x: 90, y: 176 },
   },
   { 
@@ -3512,7 +3512,7 @@ export const lickingMinorMap: Formfill[] = [
     loc: { page: 3, x: 510, y: 558 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 3, x: 510, y: 618 },
   },
 ];
@@ -3525,7 +3525,7 @@ export const lickingMinorMap: Formfill[] = [
 export const lucasAdultMap: Formfill[] = [
   /** New Case Information Statement (1-AM) */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "amJACK R PUFFENBERGER JUDGE",
   },
   {
@@ -3537,7 +3537,7 @@ export const lucasAdultMap: Formfill[] = [
     field: "amCheck Box3.5",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "amundefined",
   },
   {
@@ -3564,7 +3564,7 @@ export const lucasAdultMap: Formfill[] = [
   },
   /** Record Check Information Sheet (RRCPF) */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "p4applnm",
   },
   {
@@ -3586,7 +3586,7 @@ export const lucasAdultMap: Formfill[] = [
     loc: { page: 3, x: 530, y: 114 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 3, x: 100, y: 203 },
   },
   {
@@ -3657,7 +3657,7 @@ export const lucasAdultMap: Formfill[] = [
     loc: { page: 4, x: 206, y: 192 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 4, x: 53, y: 314 },
   },
 ];
@@ -3669,7 +3669,7 @@ export const lucasAdultMap: Formfill[] = [
  */
 export const lucasMinorMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "amJACK R PUFFENBERGER JUDGE",
   },
   {
@@ -3681,7 +3681,7 @@ export const lucasMinorMap: Formfill[] = [
     field: "amCheck Box3.5",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "amundefined",
   },
   {
@@ -3715,11 +3715,11 @@ export const lucasMinorMap: Formfill[] = [
  */
 export const madisonMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
@@ -3763,7 +3763,7 @@ export const mahoningMap: Formfill[] = [
     field: "NAME CHANGE",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Name",
   },
   {
@@ -3792,7 +3792,7 @@ export const mahoningMap: Formfill[] = [
  */
 export const medinaMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   {
@@ -3833,7 +3833,7 @@ export const medinaMap: Formfill[] = [
 export const miamiMap: Formfill[] = [
   {
     text: (applicant) =>
-      `Name Change of ${fullName(applicant.legalName) ?? ""}`,
+      `Name Change of ${fullName(applicant.legalName) }`,
     field: "IN THE MATTER OF",
   },
   {
@@ -3878,11 +3878,11 @@ export const miamiMap: Formfill[] = [
 export const montgomeryAdultMap: Formfill[] = [
   /** Application for Change of Name of Adult (P.C.F. 21.0)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Current Legal Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Requested Name",
   },
   {
@@ -3898,7 +3898,7 @@ export const montgomeryAdultMap: Formfill[] = [
     field: "Social Security Card",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicant's  Signature",
   },
   {
@@ -3925,7 +3925,7 @@ export const montgomeryAdultMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) 
       ? fullName(applicant.birthName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "Name as Appears on Birth Certificate",
   },
   {
@@ -3968,7 +3968,7 @@ export const montgomeryAdultMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) 
       ? fullName(applicant.birthName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "As Name Appears on Birth Certificate",
   },
   /** Request for a Background Check via WebCheck */
@@ -3977,7 +3977,7 @@ export const montgomeryAdultMap: Formfill[] = [
     loc: { page: 4, x: 248, y: 114 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 4, x: 100, y: 203 },
   },
   {
@@ -4048,7 +4048,7 @@ export const montgomeryAdultMap: Formfill[] = [
     loc: { page: 5, x: 206, y: 192 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 5, x: 53, y: 314 },
   },
 ];
@@ -4061,11 +4061,11 @@ export const montgomeryAdultMap: Formfill[] = [
 export const montgomeryMinorMap: Formfill[] = [
   /** Application for Change of Name of Minor (21.2)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Requested Name",
   },
   {
@@ -4125,11 +4125,11 @@ export const montgomeryMinorMap: Formfill[] = [
     field: "The applicant requests",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Current Legal Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Requeste Name",
   },
   {
@@ -4170,26 +4170,26 @@ export const montgomeryMinorMap: Formfill[] = [
   },
   /** Consent to Change of Name (21.4)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "OF",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "TO",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "the change of name of",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "to",
   },
   /** Magistrate's Decision: Change of Name of Minor (21.3.1)*/
   {
     text: (applicant) => fullName(applicant.birthName) 
       ? fullName(applicant.birthName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     loc: { page: 4, x: 370, y: 417 },
   },
   {
@@ -4232,7 +4232,7 @@ export const montgomeryMinorMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) 
       ? fullName(applicant.birthName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     loc: { page: 5, x: 390, y: 419 },
   },
 ];
@@ -4245,7 +4245,7 @@ export const montgomeryMinorMap: Formfill[] = [
 export const ottawaAdultMap: Formfill[] = [
   /** New Case Information Sheet */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "In the Matter of",
   },
   {
@@ -4261,7 +4261,7 @@ export const ottawaAdultMap: Formfill[] = [
     field: "Applicant's Email Address",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants Name",
   },
   {
@@ -4279,7 +4279,7 @@ export const ottawaAdultMap: Formfill[] = [
   },
   /** Release for Record Check (66.1)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   { 
@@ -4287,12 +4287,12 @@ export const ottawaAdultMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Typed Name",
   },
   /** Record Check Information Statement*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Name",
   },
   {
@@ -4321,7 +4321,7 @@ export const ottawaAdultMap: Formfill[] = [
  */
 export const ottawaMinorMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "In the Matter of",
   },
   {
@@ -4337,7 +4337,7 @@ export const ottawaMinorMap: Formfill[] = [
     field: "Applicant's Email Address",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants Name",
   },
   {
@@ -4363,11 +4363,11 @@ export const ottawaMinorMap: Formfill[] = [
 export const pikeAdultMap: Formfill[] = [
   /** Self-Representation Acknowledgment */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 110, y: 113 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 455, y: 890 },
   },
   {
@@ -4400,7 +4400,7 @@ export const pikeAdultMap: Formfill[] = [
     loc: { page: 1, x: 248, y: 114 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 1, x: 100, y: 203 },
   },
   {
@@ -4471,7 +4471,7 @@ export const pikeAdultMap: Formfill[] = [
     loc: { page: 2, x: 206, y: 192 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 2, x: 53, y: 314 },
   },
 ];
@@ -4483,7 +4483,7 @@ export const pikeAdultMap: Formfill[] = [
  */
 export const pikeMinorMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 110, y: 113 },
   },
   {
@@ -4524,7 +4524,7 @@ export const pikeMinorMap: Formfill[] = [
 export const richlandAdultMap: Formfill[] = [
   /** Record Check Authorization, Waiver and Consent (RCPC M2)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   { 
@@ -4532,18 +4532,18 @@ export const richlandAdultMap: Formfill[] = [
     field: "Date" 
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Typed or legibly printed Name",
   },
   /** Judgment Entry - Change of Name of Adult (21.1)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Current Legal Name",
   },
   {
     text: (applicant) => fullName(applicant.birthName) 
       ? fullName(applicant.birthName) ?? "" 
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "Applicants name at birth was",
   },
   {
@@ -4560,7 +4560,7 @@ export const richlandAdultMap: Formfill[] = [
     field: "Applicants place of birth is",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "New Legal Name",
   },
 ];
@@ -4572,7 +4572,7 @@ export const richlandAdultMap: Formfill[] = [
  */
 export const richlandMinorMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "IN THE MATTER OF",
   },
   { 
@@ -4593,7 +4593,7 @@ export const richlandMinorMap: Formfill[] = [
 export const rossMap: Formfill[] = [
   /** Self-Representation Acknowledgment */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
@@ -4619,11 +4619,11 @@ export const rossMap: Formfill[] = [
   },
   /** Name Change Application Supplement Affidavit */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "OF",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "TO",
   },
   { 
@@ -4644,7 +4644,7 @@ export const rossMap: Formfill[] = [
 export const sanduskyAdultMap: Formfill[] = [
   /** Affidavit in Support of Application for Change of Name of Adult */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
@@ -4653,7 +4653,7 @@ export const sanduskyAdultMap: Formfill[] = [
   },
   /** Ohio Court Network Background Check Application for Change of Name */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "First Middle Last",
   },
   {
@@ -4679,7 +4679,7 @@ export const sanduskyAdultMap: Formfill[] = [
 export const sanduskyMinorMap: Formfill[] = [
   /** Affidavit in Support of Application for Change of Name of Minor */
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Minor's First, Middle, & Last Name",
   },
   {
@@ -4714,11 +4714,11 @@ export const sanduskyMinorMap: Formfill[] = [
 export const summitAdultMap: Formfill[] = [
   /** Application for Change of Name of Adult (21.0)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
@@ -4758,7 +4758,7 @@ export const summitAdultMap: Formfill[] = [
     field: "Checkbox-03",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Applicants Typed or Printed Name",
   },
   {
@@ -4787,24 +4787,24 @@ export const summitAdultMap: Formfill[] = [
   },
   /** Addendum to Application for Change of Name of Adult (CN.2)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "NAME_BEFORE-CN.2",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "NAME_AFTER-CN.2",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Printed Name_01-CN.2",
   },
   /** Affidavit in Support of Application to Conform or Change Name of an Adult or Minor (CN.6)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "OF",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "TO",
   },
   {
@@ -4821,11 +4821,11 @@ export const summitAdultMap: Formfill[] = [
 export const summitMinorMap: Formfill[] = [
   /** Application for Change of Name of Minor (21.2)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Present Name",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "Name Requested",
   },
   {
@@ -4931,24 +4931,24 @@ export const summitMinorMap: Formfill[] = [
   },
   /** Consent to Change of Name (21.4)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "CHANGE OF NAME OF",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "TO",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "name of",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "as proposed in the Application",
   },
   /** Affidavit in Support of Application to Conform or Change Name of an Adult or Minor (CN.6)*/
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "OF",
   },
   {
@@ -4977,7 +4977,7 @@ export const trumbullAdultMap: Formfill[] = [
     loc: { page: 2, x: 345, y: 300 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Text1.0",
   },
   {
@@ -5010,13 +5010,13 @@ export const trumbullAdultMap: Formfill[] = [
  */
 export const warrenAdultMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PresentName",
   },
   {
     text: (applicant) => fullName(applicant.birthName)
       ? fullName(applicant.birthName) ?? ""
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "BirthName",
   },
   {
@@ -5036,7 +5036,7 @@ export const warrenAdultMap: Formfill[] = [
     field: "BirthState",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "NameChangedTo",
   },
 ];
@@ -5048,13 +5048,13 @@ export const warrenAdultMap: Formfill[] = [
  */
 export const warrenMinorMap: Formfill[] = [
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "PresentName",
   },
   {
     text: (applicant) => fullName(applicant.birthName)
       ? fullName(applicant.birthName) ?? ""
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "BirthName",
   },
   {
@@ -5074,7 +5074,7 @@ export const warrenMinorMap: Formfill[] = [
     field: "BirthState",
   },
   {
-    text: (applicant) => fullName(applicant.chosenName) ?? "",
+    text: (applicant) => fullName(applicant.chosenName),
     field: "NameChangedTo",
   },
 ];
@@ -5091,17 +5091,17 @@ export const wayneAdultMap: Formfill[] = [
     select: "Name Change/Name Conformity",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Name of Individual",
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     field: "Printed Full Name including middle name",
   },
   {
     text: (applicant) => fullName(applicant.birthName)
       ? fullName(applicant.birthName) ?? ""
-      : fullName(applicant.legalName) ?? "",
+      : fullName(applicant.legalName),
     field: "Prior Names including maiden name",
   },
   {
@@ -5135,7 +5135,7 @@ export const williamsAdultMap: Formfill[] = [
     loc: { x: 248, y: 114 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { x: 100, y: 203 },
   },
   {
@@ -5206,7 +5206,7 @@ export const williamsAdultMap: Formfill[] = [
     loc: { page: 1, x: 206, y: 192 },
   },
   {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
+    text: (applicant) => fullName(applicant.legalName),
     loc: { page: 1, x: 53, y: 314 },
   },
 ];
