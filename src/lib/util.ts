@@ -270,6 +270,48 @@ export function addZero(zeroString: string): string {
   return zeroString;
 }
 
+/**
+ * Returns combined and capitalized first letters of entered 
+ * first, middle, and last name to make initials for certain 
+ * forms.
+ * @param {Name} name
+ * @return {string}
+ */
+export function nameInitials(name: Name | undefined): string {
+  if (!name) {
+    return "";
+  }
+
+  const firstInitial = new String;
+  const middleInitial = new String;
+  const lastInitial = new String;
+
+  if (!name.first) {
+    firstInitial === "";
+    } else {
+    firstInitial === name.first.substring(0, 1);
+    firstInitial.toUpperCase();
+  }
+
+  if (!name.middle) {
+    middleInitial === "";
+    } else {
+    middleInitial === name.middle.substring(0, 1);
+    middleInitial.toUpperCase();
+  }
+
+  if (!name.last) {
+    lastInitial === "";
+    } else {
+    lastInitial === name.last.substring(0, 1);
+    lastInitial.toUpperCase();
+  }
+
+  return [firstInitial, middleInitial, lastInitial]
+    .filter((n) => n && n.length > 0)
+    .join("");
+}
+
 export function numericalBirthYear(birthdate: string | undefined): number {
   if (!birthdate) {
     return Infinity;
