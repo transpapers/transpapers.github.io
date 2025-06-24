@@ -19,8 +19,9 @@
 
 import { RhodeIslandCityOrTown } from "../../types/locality";
 
-const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
-  Barrington: {
+const rhodeislandCounties: RhodeIslandCityOrTown[] = [
+  {
+    name: "Barrington",
     county: "Bristol",
     court: {
       address: "283 County Rd, Barrington, RI 02806",
@@ -42,7 +43,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Bristol: {
+  {
+    name: "Bristol",
     county: "Bristol",
     court: {
       address: "10 Court St, Bristol, RI 02809",
@@ -57,7 +59,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     courtDoesBackgroundCheck: false,
     filingCost: "$39.00",
   },
-  Burrillville: {
+  {
+    name: "Burrillville",
     county: "Providence",
     court: {
       address: "105 Harrisville Main St, Burrillville, RI 02830",
@@ -79,7 +82,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$40.00",
   },
-  "Central Falls": {
+  {
+    name: "Central Falls",
     county: "Providence",
     court: {
       address: "580 Broad St, Central Falls, RI 02863",
@@ -101,7 +105,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Charlestown: {
+  {
+    name: "Charlestown",
     county: "Washington",
     court: {
       address: "4540 S County Trail, Charlestown, RI 02813",
@@ -125,7 +130,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Coventry: {
+  {
+    name: "Coventry",
     county: "Kent",
     court: {
       address: "1670 Flat River Rd, Coventry, RI 02816",
@@ -147,7 +153,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Cranston: {
+  {
+    name: "Cranston",
     county: "Providence",
     court: {
       address: "869 Park Ave, Cranston, RI 02910",
@@ -164,7 +171,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
 
     filingCost: "$34.00",
   },
-  Cumberland: {
+  {
+    name: "Cumberland",
     county: "Providence",
     court: {
       address: "45 Broad St, Cumberland, RI 02864",
@@ -187,7 +195,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  "East Greenwich": {
+  {
+    name: "East Greenwich",
     county: "Kent",
     court: {
       address: "125 Main St, East Greenwich, RI 02818",
@@ -209,7 +218,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$59.00",
   },
-  "East Providence": {
+  {
+    name: "East Providence",
     county: "Providence",
     court: {
       address: "145 Taunton Ave, East Providence, RI 02914",
@@ -231,7 +241,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Exeter: {
+  {
+    name: "Exeter",
     county: "Washington",
     court: {
       address: "675 Ten Rod Rd, Exeter, RI 02822",
@@ -253,7 +264,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Foster: {
+  {
+    name: "Foster",
     county: "Providence",
     court: {
       address: "181 Howard Hill Rd, Foster, RI 02825",
@@ -275,7 +287,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Glocester: {
+  {
+    name: "Glocester",
     county: "Providence",
     court: {
       address: "1145 Putnam Pike, Chepachet, RI 02814",
@@ -297,7 +310,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$109.00",
   },
-  Hopkinton: {
+  {
+    name: "Hopkinton",
     county: "Washington",
     court: {
       address: "1 Townhouse Rd, Hopkinton, RI 02833",
@@ -319,7 +333,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Jamestown: {
+  {
+    name: "Jamestown",
     county: "Newport",
     court: {
       address: "93 Narragansett Ave, Jamestown, RI 02835",
@@ -336,7 +351,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
 
     filingCost: "$34.00",
   },
-  Johnston: {
+  {
+    name: "Johnston",
     county: "Providence",
     court: {
       address: "1600 Atwood Ave, Johnston, RI 02919",
@@ -358,7 +374,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Lincoln: {
+  {
+    name: "Lincoln",
     county: "Providence",
     court: {
       address: "100 Old River Rd, Lincoln, RI 02865",
@@ -380,7 +397,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  "Little Compton": {
+  {
+    name: "Little Compton",
     county: "Newport",
     court: {
       address: "40 Commons St, Little Compton, RI 02837",
@@ -403,7 +421,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Middletown: {
+  {
+    name: "Middletown",
     county: "Newport",
     court: {
       address: "350 E Main Rd, Middletown, RI 02842",
@@ -425,7 +444,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Narragansett: {
+  {
+    name: "Narragansett",
     county: "Washington",
     court: {
       address: "25 5th Ave, Narragansett, RI 02882",
@@ -447,7 +467,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Newport: {
+  {
+    name: "Newport",
     county: "Newport",
     court: {
       address: "43 Broadway, Newport, RI 02840",
@@ -470,7 +491,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$40.00",
   },
-  "New Shoreham": {
+  {
+    name: "New Shoreham",
     county: "Washington",
     court: {
       address: "16 Old Town Rd, New Shoreham, RI 02807",
@@ -492,7 +514,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  "North Kingstown": {
+  {
+    name: "North Kingstown",
     county: "Washington",
     court: {
       address: "100 Fairway Dr, North Kingstown, RI 02852",
@@ -514,7 +537,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  "North Providence": {
+  {
+    name: "North Providence",
     county: "Providence",
     court: {
       address: "2000 Smith St, North Providence, RI 02911",
@@ -536,7 +560,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  "North Smithfield": {
+  {
+    name: "North Smithfield",
     county: "Providence",
     court: {
       address: "83 Greene St, North Smithfield, RI 02896",
@@ -558,7 +583,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Pawtucket: {
+  {
+    name: "Pawtucket",
     county: "Providence",
     court: {
       address: "137 Roosevelt Ave, Pawtucket, RI 02860",
@@ -580,7 +606,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Portsmouth: {
+  {
+    name: "Portsmouth",
     county: "Newport",
     court: {
       address: "2200 E Main Rd, Portsmouth, RI 02871",
@@ -596,7 +623,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
 
     filingCost: "$39.00",
   },
-  Providence: {
+  {
+    name: "Providence",
     county: "Providence",
     court: {
       address: "25 Dorrance St, Providence, RI 02903",
@@ -612,7 +640,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
 
     filingCost: "$39.00",
   },
-  Richmond: {
+  {
+    name: "Richmond",
     county: "Washington",
     court: {
       address: "5 Richmond Townhouse Rd, Richmond, RI 02898",
@@ -638,7 +667,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Scituate: {
+  {
+    name: "Scituate",
     county: "Providence",
     court: {
       address: "195 Danielson Pike, Scituate, RI 02857",
@@ -660,7 +690,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Smithfield: {
+  {
+    name: "Smithfield",
     county: "Providence",
     court: {
       address: "64 Farnum Pike, Smithfield, RI 02917",
@@ -677,7 +708,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
 
     filingCost: "$39.00",
   },
-  "South Kingstown": {
+  {
+    name: "South Kingstown",
     county: "Washington",
     court: {
       address: "180 High St, Wakefield, RI 02879",
@@ -693,7 +725,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
 
     filingCost: "$34.00",
   },
-  Tiverton: {
+  {
+    name: "Tiverton",
     county: "Newport",
     court: {
       address: "343 Highland Rd, Tiverton, RI 02878",
@@ -715,7 +748,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Warren: {
+  {
+    name: "Warren",
     county: "Bristol",
     court: {
       address: "514 Main St, Warren, RI 02885",
@@ -738,7 +772,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$142.00",
   },
-  Warwick: {
+  {
+    name: "Warwick",
     county: "Kent",
     court: {
       address: "3275 Post Rd, Warwick, RI 02886",
@@ -764,7 +799,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  "West Greenwich": {
+  {
+    name: "West Greenwich",
     county: "Kent",
     court: {
       address: "280 Victory Hwy, West Greenwich, RI 02817",
@@ -786,7 +822,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  "West Warwick": {
+  {
+    name: "West Warwick",
     county: "Kent",
     court: {
       address: "1170 Main St, West Warwick, RI 02893",
@@ -809,7 +846,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$34.00",
   },
-  Westerly: {
+  {
+    name: "Westerly",
     county: "Washington",
     court: {
       address: "45 Broad St, Westerly, RI 02891",
@@ -831,7 +869,8 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$39.00",
   },
-  Woonsocket: {
+  {
+    name: "Woonsocket",
     county: "Providence",
     court: {
       address: "169 Main St, Woonsocket, RI 02895",
@@ -853,6 +892,6 @@ const rhodeislandCounties: Record<string, RhodeIslandCityOrTown> = {
     ],
     filingCost: "$30.00",
   },
-};
+];
 
 export default rhodeislandCounties;

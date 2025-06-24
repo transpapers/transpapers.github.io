@@ -54,17 +54,12 @@ export interface Jurisdiction<T extends Locality> {
   /**
    * Map from `Target`s to `Process`es.
    */
-  processes?: Process<T>[];
+  processes: Process<T>[];
 
   /**
    * Map of counties (or county equivalents.)
    */
-  localities?: Record<string, T>;
-
-  /**
-   * `true` if this is the dummy `Jurisdiction` used for federal processes.
-   */
-  isFederal?: boolean;
+  localities: T[];
 }
 
 export function getProcesses(name: string | undefined): AnyProcess[] {
@@ -72,7 +67,10 @@ export function getProcesses(name: string | undefined): AnyProcess[] {
     return [];
   }
 
-  return allJurisdictions.get(name)?.processes ?? [];
+  return (
+    allJurisdictions.find((jurisdiction) => jurisdiction.name === name)
+      ?.processes ?? []
+  );
 }
 
 export function allProcesses(
@@ -89,7 +87,7 @@ export function allProcesses(
     (proc) => proc.isBirth,
   );
 
-  const federalProcesses = allJurisdictions.get("Federal")?.processes ?? [];
+  const federalProcesses = getProcesses("Federal");
 
   return [...residentProcesses, ...birthProcesses, ...federalProcesses];
 }

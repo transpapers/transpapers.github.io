@@ -19,11 +19,9 @@
 
 import { AlaskaAdministrativeDivision } from "../../types/locality";
 
-const alaskanAdministrativeDivisions: Record<
-  string,
-  AlaskaAdministrativeDivision
-> = {
-  Anchorage: {
+const alaskanAdministrativeDivisions: AlaskaAdministrativeDivision[] = [
+  {
+    name: "Anchorage",
     court: {
       address: "825 W 4th Ave #2004, Anchorage, AK 99501",
       city: "Anchorage",
@@ -38,7 +36,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 264-0610",
     trueFiling: false,
   },
-  Angoon: {
+  {
+    name: "Angoon",
     court: {
       address: "700 Aan Deina Aat Street, Angoon, AK 99820",
       city: "Angoon",
@@ -65,7 +64,8 @@ const alaskanAdministrativeDivisions: Record<
       trueFiling: true,
     },
   },
-  Bethel: {
+  {
+    name: "Bethel",
     court: {
       address: "204 Eddie Hoffman Hwy, Bethel, AK 99559",
       city: "Bethel",
@@ -80,7 +80,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 543-4419",
     trueFiling: true,
   },
-  Cordova: {
+  {
+    name: "Cordova",
     court: {
       address: "500 Water St, Cordova, AK 99574",
       city: "Cordova",
@@ -95,7 +96,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 424-7581",
     trueFiling: true,
   },
-  "Delta Junction": {
+  {
+    name: "Delta Junction",
     court: {
       address: "266 Richardson Hwy, Delta Junction, AK 99737",
       city: "Delta Junction",
@@ -110,7 +112,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 895-4204",
     trueFiling: true,
   },
-  Dillingham: {
+  {
+    name: "Dillingham",
     court: {
       address: "476 Emperor Way, Dillingham, AK 99576",
       city: "Dillingham",
@@ -123,7 +126,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Fairbanks: {
+  {
+    name: "Fairbanks",
     /** If this data updates, update the forwardsTo for Fort Yukon and Galena as well.*/
     court: {
       address: "101 Lacey St, Fairbanks, AK 99701",
@@ -139,7 +143,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 452-9330",
     trueFiling: true,
   },
-  "Fort Yukon": {
+  {
+    name: "Fort Yukon",
     court: {
       address: "E 3rd Ave, Fort Yukon, AK 99740",
       city: "Fort Yukon",
@@ -168,7 +173,8 @@ const alaskanAdministrativeDivisions: Record<
       trueFiling: true,
     },
   },
-  Galena: {
+  {
+    name: "Galena",
     court: {
       address: "167 Burbot Street, Galena AK 99741",
       city: "Galena",
@@ -197,7 +203,8 @@ const alaskanAdministrativeDivisions: Record<
       trueFiling: true,
     },
   },
-  Glennallen: {
+  {
+    name: "Glennallen",
     court: {
       address: "188.5 Glenn Hwy, Glennallen, AK 99588",
       city: "Glennallen",
@@ -212,7 +219,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 822-5364",
     trueFiling: true,
   },
-  Homer: {
+  {
+    name: "Homer",
     court: {
       address: "3670 Lake St Bldg A, Homer, AK 99603",
       city: "Homer",
@@ -227,7 +235,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 235-4257",
     trueFiling: true,
   },
-  Hoonah: {
+  {
+    name: "Hoonah",
     court: {
       address: "300 Front St, Hoonah, AK 99829",
       city: "Hoonah",
@@ -256,7 +265,8 @@ const alaskanAdministrativeDivisions: Record<
       trueFiling: true,
     },
   },
-  Juneau: {
+  {
+    name: "Juneau",
     /** If this data updates, update the forwardsTo for Hoonah as well.*/
     court: {
       address: "123 W 4th St #2, Juneau, AK 99801",
@@ -272,7 +282,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 463-3788",
     trueFiling: true,
   },
-  Kenai: {
+  {
+    name: "Kenai",
     court: {
       address: "125 Trading Bay Rd, Kenai, AK 99611",
       city: "Kenai",
@@ -285,7 +296,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Ketchikan: {
+  {
+    name: "Ketchikan",
     court: {
       address: "415 Main St #402, Ketchikan, AK 99901",
       city: "Ketchikan",
@@ -299,7 +311,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Kodiak: {
+  {
+    name: "Kodiak",
     court: {
       address: "204 Mission Rd #124, Kodiak, AK 99615",
       city: "Kodiak",
@@ -312,7 +325,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Kotzebue: {
+  {
+    name: "Kotzebue",
     court: {
       address: "605 Third Street, Kotzebue, AK 99752",
       city: "Kotzebue",
@@ -326,7 +340,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Naknek: {
+  {
+    name: "Naknek",
     court: {
       address: "#1 Main Street, Naknek, AK 99633",
       city: "Naknek",
@@ -340,7 +355,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Nenana: {
+  {
+    name: "Nenana",
     court: {
       address: "102 8th St, Nenana, AK 99760",
       city: "Nenana",
@@ -355,7 +371,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 832-5841",
     trueFiling: true,
   },
-  Nome: {
+  {
+    name: "Nome",
     court: {
       address: "306 W 5th Ave, Nome, AK 99762",
       city: "Nome",
@@ -369,7 +386,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Palmer: {
+  {
+    name: "Palmer",
     court: {
       address: "435 S Denali St, Palmer, AK 99645",
       city: "Palmer",
@@ -383,7 +401,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: false,
   },
-  Petersburg: {
+  {
+    name: "Petersburg",
     court: {
       address: "17 N Nordic Dr, Petersburg, AK 99833",
       city: "Petersburg",
@@ -398,7 +417,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 772-3018",
     trueFiling: true,
   },
-  "Prince of Wales": {
+  {
+    name: "Prince of Wales",
     court: {
       address: "6738 Klawock Hollis Hwy, Klawock, AK 99925",
       city: "Klawock",
@@ -413,7 +433,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 755-8805",
     trueFiling: true,
   },
-  Seward: {
+  {
+    name: "Seward",
     court: {
       address: "410 Adams St, Seward, AK 99664",
       city: "Seward",
@@ -427,7 +448,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Sitka: {
+  {
+    name: "Sitka",
     /** If this data updates, update the forwardsTo for Angoon as well.*/
     court: {
       address: "304 Lake St #203, Sitka, AK 99835",
@@ -442,7 +464,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Tok: {
+  {
+    name: "Tok",
     court: {
       address: "1313.5 Alaska Hwy, Tok, AK 99780",
       city: "Tok",
@@ -457,7 +480,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 883-4367",
     trueFiling: true,
   },
-  Unalaska: {
+  {
+    name: "Unalaska",
     court: {
       address: "204 W Broadway Ave, Unalaska, AK 99685",
       city: "Unalaska",
@@ -472,7 +496,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 581-2809",
     trueFiling: false,
   },
-  Utqiagvik: {
+  {
+    name: "Utqiagvik",
     court: {
       address: "1250 Agvik St, Utqiagvik, AK 99723",
       city: "Utqiagvik",
@@ -486,7 +511,8 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-  Valdez: {
+  {
+    name: "Valdez",
     court: {
       address: "213 Meals Ave, Valdez, AK 99686",
       city: "Valdez",
@@ -501,7 +527,8 @@ const alaskanAdministrativeDivisions: Record<
     faxNumber: "(907) 835-3764",
     trueFiling: true,
   },
-  Wrangell: {
+  {
+    name: "Wrangell",
     court: {
       address: "431 Zimovia Highway, Wrangell AK 99929",
       city: "Wrangell",
@@ -514,6 +541,6 @@ const alaskanAdministrativeDivisions: Record<
     faxFiling: false,
     trueFiling: true,
   },
-};
+];
 
 export default alaskanAdministrativeDivisions;
