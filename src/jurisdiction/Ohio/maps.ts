@@ -30,7 +30,7 @@ import {
   representativeName,
 } from "../../lib/util";
 
-import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
+import { GenderMarker, DateFormatPart as DATE, NameFormatPart as FML } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
@@ -904,7 +904,10 @@ export const bmvGenderDeclarationMap: Formfill[] = [
     loc: { page: 1, x: 711, y: 254 },
   },
   {
-    text: (applicant) => nameInitials(applicant.legalName),
+    text: (applicant) => 
+      nameInitials(applicant.legalName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     loc: { page: 1, x: 597, y: 449 },
   },
 ];
@@ -1014,7 +1017,7 @@ export const birthCorrectionMap: Formfill[] = [
   },
   {
     text: (applicant) => isMinor(applicant) 
-      ? fullName(applicant.representativeName) ?? "" 
+      ? fullName(applicant.representativeName) 
       : fullName(applicant.legalName),
     field: "FormSubject Name",
   },
@@ -1052,11 +1055,11 @@ export const birthCorrectionMap: Formfill[] = [
     field: "ChildSex",
   },
   {
-    text: (applicant) => fullName(applicant.mothersBirthName) ?? "",
+    text: (applicant) => fullName(applicant.mothersBirthName),
     field: "ParentName",
   },
   {
-    text: (applicant) => fullName(applicant.fathersBirthName) ?? "",
+    text: (applicant) => fullName(applicant.fathersBirthName),
     field: "ParentName2",
   },
   {
@@ -1116,7 +1119,7 @@ export const birthCorrectionMap: Formfill[] = [
   },
   {
     text: (applicant) => isMinor(applicant) 
-      ? fullName(applicant.representativeName) ?? "" 
+      ? fullName(applicant.representativeName) 
       : fullName(applicant.legalName),
     field: "ApplicantName",
   },
@@ -1281,7 +1284,7 @@ export const adamsAdultMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName) ? 
-      fullName(applicant.birthName) ?? "" : "",
+      fullName(applicant.birthName) : "",
     loc: { page: 2, x: 375, y: 748 },
   },
   /** Webcheck Beckgound Check Form */
@@ -1674,7 +1677,7 @@ export const ashtabulaMinorMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.parentsAreOkay ?
-        fullName(representativeName(applicant)) ?? "" : "",
+        fullName(representativeName(applicant)) : "",
     field: "Name",
   },
   {
@@ -2066,7 +2069,7 @@ export const champaignMap: Formfill[] = [
   },
   {
     text: (applicant) => isMinor(applicant) ?
-        fullName(representativeName(applicant)) ?? "" : "",
+        fullName(representativeName(applicant)) : "",
     loc: { x: 403, y: 465 },
   },
   {
@@ -2104,7 +2107,7 @@ export const champaignMap: Formfill[] = [
   },
   {
     text: (applicant) => isMinor(applicant) ?
-        fullName(representativeName(applicant)) ?? "" : "",
+        fullName(representativeName(applicant)) : "",
     loc: { x: 134, y: 806 },
   },
   {
@@ -2138,7 +2141,7 @@ export const clermontAdultMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName) ? 
-      fullName(applicant.birthName) ?? "" : "",
+      fullName(applicant.birthName) : "",
     field: "AKA",
   },
   {
@@ -2202,7 +2205,7 @@ export const clermontMinorMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName) ? 
-      fullName(applicant.birthName) ?? "" : "",
+      fullName(applicant.birthName) : "",
     field: "Minors AKA",
   },
   {
@@ -2383,7 +2386,7 @@ export const coshoctonMinorMap: Formfill[] = [
 export const cuyahogaMap: Formfill[] = [
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
+      fullName(applicant.birthName) : fullName(applicant.legalName),
     field: "Original Name",
   },
   {
@@ -2639,7 +2642,7 @@ export const fairfieldMinorMap: Formfill[] = [
   /** Judgment Entry/Magistrate's Decision Change of Name of Minor (21.3)*/
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
+      fullName(applicant.birthName) : fullName(applicant.legalName),
     field: "Name at Birth",
   },
   {
@@ -2724,7 +2727,7 @@ export const franklinAdultMap: Formfill[] = [
   /** Judgment Entry Changing Name of Adult (NC-21.1)*/
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
+      fullName(applicant.birthName) : fullName(applicant.legalName),
     field: "Applicants name at birth",
   },
   {
@@ -2799,7 +2802,7 @@ export const franklinMinorMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.parentsAreOkay ?
-      fullName(representativeName(applicant)) ?? "" : "",
+      fullName(representativeName(applicant)) : "",
     field: "Name",
   },
   {
@@ -2849,7 +2852,7 @@ export const franklinMinorMap: Formfill[] = [
   /** Judgment Entry Changing Name of Adult (NC-21.3)*/
   {
     text: (applicant) => fullName(applicant.birthName) ?
-      fullName(applicant.birthName) ?? "" : fullName(applicant.legalName),
+      fullName(applicant.birthName) : fullName(applicant.legalName),
     field: "Minors name at birth",
   },
   {
@@ -3924,7 +3927,7 @@ export const montgomeryAdultMap: Formfill[] = [
   /** Magistrate's Decision; Change of Name of Adult (21.1.1)*/
   {
     text: (applicant) => fullName(applicant.birthName) 
-      ? fullName(applicant.birthName) ?? "" 
+      ? fullName(applicant.birthName) 
       : fullName(applicant.legalName),
     field: "Name as Appears on Birth Certificate",
   },
@@ -3967,7 +3970,7 @@ export const montgomeryAdultMap: Formfill[] = [
   /** Judgement Entry Adopting Magistrate's Decision Change of Name, Adult (21.1)*/
   {
     text: (applicant) => fullName(applicant.birthName) 
-      ? fullName(applicant.birthName) ?? "" 
+      ? fullName(applicant.birthName) 
       : fullName(applicant.legalName),
     field: "As Name Appears on Birth Certificate",
   },
@@ -4105,7 +4108,10 @@ export const montgomeryMinorMap: Formfill[] = [
     field: "Parent 2",
   },
   {
-    text: (applicant) => nameInitials(applicant.representativeName),
+    text: (applicant) => 
+      nameInitials(applicant.representativeName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     field: "Initials has or has not been covvicted",
   },
   {
@@ -4113,7 +4119,10 @@ export const montgomeryMinorMap: Formfill[] = [
     field: "has not been convicted",
   },
   {
-    text: (applicant) => nameInitials(applicant.representativeName),
+    text: (applicant) => 
+      nameInitials(applicant.representativeName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     field: "Initials duty to comply",
   },
   {
@@ -4188,7 +4197,7 @@ export const montgomeryMinorMap: Formfill[] = [
   /** Magistrate's Decision: Change of Name of Minor (21.3.1)*/
   {
     text: (applicant) => fullName(applicant.birthName) 
-      ? fullName(applicant.birthName) ?? "" 
+      ? fullName(applicant.birthName) 
       : fullName(applicant.legalName),
     loc: { page: 4, x: 370, y: 417 },
   },
@@ -4231,7 +4240,7 @@ export const montgomeryMinorMap: Formfill[] = [
   /** Judgement Entry Adopting Magistrate's Decision Change of Name, Minor (21.3)*/
   {
     text: (applicant) => fullName(applicant.birthName) 
-      ? fullName(applicant.birthName) ?? "" 
+      ? fullName(applicant.birthName) 
       : fullName(applicant.legalName),
     loc: { page: 5, x: 390, y: 419 },
   },
@@ -4542,7 +4551,7 @@ export const richlandAdultMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName) 
-      ? fullName(applicant.birthName) ?? "" 
+      ? fullName(applicant.birthName) 
       : fullName(applicant.legalName),
     field: "Applicants name at birth was",
   },
@@ -4734,7 +4743,10 @@ export const summitAdultMap: Formfill[] = [
     field: "State",
   },
   {
-    text: (applicant) => nameInitials(applicant.legalName),
+    text: (applicant) => 
+      nameInitials(applicant.legalName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     loc: { x: 79, y: 636 },
   },
   {
@@ -4742,7 +4754,10 @@ export const summitAdultMap: Formfill[] = [
     field: "Checkbox-01",
   },
   {
-    text: (applicant) => nameInitials(applicant.legalName),
+    text: (applicant) => 
+      nameInitials(applicant.legalName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     loc: { x: 79, y: 676 },
   },
   {
@@ -4750,7 +4765,10 @@ export const summitAdultMap: Formfill[] = [
     field: "Checkbox-02",
   },
   {
-    text: (applicant) => nameInitials(applicant.legalName),
+    text: (applicant) => 
+      nameInitials(applicant.legalName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     loc: { x: 79, y: 733 },
   },
   {
@@ -4838,7 +4856,7 @@ export const summitMinorMap: Formfill[] = [
   },
   {
     text: (applicant) => applicant.parentsAreOkay ?
-        fullName(representativeName(applicant)) ?? "" : "",
+        fullName(representativeName(applicant)) : "",
     field: "Name",
   },
   {
@@ -4870,7 +4888,10 @@ export const summitMinorMap: Formfill[] = [
     field: "Checkbox-04",
   },
   {
-    text: (applicant) => nameInitials(applicant.representativeName),
+    text: (applicant) => 
+      nameInitials(applicant.representativeName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     loc: { page: 1, x: 89, y: 227 },
   },
   {
@@ -4878,7 +4899,10 @@ export const summitMinorMap: Formfill[] = [
     field: "Checkbox-09",
   },
   {
-    text: (applicant) => nameInitials(applicant.representativeName),
+    text: (applicant) => 
+      nameInitials(applicant.representativeName, {
+        format: [FML.FIRST, FML.MIDDLE, FML.LAST]
+      }),
     loc: { page: 1, x: 89, y: 252 },
   },
   {
@@ -5015,7 +5039,7 @@ export const warrenAdultMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName)
-      ? fullName(applicant.birthName) ?? ""
+      ? fullName(applicant.birthName)
       : fullName(applicant.legalName),
     field: "BirthName",
   },
@@ -5053,7 +5077,7 @@ export const warrenMinorMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName)
-      ? fullName(applicant.birthName) ?? ""
+      ? fullName(applicant.birthName)
       : fullName(applicant.legalName),
     field: "BirthName",
   },
@@ -5100,7 +5124,7 @@ export const wayneAdultMap: Formfill[] = [
   },
   {
     text: (applicant) => fullName(applicant.birthName)
-      ? fullName(applicant.birthName) ?? ""
+      ? fullName(applicant.birthName)
       : fullName(applicant.legalName),
     field: "Prior Names including maiden name",
   },

@@ -100,3 +100,16 @@ export interface DateFormat {
   format: DateFormatPart[];
   separator?: string;
 }
+
+export enum NameFormatPart {
+  FIRST,
+  MIDDLE,
+  LAST,
+}
+
+/**
+ * A format specification for names.
+ */
+export interface NameFormat {
+  format: NameFormatPart[];
+}

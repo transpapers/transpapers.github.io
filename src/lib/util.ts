@@ -17,7 +17,7 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Name, DateFormat, DateFormatPart } from "../types/types";
+import { Name, DateFormat, DateFormatPart, NameFormat, NameFormatPart } from "../types/types";
 import { Person } from "../types/person";
 
 import { parsePhoneNumber } from "react-phone-number-input";
@@ -273,34 +273,34 @@ export function addZero(zeroString: string): string {
 /**
  * Returns combined and capitalized first letters of entered 
  * first, middle, and last name to make initials for certain 
- * forms.
+ * forms. Can re-format order or amount as needed.
  * @param {Name} name
  * @return {string}
  */
-export function nameInitials(name: Name | undefined): string {
+export function nameInitials(name: Name | undefined, fmt: NameFormat): string {
   if (!name) {
     return "";
   }
+  
+  const firstInitial:String = name.first.substring(0, 1).toUpperCase();
+  const middleInitial:String = name.middle.substring(0, 1).toUpperCase();
+  const lastInitial:String = name.last.substring(0, 1).toUpperCase();
 
-  let firstInitial = new String;
-  let middleInitial = new String;
-  let lastInitial = new String;
+  return fmt.format
+    .map((part) => {
+      if (part === NameFormatPart.FIRST) {
+        return firstInitial;
+      }
 
-  if (name.first) {
-    firstInitial === name.first.substring(0, 1).toUpperCase();
-  }
+      if (part === NameFormatPart.MIDDLE) {
+        return middleInitial;
+      }
 
-  if (name.middle) {
-    middleInitial === name.middle.substring(0, 1).toUpperCase();
-  }
-
-  if (name.last) {
-    lastInitial === name.last.substring(0, 1).toUpperCase();
-  }
-
-  return [firstInitial, middleInitial, lastInitial]
-    .filter((n) => n && n.length > 0)
-    .join("");
+      if (part === NameFormatPart.LAST) {
+        return lastInitial;
+      }
+    })
+    .join();
 }
 
 export function numericalBirthYear(birthdate: string | undefined): number {
