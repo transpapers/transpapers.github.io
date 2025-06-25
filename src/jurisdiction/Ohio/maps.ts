@@ -1079,7 +1079,7 @@ export const birthCorrectionMap: Formfill[] = [
     field: "Parent2DOB",
   },
   {
-    text: () => "4",
+    text: () => "Sex:",
     field: "BoxNo1",
   },
   {
@@ -3785,6 +3785,222 @@ export const mahoningMap: Formfill[] = [
   {
     text: (applicant) => applicant.phone,
     field: "Telephone Number",
+  },
+];
+
+/**
+ * Marion County Adult Packet (forms listed below)
+ * Updated 6/2025.
+ * @type {Formfill[]}
+ */
+export const marionAdultGenderMap: Formfill[] = [
+  /** Correction of Birth Record */
+  {
+    text: (applicant) =>
+      formatDate(new Date().toLocaleDateString(), {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    field: "Date",
+  },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "Name",
+  },
+  {
+    text: (applicant) => fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    field: "Birth_name",
+  },
+  {
+    check: (applicant) => applicant.assignedSex === GenderMarker.M,
+    field: "Check Box1",
+  },
+  {
+    check: (applicant) => applicant.assignedSex === GenderMarker.F,
+    field: "Check Box2",
+  },
+  {
+    text: (applicant) =>
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    field: "Date of Birth",
+  },
+  {
+    text: (applicant) => fullName(applicant.fathersBirthName),
+    field: "Name of Father",
+  },
+  {
+    text: (applicant) => fullName(applicant.mothersBirthName),
+    field: "Maiden Name of Mother",
+  },
+  {
+    text: () => "Sex:",
+    field: "ITEM_1",
+  },
+  {
+    text: (applicant) => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+        default:
+          return "";
+      }
+    },
+    field: "READ_AS_1",
+  },
+  {
+    text: (applicant) => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+        default:
+          return "";
+      }
+    },
+    field: "SHOULD_READ_1",
+  },
+  {
+    text: (applicant) =>
+      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+    field: "Address",
+  },
+  /** Affidavit to Correct Gender Marker in Birth Record for an Adult */
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "IN RE THE BIRTH RECORD OF",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.M,
+    field: "Check BoxM",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.F,
+    field: "Check BoxF",
+  },
+  /** Licensed Professional Statement to Correct Gender Record on Birth Record */
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "IN RE BIRTH CORECTION OF",
+  },
+];
+
+/**
+ * Marion County Minor Packet (forms listed below)
+ * Updated 6/2025.
+ * @type {Formfill[]}
+ */
+export const marionMinorGenderMap: Formfill[] = [
+  /** Correction of Birth Record */
+  {
+    text: (applicant) =>
+      formatDate(new Date().toLocaleDateString(), {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    field: "Date",
+  },
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "Name",
+  },
+  {
+    text: (applicant) => fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    field: "Birth_name",
+  },
+  {
+    check: (applicant) => applicant.assignedSex === GenderMarker.M,
+    field: "Check Box1",
+  },
+  {
+    check: (applicant) => applicant.assignedSex === GenderMarker.F,
+    field: "Check Box2",
+  },
+  {
+    text: (applicant) =>
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    field: "Date of Birth",
+  },
+  {
+    text: (applicant) => fullName(applicant.fathersBirthName),
+    field: "Name of Father",
+  },
+  {
+    text: (applicant) => fullName(applicant.mothersBirthName),
+    field: "Maiden Name of Mother",
+  },
+  {
+    text: () => "Sex:",
+    field: "ITEM_1",
+  },
+  {
+    text: (applicant) => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+        default:
+          return "";
+      }
+    },
+    field: "READ_AS_1",
+  },
+  {
+    text: (applicant) => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+        default:
+          return "";
+      }
+    },
+    field: "SHOULD_READ_1",
+  },
+  {
+    text: (applicant) =>
+      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+    field: "Address",
+  },
+  /** Affidavit to Correct Gender Marker in Birth Record for an Adult */
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "IN RE THE BIRTH RECORD OF",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.M,
+    field: "Check BoxM",
+  },
+  {
+    check: (applicant) => applicant.gender === GenderMarker.F,
+    field: "Check BoxF",
+  },
+  /** Licensed Professional Statement to Correct Gender Record on Birth Record */
+  {
+    text: (applicant) => fullName(applicant.legalName),
+    field: "IN RE BIRTH CORECTION OF",
   },
 ];
 
