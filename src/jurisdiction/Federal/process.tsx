@@ -79,13 +79,13 @@ export const passport: Process<Locality> = {
 export const selectiveService: Process<Locality> = {
   target: Target.NameChange,
   documents: [
-    {
+    /** {
       name: "Request for Status Information Letter",
       filename: "Federal/selective_service_status_letter.pdf",
       map: statusLetterMap,
       include: (applicant) =>
         numericalAge(applicant.birthdate) < 26 && (applicant.assignedSex === GenderMarker.F),
-    },
+    }, */
     {
       name: "Selective Service Guide",
       guide: SelectiveServiceGuide,
