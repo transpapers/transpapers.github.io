@@ -71,7 +71,7 @@ import {
 import alaskaCounties from "./Alaska/counties";
 import { AlaskaAdministrativeDivision } from "../types/locality";
 
-import { passport, socialSecurity, selectiveService } from "./Federal/process";
+import { passport, socialSecurity, selectiveService, } from "./Federal/process";
 
 export const michigan: Jurisdiction<MichiganCounty> = {
   name: "Michigan",
