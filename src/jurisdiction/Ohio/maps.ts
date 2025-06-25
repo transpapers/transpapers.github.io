@@ -3796,7 +3796,7 @@ export const mahoningMap: Formfill[] = [
 export const marionAdultGenderMap: Formfill[] = [
   /** Correction of Birth Record */
   {
-    text: (applicant) =>
+    text: () =>
       formatDate(new Date().toLocaleDateString(), {
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
@@ -3904,7 +3904,7 @@ export const marionAdultGenderMap: Formfill[] = [
 export const marionMinorGenderMap: Formfill[] = [
   /** Correction of Birth Record */
   {
-    text: (applicant) =>
+    text: () =>
       formatDate(new Date().toLocaleDateString(), {
         format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
         separator: "/",
