@@ -75,7 +75,7 @@ export const passport: Process<Locality> = {
   ],
 };
 
-export const selectiveService: Process<Locality> = {
+/**export const selectiveService: Process<Locality> = {
   depends: [Target.NameChange, Target.SocialSecurity],
   documents: [
      {
@@ -89,4 +89,4 @@ export const selectiveService: Process<Locality> = {
       guide: SelectiveServiceGuide,
     },
   ],
-};
+};*/
