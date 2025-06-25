@@ -83,7 +83,6 @@ export const selectiveService: Process<Locality> = {
     {
       name: "Request for Status Information Letter",
       filename: "Federal/selective_service_status_letter.pdf",
-      guide: SelectiveServiceGuide,
       map: statusLetterMap,
       include: (applicant) =>
         numericalAge(applicant.birthdate) < 26 && applicant.assignedSex === GenderMarker.F,
@@ -92,7 +91,7 @@ export const selectiveService: Process<Locality> = {
       name: "Selective Service",
       guide: SelectiveServiceGuide,
       include: (applicant) =>
-        numericalAge(applicant.birthdate) < 26 && applicant.assignedSex === GenderMarker.M,
+        numericalAge(applicant.birthdate) < 26,
     },
   ],
 };
