@@ -95,7 +95,7 @@ export function abbreviateJurisdiction(
  * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
  * @return {number}
  */
-export function numericalAge(birthdate: string | undefined): number {
+export function numericalAge(birthdate: string ): number {
   if (!birthdate) {
     return Infinity;
   }

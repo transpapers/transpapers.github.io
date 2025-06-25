@@ -17,7 +17,6 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { numericalAge } from "../../lib/util";
 import { GenderMarker } from "../../types/types";
 
 import { ssnMap, ds5504Map, ds82Map, ds11Map, statusLetterMap, } from "./maps";
@@ -83,13 +82,11 @@ export const selectiveService: Process<Locality> = {
       name: "Request for Status Information Letter",
       filename: "Federal/selective_service_status_letter.pdf",
       map: statusLetterMap,
-      include: (applicant) =>
-        numericalAge(applicant.birthdate) < 26 && (applicant.assignedSex === GenderMarker.F),
+      include: (applicant) => (applicant.assignedSex === GenderMarker.F),
     },
     {
       name: "Selective Service Guide",
       guide: SelectiveServiceGuide,
-      include: (applicant) => numericalAge(applicant.birthdate) < 26,
     },
   ],
 };
