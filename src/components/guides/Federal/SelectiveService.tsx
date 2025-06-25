@@ -25,7 +25,7 @@ import { GenderMarker } from "../../../types/types";
 function SelectiveServiceGuide({ person }: { person: Person }) {
   const { age, assignedSex } = person;
   return (
-    <section key="Federal - SelectiveService">
+    <section key="FederalSelectiveService">
       <h3>Selective Service</h3>
 
       {assignedSex === GenderMarker.F ? (
