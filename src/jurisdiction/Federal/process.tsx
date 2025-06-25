@@ -17,12 +17,16 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { ssnMap, ds5504Map, ds82Map, ds11Map } from "./maps";
+import { numericalAge } from "../../lib/util";
+import { GenderMarker } from "../../types/types";
+
+import { ssnMap, ds5504Map, ds82Map, ds11Map, statusLetterMap } from "./maps";
 
 import DS5504Guide from "../../components/guides/Federal/ds5504";
 import DS82Guide from "../../components/guides/Federal/ds82";
 import DS11Guide from "../../components/guides/Federal/ds11";
 import SocialSecurityGuide from "../../components/guides/Federal/SocialSecurity";
+import SelectiveServiceGuide from "../../components/guides/Federal/SelectiveService";
 
 import { type Process, Target } from "../../types/process";
 
@@ -68,6 +72,27 @@ export const passport: Process<Locality> = {
       map: ds11Map,
       guide: DS11Guide,
       include: (applicant) => applicant.passport === "ds11",
+    },
+  ],
+};
+
+export const selectiveService: Process<Locality> = {
+  target: Target.NameChange,
+  depends: [Target.GenderMarker],
+  documents: [
+    {
+      name: "Request for Status Information Letter",
+      filename: "Federal/selective_service_status_letter.pdf",
+      guide: SelectiveServiceGuide,
+      map: statusLetterMap,
+      include: (applicant) =>
+        numericalAge(applicant.birthdate) < 26 && applicant.assignedSex === GenderMarker.F,
+    },
+    {
+      name: "Selective Service",
+      guide: SelectiveServiceGuide,
+      include: (applicant) =>
+        numericalAge(applicant.birthdate) < 26 && applicant.assignedSex === GenderMarker.M,
     },
   ],
 };

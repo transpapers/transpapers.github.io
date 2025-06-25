@@ -27,6 +27,7 @@ import {
   isMinor,
   representativeName,
   addZero,
+  allCAPS,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -585,4 +586,85 @@ export const ds11Map: Formfill[] = [
     loc: { page: 5, x: 141, y: 248 },
   },
   { text: () => "x", loc: { page: 5, x: 694, y: 236 } },
+];
+
+/**
+ * Request for Status Information Letter (federal form unnumbered)
+ * @type {Formfill[]}
+ */
+export const statusLetterMap: Formfill[] = [
+  {
+    text: (applicant) => applicant.isChangingLegalName
+      ? allCAPS(applicant.chosenName?.first)
+      : allCAPS(applicant.legalName?.first),
+    field: "First Name",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName
+      ? allCAPS(applicant.chosenName?.middle)
+      : allCAPS(applicant.legalName?.first),
+    field: "Middle Name",
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName
+      ? allCAPS(applicant.chosenName?.last)
+      : allCAPS(applicant.legalName?.first),
+    field: "Last Name",
+  },
+  {
+    text: (applicant) => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName) 
+            ? `${allCAPS(fullName(applicant.legalName))}, ${allCAPS(fullName(applicant.birthName))}`
+            : allCAPS(fullName(applicant.legalName));
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    },
+    field: "List any other names used Include multiple last names",
+  },
+  {
+    text: (applicant) =>
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    field: "Date of Birth",
+  },
+  {
+    text: (applicant) => allCAPS(applicant.streetAddress),
+    field: "Current Mailing Address 1",
+  },
+  {
+    text: (applicant) => allCAPS(applicant.residentCity),
+    field: "Current Mailing Address - City",
+  },
+  {
+    text: (applicant) => allCAPS(applicant.residentJurisdiction),
+    field: "Current Mailing Address - State",
+  },
+  {
+    text: (applicant) => applicant.zip,
+    field: "Current Mailing Address - Zip Code",
+  },
+  {
+    text: (applicant) => applicant.phone,
+    field: "Daytime Telephone Number",
+  },
+  {
+    text: (applicant) => allCAPS(applicant.email),
+    field: "Email Address",
+  },
+  {
+    check: (applicant) => applicant.assignedSex === GenderMarker.F,
+    field: "Female I have or will transition to male",
+  },
+  {
+    text: (applicant) => (applicant.assignedSex === GenderMarker.F) 
+      ? "I was assigned female at birth and was excluded from registering." : "",
+    field: "Reason for Failure to Register Before Age 26",
+  },
 ];

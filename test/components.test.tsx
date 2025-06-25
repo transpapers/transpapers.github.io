@@ -72,6 +72,7 @@ import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
 import SocialSecurityGuide from "../src/components/guides/Federal/SocialSecurity";
+import SelectiveServiceGuide from "../src/components/guides/Federal/SelectiveService";
 
 import { sampleData } from "../src/types/person";
 
@@ -222,6 +223,10 @@ const federalGuideComponents = [
   {
     name: "SocialSecurityGuide",
     component: <SocialSecurityGuide person={sampleData} />,
+  },
+  {
+    name: "SelectiveServiceGuide",
+    component: <SelectiveServiceGuide person={sampleData} />,
   },
 ];
 

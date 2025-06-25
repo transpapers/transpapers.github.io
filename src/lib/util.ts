@@ -95,7 +95,7 @@ export function abbreviateJurisdiction(
  * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
  * @return {number}
  */
-export function numericalAge(birthdate: string): number {
+export function numericalAge(birthdate: string | undefined): number {
   if (!birthdate) {
     return Infinity;
   }
@@ -309,4 +309,18 @@ export function numericalBirthYear(birthdate: string | undefined): number {
   const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
 
   return birthYear;
+}
+
+/**
+ * Capitalize and return entered string.
+ * Some forms require all CAPS entries.
+ * @param {string} capString
+ * @return {string}
+ */
+export function allCAPS(capString: string | undefined): string {
+  if (!capString) {
+    return "";
+  }
+
+  return capString.toUpperCase();
 }
