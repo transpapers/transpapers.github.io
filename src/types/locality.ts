@@ -64,6 +64,35 @@ export type RhodeIslandCityOrTown = Locality & {
   filingCost: string;
 };
 
+export type OhioCounty = Locality & {
+  courtDemandsPublication: boolean;
+  courtDoesAdvertisement?: boolean;
+  publications?: Publication[];
+
+  backgroundCheckRequired: boolean;
+  fingerprintLocations?: FingerprintLocation[];
+
+  typeOfBirthCert: string;
+
+  adultApplication: boolean;
+  adultSupportAffidavit: boolean;
+  minorSupportAffidavit: boolean;
+  judgmentEntryHearing: boolean;
+  adultJudgementEntry: boolean;
+  minorApplication: boolean;
+  minorJudgementEntry: boolean;
+  consentWaiver: boolean;
+  publicationNotice: boolean;
+  publicationWaiverOne: boolean;
+  publicationWaiverTwo: boolean;
+  backgroundCheckRelease: boolean;
+  birthCorrection: boolean;
+
+  judgeName: string;
+
+  filingCost: string;
+};
+
 export type MichiganCounty = Locality & {
   fingerprintLocations: FingerprintLocation[];
   publications: Publication[];
