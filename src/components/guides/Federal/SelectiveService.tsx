@@ -49,7 +49,7 @@ function SelectiveServiceGuide({ person }: { person: Person }) {
                 no trace of an updated name or gender marker on a birth 
                 certificate and you have changed both. If you really want 
                 to then you can within 30 days of when you turn 18 by using 
-                this  <a href="https://www.sss.gov/register/">link</a>
+                this <a href="https://www.sss.gov/register/">link</a>
                 , make sure to document any subsequent name or address 
                 changes before age 26 with them. If you don’t want to 
                 register{" "}
