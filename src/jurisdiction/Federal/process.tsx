@@ -78,7 +78,6 @@ export const passport: Process<Locality> = {
 
 export const selectiveService: Process<Locality> = {
   target: Target.NameChange,
-  depends: [Target.GenderMarker],
   documents: [
     {
       name: "Request for Status Information Letter",

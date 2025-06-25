@@ -28,7 +28,7 @@ function SelectiveServiceGuide({ person }: { person: Person }) {
     <section key="FederalSelectiveService">
       <h3>Selective Service</h3>
 
-      {assignedSex === GenderMarker.F ? (
+      {(assignedSex === GenderMarker.F) ? (
         <>
           <p>
             Since you were assigned female at birth you were excluded from 
@@ -104,7 +104,7 @@ function SelectiveServiceGuide({ person }: { person: Person }) {
         </>
       ):("")}
 
-      {assignedSex === GenderMarker.M ? (
+      {(assignedSex === GenderMarker.M) ? (
         <>
           <p>
             {age && age > 18 ? (
