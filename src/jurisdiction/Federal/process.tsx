@@ -17,10 +17,10 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-//import { numericalAge } from "../../lib/util";
-//import { GenderMarker } from "../../types/types";
+import { numericalAge } from "../../lib/util";
+import { GenderMarker } from "../../types/types";
 
-import { ssnMap, ds5504Map, ds82Map, ds11Map, /**statusLetterMap*/ } from "./maps";
+import { ssnMap, ds5504Map, ds82Map, ds11Map, statusLetterMap } from "./maps";
 
 import DS5504Guide from "../../components/guides/Federal/ds5504";
 import DS82Guide from "../../components/guides/Federal/ds82";
@@ -76,7 +76,7 @@ export const passport: Process<Locality> = {
   ],
 };
 
-/**export const selectiveService: Process<Locality> = {
+export const selectiveService: Process<Locality> = {
   target: Target.NameChange,
   documents: [
      {
@@ -86,10 +86,10 @@ export const passport: Process<Locality> = {
       include: (applicant) =>
         numericalAge(applicant.birthdate) < 26 && (applicant.assignedSex === GenderMarker.F),
     },
-    {
+    /**{
       name: "Selective Service Guide",
       guide: SelectiveServiceGuide,
       include: (applicant) => numericalAge(applicant.birthdate) < 26,
-    },
+    },*/
   ],
-};*/
+};
