@@ -18,9 +18,9 @@
  */
 
 import { numericalAge } from "../../lib/util";
-import { GenderMarker } from "../../types/types";
+//import { GenderMarker } from "../../types/types";
 
-import { ssnMap, ds5504Map, ds82Map, ds11Map, statusLetterMap } from "./maps";
+import { ssnMap, ds5504Map, ds82Map, ds11Map, /**statusLetterMap*/ } from "./maps";
 
 import DS5504Guide from "../../components/guides/Federal/ds5504";
 import DS82Guide from "../../components/guides/Federal/ds82";
