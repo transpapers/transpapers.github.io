@@ -23,11 +23,12 @@ import {
   phoneAreaCode,
   phoneStart,
   phoneEnd,
-  abbreviateJurisdiction,
   isMinor,
   representativeName,
   addZero,
   allCAPS,
+  formatContactInfo,
+  ContactFormat as cf,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -39,30 +40,28 @@ import { Formfill } from "../../types/formfill";
  */
 export const ssnMap: Formfill[] = [
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     field: "topmostSubform[0].Page5[0].firstname[0]",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     field: "topmostSubform[0].Page5[0].Middlename[0]",
   },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) => applicant.chosenName.last,
     field: "topmostSubform[0].Page5[0].LastName[0]",
   },
   {
-    text: (applicant) =>
-      applicant.birthName?.first ?? applicant.legalName?.first ?? "",
+    text: (applicant) => applicant.birthName.first || applicant.legalName.first,
     field: "topmostSubform[0].Page5[0].firstdiffname[0]",
   },
   {
     text: (applicant) =>
-      applicant.birthName?.middle ?? applicant.legalName?.middle ?? "",
+      applicant.birthName.middle || applicant.legalName.middle,
     field: "topmostSubform[0].Page5[0].Middlediffname[0]",
   },
   {
-    text: (applicant) =>
-      applicant.birthName?.last ?? applicant.legalName?.last ?? "",
+    text: (applicant) => applicant.birthName.last || applicant.legalName.last,
     field: "topmostSubform[0].Page5[0].Lastdiffname[0]",
   },
   {
@@ -70,7 +69,7 @@ export const ssnMap: Formfill[] = [
     field: "topmostSubform[0].Page5[0].cityofbirth[0]",
   },
   {
-    text: (applicant) => applicant.birthJurisdiction,
+    text: (applicant) => applicant.birthJurisdiction?.name,
     field: "topmostSubform[0].Page5[0].stateatbirth[0]",
   },
   {
@@ -94,40 +93,40 @@ export const ssnMap: Formfill[] = [
   },
 
   {
-    text: (applicant) => applicant.mothersBirthName?.first ?? "",
+    text: (applicant) => applicant.mothersBirthName.first,
     field: "topmostSubform[0].Page5[0].mothersfirstname[0]",
   },
   {
-    text: (applicant) => applicant.mothersBirthName?.middle ?? "",
+    text: (applicant) => applicant.mothersBirthName.middle,
     field: "topmostSubform[0].Page5[0].mothersmiddlename[0]",
   },
   {
-    text: (applicant) => applicant.mothersBirthName?.last ?? "",
+    text: (applicant) => applicant.mothersBirthName.last,
     field: "topmostSubform[0].Page5[0].motherslastname[0]",
   },
   {
-    text: (applicant) => applicant.fathersBirthName?.first ?? "",
+    text: (applicant) => applicant.fathersBirthName.first,
     field: "topmostSubform[0].Page5[0].fathersfirstname[0]",
   },
   {
-    text: (applicant) => applicant.fathersBirthName?.middle ?? "",
+    text: (applicant) => applicant.fathersBirthName.middle,
     field: "topmostSubform[0].Page5[0].fathersmiddlename[0]",
   },
   {
-    text: (applicant) => applicant.fathersBirthName?.last ?? "",
+    text: (applicant) => applicant.fathersBirthName.last,
     field: "topmostSubform[0].Page5[0].fatherslastname[0]",
   },
   { check: () => true, field: "topmostSubform[0].Page5[0].ssnbefore[0]" },
   {
-    text: (applicant) => applicant.legalName?.first ?? "",
+    text: (applicant) => applicant.legalName.first,
     field: "topmostSubform[0].Page5[0].firstnameonrecentcard[0]",
   },
   {
-    text: (applicant) => applicant.legalName?.middle ?? "",
+    text: (applicant) => applicant.legalName.middle,
     field: "topmostSubform[0].Page5[0].middlenameonrecentcard[0]",
   },
   {
-    text: (applicant) => applicant.legalName?.last ?? "",
+    text: (applicant) => applicant.legalName.last,
     field: "topmostSubform[0].Page5[0].lastnameonrecentcard[0]",
   },
   {
@@ -152,7 +151,7 @@ export const ssnMap: Formfill[] = [
     field: "topmostSubform[0].Page5[0].mailingcity[0]",
   },
   {
-    text: (applicant) => applicant.residentJurisdiction,
+    text: (applicant) => applicant.residentJurisdiction?.name,
     field: "topmostSubform[0].Page5[0].state[0]",
   },
   {
@@ -176,15 +175,15 @@ export const ssnMap: Formfill[] = [
 export const ds5504Map: Formfill[] = [
   { check: () => true, loc: { x: 46, y: 247 } },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) => applicant.chosenName.last,
     loc: { page: 4, x: 99, y: 193 },
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     loc: { page: 4, x: 99, y: 237 },
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     loc: { page: 4, x: 471, y: 237 },
   },
   {
@@ -218,8 +217,7 @@ export const ds5504Map: Formfill[] = [
     loc: { page: 4, x: 327, y: 281 },
   },
   {
-    text: (applicant) =>
-      `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.BirthCityAndState),
     loc: { page: 4, x: 364, y: 281 },
   },
   { text: (applicant) => applicant.email, loc: { page: 4, x: 309, y: 326 } },
@@ -251,8 +249,7 @@ export const ds5504Map: Formfill[] = [
     loc: { page: 4, x: 40, y: 461 },
   },
   {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? "",
+    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
     loc: { page: 4, x: 378, y: 461 },
   },
   { text: (applicant) => applicant.zip, loc: { page: 4, x: 436, y: 461 } },
@@ -266,7 +263,7 @@ export const ds5504Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
     loc: { page: 5, x: 47, y: 60 },
   },
   {
@@ -279,15 +276,15 @@ export const ds5504Map: Formfill[] = [
   },
   { text: () => "x", loc: { page: 5, x: 132, y: 573 } },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) => applicant.chosenName.last,
     loc: { page: 5, x: 319, y: 562 },
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     loc: { page: 5, x: 319, y: 613 },
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     loc: { page: 5, x: 574, y: 613 },
   },
 ];
@@ -304,15 +301,15 @@ export const ds82Map: Formfill[] = [
   { text: () => "X", loc: { x: 52, y: 358 } },
   { text: () => "X", loc: { x: 52, y: 455 } },
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) => applicant.chosenName.last,
     loc: { page: 4, x: 101, y: 179 },
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     loc: { page: 4, x: 99, y: 224 },
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     loc: { page: 4, x: 470, y: 224 },
   },
   {
@@ -346,8 +343,7 @@ export const ds82Map: Formfill[] = [
     loc: { page: 4, x: 327, y: 269 },
   },
   {
-    text: (applicant) =>
-      `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.BirthCityAndState),
     loc: { page: 4, x: 364, y: 270 },
   },
   { text: (applicant) => applicant.email, loc: { page: 4, x: 309, y: 316 } },
@@ -379,8 +375,7 @@ export const ds82Map: Formfill[] = [
     loc: { page: 4, x: 39, y: 448 },
   },
   {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? "",
+    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
     loc: { page: 4, x: 376, y: 448 },
   },
   { text: (applicant) => applicant.zip, loc: { page: 4, x: 436, y: 448 } },
@@ -395,12 +390,16 @@ export const ds82Map: Formfill[] = [
   { text: () => "x", loc: { page: 4, x: 262, y: 703 } },
   {
     text: (applicant) =>
-      `${applicant.court?.city ?? ""}  ${abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? ""}`,
+      applicant.residentJurisdiction && applicant.residentLocality
+        ? applicant.residentLocality.court.city +
+          " " +
+          applicant.residentJurisdiction.abbreviation
+        : undefined,
     loc: { page: 4, x: 390, y: 707 },
   },
   {
     text: (applicant) =>
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
     loc: { page: 5, x: 42, y: 59 },
   },
   {
@@ -419,15 +418,15 @@ export const ds82Map: Formfill[] = [
  */
 export const ds11Map: Formfill[] = [
   {
-    text: (applicant) => applicant.chosenName?.last ?? "",
+    text: (applicant) => applicant.chosenName.last,
     loc: { page: 4, x: 100, y: 185 },
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     loc: { page: 4, x: 102, y: 230 },
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     loc: { page: 4, x: 472, y: 230 },
   },
   {
@@ -461,8 +460,7 @@ export const ds11Map: Formfill[] = [
     loc: { page: 4, x: 323, y: 274 },
   },
   {
-    text: (applicant) =>
-      `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.BirthCityAndState),
     loc: { page: 4, x: 365, y: 275 },
   },
   { text: (applicant) => applicant.email, loc: { page: 4, x: 313, y: 323 } },
@@ -494,8 +492,7 @@ export const ds11Map: Formfill[] = [
     loc: { page: 4, x: 42, y: 454 },
   },
   {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? "") ?? "",
+    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
     loc: { page: 4, x: 379, y: 454 },
   },
   { text: (applicant) => applicant.zip, loc: { page: 4, x: 439, y: 454 } },
@@ -505,7 +502,7 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.first ?? ""} ${applicant.chosenName?.middle ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
     loc: { page: 5, x: 48, y: 56 },
   },
   {
@@ -518,11 +515,11 @@ export const ds11Map: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.mothersBirthName?.first ?? ""} ${applicant.mothersBirthName?.middle ?? ""}`,
+      `${applicant.mothersBirthName.first} ${applicant.mothersBirthName.middle}`,
     loc: { page: 5, x: 48, y: 112 },
   },
   {
-    text: (applicant) => applicant.mothersBirthName?.last ?? "",
+    text: (applicant) => applicant.mothersBirthName.last,
     loc: { page: 5, x: 480, y: 112 },
   },
   {
@@ -556,11 +553,11 @@ export const ds11Map: Formfill[] = [
   { text: () => "x", loc: { page: 5, x: 694, y: 160 } },
   {
     text: (applicant) =>
-      `${applicant.fathersBirthName?.first ?? ""} ${applicant.fathersBirthName?.middle ?? ""}`,
+      `${applicant.fathersBirthName.first} ${applicant.fathersBirthName.middle}`,
     loc: { page: 5, x: 48, y: 202 },
   },
   {
-    text: (applicant) => applicant.fathersBirthName?.last ?? "",
+    text: (applicant) => applicant.fathersBirthName.last,
     loc: { page: 5, x: 481, y: 202 },
   },
   {
@@ -630,28 +627,31 @@ export const passportAttestationMap: Formfill[] = [
  */
 export const statusLetterMap: Formfill[] = [
   {
-    text: (applicant) => applicant.isChangingLegalName
-      ? allCAPS(applicant.chosenName?.first)
-      : allCAPS(applicant.legalName?.first),
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? allCAPS(applicant.chosenName?.first)
+        : allCAPS(applicant.legalName?.first),
     field: "First Name",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName
-      ? allCAPS(applicant.chosenName?.middle)
-      : allCAPS(applicant.legalName?.first),
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? allCAPS(applicant.chosenName?.middle)
+        : allCAPS(applicant.legalName?.first),
     field: "Middle Name",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName
-      ? allCAPS(applicant.chosenName?.last)
-      : allCAPS(applicant.legalName?.first),
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? allCAPS(applicant.chosenName?.last)
+        : allCAPS(applicant.legalName?.first),
     field: "Last Name",
   },
   {
     text: (applicant) => {
       switch (applicant.isChangingLegalName) {
         case true:
-          return fullName(applicant.birthName) 
+          return fullName(applicant.birthName)
             ? `${allCAPS(fullName(applicant.legalName))}, ${allCAPS(fullName(applicant.birthName))}`
             : allCAPS(fullName(applicant.legalName));
         case false:
@@ -699,8 +699,10 @@ export const statusLetterMap: Formfill[] = [
     field: "Female I have or will transition to male",
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F) 
-      ? "I was assigned female at birth and was excluded from registering." : "",
+    text: (applicant) =>
+      applicant.assignedSex === GenderMarker.F
+        ? "I was assigned female at birth and was excluded from registering."
+        : "",
     field: "Reason for Failure to Register Before Age 26",
   },
 ];

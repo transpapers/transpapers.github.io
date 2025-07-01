@@ -24,6 +24,8 @@ import { type Person } from "../../../types/person";
 function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
   const { age, parentsAreOkay, residentJurisdiction } = person;
 
+  if (!residentJurisdiction) return "";
+
   return (
     <section key="NewYork-BC-Update">
       <h3>Birth Certificate Update (NY)</h3>
@@ -64,7 +66,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
             blanks for sections 1 through 3. Section 4 can only be completed in
             front of a notary so do <strong>not</strong> sign until directed to
             do so.
-            {residentJurisdiction && residentJurisdiction === "New York"
+            {residentJurisdiction.name === "New York"
               ? "For notary resources see the 'Getting Documents and a Notary' section above."
               : ""}
           </p>
@@ -97,14 +99,14 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
             apartment number to the street address, if applicable. The
             Attestation part below must be signed in front of a notary so do{" "}
             <strong>not</strong> sign until then.
-            {residentJurisdiction && residentJurisdiction === "New York"
+            {residentJurisdiction.name === "New York"
               ? "For notary resources see the 'Getting Documents and a Notary' section above."
               : ""}
           </p>
         </>
       )}
 
-      {residentJurisdiction && residentJurisdiction === "New York" ? (
+      {residentJurisdiction.name === "New York" ? (
         ""
       ) : (
         <p>
@@ -177,7 +179,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
           The DOH-5304 Affidavit will need to be filled out in front of a
           notary, do <strong>not</strong>
           fill it out until directed.
-          {residentJurisdiction && residentJurisdiction === "New York"
+          {residentJurisdiction.name === "New York"
             ? "For notary resources see the 'Getting Documents and a Notary' section above."
             : ""}
         </p>
@@ -199,13 +201,13 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Person }) {
           instead. Sign and date it at the bottom. Leave the DOH-5303 Affidavit
           alone until you are in front of a notary, do
           <strong>not</strong> sign or date it until directed.
-          {residentJurisdiction && residentJurisdiction === "New York"
+          {residentJurisdiction.name === "New York"
             ? "For notary resources see the 'Getting Documents and a Notary' section above."
             : ""}
         </p>
       )}
 
-      {residentJurisdiction && residentJurisdiction === "New York" ? (
+      {residentJurisdiction.name === "New York" ? (
         ""
       ) : (
         <p>

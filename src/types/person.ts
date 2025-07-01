@@ -19,33 +19,35 @@
 
 import { Name, GenderMarker } from "./types";
 
-import { Court, FingerprintLocation, Publication } from "./locality";
+import { AnyLocality, AnyJurisdiction } from "./generic";
+
+import { michigan, newYork } from "../jurisdiction/all";
 
 /**
  * Applicant's personal information.
  */
-export interface Person {
+export class Person {
   /**
    * Applicant's legal name.
    */
-  legalName: Name | undefined;
+  legalName: Name = new Name();
 
   /**
    * Applicant's chosen name.
    */
-  chosenName: Name | undefined;
+  chosenName: Name = new Name();
 
   /**
    * Applicant's birth name, if different from legal name.
    */
-  birthName: Name | undefined;
+  birthName: Name = new Name();
 
   /**
    * Reason for applicant's name change.
    *
    * @remarks Required by most Change of Name petitions.
    */
-  reasonForNameChange: string | undefined;
+  reasonForNameChange?: string;
 
   /**
    * Whether to seal applicant's previous birth certificate to prevent access by
@@ -53,17 +55,17 @@ export interface Person {
    *
    * @remarks Required by Michigan form PC 51c.
    */
-  sealBirthCertificate: boolean | undefined;
+  sealBirthCertificate?: boolean;
 
   /**
    * Applicant's city of birth.
    */
-  birthCity: string | undefined;
+  birthCity?: string;
 
   /**
    * Applicant's jurisdiction of birth; state, territory, or foreign country.
    */
-  birthJurisdiction: string | undefined;
+  birthJurisdiction?: AnyJurisdiction;
 
   /**
    * Applicant's date of birth.
@@ -93,7 +95,7 @@ export interface Person {
    * that the MI process is particularly onerous, the last breakpoint is
    * most likely 18 in other states.
    */
-  birthdate: string | undefined;
+  birthdate?: string;
 
   /**
    * The age applicant will be on filing.
@@ -101,31 +103,31 @@ export interface Person {
    * @remarks Autofilled from `birthdate` if not provided. May be provided for
    * minors who may cross a "breakpoint" between filling and filing forms.
    */
-  age: number | undefined;
+  age?: number;
 
   /**
    * Applicant's assigned sex at birth.
    */
-  assignedSex: GenderMarker | undefined;
+  assignedSex?: GenderMarker;
 
   /**
    * Applicant's self-identified gender.
    */
-  gender: GenderMarker | undefined;
+  gender?: GenderMarker;
 
   /**
    * Whether applicant is changing legal name.
    *
    * @remarks To be filled from [...]
    */
-  isChangingLegalName: boolean | undefined;
+  isChangingLegalName?: boolean;
 
   /**
    * Whether applicant is changing legal sex.
    *
    * @remarks To be filled from [...]
    */
-  isChangingLegalSex: boolean | undefined;
+  isChangingLegalSex?: boolean;
 
   /**
    * Whether to withhold publication of the newspaper notice.
@@ -134,7 +136,7 @@ export interface Person {
    * court forms in most states. Potentially skips publication step
    * in some state guides as well.
    */
-  doNotPublish: boolean | undefined;
+  doNotPublish?: boolean;
 
   /**
    * Applicant checks this to indicate criminal record.
@@ -148,7 +150,7 @@ export interface Person {
    * forms appropriately. For minors it can be either them or their
    * representative who has one.
    */
-  hasCriminalRecord: boolean | undefined;
+  hasCriminalRecord?: boolean;
 
   /**
    * Should be `true` if applicant is a minor with two living, married parents.
@@ -156,70 +158,70 @@ export interface Person {
    * @remarks Required to determine which forms should be filed for Michigan
    * minors.
    */
-  parentsAreOkay: boolean | undefined;
+  parentsAreOkay?: boolean;
 
   /**
    * Applicant's mother's birth name.
    */
-  mothersBirthName: Name | undefined;
+  mothersBirthName: Name = new Name();
 
   /**
    * Applicant's mother's birthdate.
    *
    * @remarks Cf. `birthdate` field.
    */
-  mothersBirthdate: string | undefined;
+  mothersBirthdate?: string;
 
   /**
    * Applicant's father's birth name.
    */
-  fathersBirthName: Name | undefined;
+  fathersBirthName: Name = new Name();
 
   /**
    * Applicant's father's birthdate.
    *
    * @remarks Cf. `birthdate` field.
    */
-  fathersBirthdate: string | undefined;
+  fathersBirthdate?: string;
 
   /**
    * Applicant's daytime phone number.
    */
-  phone: string | undefined;
+  phone?: string;
 
   /**
    * Applicant's current street address, including "line 2."
    */
-  streetAddress: string | undefined;
+  streetAddress?: string;
 
   /**
    * Applicant's city of residence.
    */
-  residentCity: string | undefined;
+  residentCity?: string;
 
   /**
    * Applicant's jurisdiction (state or US territory) of residence.
    *
    * @remarks Filled from step 1.
    */
-  residentJurisdiction: string | undefined;
+  residentJurisdiction?: AnyJurisdiction;
 
   /**
    * Applicant's county (or equivalent) of residence.
    *
    * @remarks Required for court locations, etc. Filled from Jurisdiction data.
    */
-  residentLocality: string | undefined;
+  residentLocality?: AnyLocality;
 
   /**
    * Applicant's ZIP code.
    */
-  zip: string | undefined;
+  zip?: string;
 
   /**
    * Applicant's email address.
    */
-  email: string | undefined;
+  email?: string;
 
   /**
    * Name of applicant's legal representative (parent, guardian, etc.), if
@@ -227,126 +229,39 @@ export interface Person {
    *
    * @remarks Only applicable for minors.
    */
-  representativeName: Name | undefined;
+  representativeName?: Name;
 
   /**
    * TODO DOCUMENT THIS
    */
-  passport: string | undefined;
-
-  court: Court | undefined;
-  fingerprintLocations: FingerprintLocation[] | undefined;
-  publications: Publication[] | undefined;
+  passport?: string;
 }
-
-export const blankData: Person = {
-  legalName: {
-    first: "",
-    middle: "",
-    last: "",
-    suffix: "",
-  },
-
-  chosenName: {
-    first: "",
-    middle: "",
-    last: "",
-    suffix: "",
-  },
-
-  birthName: undefined,
-
-  reasonForNameChange: undefined,
-
-  sealBirthCertificate: undefined,
-  birthCity: undefined,
-  birthJurisdiction: undefined,
-
-  birthdate: undefined,
-
-  age: undefined,
-
-  assignedSex: undefined,
-  gender: undefined,
-
-  isChangingLegalName: undefined,
-  isChangingLegalSex: undefined,
-
-  doNotPublish: undefined,
-  hasCriminalRecord: undefined,
-  parentsAreOkay: undefined,
-
-  mothersBirthName: {
-    first: "",
-    middle: "",
-    last: "",
-    suffix: "",
-  },
-
-  mothersBirthdate: undefined,
-
-  fathersBirthName: {
-    first: "",
-    middle: "",
-    last: "",
-    suffix: "",
-  },
-
-  fathersBirthdate: undefined,
-
-  phone: undefined,
-  streetAddress: undefined,
-
-  residentCity: undefined,
-  residentJurisdiction: undefined,
-  residentLocality: undefined,
-
-  zip: undefined,
-  email: undefined,
-
-  representativeName: {
-    first: "",
-    middle: "",
-    last: "",
-    suffix: "",
-  },
-
-  passport: undefined,
-
-  court: undefined,
-  fingerprintLocations: undefined,
-  publications: undefined,
-};
 
 // This should come in handy for documentation purposes.
 /**
  * @type {Person}
  */
-export const sampleData: Person = {
+export const sampleData: Partial<Person> = {
   legalName: {
     first: "Jane",
     middle: "Michelle",
     last: "Doe",
-    suffix: "",
   },
   chosenName: {
     first: "John",
     middle: "Michael",
     last: "Doe",
-    suffix: "",
   },
-
   birthName: {
     first: "John",
     middle: "Michael",
     last: "Doe",
-    suffix: "",
   },
 
   reasonForNameChange: "Gender transition",
   sealBirthCertificate: true,
   birthCity: "New York",
-  birthJurisdiction: "New York",
+  birthJurisdiction: newYork,
 
   birthdate: "2010-01-01",
 
@@ -362,7 +277,6 @@ export const sampleData: Person = {
     first: "Jane",
     middle: "Michelle",
     last: "Doe",
-    suffix: "",
   },
 
   doNotPublish: false,
@@ -374,7 +288,7 @@ export const sampleData: Person = {
     first: "John",
     middle: "Michael",
     last: "Doe",
-    suffix: "",
+    suffix: "Sr.",
   },
 
   fathersBirthdate: "1970-01-01",
@@ -384,8 +298,7 @@ export const sampleData: Person = {
   streetAddress: "20 Monroe Street NW",
 
   residentCity: "Grand Rapids",
-  residentJurisdiction: "Michigan",
-  residentLocality: "Kent",
+  residentJurisdiction: michigan,
 
   zip: "49503",
 
@@ -399,8 +312,4 @@ export const sampleData: Person = {
   },
 
   passport: "ds11",
-
-  court: undefined,
-  publications: undefined,
-  fingerprintLocations: undefined,
 };

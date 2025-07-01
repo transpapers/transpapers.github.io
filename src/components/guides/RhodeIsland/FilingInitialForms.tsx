@@ -29,59 +29,66 @@ function RhodeIslandFilingGuide({
   person: Person;
   locality: RhodeIslandCityOrTown;
 }) {
-  const { court, age, residentLocality } = person;
-  const { courtDoesBackgroundCheck, filingCost } = locality;
+  const { age, residentLocality } = person;
+  const { court, courtDoesBackgroundCheck, filingCost } = locality;
 
   return (
     <section key="RhodeIsland-Filing">
       <h3>Filing Initial Forms (RI)</h3>
 
-      {residentLocality && residentLocality === "West Greenwich" ? (
+      {residentLocality?.name === "West Greenwich" ? (
         <p>
-            A recent law was passed called{" "}
-            <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
-              §33-22-28
-            </a>
-            . In section D it states that there will be no publication required 
-            before a hearing. The West Greenwich court is openly defying that law 
-            by still requiring publications for everyone before their hearings and 
-            charging for it. If you have the will and ability{" "}
-            <a href="https://tinyurl.com/mgdc-feedback">notify</a> us with a tip and
-            send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org.
+          A recent law was passed called{" "}
+          <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
+            §33-22-28
+          </a>
+          . In section D it states that there will be no publication required
+          before a hearing. The West Greenwich court is openly defying that law
+          by still requiring publications for everyone before their hearings and
+          charging for it. If you have the will and ability{" "}
+          <a href="https://tinyurl.com/mgdc-feedback">notify</a> us with a tip
+          and send Patience Crozier at GLAD Law an email at
+          pcrozier@gladlaw.org.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
-      {residentLocality && residentLocality === "Glocester" ? (
+      {residentLocality?.name === "Glocester" ? (
         <p>
-            A recent law was passed called{" "}
-            <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
-              §33-22-28
-            </a>
-            . In section D it states that there will be no publication required 
-            before a hearing. The Glocester court has decided to instead publicize 
-            your case after the name change hearing and charge for it. Due to this 
-            their price is roughly triple what it should be. If you have the will 
-            and ability <a href="https://tinyurl.com/mgdc-feedback">notify</a> us 
-            with a tip and send Patience Crozier at GLAD Law an email at 
-            pcrozier@gladlaw.org.
+          A recent law was passed called{" "}
+          <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
+            §33-22-28
+          </a>
+          . In section D it states that there will be no publication required
+          before a hearing. The Glocester court has decided to instead publicize
+          your case after the name change hearing and charge for it. Due to this
+          their price is roughly triple what it should be. If you have the will
+          and ability <a href="https://tinyurl.com/mgdc-feedback">notify</a> us
+          with a tip and send Patience Crozier at GLAD Law an email at
+          pcrozier@gladlaw.org.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
-      {residentLocality && residentLocality === "Warren" ? (
+      {residentLocality?.name === "Warren" ? (
         <p>
-            A recent law was passed called{" "}
-            <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
-              §33-22-28
-            </a>
-            . In section D it states that there will be no publication required 
-            before a hearing. The Warren court has decided to instead publicize 
-            your case after the name change hearing and charge for it. Due to this 
-            their price is roughly triple what it should be. If you have the will 
-            and ability <a href="https://tinyurl.com/mgdc-feedback">notify</a> us 
-            with a tip and send Patience Crozier at GLAD Law an email at 
-            pcrozier@gladlaw.org.
+          A recent law was passed called{" "}
+          <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
+            §33-22-28
+          </a>
+          . In section D it states that there will be no publication required
+          before a hearing. The Warren court has decided to instead publicize
+          your case after the name change hearing and charge for it. Due to this
+          their price is roughly triple what it should be. If you have the will
+          and ability <a href="https://tinyurl.com/mgdc-feedback">notify</a> us
+          with a tip and send Patience Crozier at GLAD Law an email at
+          pcrozier@gladlaw.org.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
       <p>
         <strong>
@@ -94,15 +101,15 @@ function RhodeIslandFilingGuide({
 
       {age && age < 18 ? (
         <>
-          {residentLocality && residentLocality === "East Providence" ? (
+          {residentLocality?.name === "East Providence" ? (
             <p>
               The filing location is the East Providence Family court which is
               located at 1 Dorrance St, Providence, RI 02903.
             </p>
           ) : (
             <p>
-              The filing location is the {residentLocality} court at{" "}
-              {court?.address}.
+              The filing location is the {residentLocality?.name} court at{" "}
+              {court.address}.
             </p>
           )}
           <p>
@@ -116,11 +123,11 @@ function RhodeIslandFilingGuide({
             to either call to ask or cover their bases by bringing cash, check,
             and card.
           </p>
-          {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
+          {court.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
         </>
       ) : (
         <p>
-          The filing location is at {court?.address}. Bring the notarized Change
+          The filing location is at {court.address}. Bring the notarized Change
           of Name petition, useable copy of your birth certificate
           {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
           and photo ID. According to our data the filing fee will be{" "}
@@ -131,7 +138,7 @@ function RhodeIslandFilingGuide({
         </p>
       )}
 
-      {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
+      {court.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
 
       <p>
         If the clerk doesn&apos;t give a hearing date then ask about it. Some

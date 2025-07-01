@@ -36,6 +36,8 @@ import { isMinor } from "../lib/util";
 
 import { Field } from "../types/field";
 
+import { AnyJurisdiction } from "../types/generic";
+
 export const fields: Record<string, Field> = {
   legalName: {
     title: "Full legal name",
@@ -82,18 +84,6 @@ export const fields: Record<string, Field> = {
     name: "birthCity",
     type: "string",
   },
-  /* birthdate: {
-    title: 'Date of birth',
-    name: 'birthdate',
-    type: 'Date',
-  }, */
-  /* age: {
-    title: "Age at time of filing",
-    subtitle: "Fill only if you are less than 19 years old.",
-    name: "age",
-    type: "number",
-    include: (data) => isMinor(data),
-  }, */
   assignedSex: {
     title: "Sex assigned at birth",
     name: "assignedSex",
@@ -206,7 +196,7 @@ export const fields: Record<string, Field> = {
 
 export function renderField(
   field: Field,
-  jurisdiction: string,
+  jurisdiction: AnyJurisdiction,
   register: (name: string) => object,
 ) {
   if (!("type" in field)) {

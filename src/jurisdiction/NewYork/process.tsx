@@ -77,11 +77,11 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
       map: feeWaiverNYStateMap,
       include: (applicant) =>
         !(
-          applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"
+          applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"
         ),
     },
     {
@@ -91,11 +91,11 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
       guide: NYCFeeWaiverGuide,
       map: feeWaiverNYCMap,
       include: (applicant) =>
-        applicant.residentLocality === "Bronx" ||
-        applicant.residentLocality === "Kings" ||
-        applicant.residentLocality === "New York" ||
-        applicant.residentLocality === "Queens" ||
-        applicant.residentLocality === "Richmond",
+        applicant.residentLocality?.name === "Bronx" ||
+        applicant.residentLocality?.name === "Kings" ||
+        applicant.residentLocality?.name === "New York" ||
+        applicant.residentLocality?.name === "Queens" ||
+        applicant.residentLocality?.name === "Richmond",
     },
     {
       name: "Notary",
@@ -120,11 +120,11 @@ export const newyorkGenderMarker: Process<NewYorkCounty> = {
       include: (applicant) =>
         !isMinor(applicant) &&
         !(
-          applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"
+          applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"
         ),
     },
     {
@@ -135,11 +135,11 @@ export const newyorkGenderMarker: Process<NewYorkCounty> = {
       include: (applicant) =>
         isMinor(applicant) &&
         !(
-          applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"
+          applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"
         ),
     },
     {
@@ -148,11 +148,11 @@ export const newyorkGenderMarker: Process<NewYorkCounty> = {
       map: selfAttestationAdultNYCMap,
       include: (applicant) =>
         !isMinor(applicant) &&
-        (applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"),
+        (applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"),
     },
     {
       name: "Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old",
@@ -160,11 +160,11 @@ export const newyorkGenderMarker: Process<NewYorkCounty> = {
       map: selfAttestationMinorNYCMap,
       include: (applicant) =>
         isMinor(applicant) &&
-        (applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"),
+        (applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"),
     },
   ],
 };
@@ -205,11 +205,11 @@ export const newyorkBirthRecord: Process<NewYorkCounty> = {
       include: (applicant) =>
         !isMinor(applicant) &&
         !(
-          applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"
+          applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"
         ),
     },
     {
@@ -220,11 +220,11 @@ export const newyorkBirthRecord: Process<NewYorkCounty> = {
       include: (applicant) =>
         isMinor(applicant) &&
         !(
-          applicant.residentLocality === "Bronx" ||
-          applicant.residentLocality === "Kings" ||
-          applicant.residentLocality === "New York" ||
-          applicant.residentLocality === "Queens" ||
-          applicant.residentLocality === "Richmond"
+          applicant.residentLocality?.name === "Bronx" ||
+          applicant.residentLocality?.name === "Kings" ||
+          applicant.residentLocality?.name === "New York" ||
+          applicant.residentLocality?.name === "Queens" ||
+          applicant.residentLocality?.name === "Richmond"
         ),
     },
     {
@@ -233,11 +233,11 @@ export const newyorkBirthRecord: Process<NewYorkCounty> = {
       filename: "NewYork/BC Update NYC.pdf",
       map: birthCertNYCMap,
       include: (applicant) =>
-        applicant.residentLocality === "Bronx" ||
-        applicant.residentLocality === "Kings" ||
-        applicant.residentLocality === "New York" ||
-        applicant.residentLocality === "Queens" ||
-        applicant.residentLocality === "Richmond",
+        applicant.residentLocality?.name === "Bronx" ||
+        applicant.residentLocality?.name === "Kings" ||
+        applicant.residentLocality?.name === "New York" ||
+        applicant.residentLocality?.name === "Queens" ||
+        applicant.residentLocality?.name === "Richmond",
     },
   ],
   isBirth: true,

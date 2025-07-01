@@ -19,7 +19,7 @@
 
 import { type Process } from "./process";
 import { type Locality } from "./locality";
-import { type AnyProcess } from "./generic";
+import { type AnyProcess, type AnyJurisdiction } from "./generic";
 
 import { allJurisdictions } from "../jurisdiction/all";
 
@@ -74,16 +74,14 @@ export function getProcesses(name: string | undefined): AnyProcess[] {
 }
 
 export function allProcesses(
-  residentJurisdiction: string | undefined,
-  birthJurisdiction: string | undefined,
+  residentJurisdiction: AnyJurisdiction,
+  birthJurisdiction: AnyJurisdiction,
 ): AnyProcess[] {
-  const residentJurisdictionProcesses = getProcesses(residentJurisdiction);
-  const residentProcesses = residentJurisdictionProcesses.filter(
+  const residentProcesses = residentJurisdiction.processes.filter(
     (proc) => !proc.isBirth,
   );
 
-  const birthJurisdictionProcesses = getProcesses(birthJurisdiction);
-  const birthProcesses = birthJurisdictionProcesses.filter(
+  const birthProcesses = birthJurisdiction.processes.filter(
     (proc) => proc.isBirth,
   );
 

@@ -17,6 +17,9 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import React from "react";
+
+import { type Person } from "../types/person";
 import { type Process, type Document } from "../types/process";
 import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
@@ -47,3 +50,10 @@ export type AnyProcess = ProcessDistribute<AnyLocality>;
 
 type DocumentDistribute<U> = U extends Locality ? Document<U> : never;
 export type AnyDocument = DocumentDistribute<AnyLocality>;
+
+export type Guide<T extends Locality> = React.FunctionComponent<{
+  person: Person;
+  locality: T;
+}>;
+type GuideDistribute<U> = U extends Locality ? Guide<U> : never;
+export type AnyGuide = GuideDistribute<AnyLocality>;

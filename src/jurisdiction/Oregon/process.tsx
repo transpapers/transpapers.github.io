@@ -57,7 +57,7 @@ export const oregonNameChange: Process<Locality> = {
       guide: OregonMinorPetitionGuide,
       map: minorNameSexPetitionOregonMap,
       include: (applicant) =>
-        isMinor(applicant) && applicant.birthJurisdiction !== "Oregon",
+        isMinor(applicant) && applicant.birthJurisdiction?.name !== "Oregon",
     },
     {
       name: "Application for Deferral or Waiver of Fees and Declaration in Support",
@@ -65,19 +65,19 @@ export const oregonNameChange: Process<Locality> = {
       guide: OregonFeeWaiverGuide,
       map: feeWaiverOregonMap,
       include: (applicant) =>
-        !isMinor(applicant) || applicant.birthJurisdiction !== "Oregon",
+        !isMinor(applicant) || applicant.birthJurisdiction?.name !== "Oregon",
     },
     {
       name: "Filing Initial Documents",
       guide: OregonFilingInitialFormsGuide,
       include: (applicant) =>
-        !isMinor(applicant) || applicant.birthJurisdiction !== "Oregon",
+        !isMinor(applicant) || applicant.birthJurisdiction?.name !== "Oregon",
     },
     {
       name: "Court Hearing",
       guide: OregonCourtHearingGuide,
       include: (applicant) =>
-        !isMinor(applicant) || applicant.birthJurisdiction !== "Oregon",
+        !isMinor(applicant) || applicant.birthJurisdiction?.name !== "Oregon",
     },
   ],
 };

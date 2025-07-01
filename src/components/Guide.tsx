@@ -19,23 +19,119 @@
 
 import * as React from "react";
 
-import { allJurisdictions } from "../jurisdiction/all";
-
-import { compileDocuments, getLocality } from "../lib/fill";
+import { compileDocuments, collateDocuments } from "../lib/fill";
 
 import useStore from "../store";
 
-import { type Person } from "../types/person";
 import { allProcesses } from "../types/jurisdiction";
+import { type Person } from "../types/person";
+import { Target } from "../types/process";
 
-import { type AnyDocument, type AnyLocality } from "../types/generic";
+import { compileGuidesFor } from "../lib/fill";
+
+import {
+  type AnyProcess,
+  type AnyDocument,
+  type Guide,
+  type AnyGuide,
+  type AnyLocality,
+} from "../types/generic";
+
+interface GuideSection {
+  target: Target;
+  locality?: AnyLocality;
+  guides: AnyGuide[];
+}
+
+interface Instructions {
+  documents: AnyDocument[];
+  guideSections: GuideSection[];
+}
+
+export function compileInstructions(
+  applicant: Person,
+  processes: AnyProcess[],
+): Instructions {
+  const guideSections: GuideSection[] = [];
+
+  const { residentLocality } = applicant;
+
+  processes.forEach((proc) => {
+    const guidesForProc = compileGuidesFor(proc, applicant);
+    const { target } = proc;
+    if (target && guidesForProc) {
+      guideSections.push({
+        target,
+        locality: residentLocality,
+        guides: guidesForProc,
+      });
+    }
+  });
+
+  return {
+    documents: compileDocuments(processes),
+    guideSections,
+  };
+}
+
+// TODO Error type this!
+function getProcesses(
+  applicant: Person,
+  setTargets: Target[],
+): AnyProcess[] | undefined {
+  const { residentJurisdiction, birthJurisdiction } = applicant;
+  if (!(residentJurisdiction && birthJurisdiction)) {
+    return undefined;
+  }
+
+  const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
+
+  const processes: AnyProcess[] = [];
+  const metTargets: Target[] = [];
+
+  while (metTargets.length < setTargets.length) {
+    let addedSomethingThisTime = false;
+
+    for (const proc of allProcs) {
+      if (proc.target && !metTargets.includes(proc.target)) {
+        const deps = proc.depends ?? [];
+        const allMet = deps.reduce(
+          (metSoFar, dep) => metSoFar && metTargets.includes(dep),
+          true,
+        );
+
+        if (allMet) {
+          addedSomethingThisTime = true;
+          processes.push(proc);
+        }
+      }
+    }
+
+    if (!addedSomethingThisTime) {
+      // Cannot be topologically sorted.
+      return undefined;
+    }
+  }
+
+  return processes;
+}
 
 function Guide() {
   const applicant = useStore((state) => state.person);
-  const { residentJurisdiction, birthJurisdiction } = applicant;
-  const processes = allProcesses(residentJurisdiction, birthJurisdiction);
+  const processNames = useStore((state) => state.processNames);
 
-  compileDocuments(processes, applicant).then((doc) => {
+  const processes = getProcesses(applicant, processNames);
+
+  if (!processes) {
+    return <></>;
+  }
+
+  const { documents, guideSections } = compileInstructions(
+    applicant,
+    processes,
+  );
+
+  collateDocuments(documents, applicant).then((doc) => {
     if (doc !== undefined) {
       const url = URL.createObjectURL(
         new Blob([doc], { type: "application/pdf" }),
@@ -48,54 +144,23 @@ function Guide() {
     }
   }, console.error);
 
-  const documentDict = new Map<AnyLocality, AnyDocument[]>();
-  // Write this like a not idiot.
-  for (const proc of processes) {
-    let jurisdictionName, localityName;
-
-    if (proc.isBirth) {
-      jurisdictionName = applicant.birthJurisdiction;
-      localityName = null;
-    } else {
-      jurisdictionName = applicant.residentJurisdiction;
-      localityName = applicant.residentLocality;
-    }
-
-    if (jurisdictionName) {
-      const jurisdiction = allJurisdictions.get(jurisdictionName);
-      if (jurisdiction && localityName) {
-        const locality = getLocality(jurisdiction, localityName);
-        if (locality) {
-          const entry = documentDict.get(locality);
-          if (entry) {
-            proc.documents.forEach((doc) => {
-              if (!entry.includes(doc)) entry.push(doc);
-            });
-          } else {
-            documentDict.set(locality, []);
-          }
-        }
-      }
-    }
-  }
+  const locality = applicant.residentLocality;
 
   const guideElements = [];
-  for (const [locality, docs] of documentDict.entries()) {
-    for (const doc of docs) {
-      type theRightType = React.FunctionComponent<{
-        person: Person;
-        locality: typeof locality;
-      }>;
 
-      const correctlyTypedGuide = doc.guide as theRightType;
+  if (locality) {
+    for (const section of guideSections) {
+      for (const guide of section.guides) {
+        const correctlyTypedGuide = guide as Guide<typeof locality>;
 
-      if (typeof correctlyTypedGuide === "function") {
-        const element = React.createElement(correctlyTypedGuide, {
-          person: applicant,
-          locality,
-        });
+        if (typeof correctlyTypedGuide === "function") {
+          const element = React.createElement(correctlyTypedGuide, {
+            person: applicant,
+            locality,
+          });
 
-        guideElements.push(element);
+          guideElements.push(element);
+        }
       }
     }
   }

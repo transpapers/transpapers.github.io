@@ -28,7 +28,6 @@ import { fields, renderField } from "./fields";
 
 import { neededFieldNames } from "../lib/shakeTree";
 
-import { allProcesses } from "../types/jurisdiction";
 import { type Person } from "../types/person";
 
 function Step6() {
@@ -42,49 +41,44 @@ function Step6() {
 
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
-  const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
+  if (residentJurisdiction && birthJurisdiction) {
+    const allProcs = [
+      ...residentJurisdiction.processes,
+      ...birthJurisdiction.processes,
+    ];
 
-  const processes = processNames
-    .map((procName) =>
-      allProcs.find((proc) => (proc.target as string) === procName),
-    )
-    .filter((proc) => proc !== undefined);
+    const processes = processNames
+      .map((procName) => allProcs.find((proc) => proc.target === procName))
+      .filter((proc) => proc !== undefined);
 
-  const fieldNamesToShow = neededFieldNames(processes, applicant);
+    const fieldNamesToShow = neededFieldNames(processes, applicant);
 
-  const onSubmit = async (data: Partial<Person>) => {
-    updatePerson(data);
-    finalizeApplicant();
+    const onSubmit = async (data: Partial<Person>) => {
+      updatePerson(data);
+      finalizeApplicant();
 
-    await navigate("/guide");
-  };
+      await navigate("/guide");
+    };
 
-  // We do it this way to maintain ordering.
-  const fieldsToShow = Object.entries(fields)
-    .filter(([fieldName]) => fieldNamesToShow.includes(fieldName))
-    .map(([, field]) => field)
-    .filter((field) => !field.include || field.include(applicant));
+    // We do it this way to maintain ordering.
+    const fieldsToShow = Object.entries(fields)
+      .filter(([fieldName]) => fieldNamesToShow.includes(fieldName))
+      .map(([, field]) => field)
+      .filter((field) => !field.include || field.include(applicant));
 
-  if (applicant.residentJurisdiction) {
     return (
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <h2>Tell us about yourself...</h2>
         <ul className="spaced">
           {fieldsToShow.map((field) => (
             <li key={field.name}>
-              {renderField(
-                field,
-                applicant.residentJurisdiction ?? "",
-                register,
-              )}
+              {renderField(field, residentJurisdiction, register)}
             </li>
           ))}
         </ul>
         <input type="submit" value="Get my gender-affirming forms" />
       </form>
     );
-  } else {
-    return <p>Please go back and select your state of residence.</p>;
   }
 }
 

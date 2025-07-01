@@ -17,8 +17,6 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
-
 import {
   PDFDocument,
   PDFTextField,
@@ -26,17 +24,14 @@ import {
   PDFRadioGroup,
 } from "@cantoo/pdf-lib";
 
-import { allJurisdictions } from "../jurisdiction/all";
-
 import {
-  type AnyLocality,
-  type AnyJurisdiction,
   type AnyProcess,
   type AnyDocument,
+  type Guide,
+  type AnyGuide,
 } from "../types/generic";
 import { Person } from "../types/person";
 import { Formfill } from "../types/formfill";
-import { Locality } from "../types/locality";
 
 /**
  * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
@@ -59,7 +54,7 @@ export function fillForm(
       if ("text" in fill && field instanceof PDFTextField) {
         const text = fill.text(applicant);
 
-        if (typeof text === "string") {
+        if (text !== undefined) {
           // Disable maximum length.
           field.setMaxLength(undefined);
 
@@ -106,7 +101,7 @@ export function fillForm(
         const text = fill.text(applicant);
         const pitch = fill.font?.pitch;
 
-        if (typeof text === "string") {
+        if (text !== undefined) {
           if (pitch === undefined) {
             page.drawText(text, { x, y, size: fontSize });
           } else {
@@ -147,34 +142,7 @@ export function fillForm(
 export function compileGuidesFor(
   process: AnyProcess,
   applicant: Person,
-): React.JSX.Element[] | undefined {
-  const jurisdictionName: string | undefined = process.isBirth
-    ? applicant.birthJurisdiction
-    : applicant.residentJurisdiction;
-
-  if (jurisdictionName === undefined) {
-    console.error("Called compileGuidesFor() with no jurisdiction name.");
-    return undefined;
-  }
-
-  const jurisdiction = allJurisdictions.get(jurisdictionName);
-  if (jurisdiction === undefined) {
-    console.error("Called compileGuidesFor() with a nonexistent jurisdiction.");
-    return undefined;
-  }
-
-  if (applicant.residentLocality === undefined) {
-    console.error("Called compileGuidesFor() with no locality name.");
-    return undefined;
-  }
-
-  const locality = getLocality(jurisdiction, applicant.residentLocality);
-
-  if (locality === undefined) {
-    console.error("Called compileGuidesFor() with a nonexistent locality.");
-    return undefined;
-  }
-
+): AnyGuide[] | undefined {
   const docs: AnyDocument[] = [];
 
   process.documents.forEach((doc) => {
@@ -183,7 +151,7 @@ export function compileGuidesFor(
     }
   });
 
-  const guides: React.JSX.Element[] = [];
+  const guides: AnyGuide[] = [];
 
   docs
     .filter(
@@ -193,50 +161,20 @@ export function compileGuidesFor(
         doc.include(applicant),
     )
     .forEach((doc) => {
-      if (doc.guide !== undefined) {
-        type theRightType = React.FunctionComponent<{
-          person: Person;
-          locality: typeof locality;
-        }>;
-        const guide = React.createElement(doc.guide as theRightType, {
-          person: applicant,
-          locality,
-        });
-        guides.push(guide);
+      if (doc.guide !== undefined && applicant.residentLocality !== undefined) {
+        const correctlyTypedGuide = doc.guide as Guide<
+          typeof applicant.residentLocality
+        >;
+        if (typeof correctlyTypedGuide === "function") {
+          guides.push(correctlyTypedGuide);
+        }
       }
     });
 
   return guides;
 }
 
-export function getLocality(
-  jurisdiction: AnyJurisdiction,
-  localityName: string,
-): AnyLocality | undefined {
-  const localities: Record<string, Locality> | undefined =
-    jurisdiction.localities;
-
-  if (localities === undefined) {
-    console.error(
-      "Called compileGuidesFor() on a jurisdiction with no localities.",
-    );
-    return undefined;
-  }
-
-  return localities[localityName];
-}
-
-/**
- * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
- *
- * @param {Process} processes
- * @param {Person} applicant
- * @return {Promise<Uint8Array>} Compiled documents
- */
-export async function compileDocuments(
-  processes: AnyProcess[],
-  applicant: Person,
-): Promise<Uint8Array | undefined> {
+export function compileDocuments(processes: AnyProcess[]): AnyDocument[] {
   const docs: AnyDocument[] = [];
 
   processes.forEach((proc) => {
@@ -247,9 +185,23 @@ export async function compileDocuments(
     });
   });
 
+  return docs;
+}
+
+/**
+ * Collate all necessary documents as a single PDF ArrayBuffer from the given `data`.
+ *
+ * @param {Process} processes
+ * @param {Person} applicant
+ * @return {Promise<Uint8Array>} Compiled documents
+ */
+export async function collateDocuments(
+  documents: AnyDocument[],
+  applicant: Person,
+): Promise<Uint8Array | undefined> {
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
 
-  docs
+  documents
     .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.filename !== undefined) {

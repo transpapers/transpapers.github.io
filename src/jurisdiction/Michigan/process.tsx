@@ -54,7 +54,10 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51cGuide,
       map: nameChangePrivateMap,
-      include: (applicant) => (applicant.isChangingLegalSex === true || applicant.doNotPublish === true) && applicant.residentLocality !== "Kent",
+      include: (applicant) =>
+        (applicant.isChangingLegalSex === true ||
+          applicant.doNotPublish === true) &&
+        applicant.residentLocality?.name !== "Kent",
     },
     {
       name: "Petition for Name Change",
@@ -62,7 +65,10 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish || applicant.residentLocality === "Kent",
+      include: (applicant) =>
+        !applicant.isChangingLegalSex ||
+        !applicant.doNotPublish ||
+        applicant.residentLocality?.name === "Kent",
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -77,7 +83,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc52.pdf",
       guide: MichiganPC52Guide,
       map: orderFollowingMap,
-      include: (applicant) => applicant.residentLocality === "Saginaw",
+      include: (applicant) => applicant.residentLocality?.name === "Saginaw",
     },
     {
       name: "Fee Waiver Request",
@@ -93,7 +99,8 @@ export const michiganNameChange: Process<MichiganCounty> = {
     {
       name: "Publication",
       guide: MichiganPublicationGuide,
-      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish,
+      include: (applicant) =>
+        !applicant.isChangingLegalSex || !applicant.doNotPublish,
     },
     {
       name: "Court Hearing",
@@ -142,7 +149,7 @@ export const michiganBirthRecord: Process<MichiganCounty> = {
       name: "State of Michigan Sex Designation Form",
       filename: "Michigan/mi_sdf.pdf",
       map: miSexMap,
-      include: (applicant) => applicant.isChangingLegalSex === true,
+      include: (applicant) => applicant.isChangingLegalSex,
     },
     {
       name: "Acceptable ID",

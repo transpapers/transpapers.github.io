@@ -20,22 +20,18 @@
 /**
  * A person's name.
  */
-export interface Name {
-  first: string;
-  middle: string;
-  last: string;
-  suffix?: string;
+export class Name {
+  first = "";
+  middle = "";
+  last = "";
+  suffix?: string = "";
 }
 
 /**
  * Determine whether `name` is empty.
  */
-export function isEmptyName(name: Name | undefined): boolean {
-  if (name === undefined) {
-    return true;
-  } else {
-    return false;
-  }
+export function isEmptyName(name: Name): boolean {
+  return !name.first && !name.middle && !name.last && !name.suffix;
 }
 
 export enum GenderMarker {

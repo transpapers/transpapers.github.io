@@ -25,7 +25,7 @@ import { fakerEN_US as faker } from "@faker-js/faker";
 import { PDFDocument } from "@cantoo/pdf-lib";
 
 import { fillForm } from "../src/lib/fill";
-import { allJurisdictions, jurisdictionNames } from "../src/jurisdiction/all";
+import { allJurisdictions } from "../src/jurisdiction/all";
 import { type Name, GenderMarker } from "../src/types/types";
 import { type Person } from "../src/types/person";
 import {

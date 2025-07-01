@@ -18,6 +18,7 @@
  */
 
 export interface Locality {
+  name: string;
   court: Court;
 }
 
