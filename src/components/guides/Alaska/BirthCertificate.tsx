@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function AlaskaBirthCertificateGuide({ person }: { person: Person }) {
-  const { age, isChangingLegalSex } = person;
+  const { age, isChangingLegalSex, residentJurisdiction } = person;
 
   return (
     <section key="Alaska-BirthCertificate">
@@ -46,16 +46,25 @@ function AlaskaBirthCertificateGuide({ person }: { person: Person }) {
         it.
       </p>
 
-      {isChangingLegalSex ? (
+      {isChangingLegalSex ?  (
         <p>
-          To get an amended sex designation you will need a letter from the
-          person giving you trans related care. We have included a template
-          letter with a list of qualifying professions to take to this person
-          for their reference.
+          {residentJurisdiction === "Alaska" ? (
+            <>
+              To get an amended sex designation you will need a letter from the
+              person giving you trans related care.
+            </>
+          ):(
+            <>
+              To get an amended sex designation you will either need a letter from 
+              the person giving you trans related care or a court ordered gender 
+              change.
+            </>
+          )}
+          We have included a template letter with a list of qualifying professions 
+          to take to this person for their reference. Email 
+          “BVSSpecialServices@alaska.gov” with any questions.
         </p>
-      ) : (
-        ""
-      )}
+      ) : ("")}
 
       <p>
         If {age && age < 18 ? " a parent/guardian is " : " you are "} delivering
