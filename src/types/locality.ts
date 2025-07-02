@@ -23,6 +23,8 @@ export interface Locality {
 
 export type OregonCounty = Locality;
 
+export type IllinoisCounty = Locality;
+
 export type AlaskaAdministrativeDivision = Locality & {
   doesNameChange: boolean;
   inPersonFiling: boolean;
