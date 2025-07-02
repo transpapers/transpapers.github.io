@@ -68,6 +68,24 @@ import AlaskaResourcesGuide from "../src/components/guides/Alaska/Resources";
 import AlaskaVS405Guide from "../src/components/guides/Alaska/VS405";
 import { alaska } from "../src/jurisdiction/all";
 
+import IllinoisAdultOrderGuide from "../src/components/guides/Illinois/AdultOrder";
+import IllinoisAdultPetitionGuide from "../src/components/guides/Illinois/AdultPetition";
+import IllinoisBirthCertUpdateGuide from "../src/components/guides/Illinois/BirthCertUpdate";
+import IllinoisChildInfoGuide from "../src/components/guides/Illinois/ChildInfo";
+import IllinoisCourtHearingGuide from "../src/components/guides/Illinois/CourtHearing";
+import IllinoisEverythingElseGuide from "../src/components/guides/Illinois/EverythingElse";
+import IllinoisFeeOrderGuide from "../src/components/guides/Illinois/FeeOrder";
+import IllinoisFeeWaiverGuide from "../src/components/guides/Illinois/FeeWaiver";
+import IllinoisFilingInitialFormsGuide from "../src/components/guides/Illinois/FilingInitialForms";
+import IllinoisMinorOrderGuide from "../src/components/guides/Illinois/MinorOrder";
+import IllinoisMinorPetitionGuide from "../src/components/guides/Illinois/MinorPetition";
+import IllinoisNotaryGuide from "../src/components/guides/Illinois/Notary";
+import IllinoisParentInfoGuide from "../src/components/guides/Illinois/ParentInfo";
+import IllinoisPrivacyOrderGuide from "../src/components/guides/Illinois/PrivacyOrder";
+import IllinoisPrivacyRequestGuide from "../src/components/guides/Illinois/PrivacyRequest";
+import IllinoisResourcesGuide from "../src/components/guides/Illinois/Resources";
+import IllinoisSecretaryOfStateGuide from "../src/components/guides/Illinois/SecretaryOfState";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -216,6 +234,77 @@ const alaskaGuideComponents = [
   },
 ];
 
+const illinoisGuideComponents = [
+  {
+    name: "IllinoisAdultOrderGuide",
+    component: <IllinoisAdultOrderGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisAdultPetitionGuide",
+    component: <IllinoisAdultPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisBirthCertUpdateGuide",
+    component: <IllinoisBirthCertUpdateGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisChildInfoGuide",
+    component: <IllinoisChildInfoGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisCourtHearingGuide",
+    component: <IllinoisCourtHearingGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisEverythingElseGuide",
+    component: <IllinoisEverythingElseGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisFeeOrderGuide",
+    component: <IllinoisFeeOrderGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisFeeWaiverGuide",
+    component: <IllinoisFeeWaiverGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisFilingInitialFormsGuide",
+    component: <IllinoisFilingInitialFormsGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisMinorOrderGuide",
+    component: <IllinoisMinorOrderGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisMinorPetitionGuide",
+    component: <IllinoisMinorPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisNotaryGuide",
+    component: <IllinoisNotaryGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisParentInfoGuide",
+    component: <IllinoisParentInfoGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisPrivacyOrderGuide",
+    component: <IllinoisPrivacyOrderGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisPrivacyRequestGuide",
+    component: <IllinoisPrivacyRequestGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisResourcesGuide",
+    component: <IllinoisResourcesGuide person={sampleData} />,
+  },
+  {
+    name: "IllinoisSecretaryOfStateGuide",
+    component: <IllinoisSecretaryOfStateGuide person={sampleData} />,
+  },
+];
+
 const federalGuideComponents = [
   { name: "DS5504Guide", component: <DS5504Guide person={sampleData} /> },
   { name: "DS82Guide", component: <DS82Guide /> },
@@ -235,6 +324,7 @@ const allComponents = [
   ...michiganGuideComponents,
   ...oregonGuideComponents,
   ...alaskaGuideComponents,
+  ...illinoisGuideComponents,
   ...federalGuideComponents,
 ];
 

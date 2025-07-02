@@ -71,6 +71,16 @@ import {
 import alaskaCounties from "./Alaska/counties";
 import { AlaskaAdministrativeDivision } from "../types/locality";
 
+import {
+  illinoisBirthRecord,
+  illinoisNameChange,
+  illinoisPrimaryIdentification,
+  illinoisGenderMarker,
+  illinoisPostamble,
+} from "./Illinois/process";
+import illinoisCounties from "./Illinois/counties";
+import { IllinoisCounty } from "../types/locality";
+
 import { passport, socialSecurity, } from "./Federal/process";
 
 export const michigan: Jurisdiction<MichiganCounty> = {
@@ -138,6 +148,19 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   localities: alaskaCounties,
 };
 
+export const illinois: Jurisdiction<IllinoisCounty> = {
+  name: "Illinois",
+  abbreviation: "IL",
+  processes: [
+    illinoisBirthRecord,
+    illinoisNameChange,
+    illinoisPrimaryIdentification,
+    illinoisGenderMarker,
+    illinoisPostamble,
+  ],
+  localities: illinoisCounties,
+};
+
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   abbreviation: "DC",
@@ -151,6 +174,7 @@ export const jurisdictionNames: [string, AnyJurisdiction][] = [
   ["Rhode Island", rhodeIsland],
   ["New York", newYork],
   ["Alaska", alaska],
+  ["Illinois", illinois],
   ["Federal", federal],
 ];
 
