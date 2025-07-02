@@ -257,11 +257,11 @@ const illinoisGuideComponents = [
   },
   {
     name: "IllinoisEverythingElseGuide",
-    component: <IllinoisEverythingElseGuide person={sampleData} />,
+    component: <IllinoisEverythingElseGuide />,
   },
   {
     name: "IllinoisFeeOrderGuide",
-    component: <IllinoisFeeOrderGuide person={sampleData} />,
+    component: <IllinoisFeeOrderGuide />,
   },
   {
     name: "IllinoisFeeWaiverGuide",
@@ -285,11 +285,11 @@ const illinoisGuideComponents = [
   },
   {
     name: "IllinoisParentInfoGuide",
-    component: <IllinoisParentInfoGuide person={sampleData} />,
+    component: <IllinoisParentInfoGuide />,
   },
   {
     name: "IllinoisPrivacyOrderGuide",
-    component: <IllinoisPrivacyOrderGuide person={sampleData} />,
+    component: <IllinoisPrivacyOrderGuide />,
   },
   {
     name: "IllinoisPrivacyRequestGuide",
@@ -297,7 +297,7 @@ const illinoisGuideComponents = [
   },
   {
     name: "IllinoisResourcesGuide",
-    component: <IllinoisResourcesGuide person={sampleData} />,
+    component: <IllinoisResourcesGuide />,
   },
   {
     name: "IllinoisSecretaryOfStateGuide",
