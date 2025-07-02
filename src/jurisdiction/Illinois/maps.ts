@@ -348,8 +348,8 @@ export const minorChildInfoMap: Formfill[] = [
     field: "36 - Checkboxes",
   },
   {
-    text: (applicant) => applicant.reasonForNameChange ? 
-      applicant.reasonForNameChange : "",
+    text: (applicant) => applicant.reasonForNameChange ?? 
+      applicant.reasonForNameChange,
     field: "38 - Other",
   },
   {
