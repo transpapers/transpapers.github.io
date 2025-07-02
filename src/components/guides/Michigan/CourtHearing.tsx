@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function MichiganCourtHearingGuide({ person }: { person: Person }) {
-  const { age } = person;
+  const { age, isChangingLegalSex, doNotPublish } = person;
 
   return (
     <section key="MI-CourtHearing">
@@ -45,7 +45,11 @@ function MichiganCourtHearingGuide({ person }: { person: Person }) {
         <li>What is your date of birth?</li>
         <li>Have you lived in this county for over a year?</li>
         <li>Are you doing this for fraudulent reasons?</li>
-        <li>Have you paid the publication fee to an approved newspaper?</li>
+        {!isChangingLegalSex && !doNotPublish ? (
+          <>
+            <li>Have you paid the publication fee to an approved newspaper?</li>
+          </>
+        ):("")}
         <li>In your own words, why do you want to change your name?</li>
         <li>Is there anything else you’d like the court to know?</li>
         <li>
