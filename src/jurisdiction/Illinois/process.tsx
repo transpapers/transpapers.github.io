@@ -197,7 +197,7 @@ export const illinoisBirthRecord: Process<Locality> = {
     {
       name: "State of Illinois Affidavit and Certificate of Correction Request",
       id: "IOCI 19-184",
-      filename: "Illinois/Birth Certificate Form.pdf",
+      filename: "Illinois/Birth Certificate Correction Request.pdf",
       map: birthCertCorrectionMap,
     },
   ],
