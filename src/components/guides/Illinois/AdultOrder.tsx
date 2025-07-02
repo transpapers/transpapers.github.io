@@ -40,7 +40,7 @@ function IllinoisAdultOrderGuide({ person }: { person: Person }) {
             if applicable, near the end of this guide. Some states require 
             more specific information to change the name or gender on your 
             birth certificate. That information can be added to the 
-            “Additional Orders" section of this form. Use this{" "}
+            &ldquo;Additional Orders&rdquo; section of this form. Use this{" "}
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">
               link
             </a>

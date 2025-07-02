@@ -28,8 +28,8 @@ function IllinoisBirthCertUpdateGuide({ person }: { person: Person }) {
     <section key="Illinois-BirthCertificateUpdate">
       <h3>Updating your Birth Certificate (IL)</h3>
       <p>
-        This process is done by mail using the "State of Illinois Affidavit and 
-        Certificate of Correction Request” (IOCI 19-184) form.
+        This process is done by mail using the &ldquo;State of Illinois Affidavit and 
+        Certificate of Correction Request&rdquo; (IOCI 19-184) form.
         {age && age < 18 ? (
           <>
             Have your petitioner fill out their relationship to you on the 

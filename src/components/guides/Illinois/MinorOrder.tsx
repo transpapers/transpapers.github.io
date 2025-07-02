@@ -36,11 +36,11 @@ function IllinoisMinorOrderGuide({ person }: { person: Person }) {
           </>
         ):(
           <>
-            Check the “Birth Certificate Update” section of your birth state, 
+            Check the &ldquo;Birth Certificate Update&rdquo; section of your birth state, 
             if applicable, near the end of this guide. Some states require 
             more specific information to change the name or gender on your 
             birth certificate. That information can be added to the 
-            “Additional Orders" section of this form. Your petitioner should 
+            &ldquo;Additional Orders&rdquo; section of this form. Your petitioner should 
             use this{" "}
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">
               link
