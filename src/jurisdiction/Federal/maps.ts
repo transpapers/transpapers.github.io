@@ -209,13 +209,12 @@ export const ds5504Map: Formfill[] = [
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     loc: { page: 4, x: 193, y: 281 },
   },
-  /** Changed gender checkmarks to match new federal forms */
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
+    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
     loc: { page: 4, x: 296, y: 281 },
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
+    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
     loc: { page: 4, x: 327, y: 281 },
   },
   {
@@ -339,11 +338,11 @@ export const ds82Map: Formfill[] = [
     loc: { page: 4, x: 193, y: 270 },
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
+    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
     loc: { page: 4, x: 296, y: 269 },
   },
   {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
+    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
     loc: { page: 4, x: 327, y: 269 },
   },
   {
@@ -453,7 +452,14 @@ export const ds11Map: Formfill[] = [
       formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
     loc: { page: 4, x: 195, y: 275 },
   },
-  /** removed gender check marks and added a warning to guide instead */
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
+    loc: { page: 4, x: 297, y: 274 },
+  },
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
+    loc: { page: 4, x: 323, y: 274 },
+  },
   {
     text: (applicant) =>
       `${applicant.birthCity ?? ""} ${applicant.birthJurisdiction ?? ""}`,
@@ -586,6 +592,36 @@ export const ds11Map: Formfill[] = [
     loc: { page: 5, x: 141, y: 248 },
   },
   { text: () => "x", loc: { page: 5, x: 694, y: 236 } },
+];
+
+/**
+ * Attestation of Orr v. Trump Class Membership (federal form unnumbered)
+ * @type {Formfill[]}
+ */
+export const passportAttestationMap: Formfill[] = [
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
+    loc: { x: 128, y: 861 },
+  },
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
+    loc: { x: 128, y: 884 },
+  },
+  {
+    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
+    loc: { x: 128, y: 908 },
+  },
+  {
+    text: (applicant) => applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
+    loc: { page: 1, x: 105, y: 387 },
+  },
+  {
+    text: (applicant) => isMinor(applicant) ?
+      fullName(representativeName(applicant)) : "",
+    loc: { page: 1, x: 105, y: 482 },
+  },
 ];
 
 /**

@@ -29,16 +29,9 @@ function DS11Guide({ person }: { person: Person }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Warning</strong>, do not attempt to update your gender marker on
-        this form unless you meet these conditions. You need an updated social
-        security gender marker from before January 31st 2025, an updated drivers
-        license or state ID, and an updated birth certificate that does not have
-        your original sex at birth on it. If you have those documents and have
-        never had a passport before you are safe to mark your preferred gender
-        in section 3. If you don&apos;t you will need to mark your assigned sex
-        at birth in that section instead. There is an active court case to
-        restore your abilty to update your marker and we will update this
-        message when a ruling is reached.
+        <strong>Attention</strong>: The court case Orr v. Trump has concluded and
+        the state department is now required to update gender markers on passports
+        again. It is safe to do so and the passport will reflect the correct marker.
       </p>
 
       <p>
@@ -56,10 +49,20 @@ function DS11Guide({ person }: { person: Person }) {
         &quot;none&quot; in every box.
       </p>
 
+        {isChangingLegalSex ? (
+        <p>
+          The "Attestation of Orr v. Trump Class Membership" form is new and allows
+          for updating gender markers once again. To complete the form simply
+          {age && age < 18 ? (" have a parent/guardian sign ") : (" sign ")}
+          on page 2.
+        </p>
+      ):("")}
+
       <p>
         Now you will need to go to a location that you can apply in with this
-        form, your primary id, a checkbook for fees, and your photo. You can
-        find application locations at his URL:{" "}
+        DS-11 passport form, {isChangingLegalSex ? (" attestation form, "):("")} 
+        your primary id, a checkbook for fees, and your photo. You can find 
+        application locations at his URL:{" "}
         <a href="https://iafdb.travel.state.gov/">
           https://iafdb.travel.state.gov/
         </a>

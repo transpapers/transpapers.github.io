@@ -22,17 +22,15 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function DS5504Guide({ person }: { person: Person }) {
-  const { age } = person;
+  const { age, isChangingLegalSex } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Warning</strong>, do not attempt to update your gender marker on this form,
-        it will be rejected. Do not renew your passport if you have an updated
-        gender marker unless absolutely necessary as it will be reverted upon renewal.
-        There is an active court case to restore your abilty to update your marker
-        and we will update this message when a ruling is reached.
+        <strong>Attention</strong>: The court case Orr v. Trump has concluded and
+        the state department is now required to update gender markers on passports
+        again. It is safe to do so and the passport will reflect the correct marker.
       </p>
 
       <p>
@@ -65,8 +63,18 @@ function DS5504Guide({ person }: { person: Person }) {
         in every box.
       </p>
 
+      {isChangingLegalSex ? (
+        <p>
+          The "Attestation of Orr v. Trump Class Membership" form is new and allows
+          for updating gender markers once again. To complete the form simply
+          {age && age < 18 ? (" have a parent/guardian sign ") : (" sign ")}
+          on page 2.
+        </p>
+      ):("")}
+
       <p>
-        Now you will need to place the completed form, old passport, and a
+        Now you will need to place the DS-5504 passport form, 
+        {isChangingLegalSex ? (" attestation form, "):("")} old passport, and a
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is no fee involved unless you
         choose to expedite the process, to do so make out a check for $60 to the
