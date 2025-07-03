@@ -19,7 +19,14 @@
 
 import { GenderMarker } from "../../types/types";
 
-import { ssnMap, ds5504Map, ds82Map, ds11Map, statusLetterMap, } from "./maps";
+import { 
+  ssnMap, 
+  ds5504Map, 
+  ds82Map, 
+  ds11Map, 
+  statusLetterMap,
+  passportAttestationMap,
+} from "./maps";
 
 import DS5504Guide from "../../components/guides/Federal/ds5504";
 import DS82Guide from "../../components/guides/Federal/ds82";
@@ -48,6 +55,12 @@ export const socialSecurity: Process<Locality> = {
 export const passport: Process<Locality> = {
   target: Target.Passport,
   documents: [
+    {
+      name: "Attestation of Orr v. Trump Class Membership",
+      filename: "Federal/Passport Attestation Form.pdf",
+      map: passportAttestationMap,
+      include: (applicant) => applicant.isChangingLegalSex,
+    },
     {
       name: "Application for a Passport",
       id: "DS 5504",

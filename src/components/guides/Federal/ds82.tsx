@@ -51,7 +51,7 @@ function DS82Guide() {
 
         {isChangingLegalSex ? (
         <p>
-          The "Attestation of Orr v. Trump Class Membership" form is new and allows
+          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is new and allows
           for updating gender markers once again. To complete the form simply
           {age && age < 18 ? (" have a parent/guardian sign ") : (" sign ")}
           on page 2.
