@@ -23,7 +23,7 @@ import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
 function DS11Guide({ person }: { person: Person }) {
-  const { age } = person;
+  const { age, isChangingLegalSex } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
