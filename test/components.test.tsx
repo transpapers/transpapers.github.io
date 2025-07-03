@@ -307,7 +307,7 @@ const illinoisGuideComponents = [
 
 const federalGuideComponents = [
   { name: "DS5504Guide", component: <DS5504Guide person={sampleData} /> },
-  { name: "DS82Guide", component: <DS82Guide /> },
+  { name: "DS82Guide", component: <DS82Guide person={sampleData} /> },
   { name: "DS11Guide", component: <DS11Guide person={sampleData} /> },
   {
     name: "SocialSecurityGuide",

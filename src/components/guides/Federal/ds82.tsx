@@ -24,7 +24,7 @@ import { type Person } from "../../../types/person";
 // TODO Give this a once-over for style.
 // TODO Unify this with the other two passport forms.
 function DS82Guide({ person }: { person: Person }) {
-  const { age, isChangingLegalSex } = person;
+  const { isChangingLegalSex } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
@@ -54,10 +54,9 @@ function DS82Guide({ person }: { person: Person }) {
 
       {isChangingLegalSex ? (
         <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is new and allows
-          for updating gender markers once again. To complete the form simply
-          {age && age < 18 ? (" have a parent/guardian sign ") : (" sign ")}
-          on page 2.
+          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is 
+          new and allows for updating gender markers once again. To complete the 
+          form simply sign on page 2.
         </p>
       ):("")}
 
