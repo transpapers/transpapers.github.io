@@ -609,14 +609,15 @@ export const passportAttestationMap: Formfill[] = [
     loc: { x: 128, y: 908 },
   },
   {
-    text: (applicant) => applicant.isChangingLegalName
-      ? fullName(applicant.chosenName)
-      : fullName(applicant.legalName),
+    text: (applicant) =>
+      applicant.isChangingLegalName
+        ? fullName(applicant.chosenName)
+        : fullName(applicant.legalName),
     loc: { page: 1, x: 105, y: 387 },
   },
   {
-    text: (applicant) => isMinor(applicant) ?
-      fullName(representativeName(applicant)) : "",
+    text: (applicant) =>
+      isMinor(applicant) ? fullName(representativeName(applicant)) : "",
     loc: { page: 1, x: 105, y: 482 },
   },
 ];
@@ -629,22 +630,22 @@ export const statusLetterMap: Formfill[] = [
   {
     text: (applicant) =>
       applicant.isChangingLegalName
-        ? allCAPS(applicant.chosenName?.first)
-        : allCAPS(applicant.legalName?.first),
+        ? allCAPS(applicant.chosenName.first)
+        : allCAPS(applicant.legalName.first),
     field: "First Name",
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName
-        ? allCAPS(applicant.chosenName?.middle)
-        : allCAPS(applicant.legalName?.first),
+        ? allCAPS(applicant.chosenName.middle)
+        : allCAPS(applicant.legalName.first),
     field: "Middle Name",
   },
   {
     text: (applicant) =>
       applicant.isChangingLegalName
-        ? allCAPS(applicant.chosenName?.last)
-        : allCAPS(applicant.legalName?.first),
+        ? allCAPS(applicant.chosenName.last)
+        : allCAPS(applicant.legalName.first),
     field: "Last Name",
   },
   {

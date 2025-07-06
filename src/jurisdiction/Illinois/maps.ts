@@ -1,5 +1,5 @@
 /**
- * Copyright 2023-2025 Sasha Lišková and Stephanie Beckon
+ * Copyright 2023-2025 Sasha Lišková and Stephanie Beckn
  *
  * This file is part of Transpapers.
  *
@@ -22,7 +22,8 @@ import {
   fullName,
   isMinor,
   representativeName,
-  abbreviateJurisdiction,
+  formatContactInfo,
+  ContactFormat as cf,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -39,37 +40,37 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultNameChangeMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 185, y: 170 },
-  }, 
+  },
   {
     text: (applicant) => fullName(applicant.legalName),
     field: "2 - Name",
   },
   {
-    text: (applicant) => applicant.legalName?.first ?? "",
+    text: (applicant) => applicant.legalName.first,
     field: "4 - First Name",
   },
   {
-    text: (applicant) => applicant.legalName?.middle ?? "",
+    text: (applicant) => applicant.legalName.middle,
     field: "5 - Middle Name",
   },
   {
     text: (applicant) =>
-      `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     field: "6 - Last Name",
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     field: "7 - First Name",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     field: "8 - Middle Name",
   },
   {
     text: (applicant) =>
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.suffix ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`,
     field: "9 - Last Name",
   },
   {
@@ -85,14 +86,12 @@ export const adultNameChangeMap: Formfill[] = [
     loc: { x: 255, y: 865 },
   },
   {
-    text: (applicant) => 
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
+    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
     loc: { x: 540, y: 865 },
   },
   {
-    text: (applicant) => 
-      abbreviateJurisdiction(applicant.birthJurisdiction ?? "") 
-      ? "USA" : "",
+    text: (applicant) =>
+      applicant.birthJurisdiction?.abbreviation ? "USA" : "",
     loc: { x: 660, y: 865 },
   },
   {
@@ -152,8 +151,7 @@ export const adultNameChangeMap: Formfill[] = [
     field: "73 - Email",
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "74 - Address",
   },
 ];
@@ -165,9 +163,9 @@ export const adultNameChangeMap: Formfill[] = [
  */
 export const adultNameChangeOrderMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 185, y: 170 },
-  }, 
+  },
   {
     text: (applicant) => fullName(applicant.legalName),
     field: "2 - Current Legal Name",
@@ -181,37 +179,37 @@ export const adultNameChangeOrderMap: Formfill[] = [
  */
 export const minorNameChangeMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 175, y: 165 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Name",
   },
   {
-    text: (applicant) => applicant.legalName?.first ?? "",
+    text: (applicant) => applicant.legalName.first,
     field: "4 - First Name",
   },
   {
-    text: (applicant) => applicant.legalName?.middle ?? "",
+    text: (applicant) => applicant.legalName.middle,
     field: "5 - Middle Name",
   },
   {
     text: (applicant) =>
-      `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     field: "6 - Last Name",
   },
   {
-    text: (applicant) => applicant.chosenName?.first ?? "",
+    text: (applicant) => applicant.chosenName.first,
     field: "7 - First Name",
   },
   {
-    text: (applicant) => applicant.chosenName?.middle ?? "",
+    text: (applicant) => applicant.chosenName.middle,
     field: "8 - Middle Name",
   },
   {
     text: (applicant) =>
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.suffix ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`,
     field: "9 - Last Name",
   },
   {
@@ -231,8 +229,7 @@ export const minorNameChangeMap: Formfill[] = [
     field: "32 -  Print Your Name",
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "33 - Address",
   },
   {
@@ -252,24 +249,24 @@ export const minorNameChangeMap: Formfill[] = [
  */
 export const minorChildInfoMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 175, y: 198 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Name",
   },
   {
-    text: (applicant) => applicant.legalName?.first ?? "",
+    text: (applicant) => applicant.legalName.first,
     field: "4 - First Name",
   },
   {
-    text: (applicant) => applicant.legalName?.middle ?? "",
+    text: (applicant) => applicant.legalName.middle,
     field: "5 - Middle Name",
   },
   {
     text: (applicant) =>
-      `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     field: "6 - Last Name",
   },
   {
@@ -285,19 +282,16 @@ export const minorChildInfoMap: Formfill[] = [
     loc: { x: 277, y: 712 },
   },
   {
-    text: (applicant) => 
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
+    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
     loc: { x: 585, y: 712 },
   },
   {
-    text: (applicant) => 
-      abbreviateJurisdiction(applicant.birthJurisdiction ?? "") 
-      ? "USA" : "",
+    text: (applicant) =>
+      applicant.birthJurisdiction?.abbreviation ? "USA" : "",
     loc: { x: 700, y: 712 },
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "9 - Address",
   },
   {
@@ -344,12 +338,12 @@ export const minorChildInfoMap: Formfill[] = [
     field: "35 - Checkboxes",
   },
   {
-    check: (applicant) => applicant.reasonForNameChange ? true : false,
+    check: (applicant) => (applicant.reasonForNameChange ? true : false),
     field: "36 - Checkboxes",
   },
   {
-    text: (applicant) => applicant.reasonForNameChange ?? 
-      applicant.reasonForNameChange,
+    text: (applicant) =>
+      applicant.reasonForNameChange ?? applicant.reasonForNameChange,
     field: "38 - Other",
   },
   {
@@ -381,9 +375,9 @@ export const minorChildInfoMap: Formfill[] = [
  */
 export const minorAdditionalParentMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 175, y: 201 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Name",
@@ -397,9 +391,9 @@ export const minorAdditionalParentMap: Formfill[] = [
  */
 export const minorNameChangeOrderMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 180, y: 265 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Name",
@@ -413,9 +407,9 @@ export const minorNameChangeOrderMap: Formfill[] = [
  */
 export const requestCourtRecordsPrivateMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 185, y: 204 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Current Legal Name",
@@ -441,8 +435,7 @@ export const requestCourtRecordsPrivateMap: Formfill[] = [
     field: "79 - Email",
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "80 - Address",
   },
 ];
@@ -454,9 +447,9 @@ export const requestCourtRecordsPrivateMap: Formfill[] = [
  */
 export const orderCourtRecordsPrivateMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 185, y: 204 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     loc: { x: 225, y: 283 },
@@ -470,9 +463,9 @@ export const orderCourtRecordsPrivateMap: Formfill[] = [
  */
 export const feeWaiverApplicationMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 160, y: 196 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Plaintiff/Petitioner or In RE",
@@ -487,8 +480,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
     field: "6 - Your Name",
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "7 - Address",
   },
   {
@@ -500,8 +492,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
     field: "113 - Print Your Name",
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "114 - Address",
   },
   {
@@ -521,9 +512,9 @@ export const feeWaiverApplicationMap: Formfill[] = [
  */
 export const feeWaiverJudgementMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 160, y: 203 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2 - Plaintiff/Petitioner or In RE",
@@ -541,9 +532,9 @@ export const feeWaiverJudgementMap: Formfill[] = [
  */
 export const efileExemptionMap: Formfill[] = [
   {
-    text: (applicant) => applicant.residentLocality,
+    text: (applicant) => applicant.residentLocality?.name,
     loc: { x: 170, y: 171 },
-  }, 
+  },
   {
     text: (applicant) => fullName(representativeName(applicant)),
     field: "2",
@@ -565,8 +556,7 @@ export const efileExemptionMap: Formfill[] = [
     field: "13",
   },
   {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""} ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
     field: "14",
   },
 ];
@@ -578,19 +568,19 @@ export const efileExemptionMap: Formfill[] = [
  */
 export const dmvGenderDesignationMap: Formfill[] = [
   {
-    text: (applicant) => applicant.legalName?.last ?? "",
+    text: (applicant) => applicant.legalName.last,
     field: "1",
   },
   {
-    text: (applicant) => applicant.legalName?.first ?? "",
+    text: (applicant) => applicant.legalName.first,
     field: "2",
   },
   {
-    text: (applicant) => applicant.legalName?.middle ?? "",
+    text: (applicant) => applicant.legalName.middle,
     field: "3",
   },
   {
-    text: (applicant) => applicant.legalName?.suffix ?? "",
+    text: (applicant) => applicant.legalName.suffix ?? "",
     field: "4",
   },
   {
@@ -602,8 +592,7 @@ export const dmvGenderDesignationMap: Formfill[] = [
     field: "8",
   },
   {
-    text: (applicant) => 
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
+    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
     field: "9",
   },
   {
@@ -647,7 +636,7 @@ export const birthCertCorrectionMap: Formfill[] = [
         case true:
           return fullName(applicant.representativeName);
         case false:
-          return applicant.isChangingLegalName 
+          return applicant.isChangingLegalName
             ? fullName(applicant.chosenName)
             : fullName(applicant.legalName);
         default:
@@ -657,14 +646,14 @@ export const birthCertCorrectionMap: Formfill[] = [
     field: "Name of Applicant",
   },
   {
-    text: (applicant) => isMinor(applicant) 
-      ? "" : "Self",
+    text: (applicant) => (isMinor(applicant) ? "" : "Self"),
     field: "relationship",
   },
   {
-    text: (applicant) => fullName(applicant.birthName)
-      ? fullName(applicant.birthName) 
-      : fullName(applicant.legalName),
+    text: (applicant) =>
+      fullName(applicant.birthName)
+        ? fullName(applicant.birthName)
+        : fullName(applicant.legalName),
     field: "Name of Applicant",
   },
   {
@@ -676,18 +665,15 @@ export const birthCertCorrectionMap: Formfill[] = [
     field: "Date of birth or death",
   },
   {
-    text: (applicant) => 
-      fullName(applicant.mothersBirthName),
+    text: (applicant) => fullName(applicant.mothersBirthName),
     field: "MotherCoparents legal name prior to first marriagecivil union",
   },
   {
-    text: (applicant) => 
-      fullName(applicant.fathersBirthName),
+    text: (applicant) => fullName(applicant.fathersBirthName),
     field: "FatherCoparents legal name prior to first marriagecivil union",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? "Name" : "",
+    text: (applicant) => (applicant.isChangingLegalName ? "Name" : ""),
     field: "What you want corrected 1",
   },
   {
@@ -695,8 +681,8 @@ export const birthCertCorrectionMap: Formfill[] = [
       switch (applicant.isChangingLegalName) {
         case true:
           return fullName(applicant.birthName)
-          ? fullName(applicant.birthName)
-          : fullName(applicant.legalName);
+            ? fullName(applicant.birthName)
+            : fullName(applicant.legalName);
         case false:
           return "";
         default:
@@ -706,13 +692,13 @@ export const birthCertCorrectionMap: Formfill[] = [
     field: "How it reads now 1",
   },
   {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? fullName(applicant.chosenName) : "",
+    text: (applicant) =>
+      applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     field: "How it should read 1",
   },
   {
-    text: (applicant) => applicant.isChangingLegalSex 
-      ? "Sex Designation" : "",
+    text: (applicant) =>
+      applicant.isChangingLegalSex ? "Sex Designation" : "",
     field: "What you want corrected 2",
   },
   {
@@ -751,7 +737,7 @@ export const birthCertCorrectionMap: Formfill[] = [
   },
   {
     text: (applicant) =>
-      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`,
+      formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
     field: "City state and ZIP code",
   },
 ];

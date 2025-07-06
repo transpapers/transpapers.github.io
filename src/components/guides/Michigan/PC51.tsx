@@ -30,7 +30,7 @@ function MichiganPC51Guide({ person }: { person: Person }) {
       {residentLocality ? (
         <>
           <p>
-            {residentLocality?.name === "Kent" ? (
+            {residentLocality.name === "Kent" ? (
               <>
                 In Kent county the court will <strong>not</strong> hold hearings
                 for name changes meaning the process will not be published in a
