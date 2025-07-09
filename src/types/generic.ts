@@ -52,7 +52,7 @@ type DocumentDistribute<U> = U extends Locality ? Document<U> : never;
 export type AnyDocument = DocumentDistribute<AnyLocality>;
 
 export type Guide<T extends Locality> = React.FunctionComponent<{
-  person: Person;
+  person: Partial<Person>;
   locality: T;
 }>;
 type GuideDistribute<U> = U extends Locality ? Guide<U> : never;

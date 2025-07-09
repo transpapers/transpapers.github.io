@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function NYCFeeWaiverGuide({ person }: { person: Person }) {
+function NYCFeeWaiverGuide({ person }: { person: Partial<Person> }) {
   const { age } = person;
 
   return (

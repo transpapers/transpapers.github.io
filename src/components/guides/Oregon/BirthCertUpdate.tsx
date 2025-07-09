@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function OregonBirthCertUpdateGuide({ person }: { person: Person }) {
+function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
   const { age, parentsAreOkay, birthJurisdiction, residentJurisdiction } =
     person;
 

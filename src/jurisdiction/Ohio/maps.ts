@@ -134,6 +134,7 @@ export const adultChangeOfNameMap: Formfill[] = [
     field: "EMAIL ADDRESS_2",
   },
 ];
+<<<<<<< Updated upstream
 
 /**
  * Application for Change of Name of Minor (Ohio form 21.2)
@@ -1210,3 +1211,5 @@ export const voterRegistrationMap: Formfill[] = [
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtFormerName[0]",
   },
 ];
+=======
+>>>>>>> Stashed changes

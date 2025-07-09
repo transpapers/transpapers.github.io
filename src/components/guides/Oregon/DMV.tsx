@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function OregonDMVGuide({ person }: { person: Person }) {
+function OregonDMVGuide({ person }: { person: Partial<Person> }) {
   const { age } = person;
 
   return (

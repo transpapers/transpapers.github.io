@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
+function NewYorkUCS_NC2Guide({ person }: { person: Partial<Person> }) {
   const { age, residentLocality, parentsAreOkay, doNotPublish } = person;
   return (
     <section key="NewYork-UCS-NC2">

@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function AlaskaMinorPetitionGuide({ person }: { person: Person }) {
+function AlaskaMinorPetitionGuide({ person }: { person: Partial<Person> }) {
   const { parentsAreOkay } = person;
   return (
     <section key="Alaska-Minor-Petition">

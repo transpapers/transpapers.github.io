@@ -48,18 +48,18 @@ const generateDateForTesting: () => string = () =>
   faker.date.past().toISOString().substring(0, 10);
 
 const generatePersonForTesting: (
-  birthJurisdictionName: string,
-  residentJurisdictionName: string,
-  localityName: string,
+  birthJurisdiction: AnyJurisdiction,
+  residentJurisdiction: AnyJurisdiction,
+  locality: AnyLocality,
 ) => Person = (
-  birthJurisdictionName: string,
-  residentJurisdictionName: string,
-  localityName: string,
+  birthJurisdiction: AnyJurisdiction,
+  residentJurisdiction: AnyJurisdiction,
+  locality: AnyLocality,
 ) => {
   const person = {
     legalName: generateNameForTesting(),
     chosenName: generateNameForTesting(),
-    birthName: undefined,
+    birthName: generateNameForTesting(),
 
     reasonForNameChange: faker.lorem.sentence(),
     sealBirthCertificate: faker.datatype.boolean(),
@@ -87,17 +87,17 @@ const generatePersonForTesting: (
 
     residentCity: faker.location.city(),
 
-    residentJurisdiction: residentJurisdictionName,
+    birthJurisdiction,
+    residentJurisdiction,
 
-    residentLocality: localityName,
+    residentLocality: locality,
 
-    zip: faker.location.zipCode({ state: residentJurisdictionName }),
+    zip: faker.location.zipCode({ state: residentJurisdiction.name }),
     email: faker.internet.email(),
 
     passport: undefined,
     representativeName: undefined,
     birthCity: faker.location.city(),
-    birthJurisdiction: birthJurisdictionName,
 
     court: undefined,
     fingerprintLocations: undefined,
@@ -117,21 +117,19 @@ describe("generatePersonForTesting", () => {
 });
 */
 
-const processes: AnyProcess[] = Array.from(
-  jurisdictionNames.map(([, jurisdiction]) => jurisdiction.processes),
-)
-  .flat()
-  .filter((process) => process !== undefined);
+const processes: AnyProcess[] =
+  allJurisdictions.map((jurisdiction) => jurisdiction.processes)
+    .flat();
 
 const forms = processes
-  .map((process) => process!.documents)
+  .map((process) => process.documents)
   .flat()
   .filter((doc) => doc.filename !== undefined)
   .filter((doc) => doc.map !== undefined);
 
 describe.each(forms)(
   "Form $id: $name",
-  async ({
+  ({
     // Ignore ESLint warnings for variables used in test name.
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     name,
@@ -142,41 +140,36 @@ describe.each(forms)(
     map,
   }) => {
     const fuzzPeople = Array.from({ length: 25 }, () => {
-      let birthJurisdictionName;
-      while (!birthJurisdictionName || birthJurisdictionName === "Federal") {
-        birthJurisdictionName = [...allJurisdictions.keys()][
-          Math.floor(Math.random() * allJurisdictions.size)
+      let birthJurisdiction: AnyJurisdiction;
+      do {
+        birthJurisdiction = allJurisdictions[
+          Math.floor(Math.random() * allJurisdictions.length)
         ];
-      }
+      } while (birthJurisdiction.name === "Federal");
 
-      let residentJurisdiction;
-      while (
-        !residentJurisdiction ||
-        !residentJurisdiction.localities ||
-        !residentJurisdiction.abbreviation
-      ) {
-        residentJurisdiction = [...allJurisdictions.values()][
-          Math.floor(Math.random() * allJurisdictions.size)
+      let residentJurisdiction: AnyJurisdiction;
+      do {
+        residentJurisdiction = allJurisdictions[
+          Math.floor(Math.random() * allJurisdictions.length)
         ];
-      }
+      } while (residentJurisdiction.name === "Federal");
 
-      const localityName = Object.keys(residentJurisdiction.localities)[
-        Math.floor(
-          Math.random() * Object.keys(residentJurisdiction.localities).length,
-        )
+      const locality = residentJurisdiction.localities[
+        Math.floor(Math.random() * residentJurisdiction.localities.length)
       ];
 
       return generatePersonForTesting(
-        birthJurisdictionName,
-        residentJurisdiction.abbreviation,
-        localityName,
+        birthJurisdiction,
+        residentJurisdiction,
+        locality,
       );
     });
 
-    test("generates no fuzz errors", async () => {
-      fuzzPeople.forEach(async (person) => {
+    test("generates no fuzz errors", () =>
+      Promise.all(
+      fuzzPeople.map(async (person) => {
         const isIncluded = include === undefined || include(person);
-        if (isIncluded && map !== undefined) {
+        if (isIncluded && map !== undefined && filename !== undefined) {
           const buffer = readFileSync(`./public/forms/${filename}`).toString(
             "base64",
           );
@@ -190,7 +183,8 @@ describe.each(forms)(
             console.error(`Skipping encrypted form ${filename}`);
           }
         }
-      });
-    });
+      })
+      )
+    );
   },
 );

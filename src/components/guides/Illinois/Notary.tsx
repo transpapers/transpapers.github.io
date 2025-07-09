@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function IllinoisNotaryGuide({ person }: { person: Person }) {
+function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
   const { residentLocality, hasCriminalRecord, age } = person;
 
   return (

@@ -20,16 +20,15 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
-import { type AlaskaAdministrativeDivision } from "../../../types/locality";
+import { AlaskaAdministrativeDivision } from "../../../types/locality";
 
 function AlaskaFilingInitialFormsGuide({
   person,
-  locality,
 }: {
-  person: Person;
-  locality: AlaskaAdministrativeDivision;
+  person: Partial<Person>;
 }) {
   const { age } = person;
+  const locality = person.residentLocality as AlaskaAdministrativeDivision;
   const {
     doesNameChange,
     forwardsTo,

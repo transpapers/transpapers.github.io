@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function IllinoisPrivacyRequestGuide({ person }: { person: Person }) {
+function IllinoisPrivacyRequestGuide({ person }: { person: Partial<Person> }) {
   const { age, isChangingLegalSex } = person;
 
   return (
