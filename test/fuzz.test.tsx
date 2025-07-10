@@ -92,7 +92,7 @@ const generatePersonForTesting: (
 
     residentLocality: locality,
 
-    zip: faker.location.zipCode({ state: residentJurisdiction.name }),
+    zip: faker.location.zipCode({ state: residentJurisdiction.abbreviation }),
     email: faker.internet.email(),
 
     passport: undefined,
@@ -117,9 +117,9 @@ describe("generatePersonForTesting", () => {
 });
 */
 
-const processes: AnyProcess[] =
-  allJurisdictions.map((jurisdiction) => jurisdiction.processes)
-    .flat();
+const processes: AnyProcess[] = allJurisdictions
+  .map((jurisdiction) => jurisdiction.processes)
+  .flat();
 
 const forms = processes
   .map((process) => process.documents)
@@ -142,21 +142,20 @@ describe.each(forms)(
     const fuzzPeople = Array.from({ length: 25 }, () => {
       let birthJurisdiction: AnyJurisdiction;
       do {
-        birthJurisdiction = allJurisdictions[
-          Math.floor(Math.random() * allJurisdictions.length)
-        ];
+        birthJurisdiction =
+          allJurisdictions[Math.floor(Math.random() * allJurisdictions.length)];
       } while (birthJurisdiction.name === "Federal");
 
       let residentJurisdiction: AnyJurisdiction;
       do {
-        residentJurisdiction = allJurisdictions[
-          Math.floor(Math.random() * allJurisdictions.length)
-        ];
+        residentJurisdiction =
+          allJurisdictions[Math.floor(Math.random() * allJurisdictions.length)];
       } while (residentJurisdiction.name === "Federal");
 
-      const locality = residentJurisdiction.localities[
-        Math.floor(Math.random() * residentJurisdiction.localities.length)
-      ];
+      const locality =
+        residentJurisdiction.localities[
+          Math.floor(Math.random() * residentJurisdiction.localities.length)
+        ];
 
       return generatePersonForTesting(
         birthJurisdiction,
@@ -167,24 +166,23 @@ describe.each(forms)(
 
     test("generates no fuzz errors", () =>
       Promise.all(
-      fuzzPeople.map(async (person) => {
-        const isIncluded = include === undefined || include(person);
-        if (isIncluded && map !== undefined && filename !== undefined) {
-          const buffer = readFileSync(`./public/forms/${filename}`).toString(
-            "base64",
-          );
-          const form = await PDFDocument.load(buffer, {
-            ignoreEncryption: true,
-          });
+        fuzzPeople.map(async (person) => {
+          const isIncluded = include === undefined || include(person);
+          if (isIncluded && map !== undefined && filename !== undefined) {
+            const buffer = readFileSync(`./public/forms/${filename}`).toString(
+              "base64",
+            );
+            const form = await PDFDocument.load(buffer, {
+              ignoreEncryption: true,
+            });
 
-          if (!form.isEncrypted) {
-            expect(fillForm(form, map, person)).toBeTruthy();
-          } else {
-            console.error(`Skipping encrypted form ${filename}`);
+            if (!form.isEncrypted) {
+              expect(fillForm(form, map, person)).toBeTruthy();
+            } else {
+              console.error(`Skipping encrypted form ${filename}`);
+            }
           }
-        }
-      })
-      )
-    );
+        }),
+      ));
   },
 );

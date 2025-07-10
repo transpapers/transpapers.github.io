@@ -19,11 +19,33 @@
 
 import { expect, describe, test } from "vitest";
 
-import { shakeTree } from "../src/lib/shakeTree";
+import { isOpaque, shakeTree } from "../src/lib/shakeTree";
 
+import { newYork } from "../src/jurisdiction/all";
 import { michiganNameChange } from "../src/jurisdiction/Michigan/process";
 
+import { sampleData } from "../src/types/person";
+
 import { isMinor, phoneAreaCode, phoneStart, phoneEnd } from "../src/lib/util";
+
+describe("isOpaque()", () => {
+  test("is false on strings", () => {
+    expect(isOpaque("asdf")).toBe(false);
+  });
+  test("is true on Names", () => {
+    const peter = { first: "Peter", middle: "", last: "Spilles" };
+    expect(isOpaque(peter)).toBe(true);
+  });
+  test("is true on Jurisdictions", () => {
+    expect(isOpaque(newYork)).toBe(true);
+  });
+  test("is true on Localities", () => {
+    expect(isOpaque(newYork.localities[0])).toBe(true);
+  });
+  test("is false on Persons", () => {
+    expect(isOpaque(sampleData)).toBe(false);
+  });
+});
 
 describe("shakeTree()", () => {
   test("regression test", () => {
@@ -32,6 +54,8 @@ describe("shakeTree()", () => {
       "birthdate",
       "representativeName",
       "streetAddress",
+      "birthCity",
+      "birthJurisdiction",
       "residentCity",
       "residentJurisdiction",
       "zip",
@@ -42,7 +66,7 @@ describe("shakeTree()", () => {
       "reasonForNameChange",
       "chosenName",
       "sealBirthCertificate",
-      "residentLocality",
+      // "residentLocality", ???
       "age",
       "hasCriminalRecord",
       "doNotPublish",

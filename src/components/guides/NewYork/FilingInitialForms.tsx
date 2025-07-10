@@ -24,10 +24,6 @@ import { newYork } from "../../../jurisdiction/all";
 import { type Person } from "../../../types/person";
 import { type NewYorkCounty } from "../../../types/locality";
 
-const nycCourts = newYork.localities
-  .filter((loc) => loc.isNYC)
-  .map((loc) => loc.court);
-
 function NewYorkFilingGuide({
   person,
   locality,
@@ -49,12 +45,14 @@ function NewYorkFilingGuide({
             bolded.
           </p>
           {...Array.from(
-            nycCourts.map((court) => (
-              <span key="{court.name}">
-                <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
-                {court.phone}
-              </span>
-            )),
+            newYork.localities
+              .filter((loc) => loc.isNYC)
+              .map(({ court }) => (
+                <span key="{court.name}">
+                  <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
+                  {court.phone}
+                </span>
+              )),
           )}
           <p>
             {court.specificCourtInfo ?? ""}

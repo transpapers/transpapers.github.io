@@ -680,7 +680,7 @@ export const statusLetterMap: Formfill[] = [
     field: "Current Mailing Address - City",
   },
   {
-    text: (applicant) => allCAPS(applicant.residentJurisdiction),
+    text: (applicant) => allCAPS(applicant.residentJurisdiction?.name),
     field: "Current Mailing Address - State",
   },
   {

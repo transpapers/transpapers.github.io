@@ -29,6 +29,9 @@ function AlaskaFilingInitialFormsGuide({
 }) {
   const { age } = person;
   const locality = person.residentLocality as AlaskaAdministrativeDivision;
+  if (locality === undefined) {
+    return "Oops we did something wrong";
+  }
   const {
     doesNameChange,
     forwardsTo,
