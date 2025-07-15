@@ -48,13 +48,13 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const adultChangeOfNameMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => {
+  (applicant) => ({
+    text: (() => {
       switch (applicant.residentLocality?.name === "Hamilton") {
         case true:
           return fullName(applicant.birthName)
@@ -65,74 +65,74 @@ export const adultChangeOfNameMap: Formfill[] = [
         default:
           return "";
       }
-    },
-    field: "NAME BEFORE CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "NAME AFTER CHANGE",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "RESIDENT OF COUNTY OHIO",
-  },
-  {
-    text: (applicant) => applicant.legalName.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.chosenName.first,
-    field: "FIRST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.middle,
-    field: "MIDDLE NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.last,
-    field: "LAST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "CHANGE REQUESTED FOR THE FOLLOWING REASON(S)",
-  },
-  /** For typed only docs do /S/ then the name in the signature field. */
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "TYPE OF PRINTED NAME_2",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "ADDRESS_2",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "CITY_2",
-  },
-  {
-    text: (applicant) => applicant.residentJurisdiction?.name,
-    field: "STATE_2",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "ZIP_2",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "TELEPHONE NUMBER_2",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "EMAIL ADDRESS_2",
-  },
+    })(),
+    fieldName: "NAME BEFORE CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NAME AFTER CHANGE",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "RESIDENT OF COUNTY OHIO",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "CHANGE REQUESTED FOR THE FOLLOWING REASON(S)",
+  }),
+  /** For typed only docs do /S/ then the name in the signature fieldName. */
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "TYPE OF PRINTED NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "ADDRESS_2",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "CITY_2",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.name,
+    fieldName: "STATE_2",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "ZIP_2",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "TELEPHONE NUMBER_2",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "EMAIL ADDRESS_2",
+  }),
 ];
 
 /**
@@ -141,109 +141,108 @@ export const adultChangeOfNameMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const minorChangeOfNameMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PRESENT NAME",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME CHANGE",
-  },
-  {
-    check: (applicant) => applicant.parentsAreOkay,
-    field: "PARENT",
-  },
-  {
-    text: (applicant) => applicant.legalName.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.chosenName.first,
-    field: "FIRST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.middle,
-    field: "MIDDLE NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.last,
-    field: "LAST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "REASON FOR REQUESTING THIS NAME CHANGE_2",
-  },
-  {
-    check: (applicant) => applicant.parentsAreOkay,
-    field: "WAIVER OF NOTICE OF HEARING AND CONSENT OF PARENT",
-  },
-  {
-    text: (applicant) =>
-      applicant.parentsAreOkay ? fullName(representativeName(applicant)) : "",
-    field: "NAME",
-  },
-  {
-    text: (applicant) =>
-      applicant.parentsAreOkay ? applicant.streetAddress : "",
-    field: "ADDRESS",
-  },
-  {
-    text: (applicant) =>
-      applicant.parentsAreOkay
-        ? formatContactInfo(applicant, cf.ResidentCityAndStateAndZip)
-        : "",
-    field: "CITY",
-  },
-  {
-    check: (applicant) => applicant.parentsAreOkay,
-    field: "NAME AND ADDRESS OF PARENT",
-  },
-  {
-    check: (applicant) => applicant.parentsAreOkay,
-    field: "WAIVER OF NOTICE OF HEARING AND CONSENT OF PARENT_2",
-  },
-  /** For typed only docs do /S/ then the name in the signature field. */
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "TYPE OF PRINTED NAME_2",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "ADDRESS_4",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "CITY_4",
-  },
-  {
-    text: (applicant) => applicant.residentJurisdiction?.name,
-    field: "STATE_4",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "ZIP CODE_4",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "TELEPHONE NUMBER (INCLUDING AREA CODE)_2",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "EMAIL ADDRESS_2",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PRESENT NAME",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME CHANGE",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "PARENT",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "REASON FOR REQUESTING THIS NAME CHANGE_2",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "WAIVER OF NOTICE OF HEARING AND CONSENT OF PARENT",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay
+      ? fullName(representativeName(applicant))
+      : "",
+    fieldName: "NAME",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    fieldName: "ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay
+      ? formatContactInfo(applicant, cf.ResidentCityAndStateAndZip)
+      : "",
+    fieldName: "CITY",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "NAME AND ADDRESS OF PARENT",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "WAIVER OF NOTICE OF HEARING AND CONSENT OF PARENT_2",
+  }),
+  /** For typed only docs do /S/ then the name in the signature fieldName. */
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TYPE OF PRINTED NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "ADDRESS_4",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "CITY_4",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.name,
+    fieldName: "STATE_4",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "ZIP CODE_4",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "TELEPHONE NUMBER (INCLUDING AREA CODE)_2",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "EMAIL ADDRESS_2",
+  }),
 ];
 
 /**
@@ -252,46 +251,46 @@ export const minorChangeOfNameMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const adultChangeOfNameAffidavitMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "CHANGE OF NAME PRIOR TO CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "CHANGE OF NAME AFTER",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "COUNTY OHIO",
-  },
-  {
-    check: () => true,
-    field: "APPLICANT HAS BEEN A BONA FIDE RESIDENT",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "RESIDENT OF COUNTY OHIO",
-  },
-  {
-    check: () => true,
-    field:
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "CHANGE OF NAME PRIOR TO CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "CHANGE OF NAME AFTER",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "COUNTY OHIO",
+  }),
+  () => ({
+    check: true,
+    fieldName: "APPLICANT HAS BEEN A BONA FIDE RESIDENT",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "RESIDENT OF COUNTY OHIO",
+  }),
+  () => ({
+    check: true,
+    fieldName:
       "APPLICATION IS NOT MADE FOR THE PURPOSE OF EVADING ANY CREDITORS OR OTHER OBLIGATIONS",
-  },
-  {
-    check: (applicant) => !applicant.hasCriminalRecord,
-    field:
+  }),
+  (applicant) => ({
+    check: !applicant.hasCriminalRecord,
+    fieldName:
       "APPLICANT HAS NOT BEEN CONVICTED OF, PLEADED GUILTY TO, OR BEEN ADJUSICATED A DELINQUENT CHILD FOR IDENTITY",
-  },
-  {
-    check: (applicant) => !applicant.hasCriminalRecord,
-    field:
+  }),
+  (applicant) => ({
+    check: !applicant.hasCriminalRecord,
+    fieldName:
       "APPLICANT DOES NOT HAVE A DUTY TO COMPLY WITH R.C. 2950.04 OR 2950.041",
-  },
+  }),
 ];
 
 /**
@@ -300,54 +299,54 @@ export const adultChangeOfNameAffidavitMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const minorChangeOfNameAffidavitMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "NAME BEFORE REQUESTED CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED CHANGE OF NAME",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "COUNTY OHIO",
-  },
-  {
-    check: () => true,
-    field: "APPLICANT",
-  },
-  {
-    check: (applicant) => applicant.parentsAreOkay,
-    field: "PARENT",
-  },
-  {
-    check: () => true,
-    field: "MINOR HAS BEEN A BONA FIDE RESIDENT",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "MINOR HAS BEEN A BONA FIDE RESIDENT OF COUNTY OHIO",
-  },
-  {
-    check: () => true,
-    field:
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NAME BEFORE REQUESTED CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED CHANGE OF NAME",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "COUNTY OHIO",
+  }),
+  () => ({
+    check: true,
+    fieldName: "APPLICANT",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "PARENT",
+  }),
+  () => ({
+    check: true,
+    fieldName: "MINOR HAS BEEN A BONA FIDE RESIDENT",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "MINOR HAS BEEN A BONA FIDE RESIDENT OF COUNTY OHIO",
+  }),
+  () => ({
+    check: true,
+    fieldName:
       "APPLICATION IS NOT MADE FOR THE PURPOSE OF EVADING ANY CREDITORS OR OTHER OBLIGATIONS",
-  },
-  {
-    check: (applicant) => !applicant.hasCriminalRecord,
-    field:
+  }),
+  (applicant) => ({
+    check: !applicant.hasCriminalRecord,
+    fieldName:
       "MINOR HAS NOT BEEN ADJUDICATED A DELINQUENT CHILD FOR IDENTITY FRAUD",
-  },
-  {
-    check: (applicant) => !applicant.hasCriminalRecord,
-    field:
+  }),
+  (applicant) => ({
+    check: !applicant.hasCriminalRecord,
+    fieldName:
       "MINOR DOES NOT HAVE A DUTY TO COMPLY WITH R.C. 2950.04 OR R.C. 2950.041",
-  },
+  }),
 ];
 
 /**
@@ -356,59 +355,58 @@ export const minorChangeOfNameAffidavitMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const adultChangeOfNameJudgementMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "NAME PRIOR TO REQUESTED CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME CHANGE",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "APPLICANTS DATE OF BIRTH (MM/DD/YYYY)",
-  },
-  {
-    text: (applicant) => applicant.birthCity,
-    field: "CITY",
-  },
-  {
-    text: (applicant) => applicant.birthJurisdiction?.name,
-    field: "STATE",
-  },
-  {
-    text: (applicant) => applicant.legalName.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.chosenName.first,
-    field: "FIRST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.middle,
-    field: "MIDDLE NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.last,
-    field: "LAST NAME_2",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NAME PRIOR TO REQUESTED CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME CHANGE",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "APPLICANTS DATE OF BIRTH (MM/DD/YYYY)",
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "CITY",
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdiction?.name,
+    fieldName: "STATE",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME_2",
+  }),
 ];
 
 /**
@@ -417,66 +415,64 @@ export const adultChangeOfNameJudgementMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const minorChangeOfNameJudgementMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "NAME BEFORE REQUESTED CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME CHANGE",
-  },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
-    field: "NAME AT BIRTH",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "MINOR'S DATE OF BIRTH",
-  },
-  {
-    text: (applicant) => applicant.birthCity,
-    field: "CITY",
-  },
-  {
-    text: (applicant) => applicant.birthJurisdiction?.name,
-    field: "STATE",
-  },
-  {
-    text: (applicant) => applicant.legalName.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.chosenName.first,
-    field: "FIRST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.middle,
-    field: "MIDDLE NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.last,
-    field: "LAST NAME_2",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NAME BEFORE REQUESTED CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    fieldName: "NAME AT BIRTH",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "MINOR'S DATE OF BIRTH",
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "CITY",
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdiction?.name,
+    fieldName: "STATE",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME_2",
+  }),
 ];
 
 /**
@@ -485,31 +481,31 @@ export const minorChangeOfNameJudgementMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const minorChangeOfNameConsentMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "CURRENT NAME BEFORE CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME CHANGE",
-  },
-  {
-    check: (applicant) => applicant.parentsAreOkay,
-    field: "PARENT",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "CURRENT NAME BEFORE CHANGE_2",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME CHANGE_2",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "CURRENT NAME BEFORE CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME CHANGE",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "PARENT",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "CURRENT NAME BEFORE CHANGE_2",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME CHANGE_2",
+  }),
 ];
 
 /**
@@ -518,24 +514,24 @@ export const minorChangeOfNameConsentMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const judgementSettingHearingMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "NAME PRIOR TO REQUEST",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME",
-  },
-  {
-    check: () => true,
-    field:
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NAME PRIOR TO REQUEST",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME",
+  }),
+  () => ({
+    check: true,
+    fieldName:
       "BY PUBLICATION ONCE IN A NEWSPAPER OF GENERAL CIRCULATION IN THIS COUNTY",
-  },
+  }),
 ];
 
 /**
@@ -544,76 +540,76 @@ export const judgementSettingHearingMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const hearingNoticeMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PRESENT NAME",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.chosenName.first,
-    field: "FIRST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.middle,
-    field: "MIDDLE NAME_2",
-  },
-  {
-    text: (applicant) => applicant.chosenName.last,
-    field: "LAST NAME_2",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO_2",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.court.address,
-    field: "LOCATION OF PROBATE COURT",
-  },
-  /** For typed only docs do /S/ then the name in the signature field. */
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "TYPED OR PRINTED NAME",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "ADDRESS",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "CITY",
-  },
-  {
-    text: (applicant) => applicant.residentJurisdiction?.name,
-    field: "STATE",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "ZIP CODE",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "EMAIL ADDRESS",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PRESENT NAME",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME_2",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO_2",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.address,
+    fieldName: "LOCATION OF PROBATE COURT",
+  }),
+  /** For typed only docs do /S/ then the name in the signature fieldName. */
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TYPED OR PRINTED NAME",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "CITY",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.name,
+    fieldName: "STATE",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "ZIP CODE",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "EMAIL ADDRESS",
+  }),
 ];
 
 /**
@@ -622,19 +618,18 @@ export const hearingNoticeMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const backgroundCheckReleaseMap: Formfill[] = [
-  {
-    text: () =>
-      formatDate(new Date().toLocaleDateString(), {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DATE (MM/DD/YYYY)",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PRINTED NAME",
-  },
-  /** For typed only docs do /S/ then the name in the signature field. */
+  () => ({
+    text: formatDate(new Date().toLocaleDateString(), {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DATE (MM/DD/YYYY)",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PRINTED NAME",
+  }),
+  /** For typed only docs do /S/ then the name in the signature fieldName. */
 ];
 
 /**
@@ -643,23 +638,23 @@ export const backgroundCheckReleaseMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const waivePublicationOneMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY, OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY, OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PRESENT NAME",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PURSUANT TO R.C. 2717.11",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PRESENT NAME",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PURSUANT TO R.C. 2717.11",
+  }),
 ];
 
 /**
@@ -668,23 +663,23 @@ export const waivePublicationOneMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const waivePublicationTwoMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "PROBATE COURT OF COUNTY OHIO",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "PROBATE COURT OF COUNTY OHIO",
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "NAME BEFORE REQUESTED CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "REQUESTED NAME CHANGE",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PURSUANT R.C. 2717.11, REQUESTS COURT WAIVE PUBLICATION",
-  },
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NAME BEFORE REQUESTED CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "REQUESTED NAME CHANGE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PURSUANT R.C. 2717.11, REQUESTS COURT WAIVE PUBLICATION",
+  }),
 ];
 
 /**
@@ -693,81 +688,74 @@ export const waivePublicationTwoMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const feeWaiverMap: Formfill[] = [
-  {
-    text: (applicant) => fullName(applicant.legalName),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
     loc: { x: 265, y: 173 },
-  },
+  }),
   /** Add Judges Name Here.*/
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.first
-        : applicant.legalName.first,
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.first
+      : applicant.legalName.first,
     loc: { x: 270, y: 248 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.middle
-        : applicant.legalName.middle,
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.middle
+      : applicant.legalName.middle,
     loc: { x: 270, y: 273 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? `${applicant.representativeName?.last ?? ""} ${applicant.representativeName?.suffix ?? ""}`
-        : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? `${applicant.representativeName?.last ?? ""} ${applicant.representativeName?.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     loc: { x: 270, y: 298 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.first
-        : applicant.legalName.first,
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.first
+      : applicant.legalName.first,
     loc: { x: 225, y: 493 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.last
-        : applicant.legalName.last,
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.last
+      : applicant.legalName.last,
     loc: { x: 575, y: 493 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? formatDate(applicant.birthdate, {
-            format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-            separator: "/",
-          })
-        : "",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? formatDate(applicant.birthdate, {
+          format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+          separator: "/",
+        })
+      : "",
     loc: { x: 245, y: 539 },
-  },
-  {
-    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 210, y: 580 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? applicant.legalName.first : ""),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.first : "",
     loc: { x: 75, y: 672 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? applicant.legalName.last : ""),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.last : "",
     loc: { x: 263, y: 672 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? "x" : ""),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "x" : "",
     loc: { x: 423, y: 663 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) && applicant.parentsAreOkay ? "Child" : "",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? "Child" : "",
     loc: { x: 590, y: 672 },
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
     loc: { page: 1, x: 90, y: 610 },
-  },
+  }),
 ];
 
 /**
@@ -776,84 +764,80 @@ export const feeWaiverMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertOrderMap: Formfill[] = [
-  {
-    check: () => true,
-    field: "Birth Certificate",
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "Applicant Name",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "Email",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "Street Address",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "Phone Number",
-  },
-  {
-    text: (applicant) =>
-      formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    field: "City State  ZIP",
-  },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
-    field:
+  () => ({
+    check: true,
+    fieldName: "Birth Certificate",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Applicant Name",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "Street Address",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
+    fieldName: "City State  ZIP",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    fieldName:
       "Full Name indicate childs full name as shown on the original birth record",
-  },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName) ? fullName(applicant.legalName) : "",
-    field: "If Name was Changed Since Birth Indicate New Name",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "Date of Birth",
-  },
-  {
-    text: (applicant) => applicant.birthCity,
-    field: "City and County Where Birth Occurred",
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
-    field: "Name Before First Marriage",
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
-    field: "Name Before First Marriage_2",
-  },
-  {
-    text: () => "Other: Name Change",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.legalName) : "",
+    fieldName: "If Name was Changed Since Birth Indicate New Name",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "Date of Birth",
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "City and County Where Birth Occurred",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "Name Before First Marriage",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "Name Before First Marriage_2",
+  }),
+  () => ({
+    text: "Other: Name Change",
     loc: { x: 320, y: 838 },
-  },
-  {
-    text: () => "1",
-    field: "Number of Birth Record Copies",
-  },
-  {
-    text: () => "21.50",
-    field: "x $21.50",
-  },
-  {
-    text: () => "21.50",
-    field: "x $21.50",
-  },
-  {
-    text: () => "21.50",
-    field: "Total Amount Due",
-  },
+  }),
+  () => ({
+    text: "1",
+    fieldName: "Number of Birth Record Copies",
+  }),
+  () => ({
+    text: "21.50",
+    fieldName: "x $21.50",
+  }),
+  () => ({
+    text: "21.50",
+    fieldName: "x $21.50",
+  }),
+  () => ({
+    text: "21.50",
+    fieldName: "Total Amount Due",
+  }),
 ];
 
 /**
@@ -862,70 +846,67 @@ export const birthCertOrderMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const bmvGenderDeclarationMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     loc: { page: 1, x: 45, y: 188 },
-  },
-  {
-    text: (applicant) => applicant.legalName.first,
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
     loc: { page: 1, x: 410, y: 188 },
-  },
-  {
-    text: (applicant) => applicant.legalName.middle,
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
     loc: { page: 1, x: 695, y: 188 },
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
     loc: { page: 1, x: 45, y: 223 },
-  },
-  {
-    text: (applicant) => applicant.residentCity,
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
     loc: { page: 1, x: 410, y: 223 },
-  },
-  {
-    text: (applicant) => applicant.residentJurisdiction?.abbreviation,
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
     loc: { page: 1, x: 630, y: 223 },
-  },
-  {
-    text: (applicant) => applicant.zip,
+  }),
+  (applicant) => ({
+    text: applicant.zip,
     loc: { page: 1, x: 695, y: 223 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { page: 1, x: 237, y: 258 },
-  },
-  {
-    text: (applicant) => phoneAreaCode(applicant.phone),
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
     loc: { page: 1, x: 415, y: 257 },
-  },
-  {
-    text: (applicant) => phoneStart(applicant.phone),
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone),
     loc: { page: 1, x: 442, y: 257 },
-  },
-  {
-    text: (applicant) => phoneEnd(applicant.phone),
+  }),
+  (applicant) => ({
+    text: phoneEnd(applicant.phone),
     loc: { page: 1, x: 482, y: 257 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "X" : "",
     loc: { page: 1, x: 629, y: 254 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "X" : "",
     loc: { page: 1, x: 711, y: 254 },
-  },
-  {
-    text: (applicant) =>
-      nameInitials(applicant.legalName, {
-        format: [FML.FIRST, FML.MIDDLE, FML.LAST],
-      }),
+  }),
+  (applicant) => ({
+    text: nameInitials(applicant.legalName, {
+      format: [FML.FIRST, FML.MIDDLE, FML.LAST],
+    }),
     loc: { page: 1, x: 597, y: 449 },
-  },
+  }),
 ];
 
 /**
@@ -934,83 +915,80 @@ export const bmvGenderDeclarationMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertUpdateMap: Formfill[] = [
-  {
-    check: () => true,
-    field: "Birth Certificate",
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "Applicant Name",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "Email",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "Street Address",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "Phone Number",
-  },
-  {
-    text: (applicant) =>
-      formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    field: "City State  ZIP",
-  },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
-    field:
+  () => ({
+    check: true,
+    fieldName: "Birth Certificate",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Applicant Name",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "Street Address",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
+    fieldName: "City State  ZIP",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    fieldName:
       "Full Name indicate childs full name as shown on the original birth record",
-  },
-  {
-    text: (applicant) => fullName(applicant.chosenName),
-    field: "If Name was Changed Since Birth Indicate New Name",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "Date of Birth",
-  },
-  {
-    text: (applicant) => applicant.birthCity,
-    field: "City and County Where Birth Occurred",
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
-    field: "Name Before First Marriage",
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
-    field: "Name Before First Marriage_2",
-  },
-  {
-    text: () => "Other: Updating birth record",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "If Name was Changed Since Birth Indicate New Name",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "Date of Birth",
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "City and County Where Birth Occurred",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "Name Before First Marriage",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "Name Before First Marriage_2",
+  }),
+  () => ({
+    text: "Other: Updating birth record",
     loc: { x: 320, y: 838 },
-  },
-  {
-    text: () => "1",
-    field: "Number of Birth Record Copies",
-  },
-  {
-    text: () => "21.50",
-    field: "x $21.50",
-  },
-  {
-    text: () => "21.50",
-    field: "x $21.50",
-  },
-  {
-    text: () => "21.50",
-    field: "Total Amount Due",
-  },
+  }),
+  () => ({
+    text: "1",
+    fieldName: "Number of Birth Record Copies",
+  }),
+  () => ({
+    text: "21.50",
+    fieldName: "x $21.50",
+  }),
+  () => ({
+    text: "21.50",
+    fieldName: "x $21.50",
+  }),
+  () => ({
+    text: "21.50",
+    fieldName: "Total Amount Due",
+  }),
 ];
 
 /**
@@ -1019,48 +997,45 @@ export const birthCertUpdateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCorrectionMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "CourtCounty",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "CourtCounty",
+  }),
   /** Add Judges Name Here.*/
-  /** Adjust several fields to chosen name if this is done after a legal name change*/
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "BirthRecordName",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
-    field: "CourtCounty2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(applicant.representativeName)
-        : fullName(applicant.legalName),
-    field: "FormSubject Name",
-  },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
-    field: "ChildName",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DOB",
-  },
-  {
-    text: (applicant) => formatContactInfo(applicant, cf.BirthCityAndState),
-    field: "Birthplace",
-  },
-  {
-    text: (applicant) => {
+  /** Adjust several fieldNames to chosen name if this is done after a legal name change*/
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "BirthRecordName",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "CourtCounty2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? fullName(applicant.representativeName)
+      : fullName(applicant.legalName),
+    fieldName: "FormSubject Name",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    fieldName: "ChildName",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DOB",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthCityAndState),
+    fieldName: "Birthplace",
+  }),
+  (applicant) => ({
+    text: (() => {
       switch (applicant.assignedSex) {
         case GenderMarker.M:
           return "Male";
@@ -1071,39 +1046,37 @@ export const birthCorrectionMap: Formfill[] = [
         default:
           return "";
       }
-    },
-    field: "ChildSex",
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
-    field: "ParentName",
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
-    field: "ParentName2",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.mothersBirthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "ParentDOB",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.fathersBirthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "Parent2DOB",
-  },
-  {
-    text: () => "Sex:",
-    field: "BoxNo1",
-  },
-  {
-    text: (applicant) => {
+    })(),
+    fieldName: "ChildSex",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "ParentName",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "ParentName2",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.mothersBirthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "ParentDOB",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.fathersBirthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "Parent2DOB",
+  }),
+  () => ({
+    text: "Sex:",
+    fieldName: "BoxNo1",
+  }),
+  (applicant) => ({
+    text: (() => {
       switch (applicant.assignedSex) {
         case GenderMarker.M:
           return "Male";
@@ -1114,11 +1087,11 @@ export const birthCorrectionMap: Formfill[] = [
         default:
           return "";
       }
-    },
-    field: "ReadsAs1",
-  },
-  {
-    text: (applicant) => {
+    })(),
+    fieldName: "ReadsAs1",
+  }),
+  (applicant) => ({
+    text: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "Male";
@@ -1129,20 +1102,19 @@ export const birthCorrectionMap: Formfill[] = [
         default:
           return "";
       }
-    },
-    field: "ShouldRead1",
-  },
-  {
-    text: (applicant) => formatContactInfo(applicant, cf.FullContactInfo),
-    field: "Date",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(applicant.representativeName)
-        : fullName(applicant.legalName),
-    field: "ApplicantName",
-  },
+    })(),
+    fieldName: "ShouldRead1",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
+    fieldName: "Date",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? fullName(applicant.representativeName)
+      : fullName(applicant.legalName),
+    fieldName: "ApplicantName",
+  }),
 ];
 
 /**
@@ -1151,62 +1123,61 @@ export const birthCorrectionMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const voterRegistrationMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.chosenName.last,
-    field:
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtLastName[0]",
-  },
-  {
-    text: (applicant) => applicant.chosenName.first,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtFirstName[0]",
-  },
-  {
-    text: (applicant) => applicant.chosenName.middle,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtMiddleInitial[0]",
-  },
-  {
-    text: (applicant) => applicant.chosenName.suffix ?? "",
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix ?? "",
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtSuffix[0]",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingAddress[0]",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingCity[0]",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingZip[0]",
-  },
-  {
-    text: (applicant) => applicant.residentLocality?.name,
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
     loc: { x: 610, y: 693 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field:
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtBirthdate[0]",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtPhoneNumber[0]",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field:
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtFormerName[0]",
-  },
+  }),
 ];

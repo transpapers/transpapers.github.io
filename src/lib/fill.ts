@@ -17,12 +17,11 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
-
 import { PDFDocument } from "@cantoo/pdf-lib";
 
 import { Person } from "../types/person";
-import { Process, Document } from "../types/process";
+import { Guide } from "../types/generic";
+import { AnyProcess, AnyDocument, AnyGuide } from "../types/generic";
 import {
   Formfill,
   FillableField,
@@ -38,14 +37,13 @@ function fillField(doc: PDFDocument, field: FillableField) {
   const { fieldName } = field;
   if (isText(field)) {
     const formField = form.getTextField(fieldName);
-    if (formField) {
-      // Disable maximum length.
-      formField.setMaxLength(undefined);
-      formField.setText(field.text);
-    }
+
+    // Disable maximum length.
+    formField.setMaxLength(undefined);
+    formField.setText(field.text);
   } else if (isCheck(field)) {
     const formField = form.getCheckBox(fieldName);
-    if (formField && field.check) {
+    if (field.check) {
       formField.check();
     }
   } else if (isRadio(field)) {
@@ -55,9 +53,7 @@ function fillField(doc: PDFDocument, field: FillableField) {
       // cf. https://github.com/Hopding/pdf-lib/issues/811#issuecomment-1009935032
       const acroField = formField.acroField;
       const value = acroField.getOnValues()[field.choice];
-      if (value) {
-        acroField.setValue(value);
-      }
+      acroField.setValue(value);
     } else if (field.choice !== undefined) {
       formField.select(field.choice);
     }
@@ -103,11 +99,13 @@ export function fillForm(
 ): PDFDocument {
   fills
     .map((fill) => fill(applicant))
-    .forEach((field) =>
-      isFillable(field)
-        ? fillField(doc, field as FillableField)
-        : placeField(doc, field as PlaceableField),
-    );
+    .forEach((field) => {
+      if (isFillable(field)) {
+        fillField(doc, field);
+      } else {
+        placeField(doc, field);
+      }
+    });
 
   // Flatten the form fields into the document.
   try {
@@ -123,48 +121,43 @@ export function fillForm(
   return doc;
 }
 
-export function compileGuides(
-  processes: Process[],
+export function compileGuidesFor(
+  process: AnyProcess,
   applicant: Person,
-): React.JSX.Element[] | undefined {
-  const docs: Document[] = [];
+): AnyGuide[] | undefined {
+  const docs: AnyDocument[] = [];
 
-  processes.forEach((proc) => {
-    proc.documents.forEach((doc) => {
-      if (!docs.includes(doc)) {
-        docs.push(doc);
-      }
-    });
+  process.documents.forEach((doc) => {
+    if (!docs.includes(doc)) {
+      docs.push(doc);
+    }
   });
 
-  const guides: React.JSX.Element[] = [];
+  const guides: AnyGuide[] = [];
 
   docs
-    .filter((doc) => doc.include === undefined || doc.include(applicant))
+    .filter(
+      (doc) =>
+        !("include" in doc) ||
+        doc.include === undefined ||
+        doc.include(applicant),
+    )
     .forEach((doc) => {
-      if (doc.guide !== undefined) {
-        const guide = React.createElement(doc.guide, {
-          person: applicant,
-        });
-        guides.push(guide);
+      if (doc.guide !== undefined && applicant.residentLocality !== undefined) {
+        const correctlyTypedGuide = doc.guide as Guide<
+          typeof applicant.residentLocality
+        >;
+        if (typeof correctlyTypedGuide === "function") {
+          guides.push(correctlyTypedGuide);
+        }
       }
     });
 
   return guides;
 }
 
-/**
- * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
- *
- * @param {Process} processes
- * @param {Person} applicant
- * @return {Promise<Uint8Array>} Compiled documents
- */
-export async function compileDocuments(
-  processes: Process[],
-  applicant: Person,
-): Promise<Uint8Array | undefined> {
-  const docs: Document[] = [];
+export function compileDocuments(processes: AnyProcess[]): AnyDocument[] {
+  const docs: AnyDocument[] = [];
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -174,9 +167,16 @@ export async function compileDocuments(
     });
   });
 
+  return docs;
+}
+
+export async function collateDocuments(
+  documents: AnyDocument[],
+  applicant: Person,
+): Promise<Uint8Array | undefined> {
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
 
-  docs
+  documents
     .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.filename !== undefined) {
@@ -205,12 +205,10 @@ export async function compileDocuments(
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
-    allDocuments
-      .filter((doc) => doc !== undefined)
-      .map((doc) => {
-        const numPages = doc.getPageCount();
-        return result.copyPages(doc, [...Array(numPages).keys()]);
-      }),
+    allDocuments.map((doc) => {
+      const numPages = doc.getPageCount();
+      return result.copyPages(doc, [...Array(numPages).keys()]);
+    }),
   );
 
   // Flatten form fields into document.
