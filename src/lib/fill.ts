@@ -17,117 +17,101 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  PDFDocument,
-  PDFTextField,
-  PDFCheckBox,
-  PDFRadioGroup,
-} from "@cantoo/pdf-lib";
+import * as React from "react";
 
-import {
-  type AnyProcess,
-  type AnyDocument,
-  type Guide,
-  type AnyGuide,
-} from "../types/generic";
+import { PDFDocument } from "@cantoo/pdf-lib";
+
 import { Person } from "../types/person";
-import { Formfill } from "../types/formfill";
+import { Process, Document } from "../types/process";
+import {
+  Formfill,
+  FillableField,
+  PlaceableField,
+  isText,
+  isCheck,
+  isRadio,
+  isFillable,
+} from "../types/formfill";
 
-/**
- * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
- * @param {PDFDocument} doc
- * @param {Formfill[]} fills
- * @param {Person} applicant
- * @return {PDFDocument} Filled PDF document
- */
+function fillField(doc: PDFDocument, field: FillableField) {
+  const form = doc.getForm();
+  const { fieldName } = field;
+  if (isText(field)) {
+    const formField = form.getTextField(fieldName);
+    if (formField) {
+      // Disable maximum length.
+      formField.setMaxLength(undefined);
+      formField.setText(field.text);
+    }
+  } else if (isCheck(field)) {
+    const formField = form.getCheckBox(fieldName);
+    if (formField && field.check) {
+      formField.check();
+    }
+  } else if (isRadio(field)) {
+    const formField = form.getRadioGroup(fieldName);
+    if (typeof field.choice === "number") {
+      // Fill by index.
+      // cf. https://github.com/Hopding/pdf-lib/issues/811#issuecomment-1009935032
+      const acroField = formField.acroField;
+      const value = acroField.getOnValues()[field.choice];
+      if (value) {
+        acroField.setValue(value);
+      }
+    } else if (field.choice !== undefined) {
+      formField.select(field.choice);
+    }
+  }
+}
+
+function realLocation(
+  field: PlaceableField,
+  pagePixelHeight: number,
+  ourDpi: number,
+): { x: number; y: number } {
+  const theirDpi = pagePixelHeight / 11.0;
+  const scale = ourDpi / theirDpi;
+
+  const fontSize = field.font?.fontSize ?? 12;
+
+  return {
+    x: field.loc.x * scale,
+    y: pagePixelHeight - fontSize - field.loc.y * scale,
+  };
+}
+
+function placeField(doc: PDFDocument, field: PlaceableField) {
+  let whatToWrite: string | undefined;
+  if (isText(field)) {
+    whatToWrite = field.text;
+  } else if (isCheck(field) && field.check) {
+    whatToWrite = "X";
+  } else if (isRadio(field) && field.choice) {
+    whatToWrite = "X";
+  }
+
+  if (whatToWrite) {
+    const page = doc.getPages()[field.loc.page ?? 0];
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100));
+  }
+}
+
 export function fillForm(
   doc: PDFDocument,
   fills: Formfill[],
   applicant: Person,
 ): PDFDocument {
-  const form = doc.getForm();
-  const pages = doc.getPages();
-
-  fills.forEach((fill) => {
-    if ("field" in fill) {
-      const field = form.getField(fill.field);
-      if ("text" in fill && field instanceof PDFTextField) {
-        const text = fill.text(applicant);
-
-        if (text !== undefined) {
-          // Disable maximum length.
-          field.setMaxLength(undefined);
-
-          field.setText(text);
-        }
-      } else if ("check" in fill && field instanceof PDFCheckBox) {
-        const checked = fill.check(applicant);
-        if (checked) {
-          field.check();
-        }
-      } else if (
-        "select" in fill &&
-        "check" in fill &&
-        field instanceof PDFRadioGroup
-      ) {
-        const checked = fill.check(applicant);
-        if (checked && fill.select !== undefined) {
-          field.select(fill.select);
-        }
-      }
-    } else {
-      const pageIndex = fill.loc.page ?? 0;
-
-      const page = pages[pageIndex];
-
-      // Adjust the pixel location for DPI.
-      const { height } = page.getSize();
-      const dpi = height / 11.0;
-
-      const referenceDpi = 100;
-      const scalingFactor = dpi / referenceDpi;
-
-      const x = fill.loc.x * scalingFactor;
-      let fontSize = 12;
-      if ("font" in fill) {
-        fontSize = fill.font?.fontSize ?? 12;
-      }
-
-      // PDFlib uses a "Cartesian" coordinate system with 0 at the bottom left
-      // rather than the usual top left.
-      const y = height - fill.loc.y * scalingFactor - fontSize;
-
-      if ("text" in fill) {
-        const text = fill.text(applicant);
-        const pitch = fill.font?.pitch;
-
-        if (text !== undefined) {
-          if (pitch === undefined) {
-            page.drawText(text, { x, y, size: fontSize });
-          } else {
-            let currentX = x;
-            text.split("").forEach((char) => {
-              page.drawText(char, {
-                x: currentX,
-                y,
-                size: fontSize,
-              });
-              currentX += pitch;
-            });
-          }
-        }
-      } else if ("check" in fill) {
-        const checked = fill.check(applicant);
-        if (checked) {
-          page.drawText("X", { x, y });
-        }
-      }
-    }
-  });
+  fills
+    .map((fill) => fill(applicant))
+    .forEach((field) =>
+      isFillable(field)
+        ? fillField(doc, field as FillableField)
+        : placeField(doc, field as PlaceableField),
+    );
 
   // Flatten the form fields into the document.
   try {
-    form.flatten();
+    doc.getForm().flatten();
   } catch {
     // We get some ignorable errors in flattening forms here because of an
     // upstream bug.
@@ -139,43 +123,11 @@ export function fillForm(
   return doc;
 }
 
-export function compileGuidesFor(
-  process: AnyProcess,
+export function compileGuides(
+  processes: Process[],
   applicant: Person,
-): AnyGuide[] | undefined {
-  const docs: AnyDocument[] = [];
-
-  process.documents.forEach((doc) => {
-    if (!docs.includes(doc)) {
-      docs.push(doc);
-    }
-  });
-
-  const guides: AnyGuide[] = [];
-
-  docs
-    .filter(
-      (doc) =>
-        !("include" in doc) ||
-        doc.include === undefined ||
-        doc.include(applicant),
-    )
-    .forEach((doc) => {
-      if (doc.guide !== undefined && applicant.residentLocality !== undefined) {
-        const correctlyTypedGuide = doc.guide as Guide<
-          typeof applicant.residentLocality
-        >;
-        if (typeof correctlyTypedGuide === "function") {
-          guides.push(correctlyTypedGuide);
-        }
-      }
-    });
-
-  return guides;
-}
-
-export function compileDocuments(processes: AnyProcess[]): AnyDocument[] {
-  const docs: AnyDocument[] = [];
+): React.JSX.Element[] | undefined {
+  const docs: Document[] = [];
 
   processes.forEach((proc) => {
     proc.documents.forEach((doc) => {
@@ -185,23 +137,46 @@ export function compileDocuments(processes: AnyProcess[]): AnyDocument[] {
     });
   });
 
-  return docs;
+  const guides: React.JSX.Element[] = [];
+
+  docs
+    .filter((doc) => doc.include === undefined || doc.include(applicant))
+    .forEach((doc) => {
+      if (doc.guide !== undefined) {
+        const guide = React.createElement(doc.guide, {
+          person: applicant,
+        });
+        guides.push(guide);
+      }
+    });
+
+  return guides;
 }
 
 /**
- * Collate all necessary documents as a single PDF ArrayBuffer from the given `data`.
+ * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
  *
  * @param {Process} processes
  * @param {Person} applicant
  * @return {Promise<Uint8Array>} Compiled documents
  */
-export async function collateDocuments(
-  documents: AnyDocument[],
+export async function compileDocuments(
+  processes: Process[],
   applicant: Person,
 ): Promise<Uint8Array | undefined> {
+  const docs: Document[] = [];
+
+  processes.forEach((proc) => {
+    proc.documents.forEach((doc) => {
+      if (!docs.includes(doc)) {
+        docs.push(doc);
+      }
+    });
+  });
+
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
 
-  documents
+  docs
     .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.filename !== undefined) {
@@ -230,10 +205,12 @@ export async function collateDocuments(
 
   const result = await PDFDocument.create();
   const pages = await Promise.all(
-    allDocuments.map((doc) => {
-      const numPages = doc.getPageCount();
-      return result.copyPages(doc, [...Array(numPages).keys()]);
-    }),
+    allDocuments
+      .filter((doc) => doc !== undefined)
+      .map((doc) => {
+        const numPages = doc.getPageCount();
+        return result.copyPages(doc, [...Array(numPages).keys()]);
+      }),
   );
 
   // Flatten form fields into document.
