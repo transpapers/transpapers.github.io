@@ -28,7 +28,12 @@ function AlaskaFilingInitialFormsGuide({
   person: Partial<Person>;
 }) {
   const { age } = person;
-  const locality = person.residentLocality as AlaskaAdministrativeDivision;
+  const locality: AlaskaAdministrativeDivision | undefined =
+    person.residentLocality as AlaskaAdministrativeDivision;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (!locality) {
+    return "";
+  }
   const {
     doesNameChange,
     forwardsTo,
