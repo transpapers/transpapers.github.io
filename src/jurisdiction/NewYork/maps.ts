@@ -76,15 +76,16 @@ export const adultNameSexPetitionMap: Formfill[] = [
     fieldName: "ReasonsForNameChangeRequest-specify",
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
-    fieldName: "NewSexDesignation",
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    fieldName: "NewSexDesignation",
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     fieldName: "NewSexDesignation",
   }),
   (applicant) => ({
@@ -104,14 +105,8 @@ export const adultNameSexPetitionMap: Formfill[] = [
   }),
   () => ({ text: new Date().toLocaleDateString(), fieldName: "SignatureDate" }),
   (applicant) => ({
-    check: applicant.doNotPublish,
     fieldName: "SealingRequest",
-    select: "Yes",
-  }),
-  (applicant) => ({
-    check: !applicant.doNotPublish,
-    fieldName: "SealingRequest",
-    select: "No",
+    choice: applicant.doNotPublish ? "Yes" : "No",
   }),
 ];
 
@@ -124,8 +119,8 @@ export const minorNameSexPetitionMap: Formfill[] = [
   /** 'courtType' fieldName from counties.ts should go here.
    */
   (applicant) => ({
-    text: applicant.residentLocality?.name,
     fieldName: "County",
+    value: applicant.residentLocality?.name,
   }),
   (applicant) => ({
     text: isMinor(applicant) ? fullName(applicant.representativeName) : "",
@@ -162,15 +157,16 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "ReasonsForNameChangeRequest",
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
-    fieldName: "NewSexDesignation",
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    fieldName: "NewSexDesignation",
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     fieldName: "NewSexDesignation",
   }),
   (applicant) => ({
@@ -189,14 +185,8 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "CurrentAddress",
   }),
   (applicant) => ({
-    check: applicant.doNotPublish,
     fieldName: "SealingRequest",
-    select: "Yes",
-  }),
-  (applicant) => ({
-    check: !applicant.doNotPublish,
-    fieldName: "SealingRequest",
-    select: "No",
+    choice: applicant.doNotPublish ? "Yes" : "No",
   }),
   () => ({
     text: new Date().toLocaleDateString(),
@@ -207,7 +197,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "SignatureDateCoPetitioner",
   }),
   (applicant) => ({
-    text:
+    value:
       isMinor(applicant) && applicant.age && applicant.age < 14
         ? applicant.residentLocality?.name
         : "",
@@ -228,8 +218,8 @@ export const feeWaiverNYStateMap: Formfill[] = [
     fieldName: "CourtName",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
     fieldName: "CourtCounty",
+    value: applicant.residentLocality?.name,
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -240,9 +230,8 @@ export const feeWaiverNYStateMap: Formfill[] = [
     fieldName: "ApplicantAddress",
   }),
   () => ({
-    check: true,
     fieldName: "Request",
-    select: "Choice2",
+    choice: 1,
   }),
   (applicant) => ({
     text: isMinor(applicant)
@@ -251,19 +240,16 @@ export const feeWaiverNYStateMap: Formfill[] = [
     fieldName: "CourtOrderOtherSpecify",
   }),
   () => ({
-    check: true,
     fieldName: "PreviousFiling",
-    select: "No",
+    choice: "No",
   }),
   () => ({
-    check: true,
     fieldName: "Facts",
-    select: "0",
+    choice: 0,
   }),
   () => ({
-    check: true,
     fieldName: "PreviousApplication",
-    select: "Choice3",
+    choice: "3",
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -349,9 +335,8 @@ export const feeWaiverNYCMap: Formfill[] = [
  */
 export const primaryIDNewYorkMap: Formfill[] = [
   () => ({
-    check: true,
     fieldName: "PURPOSE FOR APPLICATION",
-    select: "UPDATE INFO",
+    choice: "Update Info",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
@@ -378,7 +363,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "SUFFIX",
   }),
   (applicant) => ({
-    text: addZero(
+    value: addZero(
       formatDate(applicant.birthdate, {
         format: [DATE.MONTH],
         separator: "",
@@ -387,7 +372,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "DATE OF BIRTH Month",
   }),
   (applicant) => ({
-    text: addZero(
+    value: addZero(
       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
     ),
     fieldName: "DATE OF BIRTH Day",
@@ -400,19 +385,17 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "DATE OF BIRTH Year",
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "SEX",
-    select: "M (Male)",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "SEX",
-    select: "F (Female)",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "SEX",
-    select: "X (Indeterminate/unspecified)",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M (Male)";
+        case GenderMarker.F:
+          return "F (Female)";
+        case GenderMarker.X:
+          return "X (Indeterminate#2funspecified)";
+      }
+    })(),
   }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
@@ -423,19 +406,13 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "TELEPHONE NUMBER Home Mobile",
   }),
   (applicant) => ({
-    check: applicant.isChangingLegalName,
     fieldName: "Has your name changed",
-    select: "Yes",
-  }),
-  (applicant) => ({
-    check: !applicant.isChangingLegalName,
-    fieldName: "Has your name changed",
-    select: "No",
+    choice: applicant.isChangingLegalName ? "Yes" : "No",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
     fieldName:
-      "If Yes print your former name exactly as it appears on your present license or nondriver ID Identification card",
+      "Has your name changed If Yes print your former name exactly as it appears on your present license or nondriver ID Identification card",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalSex
@@ -454,7 +431,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "ADDRESS WHERE YOU LIVE City or Town",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    value: applicant.residentJurisdiction?.abbreviation,
     fieldName: "ADDRESS WHERE YOU LIVE State",
   }),
   (applicant) => ({
@@ -480,9 +457,8 @@ export const primaryIDNewYorkMap: Formfill[] = [
  */
 export const vehicleRegistrationMap: Formfill[] = [
   () => ({
-    check: true,
     fieldName: "I WANT TO",
-    select: "CHANGE A REGISTRATION",
+    choice: "CHANGE A REGISTRATION",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
@@ -495,21 +471,15 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
   }),
   (applicant) => ({
-    check: applicant.isChangingLegalName,
     fieldName: "PRIMARY REGISTRANT Name Change",
-    select: "Yes",
-  }),
-  (applicant) => ({
-    check: !applicant.isChangingLegalName,
-    fieldName: "PRIMARY REGISTRANT Name Change",
-    select: "No",
+    choice: applicant.isChangingLegalName ? "Yes" : "No",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
     fieldName: "PRIMARY REGISTRANT FORMER NAME",
   }),
   (applicant) => ({
-    text: addZero(
+    value: addZero(
       formatDate(applicant.birthdate, {
         format: [DATE.MONTH],
         separator: "",
@@ -518,7 +488,7 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "PRIMARY REGISTRANT DATE OF BIRTH Month",
   }),
   (applicant) => ({
-    text: addZero(
+    value: addZero(
       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
     ),
     fieldName: "PRIMARY REGISTRANT DATE OF BIRTH Day",
@@ -531,19 +501,17 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "PRIMARY REGISTRANT DATE OF BIRTH Year",
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "PRIMARY REGISTRANT SEX",
-    select: "M (Male)",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "PRIMARY REGISTRANT SEX",
-    select: "F (Female)",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "PRIMARY REGISTRANT SEX",
-    select: "X (indeterminate/unspecified) ",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M (Male)";
+        case GenderMarker.F:
+          return "F (Female)";
+        case GenderMarker.X:
+          return "X (indeterminate#2funspecified) ";
+      }
+    })(),
   }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
@@ -811,19 +779,17 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S2: Date of Birth",
   }),
   (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.M,
     fieldName: "S2: Gender",
-    select: "Choice1",
-  }),
-  (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.F,
-    fieldName: "S2: Gender",
-    select: "Choice2",
-  }),
-  (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.X,
-    fieldName: "S2: Gender",
-    select: "Choice3",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Choice1";
+        case GenderMarker.F:
+          return "Choice2";
+        case GenderMarker.X:
+          return "Choice3";
+      }
+    })(),
   }),
   (applicant) => ({
     text: applicant.mothersBirthName.first,

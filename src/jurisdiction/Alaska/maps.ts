@@ -70,12 +70,12 @@ export const adultNamePetitionAlaskaMap: Formfill[] = [
   (applicant) => ({
     check: !fullName(applicant.birthName),
     fieldName: "currentLegalN",
-    select: "0",
+    choice: "0",
   }),
   (applicant) => ({
     check: !fullName(applicant.birthName),
     fieldName: "currentLegalN",
-    select: "1",
+    choice: "1",
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -176,12 +176,12 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
   (applicant) => ({
     check: !fullName(applicant.birthName),
     fieldName: "childsCurrentName",
-    select: "choice1",
+    choice: "choice1",
   }),
   (applicant) => ({
     check: !fullName(applicant.birthName),
     fieldName: "childsCurrentName",
-    select: "choice1",
+    choice: "choice1",
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -407,14 +407,8 @@ export const additionalServiceAlaskaMap: Formfill[] = [
     fieldName: "enter name here",
   }),
   (applicant) => ({
-    check: !isMinor(applicant),
     fieldName: "Adult/Minor",
-    select: "Choice1",
-  }),
-  (applicant) => ({
-    check: isMinor(applicant),
-    fieldName: "Adult/Minor",
-    select: "Choice2",
+    choice: isMinor(applicant) ? "Choice2" : "Choice1",
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -519,14 +513,16 @@ export const primaryIDSexDesignationAlaskaMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "I wish the sex designation on my Driver LicenseID Card to read",
-    select: "Male",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "I wish the sex designation on my Driver LicenseID Card to read",
-    select: "Female",
+    choice: (() => {
+      if (applicant.gender === GenderMarker.M) {
+        return "Male";
+      } else if (applicant.gender === GenderMarker.F) {
+        return "Female";
+      } else {
+        return undefined;
+      }
+    })(),
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),

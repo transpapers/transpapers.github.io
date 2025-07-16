@@ -525,19 +525,17 @@ export const mdosSexMap: Formfill[] = [
     loc: { x: 67, y: 555 },
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
     fieldName: "ChoiceA",
-    select: "Choice1",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
-    fieldName: "ChoiceA",
-    select: "Choice2",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "ChoiceA",
-    select: "Choice3",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Choice1";
+        case GenderMarker.M:
+          return "Choice2";
+        case GenderMarker.X:
+          return "Choice3";
+      }
+    })(),
   }),
   () => ({
     text: new Date().toLocaleDateString(),

@@ -4080,7 +4080,7 @@ export const wayneAdultMap: Formfill[] = [
   () => ({
     check: true,
     fieldName: "Type of Action",
-    select: "Name Change/Name Conformity",
+    choice: "Name Change/Name Conformity",
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),

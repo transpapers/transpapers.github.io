@@ -582,14 +582,12 @@ export const birthCertOregonMap: Formfill[] = [
  */
 export const voterOregonMap: Formfill[] = [
   () => ({
-    check: true,
     fieldName: "Citizen",
-    select: "Yes",
+    choice: "Yes",
   }),
   () => ({
-    check: true,
     fieldName: "Age",
-    select: "Yes",
+    choice: "Yes",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName

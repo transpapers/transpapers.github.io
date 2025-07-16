@@ -281,19 +281,17 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "DATE OF BIRTH MMDDYY",
   }),
   (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.M,
     fieldName: "Gender",
-    select: "Male",
-  }),
-  (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.F,
-    fieldName: "Gender",
-    select: "Female",
-  }),
-  (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.X,
-    fieldName: "Gender",
-    select: "Gender X",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "Gender X";
+      }
+    })(),
   }),
   (applicant) => ({
     text: applicant.email,
@@ -382,19 +380,17 @@ export const genderIDMap: Formfill[] = [
     fieldName: "I",
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "undefined",
-    select: "M",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "undefined",
-    select: "F",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "undefined",
-    select: "X",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
   }),
 ];
 

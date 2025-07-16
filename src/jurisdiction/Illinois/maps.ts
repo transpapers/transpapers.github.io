@@ -93,42 +93,42 @@ export const adultNameChangeMap: Formfill[] = [
   () => ({
     check: true,
     fieldName: "13 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "16 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "17 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "18 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "19 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "20 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "f - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "22 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -288,37 +288,37 @@ export const minorChildInfoMap: Formfill[] = [
   (applicant) => ({
     check: applicant.parentsAreOkay,
     fieldName: "11 - Checkboxes",
-    select: "parent with custody/parental decision-making responsibility",
+    choice: "parent with custody/parental decision-making responsibility",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "12 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "13 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "14 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "15 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "16 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "18 - Checkboxes",
-    select: "No",
+    choice: "No",
   }),
   () => ({
     check: true,
@@ -339,22 +339,22 @@ export const minorChildInfoMap: Formfill[] = [
   (applicant) => ({
     check: applicant.parentsAreOkay,
     fieldName: "40a - Checkbox",
-    select: "Name and Address of Other Parent",
+    choice: "Name and Address of Other Parent",
   }),
   (applicant) => ({
     check: applicant.parentsAreOkay,
     fieldName: "45 - Checkbox",
-    select: "Yes",
+    choice: "Yes",
   }),
   (applicant) => ({
     check: applicant.parentsAreOkay,
     fieldName: "46 - Checkbox",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: applicant.parentsAreOkay,
     fieldName: "47 - Checkbox",
-    select: "No",
+    choice: "No",
   }),
 ];
 
@@ -463,7 +463,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
   () => ({
     check: true,
     fieldName: "5 - Checkboxes",
-    select: "For Myself",
+    choice: "For Myself",
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -596,17 +596,17 @@ export const dmvGenderDesignationMap: Formfill[] = [
   (applicant) => ({
     check: applicant.gender === GenderMarker.M,
     fieldName: "cb1",
-    select: "Yes",
+    choice: "Yes",
   }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.F,
     fieldName: "cb1",
-    select: "No",
+    choice: "No",
   }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.X,
     fieldName: "cb1",
-    select: "43",
+    choice: "43",
   }),
 ];
 

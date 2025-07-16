@@ -76,7 +76,7 @@ export const ssnMap: Formfill[] = [
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    fieldName: "topmostSubform[0].Page5[0].DateTimeFieldName1[0]",
+    fieldName: "topmostSubform[0].Page5[0].DateTimeField1[0]",
   }),
   () => ({
     check: true,
@@ -132,7 +132,7 @@ export const ssnMap: Formfill[] = [
   }),
   () => ({
     text: new Date().toLocaleDateString(),
-    fieldName: "topmostSubform[0].Page5[0].DateTimeFieldName2[1]",
+    fieldName: "topmostSubform[0].Page5[0].DateTimeField2[1]",
   }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
