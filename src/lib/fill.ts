@@ -29,6 +29,7 @@ import {
   isText,
   isCheck,
   isRadio,
+  isDropdown,
   isFillable,
 } from "../types/formfill";
 
@@ -56,6 +57,11 @@ function fillField(doc: PDFDocument, field: FillableField) {
       acroField.setValue(value);
     } else if (field.choice !== undefined) {
       formField.select(field.choice);
+    }
+  } else if (isDropdown(field)) {
+    const formField = form.getDropdown(fieldName);
+    if (field.value) {
+      formField.select(field.value);
     }
   }
 }

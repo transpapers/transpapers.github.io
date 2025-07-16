@@ -29,7 +29,11 @@ interface CheckField {
 }
 
 interface RadioField {
-  choice: string | undefined;
+  choice: string | number | undefined;
+}
+
+interface DropdownField {
+  value: string | undefined;
 }
 
 export interface FillableField {
@@ -44,17 +48,21 @@ export interface PlaceableField {
 export interface FillableTextField extends FillableField, TextField {}
 export interface FillableCheckField extends FillableField, CheckField {}
 export interface FillableRadioField extends FillableField, RadioField {}
+export interface FillableDropdownField extends FillableField, DropdownField {}
 export interface PlaceableTextField extends PlaceableField, TextField {}
 export interface PlaceableCheckField extends PlaceableField, CheckField {}
 export interface PlaceableRadioField extends PlaceableField, RadioField {}
+export interface PlaceableDropdownField extends PlaceableField, DropdownField {}
 
 export type CompletedField =
   | FillableTextField
   | FillableCheckField
   | FillableRadioField
+  | FillableDropdownField
   | PlaceableTextField
   | PlaceableCheckField
-  | PlaceableRadioField;
+  | PlaceableRadioField
+  | PlaceableDropdownField;
 
 export function isText(field: object): field is TextField {
   return "text" in field;
@@ -66,6 +74,10 @@ export function isCheck(field: object): field is CheckField {
 
 export function isRadio(field: object): field is RadioField {
   return "choice" in field;
+}
+
+export function isDropdown(field: object): field is DropdownField {
+  return "value" in field;
 }
 
 export function isFillable(field: object): field is FillableField {
