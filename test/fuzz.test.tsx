@@ -29,7 +29,7 @@ import { allJurisdictions } from "../src/jurisdiction/all";
 import { type Name, GenderMarker } from "../src/types/types";
 import { type Person } from "../src/types/person";
 import {
-  type AnyProcess,
+  type AnyDocument,
   type AnyJurisdiction,
   type AnyLocality,
 } from "../src/types/generic";
@@ -117,27 +117,36 @@ describe("generatePersonForTesting", () => {
 });
 */
 
-const processes: AnyProcess[] = allJurisdictions
-  .map((jurisdiction) => jurisdiction.processes)
-  .flat();
+const allDocuments: (AnyDocument & { abbreviation: string })[] =
+  allJurisdictions
+    .map((jurisdiction) =>
+      jurisdiction.processes.map((process) =>
+        process.documents
+          .filter((document) => document.filename && document.map)
+          .map((document) => {
+            const docPlusAbbr: AnyDocument & { abbreviation: string } =
+              Object.assign({}, document, {
+                abbreviation: jurisdiction.abbreviation,
+              });
 
-const forms = processes
-  .map((process) => process.documents)
-  .flat()
-  .filter((doc) => doc.filename !== undefined)
-  .filter((doc) => doc.map !== undefined);
+            return docPlusAbbr;
+          }),
+      ),
+    )
+    .flat(2);
 
-describe.each(forms)(
-  "Form $id: $name",
+describe.each(allDocuments)(
+  "$abbreviation form $id: $name",
   ({
-    // Ignore ESLint warnings for variables used in test name.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    name,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // Ignore linter warnings for variables used in test name.
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    abbreviation,
     id,
+    name,
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     filename,
-    include,
     map,
+    include,
   }) => {
     const fuzzPeople = Array.from({ length: 25 }, () => {
       let birthJurisdiction: AnyJurisdiction;
