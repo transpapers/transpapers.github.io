@@ -187,10 +187,6 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "REASON FOR REQUESTING THIS NAME CHANGE_2",
   }),
   (applicant) => ({
-    check: applicant.parentsAreOkay,
-    fieldName: "WAIVER OF NOTICE OF HEARING AND CONSENT OF PARENT",
-  }),
-  (applicant) => ({
     text: applicant.parentsAreOkay
       ? fullName(representativeName(applicant))
       : "",
@@ -201,14 +197,46 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay
-      ? formatContactInfo(applicant, cf.ResidentCityAndStateAndZip)
-      : "",
+    text: applicant.parentsAreOkay ? 
+      applicant.residentCity : "",
     fieldName: "CITY",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      applicant.residentJurisdiction?.name : "",
+    fieldName: "STATE",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      applicant.zip : "",
+    fieldName: "ZIP CODE",
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "WAIVER OF NOTICE OF HEARING AND CONSENT OF PARENT",
   }),
   (applicant) => ({
     check: applicant.parentsAreOkay,
     fieldName: "NAME AND ADDRESS OF PARENT",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    fieldName: "ADDRESS_2",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      applicant.residentCity : "",
+    fieldName: "CITY_2",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      applicant.residentJurisdiction?.name : "",
+    fieldName: "STATE_2",
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      applicant.zip : "",
+    fieldName: "ZIP CODE_2",
   }),
   (applicant) => ({
     check: applicant.parentsAreOkay,
@@ -733,7 +761,7 @@ export const feeWaiverMap: Formfill[] = [
     loc: { x: 245, y: 539 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 210, y: 580 },
   }),
   (applicant) => ({
@@ -1031,7 +1059,7 @@ export const birthCorrectionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.BirthCityAndState),
+    text: applicant.birthCity,
     fieldName: "Birthplace",
   }),
   (applicant) => ({
@@ -1106,7 +1134,7 @@ export const birthCorrectionMap: Formfill[] = [
     fieldName: "ShouldRead1",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     fieldName: "Date",
   }),
   (applicant) => ({

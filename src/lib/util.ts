@@ -309,11 +309,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return [
-        fullName(representativeName(applicant)),
-        applicant.streetAddress,
-        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
-      ].join(separator);
+      return `${streetAddress} ${residentCity}, ${residentJurisdiction?.abbreviation} ${zip}`;
 
     case ContactFormat.FullAddressAndCountry:
       if (
@@ -324,12 +320,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return [
-        fullName(representativeName(applicant)),
-        applicant.streetAddress,
-        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
-        "USA",
-      ].join(separator);
+      return `${streetAddress} ${residentCity}, ${residentJurisdiction?.abbreviation} ${zip} USA`;
 
     case ContactFormat.FullContactInfo:
       if (

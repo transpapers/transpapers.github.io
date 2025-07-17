@@ -167,7 +167,7 @@ export const bciMap: Formfill[] = [
     loc: { x: 199, y: 255 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 249, y: 281 },
   }),
   () => ({
@@ -247,7 +247,7 @@ export const birthCertOneMap: Formfill[] = [
     loc: { x: 659, y: 723 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 219, y: 772 },
   }),
 ];
@@ -463,7 +463,7 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 659, y: 723 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 219, y: 772 },
   }),
 ];

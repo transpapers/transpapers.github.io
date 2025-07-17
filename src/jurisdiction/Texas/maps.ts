@@ -108,14 +108,15 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "Country",
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "undefined",
-    choice: "Male",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "undefined",
-    choice: "Female",
+    choice: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+      }
+    })(),
   }),
   (applicant) => ({
     text: fullName(applicant.birthName)
@@ -269,14 +270,15 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     loc: { page: 1, x: 695, y: 361 },
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "County_3",
-    choice: "Male",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "County_3",
-    choice: "Female",
+    choice: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+      }
+    })(),
   }),
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
@@ -1134,12 +1136,10 @@ export const feeWaiverMap: Formfill[] = [
     fieldName: "Relationship to me Parentesco ConmigoRow1",
   }),
   () => ({
-    check: true,
     fieldName: "Qualification",
     choice: "Choice3",
   }),
   () => ({
-    check: true,
     fieldName: "Type of application",
     choice: "Choice1",
   }),
@@ -1382,7 +1382,7 @@ export const primaryIDMap: Formfill[] = [
 ];
 
 /**
- * Correcting a Birth Certificate (Texas form VS-170.)
+ * Correcting a Birth Certificate (Texas form VS-170.) (Name Only)
  * Updated 7/2025.
  * @type {Formfill[]}
  */
@@ -1596,7 +1596,7 @@ export const birthCertNameCorrectionMap: Formfill[] = [
 ];
 
 /**
- * Correcting a Birth Certificate (Texas form VS-170.)
+ * Correcting a Birth Certificate (Texas form VS-170.) (Gender Marker Only)
  * Updated 7/2025.
  * @type {Formfill[]}
  */
@@ -1820,7 +1820,7 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
 ];
 
 /**
- * Correcting a Birth Certificate (Texas form VS-170.)
+ * Correcting a Birth Certificate (Texas form VS-170.) (Name and Gender Marker)
  * Updated 7/2025.
  * @type {Formfill[]}
  */

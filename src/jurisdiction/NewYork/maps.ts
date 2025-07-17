@@ -66,10 +66,9 @@ export const adultNameSexPetitionMap: Formfill[] = [
     fieldName: "NewName",
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName
-      ? formatContactInfo(applicant, cf.BirthCityAndState)
-      : "",
-    fieldName: "PlaceOfBirth",
+    check: !applicant.hasCriminalRecord,
+    fieldName: "ConvictedOfCrime",
+    choice: 1,
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
@@ -100,7 +99,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfoAndCountry),
+    text: formatContactInfo(applicant, cf.FullAddressAndCountry),
     fieldName: "CurrentAddress",
   }),
   () => ({ text: new Date().toLocaleDateString(), fieldName: "SignatureDate" }),
@@ -147,10 +146,9 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "NewName",
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName
-      ? formatContactInfo(applicant, cf.BirthCityAndState)
-      : "",
-    fieldName: "PlaceOfBirth",
+    check: !applicant.hasCriminalRecord,
+    fieldName: "ConvictedOfCrime",
+    choice: 1,
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
@@ -181,7 +179,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfoAndCountry),
+    text: formatContactInfo(applicant, cf.FullAddressAndCountry),
     fieldName: "CurrentAddress",
   }),
   (applicant) => ({
@@ -226,7 +224,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
     fieldName: "Plaintiffs",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     fieldName: "ApplicantAddress",
   }),
   () => ({
@@ -291,7 +289,7 @@ export const feeWaiverNYCMap: Formfill[] = [
     loc: { x: 223, y: 282 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 143, y: 314 },
   }),
   () => ({
@@ -393,7 +391,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
         case GenderMarker.F:
           return "F (Female)";
         case GenderMarker.X:
-          return "X (Indeterminate#2funspecified)";
+          return "X (Indeterminate/unspecified)";
       }
     })(),
   }),
@@ -620,7 +618,7 @@ export const birthCertAdultNYStateMap: Formfill[] = [
     loc: { x: 510, y: 663 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 103, y: 946 },
   }),
 ];
@@ -869,7 +867,7 @@ export const genderAffidavitAdultNYStateMap: Formfill[] = [
     loc: { x: 71, y: 188 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 106, y: 746 },
   }),
 ];
@@ -889,7 +887,7 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
     loc: { x: 203, y: 241 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { x: 103, y: 746 },
   }),
 ];
