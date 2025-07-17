@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function AlaskaDMVGuide({ person }: { person: Person }) {
+function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
   const { age, isChangingLegalSex, gender, birthJurisdiction } = person;
 
   return (
@@ -75,9 +75,9 @@ function AlaskaDMVGuide({ person }: { person: Person }) {
           professional or therapist who is giving you trans-related care. A full
           list of qualifying individuals is listed in section C of the form.
           Have them fill out section C and then you are ready to head to a DMV
-          location. 
-          {birthJurisdiction === "Alaska" 
-            ? "If you are also updating your birth certificate you can have them do the letter for that section at the same time." 
+          location.
+          {birthJurisdiction?.name === "Alaska"
+            ? "If you are also updating your birth certificate you can have them do the letter for that section at the same time."
             : ""}
         </p>
       ) : (

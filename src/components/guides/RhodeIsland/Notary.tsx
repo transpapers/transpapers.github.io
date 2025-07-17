@@ -29,8 +29,8 @@ function RhodeIslandNotaryGuide({
   person: Person;
   locality: RhodeIslandCityOrTown;
 }) {
-  const { court, age, birthJurisdiction } = person;
-  const { courtDoesBackgroundCheck } = locality;
+  const { age, birthJurisdiction } = person;
+  const { court, courtDoesBackgroundCheck } = locality;
 
   return (
     <section key="RhodeIsland-Notary">
@@ -41,7 +41,7 @@ function RhodeIslandNotaryGuide({
         convenient.
       </p>
 
-      {birthJurisdiction && birthJurisdiction === "Rhode Island" ? (
+      {birthJurisdiction?.name === "Rhode Island" ? (
         <>
           <p>
             To do the birth certificate request by mail have a check or money
@@ -103,7 +103,7 @@ function RhodeIslandNotaryGuide({
 
       {courtDoesBackgroundCheck ? (
         <p>
-          Our records show that the {court?.city} court either does the
+          Our records show that the {court.city} court either does the
           background check report for you when you file or gives its own unique
           instructions for one upon filing.
         </p>

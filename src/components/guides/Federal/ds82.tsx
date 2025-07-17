@@ -23,7 +23,7 @@ import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
 // TODO Unify this with the other two passport forms.
-function DS82Guide({ person }: { person: Person }) {
+function DS82Guide({ person }: { person: Partial<Person> }) {
   const { isChangingLegalSex } = person;
   return (
     <section key="Federal-Passport">

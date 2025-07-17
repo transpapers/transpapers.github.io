@@ -21,20 +21,19 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { blankData, type Person } from "./types/person";
+import { Person } from "./types/person";
 import { Target } from "./types/process";
 
 import { numericalAge } from "./lib/util";
-import { allJurisdictions } from "./jurisdiction/all";
 
 interface ApplicationState {
   person: Person;
-  processNames: string[];
+  processNames: Target[];
 }
 
 interface Action {
   updatePerson: (newData: Partial<ApplicationState["person"]>) => void;
-  updateProcessNames: (newProcessNames: string[]) => void;
+  updateProcessNames: (newProcessNames: Target[]) => void;
   finalizeApplicant: () => void;
 }
 
@@ -74,7 +73,7 @@ const useStore = create<ApplicationState & Action>()(
   persist(
     (set) => ({
       // Initial state.
-      person: blankData,
+      person: new Person(),
       processNames: [],
 
       // Actions.
@@ -103,23 +102,12 @@ const useStore = create<ApplicationState & Action>()(
              * Infer any extra values for the applicant as needed.
              * Do any additional assignments here.
              */
-            const { birthdate, age, residentJurisdiction, residentLocality } =
-              state.person;
+            const { birthdate, age } = state.person;
 
             const extraData: Partial<ApplicationState["person"]> = {};
 
             if (birthdate && !age) {
               extraData.age = numericalAge(birthdate);
-            }
-
-            const jurisdiction = residentJurisdiction ?? "";
-            const jurisdictionObj = allJurisdictions.get(jurisdiction);
-
-            if (jurisdictionObj?.localities) {
-              const { localities } = jurisdictionObj;
-              const locality = localities[residentLocality ?? ""];
-
-              Object.assign(extraData, locality);
             }
 
             const isChangingLegalName = state.processNames.includes(
@@ -128,6 +116,7 @@ const useStore = create<ApplicationState & Action>()(
             const isChangingLegalSex = state.processNames.includes(
               Target.GenderMarker,
             );
+
             Object.assign(extraData, {
               isChangingLegalName,
               isChangingLegalSex,

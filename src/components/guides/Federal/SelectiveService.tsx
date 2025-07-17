@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 import { GenderMarker } from "../../../types/types";
 
-function SelectiveServiceGuide({ person }: { person: Person }) {
+function SelectiveServiceGuide({ person }: { person: Partial<Person> }) {
   const { age, assignedSex } = person;
   return (
     <section key="FederalSelectiveService">

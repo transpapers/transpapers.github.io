@@ -20,16 +20,20 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
-import { type AlaskaAdministrativeDivision } from "../../../types/locality";
+import { AlaskaAdministrativeDivision } from "../../../types/locality";
 
 function AlaskaFilingInitialFormsGuide({
   person,
-  locality,
 }: {
-  person: Person;
-  locality: AlaskaAdministrativeDivision;
+  person: Partial<Person>;
 }) {
-  const { court, age, residentLocality } = person;
+  const { age } = person;
+  const locality: AlaskaAdministrativeDivision | undefined =
+    person.residentLocality as AlaskaAdministrativeDivision;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (!locality) {
+    return "";
+  }
   const {
     doesNameChange,
     forwardsTo,
@@ -39,6 +43,7 @@ function AlaskaFilingInitialFormsGuide({
     emailCourt,
     faxFiling,
     faxNumber,
+    court,
   } = locality;
   return (
     <section key="AK-InitialForms">
@@ -55,8 +60,7 @@ function AlaskaFilingInitialFormsGuide({
           ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. "
           : ""}
         No matter what method is used a valid photo ID is needed to notarize the
-        forms. Below is a list of filing methods for the {residentLocality}{" "}
-        court.
+        forms. Below is a list of filing methods for the {locality.name} court.
         {doesNameChange && forwardsTo?.court
           ? ""
           : " This court only forwards to the " +
@@ -69,11 +73,11 @@ function AlaskaFilingInitialFormsGuide({
           <span> In-person - </span>
           <br />
           {age && age < 18 ? "Your petitioner " : "You "} can go directly to the{" "}
-          {residentLocality} court at {court?.address} to file. The forms can be
+          {locality.name} court at {court.address} to file. The forms can be
           signed, dated, and notarized there. A webpage with more information is
           available{" "}
-          <a href="{court?.website}" title="here">
-            {court?.website}
+          <a href={court.website} title="here">
+            {court.website}
           </a>
           . It has the hours of operation, accepted payment types, and a phone
           number to confirm that it is the correct place to file.
@@ -109,7 +113,7 @@ function AlaskaFilingInitialFormsGuide({
           new case” and select your name under “Filer”. Case types should then
           appear, one of which should say “Change of Name”. After you hit
           “Initiate Case” there will be a screen asking for Case information,
-          select {residentLocality} for “Filing Location” and then fill out the
+          select {locality.name} for “Filing Location” and then fill out the
           case type information as applicable. Then you should see a screen for
           “Party Information” which is just
           {age && age < 18 ? " you and your minor child. " : " you. "} Fill in

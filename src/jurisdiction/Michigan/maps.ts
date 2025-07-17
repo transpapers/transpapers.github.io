@@ -19,10 +19,11 @@
 
 import {
   formatDate,
-  fullContactInfo,
   fullName,
   isMinor,
   representativeName,
+  formatContactInfo,
+  ContactFormat as cf,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -40,219 +41,201 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const nameChangePrivateMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "County",
-  },
-  {
-    text: (applicant) => applicant.court?.address,
-    field: "Court address",
-  },
-  {
-    text: (applicant) => applicant.court?.phone,
-    field: "Court telephone no",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "Current first middle and last names type or print",
-  },
-  {
-    text: (applicant) => fullContactInfo(applicant),
-    field: "Petitioners name address and telephone no",
-  },
-  {
-    check: () => true,
-    field: "3 The name change is for",
-  },
-  { check: (applicant) => !isMinor(applicant), field: "b an adult only" },
-  {
-    check: (applicant) => isMinor(applicant),
-    field: "c a minor only",
-  },
-  {
-    check: (applicant) => isMinor(applicant),
-    field:
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "County",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.address,
+    fieldName: "Court address",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.phone,
+    fieldName: "Court telephone no",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Current first middle and last names type or print",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
+    fieldName: "Petitioners name address and telephone no",
+  }),
+  () => ({
+    check: true,
+    fieldName: "3 The name change is for",
+  }),
+  (applicant) => ({ check: !isMinor(applicant), fieldName: "b an adult only" }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "c a minor only",
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName:
       "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.parentsAreOkay
         ? fullName(applicant.mothersBirthName)
         : "",
-    field: "Parent",
-  },
-  {
-    text: (applicant) =>
+    fieldName: "Parent",
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.parentsAreOkay
         ? fullName(applicant.fathersBirthName)
         : "",
-    field: "Parent_2",
-  },
-  {
-    check: (applicant) => isMinor(applicant),
-    field:
+    fieldName: "Parent_2",
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName:
       "5  As to a minor one or more of the following is the petitioner or consents to the guardianship Check all that apply",
-  },
-  {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "#6 reason for name change",
-  },
-  {
-    check: (applicant) =>
-      applicant.hasCriminalRecord ? !isMinor(applicant) : false,
-    field: "#8 has checkbox",
-  },
-  {
-    check: (applicant) => !applicant.hasCriminalRecord,
-    field: "#8 does not have checkbox",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.first ?? "",
-    field: "First",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.middle ?? "",
-    field: "Middle",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.last ?? "",
-    field: "Last",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
-    field: "First_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
-    field: "Middle_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
-    field: "Last_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.first ?? "" : "",
-    field: "First_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.middle ?? "" : "",
-    field: "Middle_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.last ?? "" : "",
-    field: "Last_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
-    field: "First_6",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
-    field: "Middle_6",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
-    field: "Last_6",
-  },
-  {
-    check: (applicant) => applicant.sealBirthCertificate,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "#6 reason for name change",
+  }),
+  (applicant) => ({
+    check: applicant.hasCriminalRecord ? !isMinor(applicant) : false,
+    fieldName: "#8 has checkbox",
+  }),
+  (applicant) => ({
+    check: !applicant.hasCriminalRecord,
+    fieldName: "#8 does not have checkbox",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.legalName.first,
+    fieldName: "First",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.legalName.middle,
+    fieldName: "Middle",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.legalName.last,
+    fieldName: "Last",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.chosenName.first,
+    fieldName: "First_2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.chosenName.middle,
+    fieldName: "Middle_2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.chosenName.last,
+    fieldName: "Last_2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.first : "",
+    fieldName: "First_5",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.middle : "",
+    fieldName: "Middle_5",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.last : "",
+    fieldName: "Last_5",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.first : "",
+    fieldName: "First_6",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.middle : "",
+    fieldName: "Middle_6",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.last : "",
+    fieldName: "Last_6",
+  }),
+  (applicant) => ({
+    check: applicant.sealBirthCertificate,
+    fieldName:
       "11 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the names",
-  },
-  {
-    text: (applicant) =>
-      applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
-    field: "Names_2",
-  },
-  { text: () => new Date().toLocaleDateString(), field: "Date" },
-  {
-    check: () => true,
-    field: "1 Publication of notice",
-  },
-  {
-    check: (applicant) => !isMinor(applicant),
-    field: "Item 1 checkbox me",
-  },
-  {
-    check: (applicant) => isMinor(applicant),
-    field: "Endangered individual checkbox",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? fullName(applicant.legalName) : "",
-    field: "Endangered individual",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalSex,
-    field: "discrimination",
-  },
-  {
-    check: () => true,
-    field: "2 basis of fear checkbox",
-  },
-  {
-    check: (applicant) => !isMinor(applicant),
-    field: "2 checkbox I",
-  },
-  {
-    check: (applicant) => isMinor(applicant),
-    field: "Endangered individual checkbox2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? fullName(applicant.legalName) : "",
-    field: "Endangered individual_2",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalSex,
-    field: "b. checkbox seek to affirm gender identity",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? fullName(representativeName(applicant)) : "",
-    field: "Name type or print",
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? applicant.streetAddress : ""),
-    field: "Address",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`
-        : "",
-    field: "City state zip",
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? applicant.phone : ""),
-    field: "Telephone no",
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text: applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
+    fieldName: "Names_2",
+  }),
+  () => ({ text: new Date().toLocaleDateString(), fieldName: "Date" }),
+  () => ({
+    check: true,
+    fieldName: "1 Publication of notice",
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "Item 1 checkbox me",
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "Endangered individual checkbox",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? fullName(applicant.legalName) : "",
+    fieldName: "Endangered individual",
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "discrimination",
+  }),
+  () => ({
+    check: true,
+    fieldName: "2 basis of fear checkbox",
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "2 checkbox I",
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "Endangered individual checkbox2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? fullName(applicant.legalName) : "",
+    fieldName: "Endangered individual_2",
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "b. checkbox seek to affirm gender identity",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? fullName(representativeName(applicant)) : "",
+    fieldName: "Name type or print",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.streetAddress : "",
+    fieldName: "Address",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? formatContactInfo(applicant, cf.ResidentCityAndStateAndZip)
+      : "",
+    fieldName: "City state zip",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.phone : "",
+    fieldName: "Telephone no",
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.age && applicant.age > 13
         ? fullName(applicant.legalName)
         : "",
-    field: "Name type or print_5",
-  },
-  {
-    text: (applicant) =>
+    fieldName: "Name type or print_5",
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.age && applicant.age > 14
         ? fullName(applicant.legalName)
         : "",
-    field: "Name type or print_6",
-  },
+    fieldName: "Name type or print_6",
+  }),
 ];
 
 /**
@@ -261,177 +244,161 @@ export const nameChangePrivateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const nameChangeMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "County",
-  },
-  {
-    text: (applicant) => applicant.court?.address,
-    field: "Court addres",
-  },
-  {
-    text: (applicant) => applicant.court?.phone,
-    field: "Court telephone no",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "Current first middle and last names type or print",
-  },
-  {
-    text: (applicant) => fullContactInfo(applicant),
-    field: "Petitioners name address and telephone no",
-  },
-  {
-    check: () => true,
-    field: "3 The name change is for",
-  },
-  { check: (applicant) => !isMinor(applicant), field: "b an adult only" },
-  {
-    check: (applicant) => isMinor(applicant),
-    field: "c a minor only",
-  },
-  {
-    check: (applicant) => isMinor(applicant),
-    field:
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "County",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.address,
+    fieldName: "Court addres",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.phone,
+    fieldName: "Court telephone no",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Current first middle and last names type or print",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
+    fieldName: "Petitioners name address and telephone no",
+  }),
+  () => ({
+    check: true,
+    fieldName: "3 The name change is for",
+  }),
+  (applicant) => ({ check: !isMinor(applicant), fieldName: "b an adult only" }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "c a minor only",
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName:
       "4 The petition includes a request to change a minors name The minors natural or adopted parents are",
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.parentsAreOkay
         ? fullName(applicant.mothersBirthName)
         : "",
-    field: "Parent",
-  },
-  {
-    text: (applicant) =>
+    fieldName: "Parent",
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.parentsAreOkay
         ? fullName(applicant.fathersBirthName)
         : "",
-    field: "Parent_2",
-  },
-  {
-    check: (applicant) => isMinor(applicant),
-    field:
+    fieldName: "Parent_2",
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName:
       "5  As to a minor one or more of the following is the petitioner or consents to the guardianship Check all that apply",
-  },
-  {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "7 The name change is not sought for any fraudulent intent",
-  },
-  {
-    check: (applicant) =>
-      applicant.hasCriminalRecord ? !isMinor(applicant) : false,
-    field: "has",
-  },
-  {
-    check: (applicant) => !applicant.hasCriminalRecord,
-    field: "does not have",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.first ?? "",
-    field: "First",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.middle ?? "",
-    field: "Middle",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.legalName?.last ?? "",
-    field: "Last",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.first ?? "",
-    field: "First_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.middle ?? "",
-    field: "Middle_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? "" : applicant.chosenName?.last ?? "",
-    field: "Last_2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.first ?? "" : "",
-    field: "First_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.middle ?? "" : "",
-    field: "Middle_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.legalName?.last ?? "" : "",
-    field: "Last_5",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
-    field: "First_6",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
-    field: "Middle_6",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
-    field: "Last_6",
-  },
-  {
-    check: (applicant) => applicant.sealBirthCertificate,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "7 The name change is not sought for any fraudulent intent",
+  }),
+  (applicant) => ({
+    check: applicant.hasCriminalRecord ? !isMinor(applicant) : false,
+    fieldName: "has",
+  }),
+  (applicant) => ({
+    check: !applicant.hasCriminalRecord,
+    fieldName: "does not have",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.legalName.first,
+    fieldName: "First",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.legalName.middle,
+    fieldName: "Middle",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.legalName.last,
+    fieldName: "Last",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.chosenName.first,
+    fieldName: "First_2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.chosenName.middle,
+    fieldName: "Middle_2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.chosenName.last,
+    fieldName: "Last_2",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.first : "",
+    fieldName: "First_5",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.middle : "",
+    fieldName: "Middle_5",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.legalName.last : "",
+    fieldName: "Last_5",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.first : "",
+    fieldName: "First_6",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.middle : "",
+    fieldName: "Middle_6",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.last : "",
+    fieldName: "Last_6",
+  }),
+  (applicant) => ({
+    check: applicant.sealBirthCertificate,
+    fieldName:
       "11 I request the court to order the State Registrar to create a new live birth certificate that does not disclose the names",
-  },
-  {
-    text: (applicant) =>
-      applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
-    field: "Names_2",
-  },
-  { text: () => new Date().toLocaleDateString(), field: "Date" },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? fullName(representativeName(applicant)) : "",
-    field: "Name type or print",
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? applicant.streetAddress : ""),
-    field: "Address",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}, ${applicant.zip ?? ""}`
-        : "",
-    field: "City state zip",
-  },
-  {
-    text: (applicant) => (isMinor(applicant) ? applicant.phone : ""),
-    field: "Telephone no",
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text: applicant.sealBirthCertificate ? fullName(applicant.legalName) : "",
+    fieldName: "Names_2",
+  }),
+  () => ({ text: new Date().toLocaleDateString(), fieldName: "Date" }),
+  (applicant) => ({
+    text: isMinor(applicant) ? fullName(representativeName(applicant)) : "",
+    fieldName: "Name type or print",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.streetAddress : "",
+    fieldName: "Address",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? formatContactInfo(applicant, cf.ResidentCityAndStateAndZip)
+      : "",
+    fieldName: "City state zip",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.phone : "",
+    fieldName: "Telephone no",
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.age && applicant.age > 13
         ? fullName(applicant.legalName)
         : "",
-    field: "Name type or print_4",
-  },
-  {
-    text: (applicant) =>
+    fieldName: "Name type or print_4",
+  }),
+  (applicant) => ({
+    text:
       isMinor(applicant) && applicant.age && applicant.age < 14
         ? fullName(applicant.legalName)
         : "",
-    field: "Name type or print_5",
-  },
+    fieldName: "Name type or print_5",
+  }),
 ];
 
 /**
@@ -439,41 +406,38 @@ export const nameChangeMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const piiMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.court?.address,
-    field: "Text6",
-  },
-  {
-    text: (applicant) => applicant.court?.phone,
-    field: "Text5",
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "PlaintiffsPetitioners name",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "In the matter of",
-  },
-  {
-    text: (applicant) =>
-      applicant.residentLocality === "Kent" ? "PC 51" : "PC 51c",
-    field: "Name of formdocument that this MC 97a is being filed with 1",
-  },
-  {
-    text: (applicant) =>
-      `${fullName(representativeName(applicant))} ${new Date().toLocaleDateString()}`,
-    field: "Name of formdocument that this MC 97a is being filed with 2",
-  },
-  { text: (applicant) => fullName(applicant.legalName), field: "Name" },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DOB",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.court.address,
+    fieldName: "Text6",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.phone,
+    fieldName: "Text5",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "PlaintiffsPetitioners name",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "In the matter of",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name === "Kent" ? "PC 51" : "PC 51c",
+    fieldName: "Name of formdocument that this MC 97a is being filed with 1",
+  }),
+  (applicant) => ({
+    text: `${fullName(representativeName(applicant))} ${new Date().toLocaleDateString()}`,
+    fieldName: "Name of formdocument that this MC 97a is being filed with 2",
+  }),
+  (applicant) => ({ text: fullName(applicant.legalName), fieldName: "Name" }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DOB",
+  }),
 ];
 
 /**
@@ -482,22 +446,22 @@ export const piiMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const orderFollowingMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "County",
-  },
-  {
-    text: (applicant) => applicant.court?.address,
-    field: "Court address",
-  },
-  {
-    text: (applicant) => applicant.court?.phone,
-    field: "Court telephone no",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "Current first middle and last names type or print",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "County",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.address,
+    fieldName: "Court address",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.phone,
+    fieldName: "Court telephone no",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Current first middle and last names type or print",
+  }),
 ];
 
 /**
@@ -505,23 +469,23 @@ export const orderFollowingMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const feeWaiverMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.court?.address,
-    field: "Text6",
-  },
-  {
-    text: (applicant) => applicant.court?.phone,
-    field: "Text5",
-  },
-  {
-    text: (applicant) => fullContactInfo(applicant),
-    field: "PlaintiffPetitioners name address and telephone no",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "In the matter of",
-  },
-  { text: () => new Date().toLocaleDateString(), field: "Date" },
+  (applicant) => ({
+    text: applicant.residentLocality?.court.address,
+    fieldName: "Text6",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.court.phone,
+    fieldName: "Text5",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
+    fieldName: "PlaintiffPetitioners name address and telephone no",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "In the matter of",
+  }),
+  () => ({ text: new Date().toLocaleDateString(), fieldName: "Date" }),
 ];
 
 /**
@@ -530,53 +494,53 @@ export const feeWaiverMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const mdosSexMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.legalName?.last ?? "",
+  (applicant) => ({
+    text: applicant.legalName.last,
     loc: { x: 57, y: 388 },
-  },
-  {
-    text: (applicant) => applicant.legalName?.first ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
     loc: { x: 351, y: 388 },
-  },
-  {
-    text: (applicant) => applicant.legalName?.middle ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
     loc: { x: 600, y: 388 },
-  },
-  {
-    text: (applicant) => applicant.legalName?.suffix ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
     loc: { x: 750, y: 388 },
-  },
-  { text: (applicant) => applicant.streetAddress, loc: { x: 57, y: 441 } },
-  { text: (applicant) => applicant.residentCity, loc: { x: 351, y: 441 } },
-  { text: (applicant) => applicant.zip, loc: { x: 701, y: 441 } },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({ text: applicant.streetAddress, loc: { x: 57, y: 441 } }),
+  (applicant) => ({ text: applicant.residentCity, loc: { x: 351, y: 441 } }),
+  (applicant) => ({ text: applicant.zip, loc: { x: 701, y: 441 } }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 351, y: 489 },
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
     loc: { x: 67, y: 555 },
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    field: "ChoiceA",
-    select: "Choice1",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    field: "ChoiceA",
-    select: "Choice2",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    field: "ChoiceA",
-    select: "Choice3",
-  },
-  { text: () => new Date().toLocaleDateString(), loc: { x: 649, y: 959 } },
+  }),
+  (applicant) => ({
+    fieldName: "ChoiceA",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Choice1";
+        case GenderMarker.M:
+          return "Choice2";
+        case GenderMarker.X:
+          return "Choice3";
+      }
+    })(),
+  }),
+  () => ({
+    text: new Date().toLocaleDateString(),
+    loc: { x: 649, y: 959 },
+  }),
 ];
 
 /**
@@ -584,156 +548,152 @@ export const mdosSexMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertMap: Formfill[] = [
-  {
-    text: (applicant) =>
+  (applicant) => ({
+    text:
       applicant.isChangingLegalName && !isMinor(applicant)
-        ? applicant.chosenName?.first ?? ""
+        ? applicant.chosenName.first
         : representativeName(applicant).first,
     loc: { x: 48, y: 196 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalName && !isMinor(applicant)
-        ? applicant.chosenName?.middle ?? ""
+        ? applicant.chosenName.middle
         : representativeName(applicant).middle,
     loc: { x: 337, y: 196 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalName && !isMinor(applicant)
-        ? applicant.chosenName?.last ?? ""
+        ? applicant.chosenName.last
         : representativeName(applicant).last,
     loc: { x: 588, y: 196 },
-  },
-  { text: (applicant) => applicant.streetAddress, loc: { x: 48, y: 237 } },
-  {
-    text: (applicant) =>
-      `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""}`,
+  }),
+  (applicant) => ({ text: applicant.streetAddress, loc: { x: 48, y: 237 } }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndState),
     loc: { x: 388, y: 237 },
-  },
-  { text: (applicant) => applicant.zip, loc: { x: 662, y: 237 } },
-  { text: (applicant) => applicant.phone, loc: { x: 48, y: 283 } },
-  { text: (applicant) => applicant.email, loc: { x: 426, y: 283 } },
-  {
-    text: (applicant) => (isMinor(applicant) ? "" : "X"),
+  }),
+  (applicant) => ({ text: applicant.zip, loc: { x: 662, y: 237 } }),
+  (applicant) => ({ text: applicant.phone, loc: { x: 48, y: 283 } }),
+  (applicant) => ({ text: applicant.email, loc: { x: 426, y: 283 } }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : "X",
     loc: { x: 52, y: 327 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
     loc: { x: 52, y: 355 },
-  },
-  { text: () => "X", loc: { x: 314, y: 409 } },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
+  }),
+  () => ({ text: "X", loc: { x: 314, y: 409 } }),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
     loc: { x: 48, y: 541 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 534, y: 541 },
-  },
-  {
-    text: (applicant) => `${applicant.birthCity ?? ""},`,
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
     loc: { x: 249, y: 636 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "X" : "",
     loc: { x: 595, y: 630 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "X" : "",
     loc: { x: 676, y: 630 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
     loc: { x: 770, y: 630 },
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
     loc: { x: 48, y: 710 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.mothersBirthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.mothersBirthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 554, y: 710 },
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
     loc: { x: 48, y: 754 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.fathersBirthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.fathersBirthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 554, y: 754 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalName && fullName(applicant.birthName)
         ? fullName(applicant.birthName)
         : fullName(applicant.legalName),
     loc: { x: 56, y: 800 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     loc: { x: 433, y: 800 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.M
         ? "Sex: M"
         : "",
     loc: { x: 56, y: 834 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.F
         ? "Sex: F"
         : "",
     loc: { x: 56, y: 834 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.X
         ? "Sex: X"
         : "",
     loc: { x: 56, y: 834 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalSex && applicant.gender === GenderMarker.M
         ? "Sex: M"
         : "",
     loc: { x: 433, y: 834 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalSex && applicant.gender === GenderMarker.F
         ? "Sex: F"
         : "",
     loc: { x: 433, y: 834 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalSex && applicant.gender === GenderMarker.X
         ? "Sex: X"
         : "",
     loc: { x: 433, y: 834 },
-  },
-  { text: () => new Date().toLocaleDateString(), loc: { x: 620, y: 956 } },
+  }),
+  () => ({
+    text: new Date().toLocaleDateString(),
+    loc: { x: 620, y: 956 },
+  }),
 ];
 
 /**
@@ -742,40 +702,39 @@ export const birthCertMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const miSexMap: Formfill[] = [
-  {
-    text: (applicant) => fullName(applicant.legalName),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
     loc: { x: 151, y: 299 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 193, y: 367 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "X" : "",
     loc: { x: 159, y: 539 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "X" : "",
     loc: { x: 159, y: 559 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
     loc: { x: 159, y: 579 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "X" : "",
     loc: { x: 486, y: 539 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "X" : "",
     loc: { x: 486, y: 559 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.X ? "X" : "",
     loc: { x: 486, y: 579 },
-  },
+  }),
 ];

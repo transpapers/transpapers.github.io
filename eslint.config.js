@@ -1,27 +1,38 @@
-import js from "@eslint/js";
-import globals from "globals";
+import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
+import reactPlugin from "eslint-plugin-react";
 import jsxA11y from "eslint-plugin-jsx-a11y";
-import { defineConfig, globalIgnores } from "eslint/config";
 
-export default defineConfig([
+export default tseslint.config(
   {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
+    ignores: [
+      "**/build/**",
+      "**/dist/**",
+      "cypress/*",
+      "eslint.config.js",
+      "cypress.config.js",
+    ],
   },
-  {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-    languageOptions: { globals: globals.browser },
-  },
-  tseslint.configs.stylisticTypeChecked,
+  eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
-  pluginReact.configs.flat.recommended,
+  tseslint.configs.stylisticTypeChecked,
   {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-    plugins: { "jsx-a11y": { rules: jsxA11y.rules } },
-    rules: jsxA11y.configs.recommended.rules,
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+    },
+    rules: {
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
+        { allowInterfaces: "with-single-extends" },
+      ],
+    },
+  },
+  {
+    ...jsxA11y.flatConfigs.strict,
+    ...reactPlugin.configs.flat.recommended,
+    settings: {
+      react: { version: "detect" },
+    },
   },
   {
     languageOptions: {
@@ -30,11 +41,5 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
   },
-  globalIgnores(["*.config.js", "cypress/*", "test/*"]),
-]);
+);

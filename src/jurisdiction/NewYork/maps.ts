@@ -24,9 +24,10 @@ import {
   phoneAreaCode,
   phoneEnd,
   phoneStart,
-  abbreviateJurisdiction,
   addZero,
   representativeName,
+  ContactFormat as cf,
+  formatContactInfo,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -42,86 +43,71 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const adultNameSexPetitionMap: Formfill[] = [
-  /** 'courtType' field from counties.ts should go here.
+  /** 'courtType' fieldName from counties.ts should go here.
    */
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "County",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "PetitionerName",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalName,
-    field: "NameChange",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalSex,
-    field: "SexDesignationChange",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    field: "NewName",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? (applicant.birthCity ?? "") +
-          ", " +
-          (applicant.birthJurisdiction ?? "")
-        : "",
-    field: "PlaceOfBirth",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
-    field: "ReasonsForNameChangeRequest-specify",
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.M ? "Male" : "",
-    field: "NewSexDesignation",
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    field: "NewSexDesignation",
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    field: "NewSexDesignation",
-  },
-  {
-    text: (applicant) => String(applicant.age),
-    field: "Age",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DOB",
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}, USA`,
-    field: "CurrentAddress",
-  },
-  { text: () => new Date().toLocaleDateString(), field: "SignatureDate" },
-  {
-    check: (applicant) => applicant.doNotPublish,
-    field: "SealingRequest",
-    select: "Yes",
-  },
-  {
-    check: (applicant) => !applicant.doNotPublish,
-    field: "SealingRequest",
-    select: "No",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "County",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PetitionerName",
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NameChange",
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "SexDesignationChange",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    fieldName: "NewName",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? formatContactInfo(applicant, cf.BirthCityAndState)
+      : "",
+    fieldName: "PlaceOfBirth",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
+    fieldName: "ReasonsForNameChangeRequest-specify",
+  }),
+  (applicant) => ({
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "NewSexDesignation",
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Age",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DOB",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfoAndCountry),
+    fieldName: "CurrentAddress",
+  }),
+  () => ({ text: new Date().toLocaleDateString(), fieldName: "SignatureDate" }),
+  (applicant) => ({
+    fieldName: "SealingRequest",
+    choice: applicant.doNotPublish ? "Yes" : "No",
+  }),
 ];
 
 /**
@@ -130,109 +116,93 @@ export const adultNameSexPetitionMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const minorNameSexPetitionMap: Formfill[] = [
-  /** 'courtType' field from counties.ts should go here.
+  /** 'courtType' fieldName from counties.ts should go here.
    */
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "County",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? fullName(applicant.representativeName) : "",
-    field: "PetitionerName",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "MinorName",
-  },
-  {
-    text: (applicant) => (isMinor(applicant) && applicant.parentsAreOkay ? "•" : ""),
+  (applicant) => ({
+    fieldName: "County",
+    value: applicant.residentLocality?.name,
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? fullName(applicant.representativeName) : "",
+    fieldName: "PetitionerName",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "MinorName",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? "•" : "",
     loc: { x: 72, y: 352 },
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalName,
-    field: "NameChange",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalSex,
-    field: "SexDesignationChange",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    field: "NewName",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? (applicant.birthCity ?? "") +
-          ", " +
-          (applicant.birthJurisdiction ?? "")
-        : "",
-    field: "PlaceOfBirth",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
-    field: "ReasonsForNameChangeRequest",
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.M ? "Male" : "",
-    field: "NewSexDesignation",
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    field: "NewSexDesignation",
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    field: "NewSexDesignation",
-  },
-  {
-    text: (applicant) => String(applicant.age),
-    field: "Age",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DOB",
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}, USA`,
-    field: "CurrentAddress",
-  },
-  {
-    check: (applicant) => applicant.doNotPublish,
-    field: "SealingRequest",
-    select: "Yes",
-  },
-  {
-    check: (applicant) => !applicant.doNotPublish,
-    field: "SealingRequest",
-    select: "No",
-  },
-  {
-    text: () => new Date().toLocaleDateString(),
-    field: "SignatureDatePetitioner",
-  },
-  {
-    text: () => new Date().toLocaleDateString(),
-    field: "SignatureDateCoPetitioner",
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NameChange",
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "SexDesignationChange",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    fieldName: "NewName",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? formatContactInfo(applicant, cf.BirthCityAndState)
+      : "",
+    fieldName: "PlaceOfBirth",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
+    fieldName: "ReasonsForNameChangeRequest",
+  }),
+  (applicant) => ({
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "NewSexDesignation",
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Age",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DOB",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfoAndCountry),
+    fieldName: "CurrentAddress",
+  }),
+  (applicant) => ({
+    fieldName: "SealingRequest",
+    choice: applicant.doNotPublish ? "Yes" : "No",
+  }),
+  () => ({
+    text: new Date().toLocaleDateString(),
+    fieldName: "SignatureDatePetitioner",
+  }),
+  () => ({
+    text: new Date().toLocaleDateString(),
+    fieldName: "SignatureDateCoPetitioner",
+  }),
+  (applicant) => ({
+    value:
       isMinor(applicant) && applicant.age && applicant.age < 14
-        ? applicant.residentLocality
+        ? applicant.residentLocality?.name
         : "",
-    field: "MinorConsentCounty",
-  },
+    fieldName: "MinorConsentCounty",
+  }),
 ];
 
 /**
@@ -241,55 +211,50 @@ export const minorNameSexPetitionMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const feeWaiverNYStateMap: Formfill[] = [
-  {
-    text: (applicant) => `${applicant.residentLocality ?? ""} county`,
-    field: "CourtName",
-  },
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "CourtCounty",
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "Plaintiffs",
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
-    field: "ApplicantAddress",
-  },
-  {
-    check: () => true,
-    field: "Request",
-    select: "Choice2",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? "Waiving the fee for the filing of UCS-NC2"
-        : "Waiving the fee for the filing of UCS-NC1",
-    field: "CourtOrderOtherSpecify",
-  },
-  {
-    check: () => true,
-    field: "PreviousFiling",
-    select: "No",
-  },
-  {
-    check: () => true,
-    field: "Facts",
-    select: "0",
-  },
-  {
-    check: () => true,
-    field: "PreviousApplication",
-    select: "Choice3",
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "ApplicantName",
-  },
+  (applicant) => ({
+    text: applicant.residentLocality
+      ? `${applicant.residentLocality.name} county`
+      : "",
+    fieldName: "CourtName",
+  }),
+  (applicant) => ({
+    fieldName: "CourtCounty",
+    value: applicant.residentLocality?.name,
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Plaintiffs",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
+    fieldName: "ApplicantAddress",
+  }),
+  () => ({
+    fieldName: "Request",
+    choice: 1,
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? "Waiving the fee for the filing of UCS-NC2"
+      : "Waiving the fee for the filing of UCS-NC1",
+    fieldName: "CourtOrderOtherSpecify",
+  }),
+  () => ({
+    fieldName: "PreviousFiling",
+    choice: "No",
+  }),
+  () => ({
+    fieldName: "Facts",
+    choice: 0,
+  }),
+  () => ({
+    fieldName: "PreviousApplication",
+    choice: "3",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "ApplicantName",
+  }),
 ];
 
 /**
@@ -298,78 +263,69 @@ export const feeWaiverNYStateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const feeWaiverNYCMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality,
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
     loc: { x: 141, y: 44 },
-  },
+  }),
   // FIXME What is this???
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(applicant.representativeName)
-        : fullName(applicant.representativeName),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? fullName(applicant.representativeName)
+      : fullName(applicant.representativeName),
     loc: { x: 65, y: 109 },
-  },
-  {
-    text: (applicant) => applicant.residentLocality,
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
     loc: { x: 237, y: 215 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(applicant.representativeName)
-        : fullName(applicant.representativeName),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? fullName(applicant.representativeName)
+      : fullName(applicant.representativeName),
     loc: { x: 65, y: 247 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(applicant.representativeName)
-        : fullName(applicant.representativeName),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? fullName(applicant.representativeName)
+      : fullName(applicant.representativeName),
     loc: { x: 223, y: 282 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 143, y: 314 },
-  },
-  {
-    text: () => "X",
+  }),
+  () => ({
+    text: "X",
     loc: { x: 150, y: 490 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? "waiving the fee for the filing of UCS-NC2"
-        : "waiving the fee for the filing of UCS-NC1",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? "waiving the fee for the filing of UCS-NC2"
+      : "waiving the fee for the filing of UCS-NC1",
     loc: { x: 261, y: 488 },
-  },
-  {
-    text: () => "X",
+  }),
+  () => ({
+    text: "X",
     loc: { x: 123, y: 768 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? fullName(applicant.representativeName)
-        : fullName(applicant.representativeName),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? fullName(applicant.representativeName)
+      : fullName(applicant.representativeName),
     loc: { x: 154, y: 914 },
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
     loc: { x: 500, y: 914 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
     loc: { x: 500, y: 947 },
-  },
-  {
-    text: (applicant) => applicant.phone,
+  }),
+  (applicant) => ({
+    text: applicant.phone,
     loc: { x: 564, y: 972 },
-  },
+  }),
 ];
 
 /**
@@ -378,138 +334,120 @@ export const feeWaiverNYCMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const primaryIDNewYorkMap: Formfill[] = [
-  {
-    check: () => true,
-    field: "PURPOSE FOR APPLICATION",
-    select: "UPDATE INFO",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.last ?? ""
-        : applicant.legalName?.last ?? "",
-    field: "FULL LAST NAME",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.first ?? ""
-        : applicant.legalName?.first ?? "",
-    field: "FULL FIRST NAME",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.middle ?? ""
-        : applicant.legalName?.middle ?? "",
-    field: "FULL MIDDLE NAME",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.suffix ?? ""
-        : applicant.legalName?.suffix ?? "",
-    field: "SUFFIX",
-  },
-  {
-    text: (applicant) =>
-      addZero(
-        formatDate(applicant.birthdate, {
-          format: [DATE.MONTH],
-          separator: "",
-        }),
-      ),
-    field: "DATE OF BIRTH Month",
-  },
-  {
-    text: (applicant) =>
-      addZero(
-        formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
-      ),
-    field: "DATE OF BIRTH Day",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
-    field: "DATE OF BIRTH Year",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    field: "SEX",
-    select: "M (Male)",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    field: "SEX",
-    select: "F (Female)",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    field: "SEX",
-    select: "X (Indeterminate/unspecified)",
-  },
-  {
-    text: (applicant) => phoneAreaCode(applicant.phone),
-    field: "TELEPHONE NUMBER Home Mobile Area Code",
-  },
-  {
-    text: (applicant) =>
-      phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
-    field: "TELEPHONE NUMBER Home Mobile",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalName,
-    field: "Has your name changed",
-    select: "Yes",
-  },
-  {
-    check: (applicant) => !applicant.isChangingLegalName,
-    field: "Has your name changed",
-    select: "No",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    field:
-      "If Yes print your former name exactly as it appears on your present license or nondriver ID Identification card",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalSex
-        ? "New sex designation for a legal sex designation change."
-        : "",
-    field:
+  () => ({
+    fieldName: "PURPOSE FOR APPLICATION",
+    choice: "Update Info",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.last
+      : applicant.legalName.last,
+    fieldName: "FULL LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.first
+      : applicant.legalName.first,
+    fieldName: "FULL FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.middle
+      : applicant.legalName.middle,
+    fieldName: "FULL MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.suffix
+      : applicant.legalName.suffix,
+    fieldName: "SUFFIX",
+  }),
+  (applicant) => ({
+    value: addZero(
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH],
+        separator: "",
+      }),
+    ),
+    fieldName: "DATE OF BIRTH Month",
+  }),
+  (applicant) => ({
+    value: addZero(
+      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+    ),
+    fieldName: "DATE OF BIRTH Day",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.YEAR],
+      separator: "",
+    }),
+    fieldName: "DATE OF BIRTH Year",
+  }),
+  (applicant) => ({
+    fieldName: "SEX",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M (Male)";
+        case GenderMarker.F:
+          return "F (Female)";
+        case GenderMarker.X:
+          return "X (Indeterminate#2funspecified)";
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "TELEPHONE NUMBER Home Mobile Area Code",
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
+    fieldName: "TELEPHONE NUMBER Home Mobile",
+  }),
+  (applicant) => ({
+    fieldName: "Has your name changed",
+    choice: applicant.isChangingLegalName ? "Yes" : "No",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName:
+      "Has your name changed If Yes print your former name exactly as it appears on your present license or nondriver ID Identification card",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalSex
+      ? "New sex designation for a legal sex designation change."
+      : "",
+    fieldName:
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field:
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName:
       "ADDRESS WHERE YOU LIVE REQUIRED IF DIFFERENT FROM ADDRESS FOR MAIL DO NOT GIVE PO Post OfficeBOX THIS ADDRESS WILL APPEAR ON YOUR ENHANCED REAL ID IDENTITY DOCUMENT",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "ADDRESS WHERE YOU LIVE City or Town",
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
-    field: "ADDRESS WHERE YOU LIVE State",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "ADDRESS WHERE YOU LIVE Zip Code",
-  },
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "ADDRESS WHERE YOU LIVE County",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? fullName(applicant.chosenName)
-        : fullName(applicant.legalName),
-    field: "PLEASE PRINT NAME",
-  },
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "ADDRESS WHERE YOU LIVE City or Town",
+  }),
+  (applicant) => ({
+    value: applicant.residentJurisdiction?.abbreviation,
+    fieldName: "ADDRESS WHERE YOU LIVE State",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "ADDRESS WHERE YOU LIVE Zip Code",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "ADDRESS WHERE YOU LIVE County",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
+    fieldName: "PLEASE PRINT NAME",
+  }),
 ];
 
 /**
@@ -518,92 +456,79 @@ export const primaryIDNewYorkMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const vehicleRegistrationMap: Formfill[] = [
-  {
-    check: () => true,
-    field: "I WANT TO",
-    select: "CHANGE A REGISTRATION",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? `${applicant.chosenName?.last ?? ""},
-      ${applicant.chosenName?.first ?? ""}, 
-      ${applicant.chosenName?.middle ?? ""}`
-        : `${applicant.legalName?.last ?? ""},
-      ${applicant.legalName?.first ?? ""}, 
-      ${applicant.legalName?.middle ?? ""}`,
-    field: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
-  },
-  {
-    check: (applicant) => applicant.isChangingLegalName,
-    field: "PRIMARY REGISTRANT Name Change",
-    select: "Yes",
-  },
-  {
-    check: (applicant) => !applicant.isChangingLegalName,
-    field: "PRIMARY REGISTRANT Name Change",
-    select: "No",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    field: "PRIMARY REGISTRANT FORMER NAME",
-  },
-  {
-    text: (applicant) =>
-      addZero(
-        formatDate(applicant.birthdate, {
-          format: [DATE.MONTH],
-          separator: "",
-        }),
-      ),
-    field: "PRIMARY REGISTRANT DATE OF BIRTH Month",
-  },
-  {
-    text: (applicant) =>
-      addZero(
-        formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
-      ),
-    field: "PRIMARY REGISTRANT DATE OF BIRTH Day",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, { format: [DATE.YEAR], separator: "" }),
-    field: "PRIMARY REGISTRANT DATE OF BIRTH Year",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    field: "PRIMARY REGISTRANT SEX",
-    select: "M (Male)",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    field: "PRIMARY REGISTRANT SEX",
-    select: "F (Female)",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    field: "PRIMARY REGISTRANT SEX",
-    select: "X (indeterminate/unspecified) ",
-  },
-  {
-    text: (applicant) => phoneAreaCode(applicant.phone),
-    field: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER Area Code",
-  },
-  {
-    text: (applicant) =>
-      phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
-    field: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
-  },
-  {
-    text: (applicant) => applicant.residentLocality,
-    field: "County of Residence",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    field: "Print Name Here",
-  },
+  () => ({
+    fieldName: "I WANT TO",
+    choice: "CHANGE A REGISTRATION",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? `${applicant.chosenName.last},
+      ${applicant.chosenName.first},
+      ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last},
+      ${applicant.legalName.first},
+      ${applicant.legalName.middle}`,
+    fieldName: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
+  }),
+  (applicant) => ({
+    fieldName: "PRIMARY REGISTRANT Name Change",
+    choice: applicant.isChangingLegalName ? "Yes" : "No",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName: "PRIMARY REGISTRANT FORMER NAME",
+  }),
+  (applicant) => ({
+    value: addZero(
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH],
+        separator: "",
+      }),
+    ),
+    fieldName: "PRIMARY REGISTRANT DATE OF BIRTH Month",
+  }),
+  (applicant) => ({
+    value: addZero(
+      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+    ),
+    fieldName: "PRIMARY REGISTRANT DATE OF BIRTH Day",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.YEAR],
+      separator: "",
+    }),
+    fieldName: "PRIMARY REGISTRANT DATE OF BIRTH Year",
+  }),
+  (applicant) => ({
+    fieldName: "PRIMARY REGISTRANT SEX",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M (Male)";
+        case GenderMarker.F:
+          return "F (Female)";
+        case GenderMarker.X:
+          return "X (indeterminate#2funspecified) ";
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER Area Code",
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
+    fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "County of Residence",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName: "Print Name Here",
+  }),
 ];
 
 /**
@@ -612,101 +537,92 @@ export const vehicleRegistrationMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertAdultNYStateMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? fullName(applicant.chosenName)
-        : fullName(applicant.legalName),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
     loc: { x: 124, y: 209 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 665, y: 209 },
-  },
-  {
-    text: (applicant) => applicant.birthCity,
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
     loc: { x: 221, y: 242 },
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
     loc: { x: 397, y: 275 },
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
     loc: { x: 397, y: 309 },
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.M ? "Male" : "",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
     loc: { x: 207, y: 562 },
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.F ? "Female" : "",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
     loc: { x: 207, y: 562 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
     loc: { x: 207, y: 562 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "Male" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "Male" : "",
     loc: { x: 510, y: 562 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "Female" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "Female" : "",
     loc: { x: 510, y: 562 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.X ? "X" : "",
     loc: { x: 510, y: 562 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName && applicant.birthName?.first
+  }),
+  (applicant) => ({
+    text:
+      applicant.isChangingLegalName && applicant.birthName.first
         ? applicant.birthName.first
-        : applicant.legalName?.first ?? "",
+        : applicant.legalName.first,
     loc: { x: 207, y: 596 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.chosenName?.first ?? "" : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
     loc: { x: 510, y: 596 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName && applicant.birthName?.middle
+  }),
+  (applicant) => ({
+    text:
+      applicant.isChangingLegalName && applicant.birthName.middle
         ? applicant.birthName.middle
-        : applicant.legalName?.middle ?? "",
+        : applicant.legalName.middle,
     loc: { x: 207, y: 629 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.chosenName?.middle ?? "" : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
     loc: { x: 510, y: 629 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName && applicant.birthName?.last
+  }),
+  (applicant) => ({
+    text:
+      applicant.isChangingLegalName && applicant.birthName.last
         ? applicant.birthName.last
-        : applicant.legalName?.last ?? "",
+        : applicant.legalName.last,
     loc: { x: 207, y: 663 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.chosenName?.last ?? "" : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     loc: { x: 510, y: 663 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 103, y: 946 },
-  },
+  }),
 ];
 
 /**
@@ -715,95 +631,88 @@ export const birthCertAdultNYStateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertMinorNYStateMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? fullName(applicant.chosenName)
-        : fullName(applicant.legalName),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
     loc: { x: 180, y: 200 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 665, y: 200 },
-  },
-  {
-    text: (applicant) => applicant.birthCity,
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
     loc: { x: 218, y: 234 },
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
     loc: { x: 428, y: 267 },
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
     loc: { x: 428, y: 300 },
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.M ? "Male" : "",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
     loc: { x: 204, y: 517 },
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.F ? "Female" : "",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
     loc: { x: 204, y: 517 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
     loc: { x: 204, y: 517 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "Male" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "Male" : "",
     loc: { x: 510, y: 517 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "Female" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "Female" : "",
     loc: { x: 510, y: 517 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.X ? "X" : "",
     loc: { x: 510, y: 517 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName && applicant.birthName?.first
-        ? applicant.legalName?.first ?? ""
-        : applicant.birthName?.first ?? "",
+  }),
+  (applicant) => ({
+    text:
+      applicant.isChangingLegalName && applicant.birthName.first
+        ? applicant.legalName.first
+        : applicant.birthName.first,
     loc: { x: 204, y: 550 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.chosenName?.first ?? "" : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
     loc: { x: 510, y: 550 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName && applicant.birthName?.middle
-        ? applicant.legalName?.middle ?? ""
-        : applicant.birthName?.middle ?? "",
+  }),
+  (applicant) => ({
+    text:
+      applicant.isChangingLegalName && applicant.birthName.middle
+        ? applicant.legalName.middle
+        : applicant.birthName.middle,
     loc: { x: 204, y: 584 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.chosenName?.middle ?? "" : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
     loc: { x: 510, y: 584 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName && applicant.birthName?.last
-        ? applicant.legalName?.last ?? ""
-        : applicant.birthName?.last ?? "",
+  }),
+  (applicant) => ({
+    text:
+      applicant.isChangingLegalName && applicant.birthName.last
+        ? applicant.legalName.last
+        : applicant.birthName.last,
     loc: { x: 204, y: 617 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? applicant.chosenName?.last ?? "" : "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     loc: { x: 510, y: 617 },
-  },
+  }),
 ];
 
 /**
@@ -812,152 +721,139 @@ export const birthCertMinorNYStateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertNYCMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.first
-        : applicant.chosenName?.first,
-    field: "S1: First Name",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.middle
-        : applicant.chosenName?.middle,
-    field: "S1: Middle Name",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? applicant.representativeName?.last
-        : applicant.chosenName?.last,
-    field: "S1: Last Name",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "S1: City",
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
-    field: "S1: State",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "S1: Zip Code",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "S1: Primary Phone Number",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "S1: Email Address",
-  },
-  {
-    text: (applicant) =>
-      applicant.birthName?.first ?? applicant.legalName?.first ?? "",
-    field: "S2: First Name 1",
-  },
-  {
-    text: (applicant) =>
-      applicant.birthName?.middle ?? applicant.legalName?.middle ?? "",
-    field: "S2: Middle Name 1",
-  },
-  {
-    text: (applicant) =>
-      applicant.birthName?.last ?? applicant.legalName?.last ?? "",
-    field: "S2: Last Name 1",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "S2: Date of Birth",
-  },
-  {
-    check: (applicant) => applicant.assignedSex === GenderMarker.M,
-    field: "S2: Gender",
-    select: "Choice1",
-  },
-  {
-    check: (applicant) => applicant.assignedSex === GenderMarker.F,
-    field: "S2: Gender",
-    select: "Choice2",
-  },
-  {
-    check: (applicant) => applicant.assignedSex === GenderMarker.X,
-    field: "S2: Gender",
-    select: "Choice3",
-  },
-  {
-    text: (applicant) => applicant.mothersBirthName?.first,
-    field: "S2: First Name 2",
-  },
-  {
-    text: (applicant) => applicant.mothersBirthName?.last,
-    field: "S2: Last Name 2",
-  },
-  {
-    text: (applicant) => (applicant.isChangingLegalName ? "Child's Name" : ""),
-    field: "S3: What do you want to correct?",
-  },
-  {
-    text: (applicant) =>
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.first
+      : applicant.chosenName.first,
+    fieldName: "S1: First Name",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.middle
+      : applicant.chosenName.middle,
+    fieldName: "S1: Middle Name",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? applicant.representativeName?.last
+      : applicant.chosenName.last,
+    fieldName: "S1: Last Name",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "S1: City",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
+    fieldName: "S1: State",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "S1: Zip Code",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "S1: Primary Phone Number",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "S1: Email Address",
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first || applicant.legalName.first,
+    fieldName: "S2: First Name 1",
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle || applicant.legalName.middle,
+    fieldName: "S2: Middle Name 1",
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last || applicant.legalName.last,
+    fieldName: "S2: Last Name 1",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "S2: Date of Birth",
+  }),
+  (applicant) => ({
+    fieldName: "S2: Gender",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Choice1";
+        case GenderMarker.F:
+          return "Choice2";
+        case GenderMarker.X:
+          return "Choice3";
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: applicant.mothersBirthName.first,
+    fieldName: "S2: First Name 2",
+  }),
+  (applicant) => ({
+    text: applicant.mothersBirthName.last,
+    fieldName: "S2: Last Name 2",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? "Child's Name" : "",
+    fieldName: "S3: What do you want to correct?",
+  }),
+  (applicant) => ({
+    text:
       applicant.isChangingLegalName && fullName(applicant.birthName)
         ? fullName(applicant.birthName)
         : fullName(applicant.legalName),
-    field: "S3: What is currently listed on the birth certificate?",
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    field: "S3: What should it say on the birth record?",
-  },
-  {
-    text: (applicant) => (applicant.isChangingLegalSex ? "Child's Sex" : ""),
-    field: "S3: What do you want to correct? 1",
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.M ? "Male" : "",
-    field: "S3: What is currently listed on the birth certificate? 1",
-  },
-  {
-    text: (applicant) =>
-      applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    field: "S3: What is currently listed on the birth certificate? 1",
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
-    field: "S3: What is currently listed on the birth certificate? 1",
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "Male" : ""),
-    field: "S3: What should it say on the birth record? 1",
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "Female" : ""),
-    field: "S3: What should it say on the birth record? 1",
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
-    field: "S3: What should it say on the birth record? 1",
-  },
-  {
-    check: () => true,
-    field: "S5: Completed",
-  },
-  {
-    check: () => true,
-    field: "S5: Payment if applicable",
-  },
-  {
-    check: () => true,
-    field: "S5: Original or certified documents",
-  },
+    fieldName: "S3: What is currently listed on the birth certificate?",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    fieldName: "S3: What should it say on the birth record?",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalSex ? "Child's Sex" : "",
+    fieldName: "S3: What do you want to correct? 1",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
+    fieldName: "S3: What is currently listed on the birth certificate? 1",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
+    fieldName: "S3: What is currently listed on the birth certificate? 1",
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
+    fieldName: "S3: What is currently listed on the birth certificate? 1",
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "Male" : "",
+    fieldName: "S3: What should it say on the birth record? 1",
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "Female" : "",
+    fieldName: "S3: What should it say on the birth record? 1",
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.X ? "X" : "",
+    fieldName: "S3: What should it say on the birth record? 1",
+  }),
+  () => ({
+    check: true,
+    fieldName: "S5: Completed",
+  }),
+  () => ({
+    check: true,
+    fieldName: "S5: Payment if applicable",
+  }),
+  () => ({
+    check: true,
+    fieldName: "S5: Original or certified documents",
+  }),
 ];
 
 /**
@@ -966,19 +862,16 @@ export const birthCertNYCMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const genderAffidavitAdultNYStateMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? fullName(applicant.chosenName)
-        : fullName(applicant.legalName),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
     loc: { x: 71, y: 188 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 106, y: 746 },
-  },
+  }),
 ];
 
 /**
@@ -987,20 +880,18 @@ export const genderAffidavitAdultNYStateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const genderAffidavitMinorNYStateMap: Formfill[] = [
-  {
-    text: (applicant) => fullName(applicant.representativeName),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
     loc: { x: 52, y: 178 },
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
     loc: { x: 203, y: 241 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""},
-      ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 103, y: 746 },
-  },
+  }),
 ];
 
 /**
@@ -1009,87 +900,82 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const selfAttestationAdultNYCMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.first ?? ""
-        : applicant.legalName?.first ?? "",
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.first
+      : applicant.legalName.first,
+
     loc: { page: 1, x: 101, y: 138 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.middle ?? ""
-        : applicant.legalName?.middle ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.middle
+      : applicant.legalName.middle,
     loc: { page: 1, x: 355, y: 138 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.last ?? ""
-        : applicant.legalName?.last ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.last
+      : applicant.legalName.last,
     loc: { page: 1, x: 543, y: 138 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { page: 1, x: 101, y: 204 },
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
     loc: { page: 1, x: 353, y: 204 },
-  },
-  {
-    text: (applicant) => applicant.residentCity,
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
     loc: { page: 1, x: 101, y: 266 },
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
     loc: { page: 1, x: 436, y: 266 },
-  },
-  {
-    text: (applicant) => applicant.zip,
+  }),
+  (applicant) => ({
+    text: applicant.zip,
     loc: { page: 1, x: 663, y: 266 },
-  },
-  {
-    text: (applicant) => applicant.phone,
+  }),
+  (applicant) => ({
+    text: applicant.phone,
     loc: { page: 1, x: 487, y: 336 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? fullName(applicant.chosenName)
-        : fullName(applicant.legalName),
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
     loc: { page: 1, x: 230, y: 963 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "M" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "M" : "",
     loc: { page: 1, x: 427, y: 550 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "F" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "F" : "",
     loc: { page: 1, x: 427, y: 550 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
     loc: { page: 1, x: 427, y: 550 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "M" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "M" : "",
     loc: { page: 1, x: 582, y: 550 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "F" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "F" : "",
     loc: { page: 1, x: 582, y: 550 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.X ? "X" : "",
     loc: { page: 1, x: 582, y: 550 },
-  },
+  }),
 ];
 
 /**
@@ -1098,90 +984,85 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const selfAttestationMinorNYCMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.representativeName?.first,
+  (applicant) => ({
+    text: applicant.representativeName?.first,
     loc: { page: 1, x: 103, y: 146 },
-  },
-  {
-    text: (applicant) => applicant.representativeName?.middle,
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.middle,
     loc: { page: 1, x: 354, y: 146 },
-  },
-  {
-    text: (applicant) => applicant.representativeName?.last,
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.last,
     loc: { page: 1, x: 542, y: 146 },
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
     loc: { page: 1, x: 353, y: 210 },
-  },
-  {
-    text: (applicant) => applicant.residentCity,
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
     loc: { page: 1, x: 101, y: 272 },
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
     loc: { page: 1, x: 436, y: 272 },
-  },
-  {
-    text: (applicant) => applicant.zip,
+  }),
+  (applicant) => ({
+    text: applicant.zip,
     loc: { page: 1, x: 663, y: 272 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.first ?? ""
-        : applicant.legalName?.first ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.first
+      : applicant.legalName.first,
     loc: { page: 1, x: 101, y: 792 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.middle ?? ""
-        : applicant.legalName?.middle ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.middle
+      : applicant.legalName.middle,
     loc: { page: 1, x: 355, y: 792 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? applicant.chosenName?.last ?? ""
-        : applicant.legalName?.last ?? "",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.last
+      : applicant.legalName.last,
     loc: { page: 1, x: 543, y: 792 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { page: 1, x: 361, y: 871 },
-  },
-  {
-    text: (applicant) => fullName(applicant.representativeName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
     loc: { page: 2, x: 116, y: 145 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.M ? "M" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "M" : "",
     loc: { page: 2, x: 478, y: 231 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.F ? "F" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "F" : "",
     loc: { page: 2, x: 478, y: 231 },
-  },
-  {
-    text: (applicant) => (applicant.assignedSex === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
     loc: { page: 2, x: 478, y: 231 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.M ? "M" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.M ? "M" : "",
     loc: { page: 2, x: 634, y: 231 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.F ? "F" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.F ? "F" : "",
     loc: { page: 2, x: 634, y: 231 },
-  },
-  {
-    text: (applicant) => (applicant.gender === GenderMarker.X ? "X" : ""),
+  }),
+  (applicant) => ({
+    text: applicant.gender === GenderMarker.X ? "X" : "",
     loc: { page: 2, x: 634, y: 231 },
-  },
+  }),
 ];

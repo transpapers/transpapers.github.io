@@ -21,7 +21,7 @@ import * as React from "react";
 import { JSX } from "react";
 
 import { Field } from "../types/field";
-import { allJurisdictions } from "../jurisdiction/all";
+import { AnyJurisdiction } from "../types/generic";
 
 function GenericField(field: Field, innards: JSX.Element): JSX.Element {
   const { name, title, subtitle, required } = field;
@@ -43,7 +43,7 @@ interface FieldConstructorProps {
 }
 
 interface CountyFieldConstructorProps {
-  jurisdiction: string;
+  jurisdiction: AnyJurisdiction;
   register: (name: string) => object;
 }
 
@@ -241,16 +241,7 @@ export function CountyField({
   jurisdiction,
   register,
 }: CountyFieldConstructorProps) {
-  const jurisdictionObj = allJurisdictions.get(jurisdiction);
-
-  if (!jurisdictionObj) {
-    return "";
-  }
-
-  const { localities } = jurisdictionObj;
-  if (!localities) {
-    return "";
-  }
+  const { localities } = jurisdiction;
 
   // TODO Fix this??
   const field: Field = {

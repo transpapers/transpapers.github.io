@@ -19,7 +19,7 @@
 
 import { type Process } from "./process";
 import { type Locality } from "./locality";
-import { type AnyProcess } from "./generic";
+import { type AnyProcess, type AnyJurisdiction } from "./generic";
 
 import { allJurisdictions } from "../jurisdiction/all";
 
@@ -54,17 +54,12 @@ export interface Jurisdiction<T extends Locality> {
   /**
    * Map from `Target`s to `Process`es.
    */
-  processes?: Process<T>[];
+  processes: Process<T>[];
 
   /**
    * Map of counties (or county equivalents.)
    */
-  localities?: Record<string, T>;
-
-  /**
-   * `true` if this is the dummy `Jurisdiction` used for federal processes.
-   */
-  isFederal?: boolean;
+  localities: T[];
 }
 
 export function getProcesses(name: string | undefined): AnyProcess[] {
@@ -72,24 +67,25 @@ export function getProcesses(name: string | undefined): AnyProcess[] {
     return [];
   }
 
-  return allJurisdictions.get(name)?.processes ?? [];
+  return (
+    allJurisdictions.find((jurisdiction) => jurisdiction.name === name)
+      ?.processes ?? []
+  );
 }
 
 export function allProcesses(
-  residentJurisdiction: string | undefined,
-  birthJurisdiction: string | undefined,
+  residentJurisdiction: AnyJurisdiction,
+  birthJurisdiction: AnyJurisdiction,
 ): AnyProcess[] {
-  const residentJurisdictionProcesses = getProcesses(residentJurisdiction);
-  const residentProcesses = residentJurisdictionProcesses.filter(
+  const residentProcesses = residentJurisdiction.processes.filter(
     (proc) => !proc.isBirth,
   );
 
-  const birthJurisdictionProcesses = getProcesses(birthJurisdiction);
-  const birthProcesses = birthJurisdictionProcesses.filter(
+  const birthProcesses = birthJurisdiction.processes.filter(
     (proc) => proc.isBirth,
   );
 
-  const federalProcesses = allJurisdictions.get("Federal")?.processes ?? [];
+  const federalProcesses = getProcesses("Federal");
 
   return [...residentProcesses, ...birthProcesses, ...federalProcesses];
 }

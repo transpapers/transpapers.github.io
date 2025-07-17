@@ -19,8 +19,9 @@
 
 import { OregonCounty } from "../../types/locality";
 
-const oregonCounties: Record<string, OregonCounty> = {
-  Baker: {
+const oregonCounties: OregonCounty[] = [
+  {
+    name: "Baker",
     court: {
       address: "1995 3rd St #220, Baker City, OR 97814",
       city: "Baker City",
@@ -28,7 +29,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/baker/Pages/default.aspx",
     },
   },
-  Benton: {
+  {
+    name: "Benton",
     court: {
       address: "120 NW 4th Street, Corvallis, OR, 97330",
       city: "Corvallis",
@@ -36,7 +38,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/benton/Pages/default.aspx",
     },
   },
-  Clackamas: {
+  {
+    name: "Clackamas",
     court: {
       address: "807 Main Street, Oregon City, OR 97045",
       city: "Oregon City",
@@ -45,7 +48,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/clackamas/Pages/default.aspx",
     },
   },
-  Clatsop: {
+  {
+    name: "Clatsop",
     court: {
       address: "749 Commercial St Suite 6, Astoria, OR 97103",
       city: "Astoria",
@@ -54,7 +58,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/clatsop/Pages/default.aspx",
     },
   },
-  Columbia: {
+  {
+    name: "Columbia",
     court: {
       address: "230 Strand Street, Saint Helens, OR 97051",
       city: "Saint Helens",
@@ -63,7 +68,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/columbia/Pages/default.aspx",
     },
   },
-  Coos: {
+  {
+    name: "Coos",
     court: {
       address: "250 N Baxter St, Coquille, OR 97423",
       city: "Coquille",
@@ -71,7 +77,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/coos/Pages/default.aspx",
     },
   },
-  Crook: {
+  {
+    name: "Crook",
     court: {
       address: "300 NE 3rd St #21, Prineville, OR 97754",
       city: "Prineville",
@@ -79,7 +86,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/crook/Pages/default.aspx",
     },
   },
-  Curry: {
+  {
+    name: "Curry",
     court: {
       address: "29821 Ellensburg Ave, Gold Beach, OR 97444",
       city: "Gold Beach",
@@ -87,7 +95,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/coos/Pages/default.aspx",
     },
   },
-  Deschutes: {
+  {
+    name: "Deschutes",
     court: {
       address: "1100 NW Bond Street, Bend, Oregon 97703",
       city: "Bend",
@@ -96,7 +105,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/deschutes/Pages/default.aspx",
     },
   },
-  Douglas: {
+  {
+    name: "Douglas",
     court: {
       address: "1036 SE Douglas Ave # 201, Roseburg, OR 97470",
       city: "Roseburg",
@@ -105,7 +115,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/douglas/Pages/default.aspx",
     },
   },
-  Gilliam: {
+  {
+    name: "Gilliam",
     court: {
       address: "221 S Oregon St, Condon, OR 97823",
       city: "Condon",
@@ -114,7 +125,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/gilliam/Pages/default.aspx",
     },
   },
-  Grant: {
+  {
+    name: "Grant",
     court: {
       address: "201 S. Humbolt Street, Canyon City, OR  97820",
       city: "Canyon City",
@@ -122,7 +134,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/grant/Pages/default.aspx",
     },
   },
-  Harney: {
+  {
+    name: "Harney",
     court: {
       address: "450 N. Buena Vista, Burns, Oregon 97720",
       city: "Burns",
@@ -130,7 +143,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/grant/Pages/default.aspx",
     },
   },
-  "Hood River": {
+  {
+    name: "Hood River",
     court: {
       address: "309 State Street, Hood River, Oregon 97031",
       city: "Hood River",
@@ -139,7 +153,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/hood_river/Pages/default.aspx",
     },
   },
-  Jackson: {
+  {
+    name: "Jackson",
     court: {
       address: "100 S. Oakdale Avenue, Medford, OR 97501-3127",
       city: "Medford",
@@ -148,7 +163,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/jackson/Pages/default.aspx",
     },
   },
-  Jefferson: {
+  {
+    name: "Jefferson",
     court: {
       address: "129 SW E Street, Madras, Oregon 97741",
       city: "Madras",
@@ -157,7 +173,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/jefferson/Pages/default.aspx",
     },
   },
-  Josephine: {
+  {
+    name: "Josephine",
     court: {
       address: "510 NW 6th Street, Grants Pass, Oregon 97526",
       city: "Grants Pass",
@@ -166,7 +183,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/josephine/Pages/default.aspx",
     },
   },
-  Klamath: {
+  {
+    name: "Klamath",
     court: {
       address: "316 Main Street, Klamath Falls, Oregon 97601",
       city: "Klamath Falls",
@@ -175,7 +193,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/klamath/Pages/default.aspx",
     },
   },
-  Lake: {
+  {
+    name: "Lake",
     court: {
       address: "513 Center St # 305, Lakeview, OR 97630",
       city: "Lakeview",
@@ -183,7 +202,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/lake/Pages/default.aspx",
     },
   },
-  Lane: {
+  {
+    name: "Lane",
     court: {
       address: "125 East 8th Avenue, Eugene, OR  97401",
       city: "Eugene",
@@ -191,7 +211,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/lane/Pages/default.aspx",
     },
   },
-  Lincoln: {
+  {
+    name: "Lincoln",
     court: {
       address: "225 W Olive St # 201, Newport, OR 97365",
       city: "Newport",
@@ -200,7 +221,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/lincoln/Pages/default.aspx",
     },
   },
-  Linn: {
+  {
+    name: "Linn",
     court: {
       address: "300 SW Fourth Avenue, Albany, OR 97321",
       city: "Albany",
@@ -208,7 +230,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/linn/Pages/default.aspx",
     },
   },
-  Malheur: {
+  {
+    name: "Malheur",
     court: {
       address: "251 B Street West, Vale, OR 97918",
       city: "Vale",
@@ -217,7 +240,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/malheur/Pages/default.aspx",
     },
   },
-  Marion: {
+  {
+    name: "Marion",
     court: {
       address: "100 High St. NE, Salem, Oregon 97301",
       city: "Salem",
@@ -225,7 +249,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/marion/Pages/default.aspx",
     },
   },
-  Morrow: {
+  {
+    name: "Morrow",
     court: {
       address: "100 N Court St #203, Heppner, OR 97836",
       city: "Heppner",
@@ -234,7 +259,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/umatilla/Pages/default.aspx",
     },
   },
-  Multnomah: {
+  {
+    name: "Multnomah",
     court: {
       address: "1200 SW 1st Ave, Portland, OR 97204",
       city: "Portland",
@@ -243,7 +269,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/multnomah/Pages/default.aspx",
     },
   },
-  Polk: {
+  {
+    name: "Polk",
     court: {
       address: "850 Main Street, Dallas, Oregon 97338",
       city: "Dallas",
@@ -251,7 +278,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/polk/Pages/default.aspx",
     },
   },
-  Sherman: {
+  {
+    name: "Sherman",
     court: {
       address: "500 Court St, Moro, OR 97039",
       city: "Moro",
@@ -260,7 +288,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/sherman/Pages/default.aspx",
     },
   },
-  Tillamook: {
+  {
+    name: "Tillamook",
     court: {
       address: "201 Laurel Avenue, Tillamook, Oregon 97141",
       city: "Tillamook",
@@ -269,7 +298,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/tillamook/Pages/default.aspx",
     },
   },
-  Umatilla: {
+  {
+    name: "Umatilla",
     court: {
       address:
         "915 SE Columbia Drive, Hermiston, OR 97838 as well as 216 SE Fourth Street Pendleton, OR 97801",
@@ -279,7 +309,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/umatilla/Pages/default.aspx",
     },
   },
-  Union: {
+  {
+    name: "Union",
     court: {
       address: "1105 K Ave, La Grande, OR 97850",
       city: "La Grande",
@@ -287,7 +318,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/union/Pages/default.aspx",
     },
   },
-  Wallowa: {
+  {
+    name: "Wallowa",
     court: {
       address: "101 S River St # 204, Enterprise, OR 97828",
       city: "Enterprise",
@@ -296,7 +328,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/wallowa/Pages/default.aspx",
     },
   },
-  Wasco: {
+  {
+    name: "Wasco",
     court: {
       address: "511 Washington Street, The Dalles, Oregon 97058",
       city: "The Dalles",
@@ -304,7 +337,8 @@ const oregonCounties: Record<string, OregonCounty> = {
       website: "https://www.courts.oregon.gov/courts/wasco/Pages/default.aspx",
     },
   },
-  Washington: {
+  {
+    name: "Washington",
     court: {
       address: "145 NE 2nd Avenue, Hillsboro, Oregon 97124",
       city: "Hillsboro",
@@ -313,7 +347,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/washington/Pages/default.aspx",
     },
   },
-  Wheeler: {
+  {
+    name: "Wheeler",
     court: {
       address: "701 Adams St # 204, Fossil, OR 97830",
       city: "Fossil",
@@ -322,7 +357,8 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/wheeler/Pages/default.aspx",
     },
   },
-  Yamhill: {
+  {
+    name: "Yamhill",
     court: {
       address: "535 NE 5th Street, McMinnville, Oregon 97128",
       city: "McMinnville",
@@ -331,6 +367,6 @@ const oregonCounties: Record<string, OregonCounty> = {
         "https://www.courts.oregon.gov/courts/yamhill/Pages/default.aspx",
     },
   },
-};
+];
 
 export default oregonCounties;

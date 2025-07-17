@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function RhodeIslandPC8_1Guide({ person }: { person: Person }) {
+function RhodeIslandPC8_1Guide({ person }: { person: Partial<Person> }) {
   const { age, residentLocality } = person;
 
   return (
@@ -73,10 +73,10 @@ function RhodeIslandPC8_1Guide({ person }: { person: Person }) {
       )}
 
       <p>
-        {residentLocality && residentLocality === "Providence"
+        {residentLocality?.name === "Providence"
           ? "You need to have lived in Providence for at least 6 months to file this form. "
           : "You need to have lived in " +
-            (residentLocality ?? "") +
+            (residentLocality?.name ?? "") +
             " for at least a year to file this form. "}
         Do <strong>not</strong> sign it or fill out anything on page 2,
         that&apos;s for a notary later.

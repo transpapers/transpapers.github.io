@@ -19,8 +19,9 @@
 
 import { NewYorkCounty } from "../../types/locality";
 
-const newyorkCounties: Record<string, NewYorkCounty> = {
-  Albany: {
+const newyorkCounties: NewYorkCounty[] = [
+  {
+    name: "Albany",
     court: {
       address: "6 Lodge St, Albany, NY 12207",
       city: "Albany",
@@ -28,7 +29,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Allegany: {
+  {
+    name: "Allegany",
     court: {
       address: "7 Court St, Belmont, NY 14813",
       city: "Belmont",
@@ -36,7 +38,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Bronx: {
+  {
+    name: "Bronx",
     borough: "The Bronx",
     court: {
       address: "851 Grand Concourse, Bronx, NY 10451",
@@ -46,7 +49,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     courtType: "New York City Civil",
     isNYC: true,
   },
-  Broome: {
+  {
+    name: "Broome",
     court: {
       address: "92 Court St, Binghamton, NY 13901",
       city: "Binghamton",
@@ -54,7 +58,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Cattaraugus: {
+  {
+    name: "Cattaraugus",
     court: {
       address: "303 Court St, Little Valley, NY 14755",
       city: "Little Valley",
@@ -62,7 +67,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Cayuga: {
+  {
+    name: "Cayuga",
     court: {
       address: "152 Genesee St, Auburn, NY 13021",
       city: "Auburn",
@@ -70,7 +76,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Chautauqua: {
+  {
+    name: "Chautauqua",
     court: {
       address: "3 N Erie St #341, Mayville, NY 14757",
       city: "Mayville",
@@ -78,7 +85,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Chemung: {
+  {
+    name: "Chemung",
     court: {
       address: "203 William St, Elmira, NY 14901",
       city: "Elmira",
@@ -86,7 +94,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Chenango: {
+  {
+    name: "Chenango",
     court: {
       address: "1 Court St, Norwich, NY 13815",
       city: "Norwich",
@@ -94,7 +103,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Clinton: {
+  {
+    name: "Clinton",
     court: {
       address: "34 Court St, Plattsburgh, NY 12901",
       city: "Plattsburgh",
@@ -102,7 +112,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Columbia: {
+  {
+    name: "Columbia",
     court: {
       address: "401 Union St, Hudson, NY 12534",
       city: "Hudson",
@@ -110,7 +121,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Cortland: {
+  {
+    name: "Cortland",
     court: {
       address: "46 Greenbush St # 301, Cortland, NY 13045",
       city: "Cortland",
@@ -118,7 +130,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Delaware: {
+  {
+    name: "Delaware",
     court: {
       address: "3 Court St, Delhi, NY 13753",
       city: "Delhi",
@@ -126,7 +139,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Dutchess: {
+  {
+    name: "Dutchess",
     court: {
       address: "10 Market St, Poughkeepsie, NY 12601",
       city: "Poughkeepsie",
@@ -134,7 +148,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Erie: {
+  {
+    name: "Erie",
     court: {
       address: "25 Delaware Ave, Buffalo, NY 14202",
       city: "Buffalo",
@@ -142,7 +157,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Essex: {
+  {
+    name: "Essex",
     court: {
       address: "7559 Court St, Elizabethtown, NY 12932",
       city: "Elizabethtown",
@@ -150,7 +166,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Franklin: {
+  {
+    name: "Franklin",
     court: {
       address: "355 W Main St, Malone, NY 12953",
       city: "Malone",
@@ -158,7 +175,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Fulton: {
+  {
+    name: "Fulton",
     court: {
       address: "N William St, Johnstown, NY 12095",
       city: "Johnstown",
@@ -166,7 +184,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Genesee: {
+  {
+    name: "Genesee",
     court: {
       address: "1 W Main St, Batavia, NY 14020",
       city: "Batavia",
@@ -174,7 +193,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Greene: {
+  {
+    name: "Greene",
     court: {
       address: "320 Main St, Catskill, NY 12414",
       city: "Catskill",
@@ -182,7 +202,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Hamilton: {
+  {
+    name: "Hamilton",
     court: {
       address: "114 Sout2551-2541, Lake Pleasant, NY 12108",
       city: "Lake Pleasant",
@@ -190,7 +211,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Herkimer: {
+  {
+    name: "Herkimer",
     court: {
       address: "301 N Washington St #2501, Herkimer, NY 13350",
       city: "Herkimer",
@@ -198,7 +220,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Jefferson: {
+  {
+    name: "Jefferson",
     court: {
       address: "163 Arsenal St, Watertown, NY 13601",
       city: "Watertown",
@@ -206,7 +229,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Kings: {
+  {
+    name: "Kings",
     borough: "Brooklyn",
     court: {
       address: "141 Livingston St, Brooklyn, NY 11201",
@@ -216,7 +240,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     courtType: "New York City Civil",
     isNYC: true,
   },
-  Lewis: {
+  {
+    name: "Lewis",
     court: {
       address: "7660 N State St, Lowville, NY 13367",
       city: "Lowville",
@@ -224,7 +249,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Livingston: {
+  {
+    name: "Livingston",
     court: {
       address: "2 Court St, Geneseo, NY 14454",
       city: "Geneseo",
@@ -232,7 +258,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Madison: {
+  {
+    name: "Madison",
     court: {
       address: "N Court St, Wampsville, NY 13163",
       city: "Wampsville",
@@ -240,7 +267,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Monroe: {
+  {
+    name: "Monroe",
     court: {
       address: "99 Exchange Blvd # 545, Rochester, NY 14614",
       city: "Rochester",
@@ -248,7 +276,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Montgomery: {
+  {
+    name: "Montgomery",
     court: {
       address: "58 Broadway, Fonda, NY 12068",
       city: "Fonda",
@@ -256,7 +285,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Nassau: {
+  {
+    name: "Nassau",
     court: {
       address: "262 Old Country Rd, Garden City, NY 11530",
       city: "Garden City",
@@ -264,7 +294,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Niagara: {
+  {
+    name: "Niagara",
     court: {
       address: "775 3rd St, Niagara Falls, NY 14301",
       city: "Niagara Falls",
@@ -272,7 +303,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  "New York": {
+  {
+    name: "New York",
     borough: "Manhatten",
     court: {
       address: "111 Centre St, New York, NY 10013",
@@ -282,7 +314,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     courtType: "New York City Civil",
     isNYC: true,
   },
-  Oneida: {
+  {
+    name: "Oneida",
     court: {
       address: "200 Elizabeth St, Utica, NY 13501",
       city: "Utica",
@@ -290,7 +323,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Onondaga: {
+  {
+    name: "Onondaga",
     court: {
       address: "505 S State St #130, Syracuse, NY 13202",
       city: "Syracuse",
@@ -298,7 +332,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Ontario: {
+  {
+    name: "Ontario",
     court: {
       address: "27 N Main St, Canandaigua, NY 14424",
       city: "Canandaigua",
@@ -306,7 +341,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Orange: {
+  {
+    name: "Orange",
     court: {
       address: "255 Main St, Goshen, NY 10924",
       city: "Goshen",
@@ -314,7 +350,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Orleans: {
+  {
+    name: "Orleans",
     court: {
       address: "27 N Platt St, Albion, NY 14411",
       city: "Albion",
@@ -322,7 +359,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Oswego: {
+  {
+    name: "Oswego",
     court: {
       address: "25 E Oneida St, Oswego, NY 13126",
       city: "Oswego",
@@ -330,7 +368,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Otsego: {
+  {
+    name: "Otsego",
     court: {
       address: "193 Main St, Cooperstown, NY 13326",
       city: "Cooperstown",
@@ -338,7 +377,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Putnam: {
+  {
+    name: "Putnam",
     court: {
       address: "20 County Center, Carmel Hamlet, NY 10512",
       city: "Carmel Hamlet",
@@ -346,7 +386,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Queens: {
+  {
+    name: "Queens",
     borough: "Queens",
     court: {
       address: "89-17 Sutphin Blvd, Queens, NY 11435",
@@ -356,7 +397,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     courtType: "New York City Civil",
     isNYC: true,
   },
-  Rensselaer: {
+  {
+    name: "Rensselaer",
     court: {
       address: "Franklin St, Troy, NY 12180",
       city: "Troy",
@@ -364,7 +406,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Richmond: {
+  {
+    name: "Richmond",
     borough: "Staten Island",
     court: {
       address: "927 Castleton Ave, Staten Island, NY 10310",
@@ -374,7 +417,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     courtType: "New York City Civil",
     isNYC: true,
   },
-  Rockland: {
+  {
+    name: "Rockland",
     court: {
       address: "1 S Main St, New City, NY 10956",
       city: "New City",
@@ -382,7 +426,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Saratoga: {
+  {
+    name: "Saratoga",
     court: {
       address: "35 W High St #2, Ballston Spa, NY 12020",
       city: "Ballston Spa",
@@ -390,7 +435,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Schenectady: {
+  {
+    name: "Schenectady",
     court: {
       address: "612 State St, Schenectady, NY 12305",
       city: "Schenectady",
@@ -398,7 +444,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Schoharie: {
+  {
+    name: "Schoharie",
     court: {
       address: "290 Main St, Schoharie, NY 12157",
       city: "Schoharie",
@@ -406,7 +453,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Schuyler: {
+  {
+    name: "Schuyler",
     court: {
       address: "105 9th St #35, Watkins Glen, NY 14891",
       city: "Watkins Glen",
@@ -414,7 +462,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Seneca: {
+  {
+    name: "Seneca",
     court: {
       address: "48 W Williams St, Waterloo, NY 13165",
       city: "Waterloo",
@@ -422,7 +471,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  "St. Lawrence": {
+  {
+    name: "St. Lawrence",
     court: {
       address: "48 Court St, Canton, NY 13617",
       city: "Canton",
@@ -430,7 +480,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Steuben: {
+  {
+    name: "Steuben",
     court: {
       address: "3 E Pulteney Square, Bath, NY 14810",
       city: "Bath",
@@ -438,7 +489,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Suffolk: {
+  {
+    name: "Suffolk",
     court: {
       address: "210 Center Dr, Riverhead, NY 11901",
       city: "Riverhead",
@@ -446,7 +498,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Sullivan: {
+  {
+    name: "Sullivan",
     court: {
       address: "414 Broadway, Monticello, NY 12701",
       city: "Monticello",
@@ -454,7 +507,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Tioga: {
+  {
+    name: "Tioga",
     court: {
       address: "21 Court St, Owego, NY 13827",
       city: "Owego",
@@ -462,7 +516,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Tompkins: {
+  {
+    name: "Tompkins",
     court: {
       address: "320 N Tioga St, Ithaca, NY 14850",
       city: "Ithaca",
@@ -470,7 +525,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Ulster: {
+  {
+    name: "Ulster",
     court: {
       address: "285 Wall St, Kingston, NY 12401",
       city: "Kingston",
@@ -478,7 +534,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Warren: {
+  {
+    name: "Warren",
     court: {
       address: "1340 US-9, Lake George, NY 12845",
       city: "Lake George",
@@ -486,7 +543,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Washington: {
+  {
+    name: "Washington",
     court: {
       address: "383 Broadway, Fort Edward, NY 12828",
       city: "Fort Edward",
@@ -494,7 +552,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Wayne: {
+  {
+    name: "Wayne",
     court: {
       address: "54 Broad St # 106D, Lyons, NY 14489",
       city: "Lyons",
@@ -502,7 +561,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Westchester: {
+  {
+    name: "Westchester",
     court: {
       address: "111 Dr.Martin Luther King Jr Blvd, White Plains, NY 10601",
       city: "White Plains",
@@ -510,7 +570,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Wyoming: {
+  {
+    name: "Wyoming",
     court: {
       address: "147 N Main St, Warsaw, NY 14569",
       city: "Warsaw",
@@ -518,7 +579,8 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-  Yates: {
+  {
+    name: "Yates",
     court: {
       address: "415 Liberty St, Penn Yan, NY 14527",
       city: "Penn Yan",
@@ -526,6 +588,6 @@ const newyorkCounties: Record<string, NewYorkCounty> = {
     },
     courtType: "County",
   },
-};
+];
 
 export default newyorkCounties;

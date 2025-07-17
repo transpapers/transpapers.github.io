@@ -18,7 +18,11 @@
  */
 
 import { type Person, sampleData } from "../types/person";
-import { type AnyProcess } from "../types/generic";
+import {
+  type AnyProcess,
+  type AnyJurisdiction,
+  type AnyLocality,
+} from "../types/generic";
 import { type Name } from "../types/types";
 
 import { fields } from "../components/fields";
@@ -26,14 +30,19 @@ import { fields } from "../components/fields";
 /**
  * Union of the types we want shakeTree() to ignore/not descend to.
  */
-type Opaque = Name;
+type Opaque = Name | AnyJurisdiction | AnyLocality;
 
 // TODO better-tree-shaker branch
 // eslint-disable-next-line
-function isOpaque(obj: any): obj is Opaque {
+export function isOpaque(obj: any): obj is Opaque {
   // TODO better-tree-shaker branch
-  // eslint-disable-next-line
-  return (obj as Name).first !== undefined;
+  /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+  const isName = (obj as Name).first !== undefined;
+  const isJurisdiction = (obj as AnyJurisdiction).name !== undefined;
+  const isLocality = (obj as AnyLocality).name !== undefined;
+  /* eslint-enable @typescript-eslint/no-unnecessary-condition */
+
+  return isName || isJurisdiction || isLocality;
 }
 
 /**
@@ -43,7 +52,6 @@ function isOpaque(obj: any): obj is Opaque {
 // eslint-disable-next-line
 export function shakeTree(obj: any, accessed: string[] = []) {
   const recursePropertyNames = ["documents", "map"];
-
   const functionPropertyNames = ["include", "text", "check"];
 
   const handler = {

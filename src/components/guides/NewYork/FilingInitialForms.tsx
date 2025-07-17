@@ -19,6 +19,8 @@
 
 import * as React from "react";
 
+import { newYork } from "../../../jurisdiction/all";
+
 import { type Person } from "../../../types/person";
 import { type NewYorkCounty } from "../../../types/locality";
 
@@ -29,8 +31,8 @@ function NewYorkFilingGuide({
   person: Person;
   locality: NewYorkCounty;
 }) {
-  const { court, age, residentLocality } = person;
-  const { isNYC, borough } = locality;
+  const { age } = person;
+  const { name, isNYC, borough, court } = locality;
   return (
     <section key="NewYork-Filing">
       <h3>Filing Initial Forms (NY)</h3>
@@ -42,69 +44,18 @@ function NewYorkFilingGuide({
             the 5 NYC Civil courts. We have them listed below with your borough
             bolded.
           </p>
-          {/** Is there a way to list these courts by direct calling from
-               counties.ts?*/}
-          {residentLocality && residentLocality == "Bronx" ? (
-            <span>
-              <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
-              {court?.phone}
-            </span>
-          ) : (
-            <span>
-              The Bronx: 851 Grand Concourse, Bronx, NY 10451. Phone Number:
-              (646) 386-5700
-            </span>
-          )}
-          <br />
-          {residentLocality && residentLocality == "Kings" ? (
-            <span>
-              <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
-              {court?.phone}
-            </span>
-          ) : (
-            <span>
-              Brooklyn: 141 Livingston St, Brooklyn, NY 11201. Phone Number:
-              (646) 386-5700
-            </span>
-          )}
-          <br />
-          {residentLocality && residentLocality == "New York" ? (
-            <span>
-              <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
-              {court?.phone}
-            </span>
-          ) : (
-            <span>
-              Manhatten: 111 Centre St, New York, NY 10013. Phone Number: (646)
-              386-5750
-            </span>
-          )}
-          <br />
-          {residentLocality && residentLocality == "Queens" ? (
-            <span>
-              <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
-              {court?.phone}
-            </span>
-          ) : (
-            <span>
-              Queens: 89-17 Sutphin Blvd, Queens, NY 11435. Phone Number: (718)
-              262-7100
-            </span>
-          )}
-          <br />
-          {residentLocality && residentLocality == "Richmond" ? (
-            <span>
-              <strong>{borough}</strong>: {court?.address}. Phone Number:{" "}
-              {court?.phone}
-            </span>
-          ) : (
-            <span>
-              Staten Island: 927 Castleton Ave, Staten Island, NY 10310. Phone
-              Number: (646) 386-5700
-            </span>
+          {...Array.from(
+            newYork.localities
+              .filter((loc) => loc.isNYC)
+              .map(({ court }) => (
+                <span key="{court.name}">
+                  <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
+                  {court.phone}
+                </span>
+              )),
           )}
           <p>
-            {court?.specificCourtInfo && court.specificCourtInfo}
+            {court.specificCourtInfo ?? ""}
             The cost to file is currently $65. If you bring cash make sure
             it&apos;s exact as they probably won&apos;t make change for you.
           </p>
@@ -112,15 +63,15 @@ function NewYorkFilingGuide({
       ) : (
         <>
           <p>
-            The filing location is the {residentLocality} county court at{" "}
-            {court?.address}.{age && age < 18 ? "A parent/guardian " : "You "}{" "}
-            may want to call ahead to check accepted payment types, their phone
-            number is {court?.phone}. Generally speaking though as long as you
-            have cash, check, and card all ready to go then you are good. The
-            cost to file is currently $210, there will not be a hearing.
+            The filing location is the {name} county court at {court.address}.
+            {age && age < 18 ? "A parent/guardian " : "You "} may want to call
+            ahead to check accepted payment types, their phone number is{" "}
+            {court.phone}. Generally speaking though as long as you have cash,
+            check, and card all ready to go then you are good. The cost to file
+            is currently $210, there will not be a hearing.
           </p>
 
-          {court?.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
+          {court.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
         </>
       )}
 

@@ -21,18 +21,18 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function AlaskaCourtHearingGuide({ person }: { person: Person }) {
-  const { age, residentLocality, court } = person;
+function AlaskaCourtHearingGuide({ person }: { person: Partial<Person> }) {
+  const { age, residentLocality } = person;
 
   return (
     <section key="AK-CourtHearing">
       <h3>Court Hearing (AK)</h3>
 
-      {residentLocality && residentLocality === "Anchorage" ? (
+      {residentLocality?.name === "Anchorage" ? (
         <p>
           For Anchorage, hearings are held in one of two locations. On weekdays
-          they are at {court?.address} but on weekends they are at the Boney
-          courthouse, 303 K St, Anchorage, AK 99501.
+          they are at {residentLocality.court.address} but on weekends they are
+          at the Boney courthouse, 303 K St, Anchorage, AK 99501.
         </p>
       ) : (
         ""

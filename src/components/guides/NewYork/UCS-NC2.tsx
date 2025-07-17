@@ -21,77 +21,85 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function NewYorkUCS_NC2Guide({ person }: { person: Person }) {
+function NewYorkUCS_NC2Guide({ person }: { person: Partial<Person> }) {
   const { age, residentLocality, parentsAreOkay, doNotPublish } = person;
   return (
     <section key="NewYork-UCS-NC2">
       <h3>Name and/or Sex Change Petition (NY, UCS-NC2)</h3>
 
-      <p>
-        The first form to be filled out is the &ldquo;Name Change and/or Sex
-        Designation Change Petition for Individual Minor&rdquo; (UCS-NC2). It
-        has some sections that a parent/legal guardian will need to review. They
-        need to look through sections A, B, and C to see if the information we
-        filled in is accurate for your circumstances. If it&apos;s not the
-        missing info needs to be typed or written with black ink. You need to
-        live in {residentLocality} county and have lived in New York State for
-        at least 6 months before a parent/guardian can file this on your behalf.
-      </p>
+      {residentLocality ? (
+        <>
+          <p>
+            The first form to be filled out is the &ldquo;Name Change and/or Sex
+            Designation Change Petition for Individual Minor&rdquo; (UCS-NC2).
+            It has some sections that a parent/legal guardian will need to
+            review. They need to look through sections A, B, and C to see if the
+            information we filled in is accurate for your circumstances. If
+            it&apos;s not the missing info needs to be typed or written with
+            black ink. You need to live in {residentLocality.name} county and
+            have lived in New York State for at least 6 months before a
+            parent/guardian can file this on your behalf.
+          </p>
 
-      {doNotPublish ? (
-        <p>
-          For #28 the court wants to know if making these court records
-          available to the public will cause you or your petitioner harm. This
-          can take the form of either discrimmination or a personal threat such
-          as a known stalker. For discrimmination that can be either state or
-          federal threats. Be sure to elaborate and potentially attach evidence.
-          Your petitioner should also fill out #29 if they do attach anything.
-          In any case the record will be sealed automatically until the judge
-          makes a decision.
-        </p>
+          {doNotPublish ? (
+            <p>
+              For #28 the court wants to know if making these court records
+              available to the public will cause you or your petitioner harm.
+              This can take the form of either discrimmination or a personal
+              threat such as a known stalker. For discrimmination that can be
+              either state or federal threats. Be sure to elaborate and
+              potentially attach evidence. Your petitioner should also fill out
+              #29 if they do attach anything. In any case the record will be
+              sealed automatically until the judge makes a decision.
+            </p>
+          ) : (
+            ""
+          )}
+
+          {parentsAreOkay ? (
+            <p>
+              If both parents are able to meet with a notary at the same time
+              they will need to have both of their names present on page 1 and
+              signed below item 30 on page 4. This does <strong>not</strong>{" "}
+              mean both have to be present at court to file, only one is
+              required there. If both parents cannot meet with a notary at the
+              same time for any reason than have the parent who isn&apos;t
+              listed as the petitioner on page 1 fill out the top part of page
+              5. Then the non-petitioning parent can meet with a notary to sign
+              on page 5. The petitioning parent can then take{" "}
+              {age && age > 13 ? " you and " : " "} that form to another
+              appointment for the remaining sections. Information about notaries
+              is in the next section.
+            </p>
+          ) : (
+            <p>
+              The parent/guardian whos name is listed as the petitoner on page 1
+              needs to get any other parent(s)/guardian(s) to sign their consent
+              on page 5 in front of a notary before
+              {age && age > 13 ? " either of you " : " they "} do. If a parent
+              is deceased or non-custodial have a certified copy of the death
+              certificate or court ordered custody submitted with this form. If
+              you have a guardian they need to make a copy of their letter of
+              guardianship to submit with this form. Information about notaries
+              is in the next section.
+            </p>
+          )}
+
+          <p>
+            If you have a non-consenting parent/guardian with custody over you
+            the process gets more complicated, there will be a hearing, and we
+            recommend using the following link to assist in the process{" "}
+            <a href="https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine">
+              https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine
+            </a>
+            . It will generate the paperwork and instructions for the
+            particulars of your case. Otherwise we recommend getting a lawyer to
+            assist with your case or wait until you are 18.
+          </p>
+        </>
       ) : (
-        ""
+        <p>Could not generate, residentLocality missing.</p>
       )}
-
-      {parentsAreOkay ? (
-        <p>
-          If both parents are able to meet with a notary at the same time they
-          will need to have both of their names present on page 1 and signed
-          below item 30 on page 4. This does <strong>not</strong> mean both have
-          to be present at court to file, only one is required there. If both
-          parents cannot meet with a notary at the same time for any reason than
-          have the parent who isn&apos;t listed as the petitioner on page 1 fill
-          out the top part of page 5. Then the non-petitioning parent can meet
-          with a notary to sign on page 5. The petitioning parent can then take{" "}
-          {age && age > 13 ? " you and " : " "} that form to another appointment
-          for the remaining sections. Information about notaries is in the next
-          section.
-        </p>
-      ) : (
-        <p>
-          The parent/guardian whos name is listed as the petitoner on page 1
-          needs to get any other parent(s)/guardian(s) to sign their consent on
-          page 5 in front of a notary before
-          {age && age > 13 ? " either of you " : " they "} do. If a parent is
-          deceased or non-custodial have a certified copy of the death
-          certificate or court ordered custody submitted with this form. If you
-          have a guardian they need to make a copy of their letter of
-          guardianship to submit with this form. Information about notaries is
-          in the next section.
-        </p>
-      )}
-
-      <p>
-        If you have a non-consenting parent/guardian with custody over you the
-        process gets more complicated, there will be a hearing, and we recommend
-        using the following link to assist in the process{" "}
-        <a href="https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine">
-          https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine
-        </a>
-        . It will generate the paperwork and instructions for the particulars of
-        your case. Otherwise we recommend getting a lawyer to assist with your
-        case or wait until you are 18.
-      </p>
     </section>
   );
 }

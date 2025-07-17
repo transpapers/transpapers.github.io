@@ -221,7 +221,7 @@ export function isMinor(applicant: Partial<Person>): boolean {
  * @return {Name}
  */
 export function representativeName(applicant: Person): Name {
-  if (!isMinor(applicant) && applicant.legalName) {
+  if (!isMinor(applicant)) {
     return applicant.legalName;
   }
 
@@ -242,15 +242,85 @@ export function representativeName(applicant: Person): Name {
  * @param {Person} applicant
  * @return {string}
  */
-export function fullContactInfo(applicant: Person, separator = "\n"): string {
-  const lines = [
-    fullName(representativeName(applicant)),
-    applicant.streetAddress,
-    `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
-    applicant.phone,
-  ];
+export enum ContactFormat {
+  FullContactInfo,
+  FullContactInfoAndCountry,
+  BirthCityAndState,
+  ResidentCityAndState,
+  ResidentCityAndStateAndZip,
+}
 
-  return lines.join(separator);
+export function formatContactInfo(
+  applicant: Person,
+  fmt: ContactFormat,
+  separator = ", ",
+): string | undefined {
+  const {
+    birthCity,
+    birthJurisdiction,
+    streetAddress,
+    residentCity,
+    residentJurisdiction,
+    zip,
+    phone,
+  } = applicant;
+  switch (fmt) {
+    case ContactFormat.BirthCityAndState:
+      if (!birthCity || !birthJurisdiction) {
+        return undefined;
+      }
+      return `${birthCity}, ${birthJurisdiction.abbreviation}`;
+
+    case ContactFormat.ResidentCityAndState:
+      if (!residentCity || !residentJurisdiction) {
+        return undefined;
+      }
+      return `${residentCity}, ${residentJurisdiction.abbreviation}`;
+
+    case ContactFormat.ResidentCityAndStateAndZip:
+      if (!residentCity || !residentJurisdiction || !zip) {
+        return undefined;
+      }
+      return `${residentCity}, ${residentJurisdiction.name}, ${zip}`;
+
+    case ContactFormat.FullContactInfo:
+      if (
+        !streetAddress ||
+        !residentCity ||
+        !residentJurisdiction ||
+        !zip ||
+        !phone
+      ) {
+        return undefined;
+      }
+      return [
+        fullName(representativeName(applicant)),
+        applicant.streetAddress,
+        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        applicant.phone,
+      ].join(separator);
+
+    case ContactFormat.FullContactInfoAndCountry:
+      if (
+        !streetAddress ||
+        !residentCity ||
+        !residentJurisdiction ||
+        !zip ||
+        !phone
+      ) {
+        return undefined;
+      }
+      return [
+        fullName(representativeName(applicant)),
+        applicant.streetAddress,
+        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        applicant.phone,
+        "USA",
+      ].join(separator);
+
+    default:
+      return undefined;
+  }
 }
 
 /**

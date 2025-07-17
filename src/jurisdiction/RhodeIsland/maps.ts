@@ -24,9 +24,10 @@ import {
   phoneAreaCode,
   phoneEnd,
   phoneStart,
-  abbreviateJurisdiction,
   representativeName,
 } from "../../lib/util";
+
+import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
@@ -41,114 +42,103 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.residentLocality,
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
     loc: { x: 520, y: 170 },
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
-    field: "6",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "7",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "8",
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
-    field: "9",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "10",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "11",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "15",
-  },
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
-    field: "17",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "18",
-  },
-  {
-    text: (applicant) =>
-      (applicant.birthCity ?? "") + ", " + (applicant.birthJurisdiction ?? ""),
-    field: "19",
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
-    field: "20",
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
-    field: "21",
-  },
-  {
-    text: (applicant) => applicant.reasonForNameChange,
-    field: "27",
-  },
-  {
-    text: (applicant) =>
-      !isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
-    field: "29",
-  },
-  {
-    text: (applicant) =>
-      !isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
-    field: "30",
-  },
-  {
-    text: (applicant) =>
-      !isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
-    field: "31",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.first ?? "" : "",
-    field: "32",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.middle ?? "" : "",
-    field: "33",
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant) ? applicant.chosenName?.last ?? "" : "",
-    field: "34",
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "6",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "7",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "8",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
+    fieldName: "9",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "10",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "11",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "15",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
+    fieldName: "17",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "18",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthCityAndState),
+    fieldName: "19",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "20",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "21",
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "27",
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? applicant.chosenName.first : "",
+    fieldName: "29",
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? applicant.chosenName.middle : "",
+    fieldName: "30",
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? applicant.chosenName.last : "",
+    fieldName: "31",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.first : "",
+    fieldName: "32",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.middle : "",
+    fieldName: "33",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.chosenName.last : "",
+    fieldName: "34",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
     loc: { page: 1, x: 135, y: 94 },
-  },
-  {
-    text: (applicant) => 
-      !isMinor(applicant) ? "Self" : "",
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? "Self" : "",
     loc: { page: 1, x: 135, y: 94 },
-  },
-  { 
-    text: () => new Date().toLocaleDateString(), 
-    loc: { page: 1, x: 662, y: 144 }, 
-  },
+  }),
+  () => ({
+    text: new Date().toLocaleDateString(),
+    loc: { page: 1, x: 662, y: 144 },
+  }),
 ];
 
 /**
@@ -156,40 +146,38 @@ export const changeOfNameMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const bciMap: Formfill[] = [
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
     loc: { x: 265, y: 202 },
-  },
-  {
-    text: (applicant) =>
+  }),
+  (applicant) => ({
+    text:
       !isMinor(applicant) && fullName(applicant.birthName)
         ? fullName(applicant.birthName)
         : "",
     loc: { x: 337, y: 227 },
-  },
-  {
-    text: (applicant) =>
-      isMinor(applicant)
-        ? ""
-        : formatDate(applicant.birthdate, {
-            format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-            separator: "/",
-          }),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant)
+      ? ""
+      : formatDate(applicant.birthdate, {
+          format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+          separator: "/",
+        }),
     loc: { x: 199, y: 255 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 249, y: 281 },
-  },
-  {
-    text: () => "name change",
+  }),
+  () => ({
+    text: "name change",
     loc: { x: 167, y: 331 },
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
     loc: { x: 113, y: 432 },
-  },
+  }),
 ];
 
 /**
@@ -197,75 +185,71 @@ export const bciMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertOneMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
     loc: { x: 184, y: 194 },
-  },
-  {
-    text: (applicant) => String(applicant.age),
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
     loc: { x: 621, y: 194 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 150, y: 227 },
-  },
-  {
-    text: (applicant) => applicant.birthCity,
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
     loc: { x: 415, y: 225 },
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
     loc: { x: 289, y: 241 },
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
     loc: { x: 289, y: 258 },
-  },
-  {
-    text: (applicant) => (!isMinor(applicant) ? "x" : ""),
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? "x" : "",
     loc: { x: 101, y: 323 },
-  },
-  {
-    text: (applicant) => (isMinor(applicant) && applicant.parentsAreOkay ? "x" : ""),
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? "x" : "",
     loc: { x: 353, y: 323 },
-  },
-  {
-    text: () => "x",
+  }),
+  () => ({
+    text: "x",
     loc: { x: 298, y: 537 },
-  },
-  {
-    text: () => "Name Change",
+  }),
+  () => ({
+    text: "Name Change",
     loc: { x: 442, y: 537 },
-  },
-  {
-    text: () => "One",
+  }),
+  () => ({
+    text: "One",
     loc: { x: 180, y: 611 },
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
     loc: { x: 203, y: 720 },
-  },
-  {
-    text: (applicant) => phoneAreaCode(applicant.phone),
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
     loc: { x: 612, y: 723 },
-  },
-  {
-    text: (applicant) =>
-      phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
     loc: { x: 659, y: 723 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 219, y: 772 },
-  },
+  }),
 ];
 
 /**
@@ -273,84 +257,78 @@ export const birthCertOneMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const primaryIDRhodeIslandMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.legalName?.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName?.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName?.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName?.suffix,
-    field: "SUFFIX",
-  },
-  {
-    text: (applicant) => 
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DATE OF BIRTH MMDDYY",
-  },
-  {
-    check: (applicant) => applicant.assignedSex === GenderMarker.M,
-    field: "Gender",
-    select: "Male",
-  },
-  {
-    check: (applicant) => applicant.assignedSex === GenderMarker.F,
-    field: "Gender",
-    select: "Female",
-  },
-  {
-    check: (applicant) => applicant.assignedSex === GenderMarker.X,
-    field: "Gender",
-    select: "Gender X",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "EMAIL ADDRESS",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "STREET ADDRESS RESIDENCE ADDRESS",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "CITYTOWN",
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
-    field: "STATE",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "ZIP CODE",
-  },
-  {
-    text: (applicant) => phoneAreaCode(applicant.phone),
-    field: "Text2",
-  },
-  {
-    text: (applicant) =>
-      `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
-    field: "Text3",
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.birthJurisdiction ?? ""),
-    field: "STATEPROVINCE",
-  },
-  {
-    text: (applicant) => applicant.birthCity,
-    field: "CITY",
-  },
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "SUFFIX",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DATE OF BIRTH MMDDYY",
+  }),
+  (applicant) => ({
+    fieldName: "Gender",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "Gender X";
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "EMAIL ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "STREET ADDRESS RESIDENCE ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "CITYTOWN",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
+    fieldName: "STATE",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "ZIP CODE",
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "Text2",
+  }),
+  (applicant) => ({
+    text: `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
+    fieldName: "Text3",
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdiction?.abbreviation,
+    fieldName: "STATEPROVINCE",
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "CITY",
+  }),
 ];
 
 /**
@@ -358,66 +336,62 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const genderIDMap: Formfill[] = [
-  {
-    text: (applicant) => applicant.legalName?.last,
-    field: "LAST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName?.first,
-    field: "FIRST NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName?.middle,
-    field: "MIDDLE NAME",
-  },
-  {
-    text: (applicant) => applicant.legalName?.suffix,
-    field: "SUFFIX",
-  },
-  {
-    text: (applicant) => 
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "DATE OF BIRTH MMDDYY",
-  },
-  {
-    text: (applicant) => applicant.streetAddress,
-    field: "RESIDENCE ADDRESS STREET ADDRESS",
-  },
-  {
-    text: (applicant) => applicant.residentCity,
-    field: "CITYTOWN",
-  },
-  {
-    text: (applicant) =>
-      abbreviateJurisdiction(applicant.residentJurisdiction ?? ""),
-    field: "STATE",
-  },
-  {
-    text: (applicant) => applicant.zip,
-    field: "ZIP CODE",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName),
-    field: "I",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.M,
-    field: "undefined",
-    select: "M",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.F,
-    field: "undefined",
-    select: "F",
-  },
-  {
-    check: (applicant) => applicant.gender === GenderMarker.X,
-    field: "undefined",
-    select: "X",
-  },
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "SUFFIX",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DATE OF BIRTH MMDDYY",
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "RESIDENCE ADDRESS STREET ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "CITYTOWN",
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.abbreviation,
+    fieldName: "STATE",
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "ZIP CODE",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "I",
+  }),
+  (applicant) => ({
+    fieldName: "undefined",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+  }),
 ];
 
 /**
@@ -425,76 +399,71 @@ export const genderIDMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const birthCertTwoMap: Formfill[] = [
-  {
-    text: (applicant) =>
-      fullName(applicant.birthName)
-        ? fullName(applicant.birthName)
-        : fullName(applicant.legalName),
+  (applicant) => ({
+    text: fullName(applicant.birthName)
+      ? fullName(applicant.birthName)
+      : fullName(applicant.legalName),
     loc: { x: 184, y: 194 },
-  },
-  {
-    text: (applicant) => String(applicant.age),
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
     loc: { x: 621, y: 194 },
-  },
-  {
-    text: (applicant) =>
-      applicant.isChangingLegalName
-        ? fullName(applicant.chosenName)
-        : fullName(applicant.legalName),
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? fullName(applicant.chosenName)
+      : fullName(applicant.legalName),
     loc: { x: 400, y: 209 },
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
     loc: { x: 150, y: 227 },
-  },
-  {
-    text: (applicant) => applicant.birthCity,
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
     loc: { x: 415, y: 225 },
-  },
-  {
-    text: (applicant) => fullName(applicant.mothersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
     loc: { x: 289, y: 241 },
-  },
-  {
-    text: (applicant) => fullName(applicant.fathersBirthName),
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
     loc: { x: 289, y: 258 },
-  },
-  {
-    text: (applicant) => (!isMinor(applicant) ? "x" : ""),
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? "x" : "",
     loc: { x: 101, y: 323 },
-  },
-  {
-    text: () => "x",
+  }),
+  () => ({
+    text: "x",
     loc: { x: 298, y: 537 },
-  },
-  {
-    text: () => "Updating record information.",
+  }),
+  () => ({
+    text: "Updating record information.",
     loc: { x: 442, y: 539 },
-  },
-  {
-    text: () => "One",
+  }),
+  () => ({
+    text: "One",
     loc: { x: 180, y: 611 },
-  },
-  {
-    text: (applicant) => fullName(representativeName(applicant)),
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
     loc: { x: 203, y: 720 },
-  },
-  {
-    text: (applicant) => phoneAreaCode(applicant.phone),
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
     loc: { x: 612, y: 723 },
-  },
-  {
-    text: (applicant) =>
-      `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
+  }),
+  (applicant) => ({
+    text: `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
     loc: { x: 659, y: 723 },
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress ?? ""}, ${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction ?? ""} ${applicant.zip ?? ""}`,
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullContactInfo),
     loc: { x: 219, y: 772 },
-  },
+  }),
 ];

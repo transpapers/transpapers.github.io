@@ -23,7 +23,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store";
 
-import { allJurisdictions } from "../jurisdiction/all";
 import { type Person } from "../types/person";
 
 function Step2() {
@@ -40,30 +39,33 @@ function Step2() {
     await navigate("/step3");
   };
 
-  const localities =
-    allJurisdictions.get(residentJurisdiction ?? "")?.localities ?? {};
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
 
-  return (
-    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
-      <h2>What {residentJurisdiction} county do you live in?</h2>
-      <ul className="wrap">
-        {Object.keys(localities).map((localityName) => (
-          <li key={localityName}>
-            <label>
-              <input
-                {...register("residentLocality", { required: true })}
-                type="radio"
-                value={localityName}
-                defaultChecked={localityName === residentLocality}
-              />
-              {localityName}
-            </label>
-          </li>
-        ))}
-      </ul>
-      <input type="submit" value="Next" />
-    </form>
-  );
+    return (
+      <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
+        <h2>What {residentJurisdiction.name} county do you live in?</h2>
+        <ul className="wrap">
+          {Object.keys(localities).map((localityName) => (
+            <li key={localityName}>
+              <label>
+                <input
+                  {...register("residentLocality", { required: true })}
+                  type="radio"
+                  value={localityName}
+                  defaultChecked={
+                    residentLocality && localityName === residentLocality.name
+                  }
+                />
+                {localityName}
+              </label>
+            </li>
+          ))}
+        </ul>
+        <input type="submit" value="Next" />
+      </form>
+    );
+  }
 }
 
 export default Step2;

@@ -19,8 +19,9 @@
 
 import { MichiganCounty } from "../../types/locality";
 
-const michiganCounties: Record<string, MichiganCounty> = {
-  Alcona: {
+const michiganCounties: MichiganCounty[] = [
+  {
+    name: "Alcona",
     court: {
       address: "106 5th Street, Harrisville MI 48740",
       city: "Harrisville",
@@ -42,7 +43,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Alger: {
+  {
+    name: "Alger",
     court: {
       address: "101 Court Street, Munising, MI 49862",
       city: "Munising",
@@ -64,7 +66,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Allegan: {
+  {
+    name: "Allegan",
     court: {
       address: "113 Chestnut St, Allegan, MI 49010",
       city: "Allegan",
@@ -87,7 +90,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Alpena: {
+  {
+    name: "Alpena",
     court: {
       address: "720 W Chisholm St # 1, Alpena, MI 49707",
       city: "Alpena",
@@ -109,7 +113,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Antrim: {
+  {
+    name: "Antrim",
     court: {
       address: "205 E Cayuga St, Bellaire, MI 49615",
       city: "Bellaire",
@@ -133,7 +138,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Arenac: {
+  {
+    name: "Arenac",
     court: {
       address: "120 N Grove St, Standish, MI 48658",
       city: "Standish",
@@ -155,7 +161,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Baraga: {
+  {
+    name: "Baraga",
     court: {
       address: "16 N 3rd St, L'Anse, MI 49946",
       city: "L'Anse",
@@ -178,7 +185,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Barry: {
+  {
+    name: "Barry",
     court: {
       address: "206 W Court St #302, Hastings, MI 49058",
       city: "Hastings",
@@ -201,7 +209,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Bay: {
+  {
+    name: "Bay",
     court: {
       address: "1230 Washington Ave # 715, Bay City, MI 48708",
       city: "Bay City",
@@ -224,7 +233,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Benzie: {
+  {
+    name: "Benzie",
     court: {
       address: "448 Court Pl, Beulah, MI 49617",
       city: "Beulah",
@@ -248,7 +258,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Berrien: {
+  {
+    name: "Berrien",
     court: {
       address: "811 Port St, St Joseph, MI 49085",
       city: "St Joseph",
@@ -295,7 +306,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Branch: {
+  {
+    name: "Branch",
     court: {
       address: "31 Division St, Coldwater, MI 49036",
       city: "Coldwater",
@@ -318,7 +330,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Calhoun: {
+  {
+    name: "Calhoun",
     court: {
       address: "161 Michigan Ave, Battle Creek, MI 49014",
       city: "Battle Creek",
@@ -346,7 +359,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Cass: {
+  {
+    name: "Cass",
     court: {
       address: "60296 M-62, Cassopolis, MI 49031",
       city: "Cassopolis",
@@ -368,7 +382,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Charlevoix: {
+  {
+    name: "Charlevoix",
     court: {
       address: "301 State St #7, Charlevoix, MI 49720",
       city: "Charleviox",
@@ -392,7 +407,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Cheboygan: {
+  {
+    name: "Cheboygan",
     court: {
       address: "870 S Main Street, Cheboygan, MI  49721",
       city: "Cheboygan",
@@ -416,7 +432,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Chippewa: {
+  {
+    name: "Chippewa",
     court: {
       address: "319 Court St # 8, Sault Ste. Marie, MI 49783",
       city: "Sault Ste. Marie",
@@ -438,7 +455,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Clare: {
+  {
+    name: "Clare",
     court: {
       address: "225 W Main St, Harrison, MI 48625",
       city: "Harrison",
@@ -460,7 +478,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Clinton: {
+  {
+    name: "Clinton",
     court: {
       address: "100 East State Street, St Johns MI 48879",
       city: "St Johns",
@@ -483,7 +502,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Crawford: {
+  {
+    name: "Crawford",
     court: {
       address: "200 Michigan Ave, Grayling, MI 49738",
       city: "Grayling",
@@ -506,7 +526,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Delta: {
+  {
+    name: "Delta",
     court: {
       address: "310 Ludington St # 206, Escanaba, MI 49829",
       city: "Escanaba",
@@ -528,7 +549,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Dickinson: {
+  {
+    name: "Dickinson",
     court: {
       address: "705 S Stephenson Ave, Iron Mountain, MI 49801",
       city: "Iron Mountain",
@@ -551,7 +573,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Eaton: {
+  {
+    name: "Eaton",
     court: {
       address: "1045 Independence Blvd, Charlotte, MI 48813",
       city: "Charlotte",
@@ -574,7 +597,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Emmet: {
+  {
+    name: "Emmet",
     court: {
       address: "200 Division St # G34, Petoskey, MI 49770",
       city: "Petoskey",
@@ -596,7 +620,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Genesee: {
+  {
+    name: "Genesee",
     court: {
       address: "900 Saginaw St, Flint, MI 48502",
       city: "Flint",
@@ -618,7 +643,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Gladwin: {
+  {
+    name: "Gladwin",
     court: {
       address: "401 W Cedar Ave #4, Gladwin, MI 48624",
       city: "Gladwin",
@@ -640,7 +666,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Gogebic: {
+  {
+    name: "Gogebic",
     court: {
       address: "200 N Moore St, Bessemer, MI 49911",
       city: "Bessemer",
@@ -664,7 +691,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  "Grand Traverse": {
+  {
+    name: "Grand Traverse",
     court: {
       address: "328 Washington St STE 300, Traverse City, MI 49684",
       city: "Traverse City",
@@ -686,7 +714,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Gratiot: {
+  {
+    name: "Gratiot",
     court: {
       address: "214 E Center St, Ithaca, MI 48847",
       city: "Ithaca",
@@ -712,7 +741,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Hillsdale: {
+  {
+    name: "Hillsdale",
     court: {
       address: "29 N Howell St # 1, Hillsdale, MI 49242",
       city: "Hillsdale",
@@ -736,7 +766,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Houghton: {
+  {
+    name: "Houghton",
     court: {
       address: "401 E Houghton Ave, Houghton, MI 49931",
       city: "Houghton",
@@ -759,7 +790,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Huron: {
+  {
+    name: "Huron",
     court: {
       address: "250 E Huron Ave # 206, Bad Axe, MI 48413",
       city: "Bad Axe",
@@ -781,7 +813,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Ingham: {
+  {
+    name: "Ingham",
     court: {
       address: "303 West Kalamazoo Street, Lansing, MI 48933",
       city: "Lansing",
@@ -804,7 +837,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Ionia: {
+  {
+    name: "Ionia",
     court: {
       address: "100 W Main St, Ionia, MI 48846",
       city: "Ionia",
@@ -827,7 +861,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Iosco: {
+  {
+    name: "Iosco",
     court: {
       address: "422 W Lake St, Tawas City, MI 48763",
       city: "Tawas City",
@@ -849,7 +884,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Iron: {
+  {
+    name: "Iron",
     court: {
       address: "2 S 6th St, Crystal Falls, MI 49920",
       city: "Crystal Falls",
@@ -872,7 +908,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Isabella: {
+  {
+    name: "Isabella",
     court: {
       address: "300 N Main St, Mt Pleasant, MI 48858",
       city: "Mt Pleasant",
@@ -895,7 +932,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Jackson: {
+  {
+    name: "Jackson",
     court: {
       address: "312 S Jackson St, Jackson, MI 49201",
       city: "Jackson",
@@ -918,7 +956,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Kalamazoo: {
+  {
+    name: "Kalamazoo",
     court: {
       address: "227 W Michigan Ave, Kalamazoo, MI 49007",
       city: "Kalamazoo",
@@ -941,7 +980,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Kalkaska: {
+  {
+    name: "Kalkaska",
     court: {
       address: "605 N Birch St, Kalkaska, MI 49646",
       city: "Kalkaska",
@@ -966,7 +1006,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Kent: {
+  {
+    name: "Kent",
     court: {
       address: "180 Ottawa Ave NW, Grand Rapids, MI 49503",
       city: "Grand Rapids",
@@ -991,7 +1032,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Keweenaw: {
+  {
+    name: "Keweenaw",
     court: {
       address: "5095 Fourth Street, Eagle River, MI 49950",
       city: "Eagle River",
@@ -1013,7 +1055,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Lake: {
+  {
+    name: "Lake",
     court: {
       address: "800 E 10th St #300, Baldwin, MI 49304",
       city: "Baldwin",
@@ -1036,7 +1079,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Lapeer: {
+  {
+    name: "Lapeer",
     court: {
       address: "255 Clay St, Lapeer, MI 48446",
       city: "Lapeer",
@@ -1063,7 +1107,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Leelanau: {
+  {
+    name: "Leelanau",
     court: {
       address: "8527 E Government Center Dr #203, Suttons Bay, MI 49682",
       city: "Suttons Bay",
@@ -1085,7 +1130,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Lenawee: {
+  {
+    name: "Lenawee",
     court: {
       address: "425 N Main St #101, Adrian, MI 49221",
       city: "Adrian",
@@ -1127,7 +1173,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Livingston: {
+  {
+    name: "Livingston",
     court: {
       address: "204 S Highlander Way # 4, Howell, MI 48843",
       city: "Howell",
@@ -1149,7 +1196,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Luce: {
+  {
+    name: "Luce",
     court: {
       address: "407 W Harrie St, Newberry, MI 49868",
       city: "Newberry",
@@ -1171,7 +1219,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Mackinac: {
+  {
+    name: "Mackinac",
     court: {
       address: "100 S Marley St, St Ignace, MI 49781",
       city: "St Ignace",
@@ -1194,7 +1243,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Macomb: {
+  {
+    name: "Macomb",
     court: {
       address: "40 N Main St, Mt Clemens, MI 48043",
       city: "Mt Clemens",
@@ -1216,7 +1266,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Manistee: {
+  {
+    name: "Manistee",
     court: {
       address: "415 Third Street, Manistee, MI 49660",
       city: "Manistee",
@@ -1238,7 +1289,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Marquette: {
+  {
+    name: "Marquette",
     court: {
       address: "234 W Baraga Ave, Marquette, MI 49855",
       city: "Marquette",
@@ -1260,7 +1312,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Mason: {
+  {
+    name: "Mason",
     court: {
       address: "304 E Ludington Ave, Ludington, MI 49431",
       city: "Ludington",
@@ -1283,7 +1336,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Mecosta: {
+  {
+    name: "Mecosta",
     court: {
       address: "400 Elm St, Big Rapids, MI 49307",
       city: "Big Rapids",
@@ -1306,7 +1360,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Menominee: {
+  {
+    name: "Menominee",
     court: {
       address: "839 10th Ave, Menominee, MI 49858",
       city: "Menominee",
@@ -1334,7 +1389,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Midland: {
+  {
+    name: "Midland",
     court: {
       address: "301 W Main St, Midland, MI 48640",
       city: "Midland",
@@ -1357,7 +1413,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Missaukee: {
+  {
+    name: "Missaukee",
     court: {
       address: "111 S Canal St, Lake City, MI 49651",
       city: "Lake City",
@@ -1381,7 +1438,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Monroe: {
+  {
+    name: "Monroe",
     court: {
       address: "106 E 1st St, Monroe, MI 48161",
       city: "Monroe",
@@ -1403,7 +1461,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Montcalm: {
+  {
+    name: "Montcalm",
     court: {
       address: "625 N State St, Stanton, MI 48888",
       city: "Stanton",
@@ -1425,7 +1484,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Montmorency: {
+  {
+    name: "Montmorency",
     court: {
       address: "12265 M-32, Atlanta, MI 49709",
       city: "Atlanta",
@@ -1447,7 +1507,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Muskegon: {
+  {
+    name: "Muskegon",
     court: {
       address: "990 Terrace St, Muskegon, MI 49442",
       city: "Muskegon",
@@ -1469,7 +1530,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Newaygo: {
+  {
+    name: "Newaygo",
     court: {
       address: "1092 E Newell St, White Cloud, MI 49349",
       city: "White Cloud",
@@ -1493,7 +1555,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Oakland: {
+  {
+    name: "Oakland",
     court: {
       address: "1200 Telegraph Rd Building #12E, Pontiac, MI 48341",
       city: "Pontiac",
@@ -1517,7 +1580,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Oceana: {
+  {
+    name: "Oceana",
     court: {
       address: "100 S State St # M-10, Hart, MI 49420",
       city: "Hart",
@@ -1541,7 +1605,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Ogemaw: {
+  {
+    name: "Ogemaw",
     court: {
       address: "806 W Houghton Ave #106, West Branch, MI 48661",
       city: "West Branch",
@@ -1564,7 +1629,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Ontonagon: {
+  {
+    name: "Ontonagon",
     court: {
       address: "725 Greenland Rd, Ontonagon, MI 49953",
       city: "Ontonagon",
@@ -1587,7 +1653,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Osceola: {
+  {
+    name: "Osceola",
     court: {
       address: "410 W Upton Ave #3, Reed City, MI 49677",
       city: "Reed City",
@@ -1615,7 +1682,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Oscoda: {
+  {
+    name: "Oscoda",
     court: {
       address: "105 Court St, Mio, MI 48647",
       city: "Mio",
@@ -1638,7 +1706,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Otsego: {
+  {
+    name: "Otsego",
     court: {
       address: "800 Livingston Blvd #1d, Gaylord, MI 49735",
       city: "Gaylord",
@@ -1661,7 +1730,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Ottawa: {
+  {
+    name: "Ottawa",
     court: {
       address: "12120 Fillmore St, West Olive, MI 49460",
       city: "West Olive",
@@ -1687,7 +1757,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  "Presque Isle": {
+  {
+    name: "Presque Isle",
     court: {
       address: "151 E Huron Ave, Rogers City, MI 49779",
       city: "Rogers City",
@@ -1709,7 +1780,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Roscommon: {
+  {
+    name: "Roscommon",
     court: {
       address: "500 Lake St, Roscommon, MI 48653",
       city: "Roscommon",
@@ -1732,7 +1804,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Saginaw: {
+  {
+    name: "Saginaw",
     court: {
       address: "111 S Michigan Ave, Saginaw, MI 48602",
       city: "Saginaw",
@@ -1758,7 +1831,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  "St. Clair": {
+  {
+    name: "St. Clair",
     court: {
       address: "201 McMorran Blvd # 1100, Port Huron, MI 48060",
       city: "Port Huron",
@@ -1782,7 +1856,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  "St. Joseph": {
+  {
+    name: "St. Joseph",
     court: {
       address: "125 W Main St, Centreville, MI 49032",
       city: "Centreville",
@@ -1810,7 +1885,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Sanilac: {
+  {
+    name: "Sanilac",
     court: {
       address: "60 W. Sanilac Ave., Sandusky, MI 48471",
       city: "Sandusky",
@@ -1833,7 +1909,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Schoolcraft: {
+  {
+    name: "Schoolcraft",
     court: {
       address: "300 Walnut St # 104, Manistique, MI 49854",
       city: "Manistique",
@@ -1857,7 +1934,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Shiawassee: {
+  {
+    name: "Shiawassee",
     court: {
       address: "208 N Shiawassee St, Corunna, MI 48817",
       city: "Corunna",
@@ -1879,7 +1957,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Tuscola: {
+  {
+    name: "Tuscola",
     court: {
       address: "440 N State St #1, Caro, MI 48723",
       city: "Caro",
@@ -1901,7 +1980,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  "Van Buren": {
+  {
+    name: "Van Buren",
     court: {
       address: "212 E Paw Paw St # 240, Paw Paw, MI 49079",
       city: "Paw Paw",
@@ -1925,7 +2005,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Washtenaw: {
+  {
+    name: "Washtenaw",
     court: {
       address: "101 E Huron St, Ann Arbor, MI 48104",
       city: "Ann Arbor",
@@ -1947,7 +2028,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Wayne: {
+  {
+    name: "Wayne",
     court: {
       address: "2 Woodward Ave, Detroit, MI 48226",
       city: "Detroit",
@@ -1979,7 +2061,8 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-  Wexford: {
+  {
+    name: "Wexford",
     court: {
       address: "437 E. Division St, Cadillac, MI 49601",
       city: "Cadillac",
@@ -2001,6 +2084,6 @@ const michiganCounties: Record<string, MichiganCounty> = {
       },
     ],
   },
-};
+];
 
 export default michiganCounties;

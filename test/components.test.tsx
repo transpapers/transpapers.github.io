@@ -66,7 +66,6 @@ import AlaskaFilingInitialFormsGuide from "../src/components/guides/Alaska/Filin
 import AlaskaMinorPetitionGuide from "../src/components/guides/Alaska/MinorPetition";
 import AlaskaResourcesGuide from "../src/components/guides/Alaska/Resources";
 import AlaskaVS405Guide from "../src/components/guides/Alaska/VS405";
-import { alaska } from "../src/jurisdiction/all";
 
 import IllinoisAdultOrderGuide from "../src/components/guides/Illinois/AdultOrder";
 import IllinoisAdultPetitionGuide from "../src/components/guides/Illinois/AdultPetition";
@@ -206,10 +205,7 @@ const alaskaGuideComponents = [
   {
     name: "AlaskaFilingInitialFormsGuide",
     component: (
-      <AlaskaFilingInitialFormsGuide
-        person={sampleData}
-        locality={alaska.localities!["Seward"]}
-      />
+      <AlaskaFilingInitialFormsGuide person={sampleData} />
     ),
   },
   {

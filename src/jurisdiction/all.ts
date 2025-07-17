@@ -28,7 +28,7 @@ import {
   michiganPrimaryIdentification,
   michiganPostamble,
 } from "./Michigan/process";
-import michiganCounties from "./Michigan/counties";
+import michiganCounties from "./Michigan/localities";
 import { MichiganCounty } from "../types/locality";
 
 import {
@@ -38,7 +38,7 @@ import {
   rhodeislandPrimaryIdentification,
   rhodeislandPostamble,
 } from "./RhodeIsland/process";
-import rhodeislandCounties from "./RhodeIsland/counties";
+import rhodeislandCounties from "./RhodeIsland/localities";
 import { RhodeIslandCityOrTown } from "../types/locality";
 
 import {
@@ -48,7 +48,7 @@ import {
   newyorkPrimaryIdentification,
   newyorkPostamble,
 } from "./NewYork/process";
-import newyorkCounties from "./NewYork/counties";
+import newyorkCounties from "./NewYork/localities";
 import { NewYorkCounty } from "../types/locality";
 
 import {
@@ -58,7 +58,7 @@ import {
   oregonGenderMarker,
   oregonPostamble,
 } from "./Oregon/process";
-import oregonCounties from "./Oregon/counties";
+import oregonCounties from "./Oregon/localities";
 import { OregonCounty } from "../types/locality";
 
 import {
@@ -68,7 +68,7 @@ import {
   alaskaGenderMarker,
   alaskaPostamble,
 } from "./Alaska/process";
-import alaskaCounties from "./Alaska/counties";
+import alaskaCounties from "./Alaska/localities";
 import { AlaskaAdministrativeDivision } from "../types/locality";
 
 import {
@@ -81,7 +81,7 @@ import {
 import illinoisCounties from "./Illinois/counties";
 import { IllinoisCounty } from "../types/locality";
 
-import { passport, socialSecurity, } from "./Federal/process";
+import { passport, socialSecurity } from "./Federal/process";
 
 export const michigan: Jurisdiction<MichiganCounty> = {
   name: "Michigan",
@@ -165,20 +165,17 @@ export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   abbreviation: "DC",
   processes: [socialSecurity, passport],
-  isFederal: true,
+
+  localities: [],
 };
 
-export const jurisdictionNames: [string, AnyJurisdiction][] = [
-  ["Michigan", michigan],
-  ["Oregon", oregon],
-  ["Rhode Island", rhodeIsland],
-  ["New York", newYork],
-  ["Alaska", alaska],
-  ["Illinois", illinois],
-  ["Federal", federal],
-];
+export const allJurisdictions: AnyJurisdiction[] = [
+  alaska,
+  illinois,
+  michigan,
+  newYork,
+  oregon,
+  rhodeIsland,
 
-// FIXME We're running into polyfill issues with GitHub here.
-export const allJurisdictions = new Map<string, AnyJurisdiction>(
-  jurisdictionNames,
-);
+  federal,
+];

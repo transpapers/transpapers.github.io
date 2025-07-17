@@ -24,7 +24,8 @@ import { useNavigate } from "react-router-dom";
 
 import useStore from "../store";
 import { targets } from "../types/process";
-import { allProcesses } from "../types/jurisdiction";
+
+import { type Target } from "../types/process";
 
 function Step5() {
   const { register, handleSubmit } = useForm();
@@ -35,40 +36,45 @@ function Step5() {
     (state) => state.person,
   );
 
-  const processes = allProcesses(residentJurisdiction, birthJurisdiction);
+  if (residentJurisdiction && birthJurisdiction) {
+    const processes = [
+      ...residentJurisdiction.processes,
+      ...birthJurisdiction.processes,
+    ];
 
-  const onSubmit = async ({ processNames }: { processNames?: string[] }) => {
-    updateProcessNames(processNames ?? []);
-    await navigate("/step6");
-  };
+    const onSubmit = async ({ processNames }: { processNames?: Target[] }) => {
+      updateProcessNames(processNames ?? []);
+      await navigate("/step6");
+    };
 
-  return (
-    <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
-      <h2>What do you need to do?</h2>
-      <p>If you&apos;re not sure, leave everything checked.</p>
-      <fieldset>
-        <legend>I need to...</legend>
-        <ul>
-          {processes
-            .filter((proc) => !proc.isJustGuide)
-            .map((proc) => (
-              <li key={proc.target}>
-                <label>
-                  <input
-                    {...register("processNames")}
-                    type="checkbox"
-                    value={proc.target}
-                    defaultChecked
-                  />
-                  {(proc.target && targets[proc.target]) ?? ""}
-                </label>
-              </li>
-            ))}
-        </ul>
-      </fieldset>
-      <input type="submit" value="Next" />
-    </form>
-  );
+    return (
+      <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
+        <h2>What do you need to do?</h2>
+        <p>If you&apos;re not sure, leave everything checked.</p>
+        <fieldset>
+          <legend>I need to...</legend>
+          <ul>
+            {processes
+              .filter((proc) => !proc.isJustGuide)
+              .map((proc) => (
+                <li key={proc.target}>
+                  <label>
+                    <input
+                      {...register("processNames")}
+                      type="checkbox"
+                      value={proc.target}
+                      defaultChecked
+                    />
+                    {(proc.target && targets[proc.target]) ?? ""}
+                  </label>
+                </li>
+              ))}
+          </ul>
+        </fieldset>
+        <input type="submit" value="Next" />
+      </form>
+    );
+  }
 }
 
 export default Step5;

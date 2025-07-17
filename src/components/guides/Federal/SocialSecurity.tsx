@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
-function SocialSecurityGuide({ person }: { person: Person }) {
+function SocialSecurityGuide({ person }: { person: Partial<Person> }) {
   const { age, parentsAreOkay } = person;
 
   return (

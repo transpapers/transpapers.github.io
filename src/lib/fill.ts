@@ -17,122 +17,105 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as React from "react";
+import { PDFDocument } from "@cantoo/pdf-lib";
 
-import {
-  PDFDocument,
-  PDFTextField,
-  PDFCheckBox,
-  PDFRadioGroup,
-} from "@cantoo/pdf-lib";
-
-import { allJurisdictions } from "../jurisdiction/all";
-
-import {
-  type AnyLocality,
-  type AnyJurisdiction,
-  type AnyProcess,
-  type AnyDocument,
-} from "../types/generic";
 import { Person } from "../types/person";
-import { Formfill } from "../types/formfill";
-import { Locality } from "../types/locality";
+import { Guide } from "../types/generic";
+import { AnyProcess, AnyDocument, AnyGuide } from "../types/generic";
+import {
+  Formfill,
+  FillableField,
+  PlaceableField,
+  isText,
+  isCheck,
+  isRadio,
+  isDropdown,
+  isFillable,
+} from "../types/formfill";
 
-/**
- * Fill a PDF `doc`ument with the given `data` based on the formfill data in `fills`.
- * @param {PDFDocument} doc
- * @param {Formfill[]} fills
- * @param {Person} applicant
- * @return {PDFDocument} Filled PDF document
- */
+function fillField(doc: PDFDocument, field: FillableField) {
+  const form = doc.getForm();
+  const { fieldName } = field;
+  if (isText(field)) {
+    const formField = form.getTextField(fieldName);
+
+    // Disable maximum length.
+    formField.setMaxLength(undefined);
+    formField.setText(field.text);
+  } else if (isCheck(field)) {
+    const formField = form.getCheckBox(fieldName);
+    if (field.check) {
+      formField.check();
+    }
+  } else if (isRadio(field)) {
+    const formField = form.getRadioGroup(fieldName);
+    if (typeof field.choice === "number") {
+      // Fill by index.
+      // cf. https://github.com/Hopding/pdf-lib/issues/811#issuecomment-1009935032
+      const acroField = formField.acroField;
+      const value = acroField.getOnValues()[field.choice];
+      acroField.setValue(value);
+    } else if (field.choice !== undefined) {
+      formField.select(field.choice);
+    }
+  } else if (isDropdown(field)) {
+    const formField = form.getDropdown(fieldName);
+    if (field.value) {
+      formField.select(field.value);
+    }
+  }
+}
+
+function realLocation(
+  field: PlaceableField,
+  pagePixelHeight: number,
+  ourDpi: number,
+): { x: number; y: number } {
+  const theirDpi = pagePixelHeight / 11.0;
+  const scale = ourDpi / theirDpi;
+
+  const fontSize = field.font?.fontSize ?? 12;
+
+  return {
+    x: field.loc.x * scale,
+    y: pagePixelHeight - fontSize - field.loc.y * scale,
+  };
+}
+
+function placeField(doc: PDFDocument, field: PlaceableField) {
+  let whatToWrite: string | undefined;
+  if (isText(field)) {
+    whatToWrite = field.text;
+  } else if (isCheck(field) && field.check) {
+    whatToWrite = "X";
+  } else if (isRadio(field) && field.choice) {
+    whatToWrite = "X";
+  }
+
+  if (whatToWrite) {
+    const page = doc.getPages()[field.loc.page ?? 0];
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100));
+  }
+}
+
 export function fillForm(
   doc: PDFDocument,
   fills: Formfill[],
   applicant: Person,
 ): PDFDocument {
-  const form = doc.getForm();
-  const pages = doc.getPages();
-
-  fills.forEach((fill) => {
-    if ("field" in fill) {
-      const field = form.getField(fill.field);
-      if ("text" in fill && field instanceof PDFTextField) {
-        const text = fill.text(applicant);
-
-        if (typeof text === "string") {
-          // Disable maximum length.
-          field.setMaxLength(undefined);
-
-          field.setText(text);
-        }
-      } else if ("check" in fill && field instanceof PDFCheckBox) {
-        const checked = fill.check(applicant);
-        if (checked) {
-          field.check();
-        }
-      } else if (
-        "select" in fill &&
-        "check" in fill &&
-        field instanceof PDFRadioGroup
-      ) {
-        const checked = fill.check(applicant);
-        if (checked && fill.select !== undefined) {
-          field.select(fill.select);
-        }
+  fills
+    .map((fill) => fill(applicant))
+    .forEach((field) => {
+      if (isFillable(field)) {
+        fillField(doc, field);
+      } else {
+        placeField(doc, field);
       }
-    } else {
-      const pageIndex = fill.loc.page ?? 0;
-
-      const page = pages[pageIndex];
-
-      // Adjust the pixel location for DPI.
-      const { height } = page.getSize();
-      const dpi = height / 11.0;
-
-      const referenceDpi = 100;
-      const scalingFactor = dpi / referenceDpi;
-
-      const x = fill.loc.x * scalingFactor;
-      let fontSize = 12;
-      if ("font" in fill) {
-        fontSize = fill.font?.fontSize ?? 12;
-      }
-
-      // PDFlib uses a "Cartesian" coordinate system with 0 at the bottom left
-      // rather than the usual top left.
-      const y = height - fill.loc.y * scalingFactor - fontSize;
-
-      if ("text" in fill) {
-        const text = fill.text(applicant);
-        const pitch = fill.font?.pitch;
-
-        if (typeof text === "string") {
-          if (pitch === undefined) {
-            page.drawText(text, { x, y, size: fontSize });
-          } else {
-            let currentX = x;
-            text.split("").forEach((char) => {
-              page.drawText(char, {
-                x: currentX,
-                y,
-                size: fontSize,
-              });
-              currentX += pitch;
-            });
-          }
-        }
-      } else if ("check" in fill) {
-        const checked = fill.check(applicant);
-        if (checked) {
-          page.drawText("X", { x, y });
-        }
-      }
-    }
-  });
+    });
 
   // Flatten the form fields into the document.
   try {
-    form.flatten();
+    doc.getForm().flatten();
   } catch {
     // We get some ignorable errors in flattening forms here because of an
     // upstream bug.
@@ -147,34 +130,7 @@ export function fillForm(
 export function compileGuidesFor(
   process: AnyProcess,
   applicant: Person,
-): React.JSX.Element[] | undefined {
-  const jurisdictionName: string | undefined = process.isBirth
-    ? applicant.birthJurisdiction
-    : applicant.residentJurisdiction;
-
-  if (jurisdictionName === undefined) {
-    console.error("Called compileGuidesFor() with no jurisdiction name.");
-    return undefined;
-  }
-
-  const jurisdiction = allJurisdictions.get(jurisdictionName);
-  if (jurisdiction === undefined) {
-    console.error("Called compileGuidesFor() with a nonexistent jurisdiction.");
-    return undefined;
-  }
-
-  if (applicant.residentLocality === undefined) {
-    console.error("Called compileGuidesFor() with no locality name.");
-    return undefined;
-  }
-
-  const locality = getLocality(jurisdiction, applicant.residentLocality);
-
-  if (locality === undefined) {
-    console.error("Called compileGuidesFor() with a nonexistent locality.");
-    return undefined;
-  }
-
+): AnyGuide[] | undefined {
   const docs: AnyDocument[] = [];
 
   process.documents.forEach((doc) => {
@@ -183,7 +139,7 @@ export function compileGuidesFor(
     }
   });
 
-  const guides: React.JSX.Element[] = [];
+  const guides: AnyGuide[] = [];
 
   docs
     .filter(
@@ -193,50 +149,20 @@ export function compileGuidesFor(
         doc.include(applicant),
     )
     .forEach((doc) => {
-      if (doc.guide !== undefined) {
-        type theRightType = React.FunctionComponent<{
-          person: Person;
-          locality: typeof locality;
-        }>;
-        const guide = React.createElement(doc.guide as theRightType, {
-          person: applicant,
-          locality,
-        });
-        guides.push(guide);
+      if (doc.guide !== undefined && applicant.residentLocality !== undefined) {
+        const correctlyTypedGuide = doc.guide as Guide<
+          typeof applicant.residentLocality
+        >;
+        if (typeof correctlyTypedGuide === "function") {
+          guides.push(correctlyTypedGuide);
+        }
       }
     });
 
   return guides;
 }
 
-export function getLocality(
-  jurisdiction: AnyJurisdiction,
-  localityName: string,
-): AnyLocality | undefined {
-  const localities: Record<string, Locality> | undefined =
-    jurisdiction.localities;
-
-  if (localities === undefined) {
-    console.error(
-      "Called compileGuidesFor() on a jurisdiction with no localities.",
-    );
-    return undefined;
-  }
-
-  return localities[localityName];
-}
-
-/**
- * Compile all necessary documents as a single PDF ArrayBuffer from the given `data`.
- *
- * @param {Process} processes
- * @param {Person} applicant
- * @return {Promise<Uint8Array>} Compiled documents
- */
-export async function compileDocuments(
-  processes: AnyProcess[],
-  applicant: Person,
-): Promise<Uint8Array | undefined> {
+export function compileDocuments(processes: AnyProcess[]): AnyDocument[] {
   const docs: AnyDocument[] = [];
 
   processes.forEach((proc) => {
@@ -247,9 +173,16 @@ export async function compileDocuments(
     });
   });
 
+  return docs;
+}
+
+export async function collateDocuments(
+  documents: AnyDocument[],
+  applicant: Person,
+): Promise<Uint8Array | undefined> {
   const formFilenamesAndMaps: [string, Formfill[]?][] = [];
 
-  docs
+  documents
     .filter((doc) => doc.include === undefined || doc.include(applicant))
     .forEach((doc) => {
       if (doc.filename !== undefined) {

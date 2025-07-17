@@ -21,14 +21,14 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function NewYorkNotaryGuide({ person }: { person: Person }) {
+function NewYorkNotaryGuide({ person }: { person: Partial<Person> }) {
   const { age, birthJurisdiction } = person;
 
   return (
     <section key="NewYork-Notary">
       <h3>Getting Documents and a Notary (NY)</h3>
 
-      {birthJurisdiction && birthJurisdiction === "New York" ? (
+      {birthJurisdiction?.name === "New York" ? (
         <p>
           In order to file {age && age < 18 ? " a parent/guardian " : " you "}
           will need a certified copy of your birth certificate. If you

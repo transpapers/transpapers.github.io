@@ -61,7 +61,8 @@ export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
       name: "Application for a Certified Copy of a Birth Record",
       filename: "RhodeIsland/Birth Cert Request.pdf",
       map: birthCertOneMap,
-      include: (applicant) => applicant.birthJurisdiction === "Rhode Island",
+      include: (applicant) =>
+        applicant.birthJurisdiction?.name === "Rhode Island",
     },
     {
       name: "Birth Certificate Request",
@@ -94,19 +95,20 @@ export const rhodeislandGenderMarker: Process<RhodeIslandCityOrTown> = {
   ],
 };
 
-export const rhodeislandPrimaryIdentification: Process<RhodeIslandCityOrTown> = {
-  target: Target.PrimaryIdentification,
-  depends: [Target.NameChange, Target.GenderMarker],
-  documents: [
-    {
-      name: "State of Rhode Island Application for License, Identification Card and Permit Form",
-      id: "LI-1",
-      filename: "RhodeIsland/DMV LI-1.pdf",
-      guide: RhodeIslandDMVGuide,
-      map: primaryIDRhodeIslandMap,
-    },
-  ],
-};
+export const rhodeislandPrimaryIdentification: Process<RhodeIslandCityOrTown> =
+  {
+    target: Target.PrimaryIdentification,
+    depends: [Target.NameChange, Target.GenderMarker],
+    documents: [
+      {
+        name: "State of Rhode Island Application for License, Identification Card and Permit Form",
+        id: "LI-1",
+        filename: "RhodeIsland/DMV LI-1.pdf",
+        guide: RhodeIslandDMVGuide,
+        map: primaryIDRhodeIslandMap,
+      },
+    ],
+  };
 
 export const rhodeislandBirthRecord: Process<RhodeIslandCityOrTown> = {
   target: Target.BirthRecord,
@@ -140,5 +142,5 @@ export const rhodeislandPostamble: Process<RhodeIslandCityOrTown> = {
       guide: RhodeIslandResourcesGuide,
     },
   ],
-   isJustGuide: true,
+  isJustGuide: true,
 };

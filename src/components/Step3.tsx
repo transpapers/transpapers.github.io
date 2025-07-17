@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
 import useStore from "../store";
 import { type Person } from "../types/person";
 
-import { jurisdictionNames } from "../jurisdiction/all";
+import { allJurisdictions } from "../jurisdiction/all";
 
 function Step3() {
   const { register, handleSubmit } = useForm();
@@ -40,16 +40,16 @@ function Step3() {
   };
 
   const bornValues = Array.from(
-    jurisdictionNames
-      .filter(([, jurisdiction]) => !jurisdiction.isFederal)
-      .map(([name]) => (
+    allJurisdictions
+      .filter((jurisdiction) => jurisdiction.name !== "Federal")
+      .map(({ name }) => (
         <li key={name}>
           <label>
             <input
               {...register("birthJurisdiction", { required: true })}
               type="radio"
               value={name}
-              defaultChecked={name === residentJurisdiction}
+              defaultChecked={name === residentJurisdiction?.name}
             />
             {name}
           </label>
@@ -68,7 +68,6 @@ function Step3() {
               {...register("birthJurisdiction", { required: true })}
               type="radio"
               value={undefined}
-              defaultChecked={residentJurisdiction === undefined}
             />
             Somewhere else
           </label>
