@@ -640,7 +640,7 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
     loc: { x: 610, y: 778 },
   }),
   (applicant) => ({
@@ -691,7 +691,7 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.chosenName.last} ${applicant.chosenName?.suffix ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName?.suffix}`,
     loc: { page: 1, x: 580, y: 412 },
   }),
   () => ({
@@ -863,7 +863,7 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
     loc: { page: 2, x: 610, y: 776 },
   }),
   (applicant) => ({
@@ -914,7 +914,7 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.chosenName.last} ${applicant.chosenName?.suffix ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName?.suffix}`,
     loc: { page: 3, x: 580, y: 412 },
   }),
   () => ({
@@ -1307,12 +1307,12 @@ export const primaryIDMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-    ? applicant.chosenName?.suffix ?? ""
-    : applicant.legalName?.suffix ?? "",
+    ? applicant.chosenName?.suffix
+    : applicant.legalName?.suffix,
     fieldName: "Suffix",
   }),
   (applicant) => ({
-    text: applicant.birthName?.last
+    text: applicant.birthName.last
     ? applicant.birthName.last
     : applicant.legalName.last,
     fieldName: "Last Name",
@@ -1464,21 +1464,21 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     choice: "Choice0",
   }),
   (applicant) => ({
-    text: applicant.birthName?.first 
+    text: applicant.birthName.first 
       ? applicant.birthName.first 
       : applicant.legalName.first,
     fieldName: "Childs First Name",
   }),
   (applicant) => ({
-    text: applicant.birthName?.middle 
+    text: applicant.birthName.middle 
       ? applicant.birthName.middle 
       : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
-    text: applicant.birthName?.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+    text: applicant.birthName.last
+      ? `${applicant.birthName.last} ${applicant.birthName?.suffix}`
+      : `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1531,15 +1531,15 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     fieldName: "What should the birth certifcate say for item 1",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first,
+    text: applicant.chosenName.first,
     fieldName: "First Name",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle,
+    text: applicant.chosenName.middle,
     fieldName: "Middle Name_2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.last,
+    text: applicant.chosenName.last,
     fieldName: "Last Name_2",
   }),
   () => ({
@@ -1678,21 +1678,21 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
     choice: "Choice0",
   }),
   (applicant) => ({
-    text: applicant.birthName?.first 
+    text: applicant.birthName.first 
       ? applicant.birthName.first 
       : applicant.legalName.first,
     fieldName: "Childs First Name",
   }),
   (applicant) => ({
-    text: applicant.birthName?.middle 
+    text: applicant.birthName.middle 
       ? applicant.birthName.middle 
       : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
-    text: applicant.birthName?.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+    text: applicant.birthName.last
+      ? `${applicant.birthName.last} ${applicant.birthName?.suffix}`
+      : `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1906,21 +1906,21 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
     choice: "Choice0",
   }),
   (applicant) => ({
-    text: applicant.birthName?.first 
+    text: applicant.birthName.first 
       ? applicant.birthName.first 
       : applicant.legalName.first,
     fieldName: "Childs First Name",
   }),
   (applicant) => ({
-    text: applicant.birthName?.middle 
+    text: applicant.birthName.middle 
       ? applicant.birthName.middle 
       : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
-    text: applicant.birthName?.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+    text: applicant.birthName.last
+      ? `${applicant.birthName.last} ${applicant.birthName?.suffix}`
+      : `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -2005,15 +2005,15 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
     fieldName: "What should the birth certifcate say for item 2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first,
+    text: applicant.chosenName.first,
     fieldName: "First Name",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle,
+    text: applicant.chosenName.middle,
     fieldName: "Middle Name_2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.last,
+    text: applicant.chosenName.last,
     fieldName: "Last Name_2",
   }),
   () => ({
