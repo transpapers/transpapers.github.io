@@ -245,8 +245,12 @@ export function representativeName(applicant: Person): Name {
 export enum ContactFormat {
   FullContactInfo,
   FullContactInfoAndCountry,
+  FullAddress,
+  FullAddressAndCountry,
   BirthCityAndState,
+  BirthCityStateCountry,
   ResidentCityAndState,
+  ResidentCountyAndState,
   ResidentCityAndStateAndZip,
 }
 
@@ -261,6 +265,7 @@ export function formatContactInfo(
     streetAddress,
     residentCity,
     residentJurisdiction,
+    residentLocality,
     zip,
     phone,
   } = applicant;
@@ -271,17 +276,60 @@ export function formatContactInfo(
       }
       return `${birthCity}, ${birthJurisdiction.abbreviation}`;
 
+    case ContactFormat.BirthCityStateCountry:
+      if (!birthCity || !birthJurisdiction) {
+        return undefined;
+      }
+      return `${birthCity}, ${birthJurisdiction.abbreviation}, USA`;
+
     case ContactFormat.ResidentCityAndState:
       if (!residentCity || !residentJurisdiction) {
         return undefined;
       }
       return `${residentCity}, ${residentJurisdiction.abbreviation}`;
 
+    case ContactFormat.ResidentCountyAndState:
+      if (!residentLocality || !residentJurisdiction) {
+        return undefined;
+      }
+      return `${residentLocality.name}, ${residentJurisdiction.name}`;
+
     case ContactFormat.ResidentCityAndStateAndZip:
       if (!residentCity || !residentJurisdiction || !zip) {
         return undefined;
       }
       return `${residentCity}, ${residentJurisdiction.name}, ${zip}`;
+
+    case ContactFormat.FullAddress:
+      if (
+        !streetAddress ||
+        !residentCity ||
+        !residentJurisdiction ||
+        !zip
+      ) {
+        return undefined;
+      }
+      return [
+        fullName(representativeName(applicant)),
+        applicant.streetAddress,
+        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+      ].join(separator);
+
+    case ContactFormat.FullAddressAndCountry:
+      if (
+        !streetAddress ||
+        !residentCity ||
+        !residentJurisdiction ||
+        !zip
+      ) {
+        return undefined;
+      }
+      return [
+        fullName(representativeName(applicant)),
+        applicant.streetAddress,
+        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        "USA",
+      ].join(separator);
 
     case ContactFormat.FullContactInfo:
       if (
