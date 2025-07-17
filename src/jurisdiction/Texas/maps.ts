@@ -640,7 +640,7 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
+      `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     loc: { x: 610, y: 778 },
   }),
   (applicant) => ({
@@ -691,7 +691,7 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.chosenName.last} ${applicant.chosenName?.suffix}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`,
     loc: { page: 1, x: 580, y: 412 },
   }),
   () => ({
@@ -863,7 +863,7 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
+      `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     loc: { page: 2, x: 610, y: 776 },
   }),
   (applicant) => ({
@@ -914,7 +914,7 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${applicant.chosenName.last} ${applicant.chosenName?.suffix}`,
+      `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`,
     loc: { page: 3, x: 580, y: 412 },
   }),
   () => ({
@@ -1307,8 +1307,8 @@ export const primaryIDMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-    ? applicant.chosenName?.suffix
-    : applicant.legalName?.suffix,
+    ? applicant.chosenName.suffix ?? ""
+    : applicant.legalName.suffix ?? "",
     fieldName: "Suffix",
   }),
   (applicant) => ({
@@ -1477,8 +1477,8 @@ export const birthCertNameCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
+      ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1691,8 +1691,8 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
+      ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1919,8 +1919,8 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix}`,
+      ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
