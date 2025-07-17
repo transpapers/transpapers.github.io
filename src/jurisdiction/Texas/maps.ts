@@ -36,27 +36,27 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "County",
   }),
   (applicant) => ({
-    text: applicant.legalName?.first ?? "",
+    text: applicant.legalName.first,
     fieldName: "First",
   }),
   (applicant) => ({
-    text: applicant.legalName?.middle ?? "",
+    text: applicant.legalName.middle,
     fieldName: "Middle",
   }),
   (applicant) => ({
-    text: applicant.legalName?.last ?? "",
+    text: applicant.legalName.last,
     fieldName: "Last",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first ?? "",
+    text: applicant.chosenName.first,
     fieldName: "First_2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle ?? "",
+    text: applicant.chosenName.middle,
     fieldName: "Middle_2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.last ?? "",
+    text: applicant.chosenName.last,
     fieldName: "Last_2",
   }),
   (applicant) => ({
@@ -293,27 +293,27 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     fieldName: "is not required to register as a sex offender",
   }),
   (applicant) => ({
-    text: applicant.legalName?.first ?? "",
+    text: applicant.legalName.first,
     fieldName: "First",
   }),
   (applicant) => ({
-    text: applicant.legalName?.middle ?? "",
+    text: applicant.legalName.middle,
     fieldName: "Middle",
   }),
   (applicant) => ({
-    text: applicant.legalName?.last ?? "",
+    text: applicant.legalName.last,
     fieldName: "Last",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first ?? "",
+    text: applicant.chosenName.first,
     fieldName: "First_2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle ?? "",
+    text: applicant.chosenName.middle,
     fieldName: "Middle_2",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.last ?? "",
+    text: applicant.chosenName.last,
     fieldName: "Last_2",
   }),
   (applicant) => ({
@@ -324,9 +324,9 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     text: (() => {
       switch (applicant.birthJurisdiction?.name === "Texas") {
         case true:
-          return applicant.birthName?.first ?? ""
-          ? applicant.birthName?.first ?? ""
-          : applicant.legalName?.first ?? "";
+          return applicant.birthName.first
+          ? applicant.birthName.first
+          : applicant.legalName.first;
         case false:
           return "";
         default:
@@ -339,9 +339,9 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     text: (() => {
       switch (applicant.birthJurisdiction?.name === "Texas") {
         case true:
-          return applicant.birthName?.middle ?? ""
-          ? applicant.birthName?.middle ?? ""
-          : applicant.legalName?.middle ?? "";
+          return applicant.birthName.middle
+          ? applicant.birthName.middle
+          : applicant.legalName.middle;
         case false:
           return "";
         default:
@@ -354,9 +354,9 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     text: (() => {
       switch (applicant.birthJurisdiction?.name === "Texas") {
         case true:
-          return applicant.birthName?.last ?? ""
-          ? applicant.birthName?.last ?? ""
-          : applicant.legalName?.last ?? "";
+          return applicant.birthName.last
+          ? applicant.birthName.last
+          : applicant.legalName.last;
         case false:
           return "";
         default:
@@ -367,17 +367,17 @@ export const nameChangeOrderAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthJurisdiction?.name === "Texas" 
-      ? applicant.chosenName?.first ?? "" : "",
+      ? applicant.chosenName.first : "",
     fieldName: "First_4",
   }),
   (applicant) => ({
     text: applicant.birthJurisdiction?.name === "Texas"
-      ? applicant.chosenName?.middle ?? "" : "",
+      ? applicant.chosenName.middle : "",
     fieldName: "Middle_4",
   }),
   (applicant) => ({
     text: applicant.birthJurisdiction?.name === "Texas"
-      ? applicant.chosenName?.last ?? "" : "",
+      ? applicant.chosenName.last : "",
     fieldName: "Last_4",
   }),
 ];
@@ -458,15 +458,15 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "There are no court orders regarding the child",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first ?? "",
+    text: applicant.chosenName.first,
     fieldName: "First",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle ?? "",
+    text: applicant.chosenName.middle,
     fieldName: "Middle",
   }),
   (applicant) => ({
-    text: applicant.chosenName?.last ?? "",
+    text: applicant.chosenName.last,
     fieldName: "Last",
   }),
   (applicant) => ({
@@ -619,11 +619,11 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { x: 450, y: 210 },
   }),
   (applicant) => ({
-    text: applicant.representativeName?.first ?? "",
+    text: applicant.representativeName?.first,
     loc: { x: 240, y: 380 },
   }),
   (applicant) => ({
-    text: applicant.representativeName?.middle ?? "",
+    text: applicant.representativeName?.middle,
     loc: { x: 425, y: 380 },
   }),
   (applicant) => ({
@@ -636,16 +636,16 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { x: 103, y: 614 },
   }),
   (applicant) => ({
-    text: applicant.legalName?.first ?? "",
+    text: applicant.legalName.first,
     loc: { x: 270, y: 778 },
   }),
   (applicant) => ({
-    text: applicant.legalName?.middle ?? "",
+    text: applicant.legalName.middle,
     loc: { x: 430, y: 778 },
   }),
   (applicant) => ({
     text: 
-      `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
     loc: { x: 610, y: 778 },
   }),
   (applicant) => ({
@@ -688,16 +688,16 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { page: 1, x: 128, y: 140 },
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first ?? "",
+    text: applicant.chosenName.first,
     loc: { page: 1, x: 130, y: 412 },
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle ?? "",
+    text: applicant.chosenName.middle,
     loc: { page: 1, x: 375, y: 412 },
   }),
   (applicant) => ({
     text: 
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.suffix ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName?.suffix ?? ""}`,
     loc: { page: 1, x: 580, y: 412 },
   }),
   () => ({
@@ -848,29 +848,29 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { x: 450, y: 210 },
   }),
   (applicant) => ({
-    text: applicant.representativeName?.first ?? "",
+    text: applicant.representativeName.first,
     loc: { x: 240, y: 388 },
   }),
   (applicant) => ({
-    text: applicant.representativeName?.middle ?? "",
+    text: applicant.representativeName.middle,
     loc: { x: 425, y: 388 },
   }),
   (applicant) => ({
     text: 
-      `${applicant.representativeName?.last ?? ""} ${applicant.representativeName?.suffix ?? ""}`,
+      `${applicant.representativeName.last} ${applicant.representativeName?.suffix ?? ""}`,
     loc: { x: 600, y: 388 },
   }),
   (applicant) => ({
-    text: applicant.legalName?.first ?? "",
+    text: applicant.legalName.first,
     loc: { page: 2, x: 270, y: 776 },
   }),
   (applicant) => ({
-    text: applicant.legalName?.middle ?? "",
+    text: applicant.legalName.middle,
     loc: { page: 2, x: 430, y: 776 },
   }),
   (applicant) => ({
     text: 
-      `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
     loc: { page: 2, x: 610, y: 776 },
   }),
   (applicant) => ({
@@ -913,16 +913,16 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { page: 3, x: 128, y: 140 },
   }),
   (applicant) => ({
-    text: applicant.chosenName?.first ?? "",
+    text: applicant.chosenName.first,
     loc: { page: 3, x: 130, y: 412 },
   }),
   (applicant) => ({
-    text: applicant.chosenName?.middle ?? "",
+    text: applicant.chosenName.middle,
     loc: { page: 3, x: 375, y: 412 },
   }),
   (applicant) => ({
     text: 
-      `${applicant.chosenName?.last ?? ""} ${applicant.chosenName?.suffix ?? ""}`,
+      `${applicant.chosenName.last} ${applicant.chosenName?.suffix ?? ""}`,
     loc: { page: 3, x: 580, y: 412 },
   }),
   () => ({
@@ -1303,20 +1303,20 @@ export const nameChangeMinorFamilyInfoMap: Formfill[] = [
 export const primaryIDMap: Formfill[] = [
   (applicant) => ({
     text: applicant.isChangingLegalName
-    ? applicant.chosenName?.last ?? ""
-    : applicant.legalName?.last ?? "",
+    ? applicant.chosenName.last
+    : applicant.legalName.last,
     fieldName: "Last Name",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-    ? applicant.chosenName?.first ?? ""
-    : applicant.legalName?.first ?? "",
+    ? applicant.chosenName.first
+    : applicant.legalName.first,
     fieldName: "First Name",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-    ? applicant.chosenName?.middle ?? ""
-    : applicant.legalName?.middle ?? "",
+    ? applicant.chosenName.middle
+    : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
@@ -1327,8 +1327,8 @@ export const primaryIDMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName?.last
-    ? applicant.birthName?.last ?? ""
-    : applicant.legalName?.last ?? "",
+    ? applicant.birthName.last
+    : applicant.legalName.last,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1355,11 +1355,11 @@ export const primaryIDMap: Formfill[] = [
     fieldName: "Country",
   }),
   (applicant) => ({
-    text: applicant.fathersBirthName?.last ?? "",
+    text: applicant.fathersBirthName.last,
     fieldName: "Fathers Last Name",
   }),
   (applicant) => ({
-    text: applicant.mothersBirthName?.last ?? "",
+    text: applicant.mothersBirthName.last,
     fieldName: "Mothers Maiden Name",
   }),
   (applicant) => ({
@@ -1480,20 +1480,20 @@ export const birthCertNameCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName?.first 
-      ? applicant.birthName?.first ?? "" 
-      : applicant.legalName?.first ?? "",
+      ? applicant.birthName.first 
+      : applicant.legalName.first,
     fieldName: "Childs First Name",
   }),
   (applicant) => ({
     text: applicant.birthName?.middle 
-      ? applicant.birthName?.middle ?? "" 
-      : applicant.legalName?.middle ?? "",
+      ? applicant.birthName.middle 
+      : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
     text: applicant.birthName?.last
-      ? `${applicant.birthName?.last ?? ""} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1695,20 +1695,20 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName?.first 
-      ? applicant.birthName?.first ?? "" 
-      : applicant.legalName?.first ?? "",
+      ? applicant.birthName.first 
+      : applicant.legalName.first,
     fieldName: "Childs First Name",
   }),
   (applicant) => ({
     text: applicant.birthName?.middle 
-      ? applicant.birthName?.middle ?? "" 
-      : applicant.legalName?.middle ?? "",
+      ? applicant.birthName.middle 
+      : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
     text: applicant.birthName?.last
-      ? `${applicant.birthName?.last ?? ""} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1924,20 +1924,20 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName?.first 
-      ? applicant.birthName?.first ?? "" 
-      : applicant.legalName?.first ?? "",
+      ? applicant.birthName.first 
+      : applicant.legalName.first,
     fieldName: "Childs First Name",
   }),
   (applicant) => ({
     text: applicant.birthName?.middle 
-      ? applicant.birthName?.middle ?? "" 
-      : applicant.legalName?.middle ?? "",
+      ? applicant.birthName.middle 
+      : applicant.legalName.middle,
     fieldName: "Middle Name",
   }),
   (applicant) => ({
     text: applicant.birthName?.last
-      ? `${applicant.birthName?.last ?? ""} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName?.last ?? ""} ${applicant.legalName?.suffix ?? ""}`,
+      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
