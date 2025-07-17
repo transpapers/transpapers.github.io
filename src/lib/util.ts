@@ -309,7 +309,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return `${streetAddress} ${residentCity}, ${residentJurisdiction?.abbreviation} ${zip}`;
+      return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip}`;
 
     case ContactFormat.FullAddressAndCountry:
       if (
@@ -320,7 +320,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return `${streetAddress} ${residentCity}, ${residentJurisdiction?.abbreviation} ${zip} USA`;
+      return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip} USA`;
 
     case ContactFormat.FullContactInfo:
       if (
