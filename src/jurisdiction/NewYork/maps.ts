@@ -148,7 +148,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
   (applicant) => ({
     check: !applicant.hasCriminalRecord,
     fieldName: "ConvictedOfCrime",
-    choice: 1,
+    choice: "TU",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
@@ -391,7 +391,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
         case GenderMarker.F:
           return "F (Female)";
         case GenderMarker.X:
-          return "X (Indeterminate/unspecified)";
+          return "X (Indeterminate#2funspecified)";
       }
     })(),
   }),
