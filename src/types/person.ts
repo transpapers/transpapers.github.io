@@ -17,11 +17,11 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Name, GenderMarker } from "./types";
+import { Name, GenderMarker, } from "./types";
 
 import { AnyLocality, AnyJurisdiction } from "./generic";
 
-import { michigan, newYork } from "../jurisdiction/all";
+import { alaska, illinois, michigan, newYork, oregon, rhodeIsland } from "../jurisdiction/all";
 
 /**
  * Applicant's personal information.
@@ -314,11 +314,11 @@ export const sampleData: Partial<Person> = {
   passport: "ds11",
 };
 
-// This is all of the static fields for person.
+// This is all of the static and dynamic fields for person listed out.
 /**
  * @type {Person}
  */
-export const sampleStaticData: Partial<Person> = {
+export const sampleCombinationData = {
   legalName: {
     first: "Jane",
     middle: "LegalMiddle",
@@ -339,7 +339,18 @@ export const sampleStaticData: Partial<Person> = {
   },
 
   reasonForNameChange: "Gender transition",
+  sealBCTest: [true, false],
   birthCity: "New York",
+  birthJurisdictionTest: [alaska, illinois, michigan, newYork, oregon, rhodeIsland],
+
+  birthdateTest: ["2010-01-23", "1990-11-23"],
+  ageTest: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+
+  assignedSexTest: [GenderMarker.F, GenderMarker.M, GenderMarker.X],
+  genderTest: [GenderMarker.F, GenderMarker.M, GenderMarker.X],
+
+  isChangingLegalNameTest: [true, false],
+  isChangingLegalSexTest: [true, false],
 
   mothersBirthName: {
     first: "Sarah",
@@ -347,6 +358,10 @@ export const sampleStaticData: Partial<Person> = {
     last: "MomsDoe",
     suffix: "Mt.",
   },
+
+  doNotPublishTest: [false, true],
+  hasCriminalRecordTest: [false, true],
+  parentsAreOkayTest: [true, false],
 
   mothersBirthdate: "1970-01-01",
   fathersBirthName: {
@@ -363,6 +378,7 @@ export const sampleStaticData: Partial<Person> = {
   streetAddress: "20 Monroe Street NW",
 
   residentCity: "Grand Rapids",
+  residentJurisdictionTest: [alaska, illinois, michigan, newYork, oregon, rhodeIsland],
   zip: "49503",
 
   email: "jdoe@goodmail.com",
@@ -373,4 +389,6 @@ export const sampleStaticData: Partial<Person> = {
     last: "RepLast",
     suffix: "Rt.",
   },
+
+  passportTest: ["ds11", "ds82", "ds5504"],
 };
