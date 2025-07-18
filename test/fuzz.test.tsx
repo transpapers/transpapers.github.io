@@ -107,15 +107,19 @@ const generatePersonForTesting: (
   return person;
 };
 
-/*
 describe("generatePersonForTesting", () => {
   test("does not error when run by itself", () => {
-    const person = generatePersonForTesting();
+    const jurisdiction = allJurisdictions[0];
+    const locality = jurisdiction.localities[0];
+    const person = generatePersonForTesting(
+      jurisdiction,
+      jurisdiction,
+      locality,
+    );
 
     expect(person).toBeTruthy();
   });
 });
-*/
 
 const allDocuments: (AnyDocument & { abbreviation: string })[] =
   allJurisdictions
