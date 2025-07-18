@@ -244,18 +244,18 @@ export class Person {
 export const sampleData: Partial<Person> = {
   legalName: {
     first: "Jane",
-    middle: "Michelle",
-    last: "Doe",
+    middle: "LegalMiddle",
+    last: "LeDoe",
   },
   chosenName: {
     first: "John",
-    middle: "Michael",
-    last: "Doe",
+    middle: "ChosenMiddle",
+    last: "ChDoe",
   },
   birthName: {
-    first: "John",
-    middle: "Michael",
-    last: "Doe",
+    first: "Augustine",
+    middle: "BirthMiddle",
+    last: "BirthDoe",
   },
 
   reasonForNameChange: "Gender transition",
@@ -274,9 +274,9 @@ export const sampleData: Partial<Person> = {
   isChangingLegalSex: true,
 
   mothersBirthName: {
-    first: "Jane",
-    middle: "Michelle",
-    last: "Doe",
+    first: "Sarah",
+    middle: "MomsMiddle",
+    last: "MomsDoe",
   },
 
   doNotPublish: false,
@@ -285,15 +285,15 @@ export const sampleData: Partial<Person> = {
 
   mothersBirthdate: "1970-01-01",
   fathersBirthName: {
-    first: "John",
-    middle: "Michael",
-    last: "Doe",
-    suffix: "Sr.",
+    first: "James",
+    middle: "DadsMiddle",
+    last: "DadsDoe",
+    suffix: "Jr.",
   },
 
   fathersBirthdate: "1970-01-01",
 
-  phone: "313-555-1234",
+  phone: "313-867-5309",
 
   streetAddress: "20 Monroe Street NW",
 
@@ -305,11 +305,72 @@ export const sampleData: Partial<Person> = {
   email: "jdoe@goodmail.com",
 
   representativeName: {
-    first: "John",
-    middle: "Michael",
-    last: "Doe",
+    first: "RepFirst",
+    middle: "RepMiddle",
+    last: "RepLast",
     suffix: "Sr.",
   },
 
   passport: "ds11",
+};
+
+// This is all of the static fields for person.
+/**
+ * @type {Person}
+ */
+export const sampleStaticData: Partial<Person> = {
+  legalName: {
+    first: "Jane",
+    middle: "LegalMiddle",
+    last: "LeDoe",
+    suffix: "Lt.",
+  },
+  chosenName: {
+    first: "John",
+    middle: "ChosenMiddle",
+    last: "ChDoe",
+    suffix: "Ct.",
+  },
+  birthName: {
+    first: "Augustine",
+    middle: "BirthMiddle",
+    last: "BirthDoe",
+    suffix: "Bt.",
+  },
+
+  reasonForNameChange: "Gender transition",
+  birthCity: "New York",
+
+  mothersBirthName: {
+    first: "Sarah",
+    middle: "MomsMiddle",
+    last: "MomsDoe",
+    suffix: "Mt.",
+  },
+
+  mothersBirthdate: "1970-01-01",
+  fathersBirthName: {
+    first: "James",
+    middle: "DadsMiddle",
+    last: "DadsDoe",
+    suffix: "Ft.",
+  },
+
+  fathersBirthdate: "1970-01-01",
+
+  phone: "313-867-5309",
+
+  streetAddress: "20 Monroe Street NW",
+
+  residentCity: "Grand Rapids",
+  zip: "49503",
+
+  email: "jdoe@goodmail.com",
+
+  representativeName: {
+    first: "RepFirst",
+    middle: "RepMiddle",
+    last: "RepLast",
+    suffix: "Rt.",
+  },
 };
