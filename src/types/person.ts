@@ -339,7 +339,7 @@ export const sampleCombinationData = {
   },
 
   reasonForNameChange: "Gender transition",
-  sealBCTest: [true, false],
+  sealBirthCertificateTest: [true, false],
   birthCity: "New York",
   birthJurisdictionTest: [alaska, illinois, michigan, newYork, oregon, rhodeIsland],
 
