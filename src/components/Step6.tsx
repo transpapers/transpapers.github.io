@@ -51,7 +51,8 @@ function Step6() {
       .map((procName) => allProcs.find((proc) => proc.target === procName))
       .filter((proc) => proc !== undefined);
 
-    const fieldNamesToShow = neededFieldNames(processes, applicant);
+    const fieldNamesToShow: (keyof Person)[] =
+      processes.flatMap(neededFieldNames);
 
     const onSubmit = async (data: Partial<Person>) => {
       updatePerson(data);
@@ -62,7 +63,9 @@ function Step6() {
 
     // We do it this way to maintain ordering.
     const fieldsToShow = Object.entries(fields)
-      .filter(([fieldName]) => fieldNamesToShow.includes(fieldName))
+      .filter(([fieldName]) =>
+        fieldNamesToShow.includes(fieldName as keyof Person),
+      )
       .map(([, field]) => field)
       .filter((field) => !field.include || field.include(applicant));
 

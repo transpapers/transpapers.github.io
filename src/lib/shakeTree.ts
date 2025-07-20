@@ -17,36 +17,35 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {AnyProcess } from '../types/generic';
-
+import { AnyProcess } from "../types/generic";
 
 import { type Formfill } from "../types/formfill";
 import { type Person, sampleData } from "../types/person";
 
-
-function makeHandler<T>(array: string[]) {
+function makeHandler<T extends object>(array: (keyof T & string)[]) {
   return {
     get(target: T, prop: keyof T): T[keyof T] {
-      array.push(prop);
+      if (typeof prop === "string") {
+        array.push(prop);
+      }
       return target[prop];
-    }
-  }
+    },
+  };
 }
 
-function fieldNamesOf(fill: Formfill): string[] {
-  const names: string[] = [];
+function fieldNamesOf(fill: Formfill): (keyof Person)[] {
+  const names: (keyof Person)[] = [];
 
-  const testDummy = new Proxy<Person>(sampleData, makeHandler(names));
+  const testDummy = new Proxy<Person>(sampleData, makeHandler<Person>(names));
   fill(testDummy);
 
   return names;
 }
 
-// Why did I ever think that shit was a good ideaa???????
-export function neededFieldNames(proc: AnyProcess): string[] {
+export function neededFieldNames(proc: AnyProcess): (keyof Person)[] {
   return proc.documents
-    .flatMap(doc => doc.map ?? [])
-    .flatMap(fill => fieldNamesOf(fill))
+    .flatMap((doc) => doc.map ?? [])
+    .flatMap((fill) => fieldNamesOf(fill))
     .sort()
     .filter((name, i, array) => i == 0 || name != array[i - 1]);
 }

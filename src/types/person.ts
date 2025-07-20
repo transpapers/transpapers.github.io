@@ -17,11 +17,18 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Name, GenderMarker, } from "./types";
+import { Name, GenderMarker } from "./types";
 
 import { AnyLocality, AnyJurisdiction } from "./generic";
 
-import { alaska, illinois, michigan, newYork, oregon, rhodeIsland } from "../jurisdiction/all";
+import {
+  alaska,
+  illinois,
+  michigan,
+  newYork,
+  oregon,
+  rhodeIsland,
+} from "../jurisdiction/all";
 
 /**
  * Applicant's personal information.
@@ -241,7 +248,7 @@ export class Person {
 /**
  * @type {Person}
  */
-export const sampleData: Partial<Person> = {
+export const sampleData: Person = {
   legalName: {
     first: "Jane",
     middle: "LegalMiddle",
@@ -341,7 +348,14 @@ export const sampleCombinationData = {
   reasonForNameChange: "Gender transition",
   sealBirthCertificateTest: [true, false],
   birthCity: "New York",
-  birthJurisdictionTest: [alaska, illinois, michigan, newYork, oregon, rhodeIsland],
+  birthJurisdictionTest: [
+    alaska,
+    illinois,
+    michigan,
+    newYork,
+    oregon,
+    rhodeIsland,
+  ],
 
   birthdateTest: ["2010-01-23", "1990-11-23"],
   ageTest: [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
@@ -378,7 +392,14 @@ export const sampleCombinationData = {
   streetAddress: "20 Monroe Street NW",
 
   residentCity: "Grand Rapids",
-  residentJurisdictionTest: [alaska, illinois, michigan, newYork, oregon, rhodeIsland],
+  residentJurisdictionTest: [
+    alaska,
+    illinois,
+    michigan,
+    newYork,
+    oregon,
+    rhodeIsland,
+  ],
   zip: "49503",
 
   email: "jdoe@goodmail.com",
