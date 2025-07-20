@@ -17,135 +17,36 @@
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import {AnyProcess } from '../types/generic';
+
+
+import { type Formfill } from "../types/formfill";
 import { type Person, sampleData } from "../types/person";
-import {
-  type AnyProcess,
-  type AnyJurisdiction,
-  type AnyLocality,
-} from "../types/generic";
-import { type Name } from "../types/types";
 
-import { fields } from "../components/fields";
 
-/**
- * Union of the types we want shakeTree() to ignore/not descend to.
- */
-type Opaque = Name | AnyJurisdiction | AnyLocality;
-
-// TODO better-tree-shaker branch
-// eslint-disable-next-line
-export function isOpaque(obj: any): obj is Opaque {
-  // TODO better-tree-shaker branch
-  /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-  const isName = (obj as Name).first !== undefined;
-  const isJurisdiction = (obj as AnyJurisdiction).name !== undefined;
-  const isLocality = (obj as AnyLocality).name !== undefined;
-  /* eslint-enable @typescript-eslint/no-unnecessary-condition */
-
-  return isName || isJurisdiction || isLocality;
-}
-
-/**
- * Determine the properties of a `Person` accessed by `object`.
- */
-// TODO better-tree-shaker branch
-// eslint-disable-next-line
-export function shakeTree(obj: any, accessed: string[] = []) {
-  const recursePropertyNames = ["documents", "map"];
-  const functionPropertyNames = ["include", "text", "check"];
-
-  const handler = {
-    // Handle nested properties correctly.
-    // cf. https://stackoverflow.com/questions/41299642/
-    // TODO better-tree-shaker branch
-    // eslint-disable-next-line
-    get(target: any, prop: string) {
-      if (isOpaque(target)) {
-        return undefined;
-      }
-
-      if (prop === "isProxy") {
-        return true;
-      }
-
-      // TODO better-tree-shaker branch
-      // eslint-disable-next-line
-      const func = target[prop];
-
-      if (typeof func === "undefined") {
-        return undefined;
-      }
-
-      // TODO better-tree-shaker branch
-      // eslint-disable-next-line
-      if (!func.isProxy && typeof func === "object") {
-        // TODO better-tree-shaker branch
-        // eslint-disable-next-line
-        target[prop] = new Proxy(func, handler);
-      }
-
-      if (!accessed.includes(prop)) {
-        accessed.push(prop);
-      }
-
-      // TODO better-tree-shaker branch
-      // eslint-disable-next-line
+function makeHandler<T>(array: string[]) {
+  return {
+    get(target: T, prop: keyof T): T[keyof T] {
+      array.push(prop);
       return target[prop];
-    },
-  };
-
-  if (obj) {
-    recursePropertyNames.forEach((name) => {
-      if (Object.prototype.hasOwnProperty.call(obj, name)) {
-        // TODO better-tree-shaker branch
-        // eslint-disable-next-line
-        const subobj = obj[name];
-        if (Array.isArray(subobj)) {
-          subobj.forEach((item) => shakeTree(item, accessed));
-        } else {
-          shakeTree(subobj, accessed);
-        }
-      }
-    });
-
-    functionPropertyNames.forEach((name) => {
-      if (Object.prototype.hasOwnProperty.call(obj, name)) {
-        // TODO better-tree-shaker branch
-        // eslint-disable-next-line
-        const func = obj[name];
-        // TODO better-tree-shaker branch
-        // eslint-disable-next-line
-        const proxiedDummy = new Proxy(sampleData, handler);
-
-        // TODO better-tree-shaker branch
-        // eslint-disable-next-line
-        func(proxiedDummy);
-      }
-    });
+    }
   }
-
-  return accessed;
 }
 
-/**
- * Convert the list of needed procedures into a list of needed field names.
- */
-export function neededFieldNames(
-  neededProcs: AnyProcess[],
-  applicant: Person,
-): string[] {
+function fieldNamesOf(fill: Formfill): string[] {
   const names: string[] = [];
-  neededProcs.forEach((process) => shakeTree(process, names));
 
-  Object.entries(fields).forEach(([fieldName, field]) => {
-    if (
-      field.include !== undefined &&
-      field.include(applicant) &&
-      !names.includes(fieldName)
-    ) {
-      names.push(fieldName);
-    }
-  });
+  const testDummy = new Proxy<Person>(sampleData, makeHandler(names));
+  fill(testDummy);
 
   return names;
+}
+
+// Why did I ever think that shit was a good ideaa???????
+export function neededFieldNames(proc: AnyProcess): string[] {
+  return proc.documents
+    .flatMap(doc => doc.map ?? [])
+    .flatMap(fill => fieldNamesOf(fill))
+    .sort()
+    .filter((name, i, array) => i == 0 || name != array[i - 1]);
 }

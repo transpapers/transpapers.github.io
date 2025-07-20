@@ -19,66 +19,40 @@
 
 import { expect, describe, test } from "vitest";
 
-import { isOpaque, shakeTree } from "../src/lib/shakeTree";
+import { neededFieldNames } from "../src/lib/shakeTree";
 
-import { newYork } from "../src/jurisdiction/all";
 import { michiganNameChange } from "../src/jurisdiction/Michigan/process";
-
-import { sampleData } from "../src/types/person";
 
 import { isMinor, phoneAreaCode, phoneStart, phoneEnd } from "../src/lib/util";
 
-describe("isOpaque()", () => {
-  test("is false on strings", () => {
-    expect(isOpaque("asdf")).toBe(false);
-  });
-  test("is true on Names", () => {
-    const peter = { first: "Peter", middle: "", last: "Spilles" };
-    expect(isOpaque(peter)).toBe(true);
-  });
-  test("is true on Jurisdictions", () => {
-    expect(isOpaque(newYork)).toBe(true);
-  });
-  test("is true on Localities", () => {
-    expect(isOpaque(newYork.localities[0])).toBe(true);
-  });
-  test("is false on Persons", () => {
-    expect(isOpaque(sampleData)).toBe(false);
-  });
-});
-
-describe("shakeTree()", () => {
+describe("neededFieldNames()", () => {
   test("regression test", () => {
     const expected = [
-      "legalName",
-      "birthdate",
-      "representativeName",
-      "streetAddress",
+      "age",
       "birthCity",
       "birthJurisdiction",
+      "birthdate",
+      "chosenName",
+      "fathersBirthName",
+      "hasCriminalRecord",
+      "isChangingLegalSex",
+      "legalName",
+      "mothersBirthName",
+      "parentsAreOkay",
+      "phone",
+      "reasonForNameChange",
+      "representativeName",
       "residentCity",
       "residentJurisdiction",
-      "zip",
-      "phone",
-      "parentsAreOkay",
-      "mothersBirthName",
-      "fathersBirthName",
-      "reasonForNameChange",
-      "chosenName",
+      "residentLocality",
       "sealBirthCertificate",
-      // "residentLocality", ???
-      "age",
-      "hasCriminalRecord",
-      "doNotPublish",
-      "isChangingLegalSex",
+      "streetAddress",
+      "zip",
     ];
 
-    const received = shakeTree(michiganNameChange);
+    const received = neededFieldNames(michiganNameChange);
 
-    const expectedSet = new Set(expected);
-    const receivedSet = new Set(received);
-
-    expect(receivedSet).toEqual(expectedSet);
+    expect(received).toEqual(expected);
   });
 });
 
