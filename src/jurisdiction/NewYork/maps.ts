@@ -66,9 +66,8 @@ export const adultNameSexPetitionMap: Formfill[] = [
     fieldName: "NewName",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
     fieldName: "ConvictedOfCrime",
-    choice: 1,
+    choice: applicant.hasCriminalRecord ? 0 : 1,
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
@@ -146,9 +145,8 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "NewName",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
     fieldName: "ConvictedOfCrime",
-    choice: "TU",
+    choice: applicant.hasCriminalRecord ? undefined : "TU",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
