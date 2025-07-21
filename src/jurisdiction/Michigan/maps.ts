@@ -649,45 +649,33 @@ export const birthCertMap: Formfill[] = [
     loc: { x: 433, y: 800 },
   }),
   (applicant) => ({
-    text:
-      applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.M
-        ? "Sex: M"
-        : "",
+    text: (() => {
+      if (applicant.isChangingLegalSex) {
+        switch (applicant.assignedSex) {
+          case GenderMarker.M:
+            return "Sex: M";
+          case GenderMarker.F:
+            return "Sex: F";
+          case GenderMarker.X:
+            return "Sex: X";
+        }
+      }
+    })(),
     loc: { x: 56, y: 834 },
   }),
   (applicant) => ({
-    text:
-      applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.F
-        ? "Sex: F"
-        : "",
-    loc: { x: 56, y: 834 },
-  }),
-  (applicant) => ({
-    text:
-      applicant.isChangingLegalSex && applicant.assignedSex === GenderMarker.X
-        ? "Sex: X"
-        : "",
-    loc: { x: 56, y: 834 },
-  }),
-  (applicant) => ({
-    text:
-      applicant.isChangingLegalSex && applicant.gender === GenderMarker.M
-        ? "Sex: M"
-        : "",
-    loc: { x: 433, y: 834 },
-  }),
-  (applicant) => ({
-    text:
-      applicant.isChangingLegalSex && applicant.gender === GenderMarker.F
-        ? "Sex: F"
-        : "",
-    loc: { x: 433, y: 834 },
-  }),
-  (applicant) => ({
-    text:
-      applicant.isChangingLegalSex && applicant.gender === GenderMarker.X
-        ? "Sex: X"
-        : "",
+    text: (() => {
+      if (applicant.isChangingLegalSex) {
+        switch (applicant.gender) {
+          case GenderMarker.M:
+            return "Sex: M";
+          case GenderMarker.F:
+            return "Sex: F";
+          case GenderMarker.X:
+            return "Sex: X";
+        }
+      }
+    })(),
     loc: { x: 433, y: 834 },
   }),
   () => ({

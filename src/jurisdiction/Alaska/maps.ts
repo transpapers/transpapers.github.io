@@ -68,14 +68,8 @@ export const adultNamePetitionAlaskaMap: Formfill[] = [
     fieldName: "lastName",
   }),
   (applicant) => ({
-    check: !fullName(applicant.birthName),
     fieldName: "currentLegalN",
-    choice: "0",
-  }),
-  (applicant) => ({
-    check: !fullName(applicant.birthName),
-    fieldName: "currentLegalN",
-    choice: "1",
+    choice: fullName(applicant.birthName) ? "1" : "0",
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -172,11 +166,6 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
   (applicant) => ({
     text: applicant.legalName.last,
     fieldName: "lastName",
-  }),
-  (applicant) => ({
-    check: !fullName(applicant.birthName),
-    fieldName: "childsCurrentName",
-    choice: "choice1",
   }),
   (applicant) => ({
     check: !fullName(applicant.birthName),

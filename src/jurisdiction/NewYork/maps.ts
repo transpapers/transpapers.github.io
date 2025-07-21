@@ -559,27 +559,29 @@ export const birthCertAdultNYStateMap: Formfill[] = [
     loc: { x: 397, y: 309 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { x: 207, y: 562 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    loc: { x: 207, y: 562 },
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { x: 207, y: 562 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "Male" : "",
-    loc: { x: 510, y: 562 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "Female" : "",
-    loc: { x: 510, y: 562 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { x: 510, y: 562 },
   }),
   (applicant) => ({
@@ -653,27 +655,29 @@ export const birthCertMinorNYStateMap: Formfill[] = [
     loc: { x: 428, y: 300 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { x: 204, y: 517 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    loc: { x: 204, y: 517 },
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { x: 204, y: 517 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "Male" : "",
-    loc: { x: 510, y: 517 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "Female" : "",
-    loc: { x: 510, y: 517 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { x: 510, y: 517 },
   }),
   (applicant) => ({
@@ -815,27 +819,29 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S3: What do you want to correct? 1",
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "Male" : "",
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     fieldName: "S3: What is currently listed on the birth certificate? 1",
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "Female" : "",
-    fieldName: "S3: What is currently listed on the birth certificate? 1",
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    fieldName: "S3: What is currently listed on the birth certificate? 1",
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "Male" : "",
-    fieldName: "S3: What should it say on the birth record? 1",
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "Female" : "",
-    fieldName: "S3: What should it say on the birth record? 1",
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     fieldName: "S3: What should it say on the birth record? 1",
   }),
   () => ({
@@ -949,27 +955,29 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
     loc: { page: 1, x: 230, y: 963 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "M" : "",
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { page: 1, x: 427, y: 550 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "F" : "",
-    loc: { page: 1, x: 427, y: 550 },
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { page: 1, x: 427, y: 550 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "M" : "",
-    loc: { page: 1, x: 582, y: 550 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "F" : "",
-    loc: { page: 1, x: 582, y: 550 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { page: 1, x: 582, y: 550 },
   }),
 ];
@@ -1038,27 +1046,29 @@ export const selfAttestationMinorNYCMap: Formfill[] = [
     loc: { page: 2, x: 116, y: 145 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "M" : "",
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { page: 2, x: 478, y: 231 },
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "F" : "",
-    loc: { page: 2, x: 478, y: 231 },
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { page: 2, x: 478, y: 231 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "M" : "",
-    loc: { page: 2, x: 634, y: 231 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "F" : "",
-    loc: { page: 2, x: 634, y: 231 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
     loc: { page: 2, x: 634, y: 231 },
   }),
 ];

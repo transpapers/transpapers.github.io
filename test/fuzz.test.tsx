@@ -33,6 +33,7 @@ import {
   type AnyJurisdiction,
   type AnyLocality,
 } from "../src/types/generic";
+import { isFillable, type PlaceableField } from "../src/types/formfill";
 
 // const mayBeOmitted = (probability, func) => ((Math.random() < probability) ? undefined : func());
 
@@ -197,5 +198,37 @@ describe.each(allDocuments)(
           }
         }),
       ));
+
+    test("contains no duplicate field names", () => {
+      if (map) {
+        const allFieldNames: string[] = map
+          .map((fill) => fill(fuzzPeople[0]))
+          .filter((field) => isFillable(field))
+          .map((field) => field.fieldName)
+          .sort();
+
+        allFieldNames.forEach((name, idx, array) => {
+          if (idx + 1 < array.length) {
+            expect(name).not.toEqual(array[idx + 1]);
+          }
+        });
+      }
+    });
+
+    test("contains no duplicate locations", () => {
+      if (map) {
+        const allLocations = map
+          .map((fill) => fill(fuzzPeople[0]))
+          .filter((field) => !isFillable(field))
+          .map((field) => (field as PlaceableField).loc)
+          .sort();
+
+        allLocations.forEach((name, idx, array) => {
+          if (idx + 1 < array.length) {
+            expect(name).not.toEqual(array[idx + 1]);
+          }
+        });
+      }
+    });
   },
 );

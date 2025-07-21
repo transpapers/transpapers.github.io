@@ -133,6 +133,7 @@ export const changeOfNameMap: Formfill[] = [
   }),
   (applicant) => ({
     text: !isMinor(applicant) ? "Self" : "",
+    // FIXME Need the real location of this --- relationship to petitionnr
     loc: { page: 1, x: 135, y: 94 },
   }),
   () => ({

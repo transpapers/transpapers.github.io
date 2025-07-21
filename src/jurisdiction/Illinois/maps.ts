@@ -594,19 +594,17 @@ export const dmvGenderDesignationMap: Formfill[] = [
     fieldName: "11",
   }),
   (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
     fieldName: "cb1",
-    choice: "Yes",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "cb1",
-    choice: "No",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "cb1",
-    choice: "43",
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Yes";
+        case GenderMarker.F:
+          return "No";
+        case GenderMarker.X:
+          return "43";
+      }
+    })(),
   }),
 ];
 
@@ -643,7 +641,7 @@ export const birthCertCorrectionMap: Formfill[] = [
     text: fullName(applicant.birthName)
       ? fullName(applicant.birthName)
       : fullName(applicant.legalName),
-    fieldName: "Name of Applicant",
+    fieldName: "Name currently on record",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
