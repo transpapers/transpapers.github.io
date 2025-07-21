@@ -15,5 +15,5 @@ for page in doc: # iterate the document pages
         # #2F is "/", #20 is " ", #28 is "(", #29 is ")"
         # see ASCII table for more
         
-        # if it spits out just a number for a radio button state add the
-        # word "Choice" before it, example: '0' -> 'Choice0'.
+        # if it spits out just a number for a radio button state
+        # add it as an integer

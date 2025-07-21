@@ -145,10 +145,6 @@ export const changeOfNameMap: Formfill[] = [
     })(),
     loc: { page: 1, x: 625, y: 94 },
   }),
-  (applicant) => ({
-    text: !isMinor(applicant) ? "Self" : "",
-    loc: { page: 1, x: 625, y: 94 },
-  }),
   () => ({
     text: new Date().toLocaleDateString(),
     loc: { page: 1, x: 662, y: 144 },

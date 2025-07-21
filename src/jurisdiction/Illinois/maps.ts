@@ -594,8 +594,7 @@ export const dmvGenderDesignationMap: Formfill[] = [
     fieldName: "11",
   }),
   (applicant) => ({
-    fieldName: "cb1",
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "Yes";
@@ -605,6 +604,7 @@ export const dmvGenderDesignationMap: Formfill[] = [
           return "43";
       }
     })(),
+    fieldName: "cb1",
   }),
 ];
 
