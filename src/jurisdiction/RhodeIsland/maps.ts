@@ -132,9 +132,22 @@ export const changeOfNameMap: Formfill[] = [
     loc: { page: 1, x: 135, y: 94 },
   }),
   (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay
+            ? "Parent" : "";
+        case false:
+          return "Self";
+        default:
+          return "";
+      }
+    })(),
+    loc: { page: 1, x: 625, y: 94 },
+  }),
+  (applicant) => ({
     text: !isMinor(applicant) ? "Self" : "",
-    // FIXME Need the real location of this --- relationship to petitionnr
-    loc: { page: 1, x: 135, y: 94 },
+    loc: { page: 1, x: 625, y: 94 },
   }),
   () => ({
     text: new Date().toLocaleDateString(),

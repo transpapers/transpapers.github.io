@@ -22,7 +22,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function RhodeIslandPC8_1Guide({ person }: { person: Partial<Person> }) {
-  const { age, residentLocality } = person;
+  const { age, residentLocality, parentsAreOkay } = person;
 
   return (
     <section key="RhodeIsland-PC8-1">
@@ -56,6 +56,9 @@ function RhodeIslandPC8_1Guide({ person }: { person: Partial<Person> }) {
             attach a copy of the court order, otherwise check “No”. On the third
             section near the bottom of page 1 have your parent/guardian fill in
             any previous addresses that they have lived at.
+            {parentsAreOkay ? (""):(
+              " On page 2 they neeed to fill out their relationship to you on the top right line."
+            )}
           </p>
         </>
       ) : (
