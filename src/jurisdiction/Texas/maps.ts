@@ -3,6 +3,7 @@ import {
   fullName,
   isMinor,
   representativeName,
+  addZero,
   numericalAge,
   nameInitials,
   phoneAreaCode,
@@ -22,6 +23,8 @@ import { Formfill } from "../../types/formfill";
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
 // then state documents (which need no map information);
+// then county forms as there are a few counties with unique forms
+// then county documents (which need no map information)
 
 /**
  * Petition to Change the Name of an Adult (Texas form FM-NCA-100.)
@@ -29,10 +32,6 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const nameChangeAdultMap: Formfill[] = [
-  () => ({
-    check: true,
-    fieldName: "County Court at Law",
-  }),
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "Print current full legal name of person asking for name change",
@@ -208,10 +207,6 @@ export const nameChangeAdultMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const nameChangeOrderAdultMap: Formfill[] = [
-  () => ({
-    check: true,
-    fieldName: "County Court at Law",
-  }),
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "Print current full legal name of person asking for name change",
@@ -393,6 +388,329 @@ export const nameChangeOrderAdultMap: Formfill[] = [
 ];
 
 /**
+ * Adult Gender Change Packet (forms listed individually below)
+ * Updated 7/2025.
+ * @type {Formfill[]}
+ */
+export const genderChangeAdultMap: Formfill[] = [
+// Petition to Change the Sex/Gender Identifier of an Adult (Texas form TC-FM-GI1-100.)
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 100, y: 139 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 290, y: 420 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M 
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { x: 127, y: 493 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { x: 307, y: 493 },
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 127, y: 550 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M
+      ? "X" : "",
+    loc: { x: 341, y: 550 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M
+      ? "X" : "",
+    loc: { x: 400, y: 550 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.gender === GenderMarker.M
+      ? "X" : "",
+    loc: { x: 507, y: 566 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.gender === GenderMarker.M
+      ? "X" : "",
+    loc: { x: 565, y: 566 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullAddressAndLocality),
+    loc: { x: 245, y: 933 },
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    loc: { page: 1, x: 210, y: 96 },
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    loc: { page: 1, x: 220, y: 333 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthStateAndCountry),
+    loc: { page: 1, x: 545, y: 333 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M
+      ? "X" : "",
+    loc: { page: 1, x: 488, y: 391 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F
+      ? "X" : "",
+    loc: { page: 1, x: 555, y: 391 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 1, x: 658, y: 512 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 2, x: 623, y: 95 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 2, x: 103, y: 555 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M 
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 2, x: 103, y: 688 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 2, x: 103, y: 688 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 2, x: 610, y: 852 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 2, x: 671, y: 852 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 2, x: 450, y: 917 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 2, x: 115, y: 956 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { page: 3, x: 265, y: 207 },
+  }),
+  (applicant) => ({
+    text: addZero(
+      formatDate(applicant.birthdate, {
+        format: [DATE.MONTH],
+        separator: "",
+      }),
+    ),
+    loc: { page: 3, x: 225, y: 244 },
+  }),
+  (applicant) => ({
+    text: addZero(
+      formatDate(applicant.birthdate, {
+        format: [DATE.DAY],
+        separator: "",
+      }),
+    ),
+    loc: { page: 3, x: 290, y: 244 },
+  }),
+  (applicant) => ({
+    text:
+      formatDate(applicant.birthdate, {
+        format: [DATE.YEAR],
+        separator: "",
+      },
+    ),
+    loc: { page: 3, x: 340, y: 244 },
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    loc: { page: 3, x: 200, y: 281 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZipAndCountry),
+    loc: { page: 3, x: 200, y: 315 },
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    loc: { page: 3, x: 222, y: 429 },
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.name,
+    loc: { page: 3, x: 408, y: 429 },
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { page: 3, x: 505, y: 462 },
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    loc: { page: 3, x: 105, y: 498 },
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 3, x: 128, y: 624 },
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 3, x: 128, y: 664 },
+  }),
+// Final Order to Change the Sex/Gender Identifier of an Adult (TC-FM-GI1-200)
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { page: 4, x: 100, y: 167 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { page: 4, x: 300, y: 648 },
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    loc: { page: 4, x: 255, y: 696 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndLocalityAndStateAndZip),
+    loc: { page: 4, x: 260, y: 736 },
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    loc: { page: 4, x: 315, y: 794 },
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    loc: { page: 4, x: 320, y: 893 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthStateAndCountry),
+    loc: { page: 4, x: 595, y: 893 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M
+      ? "X" : "",
+    loc: { page: 5, x: 549, y: 290 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F
+      ? "X" : "",
+    loc: { page: 5, x: 617, y: 290 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 5, x: 128, y: 366 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 5, x: 128, y: 534 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 5, x: 128, y: 688 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M 
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 5, x: 177, y: 874 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 5, x: 362, y: 874 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      ? "X" : "",
+    loc: { page: 6, x: 103, y: 96 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 6, x: 552, y: 132 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 6, x: 619, y: 132 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      ? "" : "X",
+    loc: { page: 6, x: 103, y: 158 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 6, x: 126, y: 176 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 6, x: 314, y: 194 },
+  }),
+];
+
+/**
  * Petition to Change the Name of a Child or Children (Texas form FM-NCC1-100.)
  * Updated 7/2025.
  * @type {Formfill[]}
@@ -401,10 +719,6 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "1",
-  }),
-  () => ({
-    check: true,
-    fieldName: "County Court at Law",
   }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
@@ -516,10 +830,6 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     text: fullName(applicant.legalName),
     loc: { x: 105, y: 188 },
   }),
-  () => ({
-    text: "X",
-    loc: { x: 569, y: 178 },
-  }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
     loc: { x: 450, y: 210 },
@@ -608,10 +918,6 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
   (applicant) => ({
     text: fullName(applicant.legalName),
     loc: { x: 105, y: 188 },
-  }),
-  () => ({
-    text: "X",
-    loc: { x: 569, y: 178 },
   }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
@@ -760,10 +1066,6 @@ export const nameChangeMinorSingleParentOrderMap: Formfill[] = [
     text: fullName(applicant.legalName),
     loc: { x: 105, y: 172 },
   }),
-  () => ({
-    text: "X",
-    loc: { x: 569, y: 170 },
-  }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
     loc: { x: 450, y: 194 },
@@ -826,10 +1128,6 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
   (applicant) => ({
     text: fullName(applicant.legalName),
     loc: { x: 105, y: 188 },
-  }),
-  () => ({
-    text: "X",
-    loc: { x: 569, y: 178 },
   }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
@@ -950,10 +1248,6 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     text: fullName(applicant.legalName),
     loc: { x: 105, y: 188 },
   }),
-  () => ({
-    text: "X",
-    loc: { x: 569, y: 178 },
-  }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
     loc: { x: 450, y: 210 },
@@ -1033,10 +1327,6 @@ export const nameChangeMinorsConsentMap: Formfill[] = [
     text: fullName(applicant.legalName),
     loc: { x: 105, y: 180 },
   }),
-  () => ({
-    text: "X",
-    loc: { x: 569, y: 170 },
-  }),
   (applicant) => ({
     text: applicant.residentLocality?.name,
     loc: { x: 450, y: 200 },
@@ -1046,7 +1336,7 @@ export const nameChangeMinorsConsentMap: Formfill[] = [
     loc: { x: 235, y: 361 },
   }),
   (applicant) => ({
-    text: applicant.age?.toString(),
+    text: String(applicant.age),
     loc: { x: 215, y: 427 },
   }),
   (applicant) => ({
@@ -1056,6 +1346,388 @@ export const nameChangeMinorsConsentMap: Formfill[] = [
   (applicant) => ({
     text: fullName(applicant.legalName),
     loc: { x: 360, y: 582 },
+  }),
+];
+
+/**
+ * Minor Gender Change Packet (forms listed individually below)
+ * Updated 7/2025.
+ * @type {Formfill[]}
+ */
+export const genderChangeMinorMap: Formfill[] = [
+// Agreed Petition to Change the Sex/Gender Identifier of a Minor (Texas form TC-FM-GI3-100.)
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 105, y: 178 },
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 265, y: 448 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { x: 307, y: 502 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { x: 143, y: 626 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { x: 330, y: 696 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { x: 127, y: 873 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { page: 1, x: 220, y: 270 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullAddress),
+    loc: { page: 1, x: 230, y: 311 },
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    loc: { page: 1, x: 630, y: 311 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M
+      ? "X" : "",
+    loc: { page: 1, x: 493, y: 370 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F
+      ? "X" : "",
+    loc: { page: 1, x: 561, y: 370 },
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    loc: { page: 1, x: 200, y: 400 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthCityStateCountry),
+    loc: { page: 1, x: 220, y: 440 },
+  }),
+  (applicant) => ({
+    text:
+      applicant.age && applicant.age < 10
+        ? "X" : "",
+    loc: { page: 1, x: 128, y: 506 },
+  }),
+  (applicant) => ({
+    text:
+      isMinor(applicant) && applicant.age && applicant.age > 9
+        ? "X" : "",
+    loc: { page: 1, x: 128, y: 530 },
+  }),
+  (applicant) => ({
+    text: 
+      !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 1, x: 128, y: 582 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M 
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 2, x: 128, y: 180 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 2, x: 279, y: 180 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M
+      ? "X" : "",
+    loc: { page: 2, x: 407, y: 228 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F
+      ? "X" : "",
+    loc: { page: 2, x: 463, y: 228 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.gender === GenderMarker.M
+      ? "X" : "",
+    loc: { page: 2, x: 545, y: 245 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.gender === GenderMarker.F
+      ? "X" : "",
+    loc: { page: 2, x: 603, y: 245 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 2, x: 272, y: 639 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 2, x: 333, y: 639 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 2, x: 613, y: 664 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 2, x: 265, y: 696 },
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { page: 3, x: 185, y: 206 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullAddress),
+    loc: { page: 3, x: 200, y: 238 },
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    loc: { page: 3, x: 230, y: 271 },
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { page: 3, x: 595, y: 271 },
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    loc: { page: 3, x: 456, y: 357 },
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.name,
+    loc: { page: 3, x: 635, y: 357 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      formatContactInfo(applicant, cf.FullAddress) : "",
+    loc: { page: 3, x: 200, y: 571 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+      applicant.residentLocality?.name : "",
+    loc: { page: 3, x: 456, y: 688 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? 
+     applicant.residentJurisdiction?.name : "",
+    loc: { page: 3, x: 635, y: 688 },
+  }),
+  (applicant) => ({
+    text:
+      isMinor(applicant) && applicant.age && applicant.age > 9
+        ? "X" : "",
+    loc: { page: 4, x: 103, y: 129 },
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 4, x: 103, y: 162 },
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 4, x: 103, y: 226 },
+  }),
+// Final Order to Change the Sex/Gender Identifier of a Minor (TC-FM-GI3-200)
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { page: 5, x: 105, y: 167 },
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { page: 5, x: 295, y: 393 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 5, x: 315, y: 446 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 5, x: 168, y: 495 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 5, x: 337, y: 589 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 5, x: 127, y: 641 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 5, x: 177, y: 707 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { page: 6, x: 225, y: 337 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullAddress),
+    loc: { page: 6, x: 230, y: 378 },
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    loc: { page: 6, x: 630, y: 378 },
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    loc: { page: 6, x: 200, y: 436 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthCityStateCountry),
+    loc: { page: 6, x: 225, y: 478 },
+  }),
+  (applicant) => ({
+    text:
+      applicant.age && applicant.age < 10
+        ? "X" : "",
+    loc: { page: 6, x: 128, y: 540 },
+  }),
+  (applicant) => ({
+    text:
+      isMinor(applicant) && applicant.age && applicant.age > 9
+        ? "X" : "",
+    loc: { page: 6, x: 128, y: 560 },
+  }),
+  (applicant) => ({
+    text: !applicant.hasCriminalRecord
+      ? "X" : "",
+    loc: { page: 6, x: 128, y: 640 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M 
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 7, x: 186, y: 156 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 7, x: 369, y: 156 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      ? "X" : "",
+    loc: { page: 7, x: 103, y: 252 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { page: 7, x: 329, y: 284 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { page: 7, x: 391, y: 284 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      ? "" : "X",
+    loc: { page: 7, x: 103, y: 309 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas" 
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 7, x: 127, y: 325 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.birthJurisdiction?.name === "Texas"
+      ? "" : applicant.birthJurisdiction?.name,
+    loc: { page: 7, x: 265, y: 340 },
+  }),
+];
+
+/**
+ * Statement of Consent of Minor For Change of Sex/Gender Identifier (Texas form TC-FM-GI3-113.)
+ * Updated 7/2025.
+ * @type {Formfill[]}
+ */
+export const genderMinorConsentMap: Formfill[] = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 105, y: 228 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) 
+      ? fullName(applicant.birthName) 
+      : fullName(applicant.legalName),
+    loc: { x: 185, y: 409 },
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    loc: { x: 136, y: 480 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.M 
+      && applicant.gender === GenderMarker.F 
+      ? "X" : "",
+    loc: { x: 128, y: 591 },
+  }),
+  (applicant) => ({
+    text: 
+      applicant.assignedSex === GenderMarker.F 
+      && applicant.gender === GenderMarker.M 
+      ? "X" : "",
+    loc: { x: 128, y: 591 },
+  }),
+];
+
+/**
+ * Respondent's Waiver of Service Only (Specific Waiver) (Texas form FM-Mod1-103.)
+ * Updated 7/2025.
+ * @type {Formfill[]}
+ */
+export const genderServiceWaiverMap: Formfill[] = [
+  (applicant) => ({
+    text: nameInitials(applicant.legalName, {
+          format: [FML.FIRST, FML.MIDDLE, FML.LAST],
+        }),
+    loc: { x: 130, y: 208 },
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 517, y: 226 },
+  }),
+  () => ({
+    text: "Travis",
+    loc: { x: 535, y: 288 },
   }),
 ];
 
@@ -1072,10 +1744,6 @@ export const feeWaiverMap: Formfill[] = [
   (applicant) => ({
     text: applicant.residentLocality?.name,
     fieldName: "County / Condado",
-  }),
-  () => ({
-    check: true,
-    fieldName: "Check.CountyatLaw",
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -1155,7 +1823,7 @@ export const feeWaiverMap: Formfill[] = [
     fieldName: "My address is  Mi domicilio es",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCountyAndState),
+    text: formatContactInfo(applicant, cf.ResidentLocalityAndState),
     fieldName: "County state",
   }),
 ];
@@ -2053,5 +2721,62 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? applicant.zip : "",
     fieldName: "Zip",
+  }),
+];
+
+
+/**
+ * Anderson County Public Filing Pro Se Information Sheet
+ * Updated 7/2025.
+ * @type {Formfill[]}
+ */
+export const andersonCountyMap: Formfill[] = [
+  (applicant) => ({
+    text: `In re ${fullName(representativeName(applicant))}`,
+    loc: { page: 1, x: 150, y: 272 },
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    loc: { page: 1, x: 405, y: 879 },
+  }),
+  (applicant) => ({
+    text: `In re ${fullName(representativeName(applicant))}`,
+    loc: { page: 1, x: 50, y: 937 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
+    loc: { page: 1, x: 405, y: 937 },
+  }),
+  () => ({ 
+    text: new Date().toLocaleDateString(), 
+    loc: { page: 1, x: 50, y: 997 },
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { page: 1, x: 405, y: 997 },
+  }),
+];
+
+/**
+ * Fannin County Public Filing Pro Se Information Sheet
+ * Updated 7/2025.
+ * @type {Formfill[]}
+ */
+export const fanninCountyMap: Formfill[] = [
+  (applicant) => ({
+    text: `In re ${fullName(representativeName(applicant))}`,
+    loc: { x: 150, y: 247 },
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullAddress),
+    loc: { x: 450, y: 932 },
+  }),
+  (applicant) => ({
+    text: `In re ${fullName(representativeName(applicant))}`,
+    loc: { x: 50, y: 978 },
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { x: 405, y: 978 },
   }),
 ];

@@ -246,12 +246,16 @@ export enum ContactFormat {
   FullContactInfo,
   FullContactInfoAndCountry,
   FullAddress,
+  FullAddressAndLocality,
   FullAddressAndCountry,
   BirthCityAndState,
   BirthCityStateCountry,
+  BirthStateAndCountry,
   ResidentCityAndState,
-  ResidentCountyAndState,
+  ResidentLocalityAndState,
   ResidentCityAndStateAndZip,
+  ResidentCityAndLocalityAndStateAndZip,
+  ResidentCityAndStateAndZipAndCountry,
 }
 
 export function formatContactInfo(
@@ -282,13 +286,19 @@ export function formatContactInfo(
       }
       return `${birthCity}, ${birthJurisdiction.abbreviation}, USA`;
 
+    case ContactFormat.BirthStateAndCountry:
+      if (!birthJurisdiction) {
+        return undefined;
+      }
+      return `${birthJurisdiction.abbreviation}, USA`;
+
     case ContactFormat.ResidentCityAndState:
       if (!residentCity || !residentJurisdiction) {
         return undefined;
       }
       return `${residentCity}, ${residentJurisdiction.abbreviation}`;
 
-    case ContactFormat.ResidentCountyAndState:
+    case ContactFormat.ResidentLocalityAndState:
       if (!residentLocality || !residentJurisdiction) {
         return undefined;
       }
@@ -300,6 +310,18 @@ export function formatContactInfo(
       }
       return `${residentCity}, ${residentJurisdiction.name}, ${zip}`;
 
+    case ContactFormat.ResidentCityAndLocalityAndStateAndZip:
+      if (!residentCity || !residentLocality || !residentJurisdiction || !zip) {
+        return undefined;
+      }
+      return `${residentCity}, ${residentLocality.name}, ${residentJurisdiction.name}, ${zip}`;
+
+    case ContactFormat.ResidentCityAndStateAndZipAndCountry:
+      if (!residentCity || !residentJurisdiction || !zip) {
+        return undefined;
+      }
+      return `${residentCity}, ${residentJurisdiction.name}, ${zip} USA`;
+
     case ContactFormat.FullAddress:
       if (
         !streetAddress ||
@@ -310,6 +332,18 @@ export function formatContactInfo(
         return undefined;
       }
       return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip}`;
+
+    case ContactFormat.FullAddressAndLocality:
+      if (
+        !streetAddress ||
+        !residentCity ||
+        !residentLocality ||
+        !residentJurisdiction ||
+        !zip
+      ) {
+        return undefined;
+      }
+      return `${streetAddress} ${residentCity}, ${residentLocality} ${residentJurisdiction.abbreviation} ${zip}`;
 
     case ContactFormat.FullAddressAndCountry:
       if (
