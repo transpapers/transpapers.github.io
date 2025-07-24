@@ -343,7 +343,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return `${streetAddress} ${residentCity}, ${residentLocality} ${residentJurisdiction.abbreviation} ${zip}`;
+      return `${streetAddress} ${residentCity}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${zip}`;
 
     case ContactFormat.FullAddressAndCountry:
       if (
