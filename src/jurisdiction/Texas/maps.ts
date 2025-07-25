@@ -314,75 +314,39 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     text: applicant.chosenName.last,
     fieldName: "Last_2",
   }),
-  (applicant) => ({
-    check: applicant.birthJurisdiction?.name === "Texas",
+  () => ({
+    check: true,
     fieldName:
       "Check box if applicable The name on the Petitioners birth certificate is",
   }),
   (applicant) => ({
-    text: (() => {
-      switch (applicant.birthJurisdiction?.name === "Texas") {
-        case true:
-          return applicant.birthName.first
-            ? applicant.birthName.first
-            : applicant.legalName.first;
-        case false:
-          return "";
-        default:
-          return "";
-      }
-    })(),
+    text: applicant.birthName.first
+      ? applicant.birthName.first
+      : applicant.legalName.first,
     fieldName: "First_3",
   }),
   (applicant) => ({
-    text: (() => {
-      switch (applicant.birthJurisdiction?.name === "Texas") {
-        case true:
-          return applicant.birthName.middle
-            ? applicant.birthName.middle
-            : applicant.legalName.middle;
-        case false:
-          return "";
-        default:
-          return "";
-      }
-    })(),
+    text: applicant.birthName.middle
+      ? applicant.birthName.middle
+      : applicant.legalName.middle,
     fieldName: "Middle_3",
   }),
   (applicant) => ({
-    text: (() => {
-      switch (applicant.birthJurisdiction?.name === "Texas") {
-        case true:
-          return applicant.birthName.last
-            ? applicant.birthName.last
-            : applicant.legalName.last;
-        case false:
-          return "";
-        default:
-          return "";
-      }
-    })(),
+    text: applicant.birthName.last
+      ? applicant.birthName.last
+      : applicant.legalName.last,
     fieldName: "Last_3",
   }),
   (applicant) => ({
-    text:
-      applicant.birthJurisdiction?.name === "Texas"
-        ? applicant.chosenName.first
-        : "",
+    text: applicant.chosenName.first,
     fieldName: "First_4",
   }),
   (applicant) => ({
-    text:
-      applicant.birthJurisdiction?.name === "Texas"
-        ? applicant.chosenName.middle
-        : "",
+    text: applicant.chosenName.middle,
     fieldName: "Middle_4",
   }),
   (applicant) => ({
-    text:
-      applicant.birthJurisdiction?.name === "Texas"
-        ? applicant.chosenName.last
-        : "",
+    text: applicant.chosenName.last,
     fieldName: "Last_4",
   }),
 ];
