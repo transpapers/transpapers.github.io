@@ -34,7 +34,7 @@ function Step6() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const processNames = useStore((state) => state.processNames);
+  const processes = useStore((state) => state.processes);
   const applicant = useStore((state) => state.person);
   const updatePerson = useStore((state) => state.updatePerson);
   const finalizeApplicant = useStore((state) => state.finalizeApplicant);
@@ -42,15 +42,7 @@ function Step6() {
   const { residentJurisdiction, birthJurisdiction } = applicant;
 
   if (residentJurisdiction && birthJurisdiction) {
-    const allProcs = [
-      ...residentJurisdiction.processes,
-      ...birthJurisdiction.processes,
-    ];
-
-    const processes = processNames
-      .map((procName) => allProcs.find((proc) => proc.target === procName))
-      .filter((proc) => proc !== undefined);
-
+    console.log(processes);
     const fieldNamesToShow: (keyof Person)[] =
       processes.flatMap(neededFieldNames);
 

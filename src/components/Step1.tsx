@@ -19,7 +19,7 @@
 
 import * as React from "react";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import useStore from "../store";
@@ -29,7 +29,7 @@ import { type Person } from "../types/person";
 import { allJurisdictions } from "../jurisdiction/all";
 
 function Step1() {
-  const { register, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const { residentJurisdiction } = useStore((state) => state.person);
@@ -43,16 +43,29 @@ function Step1() {
   const choicesElements = Array.from(
     allJurisdictions
       .filter((jurisdiction) => jurisdiction.name !== "Federal")
-      .map(({ name }) => (
-        <li key={name}>
+      .map((jurisdiction) => (
+        <li key={jurisdiction.name}>
           <label>
-            <input
-              {...register("residentJurisdiction", { required: true })}
-              type="radio"
-              value={name}
-              defaultChecked={name === residentJurisdiction?.name}
+            <Controller
+              name="residentJurisdiction"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange } }) => (
+                <>
+                  <input
+                    onChange={() => {
+                      onChange(jurisdiction);
+                    }}
+                    type="radio"
+                    value={jurisdiction.name}
+                    defaultChecked={
+                      jurisdiction.name === residentJurisdiction?.name
+                    }
+                  />
+                  {jurisdiction.name}
+                </>
+              )}
             />
-            {name}
           </label>
         </li>
       )),

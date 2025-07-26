@@ -19,14 +19,14 @@
 
 import * as React from "react";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store";
 
 import { type Person } from "../types/person";
 
 function Step2() {
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit, control } = useForm();
   const navigate = useNavigate();
 
   const updatePerson = useStore((state) => state.updatePerson);
@@ -39,25 +39,36 @@ function Step2() {
     await navigate("/step3");
   };
 
-  if (residentJurisdiction) {
+  if (residentJurisdiction?.localities) {
     const localities = residentJurisdiction.localities;
 
     return (
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <h2>What {residentJurisdiction.name} county do you live in?</h2>
         <ul className="wrap">
-          {Object.keys(localities).map((localityName) => (
-            <li key={localityName}>
+          {localities.map((locality) => (
+            <li key={locality.name}>
               <label>
-                <input
-                  {...register("residentLocality", { required: true })}
-                  type="radio"
-                  value={localityName}
-                  defaultChecked={
-                    residentLocality && localityName === residentLocality.name
-                  }
+                <Controller
+                  name="residentLocality"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { onChange } }) => (
+                    <>
+                      <input
+                        onChange={() => {
+                          onChange(locality);
+                        }}
+                        type="radio"
+                        value={locality.name}
+                        defaultChecked={
+                          locality.name === residentLocality?.name
+                        }
+                      />
+                      {locality.name}
+                    </>
+                  )}
                 />
-                {localityName}
               </label>
             </li>
           ))}

@@ -23,17 +23,18 @@ import { persist } from "zustand/middleware";
 
 import { Person } from "./types/person";
 import { Target } from "./types/process";
+import { AnyProcess } from "./types/generic";
 
 import { numericalAge } from "./lib/util";
 
 interface ApplicationState {
   person: Person;
-  processNames: Target[];
+  processes: AnyProcess[];
 }
 
 interface Action {
   updatePerson: (newData: Partial<ApplicationState["person"]>) => void;
-  updateProcessNames: (newProcessNames: Target[]) => void;
+  updateProcesses: (newProcesses: AnyProcess[]) => void;
   finalizeApplicant: () => void;
 }
 
@@ -74,7 +75,7 @@ const useStore = create<ApplicationState & Action>()(
     (set) => ({
       // Initial state.
       person: new Person(),
-      processNames: [],
+      processes: [],
 
       // Actions.
       updatePerson: (newData) => {
@@ -91,8 +92,12 @@ const useStore = create<ApplicationState & Action>()(
         );
       },
 
-      updateProcessNames: (newProcessNames) => {
-        set(() => ({ processNames: newProcessNames }));
+      updateProcesses: (newProcesses) => {
+        set(
+          produce((state: ApplicationState) => {
+            Object.assign(state.processes, newProcesses);
+          }),
+        );
       },
 
       finalizeApplicant: () => {
@@ -110,11 +115,11 @@ const useStore = create<ApplicationState & Action>()(
               extraData.age = numericalAge(birthdate);
             }
 
-            const isChangingLegalName = state.processNames.includes(
-              Target.NameChange,
+            const isChangingLegalName = state.processes.some(
+              (proc) => proc.target === Target.NameChange,
             );
-            const isChangingLegalSex = state.processNames.includes(
-              Target.GenderMarker,
+            const isChangingLegalSex = state.processes.some(
+              (proc) => proc.target === Target.GenderMarker,
             );
 
             Object.assign(extraData, {

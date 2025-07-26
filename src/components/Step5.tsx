@@ -19,32 +19,52 @@
 
 import * as React from "react";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import useStore from "../store";
 import { targets } from "../types/process";
 
-import { type Target } from "../types/process";
+import { AnyProcess } from "../types/generic";
+
+import { federal } from "../jurisdiction/all";
 
 function Step5() {
-  const { register, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const updateProcessNames = useStore((state) => state.updateProcessNames);
+  const { updateProcesses } = useStore();
   const { residentJurisdiction, birthJurisdiction } = useStore(
     (state) => state.person,
   );
 
   if (residentJurisdiction && birthJurisdiction) {
     const processes = [
-      ...residentJurisdiction.processes,
-      ...birthJurisdiction.processes,
+      ...residentJurisdiction.processes.filter(
+        (proc) => !proc.isBirth && !proc.isJustGuide,
+      ),
+      ...birthJurisdiction.processes.filter(
+        (proc) => proc.isBirth && !proc.isJustGuide,
+      ),
+      ...federal.processes.filter((proc) => !proc.isJustGuide),
     ];
 
-    const onSubmit = async ({ processNames }: { processNames?: Target[] }) => {
-      updateProcessNames(processNames ?? []);
+    const onSubmit = async ({ processes }: { processes?: AnyProcess[] }) => {
+      updateProcesses(processes ?? []);
       await navigate("/step6");
+    };
+
+    const handleChange = (proc: AnyProcess) => {
+      const newProcesses = [...processes];
+      const alreadyThere = newProcesses.some(
+        (proc2) => proc2.target === proc.target,
+      );
+
+      if (!alreadyThere) {
+        newProcesses.push(proc);
+      }
+
+      return newProcesses;
     };
 
     return (
@@ -59,11 +79,20 @@ function Step5() {
               .map((proc) => (
                 <li key={proc.target}>
                   <label>
-                    <input
-                      {...register("processNames")}
-                      type="checkbox"
-                      value={proc.target}
-                      defaultChecked
+                    <Controller
+                      control={control}
+                      name="processes"
+                      render={({ field: { onChange } }) => (
+                        <input
+                          onChange={() => {
+                            console.log(proc);
+                            onChange(proc);
+                          }}
+                          type="checkbox"
+                          value={proc.target}
+                          defaultChecked
+                        />
+                      )}
                     />
                     {(proc.target && targets[proc.target]) ?? ""}
                   </label>

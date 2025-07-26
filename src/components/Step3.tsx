@@ -19,7 +19,7 @@
 
 import * as React from "react";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import useStore from "../store";
@@ -28,11 +28,11 @@ import { type Person } from "../types/person";
 import { allJurisdictions } from "../jurisdiction/all";
 
 function Step3() {
-  const { register, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const updatePerson = useStore((state) => state.updatePerson);
-  const { residentJurisdiction } = useStore((state) => state.person);
+  const { birthJurisdiction } = useStore((state) => state.person);
 
   const onSubmit = async (data: Partial<Person>) => {
     updatePerson(data);
@@ -42,16 +42,29 @@ function Step3() {
   const bornValues = Array.from(
     allJurisdictions
       .filter((jurisdiction) => jurisdiction.name !== "Federal")
-      .map(({ name }) => (
-        <li key={name}>
+      .map((jurisdiction) => (
+        <li key={jurisdiction.name}>
           <label>
-            <input
-              {...register("birthJurisdiction", { required: true })}
-              type="radio"
-              value={name}
-              defaultChecked={name === residentJurisdiction?.name}
+            <Controller
+              name="birthJurisdiction"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange } }) => (
+                <>
+                  <input
+                    onChange={() => {
+                      onChange(jurisdiction);
+                    }}
+                    type="radio"
+                    value={jurisdiction.name}
+                    defaultChecked={
+                      jurisdiction.name === birthJurisdiction?.name
+                    }
+                  />
+                  {jurisdiction.name}
+                </>
+              )}
             />
-            {name}
           </label>
         </li>
       )),
@@ -64,12 +77,17 @@ function Step3() {
         {...bornValues}
         <li key={undefined}>
           <label>
-            <input
-              {...register("birthJurisdiction", { required: true })}
-              type="radio"
-              value={undefined}
+            <Controller
+              name="birthJurisdiction"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange } }) => (
+                <>
+                  <input onChange={onChange} type="radio" value={undefined} />
+                  Somewhere else
+                </>
+              )}
             />
-            Somewhere else
           </label>
         </li>
       </ul>

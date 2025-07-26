@@ -34,6 +34,7 @@ function makeHandler<T extends object>(array: (keyof T & string)[]) {
 }
 
 function fieldNamesOf(fill: Formfill): (keyof Person)[] {
+  console.log(fill);
   const names: (keyof Person)[] = [];
 
   const testDummy = new Proxy<Person>(sampleData, makeHandler<Person>(names));
@@ -43,6 +44,7 @@ function fieldNamesOf(fill: Formfill): (keyof Person)[] {
 }
 
 export function neededFieldNames(proc: AnyProcess): (keyof Person)[] {
+  console.log(proc);
   return proc.documents
     .flatMap((doc) => doc.map ?? [])
     .flatMap((fill) => fieldNamesOf(fill))
