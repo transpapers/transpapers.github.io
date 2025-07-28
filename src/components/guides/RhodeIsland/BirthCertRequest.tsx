@@ -76,7 +76,8 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Partial<Person> 
               or go through your birth state/territory&apos;s Vital Records
               department. If you were born in another country it will be through
               your birth country&apos;s records department instead to get proof
-              of birth.
+              of birth. Any document not in English needs a professional 
+              translation.
             </p>
           )}
         </>

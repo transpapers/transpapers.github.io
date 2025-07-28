@@ -85,6 +85,32 @@ import IllinoisPrivacyRequestGuide from "../src/components/guides/Illinois/Priva
 import IllinoisResourcesGuide from "../src/components/guides/Illinois/Resources";
 import IllinoisSecretaryOfStateGuide from "../src/components/guides/Illinois/SecretaryOfState";
 
+import TexasAdultGenderChangeGuide from "../src/components/guides/Texas/AdultGenderChange";
+import TexasAdultNameOrderGuide from "../src/components/guides/Texas/AdultNameOrder";
+import TexasAdultNamePetitionGuide from "../src/components/guides/Texas/AdultNamePetition";
+import TexasAndersonNameGuide from "../src/components/guides/Texas/AndersonName";
+import TexasCourtHearingGuide from "../src/components/guides/Texas/CourtHearing";
+import TexasDMVGuide from "../src/components/guides/Texas/DMV";
+import TexasEverythingElseGuide from "../src/components/guides/Texas/EverythingElse";
+import TexasFanninNameGuide from "../src/components/guides/Texas/FanninName";
+import TexasFeeWaiverGuide from "../src/components/guides/Texas/FeeWaiver";
+/** Both guides below require texas Locality Data
+ * import TexasFilingInitialFormsGuide from "../src/components/guides/Texas/FilingInitialForms";
+ * import TexasFingerprintingGuide from "../src/components/guides/Texas/Fingerprinting";
+ */
+import TexasGenderChangeAllGuide from "../src/components/guides/Texas/GenderChangeAll";
+import TexasGenderChangeLetterGuide from "../src/components/guides/Texas/GenderChangeLetter";
+import TexasGetBirthCertGuide from "../src/components/guides/Texas/GetBirthCert";
+import TexasMinorGenderChangeGuide from "../src/components/guides/Texas/MinorGenderChange";
+import TexasMinorGenderConsentGuide from "../src/components/guides/Texas/MinorGenderConsent";
+import TexasMinorGenderWaiverGuide from "../src/components/guides/Texas/MinorGenderWaiver";
+import TexasMinorNameConsentGuide from "../src/components/guides/Texas/MinorNameConsent";
+import TexasMinorNameOtherCustodyGuide from "../src/components/guides/Texas/MinorNameOtherCustody";
+import TexasMinorNameParentsOrderGuide from "../src/components/guides/Texas/MinorNameParentsOrder";
+import TexasMinorNameParentsPetitionGuide from "../src/components/guides/Texas/MinorNameParentsPetition";
+import TexasResourcesGuide from "../src/components/guides/Texas/Resources";
+import TexasUpdateBirthCertGuide from "../src/components/guides/Texas/UpdateBithCert";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -301,6 +327,30 @@ const illinoisGuideComponents = [
   },
 ];
 
+const texasGuideComponents = [
+  { name: "TexasAdultGenderChangeGuide", component: <TexasAdultGenderChangeGuide person={sampleData} /> },
+  { name: "TexasAdultNameOrderGuide", component: <TexasAdultNameOrderGuide person={sampleData} /> },
+  { name: "TexasAdultNamePetitionGuide", component: <TexasAdultNamePetitionGuide person={sampleData} /> },
+  { name: "TexasAndersonNameGuide", component: <TexasAndersonNameGuide person={sampleData} /> },
+  { name: "TexasCourtHearingGuide", component: <TexasCourtHearingGuide person={sampleData} /> },
+  { name: "TexasDMVGuide", component: <TexasDMVGuide person={sampleData} /> },
+  { name: "TexasEverythingElseGuide", component: <TexasEverythingElseGuide person={sampleData} /> },
+  { name: "TexasFanninNameGuide", component: <TexasFanninNameGuide person={sampleData} /> },
+  { name: "TexasFeeWaiverGuide", component: <TexasFeeWaiverGuide person={sampleData} /> },
+  { name: "TexasGenderChangeAllGuide", component: <TexasGenderChangeAllGuide person={sampleData} /> },
+  { name: "TexasGenderChangeLetterGuide", component: <TexasGenderChangeLetterGuide person={sampleData} /> },
+  { name: "TexasGetBirthCertGuide", component: <TexasGetBirthCertGuide person={sampleData} /> },
+  { name: "TexasMinorGenderChangeGuide", component: <TexasMinorGenderChangeGuide person={sampleData} /> },
+  { name: "TexasMinorGenderConsentGuide", component: <TexasMinorGenderConsentGuide person={sampleData} /> },
+  { name: "TexasMinorGenderWaiverGuide", component: <TexasMinorGenderWaiverGuide person={sampleData} /> },
+  { name: "TexasMinorNameConsentGuide", component: <TexasMinorNameConsentGuide person={sampleData} /> },
+  { name: "TexasMinorNameOtherCustodyGuide", component: <TexasMinorNameOtherCustodyGuide person={sampleData} /> },
+  { name: "TexasMinorNameParentsOrderGuide", component: <TexasMinorNameParentsOrderGuide person={sampleData} /> },
+  { name: "TexasMinorNameParentsPetitionGuide", component: <TexasMinorNameParentsPetitionGuide person={sampleData} /> },
+  { name: "TexasResourcesGuide", component: <TexasResourcesGuide person={sampleData} /> },
+  { name: "TexasUpdateBirthCertGuide", component: <TexasUpdateBirthCertGuide person={sampleData} /> },
+];
+
 const federalGuideComponents = [
   { name: "DS5504Guide", component: <DS5504Guide person={sampleData} /> },
   { name: "DS82Guide", component: <DS82Guide person={sampleData} /> },
@@ -321,6 +371,7 @@ const allComponents = [
   ...oregonGuideComponents,
   ...alaskaGuideComponents,
   ...illinoisGuideComponents,
+  ...texasGuideComponents,
   ...federalGuideComponents,
 ];
 

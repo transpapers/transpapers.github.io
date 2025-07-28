@@ -54,6 +54,11 @@ export type NewYorkCounty = Locality & {
   isNYC?: boolean;
 };
 
+export type TexasCounty = Locality & {
+  backgroundCheckRequired: boolean;
+  standingOrderRequired: boolean;
+};
+
 export type RhodeIslandCityOrTown = Locality & {
   county: string;
   advertisementRequired: boolean;
