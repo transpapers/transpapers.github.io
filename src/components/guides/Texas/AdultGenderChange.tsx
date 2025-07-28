@@ -32,7 +32,7 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
         an Adult” (TC-FM-GI1-100) as the main form for this process.
         {gender && (gender as string) === "X" ? (
           <>
-            Unfortunately Texas doesn't allow for an “X” identifier on its ID’s 
+            Unfortunately Texas doesn&apos;t allow for an “X” identifier on its ID’s 
             or Birth Certificates so there is no “X” option on these forms. 
             Please go through these forms and check “M” or “F” where they are 
             blank.

@@ -37,7 +37,7 @@ function TexasMinorGenderChangeGuide({ person }: { person: Partial<Person> }) {
         {parentsAreOkay ? (
           <>
             In addition if there are any other adults with custody of you 
-            they <strong>must</strong> sign a “Respondent's Waiver of Service” 
+            they <strong>must</strong> sign a “Respondent&apos;s Waiver of Service” 
             form in front of a notary. This form will be covered later in this 
             section.
           </>
@@ -54,7 +54,7 @@ function TexasMinorGenderChangeGuide({ person }: { person: Partial<Person> }) {
       <p>
       {gender && (gender as string) === "X" ? (
         <>
-          Unfortunately Texas doesn't allow for an “X” identifier on its ID’s 
+          Unfortunately Texas doesn&apos;t allow for an “X” identifier on its ID’s 
           or Birth Certificates so there is no “X” option on these forms. 
           Please go through these forms and check “M” or “F” where they are 
           blank.

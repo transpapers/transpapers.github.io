@@ -23,9 +23,9 @@ function TexasMinorGenderWaiverGuide() {
 
   return (
     <section key="Texas-FM-Mod1-103">
-      <h3>Respondent's Waiver of Service Only (Specific Waiver) (TX, FM-Mod1-103)</h3>
+      <h3>Respondent&apos;s Waiver of Service Only (Specific Waiver) (TX, FM-Mod1-103)</h3>
       <p>
-        The “Respondent's Waiver of Service Only (Specific Waiver)” (FM-Mod1-103) 
+        The “Respondent&apos;s Waiver of Service Only (Specific Waiver)” (FM-Mod1-103) 
         is for anyone that has rights or custody over you and is not a petitioner 
         or co-petitioner for your gender change. By signing this in front of a 
         notary they are stating that they do not need your petitioner or the court 

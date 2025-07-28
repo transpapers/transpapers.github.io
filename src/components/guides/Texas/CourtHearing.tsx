@@ -49,7 +49,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
         ):("")}
         {age && age < 18 ? (
           <>
-            <li>Why is this change in the child's best interest?</li>
+            <li>Why is this change in the child&apos;s best interest?</li>
           </>
         ):("")}
         {isChangingLegalName ? (
@@ -112,7 +112,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
           petitioner should receive that signed copy of the “Order Changing Name 
           of a Minor” which we will call the court order from now on. Your 
           petitioner will want to get two or three certified copies of that court 
-          order from the clerk's office if they haven’t already pre-ordered them. 
+          order from the clerk&apos;s office if they haven’t already pre-ordered them. 
           Keep the original in a safe place and use the copies to update your 
           other documents.
         </p>

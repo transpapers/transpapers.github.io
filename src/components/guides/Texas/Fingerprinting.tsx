@@ -40,7 +40,7 @@ function TexasFingerprintingGuide({
         <p>
           Bandera county will have you do the fingerprinting on a custom 
           fingerprinting card unique to their county. Go to the district 
-          clerk's' office at 3360 TX-173, Bandera, TX 78003 for the card and 
+          clerk&apos;s office at 3360 TX-173, Bandera, TX 78003 for the card and 
           further instructions.
         {isChangingLegalSex ? 
           " Get an extra card for the gender change petition and write “Exhibit B” at the top for the court. " : ""}
@@ -104,12 +104,15 @@ function TexasFingerprintingGuide({
         Adult Legal Name Change” (CR-65). This will tell you what information 
         is required on the card and where. Do <strong>not</strong> send any cards 
         to DPS until a court clerk tells you to.
-      {isChangingLegalName ? 
-        " Write “Exhibit” at the top of one fingerprint card, that card is for" 
-        + residentLocality?.name + "the court. " : ""}
-      {isChangingLegalSex ? 
-        "Write “Exhibit B” on top of the fingerprint card for the court in Travis County. " : ""}
-        Once you have the filled out card(s) you are ready to file.
+        {isChangingLegalName ? (
+          <>
+            Write “Exhibit” at the top of one fingerprint card, that card is for{" "}
+            {residentLocality?.name} the court.
+          </>
+        ):("")}
+        {isChangingLegalSex ? 
+          "Write “Exhibit B” on top of the fingerprint card for the court in Travis County. " : ""}
+          Once you have the filled out card(s) you are ready to file.
       </p>
     </section>
   );

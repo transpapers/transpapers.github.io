@@ -150,4 +150,4 @@ function TexasMinorNameOtherCustodyGuide({ person }: { person: Partial<Person> }
   );
 }
 
-export default TexasMinorNameParentsPetitionGuide;
+export default TexasMinorNameOtherCustodyGuide;

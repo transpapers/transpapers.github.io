@@ -29,7 +29,7 @@ function TexasUpdateBirthCertGuide({ person }: { person: Partial<Person> }) {
       <h3>Updating your Birth Certificate (TX)</h3>
       <p>
         <strong>Warning</strong>: Do <strong>NOT</strong> attempt to update your 
-        birth certificate's gender marker. They will deny the attempt and will 
+        birth certificate&apos;s gender marker. They will deny the attempt and will 
         add you to a list for attempting to do so. This message will update if 
         the legal situation changes.
       </p>
@@ -39,7 +39,7 @@ function TexasUpdateBirthCertGuide({ person }: { person: Partial<Person> }) {
           There is one potential route for getting by the gender marker ban but it is 
           not guaranteed to work. On the second page of the Birth Certificate Correction 
           form it lists a method for correcting an error made by the hospital after the 
-          child's first birthday. There is also a section dedicated to this on the bottom 
+          child&apos;s first birthday. There is also a section dedicated to this on the bottom 
           of page 3 for sex designation specifically. What you would need then is a letter 
           from your birth hospital, birth medical facility, or the doctor who delivered you 
           stating that they made a mistake with your sex designation, aka you were assigned
