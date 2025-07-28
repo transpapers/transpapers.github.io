@@ -69,7 +69,7 @@ function TexasUpdateBirthCertGuide({ person }: { person: Partial<Person> }) {
       <p>
         Vital Statistics uses the “Correcting a Birth Certificate” (VS-170) form. We included 
         two copies depending on if you want to attempt to change the gender marker. If you are 
-        changing <stong>name only</stong> use the copy with the $15 dollar amount on page 1 in 
+        changing <strong>name only</strong> use the copy with the $15 dollar amount on page 1 in 
         the “Fees” section otherwise use the other provided copy. Also in the “Fees” section 
         write how many copies of the updated birth certificate you want then total up the fee.
         {age && age < 18 && !parentsAreOkay ? (
