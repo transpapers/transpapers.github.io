@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -19,7 +19,7 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-/**
+/*!
  * A person's name.
  */
 export class Name {
@@ -29,7 +29,7 @@ export class Name {
   suffix?: string = "";
 }
 
-/**
+/*!
  * Determine whether `name` is empty.
  */
 export function isEmptyName(name: Name): boolean {
@@ -42,7 +42,7 @@ export enum GenderMarker {
   X = "X",
 }
 
-/**
+/*!
  * A pixel location in a PDF document.
  *
  * @remarks When calculating locations, use a DPI value of 100 px/in.
@@ -91,7 +91,7 @@ export enum DateFormatPart {
   YEAR,
 }
 
-/**
+/*!
  * A format specification for dates.
  */
 export interface DateFormat {
@@ -105,7 +105,7 @@ export enum NameFormatPart {
   LAST,
 }
 
-/**
+/*!
  * A format specification for names.
  */
 export interface NameFormat {

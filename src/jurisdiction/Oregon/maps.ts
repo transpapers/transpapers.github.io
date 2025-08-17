@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -36,7 +36,7 @@ import { Formfill } from "../../types/formfill";
 // State forms come first, in the order they should be filed;
 // then state documents (which need no map information);
 
-/**
+/*!
  * Change of Name or Sex (Adult) (Oregon form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -162,7 +162,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Change of Name or Sex (Minor) (Oregon form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -314,7 +314,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for Deferral or Waiver of Fees and Declaration in Support (Oregon form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -421,7 +421,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity (Oregon form OHA 2673.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -577,7 +577,7 @@ export const birthCertOregonMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Oregon Voter Registration Card (Oregon form SEL 500.)
  * Updated 7/2024.
  * @type {Formfill[]}

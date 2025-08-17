@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -34,7 +34,7 @@ export enum Target {
   SocialSecurity = "social-security",
 }
 
-/**
+/*!
  * Procedural information for filing.
  */
 export interface Process<T extends Locality> {
@@ -72,7 +72,7 @@ export interface Process<T extends Locality> {
   isJustGuide?: boolean;
 }
 
-/**
+/*!
  * A single document to be filed.
  */
 export interface Document<T extends Locality> {

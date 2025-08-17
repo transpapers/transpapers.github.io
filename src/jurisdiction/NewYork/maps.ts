@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -39,7 +39,7 @@ import { Formfill } from "../../types/formfill";
 // It's NY State and then NYC forms first, in the order they should be filed;
 // then state documents (which need no map information);
 
-/**
+/*!
  * Name Change and/or Sex Designation Change Petition for Individual Adult (New York form UCS-NC1.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -110,7 +110,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Name Change and/or Sex Designation Change Petition for Individual Minor (New York form UCS-NC2.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -203,7 +203,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application to Waive Court Costs, Fees, and Expenses (NY State form UCS-FW1.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -255,7 +255,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees (NYC form CIV-GP-15-i.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -326,7 +326,7 @@ export const feeWaiverNYCMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for Permit, Driver License or Non-Driver ID Card (New York form MV-44.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -448,7 +448,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Vehicle Registration/Title of Application (MV-82)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -529,7 +529,7 @@ export const vehicleRegistrationMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for Amendment of Certificate of Birth for Gender Designation for an Adult (New York State form DOH-5305.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -625,7 +625,7 @@ export const birthCertAdultNYStateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Parent/Legal Guardian Application for Amendment of Certificate of Birth for Gender Designation for a Minor (New York State form DOH-5306.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -717,7 +717,7 @@ export const birthCertMinorNYStateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for the Correction of a NYC Birth Certificate (NYC form VR 172.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -860,7 +860,7 @@ export const birthCertNYCMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older (New York State form DOH-5303.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -878,7 +878,7 @@ export const genderAffidavitAdultNYStateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under (New York State form DOH-5304.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -898,7 +898,7 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Self-Attestation Form for Registrants 18 Years of Age and Older (NYC form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -984,7 +984,7 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old (NYC form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}

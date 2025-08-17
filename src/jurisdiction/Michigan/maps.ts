@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -36,7 +36,7 @@ import { Formfill } from "../../types/formfill";
 // then state documents (which need no map information);
 // then finally federal forms.
 
-/**
+/*!
  * Petition for Name Change and Ex Parte Request for Nonpublication and
  * Confidential Record (Michigan form PC 51c.)
  * Updated 5/2025.
@@ -240,7 +240,7 @@ export const nameChangePrivateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Petition for Name Change (Michigan form PC 51.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -403,7 +403,7 @@ export const nameChangeMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Addendum to Personal Protected Identifying Information (Michigan form MC 97a.)
  * @type {Formfill[]}
  */
@@ -442,7 +442,7 @@ export const piiMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Order Following Hearing Regarding Petition For Name Change (Michigan form PC 52.)
  * Only required in Saginaw County
  * @type {Formfill[]}
@@ -466,7 +466,7 @@ export const orderFollowingMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Fee Waiver Request (Michigan form MC 20.)
  * @type {Formfill[]}
  */
@@ -490,7 +490,7 @@ export const feeWaiverMap: Formfill[] = [
   () => ({ text: new Date().toLocaleDateString(), fieldName: "Date" }),
 ];
 
-/**
+/*!
  * Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
  * This is for the Primary ID at the Secretary of State step.
  * @type {Formfill[]}
@@ -545,7 +545,7 @@ export const mdosSexMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application to Change or Correct a Michigan Birth Record (Michigan form DCH-0847-CHGBX.)
  * @type {Formfill[]}
  */
@@ -686,7 +686,7 @@ export const birthCertMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Michigan Sex Designation Form (Michigan form, unnumbered.)
  * This is for the Birth Certificate Update step.
  * @type {Formfill[]}

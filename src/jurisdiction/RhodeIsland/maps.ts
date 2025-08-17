@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -38,7 +38,7 @@ import { Formfill } from "../../types/formfill";
 // State forms come first, in the order they should be filed;
 // then state documents (which need no map information);
 
-/**
+/*!
  * Change of Name (Rhode Island form PC8.1.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -152,7 +152,7 @@ export const changeOfNameMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Rhode Island BCI Disclaimer Form (Rhode Island form, unnumbered.)
  * @type {Formfill[]}
  */
@@ -191,7 +191,7 @@ export const bciMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Rhode Island Application for a Certified Copy of a Birth Record Form (Rhode Island form, unnumbered.)
  * @type {Formfill[]}
  */
@@ -263,7 +263,7 @@ export const birthCertOneMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Rhode Island Application for License, Identification Card and Permit Form (Rhode Island form, LI-1.)
  * @type {Formfill[]}
  */
@@ -342,7 +342,7 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Rhode Island Gender Designation on a License or Identification Card Form (Rhode Island form, unnumbered.)
  * @type {Formfill[]}
  */
@@ -405,7 +405,7 @@ export const genderIDMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Rhode Island Application for a Certified Copy of a Birth Record Form (Rhode Island form, unnumbered.)
  * @type {Formfill[]}
  */

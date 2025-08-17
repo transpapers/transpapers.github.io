@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -32,7 +32,7 @@ import {
   rhodeIsland,
 } from "../jurisdiction/all";
 
-/**
+/*!
  * Applicant's personal information.
  */
 export class Person {
@@ -247,7 +247,7 @@ export class Person {
 }
 
 // This should come in handy for documentation purposes.
-/**
+/*!
  * @type {Person}
  */
 export const sampleData: Person = {
@@ -324,7 +324,7 @@ export const sampleData: Person = {
 };
 
 // This is all of the static and dynamic fields for person listed out.
-/**
+/*!
  * @type {Person}
  */
 export const sampleCombinationData = {

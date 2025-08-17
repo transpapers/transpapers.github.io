@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -25,7 +25,7 @@ import { type AnyProcess, type AnyJurisdiction } from "./generic";
 
 import { allJurisdictions } from "../jurisdiction/all";
 
-/**
+/*!
  * A single US state or territory.
  */
 export interface Jurisdiction<T extends Locality> {

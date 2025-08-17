@@ -24,6 +24,13 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
+      build: {
+       minify: false,
+        terserOptions: {
+         compress: false,
+          mangle: false,
+        }
+      }
     };
   } else if (mode === "test") {
     return {

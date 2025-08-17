@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -36,7 +36,7 @@ import { Formfill } from "../../types/formfill";
 // State forms come first, in the order they should be filed;
 // then state documents (which need no map information);
 
-/**
+/*!
  * Petition for Change of Name (Alaska form CIV-700.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -116,7 +116,7 @@ export const adultNamePetitionAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Petition to Change Child's Name (Alaska form CIV-694.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -212,7 +212,7 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Parental Consent from Non-Petitioning Parent (Alaska form CIV-695.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -236,7 +236,7 @@ export const nonpetitionParentalConsentAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for Legal Name Change (Alaska form VS-405.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -299,7 +299,7 @@ export const applicationNameAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Request to Waive Posting in Adult Change of Name Case (Alaska form CIV-708.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -327,7 +327,7 @@ export const adultWaivePublicationAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Request to Waive Posting in Child's Change of Name Case (Alaska form CIV-709.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -359,7 +359,7 @@ export const minorWaivePublicationAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Request for Exemption from Payment of Fees (Alaska form TF-920.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -383,7 +383,7 @@ export const feeWaiverAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Affidavit of Additional Service (Alaska form CIV-702.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -411,7 +411,7 @@ export const additionalServiceAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Drivers License, Permit, or Identification Card Transaction Application (Alaska form D-1.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -486,7 +486,7 @@ export const primaryIDAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Certification for Change of Sex Designator on Driver License or Identification Card (Alaska form 427.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -521,7 +521,7 @@ export const primaryIDSexDesignationAlaskaMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Alaska Birth Certificate Request Form (Alaska form unnumbered.)
  * Updated 7/2024.
  * @type {Formfill[]}

@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -96,7 +96,7 @@ export function abbreviateJurisdiction(
   return map[jurisdiction];
 }
 
-/**
+/*!
  * Calculate a person's numerical age from their birthdate, as a string.
  * Since a "date of birth" is a legal fiction and not a timestamp, we can do
  * this without resorting to any funky time nonsense.
@@ -125,7 +125,7 @@ export function numericalAge(birthdate: string): number {
   return thisYear - birthYear;
 }
 
-/**
+/*!
  * Format a Date as a string
  * @param {string} date - date, formatted as YYYY-MM-DD.
  * @param {DateFormat} fmt - Ugh
@@ -190,7 +190,7 @@ export function phoneEnd(phoneNumber: string | undefined): string {
   return phoneDigits(phoneNumber).substring(6);
 }
 
-/**
+/*!
  * Format a full `name` as a string.
  * @param {Name} name
  * @return {string}
@@ -204,7 +204,7 @@ export function fullName(name: Name | undefined): string {
     .join(" ");
 }
 
-/**
+/*!
  * Determine whether a person is a minor (i.e., under 18.)
  * @param {Person} applicant
  * @return {boolean}
@@ -222,7 +222,7 @@ export function isMinor(applicant: Partial<Person>): boolean {
   return numericalAge(applicant.birthdate) < 18;
 }
 
-/**
+/*!
  * Return the legal name of a person's legal representative (themself or their
  * parent/guardian) from the given `data`.
  * @param {Person} applicant
@@ -245,7 +245,7 @@ export function representativeName(applicant: Person): Name {
   };
 }
 
-/**
+/*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
  * @param {Person} applicant
  * @return {string}
@@ -394,7 +394,7 @@ export function formatContactInfo(
   }
 }
 
-/**
+/*!
  * Return entered string with leading "0" if it was single digit.
  * This is for adding 0's to the day or month for particular forms.
  * @param {string} zeroString
@@ -411,7 +411,7 @@ export function addZero(zeroString: string): string {
   return zeroString;
 }
 
-/**
+/*!
  * Returns combined and capitalized first letters of entered
  * first, middle, and last name to make initials for certain
  * forms. Can re-format order or amount as needed.
@@ -451,7 +451,7 @@ export function numericalBirthYear(birthdate: string | undefined): number {
   return birthYear;
 }
 
-/**
+/*!
  * Capitalize and return entered string.
  * Some forms require all CAPS entries.
  * @param {string} capString

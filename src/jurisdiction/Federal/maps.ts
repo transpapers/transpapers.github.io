@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -36,7 +36,7 @@ import {
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
-/**
+/*!
  * Application for a Social Security Card (federal form SS-5.)
  * @type {Formfill[]}
  */
@@ -170,7 +170,7 @@ export const ssnMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for a Passport (federal form DS 5504.)
  * @type {Formfill[]}
  */
@@ -288,7 +288,7 @@ export const ds5504Map: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for a Passport (federal form DS 82.)
  * @type {Formfill[]}
  */
@@ -408,7 +408,7 @@ export const ds82Map: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for a Passport (federal form DS 11.)
  * @type {Formfill[]}
  */
@@ -576,7 +576,7 @@ export const ds11Map: Formfill[] = [
   () => ({ text: "x", loc: { page: 5, x: 694, y: 236 } }),
 ];
 
-/**
+/*!
  * Attestation of Orr v. Trump Class Membership (federal form unnumbered)
  * @type {Formfill[]}
  */
@@ -605,7 +605,7 @@ export const passportAttestationMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Request for Status Information Letter (federal form unnumbered)
  * @type {Formfill[]}
  */

@@ -1,4 +1,4 @@
-/**
+/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckn
  *
@@ -35,7 +35,7 @@ import { Formfill } from "../../types/formfill";
 // State forms come first, in the order they should be filed;
 // then state documents (which need no map information);
 
-/**
+/*!
  * Request for Name Change (Illinois form ATJ 303.10) (Adult)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -154,7 +154,7 @@ export const adultNameChangeMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Order for Name Change (Illinois form ATJ 305.7) (Adult)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -170,7 +170,7 @@ export const adultNameChangeOrderMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Request for Name Change (Illinois form NCM-R 2003.5) (Minor)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -238,7 +238,7 @@ export const minorNameChangeMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Request for Name Change - Child Information (Illinois form NCM-CI 2004.5)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -360,7 +360,7 @@ export const minorChildInfoMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Additional Parent Request for Name Change (Illinois form NCM-AP 2006.4)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -376,7 +376,7 @@ export const minorAdditionalParentMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Order for Name Change (Illinois form NCM-O 2009.5) (Minor)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -392,7 +392,7 @@ export const minorNameChangeOrderMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Motion to Impound (Make Court Records Private) (Illinois form ATJ 308.1)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -432,7 +432,7 @@ export const requestCourtRecordsPrivateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Order on Motion to Impound (Make Court Records Private) (Illinois form ATJ 309.1)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -448,7 +448,7 @@ export const orderCourtRecordsPrivateMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Application for Waiver of Court Fees (Civil) (Illinois form WA-P 603.8)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -497,7 +497,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Order on Application for Waiver of Court Fees (Civil) (Illinois form WA-O 604.7)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -517,7 +517,7 @@ export const feeWaiverJudgementMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Certification for Exemption from E-Filing (Illinois form EW-C 3401.4)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -553,7 +553,7 @@ export const efileExemptionMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * Gender Designation Change Form (Illinois form DSD A 329.3)
  * Updated 6/2025.
  * @type {Formfill[]}
@@ -611,7 +611,7 @@ export const dmvGenderDesignationMap: Formfill[] = [
   }),
 ];
 
-/**
+/*!
  * State of Illinois Affidavit and Certificate of Correction Request (Illinois form IOCI 19-184)
  * Updated 7/2025.
  * @type {Formfill[]}
