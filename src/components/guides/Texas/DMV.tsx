@@ -1,5 +1,6 @@
 /**
- * Copyright 2023-2025 Sasha Lišková and Stephanie Beckon
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -15,6 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License along with
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
 import * as React from "react";
@@ -73,6 +75,7 @@ function TexasDMVGuide({ person }: { person: Partial<Person> }) {
         needed in any case. For this form, if you selected “Driver License”, there is a 
         required “Class” checkbox. This{" "} 
         <a href="https://www.dps.texas.gov/section/driver-license/classes-driver-licenses">
+ * @licend The above is the entire license notice for the JavaScript code in this file.
           link
         </a>
         {" "}has descriptions of each class to help you pick the correct box. If you are 

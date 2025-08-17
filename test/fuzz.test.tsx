@@ -1,5 +1,6 @@
 /**
- * Copyright 2023-2025 Sasha Lišková and Stephanie Beckon
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -15,6 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License along with
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
 import { readFileSync } from "fs";
