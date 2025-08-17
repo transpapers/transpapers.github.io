@@ -21,11 +21,11 @@
 
 import { GenderMarker } from "../../types/types";
 
-import { 
-  ssnMap, 
-  ds5504Map, 
-  ds82Map, 
-  ds11Map, 
+import {
+  ssnMap,
+  ds5504Map,
+  ds82Map,
+  ds11Map,
   statusLetterMap,
   passportAttestationMap,
 } from "./maps";
@@ -93,11 +93,11 @@ export const passport: Process<Locality> = {
 export const selectiveService: Process<Locality> = {
   depends: [Target.NameChange, Target.SocialSecurity],
   documents: [
-     {
+    {
       name: "Request for Status Information Letter",
       filename: "Federal/selective_service_status_letter.pdf",
       map: statusLetterMap,
-      include: (applicant) => (applicant.assignedSex === GenderMarker.F),
+      include: (applicant) => applicant.assignedSex === GenderMarker.F,
     },
     {
       name: "Selective Service Guide",

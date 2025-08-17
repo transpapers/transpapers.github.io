@@ -30,9 +30,9 @@ function TexasFanninNameGuide({ person }: { person: Partial<Person> }) {
     <section key="Texas-Fannin-County-Name">
       <h3>Fannin County Form (TX, unnumbered)</h3>
       <p>
-        Fannin county also requires a “Public Filing Pro Se Information Sheet” 
+        Fannin county also requires a “Public Filing Pro Se Information Sheet”
         in addition to everything else.
-        {age && age < 18 ? " Your petitioner" : " You"} should read the form and 
+        {age && age < 18 ? " Your petitioner" : " You"} should read the form and
         sign on the bottom left.
       </p>
     </section>

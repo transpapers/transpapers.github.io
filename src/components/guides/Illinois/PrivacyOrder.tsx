@@ -24,11 +24,13 @@ import * as React from "react";
 function IllinoisPrivacyOrderGuide() {
   return (
     <section key="Illinois-PrivacyOrder">
-      <h3>Order on Motion to Impound (Make Court Records Private) (IL, ATJ 309.1)</h3>
+      <h3>
+        Order on Motion to Impound (Make Court Records Private) (IL, ATJ 309.1)
+      </h3>
       <p>
-        The “Order on Motion to Impound (Make Court Records Private)” 
-        (ATJ 309.1) is what the judge fills out to seal the court records. 
-        This form is already complete.
+        The “Order on Motion to Impound (Make Court Records Private)” (ATJ
+        309.1) is what the judge fills out to seal the court records. This form
+        is already complete.
       </p>
     </section>
   );

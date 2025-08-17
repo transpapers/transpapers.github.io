@@ -137,8 +137,7 @@ export const changeOfNameMap: Formfill[] = [
     text: (() => {
       switch (isMinor(applicant)) {
         case true:
-          return applicant.parentsAreOkay
-            ? "Parent" : "";
+          return applicant.parentsAreOkay ? "Parent" : "";
         case false:
           return "Self";
         default:

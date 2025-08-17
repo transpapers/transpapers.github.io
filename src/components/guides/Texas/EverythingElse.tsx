@@ -26,16 +26,16 @@ function TexasEverythingElseGuide() {
     <section key="TX-EverythingElse">
       <h3>Everything Else (TX)</h3>
       <p>
-        Once you have the court order and primary identification in your new name, 
-        you can change your name almost everywhere else without issue. Some places 
-        will even allow for digital updates by scanning in your new ID and court 
-        order. Though there is still a ban on updating gender markers for state 
-        offices and programs which may offer some significant hurdles, private 
-        services should be unaffected by this. If you have issues with this and 
-        our guide doesn’t cover it you can submit a tip through our feedback form. 
-        What follows is a list of places, in no particular order, where you may 
-        want to update your name. Any forms that you fill out should be signed in 
-        your new name.
+        Once you have the court order and primary identification in your new
+        name, you can change your name almost everywhere else without issue.
+        Some places will even allow for digital updates by scanning in your new
+        ID and court order. Though there is still a ban on updating gender
+        markers for state offices and programs which may offer some significant
+        hurdles, private services should be unaffected by this. If you have
+        issues with this and our guide doesn’t cover it you can submit a tip
+        through our feedback form. What follows is a list of places, in no
+        particular order, where you may want to update your name. Any forms that
+        you fill out should be signed in your new name.
       </p>
 
       <p>
@@ -97,8 +97,9 @@ function TexasEverythingElseGuide() {
         <strong>not</strong> need to contact them.
       </p>
       <p>
-        <strong>Primary School Records</strong>: Each school will have different 
-        requirements and protocols; contact their registrar to see what theirs is.
+        <strong>Primary School Records</strong>: Each school will have different
+        requirements and protocols; contact their registrar to see what theirs
+        is.
       </p>
       <p>
         <strong>College Records</strong>: Contact the Student Records Department
@@ -115,7 +116,7 @@ function TexasEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: If you registered already but did 
+        <strong>Voter Registration</strong>: If you registered already but did
         not update your voter registration with your primary ID then use this{" "}
         <a href="https://txapps.texas.gov/tolapp/sos/SOSACManager?utm_source=child_voter&utm_medium=banner&utm_campaign=texasgov">
           link
@@ -124,11 +125,12 @@ function TexasEverythingElseGuide() {
         <a href="https://vrrequest.sos.texas.gov/VoterApplication/ConfirmStatusEN">
           online
         </a>
-        registration service and then mail it to the Voter Registration Office 
+        registration service and then mail it to the Voter Registration Office
         in your county, a full list of those addresses is
         <a href="https://www.sos.state.tx.us/elections/voter/votregduties.shtml">
           here
-        </a>.
+        </a>
+        .
       </p>
       <p>
         <strong>Some other places to consider:</strong>

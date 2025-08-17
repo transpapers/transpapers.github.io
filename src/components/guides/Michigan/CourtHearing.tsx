@@ -51,7 +51,9 @@ function MichiganCourtHearingGuide({ person }: { person: Partial<Person> }) {
           <>
             <li>Have you paid the publication fee to an approved newspaper?</li>
           </>
-        ):("")}
+        ) : (
+          ""
+        )}
         <li>In your own words, why do you want to change your name?</li>
         <li>Is there anything else you’d like the court to know?</li>
         <li>

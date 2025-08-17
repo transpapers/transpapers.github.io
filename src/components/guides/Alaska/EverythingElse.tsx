@@ -113,8 +113,8 @@ function AlaskaEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: If you are eligable to vote you 
-        can update online at this{" "}
+        <strong>Voter Registration</strong>: If you are eligable to vote you can
+        update online at this{" "}
         <a href="https://voterregistration.alaska.gov/">link</a>.
       </p>
       <p>

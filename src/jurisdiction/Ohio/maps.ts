@@ -199,18 +199,15 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? 
-      applicant.residentCity : "",
+    text: applicant.parentsAreOkay ? applicant.residentCity : "",
     fieldName: "CITY",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? 
-      applicant.residentJurisdiction?.name : "",
+    text: applicant.parentsAreOkay ? applicant.residentJurisdiction?.name : "",
     fieldName: "STATE",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? 
-      applicant.zip : "",
+    text: applicant.parentsAreOkay ? applicant.zip : "",
     fieldName: "ZIP CODE",
   }),
   (applicant) => ({
@@ -226,18 +223,15 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "ADDRESS_2",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? 
-      applicant.residentCity : "",
+    text: applicant.parentsAreOkay ? applicant.residentCity : "",
     fieldName: "CITY_2",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? 
-      applicant.residentJurisdiction?.name : "",
+    text: applicant.parentsAreOkay ? applicant.residentJurisdiction?.name : "",
     fieldName: "STATE_2",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? 
-      applicant.zip : "",
+    text: applicant.parentsAreOkay ? applicant.zip : "",
     fieldName: "ZIP CODE_2",
   }),
   (applicant) => ({

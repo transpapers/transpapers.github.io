@@ -30,60 +30,67 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
     <section key="Texas-Adult-Gender-Change">
       <h3>Adult Gender Change (TX, Travis County)</h3>
       <p>
-        Travis county uses the “Petition to Change the Sex/Gender Identifier of 
+        Travis county uses the “Petition to Change the Sex/Gender Identifier of
         an Adult” (TC-FM-GI1-100) as the main form for this process.
         {gender && (gender as string) === "X" ? (
           <>
-            Unfortunately Texas doesn&apos;t allow for an “X” identifier on its ID’s 
-            or Birth Certificates so there is no “X” option on these forms. 
-            Please go through these forms and check “M” or “F” where they are 
+            Unfortunately Texas doesn&apos;t allow for an “X” identifier on its
+            ID’s or Birth Certificates so there is no “X” option on these forms.
+            Please go through these forms and check “M” or “F” where they are
             blank.
           </>
-        ) : ("")}
+        ) : (
+          ""
+        )}
       </p>
 
       <p>
-        You will need to enter your social security number in section 3B and any 
-        drivers license numbers you have had over the past 10 years as well as the 
-        state(s) you got them in into section 3D. Enter your birth county into 
-        section 3E and your race, as shown on your birth certificate, into section 
-        3G. If your birth certificate doesn’t have a race listed, put “Not Shown”.
-      {hasCriminalRecord ? (
-        <>
-          Detail your criminal record in section 4, class C misdemeanors do not 
-          need to be listed. If you need help with documenting that history you 
-          can get fingerprinted and do a criminal history{" "}
-          <a href="https://www.dps.texas.gov/section/crime-records/faq/crime-records-services-faqs">
-            report
-          </a>
-          {" "}with the Texas DPS. For 4C they are talking about using a “Sex 
-          Offender Update Form” (CR-32) to notify law enforcement.
-        </>
-      ) : (" Skip sections 4 through 6.")}
+        You will need to enter your social security number in section 3B and any
+        drivers license numbers you have had over the past 10 years as well as
+        the state(s) you got them in into section 3D. Enter your birth county
+        into section 3E and your race, as shown on your birth certificate, into
+        section 3G. If your birth certificate doesn’t have a race listed, put
+        “Not Shown”.
+        {hasCriminalRecord ? (
+          <>
+            Detail your criminal record in section 4, class C misdemeanors do
+            not need to be listed. If you need help with documenting that
+            history you can get fingerprinted and do a criminal history{" "}
+            <a href="https://www.dps.texas.gov/section/crime-records/faq/crime-records-services-faqs">
+              report
+            </a>{" "}
+            with the Texas DPS. For 4C they are talking about using a “Sex
+            Offender Update Form” (CR-32) to notify law enforcement.
+          </>
+        ) : (
+          " Skip sections 4 through 6."
+        )}
       </p>
 
       <p>
-        Sign and date section 7 then fill in your mailing address. Use the checklist 
-        in section 8 to gather any documents you might need. We have provided a 
-        template letter to show your doctor/therapist and an explanation of how to 
-        do this later in this section. We will cover fingerprinting in the next 
-        section.
+        Sign and date section 7 then fill in your mailing address. Use the
+        checklist in section 8 to gather any documents you might need. We have
+        provided a template letter to show your doctor/therapist and an
+        explanation of how to do this later in this section. We will cover
+        fingerprinting in the next section.
       </p>
 
       <p>
-        The second form you will need is the “Final Order to Change the Sex/Gender 
-        Identifier of an Adult” (TC-FM-GI1-200) which the judge will sign and give 
-        back if they approve the change. They want it to be pre-filled so you will 
-        need to fill out sections 3D, 3E, 3F, and 3G with the same information that 
-        was on the petition earlier.
-      {hasCriminalRecord ? (
-        <>
-          Sections 3I through 3L are for criminal history and should also match 
-          your earlier petition.
-        </>
-      ) : (" Skip 3I through 3L.")}
-        Leave the date and signature line <strong>blank</strong> as that’s for the 
-        judge to sign.
+        The second form you will need is the “Final Order to Change the
+        Sex/Gender Identifier of an Adult” (TC-FM-GI1-200) which the judge will
+        sign and give back if they approve the change. They want it to be
+        pre-filled so you will need to fill out sections 3D, 3E, 3F, and 3G with
+        the same information that was on the petition earlier.
+        {hasCriminalRecord ? (
+          <>
+            Sections 3I through 3L are for criminal history and should also
+            match your earlier petition.
+          </>
+        ) : (
+          " Skip 3I through 3L."
+        )}
+        Leave the date and signature line <strong>blank</strong> as that’s for
+        the judge to sign.
       </p>
     </section>
   );

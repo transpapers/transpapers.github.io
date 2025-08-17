@@ -49,9 +49,10 @@ function RhodeIslandEverythingElseGuide() {
       <p>
         <strong>Work</strong>: If you have an HR system, bring your new ID, new
         social security card, and court order to them and ask them to update
-        your information. If you get your health insurance through your work, you can
-        have them send the updated information to them on your behalf. Some can do
-        it online at this <a href="https://healthsourceri.com/">link</a>.
+        your information. If you get your health insurance through your work,
+        you can have them send the updated information to them on your behalf.
+        Some can do it online at this{" "}
+        <a href="https://healthsourceri.com/">link</a>.
       </p>
       <p>
         <strong>Healthcare Providers</strong>: You should be able to bring in
@@ -60,8 +61,8 @@ function RhodeIslandEverythingElseGuide() {
         certain medical professionals will need to know your transition status.
       </p>
       <p>
-        <strong>Gas/Heating/Electricity Provider</strong>: Should be
-        able to be done by phone, email, or online.
+        <strong>Gas/Heating/Electricity Provider</strong>: Should be able to be
+        done by phone, email, or online.
       </p>
       <p>
         <strong>Water/Sewer</strong>: Should be able to be done by phone, email,
@@ -80,7 +81,7 @@ function RhodeIslandEverythingElseGuide() {
       </p>
       <p>
         <strong>Property/House Title</strong>: Contact your county’s Registry of
-        Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and 
+        Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and
         court order.
       </p>
       <p>
@@ -90,8 +91,8 @@ function RhodeIslandEverythingElseGuide() {
       </p>
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
-        change when you update your information with Social Security. You do <strong>not</strong>
-        {" "}need to contact them.
+        change when you update your information with Social Security. You do{" "}
+        <strong>not</strong> need to contact them.
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different
@@ -115,8 +116,8 @@ function RhodeIslandEverythingElseGuide() {
         <strong>Voter Registration</strong>: Rhode Island has automatic voter
         registration, so no action is required unless you opted out when
         renewing your primary ID. If you were too young for that step, they
-        should have your correct name and gender the first time you
-        apply for a license, state ID, or otherwise register to vote.
+        should have your correct name and gender the first time you apply for a
+        license, state ID, or otherwise register to vote.
       </p>
       <p>
         <strong>Some other places to consider:</strong>

@@ -33,37 +33,35 @@ function TexasGenderChangeAllGuide({ person }: { person: Partial<Person> }) {
         The Texas governor signed{" "}
         <a href="https://www.texastribune.org/2025/05/29/texas-trans-sex-definition-state-documents-impact/">
           House Bill 229
-        </a>
-        {" "}into law barring the update of gender markers for all state 
-        forms/documents including ID’s and Texas Birth Certificates. Due to 
-        this legal situation, getting a gender change court order will{" "}
+        </a>{" "}
+        into law barring the update of gender markers for all state
+        forms/documents including ID’s and Texas Birth Certificates. Due to this
+        legal situation, getting a gender change court order will{" "}
         <strong>not</strong> be effective at the state level at this time.
         {birthJurisdiction?.name === "Texas" ? (
           <>
-            It is not advisable to go through this process at this time, we will 
-            update this message if the legal situation changes. We have left the 
-            instructions and forms in case you choose to do this anyway, 
+            It is not advisable to go through this process at this time, we will
+            update this message if the legal situation changes. We have left the
+            instructions and forms in case you choose to do this anyway,
             otherwise skip this section.
           </>
         ) : (
           <>
-            Since you were not born in Texas check the Birth Certificate section 
+            Since you were not born in Texas check the Birth Certificate section
             below or this{" "}
-            <a href="https://www.cdc.gov/nchs/w2w/index.htm">
-              link
-            </a>
-            . If {birthJurisdiction?.name} requires a gender change order to 
-            update your birth certificate you should still get one.
+            <a href="https://www.cdc.gov/nchs/w2w/index.htm">link</a>. If{" "}
+            {birthJurisdiction?.name} requires a gender change order to update
+            your birth certificate you should still get one.
           </>
         )}
       </p>
 
       <p>
-        Some Texas courts will either outright refuse to change gender markers 
-        or make the process particularly difficult to do, beyond the scope of 
-        our help. Travis county will accept gender change petitions from any 
-        Texas resident who submits one and they can do E-File. They also will 
-        generally grant the changes without a hearing. For these reasons this 
+        Some Texas courts will either outright refuse to change gender markers
+        or make the process particularly difficult to do, beyond the scope of
+        our help. Travis county will accept gender change petitions from any
+        Texas resident who submits one and they can do E-File. They also will
+        generally grant the changes without a hearing. For these reasons this
         guide will use the Travis county process in all gender change cases.
       </p>
     </section>

@@ -24,11 +24,12 @@ import * as React from "react";
 function IllinoisFeeOrderGuide() {
   return (
     <section key="Illinois-FeeOrder">
-      <h3>Order on Application for Waiver of Court Fees (Civil) (IL, WA-O 604.7)</h3>
+      <h3>
+        Order on Application for Waiver of Court Fees (Civil) (IL, WA-O 604.7)
+      </h3>
       <p>
-        The “Order on Application for Waiver of Court Fees (Civil)” 
-        (WA-O 604.7) is filed with a fee waiver application. This form is 
-        already complete.
+        The “Order on Application for Waiver of Court Fees (Civil)” (WA-O 604.7)
+        is filed with a fee waiver application. This form is already complete.
       </p>
     </section>
   );

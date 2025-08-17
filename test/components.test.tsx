@@ -232,9 +232,7 @@ const alaskaGuideComponents = [
   },
   {
     name: "AlaskaFilingInitialFormsGuide",
-    component: (
-      <AlaskaFilingInitialFormsGuide person={sampleData} />
-    ),
+    component: <AlaskaFilingInitialFormsGuide person={sampleData} />,
   },
   {
     name: "AlaskaCourtHearingGuide",
@@ -330,27 +328,81 @@ const illinoisGuideComponents = [
 ];
 
 const texasGuideComponents = [
-  { name: "TexasAdultGenderChangeGuide", component: <TexasAdultGenderChangeGuide person={sampleData} /> },
-  { name: "TexasAdultNameOrderGuide", component: <TexasAdultNameOrderGuide person={sampleData} /> },
-  { name: "TexasAdultNamePetitionGuide", component: <TexasAdultNamePetitionGuide person={sampleData} /> },
-  { name: "TexasAndersonNameGuide", component: <TexasAndersonNameGuide person={sampleData} /> },
-  { name: "TexasCourtHearingGuide", component: <TexasCourtHearingGuide person={sampleData} /> },
+  {
+    name: "TexasAdultGenderChangeGuide",
+    component: <TexasAdultGenderChangeGuide person={sampleData} />,
+  },
+  {
+    name: "TexasAdultNameOrderGuide",
+    component: <TexasAdultNameOrderGuide person={sampleData} />,
+  },
+  {
+    name: "TexasAdultNamePetitionGuide",
+    component: <TexasAdultNamePetitionGuide person={sampleData} />,
+  },
+  {
+    name: "TexasAndersonNameGuide",
+    component: <TexasAndersonNameGuide person={sampleData} />,
+  },
+  {
+    name: "TexasCourtHearingGuide",
+    component: <TexasCourtHearingGuide person={sampleData} />,
+  },
   { name: "TexasDMVGuide", component: <TexasDMVGuide person={sampleData} /> },
   { name: "TexasEverythingElseGuide", component: <TexasEverythingElseGuide /> },
-  { name: "TexasFanninNameGuide", component: <TexasFanninNameGuide person={sampleData} /> },
-  { name: "TexasFeeWaiverGuide", component: <TexasFeeWaiverGuide person={sampleData} /> },
-  { name: "TexasGenderChangeAllGuide", component: <TexasGenderChangeAllGuide person={sampleData} /> },
-  { name: "TexasGenderChangeLetterGuide", component: <TexasGenderChangeLetterGuide /> },
-  { name: "TexasGetBirthCertGuide", component: <TexasGetBirthCertGuide person={sampleData} /> },
-  { name: "TexasMinorGenderChangeGuide", component: <TexasMinorGenderChangeGuide person={sampleData} /> },
-  { name: "TexasMinorGenderConsentGuide", component: <TexasMinorGenderConsentGuide person={sampleData} /> },
-  { name: "TexasMinorGenderWaiverGuide", component: <TexasMinorGenderWaiverGuide /> },
-  { name: "TexasMinorNameConsentGuide", component: <TexasMinorNameConsentGuide /> },
-  { name: "TexasMinorNameOtherCustodyGuide", component: <TexasMinorNameOtherCustodyGuide person={sampleData} /> },
-  { name: "TexasMinorNameParentsOrderGuide", component: <TexasMinorNameParentsOrderGuide /> },
-  { name: "TexasMinorNameParentsPetitionGuide", component: <TexasMinorNameParentsPetitionGuide person={sampleData} /> },
+  {
+    name: "TexasFanninNameGuide",
+    component: <TexasFanninNameGuide person={sampleData} />,
+  },
+  {
+    name: "TexasFeeWaiverGuide",
+    component: <TexasFeeWaiverGuide person={sampleData} />,
+  },
+  {
+    name: "TexasGenderChangeAllGuide",
+    component: <TexasGenderChangeAllGuide person={sampleData} />,
+  },
+  {
+    name: "TexasGenderChangeLetterGuide",
+    component: <TexasGenderChangeLetterGuide />,
+  },
+  {
+    name: "TexasGetBirthCertGuide",
+    component: <TexasGetBirthCertGuide person={sampleData} />,
+  },
+  {
+    name: "TexasMinorGenderChangeGuide",
+    component: <TexasMinorGenderChangeGuide person={sampleData} />,
+  },
+  {
+    name: "TexasMinorGenderConsentGuide",
+    component: <TexasMinorGenderConsentGuide person={sampleData} />,
+  },
+  {
+    name: "TexasMinorGenderWaiverGuide",
+    component: <TexasMinorGenderWaiverGuide />,
+  },
+  {
+    name: "TexasMinorNameConsentGuide",
+    component: <TexasMinorNameConsentGuide />,
+  },
+  {
+    name: "TexasMinorNameOtherCustodyGuide",
+    component: <TexasMinorNameOtherCustodyGuide person={sampleData} />,
+  },
+  {
+    name: "TexasMinorNameParentsOrderGuide",
+    component: <TexasMinorNameParentsOrderGuide />,
+  },
+  {
+    name: "TexasMinorNameParentsPetitionGuide",
+    component: <TexasMinorNameParentsPetitionGuide person={sampleData} />,
+  },
   { name: "TexasResourcesGuide", component: <TexasResourcesGuide /> },
-  { name: "TexasUpdateBirthCertGuide", component: <TexasUpdateBirthCertGuide person={sampleData} /> },
+  {
+    name: "TexasUpdateBirthCertGuide",
+    component: <TexasUpdateBirthCertGuide person={sampleData} />,
+  },
 ];
 
 const federalGuideComponents = [

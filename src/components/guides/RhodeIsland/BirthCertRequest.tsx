@@ -23,7 +23,11 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function RhodeIslandBirthCertRequestGuide({ person }: { person: Partial<Person> }) {
+function RhodeIslandBirthCertRequestGuide({
+  person,
+}: {
+  person: Partial<Person>;
+}) {
   const { age, birthJurisdiction, parentsAreOkay, residentLocality } = person;
 
   return (
@@ -78,7 +82,7 @@ function RhodeIslandBirthCertRequestGuide({ person }: { person: Partial<Person> 
               or go through your birth state/territory&apos;s Vital Records
               department. If you were born in another country it will be through
               your birth country&apos;s records department instead to get proof
-              of birth. Any document not in English needs a professional 
+              of birth. Any document not in English needs a professional
               translation.
             </p>
           )}

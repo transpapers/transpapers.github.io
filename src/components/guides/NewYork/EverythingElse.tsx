@@ -26,12 +26,13 @@ function NewYorkEverythingElseGuide() {
     <section key="NY-EverythingElse">
       <h3>Everything Else (NY)</h3>
       <p>
-        New York’s Gender Recognition Act mandates that any New York based public 
-        or private organization must change your name if you show them the court 
-        order and new ID. Some places will even allow for digital updates by 
-        scanning in your new ID and court order. What follows is a list of places, 
-        in no particular order, where you may want to update your name. Any forms 
-        that you fill out should be signed in your new name.
+        New York’s Gender Recognition Act mandates that any New York based
+        public or private organization must change your name if you show them
+        the court order and new ID. Some places will even allow for digital
+        updates by scanning in your new ID and court order. What follows is a
+        list of places, in no particular order, where you may want to update
+        your name. Any forms that you fill out should be signed in your new
+        name.
       </p>
 
       <p>
@@ -49,8 +50,8 @@ function NewYorkEverythingElseGuide() {
       <p>
         <strong>Work</strong>: If you have an HR system, bring your new ID, new
         social security card, and court order to them and ask them to update
-        your information. If you get your health insurance through your work, you can
-        have them send the updated information to them on your behalf.
+        your information. If you get your health insurance through your work,
+        you can have them send the updated information to them on your behalf.
       </p>
       <p>
         <strong>Healthcare Providers</strong>: You should be able to bring in
@@ -59,8 +60,8 @@ function NewYorkEverythingElseGuide() {
         certain medical professionals will need to know your transition status.
       </p>
       <p>
-        <strong>Gas/Heating/Electricity Provider</strong>: Should be
-        able to be done by phone, email, or online.
+        <strong>Gas/Heating/Electricity Provider</strong>: Should be able to be
+        done by phone, email, or online.
       </p>
       <p>
         <strong>Water/Sewer</strong>: Should be able to be done by phone, email,
@@ -78,9 +79,10 @@ function NewYorkEverythingElseGuide() {
         mail.
       </p>
       <p>
-        <strong>Property/House Title</strong>: Go to your local county recorder’s office 
-        and state that you want to correct the name on your property. They should issue 
-        a correction deed that you can fill out and submit to update your name.
+        <strong>Property/House Title</strong>: Go to your local county
+        recorder’s office and state that you want to correct the name on your
+        property. They should issue a correction deed that you can fill out and
+        submit to update your name.
       </p>
       <p>
         <strong>Phone Service</strong>: Go to the nearest store of your carrier
@@ -89,8 +91,8 @@ function NewYorkEverythingElseGuide() {
       </p>
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
-        change when you update your information with Social Security. You do <strong>not</strong>
-        {" "}need to contact them.
+        change when you update your information with Social Security. You do{" "}
+        <strong>not</strong> need to contact them.
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different
@@ -111,9 +113,10 @@ function NewYorkEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: This should have been updated when you 
-        went to the DMV to get your new ID. If not, make another appointment, bring 
-        your new ID, and ask to have your registration updated.
+        <strong>Voter Registration</strong>: This should have been updated when
+        you went to the DMV to get your new ID. If not, make another
+        appointment, bring your new ID, and ask to have your registration
+        updated.
       </p>
       <p>
         <strong>Some other places to consider:</strong>

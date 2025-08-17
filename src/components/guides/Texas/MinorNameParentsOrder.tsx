@@ -22,14 +22,13 @@
 import * as React from "react";
 
 function TexasMinorNameParentsOrderGuide() {
-
   return (
     <section key="Texas-FM-NCC1-200">
       <h3>Order Changing the Name of a Child [Set A] (TX, FM-NCC1-200)</h3>
       <p>
-        This form needs to be filed with the petition. Your parents should fill in 
-        any blanks in section 1 and section 4 with the same information as the 
-        petition. On the third page they should again fill in any missing 
+        This form needs to be filed with the petition. Your parents should fill
+        in any blanks in section 1 and section 4 with the same information as
+        the petition. On the third page they should again fill in any missing
         information and sign.
       </p>
     </section>

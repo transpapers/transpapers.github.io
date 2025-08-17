@@ -108,7 +108,8 @@ export const fields: Record<string, Field> = {
     type: "boolean",
   },
   hasCriminalRecord: {
-    title: "I have a criminal record, pending charges, or have been previously charged with a crime.",
+    title:
+      "I have a criminal record, pending charges, or have been previously charged with a crime.",
     subtitle:
       "Minors need to check the box if they or the adult filing the paperwork for them has a criminal record or pending charges.",
     name: "hasCriminalRecord",

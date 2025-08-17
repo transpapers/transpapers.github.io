@@ -31,38 +31,37 @@ function OregonCourtHearingGuide({ person }: { person: Partial<Person> }) {
       <h3>Court Hearing (OR)</h3>
       <p>
         On the day of your hearing, you
-        {age && age < 18 && " and your parent(s)/guardian(s)"} should dress 
+        {age && age < 18 && " and your parent(s)/guardian(s)"} should dress
         appropriately for a courtroom, even if the hearing is virtual. You
-        {age && age < 18 && " and/or your parent(s)/guardian(s)"} will be 
-        sworn in and questioned. The questions and process vary between 
-        courts.{" "}
-
+        {age && age < 18 && " and/or your parent(s)/guardian(s)"} will be sworn
+        in and questioned. The questions and process vary between courts.{" "}
         {age && age < 18 ? (
           <>
-            The judge will be trying to decide what is in the best
-            interest of the minor. Depending on your age, your testimony will 
-            be taken into account. If the change is denied we{" "}
-            <strong>strongly</strong> recommend hiring a lawyer for an appeal 
-            if your petitioner has not already done so. If not you will need to 
-            wait until you are 18.
+            The judge will be trying to decide what is in the best interest of
+            the minor. Depending on your age, your testimony will be taken into
+            account. If the change is denied we <strong>strongly</strong>{" "}
+            recommend hiring a lawyer for an appeal if your petitioner has not
+            already done so. If not you will need to wait until you are 18.
           </>
         ) : (
-        <>
-            The judge cannot deny the change unless they think the attempt is 
+          <>
+            The judge cannot deny the change unless they think the attempt is
             for fraudulant reasons. For more details see this{" "}
-            <a href="https://samuelslaw.com/2022/02/oregon-appellate-court-requires-that-a-judge-give-specific-reasons-before-denying-a-name-or-gender-marker-change/">link</a>
-            . If your petition is denied we <strong>strongly</strong> recommend 
+            <a href="https://samuelslaw.com/2022/02/oregon-appellate-court-requires-that-a-judge-give-specific-reasons-before-denying-a-name-or-gender-marker-change/">
+              link
+            </a>
+            . If your petition is denied we <strong>strongly</strong> recommend
             hiring a lawyer for an appeal if you have not already done so. The
-            “Resources” section will have some potenitally helpful links for 
+            “Resources” section will have some potenitally helpful links for
             this.
-        </>
+          </>
         )}
       </p>
 
       <p>
-        If the change is granted make sure to have 2 or 3 certified copies of 
-        the court order purchased. Once you have the certified copies of the 
-        court order, you are ready to file with the Social Security 
+        If the change is granted make sure to have 2 or 3 certified copies of
+        the court order purchased. Once you have the certified copies of the
+        court order, you are ready to file with the Social Security
         Administration. Keep the original court order in a safe place.
       </p>
     </section>

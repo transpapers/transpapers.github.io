@@ -128,4 +128,3 @@ export interface Publication {
   website?: string;
   email?: string;
 }
-

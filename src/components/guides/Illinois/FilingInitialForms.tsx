@@ -24,7 +24,11 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function IllinoisFilingInitialFormsGuide({ person }: { person: Partial<Person> }) {
+function IllinoisFilingInitialFormsGuide({
+  person,
+}: {
+  person: Partial<Person>;
+}) {
   const { age, residentLocality, hasCriminalRecord } = person;
 
   return (

@@ -48,9 +48,9 @@ function SocialSecurityGuide({ person }: { person: Partial<Person> }) {
         SS-5.) If you have had a legal name not shown in section 1 write it in
         &ldquo;Other Names Used&rdquo;. Enter your SSN in section 2, and those
         of your parents in sections 9-10. If you do not know and/or cannot
-        obtain their SSNs, check the “Unknown” box in the appropriate section. 
-        The “Race” and “Ethnicity” fields are optional, and left blank; you 
-        may fill them in at your discretion.
+        obtain their SSNs, check the “Unknown” box in the appropriate section.
+        The “Race” and “Ethnicity” fields are optional, and left blank; you may
+        fill them in at your discretion.
       </p>
 
       {age && age < 18 ? (
@@ -68,14 +68,14 @@ function SocialSecurityGuide({ person }: { person: Partial<Person> }) {
         <a href="https://secure.ssa.gov/ICON/main.jsp">
           https://secure.ssa.gov/ICON/main.jsp
         </a>
-        . Social Security will only do name changes by appointment so{" "} 
-        {age && age < 18 ? (" have a parent/guardian "): ("")} call the
-        number of a local office from the above link and ask for a name change 
-        appointment. A state ID, drivers license, or passport will be acceptable 
-        for ID. If {age && age < 18 ? (" they ") : (" you ")} do not have those, 
-        refer to page 2 of the SS-5 form for other accepted forms of ID. Bring
-        the completed Application for a Social Security Card (SS-5), as well as
-        the court order. There is <strong>not</strong> a fee for updating your
+        . Social Security will only do name changes by appointment so{" "}
+        {age && age < 18 ? " have a parent/guardian " : ""} call the number of a
+        local office from the above link and ask for a name change appointment.
+        A state ID, drivers license, or passport will be acceptable for ID. If{" "}
+        {age && age < 18 ? " they " : " you "} do not have those, refer to page
+        2 of the SS-5 form for other accepted forms of ID. Bring the completed
+        Application for a Social Security Card (SS-5), as well as the court
+        order. There is <strong>not</strong> a fee for updating your
         information, it&apos;s free.
       </p>
       <p>

@@ -30,24 +30,24 @@ function IllinoisFeeWaiverGuide({ person }: { person: Partial<Person> }) {
     <section key="Illinois-FeeWaiver">
       <h3>Application for Waiver of Court Fees (Civil) (IL, WA-P 603.8)</h3>
       <p>
-        The “Application for Waiver of Court Fees (Civil)” (WA-P 603.8) is an 
-        optional form to waive some or all of the cost for filing a petition. 
-        The cost varies widely from county to county and changes regularly 
-        but it is generally the largest single fee in the process. Courts 
-        will <strong>always</strong> partially or fully grant this waiver if
-        {age && age < 18 ? " your petitioner" : " you"} is using one of the 
-        public benefits listed in section 3. Otherwise the petition is not 
+        The “Application for Waiver of Court Fees (Civil)” (WA-P 603.8) is an
+        optional form to waive some or all of the cost for filing a petition.
+        The cost varies widely from county to county and changes regularly but
+        it is generally the largest single fee in the process. Courts will{" "}
+        <strong>always</strong> partially or fully grant this waiver if
+        {age && age < 18 ? " your petitioner" : " you"} is using one of the
+        public benefits listed in section 3. Otherwise the petition is not
         guaranteed to be granted but the worst they can do is deny it.
-        {age && age < 18 ? " Your petitioner" : " You"} should fill in any 
+        {age && age < 18 ? " Your petitioner" : " You"} should fill in any
         blanks in section 1 through 3. If
-        {age && age < 18 ? " your petitioner checks" : " you check"} at 
-        least one box in section 3 then skip sections 4 and 5. Otherwise 
-        fill those out as well. For section 6 a judge will only request a 
-        hearing if they have questions or need more information about the 
-        form, check the box for the preferred hearing method. In the event 
-        of a hearing {age && age < 18 ? " your petitioner" : " you"} should 
-        gather documents showing that the form was filled correctly such as 
-        benefits statements, pay stubs, bank records, bills, etc…
+        {age && age < 18 ? " your petitioner checks" : " you check"} at least
+        one box in section 3 then skip sections 4 and 5. Otherwise fill those
+        out as well. For section 6 a judge will only request a hearing if they
+        have questions or need more information about the form, check the box
+        for the preferred hearing method. In the event of a hearing{" "}
+        {age && age < 18 ? " your petitioner" : " you"} should gather documents
+        showing that the form was filled correctly such as benefits statements,
+        pay stubs, bank records, bills, etc…
       </p>
     </section>
   );

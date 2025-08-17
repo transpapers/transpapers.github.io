@@ -30,20 +30,20 @@ function TexasAdultNameOrderGuide({ person }: { person: Partial<Person> }) {
     <section key="Texas-FM-NCA-200">
       <h3>Order Changing Name of an Adult (TX, FM-NCA-200)</h3>
       <p>
-        This is the form you will get back from the judge if your petition is 
-        successful. They want this form to be pre-filled. You will need to fill 
-        it out with the same information as the petition above in sections 4C, 
+        This is the form you will get back from the judge if your petition is
+        successful. They want this form to be pre-filled. You will need to fill
+        it out with the same information as the petition above in sections 4C,
         4E, 4F, and 4J.
-
         {hasCriminalRecord ? (
           <>
-            Sections 4K through 4N are for any criminal history and should be 
+            Sections 4K through 4N are for any criminal history and should be
             filled to match the name change petition as well.
           </>
-        ) : ("")}
-
-      Leave the date and signature line <strong>blank</strong> as that’s for 
-      the judge to sign.
+        ) : (
+          ""
+        )}
+        Leave the date and signature line <strong>blank</strong> as that’s for
+        the judge to sign.
       </p>
     </section>
   );

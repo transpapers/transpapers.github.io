@@ -23,7 +23,11 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 
-function MichiganSecretaryOfStateGuide({ person }: { person: Partial<Person> }) {
+function MichiganSecretaryOfStateGuide({
+  person,
+}: {
+  person: Partial<Person>;
+}) {
   const { age, isChangingLegalSex, isChangingLegalName } = person;
 
   return (

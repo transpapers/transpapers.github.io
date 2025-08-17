@@ -31,9 +31,10 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The court case Orr v. Trump has concluded and
-        the state department is now required to update gender markers on passports
-        again. It is safe to do so and the passport will reflect the correct marker.
+        <strong>Attention</strong>: The court case Orr v. Trump has concluded
+        and the state department is now required to update gender markers on
+        passports again. It is safe to do so and the passport will reflect the
+        correct marker.
       </p>
 
       <p>
@@ -46,24 +47,27 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
         business for the highest chance of success.{" "}
         <strong>Do not staple it to the form.</strong> For section 10 on page 6
         please fill out your parents place of birth, legal gender, and
-        citizenship status. On page 6 complete sections 11 through 21 as they 
+        citizenship status. On page 6 complete sections 11 through 21 as they
         apply to you. For section 18 if you have no current travel plans write
         &quot;none&quot; in every box.
       </p>
 
-        {isChangingLegalSex ? (
+      {isChangingLegalSex ? (
         <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is new and allows
-          for updating gender markers once again. To complete the form simply
-          {age && age < 18 ? (" have a parent/guardian sign ") : (" sign ")}
+          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is
+          new and allows for updating gender markers once again. To complete the
+          form simply
+          {age && age < 18 ? " have a parent/guardian sign " : " sign "}
           on page 2.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
       <p>
         Now you will need to go to a location that you can apply in with this
-        DS-11 passport form, {isChangingLegalSex ? (" attestation form, "):("")} 
-        your primary id, a checkbook for fees, and your photo. You can find 
+        DS-11 passport form, {isChangingLegalSex ? " attestation form, " : ""}
+        your primary id, a checkbook for fees, and your photo. You can find
         application locations at his URL:{" "}
         <a href="https://iafdb.travel.state.gov/">
           https://iafdb.travel.state.gov/
@@ -80,8 +84,8 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
               cannot attend for any reason go to this{" "}
               <a href="webpage">
                 https://travel.state.gov/content/travel/en/passports/need-passport/under-16.html
-              </a>
-              {" "}and click on step #5 to see a list of potential workarounds for
+              </a>{" "}
+              and click on step #5 to see a list of potential workarounds for
               all situations.
             </>
           ) : (
@@ -90,8 +94,8 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
               one can appear with you see this{" "}
               <a href="webpage">
                 https://travel.state.gov/content/travel/en/passports/need-passport/16-17.html
-              </a>
-              {" "}and click on step #3 to see a list of potential workarounds for
+              </a>{" "}
+              and click on step #3 to see a list of potential workarounds for
               all situations.
             </>
           )}

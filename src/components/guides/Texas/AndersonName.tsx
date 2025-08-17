@@ -30,9 +30,9 @@ function TexasAndersonNameGuide({ person }: { person: Partial<Person> }) {
     <section key="Texas-Anderson-County-Name">
       <h3>Anderson County Form (TX, unnumbered)</h3>
       <p>
-        Anderson county also requires a “Public Filing Pro Se Information Sheet” 
+        Anderson county also requires a “Public Filing Pro Se Information Sheet”
         in addition to everything else.
-        {age && age < 18 ? " Your petitioner" : " You"} should read the form and 
+        {age && age < 18 ? " Your petitioner" : " You"} should read the form and
         sign on the bottom left.
       </p>
     </section>

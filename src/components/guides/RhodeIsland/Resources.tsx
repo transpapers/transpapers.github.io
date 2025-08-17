@@ -30,23 +30,24 @@ function RhodeIslandResourcesGuide() {
           <a href="https://weberrenew.org/programs/#trans-support">
             Weber Renew
           </a>
-          : Helps people through the document updating process as well as
-          some of the fees associated with it. They also connect to
-          a variety of other Trans resources in the Rhode Island area.
+          : Helps people through the document updating process as well as some
+          of the fees associated with it. They also connect to a variety of
+          other Trans resources in the Rhode Island area.
         </li>
         <li>
           <a href="https://www.glad.org/know-your-rights/glad-answers/">
             GLAD Law
           </a>
           : A New England based organization that assists with legal name
-          changes among other legal help. They can help with complex
-          cases by providing legal advice or services.
+          changes among other legal help. They can help with complex cases by
+          providing legal advice or services.
         </li>
         <li>
           <a href="https://www.thundermisthealth.org/services/trans-health-access/">
             Thundermist Health
           </a>
-          : Offers transition related health care, wellness, and access to other resources.
+          : Offers transition related health care, wellness, and access to other
+          resources.
         </li>
       </ul>
     </section>

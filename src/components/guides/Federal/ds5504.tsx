@@ -30,53 +30,55 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The court case Orr v. Trump has concluded and
-        the state department is now required to update gender markers on passports
-        again. It is safe to do so and the passport will reflect the correct marker.
+        <strong>Attention</strong>: The court case Orr v. Trump has concluded
+        and the state department is now required to update gender markers on
+        passports again. It is safe to do so and the passport will reflect the
+        correct marker.
       </p>
 
       <p>
         This step should be started after you have updated your primary ID.
-        Pages 1-4 of your passport application (DS-5504) contain
-        instructions and clarification, on page 5 at the top you will need to
-        select which documents you want. Then fill out your social security
-        number in section 5. If you have changed your name multiple times before
-        then you will need to add them to section 9. Fill out section 10 using
-        your passports information. For the photo we suggest going to a business
-        for the highest chance of success and stapling that to the form.
+        Pages 1-4 of your passport application (DS-5504) contain instructions
+        and clarification, on page 5 at the top you will need to select which
+        documents you want. Then fill out your social security number in section
+        5. If you have changed your name multiple times before then you will
+        need to add them to section 9. Fill out section 10 using your passports
+        information. For the photo we suggest going to a business for the
+        highest chance of success and stapling that to the form.
       </p>
 
-        {age && age < 18 ? (
-            <p>
-                {age && age < 16 ? (
-                    " A parent/guardian should sign on the second line below the picture section."
-                ) : (
-                    " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line."
-                )}
-            </p>
-        ) : (
-            " Sign the document on the first line below the picture section."
-        )}
+      {age && age < 18 ? (
+        <p>
+          {age && age < 16
+            ? " A parent/guardian should sign on the second line below the picture section."
+            : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line."}
+        </p>
+      ) : (
+        " Sign the document on the first line below the picture section."
+      )}
 
       <p>
-        Write in the current date to the right of the signatures in the indicated
-        section. On page 6 complete sections 11 through 19 as they apply to you.
-        For section 19 if you have no current travel plans write &ldquo;none&rdquo;
-        in every box.
+        Write in the current date to the right of the signatures in the
+        indicated section. On page 6 complete sections 11 through 19 as they
+        apply to you. For section 19 if you have no current travel plans write
+        &ldquo;none&rdquo; in every box.
       </p>
 
       {isChangingLegalSex ? (
         <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is new and allows
-          for updating gender markers once again. To complete the form simply
-          {age && age < 18 ? (" have a parent/guardian sign ") : (" sign ")}
+          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is
+          new and allows for updating gender markers once again. To complete the
+          form simply
+          {age && age < 18 ? " have a parent/guardian sign " : " sign "}
           on page 2.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
       <p>
-        Now you will need to place the DS-5504 passport form, 
-        {isChangingLegalSex ? (" attestation form, "):("")} old passport, and a
+        Now you will need to place the DS-5504 passport form,
+        {isChangingLegalSex ? " attestation form, " : ""} old passport, and a
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is no fee involved unless you
         choose to expedite the process, to do so make out a check for $60 to the

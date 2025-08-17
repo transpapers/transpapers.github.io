@@ -30,8 +30,8 @@ function NewYorkResourcesGuide() {
           <a href="https://www.nyc.gov/site/doh/health/health-topics/transgender-health.page">
             NYC Health Service
           </a>
-          : Maintains an extensive and up to date list of LGBT resources in 
-          New York City. This includes both legal assistance and healthcare 
+          : Maintains an extensive and up to date list of LGBT resources in New
+          York City. This includes both legal assistance and healthcare
           resources for transgender people.
         </li>
         <li>
@@ -39,12 +39,12 @@ function NewYorkResourcesGuide() {
             GLAD Law
           </a>
           : A New England based organization that assists with legal name
-          changes among other legal help. They can help with complex
-          cases by providing legal advice or services.
+          changes among other legal help. They can help with complex cases by
+          providing legal advice or services.
         </li>
         <li>
           <a href="https://ag.ny.gov/resources/individuals/health-care-insurance/transgender-nonbinary-intersex-health-care">
-            The New York State Attorney General 
+            The New York State Attorney General
           </a>
           : Maintains an extensive list of legal resources for transgender
           people across the whole state.

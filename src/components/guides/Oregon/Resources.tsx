@@ -27,33 +27,29 @@ function OregonResourcesGuide() {
       <h3>Resources (OR)</h3>
       <ul>
         <li>
-          <a href="https://www.ogalla.org/contact-us">
-            Ogalla Bar Association
-          </a>
+          <a href="https://www.ogalla.org/contact-us">Ogalla Bar Association</a>
           : They can help you find an LGBT supportive lawyer if needed.
         </li>
         <li>
-            <a href="https://www.basicrights.org/resources">
-                Basic Rights Oregon
-            </a>
-            : They provide a wide range of resources and help connect 
-            LGBT Oregon residents to other resources for their specific 
-            situation.
+          <a href="https://www.basicrights.org/resources">
+            Basic Rights Oregon
+          </a>
+          : They provide a wide range of resources and help connect LGBT Oregon
+          residents to other resources for their specific situation.
         </li>
         <li>
           <a href="https://outsidein.org/health-services/transgender-and-gender-non-conforming/">
             Outside In
           </a>
-          : Helps provide financial aid and other resources for 
-          name/gender marker changes in Multnomah, Clackamas, 
-          and Washington counties.
+          : Helps provide financial aid and other resources for name/gender
+          marker changes in Multnomah, Clackamas, and Washington counties.
         </li>
         <li>
           <a href="https://transponder.community/legal-id-change-program/">
             Transponder
           </a>
-          : Helps provide financial aid and other resources for 
-          name/gender marker changes anywhere in Oregon.
+          : Helps provide financial aid and other resources for name/gender
+          marker changes anywhere in Oregon.
         </li>
       </ul>
     </section>

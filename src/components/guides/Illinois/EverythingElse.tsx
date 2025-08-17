@@ -113,10 +113,10 @@ function IllinoisEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: Illinois has automatic voter 
-        registration which should have been handled with the primary ID 
+        <strong>Voter Registration</strong>: Illinois has automatic voter
+        registration which should have been handled with the primary ID
         appointment. If it was not and you are eligable to vote go to this{" "}
-        <a href="https://ova.elections.il.gov/">website</a>. Then click the 
+        <a href="https://ova.elections.il.gov/">website</a>. Then click the
         “Register to Vote or Update an Existing Registration” link.
       </p>
       <p>

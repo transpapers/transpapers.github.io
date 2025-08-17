@@ -161,7 +161,8 @@ export const texasNameChange: Process<TexasCounty> = {
       filename: "Texas/Minor Name Change Consent.pdf",
       guide: TexasMinorNameConsentGuide,
       map: nameChangeMinorsConsentMap,
-      include: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate ?? "") > 9,
+      include: (applicant) =>
+        isMinor(applicant) && numericalAge(applicant.birthdate ?? "") > 9,
     },
     {
       name: "Anderson Public Filing Pro Se Information Sheet",
@@ -246,7 +247,8 @@ export const texasGenderMarker: Process<TexasCounty> = {
       filename: "Texas/Minor Gender Change Consent.pdf",
       guide: TexasMinorGenderConsentGuide,
       map: genderMinorConsentMap,
-      include: (applicant) => isMinor(applicant) && numericalAge(applicant.birthdate ?? "") > 9,
+      include: (applicant) =>
+        isMinor(applicant) && numericalAge(applicant.birthdate ?? "") > 9,
     },
     {
       name: "Respondent's Waiver of Service Only (Specific Waiver)",

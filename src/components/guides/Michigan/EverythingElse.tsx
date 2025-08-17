@@ -59,8 +59,8 @@ function MichiganEverythingElseGuide() {
         certain medical professionals will need to know your transition status.
       </p>
       <p>
-        <strong>Gas/Heating/Electricity Provider</strong>: DTE has a digital submission link
-        for your scanned ID and court order at this{" "}
+        <strong>Gas/Heating/Electricity Provider</strong>: DTE has a digital
+        submission link for your scanned ID and court order at this{" "}
         <a href="https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form">
           https://newlook.dteenergy.com/wps/wcm/connect/dte-web/quicklinks/web-form
         </a>
@@ -68,10 +68,9 @@ function MichiganEverythingElseGuide() {
         to confirm the change.
       </p>
       <p>
-        Consumers allows its customers to
-        change the name on the billing account over the phone; their service
-        number is (800) 477-5050. You will need to confirm your old name and
-        address on the account.
+        Consumers allows its customers to change the name on the billing account
+        over the phone; their service number is (800) 477-5050. You will need to
+        confirm your old name and address on the account.
       </p>
       <p>
         <strong>Water/Sewer</strong>: Should be able to be done by phone, email,
@@ -90,7 +89,7 @@ function MichiganEverythingElseGuide() {
       </p>
       <p>
         <strong>Property/House Title</strong>: Contact your county’s Registry of
-        Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and 
+        Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and
         court order.
       </p>
       <p>
@@ -100,8 +99,8 @@ function MichiganEverythingElseGuide() {
       </p>
       <p>
         <strong>Taxes (IRS)</strong>: The IRS will be informed of your name
-        change when you update your information with Social Security. You do <strong>not</strong>
-        {" "}need to contact them.
+        change when you update your information with Social Security. You do{" "}
+        <strong>not</strong> need to contact them.
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different
@@ -127,8 +126,8 @@ function MichiganEverythingElseGuide() {
         <strong>Voter Registration</strong>: Michigan has automatic voter
         registration, so no action is required unless you opted out when
         renewing your primary ID. If you were too young for that step, they
-        should have your correct name and gender the first time you
-        apply for a license, state ID, or register to vote.
+        should have your correct name and gender the first time you apply for a
+        license, state ID, or register to vote.
       </p>
       <p>
         <strong>Some other places to consider:</strong>

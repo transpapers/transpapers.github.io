@@ -35,10 +35,10 @@ function MichiganMC20Guide({ person }: { person: Partial<Person> }) {
         $175-200, depending on the county, and is the largest single fee in the
         process. Courts will typically not grant a waiver request unless your
         household is on public assistance or annual income is below 125% of the
-        federal poverty line. However, 
-        {age && age < 18 
-            ? " a parent/guardian may file the request at their " 
-            : " you may file the request at your "}
+        federal poverty line. However,
+        {age && age < 18
+          ? " a parent/guardian may file the request at their "
+          : " you may file the request at your "}
         discretion; the worst they can do is deny it.
       </p>
 

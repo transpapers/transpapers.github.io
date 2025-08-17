@@ -32,19 +32,20 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The court case Orr v. Trump has concluded and
-        the state department is now required to update gender markers on passports
-        again. It is safe to do so and the passport will reflect the correct marker.
+        <strong>Attention</strong>: The court case Orr v. Trump has concluded
+        and the state department is now required to update gender markers on
+        passports again. It is safe to do so and the passport will reflect the
+        correct marker.
       </p>
 
       <p>
         This step should be started after you have updated your primary ID.
-        Pages 1-4 of your passport application (DS-82) contain
-        instructions and clarification, on page 5 at the top you will need to
-        select which documents you want. Then fill out your social security
-        number in section 5. If you have changed your name multiple times before
-        then you will need to add them to section 9. Fill out section 10 using
-        your old passports information. In section 11 write in the date of your name
+        Pages 1-4 of your passport application (DS-82) contain instructions and
+        clarification, on page 5 at the top you will need to select which
+        documents you want. Then fill out your social security number in section
+        5. If you have changed your name multiple times before then you will
+        need to add them to section 9. Fill out section 10 using your old
+        passports information. In section 11 write in the date of your name
         change as it appears on your court order. For the photo we suggest going
         to a business for the highest chance of success and stapling that to the
         form. Sign on the signature line below the picture section then write in
@@ -56,22 +57,24 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
 
       {isChangingLegalSex ? (
         <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is 
-          new and allows for updating gender markers once again. To complete the 
+          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is
+          new and allows for updating gender markers once again. To complete the
           form simply sign on page 2.
         </p>
-      ):("")}
+      ) : (
+        ""
+      )}
 
       <p>
-        Now you will need to place the DS-82 passport form, 
-        {isChangingLegalSex ? (" attestation form, "):("")} old passport, and a
+        Now you will need to place the DS-82 passport form,
+        {isChangingLegalSex ? " attestation form, " : ""} old passport, and a
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is a fee involved which is
         dependent on your choices go to section 5 of the following URL to see
         the breakdown:{" "}
         <a href="https://travel.state.gov/content/travel/en/passports/have-passport/renew.html">
           https://travel.state.gov/content/travel/en/passports/have-passport/renew.html
-      </a>
+        </a>
       </p>
 
       <p>

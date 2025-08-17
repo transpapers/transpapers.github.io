@@ -53,7 +53,6 @@ function PassportGuide() {
           ? 'This form must be filed in-person. Filing locations near you are available at <a href="https://iafdb.travel.state.gov">https://iafdb.travel.state.gov</a>.'
           : "This form should be mailed in to the appropriate address listed at the bottom of page 1."}
       </p>
-
     </section>
   );
 }

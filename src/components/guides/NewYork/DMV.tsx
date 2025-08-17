@@ -41,11 +41,11 @@ function NewYorkDMVGuide({ person }: { person: Partial<Person> }) {
         Mail&rdquo; box intentionally blank just in case it&apos;s different
         than your lived address, please fill it in. If either address is
         different than the one they have on file check the boxes below that
-        section. We have also left the veteran status and organ donor boxes 
-        blank for you to fill as needed. Do <strong>not</strong> check the box 
-        in the Selective Service section. On Page 2 answer questions 1 through 4. 
-        Do <strong>not</strong> sign the &ldquo;Certification&rdquo; section yet. 
-        The fee to change info on an ID is $12.50.
+        section. We have also left the veteran status and organ donor boxes
+        blank for you to fill as needed. Do <strong>not</strong> check the box
+        in the Selective Service section. On Page 2 answer questions 1 through
+        4. Do <strong>not</strong> sign the &ldquo;Certification&rdquo; section
+        yet. The fee to change info on an ID is $12.50.
       </p>
 
       <p>

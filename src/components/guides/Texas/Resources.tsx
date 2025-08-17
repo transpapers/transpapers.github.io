@@ -27,27 +27,23 @@ function TexasResourcesGuide() {
       <h3>Resources (TX)</h3>
       <ul>
         <li>
-          <a href="https://translegalaidtx.com/">
-            Trans Legal Aid Clinic
-          </a>
-          : hey walk people through the process and fill out their documents by 
-          hand. It is the go to place for more difficult or nuanced name/gender 
+          <a href="https://translegalaidtx.com/">Trans Legal Aid Clinic</a>: hey
+          walk people through the process and fill out their documents by hand.
+          It is the go to place for more difficult or nuanced name/gender
           changes.
         </li>
         <li>
-            <a href="https://lambdalegal.org/helpdesk/">
-                Lambda Legal
-            </a>
-            : They are a national organization that provides legal assistance 
-            to many marginalized groups including trans people.
+          <a href="https://lambdalegal.org/helpdesk/">Lambda Legal</a>: They are
+          a national organization that provides legal assistance to many
+          marginalized groups including trans people.
         </li>
         <li>
-            <a href="https://www.transtexas.org/">
-                Transgender Education Network of Texas
-            </a>
-            : They are a statewide organization advocating for trans rights. 
-            They have many resources including an updated list on the current 
-            legal situation for trans rights in Texas.
+          <a href="https://www.transtexas.org/">
+            Transgender Education Network of Texas
+          </a>
+          : They are a statewide organization advocating for trans rights. They
+          have many resources including an updated list on the current legal
+          situation for trans rights in Texas.
         </li>
       </ul>
     </section>

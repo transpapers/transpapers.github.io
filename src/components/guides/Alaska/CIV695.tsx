@@ -26,20 +26,20 @@ function AlaskaCIV695Guide() {
     <section key="Alaska-CIV-695">
       <h3>Parental Consent from Non-petitioning Parent (AK, CIV-695)</h3>
       <p>
-        As stated in the petition section any living non-petitioning 
-        parent/guardian with custody of you needs to fill out a “Parental Consent 
-        From Non-Petitioning Parent” (CIV-695). Said individual(s) can sign this
-        either with your petitioner at the court when they file for you or alone 
-        with a notary at an appointment.
+        As stated in the petition section any living non-petitioning
+        parent/guardian with custody of you needs to fill out a “Parental
+        Consent From Non-Petitioning Parent” (CIV-695). Said individual(s) can
+        sign this either with your petitioner at the court when they file for
+        you or alone with a notary at an appointment.
       </p>
 
       <p>
         Notaries can be found in court buildings, banks, some{" "}
         <a href="https://www.theupsstore.com/tools/find-a-store">
-        UPS Locations
+          UPS Locations
         </a>
-        , or <a href="https://www.notarize.com/">online</a>. There will be a
-        fee for this service and photo ID is required.
+        , or <a href="https://www.notarize.com/">online</a>. There will be a fee
+        for this service and photo ID is required.
       </p>
     </section>
   );

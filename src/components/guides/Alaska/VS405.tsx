@@ -26,7 +26,7 @@ function AlaskaVS405Guide() {
     <section key="Alaska-VS-405">
       <h3>Application for Legal Name Change (AK, VS-405)</h3>
       <p>
-        This form should already be complete. It should <strong>not</strong> be 
+        This form should already be complete. It should <strong>not</strong> be
         signed and dated below section 7c until directed by a court employee.
       </p>
     </section>

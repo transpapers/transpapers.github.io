@@ -64,16 +64,16 @@ function IllinoisCourtHearingGuide({ person }: { person: Partial<Person> }) {
       </ul>
       <p>
         At this point the name change should be granted and the hearing should
-        end promptly. The document that you will need to get afterward is the 
-        “Order for Name Change”, but we will call it the “court order”. You will 
-        probably be asked whether you want to pick up your court order at the 
-        court or have it mailed. The court should have the order ready for pickup 
-        within a few hours or the next day. Mailing the order will take several 
-        days. Be sure to request one or two extra certified copies of your court 
-        order if you haven&apos;t already.
+        end promptly. The document that you will need to get afterward is the
+        “Order for Name Change”, but we will call it the “court order”. You will
+        probably be asked whether you want to pick up your court order at the
+        court or have it mailed. The court should have the order ready for
+        pickup within a few hours or the next day. Mailing the order will take
+        several days. Be sure to request one or two extra certified copies of
+        your court order if you haven&apos;t already.
       </p>
       <p>
-        Once you have the court order, you are ready to file with the Social 
+        Once you have the court order, you are ready to file with the Social
         Security administration. Keep the original court order in a safe place.
       </p>
     </section>

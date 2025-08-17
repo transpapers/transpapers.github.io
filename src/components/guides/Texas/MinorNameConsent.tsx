@@ -22,13 +22,12 @@
 import * as React from "react";
 
 function TexasMinorNameConsentGuide() {
-
   return (
     <section key="Texas-FM-NCC1-200">
       <h3>Child&apos;s Consent to Name Change (TX, FM-NCC1-113)</h3>
       <p>
-        This form allows you, the minor, to consent to the name change. You can 
-        do this by signing with your current name at the bottom and writing 
+        This form allows you, the minor, to consent to the name change. You can
+        do this by signing with your current name at the bottom and writing
         today&apos;s date. This form is otherwise complete.
       </p>
     </section>

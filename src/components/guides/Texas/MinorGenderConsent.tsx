@@ -28,13 +28,16 @@ function TexasMinorGenderConsentGuide({ person }: { person: Partial<Person> }) {
 
   return (
     <section key="Texas-TC-FM-GI3-113">
-      <h3>Statement of Consent of Minor For Change of Sex/Gender Identifier (TX, TC-FM-GI3-113)</h3>
+      <h3>
+        Statement of Consent of Minor For Change of Sex/Gender Identifier (TX,
+        TC-FM-GI3-113)
+      </h3>
       <p>
-        This form allows you, the minor, to consent to the Gender Change. You 
+        This form allows you, the minor, to consent to the Gender Change. You
         will need to sign and date it at the bottom
-        {isChangingLegalName ? (" in your curent name.") : (".")} You can also 
-        fill in any other information you want the judge to know about right 
-        above the signature line.
+        {isChangingLegalName ? " in your curent name." : "."} You can also fill
+        in any other information you want the judge to know about right above
+        the signature line.
       </p>
     </section>
   );

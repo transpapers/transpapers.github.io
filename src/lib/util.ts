@@ -19,7 +19,13 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-import { Name, DateFormat, DateFormatPart, NameFormat, NameFormatPart } from "../types/types";
+import {
+  Name,
+  DateFormat,
+  DateFormatPart,
+  NameFormat,
+  NameFormatPart,
+} from "../types/types";
 import { Person } from "../types/person";
 
 import { parsePhoneNumber } from "react-phone-number-input";
@@ -97,7 +103,7 @@ export function abbreviateJurisdiction(
  * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
  * @return {number}
  */
-export function numericalAge(birthdate: string ): number {
+export function numericalAge(birthdate: string): number {
   if (!birthdate) {
     return Infinity;
   }
@@ -325,12 +331,7 @@ export function formatContactInfo(
       return `${residentCity}, ${residentJurisdiction.name}, ${zip} USA`;
 
     case ContactFormat.FullAddress:
-      if (
-        !streetAddress ||
-        !residentCity ||
-        !residentJurisdiction ||
-        !zip
-      ) {
+      if (!streetAddress || !residentCity || !residentJurisdiction || !zip) {
         return undefined;
       }
       return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip}`;
@@ -348,12 +349,7 @@ export function formatContactInfo(
       return `${streetAddress} ${residentCity}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${zip}`;
 
     case ContactFormat.FullAddressAndCountry:
-      if (
-        !streetAddress ||
-        !residentCity ||
-        !residentJurisdiction ||
-        !zip
-      ) {
+      if (!streetAddress || !residentCity || !residentJurisdiction || !zip) {
         return undefined;
       }
       return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip} USA`;
@@ -416,8 +412,8 @@ export function addZero(zeroString: string): string {
 }
 
 /**
- * Returns combined and capitalized first letters of entered 
- * first, middle, and last name to make initials for certain 
+ * Returns combined and capitalized first letters of entered
+ * first, middle, and last name to make initials for certain
  * forms. Can re-format order or amount as needed.
  * @param {Name} name
  * @return {string}
@@ -426,10 +422,10 @@ export function nameInitials(name: Name | undefined, fmt: NameFormat): string {
   if (!name) {
     return "";
   }
-  
-  const firstInitial:string = name.first.substring(0, 1).toUpperCase();
-  const middleInitial:string = name.middle.substring(0, 1).toUpperCase();
-  const lastInitial:string = name.last.substring(0, 1).toUpperCase();
+
+  const firstInitial: string = name.first.substring(0, 1).toUpperCase();
+  const middleInitial: string = name.middle.substring(0, 1).toUpperCase();
+  const lastInitial: string = name.last.substring(0, 1).toUpperCase();
 
   return fmt.format
     .map((part) => {
@@ -442,7 +438,6 @@ export function nameInitials(name: Name | undefined, fmt: NameFormat): string {
       }
 
       return lastInitial;
-
     })
     .join();
 }
