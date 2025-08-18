@@ -42,6 +42,7 @@ describe("neededFieldNames()", () => {
       "mothersBirthName",
       "parentsAreOkay",
       "phone",
+      "doNotPublish",
       "reasonForNameChange",
       "representativeName",
       "residentCity",
@@ -54,7 +55,7 @@ describe("neededFieldNames()", () => {
 
     const received = neededFieldNames(michiganNameChange);
 
-    expect(received).toEqual(expected);
+    expect(new Set(received)).toEqual(new Set(expected));
   });
 });
 

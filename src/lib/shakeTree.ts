@@ -44,10 +44,22 @@ function fieldNamesOf(fill: Formfill): (keyof Person)[] {
   return names;
 }
 
+function includedFieldNames(proc: AnyProcess): (keyof Person)[] {
+  const names: (keyof Person)[] = [];
+
+  const testDummy = new Proxy<Person>(sampleData, makeHandler<Person>(names));
+  proc.documents.map((doc) => doc.include?.(testDummy));
+
+  return names;
+}
+
 export function neededFieldNames(proc: AnyProcess): (keyof Person)[] {
-  return proc.documents
+  const fromMaps = proc.documents
     .flatMap((doc) => doc.map ?? [])
-    .flatMap((fill) => fieldNamesOf(fill))
-    .sort()
-    .filter((name, i, array) => i == 0 || name != array[i - 1]);
+    .flatMap((fill) => fieldNamesOf(fill));
+
+  const fromIncludes = includedFieldNames(proc);
+  return [...fromMaps, ...fromIncludes].filter(
+    (name, idx, arr) => arr.indexOf(name) === idx,
+  );
 }
