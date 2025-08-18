@@ -56,6 +56,7 @@ export const socialSecurity: Process<Locality> = {
 
 export const passport: Process<Locality> = {
   target: Target.Passport,
+  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Attestation of Orr v. Trump Class Membership",
@@ -102,6 +103,7 @@ export const selectiveService: Process<Locality> = {
     {
       name: "Selective Service Guide",
       guide: SelectiveServiceGuide,
+      isJustGuide: true,
     },
   ],
 };
