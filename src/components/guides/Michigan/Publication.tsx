@@ -45,128 +45,20 @@ function MichiganPublicationGuide({
         are as follows:
       </p>
 
-      <p>
-        <span>Newspaper: {publications[0].name}</span>
-        <br />
-        <span>
-          Website:{" "}
-          <a href="{publications[0]?.website}" title="link">
-            {" "}
-            {publications[0]?.website}
-          </a>
-        </span>
-        <br />
-        <span>Contact Email: {publications[0]?.email}</span>
-      </p>
-
-      {publications[1].name ? (
+      {...publications.map(({ name, website, email }) => (
         <p>
-          <span>Newspaper: {publications[1].name}</span>
+          <span>Newspaper: {name}</span>
           <br />
           <span>
             Website:{" "}
-            <a href="{publications[1]?.website}" title="link">
-              {" "}
-              {publications[1]?.website}
+            <a href="{website}" title="link">
+              {website}
             </a>
           </span>
           <br />
-          <span>Contact Email: {publications[1]?.email}</span>
+          <span>Contact Email: {email}</span>
         </p>
-      ) : (
-        ""
-      )}
-
-      {publications[2].name ? (
-        <p>
-          <span>Newspaper: {publications[2].name}</span>
-          <br />
-          <span>
-            Website:{" "}
-            <a href="{publications[2]?.website}" title="link">
-              {" "}
-              {publications[2]?.website}
-            </a>
-          </span>
-          <br />
-          <span>Contact Email: {publications[2]?.email}</span>
-        </p>
-      ) : (
-        ""
-      )}
-
-      {publications[3].name ? (
-        <p>
-          <span>Newspaper: {publications[3].name}</span>
-          <br />
-          <span>
-            Website:{" "}
-            <a href="{publications[3]?.website}" title="link">
-              {" "}
-              {publications[3]?.website}
-            </a>
-          </span>
-          <br />
-          <span>Contact Email: {publications[3]?.email}</span>
-        </p>
-      ) : (
-        ""
-      )}
-
-      {publications[4].name ? (
-        <p>
-          <span>Newspaper: {publications[4].name}</span>
-          <br />
-          <span>
-            Website:{" "}
-            <a href="{publications[4]?.website}" title="link">
-              {" "}
-              {publications[4]?.website}
-            </a>
-          </span>
-          <br />
-          <span>Contact Email: {publications[4]?.email}</span>
-        </p>
-      ) : (
-        ""
-      )}
-
-      {publications[5].name ? (
-        <p>
-          <span>Newspaper: {publications[5].name}</span>
-          <br />
-          <span>
-            Website:{" "}
-            <a href="{publications[5]?.website}" title="link">
-              {" "}
-              {publications[5]?.website}
-            </a>
-          </span>
-          <br />
-          <span>Contact Email: {publications[5]?.email}</span>
-        </p>
-      ) : (
-        ""
-      )}
-
-      {publications[6].name ? (
-        <p>
-          <span>Newspaper: {publications[6].name}</span>
-          <br />
-          <span>
-            Website:{" "}
-            <a href="{publications[6]?.website}" title="link">
-              {" "}
-              {publications[6]?.website}
-            </a>
-          </span>
-          <br />
-          <span>Contact Email: {publications[6]?.email}</span>
-        </p>
-      ) : (
-        ""
-      )}
-
+      ))}
       <p>
         At the provided link(s),{" "}
         {age && age < 18 ? " your parent/guardian " : " you "}
