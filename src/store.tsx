@@ -30,11 +30,15 @@ import { numericalAge } from "./lib/util";
 
 interface ApplicationState {
   person: Person;
+  residentJurisdictionName?: string;
+  birthJurisdictionName?: string;
+  residentLocalityName?: string;
   processNames: Target[];
 }
 
 interface Action {
   updatePerson: (newData: Partial<ApplicationState["person"]>) => void;
+  updateAppState: (newData: Partial<ApplicationState>) => void;
   updateProcessNames: (newProcessNames: Target[]) => void;
   finalizeApplicant: () => void;
 }
@@ -91,6 +95,9 @@ const useStore = create<ApplicationState & Action>()(
             Object.assign(state.person, dataToAssign);
           }),
         );
+      },
+      updateAppState: (newAppState) => {
+        set(() => newAppState);
       },
 
       updateProcessNames: (newProcessNames) => {

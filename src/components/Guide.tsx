@@ -28,7 +28,9 @@ import useStore from "../store";
 import { allProcesses } from "../types/jurisdiction";
 import { type Person } from "../types/person";
 import { Target } from "../types/process";
+import { AnyJurisdiction } from "../types/generic";
 
+import { allJurisdictions } from "../jurisdiction/all";
 import { compileGuidesFor } from "../lib/fill";
 
 import {
@@ -78,14 +80,10 @@ export function compileInstructions(
 
 // TODO Error type this!
 function getProcesses(
-  applicant: Person,
+  residentJurisdiction: AnyJurisdiction,
+  birthJurisdiction: AnyJurisdiction,
   setTargets: Target[],
 ): AnyProcess[] | undefined {
-  const { residentJurisdiction, birthJurisdiction } = applicant;
-  if (!(residentJurisdiction && birthJurisdiction)) {
-    return undefined;
-  }
-
   const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
 
   const processes: AnyProcess[] = [];
@@ -105,6 +103,7 @@ function getProcesses(
         if (allMet) {
           addedSomethingThisTime = true;
           processes.push(proc);
+          metTargets.push(proc.target);
         }
       }
     }
@@ -120,9 +119,25 @@ function getProcesses(
 
 function Guide() {
   const applicant = useStore((state) => state.person);
-  const processNames = useStore((state) => state.processNames);
 
-  const processes = getProcesses(applicant, processNames);
+  const { residentJurisdictionName, birthJurisdictionName, processNames } =
+    useStore((state) => state);
+
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  const birthJurisdiction = allJurisdictions.find(
+    (j) => j.name === birthJurisdictionName,
+  );
+
+  if (!(residentJurisdiction && birthJurisdiction)) {
+    return <></>;
+  }
+  const processes = getProcesses(
+    residentJurisdiction,
+    birthJurisdiction,
+    processNames,
+  );
 
   if (!processes) {
     return <></>;

@@ -21,25 +21,36 @@
 
 import * as React from "react";
 
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
 import useStore from "../store";
 
-import { type Person } from "../types/person";
+import { allJurisdictions } from "../jurisdiction/all";
+
+interface Step2FormValues {
+  residentLocalityName: string;
+}
 
 function Step2() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<Step2FormValues>();
   const navigate = useNavigate();
 
-  const updatePerson = useStore((state) => state.updatePerson);
-  const { residentJurisdiction, residentLocality } = useStore(
-    (state) => state.person,
+  const { updateAppState } = useStore((state) => state);
+  const { residentJurisdictionName, residentLocalityName } = useStore(
+    (state) => state,
   );
 
-  const onSubmit = async (data: Partial<Person>) => {
-    updatePerson(data);
+  const onSubmit: SubmitHandler<Step2FormValues> = async (
+    data: Step2FormValues,
+  ) => {
+    updateAppState(data);
     await navigate("/step3");
   };
+
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
 
   if (residentJurisdiction) {
     const localities = residentJurisdiction.localities;
@@ -48,18 +59,16 @@ function Step2() {
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <h2>What {residentJurisdiction.name} county do you live in?</h2>
         <ul className="wrap">
-          {Object.keys(localities).map((localityName) => (
-            <li key={localityName}>
+          {localities.map(({ name }) => (
+            <li key={name}>
               <label>
                 <input
-                  {...register("residentLocality", { required: true })}
+                  {...register("residentLocalityName", { required: true })}
                   type="radio"
-                  value={localityName}
-                  defaultChecked={
-                    residentLocality && localityName === residentLocality.name
-                  }
+                  value={name}
+                  defaultChecked={name === residentLocalityName}
                 />
-                {localityName}
+                {name}
               </label>
             </li>
           ))}

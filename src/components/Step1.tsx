@@ -21,24 +21,28 @@
 
 import * as React from "react";
 
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import useStore from "../store";
 
-import { type Person } from "../types/person";
-
 import { allJurisdictions } from "../jurisdiction/all";
 
+interface Step1FormValues {
+  residentJurisdictionName: string;
+}
+
 function Step1() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<Step1FormValues>();
   const navigate = useNavigate();
 
-  const { residentJurisdiction } = useStore((state) => state.person);
-  const updatePerson = useStore((state) => state.updatePerson);
+  const { residentJurisdictionName } = useStore((state) => state);
+  const { updateAppState } = useStore((state) => state);
 
-  const onSubmit = async (data: Partial<Person>) => {
-    updatePerson(data);
+  const onSubmit: SubmitHandler<Step1FormValues> = async (
+    data: Step1FormValues,
+  ) => {
+    updateAppState(data);
     await navigate("/step2");
   };
 
@@ -49,10 +53,10 @@ function Step1() {
         <li key={name}>
           <label>
             <input
-              {...register("residentJurisdiction", { required: true })}
+              {...register("residentJurisdictionName", { required: true })}
               type="radio"
               value={name}
-              defaultChecked={name === residentJurisdiction?.name}
+              defaultChecked={name === residentJurisdictionName}
             />
             {name}
           </label>

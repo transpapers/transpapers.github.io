@@ -32,6 +32,8 @@ import { neededFieldNames } from "../lib/shakeTree";
 
 import { type Person } from "../types/person";
 
+import { allJurisdictions } from "../jurisdiction/all";
+
 function Step6() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -41,12 +43,27 @@ function Step6() {
   const updatePerson = useStore((state) => state.updatePerson);
   const finalizeApplicant = useStore((state) => state.finalizeApplicant);
 
-  const { residentJurisdiction, birthJurisdiction } = applicant;
+  const { residentJurisdictionName, birthJurisdictionName } = useStore(
+    (state) => state,
+  );
 
-  if (residentJurisdiction && birthJurisdiction) {
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  const birthJurisdiction = allJurisdictions.find(
+    (j) => j.name === birthJurisdictionName,
+  );
+  const federalJurisdiction = allJurisdictions.find(
+    (j) => j.name === "Federal",
+  );
+
+  if (residentJurisdiction && birthJurisdiction && federalJurisdiction) {
     const allProcs = [
-      ...residentJurisdiction.processes,
-      ...birthJurisdiction.processes,
+      ...residentJurisdiction.processes.filter(
+        (p) => !p.isJustGuide && !p.isBirth,
+      ),
+      ...birthJurisdiction.processes.filter((p) => !p.isJustGuide && p.isBirth),
+      ...federalJurisdiction.processes.filter((p) => !p.isJustGuide),
     ];
 
     const processes = processNames

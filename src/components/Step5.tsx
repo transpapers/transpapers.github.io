@@ -25,23 +25,36 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import useStore from "../store";
-import { targets } from "../types/process";
+import { type Target, targets } from "../types/process";
 
-import { type Target } from "../types/process";
+import { allJurisdictions } from "../jurisdiction/all";
 
 function Step5() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const updateProcessNames = useStore((state) => state.updateProcessNames);
-  const { residentJurisdiction, birthJurisdiction } = useStore(
-    (state) => state.person,
+  const { residentJurisdictionName, birthJurisdictionName } = useStore(
+    (state) => state,
   );
 
-  if (residentJurisdiction && birthJurisdiction) {
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  const birthJurisdiction = allJurisdictions.find(
+    (j) => j.name === birthJurisdictionName,
+  );
+  const federalJurisdiction = allJurisdictions.find(
+    (j) => j.name === "Federal",
+  );
+
+  if (residentJurisdiction && birthJurisdiction && federalJurisdiction) {
     const processes = [
-      ...residentJurisdiction.processes,
-      ...birthJurisdiction.processes,
+      ...residentJurisdiction.processes.filter(
+        (p) => !p.isJustGuide && !p.isBirth,
+      ),
+      ...birthJurisdiction.processes.filter((p) => !p.isJustGuide && p.isBirth),
+      ...federalJurisdiction.processes.filter((p) => !p.isJustGuide),
     ];
 
     const onSubmit = async ({ processNames }: { processNames?: Target[] }) => {
