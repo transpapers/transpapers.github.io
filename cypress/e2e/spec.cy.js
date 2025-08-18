@@ -54,7 +54,7 @@ describe("template spec", () => {
 
     cy.document()
       .find(
-        `input[name="residentJurisdiction"][value="${residentJurisdiction}"]`,
+        `input[name="residentJurisdictionName"][value="${residentJurisdiction}"]`,
       )
       .click();
 
@@ -64,7 +64,7 @@ describe("template spec", () => {
     const { residentLocality } = someone;
 
     cy.document()
-      .find(`input[name="residentLocality"][value="${residentLocality}"]`)
+      .find(`input[name="residentLocalityName"][value="${residentLocality}"]`)
       .click();
 
     cy.document().find('input[type="submit"]').click();
@@ -73,7 +73,7 @@ describe("template spec", () => {
     const { birthJurisdiction } = someone;
 
     cy.document()
-      .find(`input[name="birthJurisdiction"][value="${birthJurisdiction}"]`)
+      .find(`input[name="birthJurisdictionName"][value="${birthJurisdiction}"]`)
       .click();
 
     cy.document().find('input[type="submit"]').click();
