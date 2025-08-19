@@ -46,7 +46,7 @@ function MichiganPublicationGuide({
       </p>
 
       {...publications.map(({ name, website, email }) => (
-        <p>
+        <p key="{publications.name}">
           <span>Newspaper: {name}</span>
           <br />
           <span>
@@ -59,6 +59,7 @@ function MichiganPublicationGuide({
           <span>Contact Email: {email}</span>
         </p>
       ))}
+
       <p>
         At the provided link(s),{" "}
         {age && age < 18 ? " your parent/guardian " : " you "}
