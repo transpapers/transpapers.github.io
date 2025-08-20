@@ -63,7 +63,7 @@ function AlaskaFilingInitialFormsGuide({
           : " "}
         No matter what method is used a valid photo ID is needed to notarize the
         forms. Below is a list of filing methods for the {locality.name} court.
-        {doesNameChange && forwardsTo?.court
+        {doesNameChange
           ? ""
           : " This court only forwards to the " +
             (forwardsTo?.court.city ?? "") +
@@ -189,6 +189,7 @@ function AlaskaFilingInitialFormsGuide({
         <p>
           The {forwardsTo?.court.city} superior court allows for the following
           filing methods:
+          <br />
           {forwardsTo?.inPersonFiling ? (
             <>
               <span>In-person - at {forwardsTo.court.address}.</span>
