@@ -35901,10 +35901,6 @@ const newyorkCounties = [
  */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: applicant.residentJurisdiction?.folderName,
-    loc: { page: 1, x: 50, y: 50 }
-  }),
-  (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocality?.name : "",
     loc: { page: 1, x: 430, y: 116 }
   }),
@@ -35964,14 +35960,14 @@ const adultNameSexPetitionOregonMap = [
     text: fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName),
     loc: { page: 1, x: 154, y: 820 }
   }),
-  (applicant) => ({
-    text: applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
-    loc: { page: 1, x: 103, y: 899 }
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
-    loc: { page: 1, x: 153, y: 952 }
-  }),
+  //(applicant) => ({
+  //text: applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
+  //loc: { page: 1, x: 103, y: 899 },
+  //}),
+  //(applicant) => ({
+  //text: applicant.isChangingLegalSex && applicant.doNotPublish ? "X" : "",
+  //loc: { page: 1, x: 153, y: 952 },
+  //}),
   () => ({
     text: (/* @__PURE__ */ new Date()).toLocaleDateString(),
     loc: { page: 2, x: 103, y: 221 }
@@ -36071,10 +36067,10 @@ const minorNameSexPetitionOregonMap = [
     text: applicant.isChangingLegalSex ? applicant.gender === GenderMarker.X ? "X" : "" : "",
     loc: { page: 1, x: 311, y: 879 }
   }),
-  (applicant) => ({
-    text: applicant.doNotPublish ? "X" : "",
-    loc: { page: 1, x: 184, y: 948 }
-  }),
+  //(applicant) => ({
+  //text: applicant.doNotPublish ? "X" : "",
+  //loc: { page: 1, x: 184, y: 948 },
+  //}),
   () => ({
     text: (/* @__PURE__ */ new Date()).toLocaleDateString(),
     loc: { page: 2, x: 105, y: 343 }
