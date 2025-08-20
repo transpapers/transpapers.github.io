@@ -35901,12 +35901,8 @@ const newyorkCounties = [
  */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: applicant.residentJurisdiction?.folderName,
     loc: { page: 1, x: 50, y: 50 }
-  }),
-  (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
-    loc: { page: 1, x: 50, y: 100 }
   }),
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocality?.name : "",
@@ -37085,8 +37081,7 @@ const oregonPostamble = {
       name: "Resources",
       guide: OregonResourcesGuide
     }
-  ],
-  isJustGuide: true
+  ]
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
