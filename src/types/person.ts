@@ -127,14 +127,14 @@ export class Person {
   /**
    * Whether applicant is changing legal name.
    *
-   * @remarks To be filled from [...]
+   * @remarks Filled from step 5 and finalizeApplicant.
    */
   isChangingLegalName?: boolean;
 
   /**
    * Whether applicant is changing legal sex.
    *
-   * @remarks To be filled from [...]
+   * @remarks Filled from step 5 and finalizeApplicant.
    */
   isChangingLegalSex?: boolean;
 
@@ -164,8 +164,7 @@ export class Person {
   /**
    * Should be `true` if applicant is a minor with two living, married parents.
    *
-   * @remarks Required to determine which forms should be filed for Michigan
-   * minors.
+   * @remarks Required to determine which forms should be filed for minors.
    */
   parentsAreOkay?: boolean;
 

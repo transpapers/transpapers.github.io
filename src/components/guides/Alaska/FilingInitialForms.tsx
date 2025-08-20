@@ -30,7 +30,7 @@ function AlaskaFilingInitialFormsGuide({
   person: Partial<Person>;
 }) {
   const { age } = person;
-  const locality: AlaskaAdministrativeDivision | undefined =
+  const locality: AlaskaAdministrativeDivision =
     person.residentLocality as AlaskaAdministrativeDivision;
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!locality) {
@@ -60,7 +60,7 @@ function AlaskaFilingInitialFormsGuide({
         forward the paperwork and payment to the correct court.
         {age && age < 18
           ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. "
-          : ""}
+          : " "}
         No matter what method is used a valid photo ID is needed to notarize the
         forms. Below is a list of filing methods for the {locality.name} court.
         {doesNameChange && forwardsTo?.court
