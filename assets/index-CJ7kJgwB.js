@@ -38541,7 +38541,7 @@ function AlaskaFilingInitialFormsGuide({
       "You can fill out the form to register an account and begin the filing process. Log in, click on “File” in the upper right hand section, and choose the “AK Trial Court” option. Under “Action” select “Initiate a new case” and select your name under “Filer”. Case types should then appear, one of which should say “Change of Name”. After you hit “Initiate Case” there will be a screen asking for Case information, select ",
       locality.name,
       " for “Filing Location” and then fill out the case type information as applicable. Then you should see a screen for “Party Information” which is just",
-      age && age < 18 ? " you and your minor child. " : " you. ",
+      age && age < 18 ? " you and your minor child." : " you.",
       " Fill in the information there and hit “Finish” which should take you to a page where you can upload the filled out forms from earlier in our guide. Upload all of your forms listed in the previous part here, with the exception of the “Request for Exemption from Payment of Fees” (TF-920) do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " upload that form here. Make sure that the names of your uploaded forms match the official form names as written in our guide above then hit “Next” twice to proceed to payment checkout. If you are paying the fee you can enter credit/debit card information here, otherwise hit the “Request Fee Waiver”, select the top option, and upload the completed (TF-920) form there."
