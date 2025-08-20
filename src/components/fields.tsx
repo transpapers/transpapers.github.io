@@ -101,7 +101,7 @@ export const fields: Record<string, Field> = {
   },
   doNotPublish: {
     title:
-      "Request that the court case records be sealed or otherwise not publically available, including newspaper publications the states that require them.",
+      "Request that the court case records be sealed or otherwise not publically available, including newspaper publications in the states that require them.",
     subtitle:
       "This usually requires proof that you would be either placed in potential danger or would be discrimminated against if the case was published. Some states have more stringent requirements than others, we will cover any of those in the guide.",
     name: "doNotPublish",
