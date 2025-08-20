@@ -38503,7 +38503,7 @@ function AlaskaFilingInitialFormsGuide({
       "Alaska has several different methods of filing depending on the court. Additionally some courts do not do name changes themselves but will still accept the paperwork, notarize it, and forward it to another court. Finally, if the paperwork was filed at the wrong court",
       age && age < 18 ? " your petitioner " : " you ",
       " may ask them to forward the paperwork and payment to the correct court.",
-      age && age < 18 ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. " : "",
+      age && age < 18 ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. " : " ",
       "No matter what method is used a valid photo ID is needed to notarize the forms. Below is a list of filing methods for the ",
       locality.name,
       " court.",
@@ -43033,13 +43033,13 @@ class Person {
   /**
    * Whether applicant is changing legal name.
    *
-   * @remarks To be filled from [...]
+   * @remarks Filled from step 5 and finalizeApplicant.
    */
   isChangingLegalName;
   /**
    * Whether applicant is changing legal sex.
    *
-   * @remarks To be filled from [...]
+   * @remarks Filled from step 5 and finalizeApplicant.
    */
   isChangingLegalSex;
   /**
@@ -43066,8 +43066,7 @@ class Person {
   /**
    * Should be `true` if applicant is a minor with two living, married parents.
    *
-   * @remarks Required to determine which forms should be filed for Michigan
-   * minors.
+   * @remarks Required to determine which forms should be filed for minors.
    */
   parentsAreOkay;
   /**
