@@ -103,7 +103,6 @@ export const selectiveService: Process<Locality> = {
     {
       name: "Selective Service Guide",
       guide: SelectiveServiceGuide,
-      isJustGuide: true,
     },
   ],
 };

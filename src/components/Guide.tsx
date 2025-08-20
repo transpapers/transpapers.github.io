@@ -89,7 +89,7 @@ function getProcesses(
   const processes: AnyProcess[] = [];
   const metTargets: Target[] = [];
 
-  const count = 0;
+  var count = 0;
 
   while (metTargets.length < setTargets.length && ++count < 100) {
     let addedSomethingThisTime = false;
