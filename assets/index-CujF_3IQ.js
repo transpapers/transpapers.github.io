@@ -35901,6 +35901,14 @@ const newyorkCounties = [
  */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
+    text: applicant.residentLocality?.name,
+    loc: { page: 1, x: 50, y: 50 }
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdiction?.name,
+    loc: { page: 1, x: 50, y: 100 }
+  }),
+  (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocality?.name : "",
     loc: { page: 1, x: 430, y: 116 }
   }),
@@ -38507,7 +38515,7 @@ function AlaskaFilingInitialFormsGuide({
       "No matter what method is used a valid photo ID is needed to notarize the forms. Below is a list of filing methods for the ",
       locality.name,
       " court.",
-      doesNameChange && forwardsTo?.court ? "" : " This court only forwards to the " + (forwardsTo?.court.city ?? "") + " superior court whose methods are also listed, file at either."
+      doesNameChange ? "" : " This court only forwards to the " + (forwardsTo?.court.city ?? "") + " superior court whose methods are also listed, file at either."
     ] }),
     inPersonFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " In-person - " }),
@@ -38576,6 +38584,7 @@ function AlaskaFilingInitialFormsGuide({
       "The ",
       forwardsTo?.court.city,
       " superior court allows for the following filing methods:",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       forwardsTo?.inPersonFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
           "In-person - at ",
