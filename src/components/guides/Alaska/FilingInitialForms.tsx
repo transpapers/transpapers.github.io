@@ -118,7 +118,7 @@ function AlaskaFilingInitialFormsGuide({
           select {locality.name} for “Filing Location” and then fill out the
           case type information as applicable. Then you should see a screen for
           “Party Information” which is just
-          {age && age < 18 ? " you and your minor child. " : " you. "} Fill in
+          {age && age < 18 ? " you and your minor child." : " you."} Fill in
           the information there and hit “Finish” which should take you to a page
           where you can upload the filled out forms from earlier in our guide.
           Upload all of your forms listed in the previous part here, with the
