@@ -43,7 +43,7 @@ export interface Jurisdiction<T extends Locality> {
   /**
    * Two-letter postal abbreviation.
    *
-   * @remarks At this time, only used for testing. We may need it later, though.
+   * @remarks Many forms require a postal code abbreviation.
    */
   abbreviation: string;
 

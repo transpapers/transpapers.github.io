@@ -43,12 +43,8 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
-    loc: { page: 1, x: 50, y: 50 },
-  }),
-  (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
-    loc: { page: 1, x: 50, y: 100 },
+    text: applicant.residentJurisdiction?.folderName,
+    loc: { page: 1, x: 430, y: 116 },
   }),
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocality?.name : "",
