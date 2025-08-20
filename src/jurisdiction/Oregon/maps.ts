@@ -583,61 +583,57 @@ export const birthCertOregonMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const voterOregonMap: Formfill[] = [
-  {
-    check: () => true,
-    field: "Citizen",
-    select: "Yes",
-  },
-  {
-    check: () => true,
-    field: "Age",
-    select: "Yes",
-  },
-  {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? applicant.chosenName?.last ?? ""
-      : applicant.legalName?.last ?? "",
-    field: "Last Name",
-  },
-  {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? applicant.chosenName?.first ?? ""
-      : applicant.legalName?.first ?? "",
-    field: "First Name",
-  },
-  {
-    text: (applicant) => applicant.isChangingLegalName 
-      ? applicant.chosenName?.middle ?? "" 
-      : applicant.legalName?.middle ?? "",
-    field: "Middle Name",
-  },
-  {
-    text: (applicant) =>
-      `${applicant.streetAddress}, ${applicant.residentCity} ${applicant.zip}`,
-    field: "Residence Address",
-  },
-  {
-    text: (applicant) =>
-      formatDate(applicant.birthdate, {
-        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-        separator: "/",
-      }),
-    field: "Date of Birth",
-  },
-  {
-    text: (applicant) => applicant.residentCounty,
-    field: "County of Residence",
-  },
-  {
-    text: (applicant) => applicant.phone,
-    field: "Phone Number",
-  },
-  {
-    text: (applicant) => applicant.email,
-    field: "Email",
-  },
-  {
-    text: (applicant) => fullName(applicant.legalName) ?? "",
-    field: "Preious Registration Name",
-  },
+  () => ({
+    fieldName: "Citizen",
+    choice: "Yes",
+  }),
+  () => ({
+    fieldName: "Age",
+    choice: "Yes",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.last
+      : applicant.legalName.last,
+    fieldName: "Last Name",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.first
+      : applicant.legalName.first,
+    fieldName: "First Name",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? applicant.chosenName.middle
+      : applicant.legalName.middle,
+    fieldName: "Middle Name",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.FullAddress),
+    fieldName: "Residence Address",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "Date of Birth",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocality?.name,
+    fieldName: "County of Residence",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Preious Registration Name",
+  }),
 ];
