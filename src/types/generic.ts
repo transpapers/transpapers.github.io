@@ -27,10 +27,9 @@ import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
 
 import {
+  GenericCounty,
   MichiganCounty,
   NewYorkCounty,
-  OregonCounty,
-  IllinoisCounty,
   TexasCounty,
   OhioCounty,
   RhodeIslandCityOrTown,
@@ -38,11 +37,10 @@ import {
 } from "../types/locality";
 
 export type AnyLocality =
+  | GenericCounty
   | MichiganCounty
-  | OregonCounty
   | RhodeIslandCityOrTown
   | NewYorkCounty
-  | IllinoisCounty
   | TexasCounty
   | OhioCounty
   | AlaskaAdministrativeDivision;

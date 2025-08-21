@@ -22,6 +22,7 @@
 import { type AnyJurisdiction } from "../types/generic";
 import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
+import { GenericCounty } from "../types/locality";
 
 import {
   michiganBirthRecord,
@@ -61,7 +62,6 @@ import {
   oregonPostamble,
 } from "./Oregon/process";
 import oregonCounties from "./Oregon/localities";
-import { OregonCounty } from "../types/locality";
 
 import {
   alaskaBirthRecord,
@@ -81,7 +81,6 @@ import {
   illinoisPostamble,
 } from "./Illinois/process";
 import illinoisCounties from "./Illinois/counties";
-import { IllinoisCounty } from "../types/locality";
 
 import { passport, socialSecurity } from "./Federal/process";
 
@@ -124,7 +123,7 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
   localities: newyorkCounties,
 };
 
-export const oregon: Jurisdiction<OregonCounty> = {
+export const oregon: Jurisdiction<GenericCounty> = {
   name: "Oregon",
   abbreviation: "OR",
   processes: [
@@ -150,7 +149,7 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   localities: alaskaCounties,
 };
 
-export const illinois: Jurisdiction<IllinoisCounty> = {
+export const illinois: Jurisdiction<GenericCounty> = {
   name: "Illinois",
   abbreviation: "IL",
   processes: [
