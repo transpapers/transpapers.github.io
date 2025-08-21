@@ -232,5 +232,10 @@ describe.each(allDocuments)(
         });
       }
     });
+
+    test("log values used in tests", () => {
+        const birthJurisdictionArray = Object.values(generatePersonForTesting);
+        console.log(birthJurisdictionArray);
+    });
   },
 );

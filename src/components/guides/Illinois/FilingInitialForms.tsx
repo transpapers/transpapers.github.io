@@ -51,7 +51,7 @@ function IllinoisFilingInitialFormsGuide({
             For e-filing make sure that all of the scanned forms/documents are
             pdf&apos;s and are in portrait mode then gather them into one
             folder. If the forms were printed and then filled out scan them back
-            in as pdf’s. Make sure each form is separated and named exactly how
+            in as pdf&apos;s. Make sure each form is separated and named exactly how
             it is written on the form. This can be done by printing to PDF and
             selecting page ranges to print. Then go to this{" "}
             <a href="https://efileil.tylertech.cloud/OfsEfsp/ui/landing">
@@ -92,7 +92,7 @@ function IllinoisFilingInitialFormsGuide({
           </p>
         </>
       ) : (
-        <p>could not generate, residentLocality missing</p>
+        <p>Could not generate, residentLocality missing.</p>
       )}
     </section>
   );
