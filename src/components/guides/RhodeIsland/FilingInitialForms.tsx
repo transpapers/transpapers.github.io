@@ -41,7 +41,7 @@ function RhodeIslandFilingGuide({
   const residentLocality: RhodeIslandCityOrTown = localities.find(
     (j) => j.name === residentLocalityName,
   ) as RhodeIslandCityOrTown;
-  const { courtDoesBackgroundCheck, filingCost } = residentLocality;
+  //const { courtDoesBackgroundCheck, filingCost } = residentLocality;
 
   return (
     <section key="RhodeIsland-Filing">
@@ -126,9 +126,9 @@ function RhodeIslandFilingGuide({
           <p>
             A parent/guardian will need to bring the notarized Change of Name
             petition, useable copy of your birth certificate
-            {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
+            {residentLocality.courtDoesBackgroundCheck ? ", " : ", BCI report, "}
             and photo ID. According to our data the filing fee will be{" "}
-            {filingCost}. The courts are not in session every day so the clerk
+            {residentLocality.filingCost}. The courts are not in session every day so the clerk
             will tell them when your hearing date will be when they file. Each
             court is specific with what payment types they accept so they need
             to either call to ask or cover their bases by bringing cash, check,
@@ -140,9 +140,9 @@ function RhodeIslandFilingGuide({
         <p>
           The filing location is at {residentLocality.court.address}. Bring the notarized Change
           of Name petition, useable copy of your birth certificate
-          {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
+          {residentLocality.courtDoesBackgroundCheck ? ", " : ", BCI report, "}
           and photo ID. According to our data the filing fee will be{" "}
-          {filingCost}. The courts are not in session every day so the clerk
+          {residentLocality.filingCost}. The courts are not in session every day so the clerk
           will tell you when your hearing date will be when you file. Each court
           is specific with what payment types they accept so either call to ask
           or try to cover your bases by bringing cash, check, and card.
