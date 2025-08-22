@@ -29,6 +29,9 @@ import {
 import { Person } from "../types/person";
 
 import { parsePhoneNumber } from "react-phone-number-input";
+import { allJurisdictions } from "../jurisdiction/all";
+import { Jurisdiction } from "../types/jurisdiction";
+import { Locality } from "../types/locality";
 
 export function abbreviateJurisdiction(
   jurisdiction: string,
@@ -243,6 +246,23 @@ export function representativeName(applicant: Person): Name {
     last: "",
     suffix: "",
   };
+}
+
+/*!
+ * Find a jurisdiction given it's name.
+ * @param {String} jurisdictionKey
+ * @return {AnyJurisdiction | undefined}
+ */
+export function getJurisdiction(jurisdictionKey: string | undefined) {
+  if (!jurisdictionKey) {
+    return undefined;
+  }
+
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey,
+  );
+
+  return foundJurisdiction as Jurisdiction<Locality>;
 }
 
 /*!

@@ -77,6 +77,13 @@ export class Person {
   birthJurisdiction?: AnyJurisdiction;
 
   /**
+   * Used to look up birthJurisdiction as a key.
+   *
+   * @remarks Filled from step 3.
+   */
+  birthJurisdictionName?: string;
+
+  /**
    * Applicant's date of birth.
    *
    * @remarks This is Chesterton's fence!! Read before you modify.
@@ -231,7 +238,7 @@ export class Person {
   /**
    * Used to look up residentLocality as a key.
    *
-   * @remarks Filled from step 1.
+   * @remarks Filled from step 2.
    */
   residentLocalityName?: string;
 
