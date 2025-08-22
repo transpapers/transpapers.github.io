@@ -27,21 +27,21 @@ import { allJurisdictions } from "../../../jurisdiction/all";
 
 function RhodeIslandFilingGuide({
   person,
-  locality,
+  //residentLocality,
 }: {
   person: Person;
-  locality: RhodeIslandCityOrTown;
+  //residentLocality: RhodeIslandCityOrTown;
 }) {
   const { age, residentJurisdictionName, residentLocalityName } = person;
-  const { court, courtDoesBackgroundCheck, filingCost } = locality;
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName,
   );
   if (residentJurisdiction) {
     const localities = residentJurisdiction.localities;
-  const residentLocality = localities.find(
+  const residentLocality: RhodeIslandCityOrTown = localities.find(
     (j) => j.name === residentLocalityName,
-  );
+  ) as RhodeIslandCityOrTown;
+  const { courtDoesBackgroundCheck, filingCost } = residentLocality;
 
   return (
     <section key="RhodeIsland-Filing">
@@ -120,7 +120,7 @@ function RhodeIslandFilingGuide({
           ) : (
             <p>
               The filing location is the {residentLocality?.name} court at{" "}
-              {court.address}.
+              {residentLocality?.court.address}.
             </p>
           )}
           <p>
@@ -134,11 +134,11 @@ function RhodeIslandFilingGuide({
             to either call to ask or cover their bases by bringing cash, check,
             and card.
           </p>
-          {court.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
+          {residentLocality?.court.specificCourtInfo && <p>{residentLocality?.court.specificCourtInfo}</p>}
         </>
       ) : (
         <p>
-          The filing location is at {court.address}. Bring the notarized Change
+          The filing location is at {residentLocality?.court.address}. Bring the notarized Change
           of Name petition, useable copy of your birth certificate
           {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
           and photo ID. According to our data the filing fee will be{" "}
@@ -149,7 +149,7 @@ function RhodeIslandFilingGuide({
         </p>
       )}
 
-      {court.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
+      {residentLocality?.court.specificCourtInfo && <p>{residentLocality?.court.specificCourtInfo}</p>}
 
       <p>
         If the clerk doesn&apos;t give a hearing date then ask about it. Some
