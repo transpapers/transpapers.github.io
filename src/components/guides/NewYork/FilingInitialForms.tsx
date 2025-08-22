@@ -55,7 +55,7 @@ function NewYorkFilingGuide({
           {...Array.from(
             newYork.localities
               .filter((loc) => loc.isNYC)
-              .map(({ court }) => (
+              .map(({ court, borough }) => (
                 <span key="{court.name}">
                   <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
                   {court.phone}
