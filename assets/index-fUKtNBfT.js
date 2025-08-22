@@ -43297,9 +43297,11 @@ function Step1() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { residentJurisdictionName } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const { updateAppState } = useStore((state) => state);
   const onSubmit = async (data) => {
     updateAppState(data);
+    updatePerson(data);
     await navigate("/step2");
   };
   const choicesElements = Array.from(
@@ -43328,11 +43330,13 @@ function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdictionName, residentLocalityName } = useStore(
     (state) => state
   );
   const onSubmit = async (data) => {
     updateAppState(data);
+    updatePerson(data);
     await navigate("/step3");
   };
   const residentJurisdiction = allJurisdictions.find(
