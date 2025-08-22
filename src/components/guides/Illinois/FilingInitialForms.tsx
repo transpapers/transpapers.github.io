@@ -23,13 +23,25 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
+import { allJurisdictions } from "../../../jurisdiction/all";
+import useStore from "../../../store";
 
 function IllinoisFilingInitialFormsGuide({
   person,
 }: {
   person: Partial<Person>;
 }) {
-  const { age, residentLocality, hasCriminalRecord } = person;
+  const { residentJurisdictionName, residentLocalityName } =
+    useStore((state) => state);
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName,
+  );
+  const { age, hasCriminalRecord } = person;
 
   return (
     <section key="Illinois-Filing">
