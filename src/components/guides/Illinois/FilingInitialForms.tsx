@@ -94,10 +94,10 @@ function IllinoisFilingInitialFormsGuide({
             the extremely unlikely event that it is denied, seek a lawyer
             immediately. The “Resources” section of this guide can help with
             that. Provided that there is no hearing and the change is accepted
-            they will return the “Order for Name Change” which we will not call
-            the court order. Make sure to get one or two certified copies for
-            later use and keep the original in a safe place. You are then ready
-            to file with the Social Security Administration.
+            they will return the “Order for Name Change” which we will call the 
+            court order from here on. Make sure to get one or two certified 
+            copies for later use and keep the original in a safe place. You are 
+            then ready to file with the Social Security Administration.
           </p>
         </>
       ) : (

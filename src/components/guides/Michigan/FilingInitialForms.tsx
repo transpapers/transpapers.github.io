@@ -22,13 +22,22 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function MichiganFilingInitialFormsGuide({
   person,
 }: {
   person: Partial<Person>;
 }) {
-  const { age, residentLocality, isChangingLegalSex, doNotPublish } = person;
+  const { age, isChangingLegalSex, doNotPublish, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName,
+  );
 
   return (
     <section key="MI-InitialForms">
@@ -134,6 +143,6 @@ function MichiganFilingInitialFormsGuide({
       )}
     </section>
   );
-}
+}}
 
 export default MichiganFilingInitialFormsGuide;

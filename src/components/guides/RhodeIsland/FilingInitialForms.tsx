@@ -23,6 +23,7 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { RhodeIslandCityOrTown } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function RhodeIslandFilingGuide({
   person,
@@ -31,8 +32,16 @@ function RhodeIslandFilingGuide({
   person: Person;
   locality: RhodeIslandCityOrTown;
 }) {
-  const { age, residentLocality } = person;
+  const { age, residentJurisdictionName, residentLocalityName } = person;
   const { court, courtDoesBackgroundCheck, filingCost } = locality;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName,
+  );
 
   return (
     <section key="RhodeIsland-Filing">
@@ -152,6 +161,6 @@ function RhodeIslandFilingGuide({
       </p>
     </section>
   );
-}
+}}
 
 export default RhodeIslandFilingGuide;

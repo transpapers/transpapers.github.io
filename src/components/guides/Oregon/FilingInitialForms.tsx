@@ -22,13 +22,22 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function OregonFilingInitialFormsGuide({
   person,
 }: {
   person: Partial<Person>;
 }) {
-  const { age, residentLocality, isChangingLegalSex } = person;
+  const { age, isChangingLegalSex, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName,
+  );
 
   return (
     <section key="OR-InitialForms">
@@ -142,6 +151,6 @@ function OregonFilingInitialFormsGuide({
       )}
     </section>
   );
-}
+}}
 
 export default OregonFilingInitialFormsGuide;
