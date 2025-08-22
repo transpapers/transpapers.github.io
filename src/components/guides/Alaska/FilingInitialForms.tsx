@@ -39,9 +39,6 @@ function AlaskaFilingInitialFormsGuide({
     const residentLocality: AlaskaAdministrativeDivision = localities.find(
     (j) => j.name === residentLocalityName,
   ) as AlaskaAdministrativeDivision;
-  if (!residentLocality) {
-    return "";
-  }
 
   return (
     <section key="AK-InitialForms">
