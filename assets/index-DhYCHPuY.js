@@ -27842,6 +27842,20 @@ function representativeName(applicant) {
   };
 }
 /*!
+ * Find a jurisdiction given it's name.
+ * @param {String} jurisdictionKey
+ * @return {AnyJurisdiction | undefined}
+ */
+function getJurisdiction(jurisdictionKey) {
+  if (!jurisdictionKey) {
+    return void 0;
+  }
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey
+  );
+  return foundJurisdiction;
+}
+/*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
  * @param {Person} applicant
  * @return {string}
@@ -35884,8 +35898,8 @@ const newyorkCounties = [
  */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocality?.name : "",
-    loc: { page: 1, x: 430, y: 116 }
+    text: getJurisdiction(applicant.residentJurisdictionName)?.name,
+    loc: { page: 1, x: 50, y: 50 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -42922,6 +42936,12 @@ class Person {
    */
   birthJurisdiction;
   /**
+   * Used to look up birthJurisdiction as a key.
+   *
+   * @remarks Filled from step 3.
+   */
+  birthJurisdictionName;
+  /**
    * Applicant's date of birth.
    *
    * @remarks This is Chesterton's fence!! Read before you modify.
@@ -43057,7 +43077,7 @@ class Person {
   /**
    * Used to look up residentLocality as a key.
    *
-   * @remarks Filled from step 1.
+   * @remarks Filled from step 2.
    */
   residentLocalityName;
   /**
@@ -43316,9 +43336,11 @@ function Step3() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const { birthJurisdictionName } = useStore((state) => state);
   const onSubmit = async (data) => {
     updateAppState(data);
+    updatePerson(data);
     await navigate("/step4");
   };
   const bornValues = Array.from(
