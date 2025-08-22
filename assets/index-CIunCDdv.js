@@ -32349,7 +32349,6 @@ function RhodeIslandFilingGuide({
     const residentLocality = localities.find(
       (j) => j.name === residentLocalityName
     );
-    const { courtDoesBackgroundCheck, filingCost } = residentLocality;
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (RI)" }),
       residentLocality.name === "West Greenwich" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -32393,10 +32392,10 @@ function RhodeIslandFilingGuide({
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "A parent/guardian will need to bring the notarized Change of Name petition, useable copy of your birth certificate",
-          courtDoesBackgroundCheck ? ", " : ", BCI report, ",
+          residentLocality.courtDoesBackgroundCheck ? ", " : ", BCI report, ",
           "and photo ID. According to our data the filing fee will be",
           " ",
-          filingCost,
+          residentLocality.filingCost,
           ". The courts are not in session every day so the clerk will tell them when your hearing date will be when they file. Each court is specific with what payment types they accept so they need to either call to ask or cover their bases by bringing cash, check, and card."
         ] }),
         residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo })
@@ -32404,10 +32403,10 @@ function RhodeIslandFilingGuide({
         "The filing location is at ",
         residentLocality.court.address,
         ". Bring the notarized Change of Name petition, useable copy of your birth certificate",
-        courtDoesBackgroundCheck ? ", " : ", BCI report, ",
+        residentLocality.courtDoesBackgroundCheck ? ", " : ", BCI report, ",
         "and photo ID. According to our data the filing fee will be",
         " ",
-        filingCost,
+        residentLocality.filingCost,
         ". The courts are not in session every day so the clerk will tell you when your hearing date will be when you file. Each court is specific with what payment types they accept so either call to ask or try to cover your bases by bringing cash, check, and card."
       ] }),
       residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
