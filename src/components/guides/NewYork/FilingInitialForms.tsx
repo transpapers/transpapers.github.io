@@ -25,26 +25,32 @@ import { newYork } from "../../../jurisdiction/all";
 
 import { type Person } from "../../../types/person";
 import { type NewYorkCounty } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function NewYorkFilingGuide({
   person,
-  locality,
 }: {
   person: Person;
-  locality: NewYorkCounty;
 }) {
-  const { age } = person;
-  const { name, isNYC, borough, court } = locality;
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality: NewYorkCounty = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as NewYorkCounty;
+
   return (
     <section key="NewYork-Filing">
       <h3>Filing Initial Forms (NY)</h3>
 
-      {isNYC ? (
+      {residentLocality.isNYC ? (
         <>
           <p>
             {age && age < 18 ? "A parent/guardian " : "You "} can file in any of
-            the 5 NYC Civil courts. We have them listed below with your borough
-            bolded.
+            the 5 NYC Civil courts. We have them listed below.
           </p>
           {...Array.from(
             newYork.localities
@@ -57,7 +63,7 @@ function NewYorkFilingGuide({
               )),
           )}
           <p>
-            {court.specificCourtInfo ?? ""}
+            {residentLocality.court.specificCourtInfo ?? ""}
             The cost to file is currently $65. If you bring cash make sure
             it&apos;s exact as they probably won&apos;t make change for you.
           </p>
@@ -65,15 +71,15 @@ function NewYorkFilingGuide({
       ) : (
         <>
           <p>
-            The filing location is the {name} county court at {court.address}.
+            The filing location is the {residentLocality.name} county court at {residentLocality.court.address}.
             {age && age < 18 ? "A parent/guardian " : "You "} may want to call
             ahead to check accepted payment types, their phone number is{" "}
-            {court.phone}. Generally speaking though as long as you have cash,
+            {residentLocality.court.phone}. Generally speaking though as long as you have cash,
             check, and card all ready to go then you are good. The cost to file
             is currently $210, there will not be a hearing.
           </p>
 
-          {court.specificCourtInfo && <p>{court.specificCourtInfo}</p>}
+          {residentLocality.court.specificCourtInfo && <p>{residentLocality.court.specificCourtInfo}</p>}
         </>
       )}
 
@@ -118,6 +124,6 @@ function NewYorkFilingGuide({
       )}
     </section>
   );
-}
+}}
 
 export default NewYorkFilingGuide;

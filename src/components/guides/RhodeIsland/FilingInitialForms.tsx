@@ -27,10 +27,8 @@ import { allJurisdictions } from "../../../jurisdiction/all";
 
 function RhodeIslandFilingGuide({
   person,
-  //residentLocality,
 }: {
   person: Person;
-  //residentLocality: RhodeIslandCityOrTown;
 }) {
   const { age, residentJurisdictionName, residentLocalityName } = person;
   const residentJurisdiction = allJurisdictions.find(
@@ -41,7 +39,6 @@ function RhodeIslandFilingGuide({
   const residentLocality: RhodeIslandCityOrTown = localities.find(
     (j) => j.name === residentLocalityName,
   ) as RhodeIslandCityOrTown;
-  //const { courtDoesBackgroundCheck, filingCost } = residentLocality;
 
   return (
     <section key="RhodeIsland-Filing">

@@ -23,23 +23,30 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { TexasCounty } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function TexasFilingInitialFormsGuide({
   person,
-  locality,
 }: {
   person: Person;
-  locality: TexasCounty;
 }) {
   const {
     age,
-    residentLocality,
     isChangingLegalSex,
     isChangingLegalName,
     hasCriminalRecord,
     birthJurisdiction,
+    residentJurisdictionName,
+    residentLocalityName,
   } = person;
-  const { backgroundCheckRequired } = locality;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality: TexasCounty = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as TexasCounty;
 
   return (
     <section key="TX-InitialForms">
@@ -143,7 +150,7 @@ function TexasFilingInitialFormsGuide({
             back a case number and a hearing date.
           </p>
 
-          {age && age > 17 && backgroundCheckRequired ? (
+          {age && age > 17 && residentLocality.backgroundCheckRequired ? (
             <>
               <p>
                 For the background check you will need to send a fingerprint
@@ -265,6 +272,6 @@ function TexasFilingInitialFormsGuide({
       </p>
     </section>
   );
-}
+}}
 
 export default TexasFilingInitialFormsGuide;
