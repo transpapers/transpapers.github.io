@@ -47,7 +47,7 @@ function RhodeIslandFilingGuide({
     <section key="RhodeIsland-Filing">
       <h3>Filing Initial Forms (RI)</h3>
 
-      {residentLocality?.name === "West Greenwich" ? (
+      {residentLocality.name === "West Greenwich" ? (
         <p>
           A recent law was passed called{" "}
           <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
@@ -65,7 +65,7 @@ function RhodeIslandFilingGuide({
         ""
       )}
 
-      {residentLocality?.name === "Glocester" ? (
+      {residentLocality.name === "Glocester" ? (
         <p>
           A recent law was passed called{" "}
           <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
@@ -83,7 +83,7 @@ function RhodeIslandFilingGuide({
         ""
       )}
 
-      {residentLocality?.name === "Warren" ? (
+      {residentLocality.name === "Warren" ? (
         <p>
           A recent law was passed called{" "}
           <a href="https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm">
@@ -112,15 +112,15 @@ function RhodeIslandFilingGuide({
 
       {age && age < 18 ? (
         <>
-          {residentLocality?.name === "East Providence" ? (
+          {residentLocality.name === "East Providence" ? (
             <p>
               The filing location is the East Providence Family court which is
               located at 1 Dorrance St, Providence, RI 02903.
             </p>
           ) : (
             <p>
-              The filing location is the {residentLocality?.name} court at{" "}
-              {residentLocality?.court.address}.
+              The filing location is the {residentLocality.name} court at{" "}
+              {residentLocality.court.address}.
             </p>
           )}
           <p>
@@ -134,11 +134,11 @@ function RhodeIslandFilingGuide({
             to either call to ask or cover their bases by bringing cash, check,
             and card.
           </p>
-          {residentLocality?.court.specificCourtInfo && <p>{residentLocality?.court.specificCourtInfo}</p>}
+          {residentLocality.court.specificCourtInfo && <p>{residentLocality.court.specificCourtInfo}</p>}
         </>
       ) : (
         <p>
-          The filing location is at {residentLocality?.court.address}. Bring the notarized Change
+          The filing location is at {residentLocality.court.address}. Bring the notarized Change
           of Name petition, useable copy of your birth certificate
           {courtDoesBackgroundCheck ? ", " : ", BCI report, "}
           and photo ID. According to our data the filing fee will be{" "}
@@ -149,7 +149,7 @@ function RhodeIslandFilingGuide({
         </p>
       )}
 
-      {residentLocality?.court.specificCourtInfo && <p>{residentLocality?.court.specificCourtInfo}</p>}
+      {residentLocality.court.specificCourtInfo && <p>{residentLocality.court.specificCourtInfo}</p>}
 
       <p>
         If the clerk doesn&apos;t give a hearing date then ask about it. Some
