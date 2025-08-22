@@ -32337,11 +32337,10 @@ function RhodeIslandEverythingElseGuide() {
   ] }, "RI-EverythingElse");
 }
 function RhodeIslandFilingGuide({
-  person,
-  locality
+  person
+  //residentLocality,
 }) {
   const { age, residentJurisdictionName, residentLocalityName } = person;
-  const { court, courtDoesBackgroundCheck, filingCost } = locality;
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName
   );
@@ -32350,9 +32349,10 @@ function RhodeIslandFilingGuide({
     const residentLocality = localities.find(
       (j) => j.name === residentLocalityName
     );
+    const { courtDoesBackgroundCheck, filingCost } = residentLocality;
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (RI)" }),
-      residentLocality?.name === "West Greenwich" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      residentLocality.name === "West Greenwich" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "A recent law was passed called",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
@@ -32361,7 +32361,7 @@ function RhodeIslandFilingGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
         " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
       ] }) : "",
-      residentLocality?.name === "Glocester" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      residentLocality.name === "Glocester" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "A recent law was passed called",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
@@ -32369,7 +32369,7 @@ function RhodeIslandFilingGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
         " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
       ] }) : "",
-      residentLocality?.name === "Warren" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      residentLocality.name === "Warren" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "A recent law was passed called",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
@@ -32383,12 +32383,12 @@ function RhodeIslandFilingGuide({
         "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
       ] }),
       age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        residentLocality?.name === "East Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The filing location is the East Providence Family court which is located at 1 Dorrance St, Providence, RI 02903." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        residentLocality.name === "East Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The filing location is the East Providence Family court which is located at 1 Dorrance St, Providence, RI 02903." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "The filing location is the ",
-          residentLocality?.name,
+          residentLocality.name,
           " court at",
           " ",
-          court.address,
+          residentLocality.court.address,
           "."
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -32399,10 +32399,10 @@ function RhodeIslandFilingGuide({
           filingCost,
           ". The courts are not in session every day so the clerk will tell them when your hearing date will be when they file. Each court is specific with what payment types they accept so they need to either call to ask or cover their bases by bringing cash, check, and card."
         ] }),
-        court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: court.specificCourtInfo })
+        residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo })
       ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "The filing location is at ",
-        court.address,
+        residentLocality.court.address,
         ". Bring the notarized Change of Name petition, useable copy of your birth certificate",
         courtDoesBackgroundCheck ? ", " : ", BCI report, ",
         "and photo ID. According to our data the filing fee will be",
@@ -32410,7 +32410,7 @@ function RhodeIslandFilingGuide({
         filingCost,
         ". The courts are not in session every day so the clerk will tell you when your hearing date will be when you file. Each court is specific with what payment types they accept so either call to ask or try to cover your bases by bringing cash, check, and card."
       ] }),
-      court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: court.specificCourtInfo }),
+      residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: `If the clerk doesn't give a hearing date then ask about it. Some courts no longer do name change hearings and will instead send a court order granting the change in the mail. If this is the case ask and pay for at least one other certified copy of that order to be sent, it should cost about $5.00. You can then skip the "Court Hearing" section.` })
     ] }, "RhodeIsland-Filing");
   }
