@@ -52,134 +52,128 @@ function TexasFilingInitialFormsGuide({
     <section key="TX-InitialForms">
       <h3>Filing Initial Forms (TX)</h3>
 
-      {residentLocality ? (
+      <p>
+      {isChangingLegalName && isChangingLegalSex ? (
         <>
-          <p>
-            {isChangingLegalName && isChangingLegalSex ? (
-              <>
-                <span> Name Change Section: </span>
-                <br />
-              </>
-            ) : (
-              ""
-            )}
-            Some counties have specific requirements for attaching standing
-            orders, county specific forms, or other unique processes specific to
-            them. In addition some counties have several different courts that
-            the case could be assigned to. We have tried to record all of them
-            but some may have slipped through the cracks. If this is the case
-            for you please give us a{" "}
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdsFASZLlzuD10ILk2xQar2Hu__iv4zCE-XpIGw9_EQck9Sjw/viewform?usp=sf_link">
-              tip
-            </a>
-            . If there is a standing order for your court it will be in the
-            documents list, include it when filing. The filing location is at
-            the {residentLocality.name} county district clerk’s office, located
-            at {residentLocality.court.address}.
-            {age && age < 18 && (
-              <>
-                Whoever filled out the paperwork as your petitioner has to be
-                the one who files the paperwork at court if they are doing
-                in-person filing.
-              </>
-            )}
-          </p>
-
-          {residentLocality.court.specificCourtInfo && (
-            <p>{residentLocality.court.specificCourtInfo}</p>
-          )}
-
-          <p>
-            <strong>
-              By state law, court clerks are barred from answering questions
-              about the forms.
-            </strong>{" "}
-            We recommend that you direct any questions you may have to the
-            court’s legal assistance center, a local LGBT organization, or an
-            attorney.
-          </p>
-
-          <p>
-            The clerk will need all of the name change forms
-            {age && age < 18
-              ? " and the fee waiver. "
-              : ", the fee waiver, and the filled out fingerprint card(s). "}
-            {hasCriminalRecord ? (
-              <>
-                If you meet the requirements of the criminal history questions
-                you also need to provide the applicable documents listed on the
-                checksheet at the end of the petition form.
-              </>
-            ) : (
-              ""
-            )}
-            Payment for the filing fee will be needed if the fee waiver is not
-            filed,
-            {age && age < 18 ? " Your petitioner" : " You"} can call ahead at
-            {residentLocality.court.phone} to check the filing fee cost and
-            accepted payment types. Some counties also allow E-filing instead of
-            in-person,
-            {age && age < 18 ? " they " : " you "} can check with the clerk and
-            E-file{" "}
-            <a href="https://efiletx.tylertech.cloud/OfsEfsp/ui/landing">
-              here
-            </a>{" "}
-            if they say yes.{" "}
-            {age && age < 18
-              ? ""
-              : " If so, take the fingerprinting card to your court hearing unless the clerk says otherwise. "}
-          </p>
-
-          <p>
-            For in-person filing the “Civil Case Information Sheet” is also
-            needed.
-            {age && age < 18 ? (
-              <>
-                All petitioners and co-petitioners need to be listed in section
-                1 under the “Plaintiff(s)/Petitioner(s)” header, add names to
-                the back if needed. Then your petitioner should sign in section
-                1 on the bottom left.
-              </>
-            ) : (
-              " Just sign in the bottom left corner of section 1. "
-            )}
-            Make sure to pre-pay for one or two certified copies of the “Order
-            Changing Name of {age && age < 18 ? "a Child”" : "an Adult”"} if
-            possible. The fee waiver will <strong>not</strong> cover the cost of
-            the copies. Once they have all of the paperwork they should give
-            back a case number and a hearing date.
-          </p>
-
-          {age && age > 17 && residentLocality.backgroundCheckRequired ? (
-            <>
-              <p>
-                For the background check you will need to send a fingerprint
-                card, a court stamped copy of your petition, and a check/money
-                order made out to the “Texas Department of Public Safety” for
-                $28.25. The mailing address is:
-              </p>
-
-              <p>
-                <span>Texas Department of Public Safety</span>
-                <br />
-                <span>Central Cash Receiving</span>
-                <br />
-                <span>P. O. Box 15999</span>
-                <br />
-                <span>Austin, Texas 78761-5999</span>
-              </p>
-
-              <p>
-                They will send the results directly to the court so do{" "}
-                <strong>not</strong> expect a response from DPS.
-              </p>
-            </>
-          ) : (
-            ""
-          )}
+        <span> Name Change Section: </span>
+        <br />
         </>
       ) : (
-        <p>Could not generate, missing residentLocality</p>
+        ""
+      )}
+      Some counties have specific requirements for attaching standing
+      orders, county specific forms, or other unique processes specific to
+      them. In addition some counties have several different courts that
+      the case could be assigned to. We have tried to record all of them
+      but some may have slipped through the cracks. If this is the case
+      for you please give us a{" "}
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdsFASZLlzuD10ILk2xQar2Hu__iv4zCE-XpIGw9_EQck9Sjw/viewform?usp=sf_link">
+        tip
+      </a>
+      . If there is a standing order for your court it will be in the
+      documents list, include it when filing. The filing location is at
+     the {residentLocality.name} county district clerk’s office, located
+      at {residentLocality.court.address}.
+      {age && age < 18 && (
+        <>
+        Whoever filled out the paperwork as your petitioner has to be
+        the one who files the paperwork at court if they are doing
+        in-person filing.
+        </>
+      )}
+      </p>
+
+      {residentLocality.court.specificCourtInfo && (
+      <p>{residentLocality.court.specificCourtInfo}</p>
+      )}
+
+      <p>
+      <strong>
+        By state law, court clerks are barred from answering questions
+        about the forms.
+      </strong>{" "}
+      We recommend that you direct any questions you may have to the
+      court’s legal assistance center, a local LGBT organization, or an
+      attorney.
+      </p>
+
+      <p>
+      The clerk will need all of the name change forms
+      {age && age < 18
+        ? " and the fee waiver. "
+        : ", the fee waiver, and the filled out fingerprint card(s). "}
+      {hasCriminalRecord ? (
+        <>
+        If you meet the requirements of the criminal history questions
+        you also need to provide the applicable documents listed on the
+        checksheet at the end of the petition form.
+        </>
+      ) : (
+        ""
+      )}
+      Payment for the filing fee will be needed if the fee waiver is not
+      filed,
+      {age && age < 18 ? " Your petitioner" : " You"} can call ahead at
+      {residentLocality.court.phone} to check the filing fee cost and
+      accepted payment types. Some counties also allow E-filing instead of
+      in-person,
+      {age && age < 18 ? " they " : " you "} can check with the clerk and
+      E-file{" "}
+      <a href="https://efiletx.tylertech.cloud/OfsEfsp/ui/landing">
+        here
+      </a>{" "}
+      if they say yes.{" "}
+      {age && age < 18
+        ? ""
+        : " If so, take the fingerprinting card to your court hearing unless the clerk says otherwise. "}
+      </p>
+
+      <p>
+      For in-person filing the “Civil Case Information Sheet” is also
+      needed.
+      {age && age < 18 ? (
+        <>
+        All petitioners and co-petitioners need to be listed in section
+        1 under the “Plaintiff(s)/Petitioner(s)” header, add names to
+        the back if needed. Then your petitioner should sign in section
+        1 on the bottom left.
+        </>
+      ) : (
+        " Just sign in the bottom left corner of section 1. "
+      )}
+      Make sure to pre-pay for one or two certified copies of the “Order
+      Changing Name of {age && age < 18 ? "a Child”" : "an Adult”"} if
+      possible. The fee waiver will <strong>not</strong> cover the cost of
+      the copies. Once they have all of the paperwork they should give
+      back a case number and a hearing date.
+      </p>
+
+      {age && age > 17 && residentLocality.backgroundCheckRequired ? (
+      <>
+        <p>
+        For the background check you will need to send a fingerprint
+        card, a court stamped copy of your petition, and a check/money
+        order made out to the “Texas Department of Public Safety” for
+        $28.25. The mailing address is:
+        </p>
+
+        <p>
+        <span>Texas Department of Public Safety</span>
+        <br />
+        <span>Central Cash Receiving</span>
+        <br />
+        <span>P. O. Box 15999</span>
+        <br />
+        <span>Austin, Texas 78761-5999</span>
+        </p>
+
+        <p>
+        They will send the results directly to the court so do{" "}
+        <strong>not</strong> expect a response from DPS.
+        </p>
+      </>
+      ) : (
+      ""
       )}
 
       <p>
