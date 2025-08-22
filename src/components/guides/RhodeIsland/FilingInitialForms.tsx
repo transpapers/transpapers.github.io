@@ -42,6 +42,9 @@ function RhodeIslandFilingGuide({
     (j) => j.name === residentLocalityName,
   ) as RhodeIslandCityOrTown;
   //const { courtDoesBackgroundCheck, filingCost } = residentLocality;
+  if (!residentLocality) {
+    return "";
+  }
 
   return (
     <section key="RhodeIsland-Filing">

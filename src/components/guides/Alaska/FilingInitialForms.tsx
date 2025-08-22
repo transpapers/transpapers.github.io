@@ -23,30 +23,26 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { AlaskaAdministrativeDivision } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function AlaskaFilingInitialFormsGuide({
   person,
 }: {
   person: Partial<Person>;
 }) {
-  const { age } = person;
-  const locality: AlaskaAdministrativeDivision =
-    person.residentLocality as AlaskaAdministrativeDivision;
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (!locality) {
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality: AlaskaAdministrativeDivision = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as AlaskaAdministrativeDivision;
+  if (!residentLocality) {
     return "";
   }
-  const {
-    doesNameChange,
-    forwardsTo,
-    inPersonFiling,
-    trueFiling,
-    emailFiling,
-    emailCourt,
-    faxFiling,
-    faxNumber,
-    court,
-  } = locality;
+
   return (
     <section key="AK-InitialForms">
       <h3>Filing Initial Forms (AK)</h3>
@@ -62,24 +58,24 @@ function AlaskaFilingInitialFormsGuide({
           ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. "
           : " "}
         No matter what method is used a valid photo ID is needed to notarize the
-        forms. Below is a list of filing methods for the {locality.name} court.
-        {doesNameChange
+        forms. Below is a list of filing methods for the {residentLocality.name} court.
+        {residentLocality.doesNameChange
           ? ""
           : " This court only forwards to the " +
-            (forwardsTo?.court.city ?? "") +
+            (residentLocality.forwardsTo?.court.city ?? "") +
             " superior court whose methods are also listed, file at either."}
       </p>
 
-      {inPersonFiling ? (
+      {residentLocality.inPersonFiling ? (
         <p>
           <span> In-person - </span>
           <br />
           {age && age < 18 ? "Your petitioner " : "You "} can go directly to the{" "}
-          {locality.name} court at {court.address} to file. The forms can be
+          {residentLocality.name} court at {residentLocality.court.address} to file. The forms can be
           signed, dated, and notarized there. A webpage with more information is
           available{" "}
-          <a href={court.website} title="here">
-            {court.website}
+          <a href={residentLocality.court.website} title="here">
+            {residentLocality.court.website}
           </a>
           . It has the hours of operation, accepted payment types, and a phone
           number to confirm that it is the correct place to file.
@@ -88,7 +84,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {trueFiling ? (
+      {residentLocality.trueFiling ? (
         <p>
           <span> True Filing - </span>
           <br />
@@ -107,7 +103,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {trueFiling ? (
+      {residentLocality.trueFiling ? (
         <p>
           You can fill out the form to register an account and begin the filing
           process. Log in, click on “File” in the upper right hand section, and
@@ -115,7 +111,7 @@ function AlaskaFilingInitialFormsGuide({
           new case” and select your name under “Filer”. Case types should then
           appear, one of which should say “Change of Name”. After you hit
           “Initiate Case” there will be a screen asking for Case information,
-          select {locality.name} for “Filing Location” and then fill out the
+          select {residentLocality.name} for “Filing Location” and then fill out the
           case type information as applicable. Then you should see a screen for
           “Party Information” which is just
           {age && age < 18 ? " you and your minor child." : " you."} Fill in
@@ -134,12 +130,12 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {emailFiling ? (
+      {residentLocality.emailFiling ? (
         <p>
           <span> Email - </span>
           <br />
           {age && age < 18 ? "Your petitioner " : "You "} can file with the
-          court using this email address {emailCourt}. In order to use this
+          court using this email address {residentLocality.emailCourt}. In order to use this
           service the forms will need to be notarized by either a notary service
           or a court clerk from another court before they are sent. Notaries can
           be found in banks, some{" "}
@@ -161,13 +157,13 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {faxFiling ? (
+      {residentLocality.faxFiling ? (
         <p>
           <span> Fax - </span>
           <br />
           {age && age < 18 ? "Your petitioner " : "You "} can file with the
           court by faxing the completed and notarized forms from the previous
-          section to this number {faxNumber}. In order to use this service the
+          section to this number {residentLocality.faxNumber}. In order to use this service the
           forms will need to be notarized by either a notary service or a court
           clerk from another court before the fax is sent. Notaries can be found
           in banks, some{" "}
@@ -183,22 +179,22 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {doesNameChange ? (
+      {residentLocality.doesNameChange ? (
         ""
       ) : (
         <p>
-          The {forwardsTo?.court.city} superior court allows for the following
+          The {residentLocality.forwardsTo?.court.city} superior court allows for the following
           filing methods:
           <br />
-          {forwardsTo?.inPersonFiling ? (
+          {residentLocality.forwardsTo?.inPersonFiling ? (
             <>
-              <span>In-person - at {forwardsTo.court.address}.</span>
+              <span>In-person - at {residentLocality.forwardsTo.court.address}.</span>
               <br />
             </>
           ) : (
             ""
           )}
-          {forwardsTo?.trueFiling ? (
+          {residentLocality.forwardsTo?.trueFiling ? (
             <>
               <span>
                 True Filing - at this{" "}
@@ -209,17 +205,17 @@ function AlaskaFilingInitialFormsGuide({
           ) : (
             ""
           )}
-          {forwardsTo?.emailFiling ? (
+          {residentLocality.forwardsTo?.emailFiling ? (
             <>
-              <span>Email - at {forwardsTo.emailCourt}.</span>
+              <span>Email - at {residentLocality.forwardsTo.emailCourt}.</span>
               <br />
             </>
           ) : (
             ""
           )}
-          {forwardsTo?.faxFiling ? (
+          {residentLocality.forwardsTo?.faxFiling ? (
             <>
-              <span>Fax - at {forwardsTo.faxNumber}.</span>
+              <span>Fax - at {residentLocality.forwardsTo.faxNumber}.</span>
               <br />
             </>
           ) : (
@@ -250,6 +246,6 @@ function AlaskaFilingInitialFormsGuide({
       </p>
     </section>
   );
-}
+}}
 
 export default AlaskaFilingInitialFormsGuide;
