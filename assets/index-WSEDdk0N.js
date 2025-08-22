@@ -28878,68 +28878,57 @@ function MichiganEverythingElseGuide() {
     ] })
   ] }, "MI-EverythingElse");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganFilingInitialFormsGuide({
   person
 }) {
-  const { age, residentLocality, isChangingLegalSex, doNotPublish } = person;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (MI)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Your filing location is the ",
-        residentLocality.name,
-        " county court at",
-        " ",
-        residentLocality.court.address,
-        ".",
-        age && age < 18 ? " A parent/guardian " : " You ",
-        " may file by mail or in person; in either case, include the Petition, the Addendum (m97a),",
-        residentLocality.name && residentLocality.name == "Saginaw" ? " the Order Following (pc52), " : " ",
-        "the optional Fee Waiver (mc20), as well as payment. Even if the fee waiver is granted payment still needs to be provided for at least one certified copy. To ask for one when filing by mail either write “Certified copy fee” in a checks memo line or include a letter stating thats what the extra money is for. No matter what the filing method we recommend calling the court at",
-        " ",
-        residentLocality.court.phone,
-        " or visiting their website:",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "website", children: residentLocality.court.website }),
-        ". This is to confirm their accepted payment types, Name Change Petition fee, and Certified Copy fee as these vary by county and are updated frequently."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Whoever filled out the paperwork as your petitioner has to be the one who files the paperwork at court if they are doing in-person filing." }) }),
-      residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
-        " ",
-        "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true || doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Once the paperwork has been filed it will be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }),
-      residentLocality.name && residentLocality.name !== "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If you want an update on your case",
-        " ",
-        age && age < 18 ? " your petitioner has " : " you have to ",
-        " to go to court and show an ID, they will not confirm anything on the phone to protect privacy."
-      ] }) : ""
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, missing residentLocality" })
-  ] }, "MI-InitialForms");
+  const { age, isChangingLegalSex, doNotPublish, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (MI)" }),
+      residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Your filing location is the ",
+          residentLocality.name,
+          " county court at",
+          " ",
+          residentLocality.court.address,
+          ".",
+          age && age < 18 ? " A parent/guardian " : " You ",
+          " may file by mail or in person; in either case, include the Petition, the Addendum (m97a),",
+          residentLocality.name && residentLocality.name == "Saginaw" ? " the Order Following (pc52), " : " ",
+          "the optional Fee Waiver (mc20), as well as payment. Even if the fee waiver is granted payment still needs to be provided for at least one certified copy. To ask for one when filing by mail either write “Certified copy fee” in a checks memo line or include a letter stating thats what the extra money is for. No matter what the filing method we recommend calling the court at",
+          " ",
+          residentLocality.court.phone,
+          " or visiting their website:",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "website", children: residentLocality.court.website }),
+          ". This is to confirm their accepted payment types, Name Change Petition fee, and Certified Copy fee as these vary by county and are updated frequently."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Whoever filled out the paperwork as your petitioner has to be the one who files the paperwork at court if they are doing in-person filing." }) }),
+        residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
+          " ",
+          "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true || doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Once the paperwork has been filed it will be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }),
+        residentLocality.name && residentLocality.name !== "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "If you want an update on your case",
+          " ",
+          age && age < 18 ? " your petitioner has " : " you have to ",
+          " to go to court and show an ID, they will not confirm anything on the phone to protect privacy."
+        ] }) : ""
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, missing residentLocality" })
+    ] }, "MI-InitialForms");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -32347,95 +32336,84 @@ function RhodeIslandEverythingElseGuide() {
     ] })
   ] }, "RI-EverythingElse");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandFilingGuide({
   person,
   locality
 }) {
-  const { age, residentLocality } = person;
+  const { age, residentJurisdictionName, residentLocalityName } = person;
   const { court, courtDoesBackgroundCheck, filingCost } = locality;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (RI)" }),
-    residentLocality?.name === "West Greenwich" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "A recent law was passed called",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
-      ". In section D it states that there will be no publication required before a hearing. The West Greenwich court is openly defying that law by still requiring publications for everyone before their hearings and charging for it. If you have the will and ability",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
-      " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
-    ] }) : "",
-    residentLocality?.name === "Glocester" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "A recent law was passed called",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
-      ". In section D it states that there will be no publication required before a hearing. The Glocester court has decided to instead publicize your case after the name change hearing and charge for it. Due to this their price is roughly triple what it should be. If you have the will and ability ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
-      " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
-    ] }) : "",
-    residentLocality?.name === "Warren" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "A recent law was passed called",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
-      ". In section D it states that there will be no publication required before a hearing. The Warren court has decided to instead publicize your case after the name change hearing and charge for it. Due to this their price is roughly triple what it should be. If you have the will and ability ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
-      " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
-    ] }) : "",
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
-      " ",
-      "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
-    ] }),
-    age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      residentLocality?.name === "East Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The filing location is the East Providence Family court which is located at 1 Dorrance St, Providence, RI 02903." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The filing location is the ",
-        residentLocality?.name,
-        " court at",
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (RI)" }),
+      residentLocality?.name === "West Greenwich" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "A recent law was passed called",
         " ",
-        court.address,
-        "."
-      ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
+        ". In section D it states that there will be no publication required before a hearing. The West Greenwich court is openly defying that law by still requiring publications for everyone before their hearings and charging for it. If you have the will and ability",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
+        " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
+      ] }) : "",
+      residentLocality?.name === "Glocester" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "A recent law was passed called",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
+        ". In section D it states that there will be no publication required before a hearing. The Glocester court has decided to instead publicize your case after the name change hearing and charge for it. Due to this their price is roughly triple what it should be. If you have the will and ability ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
+        " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
+      ] }) : "",
+      residentLocality?.name === "Warren" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "A recent law was passed called",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://webserver.rilegislature.gov/Statutes/TITLE33/33-22/33-22-28.htm", children: "§33-22-28" }),
+        ". In section D it states that there will be no publication required before a hearing. The Warren court has decided to instead publicize your case after the name change hearing and charge for it. Due to this their price is roughly triple what it should be. If you have the will and ability ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "notify" }),
+        " us with a tip and send Patience Crozier at GLAD Law an email at pcrozier@gladlaw.org."
+      ] }) : "",
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "A parent/guardian will need to bring the notarized Change of Name petition, useable copy of your birth certificate",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
+        " ",
+        "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
+      ] }),
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        residentLocality?.name === "East Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The filing location is the East Providence Family court which is located at 1 Dorrance St, Providence, RI 02903." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "The filing location is the ",
+          residentLocality?.name,
+          " court at",
+          " ",
+          court.address,
+          "."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "A parent/guardian will need to bring the notarized Change of Name petition, useable copy of your birth certificate",
+          courtDoesBackgroundCheck ? ", " : ", BCI report, ",
+          "and photo ID. According to our data the filing fee will be",
+          " ",
+          filingCost,
+          ". The courts are not in session every day so the clerk will tell them when your hearing date will be when they file. Each court is specific with what payment types they accept so they need to either call to ask or cover their bases by bringing cash, check, and card."
+        ] }),
+        court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: court.specificCourtInfo })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "The filing location is at ",
+        court.address,
+        ". Bring the notarized Change of Name petition, useable copy of your birth certificate",
         courtDoesBackgroundCheck ? ", " : ", BCI report, ",
         "and photo ID. According to our data the filing fee will be",
         " ",
         filingCost,
-        ". The courts are not in session every day so the clerk will tell them when your hearing date will be when they file. Each court is specific with what payment types they accept so they need to either call to ask or cover their bases by bringing cash, check, and card."
+        ". The courts are not in session every day so the clerk will tell you when your hearing date will be when you file. Each court is specific with what payment types they accept so either call to ask or try to cover your bases by bringing cash, check, and card."
       ] }),
-      court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: court.specificCourtInfo })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The filing location is at ",
-      court.address,
-      ". Bring the notarized Change of Name petition, useable copy of your birth certificate",
-      courtDoesBackgroundCheck ? ", " : ", BCI report, ",
-      "and photo ID. According to our data the filing fee will be",
-      " ",
-      filingCost,
-      ". The courts are not in session every day so the clerk will tell you when your hearing date will be when you file. Each court is specific with what payment types they accept so either call to ask or try to cover your bases by bringing cash, check, and card."
-    ] }),
-    court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: court.specificCourtInfo }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: `If the clerk doesn't give a hearing date then ask about it. Some courts no longer do name change hearings and will instead send a court order granting the change in the mail. If this is the case ask and pay for at least one other certified copy of that order to be sent, it should cost about $5.00. You can then skip the "Court Hearing" section.` })
-  ] }, "RhodeIsland-Filing");
+      court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: court.specificCourtInfo }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: `If the clerk doesn't give a hearing date then ask about it. Some courts no longer do name change hearings and will instead send a court order granting the change in the mail. If this is the case ask and pay for at least one other certified copy of that order to be sent, it should cost about $5.00. You can then skip the "Court Hearing" section.` })
+    ] }, "RhodeIsland-Filing");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -36802,71 +36780,60 @@ function OregonFeeWaiverGuide({ person }) {
     ] })
   ] }, "Oregon-Fee-Waiver");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonFilingInitialFormsGuide({
   person
 }) {
-  const { age, residentLocality, isChangingLegalSex } = person;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (OR)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Your county's circuit court is at",
-        " ",
-        residentLocality.court.address,
-        ". However the petition can be filed at any other Oregon circuit court as well. We have provided a map of all Oregon circuit courts",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/viewer?mid=11l4y7lcd51YLjlNXl2Qcbb4Fmg_1aaI&hl=en&ll=44.22287483137777%2C-120.8304999&z=7", children: "here" }),
-        " ",
-        "and if another court is more safe/convenient then file there instead. Every circuit court in Oregon has their info on this",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.courts.oregon.gov/courts/Pages/default.aspx", children: "website" }),
-        ". Some courts accept filing by mail or even online, the web link we provided will have the details for those. Make sure to fill in the “County” field at the top of every page on all of the forms with the name of whatever county they will be filed at. If the filing method is in-person or by mail",
-        age && age < 18 ? " your petitioner " : " you ",
-        " will need the petition forms, photo ID, payment, and (optionally) the fee waiver forms. To find out what payment methods the court accepts check the link or call them."
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        residentLocality.name === "Umatilla" ? " Umatilla county has two valid circuit court locations to file at " + residentLocality.court.address + ". Pick whichever is most convenient. " : " The filing location is the " + residentLocality.name + " circuit court at " + residentLocality.court.address + ". ",
-        "They have a webpage with their open hours and other information at",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, children: residentLocality.court.website }),
-        ". That link may also show what filing methods the court accepts, some will accept filing by mail or even online, others are in-person only. It may also show accepted payment types. If not it will have a phone number to call for questions. If the filing method is in-person or by mail",
-        " ",
-        age && age < 18 ? " your petitioner " : " you ",
-        " will need the petition forms, photo ID, payment, and (optionally) the fee waiver forms."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about how to fill out the forms." }),
-        " ",
-        "We recommend that you direct any of those questions to the court’s legal assistance center, a local LGBT organization, or an attorney."
-      ] }),
-      residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
-      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Your petitioner will need to send out written notice to any other parents or legal guardians regardless of custody, the only exceptions being if the minor has not lived with them and they haven’t given support (or tried to). You do ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-        " ",
-        "need their consent, if they have an issue they can contact the court using the notice. A copy of that notice has been provided; your petitioner simply needs to add the case number. Once notice has been sent your petitioner can fill out the table in the “Declaration of Notice” form with everyone they contacted. At that point they can sign it and send it to the court, then the court will likely make a judgment without a hearing and mail the results. If so skip the “Court Hearing” section. Assuming there isn't a hearing you will need to wait for the “General Judgement”, which we will call the court order, to arrive. Once it does your petitioner will also need to order 2 or 3 certified copies of the court order for use later in this process as some places will not return them. Keep the original in a safe place. If there is a hearing your petitioner will recieve a court date instead and we recommend getting help from a lawyer or our “Resources” section."
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have filed, the court will likely make a judgment without a hearing and will mail you the results. If so skip the “Court Hearing” section. There are a few exceptions such as a paperwork mishap or some types of criminal record that could cause a hearing though. Assuming there isn't one you will need to wait for the “General Judgement”, which we will call the court order, to arrive. Once it does you will need to order 2 or 3 certified copies of the court order for use later in the process as some places will not return them. Keep the original in a safe place. If there is a hearing you will recieve a court date instead." })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, residentLocality missing." })
-  ] }, "OR-InitialForms");
+  const { age, isChangingLegalSex, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (OR)" }),
+      residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Your county's circuit court is at",
+          " ",
+          residentLocality.court.address,
+          ". However the petition can be filed at any other Oregon circuit court as well. We have provided a map of all Oregon circuit courts",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/viewer?mid=11l4y7lcd51YLjlNXl2Qcbb4Fmg_1aaI&hl=en&ll=44.22287483137777%2C-120.8304999&z=7", children: "here" }),
+          " ",
+          "and if another court is more safe/convenient then file there instead. Every circuit court in Oregon has their info on this",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.courts.oregon.gov/courts/Pages/default.aspx", children: "website" }),
+          ". Some courts accept filing by mail or even online, the web link we provided will have the details for those. Make sure to fill in the “County” field at the top of every page on all of the forms with the name of whatever county they will be filed at. If the filing method is in-person or by mail",
+          age && age < 18 ? " your petitioner " : " you ",
+          " will need the petition forms, photo ID, payment, and (optionally) the fee waiver forms. To find out what payment methods the court accepts check the link or call them."
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          residentLocality.name === "Umatilla" ? " Umatilla county has two valid circuit court locations to file at " + residentLocality.court.address + ". Pick whichever is most convenient. " : " The filing location is the " + residentLocality.name + " circuit court at " + residentLocality.court.address + ". ",
+          "They have a webpage with their open hours and other information at",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, children: residentLocality.court.website }),
+          ". That link may also show what filing methods the court accepts, some will accept filing by mail or even online, others are in-person only. It may also show accepted payment types. If not it will have a phone number to call for questions. If the filing method is in-person or by mail",
+          " ",
+          age && age < 18 ? " your petitioner " : " you ",
+          " will need the petition forms, photo ID, payment, and (optionally) the fee waiver forms."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about how to fill out the forms." }),
+          " ",
+          "We recommend that you direct any of those questions to the court’s legal assistance center, a local LGBT organization, or an attorney."
+        ] }),
+        residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
+        age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Your petitioner will need to send out written notice to any other parents or legal guardians regardless of custody, the only exceptions being if the minor has not lived with them and they haven’t given support (or tried to). You do ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+          " ",
+          "need their consent, if they have an issue they can contact the court using the notice. A copy of that notice has been provided; your petitioner simply needs to add the case number. Once notice has been sent your petitioner can fill out the table in the “Declaration of Notice” form with everyone they contacted. At that point they can sign it and send it to the court, then the court will likely make a judgment without a hearing and mail the results. If so skip the “Court Hearing” section. Assuming there isn't a hearing you will need to wait for the “General Judgement”, which we will call the court order, to arrive. Once it does your petitioner will also need to order 2 or 3 certified copies of the court order for use later in this process as some places will not return them. Keep the original in a safe place. If there is a hearing your petitioner will recieve a court date instead and we recommend getting help from a lawyer or our “Resources” section."
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have filed, the court will likely make a judgment without a hearing and will mail you the results. If so skip the “Court Hearing” section. There are a few exceptions such as a paperwork mishap or some types of criminal record that could cause a hearing though. Assuming there isn't one you will need to wait for the “General Judgement”, which we will call the court order, to arrive. Once it does you will need to order 2 or 3 certified copies of the court order for use later in the process as some places will not return them. Keep the original in a safe place. If there is a hearing you will recieve a court date instead." })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, residentLocality missing." })
+    ] }, "OR-InitialForms");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -40598,7 +40565,7 @@ function IllinoisFilingInitialFormsGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "A hearing is unlikely unless the judge needs more information",
           hasCriminalRecord ? " or they have questions about your criminal record" : "",
-          ". They cannot deny the change unless they think it is for fraud. In the extremely unlikely event that it is denied, seek a lawyer immediately. The “Resources” section of this guide can help with that. Provided that there is no hearing and the change is accepted they will return the “Order for Name Change” which we will not call the court order. Make sure to get one or two certified copies for later use and keep the original in a safe place. You are then ready to file with the Social Security Administration."
+          ". They cannot deny the change unless they think it is for fraud. In the extremely unlikely event that it is denied, seek a lawyer immediately. The “Resources” section of this guide can help with that. Provided that there is no hearing and the change is accepted they will return the “Order for Name Change” which we will call the court order from here on. Make sure to get one or two certified copies for later use and keep the original in a safe place. You are then ready to file with the Social Security Administration."
         ] })
       ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, residentLocality missing." })
     ] }, "Illinois-Filing");
