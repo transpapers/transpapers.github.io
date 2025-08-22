@@ -108,6 +108,6 @@ function IllinoisFilingInitialFormsGuide({
       )}
     </section>
   );
-}
+}}
 
 export default IllinoisFilingInitialFormsGuide;
