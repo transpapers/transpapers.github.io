@@ -215,11 +215,25 @@ export class Person {
   residentJurisdiction?: AnyJurisdiction;
 
   /**
+   * Used to look up residentJurisdiction as a key.
+   *
+   * @remarks Filled from step 1.
+   */
+  residentJurisdictionName?: string;
+
+  /**
    * Applicant's county (or equivalent) of residence.
    *
    * @remarks Required for court locations, etc. Filled from Jurisdiction data.
    */
   residentLocality?: AnyLocality;
+
+  /**
+   * Used to look up residentLocality as a key.
+   *
+   * @remarks Filled from step 1.
+   */
+  residentLocalityName?: string;
 
   /**
    * Applicant's ZIP code.

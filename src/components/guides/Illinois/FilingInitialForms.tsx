@@ -24,15 +24,13 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { allJurisdictions } from "../../../jurisdiction/all";
-import useStore from "../../../store";
 
 function IllinoisFilingInitialFormsGuide({
   person,
 }: {
   person: Partial<Person>;
 }) {
-  const { residentJurisdictionName, residentLocalityName } =
-    useStore((state) => state);
+  const { age, hasCriminalRecord, residentJurisdictionName, residentLocalityName } = person;
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName,
   );
@@ -41,7 +39,6 @@ function IllinoisFilingInitialFormsGuide({
   const residentLocality = localities.find(
     (j) => j.name === residentLocalityName,
   );
-  const { age, hasCriminalRecord } = person;
 
   return (
     <section key="Illinois-Filing">
