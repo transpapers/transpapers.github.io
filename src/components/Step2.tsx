@@ -37,6 +37,7 @@ function Step2() {
   const navigate = useNavigate();
 
   const { updateAppState } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdictionName, residentLocalityName } = useStore(
     (state) => state,
   );
@@ -45,6 +46,7 @@ function Step2() {
     data: Step2FormValues,
   ) => {
     updateAppState(data);
+    updatePerson(data);
     await navigate("/step3");
   };
 
