@@ -266,6 +266,41 @@ export function getJurisdiction(jurisdictionKey: string | undefined) {
 }
 
 /*!
+ * Find a locality given it's name and the jurisdiction name.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {AnyJurisdiction | undefined}
+ */
+export function getLocality(jurisdictionKey: string | undefined, localityKey: string | undefined) {
+  if (!jurisdictionKey) {
+    return undefined;
+  }
+
+  if (!localityKey) {
+    return undefined;
+  }
+
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey,
+  );
+
+  if (!foundJurisdiction) {
+    return undefined;
+  }
+
+  const localities = foundJurisdiction.localities;
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey,
+  );
+
+  //Add section to differentiate Locality types, perhaps find from a list?
+  //Use AK FilingInitialForms as a guide
+  //Test if the getJurisdiction function works even with say NewYorkCounty for OR to error check
+
+  return foundLocality as Locality;
+}
+
+/*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
  * @param {Person} applicant
  * @return {string}

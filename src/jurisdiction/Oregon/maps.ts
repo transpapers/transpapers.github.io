@@ -47,6 +47,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     text: getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 1, x: 50, y: 50 },
   }),
+  
   (applicant) => ({
     text: fullName(applicant.legalName),
     loc: { page: 1, x: 103, y: 212 },
