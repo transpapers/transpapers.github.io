@@ -27,6 +27,8 @@ import {
   phoneEnd,
   phoneStart,
   representativeName,
+  getJurisdiction,
+  getLocality,
 } from "../../lib/util";
 
 import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
@@ -45,7 +47,9 @@ import { Formfill } from "../../types/formfill";
  */
 export const changeOfNameMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 520, y: 170 },
   }),
   (applicant) => ({
@@ -61,7 +65,8 @@ export const changeOfNameMap: Formfill[] = [
     fieldName: "8",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "9",
   }),
   (applicant) => ({
@@ -317,7 +322,8 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "CITYTOWN",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -333,7 +339,7 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "Text3",
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.abbreviation,
+    text: getJurisdiction(applicant.birthJurisdictionName)?.abbreviation,
     fieldName: "STATEPROVINCE",
   }),
   (applicant) => ({
@@ -379,7 +385,8 @@ export const genderIDMap: Formfill[] = [
     fieldName: "CITYTOWN",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "STATE",
   }),
   (applicant) => ({

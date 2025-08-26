@@ -30,6 +30,8 @@ import {
   addZero,
   allCAPS,
   formatContactInfo,
+  getLocality,
+  getJurisdiction,
   ContactFormat as cf,
 } from "../../lib/util";
 
@@ -70,7 +72,7 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].cityofbirth[0]",
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: getJurisdiction(applicant.birthJurisdictionName)?.name,
     fieldName: "topmostSubform[0].Page5[0].stateatbirth[0]",
   }),
   (applicant) => ({
@@ -153,7 +155,8 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "topmostSubform[0].Page5[0].state[0]",
   }),
   (applicant) => ({
@@ -250,7 +253,7 @@ export const ds5504Map: Formfill[] = [
     loc: { page: 4, x: 40, y: 461 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     loc: { page: 4, x: 378, y: 461 },
   }),
   (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 436, y: 461 } }),
@@ -373,7 +376,7 @@ export const ds82Map: Formfill[] = [
     loc: { page: 4, x: 39, y: 448 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     loc: { page: 4, x: 376, y: 448 },
   }),
   (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 436, y: 448 } }),
@@ -388,11 +391,7 @@ export const ds82Map: Formfill[] = [
   () => ({ text: "x", loc: { page: 4, x: 262, y: 703 } }),
   (applicant) => ({
     text:
-      applicant.residentJurisdiction && applicant.residentLocality
-        ? applicant.residentLocality.court.city +
-          " " +
-          applicant.residentJurisdiction.abbreviation
-        : undefined,
+      `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city} / ${getJurisdiction(applicant.residentJurisdictionName)?.abbreviation}`,
     loc: { page: 4, x: 390, y: 707 },
   }),
   (applicant) => ({
@@ -487,7 +486,7 @@ export const ds11Map: Formfill[] = [
     loc: { page: 4, x: 42, y: 454 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     loc: { page: 4, x: 379, y: 454 },
   }),
   (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 439, y: 454 } }),
@@ -659,7 +658,8 @@ export const statusLetterMap: Formfill[] = [
     fieldName: "Current Mailing Address - City",
   }),
   (applicant) => ({
-    text: allCAPS(applicant.residentJurisdiction?.name),
+    text: 
+      allCAPS(getJurisdiction(applicant.residentJurisdictionName)?.name),
     fieldName: "Current Mailing Address - State",
   }),
   (applicant) => ({

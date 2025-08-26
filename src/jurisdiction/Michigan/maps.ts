@@ -25,6 +25,7 @@ import {
   isMinor,
   representativeName,
   formatContactInfo,
+  getLocality,
   ContactFormat as cf,
 } from "../../lib/util";
 
@@ -44,15 +45,21 @@ import { Formfill } from "../../types/formfill";
  */
 export const nameChangePrivateMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.address,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.address,
     fieldName: "Court address",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.phone,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.phone,
     fieldName: "Court telephone no",
   }),
   (applicant) => ({
@@ -247,15 +254,21 @@ export const nameChangePrivateMap: Formfill[] = [
  */
 export const nameChangeMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.address,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.address,
     fieldName: "Court addres",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.phone,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.phone,
     fieldName: "Court telephone no",
   }),
   (applicant) => ({
@@ -409,11 +422,15 @@ export const nameChangeMap: Formfill[] = [
  */
 export const piiMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.court.address,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.address,
     fieldName: "Text6",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.phone,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.phone,
     fieldName: "Text5",
   }),
   (applicant) => ({
@@ -425,7 +442,10 @@ export const piiMap: Formfill[] = [
     fieldName: "In the matter of",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name === "Kent" ? "PC 51" : "PC 51c",
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName)?.name === "Kent" 
+      ? "PC 51" : "PC 51c",
     fieldName: "Name of formdocument that this MC 97a is being filed with 1",
   }),
   (applicant) => ({
@@ -449,15 +469,21 @@ export const piiMap: Formfill[] = [
  */
 export const orderFollowingMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.address,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.address,
     fieldName: "Court address",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.phone,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.phone,
     fieldName: "Court telephone no",
   }),
   (applicant) => ({
@@ -472,11 +498,15 @@ export const orderFollowingMap: Formfill[] = [
  */
 export const feeWaiverMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.court.address,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.address,
     fieldName: "Text6",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.court.phone,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.court.phone,
     fieldName: "Text5",
   }),
   (applicant) => ({

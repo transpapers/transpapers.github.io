@@ -298,7 +298,6 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   }
 
   //Add section to differentiate Locality types, perhaps find from a list?
-  //Use AK FilingInitialForms as a guide
 
   return foundLocality;
 }
@@ -331,14 +330,17 @@ export function formatContactInfo(
 ): string | undefined {
   const {
     birthCity,
-    birthJurisdiction,
+    birthJurisdictionName,
     streetAddress,
     residentCity,
-    residentJurisdiction,
-    residentLocality,
+    residentJurisdictionName,
+    residentLocalityName,
     zip,
     phone,
   } = applicant;
+  const birthJurisdiction = getJurisdiction(birthJurisdictionName)
+  const residentJurisdiction = getJurisdiction(residentJurisdictionName)
+  const residentLocality = getJurisdiction(residentLocalityName)
   switch (fmt) {
     case ContactFormat.BirthCityAndState:
       if (!birthCity || !birthJurisdiction) {

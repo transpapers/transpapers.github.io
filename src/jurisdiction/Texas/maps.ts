@@ -10,6 +10,8 @@ import {
   phoneStart,
   phoneEnd,
   formatContactInfo,
+  getJurisdiction,
+  getLocality,
   ContactFormat as cf,
 } from "../../lib/util";
 
@@ -37,7 +39,9 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "Print current full legal name of person asking for name change",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County",
   }),
   (applicant) => ({
@@ -77,11 +81,14 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County_2",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "State",
   }),
   (applicant) => ({
@@ -100,7 +107,8 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "City_2",
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     fieldName: "State_2",
   }),
   (applicant) => ({
@@ -178,20 +186,26 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "and my address is",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "State_4",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation ? "USA" : "",
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation 
+      ? "USA" : "",
     fieldName: "Country_2",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName:
       "I declare under penalty of perjury that the foregoing is true and correct",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "undefined_3",
   }),
   () => ({
@@ -212,7 +226,9 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     fieldName: "Print current full legal name of person asking for name change",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County",
   }),
   (applicant) => ({
@@ -233,11 +249,14 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County_2",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "State",
   }),
   (applicant) => ({
@@ -256,11 +275,14 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     loc: { page: 1, x: 220, y: 361 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 1, x: 540, y: 361 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation ? "USA" : "",
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation 
+      ? "USA" : "",
     loc: { page: 1, x: 695, y: 361 },
   }),
   (applicant) => ({
@@ -459,7 +481,7 @@ export const genderChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas" &&
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" &&
       applicant.gender === GenderMarker.M
         ? "X"
         : "",
@@ -467,7 +489,7 @@ export const genderChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas" &&
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" &&
       applicant.gender === GenderMarker.F
         ? "X"
         : "",
@@ -475,16 +497,16 @@ export const genderChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 2, x: 450, y: 917 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 2, x: 115, y: 956 },
   }),
   (applicant) => ({
@@ -525,11 +547,14 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 3, x: 200, y: 315 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 3, x: 222, y: 429 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 3, x: 408, y: 429 },
   }),
   (applicant) => ({
@@ -620,7 +645,7 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 5, x: 362, y: 874 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name === "Texas" ? "X" : "",
+    text: getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" ? "X" : "",
     loc: { page: 6, x: 103, y: 96 },
   }),
   (applicant) => ({
@@ -632,21 +657,21 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 6, x: 619, y: 132 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name === "Texas" ? "" : "X",
+    text: getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" ? "" : "X",
     loc: { page: 6, x: 103, y: 158 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 6, x: 126, y: 176 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 6, x: 314, y: 194 },
   }),
 ];
@@ -662,7 +687,9 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "1",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County Texas",
   }),
   (applicant) => ({
@@ -686,7 +713,9 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "Home Address",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County",
   }),
   (applicant) => ({
@@ -738,11 +767,14 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "undefined_12",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County_2",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "undefined_14",
   }),
   (applicant) => ({
@@ -752,11 +784,15 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "undefined_16",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentLocality?.name : "",
+    text: applicant.parentsAreOkay ? 
+      getLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName)?.name : "",
     fieldName: "County_3",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentJurisdiction?.name : "",
+    text: 
+      applicant.parentsAreOkay ? 
+      getJurisdiction(applicant.residentJurisdictionName)?.name: "",
     fieldName: "undefined_18",
   }),
 ];
@@ -772,7 +808,9 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     loc: { x: 105, y: 188 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 450, y: 210 },
   }),
   (applicant) => ({
@@ -788,7 +826,9 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     loc: { page: 1, x: 230, y: 190 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 1, x: 630, y: 190 },
   }),
   (applicant) => ({
@@ -803,7 +843,8 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     loc: { page: 1, x: 455, y: 240 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 1, x: 560, y: 240 },
   }),
   (applicant) => ({
@@ -861,7 +902,9 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { x: 105, y: 188 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 450, y: 210 },
   }),
   (applicant) => ({
@@ -897,7 +940,9 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { x: 230, y: 815 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 625, y: 815 },
   }),
   (applicant) => ({
@@ -912,7 +957,8 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { x: 220, y: 917 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { x: 430, y: 917 },
   }),
   (applicant) => ({
@@ -960,7 +1006,8 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { page: 1, x: 440, y: 736 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 1, x: 595, y: 736 },
   }),
   (applicant) => ({
@@ -988,11 +1035,14 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { page: 2, x: 600, y: 194 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 2, x: 560, y: 325 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 2, x: 170, y: 374 },
   }),
 ];
@@ -1008,7 +1058,9 @@ export const nameChangeMinorSingleParentOrderMap: Formfill[] = [
     loc: { x: 105, y: 172 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 450, y: 194 },
   }),
   (applicant) => ({
@@ -1035,7 +1087,8 @@ export const nameChangeMinorSingleParentOrderMap: Formfill[] = [
     loc: { page: 1, x: 315, y: 98 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 1, x: 505, y: 98 },
   }),
   (applicant) => ({
@@ -1071,7 +1124,9 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { x: 105, y: 188 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 450, y: 210 },
   }),
   (applicant) => ({
@@ -1103,7 +1158,9 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { page: 2, x: 230, y: 812 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 2, x: 630, y: 812 },
   }),
   (applicant) => ({
@@ -1118,7 +1175,8 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { page: 2, x: 220, y: 914 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 2, x: 430, y: 914 },
   }),
   (applicant) => ({
@@ -1166,7 +1224,8 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { page: 3, x: 440, y: 736 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 3, x: 595, y: 736 },
   }),
   (applicant) => ({
@@ -1190,7 +1249,9 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     loc: { x: 105, y: 188 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 450, y: 210 },
   }),
   (applicant) => ({
@@ -1206,7 +1267,9 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     loc: { page: 2, x: 230, y: 190 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 2, x: 630, y: 190 },
   }),
   (applicant) => ({
@@ -1221,7 +1284,8 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     loc: { page: 2, x: 455, y: 240 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 2, x: 560, y: 240 },
   }),
   (applicant) => ({
@@ -1269,7 +1333,9 @@ export const nameChangeMinorsConsentMap: Formfill[] = [
     loc: { x: 105, y: 180 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { x: 450, y: 200 },
   }),
   (applicant) => ({
@@ -1330,7 +1396,9 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 1, x: 230, y: 311 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName)?.name,
     loc: { page: 1, x: 630, y: 311 },
   }),
   (applicant) => ({
@@ -1398,7 +1466,7 @@ export const genderChangeMinorMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas" &&
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" &&
       applicant.gender === GenderMarker.M
         ? "X"
         : "",
@@ -1406,7 +1474,7 @@ export const genderChangeMinorMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas" &&
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" &&
       applicant.gender === GenderMarker.F
         ? "X"
         : "",
@@ -1414,16 +1482,16 @@ export const genderChangeMinorMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 2, x: 613, y: 664 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 2, x: 265, y: 696 },
   }),
   (applicant) => ({
@@ -1443,11 +1511,14 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 3, x: 595, y: 271 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 3, x: 456, y: 357 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 3, x: 635, y: 357 },
   }),
   (applicant) => ({
@@ -1457,11 +1528,15 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 3, x: 200, y: 571 },
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentLocality?.name : "",
+    text: applicant.parentsAreOkay ? 
+      getLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName)?.name : "",
     loc: { page: 3, x: 456, y: 688 },
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentJurisdiction?.name : "",
+    text: 
+      applicant.parentsAreOkay ? 
+      getJurisdiction(applicant.residentJurisdictionName)?.name : "",
     loc: { page: 3, x: 635, y: 688 },
   }),
   (applicant) => ({
@@ -1514,7 +1589,9 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 6, x: 230, y: 378 },
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     loc: { page: 6, x: 630, y: 378 },
   }),
   (applicant) => ({
@@ -1557,12 +1634,12 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 7, x: 369, y: 156 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name === "Texas" ? "X" : "",
+    text: getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" ? "X" : "",
     loc: { page: 7, x: 103, y: 252 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas" &&
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" &&
       applicant.gender === GenderMarker.M
         ? "X"
         : "",
@@ -1570,28 +1647,28 @@ export const genderChangeMinorMap: Formfill[] = [
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas" &&
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" &&
       applicant.gender === GenderMarker.F
         ? "X"
         : "",
     loc: { page: 7, x: 391, y: 284 },
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.name === "Texas" ? "" : "X",
+    text: getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas" ? "" : "X",
     loc: { page: 7, x: 103, y: 309 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 7, x: 127, y: 325 },
   }),
   (applicant) => ({
     text:
-      applicant.birthJurisdiction?.name === "Texas"
+      getJurisdiction(applicant.birthJurisdictionName)?.name === "Texas"
         ? ""
-        : applicant.birthJurisdiction?.name,
+        : getJurisdiction(applicant.birthJurisdictionName)?.name,
     loc: { page: 7, x: 265, y: 340 },
   }),
 ];
@@ -1667,7 +1744,9 @@ export const feeWaiverMap: Formfill[] = [
     fieldName: "Fill Blank 1",
   }),
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "County / Condado",
   }),
   (applicant) => ({
@@ -1808,7 +1887,9 @@ export const caseInformationMap: Formfill[] = [
  */
 export const nameChangeMinorFamilyInfoMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.name,
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.name,
     fieldName: "1a COUNTY",
   }),
   () => ({
@@ -1900,11 +1981,14 @@ export const primaryIDMap: Formfill[] = [
     fieldName: "Place of birth City",
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.abbreviation,
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.abbreviation,
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.birthJurisdiction?.abbreviation ? "USA" : "",
+    text: 
+      getJurisdiction(applicant.birthJurisdictionName)?.abbreviation 
+      ? "USA" : "",
     fieldName: "Country",
   }),
   (applicant) => ({
@@ -1924,7 +2008,7 @@ export const primaryIDMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "State_2",
   }),
   (applicant) => ({
@@ -1932,7 +2016,7 @@ export const primaryIDMap: Formfill[] = [
     fieldName: "Zip Code",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.abbreviation ? "USA" : "",
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation ? "USA" : "",
     fieldName: "County_2",
   }),
   (applicant) => ({
@@ -2129,7 +2213,8 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "State",
   }),
   (applicant) => ({
@@ -2151,7 +2236,7 @@ export const birthCertNameCorrectionMap: Formfill[] = [
   (applicant) => ({
     text:
       isMinor(applicant) && applicant.parentsAreOkay
-        ? applicant.residentJurisdiction?.name
+        ? getJurisdiction(applicant.residentJurisdictionName)?.name
         : "",
     fieldName: "State",
   }),
@@ -2358,7 +2443,8 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "State",
   }),
   (applicant) => ({
@@ -2380,7 +2466,7 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
   (applicant) => ({
     text:
       isMinor(applicant) && applicant.parentsAreOkay
-        ? applicant.residentJurisdiction?.name
+        ? getJurisdiction(applicant.residentJurisdictionName)?.name
         : "",
     fieldName: "State",
   }),
@@ -2617,7 +2703,8 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdiction?.name,
+    text: 
+      getJurisdiction(applicant.residentJurisdictionName)?.name,
     fieldName: "State",
   }),
   (applicant) => ({
@@ -2639,7 +2726,7 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
   (applicant) => ({
     text:
       isMinor(applicant) && applicant.parentsAreOkay
-        ? applicant.residentJurisdiction?.name
+        ? getJurisdiction(applicant.residentJurisdictionName)?.name
         : "",
     fieldName: "State",
   }),
