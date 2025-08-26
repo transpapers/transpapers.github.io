@@ -47,7 +47,6 @@ describe("neededFieldNames()", () => {
       "representativeName",
       "residentCity",
       "residentJurisdictionName",
-      "residentLocality",
       "residentLocalityName",
       "sealBirthCertificate",
       "streetAddress",
