@@ -28049,10 +28049,7 @@ function numericalBirthYear(birthdate) {
  */
 const nameChangePrivateMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County"
   }),
   (applicant) => ({
@@ -28243,10 +28240,7 @@ const nameChangePrivateMap = [
  */
 const nameChangeMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County"
   }),
   (applicant) => ({
@@ -28418,10 +28412,7 @@ const piiMap = [
     fieldName: "In the matter of"
   }),
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name === "Kent" ? "PC 51" : "PC 51c",
+    text: applicant.residentLocalityName === "Kent" ? "PC 51" : "PC 51c",
     fieldName: "Name of formdocument that this MC 97a is being filed with 1"
   }),
   (applicant) => ({
@@ -28444,10 +28435,7 @@ const piiMap = [
  */
 const orderFollowingMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County"
   }),
   (applicant) => ({
@@ -29452,7 +29440,7 @@ const michiganNameChange = {
       filename: "Michigan/pc51c.pdf",
       guide: MichiganPC51cGuide,
       map: nameChangePrivateMap,
-      include: (applicant) => (applicant.isChangingLegalSex === true || applicant.doNotPublish === true) && applicant.residentLocality?.name !== "Kent"
+      include: (applicant) => (applicant.isChangingLegalSex === true || applicant.doNotPublish === true) && applicant.residentLocalityName !== "Kent"
     },
     {
       name: "Petition for Name Change",
@@ -29460,7 +29448,7 @@ const michiganNameChange = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish || applicant.residentLocality?.name === "Kent"
+      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish || applicant.residentLocalityName === "Kent"
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -29475,7 +29463,7 @@ const michiganNameChange = {
       filename: "Michigan/pc52.pdf",
       guide: MichiganPC52Guide,
       map: orderFollowingMap,
-      include: (applicant) => applicant.residentLocality?.name === "Saginaw"
+      include: (applicant) => applicant.residentLocalityName === "Saginaw"
     },
     {
       name: "Fee Waiver Request",
@@ -31604,10 +31592,7 @@ const michiganCounties = [
  */
 const changeOfNameMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 }
   }),
   (applicant) => ({
@@ -31623,7 +31608,7 @@ const changeOfNameMap = [
     fieldName: "8"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "9"
   }),
   (applicant) => ({
@@ -31867,7 +31852,7 @@ const primaryIDRhodeIslandMap = [
     fieldName: "CITYTOWN"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "STATE"
   }),
   (applicant) => ({
@@ -32722,7 +32707,7 @@ const rhodeislandNameChange = {
       name: "Application for a Certified Copy of a Birth Record",
       filename: "RhodeIsland/Birth Cert Request.pdf",
       map: birthCertOneMap,
-      include: (applicant) => applicant.birthJurisdiction?.name === "Rhode Island"
+      include: (applicant) => applicant.birthJurisdictionName === "Rhode Island"
     },
     {
       name: "Birth Certificate Request",
@@ -33635,10 +33620,7 @@ const adultNameSexPetitionMap = [
   /** 'courtType' fieldName from counties.ts should go here.
    */
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County"
   }),
   (applicant) => ({
@@ -33709,10 +33691,7 @@ const minorNameSexPetitionMap = [
    */
   (applicant) => ({
     fieldName: "County",
-    value: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name
+    value: applicant.residentLocalityName
   }),
   (applicant) => ({
     text: isMinor(applicant) ? fullName(applicant.representativeName) : "",
@@ -33787,10 +33766,7 @@ const minorNameSexPetitionMap = [
     fieldName: "SignatureDateCoPetitioner"
   }),
   (applicant) => ({
-    value: isMinor(applicant) && applicant.age && applicant.age < 14 ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    value: isMinor(applicant) && applicant.age && applicant.age < 14 ? applicant.residentLocalityName : "",
     fieldName: "MinorConsentCounty"
   })
 ];
@@ -33801,21 +33777,12 @@ const minorNameSexPetitionMap = [
  */
 const feeWaiverNYStateMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name ? `${getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name ?? ""} county` : "",
+    text: applicant.residentLocalityName ? `${applicant.residentLocalityName} county` : "",
     fieldName: "CourtName"
   }),
   (applicant) => ({
     fieldName: "CourtCounty",
-    value: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name
+    value: applicant.residentLocalityName
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -33857,10 +33824,7 @@ const feeWaiverNYStateMap = [
  */
 const feeWaiverNYCMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 141, y: 44 }
   }),
   (applicant) => ({
@@ -33868,10 +33832,7 @@ const feeWaiverNYCMap = [
     loc: { x: 65, y: 109 }
   }),
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 237, y: 215 }
   }),
   (applicant) => ({
@@ -34013,10 +33974,7 @@ const primaryIDNewYorkMap = [
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code"
   }),
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "ADDRESS WHERE YOU LIVE County"
   }),
   (applicant) => ({
@@ -34094,10 +34052,7 @@ const vehicleRegistrationMap = [
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER"
   }),
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County of Residence"
   }),
   (applicant) => ({
@@ -35268,7 +35223,7 @@ const newyorkNameChange = {
       filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
       guide: NYStateFeeWaiverGuide,
       map: feeWaiverNYStateMap,
-      include: (applicant) => !(applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees",
@@ -35276,7 +35231,7 @@ const newyorkNameChange = {
       filename: "NewYork/NYC Fee Waiver.pdf",
       guide: NYCFeeWaiverGuide,
       map: feeWaiverNYCMap,
-      include: (applicant) => applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond"
+      include: (applicant) => applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond"
     },
     {
       name: "Notary",
@@ -35297,26 +35252,26 @@ const newyorkGenderMarker = {
       id: "DOH 5303",
       filename: "NewYork/Gender Affidavit 17 and up NY State.pdf",
       map: genderAffidavitAdultNYStateMap,
-      include: (applicant) => !isMinor(applicant) && !(applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => !isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under",
       id: "DOH 5304",
       filename: "NewYork/Gender Affidavit Under 17 NY State.pdf",
       map: genderAffidavitMinorNYStateMap,
-      include: (applicant) => isMinor(applicant) && !(applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Self-Attestation Form for Registrants 18 Years of Age and Older",
       filename: "NewYork/BC Self-attestation Adult NYC.pdf",
       map: selfAttestationAdultNYCMap,
-      include: (applicant) => !isMinor(applicant) && (applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => !isMinor(applicant) && (applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old",
       filename: "NewYork/BC Self-attestation Minor NYC.pdf",
       map: selfAttestationMinorNYCMap,
-      include: (applicant) => isMinor(applicant) && (applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => isMinor(applicant) && (applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     }
   ]
 };
@@ -35352,21 +35307,21 @@ const newyorkBirthRecord = {
       id: "DOH 5305",
       filename: "NewYork/BC Update 17 and up NY State.pdf",
       map: birthCertAdultNYStateMap,
-      include: (applicant) => !isMinor(applicant) && !(applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => !isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Parent/Legal Guardian Application for Amendment of Certificate of Birth for Gender Designation for a Minor",
       id: "DOH 5306",
       filename: "NewYork/BC Update 17 and up NY State.pdf",
       map: birthCertMinorNYStateMap,
-      include: (applicant) => isMinor(applicant) && !(applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond")
+      include: (applicant) => isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Application for the Correction of a NYC Birth Certificate",
       id: "VR 172",
       filename: "NewYork/BC Update NYC.pdf",
       map: birthCertNYCMap,
-      include: (applicant) => applicant.residentLocality?.name === "Bronx" || applicant.residentLocality?.name === "Kings" || applicant.residentLocality?.name === "New York" || applicant.residentLocality?.name === "Queens" || applicant.residentLocality?.name === "Richmond"
+      include: (applicant) => applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond"
     }
   ],
   isBirth: true
@@ -36003,10 +35958,7 @@ const newyorkCounties = [
  */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 1, x: 431, y: 117 }
   }),
   (applicant) => ({
@@ -36094,10 +36046,7 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 2, x: 604, y: 326 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 3, x: 431, y: 117 }
   }),
   (applicant) => ({
@@ -36120,10 +36069,7 @@ const adultNameSexPetitionOregonMap = [
  */
 const minorNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 1, x: 430, y: 116 }
   }),
   (applicant) => ({
@@ -36203,10 +36149,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 2, x: 601, y: 482 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 3, x: 430, y: 117 }
   }),
   (applicant) => ({
@@ -36218,10 +36161,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 3, x: 241, y: 298 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 4, x: 430, y: 117 }
   }),
   (applicant) => ({
@@ -36245,10 +36185,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 4, x: 637, y: 762 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 5, x: 430, y: 117 }
   }),
   (applicant) => ({
@@ -36271,10 +36208,7 @@ const minorNameSexPetitionOregonMap = [
  */
 const feeWaiverOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 1, x: 420, y: 117 }
   }),
   (applicant) => ({
@@ -36333,10 +36267,7 @@ const feeWaiverOregonMap = [
     loc: { page: 3, x: 601, y: 688 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
     loc: { page: 4, x: 420, y: 117 }
   }),
   (applicant) => ({
@@ -36395,7 +36326,7 @@ const birthCertOregonMap = [
     fieldName: "Applicant residential city"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "App residential city/county"
   }),
   (applicant) => ({
@@ -36555,10 +36486,7 @@ const voterOregonMap = [
     fieldName: "Date of Birth"
   }),
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County of Residence"
   }),
   (applicant) => ({
@@ -37119,24 +37047,24 @@ const oregonNameChange = {
       filename: "Oregon/Name and Sex Change Petition Minor.pdf",
       guide: OregonMinorPetitionGuide,
       map: minorNameSexPetitionOregonMap,
-      include: (applicant) => isMinor(applicant) && applicant.birthJurisdiction?.name !== "Oregon"
+      include: (applicant) => isMinor(applicant) && applicant.birthJurisdictionName !== "Oregon"
     },
     {
       name: "Application for Deferral or Waiver of Fees and Declaration in Support",
       filename: "Oregon/Fee Waiver Form.pdf",
       guide: OregonFeeWaiverGuide,
       map: feeWaiverOregonMap,
-      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdiction?.name !== "Oregon"
+      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdictionName !== "Oregon"
     },
     {
       name: "Filing Initial Documents",
       guide: OregonFilingInitialFormsGuide,
-      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdiction?.name !== "Oregon"
+      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdictionName !== "Oregon"
     },
     {
       name: "Court Hearing",
       guide: OregonCourtHearingGuide,
-      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdiction?.name !== "Oregon"
+      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdictionName !== "Oregon"
     }
   ]
 };
@@ -37571,10 +37499,7 @@ const oregonCounties = [
  */
 const adultNamePetitionAlaskaMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37669,10 +37594,7 @@ const minorNamePetitionAlaskaMap = [
     fieldName: "email"
   }),
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37751,10 +37673,7 @@ const minorNamePetitionAlaskaMap = [
  */
 const nonpetitionParentalConsentAlaskaMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "courtLocations"
   }),
   (applicant) => ({
@@ -37800,7 +37719,7 @@ const applicationNameAlaskaMap = [
     loc: { x: 187, y: 445 }
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.birthJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     loc: { x: 433, y: 445 }
   }),
   (applicant) => ({
@@ -37839,10 +37758,7 @@ const applicationNameAlaskaMap = [
  */
 const adultWaivePublicationAlaskaMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "location"
   }),
   (applicant) => ({
@@ -37869,10 +37785,7 @@ const adultWaivePublicationAlaskaMap = [
  */
 const minorWaivePublicationAlaskaMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "location"
   }),
   (applicant) => ({
@@ -37903,10 +37816,7 @@ const minorWaivePublicationAlaskaMap = [
  */
 const feeWaiverAlaskaMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37929,10 +37839,7 @@ const feeWaiverAlaskaMap = [
  */
 const additionalServiceAlaskaMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     fieldName: "enter court location here"
   }),
   (applicant) => ({
@@ -39563,10 +39470,7 @@ const alaskanAdministrativeDivisions = [
  */
 const adultNameChangeMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 185, y: 170 }
   }),
   (applicant) => ({
@@ -39684,10 +39588,7 @@ const adultNameChangeMap = [
  */
 const adultNameChangeOrderMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 185, y: 170 }
   }),
   (applicant) => ({
@@ -39702,10 +39603,7 @@ const adultNameChangeOrderMap = [
  */
 const minorNameChangeMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 175, y: 165 }
   }),
   (applicant) => ({
@@ -39772,10 +39670,7 @@ const minorNameChangeMap = [
  */
 const minorChildInfoMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 175, y: 198 }
   }),
   (applicant) => ({
@@ -39896,10 +39791,7 @@ const minorChildInfoMap = [
  */
 const minorAdditionalParentMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 175, y: 201 }
   }),
   (applicant) => ({
@@ -39914,10 +39806,7 @@ const minorAdditionalParentMap = [
  */
 const minorNameChangeOrderMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 180, y: 265 }
   }),
   (applicant) => ({
@@ -39932,10 +39821,7 @@ const minorNameChangeOrderMap = [
  */
 const requestCourtRecordsPrivateMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 185, y: 204 }
   }),
   (applicant) => ({
@@ -39974,10 +39860,7 @@ const requestCourtRecordsPrivateMap = [
  */
 const orderCourtRecordsPrivateMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 185, y: 204 }
   }),
   (applicant) => ({
@@ -39992,10 +39875,7 @@ const orderCourtRecordsPrivateMap = [
  */
 const feeWaiverApplicationMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 160, y: 196 }
   }),
   (applicant) => ({
@@ -40043,10 +39923,7 @@ const feeWaiverApplicationMap = [
  */
 const feeWaiverJudgementMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 160, y: 203 }
   }),
   (applicant) => ({
@@ -40065,10 +39942,7 @@ const feeWaiverJudgementMap = [
  */
 const efileExemptionMap = [
   (applicant) => ({
-    text: getLocality(
-      applicant.residentJurisdictionName,
-      applicant.residentLocalityName
-    )?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 170, y: 171 }
   }),
   (applicant) => ({
@@ -42158,7 +42032,7 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].cityofbirth[0]"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.birthJurisdictionName)?.name,
+    text: applicant.birthJurisdictionName,
     fieldName: "topmostSubform[0].Page5[0].stateatbirth[0]"
   }),
   (applicant) => ({
@@ -42239,7 +42113,7 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "topmostSubform[0].Page5[0].state[0]"
   }),
   (applicant) => ({
