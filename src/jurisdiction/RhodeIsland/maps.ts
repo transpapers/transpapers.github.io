@@ -28,6 +28,7 @@ import {
   phoneStart,
   representativeName,
   getJurisdiction,
+  getLocality,
 } from "../../lib/util";
 
 import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
@@ -45,6 +46,12 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
+  (applicant) => ({
+    text: 
+      getLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName)?.county,
+    loc: { x: 50, y: 50 },
+  }),
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 },
