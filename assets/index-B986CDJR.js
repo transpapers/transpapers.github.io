@@ -27856,6 +27856,34 @@ function getJurisdiction(jurisdictionKey) {
   return foundJurisdiction;
 }
 /*!
+ * Find a locality given it's name and the jurisdiction name.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {AnyJurisdiction | undefined}
+ */
+function getLocality(jurisdictionKey, localityKey) {
+  if (!jurisdictionKey) {
+    return void 0;
+  }
+  if (!localityKey) {
+    return void 0;
+  }
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey
+  );
+  if (!foundJurisdiction) {
+    return void 0;
+  }
+  const localities = foundJurisdiction.localities;
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey
+  );
+  if (!foundLocality) {
+    return void 0;
+  }
+  return foundLocality;
+}
+/*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
  * @param {Person} applicant
  * @return {string}
@@ -35900,6 +35928,10 @@ const adultNameSexPetitionOregonMap = [
   (applicant) => ({
     text: getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 1, x: 50, y: 50 }
+  }),
+  (applicant) => ({
+    text: getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.name,
+    loc: { page: 1, x: 50, y: 100 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
