@@ -169,14 +169,14 @@ export const texasNameChange: Process<TexasCounty> = {
       filename: "Texas/Anderson County All.pdf",
       guide: TexasAndersonNameGuide,
       map: andersonCountyMap,
-      include: (applicant) => applicant.residentLocality?.name === "Anderson",
+      include: (applicant) => applicant.residentLocalityName === "Anderson",
     },
     {
       name: "Fannin Public Filing Pro Se Information Sheet",
       filename: "Texas/Fannin County All.pdf",
       guide: TexasFanninNameGuide,
       map: fanninCountyMap,
-      include: (applicant) => applicant.residentLocality?.name === "Fannin",
+      include: (applicant) => applicant.residentLocalityName === "Fannin",
     },
     {
       name: "Statement of Inability to Afford Payment of Court Costs or an Appeal Bond",

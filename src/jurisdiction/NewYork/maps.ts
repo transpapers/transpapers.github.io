@@ -29,7 +29,6 @@ import {
   addZero,
   representativeName,
   getJurisdiction,
-  getLocality,
   ContactFormat as cf,
   formatContactInfo,
 } from "../../lib/util";
@@ -50,9 +49,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
   /** 'courtType' fieldName from counties.ts should go here.
    */
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County",
   }),
   (applicant) => ({
@@ -124,9 +121,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
    */
   (applicant) => ({
     fieldName: "County",
-    value: 
-      getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name,
+    value: applicant.residentLocalityName,
   }),
   (applicant) => ({
     text: isMinor(applicant) ? fullName(applicant.representativeName) : "",
@@ -203,8 +198,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
   (applicant) => ({
     value:
       isMinor(applicant) && applicant.age && applicant.age < 14
-        ? getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name : "",
+        ? applicant.residentLocalityName : "",
     fieldName: "MinorConsentCounty",
   }),
 ];
@@ -216,18 +210,14 @@ export const minorNameSexPetitionMap: Formfill[] = [
  */
 export const feeWaiverNYStateMap: Formfill[] = [
   (applicant) => ({
-    text: getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name
-      ? `${getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name ?? ''} county`
+    text: applicant.residentLocalityName
+      ? `${applicant.residentLocalityName} county`
       : "",
     fieldName: "CourtName",
   }),
   (applicant) => ({
     fieldName: "CourtCounty",
-    value: 
-      getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name,
+    value: applicant.residentLocalityName,
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -272,9 +262,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
  */
 export const feeWaiverNYCMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 141, y: 44 },
   }),
   (applicant) => ({
@@ -282,9 +270,7 @@ export const feeWaiverNYCMap: Formfill[] = [
     loc: { x: 65, y: 109 },
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 237, y: 215 },
   }),
   (applicant) => ({
@@ -445,9 +431,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "ADDRESS WHERE YOU LIVE County",
   }),
   (applicant) => ({
@@ -530,9 +514,7 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County of Residence",
   }),
   (applicant) => ({

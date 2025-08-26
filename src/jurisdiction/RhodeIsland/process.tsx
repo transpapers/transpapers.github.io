@@ -64,7 +64,7 @@ export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
       filename: "RhodeIsland/Birth Cert Request.pdf",
       map: birthCertOneMap,
       include: (applicant) =>
-        applicant.birthJurisdiction?.name === "Rhode Island",
+        applicant.birthJurisdictionName === "Rhode Island",
     },
     {
       name: "Birth Certificate Request",

@@ -59,7 +59,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       include: (applicant) =>
         (applicant.isChangingLegalSex === true ||
           applicant.doNotPublish === true) &&
-        applicant.residentLocality?.name !== "Kent",
+        applicant.residentLocalityName !== "Kent",
     },
     {
       name: "Petition for Name Change",
@@ -70,7 +70,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       include: (applicant) =>
         !applicant.isChangingLegalSex ||
         !applicant.doNotPublish ||
-        applicant.residentLocality?.name === "Kent",
+        applicant.residentLocalityName === "Kent",
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -85,7 +85,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       filename: "Michigan/pc52.pdf",
       guide: MichiganPC52Guide,
       map: orderFollowingMap,
-      include: (applicant) => applicant.residentLocality?.name === "Saginaw",
+      include: (applicant) => applicant.residentLocalityName === "Saginaw",
     },
     {
       name: "Fee Waiver Request",

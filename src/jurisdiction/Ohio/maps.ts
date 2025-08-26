@@ -53,16 +53,13 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultChangeOfNameMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
   (applicant) => ({
     text: (() => {
-      switch (getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name === "Hamilton") {
+      switch (applicant.residentLocalityName === "Hamilton") {
         case true:
           return fullName(applicant.birthName)
             ? `${applicant.legalName.first} ${applicant.legalName.middle} ${applicant.birthName.last} (maiden) ${applicant.legalName.last} (married)`
@@ -80,9 +77,7 @@ export const adultChangeOfNameMap: Formfill[] = [
     fieldName: "NAME AFTER CHANGE",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "RESIDENT OF COUNTY OHIO",
   }),
   (applicant) => ({
@@ -127,8 +122,7 @@ export const adultChangeOfNameMap: Formfill[] = [
     fieldName: "CITY_2",
   }),
   (applicant) => ({
-    text: 
-      getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "STATE_2",
   }),
   (applicant) => ({
@@ -152,9 +146,7 @@ export const adultChangeOfNameMap: Formfill[] = [
  */
 export const minorChangeOfNameMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -215,7 +207,7 @@ export const minorChangeOfNameMap: Formfill[] = [
   (applicant) => ({
     text: 
       applicant.parentsAreOkay ? 
-      getJurisdiction(applicant.residentJurisdictionName)?.name : "",
+      applicant.residentJurisdictionName : "",
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -241,7 +233,7 @@ export const minorChangeOfNameMap: Formfill[] = [
   (applicant) => ({
     text: 
       applicant.parentsAreOkay ? 
-      getJurisdiction(applicant.residentJurisdictionName)?.name : "",
+      applicant.residentJurisdictionName : "",
     fieldName: "STATE_2",
   }),
   (applicant) => ({
@@ -266,8 +258,7 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "CITY_4",
   }),
   (applicant) => ({
-    text: 
-      getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "STATE_4",
   }),
   (applicant) => ({
@@ -291,9 +282,7 @@ export const minorChangeOfNameMap: Formfill[] = [
  */
 export const adultChangeOfNameAffidavitMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -306,9 +295,7 @@ export const adultChangeOfNameAffidavitMap: Formfill[] = [
     fieldName: "CHANGE OF NAME AFTER",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "COUNTY OHIO",
   }),
   () => ({
@@ -316,9 +303,7 @@ export const adultChangeOfNameAffidavitMap: Formfill[] = [
     fieldName: "APPLICANT HAS BEEN A BONA FIDE RESIDENT",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "RESIDENT OF COUNTY OHIO",
   }),
   () => ({
@@ -345,9 +330,7 @@ export const adultChangeOfNameAffidavitMap: Formfill[] = [
  */
 export const minorChangeOfNameAffidavitMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -360,9 +343,7 @@ export const minorChangeOfNameAffidavitMap: Formfill[] = [
     fieldName: "REQUESTED CHANGE OF NAME",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "COUNTY OHIO",
   }),
   () => ({
@@ -378,9 +359,7 @@ export const minorChangeOfNameAffidavitMap: Formfill[] = [
     fieldName: "MINOR HAS BEEN A BONA FIDE RESIDENT",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "MINOR HAS BEEN A BONA FIDE RESIDENT OF COUNTY OHIO",
   }),
   () => ({
@@ -407,9 +386,7 @@ export const minorChangeOfNameAffidavitMap: Formfill[] = [
  */
 export const adultChangeOfNameJudgementMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -433,8 +410,7 @@ export const adultChangeOfNameJudgementMap: Formfill[] = [
     fieldName: "CITY",
   }),
   (applicant) => ({
-    text: 
-      getJurisdiction(applicant.birthJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -470,9 +446,7 @@ export const adultChangeOfNameJudgementMap: Formfill[] = [
  */
 export const minorChangeOfNameJudgementMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -502,8 +476,7 @@ export const minorChangeOfNameJudgementMap: Formfill[] = [
     fieldName: "CITY",
   }),
   (applicant) => ({
-    text: 
-      getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -539,9 +512,7 @@ export const minorChangeOfNameJudgementMap: Formfill[] = [
  */
 export const minorChangeOfNameConsentMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -574,9 +545,7 @@ export const minorChangeOfNameConsentMap: Formfill[] = [
  */
 export const judgementSettingHearingMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -602,9 +571,7 @@ export const judgementSettingHearingMap: Formfill[] = [
  */
 export const hearingNoticeMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -641,9 +608,7 @@ export const hearingNoticeMap: Formfill[] = [
     fieldName: "LAST NAME_2",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO_2",
   }),
   (applicant) => ({
@@ -666,8 +631,7 @@ export const hearingNoticeMap: Formfill[] = [
     fieldName: "CITY",
   }),
   (applicant) => ({
-    text: 
-      getJurisdiction(applicant.residentJurisdictionName)?.name,
+    text: applicant.residentJurisdictionName,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -707,9 +671,7 @@ export const backgroundCheckReleaseMap: Formfill[] = [
  */
 export const waivePublicationOneMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY, OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -734,9 +696,7 @@ export const waivePublicationOneMap: Formfill[] = [
  */
 export const waivePublicationTwoMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "PROBATE COURT OF COUNTY OHIO",
   }),
   /** Add Judges Name Here.*/
@@ -1071,9 +1031,7 @@ export const birthCertUpdateMap: Formfill[] = [
  */
 export const birthCorrectionMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "CourtCounty",
   }),
   /** Add Judges Name Here.*/
@@ -1083,9 +1041,7 @@ export const birthCorrectionMap: Formfill[] = [
     fieldName: "BirthRecordName",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "CourtCounty2",
   }),
   (applicant) => ({
@@ -1236,9 +1192,7 @@ export const voterRegistrationMap: Formfill[] = [
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingZip[0]",
   }),
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     loc: { x: 610, y: 693 },
   }),
   (applicant) => ({

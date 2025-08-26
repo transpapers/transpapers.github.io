@@ -45,9 +45,7 @@ import { Formfill } from "../../types/formfill";
  */
 export const nameChangePrivateMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County",
   }),
   (applicant) => ({
@@ -254,9 +252,7 @@ export const nameChangePrivateMap: Formfill[] = [
  */
 export const nameChangeMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County",
   }),
   (applicant) => ({
@@ -443,8 +439,7 @@ export const piiMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name === "Kent" 
+      applicant.residentLocalityName === "Kent" 
       ? "PC 51" : "PC 51c",
     fieldName: "Name of formdocument that this MC 97a is being filed with 1",
   }),
@@ -469,9 +464,7 @@ export const piiMap: Formfill[] = [
  */
 export const orderFollowingMap: Formfill[] = [
   (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-        applicant.residentLocalityName)?.name,
+    text: applicant.residentLocalityName,
     fieldName: "County",
   }),
   (applicant) => ({
