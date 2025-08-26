@@ -28,6 +28,7 @@ import {
   ContactFormat as cf,
   formatContactInfo,
   getJurisdiction,
+  getLocality,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -47,7 +48,10 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     text: getJurisdiction(applicant.residentJurisdictionName)?.name,
     loc: { page: 1, x: 50, y: 50 },
   }),
-  
+  (applicant) => ({
+    text: getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.name,
+    loc: { page: 1, x: 50, y: 100 },
+  }),
   (applicant) => ({
     text: fullName(applicant.legalName),
     loc: { page: 1, x: 103, y: 212 },

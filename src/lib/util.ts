@@ -293,11 +293,14 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
     (j) => j.name === localityKey,
   );
 
+  if (!foundLocality) {
+    return undefined;
+  }
+
   //Add section to differentiate Locality types, perhaps find from a list?
   //Use AK FilingInitialForms as a guide
-  //Test if the getJurisdiction function works even with say NewYorkCounty for OR to error check
 
-  return foundLocality as Locality;
+  return foundLocality;
 }
 
 /*!
