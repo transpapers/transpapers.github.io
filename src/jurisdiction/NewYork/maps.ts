@@ -217,9 +217,9 @@ export const minorNameSexPetitionMap: Formfill[] = [
 export const feeWaiverNYStateMap: Formfill[] = [
   (applicant) => ({
     text: getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)
+      applicant.residentLocalityName)?.name
       ? `${getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name} county`
+      applicant.residentLocalityName)?.name?.toString()} county`
       : "",
     fieldName: "CourtName",
   }),

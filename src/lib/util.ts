@@ -288,6 +288,9 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
     return undefined;
   }
 
+  //Add section to differentiate Locality types, perhaps find from a list?
+  //Do this by setting Jurisdiction type?
+
   const localities = foundJurisdiction.localities;
   const foundLocality = localities.find(
     (j) => j.name === localityKey,
@@ -296,8 +299,6 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   if (!foundLocality) {
     return undefined;
   }
-
-  //Add section to differentiate Locality types, perhaps find from a list?
 
   return foundLocality;
 }

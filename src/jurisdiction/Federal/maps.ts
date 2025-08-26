@@ -391,7 +391,7 @@ export const ds82Map: Formfill[] = [
   () => ({ text: "x", loc: { page: 4, x: 262, y: 703 } }),
   (applicant) => ({
     text:
-      `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city} / ${getJurisdiction(applicant.residentJurisdictionName)?.abbreviation}`,
+      `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city?.toString()} / ${getJurisdiction(applicant.residentJurisdictionName)?.abbreviation.toString()}`,
     loc: { page: 4, x: 390, y: 707 },
   }),
   (applicant) => ({
