@@ -40,7 +40,6 @@ import {
   RhodeIslandCityOrTown,
   AlaskaAdministrativeDivision,
 } from "../types/locality";
-import { AnyLocality } from "../types/generic";
 
 export function abbreviateJurisdiction(
   jurisdiction: string,
@@ -306,71 +305,43 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
         (j) => j.name === localityKey,
       ) as RhodeIslandCityOrTown
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
     case "Alaska":
       {const foundLocality: AlaskaAdministrativeDivision = localities.find(
         (j) => j.name === localityKey,
       ) as AlaskaAdministrativeDivision
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
     case "New York":
       {const foundLocality: NewYorkCounty = localities.find(
         (j) => j.name === localityKey,
       ) as NewYorkCounty
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
     case "Texas":
       {const foundLocality: TexasCounty = localities.find(
         (j) => j.name === localityKey,
       ) as TexasCounty
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
     case "Michigan":
       {const foundLocality: MichiganCounty = localities.find(
         (j) => j.name === localityKey,
       ) as MichiganCounty
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
     case "Ohio":
       {const foundLocality: OhioCounty = localities.find(
         (j) => j.name === localityKey,
       ) as OhioCounty
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
     default:
       {const foundLocality: Locality = localities.find(
         (j) => j.name === localityKey,
       ) as Locality
 
-      if (!foundLocality) {
-        return undefined;
-      } else {
-        return foundLocality
-      }};
+      return foundLocality};
   }
   //end section
 }
