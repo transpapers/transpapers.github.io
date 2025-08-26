@@ -219,7 +219,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
     text: getLocality(applicant.residentJurisdictionName, 
       applicant.residentLocalityName)?.name
       ? `${getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.name?.toString()} county`
+      applicant.residentLocalityName)?.name || ''} county`
       : "",
     fieldName: "CourtName",
   }),
