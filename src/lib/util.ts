@@ -337,9 +337,9 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
 
       return foundLocality};
     default:
-      {const foundLocality: Locality = localities.find(
+      {const foundLocality = localities.find(
         (j) => j.name === localityKey,
-      ) as Locality
+      );
 
       return foundLocality};
   }
