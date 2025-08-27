@@ -137,9 +137,9 @@ function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
         {age && age < 18 ? (
           <>
             {birthJurisdictionName === "Oregon" &&
-            residentJurisdictionName === "Oregon" ?(
+            residentJurisdictionName === "Oregon" ? (
               <> 
-                According to the Social Security Administration's {" "}
+                According to the Social Security Administration&apos;s {" "}
                 <a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'> rules </a>
                 {" "}when the new birth certificate and correspondence letter 
                 arrive a parent/guardian can update your information at Social 
