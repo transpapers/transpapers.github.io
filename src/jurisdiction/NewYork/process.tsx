@@ -112,7 +112,7 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
 
 export const newyorkGenderMarker: Process<NewYorkCounty> = {
   target: Target.GenderMarker,
-  depends: [Target.BirthRecord],
+  depends: [Target.BirthRecord, Target.PrimaryIdentification],
   documents: [
     {
       name: "Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older",

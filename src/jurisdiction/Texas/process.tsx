@@ -38,7 +38,7 @@ import {
   feeWaiverMap,
   caseInformationMap,
   nameChangeMinorFamilyInfoMap,
-  primaryIDMap,
+  primaryIDTexasMap,
   birthCertNameCorrectionMap,
   birthCertGenderCorrectionMap,
   birthCertNameAndGenderCorrectionMap,
@@ -278,7 +278,7 @@ export const texasPrimaryIdentification: Process<TexasCounty> = {
       name: "Texas Driver License or Identification Card Application",
       id: "DL-14A",
       filename: "Texas/DPS DL14A.pdf",
-      map: primaryIDMap,
+      map: primaryIDTexasMap,
     },
   ],
 };
