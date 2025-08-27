@@ -46,48 +46,44 @@ function NewYorkFilingGuide({
     <section key="NewYork-Filing">
       <h3>Filing Initial Forms (NY)</h3>
 
-      {residentLocality ? (
-        <>
-          {residentLocality.isNYC ? (
-            <>
-              <p>
-                {age && age < 18 ? "A parent/guardian " : "You "} can file in any of
-                the 5 NYC Civil courts. We have them listed below.
-              </p>
-              {...Array.from(
-                newYork.localities
-                  .filter((loc) => loc.isNYC)
-                  .map(({ court, borough }) => (
-                    <p key="{residentLocality.court.name}">
-                      <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
-                      {court.phone}
-                    </p>
-                  )),
-              )}
-              <p>
-                {residentLocality.court.specificCourtInfo ?? ""}
-                The cost to file is currently $65. If you bring cash make sure
-                it&apos;s exact as they probably won&apos;t make change for you.
-              </p>
-            </>
-          ) : (
-            <>
-              <p>
-                The filing location is the {residentLocality.name} county court at {residentLocality.court.address}.
-                {age && age < 18 ? " A parent/guardian " : " You "} may want to call
-                ahead to check accepted payment types, their phone number is{" "}
-                {residentLocality.court.phone}. Generally speaking though as long as you have cash,
-                check, and card all ready to go then you are good. The cost to file
-                is currently $210, there will not be a hearing.
-              </p>
+    {residentLocality.isNYC ? (
+      <>
+        <p>
+          {age && age < 18 ? "A parent/guardian " : "You "} can file in any of
+          the 5 NYC Civil courts. We have them listed below.
+        </p>
 
-              {residentLocality.court.specificCourtInfo && <p>{residentLocality.court.specificCourtInfo}</p>}
-            </>
-          )}
-        </>
-      ) : (
-        <p>residentLocality not found.</p>
-      )}
+        {...Array.from(
+          newYork.localities
+          .filter((loc) => loc.isNYC)
+          .map(({ court, borough }) => (
+          <p key="{residentLocality.court.name}">
+            <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
+            {court.phone}
+          </p>
+          )),
+        )}
+
+        <p>
+          {residentLocality.court.specificCourtInfo ?? ""}
+          The cost to file is currently $65. If you bring cash make sure
+          it&apos;s exact as they probably won&apos;t make change for you.
+        </p>
+      </>
+    ) : (
+      <>
+        <p>
+          The filing location is the {residentLocality.name} county court at {residentLocality.court.address}.
+          {age && age < 18 ? " A parent/guardian " : " You "} may want to call
+          ahead to check accepted payment types, their phone number is{" "}
+          {residentLocality.court.phone}. Generally speaking though as long as you have cash,
+          check, and card all ready to go then you are good. The cost to file
+          is currently $210, there will not be a hearing.
+        </p>
+
+        {residentLocality.court.specificCourtInfo && <p>{residentLocality.court.specificCourtInfo}</p>}
+      </>
+    )}
 
       <p>
         <strong>
