@@ -110,7 +110,7 @@ function RhodeIslandNotaryGuide({
         a photo ID.
       </p>
 
-      {residentLocality.courtDoesBackgroundCheck ? (
+      {residentLocality && residentLocality.courtDoesBackgroundCheck ? (
         <p>
           Our records show that the {residentLocality.court.city} court either does the
           background check report for you when you file or gives its own unique
