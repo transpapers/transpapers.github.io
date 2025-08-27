@@ -27875,13 +27875,50 @@ function getLocality(jurisdictionKey, localityKey) {
     return void 0;
   }
   const localities = foundJurisdiction.localities;
-  const foundLocality = localities.find(
-    (j) => j.name === localityKey
-  );
-  if (!foundLocality) {
-    return void 0;
+  switch (foundJurisdiction.name) {
+    case "Rhode Island": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Alaska": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "New York": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Texas": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Michigan": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Ohio": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    default: {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
   }
-  return foundLocality;
 }
 /*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
@@ -28209,7 +28246,7 @@ const nameChangePrivateMap = [
     fieldName: "b. checkbox seek to affirm gender identity"
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? fullName(representativeName(applicant)) : "",
+    text: isMinor(applicant) ? fullName(representativeName(applicant)) : fullName(applicant.legalName),
     fieldName: "Name type or print"
   }),
   (applicant) => ({
@@ -28741,6 +28778,7 @@ function MichiganBirthCertificateGuide({
       " ",
       "(form DCH-0847-CHGBX)",
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        " ",
         "and the ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "State of Michigan Sex Designation Form" }),
         "."
@@ -28831,7 +28869,7 @@ function MichiganCourtHearingGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
       !isChangingLegalSex && !doNotPublish ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you paid the publication fee to an approved newspaper?" }) }) : "",
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you’d like the court to know?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you'd like the court to know?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
@@ -28909,7 +28947,7 @@ function MichiganEverythingElseGuide() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Property/House Title" }),
-      ": Contact your county’s Registry of Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and court order."
+      ": Contact your county's Registry of Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and court order."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Phone Service" }),
@@ -28978,8 +29016,10 @@ function MichiganFilingInitialFormsGuide({
           age && age < 18 ? " A parent/guardian " : " You ",
           " may file by mail or in person; in either case, include the Petition, the Addendum (m97a),",
           residentLocality.name && residentLocality.name == "Saginaw" ? " the Order Following (pc52), " : " ",
-          "the optional Fee Waiver (mc20), as well as payment. Even if the fee waiver is granted payment still needs to be provided for at least one certified copy. To ask for one when filing by mail either write “Certified copy fee” in a checks memo line or include a letter stating thats what the extra money is for. No matter what the filing method we recommend calling the court at",
-          " ",
+          "the optional Fee Waiver (mc20), as well as payment. Even if the fee waiver is granted payment still needs to be provided for at least one certified copy. To ask for one when filing by mail either write “Certified copy fee” in a checks memo line or include a letter stating thats what the extra money is for."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "No matter what filing method is used we recommend calling the court at ",
           residentLocality.court.phone,
           " or visiting their website:",
           " ",
@@ -28991,10 +29031,10 @@ function MichiganFilingInitialFormsGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
           " ",
-          "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
+          "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true || doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Once the paperwork has been filed it will be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Once the paperwork has been filed it will be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the “Court Hearing” section, otherwise skip it.' }),
         residentLocality.name && residentLocality.name !== "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "If you want an update on your case",
           " ",
@@ -29090,34 +29130,36 @@ function MichiganMC20Guide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function MichiganPC51cGuide({ person }) {
-  const { age, residentLocality, parentsAreOkay, hasCriminalRecord } = person;
+  const { age, residentLocalityName, parentsAreOkay, hasCriminalRecord, isChangingLegalSex } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Petition for Name Change (MI, PC51c)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "This form will keep the process confidential and make sure that even if there is a hearing it will be private with no publication of your information. You do need to have lived in ",
-        residentLocality.name,
-        " ",
-        "county for at least a year to file this form though."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If necessary complete item 1 for any active court cases.",
-        hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. " : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. " }) : "",
-        " ",
-        "If you would like for the judge to see personal details of why you may be at risk of discrimination or retaliation add them to the bottom of page 3, this is optional."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "Also fill out ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 4" }),
-        ", ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 5" }),
-        ", and ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 10" }),
-        " as applicable. The parent that is filing this at court should date and sign the bottom of pages 2, 3, and the left side of the “Signature of Parent/Guardian for Minor” section on page 4.",
-        parentsAreOkay ? " The other should complete the right side of the same section." : " If one of your parents is deceased or noncustodial then only the first signature is needed. If both are deceased or noncustodial your legal guardian(s) should do the above instead and attach copies of their letters of guardianship to this form.",
-        age && age < 14 ? " Since you are below the age of 14 you should not sign the first “Consent by Minor” section on page 4, sign the second instead." : " Since you are over the age of 13 you should sign the first “Consent by Minor” section on page 4 and ignore the second."
-      ] }) : " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature.” Do the same on the bottom of page 3." })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate guide, no residentLocality given" })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form will keep the process confidential and make sure that even if there is a hearing it will be private with no publication of your information.",
+      " ",
+      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Anyone changing their name to affirm their gender identity automatically qualifies for this process." }) : "",
+      " ",
+      "You do need to have lived in ",
+      residentLocalityName,
+      " ",
+      "county for at least a year to file any forms though."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If necessary complete item 1 for any active court cases.",
+      hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. " : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. " }) : "",
+      " ",
+      "If you would like for the judge to see personal details of why you may be at risk of discrimination or retaliation add them to the bottom of page 3, this is optional."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      "Also fill out ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 4" }),
+      ", ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 5" }),
+      ", and ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 10" }),
+      " as applicable. The parent that is filing this at court should date and sign the bottom of pages 2, 3, and the left side of the “Signature of Parent/Guardian for Minor” section on page 4.",
+      parentsAreOkay ? " The other should complete the right side of the same section." : " If one of your parents is deceased or noncustodial then only the first signature is needed. If both are deceased or noncustodial your legal guardian(s) should do the above instead and attach copies of their letters of guardianship to this form.",
+      age && age < 14 ? " Since you are below the age of 14 you should not sign the first “Consent by Minor” section on page 4, sign the second instead." : " Since you are over the age of 13 you should sign the first “Consent by Minor” section on page 4 and ignore the second."
+    ] }) : " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature.” Do the same on the bottom of page 3." })
   ] }, "Michigan-PC51c");
 }
 /*!
@@ -29141,33 +29183,31 @@ function MichiganPC51cGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function MichiganPC51Guide({ person }) {
-  const { age, residentLocality, parentsAreOkay, hasCriminalRecord } = person;
+  const { age, residentLocalityName, parentsAreOkay, hasCriminalRecord } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Name Change (MI, PC51)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        residentLocality.name === "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          "In Kent county the court will ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-          " hold hearings for name changes meaning the process will not be published in a newspaper even when filing with the standard petition like this."
-        ] }) : "",
-        "You need to have lived in ",
-        residentLocality.name,
-        " county for at least one year to file this form. If necessary complete item 1 for any active court cases."
-      ] }),
-      hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. " : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. " }) : "",
-      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Also fill out ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 4" }),
-        ", ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 5" }),
-        ", and ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 10" }),
-        " as applicable. The parent/guardian that is filing this at court should date and sign the bottom of page 2 and the left side of the “Signature of Parent/Guardian for Minor” section on page 3.",
-        parentsAreOkay ? " The other should complete the right side of the same section." : " If one of your parents is deceased or noncustodial then only the first signature is needed. If both are deceased or noncustodial your legal guardian(s) should do the above instead and attach copies of their letters of guardianship to this form.",
-        age && age < 14 ? " Since you are below the age of 14 you should not sign the first “Consent by Minor” section on page 3, sign the second instead." : " Since you are over the age of 13 you should sign the first “Consent by Minor” section on page 3 and ignore the second."
-      ] }) : " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature”."
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate guide, residentLocality missing" })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      residentLocalityName === "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "In Kent county the court will ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " hold hearings for name changes meaning the process will not be published in a newspaper even when filing with the standard petition like this."
+      ] }) : "",
+      "You need to have lived in ",
+      residentLocalityName,
+      " county for at least one year to file any forms. If necessary complete item 1 for any active court cases."
+    ] }),
+    hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. " : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. " }) : "",
+    age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Also fill out ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 4" }),
+      ", ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 5" }),
+      ", and ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "item 10" }),
+      " as applicable. The parent/guardian that is filing this at court should date and sign the bottom of page 2 and the left side of the “Signature of Parent/Guardian for Minor” section on page 3.",
+      parentsAreOkay ? " The other should complete the right side of the same section." : " If one of your parents is deceased or noncustodial then only the first signature is needed. If both are deceased or noncustodial your legal guardian(s) should do the above instead and attach copies of their letters of guardianship to this form.",
+      age && age < 14 ? " Since you are below the age of 14 you should not sign the first “Consent by Minor” section on page 3, sign the second instead." : " Since you are over the age of 13 you should sign the first “Consent by Minor” section on page 3 and ignore the second."
+    ] }) : " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature”."
   ] }, "Michigan-PC51");
 }
 /*!
@@ -29196,63 +29236,49 @@ function MichiganPC52Guide() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This form is required by Saginaw County. It should already be complete." })
   ] }, "Michigan-PC52");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganPublicationGuide({
-  person,
-  locality
+  person
 }) {
-  const { age } = person;
-  const { publications } = locality;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Publication (MI)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "If the clerk instructed",
-      age && age < 18 ? " your parent/guardian " : " you ",
-      " to place an ad with a local newspaper the court-approved newspaper(s) in your county are as follows:"
-    ] }),
-    ...publications.map(({ name, website, email }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "Newspaper: ",
-        name
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Publication (MI)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "If the clerk instructed",
+        age && age < 18 ? " your parent/guardian " : " you ",
+        " to place an ad with a local newspaper the court-approved newspaper(s) in your county are as follows:"
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "Website:",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "{website}", title: "link", children: website })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "Contact Email: ",
-        email
+      ...residentLocality.publications.map(({ name, website, email }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          "Newspaper: ",
+          name
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          "Website:",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "{website}", title: "link", children: website })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          "Contact Email: ",
+          email
+        ] })
+      ] }, "{residentLocality.publications.name}")),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "At the provided link(s),",
+        age && age < 18 ? " your parent/guardian " : " you ",
+        "should contact a newspaper about placing a legal notice for the name change hearing. Make sure the publication date is more than seven days before the hearing date. After a few days, confirm with the court that they have received the necessary paperwork from the newspaper."
       ] })
-    ] }, "{publications.name}")),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "At the provided link(s),",
-      " ",
-      age && age < 18 ? " your parent/guardian " : " you ",
-      "should contact a newspaper about placing a legal notice for the name change hearing. Make sure the publication date is more than seven days before the hearing date. After a few days, confirm with the court that they have received the necessary paperwork from the newspaper."
-    ] })
-  ] }, "MI-Publication");
+    ] }, "MI-Publication");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -29316,7 +29342,7 @@ function MichiganSecretaryOfStateGuide({
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Primary ID (MI)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This section covers the process of updating your primary identification (driver’s license/state ID) and any vehicle registrations you may have. If this is not relevant to you, proceed to the next section. You will need to schedule an in-person appointment at your local Secretary of State office, which can be done here",
+      "This section covers the process of updating your primary identification (driver's license/state ID) and any vehicle registrations you may have. If this is not relevant to you, proceed to the next section. You will need to schedule an in-person appointment at any Secretary of State office in Michigan, which can be done here",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dsvsesvc.sos.state.mi.us/TAP/_/", children: "https://dsvsesvc.sos.state.mi.us/TAP/_/" }),
       ".",
@@ -29324,18 +29350,20 @@ function MichiganSecretaryOfStateGuide({
       age && age < 18 ? " A parent/guardian will need to go with you to this appointment." : ""
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "If you already have a driver’s license or state ID bring it to the appointment.",
+      "If you already have a driver's license or state ID bring it to the appointment.",
+      " ",
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Also bring the",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Michigan Secretary of State Sex Designation" }),
         " form. For that form, if you have a drivers license, write the license number in section A."
       ] }) : "",
+      " ",
       "Arrive a few minutes early and check in at the kiosk."
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you do not already have a driver’s license or state ID, tell the clerk that you are applying for one and bring the forms of identification you used for Social Security. The appointment should proceed normally but make sure the gender marker is set correctly before you leave." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you do not already have a driver's license or state ID, tell the clerk that you are applying for one and bring the forms of identification you used for Social Security. The appointment should proceed normally but make sure the gender marker is set correctly before you leave." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "If you do have primary identification, tell the clerk that you are updating the name and/or gender marker on it. They will ask for the",
+      "If you do have a driver's license/state ID, tell the clerk that you are updating the name and/or gender marker on it. They will ask for the",
       isChangingLegalName ? " court-ordered name change, " : "",
       isChangingLegalSex ? " the Sex Designation Form, " : "",
       "and ID. Sign and date it in front of them",
@@ -29489,6 +29517,7 @@ const michiganNameChange = {
 };
 const michiganGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Michigan Dept. of State Sex Designation Form",
@@ -31591,6 +31620,13 @@ const michiganCounties = [
  * @type {Formfill[]}
  */
 const changeOfNameMap = [
+  //FIXME adjust this or the util function so it works.
+  //(applicant) => ({
+  //text: 
+  //getLocality(applicant.residentJurisdictionName, 
+  //applicant.residentLocalityName)?.county,
+  //loc: { x: 50, y: 50 },
+  //}),
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 }
@@ -32007,106 +32043,83 @@ const birthCertTwoMap = [
     loc: { x: 219, y: 772 }
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandBCIGuide({
-  person,
-  locality
+  person
 }) {
-  const { age } = person;
-  const { court, courtDoesBackgroundCheck } = locality;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Background Check Authorization Form (RI)" }),
-    courtDoesBackgroundCheck ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Our records show that the ",
-      court.city,
-      " court either does the background check report for you when you file or gives its own unique instructions for one upon filing. You can ignore this section and that form for the time being. We have included this form and its instructions just in case we are wrong."
-    ] }) : "",
-    age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For a Rhode Island name change you and the parent/guardian who is filing the Change of Name form for you will need a background check." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For a Rhode Island name change you will need a background check." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This form, from the State of Rhode Island Office of the Attorney General, is specifically for requesting a background check",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "by mail" }),
-      ". Going in-person doesn't require a form.",
-      age && age < 18 ? " If the parent/guardian filing the Name Change has " : " If you have ",
-      "ever had any other legal names those names need to be listed on the “Maiden Name / other names used” line if they aren't already listed. After that this form is ready for a notary, do",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " fill anything else out."
-    ] })
-  ] }, "RhodeIsland-BCI");
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Background Check Authorization Form (RI)" }),
+      residentLocality.courtDoesBackgroundCheck ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Our records show that the ",
+        residentLocality.court.city,
+        " court either does the background check report for you when you file or gives its own unique instructions for one upon filing. You can ignore this section and the “Background Check Authorization” form for the time being. We have included this form and its instructions just in case."
+      ] }) : "",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For a Rhode Island name change you and the parent/guardian who is filing the Change of Name form for you will need a background check." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For a Rhode Island name change you will need a background check." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "This form, from the State of Rhode Island Office of the Attorney General, is specifically for requesting a background check",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "by mail" }),
+        ". Going in-person doesn't require a form.",
+        age && age < 18 ? " If the parent/guardian filing the Name Change has " : " If you have ",
+        "ever had any other legal names those names need to be listed on the “Maiden Name / other names used” line if they aren't already listed. After that this form is ready for a notary, do",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " fill anything else out."
+      ] })
+    ] }, "RhodeIsland-BCI");
+  }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandBirthCertRequestGuide({
   person
 }) {
-  const { age, birthJurisdiction, parentsAreOkay, residentLocality } = person;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Birth Certificate Request (RI)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        age && age < 18 ? "A parent/guardian needs a copy of your " : "You need a copy of your ",
-        "birth certificate in order to file for a name change. Call the local court at this number ",
-        residentLocality.court.phone,
-        " to check if they allow a photocopy or if they need a certified copy. If they need a certified copy and you happen to have that, ask if it is useable as some courts will only take a recent certified copy."
-      ] }),
-      birthJurisdiction?.name === "Rhode Island" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If you don't have a useable copy you can either request one online through",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.vitalchek.com/v/vital-records/rhode-island", children: "VitalChek" }),
-        " ",
-        'or by mail using the "Application for a Certified Copy of a Birth Record" form we provided. Specifically the one with "name change" written in the bottom right of section 3. If you want to use this form finish filling out the section 1 "hospital" field. If you have had your name changed by court order before now then fill out the "New name if changed in court" field as well.',
-        parentsAreOkay ? "" : " In section 2 a parent should check the “my child” box. Legal guardians should check “another person” and write “Legal Guardian” to the right. ",
-        age && age < 18 ? " Then have the parent/guardian whose name is listed in section 5 sign and date that section. " : " Then sign and date section 5 with your current legal name. ",
-        "Instructions for in-person or mail ordering are in the next section."
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If you don't have a useable copy you will need to either",
-        age && age < 18 ? " have a parent/guardian" : " ",
-        " order one online through",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH", children: "VitalChek" }),
-        " ",
-        "or go through your birth state/territory's Vital Records department. If you were born in another country it will be through your birth country's records department instead to get proof of birth. Any document not in English needs a professional translation."
-      ] })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "residentLocality not found." })
-  ] }, "RhodeIsland-BC-Req");
+  const { age, birthJurisdictionName, parentsAreOkay, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Birth Certificate Request (RI)" }),
+      residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          age && age < 18 ? "A parent/guardian needs a copy of your " : "You need a copy of your ",
+          "birth certificate in order to file for a name change. Call the local court at this number ",
+          residentLocality.court.phone,
+          " to check if they allow a photocopy or if they need a certified copy. If they need a certified copy and you happen to have that, ask if it is useable as some courts will only take a recent certified copy."
+        ] }),
+        birthJurisdictionName === "Rhode Island" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "If you don't have a useable copy you can either request one online through",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.vitalchek.com/v/vital-records/rhode-island", children: "VitalChek" }),
+          " ",
+          'or by mail using the "Application for a Certified Copy of a Birth Record" form we provided. Specifically the one with "name change" written in the bottom right of section 3. If you want to use this form finish filling out the section 1 "hospital" field. If you have had your name changed by court order before now then fill out the "New name if changed in court" field as well.',
+          parentsAreOkay ? "" : " In section 2 a parent should check the “my child” box. Legal guardians should check “another person” and write “Legal Guardian” to the right.",
+          " ",
+          age && age < 18 ? "Then have the parent/guardian whose name is listed in section 5 sign and date that section. " : "Then sign and date section 5 with your current legal name. ",
+          "Instructions for in-person or mail ordering are in the next section."
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "If you don't have a useable copy you will need to either",
+          age && age < 18 ? " have a parent/guardian" : " ",
+          " order one online through",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH", children: "VitalChek" }),
+          " ",
+          "or go through your birth state/territory's Vital Records department. If you were born in another country it will be through your birth country's records department instead to get proof of birth. Any document not in English needs a professional translation."
+        ] })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "residentLocality not found." })
+    ] }, "RhodeIsland-BC-Req");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -32136,14 +32149,15 @@ function RhodeIslandBirthCertUpdateGuide({
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Birth Certificate Update (RI)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       'To update a birth certificate you need the "Application for a Certified Copy of a Birth Record" form we provided. Specifically the one with "Updating record information" written in the bottom right of section 3. Finish filling out the section 1 "hospital" field. If you have had your name changed by court order before this time then fill out the "New name if changed in court" field as well.',
-      parentsAreOkay ? "" : " In section 2 a parent should check the “my child” box. Legal guardians should check “another person” and write “Legal Guardian” to the right. ",
-      age && age < 18 ? " Then have the parent/guardian whose name is listed in section 5 check the appropriate box in section 2 and sign/date section 5. " : isChangingLegalName ? " Then sign and date section 5 in your new name. " : " Then sign and date section 5. "
+      parentsAreOkay ? "" : " In section 2 a parent should check the “my child” box. Legal guardians should check “another person” and write “Legal Guardian” to the right.",
+      " ",
+      age && age < 18 ? "Then have the parent/guardian whose name is listed in section 5 check the appropriate box in section 2 and sign/date section 5. " : isChangingLegalName ? "Then sign and date section 5 in your new name. " : "Then sign and date section 5. "
     ] }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "To update the gender marker of a birth certificate you need to",
-      age && age < 18 ? " have a parent/guardian " : " ",
+      age && age < 18 ? " have a parent/guardian" : " ",
       " contact the RI Office of Vital Records directly by either calling (401) 222-2811 or sending an email to doh.website@health.ri.gov. During this contact they need to be told that you want an updated gender marker on your birth certificate. They need to know your",
-      isChangingLegalName ? " new legal name, your name at birth, " : " legal name, your name at birth (if different),",
+      isChangingLegalName ? " new legal name, your name at birth, " : " legal name, your name at birth (if different), ",
       "date of birth, place of birth, old gender marker, and what the new marker will be. They accept M, F, or X as options. Finally make sure they have a good phone number and email address so they can send you a sworn affidavit. Leave this document ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "unsigned" }),
       " until directed otherwise. Once you have the affidavit you are ready to file with the RI Office of Vital Records, this can be done either in person or by mail."
@@ -32152,21 +32166,21 @@ function RhodeIslandBirthCertUpdateGuide({
       "For mail filing",
       age && age < 18 ? " a parent/guardian that is listed on the court order will " : " you will ",
       "need to make a photocopy of a photo ID, such as a drivers license.",
-      isChangingLegalSex ? " The sworn affidavit will also need to be signed in front of a notary (see previous notary section for instructions). " : "",
+      isChangingLegalSex ? " The sworn affidavit will also need to be signed in front of a notary (see previous notary section for instructions). " : " ",
       "Finally place the",
-      isChangingLegalSex ? " notarized sworn affidavit, " : "",
+      isChangingLegalSex ? " notarized sworn affidavit, " : " ",
       "Application for a Certified Copy of a Birth Certificate,",
-      isChangingLegalName ? " certified copy of the Court Order, " : "",
-      "and payment into an envelope. The fee is $35.00. They take cash, check, or money order. Make any checks payable to “General Treasurer, State of Rhode Island”. Then mail it to:",
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Rhode Island Department of Health" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Office of Vital Records" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "6 Harrington Road" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Cranston, Rhode Island 02920" })
-      ] })
+      isChangingLegalName ? " certified copy of the Court Order, " : " ",
+      "and payment into an envelope. The fee is $35.00. They take cash, check, or money order. Make any checks payable to “General Treasurer, State of Rhode Island”. Then mail it to:"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Rhode Island Department of Health" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Office of Vital Records" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "6 Harrington Road" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Cranston, Rhode Island 02920" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "For in-person filing",
@@ -32174,9 +32188,14 @@ function RhodeIslandBirthCertUpdateGuide({
       "(401) 222-5339 to make an appointment. Then",
       age && age < 18 ? " a parent/guardian will need to " : " ",
       "bring the",
-      isChangingLegalSex ? " <strong>unsigned</strong> sworn affidavit, " : "",
+      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "unsigned" }),
+        " sworn affidavit,",
+        " "
+      ] }) : " ",
       "Application for a Certified Copy of a Birth Certificate,",
-      isChangingLegalName ? " certified copy of the Court Order, " : "",
+      isChangingLegalName ? " certified copy of the Court Order, " : " ",
       "and a photo ID. The address is the same as the mailing address above but the fee is $32.00 for in-person. The affidavit can be signed in front of a notary at the Office of Vital Records when they say to. They will then check ID, collect the forms, and ask for the fee."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -32212,12 +32231,12 @@ function RhodeIslandCourtHearingGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Hearing (RI)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "On the day of your hearing, you",
-      age && age < 18 && " and your parent(s)/guardian(s) ",
+      age && age < 18 && " and your parent(s)/guardian(s)",
       " should dress appropriately for a courtroom, even if the hearing is virtual. The hearing may begin late, but it should only take a few minutes once it starts."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "You",
-      age && age < 18 && " and/or your parent(s)/guardian(s) ",
+      age && age < 18 && " and/or your parent(s)/guardian(s)",
       " will be sworn in and questioned. The questions vary between courts, but you can expect some of the following:"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
@@ -32228,7 +32247,7 @@ function RhodeIslandCourtHearingGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you paid the publication fee to an approved newspaper?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you’d like the court to know?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you'd like the court to know?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
@@ -32284,16 +32303,16 @@ function RhodeIslandDMVGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dmv.ri.gov/locations-hours", children: "here" }),
       ". You will need",
       isChangingLegalSex ? " both forms, " : " the LI-1 form, ",
-      isChangingLegalName ? " your court order, " : "",
-      'your current ID, and the receipt from social security. If you don’t have a current ID then bring the ID documents you used for Social Security. If you selected "REAL ID" you will also need an additional document, pick one on page 3 of the LI-1 form under "Proof of Identity". It is unusual but not impossible for them to ask for Proof of Residency documents which are also listed on page 3 of the LI-1 form.',
+      isChangingLegalName ? " your court order, " : " ",
+      `your current ID, and the receipt from social security. If you don't have a current ID then bring the ID documents you used for Social Security. If you selected "REAL ID" you will also need an additional document, pick one on page 3 of the LI-1 form under "Proof of Identity". It is unusual but not impossible for them to ask for Proof of Residency documents which are also listed on page 3 of the LI-1 form.`,
       isChangingLegalSex ? " You do not need any proof or medical records for the gender form." : ""
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "When you ",
-      age && age < 18 ? " and a parent/guardian " : " ",
+      age && age < 18 ? " and a parent/guardian" : " ",
       " arrive, tell the clerk that you want to update the name and/or gender marker on your ID and present the above documents to the clerk. Sign and date in front of the clerk.",
       age && age < 18 ? " A parent/guardian will need to sign the LI-1 form as well just below section G. " : " ",
-      "If you do not already have a driver’s license or state ID, tell the clerk that you are applying for one and take the same steps. Make sure the gender marker is set correctly before you leave. If you experience any issues or pushback politely insist on speaking to a manager, they should be more knowledgeable about this process. This should cost around $30.00 total."
+      "If you do not already have a driver's license or state ID, tell the clerk that you are applying for one and take the same steps. Make sure the gender marker is set correctly before you leave. If you experience any issues or pushback politely insist on speaking to a manager, they should be more knowledgeable about this process. This should cost around $30.00 total."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Optionally, you may also update your vehicle registration(s). You will be given another form, which you should sign",
@@ -32367,7 +32386,7 @@ function RhodeIslandEverythingElseGuide() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Property/House Title" }),
-      ": Contact your county’s Registry of Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and court order."
+      ": Contact your county's Registry of Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and court order."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Phone Service" }),
@@ -32453,7 +32472,7 @@ function RhodeIslandFilingGuide({
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
         " ",
-        "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
+        "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
       ] }),
       age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         residentLocality.name === "East Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The filing location is the East Providence Family court which is located at 1 Dorrance St, Providence, RI 02903." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -32488,102 +32507,87 @@ function RhodeIslandFilingGuide({
     ] }, "RhodeIsland-Filing");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandNotaryGuide({
-  person,
-  locality
+  person
 }) {
-  const { age, birthJurisdiction } = person;
-  const { court, courtDoesBackgroundCheck } = locality;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Getting Documents and a Notary (RI)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Everything in this section can be done in whatever order is most convenient." }),
-    birthJurisdiction?.name === "Rhode Island" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+  const { age, birthJurisdictionName, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Getting Documents and a Notary (RI)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Everything in this section can be done in whatever order is most convenient." }),
+      birthJurisdictionName === "Rhode Island" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          'To do the birth certificate request by mail have a check or money order made out to the "General Treasurer of RI" for $25.00.',
+          age && age < 18 ? " The parent/guardian that is listed on the form will " : " You will then ",
+          "need to make a photocopy of a Drivers License, State ID, or Passport. Place the form, photocopy, and payment into an envelope, place a stamp, and mail it to:"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Rhode Island Department of Health - Office of Vital Records" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "6 Harrington Road" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Cranston, Rhode Island 02920" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "To do the process in-person",
+          age && age < 18 ? " a parent/guardian " : " you ",
+          "will need to make an appointment at this",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://outlook.office365.com/book/VitalRecordsAppointments@health.ri.gov/", children: "link" }),
+          " ",
+          `and click "Record Request". Then fill out the requested info and go to the Cranston address listed above when it's time. Just bring photo ID, the completed form, and a payment method for the fee (cash, check, or card). Additionally the Attorney General's office is located very close to this address and only does walk-ins so it's possible to knock out both in one trip.`
+        ] })
+      ] }) : "",
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        'To do the birth certificate request by mail have a check or money order made out to the "General Treasurer of RI" for $25.00.',
-        age && age < 18 ? " The parent/guardian that is listed on the form will " : " You will then ",
-        "need to make a photocopy of a Drivers License, State ID, or Passport. Place the form, photocopy, and payment into an envelope, place a stamp, and mail it to:"
+        "Notaries are needed to witness",
+        age && age < 18 ? " both parent(s)/guardian(s) " : " your ",
+        "signatures and provide their own. The Change of Name form and (optionally) the Background Check Authorization form both need a notary and can be done during the same appointment. Rhode Island maintains a list of notaries",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://business.sos.ri.gov/PublicNotarySearch/Home", children: "here" }),
+        ". Notaries can also be found in court buildings, banks, some",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "UPS locations", children: "https://www.theupsstore.com/tools/find-a-store" }),
+        ", or ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "online", children: "https://www.notarize.com/" }),
+        ". All of these services have different fees and payment methods but all of them require a photo ID."
+      ] }),
+      residentLocality.courtDoesBackgroundCheck ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Our records show that the ",
+        residentLocality.court.city,
+        " court either does the background check report for you when you file or gives its own unique instructions for one upon filing."
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "To do the background check by mail",
+          age && age < 18 ? " the parent/guardian that is listed on the form will " : " you will ",
+          'need to make a photocopy of a Drivers License, State ID, or Passport. Then have a check or money order for $5.00 made out to "BCI". After that make a self-addressed and stamped envelope for them to send the report back in. Finally place the notarized Authorization form, photocopy, payment, and self-addressed envelope into a large envelope and mail it to this address:'
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Rhode Island Office of the Attorney General" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "4 Howard Avenue" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Cranston, Rhode Island 02920" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "To do the background check in-person",
+          age && age < 18 ? " the parent/guardian that is filing these documents at court will " : " you will ",
+          "need to head to the above address. They only do walk-ins so the only things needed are a photo ID and a credit/debit card for the $5.00 fee. They will mail you the report."
+        ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Rhode Island Department of Health - Office of Vital Records" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "6 Harrington Road" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Cranston, Rhode Island 02920" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "To do the process in-person",
-        " ",
-        age && age < 18 ? " a parent/guardian " : " you ",
-        "will need to make an appointment at this",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://outlook.office365.com/book/VitalRecordsAppointments@health.ri.gov/", children: "link" }),
-        " ",
-        `and click "Record Request". Then fill out the requested info and go to the Cranston address listed above when it's time. Just bring photo ID, the completed form, and a payment method for the fee (cash, check, or card). Additionally the Attorney General's office is located very close to this address and only does walk-ins so it's possible to knock out both in one trip.`
+        age && age < 18 ? "Once you and your parent(s)/guardian(s) " : "Once you ",
+        "have a useable copy of the birth certificate",
+        residentLocality.courtDoesBackgroundCheck ? " and a notarized Change of Name petition you are ready to file. The court should take care of the background check when you file." : ", a notarized Change of Name petition, and the background check results you are ready to file."
       ] })
-    ] }) : "",
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Notaries are needed to witness",
-      " ",
-      age && age < 18 ? " both parent(s)/guardian(s) " : " your ",
-      "signatures and provide their own. The Change of Name form and (optionally) the Background Check Authorization form both need a notary and can be done during the same appointment. Rhode Island maintains a list of notaries",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://business.sos.ri.gov/PublicNotarySearch/Home", children: "here" }),
-      ". Notaries can also be found in court buildings, banks, some",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "UPS locations", children: "https://www.theupsstore.com/tools/find-a-store" }),
-      ", or ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "online", children: "https://www.notarize.com/" }),
-      ". All of these services have different fees and payment methods but all of them require a photo ID."
-    ] }),
-    courtDoesBackgroundCheck ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Our records show that the ",
-      court.city,
-      " court either does the background check report for you when you file or gives its own unique instructions for one upon filing."
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "To do the background check by mail",
-        age && age < 18 ? " the parent/guardian that is listed on the form will " : " you will ",
-        'need to make a photocopy of a Drivers License, State ID, or Passport. Then have a check or money order for $5.00 made out to "BCI". After that make a self-addressed and stamped envelope for them to send the report back in. Finally place the notarized Authorization form, photocopy, payment, and self-addressed envelope into a large envelope and mail it to this address:'
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Rhode Island Office of the Attorney General" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "4 Howard Avenue" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Cranston, Rhode Island 02920" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "To do the background check in-person",
-        age && age < 18 ? " the parent/guardian that is filing these documents at court will " : " you will ",
-        "need to head to the above address. They only do walk-ins so the only things needed are a photo ID and a credit/debit card for the $5.00 fee. They will mail you the report."
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      age && age < 18 ? "Once you and your parent(s)/guardian(s) " : "Once you ",
-      "have a useable copy of the birth certificate",
-      courtDoesBackgroundCheck ? " and a notarized Change of Name petition you are ready to file. The court should take care of the background check when you file." : ", a notarized Change of Name petition, and the background check results you are ready to file."
-    ] })
-  ] }, "RhodeIsland-Notary");
+    ] }, "RhodeIsland-Notary");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -32606,7 +32610,7 @@ function RhodeIslandNotaryGuide({
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function RhodeIslandPC8_1Guide({ person }) {
-  const { age, residentLocality, parentsAreOkay } = person;
+  const { age, residentLocalityName, parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Change of Name (RI, PC8.1)" }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -32620,7 +32624,12 @@ function RhodeIslandPC8_1Guide({ person }) {
       ] })
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The first form to be filled out is the Change of Name (PC 8.1). On the bottom of the first section fill out your mailing address if it's different than your actual address. Fill in your occupation and (optionally) your marital status, just below your mothers name. Right below that there is a checkbox. If it isn't already checked and you have changed your name by court order before, check the “Yes” box and attach a copy of the court order, otherwise check “No”. On the third section near the bottom of page 1 fill in any previous addresses you have lived at." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      residentLocality?.name === "Providence" ? "You need to have lived in Providence for at least 6 months to file this form. " : "You need to have lived in " + (residentLocality?.name ?? "") + " for at least a year to file this form. ",
+      residentLocalityName === "Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "You need to have lived in Providence for at least 6 months to file this form." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "You need to have lived in ",
+        residentLocalityName,
+        " for at least a year to file this form."
+      ] }),
+      " ",
       "Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign it or fill out anything on page 2, that's for a notary later."
@@ -34572,8 +34581,7 @@ const selfAttestationMinorNYCMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function NewYorkBirthCertUpdateGuide({ person }) {
-  const { age, parentsAreOkay, residentJurisdiction } = person;
-  if (!residentJurisdiction) return "";
+  const { age, parentsAreOkay, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Birth Certificate Update (NY)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -34594,7 +34602,7 @@ function NewYorkBirthCertUpdateGuide({ person }) {
         "For the self-attestation form have a parent/guardian fill in any blanks for sections 1 through 3. Section 4 can only be completed in front of a notary so do ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
         " sign until directed to do so.",
-        residentJurisdiction.name === "New York" ? "For notary resources see the 'Getting Documents and a Notary' section above." : ""
+        residentJurisdictionName === "New York" ? " For notary resources see the 'Getting Documents and a Notary' section above." : ""
       ] })
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -34610,10 +34618,10 @@ function NewYorkBirthCertUpdateGuide({ person }) {
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
         " sign until then.",
-        residentJurisdiction.name === "New York" ? "For notary resources see the 'Getting Documents and a Notary' section above." : ""
+        residentJurisdictionName === "New York" ? " For notary resources see the 'Getting Documents and a Notary' section above." : ""
       ] })
     ] }),
-    residentJurisdiction.name === "New York" ? "" : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    residentJurisdictionName === "New York" ? "" : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Notaries can be found in court buildings, banks, some",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
@@ -34655,11 +34663,11 @@ function NewYorkBirthCertUpdateGuide({ person }) {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       "To change the name and/or gender marker on your birth certificate your parent/guardian(s) will need a copy of the court order, a certified copy of your birth certificate, the “Application for Amendment of Certificate of Birth for Gender Designation for a Minor” (DOH-5306), and the “Notarized Affidavit of Gender Change for a Person 16 Years of Age or Under” (DOH-5304). Use black ink when filling out the forms. For the DOH-5306 Application there is a section asking for information from your current birth certificate that they can fill out. Both parents/guardians will need to sign and date at the bottom.",
-      parentsAreOkay ? "" : " If you only have one parent/guardian they need to check the box above the signature line indicating that. ",
+      parentsAreOkay ? " " : " If you only have one parent/guardian they need to check the box above the signature line indicating that. ",
       "The DOH-5304 Affidavit will need to be filled out in front of a notary, do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       "fill it out until directed.",
-      residentJurisdiction.name === "New York" ? "For notary resources see the 'Getting Documents and a Notary' section above." : ""
+      residentJurisdictionName === "New York" ? " For notary resources see the 'Getting Documents and a Notary' section above." : ""
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "New York State" }),
@@ -34669,9 +34677,9 @@ function NewYorkBirthCertUpdateGuide({ person }) {
       "To change the name and/or gender marker on your birth certificate you will need a copy of your court order, a copy certified of your birth certificate, the “Application for Amendment of Certificate of Birth for Gender Designation for an Adult” (DOH-5305), and the “Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older” (DOH-5303). Use black ink when filling out the forms. For the DOH-5305 Application there is an optional section asking for information from your current birth certificate that you can fill out or you can give them a copy of the birth certificate instead. Sign and date it at the bottom. Leave the DOH-5303 Affidavit alone until you are in front of a notary, do",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign or date it until directed.",
-      residentJurisdiction.name === "New York" ? "For notary resources see the 'Getting Documents and a Notary' section above." : ""
+      residentJurisdictionName === "New York" ? " For notary resources see the 'Getting Documents and a Notary' section above." : ""
     ] }),
-    residentJurisdiction.name === "New York" ? "" : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    residentJurisdictionName === "New York" ? "" : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Notaries can be found in court buildings, banks, some",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
@@ -34776,7 +34784,7 @@ function NewYorkDMVGuide({ person }) {
 function NewYorkEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (NY)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "New York’s Gender Recognition Act mandates that any New York based public or private organization must change your name if you show them the court order and new ID. Some places will even allow for digital updates by scanning in your new ID and court order. What follows is a list of places, in no particular order, where you may want to update your name. Any forms that you fill out should be signed in your new name." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "New York's Gender Recognition Act mandates that any New York based public or private organization must change your name if you show them the court order and new ID. Some places will even allow for digital updates by scanning in your new ID and court order. What follows is a list of places, in no particular order, where you may want to update your name. Any forms that you fill out should be signed in your new name." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Bank" }),
       ": Bring your new ID and court order and request the name on your account(s) be changed. If you have a debit card or checkbook out of this account, then you will need to request new ones. Any joint account holders must also be present to sign."
@@ -34815,7 +34823,7 @@ function NewYorkEverythingElseGuide() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Property/House Title" }),
-      ": Go to your local county recorder’s office and state that you want to correct the name on your property. They should issue a correction deed that you can fill out and submit to update your name."
+      ": Go to your local county recorder's office and state that you want to correct the name on your property. They should issue a correction deed that you can fill out and submit to update your name."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Phone Service" }),
@@ -34879,14 +34887,14 @@ function NewYorkFilingGuide({
           " can file in any of the 5 NYC Civil courts. We have them listed below."
         ] }),
         ...Array.from(
-          newYork.localities.filter((loc) => loc.isNYC).map(({ court, borough }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          newYork.localities.filter((loc) => loc.isNYC).map(({ court, borough }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: borough }),
             ": ",
             court.address,
             ". Phone Number:",
             " ",
             court.phone
-          ] }, "{court.name}"))
+          ] }, "{residentLocality.court.name}"))
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           residentLocality.court.specificCourtInfo ?? "",
@@ -34899,7 +34907,7 @@ function NewYorkFilingGuide({
           " county court at ",
           residentLocality.court.address,
           ".",
-          age && age < 18 ? "A parent/guardian " : "You ",
+          age && age < 18 ? " A parent/guardian " : " You ",
           " may want to call ahead to check accepted payment types, their phone number is",
           " ",
           residentLocality.court.phone,
@@ -34910,9 +34918,9 @@ function NewYorkFilingGuide({
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
         " ",
-        "We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney."
+        "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
       ] }),
-      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After the clerk receives the filled out & notarized petition, your parent/guardian(s) ID, the certified copy of the minors birth certificate, and the filing fee (or optional fee waiver) they should then give a reference number. The clerk should also tell your parent/guardian(s) when to come back for the court order confirming the changes. There shouldn’t be a hearing unless there is a parent/guardian who refused to give consent for the change. When they return they only need their ID(s) and the reference slip that the clerk gave them. Finally a document called “Order Granting Name Change and/or Sex Designation Change for an Individual Minor” (UCS-NC02) will be given that we will refer to as the court order. We recommend requesting and paying for an additional certified copy or 2 of the order for later use. Have the original kept in a safe place." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After the clerk recieves your notarized UCS-NC1 form, your ID, a copy of your birth certificate, and the filing fee (or optional fee waiver) they should give you a reference number. They will also tell you when to return for your court order confirming the changes as there will not be a hearing. When you return you only need your ID and the reference slip they gave you. You should recieve a document called “Order Granting Name Change and/or Sex Designation Change for an Individual Adult” (UCS-NC01) that we will refer to as the court order. We recommend paying for an additional certified copy or 2 for later use. Keep the original in a safe space." })
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After the clerk receives the filled out & notarized petition, your parent/guardian(s) ID, the certified copy of the minors birth certificate, and the filing fee (or optional fee waiver) they should then give a reference number. The clerk should also tell your parent/guardian(s) when to come back for the court order confirming the changes. There shouldn't be a hearing unless there is a parent/guardian who refused to give consent for the change. When they return they only need their ID(s) and the reference slip that the clerk gave them. Finally a document called “Order Granting Name Change and/or Sex Designation Change for an Individual Minor” (UCS-NC02) will be given that we will refer to as the court order. We recommend requesting and paying for an additional certified copy or 2 of the order for later use. Have the original kept in a safe place." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After the clerk recieves your notarized UCS-NC1 form, your ID, a copy of your birth certificate, and the filing fee (or optional fee waiver) they should give you a reference number. They will also tell you when to return for your court order confirming the changes as there will not be a hearing. When you return you only need your ID and the reference slip they gave you. You should recieve a document called “Order Granting Name Change and/or Sex Designation Change for an Individual Adult” (UCS-NC01) that we will refer to as the court order. We recommend paying for an additional certified copy or 2 for later use. Keep the original in a safe space." })
     ] }, "NewYork-Filing");
   }
 }
@@ -34937,10 +34945,10 @@ function NewYorkFilingGuide({
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function NewYorkNotaryGuide({ person }) {
-  const { age, birthJurisdiction } = person;
+  const { age, birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Getting Documents and a Notary (NY)" }),
-    birthJurisdiction?.name === "New York" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    birthJurisdictionName === "New York" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "In order to file ",
       age && age < 18 ? " a parent/guardian " : " you ",
       "will need a certified copy of your birth certificate. If you don't have one you can get one",
@@ -34950,6 +34958,7 @@ function NewYorkNotaryGuide({ person }) {
       "no matter where in New York state you were born. There is an in-person option if you were born in New York City. Appointments can be made at this",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/", children: "link" }),
+      " ",
       "and selecting “Purchase a Birth Certificate”. They accept credit/debit cards, checks, or money orders. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "No Cash." })
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -34969,7 +34978,7 @@ function NewYorkNotaryGuide({ person }) {
       ", or ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
       ". There will be a fee for this required service.",
-      age && age > 13 ? " " : " You and the petitioner need to meet with the notary together to sign.",
+      age && age > 13 ? " " : " You and the petitioner need to meet with the notary together to sign. ",
       "Once all signatures are signed, witnessed, and stamped the form is ready to be filed at court."
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "You will need a notary to witness your signature and provide their own. Notaries can be found in court buildings, banks, some",
@@ -35007,9 +35016,8 @@ function NYCFeeWaiverGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Fee Waiver Request (NYC, CIV-GP-15-i)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This form is optional. It is a request to waive the filing fee charged upon submitting ",
-      age && age < 18 ? " the UCS-NC2" : " the UCS-NC1 ",
-      " ",
-      "petition to the court. In New York City the filing fee is $65 (outside NYC is $210). Courts will typically not grant your waiver request unless you are on public assistance or your annual income is below 125% of the federal poverty line. However, you may file the request at your discretion; the worst they can do is deny it."
+      age && age < 18 ? " the UCS-NC2 " : " the UCS-NC1 ",
+      "petition to the court. In New York City the filing fee is $65. Courts will typically not grant your waiver request unless you are on public assistance or your annual income is below 125% of the federal poverty line. However, you may file the request at your discretion; the worst they can do is deny it."
     ] }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If a parent/guardian chooses to file this form, they need to circle “I am” or “am not” on item number 7. They also need to fill out items 8 & 9 then sign and date at the bottom." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you choose to file this form, circle “I am” or “am not” on item number 7. Fill out items 8 & 9 as well then sign and date at the bottom." })
   ] }, "NYC-Fee-Waiver");
@@ -35040,8 +35048,7 @@ function NYStateFeeWaiverGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Fee Waiver Request (NY State, UCS-FW1)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This form is optional. It is a request to waive the filing fee charged upon submitting ",
-      age && age < 18 ? " the UCS-NC2" : " the UCS-NC1 ",
-      " ",
+      age && age < 18 ? " the UCS-NC2 " : " the UCS-NC1 ",
       "petition to the court. In New York State the filing fee is $210 (in NYC it's $65). Courts will typically not grant your waiver request unless you are on public assistance or your annual income is below 125% of the federal poverty line. However, you may file the request at your discretion; the worst they can do is deny it."
     ] }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If a parent/guardian chooses to file this form, they need to fill out items 4, 5, and 6 as it applies to them. Then they can sign and date at the bottom of page 3." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you choose to file this form fill out items 4, 5, and 6 as needed. Then sign and date the bottom of page 3." })
@@ -35107,13 +35114,13 @@ function NewYorkResourcesGuide() {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function NewYorkUCS_NC1Guide({ person }) {
-  const { residentLocality, doNotPublish } = person;
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+  const { residentLocalityName, doNotPublish } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (NY, UCS-NC1)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The first form to be filled out is the “Name Change and/or Sex Designation Change Petition for an Individual Adult” (UCS-NC1). In order to file this you need to live in",
       " ",
-      residentLocality.name,
+      residentLocalityName,
       " county and have lived in New York State for at least 6 months. It has some sections that you will need to review. Look through sections A, B, and C to see if the information we filled in is accurate for your circumstances. If it's not then type in the missing info or write with black ink if it's already printed."
     ] }),
     doNotPublish ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For #28 the court wants to know if making these court records available to the public will cause you harm. This can take the form of either discrimmination or a personal threat such as a known stalker. For discrimmination that can be either state or federal threats. Be sure to elaborate and potentially attach evidence, fill out #29 if you do attach anything. In any case the record will be sealed automatically until the judge makes a decision." }) : "",
@@ -35122,7 +35129,7 @@ function NewYorkUCS_NC1Guide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " additionally sign on the line that reads “Petitioner Signature in Presence of Notary” until you meet with one."
     ] })
-  ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate NewYorkUCS_NC1." }) }, "NewYork-UCS-NC1");
+  ] }, "NewYork-UCS-NC1");
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -35145,36 +35152,34 @@ function NewYorkUCS_NC1Guide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function NewYorkUCS_NC2Guide({ person }) {
-  const { age, residentLocality, parentsAreOkay, doNotPublish } = person;
+  const { age, residentLocalityName, parentsAreOkay, doNotPublish } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (NY, UCS-NC2)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The first form to be filled out is the “Name Change and/or Sex Designation Change Petition for Individual Minor” (UCS-NC2). It has some sections that a parent/legal guardian will need to review. They need to look through sections A, B, and C to see if the information we filled in is accurate for your circumstances. If it's not the missing info needs to be typed or written with black ink. You need to live in ",
-        residentLocality.name,
-        " county and have lived in New York State for at least 6 months before a parent/guardian can file this on your behalf."
-      ] }),
-      doNotPublish ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For #28 the court wants to know if making these court records available to the public will cause you or your petitioner harm. This can take the form of either discrimmination or a personal threat such as a known stalker. For discrimmination that can be either state or federal threats. Be sure to elaborate and potentially attach evidence. Your petitioner should also fill out #29 if they do attach anything. In any case the record will be sealed automatically until the judge makes a decision." }) : "",
-      parentsAreOkay ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If both parents are able to meet with a notary at the same time they will need to have both of their names present on page 1 and signed below item 30 on page 4. This does ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-        " ",
-        "mean both have to be present at court to file, only one is required there. If both parents cannot meet with a notary at the same time for any reason than have the parent who isn't listed as the petitioner on page 1 fill out the top part of page 5. Then the non-petitioning parent can meet with a notary to sign on page 5. The petitioning parent can then take",
-        " ",
-        age && age > 13 ? " you and " : " ",
-        " that form to another appointment for the remaining sections. Information about notaries is in the next section."
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The parent/guardian whos name is listed as the petitoner on page 1 needs to get any other parent(s)/guardian(s) to sign their consent on page 5 in front of a notary before",
-        age && age > 13 ? " either of you " : " they ",
-        " do. If a parent is deceased or non-custodial have a certified copy of the death certificate or court ordered custody submitted with this form. If you have a guardian they need to make a copy of their letter of guardianship to submit with this form. Information about notaries is in the next section."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If you have a non-consenting parent/guardian with custody over you the process gets more complicated, there will be a hearing, and we recommend using the following link to assist in the process",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine", children: "https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine" }),
-        ". It will generate the paperwork and instructions for the particulars of your case. Otherwise we recommend getting a lawyer to assist with your case or wait until you are 18."
-      ] })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, residentLocality missing." })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The first form to be filled out is the “Name Change and/or Sex Designation Change Petition for Individual Minor” (UCS-NC2). It has some sections that a parent/legal guardian will need to review. They need to look through sections A, B, and C to see if the information we filled in is accurate for your circumstances. If it's not the missing info needs to be typed or written with black ink. You need to live in ",
+      residentLocalityName,
+      " county and have lived in New York State for at least 6 months before a parent/guardian can file this on your behalf."
+    ] }),
+    doNotPublish ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "For #28 the court wants to know if making these court records available to the public will cause you or your petitioner harm. This can take the form of either discrimmination or a personal threat such as a known stalker. For discrimmination that can be either state or federal threats. Be sure to elaborate and potentially attach evidence. Your petitioner should also fill out #29 if they do attach anything. In any case the record will be sealed automatically until the judge makes a decision." }) : "",
+    parentsAreOkay ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If both parents are able to meet with a notary at the same time they will need to have both of their names present on page 1 and signed below item 30 on page 4. This does ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " ",
+      "mean both have to be present at court to file, only one is required there. If both parents cannot meet with a notary at the same time for any reason than have the parent who isn't listed as the petitioner on page 1 fill out the top part of page 5. Then the non-petitioning parent can meet with a notary to sign on page 5. The petitioning parent can then take",
+      " ",
+      age && age > 13 ? " you and" : " ",
+      " that form to another appointment for the remaining sections. Information about notaries is in the next section."
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The parent/guardian whos name is listed as the petitoner on page 1 needs to get any other parent(s)/guardian(s) to sign their consent on page 5 in front of a notary before",
+      age && age > 13 ? " either of you" : " they",
+      " do. If a parent is deceased or non-custodial have a certified copy of the death certificate or court ordered custody submitted with this form. If you have a guardian they need to make a copy of their letter of guardianship to submit with this form. Information about notaries is in the next section."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you have a non-consenting parent/guardian with custody over you the process gets more complicated, there will be a hearing, and we recommend using the following link to assist in the process",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine", children: "https://lawhelpinteractive.org/Interview/GenerateInterview/5031/engine" }),
+      ". It will generate the paperwork and instructions for the particulars of your case. Otherwise we recommend getting a lawyer to assist with your case or wait until you are 18."
+    ] })
   ] }, "NewYork-UCS-NC2");
 }
 /*!
@@ -35245,7 +35250,7 @@ const newyorkNameChange = {
 };
 const newyorkGenderMarker = {
   target: Target.GenderMarker,
-  depends: [Target.BirthRecord],
+  depends: [Target.BirthRecord, Target.PrimaryIdentification],
   documents: [
     {
       name: "Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older",
@@ -36523,22 +36528,22 @@ const voterOregonMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function OregonAdultPetitionGuide({ person }) {
-  const { residentLocality, isChangingLegalSex } = person;
+  const { residentLocalityName, isChangingLegalSex } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (OR)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The Petition for Change of Name/Sex allows for name and/or gender changes all in one form.",
-      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "In order to file this you need to be a resident of Oregon, which just means you need an ID or some mail with your legal name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this you need to be a resident of Oregon, which just means you need an ID or some mail with your legal name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "In order to file this you need to be a resident of",
         " ",
-        residentLocality.name,
+        residentLocalityName,
         " county, which just means you need an ID or some mail with your legal name and an address within",
         " ",
-        residentLocality.name,
+        residentLocalityName,
         " county on it."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You will need to check and fill out any of the lines below the “Public Interest” section as they apply to you. You will also need to list down any prior names/aliases that you have used in the past below the “Public Interest” section. If you are in the Address Confidentiality Program you can check the box on page 1 near the bottom to seal this court record. You then need to sign the form with your current legal name on page 3. The “General Judgement” on page 4 should already be set, file it with your petition." })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate." })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You will need to check and fill out any of the lines below the “Public Interest” section as they apply to you. You will also need to list down any prior names/aliases that you have used in the past below the “Public Interest” section. If you are in the Address Confidentiality Program you can check the box on page 1 near the bottom to seal this court record. You then need to sign the form with your current legal name on page 3. The “General Judgement” on page 4 should already be filled out, file it with your petition." })
   ] }, "Oregon-Adult-Petition");
 }
 /*!
@@ -36562,70 +36567,77 @@ function OregonAdultPetitionGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function OregonBirthCertUpdateGuide({ person }) {
-  const { age, parentsAreOkay, birthJurisdiction, residentJurisdiction } = person;
+  const { age, parentsAreOkay, birthJurisdictionName, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Birth Certificate Update (OR)" }),
-    birthJurisdiction && residentJurisdiction ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          birthJurisdiction.name === "Oregon" ? " A court case is not required to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that. " : "",
-          "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. If your parents/guardians mailing address is different from their listed address they will need to put it in number 3. They will also need to fill out items 6 and 15. Do ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-          " ",
-          "sign/date the form until a notary instructs you to do so."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "Notaries can be found in court buildings, banks,",
-          " ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.onpointcu.com/faq/do-you-offer-notary-services/", children: "OnPoint Credit Unions" }),
-          ", some",
-          " ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
-          ", or ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
-          ". There may be a fee for this required service."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "After the form is notarized your parent/guardian will need a large envelope,",
-          birthJurisdiction.name === "Oregon" ? " " : " a copy of your court order, ",
-          "a photocopy of their ID (both sides), and payment. If your parent is filling this out and their name does not match the one on your birth certificate they will need to attach documentation of the change (e.g. marriage certificate, divorce certificate, court order, etc…) ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopies only" }),
-          ".",
-          parentsAreOkay ? "" : " Legal guardians need to provide proof of guardianship. ",
-          "If they do not have a driver's license or state ID the “Oregon Vital Records Acceptable Proofs of Identity” we included has a list of acceptable alternatives to photocopy. For payment they take either checks or money orders made out to “Oregon Vital Records”. Mail the application to the following address:"
-        ] })
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. If your mailing address is different from your listed address put it in number 3. You will then need to fill out item 15, specifically the number of copies that you want and what form you want them in. Do ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-          " ",
-          "sign/date the form until a notary instructs you to do so."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "Notaries can be found in court buildings, banks,",
-          " ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.onpointcu.com/faq/do-you-offer-notary-services/", children: "OnPoint Credit Unions" }),
-          ", some",
-          " ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
-          ", or ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
-          ". There may be a fee for this required service."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After your form is notarized you will need a large envelope, a copy of your court order, a photocopy of your ID (both sides), and payment. If you do not have a driver's license or state ID the “Oregon Vital Records Acceptable Proofs of Identity” we included has a list of acceptable alternatives to photocopy. For payment they take either checks or money orders made out to “Oregon Vital Records”. Mail the application to the following address:" })
+    age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        birthJurisdictionName === "Oregon" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          "A court case is not required to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that.",
+          " "
+        ] }) : "",
+        "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. If your parents/guardians mailing address is different from their listed address they will need to put it in number 3. They will also need to fill out items 6 and 15. Do ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " ",
+        "sign/date the form until a notary instructs you to do so."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Oregon Vital Records" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "PO Box 14050" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Portland, OR 97293" })
+        "Notaries can be found in court buildings, banks,",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.onpointcu.com/faq/do-you-offer-notary-services/", children: "OnPoint Credit Unions" }),
+        ", some",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+        ", or ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+        ". There may be a fee for this required service."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Alternatively the envelope can be placed in a dropbox at 800 NE Oregon St, Portland. It may take up to six months to process once the letter is sent.",
-        age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: birthJurisdiction.name === "Oregon" && residentJurisdiction.name === "Oregon" ? " According to the Social Security Administration's<a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'> rules </a> when the new birth certificate and correspondence letter arrive a  parent/guardian can update your information at Social Security using  those documents. Any mention of the court order in those guides means the correspondence letter for you." : "" }) : ""
+        "After the form is notarized your parent/guardian will need a large envelope,",
+        birthJurisdictionName === "Oregon" ? " " : " a copy of your court order, ",
+        "a photocopy of their ID (both sides), and payment. If your parent is filling this out and their name does not match the one on your birth certificate they will need to attach documentation of the change (e.g. marriage certificate, divorce certificate, court order, etc…) ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopies only" }),
+        ".",
+        parentsAreOkay ? " " : " Legal guardians need to provide proof of guardianship. ",
+        "If they do not have a driver's license or state ID the “Oregon Vital Records Acceptable Proofs of Identity” we included has a list of acceptable alternatives to photocopy. For payment they take either checks or money orders made out to “Oregon Vital Records”. Mail the application to the following address:"
       ] })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, birthJurisdiction and/or residentJurisdiction missing." })
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. If your mailing address is different from your listed address put it in number 3. You will then need to fill out item 15, specifically the number of copies that you want and what form you want them in. Do ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " ",
+        "sign/date the form until a notary instructs you to do so."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Notaries can be found in court buildings, banks,",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.onpointcu.com/faq/do-you-offer-notary-services/", children: "OnPoint Credit Unions" }),
+        ", some",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+        ", or ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+        ". There may be a fee for this required service."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After your form is notarized you will need a large envelope, a copy of your court order, a photocopy of your ID (both sides), and payment. If you do not have a driver's license or state ID the “Oregon Vital Records Acceptable Proofs of Identity” we included has a list of acceptable alternatives to photocopy. For payment they take either checks or money orders made out to “Oregon Vital Records”. Mail the application to the following address:" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Oregon Vital Records" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "PO Box 14050" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Portland, OR 97293" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Alternatively the envelope can be placed in a dropbox at 800 NE Oregon St, Portland. It may take up to six months to process once the letter is sent.",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: birthJurisdictionName === "Oregon" && residentJurisdictionName === "Oregon" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "According to the Social Security Administration's ",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://secure.ssa.gov/poms.nsf/lnx/0110212090", children: " rules " }),
+        " ",
+        "when the new birth certificate and correspondence letter arrive a parent/guardian can update your information at Social Security using those documents. Any mention of the court order in those guides means the correspondence letter for you."
+      ] }) : "" }) : ""
+    ] })
   ] }, "Oregon-BC-Update");
 }
 /*!
@@ -36701,7 +36713,7 @@ function OregonDMVGuide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Primary ID (OR)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This section covers the process of updating your primary identification (driver’s license/state ID) and any vehicle registrations you may have. If this is not relevant to you, then skip this section. You will need to schedule an in-person appointment at any DMV in the state, which can be done by hitting the “Let's get started” button at this",
+      "This section covers the process of updating your primary identification (driver's license/state ID) and any vehicle registrations you may have. If this is not relevant to you, then skip this section. You will need to schedule an in-person appointment at any DMV in the state, which can be done by hitting the “Let's get started” button at this",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.oregon.gov/odot/DMV/pages/appointments.aspx", children: "link" }),
       ". The website will walk you through making an appointment and finding the closest DMV to you."
@@ -36713,7 +36725,7 @@ function OregonDMVGuide({ person }) {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.oregon.gov/odot/dmv/pages/driverid/idproof.aspx", children: "Here" }),
       " ",
-      "are other acceptable documents for proof of ID, they don't need to have your new information. You will also need a certified copy of the court order and the receipt from social security. Finally, if your address is different now than on your old ID or if you don’t have an old ID you will need proof of address. This is any two bits of mail, other forms of ID, bills, or other documents with your old full legal name on it and your current address. The proof of ID link above also contains a complete list of acceptable documents for proof of address. For payment the DMV accepts cash, checks, money order, credit/debit cards, and mobile payments. When you are there, state that you want your name and/or gender marker updated on your ID and present the above documents, you will be charged a fee for this service."
+      "are other acceptable documents for proof of ID, they don't need to have your new information. You will also need a certified copy of the court order and the receipt from social security. Finally, if your address is different now than on your old ID or if you don't have an old ID you will need proof of address. This is any two bits of mail, other forms of ID, bills, or other documents with your old full legal name on it and your current address. The proof of ID link above also contains a complete list of acceptable documents for proof of address. For payment the DMV accepts cash, checks, money order, credit/debit cards, and mobile payments. When you are there, state that you want your name and/or gender marker updated on your ID and present the above documents, you will be charged a fee for this service."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Optionally, you may also update your vehicle registration(s). You will be given another form, which you should sign and initial in your new legal name. You will be charged a fee for each vehicle." })
   ] }, "Oregon-DMV");
@@ -36815,7 +36827,7 @@ function OregonEverythingElseGuide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS", children: "link" }),
       " ",
-      "or by completing the Oregon Voter Registration Card (SEL 500) and hand delivering it to your county’s local election office. If there are only a few days until an election that you want to vote in we recommend the second option. We have attached a partially filled form to this guide if you need it, fill in any blanks on page 1. Page 2 contains the addresses for all local election offices."
+      "or by completing the Oregon Voter Registration Card (SEL 500) and hand delivering it to your county's local election office. If there are only a few days until an election that you want to vote in we recommend the second option. We have attached a partially filled form to this guide if you need it, fill in any blanks on page 1. Page 2 contains the addresses for all local election offices."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Some other places to consider:" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
@@ -36855,7 +36867,7 @@ function OregonFeeWaiverGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This form is optional. It is a request to waive the filing fee charged upon submitting the “Change of Name or Sex” petition to the court. In Oregon the filing fee for that petition is around $125. Courts will typically not grant the waiver unless your household is on public assistance, is enrolled in the Oregon Health Plan (OHP), or the household annual income is below 125% of the federal poverty line. However, you may file the request at your discretion; the worst they can do is deny it. On the second page",
       age && age < 18 ? " your petitioner should " : " ",
-      "fill in any remaining blanks in sections 1 through 7 and then sign/date at the bottom of page 3. The “Order Re: Referal or Waiver of Fees” is already set and should be filed with the waiver."
+      "fill in any remaining blanks in sections 1 through 7 and then sign/date at the bottom of page 3. The “Order Re: Referal or Waiver of Fees” is already filled out and should be filed with the waiver."
     ] })
   ] }, "Oregon-Fee-Waiver");
 }
@@ -36894,18 +36906,17 @@ function OregonFilingInitialFormsGuide({
           " ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, children: residentLocality.court.website }),
           ". That link may also show what filing methods the court accepts, some will accept filing by mail or even online, others are in-person only. It may also show accepted payment types. If not it will have a phone number to call for questions. If the filing method is in-person or by mail",
-          " ",
           age && age < 18 ? " your petitioner " : " you ",
           " will need the petition forms, photo ID, payment, and (optionally) the fee waiver forms."
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about how to fill out the forms." }),
           " ",
-          "We recommend that you direct any of those questions to the court’s legal assistance center, a local LGBT organization, or an attorney."
+          "We recommend that you direct any of those questions to the court's legal assistance center, a local LGBT organization, or an attorney."
         ] }),
         residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
         age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "Your petitioner will need to send out written notice to any other parents or legal guardians regardless of custody, the only exceptions being if the minor has not lived with them and they haven’t given support (or tried to). You do ",
+          "Your petitioner will need to send out written notice to any other parents or legal guardians regardless of custody, the only exceptions being if the minor has not lived with them and they haven't given support (or tried to). You do ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
           " ",
           "need their consent, if they have an issue they can contact the court using the notice. A copy of that notice has been provided; your petitioner simply needs to add the case number. Once notice has been sent your petitioner can fill out the table in the “Declaration of Notice” form with everyone they contacted. At that point they can sign it and send it to the court, then the court will likely make a judgment without a hearing and mail the results. If so skip the “Court Hearing” section. Assuming there isn't a hearing you will need to wait for the “General Judgement”, which we will call the court order, to arrive. Once it does your petitioner will also need to order 2 or 3 certified copies of the court order for use later in this process as some places will not return them. Keep the original in a safe place. If there is a hearing your petitioner will recieve a court date instead and we recommend getting help from a lawyer or our “Resources” section."
@@ -36935,37 +36946,35 @@ function OregonFilingInitialFormsGuide({
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function OregonMinorPetitionGuide({ person }) {
-  const { residentLocality, isChangingLegalSex, isChangingLegalName } = person;
+  const { residentLocalityName, isChangingLegalSex, isChangingLegalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (OR)" }),
-    residentLocality ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The Petition for Change of Name/Sex allows for name and/or gender changes all in one form. Any parent or legal guardian can fill this form out and file it on your behalf. Whoever does becomes your petitioner and will be going through this process with you.",
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The Petition for Change of Name/Sex allows for name and/or gender changes all in one form. Any parent or legal guardian can fill this form out and file it on your behalf. Whoever does becomes your petitioner and will be going through this process with you.",
+      " ",
+      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this your petitioner needs to be a resident of Oregon, which just means they need an ID or some mail with their name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "In order to file this your petitioner needs to be a resident of",
         " ",
-        isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this your petitioner needs to be a resident of Oregon, which just means they need an ID or some mail with their name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          "In order to file this your petitioner needs to be a resident of",
-          " ",
-          residentLocality.name,
-          " county, which just means you need an ID or some mail with their name and an address within",
-          " ",
-          residentLocality.name,
-          " county on it."
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        isChangingLegalName ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          "Your petitioner will ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-          " need to fill out the legal notice section on page 2 yet, thats for after filing. Your petitioner can fill out why this is in your best interest on page 3 then sign and the form is ready to file. We will cover what to do about sending notice on the filing step."
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          "Your petitioner will ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-          " need to fill out the legal notice section on page 2 since you are not requesting a name change. Your petitioner can fill out why this is in your best interest on page 3 then sign and the form is ready to file."
-        ] }),
+        residentLocalityName,
+        " county, which just means you need an ID or some mail with their name and an address within",
         " ",
-        "The “General Judgement” is on pages 6 and 7 should already be set, file it with the petition."
+        residentLocalityName,
+        " county on it."
       ] })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate." })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      isChangingLegalName ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Your petitioner will ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " need to fill out the legal notice section on page 2 yet, thats for after filing. Your petitioner should fill out why this is in your best interest on page 3 then sign and the form is ready to file. We will cover what to do about sending notice on the filing step."
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Your petitioner will ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " need to fill out the legal notice section on page 2 since you are not requesting a name change. Your petitioner can fill out why this is in your best interest on page 3 then sign and the form is ready to file."
+      ] }),
+      " ",
+      "The “General Judgement” is on pages 6 and 7 should already be filled out, your petitioner can file it with the petition."
+    ] })
   ] }, "Oregon-Minor-Petition");
 }
 /*!
@@ -38113,13 +38122,12 @@ function AlaskaAdultPetitionGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function AlaskaBirthCertificateGuide({ person }) {
-  const { age, isChangingLegalSex, residentJurisdiction } = person;
+  const { age, isChangingLegalSex, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Birth Certificate (AK)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "For this process ",
       age && age < 18 ? " a parent/guardian " : " you ",
-      " ",
       "will need an “Alaska Birth Certificate Request Form”, they will not change the birth certificate but will include the updated information in an addendum. On page 2 ",
       age && age < 18 ? " they " : " you ",
       " will need to fill out any blanks in the “Applicant Information” section as well as sign at the bottom right of that section. Below that in the “What would you like to order?” section we put a “1” in the spot indicating that you want to change the certificate, you will also need to put in however many copies of the changed certificate you want directly above that, you need at least 1. The minimum fee should be $60 (Information change fee plus one copy) without including any additional copies that you may choose to order. Select an option in the “How would you like it shipped?” section and total up the fee at the bottom. Payment methods and information are located at the bottom of the form. Do",
@@ -38128,7 +38136,8 @@ function AlaskaBirthCertificateGuide({ person }) {
       " use cash for the fee unless you are hand delivering it."
     ] }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      residentJurisdiction?.name === "Alaska" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "To get an amended sex designation you will need a letter from the person giving you trans related care." }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "To get an amended sex designation you will either need a letter from the person giving you trans related care or a court ordered gender change." }),
+      residentJurisdictionName === "Alaska" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "To get an amended sex designation you will need a letter from the person giving you trans related care." }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "To get an amended sex designation you will either need a letter from the person giving you trans related care or a court ordered gender change." }),
+      " ",
       "We have included a template letter with a list of qualifying professions to take to this person for their reference. Email “BVSSpecialServices@alaska.gov” with any questions."
     ] }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -38139,7 +38148,7 @@ function AlaskaBirthCertificateGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "If ",
       age && age < 18 ? " a parent/guardian is " : " you are ",
-      " mailing this, a photocopy of both sides of an acceptable ID is needed instead. Place the photocopies, the “Alaska Birth Certificate Request Form”, and a certified copy of the court order in an envelope. For payment by check address it to the “Alaska Vital Records Office” for the fee amount. The mailing address is on the first page of the form in the bottom left corner. It may take several weeks to get an updated copy back."
+      " mailing this, a photocopy of both sides of an acceptable ID is needed instead. Place the photocopies, the “Alaska Birth Certificate Request Form”, and a certified copy of the court order in an envelope. For payment by check, address it to the “Alaska Vital Records Office” for the fee amount. The mailing address is on the first page of the form in the bottom left corner. It may take several weeks to get an updated copy back."
     ] })
   ] }, "Alaska-BirthCertificate");
 }
@@ -38238,70 +38247,59 @@ function AlaskaCIV709Guide() {
     ] })
   ] }, "Alaska-CIV-709");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaCourtHearingGuide({ person }) {
-  const { age, residentLocality } = person;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Hearing (AK)" }),
-    residentLocality?.name === "Anchorage" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "For Anchorage, hearings are held in one of two locations. On weekdays they are at ",
-      residentLocality.court.address,
-      " but on weekends they are at the Boney courthouse, 303 K St, Anchorage, AK 99501."
-    ] }) : "",
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "On the day of your hearing, you",
-      age && age < 18 && "and your petitioner",
-      " should dress appropriately for a courtroom, even if the hearing is virtual. The hearing may begin late, but it should only take a few minutes once it starts."
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "You",
-      age && age < 18 && "and/or your petitioner",
-      " will be sworn in and questioned. The questions vary between courts, but you can expect some of the following:"
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your current legal name?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your desired legal name?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your date of birth?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you lived in this county for over a year?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you paid the publication fee to an approved newspaper?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you’d like the court to know?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-        "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
-        " ",
-        "(Compare the history of the phrase “speak now or forever hold your peace.”)"
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "At this point the name change should be granted and the hearing should end promptly. In rare cases",
-      age && age < 18 ? " your petitioner " : " you ",
-      " may also be told to send notice to individuals that the name change was granted. If so, inform whoever the court says to and use the copy of the “Affidavit of Additional Service” (CIV-702) we provided and return a completed and notarized copy to the court within 20 days.",
-      age && age < 18 ? "Your petitioner " : "You ",
-      " will receive two copies of the “Certificate of Name Change” (CIV-705) which we will call the court order. You will likely want to order an additional 1 or 2 copies if you plan on updating the rest of your information by mail. The date listed on the certificate is the day when you can begin using our new legal name, it is also the date by which you have to notify the DMV of the change which is covered in the “Primary ID” section below."
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
-  ] }, "AK-CourtHearing");
+  const { age, residentLocalityName, residentJurisdictionName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Hearing (AK)" }),
+      residentLocality && residentLocality.name === "Anchorage" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "For Anchorage, hearings are held in one of two locations. On weekdays they are at ",
+        residentLocality.court.address,
+        " but on weekends they are at the Boney courthouse, 303 K St, Anchorage, AK 99501."
+      ] }) : "",
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "On the day of your hearing, you",
+        age && age < 18 && " and your petitioner",
+        " should dress appropriately for a courtroom, even if the hearing is virtual. The hearing may begin late, but it should only take a few minutes once it starts."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "You ",
+        age && age < 18 && "and/or your petitioner",
+        " will be sworn in and questioned. The questions vary between courts, but you can expect some of the following:"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your current legal name?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your desired legal name?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your date of birth?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you lived in this county for over a year?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you paid the publication fee to an approved newspaper?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you would like the court to know?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
+          " ",
+          "(Compare the history of the phrase “speak now or forever hold your peace.”)"
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "At this point the name change should be granted and the hearing should end promptly. In rare cases",
+        age && age < 18 ? " your petitioner" : " you",
+        " may also be told to send notice to individuals that the name change was granted. If so, inform whoever the court says to and use the copy of the “Affidavit of Additional Service” (CIV-702) we provided and return a completed and notarized copy to the court within 20 days.",
+        age && age < 18 ? " Your petitioner" : " You",
+        " will receive two copies of the “Certificate of Name Change” (CIV-705) which we will call the court order. You will likely want to order an additional 1 or 2 copies if you plan on updating the rest of your information by mail. The date listed on the certificate is the day when you can begin using your new legal name, it is also the date by which you have to notify the DMV of the change which is covered in the “Primary ID” section below."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
+    ] }, "AK-CourtHearing");
+  }
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -38324,7 +38322,7 @@ function AlaskaCourtHearingGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function AlaskaDMVGuide({ person }) {
-  const { age, isChangingLegalSex, gender, birthJurisdiction } = person;
+  const { age, isChangingLegalSex, gender, birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Primary ID (AK)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -38337,8 +38335,8 @@ function AlaskaDMVGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Alternatively you ",
       age && age < 18 && "and a parent/guardian",
-      " can go to a DMV location and request that they update the name on your license to your new name. That will count as notifying them. To do this you will need the “Driver License, Permit Or Identification Card Transaction Application” (form D1). For this form fill out any blanks we left in the top half of the form, if you are applying for a drivers license/ID for the first time check the “New” box instead of providing a drivers license or ID number.",
-      gender && gender === "X" ? " Alaska does not have an “X” option for ID's, you will need to put either “Male” or “Female” in the top section. " : "",
+      " can go to a DMV location and request that they update the name on your license to your new name. That will count as notifying them. To do this you will need the “Driver License, Permit Or Identification Card Transaction Application” (form D1). For this form fill out any blanks we left in the top half of the form. If you are applying for a drivers license/ID for the first time check the “New” box instead of providing a drivers license or ID number.",
+      gender && gender === "X" ? " Alaska does not have an “X” option for ID's, you will need to put either “Male” or “Female” in the top section. " : " ",
       "Then select what type of ID or drivers license that you would like and answer questions 1 thru 10 on the bottom half of the form. On question 2 though if you have had more names than what we have listed fill in the others. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign or date this form with your old legal signature until you are instructed to by a DMV representative.",
@@ -38348,15 +38346,15 @@ function AlaskaDMVGuide({ person }) {
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "To change your gender marker on your ID as well you will need the “Certification For Change Of Sex Designator On Driver License Or Identification Card” (Form 427).",
       " ",
-      gender && gender === "X" ? " Alaska does not have an “X” option for ID's, you will need to check either “Male” or “Female” in section A. " : "",
+      gender && gender === "X" ? " Alaska does not have an “X” option for ID's, you will need to check either “Male” or “Female” in section A. " : " ",
       "Fill out your driver's license or ID number, if applicable, in section A and then sign it with your old name. Sign and date with your old name as well in section B and then take it to a medical professional or therapist who is giving you trans-related care. A full list of qualifying individuals is listed in section C of the form. Have them fill out section C and then you are ready to head to a DMV location.",
-      birthJurisdiction?.name === "Alaska" ? "If you are also updating your birth certificate you can have them do the letter for that section at the same time." : ""
+      birthJurisdictionName === "Alaska" ? " If you are also updating your birth certificate you can have them do the letter for that section at the same time." : ""
     ] }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "When you ",
       age && age < 18 && "and a parent/guardian",
       " go in for the appointment be sure to bring",
-      isChangingLegalSex ? " both forms, " : " the D1 form ",
+      isChangingLegalSex ? " both forms," : " the D1 form,",
       " a certified copy of your court order and payment. Optionally, you may also update your vehicle registration(s). You will be given another form, which you should sign and initial in your new legal name. You will be charged a fee for each vehicle."
     ] })
   ] }, "Alaska-DMV");
@@ -38520,7 +38518,7 @@ function AlaskaFilingInitialFormsGuide({
       /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (AK)" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Alaska has several different methods of filing depending on the court. Additionally some courts do not do name changes themselves but will still accept the paperwork, notarize it, and forward it to another court. Finally, if the paperwork was filed at the wrong court",
-        age && age < 18 ? " your petitioner " : " you ",
+        age && age < 18 ? " your petitioner" : " you",
         " may ask them to forward the paperwork and payment to the correct court.",
         age && age < 18 ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. " : " ",
         "No matter what method is used a valid photo ID is needed to notarize the forms. Below is a list of filing methods for the ",
@@ -38531,13 +38529,13 @@ function AlaskaFilingInitialFormsGuide({
       residentLocality.inPersonFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " In-person - " }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        age && age < 18 ? "Your petitioner " : "You ",
+        age && age < 18 ? "Your petitioner" : "You",
         " can go directly to the",
         " ",
         residentLocality.name,
         " court at ",
         residentLocality.court.address,
-        " to file. The forms can be signed, dated, and notarized there. A webpage with more information is available",
+        " to file. The forms can be signed, dated, and notarized there. A webpage with more information is available at",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "here", children: residentLocality.court.website }),
         ". It has the hours of operation, accepted payment types, and a phone number to confirm that it is the correct place to file."
@@ -38545,7 +38543,7 @@ function AlaskaFilingInitialFormsGuide({
       residentLocality.trueFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " True Filing - " }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        age && age < 18 ? "Your petitioner " : "You ",
+        age && age < 18 ? "Your petitioner" : "You",
         " can file online with the state's TrueFiling system at this",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://akfile.truefiling.com/register", children: "website" }),
@@ -38553,7 +38551,7 @@ function AlaskaFilingInitialFormsGuide({
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://courts.alaska.gov/efile/videos/How_to_File_a_New_Civil_Case.mp4", children: "here" }),
         ". As a backup measure we have transcribed the instructions from the video below for ",
-        age && age < 18 ? " your petitioner " : " you ",
+        age && age < 18 ? "your petitioner" : "you",
         " if needed."
       ] }) : "",
       residentLocality.trueFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -38568,7 +38566,7 @@ function AlaskaFilingInitialFormsGuide({
       residentLocality.emailFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " Email - " }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        age && age < 18 ? "Your petitioner " : "You ",
+        age && age < 18 ? "Your petitioner" : "You",
         " can file with the court using this email address ",
         residentLocality.emailCourt,
         ". In order to use this service the forms will need to be notarized by either a notary service or a court clerk from another court before they are sent. Notaries can be found in banks, some",
@@ -38576,12 +38574,12 @@ function AlaskaFilingInitialFormsGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
         ", or ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
-        ". There will be a fee for this service and photo ID is required. Write an email to request a name change and attach all of the completed and notarized forms from the previous section. All emailed forms must also be emailed in PDF format, we recommend scanning the signed and notarized documents as separate PDF attachments and naming them exactly like they are in the previous sections of this guide. The court clerk will then send an email back with a special payment link if a completed “Request for Exemption from Payment of Fees” (TF-920) form with your documents was not sent."
+        ". There will be a fee for this service and photo ID is required. Write an email to request a name change and attach all of the completed and notarized forms from the previous section. All emailed forms must also be emailed in PDF format, we recommend scanning the signed and notarized documents as separate PDF attachments and naming them exactly like they are in the previous sections of this guide. The court clerk will then send an email back with a special payment link if a completed “Request for Exemption from Payment of Fees” (TF-920) form was not sent."
       ] }) : "",
       residentLocality.faxFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " Fax - " }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        age && age < 18 ? "Your petitioner " : "You ",
+        age && age < 18 ? "Your petitioner" : "You",
         " can file with the court by faxing the completed and notarized forms from the previous section to this number ",
         residentLocality.faxNumber,
         ". In order to use this service the forms will need to be notarized by either a notary service or a court clerk from another court before the fax is sent. Notaries can be found in banks, some",
@@ -38589,7 +38587,7 @@ function AlaskaFilingInitialFormsGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
         ", or ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
-        ". There will be a fee for this service and photo ID is required. If the fee waiver was denied or wasn't used the payment will be due on the day of the hearing."
+        ". There will be a fee for this service and photo ID is required. If the fee waiver was not used or was denied the payment will be due on the day of the hearing."
       ] }) : "",
       residentLocality.doesNameChange ? "" : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "The ",
@@ -38629,16 +38627,19 @@ function AlaskaFilingInitialFormsGuide({
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
         ] }) : "",
+        " ",
         "Instructions for each method are listed in the above section."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " After Filing - " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         "Once everything has been filed the clerk will send an “Order For Hearing, Posting, and Additional Service” (CIV-701) which will have the date of the hearing, whether the court will publicize your case information on the Alaska Court Systems legal notice website, whether others need to be informed about the hearing, and whether additional action is needed for publication. Additional publication and informing steps are rare and are usually due to",
         age && age < 18 ? " name changes involving absentee parents/guardians, criminal records, or probation. " : " petitioners with criminal records or petitioners who are on probation. ",
         "If ",
-        age && age < 18 ? " your petitioner has " : " you have ",
+        age && age < 18 ? "your petitioner has" : "you have",
         " been instructed to do this, ",
-        age && age < 18 ? " they should " : " ",
-        " follow the court's directions and fill out the Affidavit of Additional Service (CIV-702) and return a completed and notarized copy to the court as soon as possible. If the “Request for Exemption from Payment of Fees” (TF-920) was denied a filing fee will need to be paid in order to continue."
+        age && age < 18 ? "they should" : "",
+        " follow the court's directions and fill out the “Affidavit of Additional Service” (CIV-702) and return a completed and notarized copy to the court as soon as possible. If the “Request for Exemption from Payment of Fees” (TF-920) was denied a filing fee will need to be paid in order to continue."
       ] })
     ] }, "AK-InitialForms");
   }
@@ -38668,10 +38669,14 @@ function AlaskaMinorPetitionGuide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition to Change Child's Name (AK, CIV-694)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The “Petition to Change Child’s Name” (CIV-694) is the primary name change document. Any parent or legal guardian can fill this form out and file it on your behalf. Whoever does becomes your petitioner and will be going through this process with you. Your parent/guardian will need to decide whether to check the box at the top to receive court documents to an email account instead of regular mail.",
-      parentsAreOkay ? "" : " Afterwards they will need to check a box for item 4. ",
+      "The “Petition to Change Child's Name” (CIV-694) is the primary name change document. Any parent or legal guardian can fill this form out and file it on your behalf. Whoever does becomes your petitioner and will be going through this process with you. Your parent/guardian will need to decide whether to check the box at the top to receive court documents to an email account instead of regular mail.",
+      parentsAreOkay ? " " : " Afterwards they will need to check a box for item 4. ",
       "Item 5 is talking about the “Parental Consent From Non-Petitioning Parent” (CIV-695) form which we have included. Any parent/guardian needs to sign one of those forms unless they are deceased or are non-custodial",
-      parentsAreOkay ? ". " : " in which case attach certified copies of a death certificate or custody order. Legal Guardians also need to provide a certified copy of their letter of guardianship. ",
+      parentsAreOkay ? ". " : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        " ",
+        "in which case attach certified copies of a death certificate or custody order. Legal Guardians also need to provide a certified copy of their letter of guardianship.",
+        " "
+      ] }),
       "If a parent/guardian with custody of you refuses to sign that form in front of a notary or court clerk this process will be contested and we recommend getting a lawyer. Your petitioner should ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " ",
@@ -38840,6 +38845,7 @@ const alaskaNameChange = {
 };
 const alaskaGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Certification for Change of Sex Designator on Driver License or Identification Card",
@@ -39526,37 +39532,37 @@ const adultNameChangeMap = [
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "16 - Checkboxes",
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "17 - Checkboxes",
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "18 - Checkboxes",
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "19 - Checkboxes",
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "20 - Checkboxes",
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "f - Checkboxes",
     choice: "No"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "22 - Checkboxes",
     choice: "No"
   }),
@@ -40017,9 +40023,9 @@ const dmvGenderDesignationMap = [
     choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
-          return "Yes";
-        case GenderMarker.F:
           return "No";
+        case GenderMarker.F:
+          return "Yes";
         case GenderMarker.X:
           return "43";
       }
@@ -40158,17 +40164,19 @@ const birthCertCorrectionMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function IllinoisAdultOrderGuide({ person }) {
-  const { birthJurisdiction } = person;
+  const { birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order for Name Change (IL, ATJ 305.7)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Order for Name Change” (ATJ 305.7) is what the judge fills out to approve a name change.",
-      birthJurisdiction?.name === "Illinois" ? "This form is already complete." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      " ",
+      birthJurisdictionName === "Illinois" ? "This form is already complete." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Check the “Birth Certificate Update” section of your birth state, if applicable, near the end of this guide. Some states require more specific information to change the name or gender on your birth certificate. That information can be added to the “Additional Orders” section of this form. Use this",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "link" }),
+        " ",
         "or the contact info provided in that section to find out what specifically needs to be present in this order to change your birth certificate in ",
-        birthJurisdiction?.name ?? "",
+        birthJurisdictionName,
         "."
       ] })
     ] })
@@ -40195,7 +40203,7 @@ function IllinoisAdultOrderGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function IllinoisAdultPetitionGuide({ person }) {
-  const { residentLocality, hasCriminalRecord } = person;
+  const { residentLocalityName, hasCriminalRecord } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request for Name Change (IL, ATJ 303.10)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -40211,14 +40219,14 @@ function IllinoisAdultPetitionGuide({ person }) {
         "Check any boxes in section 2 that apply to you. You cannot file this petition if you have been convicted of a felony and have yet to finish your sentence, including any parole. If you check “Yes” on box 2e you ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "need" }),
         " to check the “Gender-related identity as defined by the Illinois Human Rights Act” in order to ensure that the petition is still accepted and you will not face felony charges. If there is a hearing expect questions related to your gender identity. Fill out 2h as needed."
-      ] }) : "",
+      ] }) : " ",
       "Skip the rest of the sections and proceed directly to the “Sign” section on the last page. We have pre-filled the address as you wrote it but if that is unsafe you can use this",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/74f342af-7d93-4f93-b5b7-fbb92635d45a/NC-A%20Request%20for%20Name%20Change.pdf", children: "blank" }),
       " ",
       "form and change that to a PO box or other alternate address. Be sure to check the relevant box if you do. This form is otherwise complete. In order to file this form you must have lived in",
       " ",
-      residentLocality?.name ?? "",
+      residentLocalityName,
       " county for at least 3 months."
     ] })
   ] }, "Illinois-AdultPetition");
@@ -40249,10 +40257,10 @@ function IllinoisBirthCertUpdateGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Birth Certificate (IL)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This process is done by mail using the “State of Illinois Affidavit and Certificate of Correction Request” (IOCI 19-184) form.",
-      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Have your petitioner fill out their relationship to you on the second blank of page 2." }) : "",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Have your petitioner fill out their relationship to you on the second blank of page 2." }) : " ",
       "On the “Place of Birth or Death” line",
-      age && age < 18 ? " have your petitioner " : "",
-      "write in the exact location you were born in this format: hospital, city, and county. If you live in an apartment or have some other floor or suite number add it in the third section where we added your street address.",
+      age && age < 18 ? " have your petitioner " : " ",
+      "write in the exact location you were born in this format: hospital name, city, and county. If you live in an apartment or have some other floor or suite number add it in the third section where we put your street address if it wasn't otherwise included.",
       age && age < 18 ? " Your petitioner should " : " Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign ",
@@ -40269,10 +40277,15 @@ function IllinoisBirthCertUpdateGuide({ person }) {
     ] }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Once the form is complete and notarized",
-      age && age < 18 ? " have your petitioner make a photocopy of their ID " : " make a photocopy of your ID ",
-      "make sure both sides are photocopied and do ",
+      age && age < 18 ? " have your petitioner make a photocopy of their ID. " : " make a photocopy of your ID. ",
+      "Ensure both sides of the ID are photocopied and do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " redact them. The fee should be $15 and include one updated copy, additional copies should be $2 but check the website to be sure. Have a check made out to the “Illinois Department of Public Health” for the fee amount plus any extra copies, if any. Then place the form,",
+      " ",
+      "redact them. The fee should be $15 and include one updated copy, additional copies should be $2 but check the",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dph.illinois.gov/topics-services/birth-death-other-records/birth-records/gender-reassignment.html", children: "website" }),
+      " ",
+      "to be sure. Have a check made out to the “Illinois Department of Public Health” for the fee amount plus any extra copies, if any. Then place the form,",
       isChangingLegalName ? " certified copy of the court order, " : "",
       "ID photocopies, and check into an envelope. Mail it to:"
     ] }),
@@ -40320,7 +40333,7 @@ function IllinoisChildInfoGuide({ person }) {
       "form in case your petitioner opts for an alternate address for 1d.",
       parentsAreOkay ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Your parent/guardian needs to check the applicable box in section 2." }),
       hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "If you, the minor, have a criminal record your petitioner will need to check “yes” for any boxes that apply or “No” if they don’t in section 3. Your petitioner cannot file this petition if you have been convicted of a felony and have yet to finish your sentence, including any parole. If box 23 is checked “Yes” your petitioner",
+        "If you, the minor, have a criminal record your petitioner will need to check “yes” for any boxes that apply or “No” if they don't in section 3. Your petitioner cannot file this petition if you have been convicted of a felony and have yet to finish your sentence, including any parole. If box 23 is checked “Yes” your petitioner",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "needs" }),
         " to check the “Gender-related identity as defined by the Illinois Human Rights Act” in order to ensure that the petition is still accepted and they will not face felony charges. If there is a hearing expect questions related to your gender identity. They should fill out 2g as needed."
@@ -40383,7 +40396,7 @@ function IllinoisCourtHearingGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you lived in this county for over six months?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you’d like the court to know?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you'd like the court to know?" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
@@ -40559,10 +40572,10 @@ function IllinoisFeeWaiverGuide({ person }) {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "always" }),
       " partially or fully grant this waiver if",
-      age && age < 18 ? " your petitioner" : " you",
-      " is using one of the public benefits listed in section 3. Otherwise the petition is not guaranteed to be granted but the worst they can do is deny it.",
+      age && age < 18 ? " your petitioner is" : " you are",
+      " using one of the public benefits listed in section 3. Otherwise the petition is not guaranteed to be granted but the worst they can do is deny it.",
       age && age < 18 ? " Your petitioner" : " You",
-      " should fill in any blanks in section 1 through 3. If",
+      " should fill in any blanks in sections 1 through 3. If",
       age && age < 18 ? " your petitioner checks" : " you check",
       " at least one box in section 3 then skip sections 4 and 5. Otherwise fill those out as well. For section 6 a judge will only request a hearing if they have questions or need more information about the form, check the box for the preferred hearing method. In the event of a hearing",
       " ",
@@ -40599,7 +40612,7 @@ function IllinoisFilingInitialFormsGuide({
           " ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://efileil.tylertech.cloud/OfsEfsp/ui/landing", children: "link" }),
           " ",
-          "and click “Register for an Individual Account” from here the state of Illinois provides extensive",
+          "and click “Register for an Individual Account”. From here the state of Illinois provides extensive",
           " ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.illinoiscourts.gov/self-help/how-to-e-file/", children: "guides" }),
           " ",
@@ -40618,7 +40631,7 @@ function IllinoisFilingInitialFormsGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "A hearing is unlikely unless the judge needs more information",
           hasCriminalRecord ? " or they have questions about your criminal record" : "",
-          ". They cannot deny the change unless they think it is for fraud. In the extremely unlikely event that it is denied, seek a lawyer immediately. The “Resources” section of this guide can help with that. Provided that there is no hearing and the change is accepted they will return the “Order for Name Change” which we will call the court order from here on. Make sure to get one or two certified copies for later use and keep the original in a safe place. You are then ready to file with the Social Security Administration."
+          ". They cannot deny the change unless they think it is for fraud. In the extremely unlikely event that it is denied, seek a lawyer immediately. The “Resources” section of this guide can help with that. Provided that there is no hearing and the change is accepted they will return the “Order for Name Change” which we will call the court order from here on. Skip the “Court Hearing” section and make sure to get one or two certified copies for later use. Keep the original in a safe place. You are then ready to file with the Social Security Administration."
         ] })
       ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Could not generate, residentLocality missing." })
     ] }, "Illinois-Filing");
@@ -40645,17 +40658,19 @@ function IllinoisFilingInitialFormsGuide({
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function IllinoisMinorOrderGuide({ person }) {
-  const { birthJurisdiction } = person;
+  const { birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order for Name Change (IL, NCM-O 2009.5)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Order for Name Change” (NCM-O 2009.5) is what the judge fills out to approve a name change.",
-      birthJurisdiction?.name === "Illinois" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "This form is already complete." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      " ",
+      birthJurisdictionName === "Illinois" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "This form is already complete." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Check the “Birth Certificate Update” section of your birth state, if applicable, near the end of this guide. Some states require more specific information to change the name or gender on your birth certificate. That information can be added to the “Additional Orders” section of this form. Your petitioner should use this",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "link" }),
+        " ",
         "or the contact info provided in that section to find out what specifically needs to be present in this order to change your birth certificate in ",
-        birthJurisdiction?.name,
+        birthJurisdictionName,
         "."
       ] })
     ] })
@@ -40682,7 +40697,7 @@ function IllinoisMinorOrderGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function IllinoisMinorPetitionGuide({ person }) {
-  const { residentLocality } = person;
+  const { residentLocalityName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request for Name Change (IL, NCM-R 2003.5)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -40695,7 +40710,7 @@ function IllinoisMinorPetitionGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Request for Name Change” (NCM-R 2003.5) is the main form for this process. The parent or legal guardian that is named on this form needs to file this on your behalf. This person then becomes your petitioner and will be going through this process with you. In order for your petitioner to file this on your behalf you need to have lived in",
       " ",
-      residentLocality?.name,
+      residentLocalityName,
       " for at least 6 months. This form is already complete unless your petitioner wants to use an alternate address for safety. If so, here is a",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/76ab40ea-58b3-420b-84de-dd4a1a8662c1/NC-M%20Request%20for%20Name%20Change.pdf", children: "blank" }),
@@ -40725,7 +40740,7 @@ function IllinoisMinorPetitionGuide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function IllinoisNotaryGuide({ person }) {
-  const { residentLocality, hasCriminalRecord, age } = person;
+  const { residentLocalityName, hasCriminalRecord, age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Getting Documents and a Notary (IL)" }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -40740,7 +40755,7 @@ function IllinoisNotaryGuide({ person }) {
       "A redacted scanned copy of your ",
       age && age < 18 && "petitioner's ",
       "photo ID is required. A Drivers License, State ID, or passport will work. If it is one of the first two make sure to scan both sides, if it is the last one only the page with the passport ID and photo is needed. If the photo ID does not have a ",
-      residentLocality?.name,
+      residentLocalityName,
       " county address additional proof of address is needed such as a lease or utility bill."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -40748,22 +40763,22 @@ function IllinoisNotaryGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopy" }),
       " with a black marker. If the scan of the photocopy still shows the information through the marker, keep repeating the process until it does not."
     ] }),
-    residentLocality?.name === "Cook" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    residentLocalityName === "Cook" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Cook county requires a copy of your birth certificate",
       age && age < 18 && " as well as your petitioner's",
       "."
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "A copy of your birth certificate, not your petitioners, is required." }) }),
-    residentLocality?.name === "Cook" || age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    residentLocalityName === "Cook" || age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "If a certified copy of a birth certificate is needed they are available online through",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH", children: "VitalChek" }),
       " ",
-      "or your state/territory’s",
+      "or your state/territory's",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "Vital Records department" }),
       ". If you",
-      residentLocality?.name === "Cook" && age && age < 18 ? " or your petitioner " : "",
-      "were born in another country it will be through your birth country’s records department instead to get proof of birth. Any document not in English needs a professional translation."
+      residentLocalityName === "Cook" && age && age < 18 ? " or your petitioner " : "",
+      "were born in another country it will be through your birth country's records department instead to get proof of birth. Any document not in English needs a professional translation."
     ] }) : "",
     hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You will want to gather records of your criminal history including the charges, release paperwork, parole paperwork, or any documents showing that your sentence has been entirely served. Those can be added to the petition as supporting documents and will reduce the likelihood of a hearing." }) : ""
   ] }, "Illinois-Notary");
@@ -40852,12 +40867,14 @@ function IllinoisPrivacyRequestGuide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Motion to Impound (Make Court Records Private) (IL, ATJ 308.1)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Illinois courts can make court records private so the public can’t see them using the “Motion to Impound (Make Court Records Private)” (ATJ 308.1) form.",
+      "Illinois courts can make court records private so the public can't see them using the “Motion to Impound (Make Court Records Private)” (ATJ 308.1) form.",
+      " ",
       isChangingLegalSex && age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Just being transgender is enough proof for them to make the court records private." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Check the box in section 3 that most closely matches your situation.",
-        age && age < 18 ? " The top checkbox only applies if your petitioner meets the criteria not you. " : "",
+        age && age < 18 ? " The top checkbox only applies if your petitioner meets the criteria not you. " : " ",
         "Evidence can be attached if desired but it is optional."
       ] }),
+      " ",
       "We have a",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/c739a9d8-27a9-47e3-af18-a7ec5cfeef00/NC%20Motion%20to%20Impound.pdf", children: "blank" }),
@@ -40934,24 +40951,24 @@ function IllinoisSecretaryOfStateGuide({
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Primary ID (IL)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This section covers the process of updating your primary identification (driver’s license/state ID) and any vehicle registrations you may have. If this is not relevant to you, then skip this section. Illinois lets you update your primary ID at any facility in the state, a full list of locations is",
+      "This section covers the process of updating your primary identification (driver's license/state ID) and any vehicle registrations you may have. If this is not relevant to you, then skip this section. Illinois lets you update your primary ID at any facility in the state, a full list of locations is",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.ilsos.gov/facilities/facilitylist.html", children: "here" }),
       ".",
-      age && age < 18 ? " A parent/guardian will need to go with you. " : "",
+      age && age < 18 ? " A parent/guardian will need to go with you. " : " ",
       "Some locations on that webpage are listed as appointment only, call the provided number or click the link to set an appointment if needed."
     ] }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you already have a license or state ID you will need the “Gender Designation Change Form” (DSD A 329.3) in order to change your gender marker. In section A fill out your Drivers License/State ID number, then sign with your old name and date." }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Bring your court order,",
       isChangingLegalSex ? " the Gender Designation Change Form, " : "",
-      "the receipt from Social Security, and your current Drivers License/State ID. If you don’t have a license see this",
+      "the receipt from Social Security, and your current Drivers License/State ID to the appointment. If you don't have a license see this",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.ilsos.gov/publications/pdf_publications/dsd_x173.pdf", children: "link" }),
       " ",
-      "for other acceptable ID documents. If you don’t have an ID already the appointment should proceed normally, just make sure they set the gender marker correctly. Otherwise tell the clerk that you want to update the name",
-      isChangingLegalSex ? " and gender marker" : "",
-      " on your license and present the above items. There will be a small fee for this process the amount depends on if you are renewing and which ID you get but shouldn’t total more than $30. If at any point you get pushback over this ask for a manager, failing that you can report discrimination at this",
+      "for other acceptable ID documents. If you are getting an ID for the first time the appointment should proceed normally, just make sure they set the gender marker correctly. Otherwise tell the clerk that you want to update the name",
+      isChangingLegalSex ? " and gender marker" : " ",
+      " on your license and present the above items. There will be a small fee for this process the amount depends on if you are renewing and which ID you get but shouldn't total more than $30. If at any point you get pushback over this update ask for a manager, failing that you can report discrimination at this",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dhr.illinois.gov/filing-a-charge/public-accommodations.html", children: "link" }),
       "."
@@ -41087,6 +41104,7 @@ const illinoisNameChange = {
 };
 const illinoisGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Gender Designation Change Form",
@@ -42575,7 +42593,7 @@ function DS5504Guide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
       ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification, on page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. Fill out section 10 using your passports information. For the photo we suggest going to a business for the highest chance of success and stapling that to the form." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. Fill out section 10 using your passports information. For the photo we suggest going to a business for the highest chance of success and stapling that to the form." }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 16 ? " A parent/guardian should sign on the second line below the picture section." : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line." }) : " Sign the document on the first line below the picture section.",
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Write in the current date to the right of the signatures in the indicated section. On page 6 complete sections 11 through 19 as they apply to you. For section 19 if you have no current travel plans write “none” in every box." }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -42620,12 +42638,12 @@ function DS82Guide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
       ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification, on page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. Fill out section 10 using your old passports information. In section 11 write in the date of your name change as it appears on your court order. For the photo we suggest going to a business for the highest chance of success and stapling that to the form. Sign on the signature line below the picture section then write in the current date to the right of the signature in the indicated section. On page 6 complete sections 12 through 20 as they apply to you. For section 20 if you have no current travel plans write “none” in every box." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. Fill out section 10 using your old passports information. In section 11 write in the date of your name change as it appears on your court order. For the photo we suggest going to a business for the highest chance of success and stapling that to the form. Sign on the signature line below the picture section then write in the current date to the right of the signature in the indicated section. On page 6 complete sections 12 through 20 as they apply to you. For section 20 if you have no current travel plans write “none” in every box." }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply sign on page 2." }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Now you will need to place the DS-82 passport form,",
       isChangingLegalSex ? " attestation form, " : "",
-      " old passport, and a certified copy of your court order in an envelope. We suggest two stamps on the envelope for weight reasons. There is a fee involved which is dependent on your choices go to section 5 of the following URL to see the breakdown:",
+      " old passport, and a certified copy of your court order in an envelope. We suggest two stamps on the envelope for weight reasons. There is a fee involved which is dependent on your choices, go to section 5 of the following URL to see the breakdown:",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://travel.state.gov/content/travel/en/passports/have-passport/renew.html", children: "https://travel.state.gov/content/travel/en/passports/have-passport/renew.html" })
     ] }),
@@ -42665,10 +42683,10 @@ function DS11Guide({ person }) {
       ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification, on page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. For the photo we suggest going to a business for the highest chance of success.",
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. For the photo we suggest going to a business for the highest chance of success.",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Do not staple it to the form." }),
-      ' For section 10 on page 6 please fill out your parents place of birth, legal gender, and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
+      ' For section 10 on page 6 fill out your parents place of birth, legal gender, and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
     ] }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply",
@@ -42729,9 +42747,11 @@ function SocialSecurityGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating Your Social Security Info" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Warning" }),
-      ", do not attempt to update your gender marker on this form, it will be rejected. If you changed your marker before January 31st 2025 and are coming back to change your name you should be safe to do so."
+      ", do not attempt to update your gender marker on this form, it will be rejected. If you changed your marker before January 31st 2025 and are coming back to change your name you should be safe to do so. You do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " need to update your gender marker here to get it updated elsewhere, Social Security shares gender marker data with a very small number of other agencies."
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Since all government databases use data from the Social Security administration, you must change your information with them first before you can change it anywhere else." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Since all government databases use data from the Social Security administration, you must change your name with them first before you can change it anywhere else." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "First, complete the “Application for a Social Security Card” (form SS-5.) If you have had a legal name not shown in section 1 write it in “Other Names Used”. Enter your SSN in section 2, and those of your parents in sections 9-10. If you do not know and/or cannot obtain their SSNs, check the “Unknown” box in the appropriate section. The “Race” and “Ethnicity” fields are optional, and left blank; you may fill them in at your discretion." }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "A parent/guardian should sign in section 17.",
@@ -42747,12 +42767,12 @@ function SocialSecurityGuide({ person }) {
       " call the number of a local office from the above link and ask for a name change appointment. A state ID, drivers license, or passport will be acceptable for ID. If",
       " ",
       age && age < 18 ? " they " : " you ",
-      " do not have those, refer to page 2 of the SS-5 form for other accepted forms of ID. Bring the completed Application for a Social Security Card (SS-5), as well as the court order. There is ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " a fee for updating your information, it's free."
+      " do not have those, refer to page 2 of the SS-5 form for other accepted forms of ID. Bring the completed “Application for a Social Security Card” (SS-5), as well as the court order. There is ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "no" }),
+      " fee for updating your information, it's free."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "At the appointment the clerk will request the Social Security form, ID documents, and court order. They should then approve the name change and hand out a receipt, which should be checked for accuracy and kept for your records. This receipt is sufficient to update your Drivers License or State ID as early as the next business day; you do",
+      "At the appointment the clerk will request the Social Security form, ID documents, and court order. They should then approve the name change and hand out a receipt. Check that receipt for accuracy and keep it for your records. This receipt is sufficient to update your Drivers License or State ID as early as the next business day; you do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " need to wait for the new Social Security card in the mail."
@@ -43356,10 +43376,10 @@ function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
-  const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdictionName, residentLocalityName } = useStore(
     (state) => state
   );
+  const updatePerson = useStore((state) => state.updatePerson);
   const onSubmit = async (data) => {
     updateAppState(data);
     updatePerson(data);
@@ -43396,8 +43416,8 @@ function Step3() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
-  const updatePerson = useStore((state) => state.updatePerson);
   const { birthJurisdictionName } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const onSubmit = async (data) => {
     updateAppState(data);
     updatePerson(data);
