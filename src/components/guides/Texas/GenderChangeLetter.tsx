@@ -33,7 +33,7 @@ function TexasGenderChangeLetterGuide() {
         doctor or your therapist. If you get your care by a nurse practitioner,
         such as at planned parenthood, they will have a head doctor that they
         report to. That doctor is the one who needs to write the letter. If you
-        don’t have a doctor or therapist for transition related care you can ask
+        don&apos;t have a doctor or therapist for transition related care you can ask
         your primary care physician or another doctor to review your medical
         information and write the letter, this is included in the template. Once
         you have the letter write “Exhibit A” at the top.

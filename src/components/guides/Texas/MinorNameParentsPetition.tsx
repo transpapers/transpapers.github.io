@@ -28,7 +28,7 @@ function TexasMinorNameParentsPetitionGuide({
 }: {
   person: Partial<Person>;
 }) {
-  const { hasCriminalRecord, residentLocality } = person;
+  const { hasCriminalRecord, residentLocalityName } = person;
 
   return (
     <section key="Texas-FM-NCC1-100">
@@ -37,7 +37,7 @@ function TexasMinorNameParentsPetitionGuide({
       </h3>
       <p>
         This is the main form for this process. You need to have lived in Texas
-        for at least 6 months and {residentLocality?.name} for at least 90 days
+        for at least 6 months and {residentLocalityName} for at least 90 days
         in order for your parents to file this. Your parents need to jointly
         file this on your behalf as co-petitioners. They will both be going
         through this process with you. If one parent objects it will turn into a
@@ -50,7 +50,7 @@ function TexasMinorNameParentsPetitionGuide({
       <p>
         For section 2 your parents should fill in any blanks we left concerning
         their contact information. For section 4C they need to enter your Social
-        Security Number or check the box if you don’t have one.
+        Security Number or check the box if you don&apos;t have one.
         {hasCriminalRecord ? (
           <>
             If you need help with documenting a criminal record you can do a

@@ -112,7 +112,8 @@ export const michiganNameChange: Process<MichiganCounty> = {
 };
 
 export const michiganGenderMarker: Process<MichiganCounty> = {
-  target: Target.GenderMarker,
+  target: Target.PrimaryIdentification,
+  depends: [Target.NameChange, Target.GenderMarker],
   documents: [
     {
       name: "Michigan Dept. of State Sex Designation Form",

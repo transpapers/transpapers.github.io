@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex, gender, birthJurisdiction } = person;
+  const { age, isChangingLegalSex, gender, birthJurisdictionName } = person;
 
   return (
     <section key="Alaska-DMV">
@@ -38,7 +38,7 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
         </a>{" "}
         is a list of DMV offices with their contact information. You can call
         them to ask what their policy is. It does not matter which DMV office
-        you use to send a letter.
+        you use to send a letter. 
       </p>
 
       <p>
@@ -47,12 +47,12 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
         your new name. That will count as notifying them. To do this you will
         need the “Driver License, Permit Or Identification Card Transaction
         Application” (form D1). For this form fill out any blanks we left in the
-        top half of the form, if you are applying for a drivers license/ID for
+        top half of the form. If you are applying for a drivers license/ID for
         the first time check the “New” box instead of providing a drivers
         license or ID number.
         {gender && (gender as string) === "X"
           ? " Alaska does not have an “X” option for ID's, you will need to put either “Male” or “Female” in the top section. "
-          : ""}
+          : " "}
         Then select what type of ID or drivers license that you would like and
         answer questions 1 thru 10 on the bottom half of the form. On question 2
         though if you have had more names than what we have listed fill in the
@@ -70,7 +70,7 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
           Identification Card” (Form 427).{" "}
           {gender && (gender as string) === "X"
             ? " Alaska does not have an “X” option for ID's, you will need to check either “Male” or “Female” in section A. "
-            : ""}
+            : " "}
           Fill out your driver&apos;s license or ID number, if applicable, in
           section A and then sign it with your old name. Sign and date with your
           old name as well in section B and then take it to a medical
@@ -78,8 +78,8 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
           list of qualifying individuals is listed in section C of the form.
           Have them fill out section C and then you are ready to head to a DMV
           location.
-          {birthJurisdiction?.name === "Alaska"
-            ? "If you are also updating your birth certificate you can have them do the letter for that section at the same time."
+          {birthJurisdictionName === "Alaska"
+            ? " If you are also updating your birth certificate you can have them do the letter for that section at the same time."
             : ""}
         </p>
       ) : (
@@ -89,7 +89,7 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
       <p>
         When you {age && age < 18 && "and a parent/guardian"} go in for the
         appointment be sure to bring
-        {isChangingLegalSex ? " both forms, " : " the D1 form "} a certified
+        {isChangingLegalSex ? " both forms," : " the D1 form,"} a certified
         copy of your court order and payment. Optionally, you may also update
         your vehicle registration(s). You will be given another form, which you
         should sign and initial in your new legal name. You will be charged a

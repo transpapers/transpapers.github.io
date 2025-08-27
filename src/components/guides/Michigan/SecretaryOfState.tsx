@@ -35,10 +35,10 @@ function MichiganSecretaryOfStateGuide({
       <h3>Updating your Primary ID (MI)</h3>
       <p>
         This section covers the process of updating your primary identification
-        (driver’s license/state ID) and any vehicle registrations you may have.
+        (driver&apos;s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, proceed to the next section. You will
-        need to schedule an in-person appointment at your local Secretary of
-        State office, which can be done here{" "}
+        need to schedule an in-person appointment at any Secretary of State office 
+        in Michigan, which can be done here{" "}
         <a href="https://dsvsesvc.sos.state.mi.us/TAP/_/">
           https://dsvsesvc.sos.state.mi.us/TAP/_/
         </a>
@@ -49,8 +49,8 @@ function MichiganSecretaryOfStateGuide({
       </p>
 
       <p>
-        If you already have a driver’s license or state ID bring it to the
-        appointment.
+        If you already have a driver&apos;s license or state ID bring it to the
+        appointment.{" "}
         {isChangingLegalSex ? (
           <>
             Also bring the{" "}
@@ -61,11 +61,11 @@ function MichiganSecretaryOfStateGuide({
         ) : (
           ""
         )}
-        Arrive a few minutes early and check in at the kiosk.
+        {" "}Arrive a few minutes early and check in at the kiosk.
       </p>
 
       <p>
-        If you do not already have a driver’s license or state ID, tell the
+        If you do not already have a driver&apos;s license or state ID, tell the
         clerk that you are applying for one and bring the forms of
         identification you used for Social Security. The appointment should
         proceed normally but make sure the gender marker is set correctly before
@@ -73,7 +73,7 @@ function MichiganSecretaryOfStateGuide({
       </p>
 
       <p>
-        If you do have primary identification, tell the clerk that you are
+        If you do have a driver&apos;s license/state ID, tell the clerk that you are
         updating the name and/or gender marker on it. They will ask for the
         {isChangingLegalName ? " court-ordered name change, " : ""}
         {isChangingLegalSex ? " the Sex Designation Form, " : ""}

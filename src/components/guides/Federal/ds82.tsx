@@ -41,7 +41,7 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
       <p>
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-82) contain instructions and
-        clarification, on page 5 at the top you will need to select which
+        clarification. On page 5 at the top you will need to select which
         documents you want. Then fill out your social security number in section
         5. If you have changed your name multiple times before then you will
         need to add them to section 9. Fill out section 10 using your old
@@ -70,7 +70,7 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
         {isChangingLegalSex ? " attestation form, " : ""} old passport, and a
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is a fee involved which is
-        dependent on your choices go to section 5 of the following URL to see
+        dependent on your choices, go to section 5 of the following URL to see
         the breakdown:{" "}
         <a href="https://travel.state.gov/content/travel/en/passports/have-passport/renew.html">
           https://travel.state.gov/content/travel/en/passports/have-passport/renew.html

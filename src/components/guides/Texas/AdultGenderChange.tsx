@@ -35,7 +35,7 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
         {gender && (gender as string) === "X" ? (
           <>
             Unfortunately Texas doesn&apos;t allow for an “X” identifier on its
-            ID’s or Birth Certificates so there is no “X” option on these forms.
+            ID&apos;s or Birth Certificates so there is no “X” option on these forms.
             Please go through these forms and check “M” or “F” where they are
             blank.
           </>
@@ -49,7 +49,7 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
         drivers license numbers you have had over the past 10 years as well as
         the state(s) you got them in into section 3D. Enter your birth county
         into section 3E and your race, as shown on your birth certificate, into
-        section 3G. If your birth certificate doesn’t have a race listed, put
+        section 3G. If your birth certificate doesn&apos;t have a race listed, put
         “Not Shown”.
         {hasCriminalRecord ? (
           <>
@@ -89,7 +89,7 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
         ) : (
           " Skip 3I through 3L."
         )}
-        Leave the date and signature line <strong>blank</strong> as that’s for
+        Leave the date and signature line <strong>blank</strong> as that&apos;s for
         the judge to sign.
       </p>
     </section>

@@ -42,7 +42,7 @@ function TexasAdultNameOrderGuide({ person }: { person: Partial<Person> }) {
         ) : (
           ""
         )}
-        Leave the date and signature line <strong>blank</strong> as that’s for
+        Leave the date and signature line <strong>blank</strong> as that&apos;s for
         the judge to sign.
       </p>
     </section>

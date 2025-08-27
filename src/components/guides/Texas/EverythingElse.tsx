@@ -32,7 +32,7 @@ function TexasEverythingElseGuide() {
         ID and court order. Though there is still a ban on updating gender
         markers for state offices and programs which may offer some significant
         hurdles, private services should be unaffected by this. If you have
-        issues with this and our guide doesn’t cover it you can submit a tip
+        issues with this and our guide doesn&apos;t cover it you can submit a tip
         through our feedback form. What follows is a list of places, in no
         particular order, where you may want to update your name. Any forms that
         you fill out should be signed in your new name.

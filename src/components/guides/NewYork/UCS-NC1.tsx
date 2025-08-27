@@ -24,50 +24,44 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function NewYorkUCS_NC1Guide({ person }: { person: Partial<Person> }) {
-  const { residentLocality, doNotPublish } = person;
+  const { residentLocalityName, doNotPublish } = person;
   return (
     <section key="NewYork-UCS-NC1">
-      {residentLocality ? (
-        <>
-          <h3>Name and/or Sex Change Petition (NY, UCS-NC1)</h3>
+      <h3>Name and/or Sex Change Petition (NY, UCS-NC1)</h3>
 
-          <p>
-            The first form to be filled out is the &ldquo;Name Change and/or Sex
-            Designation Change Petition for an Individual Adult&rdquo;
-            (UCS-NC1). In order to file this you need to live in{" "}
-            {residentLocality.name} county and have lived in New York State for
-            at least 6 months. It has some sections that you will need to
-            review. Look through sections A, B, and C to see if the information
-            we filled in is accurate for your circumstances. If it&apos;s not
-            then type in the missing info or write with black ink if it&apos;s
-            already printed.
-          </p>
+      <p>
+        The first form to be filled out is the &ldquo;Name Change and/or Sex
+        Designation Change Petition for an Individual Adult&rdquo;
+        (UCS-NC1). In order to file this you need to live in{" "}
+        {residentLocalityName} county and have lived in New York State for
+        at least 6 months. It has some sections that you will need to
+        review. Look through sections A, B, and C to see if the information
+        we filled in is accurate for your circumstances. If it&apos;s not
+        then type in the missing info or write with black ink if it&apos;s
+        already printed.
+      </p>
 
-          {doNotPublish ? (
-            <p>
-              For #28 the court wants to know if making these court records
-              available to the public will cause you harm. This can take the
-              form of either discrimmination or a personal threat such as a
-              known stalker. For discrimmination that can be either state or
-              federal threats. Be sure to elaborate and potentially attach
-              evidence, fill out #29 if you do attach anything. In any case the
-              record will be sealed automatically until the judge makes a
-              decision.
-            </p>
-          ) : (
-            ""
-          )}
-
-          <p>
-            You will need to sign with your current legal name below item 30 on
-            the last page but do <strong>not</strong> additionally sign on the
-            line that reads “Petitioner Signature in Presence of Notary” until
-            you meet with one.
-          </p>
-        </>
+      {doNotPublish ? (
+        <p>
+          For #28 the court wants to know if making these court records
+          available to the public will cause you harm. This can take the
+          form of either discrimmination or a personal threat such as a
+          known stalker. For discrimmination that can be either state or
+          federal threats. Be sure to elaborate and potentially attach
+          evidence, fill out #29 if you do attach anything. In any case the
+          record will be sealed automatically until the judge makes a
+          decision.
+        </p>
       ) : (
-        <p>Could not generate NewYorkUCS_NC1.</p>
+        ""
       )}
+
+      <p>
+        You will need to sign with your current legal name below item 30 on
+        the last page but do <strong>not</strong> additionally sign on the
+        line that reads “Petitioner Signature in Presence of Notary” until
+        you meet with one.
+      </p>
     </section>
   );
 }

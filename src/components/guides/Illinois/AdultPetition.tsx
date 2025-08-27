@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function IllinoisAdultPetitionGuide({ person }: { person: Partial<Person> }) {
-  const { residentLocality, hasCriminalRecord } = person;
+  const { residentLocalityName, hasCriminalRecord } = person;
 
   return (
     <section key="Illinois-AdultPetition">
@@ -52,7 +52,7 @@ function IllinoisAdultPetitionGuide({ person }: { person: Partial<Person> }) {
             your gender identity. Fill out 2h as needed.
           </>
         ) : (
-          ""
+          " "
         )}
         Skip the rest of the sections and proceed directly to the “Sign” section
         on the last page. We have pre-filled the address as you wrote it but if
@@ -63,7 +63,7 @@ function IllinoisAdultPetitionGuide({ person }: { person: Partial<Person> }) {
         form and change that to a PO box or other alternate address. Be sure to
         check the relevant box if you do. This form is otherwise complete. In
         order to file this form you must have lived in{" "}
-        {residentLocality?.name ?? ""} county for at least 3 months.
+        {residentLocalityName} county for at least 3 months.
       </p>
     </section>
   );

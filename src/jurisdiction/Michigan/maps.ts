@@ -212,7 +212,10 @@ export const nameChangePrivateMap: Formfill[] = [
     fieldName: "b. checkbox seek to affirm gender identity",
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? fullName(representativeName(applicant)) : "",
+    text: 
+     isMinor(applicant) 
+     ? fullName(representativeName(applicant)) 
+     : fullName(applicant.legalName),
     fieldName: "Name type or print",
   }),
   (applicant) => ({

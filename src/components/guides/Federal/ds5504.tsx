@@ -39,7 +39,7 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
       <p>
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-5504) contain instructions
-        and clarification, on page 5 at the top you will need to select which
+        and clarification. On page 5 at the top you will need to select which
         documents you want. Then fill out your social security number in section
         5. If you have changed your name multiple times before then you will
         need to add them to section 9. Fill out section 10 using your passports

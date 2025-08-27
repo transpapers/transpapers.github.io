@@ -88,7 +88,7 @@ function OregonFilingInitialFormsGuide({
               some will accept filing by mail or even online, others are
               in-person only. It may also show accepted payment types. If not it
               will have a phone number to call for questions. If the filing
-              method is in-person or by mail{" "}
+              method is in-person or by mail
               {age && age < 18 ? " your petitioner " : " you "} will need the
               petition forms, photo ID, payment, and (optionally) the fee waiver
               forms.
@@ -100,7 +100,7 @@ function OregonFilingInitialFormsGuide({
               By state law, court clerks are barred from answering questions
               about how to fill out the forms.
             </strong>{" "}
-            We recommend that you direct any of those questions to the court’s
+            We recommend that you direct any of those questions to the court&apos;s
             legal assistance center, a local LGBT organization, or an attorney.
           </p>
 
@@ -113,7 +113,7 @@ function OregonFilingInitialFormsGuide({
               Your petitioner will need to send out written notice to any other
               parents or legal guardians regardless of custody, the only
               exceptions being if the minor has not lived with them and they
-              haven’t given support (or tried to). You do <strong>not</strong>{" "}
+              haven&apos;t given support (or tried to). You do <strong>not</strong>{" "}
               need their consent, if they have an issue they can contact the
               court using the notice. A copy of that notice has been provided;
               your petitioner simply needs to add the case number. Once notice

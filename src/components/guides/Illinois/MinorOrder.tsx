@@ -24,16 +24,18 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function IllinoisMinorOrderGuide({ person }: { person: Partial<Person> }) {
-  const { birthJurisdiction } = person;
+  const { birthJurisdictionName } = person;
 
   return (
     <section key="Illinois-MinorOrder">
       <h3>Order for Name Change (IL, NCM-O 2009.5)</h3>
       <p>
         The “Order for Name Change” (NCM-O 2009.5) is what the judge fills out
-        to approve a name change.
-        {birthJurisdiction?.name === "Illinois" ? (
-          <>This form is already complete.</>
+        to approve a name change.{" "}
+        {birthJurisdictionName === "Illinois" ? (
+          <>
+            This form is already complete.
+          </>
         ) : (
           <>
             Check the &ldquo;Birth Certificate Update&rdquo; section of your
@@ -43,9 +45,9 @@ function IllinoisMinorOrderGuide({ person }: { person: Partial<Person> }) {
             &ldquo;Additional Orders&rdquo; section of this form. Your
             petitioner should use this{" "}
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">link</a>
-            or the contact info provided in that section to find out what
+            {" "}or the contact info provided in that section to find out what
             specifically needs to be present in this order to change your birth
-            certificate in {birthJurisdiction?.name}.
+            certificate in {birthJurisdictionName}.
           </>
         )}
       </p>

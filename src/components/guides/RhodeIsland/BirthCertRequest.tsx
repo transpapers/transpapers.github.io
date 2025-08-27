@@ -22,13 +22,22 @@
 import * as React from "react";
 
 import { type Person } from "../../../types/person";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function RhodeIslandBirthCertRequestGuide({
   person,
 }: {
   person: Partial<Person>;
 }) {
-  const { age, birthJurisdiction, parentsAreOkay, residentLocality } = person;
+  const { age, birthJurisdictionName, parentsAreOkay, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+  const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName,
+  );
 
   return (
     <section key="RhodeIsland-BC-Req">
@@ -47,7 +56,7 @@ function RhodeIslandBirthCertRequestGuide({
             some courts will only take a recent certified copy.
           </p>
 
-          {birthJurisdiction?.name === "Rhode Island" ? (
+          {birthJurisdictionName === "Rhode Island" ? (
             <p>
               If you don&apos;t have a useable copy you can either request one
               online through{" "}
@@ -64,10 +73,11 @@ function RhodeIslandBirthCertRequestGuide({
               {parentsAreOkay
                 ? ""
                 : " In section 2 a parent should check the “my child” box. Legal guardians" +
-                  " should check “another person” and write “Legal Guardian” to the right. "}
+                  " should check “another person” and write “Legal Guardian” to the right."}
+              {" "}
               {age && age < 18
-                ? " Then have the parent/guardian whose name is listed in section 5 sign and date that section. "
-                : " Then sign and date section 5 with your current legal name. "}
+                ? "Then have the parent/guardian whose name is listed in section 5 sign and date that section. "
+                : "Then sign and date section 5 with your current legal name. "}
               Instructions for in-person or mail ordering are in the next
               section.
             </p>
@@ -92,6 +102,6 @@ function RhodeIslandBirthCertRequestGuide({
       )}
     </section>
   );
-}
+}}
 
 export default RhodeIslandBirthCertRequestGuide;

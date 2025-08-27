@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function IllinoisMinorPetitionGuide({ person }: { person: Partial<Person> }) {
-  const { residentLocality } = person;
+  const { residentLocalityName } = person;
 
   return (
     <section key="Illinois-MinorPetition">
@@ -43,7 +43,7 @@ function IllinoisMinorPetitionGuide({ person }: { person: Partial<Person> }) {
         to file this on your behalf. This person then becomes your petitioner
         and will be going through this process with you. In order for your
         petitioner to file this on your behalf you need to have lived in{" "}
-        {residentLocality?.name} for at least 6 months. This form is already
+        {residentLocalityName} for at least 6 months. This form is already
         complete unless your petitioner wants to use an alternate address for
         safety. If so, here is a{" "}
         <a href="https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/76ab40ea-58b3-420b-84de-dd4a1a8662c1/NC-M%20Request%20for%20Name%20Change.pdf">

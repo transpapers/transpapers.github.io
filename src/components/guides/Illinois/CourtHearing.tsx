@@ -48,7 +48,7 @@ function IllinoisCourtHearingGuide({ person }: { person: Partial<Person> }) {
         <li>Have you lived in this county for over six months?</li>
         <li>Are you doing this for fraudulent reasons?</li>
         <li>In your own words, why do you want to change your name?</li>
-        <li>Is there anything else you’d like the court to know?</li>
+        <li>Is there anything else you&apos;d like the court to know?</li>
         <li>
           You may also be asked “Do you know of anyone who would oppose this
           name change?” The authors of this guide are not lawyers, but our

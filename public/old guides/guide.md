@@ -65,7 +65,7 @@ Your filing location is {{court.name}}, located at {{court.address}}. You may fi
 
 {{ specific_court_info }}
 
-**By state law, court clerks are barred from answering questions about the forms.** We recommend that you direct any questions you may have to the court’s legal assistance center, a local LGBT organization, or an attorney. The clerk will return a copy of the Petition to Change Name with a case number.
+**By state law, court clerks are barred from answering questions about the forms.** We recommend that you direct any questions you may have to the court&apos;s legal assistance center, a local LGBT organization, or an attorney. The clerk will return a copy of the Petition to Change Name with a case number.
 
 While you do these next steps, we recommend that you call the court every few weeks until you receive your court hearing date to make sure that there were no mistakes. Do not simply wait for a notice in the mail.
 
@@ -128,7 +128,7 @@ You{{ if under 18 }}r parent(s){{endif}} will be sworn in and questioned. The qu
 - Are you doing this for fraudulent reasons?
 - Have you paid the publication fee to an approved newspaper?
 - In your own words, why do you want to change your name?
-- Is there anything else you’d like the court to know?
+- Is there anything else you&apos;d like the court to know?
 - You may also be asked "Do you know of anyone who would oppose this name change?" Having answered "no" to the "fraudulent reasons" question, you can most likely answer "no" to this one. In particular, **you can safely disregard any "opposition" on purely transphobic grounds.** (Compare the history of the phrase "speak now or forever hold your peace.")
 
 #### END FURTHER CONFIRMATION
@@ -155,15 +155,15 @@ Sign the document in section 17 in your old name.
 
 You can find the nearest Social Security office at [https://secure.ssa.gov/ICON/main.jsp](https://secure.ssa.gov/ICON/main.jsp). We recommend that you call to check if your chosen location is by appointment only. You will need identification to prove your identity, age, and citizenship. A state ID, drivers license, or passport will be acceptable. If you do not have those, refer to page two of form SS-5 for other accepted forms of ID. You will also need to bring your completed Application for a Social Security Card, as well as your court order. This service is provided free of charge.
 
-Tell the clerk that you are updating your Social Security information. They will request the Social Security form, ID documents, and court order. You should be informed that, as of 20 October 2022, the administration’s policy allows you to update your gender marker at any time without giving a reason. (See [https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/](https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/).) They should approve the change and give you a receipt, which you should keep for your records. This receipt is sufficient to update your primary identification with the Secretary of State as early as the next business day; you do not need to wait for the new Social Security card in the mail.
+Tell the clerk that you are updating your Social Security information. They will request the Social Security form, ID documents, and court order. You should be informed that, as of 20 October 2022, the administration&apos;s policy allows you to update your gender marker at any time without giving a reason. (See [https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/](https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/).) They should approve the change and give you a receipt, which you should keep for your records. This receipt is sufficient to update your primary identification with the Secretary of State as early as the next business day; you do not need to wait for the new Social Security card in the mail.
 
 ## 6. Secretary of State
 
-This section covers the process of updating your primary identification (driver’s license/state ID) and any vehicle registrations you may have. If this is not relevant to you, proceed to the next section. You will need to schedule an in-person appointment at your local Secretary of State office, which can be done at [https://dsvsesvc.sos.state.mi.us/TAP/\_/](https://dsvsesvc.sos.state.mi.us/TAP/_/).
+This section covers the process of updating your primary identification (driver&apos;s license/state ID) and any vehicle registrations you may have. If this is not relevant to you, proceed to the next section. You will need to schedule an in-person appointment at your local Secretary of State office, which can be done at [https://dsvsesvc.sos.state.mi.us/TAP/\_/](https://dsvsesvc.sos.state.mi.us/TAP/_/).
 
-If you already have a driver’s license or state ID, you will need to bring it to the appointment, as well as the completed Michigan Secretary of State Sex Designation Form; if not, bring the forms of identification you used for Social Security. Arrive a few minutes early and check in at the kiosk.
+If you already have a driver&apos;s license or state ID, you will need to bring it to the appointment, as well as the completed Michigan Secretary of State Sex Designation Form; if not, bring the forms of identification you used for Social Security. Arrive a few minutes early and check in at the kiosk.
 
-If you do not already have a driver’s license or state ID, tell the clerk that you are applying for one; the appointment should proceed normally. Make sure the gender marker is set correctly.
+If you do not already have a driver&apos;s license or state ID, tell the clerk that you are applying for one; the appointment should proceed normally. Make sure the gender marker is set correctly.
 
 If you do have primary identification, tell the clerk that you are updating the name and/or gender marker on it. They will ask for identification, your court-ordered name change, and the Sex Designation Form.
 
@@ -188,12 +188,12 @@ Complete the "Payment" section on page 2 as applicable. You will also need to wr
 ![alt_text](images/image3.png "image_tooltip")
 
 {{ if under 18 }}
-Your parent or guardian will need to make a photocopy of their primary identification. If they don’t have a state ID or driver’s license, refer to the document in your printout titled “Acceptable ID”. If they are your guardian, they will need to include a copy of the court guardianship. Only one parent or guardian’s identification is needed.
+Your parent or guardian will need to make a photocopy of their primary identification. If they don&apos;t have a state ID or driver&apos;s license, refer to the document in your printout titled “Acceptable ID”. If they are your guardian, they will need to include a copy of the court guardianship. Only one parent or guardian&apos;s identification is needed.
 {{ else }}
-You will need to make a photocopy of your primary identification. If you don’t have a state ID or driver’s license, refer to the document in your printout titled “Acceptable ID”.
+You will need to make a photocopy of your primary identification. If you don&apos;t have a state ID or driver&apos;s license, refer to the document in your printout titled “Acceptable ID”.
 {{ endif }}
 
-You must also include a photocopy of the court order in the envelope. **Do not send any original documents; they will not be returned to you.** Fill out the envelope’s address as follows:
+You must also include a photocopy of the court order in the envelope. **Do not send any original documents; they will not be returned to you.** Fill out the envelope&apos;s address as follows:
 
 ![alt_text](images/image4.png "image_tooltip")
 
@@ -235,7 +235,7 @@ Once you have the court order and primary identification in your new name, you c
 ## 9. Resources
 
 - [https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Doing-Business-with-MDHHS/Birth-Death-Marriage-and-Divorce-Records/Photo_ID_Alternative_Documents.pdf](https://www.michigan.gov/mdhhs/-/media/Project/Websites/mdhhs/Doing-Business-with-MDHHS/Birth-Death-Marriage-and-Divorce-Records/Photo_ID_Alternative_Documents.pdf)
-- The Social Security Administration’s policy on self-attestation of gender:
+- The Social Security Administration&apos;s policy on self-attestation of gender:
   [https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/](https://blog.ssa.gov/social-security-implements-self-attestation-of-sex-marker-in-social-security-number-records/)
 - [Grand Rapids Trans Foundation](https://grtransfoundation.org/update-program/): Helps people with the name change process in Kent county and provides general support and resources to the trans community.
 - [Transgender Name Change Clinic](https://corktownhealth.org/transgender-name-clinic-available/): Helps low income trans people changing their name & gender markers in Oakland, Macomb, and Wayne county.

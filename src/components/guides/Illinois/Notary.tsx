@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
-  const { residentLocality, hasCriminalRecord, age } = person;
+  const { residentLocalityName, hasCriminalRecord, age } = person;
 
   return (
     <section key="Illinois-Notary">
@@ -48,7 +48,7 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
         photo ID is required. A Drivers License, State ID, or passport will
         work. If it is one of the first two make sure to scan both sides, if it
         is the last one only the page with the passport ID and photo is needed.
-        If the photo ID does not have a {residentLocality?.name} county address
+        If the photo ID does not have a {residentLocalityName} county address
         additional proof of address is needed such as a lease or utility bill.
       </p>
 
@@ -63,7 +63,7 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
         the process until it does not.
       </p>
 
-      {residentLocality?.name === "Cook" ? (
+      {residentLocalityName === "Cook" ? (
         <p>
           Cook county requires a copy of your birth certificate
           {age && age < 18 && " as well as your petitioner's"}.
@@ -78,22 +78,22 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
           )}
         </>
       )}
-      {residentLocality?.name === "Cook" || (age && age < 18) ? (
+      {residentLocalityName === "Cook" || (age && age < 18) ? (
         <p>
           If a certified copy of a birth certificate is needed they are
           available online through{" "}
           <a href="https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH">
             VitalChek
           </a>{" "}
-          or your state/territory’s{" "}
+          or your state/territory&apos;s{" "}
           <a href="https://www.cdc.gov/nchs/w2w/index.htm">
             Vital Records department
           </a>
           . If you
-          {residentLocality?.name === "Cook" && age && age < 18
+          {residentLocalityName === "Cook" && age && age < 18
             ? " or your petitioner "
             : ""}
-          were born in another country it will be through your birth country’s
+          were born in another country it will be through your birth country&apos;s
           records department instead to get proof of birth. Any document not in
           English needs a professional translation.
         </p>

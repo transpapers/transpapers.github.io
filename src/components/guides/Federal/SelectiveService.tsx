@@ -53,7 +53,7 @@ function SelectiveServiceGuide({ person }: { person: Partial<Person> }) {
                 days of when you turn 18 by using this{" "}
                 <a href="https://www.sss.gov/register/">link</a>, make sure to
                 document any subsequent name or address changes before age 26
-                with them. If you don’t want to register{" "}
+                with them. If you don&apos;t want to register{" "}
               </>
             )}
             you will instead need to fill out and send the &ldquo;Request for
@@ -79,12 +79,12 @@ function SelectiveServiceGuide({ person }: { person: Partial<Person> }) {
             used to change it. If it was changed without a court order, send
             documentation of the change or medical documentation showing the
             transition. There is <strong>no fee</strong> for this process unless
-            you don’t have a copy of your birth certificate to send. If so then
+            you don&apos;t have a copy of your birth certificate to send. If so then
             you can order one online through{" "}
             <a href="https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH">
               VitalChek
             </a>{" "}
-            or your birth state/territory’s{" "}
+            or your birth state/territory&apos;s{" "}
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">
               Vital Records Department
             </a>

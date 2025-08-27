@@ -24,18 +24,18 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function TexasAdultNamePetitionGuide({ person }: { person: Partial<Person> }) {
-  const { hasCriminalRecord, residentLocality } = person;
+  const { hasCriminalRecord, residentLocalityName } = person;
 
   return (
     <section key="Texas-FM-NCA-100">
       <h3>Petition to Change the Name of an Adult (TX, FM-NCA-100)</h3>
       <p>
         This is the state form for name changes. You need to have lived in Texas
-        for at least 6 months and {residentLocality?.name} for at least 90 days
+        for at least 6 months and {residentLocalityName} for at least 90 days
         in order to file this. You will need to fill out your social security
         number in sections 3B, the drivers license section in 3D, birth country
         (if applicable) in section 3E, and race, as shown on your birth
-        certificate, in section 3G. If your birth certificate doesn’t have a
+        certificate, in section 3G. If your birth certificate doesn&apos;t have a
         race listed, put “Not Shown”. If you have gone by different names other
         than your current legal name and/or birth name please list them in
         section 3I.

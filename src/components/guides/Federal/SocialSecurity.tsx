@@ -35,13 +35,15 @@ function SocialSecurityGuide({ person }: { person: Partial<Person> }) {
         <strong>Warning</strong>, do not attempt to update your gender marker on
         this form, it will be rejected. If you changed your marker before
         January 31st 2025 and are coming back to change your name you should be
-        safe to do so.
+        safe to do so. You do <strong>not</strong> need to update your gender marker
+        here to get it updated elsewhere, Social Security shares gender marker data 
+        with a very small number of other agencies.
       </p>
 
       <p>
         Since all government databases use data from the Social Security
-        administration, you must change your information with them first before
-        you can change it anywhere else.
+        administration, you must change your name with them first before you
+        can change it anywhere else.
       </p>
       <p>
         First, complete the “Application for a Social Security Card” (form
@@ -74,14 +76,14 @@ function SocialSecurityGuide({ person }: { person: Partial<Person> }) {
         A state ID, drivers license, or passport will be acceptable for ID. If{" "}
         {age && age < 18 ? " they " : " you "} do not have those, refer to page
         2 of the SS-5 form for other accepted forms of ID. Bring the completed
-        Application for a Social Security Card (SS-5), as well as the court
-        order. There is <strong>not</strong> a fee for updating your
-        information, it&apos;s free.
+        “Application for a Social Security Card” (SS-5), as well as the court
+        order. There is <strong>no</strong> fee for updating your information, 
+        it&apos;s free.
       </p>
       <p>
         At the appointment the clerk will request the Social Security form, ID
         documents, and court order. They should then approve the name change and
-        hand out a receipt, which should be checked for accuracy and kept for
+        hand out a receipt. Check that receipt for accuracy and keep it for
         your records. This receipt is sufficient to update your Drivers License
         or State ID as early as the next business day; you do{" "}
         <strong>not</strong> need to wait for the new Social Security card in

@@ -23,22 +23,28 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { TexasCounty } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function TexasFingerprintingGuide({
   person,
-  locality,
 }: {
   person: Person;
-  locality: TexasCounty;
 }) {
-  const { residentLocality, isChangingLegalSex, isChangingLegalName } = person;
-  const { backgroundCheckRequired } = locality;
+  const { residentLocalityName, isChangingLegalSex, isChangingLegalName, residentJurisdictionName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality: TexasCounty = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as TexasCounty;
 
   return (
     <section key="Texas-Fingerprinting">
       <h3>Fingerprinting (TX)</h3>
 
-      {residentLocality?.name === "Bandera" ? (
+      {residentLocality.name === "Bandera" ? (
         <p>
           Bandera county will have you do the fingerprinting on a custom
           fingerprinting card unique to their county. Go to the district
@@ -53,7 +59,7 @@ function TexasFingerprintingGuide({
         ""
       )}
 
-      {residentLocality?.name === "Crockett" ? (
+      {residentLocality.name === "Crockett" ? (
         <p>
           Crockett county has a custom Identogo form that they use, you can pick
           it up when filing, ignore the rest of this section.
@@ -65,7 +71,7 @@ function TexasFingerprintingGuide({
         ""
       )}
 
-      {residentLocality?.name === "Rusk" ? (
+      {residentLocality.name === "Rusk" ? (
         <p>
           Rusk county will have you do the fingerprinting at the court house
           when you file, ignore the rest of this section.
@@ -100,9 +106,9 @@ function TexasFingerprintingGuide({
         ) : (
           ""
         )}
-        {backgroundCheckRequired ? (
+        {residentLocality.backgroundCheckRequired ? (
           <>
-            For the name change {residentLocality?.name} county requires a
+            For the name change {residentLocality.name} county requires a
             background check in addition to a fingerprint card so you will need
             to get an additional filled out fingerprint card, one is for the
             court and one is sent to DPS after filing.
@@ -121,7 +127,7 @@ function TexasFingerprintingGuide({
         {isChangingLegalName ? (
           <>
             Write “Exhibit” at the top of one fingerprint card, that card is for{" "}
-            {residentLocality?.name} the court.
+            the {residentLocality.name} county court.
           </>
         ) : (
           ""
@@ -133,6 +139,6 @@ function TexasFingerprintingGuide({
       </p>
     </section>
   );
-}
+}}
 
 export default TexasFingerprintingGuide;

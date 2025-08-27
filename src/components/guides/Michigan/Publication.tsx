@@ -23,16 +23,22 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { MichiganCounty } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function MichiganPublicationGuide({
   person,
-  locality,
 }: {
   person: Person;
-  locality: MichiganCounty;
 }) {
-  const { age } = person;
-  const { publications } = locality;
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+  const residentLocality: MichiganCounty = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as MichiganCounty;
 
   return (
     <section key="MI-Publication">
@@ -45,8 +51,8 @@ function MichiganPublicationGuide({
         are as follows:
       </p>
 
-      {...publications.map(({ name, website, email }) => (
-        <p key="{publications.name}">
+      {...residentLocality.publications.map(({ name, website, email }) => (
+        <p key="{residentLocality.publications.name}">
           <span>Newspaper: {name}</span>
           <br />
           <span>
@@ -61,7 +67,7 @@ function MichiganPublicationGuide({
       ))}
 
       <p>
-        At the provided link(s),{" "}
+        At the provided link(s),
         {age && age < 18 ? " your parent/guardian " : " you "}
         should contact a newspaper about placing a legal notice for the name
         change hearing. Make sure the publication date is more than seven days
@@ -70,6 +76,6 @@ function MichiganPublicationGuide({
       </p>
     </section>
   );
-}
+}}
 
 export default MichiganPublicationGuide;

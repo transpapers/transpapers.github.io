@@ -24,9 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
-  const { age, parentsAreOkay, residentJurisdiction } = person;
-
-  if (!residentJurisdiction) return "";
+  const { age, parentsAreOkay, residentJurisdictionName } = person;
 
   return (
     <section key="NewYork-BC-Update">
@@ -68,8 +66,8 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             blanks for sections 1 through 3. Section 4 can only be completed in
             front of a notary so do <strong>not</strong> sign until directed to
             do so.
-            {residentJurisdiction.name === "New York"
-              ? "For notary resources see the 'Getting Documents and a Notary' section above."
+            {residentJurisdictionName === "New York"
+              ? " For notary resources see the 'Getting Documents and a Notary' section above."
               : ""}
           </p>
         </>
@@ -101,14 +99,14 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             apartment number to the street address, if applicable. The
             Attestation part below must be signed in front of a notary so do{" "}
             <strong>not</strong> sign until then.
-            {residentJurisdiction.name === "New York"
-              ? "For notary resources see the 'Getting Documents and a Notary' section above."
+            {residentJurisdictionName === "New York"
+              ? " For notary resources see the 'Getting Documents and a Notary' section above."
               : ""}
           </p>
         </>
       )}
 
-      {residentJurisdiction.name === "New York" ? (
+      {residentJurisdictionName === "New York" ? (
         ""
       ) : (
         <p>
@@ -147,8 +145,8 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         If you prefer an in-person appointment use this{" "}
-        <a href="https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/">link</a>{" "}
-        to schedule one.
+        <a href="https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/">link</a>
+        {" "}to schedule one.
         {age && age < 18
           ? " Any living parents listed on the birth certificate will need to go and bring photo ID "
           : " You will need to bring photo ID. "}
@@ -176,13 +174,13 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
           can fill out. Both parents/guardians will need to sign and date at the
           bottom.
           {parentsAreOkay
-            ? ""
+            ? " "
             : " If you only have one parent/guardian they need to check the box above the signature line indicating that. "}
           The DOH-5304 Affidavit will need to be filled out in front of a
           notary, do <strong>not</strong>
           fill it out until directed.
-          {residentJurisdiction.name === "New York"
-            ? "For notary resources see the 'Getting Documents and a Notary' section above."
+          {residentJurisdictionName === "New York"
+            ? " For notary resources see the 'Getting Documents and a Notary' section above."
             : ""}
         </p>
       ) : (
@@ -203,13 +201,13 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
           instead. Sign and date it at the bottom. Leave the DOH-5303 Affidavit
           alone until you are in front of a notary, do
           <strong>not</strong> sign or date it until directed.
-          {residentJurisdiction.name === "New York"
-            ? "For notary resources see the 'Getting Documents and a Notary' section above."
+          {residentJurisdictionName === "New York"
+            ? " For notary resources see the 'Getting Documents and a Notary' section above."
             : ""}
         </p>
       )}
 
-      {residentJurisdiction.name === "New York" ? (
+      {residentJurisdictionName === "New York" ? (
         ""
       ) : (
         <p>

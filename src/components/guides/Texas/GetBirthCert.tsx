@@ -24,16 +24,16 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function TexasGetBirthCertGuide({ person }: { person: Partial<Person> }) {
-  const { birthJurisdiction } = person;
+  const { birthJurisdictionName } = person;
 
   return (
     <section key="Texas-Get-Birth-Cert">
       <h3>Get Your Birth Certificate (TX)</h3>
       <p>
         A certified copy of your birth certificate is needed for the gender
-        change petition. If you don’t have one available they can be ordered
+        change petition. If you don&apos;t have one available they can be ordered
         online through{" "}
-        {birthJurisdiction?.name === "Texas" ? (
+        {birthJurisdictionName === "Texas" ? (
           <>
             the Texas Department of{" "}
             <a href="https://ovra.txapps.texas.gov/ovra/order-vital-records">
@@ -50,8 +50,8 @@ function TexasGetBirthCertGuide({ person }: { person: Partial<Person> }) {
         )}
         . If you were born in another country it will be through your birth
         country&apos;s records department instead to get proof of birth. Any
-        document not in English needs a professional translation. Write “Exhibit
-        B” at the top of the birth certificate.
+        document not in English needs a professional translation. Write 
+        &ldquo;Exhibit&rdquo; at the top of the birth certificate.
       </p>
     </section>
   );

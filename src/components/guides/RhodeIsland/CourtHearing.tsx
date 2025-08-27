@@ -29,16 +29,17 @@ function RhodeIslandCourtHearingGuide({ person }: { person: Partial<Person> }) {
   return (
     <section key="RI-CourtHearing">
       <h3>Court Hearing (RI)</h3>
+
       <p>
         On the day of your hearing, you
-        {age && age < 18 && " and your parent(s)/guardian(s) "} should dress
+        {age && age < 18 && " and your parent(s)/guardian(s)"} should dress
         appropriately for a courtroom, even if the hearing is virtual. The
         hearing may begin late, but it should only take a few minutes once it
         starts.
       </p>
       <p>
         You
-        {age && age < 18 && " and/or your parent(s)/guardian(s) "} will be sworn
+        {age && age < 18 && " and/or your parent(s)/guardian(s)"} will be sworn
         in and questioned. The questions vary between courts, but you can expect
         some of the following:
       </p>
@@ -50,7 +51,7 @@ function RhodeIslandCourtHearingGuide({ person }: { person: Partial<Person> }) {
         <li>Are you doing this for fraudulent reasons?</li>
         <li>Have you paid the publication fee to an approved newspaper?</li>
         <li>In your own words, why do you want to change your name?</li>
-        <li>Is there anything else you’d like the court to know?</li>
+        <li>Is there anything else you&apos;d like the court to know?</li>
         <li>
           You may also be asked “Do you know of anyone who would oppose this
           name change?” The authors of this guide are not lawyers, but our
@@ -85,6 +86,7 @@ function RhodeIslandCourtHearingGuide({ person }: { person: Partial<Person> }) {
         you haven&apos;t done so yet and the court does not automatically
         provide one.
       </p>
+
       <p>
         Once you have the certified copy of the court order, you are ready to
         file with the Social Security administration. Keep the original court

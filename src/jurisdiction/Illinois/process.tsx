@@ -162,7 +162,8 @@ export const illinoisNameChange: Process<Locality> = {
 };
 
 export const illinoisGenderMarker: Process<Locality> = {
-  target: Target.GenderMarker,
+  target: Target.PrimaryIdentification,
+  depends: [Target.NameChange, Target.GenderMarker],
   documents: [
     {
       name: "Gender Designation Change Form",

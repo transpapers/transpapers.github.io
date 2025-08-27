@@ -46,12 +46,13 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
-  (applicant) => ({
-    text: 
-      getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName)?.county,
-    loc: { x: 50, y: 50 },
-  }),
+  //FIXME adjust this or the util function so it works.
+  //(applicant) => ({
+    //text: 
+      //getLocality(applicant.residentJurisdictionName, 
+      //applicant.residentLocalityName)?.county,
+    //loc: { x: 50, y: 50 },
+  //}),
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 },

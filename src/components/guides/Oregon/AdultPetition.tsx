@@ -24,42 +24,40 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonAdultPetitionGuide({ person }: { person: Partial<Person> }) {
-  const { residentLocality, isChangingLegalSex } = person;
+  const { residentLocalityName, isChangingLegalSex } = person;
   return (
     <section key="Oregon-Adult-Petition">
       <h3>Name and/or Sex Change Petition (OR)</h3>
-      {residentLocality ? (
+          
+      <p>
+        The Petition for Change of Name/Sex allows for name and/or gender
+        changes all in one form.
+        {isChangingLegalSex ? (
         <>
-          The Petition for Change of Name/Sex allows for name and/or gender
-          changes all in one form.
-          {isChangingLegalSex ? (
-            <p>
-              In order to file this you need to be a resident of Oregon, which
-              just means you need an ID or some mail with your legal name and an
-              Oregon address on it.
-            </p>
-          ) : (
-            <p>
-              In order to file this you need to be a resident of{" "}
-              {residentLocality.name} county, which just means you need an ID or
-              some mail with your legal name and an address within{" "}
-              {residentLocality.name} county on it.
-            </p>
-          )}
-          <p>
-            You will need to check and fill out any of the lines below the
-            “Public Interest” section as they apply to you. You will also need
-            to list down any prior names/aliases that you have used in the past
-            below the “Public Interest” section. If you are in the Address
-            Confidentiality Program you can check the box on page 1 near the
-            bottom to seal this court record. You then need to sign the form
-            with your current legal name on page 3. The “General Judgement” on
-            page 4 should already be set, file it with your petition.
-          </p>
+            In order to file this you need to be a resident of Oregon, which
+            just means you need an ID or some mail with your legal name and an
+            Oregon address on it.
         </>
-      ) : (
-        <p>Could not generate.</p>
-      )}
+        ) : (
+        <>
+            In order to file this you need to be a resident of{" "}
+            {residentLocalityName} county, which just means you need an ID or
+            some mail with your legal name and an address within{" "}
+            {residentLocalityName} county on it.
+        </>
+        )}
+      </p>
+
+      <p>
+        You will need to check and fill out any of the lines below the
+        “Public Interest” section as they apply to you. You will also need
+        to list down any prior names/aliases that you have used in the past
+        below the “Public Interest” section. If you are in the Address
+        Confidentiality Program you can check the box on page 1 near the
+        bottom to seal this court record. You then need to sign the form
+        with your current legal name on page 3. The “General Judgement” on
+        page 4 should already be filled out, file it with your petition.
+      </p>
     </section>
   );
 }

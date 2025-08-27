@@ -42,7 +42,7 @@ function MichiganBirthCertificateGuide({
         (form DCH-0847-CHGBX)
         {isChangingLegalSex ? (
           <>
-            and the <strong>State of Michigan Sex Designation Form</strong>.
+            {" "}and the <strong>State of Michigan Sex Designation Form</strong>.
           </>
         ) : (
           "."

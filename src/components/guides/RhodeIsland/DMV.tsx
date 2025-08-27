@@ -29,6 +29,7 @@ function RhodeIslandDMVGuide({ person }: { person: Partial<Person> }) {
   return (
     <section key="RI-DMV">
       <h3>Updating Primary ID (RI)</h3>
+
       <p>
         To update your primary ID you will need the &quot;Application for a
         License, Identification Card and Permit&quot; (LI-1)
@@ -58,8 +59,8 @@ function RhodeIslandDMVGuide({ person }: { person: Partial<Person> }) {
         all Rhode Island locations are listed{" "}
         <a href="https://dmv.ri.gov/locations-hours">here</a>. You will need
         {isChangingLegalSex ? " both forms, " : " the LI-1 form, "}
-        {isChangingLegalName ? " your court order, " : ""}
-        your current ID, and the receipt from social security. If you don’t have
+        {isChangingLegalName ? " your court order, " : " "}
+        your current ID, and the receipt from social security. If you don&apos;t have
         a current ID then bring the ID documents you used for Social Security.
         If you selected &quot;REAL ID&quot; you will also need an additional
         document, pick one on page 3 of the LI-1 form under &quot;Proof of
@@ -72,14 +73,14 @@ function RhodeIslandDMVGuide({ person }: { person: Partial<Person> }) {
       </p>
 
       <p>
-        When you {age && age < 18 ? " and a parent/guardian " : " "} arrive,
+        When you {age && age < 18 ? " and a parent/guardian" : " "} arrive,
         tell the clerk that you want to update the name and/or gender marker on
         your ID and present the above documents to the clerk. Sign and date in
         front of the clerk.
         {age && age < 18
           ? " A parent/guardian will need to sign the LI-1 form as well just below section G. "
           : " "}
-        If you do not already have a driver’s license or state ID, tell the
+        If you do not already have a driver&apos;s license or state ID, tell the
         clerk that you are applying for one and take the same steps. Make sure
         the gender marker is set correctly before you leave. If you experience
         any issues or pushback politely insist on speaking to a manager, they

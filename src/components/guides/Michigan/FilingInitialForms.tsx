@@ -57,9 +57,12 @@ function MichiganFilingInitialFormsGuide({
             waiver is granted payment still needs to be provided for at least
             one certified copy. To ask for one when filing by mail either write
             &ldquo;Certified copy fee&rdquo; in a checks memo line or include a
-            letter stating thats what the extra money is for. No matter what the
-            filing method we recommend calling the court at{" "}
-            {residentLocality.court.phone} or visiting their website:{" "}
+            letter stating thats what the extra money is for. 
+          </p>
+            
+          <p>
+            No matter what filing method is used we recommend calling the court 
+            at {residentLocality.court.phone} or visiting their website:{" "}
             <a href={residentLocality.court.website} title="website">
               {residentLocality.court.website}
             </a>
@@ -88,7 +91,7 @@ function MichiganFilingInitialFormsGuide({
               about the forms.
             </strong>{" "}
             We recommend that you direct any questions you may have to the
-            court’s legal assistance center, a local LGBT organization, or an
+            court&apos;s legal assistance center, a local LGBT organization, or an
             attorney.
           </p>
 
@@ -124,7 +127,7 @@ function MichiganFilingInitialFormsGuide({
             recieve your “Order Following Hearing On Petition To Change Name”
             and certified copy in the mail. We call those documents the
             &quot;Court Order&quot;. If you recieved notice of a hearing instead
-            read the next section, otherwise skip it.
+            read the “Court Hearing” section, otherwise skip it.
           </p>
 
           {residentLocality.name && residentLocality.name !== "Kent" ? (

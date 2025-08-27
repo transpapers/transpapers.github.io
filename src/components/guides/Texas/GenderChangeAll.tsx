@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function TexasGenderChangeAllGuide({ person }: { person: Partial<Person> }) {
-  const { birthJurisdiction } = person;
+  const { birthJurisdictionName } = person;
 
   return (
     <section key="Texas-Gender-Change-All">
@@ -35,10 +35,10 @@ function TexasGenderChangeAllGuide({ person }: { person: Partial<Person> }) {
           House Bill 229
         </a>{" "}
         into law barring the update of gender markers for all state
-        forms/documents including ID’s and Texas Birth Certificates. Due to this
+        forms/documents including ID&apos;s and Texas Birth Certificates. Due to this
         legal situation, getting a gender change court order will{" "}
         <strong>not</strong> be effective at the state level at this time.
-        {birthJurisdiction?.name === "Texas" ? (
+        {birthJurisdictionName === "Texas" ? (
           <>
             It is not advisable to go through this process at this time, we will
             update this message if the legal situation changes. We have left the
@@ -50,7 +50,7 @@ function TexasGenderChangeAllGuide({ person }: { person: Partial<Person> }) {
             Since you were not born in Texas check the Birth Certificate section
             below or this{" "}
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">link</a>. If{" "}
-            {birthJurisdiction?.name} requires a gender change order to update
+            {birthJurisdictionName} requires a gender change order to update
             your birth certificate you should still get one.
           </>
         )}

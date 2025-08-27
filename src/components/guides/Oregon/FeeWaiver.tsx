@@ -41,7 +41,7 @@ function OregonFeeWaiverGuide({ person }: { person: Partial<Person> }) {
         {age && age < 18 ? " your petitioner should " : " "}
         fill in any remaining blanks in sections 1 through 7 and then sign/date
         at the bottom of page 3. The “Order Re: Referal or Waiver of Fees” is
-        already set and should be filed with the waiver.
+        already filled out and should be filed with the waiver.
       </p>
     </section>
   );

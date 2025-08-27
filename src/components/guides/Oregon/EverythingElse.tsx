@@ -119,7 +119,7 @@ function OregonEverythingElseGuide() {
           link
         </a>{" "}
         or by completing the Oregon Voter Registration Card (SEL 500) and hand
-        delivering it to your county’s local election office. If there are only
+        delivering it to your county&apos;s local election office. If there are only
         a few days until an election that you want to vote in we recommend the
         second option. We have attached a partially filled form to this guide if
         you need it, fill in any blanks on page 1. Page 2 contains the addresses

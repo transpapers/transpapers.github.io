@@ -23,28 +23,34 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { RhodeIslandCityOrTown } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function RhodeIslandBCIGuide({
   person,
-  locality,
 }: {
   person: Person;
-  locality: RhodeIslandCityOrTown;
 }) {
-  const { age } = person;
-  const { court, courtDoesBackgroundCheck } = locality;
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+  const localities = residentJurisdiction.localities;
+  const residentLocality: RhodeIslandCityOrTown = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as RhodeIslandCityOrTown;
 
   return (
     <section key="RhodeIsland-BCI">
       <h3>Background Check Authorization Form (RI)</h3>
 
-      {courtDoesBackgroundCheck ? (
+      {residentLocality.courtDoesBackgroundCheck ? (
         <p>
-          Our records show that the {court.city} court either does the
-          background check report for you when you file or gives its own unique
-          instructions for one upon filing. You can ignore this section and that
-          form for the time being. We have included this form and its
-          instructions just in case we are wrong.
+          Our records show that the {residentLocality.court.city} court either 
+          does the background check report for you when you file or gives its 
+          own unique instructions for one upon filing. You can ignore this 
+          section and the “Background Check Authorization” form for the time 
+          being. We have included this form and its instructions just in case.
         </p>
       ) : (
         ""
@@ -73,6 +79,6 @@ function RhodeIslandBCIGuide({
       </p>
     </section>
   );
-}
+}}
 
 export default RhodeIslandBCIGuide;

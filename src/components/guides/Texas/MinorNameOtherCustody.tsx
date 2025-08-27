@@ -28,17 +28,17 @@ function TexasMinorNameOtherCustodyGuide({
 }: {
   person: Partial<Person>;
 }) {
-  const { hasCriminalRecord, residentLocality } = person;
+  const { hasCriminalRecord, residentLocalityName } = person;
 
   return (
     <section key="Texas-FM-NCC1-100">
       <h3>Minor Name Change Petitions and Orders (TX, Multiple Forms)</h3>
       <p>
         There are a few different petition and order forms that could be filed
-        depending on your custody situation. Since we don’t have a way to
+        depending on your custody situation. Since we don&apos;t have a way to
         determine what your exact situation is, we have provided for all
         possibilities. In any case, all living adults with custody of you must
-        sign the forms to become your petitioner(s). If that doesn’t happen the
+        sign the forms to become your petitioner(s). If that doesn&apos;t happen the
         hearing will become contested which is beyond the scope of this guide.
         If this happens your supportive parent/guardian will need a lawyer or
         you will need to wait until you are 18. See the “Resources” section
@@ -48,7 +48,7 @@ function TexasMinorNameOtherCustodyGuide({
         share the same names so we will use the form number to tell them apart,
         that number can be found on the bottom left of the forms. In any case
         you need to have lived in Texas for at least 6 months and{" "}
-        {residentLocality?.name} for at least 90 days in order to use any of
+        {residentLocalityName} for at least 90 days in order to use any of
         these forms.
       </p>
 
@@ -127,7 +127,7 @@ function TexasMinorNameOtherCustodyGuide({
       <p>
         <span> Section 3: Everyone Else </span>
         <br />
-        If you don’t meet the criteria of the first two sections, use forms
+        If you don&apos;t meet the criteria of the first two sections, use forms
         “FM-NCC5-100” and “FM-NCC5-200”. For the petition the petitioner is
         whoever has their name listed at the top of section 2. They or their
         co-petitioner(s) should fill in any missing information in section 2 for

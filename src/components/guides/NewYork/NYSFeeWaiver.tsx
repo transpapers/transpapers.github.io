@@ -31,7 +31,7 @@ function NYStateFeeWaiverGuide({ person }: { person: Partial<Person> }) {
       <h3>Fee Waiver Request (NY State, UCS-FW1)</h3>
       <p>
         This form is optional. It is a request to waive the filing fee charged
-        upon submitting {age && age < 18 ? " the UCS-NC2" : " the UCS-NC1 "}{" "}
+        upon submitting {age && age < 18 ? " the UCS-NC2 " : " the UCS-NC1 "}
         petition to the court. In New York State the filing fee is $210 (in NYC
         it&apos;s $65). Courts will typically not grant your waiver request
         unless you are on public assistance or your annual income is below 125%

@@ -26,7 +26,7 @@ function NewYorkEverythingElseGuide() {
     <section key="NY-EverythingElse">
       <h3>Everything Else (NY)</h3>
       <p>
-        New York’s Gender Recognition Act mandates that any New York based
+        New York&apos;s Gender Recognition Act mandates that any New York based
         public or private organization must change your name if you show them
         the court order and new ID. Some places will even allow for digital
         updates by scanning in your new ID and court order. What follows is a
@@ -80,7 +80,7 @@ function NewYorkEverythingElseGuide() {
       </p>
       <p>
         <strong>Property/House Title</strong>: Go to your local county
-        recorder’s office and state that you want to correct the name on your
+        recorder&apos;s office and state that you want to correct the name on your
         property. They should issue a correction deed that you can fill out and
         submit to update your name.
       </p>

@@ -31,7 +31,7 @@ function OregonDMVGuide({ person }: { person: Partial<Person> }) {
       <h3>Updating your Primary ID (OR)</h3>
       <p>
         This section covers the process of updating your primary identification
-        (driver’s license/state ID) and any vehicle registrations you may have.
+        (driver&apos;s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, then skip this section. You will need to
         schedule an in-person appointment at any DMV in the state, which can be
         done by hitting the &ldquo;Let&apos;s get started&rdquo; button at this{" "}
@@ -52,7 +52,7 @@ function OregonDMVGuide({ person }: { person: Partial<Person> }) {
         are other acceptable documents for proof of ID, they don&apos;t need to
         have your new information. You will also need a certified copy of the
         court order and the receipt from social security. Finally, if your
-        address is different now than on your old ID or if you don’t have an old
+        address is different now than on your old ID or if you don&apos;t have an old
         ID you will need proof of address. This is any two bits of mail, other
         forms of ID, bills, or other documents with your old full legal name on
         it and your current address. The proof of ID link above also contains a

@@ -87,7 +87,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
         {age && age < 18 && isChangingLegalName ? (
           <>
             <li>
-              Why do you, the petitioner, want to change this minor’s name?
+              Why do you, the petitioner, want to change this minor&apos;s name?
             </li>
           </>
         ) : (
@@ -96,7 +96,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
         {age && age < 18 && isChangingLegalSex ? (
           <>
             <li>
-              Why do you, the petitioner, want to change this minor’s gender?
+              Why do you, the petitioner, want to change this minor&apos;s gender?
             </li>
           </>
         ) : (
@@ -124,7 +124,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
         ) : (
           ""
         )}
-        <li>Is there anything else you’d like the court to know?</li>
+        <li>Is there anything else you&apos;d like the court to know?</li>
         <li>
           You may also be asked “Do you know of anyone who would oppose this
           name change?” The authors of this guide are not lawyers, but our
@@ -146,7 +146,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
           petitioner should receive that signed copy of the “Order Changing Name
           of a Minor” which we will call the court order from now on. Your
           petitioner will want to get two or three certified copies of that
-          court order from the clerk&apos;s office if they haven’t already
+          court order from the clerk&apos;s office if they haven&apos;t already
           pre-ordered them. Keep the original in a safe place and use the copies
           to update your other documents.
         </p>

@@ -103,7 +103,7 @@ function RhodeIslandFilingGuide({
           By state law, court clerks are barred from answering questions about
           the forms.
         </strong>{" "}
-        We recommend that you direct any questions you may have to the court’s
+        We recommend that you direct any questions you may have to the court&apos;s
         legal assistance center, a local LGBT organization, or an attorney.
       </p>
 

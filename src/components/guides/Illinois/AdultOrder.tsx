@@ -24,15 +24,15 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function IllinoisAdultOrderGuide({ person }: { person: Partial<Person> }) {
-  const { birthJurisdiction } = person;
+  const { birthJurisdictionName } = person;
 
   return (
     <section key="Illinois-AdultOrder">
       <h3>Order for Name Change (IL, ATJ 305.7)</h3>
       <p>
         The “Order for Name Change” (ATJ 305.7) is what the judge fills out to
-        approve a name change.
-        {birthJurisdiction?.name === "Illinois" ? (
+        approve a name change.{" "}
+        {birthJurisdictionName === "Illinois" ? (
           "This form is already complete."
         ) : (
           <>
@@ -42,9 +42,9 @@ function IllinoisAdultOrderGuide({ person }: { person: Partial<Person> }) {
             certificate. That information can be added to the &ldquo;Additional
             Orders&rdquo; section of this form. Use this{" "}
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">link</a>
-            or the contact info provided in that section to find out what
+            {" "}or the contact info provided in that section to find out what
             specifically needs to be present in this order to change your birth
-            certificate in {birthJurisdiction?.name ?? ""}.
+            certificate in {birthJurisdictionName}.
           </>
         )}
       </p>

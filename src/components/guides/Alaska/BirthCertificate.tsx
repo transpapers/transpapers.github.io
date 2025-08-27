@@ -24,13 +24,13 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function AlaskaBirthCertificateGuide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex, residentJurisdiction } = person;
+  const { age, isChangingLegalSex, residentJurisdictionName } = person;
 
   return (
     <section key="Alaska-BirthCertificate">
       <h3>Updating your Birth Certificate (AK)</h3>
       <p>
-        For this process {age && age < 18 ? " a parent/guardian " : " you "}{" "}
+        For this process {age && age < 18 ? " a parent/guardian " : " you "}
         will need an “Alaska Birth Certificate Request Form”, they will not
         change the birth certificate but will include the updated information in
         an addendum. On page 2 {age && age < 18 ? " they " : " you "} will need
@@ -50,7 +50,7 @@ function AlaskaBirthCertificateGuide({ person }: { person: Partial<Person> }) {
 
       {isChangingLegalSex ? (
         <p>
-          {residentJurisdiction?.name === "Alaska" ? (
+          {residentJurisdictionName === "Alaska" ? (
             <>
               To get an amended sex designation you will need a letter from the
               person giving you trans related care.
@@ -62,7 +62,7 @@ function AlaskaBirthCertificateGuide({ person }: { person: Partial<Person> }) {
               gender change.
             </>
           )}
-          We have included a template letter with a list of qualifying
+          {" "}We have included a template letter with a list of qualifying
           professions to take to this person for their reference. Email
           “BVSSpecialServices@alaska.gov” with any questions.
         </p>
@@ -82,7 +82,7 @@ function AlaskaBirthCertificateGuide({ person }: { person: Partial<Person> }) {
         If {age && age < 18 ? " a parent/guardian is " : " you are "} mailing
         this, a photocopy of both sides of an acceptable ID is needed instead.
         Place the photocopies, the “Alaska Birth Certificate Request Form”, and
-        a certified copy of the court order in an envelope. For payment by check
+        a certified copy of the court order in an envelope. For payment by check,
         address it to the “Alaska Vital Records Office” for the fee amount. The
         mailing address is on the first page of the form in the bottom left
         corner. It may take several weeks to get an updated copy back.

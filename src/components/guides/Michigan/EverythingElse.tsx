@@ -88,7 +88,7 @@ function MichiganEverythingElseGuide() {
         mail.
       </p>
       <p>
-        <strong>Property/House Title</strong>: Contact your county’s Registry of
+        <strong>Property/House Title</strong>: Contact your county&apos;s Registry of
         Deeds. A Grant or Quitclaim deed will need to be filed. Bring ID and
         court order.
       </p>

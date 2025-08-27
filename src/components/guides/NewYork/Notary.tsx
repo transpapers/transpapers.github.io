@@ -24,13 +24,13 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function NewYorkNotaryGuide({ person }: { person: Partial<Person> }) {
-  const { age, birthJurisdiction } = person;
+  const { age, birthJurisdictionName } = person;
 
   return (
     <section key="NewYork-Notary">
       <h3>Getting Documents and a Notary (NY)</h3>
 
-      {birthJurisdiction?.name === "New York" ? (
+      {birthJurisdictionName === "New York" ? (
         <p>
           In order to file {age && age < 18 ? " a parent/guardian " : " you "}
           will need a certified copy of your birth certificate. If you
@@ -43,7 +43,7 @@ function NewYorkNotaryGuide({ person }: { person: Partial<Person> }) {
           this{" "}
           <a href="https://wb-nycdohmh.qmatic.cloud/qmaticwebbooking/#/">
             link
-          </a>
+          </a>{" "}
           and selecting &ldquo;Purchase a Birth Certificate&rdquo;. They accept
           credit/debit cards, checks, or money orders. <strong>No Cash.</strong>
         </p>
@@ -71,7 +71,7 @@ function NewYorkNotaryGuide({ person }: { person: Partial<Person> }) {
           fee for this required service.
           {age && age > 13
             ? " "
-            : " You and the petitioner need to meet with the notary together to sign."}
+            : " You and the petitioner need to meet with the notary together to sign. "}
           Once all signatures are signed, witnessed, and stamped the form is
           ready to be filed at court.
         </p>

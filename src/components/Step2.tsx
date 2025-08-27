@@ -37,10 +37,10 @@ function Step2() {
   const navigate = useNavigate();
 
   const { updateAppState } = useStore((state) => state);
-  const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdictionName, residentLocalityName } = useStore(
     (state) => state,
   );
+  const updatePerson = useStore((state) => state.updatePerson);
 
   const onSubmit: SubmitHandler<Step2FormValues> = async (
     data: Step2FormValues,

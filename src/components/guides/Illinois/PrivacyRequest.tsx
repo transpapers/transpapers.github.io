@@ -30,9 +30,9 @@ function IllinoisPrivacyRequestGuide({ person }: { person: Partial<Person> }) {
     <section key="Illinois-PrivacyRequest">
       <h3>Motion to Impound (Make Court Records Private) (IL, ATJ 308.1)</h3>
       <p>
-        Illinois courts can make court records private so the public can’t see
+        Illinois courts can make court records private so the public can&apos;t see
         them using the “Motion to Impound (Make Court Records Private)” (ATJ
-        308.1) form.
+        308.1) form.{" "}
         {isChangingLegalSex && age && age > 17 ? (
           <>
             Just being transgender is enough proof for them to make the court
@@ -43,11 +43,11 @@ function IllinoisPrivacyRequestGuide({ person }: { person: Partial<Person> }) {
             Check the box in section 3 that most closely matches your situation.
             {age && age < 18
               ? " The top checkbox only applies if your petitioner meets the criteria not you. "
-              : ""}
+              : " "}
             Evidence can be attached if desired but it is optional.
           </>
         )}
-        We have a{" "}
+        {" "}We have a{" "}
         <a href="https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/c739a9d8-27a9-47e3-af18-a7ec5cfeef00/NC%20Motion%20to%20Impound.pdf">
           blank
         </a>{" "}

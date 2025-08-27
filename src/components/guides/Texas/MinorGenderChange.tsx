@@ -48,7 +48,7 @@ function TexasMinorGenderChangeGuide({ person }: { person: Partial<Person> }) {
         )}
         If a parent/guardian is deceased, get a certified copy of their death
         certificate and attach it to this form instead. If a parent/guardian
-        with parental rights or custody doesn’t sign the case will become
+        with parental rights or custody doesn&apos;t sign the case will become
         contested, which is beyond the scope of this guide. If that happens your
         petitioner will need to either hire a lawyer or you will need to wait
         until you are 18 to do the adult process. You can find legal help in the
@@ -59,7 +59,7 @@ function TexasMinorGenderChangeGuide({ person }: { person: Partial<Person> }) {
         {gender && (gender as string) === "X" ? (
           <>
             Unfortunately Texas doesn&apos;t allow for an “X” identifier on its
-            ID’s or Birth Certificates so there is no “X” option on these forms.
+            ID&apos;s or Birth Certificates so there is no “X” option on these forms.
             Please go through these forms and check “M” or “F” where they are
             blank.
           </>

@@ -40,16 +40,15 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
       <p>
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-11) contain instructions and
-        clarification, on page 5 at the top you will need to select which
+        clarification. On page 5 at the top you will need to select which
         documents you want. Then fill out your social security number in section
         5. If you have changed your name multiple times before then you will
         need to add them to section 9. For the photo we suggest going to a
         business for the highest chance of success.{" "}
         <strong>Do not staple it to the form.</strong> For section 10 on page 6
-        please fill out your parents place of birth, legal gender, and
-        citizenship status. On page 6 complete sections 11 through 21 as they
-        apply to you. For section 18 if you have no current travel plans write
-        &quot;none&quot; in every box.
+        fill out your parents place of birth, legal gender, and citizenship status. 
+        On page 6 complete sections 11 through 21 as they apply to you. For section 
+        18 if you have no current travel plans write &quot;none&quot; in every box.
       </p>
 
       {isChangingLegalSex ? (

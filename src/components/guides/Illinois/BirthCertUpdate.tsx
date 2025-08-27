@@ -39,14 +39,14 @@ function IllinoisBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             second blank of page 2.
           </>
         ) : (
-          ""
+          " "
         )}
         On the “Place of Birth or Death” line
-        {age && age < 18 ? " have your petitioner " : ""}
-        write in the exact location you were born in this format: hospital,
+        {age && age < 18 ? " have your petitioner " : " "}
+        write in the exact location you were born in this format: hospital name,
         city, and county. If you live in an apartment or have some other floor
-        or suite number add it in the third section where we added your street
-        address.
+        or suite number add it in the third section where we put your street
+        address if it wasn&apos;t otherwise included.
         {age && age < 18 ? " Your petitioner should " : " Do "}
         <strong>not</strong> sign {age && age < 18 ? "" : " in your new name "}
         or date this until a notary says to.
@@ -69,13 +69,17 @@ function IllinoisBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
       <p>
         Once the form is complete and notarized
         {age && age < 18
-          ? " have your petitioner make a photocopy of their ID "
-          : " make a photocopy of your ID "}
-        make sure both sides are photocopied and do <strong>not</strong> redact
-        them. The fee should be $15 and include one updated copy, additional
-        copies should be $2 but check the website to be sure. Have a check made
-        out to the “Illinois Department of Public Health” for the fee amount
-        plus any extra copies, if any. Then place the form,
+          ? " have your petitioner make a photocopy of their ID. "
+          : " make a photocopy of your ID. "}
+        Ensure both sides of the ID are photocopied and do <strong>not</strong> 
+        {" "}redact them. The fee should be $15 and include one updated copy, 
+        additional copies should be $2 but check the{" "}
+        <a href="https://dph.illinois.gov/topics-services/birth-death-other-records/birth-records/gender-reassignment.html">
+          website
+        </a>
+        {" "}to be sure. Have 
+        a check made out to the “Illinois Department of Public Health” for the 
+        fee amount plus any extra copies, if any. Then place the form,
         {isChangingLegalName ? " certified copy of the court order, " : ""}
         ID photocopies, and check into an envelope. Mail it to:
       </p>

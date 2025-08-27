@@ -34,13 +34,13 @@ function TexasDMVGuide({ person }: { person: Partial<Person> }) {
         gender marker on any Texas state documents such as an ID. They will deny
         the change and will add you to a list for attempting to. If you have
         updated your gender marker but not your name before the ban they
-        shouldn’t revert it when you go to update your name. This message will
+        shouldn&apos;t revert it when you go to update your name. This message will
         update if the legal situation changes.
       </p>
 
       <p>
         This section covers the process of updating your primary identification
-        (driver’s license/state ID) and any vehicle registrations you may have.
+        (driver&apos;s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, proceed to the next section. If you
         already have an ID the Texas Department of Public Safety requires that
         you inform them about the name change within 30 days of the order being
@@ -102,7 +102,7 @@ function TexasDMVGuide({ person }: { person: Partial<Person> }) {
         Make an appointment with <strong>any</strong> Texas DPS Drivers License
         office using this <a href="https://public.txdpsscheduler.com/">link</a>.
         For those <strong>not</strong> attempting to get around the gender
-        marker issue bring your court order, old ID, and payment. If you don’t
+        marker issue bring your court order, old ID, and payment. If you don&apos;t
         have an old ID then consult this{" "}
         <a href="https://www.dps.texas.gov/section/driver-license/how-apply-texas-identification-card">
           link
@@ -112,7 +112,7 @@ function TexasDMVGuide({ person }: { person: Partial<Person> }) {
           ? " Bring a parent/guardian to your appointment as well. "
           : ""}
         If you run into issues during your appointment, ask for a manager. If
-        that doesn’t resolve the issue, cancel the appointment and try again
+        that doesn&apos;t resolve the issue, cancel the appointment and try again
         elsewhere. Wait until you have your new Drivers License/State ID before
         continuing on. After the change is finalized you can ensure your voter
         registration is correct using this{" "}

@@ -46,7 +46,7 @@ function IllinoisChildInfoGuide({ person }: { person: Partial<Person> }) {
         {hasCriminalRecord ? (
           <>
             If you, the minor, have a criminal record your petitioner will need
-            to check “yes” for any boxes that apply or “No” if they don’t in
+            to check “yes” for any boxes that apply or “No” if they don&apos;t in
             section 3. Your petitioner cannot file this petition if you have
             been convicted of a felony and have yet to finish your sentence,
             including any parole. If box 23 is checked “Yes” your petitioner{" "}

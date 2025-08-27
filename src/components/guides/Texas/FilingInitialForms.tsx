@@ -35,7 +35,7 @@ function TexasFilingInitialFormsGuide({
     isChangingLegalSex,
     isChangingLegalName,
     hasCriminalRecord,
-    birthJurisdiction,
+    birthJurisdictionName,
     residentJurisdictionName,
     residentLocalityName,
   } = person;
@@ -72,7 +72,7 @@ function TexasFilingInitialFormsGuide({
       </a>
       . If there is a standing order for your court it will be in the
       documents list, include it when filing. The filing location is at
-     the {residentLocality.name} county district clerk’s office, located
+     the {residentLocality.name} county district clerk&apos;s office, located
       at {residentLocality.court.address}.
       {age && age < 18 && (
         <>
@@ -93,7 +93,7 @@ function TexasFilingInitialFormsGuide({
         about the forms.
       </strong>{" "}
       We recommend that you direct any questions you may have to the
-      court’s legal assistance center, a local LGBT organization, or an
+      court&apos;s legal assistance center, a local LGBT organization, or an
       attorney.
       </p>
 
@@ -207,7 +207,7 @@ function TexasFilingInitialFormsGuide({
         )}
         For gender changes Travis county offers either in-person filing or
         E-filing. For in-person filing they are located at the Travis county
-        district clerk’s office, on the 3rd floor of 1700 Guadalupe St, Austin,
+        district clerk&apos;s office, on the 3rd floor of 1700 Guadalupe St, Austin,
         TX 78701.
         {age && age < 18
           ? " Only the petitioner needs to be present to file in-person. "
@@ -225,7 +225,7 @@ function TexasFilingInitialFormsGuide({
           By state law, the court clerks in Travis county are barred from
           answering questions about the forms.
         </strong>{" "}
-        We recommend that you direct any questions you may have to the court’s
+        We recommend that you direct any questions you may have to the court&apos;s
         legal assistance center, a local LGBT organization, or an attorney.
       </p>
 
@@ -260,7 +260,7 @@ function TexasFilingInitialFormsGuide({
         Following to use for later. We will call the Order Following that the
         judge signed the “court order” from here on. Keep the original in a safe
         place.
-        {birthJurisdiction?.name === "Texas"
+        {birthJurisdictionName === "Texas"
           ? ""
           : " You can use the copy to update your birth certificate in a later section."}
       </p>

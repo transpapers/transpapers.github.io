@@ -74,7 +74,7 @@ function TexasUpdateBirthCertGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         If you have already updated your gender marker but not your name before
-        the ban they shouldn’t revert it if you go to update your name. If
+        the ban they shouldn&apos;t revert it if you go to update your name. If
         updating your birth certificate is not feasible a passport can be used
         in place of a birth certificate for nearly everything. They can also be
         completely updated with the correct name and gender marker.
@@ -135,7 +135,7 @@ function TexasUpdateBirthCertGuide({ person }: { person: Partial<Person> }) {
         <a href="https://dshs.texas.gov/vital-statistics/acceptable-identification-id">
           list
         </a>{" "}
-        of other acceptable ID’s to photocopy if needed. Then get a check or
+        of other acceptable ID&apos;s to photocopy if needed. Then get a check or
         money order for the total fee amount from page 1 made out to “DSHS Vital
         Statistics”. Finally grab an envelope and place the notarized
         “Correcting a Birth Certificate” (VS-170) form,{" "}

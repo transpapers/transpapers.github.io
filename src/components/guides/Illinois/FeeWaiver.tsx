@@ -35,11 +35,11 @@ function IllinoisFeeWaiverGuide({ person }: { person: Partial<Person> }) {
         The cost varies widely from county to county and changes regularly but
         it is generally the largest single fee in the process. Courts will{" "}
         <strong>always</strong> partially or fully grant this waiver if
-        {age && age < 18 ? " your petitioner" : " you"} is using one of the
+        {age && age < 18 ? " your petitioner is" : " you are"} using one of the
         public benefits listed in section 3. Otherwise the petition is not
         guaranteed to be granted but the worst they can do is deny it.
         {age && age < 18 ? " Your petitioner" : " You"} should fill in any
-        blanks in section 1 through 3. If
+        blanks in sections 1 through 3. If
         {age && age < 18 ? " your petitioner checks" : " you check"} at least
         one box in section 3 then skip sections 4 and 5. Otherwise fill those
         out as well. For section 6 a judge will only request a hearing if they

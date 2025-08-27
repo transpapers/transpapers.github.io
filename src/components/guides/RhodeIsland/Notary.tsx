@@ -23,16 +23,23 @@ import * as React from "react";
 
 import { type Person } from "../../../types/person";
 import { RhodeIslandCityOrTown } from "../../../types/locality";
+import { allJurisdictions } from "../../../jurisdiction/all";
 
 function RhodeIslandNotaryGuide({
   person,
-  locality,
 }: {
   person: Person;
   locality: RhodeIslandCityOrTown;
 }) {
-  const { age, birthJurisdiction } = person;
-  const { court, courtDoesBackgroundCheck } = locality;
+  const { age, birthJurisdictionName, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName,
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+  const residentLocality: RhodeIslandCityOrTown = localities.find(
+    (j) => j.name === residentLocalityName,
+  ) as RhodeIslandCityOrTown;
 
   return (
     <section key="RhodeIsland-Notary">
@@ -43,7 +50,7 @@ function RhodeIslandNotaryGuide({
         convenient.
       </p>
 
-      {birthJurisdiction?.name === "Rhode Island" ? (
+      {birthJurisdictionName === "Rhode Island" ? (
         <>
           <p>
             To do the birth certificate request by mail have a check or money
@@ -68,7 +75,7 @@ function RhodeIslandNotaryGuide({
           </p>
 
           <p>
-            To do the process in-person{" "}
+            To do the process in-person
             {age && age < 18 ? " a parent/guardian " : " you "}
             will need to make an appointment at this{" "}
             <a href="https://outlook.office365.com/book/VitalRecordsAppointments@health.ri.gov/">
@@ -87,7 +94,7 @@ function RhodeIslandNotaryGuide({
       )}
 
       <p>
-        Notaries are needed to witness{" "}
+        Notaries are needed to witness
         {age && age < 18 ? " both parent(s)/guardian(s) " : " your "}
         signatures and provide their own. The Change of Name form and
         (optionally) the Background Check Authorization form both need a notary
@@ -103,9 +110,9 @@ function RhodeIslandNotaryGuide({
         a photo ID.
       </p>
 
-      {courtDoesBackgroundCheck ? (
+      {residentLocality.courtDoesBackgroundCheck ? (
         <p>
-          Our records show that the {court.city} court either does the
+          Our records show that the {residentLocality.court.city} court either does the
           background check report for you when you file or gives its own unique
           instructions for one upon filing.
         </p>
@@ -123,6 +130,7 @@ function RhodeIslandNotaryGuide({
             notarized Authorization form, photocopy, payment, and self-addressed
             envelope into a large envelope and mail it to this address:
           </p>
+
           <p>
             <span>Rhode Island Office of the Attorney General</span>
             <br />
@@ -148,12 +156,12 @@ function RhodeIslandNotaryGuide({
           ? "Once you and your parent(s)/guardian(s) "
           : "Once you "}
         have a useable copy of the birth certificate
-        {courtDoesBackgroundCheck
+        {residentLocality.courtDoesBackgroundCheck
           ? " and a notarized Change of Name petition you are ready to file. The court should take care of the background check when you file."
           : ", a notarized Change of Name petition, and the background check results you are ready to file."}
       </p>
     </section>
   );
-}
+}}
 
 export default RhodeIslandNotaryGuide;

@@ -56,10 +56,10 @@ function NewYorkFilingGuide({
             newYork.localities
               .filter((loc) => loc.isNYC)
               .map(({ court, borough }) => (
-                <span key="{court.name}">
+                <p key="{residentLocality.court.name}">
                   <strong>{borough}</strong>: {court.address}. Phone Number:{" "}
                   {court.phone}
-                </span>
+                </p>
               )),
           )}
           <p>
@@ -72,7 +72,7 @@ function NewYorkFilingGuide({
         <>
           <p>
             The filing location is the {residentLocality.name} county court at {residentLocality.court.address}.
-            {age && age < 18 ? "A parent/guardian " : "You "} may want to call
+            {age && age < 18 ? " A parent/guardian " : " You "} may want to call
             ahead to check accepted payment types, their phone number is{" "}
             {residentLocality.court.phone}. Generally speaking though as long as you have cash,
             check, and card all ready to go then you are good. The cost to file
@@ -88,7 +88,7 @@ function NewYorkFilingGuide({
           By state law, court clerks are barred from answering questions about
           the forms.
         </strong>{" "}
-        We recommend that you direct any questions you may have to the court’s
+        We recommend that you direct any questions you may have to the court&apos;s
         legal assistance center, a local LGBT organization, or an attorney.
       </p>
 
@@ -99,7 +99,7 @@ function NewYorkFilingGuide({
           certificate, and the filing fee (or optional fee waiver) they should
           then give a reference number. The clerk should also tell your
           parent/guardian(s) when to come back for the court order confirming
-          the changes. There shouldn’t be a hearing unless there is a
+          the changes. There shouldn&apos;t be a hearing unless there is a
           parent/guardian who refused to give consent for the change. When they
           return they only need their ID(s) and the reference slip that the
           clerk gave them. Finally a document called &ldquo;Order Granting Name

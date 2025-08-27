@@ -66,7 +66,7 @@ function IllinoisFilingInitialFormsGuide({
             <a href="https://efileil.tylertech.cloud/OfsEfsp/ui/landing">
               link
             </a>{" "}
-            and click “Register for an Individual Account” from here the state
+            and click “Register for an Individual Account”. From here the state
             of Illinois provides extensive{" "}
             <a href="https://www.illinoiscourts.gov/self-help/how-to-e-file/">
               guides
@@ -95,9 +95,10 @@ function IllinoisFilingInitialFormsGuide({
             immediately. The “Resources” section of this guide can help with
             that. Provided that there is no hearing and the change is accepted
             they will return the “Order for Name Change” which we will call the 
-            court order from here on. Make sure to get one or two certified 
-            copies for later use and keep the original in a safe place. You are 
-            then ready to file with the Social Security Administration.
+            court order from here on. Skip the “Court Hearing” section and make 
+            sure to get one or two certified copies for later use. Keep the 
+            original in a safe place. You are then ready to file with the Social 
+            Security Administration.
           </p>
         </>
       ) : (

@@ -102,37 +102,37 @@ export const adultNameChangeMap: Formfill[] = [
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "16 - Checkboxes",
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "17 - Checkboxes",
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "18 - Checkboxes",
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "19 - Checkboxes",
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "20 - Checkboxes",
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "f - Checkboxes",
     choice: "No",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
+    check: applicant.hasCriminalRecord,
     fieldName: "22 - Checkboxes",
     choice: "No",
   }),
@@ -608,9 +608,9 @@ export const dmvGenderDesignationMap: Formfill[] = [
     choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
-          return "Yes";
-        case GenderMarker.F:
           return "No";
+        case GenderMarker.F:
+          return "Yes";
         case GenderMarker.X:
           return "43";
       }

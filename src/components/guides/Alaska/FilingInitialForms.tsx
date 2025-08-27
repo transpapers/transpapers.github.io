@@ -49,7 +49,7 @@ function AlaskaFilingInitialFormsGuide({
         Additionally some courts do not do name changes themselves but will
         still accept the paperwork, notarize it, and forward it to another
         court. Finally, if the paperwork was filed at the wrong court
-        {age && age < 18 ? " your petitioner " : " you "} may ask them to
+        {age && age < 18 ? " your petitioner" : " you"} may ask them to
         forward the paperwork and payment to the correct court.
         {age && age < 18
           ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. "
@@ -67,10 +67,10 @@ function AlaskaFilingInitialFormsGuide({
         <p>
           <span> In-person - </span>
           <br />
-          {age && age < 18 ? "Your petitioner " : "You "} can go directly to the{" "}
+          {age && age < 18 ? "Your petitioner" : "You"} can go directly to the{" "}
           {residentLocality.name} court at {residentLocality.court.address} to file. The forms can be
           signed, dated, and notarized there. A webpage with more information is
-          available{" "}
+          available at{" "}
           <a href={residentLocality.court.website} title="here">
             {residentLocality.court.website}
           </a>
@@ -85,7 +85,7 @@ function AlaskaFilingInitialFormsGuide({
         <p>
           <span> True Filing - </span>
           <br />
-          {age && age < 18 ? "Your petitioner " : "You "} can file online with
+          {age && age < 18 ? "Your petitioner" : "You"} can file online with
           the state&apos;s TrueFiling system at this{" "}
           <a href="https://akfile.truefiling.com/register">website</a>. There is
           also a video tutorial{" "}
@@ -93,7 +93,7 @@ function AlaskaFilingInitialFormsGuide({
             here
           </a>
           . As a backup measure we have transcribed the instructions from the
-          video below for {age && age < 18 ? " your petitioner " : " you "} if
+          video below for {age && age < 18 ? "your petitioner" : "you"} if
           needed.
         </p>
       ) : (
@@ -131,11 +131,11 @@ function AlaskaFilingInitialFormsGuide({
         <p>
           <span> Email - </span>
           <br />
-          {age && age < 18 ? "Your petitioner " : "You "} can file with the
-          court using this email address {residentLocality.emailCourt}. In order to use this
-          service the forms will need to be notarized by either a notary service
-          or a court clerk from another court before they are sent. Notaries can
-          be found in banks, some{" "}
+          {age && age < 18 ? "Your petitioner" : "You"} can file with the
+          court using this email address {residentLocality.emailCourt}. In order 
+          to use this service the forms will need to be notarized by either a 
+          notary service or a court clerk from another court before they are 
+          sent. Notaries can be found in banks, some{" "}
           <a href="https://www.theupsstore.com/tools/find-a-store">
             UPS Locations
           </a>
@@ -147,8 +147,8 @@ function AlaskaFilingInitialFormsGuide({
           documents as separate PDF attachments and naming them exactly like
           they are in the previous sections of this guide. The court clerk will
           then send an email back with a special payment link if a completed
-          “Request for Exemption from Payment of Fees” (TF-920) form with your
-          documents was not sent.
+          “Request for Exemption from Payment of Fees” (TF-920) form was not 
+          sent.
         </p>
       ) : (
         ""
@@ -158,18 +158,18 @@ function AlaskaFilingInitialFormsGuide({
         <p>
           <span> Fax - </span>
           <br />
-          {age && age < 18 ? "Your petitioner " : "You "} can file with the
+          {age && age < 18 ? "Your petitioner" : "You"} can file with the
           court by faxing the completed and notarized forms from the previous
-          section to this number {residentLocality.faxNumber}. In order to use this service the
-          forms will need to be notarized by either a notary service or a court
-          clerk from another court before the fax is sent. Notaries can be found
-          in banks, some{" "}
+          section to this number {residentLocality.faxNumber}. In order to use 
+          this service the forms will need to be notarized by either a notary 
+          service or a court clerk from another court before the fax is sent. 
+          Notaries can be found in banks, some{" "}
           <a href="https://www.theupsstore.com/tools/find-a-store">
             UPS Locations
           </a>
           , or <a href="https://www.notarize.com/">online</a>. There will be a
           fee for this service and photo ID is required. If the fee waiver was
-          denied or wasn&apos;t used the payment will be due on the day of the
+          not used or was denied the payment will be due on the day of the
           hearing.
         </p>
       ) : (
@@ -218,11 +218,13 @@ function AlaskaFilingInitialFormsGuide({
           ) : (
             ""
           )}
-          Instructions for each method are listed in the above section.
+          {" "}Instructions for each method are listed in the above section.
         </p>
       )}
 
       <p>
+        <span> After Filing - </span>
+        <br />
         Once everything has been filed the clerk will send an “Order For
         Hearing, Posting, and Additional Service” (CIV-701) which will have the
         date of the hearing, whether the court will publicize your case
@@ -233,10 +235,10 @@ function AlaskaFilingInitialFormsGuide({
         {age && age < 18
           ? " name changes involving absentee parents/guardians, criminal records, or probation. "
           : " petitioners with criminal records or petitioners who are on probation. "}
-        If {age && age < 18 ? " your petitioner has " : " you have "} been
-        instructed to do this, {age && age < 18 ? " they should " : " "} follow
-        the court&apos;s directions and fill out the Affidavit of Additional
-        Service (CIV-702) and return a completed and notarized copy to the court
+        If {age && age < 18 ? "your petitioner has" : "you have"} been
+        instructed to do this, {age && age < 18 ? "they should" : ""} follow
+        the court&apos;s directions and fill out the “Affidavit of Additional
+        Service” (CIV-702) and return a completed and notarized copy to the court
         as soon as possible. If the “Request for Exemption from Payment of Fees”
         (TF-920) was denied a filing fee will need to be paid in order to
         continue.
