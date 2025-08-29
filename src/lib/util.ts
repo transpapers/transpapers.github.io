@@ -33,12 +33,12 @@ import { allJurisdictions } from "../jurisdiction/all";
 import { Jurisdiction } from "../types/jurisdiction";
 import { 
   Locality, 
-  //MichiganCounty,
-  //NewYorkCounty,
-  //TexasCounty,
-  //OhioCounty,
-  //RhodeIslandCityOrTown,
-  //AlaskaAdministrativeDivision,
+  MichiganCounty,
+  NewYorkCounty,
+  TexasCounty,
+  OhioCounty,
+  RhodeIslandCityOrTown,
+  AlaskaAdministrativeDivision,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -297,14 +297,8 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   }
 
   const localities = foundJurisdiction.localities;
-  const foundLocality = localities.find(
-    (j) => j.name === localityKey,
-  );
-
-  return foundLocality;
 
   //FIXME This section is a temporary work around
-  /**
   switch (foundJurisdiction.name) {
     case "Rhode Island":
       {const foundLocality: RhodeIslandCityOrTown = localities.find(
@@ -349,7 +343,7 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
 
       return foundLocality};
   }
-  */
+  // End Section
 }
 
 /*!

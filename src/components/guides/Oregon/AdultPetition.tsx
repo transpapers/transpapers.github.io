@@ -24,11 +24,19 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonAdultPetitionGuide({ person }: { person: Partial<Person> }) {
-  const { residentLocalityName, isChangingLegalSex } = person;
+  const { residentLocalityName, isChangingLegalSex, residentJurisdictionName, birthJurisdictionName } = person;
   return (
     <section key="Oregon-Adult-Petition">
       <h3>Name and/or Sex Change Petition (OR)</h3>
-          
+      
+      <p>
+        <span>Resident State: {residentJurisdictionName ?? ""}</span>
+        <br />
+        <span>Resident County: {residentLocalityName ?? ""}</span>
+        <br />
+        <span>Birth State: {birthJurisdictionName ?? ""}</span>
+      </p>
+
       <p>
         The Petition for Change of Name/Sex allows for name and/or gender
         changes all in one form.
