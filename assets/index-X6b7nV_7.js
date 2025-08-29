@@ -43376,10 +43376,10 @@ function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdictionName, residentLocalityName } = useStore(
     (state) => state
   );
-  const updatePerson = useStore((state) => state.updatePerson);
   const onSubmit = async (data) => {
     updateAppState(data);
     updatePerson(data);
@@ -43416,8 +43416,8 @@ function Step3() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
-  const { birthJurisdictionName } = useStore((state) => state);
   const updatePerson = useStore((state) => state.updatePerson);
+  const { birthJurisdictionName } = useStore((state) => state);
   const onSubmit = async (data) => {
     updateAppState(data);
     updatePerson(data);
