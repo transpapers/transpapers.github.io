@@ -44,9 +44,9 @@ function OregonMinorPetitionGuide({ person }: { person: Partial<Person> }) {
         ) : (
             <>
             In order to file this your petitioner needs to be a resident of{" "}
-            {residentLocalityName} county, which just means you need an ID
+            {residentLocalityName ?? ""} county, which just means you need an ID
             or some mail with their name and an address within{" "}
-            {residentLocalityName} county on it.
+            {residentLocalityName ?? ""} county on it.
             </>
         )}
       </p>

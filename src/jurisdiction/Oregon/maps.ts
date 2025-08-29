@@ -45,7 +45,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 1, x: 431, y: 117 },
   }),
   (applicant) => ({
@@ -149,7 +149,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 3, x: 431, y: 117 },
   }),
   (applicant) => ({
@@ -175,7 +175,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 1, x: 430, y: 116 },
   }),
   (applicant) => ({
@@ -269,7 +269,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 3, x: 430, y: 117 },
   }),
   (applicant) => ({
@@ -283,7 +283,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 4, x: 430, y: 117 },
   }),
   (applicant) => ({
@@ -309,7 +309,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 5, x: 430, y: 117 },
   }),
   (applicant) => ({
@@ -335,7 +335,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 1, x: 420, y: 117 },
   }),
   (applicant) => ({
@@ -404,7 +404,7 @@ export const feeWaiverOregonMap: Formfill[] = [
   (applicant) => ({
     text: 
     !applicant.isChangingLegalSex ? 
-      applicant.residentLocalityName : "",
+      applicant.residentLocalityName ?? "" : "",
     loc: { page: 4, x: 420, y: 117 },
   }),
   (applicant) => ({
@@ -470,7 +470,7 @@ export const birthCertOregonMap: Formfill[] = [
     fieldName: "Applicant residential city",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.residentJurisdictionName ?? "",
     fieldName: "App residential city/county",
   }),
   (applicant) => ({
@@ -637,7 +637,7 @@ export const voterOregonMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "County of Residence",
   }),
   (applicant) => ({

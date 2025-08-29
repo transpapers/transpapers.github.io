@@ -34,7 +34,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
       {age && age < 18 ? (
         <>
           <p>
-            {birthJurisdictionName === "Oregon" ? (
+            {birthJurisdictionName && birthJurisdictionName === "Oregon" ? (
               <>
                 A court case is not required to update your information, instead it 
                 can be updated by changing your birth certificate information and 
@@ -66,7 +66,7 @@ function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
           <p>
             After the form is notarized your parent/guardian will need a
             large envelope,
-            {birthJurisdictionName === "Oregon"
+            {birthJurisdictionName && birthJurisdictionName === "Oregon"
                 ? " "
                 : " a copy of your court order, "}
             a photocopy of their ID (both sides), and payment. If your
@@ -136,8 +136,8 @@ function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
         the letter is sent.
         {age && age < 18 ? (
           <>
-            {birthJurisdictionName === "Oregon" &&
-            residentJurisdictionName === "Oregon" ? (
+            {birthJurisdictionName && birthJurisdictionName === "Oregon" &&
+            residentJurisdictionName && residentJurisdictionName === "Oregon" ? (
               <> 
                 According to the Social Security Administration&apos;s {" "}
                 <a href='https://secure.ssa.gov/poms.nsf/lnx/0110212090'> rules </a>

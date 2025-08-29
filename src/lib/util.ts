@@ -297,8 +297,14 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   }
 
   const localities = foundJurisdiction.localities;
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey,
+  );
+
+  return foundLocality;
 
   //FIXME This section is a temporary work around
+  /**
   switch (foundJurisdiction.name) {
     case "Rhode Island":
       {const foundLocality: RhodeIslandCityOrTown = localities.find(
@@ -343,7 +349,7 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
 
       return foundLocality};
   }
-  //end section
+  */
 }
 
 /*!

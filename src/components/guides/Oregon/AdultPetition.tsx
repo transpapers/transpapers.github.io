@@ -41,9 +41,9 @@ function OregonAdultPetitionGuide({ person }: { person: Partial<Person> }) {
         ) : (
         <>
             In order to file this you need to be a resident of{" "}
-            {residentLocalityName} county, which just means you need an ID or
+            {residentLocalityName ?? ""} county, which just means you need an ID or
             some mail with your legal name and an address within{" "}
-            {residentLocalityName} county on it.
+            {residentLocalityName ?? ""} county on it.
         </>
         )}
       </p>
