@@ -27875,10 +27875,50 @@ function getLocality(jurisdictionKey, localityKey) {
     return void 0;
   }
   const localities = foundJurisdiction.localities;
-  const foundLocality = localities.find(
-    (j) => j.name === localityKey
-  );
-  return foundLocality;
+  switch (foundJurisdiction.name) {
+    case "Rhode Island": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Alaska": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "New York": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Texas": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Michigan": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    case "Ohio": {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+    default: {
+      const foundLocality = localities.find(
+        (j) => j.name === localityKey
+      );
+      return foundLocality;
+    }
+  }
 }
 /*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
@@ -36488,9 +36528,25 @@ const voterOregonMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function OregonAdultPetitionGuide({ person }) {
-  const { residentLocalityName, isChangingLegalSex } = person;
+  const { residentLocalityName, isChangingLegalSex, residentJurisdictionName, birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (OR)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Resident State: ",
+        residentJurisdictionName ?? ""
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Resident County: ",
+        residentLocalityName ?? ""
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Birth State: ",
+        birthJurisdictionName ?? ""
+      ] })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The Petition for Change of Name/Sex allows for name and/or gender changes all in one form.",
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this you need to be a resident of Oregon, which just means you need an ID or some mail with your legal name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
