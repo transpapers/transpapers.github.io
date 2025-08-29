@@ -48,7 +48,7 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
         photo ID is required. A Drivers License, State ID, or passport will
         work. If it is one of the first two make sure to scan both sides, if it
         is the last one only the page with the passport ID and photo is needed.
-        If the photo ID does not have a {residentLocalityName} county address
+        If the photo ID does not have a {residentLocalityName ?? ""} county address
         additional proof of address is needed such as a lease or utility bill.
       </p>
 
@@ -63,7 +63,7 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
         the process until it does not.
       </p>
 
-      {residentLocalityName === "Cook" ? (
+      {residentLocalityName && residentLocalityName === "Cook" ? (
         <p>
           Cook county requires a copy of your birth certificate
           {age && age < 18 && " as well as your petitioner's"}.
@@ -78,7 +78,7 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
           )}
         </>
       )}
-      {residentLocalityName === "Cook" || (age && age < 18) ? (
+      {residentLocalityName && residentLocalityName === "Cook" || (age && age < 18) ? (
         <p>
           If a certified copy of a birth certificate is needed they are
           available online through{" "}
@@ -90,7 +90,7 @@ function IllinoisNotaryGuide({ person }: { person: Partial<Person> }) {
             Vital Records department
           </a>
           . If you
-          {residentLocalityName === "Cook" && age && age < 18
+          {residentLocalityName && residentLocalityName === "Cook" && age && age < 18
             ? " or your petitioner "
             : ""}
           were born in another country it will be through your birth country&apos;s

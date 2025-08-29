@@ -32,7 +32,7 @@ function IllinoisMinorOrderGuide({ person }: { person: Partial<Person> }) {
       <p>
         The “Order for Name Change” (NCM-O 2009.5) is what the judge fills out
         to approve a name change.{" "}
-        {birthJurisdictionName === "Illinois" ? (
+        {birthJurisdictionName && birthJurisdictionName === "Illinois" ? (
           <>
             This form is already complete.
           </>
@@ -47,7 +47,7 @@ function IllinoisMinorOrderGuide({ person }: { person: Partial<Person> }) {
             <a href="https://www.cdc.gov/nchs/w2w/index.htm">link</a>
             {" "}or the contact info provided in that section to find out what
             specifically needs to be present in this order to change your birth
-            certificate in {birthJurisdictionName}.
+            certificate in {birthJurisdictionName ?? ""}.
           </>
         )}
       </p>

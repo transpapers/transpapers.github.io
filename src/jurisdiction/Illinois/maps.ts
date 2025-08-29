@@ -43,7 +43,7 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultNameChangeMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 170 },
   }),
   (applicant) => ({
@@ -165,7 +165,7 @@ export const adultNameChangeMap: Formfill[] = [
  */
 export const adultNameChangeOrderMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 170 },
   }),
   (applicant) => ({
@@ -181,7 +181,7 @@ export const adultNameChangeOrderMap: Formfill[] = [
  */
 export const minorNameChangeMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 175, y: 165 },
   }),
   (applicant) => ({
@@ -249,7 +249,7 @@ export const minorNameChangeMap: Formfill[] = [
  */
 export const minorChildInfoMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 175, y: 198 },
   }),
   (applicant) => ({
@@ -374,7 +374,7 @@ export const minorChildInfoMap: Formfill[] = [
  */
 export const minorAdditionalParentMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 175, y: 201 },
   }),
   (applicant) => ({
@@ -390,7 +390,7 @@ export const minorAdditionalParentMap: Formfill[] = [
  */
 export const minorNameChangeOrderMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 180, y: 265 },
   }),
   (applicant) => ({
@@ -406,7 +406,7 @@ export const minorNameChangeOrderMap: Formfill[] = [
  */
 export const requestCourtRecordsPrivateMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 204 },
   }),
   (applicant) => ({
@@ -446,7 +446,7 @@ export const requestCourtRecordsPrivateMap: Formfill[] = [
  */
 export const orderCourtRecordsPrivateMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 204 },
   }),
   (applicant) => ({
@@ -462,7 +462,7 @@ export const orderCourtRecordsPrivateMap: Formfill[] = [
  */
 export const feeWaiverApplicationMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 160, y: 196 },
   }),
   (applicant) => ({
@@ -511,7 +511,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
  */
 export const feeWaiverJudgementMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 160, y: 203 },
   }),
   (applicant) => ({
@@ -531,7 +531,7 @@ export const feeWaiverJudgementMap: Formfill[] = [
  */
 export const efileExemptionMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 170, y: 171 },
   }),
   (applicant) => ({

@@ -30,16 +30,8 @@ function OregonAdultPetitionGuide({ person }: { person: Partial<Person> }) {
       <h3>Name and/or Sex Change Petition (OR)</h3>
       
       <p>
-        <span>Resident State: {residentJurisdictionName ?? ""}</span>
-        <br />
-        <span>Resident County: {residentLocalityName ?? ""}</span>
-        <br />
-        <span>Birth State: {birthJurisdictionName ?? ""}</span>
-      </p>
-
-      <p>
         The Petition for Change of Name/Sex allows for name and/or gender
-        changes all in one form.
+        changes all in one form.{" "}
         {isChangingLegalSex ? (
         <>
             In order to file this you need to be a resident of Oregon, which

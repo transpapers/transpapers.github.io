@@ -63,7 +63,7 @@ function IllinoisAdultPetitionGuide({ person }: { person: Partial<Person> }) {
         form and change that to a PO box or other alternate address. Be sure to
         check the relevant box if you do. This form is otherwise complete. In
         order to file this form you must have lived in{" "}
-        {residentLocalityName} county for at least 3 months.
+        {residentLocalityName ?? ""} county for at least 3 months.
       </p>
     </section>
   );

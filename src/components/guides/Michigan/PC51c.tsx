@@ -39,7 +39,7 @@ function MichiganPC51cGuide({ person }: { person: Partial<Person> }) {
             automatically qualifies for this process.
           </>
         ):("")} 
-        {" "}You do need to have lived in {residentLocalityName}{" "}
+        {" "}You do need to have lived in {residentLocalityName ?? ""}{" "}
         county for at least a year to file any forms though.
       </p>
 
