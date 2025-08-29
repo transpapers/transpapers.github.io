@@ -37,8 +37,9 @@ function Step3() {
   const navigate = useNavigate();
 
   const { updateAppState } = useStore((state) => state);
-  const { birthJurisdictionName } = useStore((state) => state);
   const updatePerson = useStore((state) => state.updatePerson);
+  const { birthJurisdictionName } = useStore((state) => state);
+  //const updatePerson = useStore((state) => state.updatePerson);
 
   const onSubmit: SubmitHandler<Step3FormValues> = async (
     data: Step3FormValues,
