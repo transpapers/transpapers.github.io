@@ -29139,7 +29139,7 @@ function MichiganPC51cGuide({ person }) {
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Anyone changing their name to affirm their gender identity automatically qualifies for this process." }) : "",
       " ",
       "You do need to have lived in ",
-      residentLocalityName,
+      residentLocalityName ?? "",
       " ",
       "county for at least a year to file any forms though."
     ] }),
@@ -29187,13 +29187,13 @@ function MichiganPC51Guide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Name Change (MI, PC51)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      residentLocalityName === "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      residentLocalityName && residentLocalityName === "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "In Kent county the court will ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
         " hold hearings for name changes meaning the process will not be published in a newspaper even when filing with the standard petition like this."
       ] }) : "",
       "You need to have lived in ",
-      residentLocalityName,
+      residentLocalityName ?? "",
       " county for at least one year to file any forms. If necessary complete item 1 for any active court cases."
     ] }),
     hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? " Fill out items 8 and/or 9 as needed for just you and the parent/guardian filing as your petitioner. Be sure to include any pending charges. " : " Fill out item 8 and include pending charges, you can attach sheets to the petition as necessary. Only your record needs to be attached. " }) : "",
@@ -36528,27 +36528,12 @@ const voterOregonMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function OregonAdultPetitionGuide({ person }) {
-  const { residentLocalityName, isChangingLegalSex, residentJurisdictionName, birthJurisdictionName } = person;
+  const { residentLocalityName, isChangingLegalSex } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (OR)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "Resident State: ",
-        residentJurisdictionName ?? ""
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "Resident County: ",
-        residentLocalityName ?? ""
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "Birth State: ",
-        birthJurisdictionName ?? ""
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The Petition for Change of Name/Sex allows for name and/or gender changes all in one form.",
+      " ",
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this you need to be a resident of Oregon, which just means you need an ID or some mail with your legal name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "In order to file this you need to be a resident of",
         " ",
@@ -39492,7 +39477,7 @@ const alaskanAdministrativeDivisions = [
  */
 const adultNameChangeMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 170 }
   }),
   (applicant) => ({
@@ -39610,7 +39595,7 @@ const adultNameChangeMap = [
  */
 const adultNameChangeOrderMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 170 }
   }),
   (applicant) => ({
@@ -39625,7 +39610,7 @@ const adultNameChangeOrderMap = [
  */
 const minorNameChangeMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 175, y: 165 }
   }),
   (applicant) => ({
@@ -39692,7 +39677,7 @@ const minorNameChangeMap = [
  */
 const minorChildInfoMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 175, y: 198 }
   }),
   (applicant) => ({
@@ -39813,7 +39798,7 @@ const minorChildInfoMap = [
  */
 const minorAdditionalParentMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 175, y: 201 }
   }),
   (applicant) => ({
@@ -39828,7 +39813,7 @@ const minorAdditionalParentMap = [
  */
 const minorNameChangeOrderMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 180, y: 265 }
   }),
   (applicant) => ({
@@ -39843,7 +39828,7 @@ const minorNameChangeOrderMap = [
  */
 const requestCourtRecordsPrivateMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 204 }
   }),
   (applicant) => ({
@@ -39882,7 +39867,7 @@ const requestCourtRecordsPrivateMap = [
  */
 const orderCourtRecordsPrivateMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 185, y: 204 }
   }),
   (applicant) => ({
@@ -39897,7 +39882,7 @@ const orderCourtRecordsPrivateMap = [
  */
 const feeWaiverApplicationMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 160, y: 196 }
   }),
   (applicant) => ({
@@ -39945,7 +39930,7 @@ const feeWaiverApplicationMap = [
  */
 const feeWaiverJudgementMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 160, y: 203 }
   }),
   (applicant) => ({
@@ -39964,7 +39949,7 @@ const feeWaiverJudgementMap = [
  */
 const efileExemptionMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     loc: { x: 170, y: 171 }
   }),
   (applicant) => ({
@@ -40186,13 +40171,13 @@ function IllinoisAdultOrderGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Order for Name Change” (ATJ 305.7) is what the judge fills out to approve a name change.",
       " ",
-      birthJurisdictionName === "Illinois" ? "This form is already complete." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      birthJurisdictionName && birthJurisdictionName === "Illinois" ? "This form is already complete." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Check the “Birth Certificate Update” section of your birth state, if applicable, near the end of this guide. Some states require more specific information to change the name or gender on your birth certificate. That information can be added to the “Additional Orders” section of this form. Use this",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "link" }),
         " ",
         "or the contact info provided in that section to find out what specifically needs to be present in this order to change your birth certificate in ",
-        birthJurisdictionName,
+        birthJurisdictionName ?? "",
         "."
       ] })
     ] })
@@ -40242,7 +40227,7 @@ function IllinoisAdultPetitionGuide({ person }) {
       " ",
       "form and change that to a PO box or other alternate address. Be sure to check the relevant box if you do. This form is otherwise complete. In order to file this form you must have lived in",
       " ",
-      residentLocalityName,
+      residentLocalityName ?? "",
       " county for at least 3 months."
     ] })
   ] }, "Illinois-AdultPetition");
@@ -40680,13 +40665,13 @@ function IllinoisMinorOrderGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Order for Name Change” (NCM-O 2009.5) is what the judge fills out to approve a name change.",
       " ",
-      birthJurisdictionName === "Illinois" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "This form is already complete." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      birthJurisdictionName && birthJurisdictionName === "Illinois" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "This form is already complete." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Check the “Birth Certificate Update” section of your birth state, if applicable, near the end of this guide. Some states require more specific information to change the name or gender on your birth certificate. That information can be added to the “Additional Orders” section of this form. Your petitioner should use this",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "link" }),
         " ",
         "or the contact info provided in that section to find out what specifically needs to be present in this order to change your birth certificate in ",
-        birthJurisdictionName,
+        birthJurisdictionName ?? "",
         "."
       ] })
     ] })
@@ -40726,7 +40711,7 @@ function IllinoisMinorPetitionGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Request for Name Change” (NCM-R 2003.5) is the main form for this process. The parent or legal guardian that is named on this form needs to file this on your behalf. This person then becomes your petitioner and will be going through this process with you. In order for your petitioner to file this on your behalf you need to have lived in",
       " ",
-      residentLocalityName,
+      residentLocalityName ?? "",
       " for at least 6 months. This form is already complete unless your petitioner wants to use an alternate address for safety. If so, here is a",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/76ab40ea-58b3-420b-84de-dd4a1a8662c1/NC-M%20Request%20for%20Name%20Change.pdf", children: "blank" }),
@@ -40771,7 +40756,7 @@ function IllinoisNotaryGuide({ person }) {
       "A redacted scanned copy of your ",
       age && age < 18 && "petitioner's ",
       "photo ID is required. A Drivers License, State ID, or passport will work. If it is one of the first two make sure to scan both sides, if it is the last one only the page with the passport ID and photo is needed. If the photo ID does not have a ",
-      residentLocalityName,
+      residentLocalityName ?? "",
       " county address additional proof of address is needed such as a lease or utility bill."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -40779,12 +40764,12 @@ function IllinoisNotaryGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopy" }),
       " with a black marker. If the scan of the photocopy still shows the information through the marker, keep repeating the process until it does not."
     ] }),
-    residentLocalityName === "Cook" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    residentLocalityName && residentLocalityName === "Cook" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Cook county requires a copy of your birth certificate",
       age && age < 18 && " as well as your petitioner's",
       "."
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "A copy of your birth certificate, not your petitioners, is required." }) }),
-    residentLocalityName === "Cook" || age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    residentLocalityName && residentLocalityName === "Cook" || age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "If a certified copy of a birth certificate is needed they are available online through",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH", children: "VitalChek" }),
@@ -40793,7 +40778,7 @@ function IllinoisNotaryGuide({ person }) {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "Vital Records department" }),
       ". If you",
-      residentLocalityName === "Cook" && age && age < 18 ? " or your petitioner " : "",
+      residentLocalityName && residentLocalityName === "Cook" && age && age < 18 ? " or your petitioner " : "",
       "were born in another country it will be through your birth country's records department instead to get proof of birth. Any document not in English needs a professional translation."
     ] }) : "",
     hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You will want to gather records of your criminal history including the charges, release paperwork, parole paperwork, or any documents showing that your sentence has been entirely served. Those can be added to the petition as supporting documents and will reduce the likelihood of a hearing." }) : ""
