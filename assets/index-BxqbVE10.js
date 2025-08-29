@@ -42050,7 +42050,7 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].cityofbirth[0]"
   }),
   (applicant) => ({
-    text: applicant.birthJurisdictionName,
+    text: applicant.birthJurisdictionName ?? "",
     fieldName: "topmostSubform[0].Page5[0].stateatbirth[0]"
   }),
   (applicant) => ({
@@ -42131,7 +42131,7 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]"
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.residentJurisdictionName ?? "",
     fieldName: "topmostSubform[0].Page5[0].state[0]"
   }),
   (applicant) => ({
@@ -43376,10 +43376,10 @@ function Step2() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
-  const updatePerson = useStore((state) => state.updatePerson);
   const { residentJurisdictionName, residentLocalityName } = useStore(
     (state) => state
   );
+  const updatePerson = useStore((state) => state.updatePerson);
   const onSubmit = async (data) => {
     updateAppState(data);
     updatePerson(data);
@@ -43416,8 +43416,8 @@ function Step3() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const { updateAppState } = useStore((state) => state);
-  const updatePerson = useStore((state) => state.updatePerson);
   const { birthJurisdictionName } = useStore((state) => state);
+  const updatePerson = useStore((state) => state.updatePerson);
   const onSubmit = async (data) => {
     updateAppState(data);
     updatePerson(data);
