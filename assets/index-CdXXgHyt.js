@@ -27875,50 +27875,10 @@ function getLocality(jurisdictionKey, localityKey) {
     return void 0;
   }
   const localities = foundJurisdiction.localities;
-  switch (foundJurisdiction.name) {
-    case "Rhode Island": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Alaska": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "New York": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Texas": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Michigan": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Ohio": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    default: {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-  }
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey
+  );
+  return foundLocality;
 }
 /*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
@@ -35963,7 +35923,7 @@ const newyorkCounties = [
  */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 1, x: 431, y: 117 }
   }),
   (applicant) => ({
@@ -36051,7 +36011,7 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 2, x: 604, y: 326 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 3, x: 431, y: 117 }
   }),
   (applicant) => ({
@@ -36074,7 +36034,7 @@ const adultNameSexPetitionOregonMap = [
  */
 const minorNameSexPetitionOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 1, x: 430, y: 116 }
   }),
   (applicant) => ({
@@ -36154,7 +36114,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 2, x: 601, y: 482 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 3, x: 430, y: 117 }
   }),
   (applicant) => ({
@@ -36166,7 +36126,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 3, x: 241, y: 298 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 4, x: 430, y: 117 }
   }),
   (applicant) => ({
@@ -36190,7 +36150,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 4, x: 637, y: 762 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 5, x: 430, y: 117 }
   }),
   (applicant) => ({
@@ -36213,7 +36173,7 @@ const minorNameSexPetitionOregonMap = [
  */
 const feeWaiverOregonMap = [
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 1, x: 420, y: 117 }
   }),
   (applicant) => ({
@@ -36272,7 +36232,7 @@ const feeWaiverOregonMap = [
     loc: { page: 3, x: 601, y: 688 }
   }),
   (applicant) => ({
-    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName : "",
+    text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
     loc: { page: 4, x: 420, y: 117 }
   }),
   (applicant) => ({
@@ -36331,7 +36291,7 @@ const birthCertOregonMap = [
     fieldName: "Applicant residential city"
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.residentJurisdictionName ?? "",
     fieldName: "App residential city/county"
   }),
   (applicant) => ({
@@ -36491,7 +36451,7 @@ const voterOregonMap = [
     fieldName: "Date of Birth"
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "County of Residence"
   }),
   (applicant) => ({
@@ -36536,10 +36496,10 @@ function OregonAdultPetitionGuide({ person }) {
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this you need to be a resident of Oregon, which just means you need an ID or some mail with your legal name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "In order to file this you need to be a resident of",
         " ",
-        residentLocalityName,
+        residentLocalityName ?? "",
         " county, which just means you need an ID or some mail with your legal name and an address within",
         " ",
-        residentLocalityName,
+        residentLocalityName ?? "",
         " county on it."
       ] })
     ] }),
@@ -36572,7 +36532,7 @@ function OregonBirthCertUpdateGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Birth Certificate Update (OR)" }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        birthJurisdictionName === "Oregon" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        birthJurisdictionName && birthJurisdictionName === "Oregon" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           "A court case is not required to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that.",
           " "
         ] }) : "",
@@ -36594,7 +36554,7 @@ function OregonBirthCertUpdateGuide({ person }) {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "After the form is notarized your parent/guardian will need a large envelope,",
-        birthJurisdictionName === "Oregon" ? " " : " a copy of your court order, ",
+        birthJurisdictionName && birthJurisdictionName === "Oregon" ? " " : " a copy of your court order, ",
         "a photocopy of their ID (both sides), and payment. If your parent is filling this out and their name does not match the one on your birth certificate they will need to attach documentation of the change (e.g. marriage certificate, divorce certificate, court order, etc…) ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopies only" }),
         ".",
@@ -36630,7 +36590,7 @@ function OregonBirthCertUpdateGuide({ person }) {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Alternatively the envelope can be placed in a dropbox at 800 NE Oregon St, Portland. It may take up to six months to process once the letter is sent.",
-      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: birthJurisdictionName === "Oregon" && residentJurisdictionName === "Oregon" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: birthJurisdictionName && birthJurisdictionName === "Oregon" && residentJurisdictionName && residentJurisdictionName === "Oregon" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "According to the Social Security Administration's ",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://secure.ssa.gov/poms.nsf/lnx/0110212090", children: " rules " }),
@@ -36955,10 +36915,10 @@ function OregonMinorPetitionGuide({ person }) {
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In order to file this your petitioner needs to be a resident of Oregon, which just means they need an ID or some mail with their name and an Oregon address on it." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "In order to file this your petitioner needs to be a resident of",
         " ",
-        residentLocalityName,
+        residentLocalityName ?? "",
         " county, which just means you need an ID or some mail with their name and an address within",
         " ",
-        residentLocalityName,
+        residentLocalityName ?? "",
         " county on it."
       ] })
     ] }),
@@ -37056,24 +37016,24 @@ const oregonNameChange = {
       filename: "Oregon/Name and Sex Change Petition Minor.pdf",
       guide: OregonMinorPetitionGuide,
       map: minorNameSexPetitionOregonMap,
-      include: (applicant) => isMinor(applicant) && applicant.birthJurisdictionName !== "Oregon"
+      include: (applicant) => isMinor(applicant) && (applicant.birthJurisdictionName ?? "") !== "Oregon"
     },
     {
       name: "Application for Deferral or Waiver of Fees and Declaration in Support",
       filename: "Oregon/Fee Waiver Form.pdf",
       guide: OregonFeeWaiverGuide,
       map: feeWaiverOregonMap,
-      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdictionName !== "Oregon"
+      include: (applicant) => !isMinor(applicant) || (applicant.birthJurisdictionName ?? "") !== "Oregon"
     },
     {
       name: "Filing Initial Documents",
       guide: OregonFilingInitialFormsGuide,
-      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdictionName !== "Oregon"
+      include: (applicant) => !isMinor(applicant) || (applicant.birthJurisdictionName ?? "") !== "Oregon"
     },
     {
       name: "Court Hearing",
       guide: OregonCourtHearingGuide,
-      include: (applicant) => !isMinor(applicant) || applicant.birthJurisdictionName !== "Oregon"
+      include: (applicant) => !isMinor(applicant) || (applicant.birthJurisdictionName ?? "") !== "Oregon"
     }
   ]
 };
