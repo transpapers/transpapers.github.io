@@ -72,7 +72,7 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].cityofbirth[0]",
   }),
   (applicant) => ({
-    text: applicant.birthJurisdictionName,
+    text: applicant.birthJurisdictionName ?? "",
     fieldName: "topmostSubform[0].Page5[0].stateatbirth[0]",
   }),
   (applicant) => ({
@@ -155,7 +155,7 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.residentJurisdictionName ?? "",
     fieldName: "topmostSubform[0].Page5[0].state[0]",
   }),
   (applicant) => ({
@@ -658,7 +658,7 @@ export const statusLetterMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      allCAPS(applicant.residentJurisdictionName),
+      allCAPS(applicant.residentJurisdictionName ?? ""),
     fieldName: "Current Mailing Address - State",
   }),
   (applicant) => ({
