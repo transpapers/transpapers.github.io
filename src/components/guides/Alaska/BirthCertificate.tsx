@@ -50,7 +50,7 @@ function AlaskaBirthCertificateGuide({ person }: { person: Partial<Person> }) {
 
       {isChangingLegalSex ? (
         <p>
-          {residentJurisdictionName === "Alaska" ? (
+          {residentJurisdictionName && residentJurisdictionName === "Alaska" ? (
             <>
               To get an amended sex designation you will need a letter from the
               person giving you trans related care.
