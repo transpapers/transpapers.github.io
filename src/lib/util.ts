@@ -33,12 +33,12 @@ import { allJurisdictions } from "../jurisdiction/all";
 import { Jurisdiction } from "../types/jurisdiction";
 import { 
   Locality, 
-  MichiganCounty,
-  NewYorkCounty,
-  TexasCounty,
-  OhioCounty,
-  RhodeIslandCityOrTown,
-  AlaskaAdministrativeDivision,
+  //MichiganCounty,
+  //NewYorkCounty,
+  //TexasCounty,
+  //OhioCounty,
+  //RhodeIslandCityOrTown,
+  //AlaskaAdministrativeDivision,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
