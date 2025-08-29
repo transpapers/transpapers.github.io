@@ -78,7 +78,7 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
           list of qualifying individuals is listed in section C of the form.
           Have them fill out section C and then you are ready to head to a DMV
           location.
-          {birthJurisdictionName === "Alaska"
+          {birthJurisdictionName && birthJurisdictionName === "Alaska"
             ? " If you are also updating your birth certificate you can have them do the letter for that section at the same time."
             : ""}
         </p>

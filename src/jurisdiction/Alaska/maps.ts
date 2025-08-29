@@ -43,7 +43,7 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultNamePetitionAlaskaMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocation",
   }),
   (applicant) => ({
@@ -139,7 +139,7 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
     fieldName: "email",
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocation",
   }),
   (applicant) => ({
@@ -219,7 +219,7 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
  */
 export const nonpetitionParentalConsentAlaskaMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocations",
   }),
   (applicant) => ({
@@ -266,7 +266,7 @@ export const applicationNameAlaskaMap: Formfill[] = [
     loc: { x: 187, y: 445 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.residentJurisdictionName ?? "",
     loc: { x: 433, y: 445 },
   }),
   (applicant) => ({
@@ -306,7 +306,7 @@ export const applicationNameAlaskaMap: Formfill[] = [
  */
 export const adultWaivePublicationAlaskaMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "location",
   }),
   (applicant) => ({
@@ -334,7 +334,7 @@ export const adultWaivePublicationAlaskaMap: Formfill[] = [
  */
 export const minorWaivePublicationAlaskaMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "location",
   }),
   (applicant) => ({
@@ -366,7 +366,7 @@ export const minorWaivePublicationAlaskaMap: Formfill[] = [
  */
 export const feeWaiverAlaskaMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocation",
   }),
   (applicant) => ({
@@ -390,7 +390,7 @@ export const feeWaiverAlaskaMap: Formfill[] = [
  */
 export const additionalServiceAlaskaMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "enter court location here",
   }),
   (applicant) => ({
