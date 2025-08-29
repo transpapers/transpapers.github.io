@@ -37508,7 +37508,7 @@ const oregonCounties = [
  */
 const adultNamePetitionAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37603,7 +37603,7 @@ const minorNamePetitionAlaskaMap = [
     fieldName: "email"
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37682,7 +37682,7 @@ const minorNamePetitionAlaskaMap = [
  */
 const nonpetitionParentalConsentAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocations"
   }),
   (applicant) => ({
@@ -37728,7 +37728,7 @@ const applicationNameAlaskaMap = [
     loc: { x: 187, y: 445 }
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.residentJurisdictionName ?? "",
     loc: { x: 433, y: 445 }
   }),
   (applicant) => ({
@@ -37767,7 +37767,7 @@ const applicationNameAlaskaMap = [
  */
 const adultWaivePublicationAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "location"
   }),
   (applicant) => ({
@@ -37794,7 +37794,7 @@ const adultWaivePublicationAlaskaMap = [
  */
 const minorWaivePublicationAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "location"
   }),
   (applicant) => ({
@@ -37825,7 +37825,7 @@ const minorWaivePublicationAlaskaMap = [
  */
 const feeWaiverAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37848,7 +37848,7 @@ const feeWaiverAlaskaMap = [
  */
 const additionalServiceAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.residentLocalityName ?? "",
     fieldName: "enter court location here"
   }),
   (applicant) => ({
@@ -38348,7 +38348,7 @@ function AlaskaDMVGuide({ person }) {
       " ",
       gender && gender === "X" ? " Alaska does not have an “X” option for ID's, you will need to check either “Male” or “Female” in section A. " : " ",
       "Fill out your driver's license or ID number, if applicable, in section A and then sign it with your old name. Sign and date with your old name as well in section B and then take it to a medical professional or therapist who is giving you trans-related care. A full list of qualifying individuals is listed in section C of the form. Have them fill out section C and then you are ready to head to a DMV location.",
-      birthJurisdictionName === "Alaska" ? " If you are also updating your birth certificate you can have them do the letter for that section at the same time." : ""
+      birthJurisdictionName && birthJurisdictionName === "Alaska" ? " If you are also updating your birth certificate you can have them do the letter for that section at the same time." : ""
     ] }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "When you ",
