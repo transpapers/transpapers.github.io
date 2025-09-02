@@ -73,14 +73,14 @@ function realLocation(
   pagePixelHeight: number,
   ourDpi: number,
 ): { x: number; y: number } {
-  const theirDpi = pagePixelHeight / 11.0;
-  const scale = ourDpi / theirDpi;
+  pagePixelHeight = (pagePixelHeight * (1/72)) * ourDpi;
+  pagePixelHeight = Math.round(pagePixelHeight)
 
   const fontSize = field.font?.fontSize ?? 12;
 
   return {
-    x: field.loc.x * scale,
-    y: pagePixelHeight - fontSize - field.loc.y * scale,
+    x: field.loc.x,
+    y: pagePixelHeight - fontSize - field.loc.y,
   };
 }
 
