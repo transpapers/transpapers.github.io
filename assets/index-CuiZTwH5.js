@@ -78580,12 +78580,12 @@ function fillField(doc, field) {
   }
 }
 function realLocation(field, pagePixelHeight, ourDpi) {
-  pagePixelHeight = pagePixelHeight * (1 / 72) * ourDpi;
-  pagePixelHeight = Math.round(pagePixelHeight);
+  const trueHeight = Math.round(pagePixelHeight * (1 / 72) * ourDpi);
   const fontSize = field.font?.fontSize ?? 12;
+  const trueFontSize = Math.round(fontSize * (1 / 72) * ourDpi);
   return {
     x: field.loc.x,
-    y: pagePixelHeight - fontSize - field.loc.y
+    y: trueHeight - trueFontSize - field.loc.y
   };
 }
 function placeField(doc, field) {
