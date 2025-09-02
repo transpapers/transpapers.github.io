@@ -73,14 +73,16 @@ function realLocation(
   pagePixelHeight: number,
   ourDpi: number,
 ): { x: number; y: number } {
-  pagePixelHeight = (pagePixelHeight * (1/72)) * ourDpi;
-  pagePixelHeight = Math.round(pagePixelHeight)
+  //getHeight returns a number in PDF Units (1/72) of an inch, must convert to pixels.
+  const trueHeight = Math.round((pagePixelHeight * (1/72)) * ourDpi);
 
+  //must adjust pixel size for font size as well
   const fontSize = field.font?.fontSize ?? 12;
+  const trueFontSize = Math.round((fontSize * (1/72)) * ourDpi);
 
   return {
     x: field.loc.x,
-    y: pagePixelHeight - fontSize - field.loc.y,
+    y: trueHeight - trueFontSize - field.loc.y,
   };
 }
 
