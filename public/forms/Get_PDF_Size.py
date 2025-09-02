@@ -13,7 +13,13 @@ count = 0
 for page in doc.pages: # iterate the document pages
     mediaBox = doc.pages[count].mediabox #grap media box object to get size
     count = count + 1
-    widthInch = mediaBox.width * (1/72)
-    heightInch = mediaBox.height * (1/72)
+    
+    print('Raw Width: ' + str(mediaBox.width))
+    widthInch = (mediaBox.width * (1/72)) * 100
+          
+    print('Raw Height: ' + str(mediaBox.height))
+    heightInch = (mediaBox.height * (1/72)) * 100
+          
     print('Page: ' + str(count) + ' Width: ' + str(widthInch) + ' Height: ' + str(heightInch))
+    print ('')
     

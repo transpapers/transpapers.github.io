@@ -76,13 +76,13 @@ function realLocation(
   //getHeight returns a number in PDF Units (1/72) of an inch, must convert to pixels.
   const trueHeight = Math.round((pagePixelHeight * (1/72)) * ourDpi);
 
-  //must adjust pixel size for font size as well
-  const fontSize = field.font?.fontSize ?? 12;
-  const trueFontSize = Math.round((fontSize * (1/72)) * ourDpi);
+  //this will return a 12 pixel height default text equivilent regardless of DPI
+  const defaultFontSize = Math.round((8.64 * (1/72)) * ourDpi)
+  const fontSize = field.font?.fontSize ?? defaultFontSize;
 
   return {
     x: field.loc.x,
-    y: trueHeight - trueFontSize - field.loc.y,
+    y: trueHeight - fontSize - field.loc.y,
   };
 }
 
