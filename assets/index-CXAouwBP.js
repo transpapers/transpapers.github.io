@@ -36043,7 +36043,7 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 2, x: 103, y: 326 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
     loc: { page: 2, x: 350, y: 326 }
   }),
   (applicant) => ({
