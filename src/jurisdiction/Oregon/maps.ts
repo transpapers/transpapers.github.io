@@ -46,7 +46,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     text: 
     !applicant.isChangingLegalSex ? 
       applicant.residentLocalityName ?? "" : "",
-    loc: { page: 1, x: 431, y: 117 },
+    loc: { x: 431, y: 117 },
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -139,7 +139,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 103, y: 326 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
     loc: { page: 2, x: 350, y: 326 },
   }),
   (applicant) => ({
