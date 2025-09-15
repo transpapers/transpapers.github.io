@@ -78579,8 +78579,8 @@ function fillField(doc, field) {
     }
   }
 }
-function realLocation(field, pagePixelHeight, ourDpi) {
-  const trueHeight = Math.round(pagePixelHeight * (1 / 72) * ourDpi);
+function realLocation(field, pageHeight, ourDpi) {
+  const trueHeight = Math.round(pageHeight * (1 / 72) * ourDpi);
   const defaultFontSize = Math.round(8.64 * (1 / 72) * ourDpi);
   const fontSize = field.font?.fontSize ?? defaultFontSize;
   return {
@@ -78599,7 +78599,7 @@ function placeField(doc, field) {
   }
   if (whatToWrite) {
     const page = doc.getPages()[field.loc.page ?? 0];
-    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100));
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 300));
   }
 }
 function fillForm(doc, fills, applicant) {
