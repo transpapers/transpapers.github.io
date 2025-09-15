@@ -35964,7 +35964,7 @@ const newyorkCounties = [
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
-    loc: { page: 1, x: 431, y: 117 }
+    loc: { x: 431, y: 117 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -36043,7 +36043,7 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 2, x: 103, y: 326 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
     loc: { page: 2, x: 350, y: 326 }
   }),
   (applicant) => ({
