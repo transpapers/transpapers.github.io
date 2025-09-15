@@ -139,7 +139,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 103, y: 326 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
+    text: formatContactInfo(applicant, cf.FullAddress),
     loc: { page: 2, x: 350, y: 326 },
   }),
   (applicant) => ({
