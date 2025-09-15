@@ -70,11 +70,11 @@ function fillField(doc: PDFDocument, field: FillableField) {
 
 function realLocation(
   field: PlaceableField,
-  pagePixelHeight: number,
+  pageHeight: number,
   ourDpi: number,
 ): { x: number; y: number } {
-  //getHeight returns a number in PDF Units (1/72) of an inch, must convert to pixels.
-  const trueHeight = Math.round((pagePixelHeight * (1/72)) * ourDpi);
+  //page.getHeight returns a number in PDF Units (1/72) of an inch, must convert to pixels.
+  const trueHeight = Math.round((pageHeight * (1/72)) * ourDpi);
 
   //this will return a 12 pixel height default text equivilent regardless of DPI
   const defaultFontSize = Math.round((8.64 * (1/72)) * ourDpi)
@@ -98,7 +98,7 @@ function placeField(doc: PDFDocument, field: PlaceableField) {
 
   if (whatToWrite) {
     const page = doc.getPages()[field.loc.page ?? 0];
-    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100));
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 300));
   }
 }
 
