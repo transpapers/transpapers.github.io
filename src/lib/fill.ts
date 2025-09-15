@@ -77,15 +77,16 @@ function realLocation(
   const trueHeight = Math.round((pageHeight * (1/72)) * ourDpi);
 
   //X&Y Coords are listed under the assumption of an 850 x 1100 pixel page which is 100 DPI.
-  const dpiAdjustedCoords = Math.round((field.loc.y * (1/72)) * ourDpi);
+  const yAdjustedDPI = Math.round((field.loc.y * (1/72)) * ourDpi);
+  const xAdjustedDPI = Math.round((field.loc.x * (1/72)) * ourDpi);
 
   //this will return a 12 pixel height default text equivilent regardless of DPI
   const defaultFontSize = Math.round((8.64 * (1/72)) * ourDpi);
   const fontSize = field.font?.fontSize ?? defaultFontSize;
 
   return {
-    x: field.loc.x,
-    y: trueHeight - fontSize - dpiAdjustedCoords,
+    x: xAdjustedDPI,
+    y: trueHeight - fontSize - yAdjustedDPI,
   };
 }
 
