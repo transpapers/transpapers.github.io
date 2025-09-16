@@ -132,7 +132,6 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
 
 export const alaskaGenderMarker: Process<AlaskaAdministrativeDivision> = {
   target: Target.GenderMarker,
-  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Certification for Change of Sex Designator on Driver License or Identification Card",

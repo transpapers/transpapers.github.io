@@ -87,7 +87,6 @@ export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
 
 export const rhodeislandGenderMarker: Process<RhodeIslandCityOrTown> = {
   target: Target.GenderMarker,
-  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
