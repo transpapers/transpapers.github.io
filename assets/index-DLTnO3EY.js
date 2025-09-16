@@ -29517,7 +29517,6 @@ const michiganNameChange = {
 };
 const michiganGenderMarker = {
   target: Target.GenderMarker,
-  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Michigan Dept. of State Sex Designation Form",
@@ -32738,7 +32737,6 @@ const rhodeislandNameChange = {
 };
 const rhodeislandGenderMarker = {
   target: Target.GenderMarker,
-  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
@@ -35250,7 +35248,6 @@ const newyorkNameChange = {
 };
 const newyorkGenderMarker = {
   target: Target.GenderMarker,
-  depends: [Target.BirthRecord, Target.PrimaryIdentification],
   documents: [
     {
       name: "Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older",
@@ -38846,7 +38843,6 @@ const alaskaNameChange = {
 };
 const alaskaGenderMarker = {
   target: Target.GenderMarker,
-  depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Certification for Change of Sex Designator on Driver License or Identification Card",
@@ -41105,7 +41101,6 @@ const illinoisNameChange = {
 };
 const illinoisGenderMarker = {
   target: Target.GenderMarker,
-  //depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Gender Designation Change Form",
