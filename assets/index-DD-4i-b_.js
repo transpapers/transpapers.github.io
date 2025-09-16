@@ -35964,7 +35964,7 @@ const newyorkCounties = [
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
-    loc: { x: 431, y: 117 }
+    loc: { page: 1, x: 431, y: 117 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -41105,7 +41105,7 @@ const illinoisNameChange = {
 };
 const illinoisGenderMarker = {
   target: Target.GenderMarker,
-  depends: [Target.PrimaryIdentification],
+  //depends: [Target.PrimaryIdentification],
   documents: [
     {
       name: "Gender Designation Change Form",
