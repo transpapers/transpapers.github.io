@@ -29,6 +29,7 @@ import { allProcesses } from "../types/jurisdiction";
 import { type Person } from "../types/person";
 import { Target } from "../types/process";
 import { AnyJurisdiction } from "../types/generic";
+import { MichiganCounty } from "../types/locality";
 
 import { allJurisdictions } from "../jurisdiction/all";
 import { compileGuidesFor } from "../lib/fill";
@@ -163,7 +164,7 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocalityName;
+  const locality = applicant.residentLocality as MichiganCounty;
 
   const guideElements = [];
 
