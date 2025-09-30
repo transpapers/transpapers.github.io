@@ -168,7 +168,7 @@ function Guide() {
 
   const guideElements = [];
 
-  if (locality) {
+  //if (locality) {
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
@@ -183,7 +183,7 @@ function Guide() {
         }
       }
     }
-  }
+ // }
 
   return (
     <>
