@@ -163,19 +163,19 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocality;
+  const localityName = applicant.residentLocalityName;
 
   const guideElements = [];
 
-  if (locality) {
+  if (localityName) {
     for (const section of guideSections) {
       for (const guide of section.guides) {
-        const correctlyTypedGuide = guide as Guide<typeof locality>;
+        const correctlyTypedGuide = guide as Guide<typeof localityName>;
 
         if (typeof correctlyTypedGuide === "function") {
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
-            locality,
+            localityName,
           });
 
           guideElements.push(element);
