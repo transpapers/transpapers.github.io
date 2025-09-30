@@ -78793,15 +78793,17 @@ function Guide() {
   }, console.error);
   const locality = applicant.residentLocality;
   const guideElements = [];
-  for (const section of guideSections) {
-    for (const guide of section.guides) {
-      const correctlyTypedGuide = guide;
-      if (typeof correctlyTypedGuide === "function") {
-        const element = reactExports.createElement(correctlyTypedGuide, {
-          person: applicant,
-          locality
-        });
-        guideElements.push(element);
+  if (locality) {
+    for (const section of guideSections) {
+      for (const guide of section.guides) {
+        const correctlyTypedGuide = guide;
+        if (typeof correctlyTypedGuide === "function") {
+          const element = reactExports.createElement(correctlyTypedGuide, {
+            person: applicant,
+            locality
+          });
+          guideElements.push(element);
+        }
       }
     }
   }
