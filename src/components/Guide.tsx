@@ -163,7 +163,7 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocality;
+  const locality = applicant.residentJurisdiction;
 
   const guideElements = [];
 
