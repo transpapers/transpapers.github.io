@@ -24,8 +24,6 @@ export interface Locality {
   court: Court;
 }
 
-export type GenericCounty = Locality;
-
 export type AlaskaAdministrativeDivision = Locality & {
   doesNameChange: boolean;
   inPersonFiling: boolean;

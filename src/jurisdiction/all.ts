@@ -22,7 +22,6 @@
 import { type AnyJurisdiction } from "../types/generic";
 import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
-import { GenericCounty } from "../types/locality";
 
 import {
   michiganBirthRecord,
@@ -123,7 +122,7 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
   localities: newyorkCounties,
 };
 
-export const oregon: Jurisdiction<GenericCounty> = {
+export const oregon: Jurisdiction<Locality> = {
   name: "Oregon",
   abbreviation: "OR",
   processes: [
@@ -149,7 +148,7 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   localities: alaskaCounties,
 };
 
-export const illinois: Jurisdiction<GenericCounty> = {
+export const illinois: Jurisdiction<Locality> = {
   name: "Illinois",
   abbreviation: "IL",
   processes: [

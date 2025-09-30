@@ -19,9 +19,9 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-import { GenericCounty } from "../../types/locality";
+import { Locality } from "../../types/locality";
 
-const oregonCounties: GenericCounty[] = [
+const oregonCounties: Locality[] = [
   {
     name: "Baker",
     court: {

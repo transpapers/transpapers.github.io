@@ -27,7 +27,6 @@ import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
 
 import {
-  GenericCounty,
   MichiganCounty,
   NewYorkCounty,
   TexasCounty,
@@ -37,7 +36,7 @@ import {
 } from "../types/locality";
 
 export type AnyLocality =
-  | GenericCounty
+  | Locality
   | MichiganCounty
   | RhodeIslandCityOrTown
   | NewYorkCounty
