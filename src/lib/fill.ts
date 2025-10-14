@@ -19,7 +19,7 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-import { PDFDocument, setFontAndSize } from "@cantoo/pdf-lib";
+import { PDFDocument } from "@cantoo/pdf-lib";
 
 import { Person } from "../types/person";
 import { Guide } from "../types/generic";
@@ -72,7 +72,7 @@ function realLocation(
   field: PlaceableField,
   pageHeight: number,
   ourDpi: number,
-): { x: number; y: number } {
+): { x: number; y: number; size: number } {
   //page.getHeight returns a number in PDF Units (1/72) of an inch, must convert to pixels.
   const trueHeight = Math.round((pageHeight * (1/72)) * ourDpi);
 
@@ -87,6 +87,7 @@ function realLocation(
   return {
     x: xAdjustedDPI,
     y: trueHeight - fontSize - yAdjustedDPI,
+    size: fontSize
   };
 }
 
@@ -102,8 +103,7 @@ function placeField(doc: PDFDocument, field: PlaceableField) {
 
   if (whatToWrite) {
     const page = doc.getPages()[field.loc.page ?? 0];
-    const selectedFont = setFontAndSize('TimesRoman', 12).toString();
-    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100), selectedFont);
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100));
   }
 }
 
