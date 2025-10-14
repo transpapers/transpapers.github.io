@@ -56,19 +56,19 @@ function AlaskaFilingInitialFormsGuide({
           : " "}
         Alaska also has several different methods of filing depending on the court.
         No matter what method is used a valid photo ID is needed to notarize the
-        forms. Below is a list of filing methods for the {residentLocality?.name} court.
+        forms. Below is a list of filing methods for the {residentLocality.name} court.
       </p>
 
-      {residentLocality?.inPersonFiling ? (
+      {residentLocality.inPersonFiling ? (
         <p>
           <span> In-person - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can go directly to the{" "}
-          {residentLocality?.name} court at {residentLocality?.court.address} to file. The forms can be
+          {residentLocality?.name} court at {residentLocality.court.address} to file. The forms can be
           signed, dated, and notarized there. A webpage with more information is
           available at{" "}
-          <a href={residentLocality?.court.website} title="here">
-            {residentLocality?.court.website}
+          <a href={residentLocality.court.website} title="here">
+            {residentLocality.court.website}
           </a>
           . It has the hours of operation, accepted payment types, and a phone
           number for any questions.
@@ -77,7 +77,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality?.trueFiling ? (
+      {residentLocality.trueFiling ? (
         <p>
           <span> True Filing - </span>
           <br />
@@ -96,7 +96,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality?.trueFiling ? (
+      {residentLocality.trueFiling ? (
         <p>
           You can fill out the form to register an account and begin the filing
           process. Log in, click on “File” in the upper right hand section, and
@@ -104,7 +104,7 @@ function AlaskaFilingInitialFormsGuide({
           new case” and select your name under “Filer”. Case types should then
           appear, one of which should say “Change of Name”. After you hit
           “Initiate Case” there will be a screen asking for Case information,
-          select {residentLocality?.name} for “Filing Location” and then fill out the
+          select {residentLocality.name} for “Filing Location” and then fill out the
           case type information as applicable. Then you should see a screen for
           “Party Information” which is just
           {age && age < 18 ? " the petitioner and the minor child. " : " you. "} 
@@ -123,12 +123,12 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality?.emailFiling ? (
+      {residentLocality.emailFiling ? (
         <p>
           <span> Email - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can file with the
-          court using this email address {residentLocality?.emailCourt}. In order 
+          court using this email address {residentLocality.emailCourt}. In order 
           to use this service the forms will need to be notarized by either a 
           notary service or a court clerk from another court before they are 
           sent. Notaries can be found in banks, some{" "}
@@ -150,13 +150,13 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality?.faxFiling ? (
+      {residentLocality.faxFiling ? (
         <p>
           <span> Fax - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can file with the
           court by faxing the completed and notarized forms from the previous
-          section to this number {residentLocality?.faxNumber}. In order to use 
+          section to this number {residentLocality.faxNumber}. In order to use 
           this service the forms will need to be notarized by either a notary 
           service or a court clerk from another court before the fax is sent. 
           Notaries can be found in banks, some{" "}
