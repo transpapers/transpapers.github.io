@@ -29517,13 +29517,7 @@ const michiganNameChange = {
 };
 const michiganGenderMarker = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Michigan Dept. of State Sex Designation Form",
-      filename: "Michigan/mdos_sdf.pdf",
-      map: mdosSexMap
-    }
-  ]
+  documents: []
 };
 const michiganPrimaryIdentification = {
   target: Target.PrimaryIdentification,
@@ -29532,6 +29526,12 @@ const michiganPrimaryIdentification = {
     {
       name: "Secretary of State",
       guide: MichiganSecretaryOfStateGuide
+    },
+    {
+      name: "Michigan Dept. of State Sex Designation Form",
+      filename: "Michigan/mdos_sdf.pdf",
+      map: mdosSexMap,
+      include: (applicant) => applicant.isChangingLegalSex === true
     }
   ]
 };
@@ -32737,13 +32737,7 @@ const rhodeislandNameChange = {
 };
 const rhodeislandGenderMarker = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
-      filename: "RhodeIsland/DMV Gender Designation.pdf",
-      map: genderIDMap
-    }
-  ]
+  documents: []
 };
 const rhodeislandPrimaryIdentification = {
   target: Target.PrimaryIdentification,
@@ -32755,6 +32749,12 @@ const rhodeislandPrimaryIdentification = {
       filename: "RhodeIsland/DMV LI-1.pdf",
       guide: RhodeIslandDMVGuide,
       map: primaryIDRhodeIslandMap
+    },
+    {
+      name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
+      filename: "RhodeIsland/DMV Gender Designation.pdf",
+      map: genderIDMap,
+      include: (applicant) => applicant.isChangingLegalSex === true
     }
   ]
 };
@@ -38515,14 +38515,16 @@ function AlaskaFilingInitialFormsGuide({
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (AK)" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Alaska has several different methods of filing depending on the court. Additionally some courts do not do name changes themselves but will still accept the paperwork, notarize it, and forward it to another court. Finally, if the paperwork was filed at the wrong court",
+        "Alaska has specific boundaries to determine which court a petitioner should file at. We have made a map with this information",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing", children: "here" }),
+        ". If the paperwork was filed at the wrong court",
         age && age < 18 ? " your petitioner" : " you",
         " may ask them to forward the paperwork and payment to the correct court.",
         age && age < 18 ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. " : " ",
-        "No matter what method is used a valid photo ID is needed to notarize the forms. Below is a list of filing methods for the ",
+        "Alaska also has several different methods of filing depending on the court. No matter what method is used a valid photo ID is needed to notarize the forms. Below is a list of filing methods for the ",
         residentLocality.name,
-        " court.",
-        residentLocality.doesNameChange ? "" : " This court only forwards to the " + (residentLocality.forwardsTo?.court.city ?? "") + " superior court whose methods are also listed, file at either."
+        " court."
       ] }),
       residentLocality.inPersonFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " In-person - " }),
@@ -38536,7 +38538,7 @@ function AlaskaFilingInitialFormsGuide({
         " to file. The forms can be signed, dated, and notarized there. A webpage with more information is available at",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "here", children: residentLocality.court.website }),
-        ". It has the hours of operation, accepted payment types, and a phone number to confirm that it is the correct place to file."
+        ". It has the hours of operation, accepted payment types, and a phone number for any questions."
       ] }) : "",
       residentLocality.trueFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " True Filing - " }),
@@ -38556,8 +38558,8 @@ function AlaskaFilingInitialFormsGuide({
         "You can fill out the form to register an account and begin the filing process. Log in, click on “File” in the upper right hand section, and choose the “AK Trial Court” option. Under “Action” select “Initiate a new case” and select your name under “Filer”. Case types should then appear, one of which should say “Change of Name”. After you hit “Initiate Case” there will be a screen asking for Case information, select ",
         residentLocality.name,
         " for “Filing Location” and then fill out the case type information as applicable. Then you should see a screen for “Party Information” which is just",
-        age && age < 18 ? " you and your minor child." : " you.",
-        " Fill in the information there and hit “Finish” which should take you to a page where you can upload the filled out forms from earlier in our guide. Upload all of your forms listed in the previous part here, with the exception of the “Request for Exemption from Payment of Fees” (TF-920) do ",
+        age && age < 18 ? " the petitioner and the minor child. " : " you. ",
+        "Fill in the information there and hit “Finish” which should take you to a page where you can upload the filled out forms from earlier in our guide. Upload all of your forms listed in the previous part here, with the exception of the “Request for Exemption from Payment of Fees” (TF-920) do ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
         " upload that form here. Make sure that the names of your uploaded forms match the official form names as written in our guide above then hit “Next” twice to proceed to payment checkout. If you are paying the fee you can enter credit/debit card information here, otherwise hit the “Request Fee Waiver”, select the top option, and upload the completed (TF-920) form there."
       ] }) : "",
@@ -38587,47 +38589,6 @@ function AlaskaFilingInitialFormsGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
         ". There will be a fee for this service and photo ID is required. If the fee waiver was not used or was denied the payment will be due on the day of the hearing."
       ] }) : "",
-      residentLocality.doesNameChange ? "" : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The ",
-        residentLocality.forwardsTo?.court.city,
-        " superior court allows for the following filing methods:",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        residentLocality.forwardsTo?.inPersonFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            "In-person - at ",
-            residentLocality.forwardsTo.court.address,
-            "."
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-        ] }) : "",
-        residentLocality.forwardsTo?.trueFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            "True Filing - at this",
-            " ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://akfile.truefiling.com/register", children: "website" }),
-            "."
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-        ] }) : "",
-        residentLocality.forwardsTo?.emailFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            "Email - at ",
-            residentLocality.forwardsTo.emailCourt,
-            "."
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-        ] }) : "",
-        residentLocality.forwardsTo?.faxFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-            "Fax - at ",
-            residentLocality.forwardsTo.faxNumber,
-            "."
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-        ] }) : "",
-        " ",
-        "Instructions for each method are listed in the above section."
-      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " After Filing - " }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
@@ -38843,14 +38804,7 @@ const alaskaNameChange = {
 };
 const alaskaGenderMarker = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Certification for Change of Sex Designator on Driver License or Identification Card",
-      id: "427",
-      filename: "Alaska/Primary ID Sex Designation Change.pdf",
-      map: primaryIDSexDesignationAlaskaMap
-    }
-  ]
+  documents: []
 };
 const alaskaPrimaryIdentification = {
   target: Target.PrimaryIdentification,
@@ -38862,6 +38816,13 @@ const alaskaPrimaryIdentification = {
       filename: "Alaska/Primary ID.pdf",
       guide: AlaskaDMVGuide,
       map: primaryIDAlaskaMap
+    },
+    {
+      name: "Certification for Change of Sex Designator on Driver License or Identification Card",
+      id: "427",
+      filename: "Alaska/Primary ID Sex Designation Change.pdf",
+      map: primaryIDSexDesignationAlaskaMap,
+      include: (applicant) => applicant.isChangingLegalSex === true
     }
   ]
 };
@@ -38941,34 +38902,6 @@ const alaskanAdministrativeDivisions = [
     trueFiling: false
   },
   {
-    name: "Angoon",
-    court: {
-      address: "700 Aan Deina Aat Street, Angoon, AK 99820",
-      city: "Angoon",
-      phone: "(907) 788-3229",
-      website: "https://courts.alaska.gov/courtdir/1ag.htm"
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "1SImailbox@akcourts.gov",
-    faxFiling: false,
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "304 Lake St #203, Sitka, AK 99835",
-        city: "Sitka",
-        phone: "(907) 747-3291",
-        website: "https://courts.alaska.gov/courtdir/1si.htm"
-      },
-      inPersonFiling: false,
-      emailFiling: true,
-      emailCourt: "1SImailbox@akcourts.gov",
-      faxFiling: false,
-      trueFiling: true
-    }
-  },
-  {
     name: "Bethel",
     court: {
       address: "204 Eddie Hoffman Hwy, Bethel, AK 99559",
@@ -39032,7 +38965,6 @@ const alaskanAdministrativeDivisions = [
   },
   {
     name: "Fairbanks",
-    /** If this data updates, update the forwardsTo for Fort Yukon and Galena as well.*/
     court: {
       address: "101 Lacey St, Fairbanks, AK 99701",
       city: "Fairbanks",
@@ -39046,66 +38978,6 @@ const alaskanAdministrativeDivisions = [
     faxFiling: true,
     faxNumber: "(907) 452-9330",
     trueFiling: true
-  },
-  {
-    name: "Fort Yukon",
-    court: {
-      address: "E 3rd Ave, Fort Yukon, AK 99740",
-      city: "Fort Yukon",
-      phone: "(907) 662-2336",
-      website: "https://courts.alaska.gov/courtdir/4fy.htm"
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "4FAcivil@akcourts.gov",
-    faxFiling: true,
-    faxNumber: "(907) 452-9330",
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "101 Lacey St, Fairbanks, AK 99701",
-        city: "Fairbanks",
-        phone: "(907) 452-9277",
-        website: "https://courts.alaska.gov/courtdir/4fa.htm"
-      },
-      inPersonFiling: true,
-      emailFiling: true,
-      emailCourt: "4FAcivil@akcourts.gov",
-      faxFiling: true,
-      faxNumber: "(907) 452-9330",
-      trueFiling: true
-    }
-  },
-  {
-    name: "Galena",
-    court: {
-      address: "167 Burbot Street, Galena AK 99741",
-      city: "Galena",
-      phone: "(907) 656-1322",
-      website: "https://courts.alaska.gov/courtdir/4ga.htm"
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "4FAcivil@akcourts.gov",
-    faxFiling: true,
-    faxNumber: "(907) 452-9330",
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "101 Lacey St, Fairbanks, AK 99701",
-        city: "Fairbanks",
-        phone: "(907) 452-9277",
-        website: "https://courts.alaska.gov/courtdir/4fa.htm"
-      },
-      inPersonFiling: true,
-      emailFiling: true,
-      emailCourt: "4FAcivil@akcourts.gov",
-      faxFiling: true,
-      faxNumber: "(907) 452-9330",
-      trueFiling: true
-    }
   },
   {
     name: "Glennallen",
@@ -39140,38 +39012,7 @@ const alaskanAdministrativeDivisions = [
     trueFiling: true
   },
   {
-    name: "Hoonah",
-    court: {
-      address: "300 Front St, Hoonah, AK 99829",
-      city: "Hoonah",
-      phone: "(907) 945-3668",
-      website: "https://courts.alaska.gov/courtdir/1hn.htm"
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "1JUMailbox@akcourts.gov",
-    faxFiling: true,
-    faxNumber: "(907) 463-3788",
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "123 W 4th St #2, Juneau, AK 99801",
-        city: "Juneau",
-        phone: "(907) 463-4700",
-        website: "https://courts.alaska.gov/courtdir/1ju.htm"
-      },
-      inPersonFiling: true,
-      emailFiling: true,
-      emailCourt: "1JUMailbox@akcourts.gov",
-      faxFiling: true,
-      faxNumber: "(907) 463-3788",
-      trueFiling: true
-    }
-  },
-  {
     name: "Juneau",
-    /** If this data updates, update the forwardsTo for Hoonah as well.*/
     court: {
       address: "123 W 4th St #2, Juneau, AK 99801",
       city: "Juneau",
@@ -39354,7 +39195,6 @@ const alaskanAdministrativeDivisions = [
   },
   {
     name: "Sitka",
-    /** If this data updates, update the forwardsTo for Angoon as well.*/
     court: {
       address: "304 Lake St #203, Sitka, AK 99835",
       city: "Sitka",
@@ -41101,14 +40941,7 @@ const illinoisNameChange = {
 };
 const illinoisGenderMarker = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Gender Designation Change Form",
-      id: "DSD A 329.3",
-      filename: "Illinois/SOS Gender Designation.pdf",
-      map: dmvGenderDesignationMap
-    }
-  ]
+  documents: []
 };
 const illinoisPrimaryIdentification = {
   target: Target.PrimaryIdentification,
@@ -41117,6 +40950,13 @@ const illinoisPrimaryIdentification = {
     {
       name: "Secretary Of State",
       guide: IllinoisSecretaryOfStateGuide
+    },
+    {
+      name: "Gender Designation Change Form",
+      id: "DSD A 329.3",
+      filename: "Illinois/SOS Gender Designation.pdf",
+      map: dmvGenderDesignationMap,
+      include: (applicant) => applicant.isChangingLegalSex === true
     }
   ]
 };
@@ -42941,7 +42781,7 @@ const illinois = {
 };
 const federal = {
   name: "Federal",
-  abbreviation: "DC",
+  abbreviation: "",
   processes: [socialSecurity, passport],
   localities: []
 };
@@ -78582,7 +78422,8 @@ function realLocation(field, pageHeight, ourDpi) {
   const fontSize = field.font?.fontSize ?? defaultFontSize;
   return {
     x: xAdjustedDPI,
-    y: trueHeight - fontSize - yAdjustedDPI
+    y: trueHeight - fontSize - yAdjustedDPI,
+    size: fontSize
   };
 }
 function placeField(doc, field) {
