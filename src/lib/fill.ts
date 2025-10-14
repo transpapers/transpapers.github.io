@@ -19,7 +19,7 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-import { PDFDocument, StandardFonts } from "@cantoo/pdf-lib";
+import { PDFDocument, setFontAndSize } from "@cantoo/pdf-lib";
 
 import { Person } from "../types/person";
 import { Guide } from "../types/generic";
@@ -102,7 +102,8 @@ function placeField(doc: PDFDocument, field: PlaceableField) {
 
   if (whatToWrite) {
     const page = doc.getPages()[field.loc.page ?? 0];
-    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100), StandardFonts('Times-Roman'), 12);
+    const selectedFont = setFontAndSize('TimesRoman', 12).toString();
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100), selectedFont);
   }
 }
 
