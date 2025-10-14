@@ -64,7 +64,7 @@ function AlaskaFilingInitialFormsGuide({
           <span> In-person - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can go directly to the{" "}
-          {residentLocality?.name} court at {residentLocality.court.address} to file. The forms can be
+          {residentLocality.name} court at {residentLocality.court.address} to file. The forms can be
           signed, dated, and notarized there. A webpage with more information is
           available at{" "}
           <a href={residentLocality.court.website} title="here">
