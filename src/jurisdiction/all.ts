@@ -163,7 +163,7 @@ export const illinois: Jurisdiction<Locality> = {
 
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
-  abbreviation: "DC",
+  abbreviation: "",
   processes: [socialSecurity, passport],
 
   localities: [],

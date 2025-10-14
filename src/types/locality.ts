@@ -32,19 +32,7 @@ export type AlaskaAdministrativeDivision = Locality & {
   faxFiling: boolean;
   faxNumber?: string;
   trueFiling: boolean;
-  forwardsTo?: ForwardsTo;
 };
-
-export interface ForwardsTo {
-  court: Court;
-
-  inPersonFiling: boolean;
-  emailFiling: boolean;
-  emailCourt?: string;
-  faxFiling: boolean;
-  faxNumber?: string;
-  trueFiling: boolean;
-}
 
 export type NewYorkCounty = Locality & {
   borough?: string;

@@ -85,15 +85,13 @@ export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
   ],
 };
 
+/** This process is empty because Rhode Island has no solo
+ * Gender Marker forms or processes but without a
+ * Gender Marker process the isChangingLegalSex variable
+ * reads false.*/
 export const rhodeislandGenderMarker: Process<RhodeIslandCityOrTown> = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
-      filename: "RhodeIsland/DMV Gender Designation.pdf",
-      map: genderIDMap,
-    },
-  ],
+  documents: [],
 };
 
 export const rhodeislandPrimaryIdentification: Process<RhodeIslandCityOrTown> =
@@ -107,6 +105,12 @@ export const rhodeislandPrimaryIdentification: Process<RhodeIslandCityOrTown> =
         filename: "RhodeIsland/DMV LI-1.pdf",
         guide: RhodeIslandDMVGuide,
         map: primaryIDRhodeIslandMap,
+      },
+      {
+        name: "State of Rhode Island Gender Designation on a License or Identification Card Form",
+        filename: "RhodeIsland/DMV Gender Designation.pdf",
+        map: genderIDMap,
+        include: (applicant) => applicant.isChangingLegalSex === true,
       },
     ],
   };

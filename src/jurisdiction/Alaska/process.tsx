@@ -130,16 +130,13 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
   ],
 };
 
+/** This process is empty because Alaska has no solo
+ * Gender Marker forms or processes but without a
+ * Gender Marker process the isChangingLegalSex variable
+ * reads false.*/
 export const alaskaGenderMarker: Process<AlaskaAdministrativeDivision> = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Certification for Change of Sex Designator on Driver License or Identification Card",
-      id: "427",
-      filename: "Alaska/Primary ID Sex Designation Change.pdf",
-      map: primaryIDSexDesignationAlaskaMap,
-    },
-  ],
+  documents: [],
 };
 
 export const alaskaPrimaryIdentification: Process<AlaskaAdministrativeDivision> =
@@ -153,6 +150,13 @@ export const alaskaPrimaryIdentification: Process<AlaskaAdministrativeDivision> 
         filename: "Alaska/Primary ID.pdf",
         guide: AlaskaDMVGuide,
         map: primaryIDAlaskaMap,
+      },
+      {
+        name: "Certification for Change of Sex Designator on Driver License or Identification Card",
+        id: "427",
+        filename: "Alaska/Primary ID Sex Designation Change.pdf",
+        map: primaryIDSexDesignationAlaskaMap,
+        include: (applicant) => applicant.isChangingLegalSex === true,
       },
     ],
   };

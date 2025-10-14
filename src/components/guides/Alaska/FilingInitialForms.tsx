@@ -45,43 +45,39 @@ function AlaskaFilingInitialFormsGuide({
       <h3>Filing Initial Forms (AK)</h3>
 
       <p>
-        Alaska has several different methods of filing depending on the court.
-        Additionally some courts do not do name changes themselves but will
-        still accept the paperwork, notarize it, and forward it to another
-        court. Finally, if the paperwork was filed at the wrong court
+        Alaska has specific boundaries to determine which court a petitioner should
+        file at. We have made a map with this information{" "}
+        <a href="https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing">here</a>.
+        If the paperwork was filed at the wrong court
         {age && age < 18 ? " your petitioner" : " you"} may ask them to
         forward the paperwork and payment to the correct court.
         {age && age < 18
           ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. "
           : " "}
+        Alaska also has several different methods of filing depending on the court.
         No matter what method is used a valid photo ID is needed to notarize the
-        forms. Below is a list of filing methods for the {residentLocality.name} court.
-        {residentLocality.doesNameChange
-          ? ""
-          : " This court only forwards to the " +
-            (residentLocality.forwardsTo?.court.city ?? "") +
-            " superior court whose methods are also listed, file at either."}
+        forms. Below is a list of filing methods for the {residentLocality?.name} court.
       </p>
 
-      {residentLocality.inPersonFiling ? (
+      {residentLocality?.inPersonFiling ? (
         <p>
           <span> In-person - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can go directly to the{" "}
-          {residentLocality.name} court at {residentLocality.court.address} to file. The forms can be
+          {residentLocality?.name} court at {residentLocality?.court.address} to file. The forms can be
           signed, dated, and notarized there. A webpage with more information is
           available at{" "}
-          <a href={residentLocality.court.website} title="here">
-            {residentLocality.court.website}
+          <a href={residentLocality?.court.website} title="here">
+            {residentLocality?.court.website}
           </a>
           . It has the hours of operation, accepted payment types, and a phone
-          number to confirm that it is the correct place to file.
+          number for any questions.
         </p>
       ) : (
         ""
       )}
 
-      {residentLocality.trueFiling ? (
+      {residentLocality?.trueFiling ? (
         <p>
           <span> True Filing - </span>
           <br />
@@ -100,7 +96,7 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality.trueFiling ? (
+      {residentLocality?.trueFiling ? (
         <p>
           You can fill out the form to register an account and begin the filing
           process. Log in, click on “File” in the upper right hand section, and
@@ -108,12 +104,12 @@ function AlaskaFilingInitialFormsGuide({
           new case” and select your name under “Filer”. Case types should then
           appear, one of which should say “Change of Name”. After you hit
           “Initiate Case” there will be a screen asking for Case information,
-          select {residentLocality.name} for “Filing Location” and then fill out the
+          select {residentLocality?.name} for “Filing Location” and then fill out the
           case type information as applicable. Then you should see a screen for
           “Party Information” which is just
-          {age && age < 18 ? " you and your minor child." : " you."} Fill in
-          the information there and hit “Finish” which should take you to a page
-          where you can upload the filled out forms from earlier in our guide.
+          {age && age < 18 ? " the petitioner and the minor child. " : " you. "} 
+          Fill in the information there and hit “Finish” which should take you to 
+          a page where you can upload the filled out forms from earlier in our guide.
           Upload all of your forms listed in the previous part here, with the
           exception of the “Request for Exemption from Payment of Fees” (TF-920)
           do <strong>not</strong> upload that form here. Make sure that the
@@ -127,12 +123,12 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality.emailFiling ? (
+      {residentLocality?.emailFiling ? (
         <p>
           <span> Email - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can file with the
-          court using this email address {residentLocality.emailCourt}. In order 
+          court using this email address {residentLocality?.emailCourt}. In order 
           to use this service the forms will need to be notarized by either a 
           notary service or a court clerk from another court before they are 
           sent. Notaries can be found in banks, some{" "}
@@ -154,13 +150,13 @@ function AlaskaFilingInitialFormsGuide({
         ""
       )}
 
-      {residentLocality.faxFiling ? (
+      {residentLocality?.faxFiling ? (
         <p>
           <span> Fax - </span>
           <br />
           {age && age < 18 ? "Your petitioner" : "You"} can file with the
           court by faxing the completed and notarized forms from the previous
-          section to this number {residentLocality.faxNumber}. In order to use 
+          section to this number {residentLocality?.faxNumber}. In order to use 
           this service the forms will need to be notarized by either a notary 
           service or a court clerk from another court before the fax is sent. 
           Notaries can be found in banks, some{" "}
@@ -174,52 +170,6 @@ function AlaskaFilingInitialFormsGuide({
         </p>
       ) : (
         ""
-      )}
-
-      {residentLocality.doesNameChange ? (
-        ""
-      ) : (
-        <p>
-          The {residentLocality.forwardsTo?.court.city} superior court allows for the following
-          filing methods:
-          <br />
-          {residentLocality.forwardsTo?.inPersonFiling ? (
-            <>
-              <span>In-person - at {residentLocality.forwardsTo.court.address}.</span>
-              <br />
-            </>
-          ) : (
-            ""
-          )}
-          {residentLocality.forwardsTo?.trueFiling ? (
-            <>
-              <span>
-                True Filing - at this{" "}
-                <a href="https://akfile.truefiling.com/register">website</a>.
-              </span>
-              <br />
-            </>
-          ) : (
-            ""
-          )}
-          {residentLocality.forwardsTo?.emailFiling ? (
-            <>
-              <span>Email - at {residentLocality.forwardsTo.emailCourt}.</span>
-              <br />
-            </>
-          ) : (
-            ""
-          )}
-          {residentLocality.forwardsTo?.faxFiling ? (
-            <>
-              <span>Fax - at {residentLocality.forwardsTo.faxNumber}.</span>
-              <br />
-            </>
-          ) : (
-            ""
-          )}
-          {" "}Instructions for each method are listed in the above section.
-        </p>
       )}
 
       <p>

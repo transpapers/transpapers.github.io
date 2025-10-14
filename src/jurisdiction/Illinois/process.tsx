@@ -161,16 +161,13 @@ export const illinoisNameChange: Process<Locality> = {
   ],
 };
 
+/** This process is empty because Illinois has no solo
+ * Gender Marker forms or processes but without a
+ * Gender Marker process the isChangingLegalSex variable
+ * reads false.*/
 export const illinoisGenderMarker: Process<Locality> = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Gender Designation Change Form",
-      id: "DSD A 329.3",
-      filename: "Illinois/SOS Gender Designation.pdf",
-      map: dmvGenderDesignationMap,
-    },
-  ],
+  documents: [],
 };
 
 export const illinoisPrimaryIdentification: Process<Locality> = {
@@ -180,6 +177,13 @@ export const illinoisPrimaryIdentification: Process<Locality> = {
     {
       name: "Secretary Of State",
       guide: IllinoisSecretaryOfStateGuide,
+    },
+    {
+      name: "Gender Designation Change Form",
+      id: "DSD A 329.3",
+      filename: "Illinois/SOS Gender Designation.pdf",
+      map: dmvGenderDesignationMap,
+      include: (applicant) => applicant.isChangingLegalSex === true,
     },
   ],
 };

@@ -111,15 +111,13 @@ export const michiganNameChange: Process<MichiganCounty> = {
   ],
 };
 
+/** This process is empty because Michigan has no solo
+ * Gender Marker forms or processes but without a
+ * Gender Marker process the isChangingLegalSex variable
+ * reads false.*/
 export const michiganGenderMarker: Process<MichiganCounty> = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Michigan Dept. of State Sex Designation Form",
-      filename: "Michigan/mdos_sdf.pdf",
-      map: mdosSexMap,
-    },
-  ],
+  documents: [],
 };
 
 export const michiganPrimaryIdentification: Process<MichiganCounty> = {
@@ -129,6 +127,12 @@ export const michiganPrimaryIdentification: Process<MichiganCounty> = {
     {
       name: "Secretary of State",
       guide: MichiganSecretaryOfStateGuide,
+    },
+    {
+      name: "Michigan Dept. of State Sex Designation Form",
+      filename: "Michigan/mdos_sdf.pdf",
+      map: mdosSexMap,
+      include: (applicant) => applicant.isChangingLegalSex === true,
     },
   ],
 };

@@ -102,7 +102,7 @@ function placeField(doc: PDFDocument, field: PlaceableField) {
 
   if (whatToWrite) {
     const page = doc.getPages()[field.loc.page ?? 0];
-    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100));
+    page.drawText(whatToWrite, realLocation(field, page.getHeight(), 100), doc.StandardFonts.TimesRoman, 12);
   }
 }
 

@@ -39,34 +39,6 @@ const alaskanAdministrativeDivisions: AlaskaAdministrativeDivision[] = [
     trueFiling: false,
   },
   {
-    name: "Angoon",
-    court: {
-      address: "700 Aan Deina Aat Street, Angoon, AK 99820",
-      city: "Angoon",
-      phone: "(907) 788-3229",
-      website: "https://courts.alaska.gov/courtdir/1ag.htm",
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "1SImailbox@akcourts.gov",
-    faxFiling: false,
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "304 Lake St #203, Sitka, AK 99835",
-        city: "Sitka",
-        phone: "(907) 747-3291",
-        website: "https://courts.alaska.gov/courtdir/1si.htm",
-      },
-      inPersonFiling: false,
-      emailFiling: true,
-      emailCourt: "1SImailbox@akcourts.gov",
-      faxFiling: false,
-      trueFiling: true,
-    },
-  },
-  {
     name: "Bethel",
     court: {
       address: "204 Eddie Hoffman Hwy, Bethel, AK 99559",
@@ -130,7 +102,6 @@ const alaskanAdministrativeDivisions: AlaskaAdministrativeDivision[] = [
   },
   {
     name: "Fairbanks",
-    /** If this data updates, update the forwardsTo for Fort Yukon and Galena as well.*/
     court: {
       address: "101 Lacey St, Fairbanks, AK 99701",
       city: "Fairbanks",
@@ -144,66 +115,6 @@ const alaskanAdministrativeDivisions: AlaskaAdministrativeDivision[] = [
     faxFiling: true,
     faxNumber: "(907) 452-9330",
     trueFiling: true,
-  },
-  {
-    name: "Fort Yukon",
-    court: {
-      address: "E 3rd Ave, Fort Yukon, AK 99740",
-      city: "Fort Yukon",
-      phone: "(907) 662-2336",
-      website: "https://courts.alaska.gov/courtdir/4fy.htm",
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "4FAcivil@akcourts.gov",
-    faxFiling: true,
-    faxNumber: "(907) 452-9330",
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "101 Lacey St, Fairbanks, AK 99701",
-        city: "Fairbanks",
-        phone: "(907) 452-9277",
-        website: "https://courts.alaska.gov/courtdir/4fa.htm",
-      },
-      inPersonFiling: true,
-      emailFiling: true,
-      emailCourt: "4FAcivil@akcourts.gov",
-      faxFiling: true,
-      faxNumber: "(907) 452-9330",
-      trueFiling: true,
-    },
-  },
-  {
-    name: "Galena",
-    court: {
-      address: "167 Burbot Street, Galena AK 99741",
-      city: "Galena",
-      phone: "(907) 656-1322",
-      website: "https://courts.alaska.gov/courtdir/4ga.htm",
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "4FAcivil@akcourts.gov",
-    faxFiling: true,
-    faxNumber: "(907) 452-9330",
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "101 Lacey St, Fairbanks, AK 99701",
-        city: "Fairbanks",
-        phone: "(907) 452-9277",
-        website: "https://courts.alaska.gov/courtdir/4fa.htm",
-      },
-      inPersonFiling: true,
-      emailFiling: true,
-      emailCourt: "4FAcivil@akcourts.gov",
-      faxFiling: true,
-      faxNumber: "(907) 452-9330",
-      trueFiling: true,
-    },
   },
   {
     name: "Glennallen",
@@ -238,38 +149,7 @@ const alaskanAdministrativeDivisions: AlaskaAdministrativeDivision[] = [
     trueFiling: true,
   },
   {
-    name: "Hoonah",
-    court: {
-      address: "300 Front St, Hoonah, AK 99829",
-      city: "Hoonah",
-      phone: "(907) 945-3668",
-      website: "https://courts.alaska.gov/courtdir/1hn.htm",
-    },
-    doesNameChange: false,
-    inPersonFiling: true,
-    emailFiling: true,
-    emailCourt: "1JUMailbox@akcourts.gov",
-    faxFiling: true,
-    faxNumber: "(907) 463-3788",
-    trueFiling: true,
-    forwardsTo: {
-      court: {
-        address: "123 W 4th St #2, Juneau, AK 99801",
-        city: "Juneau",
-        phone: "(907) 463-4700",
-        website: "https://courts.alaska.gov/courtdir/1ju.htm",
-      },
-      inPersonFiling: true,
-      emailFiling: true,
-      emailCourt: "1JUMailbox@akcourts.gov",
-      faxFiling: true,
-      faxNumber: "(907) 463-3788",
-      trueFiling: true,
-    },
-  },
-  {
     name: "Juneau",
-    /** If this data updates, update the forwardsTo for Hoonah as well.*/
     court: {
       address: "123 W 4th St #2, Juneau, AK 99801",
       city: "Juneau",
@@ -452,7 +332,6 @@ const alaskanAdministrativeDivisions: AlaskaAdministrativeDivision[] = [
   },
   {
     name: "Sitka",
-    /** If this data updates, update the forwardsTo for Angoon as well.*/
     court: {
       address: "304 Lake St #203, Sitka, AK 99835",
       city: "Sitka",
