@@ -86,7 +86,7 @@ function realLocation(
 
   return {
     x: field.loc.x,
-    y: field.loc.y,
+    y: pageHeight - (fontSize + field.loc.y),
     //y: trueHeight - (fontSize + yAdjustedDPI),
     size: fontSize
   };
