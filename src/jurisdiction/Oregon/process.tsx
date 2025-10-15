@@ -69,12 +69,12 @@ export const oregonNameChange: Process<Locality> = {
       include: (applicant) =>
         !isMinor(applicant) || (applicant.birthJurisdictionName ?? "") !== "Oregon",
     },
-    {
-      name: "Filing Initial Documents",
-      guide: OregonFilingInitialFormsGuide,
-      include: (applicant) =>
-        !isMinor(applicant) || (applicant.birthJurisdictionName ?? "") !== "Oregon",
-    },
+    //{
+      //name: "Filing Initial Documents",
+      //guide: OregonFilingInitialFormsGuide,
+      //include: (applicant) =>
+        //!isMinor(applicant) || (applicant.birthJurisdictionName ?? "") !== "Oregon",
+    //},
     {
       name: "Court Hearing",
       guide: OregonCourtHearingGuide,
