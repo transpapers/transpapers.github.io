@@ -78415,10 +78415,11 @@ function fillField(doc, field) {
   }
 }
 function realLocation(field, pageHeight, ourDpi) {
+  const xAdjustedDPI = Math.round(field.loc.x / (field.loc.x * (1 / 72) * ourDpi) * field.loc.x);
   const defaultFontSize = Math.round(8.64 * (1 / 72) * ourDpi);
   const fontSize = field.font?.fontSize ?? defaultFontSize;
   return {
-    x: field.loc.x,
+    x: xAdjustedDPI,
     y: pageHeight - (fontSize + field.loc.y),
     //y: trueHeight - (fontSize + yAdjustedDPI),
     size: fontSize
