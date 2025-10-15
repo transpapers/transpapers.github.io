@@ -29517,6 +29517,7 @@ const michiganNameChange = {
 };
 const michiganGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: []
 };
 const michiganPrimaryIdentification = {
@@ -32737,6 +32738,7 @@ const rhodeislandNameChange = {
 };
 const rhodeislandGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: []
 };
 const rhodeislandPrimaryIdentification = {
@@ -35248,6 +35250,7 @@ const newyorkNameChange = {
 };
 const newyorkGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: [
     {
       name: "Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older",
@@ -37077,6 +37080,7 @@ const oregonNameChange = {
 };
 const oregonGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: []
 };
 const oregonPrimaryIdentification = {
@@ -38804,6 +38808,7 @@ const alaskaNameChange = {
 };
 const alaskaGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: []
 };
 const alaskaPrimaryIdentification = {
@@ -40941,6 +40946,7 @@ const illinoisNameChange = {
 };
 const illinoisGenderMarker = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: []
 };
 const illinoisPrimaryIdentification = {
