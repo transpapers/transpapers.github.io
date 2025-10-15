@@ -167,6 +167,7 @@ export const illinoisNameChange: Process<Locality> = {
  * reads false.*/
 export const illinoisGenderMarker: Process<Locality> = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: [],
 };
 

@@ -91,6 +91,7 @@ export const rhodeislandNameChange: Process<RhodeIslandCityOrTown> = {
  * reads false.*/
 export const rhodeislandGenderMarker: Process<RhodeIslandCityOrTown> = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: [],
 };
 

@@ -136,6 +136,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
  * reads false.*/
 export const alaskaGenderMarker: Process<AlaskaAdministrativeDivision> = {
   target: Target.GenderMarker,
+  depends: [Target.NameChange],
   documents: [],
 };
 
