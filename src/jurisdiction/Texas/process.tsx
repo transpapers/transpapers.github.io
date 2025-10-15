@@ -220,7 +220,6 @@ export const texasNameChange: Process<TexasCounty> = {
 
 export const texasGenderMarker: Process<TexasCounty> = {
   target: Target.GenderMarker,
-  depends: [Target.NameChange],
   documents: [
     {
       name: "Gender Change Warning",

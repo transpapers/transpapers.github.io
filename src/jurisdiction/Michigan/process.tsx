@@ -117,7 +117,6 @@ export const michiganNameChange: Process<MichiganCounty> = {
  * reads false.*/
 export const michiganGenderMarker: Process<MichiganCounty> = {
   target: Target.GenderMarker,
-  depends: [Target.NameChange],
   documents: [],
 };
 

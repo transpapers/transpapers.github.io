@@ -90,7 +90,6 @@ export const oregonNameChange: Process<Locality> = {
  * reads false.*/
 export const oregonGenderMarker: Process<Locality> = {
   target: Target.GenderMarker,
-  depends: [Target.NameChange],
   documents: [],
 };
 
