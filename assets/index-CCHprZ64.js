@@ -78419,7 +78419,7 @@ function realLocation(field, pageHeight, ourDpi) {
   const fontSize = field.font?.fontSize ?? defaultFontSize;
   return {
     x: field.loc.x,
-    y: field.loc.y,
+    y: pageHeight - (fontSize + field.loc.y),
     //y: trueHeight - (fontSize + yAdjustedDPI),
     size: fontSize
   };
