@@ -140,10 +140,6 @@ function Guide() {
     return <></>;
   }
 
-  const localities = residentJurisdiction.localities;
-  const residentLocality = localities.find(
-    (j) => j.name === residentLocalityName);
-
   const processes = getProcesses(
     residentJurisdiction,
     birthJurisdiction,
@@ -172,7 +168,10 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocality;
+  const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName);
+  //const locality = applicant.residentLocality;
 
   const guideElements = [];
 
@@ -186,16 +185,14 @@ function Guide() {
         const correctlyTypedGuide = guide as Guide<typeof residentLocality>;
 
         if (typeof correctlyTypedGuide === "function") {
-          if (locality) {
             guideChecker.name = "True";
             const element = React.createElement(correctlyTypedGuide, {
               person: applicant,
-              locality,
+              residentLocality,
             });
           
 
             guideElements.push(element);
-          }
         }
       }
     }
