@@ -78597,7 +78597,12 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
 }
 function Guide() {
   const applicant = useStore((state) => state.person);
-  const { residentJurisdictionName, birthJurisdictionName, processNames } = useStore((state) => state);
+  const {
+    residentJurisdictionName,
+    residentLocalityName,
+    birthJurisdictionName,
+    processNames
+  } = useStore((state) => state);
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName
   );
@@ -78607,6 +78612,10 @@ function Guide() {
   if (!(residentJurisdiction && birthJurisdiction)) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
   }
+  const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName
+  );
   const processes = getProcesses(
     residentJurisdiction,
     birthJurisdiction,
@@ -78635,18 +78644,20 @@ function Guide() {
   const guideElements = [];
   const localityChecker = { name: "False" };
   const guideChecker = { name: "False" };
-  if (locality) {
+  if (residentLocality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide;
         if (typeof correctlyTypedGuide === "function") {
-          guideChecker.name = "True";
-          const element = reactExports.createElement(correctlyTypedGuide, {
-            person: applicant,
-            locality
-          });
-          guideElements.push(element);
+          if (locality) {
+            guideChecker.name = "True";
+            const element = reactExports.createElement(correctlyTypedGuide, {
+              person: applicant,
+              locality
+            });
+            guideElements.push(element);
+          }
         }
       }
     }
