@@ -78647,6 +78647,7 @@ function Guide() {
       }
     }
   }
+  const guideArrayLength = guideElements.length;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Thank you for using Transpapers!" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -78654,7 +78655,8 @@ function Guide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "You should print both this webpage and the PDF containing your compiled documents." }),
       " ",
-      "Please review the forms and guide side by side."
+      "Please review the forms and guide side by side.",
+      guideArrayLength
     ] }),
     ...guideElements
   ] });
