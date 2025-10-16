@@ -120,7 +120,7 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant = useStore((state) => state.person) as Person;
+  const applicant = useStore((state) => state.person);
 
   const { residentJurisdictionName, birthJurisdictionName, processNames } =
     useStore((state) => state);
@@ -163,11 +163,11 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocality;
+  const locality = applicant!.residentLocality as AnyLocality;
 
   const guideElements = [];
 
-  if (locality) {
+  //if (locality) {
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
@@ -182,7 +182,7 @@ function Guide() {
         }
       }
     }
-  }
+  //}
 
   return (
     <>
