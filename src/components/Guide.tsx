@@ -167,17 +167,17 @@ function Guide() {
 
   const guideElements = [];
 
-  const localityChecker: {status: boolean} = {status: false};
-  const guideChecker: {status: boolean} = {status: false};
+  const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
+  const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
 
   if (locality) {
-    localityChecker.status === true;
+    localityChecker.name === "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
 
         if (typeof correctlyTypedGuide === "function") {
-          guideChecker.status === true;
+          guideChecker.name === "True";
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
             locality,
@@ -208,8 +208,8 @@ function Guide() {
       if (guideArrayLength === 0) {
       <p>
         Number of guide sections generated: {guideArrayLength}. Locality 
-        generating correctly: {localityChecker.status.toString()}. Guide 
-        pushing correctly: {guideChecker.status.toString()}. If you see
+        generating correctly: {localityChecker.name}. Guide 
+        pushing correctly: {guideChecker.name}. If you see
         this message report the bug to our{" "}
         <a href="https://tinyurl.com/mgdc-feedback">feedback</a> form.
       </p>
