@@ -163,7 +163,7 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant!.residentLocality as AnyLocality;
+  const locality: AnyLocality = applicant.residentLocality;
 
   const guideElements = [];
 
