@@ -78651,6 +78651,8 @@ function Guide() {
       }
     }
   }
+  localityChecker.name = "Updating";
+  guideChecker.name = "Updating";
   const guideArrayLength = guideElements.length;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Thank you for using Transpapers!" }),
@@ -78661,8 +78663,7 @@ function Guide() {
       " ",
       "Please review the forms and guide side by side."
     ] }),
-    "if (guideArrayLength === 0) ",
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    guideArrayLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Number of guide sections generated: ",
       guideArrayLength,
       ". Locality generating correctly: ",
@@ -78673,9 +78674,7 @@ function Guide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "feedback" }),
       " form."
-    ] }),
-    ":",
-    "",
+    ] }) : "",
     ...guideElements
   ] });
 }
