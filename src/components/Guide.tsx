@@ -189,7 +189,7 @@ function Guide() {
           guideChecker.name = "True";
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
-            locality,
+            residentLocality,
           });
 
           guideElements.push(element);
