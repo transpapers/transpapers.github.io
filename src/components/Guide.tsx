@@ -26,7 +26,7 @@ import { compileDocuments, collateDocuments } from "../lib/fill";
 import useStore from "../store";
 
 import { allProcesses } from "../types/jurisdiction";
-import { type Person } from "../types/person";
+import { Person } from "../types/person";
 import { Target } from "../types/process";
 import { AnyJurisdiction } from "../types/generic";
 
@@ -119,8 +119,8 @@ function getProcesses(
   return processes;
 }
 
-function Guide() {
-  const applicant = useStore((state) => state.person);
+function Guide(applicant: Person) {
+  //const applicant = useStore((state) => state.person);
 
   const { residentJurisdictionName, birthJurisdictionName, processNames } =
     useStore((state) => state);
