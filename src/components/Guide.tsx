@@ -120,7 +120,7 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant = useStore((state) => state.person);
+  const applicant = useStore((state) => state.person) as Person;
 
   const { residentJurisdictionName, birthJurisdictionName, processNames } =
     useStore((state) => state);
@@ -163,7 +163,7 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocality as AnyLocality;
+  const locality = applicant.residentLocality;
 
   const guideElements = [];
 
