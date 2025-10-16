@@ -120,10 +120,14 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant: Partial<Person> = useStore((state) => state.person);
+  const applicant = useStore((state) => state.person);
 
-  const { residentJurisdictionName, birthJurisdictionName, processNames } =
-    useStore((state) => state);
+  const { 
+    residentJurisdictionName,
+    residentLocalityName,
+    birthJurisdictionName, 
+    processNames 
+  } = useStore((state) => state);
 
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName,
@@ -135,6 +139,11 @@ function Guide() {
   if (!(residentJurisdiction && birthJurisdiction)) {
     return <></>;
   }
+
+  const localities = residentJurisdiction.localities;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName);
+
   const processes = getProcesses(
     residentJurisdiction,
     birthJurisdiction,
@@ -163,18 +172,18 @@ function Guide() {
     }
   }, console.error);
 
-  const locality = applicant.residentLocality;
+  //const locality = applicant.residentLocality;
 
   const guideElements = [];
 
   const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
   const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
 
-  if (locality) {
+  if (residentLocality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
-        const correctlyTypedGuide = guide as Guide<typeof locality>;
+        const correctlyTypedGuide = guide as Guide<typeof residentLocality>;
 
         if (typeof correctlyTypedGuide === "function") {
           guideChecker.name = "True";
