@@ -78651,8 +78651,6 @@ function Guide() {
       }
     }
   }
-  localityChecker.name = "Updating";
-  guideChecker.name = "Updating";
   const guideArrayLength = guideElements.length;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Thank you for using Transpapers!" }),
