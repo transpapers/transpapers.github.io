@@ -78633,11 +78633,15 @@ function Guide() {
   }, console.error);
   const locality = applicant.residentLocality;
   const guideElements = [];
+  const localityChecker = { name: "False" };
+  const guideChecker = { name: "False" };
   if (locality) {
+    localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide;
         if (typeof correctlyTypedGuide === "function") {
+          guideChecker.name = "True";
           const element = reactExports.createElement(correctlyTypedGuide, {
             person: applicant,
             locality
@@ -78655,9 +78659,23 @@ function Guide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "You should print both this webpage and the PDF containing your compiled documents." }),
       " ",
-      "Please review the forms and guide side by side.",
-      guideArrayLength
+      "Please review the forms and guide side by side."
     ] }),
+    "if (guideArrayLength === 0) ",
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Number of guide sections generated: ",
+      guideArrayLength,
+      ". Locality generating correctly: ",
+      localityChecker.name,
+      ". Guide pushing correctly: ",
+      guideChecker.name,
+      ". If you see this message report the bug to our",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "feedback" }),
+      " form."
+    ] }),
+    ":",
+    "",
     ...guideElements
   ] });
 }
