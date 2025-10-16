@@ -171,13 +171,13 @@ function Guide() {
   const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
 
   if (locality) {
-    localityChecker.name === "True";
+    localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
 
         if (typeof correctlyTypedGuide === "function") {
-          guideChecker.name === "True";
+          guideChecker.name = "True";
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
             locality,
