@@ -120,7 +120,7 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant = useStore((state) => state.person) as Person;
+  const applicant: Person = useStore((state) => state.person);
 
   const { residentJurisdictionName, birthJurisdictionName, processNames } =
     useStore((state) => state);
