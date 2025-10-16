@@ -189,8 +189,6 @@ function Guide() {
     }
   }
 
-  localityChecker.name = "Updating";
-  guideChecker.name = "Updating";
   const guideArrayLength: number = guideElements.length;
 
   return (
@@ -210,9 +208,9 @@ function Guide() {
       {guideArrayLength === 0 ? (
       <p>
         Number of guide sections generated: {guideArrayLength}. Locality 
-        generating correctly: {localityChecker.name}. Guide 
-        pushing correctly: {guideChecker.name}. If you see
-        this message report the bug to our{" "}
+        generating correctly: {localityChecker.name}. Guide pushing 
+        correctly: {guideChecker.name}. If you see this message report the 
+        bug to our{" "}
         <a href="https://tinyurl.com/mgdc-feedback">feedback</a> form.
       </p>
       ):("")}
