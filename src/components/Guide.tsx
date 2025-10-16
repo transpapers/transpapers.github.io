@@ -186,13 +186,16 @@ function Guide() {
         const correctlyTypedGuide = guide as Guide<typeof residentLocality>;
 
         if (typeof correctlyTypedGuide === "function") {
-          guideChecker.name = "True";
-          const element = React.createElement(correctlyTypedGuide, {
-            person: applicant,
-            locality,
-          });
+          if (locality) {
+            guideChecker.name = "True";
+            const element = React.createElement(correctlyTypedGuide, {
+              person: applicant,
+              locality,
+            });
+          
 
-          guideElements.push(element);
+            guideElements.push(element);
+          }
         }
       }
     }
