@@ -167,12 +167,17 @@ function Guide() {
 
   const guideElements = [];
 
+  const localityChecker: {status: boolean} = {status: false};
+  const guideChecker: {status: boolean} = {status: false};
+
   if (locality) {
+    localityChecker.status === true;
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
 
         if (typeof correctlyTypedGuide === "function") {
+          guideChecker.status === true;
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
             locality,
@@ -198,8 +203,18 @@ function Guide() {
           compiled documents.
         </strong>{" "}
         Please review the forms and guide side by side.
-        {guideArrayLength}
       </p>
+
+      if (guideArrayLength === 0) {
+      <p>
+        Number of guide sections generated: {guideArrayLength}. Locality 
+        generating correctly: {localityChecker.status.toString()}. Guide 
+        pushing correctly: {guideChecker.status.toString()}. If you see
+        this message report the bug to our{" "}
+        <a href="https://tinyurl.com/mgdc-feedback">feedback</a> form.
+      </p>
+      }:{""}
+
       {...guideElements}
     </>
   );
