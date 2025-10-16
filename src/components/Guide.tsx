@@ -120,7 +120,7 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant = useStore((state) => state.person);
+  const applicant: Person = useStore((state) => state.person);
 
   const { 
     residentJurisdictionName,
@@ -172,7 +172,7 @@ function Guide() {
     }
   }, console.error);
 
-  //const locality = applicant.residentLocality;
+  const locality = applicant.residentLocality;
 
   const guideElements = [];
 
@@ -189,7 +189,7 @@ function Guide() {
           guideChecker.name = "True";
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
-            residentLocality,
+            locality,
           });
 
           guideElements.push(element);
