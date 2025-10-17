@@ -181,8 +181,8 @@ function Guide() {
   if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
-      for (const guide of section.guides) {
-        const correctlyTypedGuide = guide as Guide<typeof locality>;
+      //for (const guide of section.guides) {
+        const correctlyTypedGuide = section as Guide<typeof locality>;
 
         if (typeof correctlyTypedGuide === "function") {
           guideChecker.name = "True";
@@ -193,12 +193,13 @@ function Guide() {
           
           guideElements.push(element);
         }
-      }
+      //}
     }
   }
 
   const guideSectionLength: number = guideSections.length;
-  const guideArrayLength: number = guideElements.length;
+  //const guidePickedLength: number = ;
+  const guidePushedLength: number = guideElements.length;
 
   return (
     <>
@@ -214,17 +215,17 @@ function Guide() {
         Please review the forms and guide side by side.
       </p>
 
-      {guideArrayLength === 0 ? (
+      {guidePushedLength === 0 ? (
       <p>
         <span>Locality generating correctly: {localityChecker.name}.</span>
         <br />
         <span>Number of guide sections generated: {guideSectionLength}.</span>
         <br />
-        <span>Number of guide sections selected: {guideArrayLength}.</span>
+        <span>Number of guide sections pushed: {guidePushedLength}.</span>
         <br />
         <span>Guide pushing correctly: {guideChecker.name}.</span>
         <br />
-        If you see this message report the bug to our{" "}
+        If you see this message report the above info to our{" "}
         <a href="https://tinyurl.com/mgdc-feedback">feedback</a> form.
       </p>
       ):("")}
