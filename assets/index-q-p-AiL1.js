@@ -78648,14 +78648,12 @@ function Guide() {
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide;
-        if (typeof correctlyTypedGuide === "function") {
-          guideChecker.name = "True";
-          const element = reactExports.createElement(correctlyTypedGuide, {
-            person: applicant,
-            locality
-          });
-          guideElements.push(element);
-        }
+        guideChecker.name = "True";
+        const element = reactExports.createElement(correctlyTypedGuide, {
+          person: applicant,
+          locality
+        });
+        guideElements.push(element);
       }
     }
   }
