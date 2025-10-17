@@ -178,7 +178,7 @@ function Guide() {
   const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
   const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
 
-  if (residentLocality) {
+  //if (residentLocality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
@@ -196,7 +196,7 @@ function Guide() {
         }
       }
     }
-  }
+  //}
 
   const guideArrayLength: number = guideElements.length;
 
