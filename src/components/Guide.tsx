@@ -179,7 +179,7 @@ function Guide() {
   const localityChecker: {count: number, name: string} = {count: 0, name: "False"};
   const guideChecker: {count: number, name: string} = {count: 0, name: "False"};
 
-  //if (locality) {
+  if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       localityChecker.count = localityChecker.count + 1;
@@ -198,7 +198,7 @@ function Guide() {
         }
       }
     }
-  //}
+  }
 
   //const guideSectionLength: number = guideSections.length;
   const guidePushedLength: number = guideElements.length;
