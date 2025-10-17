@@ -184,7 +184,7 @@ function Guide() {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
 
-        //if (typeof correctlyTypedGuide === "function") {
+        if (typeof correctlyTypedGuide === "function") {
           guideChecker.name = "True";
           const element = React.createElement(correctlyTypedGuide, {
             person: applicant,
@@ -192,11 +192,12 @@ function Guide() {
           });
           
           guideElements.push(element);
-        //}
+        }
       }
     }
   }
 
+  const guideSectionLength: number = guideSections.length;
   const guideArrayLength: number = guideElements.length;
 
   return (
@@ -215,10 +216,15 @@ function Guide() {
 
       {guideArrayLength === 0 ? (
       <p>
-        Number of guide sections generated: {guideArrayLength}. Locality 
-        generating correctly: {localityChecker.name}. Guide pushing 
-        correctly: {guideChecker.name}. If you see this message report the 
-        bug to our{" "}
+        <span>Locality generating correctly: {localityChecker.name}.</span>
+        <br />
+        <span>Number of guide sections generated: {guideSectionLength}.</span>
+        <br />
+        <span>Number of guide sections selected: {guideArrayLength}.</span>
+        <br />
+        <span>Guide pushing correctly: {guideChecker.name}.</span>
+        <br />
+        If you see this message report the bug to our{" "}
         <a href="https://tinyurl.com/mgdc-feedback">feedback</a> form.
       </p>
       ):("")}
