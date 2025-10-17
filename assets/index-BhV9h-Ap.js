@@ -78641,26 +78641,24 @@ function Guide() {
     (j) => j.name === residentLocalityName
   );
   const guideElements = [];
-  const localityChecker = { name: "False" };
+  const localityChecker = { count: 0, name: "False" };
   const guideChecker = { count: 0, name: "False" };
-  if (locality) {
-    localityChecker.name = "True";
-    for (const section of guideSections) {
-      for (const guide of section.guides) {
-        const correctlyTypedGuide = guide;
-        guideChecker.count = guideChecker.count + 1;
-        if (typeof correctlyTypedGuide === "function") {
-          guideChecker.name = "True";
-          const element = reactExports.createElement(correctlyTypedGuide, {
-            person: applicant,
-            locality
-          });
-          guideElements.push(element);
-        }
+  localityChecker.name = "True";
+  for (const section of guideSections) {
+    localityChecker.count = localityChecker.count + 1;
+    for (const guide of section.guides) {
+      const correctlyTypedGuide = guide;
+      guideChecker.count = guideChecker.count + 1;
+      if (typeof correctlyTypedGuide === "function") {
+        guideChecker.name = "True";
+        const element = reactExports.createElement(correctlyTypedGuide, {
+          person: applicant,
+          locality
+        });
+        guideElements.push(element);
       }
     }
   }
-  const guideSectionLength = guideSections.length;
   const guidePushedLength = guideElements.length;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Thank you for using Transpapers!" }),
@@ -78680,7 +78678,7 @@ function Guide() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
         "Number of guide sections generated: ",
-        guideSectionLength,
+        localityChecker.count,
         "."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
