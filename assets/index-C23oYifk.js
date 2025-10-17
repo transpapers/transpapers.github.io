@@ -42781,7 +42781,7 @@ const illinois = {
 };
 const federal = {
   name: "Federal",
-  abbreviation: "",
+  abbreviation: "FED",
   processes: [socialSecurity, passport],
   localities: []
 };
@@ -78612,10 +78612,6 @@ function Guide() {
   if (!(residentJurisdiction && birthJurisdiction)) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
   }
-  const localities = residentJurisdiction.localities;
-  const residentLocality = localities.find(
-    (j) => j.name === residentLocalityName
-  );
   const processes = getProcesses(
     residentJurisdiction,
     birthJurisdiction,
@@ -78640,24 +78636,25 @@ function Guide() {
       URL.revokeObjectURL(link.href);
     }
   }, console.error);
-  const locality = applicant.residentLocality;
+  const localities = residentJurisdiction.localities;
+  const locality = localities.find(
+    (j) => j.name === residentLocalityName
+  );
   const guideElements = [];
   const localityChecker = { name: "False" };
   const guideChecker = { name: "False" };
-  if (residentLocality) {
+  if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide;
         if (typeof correctlyTypedGuide === "function") {
-          if (locality) {
-            guideChecker.name = "True";
-            const element = reactExports.createElement(correctlyTypedGuide, {
-              person: applicant,
-              locality
-            });
-            guideElements.push(element);
-          }
+          guideChecker.name = "True";
+          const element = reactExports.createElement(correctlyTypedGuide, {
+            person: applicant,
+            locality
+          });
+          guideElements.push(element);
         }
       }
     }
