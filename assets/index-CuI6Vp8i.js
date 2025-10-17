@@ -78648,15 +78648,18 @@ function Guide() {
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide;
-        guideChecker.name = "True";
-        const element = reactExports.createElement(correctlyTypedGuide, {
-          person: applicant,
-          locality
-        });
-        guideElements.push(element);
+        if (typeof correctlyTypedGuide === "function") {
+          guideChecker.name = "True";
+          const element = reactExports.createElement(correctlyTypedGuide, {
+            person: applicant,
+            locality
+          });
+          guideElements.push(element);
+        }
       }
     }
   }
+  const guideSectionLength = guideSections.length;
   const guideArrayLength = guideElements.length;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Thank you for using Transpapers!" }),
@@ -78668,13 +78671,31 @@ function Guide() {
       "Please review the forms and guide side by side."
     ] }),
     guideArrayLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Number of guide sections generated: ",
-      guideArrayLength,
-      ". Locality generating correctly: ",
-      localityChecker.name,
-      ". Guide pushing correctly: ",
-      guideChecker.name,
-      ". If you see this message report the bug to our",
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Locality generating correctly: ",
+        localityChecker.name,
+        "."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Number of guide sections generated: ",
+        guideSectionLength,
+        "."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Number of guide sections selected: ",
+        guideArrayLength,
+        "."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Guide pushing correctly: ",
+        guideChecker.name,
+        "."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      "If you see this message report the bug to our",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "feedback" }),
       " form."
