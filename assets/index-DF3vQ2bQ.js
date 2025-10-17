@@ -78599,7 +78599,7 @@ function Guide() {
   const applicant = useStore((state) => state.person);
   const {
     residentJurisdictionName,
-    residentLocalityName,
+    //residentLocalityName,
     birthJurisdictionName,
     processNames
   } = useStore((state) => state);
@@ -78610,7 +78610,7 @@ function Guide() {
     (j) => j.name === birthJurisdictionName
   );
   if (!(residentJurisdiction && birthJurisdiction)) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Error: Either Resident or Birth Jurisdiction failed to load." });
   }
   const processes = getProcesses(
     residentJurisdiction,
@@ -78618,7 +78618,7 @@ function Guide() {
     processNames
   );
   if (!processes) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Error: Either no processes were selected in Step 5 or they failed to load." });
   }
   const { documents, guideSections } = compileInstructions(
     applicant,
@@ -78636,26 +78636,26 @@ function Guide() {
       URL.revokeObjectURL(link.href);
     }
   }, console.error);
-  const localities = residentJurisdiction.localities;
-  const locality = localities.find(
-    (j) => j.name === residentLocalityName
-  );
+  const { residentLocality } = applicant;
+  const locality = residentLocality;
   const guideElements = [];
   const localityChecker = { count: 0, name: "False" };
   const guideChecker = { count: 0, name: "False" };
-  localityChecker.name = "True";
-  for (const section of guideSections) {
-    localityChecker.count = localityChecker.count + 1;
-    for (const guide of section.guides) {
-      guideChecker.count = guideChecker.count + 1;
-      const correctlyTypedGuide = guide;
-      if (typeof correctlyTypedGuide === "function") {
-        guideChecker.name = "True";
-        const element = reactExports.createElement(correctlyTypedGuide, {
-          person: applicant,
-          locality
-        });
-        guideElements.push(element);
+  if (locality) {
+    localityChecker.name = "True";
+    for (const section of guideSections) {
+      localityChecker.count = localityChecker.count + 1;
+      for (const guide of section.guides) {
+        guideChecker.count = guideChecker.count + 1;
+        const correctlyTypedGuide = guide;
+        if (typeof correctlyTypedGuide === "function") {
+          guideChecker.name = "True";
+          const element = reactExports.createElement(correctlyTypedGuide, {
+            person: applicant,
+            locality
+          });
+          guideElements.push(element);
+        }
       }
     }
   }
