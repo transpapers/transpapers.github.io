@@ -169,7 +169,7 @@ function Guide() {
   }, console.error);
 
   const localities = residentJurisdiction.localities;
-  const residentLocality = localities.find(
+  const locality = localities.find(
     (j) => j.name === residentLocalityName);
   //const locality = applicant.residentLocality;
 
@@ -178,17 +178,17 @@ function Guide() {
   const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
   const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
 
-  if (residentLocality) {
+  if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
-        const correctlyTypedGuide = guide as Guide<typeof residentLocality>;
+        const correctlyTypedGuide = guide as Guide<typeof locality>;
 
         if (typeof correctlyTypedGuide === "function") {
             guideChecker.name = "True";
             const element = React.createElement(correctlyTypedGuide, {
               person: applicant,
-              residentLocality,
+              locality,
             });
           
 
