@@ -169,9 +169,9 @@ function Guide() {
   }, console.error);
 
   const localities = residentJurisdiction.localities;
-  const locality = localities.find(
-    (j) => j.name === residentLocalityName);
-  //const locality = applicant.residentLocality;
+  const locality: AnyLocality = localities.find(
+    (j) => j.name === residentLocalityName) as AnyLocality;
+  //const typeLocality = applicant.residentLocality;
 
   const guideElements = [];
 
