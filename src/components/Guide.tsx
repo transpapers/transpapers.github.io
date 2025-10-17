@@ -124,7 +124,7 @@ function Guide() {
 
   const { 
     residentJurisdictionName,
-    residentLocalityName,
+    //residentLocalityName,
     birthJurisdictionName, 
     processNames 
   } = useStore((state) => state);
