@@ -78647,8 +78647,8 @@ function Guide() {
   for (const section of guideSections) {
     localityChecker.count = localityChecker.count + 1;
     for (const guide of section.guides) {
-      const correctlyTypedGuide = guide;
       guideChecker.count = guideChecker.count + 1;
+      const correctlyTypedGuide = guide;
       if (typeof correctlyTypedGuide === "function") {
         guideChecker.name = "True";
         const element = reactExports.createElement(correctlyTypedGuide, {
