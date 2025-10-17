@@ -183,8 +183,8 @@ function Guide() {
     for (const section of guideSections) {
       localityChecker.count = localityChecker.count + 1;
       for (const guide of section.guides) {
-        const correctlyTypedGuide = guide as Guide<typeof locality>;
         guideChecker.count = guideChecker.count + 1;
+        const correctlyTypedGuide = guide as Guide<typeof locality>;
 
         if (typeof correctlyTypedGuide === "function") {
           guideChecker.name = "True";
