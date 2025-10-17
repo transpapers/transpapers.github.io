@@ -78642,12 +78642,13 @@ function Guide() {
   );
   const guideElements = [];
   const localityChecker = { name: "False" };
-  const guideChecker = { name: "False" };
+  const guideChecker = { count: 0, name: "False" };
   if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide;
+        guideChecker.count = guideChecker.count + 1;
         if (typeof correctlyTypedGuide === "function") {
           guideChecker.name = "True";
           const element = reactExports.createElement(correctlyTypedGuide, {
@@ -78660,7 +78661,7 @@ function Guide() {
     }
   }
   const guideSectionLength = guideSections.length;
-  const guideArrayLength = guideElements.length;
+  const guidePushedLength = guideElements.length;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Thank you for using Transpapers!" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -78670,7 +78671,7 @@ function Guide() {
       " ",
       "Please review the forms and guide side by side."
     ] }),
-    guideArrayLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    guidePushedLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
         "Locality generating correctly: ",
         localityChecker.name,
@@ -78685,7 +78686,13 @@ function Guide() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
         "Number of guide sections selected: ",
-        guideArrayLength,
+        guideChecker.count,
+        "."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "Number of guide sections pushed: ",
+        guidePushedLength,
         "."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
@@ -78695,7 +78702,7 @@ function Guide() {
         "."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      "If you see this message report the bug to our",
+      "If you see this message report the above info to our",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "feedback" }),
       " form."
