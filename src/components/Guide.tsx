@@ -120,7 +120,7 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant: Person = useStore((state) => state.person);
+  const applicant = useStore((state) => state.person);
 
   const { 
     residentJurisdictionName,
@@ -169,8 +169,8 @@ function Guide() {
   }, console.error);
 
   const localities = residentJurisdiction.localities;
-  const residentLocality: AnyLocality = localities.find(
-    (j) => j.name === residentLocalityName) as AnyLocality;
+  const residentLocality = localities.find(
+    (j) => j.name === residentLocalityName);
   //const locality = applicant.residentLocality;
 
   const guideElements = [];
@@ -178,7 +178,7 @@ function Guide() {
   const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
   const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
 
-  //if (residentLocality) {
+  if (residentLocality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       for (const guide of section.guides) {
@@ -196,7 +196,7 @@ function Guide() {
         }
       }
     }
-  //}
+  }
 
   const guideArrayLength: number = guideElements.length;
 
