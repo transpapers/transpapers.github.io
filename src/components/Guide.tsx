@@ -120,7 +120,7 @@ function getProcesses(
 }
 
 function Guide() {
-  const applicant = useStore((state) => state.person);
+  const applicant: Person = useStore((state) => state.person);
 
   const { 
     residentJurisdictionName,
@@ -137,7 +137,7 @@ function Guide() {
   );
 
   if (!(residentJurisdiction && birthJurisdiction)) {
-    return <></>;
+    return <>Error: Either Resident or Birth Jurisdiction failed to load.</>;
   }
 
   const processes = getProcesses(
@@ -147,7 +147,7 @@ function Guide() {
   );
 
   if (!processes) {
-    return <></>;
+    return <>Error: Either no processes were selected in Step 5 or they failed to load.</>;
   }
 
   const { documents, guideSections } = compileInstructions(
@@ -168,17 +168,18 @@ function Guide() {
     }
   }, console.error);
 
-  const localities = residentJurisdiction.localities;
-  const locality: AnyLocality = localities.find(
-    (j) => j.name === residentLocalityName) as AnyLocality;
-  //const typeLocality = applicant.residentLocality;
+  //const localities = residentJurisdiction.localities;
+  //const locality: AnyLocality = localities.find(
+    //(j) => j.name === residentLocalityName) as AnyLocality;
+  const { residentLocality } = applicant;
+  const locality = residentLocality;
 
   const guideElements = [];
 
   const localityChecker: {count: number, name: string} = {count: 0, name: "False"};
   const guideChecker: {count: number, name: string} = {count: 0, name: "False"};
 
-  //if (locality) {
+  if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
       localityChecker.count = localityChecker.count + 1;
@@ -197,7 +198,7 @@ function Guide() {
         }
       }
     }
-  //}
+  }
 
   //const guideSectionLength: number = guideSections.length;
   const guidePushedLength: number = guideElements.length;
