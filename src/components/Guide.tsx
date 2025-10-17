@@ -169,8 +169,8 @@ function Guide() {
   }, console.error);
 
   const localities = residentJurisdiction.localities;
-  const locality: AnyLocality = localities.find(
-    (j) => j.name === residentLocalityName) as AnyLocality;
+  const locality = localities.find(
+    (j) => j.name === residentLocalityName);
   //const typeLocality = applicant.residentLocality;
 
   const guideElements = [];
@@ -184,16 +184,15 @@ function Guide() {
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
 
-        if (typeof correctlyTypedGuide === "function") {
-            guideChecker.name = "True";
-            const element = React.createElement(correctlyTypedGuide, {
-              person: applicant,
-              locality,
-            });
+        //if (typeof correctlyTypedGuide === "function") {
+          guideChecker.name = "True";
+          const element = React.createElement(correctlyTypedGuide, {
+            person: applicant,
+            locality,
+          });
           
-
-            guideElements.push(element);
-        }
+          guideElements.push(element);
+        //}
       }
     }
   }
