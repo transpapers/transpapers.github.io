@@ -169,18 +169,19 @@ function Guide() {
   }, console.error);
 
   const localities = residentJurisdiction.localities;
-  const locality = localities.find(
-    (j) => j.name === residentLocalityName);
+  const locality: AnyLocality = localities.find(
+    (j) => j.name === residentLocalityName) as AnyLocality;
   //const typeLocality = applicant.residentLocality;
 
   const guideElements = [];
 
-  const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
+  const localityChecker: {count: number, name: string} = {count: 0, name: "False"};
   const guideChecker: {count: number, name: string} = {count: 0, name: "False"};
 
   if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
+      localityChecker.count = localityChecker.count + 1;
       for (const guide of section.guides) {
         const correctlyTypedGuide = guide as Guide<typeof locality>;
         guideChecker.count = guideChecker.count + 1;
@@ -198,7 +199,7 @@ function Guide() {
     }
   }
 
-  const guideSectionLength: number = guideSections.length;
+  //const guideSectionLength: number = guideSections.length;
   const guidePushedLength: number = guideElements.length;
 
   return (
@@ -219,7 +220,7 @@ function Guide() {
       <p>
         <span>Locality generating correctly: {localityChecker.name}.</span>
         <br />
-        <span>Number of guide sections generated: {guideSectionLength}.</span>
+        <span>Number of guide sections generated: {localityChecker.count}.</span>
         <br />
         <span>Number of guide sections selected: {guideChecker.count}.</span>
         <br />
