@@ -78599,7 +78599,7 @@ function Guide() {
   const applicant = useStore((state) => state.person);
   const {
     residentJurisdictionName,
-    //residentLocalityName,
+    residentLocalityName,
     birthJurisdictionName,
     processNames
   } = useStore((state) => state);
@@ -78636,8 +78636,10 @@ function Guide() {
       URL.revokeObjectURL(link.href);
     }
   }, console.error);
-  const { residentLocality } = applicant;
-  const locality = residentLocality;
+  const localities = residentJurisdiction.localities;
+  const locality = localities.find(
+    (j) => j.name === residentLocalityName
+  );
   const guideElements = [];
   const localityChecker = { count: 0, name: "False" };
   const guideChecker = { count: 0, name: "False" };
