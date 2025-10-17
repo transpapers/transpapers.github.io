@@ -176,13 +176,14 @@ function Guide() {
   const guideElements = [];
 
   const localityChecker: {status: boolean, name: string} = {status: false, name: "False"};
-  const guideChecker: {status: boolean, name: string} = {status: false, name: "False"};
+  const guideChecker: {count: number, name: string} = {count: 0, name: "False"};
 
   if (locality) {
     localityChecker.name = "True";
     for (const section of guideSections) {
-      //for (const guide of section.guides) {
-        const correctlyTypedGuide = section as Guide<typeof locality>;
+      for (const guide of section.guides) {
+        const correctlyTypedGuide = guide as Guide<typeof locality>;
+        guideChecker.count = guideChecker.count + 1;
 
         if (typeof correctlyTypedGuide === "function") {
           guideChecker.name = "True";
@@ -193,12 +194,11 @@ function Guide() {
           
           guideElements.push(element);
         }
-      //}
+      }
     }
   }
 
   const guideSectionLength: number = guideSections.length;
-  //const guidePickedLength: number = ;
   const guidePushedLength: number = guideElements.length;
 
   return (
@@ -220,6 +220,8 @@ function Guide() {
         <span>Locality generating correctly: {localityChecker.name}.</span>
         <br />
         <span>Number of guide sections generated: {guideSectionLength}.</span>
+        <br />
+        <span>Number of guide sections selected: {guideChecker.count}.</span>
         <br />
         <span>Number of guide sections pushed: {guidePushedLength}.</span>
         <br />
