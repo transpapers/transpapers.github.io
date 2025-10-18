@@ -68,8 +68,8 @@ export const michiganNameChange: Process<MichiganCounty> = {
       guide: MichiganPC51Guide,
       map: nameChangeMap,
       include: (applicant) =>
-        !applicant.isChangingLegalSex ||
-        !applicant.doNotPublish ||
+        (!applicant.isChangingLegalSex &&
+        !applicant.doNotPublish) ||
         applicant.residentLocalityName === "Kent",
     },
     {
@@ -102,7 +102,7 @@ export const michiganNameChange: Process<MichiganCounty> = {
       name: "Publication",
       guide: MichiganPublicationGuide,
       include: (applicant) =>
-        !applicant.isChangingLegalSex || !applicant.doNotPublish,
+        !applicant.isChangingLegalSex && !applicant.doNotPublish,
     },
     {
       name: "Court Hearing",

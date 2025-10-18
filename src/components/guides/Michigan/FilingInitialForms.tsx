@@ -96,7 +96,7 @@ function MichiganFilingInitialFormsGuide({
           </p>
 
           <p>
-            {isChangingLegalSex === true || doNotPublish === true ? (
+            {isChangingLegalSex === true && doNotPublish === true ? (
               <>
                 Once the paperwork has been filed it may be several weeks before
                 you get a response. From this point you just need to wait. The
