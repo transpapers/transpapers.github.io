@@ -78618,7 +78618,7 @@ function Guide() {
     processNames
   );
   if (!processes) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Error: Either no processes were selected in Step 5 or they failed to load." });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Error: Either no checkboxes were selected in Step 5 or they failed to load." });
   }
   const { documents, guideSections } = compileInstructions(
     applicant,
@@ -78669,7 +78669,19 @@ function Guide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "You should print both this webpage and the PDF containing your compiled documents." }),
       " ",
-      "Please review the forms and guide side by side."
+      "Please review the forms and guide side by side.",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[0].locality?.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[1].locality?.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[2].locality?.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[3].locality?.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[4].locality?.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[5].locality?.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
     ] }),
     guidePushedLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
