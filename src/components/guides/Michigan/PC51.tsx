@@ -39,8 +39,8 @@ function MichiganPC51Guide({ person }: { person: Partial<Person> }) {
         ) : (
             ""
         )}
-        You need to have lived in {residentLocalityName ?? ""} county for at
-        least one year to file any forms. If necessary complete item 1 for
+        {" "}You need to have lived in {residentLocalityName ?? ""} county for 
+        at least one year to file any forms. If necessary complete item 1 for
         any active court cases.
       </p>
 

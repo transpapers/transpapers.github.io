@@ -50,9 +50,7 @@ function MichiganFilingInitialFormsGuide({
             {age && age < 18 ? " A parent/guardian " : " You "} may file by mail
             or in person; in either case, include the Petition, the Addendum
             (m97a),
-            {residentLocality.name && residentLocality.name == "Saginaw"
-              ? " the Order Following (pc52), "
-              : " "}
+            {residentLocalityName === "Saginaw" ? " the Order Following (pc52), " : " "}
             the optional Fee Waiver (mc20), as well as payment. Even if the fee
             waiver is granted payment still needs to be provided for at least
             one certified copy. To ask for one when filing by mail either write
@@ -96,7 +94,7 @@ function MichiganFilingInitialFormsGuide({
           </p>
 
           <p>
-            {isChangingLegalSex === true && doNotPublish === true ? (
+            {isChangingLegalSex === true || doNotPublish === true ? (
               <>
                 Once the paperwork has been filed it may be several weeks before
                 you get a response. From this point you just need to wait. The
@@ -104,7 +102,8 @@ function MichiganFilingInitialFormsGuide({
                 simply recieve your “Order Following Hearing On Petition To
                 Change Name” and certified copy in the mail. We call those
                 documents the &quot;Court Order&quot;. If you recieved notice of
-                a hearing instead read the next section, otherwise skip it.
+                a hearing instead read the “Court Hearing” section, otherwise 
+                skip it.
               </>
             ) : (
               <>
@@ -120,17 +119,8 @@ function MichiganFilingInitialFormsGuide({
               </>
             )}
           </p>
-          <p>
-            Once the paperwork has been filed it will be several weeks before
-            you get a response. From this point you just need to wait. The vast
-            majority of cases will not even have a hearing you will simply
-            recieve your “Order Following Hearing On Petition To Change Name”
-            and certified copy in the mail. We call those documents the
-            &quot;Court Order&quot;. If you recieved notice of a hearing instead
-            read the “Court Hearing” section, otherwise skip it.
-          </p>
 
-          {residentLocality.name && residentLocality.name !== "Kent" ? (
+          {residentLocalityName !== "Kent" || doNotPublish === true ? (
             <p>
               If you want an update on your case{" "}
               {age && age < 18 ? " your petitioner has " : " you have to "} to

@@ -80,7 +80,7 @@ function MichiganSecretaryOfStateGuide({
         and ID. Sign and date it in front of them
         {isChangingLegalName ? " with your new legal name. " : ". "}
         If at any point you experience issues or pushback politely inisist on
-        speaking to a supervisor for assistence.
+        speaking to a supervisor for assistance.
       </p>
 
       <p>

@@ -88,8 +88,8 @@ export const michigan: Jurisdiction<MichiganCounty> = {
   abbreviation: "MI",
   processes: [
     michiganNameChange,
-    michiganPrimaryIdentification,
     socialSecurity,
+    michiganPrimaryIdentification,
     michiganGenderMarker,
     michiganBirthRecord,
     michiganPostamble,
@@ -102,8 +102,8 @@ export const rhodeIsland: Jurisdiction<RhodeIslandCityOrTown> = {
   abbreviation: "RI",
   processes: [
     rhodeislandNameChange,
-    rhodeislandPrimaryIdentification,
     socialSecurity,
+    rhodeislandPrimaryIdentification,
     rhodeislandGenderMarker,
     rhodeislandBirthRecord,
     rhodeislandPostamble,
@@ -116,8 +116,8 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
   abbreviation: "NY",
   processes: [
     newyorkNameChange,
-    newyorkPrimaryIdentification,
     socialSecurity,
+    newyorkPrimaryIdentification,
     newyorkBirthRecord,
     newyorkGenderMarker,
     newyorkPostamble,
@@ -130,8 +130,8 @@ export const oregon: Jurisdiction<Locality> = {
   abbreviation: "OR",
   processes: [
     oregonNameChange,
-    oregonPrimaryIdentification,
     socialSecurity,
+    oregonPrimaryIdentification,
     oregonBirthRecord,
     oregonGenderMarker,
     oregonPostamble,
@@ -144,8 +144,8 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   abbreviation: "AK",
   processes: [
     alaskaNameChange,
-    alaskaPrimaryIdentification,
     socialSecurity,
+    alaskaPrimaryIdentification,
     alaskaGenderMarker,
     alaskaBirthRecord,
     alaskaPostamble,
@@ -157,11 +157,11 @@ export const illinois: Jurisdiction<Locality> = {
   name: "Illinois",
   abbreviation: "IL",
   processes: [
-    illinoisBirthRecord,
     illinoisNameChange,
-    illinoisPrimaryIdentification,
     socialSecurity,
+    illinoisPrimaryIdentification,
     illinoisGenderMarker,
+    illinoisBirthRecord,
     illinoisPostamble,
   ],
   localities: illinoisCounties,
