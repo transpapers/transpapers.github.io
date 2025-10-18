@@ -29015,7 +29015,7 @@ function MichiganFilingInitialFormsGuide({
           ".",
           age && age < 18 ? " A parent/guardian " : " You ",
           " may file by mail or in person; in either case, include the Petition, the Addendum (m97a),",
-          residentLocality.name && residentLocality.name == "Saginaw" ? " the Order Following (pc52), " : " ",
+          residentLocalityName === "Saginaw" ? " the Order Following (pc52), " : " ",
           "the optional Fee Waiver (mc20), as well as payment. Even if the fee waiver is granted payment still needs to be provided for at least one certified copy. To ask for one when filing by mail either write “Certified copy fee” in a checks memo line or include a letter stating thats what the extra money is for."
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -29033,9 +29033,8 @@ function MichiganFilingInitialFormsGuide({
           " ",
           "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true && doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Once the paperwork has been filed it will be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the “Court Hearing” section, otherwise skip it.' }),
-        residentLocality.name && residentLocality.name !== "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true || doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the “Court Hearing” section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
+        residentLocalityName !== "Kent" || doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "If you want an update on your case",
           " ",
           age && age < 18 ? " your petitioner has " : " you have to ",
@@ -29192,6 +29191,7 @@ function MichiganPC51Guide({ person }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
         " hold hearings for name changes meaning the process will not be published in a newspaper even when filing with the standard petition like this."
       ] }) : "",
+      " ",
       "You need to have lived in ",
       residentLocalityName ?? "",
       " county for at least one year to file any forms. If necessary complete item 1 for any active court cases."
@@ -29368,7 +29368,7 @@ function MichiganSecretaryOfStateGuide({
       isChangingLegalSex ? " the Sex Designation Form, " : "",
       "and ID. Sign and date it in front of them",
       isChangingLegalName ? " with your new legal name. " : ". ",
-      "If at any point you experience issues or pushback politely inisist on speaking to a supervisor for assistence."
+      "If at any point you experience issues or pushback politely inisist on speaking to a supervisor for assistance."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Optionally, you may also update your vehicle registration(s). You will be given another form, which you should sign and initial",
@@ -42712,8 +42712,8 @@ const michigan = {
   abbreviation: "MI",
   processes: [
     michiganNameChange,
-    michiganPrimaryIdentification,
     socialSecurity,
+    michiganPrimaryIdentification,
     michiganGenderMarker,
     michiganBirthRecord,
     michiganPostamble
@@ -42725,8 +42725,8 @@ const rhodeIsland = {
   abbreviation: "RI",
   processes: [
     rhodeislandNameChange,
-    rhodeislandPrimaryIdentification,
     socialSecurity,
+    rhodeislandPrimaryIdentification,
     rhodeislandGenderMarker,
     rhodeislandBirthRecord,
     rhodeislandPostamble
@@ -42738,8 +42738,8 @@ const newYork = {
   abbreviation: "NY",
   processes: [
     newyorkNameChange,
-    newyorkPrimaryIdentification,
     socialSecurity,
+    newyorkPrimaryIdentification,
     newyorkBirthRecord,
     newyorkGenderMarker,
     newyorkPostamble
@@ -42751,8 +42751,8 @@ const oregon = {
   abbreviation: "OR",
   processes: [
     oregonNameChange,
-    oregonPrimaryIdentification,
     socialSecurity,
+    oregonPrimaryIdentification,
     oregonBirthRecord,
     oregonGenderMarker,
     oregonPostamble
@@ -42764,8 +42764,8 @@ const alaska = {
   abbreviation: "AK",
   processes: [
     alaskaNameChange,
-    alaskaPrimaryIdentification,
     socialSecurity,
+    alaskaPrimaryIdentification,
     alaskaGenderMarker,
     alaskaBirthRecord,
     alaskaPostamble
@@ -42776,11 +42776,11 @@ const illinois = {
   name: "Illinois",
   abbreviation: "IL",
   processes: [
-    illinoisBirthRecord,
     illinoisNameChange,
-    illinoisPrimaryIdentification,
     socialSecurity,
+    illinoisPrimaryIdentification,
     illinoisGenderMarker,
+    illinoisBirthRecord,
     illinoisPostamble
   ],
   localities: illinoisCounties
