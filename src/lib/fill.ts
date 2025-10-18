@@ -23,6 +23,7 @@ import { PDFDocument } from "@cantoo/pdf-lib";
 
 import { Person } from "../types/person";
 import { Guide } from "../types/generic";
+import { allJurisdictions } from "../jurisdiction/all";
 import { AnyProcess, AnyDocument, AnyGuide } from "../types/generic";
 import {
   Formfill,
@@ -147,6 +148,16 @@ export function compileGuidesFor(
   });
 
   const guides: AnyGuide[] = [];
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === applicant.residentJurisdictionName,);
+  
+  if (!residentJurisdiction) {
+    return undefined;
+  };
+
+  const localities = residentJurisdiction.localities;
+  const locality = localities.find(
+    (j) => j.name === applicant.residentLocalityName);
 
   docs
     .filter(
@@ -156,9 +167,9 @@ export function compileGuidesFor(
         doc.include(applicant),
     )
     .forEach((doc) => {
-      if (doc.guide !== undefined && applicant.residentLocality !== undefined) {
+      if (doc.guide !== undefined && locality !== undefined) {
         const correctlyTypedGuide = doc.guide as Guide<
-          typeof applicant.residentLocality
+          typeof locality
         >;
         if (typeof correctlyTypedGuide === "function") {
           guides.push(correctlyTypedGuide);
