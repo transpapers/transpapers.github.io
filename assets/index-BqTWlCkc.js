@@ -42713,6 +42713,7 @@ const michigan = {
   processes: [
     michiganNameChange,
     michiganPrimaryIdentification,
+    socialSecurity,
     michiganGenderMarker,
     michiganBirthRecord,
     michiganPostamble
@@ -42725,6 +42726,7 @@ const rhodeIsland = {
   processes: [
     rhodeislandNameChange,
     rhodeislandPrimaryIdentification,
+    socialSecurity,
     rhodeislandGenderMarker,
     rhodeislandBirthRecord,
     rhodeislandPostamble
@@ -42737,6 +42739,7 @@ const newYork = {
   processes: [
     newyorkNameChange,
     newyorkPrimaryIdentification,
+    socialSecurity,
     newyorkBirthRecord,
     newyorkGenderMarker,
     newyorkPostamble
@@ -42749,6 +42752,7 @@ const oregon = {
   processes: [
     oregonNameChange,
     oregonPrimaryIdentification,
+    socialSecurity,
     oregonBirthRecord,
     oregonGenderMarker,
     oregonPostamble
@@ -42761,6 +42765,7 @@ const alaska = {
   processes: [
     alaskaNameChange,
     alaskaPrimaryIdentification,
+    socialSecurity,
     alaskaGenderMarker,
     alaskaBirthRecord,
     alaskaPostamble
@@ -42774,6 +42779,7 @@ const illinois = {
     illinoisBirthRecord,
     illinoisNameChange,
     illinoisPrimaryIdentification,
+    socialSecurity,
     illinoisGenderMarker,
     illinoisPostamble
   ],
@@ -42782,7 +42788,7 @@ const illinois = {
 const federal = {
   name: "Federal",
   abbreviation: "FED",
-  processes: [socialSecurity, passport],
+  processes: [passport],
   localities: []
 };
 const allJurisdictions = [
