@@ -171,8 +171,6 @@ function Guide() {
   const localities = residentJurisdiction.localities;
   const locality = localities.find(
     (j) => j.name === residentLocalityName);
-  //const { residentLocality } = applicant;
-  //const locality = residentLocality;
 
   const guideElements = [];
 
@@ -200,7 +198,6 @@ function Guide() {
     }
   }
 
-  //const guideSectionLength: number = guideSections.length;
   const guidePushedLength: number = guideElements.length;
 
   return (
