@@ -89,6 +89,7 @@ export const michigan: Jurisdiction<MichiganCounty> = {
   processes: [
     michiganNameChange,
     michiganPrimaryIdentification,
+    socialSecurity,
     michiganGenderMarker,
     michiganBirthRecord,
     michiganPostamble,
@@ -102,6 +103,7 @@ export const rhodeIsland: Jurisdiction<RhodeIslandCityOrTown> = {
   processes: [
     rhodeislandNameChange,
     rhodeislandPrimaryIdentification,
+    socialSecurity,
     rhodeislandGenderMarker,
     rhodeislandBirthRecord,
     rhodeislandPostamble,
@@ -115,6 +117,7 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
   processes: [
     newyorkNameChange,
     newyorkPrimaryIdentification,
+    socialSecurity,
     newyorkBirthRecord,
     newyorkGenderMarker,
     newyorkPostamble,
@@ -128,6 +131,7 @@ export const oregon: Jurisdiction<Locality> = {
   processes: [
     oregonNameChange,
     oregonPrimaryIdentification,
+    socialSecurity,
     oregonBirthRecord,
     oregonGenderMarker,
     oregonPostamble,
@@ -141,6 +145,7 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
   processes: [
     alaskaNameChange,
     alaskaPrimaryIdentification,
+    socialSecurity,
     alaskaGenderMarker,
     alaskaBirthRecord,
     alaskaPostamble,
@@ -155,6 +160,7 @@ export const illinois: Jurisdiction<Locality> = {
     illinoisBirthRecord,
     illinoisNameChange,
     illinoisPrimaryIdentification,
+    socialSecurity,
     illinoisGenderMarker,
     illinoisPostamble,
   ],
@@ -164,7 +170,7 @@ export const illinois: Jurisdiction<Locality> = {
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   abbreviation: "FED",
-  processes: [socialSecurity, passport],
+  processes: [passport],
 
   localities: [],
 };
