@@ -215,18 +215,6 @@ function Guide() {
           compiled documents.
         </strong>{" "}
         Please review the forms and guide side by side.
-        <span>{guideSections[0].locality?.name}</span>
-        <br />
-        <span>{guideSections[1].locality?.name}</span>
-        <br />
-        <span>{guideSections[2].locality?.name}</span>
-        <br />
-        <span>{guideSections[3].locality?.name}</span>
-        <br />
-        <span>{guideSections[4].locality?.name}</span>
-        <br />
-        <span>{guideSections[5].locality?.name}</span>
-        <br />
       </p>
 
       {guidePushedLength === 0 ? (

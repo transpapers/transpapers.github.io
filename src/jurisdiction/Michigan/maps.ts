@@ -523,6 +523,10 @@ export const feeWaiverMap: Formfill[] = [
  */
 export const mdosSexMap: Formfill[] = [
   (applicant) => ({
+    text: applicant.isChangingLegalName ? "Yes" : "No",
+    loc: { x: 40, y: 100 },
+  }),
+  (applicant) => ({
     text: applicant.legalName.last,
     loc: { x: 57, y: 388 },
   }),
