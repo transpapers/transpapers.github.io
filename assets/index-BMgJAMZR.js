@@ -29033,7 +29033,7 @@ function MichiganFilingInitialFormsGuide({
           " ",
           "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true || doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex === true && doNotPublish === true ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: 'Once the paperwork has been filed it may be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the next section, otherwise skip it.' }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: `Upon filing ask the clerk if you need to place a legal notice with a local newspaper. If so read the next section otherwise skip it. Also if you recieved notice of a hearing read the "Court Hearing" section, otherwise skip that as well. If you don't need to place a legal notice or attend a hearing you can expect to recieve an “Order Following Hearing On Petition To Change Name” and certified copy in the mail. It may take several weeks to arrive. We will call the the "Court Order" from here on.` }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'Once the paperwork has been filed it will be several weeks before you get a response. From this point you just need to wait. The vast majority of cases will not even have a hearing you will simply recieve your “Order Following Hearing On Petition To Change Name” and certified copy in the mail. We call those documents the "Court Order". If you recieved notice of a hearing instead read the “Court Hearing” section, otherwise skip it.' }),
         residentLocality.name && residentLocality.name !== "Kent" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "If you want an update on your case",
@@ -29138,7 +29138,7 @@ function MichiganPC51cGuide({ person }) {
       " ",
       isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Anyone changing their name to affirm their gender identity automatically qualifies for this process." }) : "",
       " ",
-      "You do need to have lived in ",
+      "You need to have lived in ",
       residentLocalityName ?? "",
       " ",
       "county for at least a year to file any forms though."
@@ -29476,7 +29476,7 @@ const michiganNameChange = {
       filename: "Michigan/pc51.pdf",
       guide: MichiganPC51Guide,
       map: nameChangeMap,
-      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish || applicant.residentLocalityName === "Kent"
+      include: (applicant) => !applicant.isChangingLegalSex && !applicant.doNotPublish || applicant.residentLocalityName === "Kent"
     },
     {
       name: "Addendum to Protected Personal Identifying Information",
@@ -29507,7 +29507,7 @@ const michiganNameChange = {
     {
       name: "Publication",
       guide: MichiganPublicationGuide,
-      include: (applicant) => !applicant.isChangingLegalSex || !applicant.doNotPublish
+      include: (applicant) => !applicant.isChangingLegalSex && !applicant.doNotPublish
     },
     {
       name: "Court Hearing",
