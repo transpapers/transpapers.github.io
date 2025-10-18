@@ -28530,6 +28530,10 @@ const feeWaiverMap = [
  */
 const mdosSexMap = [
   (applicant) => ({
+    text: applicant.isChangingLegalName ? "Yes" : "No",
+    loc: { x: 40, y: 100 }
+  }),
+  (applicant) => ({
     text: applicant.legalName.last,
     loc: { x: 57, y: 388 }
   }),
@@ -78669,19 +78673,7 @@ function Guide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "You should print both this webpage and the PDF containing your compiled documents." }),
       " ",
-      "Please review the forms and guide side by side.",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[0].locality?.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[1].locality?.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[2].locality?.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[3].locality?.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[4].locality?.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: guideSections[5].locality?.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      "Please review the forms and guide side by side."
     ] }),
     guidePushedLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
