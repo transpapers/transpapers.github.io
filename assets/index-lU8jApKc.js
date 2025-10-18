@@ -28530,10 +28530,6 @@ const feeWaiverMap = [
  */
 const mdosSexMap = [
   (applicant) => ({
-    text: applicant.isChangingLegalName ? "Yes" : "No",
-    loc: { x: 40, y: 100 }
-  }),
-  (applicant) => ({
     text: applicant.legalName.last,
     loc: { x: 57, y: 388 }
   }),
@@ -78465,10 +78461,20 @@ function compileGuidesFor(process2, applicant) {
     }
   });
   const guides = [];
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === applicant.residentJurisdictionName
+  );
+  if (!residentJurisdiction) {
+    return void 0;
+  }
+  const localities = residentJurisdiction.localities;
+  const locality = localities.find(
+    (j) => j.name === applicant.residentLocalityName
+  );
   docs.filter(
     (doc) => !("include" in doc) || doc.include === void 0 || doc.include(applicant)
   ).forEach((doc) => {
-    if (doc.guide !== void 0 && applicant.residentLocality !== void 0) {
+    if (doc.guide !== void 0 && locality !== void 0) {
       const correctlyTypedGuide = doc.guide;
       if (typeof correctlyTypedGuide === "function") {
         guides.push(correctlyTypedGuide);
