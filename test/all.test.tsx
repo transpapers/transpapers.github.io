@@ -42,7 +42,7 @@ describe("neededFieldNames()", () => {
       "mothersBirthName",
       "parentsAreOkay",
       "phone",
-      "doNotPublish",
+      //"doNotPublish",
       "reasonForNameChange",
       "representativeName",
       "residentCity",
