@@ -29563,6 +29563,7 @@ const michiganBirthRecord = {
   isBirth: true
 };
 const michiganPostamble = {
+  target: Target.BirthRecord,
   depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
@@ -32779,6 +32780,8 @@ const rhodeislandBirthRecord = {
   isBirth: true
 };
 const rhodeislandPostamble = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",
@@ -37115,6 +37118,8 @@ const oregonBirthRecord = {
   isBirth: true
 };
 const oregonPostamble = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",
@@ -38852,6 +38857,8 @@ const alaskaBirthRecord = {
   isBirth: true
 };
 const alaskaPostamble = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",
@@ -40982,6 +40989,8 @@ const illinoisBirthRecord = {
   isBirth: true
 };
 const illinoisPostamble = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",
@@ -78603,11 +78612,6 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
           processes.push(proc);
           metTargets.push(proc.target);
         }
-      }
-    }
-    for (const resProc of allProcs) {
-      if (resProc.isJustGuide) {
-        processes.push(resProc);
       }
     }
     if (!addedSomethingThisTime) {
