@@ -43376,7 +43376,7 @@ function Step5() {
   if (residentJurisdiction && birthJurisdiction && federalJurisdiction) {
     const processes = [
       ...residentJurisdiction.processes.filter(
-        (p) => !p.isJustGuide && !p.isBirth
+        (p) => !p.isBirth
       ),
       ...birthJurisdiction.processes.filter((p) => !p.isJustGuide && p.isBirth),
       ...federalJurisdiction.processes.filter((p) => !p.isJustGuide)
