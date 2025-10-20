@@ -37505,6 +37505,56 @@ const oregonCounties = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 /*!
+ * Request for Exemption from Payment of Fees (Alaska form TF-920.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const feeWaiverAlaskaMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "courtLocation"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "plaintiff"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "requestor"
+  }),
+  () => ({
+    check: true,
+    fieldName: "filingFee"
+  })
+];
+/*!
+ * Affidavit of Additional Service (Alaska form CIV-702.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const additionalServiceAlaskaMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "enter court location here"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "enter name here"
+  }),
+  (applicant) => ({
+    fieldName: "Adult/Minor",
+    choice: isMinor(applicant) ? "Choice2" : "Choice1"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "yourName"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    fieldName: "mailingAddress"
+  })
+];
+/*!
  * Drivers License, Permit, or Identification Card Transaction Application (Alaska form D-1.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -37755,6 +37805,60 @@ function AlaskaBirthCertificateGuide({ person }) {
     ] })
   ] }, "Alaska-BirthCertificate");
 }
+function AlaskaCourtHearingGuide({ person }) {
+  const { age, residentLocalityName, residentJurisdictionName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Hearing (AK)" }),
+      residentLocality && residentLocality.name === "Anchorage" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "For Anchorage, hearings are held in one of two locations. On weekdays they are at ",
+        residentLocality.court.address,
+        " but on weekends they are at the Boney courthouse, 303 K St, Anchorage, AK 99501."
+      ] }) : "",
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "On the day of your hearing, you",
+        age && age < 18 && " and your petitioner",
+        " should dress appropriately for a courtroom, even if the hearing is virtual. The hearing may begin late, but it should only take a few minutes once it starts."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "You ",
+        age && age < 18 && "and/or your petitioner",
+        " will be sworn in and questioned. The questions vary between courts, but you can expect some of the following:"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your current legal name?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your desired legal name?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your date of birth?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you lived in this county for over a year?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Have you paid the publication fee to an approved newspaper?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you would like the court to know?" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+          "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
+          " ",
+          "(Compare the history of the phrase “speak now or forever hold your peace.”)"
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "At this point the name change should be granted and the hearing should end promptly. In rare cases",
+        age && age < 18 ? " your petitioner" : " you",
+        " may also be told to send notice to individuals that the name change was granted. If so, inform whoever the court says to and use the copy of the “Affidavit of Additional Service” (CIV-702) we provided and return a completed and notarized copy to the court within 20 days.",
+        age && age < 18 ? " Your petitioner" : " You",
+        " will receive two copies of the “Certificate of Name Change” (CIV-705) which we will call the court order. You will likely want to order an additional 1 or 2 copies if you plan on updating the rest of your information by mail. The date listed on the certificate is the day when you can begin using your new legal name, it is also the date by which you have to notify the DMV of the change which is covered in the “Primary ID” section below."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
+    ] }, "AK-CourtHearing");
+  }
+}
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
@@ -37942,6 +38046,143 @@ function AlaskaEverythingElseGuide() {
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
+function AlaskaFeeWaiverGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request for Exemption from Payment of Fees (AK, TF-920)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is optional. It is a request to waive the filing fee charged upon submitting the name change petition to the court. In Alaska the filing fee for that petition is around $200. Courts will typically not grant the waiver unless your household is on public assistance, or the household annual income is below 125% of the federal poverty line. However, you may file the request at your discretion; the worst they can do is deny it.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out the “Financial Statement” section as needed.",
+      age && age < 18 ? " Your petitioner should " : " Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign or date this form until a notary or court clerk says to."
+    ] })
+  ] }, "Alaska-Fee-Waiver");
+}
+function AlaskaFilingInitialFormsGuide({
+  person
+}) {
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (AK)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Alaska has specific boundaries to determine which court a petitioner should file at. We have made a map with this information",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing", children: "here" }),
+        ". If the paperwork was filed at the wrong court",
+        age && age < 18 ? " your petitioner" : " you",
+        " may ask them to forward the paperwork and payment to the correct court.",
+        age && age < 18 ? " In this case the correct court for your petitioner to file at is based on where you (the minor) lives, not the petitioner. " : " ",
+        "Alaska also has several different methods of filing depending on the court. No matter what method is used a valid photo ID is needed to notarize the forms. Below is a list of filing methods for the ",
+        residentLocality.name,
+        " court."
+      ] }),
+      residentLocality.inPersonFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " In-person - " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        age && age < 18 ? "Your petitioner" : "You",
+        " can go directly to the",
+        " ",
+        residentLocality.name,
+        " court at ",
+        residentLocality.court.address,
+        " to file. The forms can be signed, dated, and notarized there. A webpage with more information is available at",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "here", children: residentLocality.court.website }),
+        ". It has the hours of operation, accepted payment types, and a phone number for any questions."
+      ] }) : "",
+      residentLocality.trueFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " True Filing - " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        age && age < 18 ? "Your petitioner" : "You",
+        " can file online with the state's TrueFiling system at this",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://akfile.truefiling.com/register", children: "website" }),
+        ". There is also a video tutorial",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://courts.alaska.gov/efile/videos/How_to_File_a_New_Civil_Case.mp4", children: "here" }),
+        ". As a backup measure we have transcribed the instructions from the video below for ",
+        age && age < 18 ? "your petitioner" : "you",
+        " if needed."
+      ] }) : "",
+      residentLocality.trueFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "You can fill out the form to register an account and begin the filing process. Log in, click on “File” in the upper right hand section, and choose the “AK Trial Court” option. Under “Action” select “Initiate a new case” and select your name under “Filer”. Case types should then appear, one of which should say “Change of Name”. After you hit “Initiate Case” there will be a screen asking for Case information, select ",
+        residentLocality.name,
+        " for “Filing Location” and then fill out the case type information as applicable. Then you should see a screen for “Party Information” which is just",
+        age && age < 18 ? " the petitioner and the minor child. " : " you. ",
+        "Fill in the information there and hit “Finish” which should take you to a page where you can upload the filled out forms from earlier in our guide. Upload all of your forms listed in the previous part here, with the exception of the “Request for Exemption from Payment of Fees” (TF-920) do ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " upload that form here. Make sure that the names of your uploaded forms match the official form names as written in our guide above then hit “Next” twice to proceed to payment checkout. If you are paying the fee you can enter credit/debit card information here, otherwise hit the “Request Fee Waiver”, select the top option, and upload the completed (TF-920) form there."
+      ] }) : "",
+      residentLocality.emailFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " Email - " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        age && age < 18 ? "Your petitioner" : "You",
+        " can file with the court using this email address ",
+        residentLocality.emailCourt,
+        ". In order to use this service the forms will need to be notarized by either a notary service or a court clerk from another court before they are sent. Notaries can be found in banks, some",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+        ", or ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+        ". There will be a fee for this service and photo ID is required. Write an email to request a name change and attach all of the completed and notarized forms from the previous section. All emailed forms must also be emailed in PDF format, we recommend scanning the signed and notarized documents as separate PDF attachments and naming them exactly like they are in the previous sections of this guide. The court clerk will then send an email back with a special payment link if a completed “Request for Exemption from Payment of Fees” (TF-920) form was not sent."
+      ] }) : "",
+      residentLocality.faxFiling ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " Fax - " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        age && age < 18 ? "Your petitioner" : "You",
+        " can file with the court by faxing the completed and notarized forms from the previous section to this number ",
+        residentLocality.faxNumber,
+        ". In order to use this service the forms will need to be notarized by either a notary service or a court clerk from another court before the fax is sent. Notaries can be found in banks, some",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+        ", or ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+        ". There will be a fee for this service and photo ID is required. If the fee waiver was not used or was denied the payment will be due on the day of the hearing."
+      ] }) : "",
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: " After Filing - " }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        "Once everything has been filed the clerk will send an “Order For Hearing, Posting, and Additional Service” (CIV-701) which will have the date of the hearing, whether the court will publicize your case information on the Alaska Court Systems legal notice website, whether others need to be informed about the hearing, and whether additional action is needed for publication. Additional publication and informing steps are rare and are usually due to",
+        age && age < 18 ? " name changes involving absentee parents/guardians, criminal records, or probation. " : " petitioners with criminal records or petitioners who are on probation. ",
+        "If ",
+        age && age < 18 ? "your petitioner has" : "you have",
+        " been instructed to do this, ",
+        age && age < 18 ? "they should" : "",
+        " follow the court's directions and fill out the “Affidavit of Additional Service” (CIV-702) and return a completed and notarized copy to the court as soon as possible. If the “Request for Exemption from Payment of Fees” (TF-920) was denied a filing fee will need to be paid in order to continue."
+      ] })
+    ] }, "AK-InitialForms");
+  }
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
 function AlaskaResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (AK)" }),
@@ -38031,28 +38272,28 @@ const alaskaNameChange = {
        include: (applicant) =>
          isMinor(applicant) && applicant.doNotPublish === true,
      },
-     {
-       name: "Request for Exemption from Payment of Fees",
-       id: "TF 920",
-       filename: "Alaska/Fee Waiver.pdf",
-       guide: AlaskaFeeWaiverGuide,
-       map: feeWaiverAlaskaMap,
-     },
-     {
-       name: "Filing Initial Documents",
-       guide: AlaskaFilingInitialFormsGuide,
-     },
-     {
-       name: "Court Hearing",
-       guide: AlaskaCourtHearingGuide,
-     },
-     {
-       name: "Affidavit of Additional Service",
-       id: "CIV 702",
-       filename: "Alaska/Affidavit of Additional Service.pdf",
-       map: additionalServiceAlaskaMap,
-     },
     */
+    {
+      name: "Request for Exemption from Payment of Fees",
+      id: "TF 920",
+      filename: "Alaska/Fee Waiver.pdf",
+      guide: AlaskaFeeWaiverGuide,
+      map: feeWaiverAlaskaMap
+    },
+    {
+      name: "Filing Initial Documents",
+      guide: AlaskaFilingInitialFormsGuide
+    },
+    {
+      name: "Court Hearing",
+      guide: AlaskaCourtHearingGuide
+    },
+    {
+      name: "Affidavit of Additional Service",
+      id: "CIV 702",
+      filename: "Alaska/Affidavit of Additional Service.pdf",
+      map: additionalServiceAlaskaMap
+    }
   ]
 };
 const alaskaGenderMarker = {
