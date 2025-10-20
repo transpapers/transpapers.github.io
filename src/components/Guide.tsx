@@ -116,6 +116,7 @@ function getProcesses(
     }
   }
 
+  //The below lines add isJustGuide sections back into the process list.
   const guideProcesses: AnyProcess[] = residentJurisdiction.processes.filter((p) => p.isJustGuide);
   for (const guideProc of guideProcesses) {
     processes.push(guideProc);

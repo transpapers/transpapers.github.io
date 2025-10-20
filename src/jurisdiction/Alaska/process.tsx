@@ -57,6 +57,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
+    /**
     {
       name: "Petition for Change of Name",
       id: "CIV 700",
@@ -127,6 +128,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       filename: "Alaska/Affidavit of Additional Service.pdf",
       map: additionalServiceAlaskaMap,
     },
+   */
   ],
 };
 
