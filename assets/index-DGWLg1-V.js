@@ -37511,7 +37511,7 @@ const oregonCounties = [
  */
 const adultNamePetitionAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37539,7 +37539,7 @@ const adultNamePetitionAlaskaMap = [
   }),
   (applicant) => ({
     fieldName: "currentLegalN",
-    choice: fullName(applicant.birthName) ? "1" : "0"
+    choice: fullName(applicant.birthName) ? 1 : 0
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -37606,7 +37606,7 @@ const minorNamePetitionAlaskaMap = [
     fieldName: "email"
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37685,7 +37685,7 @@ const minorNamePetitionAlaskaMap = [
  */
 const nonpetitionParentalConsentAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "courtLocations"
   }),
   (applicant) => ({
@@ -37731,7 +37731,7 @@ const applicationNameAlaskaMap = [
     loc: { x: 187, y: 445 }
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName ?? "",
+    text: applicant.residentJurisdictionName,
     loc: { x: 433, y: 445 }
   }),
   (applicant) => ({
@@ -37770,7 +37770,7 @@ const applicationNameAlaskaMap = [
  */
 const adultWaivePublicationAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "location"
   }),
   (applicant) => ({
@@ -37797,7 +37797,7 @@ const adultWaivePublicationAlaskaMap = [
  */
 const minorWaivePublicationAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "location"
   }),
   (applicant) => ({
@@ -37828,7 +37828,7 @@ const minorWaivePublicationAlaskaMap = [
  */
 const feeWaiverAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "courtLocation"
   }),
   (applicant) => ({
@@ -37851,7 +37851,7 @@ const feeWaiverAlaskaMap = [
  */
 const additionalServiceAlaskaMap = [
   (applicant) => ({
-    text: applicant.residentLocalityName ?? "",
+    text: applicant.residentLocalityName,
     fieldName: "enter court location here"
   }),
   (applicant) => ({
