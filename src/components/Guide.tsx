@@ -109,6 +109,14 @@ function getProcesses(
         }
       }
     }
+    
+    const guideProcesses = [...residentJurisdiction.processes.filter(
+      (p) => p.isJustGuide)];
+    for (const resProc of guideProcesses) {
+      if (resProc.isJustGuide === true) {
+        processes.push(resProc)
+      }
+    }
 
     if (!addedSomethingThisTime) {
       // Cannot be topologically sorted.
@@ -125,8 +133,8 @@ function Guide() {
   const { 
     residentJurisdictionName,
     residentLocalityName,
-    birthJurisdictionName, 
-    processNames 
+    birthJurisdictionName,
+    processNames
   } = useStore((state) => state);
 
   const residentJurisdiction = allJurisdictions.find(
