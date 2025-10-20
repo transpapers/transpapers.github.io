@@ -116,6 +116,14 @@ function getProcesses(
     }
   }
 
+  const guideProcesses: AnyProcess[] = residentJurisdiction.processes.filter((p) => p.isJustGuide);
+  for (const guideProc of guideProcesses) {
+    if (guideProc !== undefined && guideProc.target !== undefined) {
+      processes.push(guideProc);
+      metTargets.push(guideProc.target);
+    }
+  }
+
   return processes;
 }
 
