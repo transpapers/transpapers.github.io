@@ -118,10 +118,7 @@ function getProcesses(
 
   const guideProcesses: AnyProcess[] = residentJurisdiction.processes.filter((p) => p.isJustGuide);
   for (const guideProc of guideProcesses) {
-    //if (guideProc !== undefined) {
-      processes.push(guideProc);
-      //metTargets.push(guideProc.target);
-    //}
+    processes.push(guideProc);
   }
 
   return processes;
