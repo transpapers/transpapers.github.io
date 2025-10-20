@@ -28,8 +28,8 @@ import {
   //applicationNameAlaskaMap,
   //adultWaivePublicationAlaskaMap,
   //minorWaivePublicationAlaskaMap,
-  //feeWaiverAlaskaMap,
-  //additionalServiceAlaskaMap,
+  feeWaiverAlaskaMap,
+  additionalServiceAlaskaMap,
   primaryIDAlaskaMap,
   primaryIDSexDesignationAlaskaMap,
   birthCertRequestAlaskaMap,
@@ -40,11 +40,11 @@ import AlaskaBirthCertificateGuide from "../../components/guides/Alaska/BirthCer
 //import AlaskaCIV695Guide from "../../components/guides/Alaska/CIV695";
 //import AlaskaCIV708Guide from "../../components/guides/Alaska/CIV708";
 //import AlaskaCIV709Guide from "../../components/guides/Alaska/CIV709";
-//import AlaskaCourtHearingGuide from "../../components/guides/Alaska/CourtHearing";
+import AlaskaCourtHearingGuide from "../../components/guides/Alaska/CourtHearing";
 import AlaskaDMVGuide from "../../components/guides/Alaska/DMV";
 import AlaskaEverythingElseGuide from "../../components/guides/Alaska/EverythingElse";
-//import AlaskaFeeWaiverGuide from "../../components/guides/Alaska/FeeWaiver";
-//import AlaskaFilingInitialFormsGuide from "../../components/guides/Alaska/FilingInitialForms";
+import AlaskaFeeWaiverGuide from "../../components/guides/Alaska/FeeWaiver";
+import AlaskaFilingInitialFormsGuide from "../../components/guides/Alaska/FilingInitialForms";
 //import AlaskaMinorPetitionGuide from "../../components/guides/Alaska/MinorPetition";
 import AlaskaResourcesGuide from "../../components/guides/Alaska/Resources";
 //import AlaskaVS405Guide from "../../components/guides/Alaska/VS405";
@@ -107,6 +107,7 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       include: (applicant) =>
         isMinor(applicant) && applicant.doNotPublish === true,
     },
+   */
     {
       name: "Request for Exemption from Payment of Fees",
       id: "TF 920",
@@ -128,7 +129,6 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       filename: "Alaska/Affidavit of Additional Service.pdf",
       map: additionalServiceAlaskaMap,
     },
-   */
   ],
 };
 
