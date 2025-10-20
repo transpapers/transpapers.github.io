@@ -111,7 +111,7 @@ function getProcesses(
     }
     
     for (const resProc of allProcs) {
-      if (resProc.isJustGuide && resProc.isJustGuide === true) {
+      if (resProc.isJustGuide) {
         processes.push(resProc)
       }
     }
