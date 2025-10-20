@@ -34296,11 +34296,11 @@ const birthCertNYCMap = [
     choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
-          return "Choice1";
+          return 1;
         case GenderMarker.F:
-          return "Choice2";
+          return 2;
         case GenderMarker.X:
-          return "Choice3";
+          return 3;
       }
     })()
   }),
