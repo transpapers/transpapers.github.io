@@ -37505,6 +37505,126 @@ const oregonCounties = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 /*!
+ * Application for Legal Name Change (Alaska form VS-405.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const applicationNameAlaskaMap = [
+  (applicant) => ({
+    text: applicant.birthName.first || applicant.legalName.first,
+    loc: { x: 190, y: 357 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle || applicant.legalName.middle,
+    loc: { x: 190, y: 386 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last || applicant.legalName.last,
+    loc: { x: 190, y: 416 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.suffix ?? applicant.legalName.suffix,
+    loc: { x: 720, y: 416 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 187, y: 445 }
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdictionName ?? "",
+    loc: { x: 433, y: 445 }
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    loc: { x: 708, y: 445 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    loc: { x: 225, y: 474 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    loc: { x: 264, y: 507 }
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 50, y: 570 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    loc: { x: 435, y: 570 }
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { x: 50, y: 620 }
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    loc: { x: 435, y: 620 }
+  })
+];
+/*!
+ * Request to Waive Posting in Adult Change of Name Case (Alaska form CIV-708.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const adultWaivePublicationAlaskaMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "location"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "ITMO"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    fieldName: "mailing"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "myPhone"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "myEmail"
+  })
+];
+/*!
+ * Request to Waive Posting in Child's Change of Name Case (Alaska form CIV-709.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const minorWaivePublicationAlaskaMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "location"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "ITMO"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    fieldName: "petitioner"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    fieldName: "mailing"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "myPhone"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "myEmail"
+  })
+];
+/*!
  * Request for Exemption from Payment of Fees (Alaska form TF-920.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -37804,6 +37924,67 @@ function AlaskaBirthCertificateGuide({ person }) {
       " mailing this, a photocopy of both sides of an acceptable ID is needed instead. Place the photocopies, the “Alaska Birth Certificate Request Form”, and a certified copy of the court order in an envelope. For payment by check, address it to the “Alaska Vital Records Office” for the fee amount. The mailing address is on the first page of the form in the bottom left corner. It may take several weeks to get an updated copy back."
     ] })
   ] }, "Alaska-BirthCertificate");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
+function AlaskaCIV708Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Posting in Adult Change of Name Case (AK, CIV-708)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Request to Waive Posting in Adult Change of Name Case” (CIV-708) allows you to ask the court to not publish details of your name change case to the Alaska Court Systems legal notice website and potentially further seal the case records as necessary. Simply filling out items 3 and 4 is enough to request removal of publication but if you need to further seal the records check the applicable boxes on item 2. Please give a description explaining why you need this action taken in item 3, the court is looking for things like stalkers, or known specific threats. Please be prompt but detailed in the reason and bring supporting evidence if you have it. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign or date this form until instructed by a notary or court clerk."
+    ] })
+  ] }, "Alaska-CIV-708");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
+function AlaskaCIV709Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Posting in Child's Change of Name Case (AK, CIV-709)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Request to Waive Posting in Child's Change of Name Case” (CIV-709) form allows your petitioner to ask the court to not publish details of your name change case to the Alaska Court Systems legal notice website and potentially further seal the case records as necessary. Simply filling out items 3 & 4 is enough to request removal of publication but if you or your petitioner needs to further seal the records they should check the applicable boxes on item 2. You both need to come up with a description explaining why you or they need this action taken in item 3. The court is looking for things like stalkers or known specific threats. Please be prompt but detailed in the reason and bring supporting evidence if you have it. Your petitioner should",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign or date the form until a notary or court employee says to."
+    ] })
+  ] }, "Alaska-CIV-709");
 }
 function AlaskaCourtHearingGuide({ person }) {
   const { age, residentLocalityName, residentJurisdictionName } = person;
@@ -38218,6 +38399,36 @@ function AlaskaResourcesGuide() {
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
+function AlaskaVS405Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Application for Legal Name Change (AK, VS-405)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form should already be complete. It should ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " be signed and dated below section 7c until directed by a court employee."
+    ] })
+  ] }, "Alaska-VS-405");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
 const alaskaNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -38247,32 +38458,30 @@ const alaskaNameChange = {
        map: nonpetitionParentalConsentAlaskaMap,
        include: (applicant) => isMinor(applicant),
      },
-     {
-       name: "Application for Legal Name Change",
-       id: "VS 405",
-       filename: "Alaska/Application for Legal Name Change.pdf",
-       guide: AlaskaVS405Guide,
-       map: applicationNameAlaskaMap,
-     },
-     {
-       name: "Request to Waive Posting in Adult Change of Name Case",
-       id: "CIV 708",
-       filename: "Alaska/Waive Publication Adult.pdf",
-       guide: AlaskaCIV708Guide,
-       map: adultWaivePublicationAlaskaMap,
-       include: (applicant) =>
-         isMinor(applicant) && applicant.doNotPublish === true,
-     },
-     {
-       name: "Request to Waive Posting in Child's Change of Name Case",
-       id: "CIV 709",
-       filename: "Alaska/Waive Publication Minor.pdf",
-       guide: AlaskaCIV709Guide,
-       map: minorWaivePublicationAlaskaMap,
-       include: (applicant) =>
-         isMinor(applicant) && applicant.doNotPublish === true,
-     },
     */
+    {
+      name: "Application for Legal Name Change",
+      id: "VS 405",
+      filename: "Alaska/Application for Legal Name Change.pdf",
+      guide: AlaskaVS405Guide,
+      map: applicationNameAlaskaMap
+    },
+    {
+      name: "Request to Waive Posting in Adult Change of Name Case",
+      id: "CIV 708",
+      filename: "Alaska/Waive Publication Adult.pdf",
+      guide: AlaskaCIV708Guide,
+      map: adultWaivePublicationAlaskaMap,
+      include: (applicant) => isMinor(applicant) && applicant.doNotPublish === true
+    },
+    {
+      name: "Request to Waive Posting in Child's Change of Name Case",
+      id: "CIV 709",
+      filename: "Alaska/Waive Publication Minor.pdf",
+      guide: AlaskaCIV709Guide,
+      map: minorWaivePublicationAlaskaMap,
+      include: (applicant) => isMinor(applicant) && applicant.doNotPublish === true
+    },
     {
       name: "Request for Exemption from Payment of Fees",
       id: "TF 920",
