@@ -247,7 +247,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
   }),
   () => ({
     fieldName: "PreviousApplication",
-    choice: "3",
+    choice: 3,
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
