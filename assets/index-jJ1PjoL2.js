@@ -43376,7 +43376,7 @@ function Step5() {
   if (residentJurisdiction && birthJurisdiction && federalJurisdiction) {
     const processes = [
       ...residentJurisdiction.processes.filter(
-        (p) => !p.isBirth
+        (p) => !p.isJustGuide && !p.isBirth
       ),
       ...birthJurisdiction.processes.filter((p) => !p.isJustGuide && p.isBirth),
       ...federalJurisdiction.processes.filter((p) => !p.isJustGuide)
@@ -78617,6 +78617,10 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
     if (!addedSomethingThisTime) {
       return void 0;
     }
+  }
+  const guideProcesses = residentJurisdiction.processes.filter((p) => p.isJustGuide);
+  for (const guideProc of guideProcesses) {
+    processes.push(guideProc);
   }
   return processes;
 }
