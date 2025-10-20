@@ -22,9 +22,9 @@
 import { isMinor } from "../../lib/util";
 
 import {
-  //adultNamePetitionAlaskaMap,
-  //minorNamePetitionAlaskaMap,
-  //nonpetitionParentalConsentAlaskaMap,
+  adultNamePetitionAlaskaMap,
+  minorNamePetitionAlaskaMap,
+  nonpetitionParentalConsentAlaskaMap,
   applicationNameAlaskaMap,
   adultWaivePublicationAlaskaMap,
   minorWaivePublicationAlaskaMap,
@@ -35,9 +35,9 @@ import {
   birthCertRequestAlaskaMap,
 } from "./maps";
 
-//import AlaskaAdultPetitionGuide from "../../components/guides/Alaska/AdultPetition";
+import AlaskaAdultPetitionGuide from "../../components/guides/Alaska/AdultPetition";
 import AlaskaBirthCertificateGuide from "../../components/guides/Alaska/BirthCertificate";
-//import AlaskaCIV695Guide from "../../components/guides/Alaska/CIV695";
+import AlaskaCIV695Guide from "../../components/guides/Alaska/CIV695";
 import AlaskaCIV708Guide from "../../components/guides/Alaska/CIV708";
 import AlaskaCIV709Guide from "../../components/guides/Alaska/CIV709";
 import AlaskaCourtHearingGuide from "../../components/guides/Alaska/CourtHearing";
@@ -45,7 +45,7 @@ import AlaskaDMVGuide from "../../components/guides/Alaska/DMV";
 import AlaskaEverythingElseGuide from "../../components/guides/Alaska/EverythingElse";
 import AlaskaFeeWaiverGuide from "../../components/guides/Alaska/FeeWaiver";
 import AlaskaFilingInitialFormsGuide from "../../components/guides/Alaska/FilingInitialForms";
-//import AlaskaMinorPetitionGuide from "../../components/guides/Alaska/MinorPetition";
+import AlaskaMinorPetitionGuide from "../../components/guides/Alaska/MinorPetition";
 import AlaskaResourcesGuide from "../../components/guides/Alaska/Resources";
 import AlaskaVS405Guide from "../../components/guides/Alaska/VS405";
 
@@ -57,7 +57,6 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
-    /**
     {
       name: "Petition for Change of Name",
       id: "CIV 700",
@@ -82,7 +81,6 @@ export const alaskaNameChange: Process<AlaskaAdministrativeDivision> = {
       map: nonpetitionParentalConsentAlaskaMap,
       include: (applicant) => isMinor(applicant),
     },
-   */
     {
       name: "Application for Legal Name Change",
       id: "VS 405",
