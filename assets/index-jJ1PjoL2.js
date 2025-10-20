@@ -37505,6 +37505,203 @@ const oregonCounties = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 /*!
+ * Petition for Change of Name (Alaska form CIV-700.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const adultNamePetitionAlaskaMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "courtLocation"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "legalName"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DOB"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "firstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "middleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "lastName"
+  }),
+  (applicant) => ({
+    fieldName: "currentLegalN",
+    choice: fullName(applicant.birthName) ? "1" : "0"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first,
+    fieldName: "firstName0"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle,
+    fieldName: "middleName0"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last,
+    fieldName: "lastName0"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "firstName1"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "middleName1"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "lastName1"
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "reasonForNameChange"
+  }),
+  () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "date2" }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    fieldName: "mailingAddress"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "daytimePhone"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "email"
+  })
+];
+/*!
+ * Petition to Change Child's Name (Alaska form CIV-694.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const minorNamePetitionAlaskaMap = [
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    fieldName: "namePetitioner"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "phoneNo"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    fieldName: "address"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "email"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "courtLocation"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "legalName"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DOB"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    fieldName: "By"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "firstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "middleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "lastName"
+  }),
+  (applicant) => ({
+    check: !fullName(applicant.birthName),
+    fieldName: "childsCurrentName",
+    choice: "choice1"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first,
+    fieldName: "firstName0"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle,
+    fieldName: "middleName0"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last,
+    fieldName: "lastName0"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "firstName1"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "middleName1"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "lastName1"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant) && applicant.parentsAreOkay,
+    fieldName: "parent"
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "reasonForNameChange"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    loc: { page: 1, x: 427, y: 544 }
+  })
+];
+/*!
+ * Parental Consent from Non-Petitioning Parent (Alaska form CIV-695.)
+ * Updated 7/2024.
+ * @type {Formfill[]}
+ */
+const nonpetitionParentalConsentAlaskaMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ?? "",
+    fieldName: "courtLocations"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "minor"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    fieldName: "guardian"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "nameOf"
+  })
+];
+/*!
  * Application for Legal Name Change (Alaska form VS-405.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -37894,6 +38091,39 @@ const birthCertRequestAlaskaMap = [
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
+function AlaskaAdultPetitionGuide({ person }) {
+  const { hasCriminalRecord } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (AK, CIV-700)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Petition for Change of Name” (CIV-700) is the primary name change document. You may need to fill out",
+      hasCriminalRecord ? " items 6-10 as they apply to you. " : " item 6, ignore the rest. ",
+      "Also at the bottom you will need to decide if you would like to check the box to have the court email your documents rather than snail mail them. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign and date the form until a notary or court clerk instructs you to do so."
+    ] })
+  ] }, "Alaska-Adult-Petition");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
 function AlaskaBirthCertificateGuide({ person }) {
   const { age, isChangingLegalSex, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -37924,6 +38154,40 @@ function AlaskaBirthCertificateGuide({ person }) {
       " mailing this, a photocopy of both sides of an acceptable ID is needed instead. Place the photocopies, the “Alaska Birth Certificate Request Form”, and a certified copy of the court order in an envelope. For payment by check, address it to the “Alaska Vital Records Office” for the fee amount. The mailing address is on the first page of the form in the bottom left corner. It may take several weeks to get an updated copy back."
     ] })
   ] }, "Alaska-BirthCertificate");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
+function AlaskaCIV695Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Parental Consent from Non-petitioning Parent (AK, CIV-695)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "As stated in the petition section any living non-petitioning parent/guardian with custody of you needs to fill out a “Parental Consent From Non-Petitioning Parent” (CIV-695). Said individual(s) can sign this either with your petitioner at the court when they file for you or alone with a notary at an appointment." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Notaries can be found in court buildings, banks, some",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+      ", or ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+      ". There will be a fee for this service and photo ID is required."
+    ] })
+  ] }, "Alaska-CIV-695");
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -38364,6 +38628,46 @@ function AlaskaFilingInitialFormsGuide({
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
+function AlaskaMinorPetitionGuide({ person }) {
+  const { parentsAreOkay } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition to Change Child's Name (AK, CIV-694)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Petition to Change Child's Name” (CIV-694) is the primary name change document. Any parent or legal guardian can fill this form out and file it on your behalf. Whoever does becomes your petitioner and will be going through this process with you. Your parent/guardian will need to decide whether to check the box at the top to receive court documents to an email account instead of regular mail.",
+      parentsAreOkay ? " " : " Afterwards they will need to check a box for item 4. ",
+      "Item 5 is talking about the “Parental Consent From Non-Petitioning Parent” (CIV-695) form which we have included. Any parent/guardian needs to sign one of those forms unless they are deceased or are non-custodial",
+      parentsAreOkay ? ". " : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        " ",
+        "in which case attach certified copies of a death certificate or custody order. Legal Guardians also need to provide a certified copy of their letter of guardianship.",
+        " "
+      ] }),
+      "If a parent/guardian with custody of you refuses to sign that form in front of a notary or court clerk this process will be contested and we recommend getting a lawyer. Your petitioner should ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " ",
+      "sign and date the form until a notary or court clerk instructs them to do so."
+    ] })
+  ] }, "Alaska-Minor-Petition");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
 function AlaskaResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (AK)" }),
@@ -38433,32 +38737,30 @@ const alaskaNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
-    /**
-     {
-       name: "Petition for Change of Name",
-       id: "CIV 700",
-       filename: "Alaska/Petition for Change of Name Adult.pdf",
-       guide: AlaskaAdultPetitionGuide,
-       map: adultNamePetitionAlaskaMap,
-       include: (applicant) => !isMinor(applicant),
-     },
-     {
-       name: "Petition to Change Child's Name",
-       id: "CIV 694",
-       filename: "Alaska/Petition for Change of Name Minor.pdf",
-       guide: AlaskaMinorPetitionGuide,
-       map: minorNamePetitionAlaskaMap,
-       include: (applicant) => isMinor(applicant),
-     },
-     {
-       name: "Parental Consent from Non-Petitioning Parent",
-       id: "CIV 695",
-       filename: "Alaska/Non-petitioning Parental Consent.pdf",
-       guide: AlaskaCIV695Guide,
-       map: nonpetitionParentalConsentAlaskaMap,
-       include: (applicant) => isMinor(applicant),
-     },
-    */
+    {
+      name: "Petition for Change of Name",
+      id: "CIV 700",
+      filename: "Alaska/Petition for Change of Name Adult.pdf",
+      guide: AlaskaAdultPetitionGuide,
+      map: adultNamePetitionAlaskaMap,
+      include: (applicant) => !isMinor(applicant)
+    },
+    {
+      name: "Petition to Change Child's Name",
+      id: "CIV 694",
+      filename: "Alaska/Petition for Change of Name Minor.pdf",
+      guide: AlaskaMinorPetitionGuide,
+      map: minorNamePetitionAlaskaMap,
+      include: (applicant) => isMinor(applicant)
+    },
+    {
+      name: "Parental Consent from Non-Petitioning Parent",
+      id: "CIV 695",
+      filename: "Alaska/Non-petitioning Parental Consent.pdf",
+      guide: AlaskaCIV695Guide,
+      map: nonpetitionParentalConsentAlaskaMap,
+      include: (applicant) => isMinor(applicant)
+    },
     {
       name: "Application for Legal Name Change",
       id: "VS 405",
