@@ -131,6 +131,8 @@ export const oregonBirthRecord: Process<Locality> = {
 };
 
 export const oregonPostamble: Process<Locality> = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",

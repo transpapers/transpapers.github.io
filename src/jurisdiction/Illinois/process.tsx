@@ -211,6 +211,8 @@ export const illinoisBirthRecord: Process<Locality> = {
 };
 
 export const illinoisPostamble: Process<Locality> = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",

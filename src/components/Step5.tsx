@@ -57,17 +57,6 @@ function Step5() {
       ...federalJurisdiction.processes.filter((p) => !p.isJustGuide),
     ];
 
-    //Adds guide sections with isJustGuide flag while keeping it out of user selection.
-    const guideProcesses = residentJurisdiction.processes.filter(
-      (p) => p.isJustGuide);
-    const guideProcNames:Target[] = [];
-    for (const proc of guideProcesses) {
-      if (proc.target) {
-        guideProcNames.push(proc.target)
-      }
-    }
-    updateProcessNames(guideProcNames);
-
     const onSubmit = async ({ processNames }: { processNames?: Target[] }) => {
       updateProcessNames(processNames ?? []);
       await navigate("/step6");

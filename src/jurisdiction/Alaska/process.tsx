@@ -188,6 +188,8 @@ export const alaskaBirthRecord: Process<AlaskaAdministrativeDivision> = {
 };
 
 export const alaskaPostamble: Process<AlaskaAdministrativeDivision> = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {
       name: "Everything Else",

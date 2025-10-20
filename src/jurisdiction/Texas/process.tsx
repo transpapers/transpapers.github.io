@@ -317,6 +317,7 @@ export const texasBirthRecord: Process<TexasCounty> = {
 };
 
 export const texasPostamble: Process<TexasCounty> = {
+  target: Target.BirthRecord,
   depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {

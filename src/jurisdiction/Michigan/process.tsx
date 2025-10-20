@@ -166,6 +166,7 @@ export const michiganBirthRecord: Process<MichiganCounty> = {
 };
 
 export const michiganPostamble: Process<MichiganCounty> = {
+  target: Target.BirthRecord,
   depends: [Target.PrimaryIdentification, Target.Passport],
   documents: [
     {

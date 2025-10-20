@@ -137,6 +137,8 @@ export const rhodeislandBirthRecord: Process<RhodeIslandCityOrTown> = {
 };
 
 export const rhodeislandPostamble: Process<RhodeIslandCityOrTown> = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],  
   documents: [
     {
       name: "Everything Else",
