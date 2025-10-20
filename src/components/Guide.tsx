@@ -109,12 +109,6 @@ function getProcesses(
         }
       }
     }
-    
-    for (const resProc of allProcs) {
-      if (resProc.isJustGuide) {
-        processes.push(resProc)
-      }
-    }
 
     if (!addedSomethingThisTime) {
       // Cannot be topologically sorted.
