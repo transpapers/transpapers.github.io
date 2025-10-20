@@ -78605,6 +78605,14 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
         }
       }
     }
+    const guideProcesses = [...residentJurisdiction.processes.filter(
+      (p) => p.isJustGuide
+    )];
+    for (const resProc of guideProcesses) {
+      if (resProc.isJustGuide === true) {
+        processes.push(resProc);
+      }
+    }
     if (!addedSomethingThisTime) {
       return void 0;
     }
