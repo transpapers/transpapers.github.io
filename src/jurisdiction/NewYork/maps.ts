@@ -70,11 +70,11 @@ export const adultNameSexPetitionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.hasCriminalRecord ? "•" : "",
-    loc: { x: 685, y: 64 },
+    loc: { page: 1, x: 685, y: 64 },
   }),
   (applicant) => ({
     text: !applicant.hasCriminalRecord ? "•" : "",
-    loc: { x: 753, y: 64 },
+    loc: { page: 1, x: 753, y: 64 },
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
