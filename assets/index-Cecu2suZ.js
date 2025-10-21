@@ -33711,6 +33711,112 @@ const minorNameSexPetitionMap = [
   })
 ];
 /*!
+ * Application to Waive Court Costs, Fees, and Expenses (NY State form UCS-FW1.)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+const feeWaiverNYStateMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName ? `${applicant.residentLocalityName} county` : "",
+    fieldName: "CourtName"
+  }),
+  (applicant) => ({
+    fieldName: "CourtCounty",
+    value: applicant.residentLocalityName
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Plaintiffs"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    fieldName: "ApplicantAddress"
+  }),
+  () => ({
+    fieldName: "Request",
+    choice: 1
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "Waiving the fee for the filing of UCS-NC2" : "Waiving the fee for the filing of UCS-NC1",
+    fieldName: "CourtOrderOtherSpecify"
+  }),
+  () => ({
+    fieldName: "PreviousFiling",
+    choice: "No"
+  }),
+  () => ({
+    fieldName: "Facts",
+    choice: 0
+  }),
+  () => ({
+    fieldName: "PreviousApplication",
+    choice: "3"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "ApplicantName"
+  })
+];
+/*!
+ * Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees (NYC form CIV-GP-15-i.)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+const feeWaiverNYCMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    loc: { x: 141, y: 44 }
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 65, y: 109 }
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    loc: { x: 237, y: 215 }
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 65, y: 247 }
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 223, y: 282 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    loc: { x: 143, y: 314 }
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 150, y: 490 }
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "waiving the fee for the filing of UCS-NC2" : "waiving the fee for the filing of UCS-NC1",
+    loc: { x: 261, y: 488 }
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 123, y: 768 }
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? fullName(applicant.representativeName) : fullName(applicant.representativeName),
+    loc: { x: 154, y: 914 }
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    loc: { x: 500, y: 914 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
+    loc: { x: 500, y: 947 }
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { x: 564, y: 972 }
+  })
+];
+/*!
  * Application for Permit, Driver License or Non-Driver ID Card (New York form MV-44.)
  * Updated 7/2024.
  * @type {Formfill[]}
@@ -35050,17 +35156,17 @@ const newyorkNameChange = {
     {
       name: "Application to Waive Court Costs, Fees, and Expenses",
       id: "UCS FW1",
-      //filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
+      filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
       guide: NYStateFeeWaiverGuide,
-      //map: feeWaiverNYStateMap,
+      map: feeWaiverNYStateMap,
       include: (applicant) => !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees",
       id: "CIV GP 15 i",
-      //filename: "NewYork/NYC Fee Waiver.pdf",
+      filename: "NewYork/NYC Fee Waiver.pdf",
       guide: NYCFeeWaiverGuide,
-      //map: feeWaiverNYCMap,
+      map: feeWaiverNYCMap,
       include: (applicant) => applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond"
     },
     {
