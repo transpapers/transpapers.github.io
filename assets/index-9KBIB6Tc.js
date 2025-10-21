@@ -33622,6 +33622,76 @@ const rhodeislandCounties = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 /*!
+ * Name Change and/or Sex Designation Change Petition for Individual Adult (New York form UCS-NC1.)
+ * Updated 5/2025.
+ * @type {Formfill[]}
+ */
+const adultNameSexPetitionMap = [
+  /** 'courtType' fieldName from counties.ts should go here.
+   */
+  (applicant) => ({
+    fieldName: "County",
+    value: applicant.residentLocalityName
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "PetitionerName"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NameChange"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "SexDesignationChange"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    fieldName: "NewName"
+  }),
+  (applicant) => ({
+    fieldName: "ConvictedOfCrime",
+    choice: applicant.hasCriminalRecord ? 0 : 1
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
+    fieldName: "ReasonsForNameChangeRequest-specify"
+  }),
+  (applicant) => ({
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "NewSexDesignation"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Age"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DOB"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.FullAddressAndCountry),
+    fieldName: "CurrentAddress"
+  }),
+  () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "SignatureDate" }),
+  (applicant) => ({
+    fieldName: "SealingRequest",
+    choice: applicant.doNotPublish ? "Yes" : "No"
+  })
+];
+/*!
  * Name Change and/or Sex Designation Change Petition for Individual Minor (New York form UCS-NC2.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -35140,9 +35210,9 @@ const newyorkNameChange = {
     {
       name: "Name Change and/or Sex Designation Change Petition for Individual Adult",
       id: "UCS NC1",
-      //filename: "NewYork/UCS-NC1 Adult.pdf",
+      filename: "NewYork/UCS-NC1 Adult.pdf",
       guide: NewYorkUCS_NC1Guide,
-      //map: adultNameSexPetitionMap,
+      map: adultNameSexPetitionMap,
       include: (applicant) => !isMinor(applicant)
     },
     {
@@ -35181,34 +35251,7 @@ const newyorkNameChange = {
 };
 const newyorkGenderMarker = {
   target: Target.GenderMarker,
-  documents: [
-    {
-      name: "Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older",
-      id: "DOH 5303",
-      filename: "NewYork/Gender Affidavit 17 and up NY State.pdf",
-      map: genderAffidavitAdultNYStateMap,
-      include: (applicant) => !isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
-    },
-    {
-      name: "Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under",
-      id: "DOH 5304",
-      filename: "NewYork/Gender Affidavit Under 17 NY State.pdf",
-      map: genderAffidavitMinorNYStateMap,
-      include: (applicant) => isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
-    },
-    {
-      name: "Self-Attestation Form for Registrants 18 Years of Age and Older",
-      filename: "NewYork/BC Self-attestation Adult NYC.pdf",
-      map: selfAttestationAdultNYCMap,
-      include: (applicant) => !isMinor(applicant) && (applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
-    },
-    {
-      name: "Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old",
-      filename: "NewYork/BC Self-attestation Minor NYC.pdf",
-      map: selfAttestationMinorNYCMap,
-      include: (applicant) => isMinor(applicant) && (applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
-    }
-  ]
+  documents: []
 };
 const newyorkPrimaryIdentification = {
   target: Target.PrimaryIdentification,
@@ -35257,6 +35300,32 @@ const newyorkBirthRecord = {
       filename: "NewYork/BC Update NYC.pdf",
       map: birthCertNYCMap,
       include: (applicant) => applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond"
+    },
+    {
+      name: "Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older",
+      id: "DOH 5303",
+      filename: "NewYork/Gender Affidavit 17 and up NY State.pdf",
+      map: genderAffidavitAdultNYStateMap,
+      include: (applicant) => !isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
+    },
+    {
+      name: "Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under",
+      id: "DOH 5304",
+      filename: "NewYork/Gender Affidavit Under 17 NY State.pdf",
+      map: genderAffidavitMinorNYStateMap,
+      include: (applicant) => isMinor(applicant) && !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
+    },
+    {
+      name: "Self-Attestation Form for Registrants 18 Years of Age and Older",
+      filename: "NewYork/BC Self-attestation Adult NYC.pdf",
+      map: selfAttestationAdultNYCMap,
+      include: (applicant) => !isMinor(applicant) && (applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
+    },
+    {
+      name: "Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old",
+      filename: "NewYork/BC Self-attestation Minor NYC.pdf",
+      map: selfAttestationMinorNYCMap,
+      include: (applicant) => isMinor(applicant) && (applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     }
   ],
   isBirth: true
