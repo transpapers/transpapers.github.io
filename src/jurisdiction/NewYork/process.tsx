@@ -22,10 +22,10 @@
 import { isMinor } from "../../lib/util";
 
 import {
-  adultNameSexPetitionMap,
+  //adultNameSexPetitionMap,
   minorNameSexPetitionMap,
-  feeWaiverNYStateMap,
-  feeWaiverNYCMap,
+  //feeWaiverNYStateMap,
+  //feeWaiverNYCMap,
   primaryIDNewYorkMap,
   vehicleRegistrationMap,
   birthCertAdultNYStateMap,
@@ -58,9 +58,9 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
     {
       name: "Name Change and/or Sex Designation Change Petition for Individual Adult",
       id: "UCS NC1",
-      filename: "NewYork/UCS-NC1 Adult.pdf",
+      //filename: "NewYork/UCS-NC1 Adult.pdf",
       guide: NewYorkUCS_NC1Guide,
-      map: adultNameSexPetitionMap,
+      //map: adultNameSexPetitionMap,
       include: (applicant) => !isMinor(applicant),
     },
     {
@@ -74,9 +74,9 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
     {
       name: "Application to Waive Court Costs, Fees, and Expenses",
       id: "UCS FW1",
-      filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
+      //filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
       guide: NYSFeeWaiverGuide,
-      map: feeWaiverNYStateMap,
+      //map: feeWaiverNYStateMap,
       include: (applicant) =>
         !(
           applicant.residentLocalityName === "Bronx" ||
@@ -89,9 +89,9 @@ export const newyorkNameChange: Process<NewYorkCounty> = {
     {
       name: "Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees",
       id: "CIV GP 15 i",
-      filename: "NewYork/NYC Fee Waiver.pdf",
+      //filename: "NewYork/NYC Fee Waiver.pdf",
       guide: NYCFeeWaiverGuide,
-      map: feeWaiverNYCMap,
+      //map: feeWaiverNYCMap,
       include: (applicant) =>
         applicant.residentLocalityName === "Bronx" ||
         applicant.residentLocalityName === "Kings" ||
