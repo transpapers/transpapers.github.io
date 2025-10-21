@@ -33649,10 +33649,10 @@ const adultNameSexPetitionMap = [
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     fieldName: "NewName"
   }),
-  //(applicant) => ({
-  //fieldName: "ConvictedOfCrime",
-  //choice: applicant.hasCriminalRecord ? 0 : 1,
-  //}),
+  (applicant) => ({
+    fieldName: "ConvictedOfCrime",
+    choice: applicant.hasCriminalRecord ? "0" : "1"
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
     fieldName: "ReasonsForNameChangeRequest-specify"
