@@ -48,10 +48,10 @@ import { Formfill } from "../../types/formfill";
 export const adultNameSexPetitionMap: Formfill[] = [
   /** 'courtType' fieldName from counties.ts should go here.
    */
-  (applicant) => ({
-    fieldName: "County",
-    value: applicant.residentLocalityName,
-  }),
+  //(applicant) => ({
+    //fieldName: "County",
+    //value: applicant.residentLocalityName,
+  //}),
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "PetitionerName",
