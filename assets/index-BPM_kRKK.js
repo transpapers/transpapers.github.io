@@ -33622,76 +33622,6 @@ const rhodeislandCounties = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 /*!
- * Name Change and/or Sex Designation Change Petition for Individual Adult (New York form UCS-NC1.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
-const adultNameSexPetitionMap = [
-  /** 'courtType' fieldName from counties.ts should go here.
-   */
-  (applicant) => ({
-    text: applicant.residentLocalityName,
-    fieldName: "County"
-  }),
-  (applicant) => ({
-    text: fullName(applicant.legalName),
-    fieldName: "PetitionerName"
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NameChange"
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalSex,
-    fieldName: "SexDesignationChange"
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    fieldName: "NewName"
-  }),
-  (applicant) => ({
-    fieldName: "ConvictedOfCrime",
-    choice: applicant.hasCriminalRecord ? 0 : 1
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
-    fieldName: "ReasonsForNameChangeRequest-specify"
-  }),
-  (applicant) => ({
-    value: (() => {
-      switch (applicant.assignedSex) {
-        case GenderMarker.M:
-          return "Male";
-        case GenderMarker.F:
-          return "Female";
-        case GenderMarker.X:
-          return "X";
-      }
-    })(),
-    fieldName: "NewSexDesignation"
-  }),
-  (applicant) => ({
-    text: String(applicant.age),
-    fieldName: "Age"
-  }),
-  (applicant) => ({
-    text: formatDate(applicant.birthdate, {
-      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
-      separator: "/"
-    }),
-    fieldName: "DOB"
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddressAndCountry),
-    fieldName: "CurrentAddress"
-  }),
-  () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "SignatureDate" }),
-  (applicant) => ({
-    fieldName: "SealingRequest",
-    choice: applicant.doNotPublish ? "Yes" : "No"
-  })
-];
-/*!
  * Name Change and/or Sex Designation Change Petition for Individual Minor (New York form UCS-NC2.)
  * Updated 5/2025.
  * @type {Formfill[]}
@@ -33778,112 +33708,6 @@ const minorNameSexPetitionMap = [
   (applicant) => ({
     value: isMinor(applicant) && applicant.age && applicant.age < 14 ? applicant.residentLocalityName : "",
     fieldName: "MinorConsentCounty"
-  })
-];
-/*!
- * Application to Waive Court Costs, Fees, and Expenses (NY State form UCS-FW1.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
-const feeWaiverNYStateMap = [
-  (applicant) => ({
-    text: applicant.residentLocalityName ? `${applicant.residentLocalityName} county` : "",
-    fieldName: "CourtName"
-  }),
-  (applicant) => ({
-    fieldName: "CourtCounty",
-    value: applicant.residentLocalityName
-  }),
-  (applicant) => ({
-    text: fullName(representativeName(applicant)),
-    fieldName: "Plaintiffs"
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
-    fieldName: "ApplicantAddress"
-  }),
-  () => ({
-    fieldName: "Request",
-    choice: 1
-  }),
-  (applicant) => ({
-    text: isMinor(applicant) ? "Waiving the fee for the filing of UCS-NC2" : "Waiving the fee for the filing of UCS-NC1",
-    fieldName: "CourtOrderOtherSpecify"
-  }),
-  () => ({
-    fieldName: "PreviousFiling",
-    choice: "No"
-  }),
-  () => ({
-    fieldName: "Facts",
-    choice: 0
-  }),
-  () => ({
-    fieldName: "PreviousApplication",
-    choice: "3"
-  }),
-  (applicant) => ({
-    text: fullName(representativeName(applicant)),
-    fieldName: "ApplicantName"
-  })
-];
-/*!
- * Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees (NYC form CIV-GP-15-i.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
-const feeWaiverNYCMap = [
-  (applicant) => ({
-    text: applicant.residentLocalityName,
-    loc: { x: 141, y: 44 }
-  }),
-  (applicant) => ({
-    text: fullName(representativeName(applicant)),
-    loc: { x: 65, y: 109 }
-  }),
-  (applicant) => ({
-    text: applicant.residentLocalityName,
-    loc: { x: 237, y: 215 }
-  }),
-  (applicant) => ({
-    text: fullName(representativeName(applicant)),
-    loc: { x: 65, y: 247 }
-  }),
-  (applicant) => ({
-    text: fullName(representativeName(applicant)),
-    loc: { x: 223, y: 282 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
-    loc: { x: 143, y: 314 }
-  }),
-  () => ({
-    text: "X",
-    loc: { x: 150, y: 490 }
-  }),
-  (applicant) => ({
-    text: isMinor(applicant) ? "waiving the fee for the filing of UCS-NC2" : "waiving the fee for the filing of UCS-NC1",
-    loc: { x: 261, y: 488 }
-  }),
-  () => ({
-    text: "X",
-    loc: { x: 123, y: 768 }
-  }),
-  (applicant) => ({
-    text: isMinor(applicant) ? fullName(applicant.representativeName) : fullName(applicant.representativeName),
-    loc: { x: 154, y: 914 }
-  }),
-  (applicant) => ({
-    text: applicant.streetAddress,
-    loc: { x: 500, y: 914 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { x: 500, y: 947 }
-  }),
-  (applicant) => ({
-    text: applicant.phone,
-    loc: { x: 564, y: 972 }
   })
 ];
 /*!
@@ -35210,9 +35034,9 @@ const newyorkNameChange = {
     {
       name: "Name Change and/or Sex Designation Change Petition for Individual Adult",
       id: "UCS NC1",
-      filename: "NewYork/UCS-NC1 Adult.pdf",
+      //filename: "NewYork/UCS-NC1 Adult.pdf",
       guide: NewYorkUCS_NC1Guide,
-      map: adultNameSexPetitionMap,
+      //map: adultNameSexPetitionMap,
       include: (applicant) => !isMinor(applicant)
     },
     {
@@ -35226,17 +35050,17 @@ const newyorkNameChange = {
     {
       name: "Application to Waive Court Costs, Fees, and Expenses",
       id: "UCS FW1",
-      filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
+      //filename: "NewYork/NY State Fee Waiver UCS-FW1.pdf",
       guide: NYStateFeeWaiverGuide,
-      map: feeWaiverNYStateMap,
+      //map: feeWaiverNYStateMap,
       include: (applicant) => !(applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond")
     },
     {
       name: "Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees",
       id: "CIV GP 15 i",
-      filename: "NewYork/NYC Fee Waiver.pdf",
+      //filename: "NewYork/NYC Fee Waiver.pdf",
       guide: NYCFeeWaiverGuide,
-      map: feeWaiverNYCMap,
+      //map: feeWaiverNYCMap,
       include: (applicant) => applicant.residentLocalityName === "Bronx" || applicant.residentLocalityName === "Kings" || applicant.residentLocalityName === "New York" || applicant.residentLocalityName === "Queens" || applicant.residentLocalityName === "Richmond"
     },
     {
