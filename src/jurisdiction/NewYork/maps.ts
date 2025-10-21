@@ -48,10 +48,10 @@ import { Formfill } from "../../types/formfill";
 export const adultNameSexPetitionMap: Formfill[] = [
   /** 'courtType' fieldName from counties.ts should go here.
    */
-  //(applicant) => ({
-    //fieldName: "County",
-    //value: applicant.residentLocalityName,
-  //}),
+  (applicant) => ({
+    fieldName: "County",
+    value: applicant.residentLocalityName,
+  }),
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "PetitionerName",
@@ -68,6 +68,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     fieldName: "NewName",
   }),
+  /**
   (applicant) => ({
     fieldName: "ConvictedOfCrime",
     choice: applicant.hasCriminalRecord ? 0 : 1,
@@ -89,6 +90,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
     })(),
     fieldName: "NewSexDesignation",
   }),
+  */
   (applicant) => ({
     text: String(applicant.age),
     fieldName: "Age",
