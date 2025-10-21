@@ -33649,14 +33649,13 @@ const adultNameSexPetitionMap = [
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     fieldName: "NewName"
   }),
-  /**
-  (applicant) => ({
-    fieldName: "ConvictedOfCrime",
-    choice: applicant.hasCriminalRecord ? 0 : 1,
-  }),
+  //(applicant) => ({
+  //fieldName: "ConvictedOfCrime",
+  //choice: applicant.hasCriminalRecord ? 0 : 1,
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
-    fieldName: "ReasonsForNameChangeRequest-specify",
+    fieldName: "ReasonsForNameChangeRequest-specify"
   }),
   (applicant) => ({
     value: (() => {
@@ -33669,9 +33668,8 @@ const adultNameSexPetitionMap = [
           return "X";
       }
     })(),
-    fieldName: "NewSexDesignation",
+    fieldName: "NewSexDesignation"
   }),
-  */
   (applicant) => ({
     text: String(applicant.age),
     fieldName: "Age"
