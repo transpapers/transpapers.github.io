@@ -70,7 +70,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
   }),
   (applicant) => ({
     fieldName: "ConvictedOfCrime",
-    choice: applicant.hasCriminalRecord ? "0" : "1",
+    choice: applicant.hasCriminalRecord ? "Choice0" : "Choice1",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
