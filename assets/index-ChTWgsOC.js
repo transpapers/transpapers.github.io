@@ -33629,10 +33629,10 @@ const rhodeislandCounties = [
 const adultNameSexPetitionMap = [
   /** 'courtType' fieldName from counties.ts should go here.
    */
-  (applicant) => ({
-    fieldName: "County",
-    value: applicant.residentLocalityName
-  }),
+  //(applicant) => ({
+  //fieldName: "County",
+  //value: applicant.residentLocalityName,
+  //}),
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "PetitionerName"
