@@ -78433,14 +78433,17 @@ function fillField(doc, field) {
   }
 }
 function realLocation(field, pageHeight, ourDpi) {
-  const yAdjustedDPI = Math.round(field.loc.y / (field.loc.y * (1 / 72) * ourDpi) * field.loc.y);
-  const xAdjustedDPI = Math.round(field.loc.x / (field.loc.x * (1 / 72) * ourDpi) * field.loc.x);
-  const defaultFontSize = Math.round(8.64 * (1 / 72) * ourDpi);
-  const fontSize = field.font?.fontSize ?? defaultFontSize;
+  const theirDpi = 72;
+  const scalingFromOurToTheirDpi = theirDpi / ourDpi;
+  const fontSize = field.font?.fontSize ?? 12;
+  const xAdjustedToTheirDpi = field.loc.x * scalingFromOurToTheirDpi;
+  const yAdjustedToTheirDpi = field.loc.y * scalingFromOurToTheirDpi;
+  const fontSizeAdjustedToTheirDpi = fontSize * scalingFromOurToTheirDpi;
+  const yAdjustedToTheirDpiAndCoordinates = pageHeight - yAdjustedToTheirDpi - fontSizeAdjustedToTheirDpi;
   return {
-    x: xAdjustedDPI,
-    y: pageHeight - (fontSize + yAdjustedDPI),
-    size: fontSize
+    x: xAdjustedToTheirDpi,
+    y: yAdjustedToTheirDpiAndCoordinates,
+    size: fontSizeAdjustedToTheirDpi
   };
 }
 function placeField(doc, field) {
