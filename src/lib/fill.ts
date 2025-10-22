@@ -69,25 +69,43 @@ function fillField(doc: PDFDocument, field: FillableField) {
   }
 }
 
+/**
+ * Determine the actual pixel location of a placeable `field` relative to the
+ * `pageHeight` and `ourDpi`, which is the DPI the data in `field` assumes for
+ * its PDF document (default 100).
+ *
+ * We need this function because PDF-LIB is poorly documented.
+ * `page.getHeight()` returns a value in points (1/72") and doesn't document
+ * this anywhere. `page.drawText()` takes a value in PIXELS and doesn't document
+ * this anywhere. We banged our heads on this for weeks.
+ *
+ * Returning a value in points is equivalent to operating with 72 DPI. This function
+ * uses this convention.
+ *
+ * PDF-LIB also uses a coordinate system with its origin at the
+ * lower left corner, as opposed to the upper left corner, as is more common.
+ **/
 function realLocation(
   field: PlaceableField,
   pageHeight: number,
   ourDpi: number,
-): { x: number; y: number; size: number } {
-  //pdf lib returns a number in PDF Units (1/72) of an inch, must convert to pixels.
-  //X&Y Coords are listed in map files under the assumption of an 850 x 1100 pixel page (100 DPI).
-  const yAdjustedDPI = Math.round((field.loc.y / ((field.loc.y * (1/72)) * ourDpi)) * field.loc.y);
-  const xAdjustedDPI = Math.round((field.loc.x / ((field.loc.x * (1/72)) * ourDpi)) * field.loc.x);
+): {x: number; y: number; size: number} {
+  const theirDpi = 72;
+  const scalingFromOurToTheirDpi = theirDpi / ourDpi;
 
-  //this will return a 12 pixel height default text equivilent regardless of DPI
-  const defaultFontSize = Math.round((8.64 * (1/72)) * ourDpi);
-  const fontSize = field.font?.fontSize ?? defaultFontSize;
+  const fontSize = field.font?.fontSize ?? 12;
+
+  const xAdjustedToTheirDpi = field.loc.x * scalingFromOurToTheirDpi;
+  const yAdjustedToTheirDpi = field.loc.y * scalingFromOurToTheirDpi;
+  const fontSizeAdjustedToTheirDpi = fontSize * scalingFromOurToTheirDpi;
+
+  const yAdjustedToTheirDpiAndCoordinates = pageHeight - yAdjustedToTheirDpi - fontSizeAdjustedToTheirDpi;
 
   return {
-    x: xAdjustedDPI,
-    y: pageHeight - (fontSize + yAdjustedDPI),
-    size: fontSize
-  };
+    x: xAdjustedToTheirDpi,
+    y: yAdjustedToTheirDpiAndCoordinates,
+    size: fontSizeAdjustedToTheirDpi,
+  }
 }
 
 function placeField(doc: PDFDocument, field: PlaceableField) {
