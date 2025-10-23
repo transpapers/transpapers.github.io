@@ -47,13 +47,14 @@ import { RhodeIslandCityOrTown } from "../../types/locality";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
-  //FIXME adjust this or the util function so it works.
+  /*FIXME adjust this or the util function so it works.
   (applicant) => ({
     text: applicant.residentLocality ?
       (getLocality(applicant.residentJurisdictionName, 
       applicant.residentLocalityName) as RhodeIslandCityOrTown).county : "",
     loc: { x: 145, y: 150 },
   }),
+  */
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 },
