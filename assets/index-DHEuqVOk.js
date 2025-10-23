@@ -42000,18 +42000,21 @@ const ssnMap = [
  * @type {Formfill[]}
  */
 const ds5504Map = [
-  () => ({ check: true, loc: { x: 46, y: 247 } }),
   (applicant) => ({
-    text: applicant.chosenName.last,
-    loc: { page: 4, x: 99, y: 193 }
+    choice: applicant.isChangingLegalName ? "YES" : "NO",
+    fieldName: "Changed Name"
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
-    loc: { page: 4, x: 99, y: 237 }
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
+    fieldName: "App Name Last"
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
-    loc: { page: 4, x: 471, y: 237 }
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : applicant.legalName.first,
+    fieldName: "App First"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : applicant.legalName.middle,
+    fieldName: "App Middle"
   }),
   (applicant) => ({
     text: addZero(
@@ -42020,94 +42023,119 @@ const ds5504Map = [
         separator: ""
       })
     ),
-    loc: { page: 4, x: 99, y: 281 }
+    fieldName: "App DOB MM"
   }),
   (applicant) => ({
     text: addZero(
       formatDate(applicant.birthdate, { format: [DateFormatPart.DAY], separator: "" })
     ),
-    loc: { page: 4, x: 147, y: 281 }
+    fieldName: "App DOB DD"
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.YEAR],
       separator: ""
     }),
-    loc: { page: 4, x: 193, y: 281 }
+    fieldName: "App DOB YYYY"
   }),
   (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { page: 4, x: 296, y: 281 }
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { page: 4, x: 327, y: 281 }
+    value: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+      }
+    })(),
+    fieldName: "Gender"
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
-    loc: { page: 4, x: 364, y: 281 }
+    fieldName: "App Place of Birth"
   }),
-  (applicant) => ({ text: applicant.email, loc: { page: 4, x: 309, y: 326 } }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "App Email"
+  }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
-    loc: { page: 4, x: 593, y: 326 }
+    fieldName: "App Phone 1"
   }),
   (applicant) => ({
     text: phoneStart(applicant.phone),
-    loc: { page: 4, x: 660, y: 326 }
+    fieldName: "App Phone 2"
   }),
   (applicant) => ({
     text: phoneEnd(applicant.phone),
-    loc: { page: 4, x: 726, y: 326 }
+    fieldName: "App Phone 3"
   }),
   (applicant) => ({
     text: applicant.streetAddress,
-    loc: { page: 4, x: 40, y: 372 }
+    fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB"
   }),
   (applicant) => ({
     text: isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : "",
-    loc: { page: 4, x: 40, y: 417 }
+    fieldName: "App Mailing Address Line 2"
   }),
   (applicant) => ({
     text: applicant.residentCity,
-    loc: { page: 4, x: 40, y: 461 }
+    fieldName: "App Mailing City"
   }),
   (applicant) => ({
     text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    loc: { page: 4, x: 378, y: 461 }
+    fieldName: "App Mailing State"
   }),
-  (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 436, y: 461 } }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "App Mailing Zip"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "App List all other name you have used"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName && fullName(applicant.birthName) ? fullName(applicant.legalName) : "",
+    fieldName: "App List all other names you have used 2"
+  }),
   (applicant) => ({
     text: fullName(applicant.legalName),
-    loc: { page: 4, x: 50, y: 506 }
+    fieldName: "Your name as printed on your most recent U.S. passport book and/or passport card"
   }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
-    loc: { page: 4, x: 271, y: 593 }
-  }),
-  (applicant) => ({
-    text: `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
-    loc: { page: 5, x: 47, y: 60 }
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    fieldName: "Name of Applicant 2"
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { page: 5, x: 661, y: 60 }
-  }),
-  () => ({ text: "x", loc: { page: 5, x: 132, y: 573 } }),
-  (applicant) => ({
-    text: applicant.chosenName.last,
-    loc: { page: 5, x: 319, y: 562 }
+    fieldName: "Date of Birth"
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
-    loc: { page: 5, x: 319, y: 613 }
+    choice: applicant.isChangingLegalName ? "Yes" : "No",
+    fieldName: "Name Change"
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
-    loc: { page: 5, x: 574, y: 613 }
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
+    fieldName: "Changed Last Name"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
+    fieldName: "Changed First"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
+    fieldName: "Changed Middle"
   })
 ];
 /*!
@@ -42122,15 +42150,15 @@ const ds82Map = [
   () => ({ text: "X", loc: { x: 52, y: 358 } }),
   () => ({ text: "X", loc: { x: 52, y: 455 } }),
   (applicant) => ({
-    text: applicant.chosenName.last,
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
     loc: { page: 4, x: 101, y: 179 }
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : applicant.legalName.first,
     loc: { page: 4, x: 99, y: 224 }
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : applicant.legalName.first,
     loc: { page: 4, x: 470, y: 224 }
   }),
   (applicant) => ({
@@ -42198,20 +42226,28 @@ const ds82Map = [
   }),
   (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 436, y: 448 } }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
     loc: { page: 4, x: 51, y: 493 }
   }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
+    text: applicant.isChangingLegalName && fullName(applicant.birthName) ? fullName(applicant.legalName) : "",
     loc: { page: 4, x: 261, y: 557 }
   }),
-  () => ({ text: "x", loc: { page: 4, x: 262, y: 703 } }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""} / ${getJurisdiction(applicant.residentJurisdictionName)?.abbreviation ?? ""}`,
-    loc: { page: 4, x: 390, y: 707 }
+    text: applicant.isChangingLegalName ? "x" : "",
+    loc: { page: 4, x: 262, y: 703 }
   }),
   (applicant) => ({
-    text: `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     loc: { page: 5, x: 42, y: 59 }
   }),
   (applicant) => ({
@@ -42228,16 +42264,16 @@ const ds82Map = [
  */
 const ds11Map = [
   (applicant) => ({
-    text: applicant.chosenName.last,
-    loc: { page: 4, x: 100, y: 185 }
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
+    fieldName: "Applicant Last Name"
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
-    loc: { page: 4, x: 102, y: 230 }
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : applicant.legalName.first,
+    fieldName: "Applicant First Name"
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
-    loc: { page: 4, x: 472, y: 230 }
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : applicant.legalName.middle,
+    fieldName: "Applicant Middle Name"
   }),
   (applicant) => ({
     text: addZero(
@@ -42246,146 +42282,141 @@ const ds11Map = [
         separator: ""
       })
     ),
-    loc: { page: 4, x: 100, y: 275 }
+    fieldName: "Applicant DOB M"
   }),
   (applicant) => ({
     text: addZero(
-      formatDate(applicant.birthdate, { format: [DateFormatPart.DAY], separator: "" })
+      formatDate(applicant.birthdate, {
+        format: [DateFormatPart.DAY],
+        separator: ""
+      })
     ),
-    loc: { page: 4, x: 148, y: 275 }
+    fieldName: "Applicant DOB D"
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.YEAR],
       separator: ""
     }),
-    loc: { page: 4, x: 195, y: 275 }
+    fieldName: "Applicant DOB Y"
   }),
   (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { page: 4, x: 297, y: 274 }
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { page: 4, x: 323, y: 274 }
+    value: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+      }
+    })(),
+    fieldName: "Gender"
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
-    loc: { page: 4, x: 365, y: 275 }
-  }),
-  (applicant) => ({ text: applicant.email, loc: { page: 4, x: 313, y: 323 } }),
-  (applicant) => ({
-    text: phoneAreaCode(applicant.phone),
-    loc: { page: 4, x: 597, y: 323 }
+    fieldName: "Applicant Place of Birth"
   }),
   (applicant) => ({
-    text: phoneStart(applicant.phone),
-    loc: { page: 4, x: 665, y: 323 }
-  }),
-  (applicant) => ({
-    text: phoneEnd(applicant.phone),
-    loc: { page: 4, x: 730, y: 323 }
+    text: applicant.email,
+    fieldName: "Applicant Email"
   }),
   (applicant) => ({
     text: applicant.streetAddress,
-    loc: { page: 4, x: 42, y: 367 }
+    fieldName: "Applicant Address Street"
   }),
   (applicant) => ({
     text: isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : "",
-    loc: { page: 4, x: 42, y: 412 }
+    fieldName: "Address Line 2"
   }),
   (applicant) => ({
     text: applicant.residentCity,
-    loc: { page: 4, x: 42, y: 454 }
+    fieldName: "Applicant Address City"
   }),
   (applicant) => ({
     text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    loc: { page: 4, x: 379, y: 454 }
-  }),
-  (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 439, y: 454 } }),
-  (applicant) => ({
-    text: fullName(applicant.legalName),
-    loc: { page: 4, x: 52, y: 500 }
+    fieldName: "Applicant Address State"
   }),
   (applicant) => ({
-    text: `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
-    loc: { page: 5, x: 48, y: 56 }
+    text: applicant.zip,
+    fieldName: "Applicant Address Zip Code"
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "Applicant Phone 1"
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone),
+    fieldName: "Applicant Phone 2"
+  }),
+  (applicant) => ({
+    text: phoneEnd(applicant.phone),
+    fieldName: "Applicant Phone 3"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "List all other name you have used"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName && fullName(applicant.birthName) ? fullName(applicant.legalName) : "",
+    fieldName: "List all other names you have used"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    fieldName: "Name of Applicant 2"
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { page: 5, x: 640, y: 56 }
+    fieldName: "Applicant DOB 2"
   }),
   (applicant) => ({
     text: `${applicant.mothersBirthName.first} ${applicant.mothersBirthName.middle}`,
-    loc: { page: 5, x: 48, y: 112 }
+    fieldName: "Parent 1 FM Name"
   }),
   (applicant) => ({
     text: applicant.mothersBirthName.last,
-    loc: { page: 5, x: 480, y: 112 }
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.mothersBirthdate, {
-        format: [DateFormatPart.MONTH],
-        separator: ""
-      })
-    ),
-    loc: { page: 5, x: 47, y: 158 }
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.mothersBirthdate, {
-        format: [DateFormatPart.DAY],
-        separator: ""
-      })
-    ),
-    loc: { page: 5, x: 94, y: 158 }
+    fieldName: "Parent 1 Last Name"
   }),
   (applicant) => ({
     text: formatDate(applicant.mothersBirthdate, {
-      format: [DateFormatPart.YEAR],
-      separator: ""
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
     }),
-    loc: { page: 5, x: 140, y: 158 }
+    fieldName: "Parent 1 DOB"
   }),
-  () => ({ text: "x", loc: { page: 5, x: 694, y: 160 } }),
+  () => ({
+    choice: "F",
+    fieldName: "Parent 1 Gender"
+  }),
   (applicant) => ({
     text: `${applicant.fathersBirthName.first} ${applicant.fathersBirthName.middle}`,
-    loc: { page: 5, x: 48, y: 202 }
+    fieldName: "Parent 2 FM Name"
   }),
   (applicant) => ({
     text: applicant.fathersBirthName.last,
-    loc: { page: 5, x: 481, y: 202 }
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.fathersBirthdate, {
-        format: [DateFormatPart.MONTH],
-        separator: ""
-      })
-    ),
-    loc: { page: 5, x: 48, y: 248 }
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.fathersBirthdate, {
-        format: [DateFormatPart.DAY],
-        separator: ""
-      })
-    ),
-    loc: { page: 5, x: 95, y: 248 }
+    fieldName: "Parent 2 Last Name"
   }),
   (applicant) => ({
     text: formatDate(applicant.fathersBirthdate, {
-      format: [DateFormatPart.YEAR],
-      separator: ""
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
     }),
-    loc: { page: 5, x: 141, y: 248 }
+    fieldName: "Parent 2 DOB"
   }),
-  () => ({ text: "x", loc: { page: 5, x: 694, y: 236 } })
+  () => ({
+    choice: "M",
+    fieldName: "Parent 2 Gender"
+  })
 ];
 /*!
  * Attestation of Orr v. Trump Class Membership (federal form unnumbered)
@@ -42434,16 +42465,24 @@ const passportAttestationMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function DS5504Guide({ person }) {
-  const { age, isChangingLegalSex } = person;
+  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
+      ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker.",
+      " ",
+      !isChangingLegalName && isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "To update your incorrect gender marker, check the middle box on page 1." }) : ""
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. Fill out section 10 using your passports information. For the photo we suggest going to a business for the highest chance of success and stapling that to the form." }),
-    age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 16 ? " A parent/guardian should sign on the second line below the picture section." : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line." }) : " Sign the document on the first line below the picture section.",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Write in the current date to the right of the signatures in the indicated section. On page 6 complete sections 11 through 19 as they apply to you. For section 19 if you have no current travel plans write “none” in every box." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification.",
+      !isChangingLegalName ? " Check the box or boxes applicable to your situation on the first page. " : "",
+      "On page 5 at the top you will need to select which documents you want.",
+      gender && gender === "X" ? " Leave section 3 unchecked, you can pick the X marker on another form. " : "",
+      "Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your passports information. For the photo we suggest going to a business for the highest chance of success and stapling that to the form."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: age && age < 16 ? " A parent/guardian should sign on the second line below the picture section." : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line." }) : " Sign the document on the first line below the picture section." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Write in the current date to the right of the signatures in the indicated section. On page 6 complete any blank sections from 11 through 23 as they apply to you. For section 19 if you have no current travel plans write “none” in every box." }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply",
       age && age < 18 ? " have a parent/guardian sign " : " sign ",
@@ -42479,14 +42518,20 @@ function DS5504Guide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function DS82Guide({ person }) {
-  const { isChangingLegalSex } = person;
+  const { isChangingLegalSex, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
       ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. Fill out section 10 using your old passports information. In section 11 write in the date of your name change as it appears on your court order. For the photo we suggest going to a business for the highest chance of success and stapling that to the form. Sign on the signature line below the picture section then write in the current date to the right of the signature in the indicated section. On page 6 complete sections 12 through 20 as they apply to you. For section 20 if you have no current travel plans write “none” in every box." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification. On page 5 at the top you will need to select which documents you want.",
+      gender && gender === "X" ? " Leave section 3 unchecked, you can pick the X marker on another form. " : "",
+      "Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your old passports information.",
+      isChangingLegalName ? " In section 11 write in the location and date of your name change as it appears on your court order. " : "",
+      "For the photo we suggest going to a business for the highest chance of success and stapling that to the form. Sign on the signature line below the picture section then write in the current date to the right of the signature in the indicated section. On page 6 complete sections 12 through 20 as they apply to you. For section 20 if you have no current travel plans write “none” in every box."
+    ] }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply sign on page 2." }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Now you will need to place the DS-82 passport form,",
@@ -42523,7 +42568,7 @@ function DS82Guide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function DS11Guide({ person }) {
-  const { age, isChangingLegalSex } = person;
+  const { age, gender, isChangingLegalSex, isChangingLegalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -42531,10 +42576,11 @@ function DS11Guide({ person }) {
       ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9. For the photo we suggest going to a business for the highest chance of success.",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Do not staple it to the form." }),
-      ' For section 10 on page 6 fill out your parents place of birth, legal gender, and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want.",
+      gender && gender === "X" ? " Leave section 3 unchecked, you can pick the X marker on another form. " : "",
+      "Then fill out your social security number in section 5. In section 6 if you are not a US citizen fill out your USCIS number from your green card or form I-551 if applicable. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already there. For the photo we suggest going to a business for the highest chance of success. ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Do not staple it to the form yet." }),
+      ' For section 10 on page 6 fill out your parents place of birth and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
     ] }),
     isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply",
@@ -42563,7 +42609,9 @@ function DS11Guide({ person }) {
       "and click on step #3 to see a list of potential workarounds for all situations."
     ] }) }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "If you have had a passport in the past then you should bring it and a certified copy of the court order. It will likely take a few months for them to process a nonexpedited request, you can keep tabs on it using this url:",
+      "If you have had a passport in the past then you should bring it",
+      isChangingLegalName ? " and a certified copy of the court order. " : ". ",
+      "It will likely take a few months for them to process a nonexpedited request, you can keep tabs on it using this url:",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://passportstatus.state.gov/", children: "https://passportstatus.state.gov/" })
     ] })
