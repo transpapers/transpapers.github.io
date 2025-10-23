@@ -27875,50 +27875,10 @@ function getLocality(jurisdictionKey, localityKey) {
     return void 0;
   }
   const localities = foundJurisdiction.localities;
-  switch (foundJurisdiction.name) {
-    case "Rhode Island": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Alaska": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "New York": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Texas": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Michigan": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    case "Ohio": {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-    default: {
-      const foundLocality = localities.find(
-        (j) => j.name === localityKey
-      );
-      return foundLocality;
-    }
-  }
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey
+  );
+  return foundLocality;
 }
 /*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
@@ -31621,12 +31581,12 @@ const michiganCounties = [
  */
 const changeOfNameMap = [
   //FIXME adjust this or the util function so it works.
-  //(applicant) => ({
-  //text: 
-  //getLocality(applicant.residentJurisdictionName, 
-  //applicant.residentLocalityName)?.county,
-  //loc: { x: 50, y: 50 },
-  //}),
+  (applicant) => ({
+    text: applicant.residentLocality.county,
+    //getLocality(applicant.residentJurisdictionName, 
+    //applicant.residentLocalityName)?.county,
+    loc: { x: 145, y: 150 }
+  }),
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 }
