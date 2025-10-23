@@ -93,7 +93,7 @@ function realLocation(
   const theirDpi = 72;
   const scalingFromOurToTheirDpi = theirDpi / ourDpi;
 
-  const fontSize = field.font?.fontSize ?? 12;
+  const fontSize = field.font?.fontSize ?? 14;
 
   const xAdjustedToTheirDpi = field.loc.x * scalingFromOurToTheirDpi;
   const yAdjustedToTheirDpi = field.loc.y * scalingFromOurToTheirDpi;
