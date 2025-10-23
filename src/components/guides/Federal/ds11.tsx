@@ -25,7 +25,7 @@ import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
 function DS11Guide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex } = person;
+  const { age, gender, isChangingLegalSex, isChangingLegalName } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
@@ -41,12 +41,19 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-11) contain instructions and
         clarification. On page 5 at the top you will need to select which
-        documents you want. Then fill out your social security number in section
-        5. If you have changed your name multiple times before then you will
-        need to add them to section 9. For the photo we suggest going to a
-        business for the highest chance of success.{" "}
-        <strong>Do not staple it to the form.</strong> For section 10 on page 6
-        fill out your parents place of birth, legal gender, and citizenship status. 
+        documents you want. 
+        {gender && (gender as string) === "X" ? (
+          " Leave section 3 unchecked, you can pick the X marker on another form. "
+        ) : (
+          ""
+        )}
+        Then fill out your social security number in section 5. In section 6 if 
+        you are not a US citizen fill out your USCIS number from your green card 
+        or form I-551 if applicable. If you have changed your name multiple times 
+        before then you will need to add them to section 9 if they are not already 
+        there. For the photo we suggest going to a business for the highest chance 
+        of success. <strong>Do not staple it to the form yet.</strong> For section 
+        10 on page 6 fill out your parents place of birth and citizenship status. 
         On page 6 complete sections 11 through 21 as they apply to you. For section 
         18 if you have no current travel plans write &quot;none&quot; in every box.
       </p>
@@ -104,10 +111,14 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
       )}
 
       <p>
-        If you have had a passport in the past then you should bring it and a
-        certified copy of the court order. It will likely take a few months for
-        them to process a nonexpedited request, you can keep tabs on it using
-        this url:{" "}
+        If you have had a passport in the past then you should bring it
+        {isChangingLegalName ? (
+          " and a certified copy of the court order. "
+        ) : (
+          ". "
+        )}
+        It will likely take a few months for them to process a nonexpedited 
+        request, you can keep tabs on it using this url:{" "}
         <a href="https://passportstatus.state.gov/">
           https://passportstatus.state.gov/
         </a>

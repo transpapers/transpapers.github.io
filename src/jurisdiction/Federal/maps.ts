@@ -30,7 +30,6 @@ import {
   addZero,
   allCAPS,
   formatContactInfo,
-  getLocality,
   getJurisdiction,
   ContactFormat as cf,
 } from "../../lib/util";
@@ -471,16 +470,22 @@ export const ds82Map: Formfill[] = [
  */
 export const ds11Map: Formfill[] = [
   (applicant) => ({
-    text: applicant.chosenName.last,
-    loc: { page: 4, x: 100, y: 185 },
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.last 
+      : applicant.legalName.last,
+    fieldName: "Applicant Last Name",
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
-    loc: { page: 4, x: 102, y: 230 },
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.first 
+      : applicant.legalName.first,
+    fieldName: "Applicant First Name",
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
-    loc: { page: 4, x: 472, y: 230 },
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.middle 
+      : applicant.legalName.middle,
+    fieldName: "Applicant Middle Name",
   }),
   (applicant) => ({
     text: addZero(
@@ -489,148 +494,148 @@ export const ds11Map: Formfill[] = [
         separator: "",
       }),
     ),
-    loc: { page: 4, x: 100, y: 275 },
+    fieldName: "Applicant DOB M",
   }),
   (applicant) => ({
     text: addZero(
-      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      formatDate(applicant.birthdate, { 
+        format: [DATE.DAY], 
+        separator: "" }),
     ),
-    loc: { page: 4, x: 148, y: 275 },
+    fieldName: "Applicant DOB D",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.YEAR],
       separator: "",
     }),
-    loc: { page: 4, x: 195, y: 275 },
+    fieldName: "Applicant DOB Y",
   }),
   (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { page: 4, x: 297, y: 274 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { page: 4, x: 323, y: 274 },
+    value: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+      }
+    })(),
+    fieldName: "Gender",
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
-    loc: { page: 4, x: 365, y: 275 },
+    fieldName: "Applicant Place of Birth",
   }),
-  (applicant) => ({ text: applicant.email, loc: { page: 4, x: 313, y: 323 } }),
-  (applicant) => ({
-    text: phoneAreaCode(applicant.phone),
-    loc: { page: 4, x: 597, y: 323 },
-  }),
-  (applicant) => ({
-    text: phoneStart(applicant.phone),
-    loc: { page: 4, x: 665, y: 323 },
-  }),
-  (applicant) => ({
-    text: phoneEnd(applicant.phone),
-    loc: { page: 4, x: 730, y: 323 },
+  (applicant) => ({ 
+    text: applicant.email, 
+    fieldName: "Applicant Email", 
   }),
   (applicant) => ({
     text: applicant.streetAddress,
-    loc: { page: 4, x: 42, y: 367 },
+    fieldName: "Applicant Address Street",
   }),
   (applicant) => ({
     text: isMinor(applicant)
       ? `In Care Of - ${fullName(representativeName(applicant))}`
       : "",
-    loc: { page: 4, x: 42, y: 412 },
+    fieldName: "Address Line 2",
   }),
   (applicant) => ({
     text: applicant.residentCity,
-    loc: { page: 4, x: 42, y: 454 },
+    fieldName: "Applicant Address City",
   }),
   (applicant) => ({
     text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    loc: { page: 4, x: 379, y: 454 },
+    fieldName: "Applicant Address State",
   }),
-  (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 439, y: 454 } }),
-  (applicant) => ({
-    text: fullName(applicant.legalName),
-    loc: { page: 4, x: 52, y: 500 },
+  (applicant) => ({ 
+    text: applicant.zip, 
+    fieldName: "Applicant Address Zip Code", 
   }),
   (applicant) => ({
-    text: `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
-    loc: { page: 5, x: 48, y: 56 },
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "Applicant Phone 1",
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone),
+    fieldName: "Applicant Phone 2",
+  }),
+  (applicant) => ({
+    text: phoneEnd(applicant.phone),
+    fieldName: "Applicant Phone 3",
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName)
+            ? fullName(applicant.birthName)
+            : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "List all other name you have used",
+  }),
+  (applicant) => ({
+    text: 
+      applicant.isChangingLegalName && fullName(applicant.birthName) ?
+        fullName(applicant.legalName) : "",
+    fieldName: "List all other names you have used",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName
+      ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    fieldName: "Name of Applicant 2",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    loc: { page: 5, x: 640, y: 56 },
+    fieldName: "Applicant DOB 2",
   }),
   (applicant) => ({
     text: `${applicant.mothersBirthName.first} ${applicant.mothersBirthName.middle}`,
-    loc: { page: 5, x: 48, y: 112 },
+    fieldName: "Parent 1 FM Name",
   }),
   (applicant) => ({
     text: applicant.mothersBirthName.last,
-    loc: { page: 5, x: 480, y: 112 },
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.mothersBirthdate, {
-        format: [DATE.MONTH],
-        separator: "",
-      }),
-    ),
-    loc: { page: 5, x: 47, y: 158 },
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.mothersBirthdate, {
-        format: [DATE.DAY],
-        separator: "",
-      }),
-    ),
-    loc: { page: 5, x: 94, y: 158 },
+    fieldName: "Parent 1 Last Name",
   }),
   (applicant) => ({
     text: formatDate(applicant.mothersBirthdate, {
-      format: [DATE.YEAR],
-      separator: "",
-    }),
-    loc: { page: 5, x: 140, y: 158 },
+        format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+        separator: "/",
+      }),
+    fieldName: "Parent 1 DOB",
   }),
-  () => ({ text: "x", loc: { page: 5, x: 694, y: 160 } }),
+  () => ({ 
+    choice: "F", 
+    fieldName: "Parent 1 Gender", 
+  }),
   (applicant) => ({
     text: `${applicant.fathersBirthName.first} ${applicant.fathersBirthName.middle}`,
-    loc: { page: 5, x: 48, y: 202 },
+    fieldName: "Parent 2 FM Name",
   }),
   (applicant) => ({
     text: applicant.fathersBirthName.last,
-    loc: { page: 5, x: 481, y: 202 },
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.fathersBirthdate, {
-        format: [DATE.MONTH],
-        separator: "",
-      }),
-    ),
-    loc: { page: 5, x: 48, y: 248 },
-  }),
-  (applicant) => ({
-    text: addZero(
-      formatDate(applicant.fathersBirthdate, {
-        format: [DATE.DAY],
-        separator: "",
-      }),
-    ),
-    loc: { page: 5, x: 95, y: 248 },
+    fieldName: "Parent 2 Last Name",
   }),
   (applicant) => ({
     text: formatDate(applicant.fathersBirthdate, {
-      format: [DATE.YEAR],
-      separator: "",
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
     }),
-    loc: { page: 5, x: 141, y: 248 },
+    fieldName: "Parent 2 DOB",
   }),
-  () => ({ text: "x", loc: { page: 5, x: 694, y: 236 } }),
+  () => ({ 
+    choice: "M", 
+    fieldName: "Parent 2 Gender", 
+  }),
 ];
 
 /*!
