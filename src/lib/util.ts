@@ -31,14 +31,15 @@ import { Person } from "../types/person";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { allJurisdictions } from "../jurisdiction/all";
 import { Jurisdiction } from "../types/jurisdiction";
+import { AnyLocality } from "../types/generic";
 import { 
   Locality, 
-  MichiganCounty,
-  NewYorkCounty,
-  TexasCounty,
-  OhioCounty,
-  RhodeIslandCityOrTown,
-  AlaskaAdministrativeDivision,
+  //MichiganCounty,
+  //NewYorkCounty,
+  //TexasCounty,
+  //OhioCounty,
+  //RhodeIslandCityOrTown,
+  //AlaskaAdministrativeDivision,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -279,7 +280,7 @@ export function getJurisdiction(jurisdictionKey: string | undefined) {
  * @param {String} localityKey
  * @return {AnyJurisdiction | undefined}
  */
-export function getLocality(jurisdictionKey: string | undefined, localityKey: string | undefined) {
+export function getLocality(jurisdictionKey: string | undefined, localityKey: string | undefined): AnyLocality | undefined {
   if (!jurisdictionKey) {
     return undefined;
   }
@@ -297,8 +298,13 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   }
 
   const localities = foundJurisdiction.localities;
+  const foundLocality: AnyLocality = localities.find(
+    (j) => j.name === localityKey,
+  ) as AnyLocality;
 
-  //FIXME This section is a temporary work around
+  return foundLocality;
+
+  /** FIXME This section is a temporary work around
   switch (foundJurisdiction.name) {
     case "Rhode Island":
       {const foundLocality: RhodeIslandCityOrTown = localities.find(
@@ -343,7 +349,7 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
 
       return foundLocality};
   }
-  // End Section
+  End Section */
 }
 
 /*!
