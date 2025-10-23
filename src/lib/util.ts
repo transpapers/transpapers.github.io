@@ -271,7 +271,7 @@ export function getJurisdiction(jurisdictionKey: string | undefined) {
     (j) => j.name === jurisdictionKey,
   );
 
-  return foundJurisdiction as Jurisdiction<Locality>;
+  return foundJurisdiction as Jurisdiction<AnyLocality>;
 }
 
 /*!
