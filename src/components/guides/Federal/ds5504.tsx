@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function DS5504Guide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex } = person;
+  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
@@ -33,35 +33,52 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
         <strong>Attention</strong>: The court case Orr v. Trump has concluded
         and the state department is now required to update gender markers on
         passports again. It is safe to do so and the passport will reflect the
-        correct marker.
+        correct marker.{" "}
+        {!isChangingLegalName && isChangingLegalSex ? (
+          <>
+            To update your incorrect gender marker, check the middle box on 
+            page 1.
+          </>
+        ):("")}
       </p>
 
       <p>
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-5504) contain instructions
-        and clarification. On page 5 at the top you will need to select which
-        documents you want. Then fill out your social security number in section
-        5. If you have changed your name multiple times before then you will
-        need to add them to section 9. Fill out section 10 using your passports
-        information. For the photo we suggest going to a business for the
-        highest chance of success and stapling that to the form.
+        and clarification.
+        {!isChangingLegalName ? (
+            " Check the box or boxes applicable to your situation on the first page. "
+        ):("")}
+        On page 5 at the top you will need to select which documents you want.
+        {gender && (gender as string) === "X" ? (
+          " Leave section 3 unchecked, you can pick the X marker on another form. "
+        ) : (
+          ""
+        )}
+        Then fill out your social security number in section 5. If you have 
+        changed your name multiple times before then you will need to add them 
+        to section 9 if they are not already present. Fill out section 10 using 
+        your passports information. For the photo we suggest going to a business 
+        for the highest chance of success and stapling that to the form.
       </p>
 
-      {age && age < 18 ? (
-        <p>
-          {age && age < 16
-            ? " A parent/guardian should sign on the second line below the picture section."
-            : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line."}
-        </p>
-      ) : (
-        " Sign the document on the first line below the picture section."
-      )}
+      <p>
+        {age && age < 18 ? (
+          <>
+            {age && age < 16
+              ? " A parent/guardian should sign on the second line below the picture section."
+              : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line."}
+          </>
+        ) : (
+          " Sign the document on the first line below the picture section."
+        )}
+      </p>
 
       <p>
         Write in the current date to the right of the signatures in the
-        indicated section. On page 6 complete sections 11 through 19 as they
-        apply to you. For section 19 if you have no current travel plans write
-        &ldquo;none&rdquo; in every box.
+        indicated section. On page 6 complete any blank sections from 11 through 
+        23 as they apply to you. For section 19 if you have no current travel 
+        plans write &ldquo;none&rdquo; in every box.
       </p>
 
       {isChangingLegalSex ? (

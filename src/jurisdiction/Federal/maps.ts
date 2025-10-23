@@ -177,18 +177,27 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
-  () => ({ check: true, loc: { x: 46, y: 247 } }),
-  (applicant) => ({
-    text: applicant.chosenName.last,
-    loc: { page: 4, x: 99, y: 193 },
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? "YES" : "NO", 
+    fieldName: "Changed Name",
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
-    loc: { page: 4, x: 99, y: 237 },
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.last 
+      : applicant.legalName.last,
+    fieldName: "App Name Last",
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
-    loc: { page: 4, x: 471, y: 237 },
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.first 
+      : applicant.legalName.first,
+    fieldName: "App First",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.middle 
+      : applicant.legalName.middle,
+    fieldName: "App Middle",
   }),
   (applicant) => ({
     text: addZero(
@@ -197,96 +206,127 @@ export const ds5504Map: Formfill[] = [
         separator: "",
       }),
     ),
-    loc: { page: 4, x: 99, y: 281 },
+    fieldName: "App DOB MM",
   }),
   (applicant) => ({
     text: addZero(
       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
     ),
-    loc: { page: 4, x: 147, y: 281 },
+    fieldName: "App DOB DD",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.YEAR],
       separator: "",
     }),
-    loc: { page: 4, x: 193, y: 281 },
+    fieldName: "App DOB YYYY",
   }),
   (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { page: 4, x: 296, y: 281 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { page: 4, x: 327, y: 281 },
+    value: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+      }
+    })(),
+    fieldName: "Gender",
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
-    loc: { page: 4, x: 364, y: 281 },
+    fieldName: "App Place of Birth",
   }),
-  (applicant) => ({ text: applicant.email, loc: { page: 4, x: 309, y: 326 } }),
+  (applicant) => ({ 
+    text: applicant.email, 
+    fieldName: "App Email", 
+  }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
-    loc: { page: 4, x: 593, y: 326 },
+    fieldName: "App Phone 1",
   }),
   (applicant) => ({
     text: phoneStart(applicant.phone),
-    loc: { page: 4, x: 660, y: 326 },
+    fieldName: "App Phone 2",
   }),
   (applicant) => ({
     text: phoneEnd(applicant.phone),
-    loc: { page: 4, x: 726, y: 326 },
+    fieldName: "App Phone 3",
   }),
   (applicant) => ({
     text: applicant.streetAddress,
-    loc: { page: 4, x: 40, y: 372 },
+    fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB",
   }),
   (applicant) => ({
     text: isMinor(applicant)
       ? `In Care Of - ${fullName(representativeName(applicant))}`
       : "",
-    loc: { page: 4, x: 40, y: 417 },
+    fieldName: "App Mailing Address Line 2",
   }),
   (applicant) => ({
     text: applicant.residentCity,
-    loc: { page: 4, x: 40, y: 461 },
+    fieldName: "App Mailing City",
   }),
   (applicant) => ({
     text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    loc: { page: 4, x: 378, y: 461 },
+    fieldName: "App Mailing State",
   }),
-  (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 436, y: 461 } }),
+  (applicant) => ({ 
+    text: applicant.zip, 
+    fieldName: "App Mailing Zip", 
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName)
+            ? fullName(applicant.birthName)
+            : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "App List all other name you have used",
+  }),
+  (applicant) => ({
+    text: 
+      applicant.isChangingLegalName && fullName(applicant.birthName) ?
+        fullName(applicant.legalName) : "",
+    fieldName: "App List all other names you have used 2",
+  }),
   (applicant) => ({
     text: fullName(applicant.legalName),
-    loc: { page: 4, x: 50, y: 506 },
+    fieldName: "Your name as printed on your most recent U.S. passport book and/or passport card",
   }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
-    loc: { page: 4, x: 271, y: 593 },
-  }),
-  (applicant) => ({
-    text: `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
-    loc: { page: 5, x: 47, y: 60 },
+    text: applicant.isChangingLegalName
+      ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    fieldName: "Name of Applicant 2",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    loc: { page: 5, x: 661, y: 60 },
+    fieldName: "Date of Birth",
   }),
-  () => ({ text: "x", loc: { page: 5, x: 132, y: 573 } }),
-  (applicant) => ({
-    text: applicant.chosenName.last,
-    loc: { page: 5, x: 319, y: 562 },
-  }),
-  (applicant) => ({
-    text: applicant.chosenName.first,
-    loc: { page: 5, x: 319, y: 613 },
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? "Yes" : "No", 
+    fieldName: "Name Change",
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
-    loc: { page: 5, x: 574, y: 613 },
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
+    fieldName: "Changed Last Name",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
+    fieldName: "Changed First",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
+    fieldName: "Changed Middle",
   }),
 ];
 
@@ -302,15 +342,21 @@ export const ds82Map: Formfill[] = [
   () => ({ text: "X", loc: { x: 52, y: 358 } }),
   () => ({ text: "X", loc: { x: 52, y: 455 } }),
   (applicant) => ({
-    text: applicant.chosenName.last,
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.last 
+      : applicant.legalName.last,
     loc: { page: 4, x: 101, y: 179 },
   }),
   (applicant) => ({
-    text: applicant.chosenName.first,
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.first 
+      : applicant.legalName.first,
     loc: { page: 4, x: 99, y: 224 },
   }),
   (applicant) => ({
-    text: applicant.chosenName.middle,
+    text: applicant.isChangingLegalName 
+      ? applicant.chosenName.first 
+      : applicant.legalName.first,
     loc: { page: 4, x: 470, y: 224 },
   }),
   (applicant) => ({
@@ -380,21 +426,34 @@ export const ds82Map: Formfill[] = [
   }),
   (applicant) => ({ text: applicant.zip, loc: { page: 4, x: 436, y: 448 } }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName)
+            ? fullName(applicant.birthName)
+            : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
     loc: { page: 4, x: 51, y: 493 },
   }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
+    text: 
+      applicant.isChangingLegalName && fullName(applicant.birthName) ?
+        fullName(applicant.legalName) : "",
     loc: { page: 4, x: 261, y: 557 },
   }),
-  () => ({ text: "x", loc: { page: 4, x: 262, y: 703 } }),
-  (applicant) => ({
-    text:
-      `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ''} / ${getJurisdiction(applicant.residentJurisdictionName)?.abbreviation ?? ''}`,
-    loc: { page: 4, x: 390, y: 707 },
+  (applicant) => ({ 
+    text: applicant.isChangingLegalName ? "x" : "", 
+    loc: { page: 4, x: 262, y: 703 } 
   }),
   (applicant) => ({
-    text: `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`,
+    text: applicant.isChangingLegalName
+      ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     loc: { page: 5, x: 42, y: 59 },
   }),
   (applicant) => ({

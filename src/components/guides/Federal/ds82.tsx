@@ -26,7 +26,7 @@ import { type Person } from "../../../types/person";
 // TODO Give this a once-over for style.
 // TODO Unify this with the other two passport forms.
 function DS82Guide({ person }: { person: Partial<Person> }) {
-  const { isChangingLegalSex } = person;
+  const { isChangingLegalSex, isChangingLegalName, gender } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
@@ -42,17 +42,25 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-82) contain instructions and
         clarification. On page 5 at the top you will need to select which
-        documents you want. Then fill out your social security number in section
-        5. If you have changed your name multiple times before then you will
-        need to add them to section 9. Fill out section 10 using your old
-        passports information. In section 11 write in the date of your name
-        change as it appears on your court order. For the photo we suggest going
-        to a business for the highest chance of success and stapling that to the
-        form. Sign on the signature line below the picture section then write in
-        the current date to the right of the signature in the indicated section.
-        On page 6 complete sections 12 through 20 as they apply to you. For
-        section 20 if you have no current travel plans write &ldquo;none&rdquo;
-        in every box.
+        documents you want. 
+        {gender && (gender as string) === "X" ? (
+          " Leave section 3 unchecked, you can pick the X marker on another form. "
+        ) : (
+          ""
+        )}
+        Then fill out your social security number in section 5. If you have 
+        changed your name multiple times before then you will need to add them to 
+        section 9 if they are not already present. Fill out section 10 using your 
+        old passports information. 
+        {isChangingLegalName ? (
+          " In section 11 write in the location and date of your name change as it appears on your court order. "
+        ):("")} 
+        For the photo we suggest going to a business for the highest chance of 
+        success and stapling that to the form. Sign on the signature line below 
+        the picture section then write in the current date to the right of the 
+        signature in the indicated section. On page 6 complete sections 12 through 
+        20 as they apply to you. For section 20 if you have no current travel plans 
+        write &ldquo;none&rdquo; in every box.
       </p>
 
       {isChangingLegalSex ? (
