@@ -33,13 +33,15 @@ import { allJurisdictions } from "../jurisdiction/all";
 import { Jurisdiction } from "../types/jurisdiction";
 import { AnyLocality } from "../types/generic";
 import { 
-  Locality, 
-  //MichiganCounty,
-  //NewYorkCounty,
-  //TexasCounty,
-  //OhioCounty,
-  //RhodeIslandCityOrTown,
-  //AlaskaAdministrativeDivision,
+  Locality,
+  /*
+  MichiganCounty,
+  NewYorkCounty,
+  TexasCounty,
+  OhioCounty,
+  RhodeIslandCityOrTown,
+  AlaskaAdministrativeDivision,
+  */
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -271,7 +273,7 @@ export function getJurisdiction(jurisdictionKey: string | undefined) {
     (j) => j.name === jurisdictionKey,
   );
 
-  return foundJurisdiction as Jurisdiction<AnyLocality>;
+  return foundJurisdiction as Jurisdiction<Locality>;
 }
 
 /*!
