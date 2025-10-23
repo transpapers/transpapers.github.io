@@ -176,11 +176,10 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
-  /**
-  (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? "YES" : "NO", 
-    fieldName: "Changed Name",
-  }),
+  //(applicant) => ({ 
+    //choice: applicant.isChangingLegalName ? "YES" : "NO", 
+    //fieldName: "Changed Name",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName 
       ? applicant.chosenName.last 
@@ -210,7 +209,9 @@ export const ds5504Map: Formfill[] = [
   }),
   (applicant) => ({
     text: addZero(
-      formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
+      formatDate(applicant.birthdate, { 
+        format: [DATE.DAY], 
+        separator: "" }),
     ),
     fieldName: "App DOB DD",
   }),
@@ -228,6 +229,8 @@ export const ds5504Map: Formfill[] = [
           return "M";
         case GenderMarker.F:
           return "F";
+        default:
+          return undefined;
       }
     })(),
     fieldName: "Gender",
@@ -312,10 +315,10 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "Date of Birth",
   }),
-  (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? "Yes" : "No", 
-    fieldName: "Name Change",
-  }),
+  //(applicant) => ({ 
+    //choice: applicant.isChangingLegalName ? "Yes" : "No", 
+    //fieldName: "Name Change",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name",
@@ -324,7 +327,6 @@ export const ds5504Map: Formfill[] = [
     text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
     fieldName: "Changed First",
   }),
- */
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
     fieldName: "Changed Middle",
@@ -409,6 +411,8 @@ export const ds82Map: Formfill[] = [
           return "M";
         case GenderMarker.F:
           return "F";
+        default:
+          return undefined;
       }
     })(),
     fieldName: "Gender",
@@ -553,6 +557,8 @@ export const ds11Map: Formfill[] = [
           return "M";
         case GenderMarker.F:
           return "F";
+        default:
+          return undefined;
       }
     })(),
     fieldName: "Gender",
