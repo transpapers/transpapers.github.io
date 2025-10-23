@@ -176,10 +176,10 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
-  (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? "YES" : "NO", 
-    fieldName: "Changed Name",
-  }),
+  //(applicant) => ({ 
+    //choice: applicant.isChangingLegalName ? "YES" : "NO", 
+    //fieldName: "Changed Name",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName 
       ? applicant.chosenName.last 
@@ -222,6 +222,7 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "App DOB YYYY",
   }),
+  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -235,6 +236,7 @@ export const ds5504Map: Formfill[] = [
     })(),
     fieldName: "Gender",
   }),
+  */
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "App Place of Birth",
@@ -315,10 +317,10 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "Date of Birth",
   }),
-  (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? "Yes" : "No", 
-    fieldName: "Name Change",
-  }),
+  //(applicant) => ({ 
+    //choice: applicant.isChangingLegalName ? "Yes" : "No", 
+    //fieldName: "Name Change",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name",
@@ -338,6 +340,7 @@ export const ds5504Map: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds82Map: Formfill[] = [
+  /*
   () => ({ 
     choice: "YES_1", 
     fieldName: "Most Recent",
@@ -358,6 +361,7 @@ export const ds82Map: Formfill[] = [
     choice: "YES", 
     fieldName: "Not Limited",
   }),
+  */
   (applicant) => ({ 
     choice: applicant.isChangingLegalName ? "YES" : "NO", 
     fieldName: "Name Changed",
@@ -404,6 +408,7 @@ export const ds82Map: Formfill[] = [
     }),
     fieldName: "App DOB YYYY",
   }),
+  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -417,6 +422,7 @@ export const ds82Map: Formfill[] = [
     })(),
     fieldName: "Gender",
   }),
+  */
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "App Place of Birth",
@@ -550,6 +556,7 @@ export const ds11Map: Formfill[] = [
     }),
     fieldName: "Applicant DOB Y",
   }),
+  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -563,6 +570,7 @@ export const ds11Map: Formfill[] = [
     })(),
     fieldName: "Gender",
   }),
+  */
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "Applicant Place of Birth",
