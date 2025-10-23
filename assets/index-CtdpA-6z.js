@@ -42089,10 +42089,10 @@ const ds5504Map = [
     }),
     fieldName: "Date of Birth"
   }),
-  (applicant) => ({
-    choice: applicant.isChangingLegalName ? "Yes" : "No",
-    fieldName: "Name Change"
-  }),
+  //(applicant) => ({ 
+  //choice: applicant.isChangingLegalName ? "Yes" : "No", 
+  //fieldName: "Name Change",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name"
