@@ -41960,155 +41960,144 @@ const ssnMap = [
  * @type {Formfill[]}
  */
 const ds5504Map = [
-  /**
-   (applicant) => ({ 
-     choice: applicant.isChangingLegalName ? "YES" : "NO", 
-     fieldName: "Changed Name",
-   }),
-   (applicant) => ({
-     text: applicant.isChangingLegalName 
-       ? applicant.chosenName.last 
-       : applicant.legalName.last,
-     fieldName: "App Name Last",
-   }),
-   (applicant) => ({
-     text: applicant.isChangingLegalName 
-       ? applicant.chosenName.first 
-       : applicant.legalName.first,
-     fieldName: "App First",
-   }),
-   (applicant) => ({
-     text: applicant.isChangingLegalName 
-       ? applicant.chosenName.middle 
-       : applicant.legalName.middle,
-     fieldName: "App Middle",
-   }),
-   (applicant) => ({
-     text: addZero(
-       formatDate(applicant.birthdate, {
-         format: [DATE.MONTH],
-         separator: "",
-       }),
-     ),
-     fieldName: "App DOB MM",
-   }),
-   (applicant) => ({
-     text: addZero(
-       formatDate(applicant.birthdate, { format: [DATE.DAY], separator: "" }),
-     ),
-     fieldName: "App DOB DD",
-   }),
-   (applicant) => ({
-     text: formatDate(applicant.birthdate, {
-       format: [DATE.YEAR],
-       separator: "",
-     }),
-     fieldName: "App DOB YYYY",
-   }),
-   (applicant) => ({
-     value: (() => {
-       switch (applicant.gender) {
-         case GenderMarker.M:
-           return "M";
-         case GenderMarker.F:
-           return "F";
-       }
-     })(),
-     fieldName: "Gender",
-   }),
-   (applicant) => ({
-     text: formatContactInfo(applicant, cf.BirthCityAndState),
-     fieldName: "App Place of Birth",
-   }),
-   (applicant) => ({ 
-     text: applicant.email, 
-     fieldName: "App Email", 
-   }),
-   (applicant) => ({
-     text: phoneAreaCode(applicant.phone),
-     fieldName: "App Phone 1",
-   }),
-   (applicant) => ({
-     text: phoneStart(applicant.phone),
-     fieldName: "App Phone 2",
-   }),
-   (applicant) => ({
-     text: phoneEnd(applicant.phone),
-     fieldName: "App Phone 3",
-   }),
-   (applicant) => ({
-     text: applicant.streetAddress,
-     fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB",
-   }),
-   (applicant) => ({
-     text: isMinor(applicant)
-       ? `In Care Of - ${fullName(representativeName(applicant))}`
-       : "",
-     fieldName: "App Mailing Address Line 2",
-   }),
-   (applicant) => ({
-     text: applicant.residentCity,
-     fieldName: "App Mailing City",
-   }),
-   (applicant) => ({
-     text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-     fieldName: "App Mailing State",
-   }),
-   (applicant) => ({ 
-     text: applicant.zip, 
-     fieldName: "App Mailing Zip", 
-   }),
-   (applicant) => ({
-     text: (() => {
-       switch (applicant.isChangingLegalName) {
-         case true:
-           return fullName(applicant.birthName)
-             ? fullName(applicant.birthName)
-             : fullName(applicant.legalName);
-         case false:
-           return fullName(applicant.birthName);
-         default:
-           return "";
-       }
-     })(),
-     fieldName: "App List all other name you have used",
-   }),
-   (applicant) => ({
-     text: 
-       applicant.isChangingLegalName && fullName(applicant.birthName) ?
-         fullName(applicant.legalName) : "",
-     fieldName: "App List all other names you have used 2",
-   }),
-   (applicant) => ({
-     text: fullName(applicant.legalName),
-     fieldName: "Your name as printed on your most recent U.S. passport book and/or passport card",
-   }),
-   (applicant) => ({
-     text: applicant.isChangingLegalName
-       ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
-       : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
-     fieldName: "Name of Applicant 2",
-   }),
-   (applicant) => ({
-     text: formatDate(applicant.birthdate, {
-       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
-       separator: "/",
-     }),
-     fieldName: "Date of Birth",
-   }),
-   (applicant) => ({ 
-     choice: applicant.isChangingLegalName ? "Yes" : "No", 
-     fieldName: "Name Change",
-   }),
-   (applicant) => ({
-     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
-     fieldName: "Changed Last Name",
-   }),
-   (applicant) => ({
-     text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
-     fieldName: "Changed First",
-   }),
-  */
+  //(applicant) => ({ 
+  //choice: applicant.isChangingLegalName ? "YES" : "NO", 
+  //fieldName: "Changed Name",
+  //}),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
+    fieldName: "App Name Last"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : applicant.legalName.first,
+    fieldName: "App First"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.middle : applicant.legalName.middle,
+    fieldName: "App Middle"
+  }),
+  (applicant) => ({
+    text: addZero(
+      formatDate(applicant.birthdate, {
+        format: [DateFormatPart.MONTH],
+        separator: ""
+      })
+    ),
+    fieldName: "App DOB MM"
+  }),
+  (applicant) => ({
+    text: addZero(
+      formatDate(applicant.birthdate, {
+        format: [DateFormatPart.DAY],
+        separator: ""
+      })
+    ),
+    fieldName: "App DOB DD"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.YEAR],
+      separator: ""
+    }),
+    fieldName: "App DOB YYYY"
+  }),
+  (applicant) => ({
+    value: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.F:
+          return "F";
+        default:
+          return void 0;
+      }
+    })(),
+    fieldName: "Gender"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    fieldName: "App Place of Birth"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "App Email"
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "App Phone 1"
+  }),
+  (applicant) => ({
+    text: phoneStart(applicant.phone),
+    fieldName: "App Phone 2"
+  }),
+  (applicant) => ({
+    text: phoneEnd(applicant.phone),
+    fieldName: "App Phone 3"
+  }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : "",
+    fieldName: "App Mailing Address Line 2"
+  }),
+  (applicant) => ({
+    text: applicant.residentCity,
+    fieldName: "App Mailing City"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "App Mailing State"
+  }),
+  (applicant) => ({
+    text: applicant.zip,
+    fieldName: "App Mailing Zip"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName);
+        case false:
+          return fullName(applicant.birthName);
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "App List all other name you have used"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName && fullName(applicant.birthName) ? fullName(applicant.legalName) : "",
+    fieldName: "App List all other names you have used 2"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Your name as printed on your most recent U.S. passport book and/or passport card"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    fieldName: "Name of Applicant 2"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  //(applicant) => ({ 
+  //choice: applicant.isChangingLegalName ? "Yes" : "No", 
+  //fieldName: "Name Change",
+  //}),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
+    fieldName: "Changed Last Name"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
+    fieldName: "Changed First"
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
     fieldName: "Changed Middle"
@@ -42187,6 +42176,8 @@ const ds82Map = [
           return "M";
         case GenderMarker.F:
           return "F";
+        default:
+          return void 0;
       }
     })(),
     fieldName: "Gender"
@@ -42317,6 +42308,8 @@ const ds11Map = [
           return "M";
         case GenderMarker.F:
           return "F";
+        default:
+          return void 0;
       }
     })(),
     fieldName: "Gender"
