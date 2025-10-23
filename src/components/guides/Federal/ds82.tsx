@@ -46,7 +46,7 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
         {gender && (gender as string) === "X" ? (
           " Leave section 3 unchecked, you can pick the X marker on another form. "
         ) : (
-          ""
+          " "
         )}
         Then fill out your social security number in section 5. If you have 
         changed your name multiple times before then you will need to add them to 
@@ -54,7 +54,7 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
         old passports information. 
         {isChangingLegalName ? (
           " In section 11 write in the location and date of your name change as it appears on your court order. "
-        ):("")} 
+        ):(" ")} 
         For the photo we suggest going to a business for the highest chance of 
         success and stapling that to the form. Sign on the signature line below 
         the picture section then write in the current date to the right of the 

@@ -45,7 +45,7 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
         {gender && (gender as string) === "X" ? (
           " Leave section 3 unchecked, you can pick the X marker on another form. "
         ) : (
-          ""
+          " "
         )}
         Then fill out your social security number in section 5. In section 6 if 
         you are not a US citizen fill out your USCIS number from your green card 

@@ -48,12 +48,12 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
         and clarification.
         {!isChangingLegalName ? (
             " Check the box or boxes applicable to your situation on the first page. "
-        ):("")}
+        ):(" ")}
         On page 5 at the top you will need to select which documents you want.
         {gender && (gender as string) === "X" ? (
           " Leave section 3 unchecked, you can pick the X marker on another form. "
         ) : (
-          ""
+          " "
         )}
         Then fill out your social security number in section 5. If you have 
         changed your name multiple times before then you will need to add them 

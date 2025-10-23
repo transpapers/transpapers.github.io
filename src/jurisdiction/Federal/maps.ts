@@ -176,6 +176,7 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
+  /**
   (applicant) => ({ 
     choice: applicant.isChangingLegalName ? "YES" : "NO", 
     fieldName: "Changed Name",
@@ -323,6 +324,7 @@ export const ds5504Map: Formfill[] = [
     text: applicant.isChangingLegalName ? applicant.chosenName.first : "",
     fieldName: "Changed First",
   }),
+ */
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.middle : "",
     fieldName: "Changed Middle",
