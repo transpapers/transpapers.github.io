@@ -41961,10 +41961,10 @@ const ssnMap = [
  * @type {Formfill[]}
  */
 const ds5504Map = [
-  (applicant) => ({
-    choice: applicant.isChangingLegalName ? "YES" : "NO",
-    fieldName: "Changed Name"
-  }),
+  //(applicant) => ({ 
+  //choice: applicant.isChangingLegalName ? "YES" : "NO", 
+  //fieldName: "Changed Name",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
     fieldName: "App Name Last"
@@ -42002,6 +42002,7 @@ const ds5504Map = [
     }),
     fieldName: "App DOB YYYY"
   }),
+  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -42010,11 +42011,12 @@ const ds5504Map = [
         case GenderMarker.F:
           return "F";
         default:
-          return void 0;
+          return undefined;
       }
     })(),
-    fieldName: "Gender"
+    fieldName: "Gender",
   }),
+  */
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "App Place of Birth"
@@ -42087,10 +42089,10 @@ const ds5504Map = [
     }),
     fieldName: "Date of Birth"
   }),
-  (applicant) => ({
-    choice: applicant.isChangingLegalName ? "Yes" : "No",
-    fieldName: "Name Change"
-  }),
+  //(applicant) => ({ 
+  //choice: applicant.isChangingLegalName ? "Yes" : "No", 
+  //fieldName: "Name Change",
+  //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name"
@@ -42109,26 +42111,28 @@ const ds5504Map = [
  * @type {Formfill[]}
  */
 const ds82Map = [
-  () => ({
-    choice: "YES_1",
-    fieldName: "Most Recent"
+  /*
+  () => ({ 
+    choice: "YES_1", 
+    fieldName: "Most Recent",
   }),
-  () => ({
-    choice: "YES",
-    fieldName: "16 Years"
+  () => ({ 
+    choice: "YES", 
+    fieldName: "16 Years",
   }),
-  () => ({
-    choice: "YES",
-    fieldName: "Less Than 15"
+  () => ({ 
+    choice: "YES", 
+    fieldName: "Less Than 15",
   }),
-  () => ({
-    choice: "YES",
-    fieldName: "Damaged"
+  () => ({ 
+    choice: "YES", 
+    fieldName: "Damaged",
   }),
-  () => ({
-    choice: "YES",
-    fieldName: "Not Limited"
+  () => ({ 
+    choice: "YES", 
+    fieldName: "Not Limited",
   }),
+  */
   (applicant) => ({
     choice: applicant.isChangingLegalName ? "YES" : "NO",
     fieldName: "Name Changed"
@@ -42170,6 +42174,7 @@ const ds82Map = [
     }),
     fieldName: "App DOB YYYY"
   }),
+  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -42178,11 +42183,12 @@ const ds82Map = [
         case GenderMarker.F:
           return "F";
         default:
-          return void 0;
+          return undefined;
       }
     })(),
-    fieldName: "Gender"
+    fieldName: "Gender",
   }),
+  */
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "App Place of Birth"
@@ -42302,6 +42308,7 @@ const ds11Map = [
     }),
     fieldName: "Applicant DOB Y"
   }),
+  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -42310,11 +42317,12 @@ const ds11Map = [
         case GenderMarker.F:
           return "F";
         default:
-          return void 0;
+          return undefined;
       }
     })(),
-    fieldName: "Gender"
+    fieldName: "Gender",
   }),
+  */
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "Applicant Place of Birth"
