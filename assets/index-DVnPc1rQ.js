@@ -31580,13 +31580,14 @@ const michiganCounties = [
  * @type {Formfill[]}
  */
 const changeOfNameMap = [
-  //FIXME adjust this or the util function so it works.
+  /*FIXME adjust this or the util function so it works.
   (applicant) => ({
-    text: applicant.residentLocality.county,
-    //getLocality(applicant.residentJurisdictionName, 
-    //applicant.residentLocalityName)?.county,
-    loc: { x: 145, y: 150 }
+    text: applicant.residentLocality ?
+      (getLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName) as RhodeIslandCityOrTown).county : "",
+    loc: { x: 145, y: 150 },
   }),
+  */
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 }
@@ -41960,10 +41961,10 @@ const ssnMap = [
  * @type {Formfill[]}
  */
 const ds5504Map = [
-  //(applicant) => ({ 
-  //choice: applicant.isChangingLegalName ? "YES" : "NO", 
-  //fieldName: "Changed Name",
-  //}),
+  (applicant) => ({
+    choice: applicant.isChangingLegalName ? "YES" : "NO",
+    fieldName: "Changed Name"
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
     fieldName: "App Name Last"
@@ -42002,7 +42003,7 @@ const ds5504Map = [
     fieldName: "App DOB YYYY"
   }),
   (applicant) => ({
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "M";
@@ -42086,10 +42087,10 @@ const ds5504Map = [
     }),
     fieldName: "Date of Birth"
   }),
-  //(applicant) => ({ 
-  //choice: applicant.isChangingLegalName ? "Yes" : "No", 
-  //fieldName: "Name Change",
-  //}),
+  (applicant) => ({
+    choice: applicant.isChangingLegalName ? "Yes" : "No",
+    fieldName: "Name Change"
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name"
@@ -42170,7 +42171,7 @@ const ds82Map = [
     fieldName: "App DOB YYYY"
   }),
   (applicant) => ({
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "M";
@@ -42302,7 +42303,7 @@ const ds11Map = [
     fieldName: "Applicant DOB Y"
   }),
   (applicant) => ({
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "M";
