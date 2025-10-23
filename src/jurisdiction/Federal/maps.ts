@@ -176,10 +176,10 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
-  //(applicant) => ({ 
-    //choice: applicant.isChangingLegalName ? "YES" : "NO", 
-    //fieldName: "Changed Name",
-  //}),
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? "YES" : "NO", 
+    fieldName: "Changed Name",
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName 
       ? applicant.chosenName.last 
@@ -223,7 +223,7 @@ export const ds5504Map: Formfill[] = [
     fieldName: "App DOB YYYY",
   }),
   (applicant) => ({
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "M";
@@ -315,10 +315,10 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "Date of Birth",
   }),
-  //(applicant) => ({ 
-    //choice: applicant.isChangingLegalName ? "Yes" : "No", 
-    //fieldName: "Name Change",
-  //}),
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? "Yes" : "No", 
+    fieldName: "Name Change",
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name",
@@ -405,7 +405,7 @@ export const ds82Map: Formfill[] = [
     fieldName: "App DOB YYYY",
   }),
   (applicant) => ({
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "M";
@@ -551,7 +551,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Applicant DOB Y",
   }),
   (applicant) => ({
-    value: (() => {
+    choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
           return "M";
