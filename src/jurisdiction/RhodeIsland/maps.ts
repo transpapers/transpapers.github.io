@@ -50,7 +50,7 @@ export const changeOfNameMap: Formfill[] = [
   //FIXME adjust this or the util function so it works.
   (applicant) => ({
     text:
-      (applicant.residentLocality as RhodeIslandCityOrTown)?.county,
+      (applicant.residentLocality as RhodeIslandCityOrTown).county,
 
       //getLocality(applicant.residentJurisdictionName, 
       //applicant.residentLocalityName)?.county,
