@@ -41963,11 +41963,11 @@ const ssnMap = [
 const ds5504Map = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? "X" : "",
-    loc: { x: 41, y: 264 }
+    loc: { x: 42, y: 262 }
   }),
   (applicant) => ({
     text: !applicant.isChangingLegalName ? "X" : "",
-    loc: { x: 117, y: 264 }
+    loc: { x: 118, y: 262 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
