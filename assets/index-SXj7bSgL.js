@@ -41962,7 +41962,7 @@ const ssnMap = [
  */
 const ds5504Map = [
   (applicant) => ({
-    choice: applicant.isChangingLegalName ? "YES" : "NO",
+    choice: applicant.isChangingLegalName ? 1 : 0,
     fieldName: "Changed Name"
   }),
   (applicant) => ({
@@ -42006,9 +42006,9 @@ const ds5504Map = [
     choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
-          return "M";
+          return 0;
         case GenderMarker.F:
-          return "F";
+          return 1;
         default:
           return void 0;
       }
@@ -42087,10 +42087,10 @@ const ds5504Map = [
     }),
     fieldName: "Date of Birth"
   }),
-  //(applicant) => ({ 
-  //choice: applicant.isChangingLegalName ? "Yes" : "No", 
-  //fieldName: "Name Change",
-  //}),
+  (applicant) => ({
+    choice: applicant.isChangingLegalName ? 1 : 0,
+    fieldName: "Name Change"
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : "",
     fieldName: "Changed Last Name"
