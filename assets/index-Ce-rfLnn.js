@@ -41962,8 +41962,12 @@ const ssnMap = [
  */
 const ds5504Map = [
   (applicant) => ({
-    choice: applicant.isChangingLegalName ? 1 : 0,
-    fieldName: "Changed Name"
+    text: applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 41, y: 264 }
+  }),
+  (applicant) => ({
+    text: !applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 117, y: 264 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
@@ -42004,16 +42008,29 @@ const ds5504Map = [
   }),
   (applicant) => ({
     choice: (() => {
-      switch (applicant.gender) {
-        case GenderMarker.M:
-          return 0;
-        case GenderMarker.F:
-          return 1;
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.M ? "X" : "";
+        case false:
+          return applicant.assignedSex === GenderMarker.M ? "X" : "";
         default:
           return void 0;
       }
     })(),
-    fieldName: "Gender"
+    loc: { page: 4, x: 343, y: 287 }
+  }),
+  (applicant) => ({
+    choice: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.F ? "X" : "";
+        case false:
+          return applicant.assignedSex === GenderMarker.F ? "X" : "";
+        default:
+          return void 0;
+      }
+    })(),
+    loc: { page: 4, x: 369, y: 287 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
@@ -42088,8 +42105,12 @@ const ds5504Map = [
     fieldName: "Date of Birth"
   }),
   (applicant) => ({
-    choice: applicant.isChangingLegalName ? 1 : 0,
-    fieldName: "Name Change"
+    text: applicant.isChangingLegalName ? "X" : "",
+    loc: { page: 5, x: 127, y: 576 }
+  }),
+  (applicant) => ({
+    text: !applicant.isChangingLegalName ? "X" : "",
+    loc: { page: 5, x: 180, y: 576 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : "",
@@ -42109,31 +42130,33 @@ const ds5504Map = [
  * @type {Formfill[]}
  */
 const ds82Map = [
-  /*
-  () => ({ 
-    choice: "YES_1", 
-    fieldName: "Most Recent",
+  () => ({
+    text: "X",
+    loc: { x: 41, y: 246 }
   }),
-  () => ({ 
-    choice: "YES", 
-    fieldName: "16 Years",
+  () => ({
+    text: "X",
+    loc: { x: 41, y: 280 }
   }),
-  () => ({ 
-    choice: "YES", 
-    fieldName: "Less Than 15",
+  () => ({
+    text: "X",
+    loc: { x: 41, y: 314 }
   }),
-  () => ({ 
-    choice: "YES", 
-    fieldName: "Damaged",
+  () => ({
+    text: "X",
+    loc: { x: 41, y: 348 }
   }),
-  () => ({ 
-    choice: "YES", 
-    fieldName: "Not Limited",
+  () => ({
+    text: "X",
+    loc: { x: 41, y: 395 }
   }),
-  */
   (applicant) => ({
-    choice: applicant.isChangingLegalName ? "YES" : "NO",
-    fieldName: "Name Changed"
+    text: applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 41, y: 473 }
+  }),
+  (applicant) => ({
+    text: !applicant.isChangingLegalName ? "X" : "",
+    loc: { x: 109, y: 473 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
@@ -42172,21 +42195,32 @@ const ds82Map = [
     }),
     fieldName: "App DOB YYYY"
   }),
-  /*
   (applicant) => ({
     choice: (() => {
-      switch (applicant.gender) {
-        case GenderMarker.M:
-          return "M";
-        case GenderMarker.F:
-          return "F";
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.M ? "X" : "";
+        case false:
+          return applicant.assignedSex === GenderMarker.M ? "X" : "";
         default:
-          return undefined;
+          return void 0;
       }
     })(),
-    fieldName: "Gender",
+    loc: { page: 4, x: 342, y: 275 }
   }),
-  */
+  (applicant) => ({
+    choice: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.F ? "X" : "";
+        case false:
+          return applicant.assignedSex === GenderMarker.F ? "X" : "";
+        default:
+          return void 0;
+      }
+    })(),
+    loc: { page: 4, x: 369, y: 275 }
+  }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "App Place of Birth"
@@ -42306,21 +42340,32 @@ const ds11Map = [
     }),
     fieldName: "Applicant DOB Y"
   }),
-  /*
   (applicant) => ({
     choice: (() => {
-      switch (applicant.gender) {
-        case GenderMarker.M:
-          return "M";
-        case GenderMarker.F:
-          return "F";
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.M ? "X" : "";
+        case false:
+          return applicant.assignedSex === GenderMarker.M ? "X" : "";
         default:
-          return undefined;
+          return void 0;
       }
     })(),
-    fieldName: "Gender",
+    loc: { page: 4, x: 337, y: 282 }
   }),
-  */
+  (applicant) => ({
+    choice: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.F ? "X" : "";
+        case false:
+          return applicant.assignedSex === GenderMarker.F ? "X" : "";
+        default:
+          return void 0;
+      }
+    })(),
+    loc: { page: 4, x: 361, y: 282 }
+  }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "Applicant Place of Birth"
