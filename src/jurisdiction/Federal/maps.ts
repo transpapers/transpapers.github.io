@@ -177,7 +177,7 @@ export const ssnMap: Formfill[] = [
  */
 export const ds5504Map: Formfill[] = [
   (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? "YES" : "NO", 
+    choice: applicant.isChangingLegalName ? 1 : 0, 
     fieldName: "Changed Name",
   }),
   (applicant) => ({
@@ -226,9 +226,9 @@ export const ds5504Map: Formfill[] = [
     choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
-          return "M";
+          return 0;
         case GenderMarker.F:
-          return "F";
+          return 1;
         default:
           return undefined;
       }
@@ -315,10 +315,10 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "Date of Birth",
   }),
-  //(applicant) => ({ 
-    //choice: applicant.isChangingLegalName ? "Yes" : "No", 
-    //fieldName: "Name Change",
-  //}),
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? 1 : 0, 
+    fieldName: "Name Change",
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? 
       `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : "",
