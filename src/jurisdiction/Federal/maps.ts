@@ -182,8 +182,8 @@ export const ds5504Map: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName 
-      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix}`
-      : `${applicant.legalName.last} ${applicant.legalName.suffix}`,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "App Name Last",
   }),
   (applicant) => ({
@@ -321,7 +321,7 @@ export const ds5504Map: Formfill[] = [
   //}),
   (applicant) => ({
     text: applicant.isChangingLegalName ? 
-      `${applicant.chosenName.last} ${applicant.chosenName.suffix}` : "",
+      `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : "",
     fieldName: "Changed Last Name",
   }),
   (applicant) => ({
@@ -367,8 +367,8 @@ export const ds82Map: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName 
-      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix}`
-      : `${applicant.legalName.last} ${applicant.legalName.suffix}`,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "App Name Last",
   }),
   (applicant) => ({
@@ -515,8 +515,8 @@ export const ds82Map: Formfill[] = [
 export const ds11Map: Formfill[] = [
   (applicant) => ({
     text: applicant.isChangingLegalName 
-      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix}`
-      : `${applicant.legalName.last} ${applicant.legalName.suffix}`,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Applicant Last Name",
   }),
   (applicant) => ({
@@ -651,7 +651,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Parent 1 FM Name",
   }),
   (applicant) => ({
-    text: `${applicant.mothersBirthName.last} ${applicant.mothersBirthName.suffix}`,
+    text: `${applicant.mothersBirthName.last} ${applicant.mothersBirthName.suffix ?? ""}`,
     fieldName: "Parent 1 Last Name",
   }),
   (applicant) => ({
@@ -670,7 +670,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Parent 2 FM Name",
   }),
   (applicant) => ({
-    text: `${applicant.fathersBirthName.last} ${applicant.fathersBirthName.suffix}`,
+    text: `${applicant.fathersBirthName.last} ${applicant.fathersBirthName.suffix ?? ""}`,
     fieldName: "Parent 2 Last Name",
   }),
   (applicant) => ({
