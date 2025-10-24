@@ -41961,12 +41961,12 @@ const ssnMap = [
  * @type {Formfill[]}
  */
 const ds5504Map = [
-  //(applicant) => ({ 
-  //choice: applicant.isChangingLegalName ? "YES" : "NO", 
-  //fieldName: "Changed Name",
-  //}),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
+    choice: applicant.isChangingLegalName ? "YES" : "NO",
+    fieldName: "Changed Name"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "App Name Last"
   }),
   (applicant) => ({
@@ -42002,7 +42002,6 @@ const ds5504Map = [
     }),
     fieldName: "App DOB YYYY"
   }),
-  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -42011,12 +42010,11 @@ const ds5504Map = [
         case GenderMarker.F:
           return "F";
         default:
-          return undefined;
+          return void 0;
       }
     })(),
-    fieldName: "Gender",
+    fieldName: "Gender"
   }),
-  */
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "App Place of Birth"
@@ -42079,7 +42077,7 @@ const ds5504Map = [
     fieldName: "Your name as printed on your most recent U.S. passport book and/or passport card"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant 2"
   }),
   (applicant) => ({
@@ -42094,7 +42092,7 @@ const ds5504Map = [
   //fieldName: "Name Change",
   //}),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : "",
     fieldName: "Changed Last Name"
   }),
   (applicant) => ({
@@ -42138,7 +42136,7 @@ const ds82Map = [
     fieldName: "Name Changed"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "App Name Last"
   }),
   (applicant) => ({
@@ -42255,7 +42253,7 @@ const ds82Map = [
     fieldName: "Changed by Court Order"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant (Last, First, Middle) 2"
   }),
   (applicant) => ({
@@ -42272,7 +42270,7 @@ const ds82Map = [
  */
 const ds11Map = [
   (applicant) => ({
-    text: applicant.isChangingLegalName ? applicant.chosenName.last : applicant.legalName.last,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Applicant Last Name"
   }),
   (applicant) => ({
@@ -42381,7 +42379,7 @@ const ds11Map = [
     fieldName: "List all other names you have used"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant 2"
   }),
   (applicant) => ({
@@ -42396,7 +42394,7 @@ const ds11Map = [
     fieldName: "Parent 1 FM Name"
   }),
   (applicant) => ({
-    text: applicant.mothersBirthName.last,
+    text: `${applicant.mothersBirthName.last} ${applicant.mothersBirthName.suffix ?? ""}`,
     fieldName: "Parent 1 Last Name"
   }),
   (applicant) => ({
@@ -42415,7 +42413,7 @@ const ds11Map = [
     fieldName: "Parent 2 FM Name"
   }),
   (applicant) => ({
-    text: applicant.fathersBirthName.last,
+    text: `${applicant.fathersBirthName.last} ${applicant.fathersBirthName.suffix ?? ""}`,
     fieldName: "Parent 2 Last Name"
   }),
   (applicant) => ({
