@@ -178,11 +178,11 @@ export const ssnMap: Formfill[] = [
 export const ds5504Map: Formfill[] = [
   (applicant) => ({ 
     text: applicant.isChangingLegalName ? "X" : "", 
-    loc: { x: 41, y: 264 },
+    loc: { x: 42, y: 262 },
   }),
   (applicant) => ({ 
     text: !applicant.isChangingLegalName ? "X" : "", 
-    loc: { x: 117, y: 264 },
+    loc: { x: 118, y: 262 },
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName 
