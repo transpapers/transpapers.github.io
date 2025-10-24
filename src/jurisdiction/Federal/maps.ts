@@ -317,10 +317,14 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "Date of Birth",
   }),
-  //(applicant) => ({ 
-    //choice: applicant.isChangingLegalName ? "Yes" : "No", 
-    //fieldName: "Name Change",
-  //}),
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? "Yes" : undefined, 
+    fieldName: "Name Change",
+  }),
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? undefined : "No", 
+    fieldName: "Name Change",
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
     fieldName: "Changed Last Name",
