@@ -176,14 +176,14 @@ export const ssnMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const ds5504Map: Formfill[] = [
-  //(applicant) => ({ 
-    //choice: applicant.isChangingLegalName ? "YES" : "NO", 
-    //fieldName: "Changed Name",
-  //}),
+  (applicant) => ({ 
+    choice: applicant.isChangingLegalName ? "YES" : "NO", 
+    fieldName: "Changed Name",
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName 
-      ? applicant.chosenName.last 
-      : applicant.legalName.last,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix}`,
     fieldName: "App Name Last",
   }),
   (applicant) => ({
@@ -222,7 +222,6 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "App DOB YYYY",
   }),
-  /*
   (applicant) => ({
     choice: (() => {
       switch (applicant.gender) {
@@ -236,7 +235,6 @@ export const ds5504Map: Formfill[] = [
     })(),
     fieldName: "Gender",
   }),
-  */
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "App Place of Birth",
@@ -306,8 +304,8 @@ export const ds5504Map: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-      ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
-      : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant 2",
   }),
   (applicant) => ({
@@ -317,16 +315,13 @@ export const ds5504Map: Formfill[] = [
     }),
     fieldName: "Date of Birth",
   }),
-  (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? "Yes" : undefined, 
-    fieldName: "Name Change",
-  }),
-  (applicant) => ({ 
-    choice: applicant.isChangingLegalName ? undefined : "No", 
-    fieldName: "Name Change",
-  }),
+  //(applicant) => ({ 
+    //choice: applicant.isChangingLegalName ? "Yes" : "No", 
+    //fieldName: "Name Change",
+  //}),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? applicant.chosenName.last : "",
+    text: applicant.isChangingLegalName ? 
+      `${applicant.chosenName.last} ${applicant.chosenName.suffix}` : "",
     fieldName: "Changed Last Name",
   }),
   (applicant) => ({
@@ -372,8 +367,8 @@ export const ds82Map: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName 
-      ? applicant.chosenName.last 
-      : applicant.legalName.last,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix}`,
     fieldName: "App Name Last",
   }),
   (applicant) => ({
@@ -500,8 +495,8 @@ export const ds82Map: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-      ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
-      : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant (Last, First, Middle) 2",
   }),
   (applicant) => ({
@@ -520,8 +515,8 @@ export const ds82Map: Formfill[] = [
 export const ds11Map: Formfill[] = [
   (applicant) => ({
     text: applicant.isChangingLegalName 
-      ? applicant.chosenName.last 
-      : applicant.legalName.last,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix}`,
     fieldName: "Applicant Last Name",
   }),
   (applicant) => ({
@@ -640,8 +635,8 @@ export const ds11Map: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-      ? `${applicant.chosenName.last} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
-      : `${applicant.legalName.last} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+      ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant 2",
   }),
   (applicant) => ({
@@ -656,7 +651,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Parent 1 FM Name",
   }),
   (applicant) => ({
-    text: applicant.mothersBirthName.last,
+    text: `${applicant.mothersBirthName.last} ${applicant.mothersBirthName.suffix}`,
     fieldName: "Parent 1 Last Name",
   }),
   (applicant) => ({
@@ -675,7 +670,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Parent 2 FM Name",
   }),
   (applicant) => ({
-    text: applicant.fathersBirthName.last,
+    text: `${applicant.fathersBirthName.last} ${applicant.fathersBirthName.suffix}`,
     fieldName: "Parent 2 Last Name",
   }),
   (applicant) => ({
