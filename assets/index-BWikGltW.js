@@ -41963,11 +41963,11 @@ const ssnMap = [
 const ds5504Map = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? "X" : "",
-    loc: { x: 42, y: 262 }
+    loc: { x: 42, y: 263 }
   }),
   (applicant) => ({
     text: !applicant.isChangingLegalName ? "X" : "",
-    loc: { x: 118, y: 262 }
+    loc: { x: 118, y: 263 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
@@ -42017,7 +42017,7 @@ const ds5504Map = [
           return void 0;
       }
     })(),
-    loc: { page: 4, x: 343, y: 287 }
+    loc: { page: 4, x: 343, y: 286 }
   }),
   (applicant) => ({
     choice: (() => {
@@ -42030,7 +42030,7 @@ const ds5504Map = [
           return void 0;
       }
     })(),
-    loc: { page: 4, x: 369, y: 287 }
+    loc: { page: 4, x: 373, y: 284 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
@@ -42094,7 +42094,7 @@ const ds5504Map = [
     fieldName: "Your name as printed on your most recent U.S. passport book and/or passport card"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last}, ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last}, ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant 2"
   }),
   (applicant) => ({
@@ -42106,11 +42106,11 @@ const ds5504Map = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 5, x: 127, y: 576 }
+    loc: { page: 5, x: 126, y: 576 }
   }),
   (applicant) => ({
     text: !applicant.isChangingLegalName ? "X" : "",
-    loc: { page: 5, x: 180, y: 576 }
+    loc: { page: 5, x: 179, y: 576 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : "",
@@ -42132,23 +42132,23 @@ const ds5504Map = [
 const ds82Map = [
   () => ({
     text: "X",
-    loc: { x: 41, y: 246 }
+    loc: { x: 41, y: 245 }
   }),
   () => ({
     text: "X",
-    loc: { x: 41, y: 280 }
+    loc: { x: 41, y: 279 }
   }),
   () => ({
     text: "X",
-    loc: { x: 41, y: 314 }
+    loc: { x: 41, y: 313 }
   }),
   () => ({
     text: "X",
-    loc: { x: 41, y: 348 }
+    loc: { x: 41, y: 347 }
   }),
   () => ({
     text: "X",
-    loc: { x: 41, y: 395 }
+    loc: { x: 41, y: 394 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? "X" : "",
@@ -42206,7 +42206,7 @@ const ds82Map = [
           return void 0;
       }
     })(),
-    loc: { page: 4, x: 342, y: 275 }
+    loc: { page: 4, x: 343, y: 273 }
   }),
   (applicant) => ({
     choice: (() => {
@@ -42219,7 +42219,7 @@ const ds82Map = [
           return void 0;
       }
     })(),
-    loc: { page: 4, x: 369, y: 275 }
+    loc: { page: 4, x: 370, y: 273 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
@@ -42287,7 +42287,7 @@ const ds82Map = [
     fieldName: "Changed by Court Order"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last}, ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last}, ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant (Last, First, Middle) 2"
   }),
   (applicant) => ({
@@ -42424,7 +42424,7 @@ const ds11Map = [
     fieldName: "List all other names you have used"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last}, ${applicant.chosenName.suffix ?? ""} ${applicant.chosenName.first} ${applicant.chosenName.middle}` : `${applicant.legalName.last}, ${applicant.legalName.suffix ?? ""} ${applicant.legalName.first} ${applicant.legalName.middle}`,
     fieldName: "Name of Applicant 2"
   }),
   (applicant) => ({
@@ -42450,8 +42450,8 @@ const ds11Map = [
     fieldName: "Parent 1 DOB"
   }),
   () => ({
-    choice: "F",
-    fieldName: "Parent 1 Gender"
+    text: "x",
+    loc: { page: 5, x: 689, y: 161 }
   }),
   (applicant) => ({
     text: `${applicant.fathersBirthName.first} ${applicant.fathersBirthName.middle}`,
@@ -42469,8 +42469,8 @@ const ds11Map = [
     fieldName: "Parent 2 DOB"
   }),
   () => ({
-    choice: "M",
-    fieldName: "Parent 2 Gender"
+    text: "x",
+    loc: { page: 5, x: 687, y: 237 }
   })
 ];
 /*!
@@ -42480,15 +42480,15 @@ const ds11Map = [
 const passportAttestationMap = [
   (applicant) => ({
     text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { x: 128, y: 861 }
+    loc: { x: 129, y: 864 }
   }),
   (applicant) => ({
     text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { x: 128, y: 884 }
+    loc: { x: 129, y: 887 }
   }),
   (applicant) => ({
     text: applicant.gender === GenderMarker.X ? "X" : "",
-    loc: { x: 128, y: 908 }
+    loc: { x: 129, y: 911 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
