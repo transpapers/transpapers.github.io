@@ -50,9 +50,8 @@ import { allJurisdictions } from "../../jurisdiction/all";
 export const changeOfNameMap: Formfill[] = [
   /*FIXME adjust this or the util function so it works.  */
   (applicant) => ({
-    text: (((allJurisdictions.find(
-      (j) => j.name === applicant.residentJurisdictionName)?.localities.find(
-      (j) => j.name === applicant.residentLocalityName) as RhodeIslandCityOrTown).county ?? "")),
+    text: (applicant.residentJurisdiction?.localities.find(
+      (j) => j.name === applicant.residentLocalityName) as RhodeIslandCityOrTown).county,
     loc: { x: 145, y: 150 },
   }),
   (applicant) => ({
