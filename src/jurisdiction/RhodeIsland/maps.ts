@@ -28,14 +28,14 @@ import {
   phoneStart,
   representativeName,
   getJurisdiction,
-  //getLocality,
+  getLocality,
 } from "../../lib/util";
 
 import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
-//import { RhodeIslandCityOrTown } from "../../types/locality";
+import { RhodeIslandCityOrTown } from "../../types/locality";
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
@@ -47,14 +47,13 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
-  /*FIXME adjust this or the util function so it works.
+  /*FIXME adjust this or the util function so it works.  */
   (applicant) => ({
-    text: applicant.residentLocality ?
+    text:
       (getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName) as RhodeIslandCityOrTown).county : "",
+      applicant.residentLocalityName) as RhodeIslandCityOrTown).county ?? "",
     loc: { x: 145, y: 150 },
   }),
-  */
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 },
