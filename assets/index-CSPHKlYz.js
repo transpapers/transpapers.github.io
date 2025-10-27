@@ -31616,7 +31616,6 @@ const michiganCounties = [
  * @type {Formfill[]}
  */
 const changeOfNameMap = [
-  /*FIXME adjust this or the util function so it works.  */
   (applicant) => ({
     text: getRILocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.county,
     loc: { x: 145, y: 150 }
@@ -31638,7 +31637,7 @@ const changeOfNameMap = [
     fieldName: "8"
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "9"
   }),
   (applicant) => ({
@@ -31675,6 +31674,10 @@ const changeOfNameMap = [
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
     fieldName: "21"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? "" : "X",
+    loc: { x: 492, y: 642 }
   }),
   (applicant) => ({
     text: applicant.reasonForNameChange,
@@ -31793,15 +31796,15 @@ const birthCertOneMap = [
   }),
   (applicant) => ({
     text: !isMinor(applicant) ? "x" : "",
-    loc: { x: 101, y: 323 }
+    loc: { x: 102, y: 323 }
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? "x" : "",
-    loc: { x: 353, y: 323 }
+    loc: { x: 354, y: 323 }
   }),
   () => ({
     text: "x",
-    loc: { x: 298, y: 537 }
+    loc: { x: 299, y: 538 }
   }),
   () => ({
     text: "Name Change",
@@ -31882,7 +31885,7 @@ const primaryIDRhodeIslandMap = [
     fieldName: "CITYTOWN"
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "STATE"
   }),
   (applicant) => ({
@@ -31898,7 +31901,7 @@ const primaryIDRhodeIslandMap = [
     fieldName: "Text3"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.birthJurisdictionName)?.abbreviation,
+    text: applicant.birthJurisdictionName,
     fieldName: "STATEPROVINCE"
   }),
   (applicant) => ({
@@ -42381,7 +42384,7 @@ const ds11Map = [
           return void 0;
       }
     })(),
-    loc: { page: 4, x: 337, y: 282 }
+    loc: { page: 4, x: 339, y: 280 }
   }),
   (applicant) => ({
     choice: (() => {
@@ -42394,7 +42397,7 @@ const ds11Map = [
           return void 0;
       }
     })(),
-    loc: { page: 4, x: 361, y: 282 }
+    loc: { page: 4, x: 363, y: 280 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
@@ -42480,8 +42483,8 @@ const ds11Map = [
     fieldName: "Parent 1 DOB"
   }),
   () => ({
-    text: "x",
-    loc: { page: 5, x: 689, y: 161 }
+    text: "X",
+    loc: { page: 5, x: 688, y: 161 }
   }),
   (applicant) => ({
     text: `${applicant.fathersBirthName.first} ${applicant.fathersBirthName.middle}`,
@@ -42499,7 +42502,7 @@ const ds11Map = [
     fieldName: "Parent 2 DOB"
   }),
   () => ({
-    text: "x",
+    text: "X",
     loc: { page: 5, x: 687, y: 237 }
   })
 ];
