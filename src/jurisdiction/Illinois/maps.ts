@@ -102,39 +102,32 @@ export const adultNameChangeMap: Formfill[] = [
     choice: "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "16 - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "17 - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "18 - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "19 - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "20 - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "f - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "22 - Checkboxes",
-    choice: "No",
+    choice: applicant.hasCriminalRecord ? undefined : "No",
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
