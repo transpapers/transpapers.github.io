@@ -600,7 +600,7 @@ export const ds11Map: Formfill[] = [
           return undefined;
       }
     })(),
-    loc: { page: 4, x: 337, y: 282 },
+    loc: { page: 4, x: 339, y: 280 },
   }),
   (applicant) => ({
     choice: (() => {
@@ -613,7 +613,7 @@ export const ds11Map: Formfill[] = [
           return undefined;
       }
     })(),
-    loc: { page: 4, x: 361, y: 282 },
+    loc: { page: 4, x: 363, y: 280 },
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
@@ -707,8 +707,8 @@ export const ds11Map: Formfill[] = [
     fieldName: "Parent 1 DOB",
   }),
   () => ({ 
-    text: "x", 
-    loc: { page: 5, x: 689, y: 161 }, 
+    text: "X", 
+    loc: { page: 5, x: 688, y: 161 }, 
   }),
   (applicant) => ({
     text: `${applicant.fathersBirthName.first} ${applicant.fathersBirthName.middle}`,
@@ -726,7 +726,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Parent 2 DOB",
   }),
   () => ({ 
-    text: "x", 
+    text: "X", 
     loc: { page: 5, x: 687, y: 237 }, 
   }),
 ];

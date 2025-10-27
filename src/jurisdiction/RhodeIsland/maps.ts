@@ -35,8 +35,6 @@ import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
-//import { RhodeIslandCityOrTown } from "../../types/locality";
-//import { allJurisdictions } from "../../jurisdiction/all";
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
@@ -48,7 +46,6 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const changeOfNameMap: Formfill[] = [
-  /*FIXME adjust this or the util function so it works.  */
   (applicant) => ({
     text: 
       getRILocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.county,
@@ -71,7 +68,7 @@ export const changeOfNameMap: Formfill[] = [
     fieldName: "8",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "9",
   }),
   (applicant) => ({
@@ -110,6 +107,10 @@ export const changeOfNameMap: Formfill[] = [
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
     fieldName: "21",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? "" : "X",
+    loc: { x: 492, y: 642 },
   }),
   (applicant) => ({
     text: applicant.reasonForNameChange,
@@ -237,15 +238,15 @@ export const birthCertOneMap: Formfill[] = [
   }),
   (applicant) => ({
     text: !isMinor(applicant) ? "x" : "",
-    loc: { x: 101, y: 323 },
+    loc: { x: 102, y: 323 },
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? "x" : "",
-    loc: { x: 353, y: 323 },
+    loc: { x: 354, y: 323 },
   }),
   () => ({
     text: "x",
-    loc: { x: 298, y: 537 },
+    loc: { x: 299, y: 538 },
   }),
   () => ({
     text: "Name Change",
@@ -327,7 +328,7 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "CITYTOWN",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -343,7 +344,7 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "Text3",
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.birthJurisdictionName)?.abbreviation,
+    text: applicant.birthJurisdictionName,
     fieldName: "STATEPROVINCE",
   }),
   (applicant) => ({
