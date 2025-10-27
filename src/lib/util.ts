@@ -34,12 +34,8 @@ import { Jurisdiction } from "../types/jurisdiction";
 import { AnyLocality } from "../types/generic";
 import { 
   Locality,
-  //MichiganCounty,
-  //NewYorkCounty,
-  //TexasCounty,
-  //OhioCounty,
+  NewYorkCounty,
   RhodeIslandCityOrTown,
-  //AlaskaAdministrativeDivision,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -275,10 +271,10 @@ export function getJurisdiction(jurisdictionKey: string | undefined) {
 }
 
 /*!
- * Find a locality given it's name and the jurisdiction name.
+ * Find a generic locality given it's name and the jurisdiction name.
  * @param {String} jurisdictionKey
  * @param {String} localityKey
- * @return {AnyJurisdiction | undefined}
+ * @return {AnyLocality | undefined}
  */
 export function getLocality(jurisdictionKey: string | undefined, localityKey: string | undefined): AnyLocality | undefined {
   if (!jurisdictionKey) {
@@ -305,6 +301,12 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   return foundLocality;
 }
 
+/*!
+ * Get an RI locality object to pull RI specific properties for forms.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {RhodeIslandCityOrTown | undefined}
+ */
 export function getRILocality(jurisdictionKey: string | undefined, localityKey: string | undefined): RhodeIslandCityOrTown | undefined {
   if (!jurisdictionKey) {
     return undefined;
@@ -326,6 +328,37 @@ export function getRILocality(jurisdictionKey: string | undefined, localityKey: 
   const foundLocality: RhodeIslandCityOrTown = localities.find(
     (j) => j.name === localityKey,
   ) as RhodeIslandCityOrTown;
+
+  return foundLocality;
+}
+
+/*!
+ * Get an NY locality object to pull NY specific properties for forms.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {NewYorkCounty | undefined}
+ */
+export function getNYLocality(jurisdictionKey: string | undefined, localityKey: string | undefined): NewYorkCounty | undefined {
+  if (!jurisdictionKey) {
+    return undefined;
+  }
+
+  if (!localityKey) {
+    return undefined;
+  }
+
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey,
+  );
+
+  if (!foundJurisdiction) {
+    return undefined;
+  }
+
+  const localities = foundJurisdiction.localities;
+  const foundLocality: NewYorkCounty = localities.find(
+    (j) => j.name === localityKey,
+  ) as NewYorkCounty;
 
   return foundLocality;
 }

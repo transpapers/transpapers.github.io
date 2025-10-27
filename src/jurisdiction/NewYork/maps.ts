@@ -31,6 +31,7 @@ import {
   getJurisdiction,
   ContactFormat as cf,
   formatContactInfo,
+  getNYLocality,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -46,8 +47,12 @@ import { Formfill } from "../../types/formfill";
  * @type {Formfill[]}
  */
 export const adultNameSexPetitionMap: Formfill[] = [
-  /** 'courtType' fieldName from counties.ts should go here.
-   */
+  (applicant) => ({
+    fieldName: "CourtType",
+    value: 
+      getNYLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.courtType,
+  }),
   (applicant) => ({
     fieldName: "County",
     value: applicant.residentLocalityName,
@@ -121,8 +126,12 @@ export const adultNameSexPetitionMap: Formfill[] = [
  * @type {Formfill[]}
  */
 export const minorNameSexPetitionMap: Formfill[] = [
-  /** 'courtType' fieldName from counties.ts should go here.
-   */
+  (applicant) => ({
+    fieldName: "CourtType",
+    value: 
+      getNYLocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.courtType,
+  }),
   (applicant) => ({
     fieldName: "County",
     value: applicant.residentLocalityName,

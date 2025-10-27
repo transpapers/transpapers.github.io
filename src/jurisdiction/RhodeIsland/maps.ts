@@ -48,7 +48,8 @@ import { Formfill } from "../../types/formfill";
 export const changeOfNameMap: Formfill[] = [
   (applicant) => ({
     text: 
-      getRILocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.county,
+      getRILocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.county,
     loc: { x: 145, y: 150 },
   }),
   (applicant) => ({
