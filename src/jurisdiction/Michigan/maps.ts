@@ -647,7 +647,6 @@ export const birthCertMap: Formfill[] = [
     fieldName: "place of birth",
   }),
   (applicant) => ({
-    check: applicant.gender,
     choice: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
