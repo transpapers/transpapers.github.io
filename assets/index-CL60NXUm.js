@@ -31580,14 +31580,11 @@ const michiganCounties = [
  * @type {Formfill[]}
  */
 const changeOfNameMap = [
-  /*FIXME adjust this or the util function so it works.
+  /*FIXME adjust this or the util function so it works.  */
   (applicant) => ({
-    text: applicant.residentLocality ?
-      (getLocality(applicant.residentJurisdictionName, 
-      applicant.residentLocalityName) as RhodeIslandCityOrTown).county : "",
-    loc: { x: 145, y: 150 },
+    text: applicant.residentLocality.county,
+    loc: { x: 145, y: 150 }
   }),
-  */
   (applicant) => ({
     text: applicant.residentLocalityName,
     loc: { x: 520, y: 170 }
@@ -38304,7 +38301,7 @@ function AlaskaDMVGuide({ person }) {
       age && age < 18 && "and a parent/guardian",
       " can go to a DMV location and request that they update the name on your license to your new name. That will count as notifying them. To do this you will need the “Driver License, Permit Or Identification Card Transaction Application” (form D1). For this form fill out any blanks we left in the top half of the form. If you are applying for a drivers license/ID for the first time check the “New” box instead of providing a drivers license or ID number.",
       gender && gender === "X" ? " Alaska does not have an “X” option for ID's, you will need to put either “Male” or “Female” in the top section. " : " ",
-      "Then select what type of ID or drivers license that you would like and answer questions 1 thru 10 on the bottom half of the form. On question 2 though if you have had more names than what we have listed fill in the others. Do ",
+      "Then select what type of ID or drivers license that you would like and answer questions 1 thru 10 on the bottom half of the form. On question 2, if you have had more names than what we have listed, fill in the others. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign or date this form with your old legal signature until you are instructed to by a DMV representative.",
       " ",
@@ -39340,39 +39337,32 @@ const adultNameChangeMap = [
     choice: "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "16 - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "17 - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "18 - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "19 - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "20 - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "f - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
-    check: applicant.hasCriminalRecord,
     fieldName: "22 - Checkboxes",
-    choice: "No"
+    choice: applicant.hasCriminalRecord ? void 0 : "No"
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
