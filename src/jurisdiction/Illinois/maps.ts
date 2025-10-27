@@ -102,32 +102,32 @@ export const adultNameChangeMap: Formfill[] = [
     choice: "No",
   }),
   (applicant) => ({
-    fieldName: "16 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 356 },
   }),
   (applicant) => ({
-    fieldName: "17 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 430 },
   }),
   (applicant) => ({
-    fieldName: "18 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 490 },
   }),
   (applicant) => ({
-    fieldName: "19 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 550 },
   }),
   (applicant) => ({
-    fieldName: "20 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 632 },
   }),
   (applicant) => ({
-    fieldName: "f - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 734 },
   }),
   (applicant) => ({
-    fieldName: "22 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? undefined : "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 975 },
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
