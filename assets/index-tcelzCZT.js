@@ -28563,89 +28563,105 @@ const mdosSexMap = [
 const birthCertMap = [
   (applicant) => ({
     text: applicant.isChangingLegalName && !isMinor(applicant) ? applicant.chosenName.first : representativeName(applicant).first,
-    loc: { x: 48, y: 196 }
+    fieldName: "First name"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName && !isMinor(applicant) ? applicant.chosenName.middle : representativeName(applicant).middle,
-    loc: { x: 337, y: 196 }
+    fieldName: "Middle name"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName && !isMinor(applicant) ? applicant.chosenName.last : representativeName(applicant).last,
-    loc: { x: 588, y: 196 }
+    fieldName: "Last name"
   }),
-  (applicant) => ({ text: applicant.streetAddress, loc: { x: 48, y: 237 } }),
+  (applicant) => ({
+    text: applicant.streetAddress,
+    fieldName: "address"
+  }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentCityAndState),
-    loc: { x: 388, y: 237 }
-  }),
-  (applicant) => ({ text: applicant.zip, loc: { x: 662, y: 237 } }),
-  (applicant) => ({ text: applicant.phone, loc: { x: 48, y: 283 } }),
-  (applicant) => ({ text: applicant.email, loc: { x: 426, y: 283 } }),
-  (applicant) => ({
-    text: isMinor(applicant) ? "" : "X",
-    loc: { x: 52, y: 327 }
+    fieldName: "city/state"
   }),
   (applicant) => ({
-    text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
-    loc: { x: 52, y: 355 }
+    text: applicant.zip,
+    fieldName: "zip"
   }),
-  () => ({ text: "X", loc: { x: 314, y: 409 } }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "email"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "Self Correcting my own record"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant) && applicant.parentsAreOkay,
+    fieldName: "Parent of the child"
+  }),
+  () => ({
+    check: true,
+    fieldName: "Court ordered legal name change Court order required"
+  }),
   (applicant) => ({
     text: fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName),
-    loc: { x: 48, y: 541 }
+    fieldName: "Full Name on Birth Certificate"
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 534, y: 541 }
+    fieldName: "DOB"
   }),
   (applicant) => ({
     text: applicant.birthCity,
-    loc: { x: 249, y: 636 }
+    fieldName: "place of birth"
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "X" : "",
-    loc: { x: 595, y: 630 }
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "X" : "",
-    loc: { x: 676, y: 630 }
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { x: 770, y: 630 }
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "GENDER"
   }),
   (applicant) => ({
     text: fullName(applicant.mothersBirthName),
-    loc: { x: 48, y: 710 }
+    fieldName: "ParentMothers Full Name at Birth"
   }),
   (applicant) => ({
     text: formatDate(applicant.mothersBirthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 554, y: 710 }
+    fieldName: "parent/mother dob"
   }),
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
-    loc: { x: 48, y: 754 }
+    fieldName: "ParentFathers Full Name at Birth"
   }),
   (applicant) => ({
     text: formatDate(applicant.fathersBirthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 554, y: 754 }
+    fieldName: "parent/father dob"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName && fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName),
-    loc: { x: 56, y: 800 }
+    fieldName: "1"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    loc: { x: 433, y: 800 }
+    fieldName: "1_2"
   }),
   (applicant) => ({
     text: (() => {
@@ -28660,7 +28676,7 @@ const birthCertMap = [
         }
       }
     })(),
-    loc: { x: 56, y: 834 }
+    fieldName: "2"
   }),
   (applicant) => ({
     text: (() => {
@@ -28675,11 +28691,11 @@ const birthCertMap = [
         }
       }
     })(),
-    loc: { x: 433, y: 834 }
+    fieldName: "2_2"
   }),
   () => ({
-    text: (/* @__PURE__ */ new Date()).toLocaleDateString(),
-    loc: { x: 620, y: 956 }
+    text: "50",
+    fieldName: "fill_4"
   })
 ];
 /*!
@@ -28747,7 +28763,7 @@ const miSexMap = [
 function MichiganBirthCertificateGuide({
   person
 }) {
-  const { age, isChangingLegalSex, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, isChangingLegalName, parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Birth Certificate (MI)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -28768,9 +28784,10 @@ function MichiganBirthCertificateGuide({
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Application to Correct or Change a Michigan Birth Record" }),
       " ",
-      "and check the applicable box underneath. Write your birth county in the same section just below those checkboxes.",
-      isChangingLegalName ? " All signatures from now on can be done in your new name. " : "",
-      age && age < 15 ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively." : age && age < 18 ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively." : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively."
+      "and check the applicable box. Write your birth county in the same section next to your birth city.",
+      isChangingLegalName ? " All signatures from now on can be done in your new name. " : " ",
+      age && age < 18 ? "Both parents listed on the birth certificate must sign in part 7. " : "Sign on the top line of part 7. ",
+      !parentsAreOkay && age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If a parent is deceased or has had their parental rights removed attach copies of either a death certificate or court order removing parental rights. Legal guardians can sign if both parents are deceased or no longer have parental rights but they need to attach copies of their court issued guardianship documents. If you cannot get these signatures wait until you are 18 and fill this form out as an adult." }) : ""
     ] }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Your parent or guardian should complete the “Payment” section on page 2 as applicable. Then, they should mail the completed forms to:" }),
