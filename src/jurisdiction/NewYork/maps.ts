@@ -78,11 +78,11 @@ export const adultNameSexPetitionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
-    fieldName: "ReasonsForNameChangeRequest-specify",
+    loc: { page: 2, x: 80, y: 121 },
   }),
   (applicant) => ({
     value: (() => {
-      switch (applicant.assignedSex) {
+      switch (applicant.gender) {
         case GenderMarker.M:
           return "Male";
         case GenderMarker.F:

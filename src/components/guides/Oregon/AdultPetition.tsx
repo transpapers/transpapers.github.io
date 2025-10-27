@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function OregonAdultPetitionGuide({ person }: { person: Partial<Person> }) {
-  const { residentLocalityName, isChangingLegalSex } = person;
+  const { residentLocalityName, isChangingLegalSex, doNotPublish } = person;
   return (
     <section key="Oregon-Adult-Petition">
       <h3>Name and/or Sex Change Petition (OR)</h3>
@@ -54,9 +54,13 @@ function OregonAdultPetitionGuide({ person }: { person: Partial<Person> }) {
         to list down any prior names/aliases that you have used in the past
         below the “Public Interest” section. If you are in the Address
         Confidentiality Program you can check the box on page 1 near the
-        bottom to seal this court record. You then need to sign the form
-        with your current legal name on page 3. The “General Judgement” on
-        page 4 should already be filled out, file it with your petition.
+        bottom to seal this court record.
+        {isChangingLegalSex && !doNotPublish ? (
+          " Changing your gender marker also qualifies you to have a sealed record if you check the relevant boxes on the bottom of page 1. "
+        ):(" ")}
+        You then need to sign the form with your current legal name on page 3. 
+        The “General Judgement” on page 4 should already be filled out, file it 
+        with your petition.
       </p>
     </section>
   );
