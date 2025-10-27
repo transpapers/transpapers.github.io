@@ -27880,6 +27880,25 @@ function getLocality(jurisdictionKey, localityKey) {
   );
   return foundLocality;
 }
+function getRILocality(jurisdictionKey, localityKey) {
+  if (!jurisdictionKey) {
+    return void 0;
+  }
+  if (!localityKey) {
+    return void 0;
+  }
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey
+  );
+  if (!foundJurisdiction) {
+    return void 0;
+  }
+  const localities = foundJurisdiction.localities;
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey
+  );
+  return foundLocality;
+}
 /*!
  * Return a person's full contact info, i.e., full name, street address, and phone.
  * @param {Person} applicant
@@ -31582,7 +31601,7 @@ const michiganCounties = [
 const changeOfNameMap = [
   /*FIXME adjust this or the util function so it works.  */
   (applicant) => ({
-    text: applicant.residentLocality.county,
+    text: getRILocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.county,
     loc: { x: 145, y: 150 }
   }),
   (applicant) => ({
@@ -33617,11 +33636,11 @@ const adultNameSexPetitionMap = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
-    fieldName: "ReasonsForNameChangeRequest-specify"
+    loc: { page: 2, x: 80, y: 121 }
   }),
   (applicant) => ({
     value: (() => {
-      switch (applicant.assignedSex) {
+      switch (applicant.gender) {
         case GenderMarker.M:
           return "Male";
         case GenderMarker.F:
@@ -36489,7 +36508,7 @@ const voterOregonMap = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function OregonAdultPetitionGuide({ person }) {
-  const { residentLocalityName, isChangingLegalSex } = person;
+  const { residentLocalityName, isChangingLegalSex, doNotPublish } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and/or Sex Change Petition (OR)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -36505,7 +36524,11 @@ function OregonAdultPetitionGuide({ person }) {
         " county on it."
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You will need to check and fill out any of the lines below the “Public Interest” section as they apply to you. You will also need to list down any prior names/aliases that you have used in the past below the “Public Interest” section. If you are in the Address Confidentiality Program you can check the box on page 1 near the bottom to seal this court record. You then need to sign the form with your current legal name on page 3. The “General Judgement” on page 4 should already be filled out, file it with your petition." })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "You will need to check and fill out any of the lines below the “Public Interest” section as they apply to you. You will also need to list down any prior names/aliases that you have used in the past below the “Public Interest” section. If you are in the Address Confidentiality Program you can check the box on page 1 near the bottom to seal this court record.",
+      isChangingLegalSex && !doNotPublish ? " Changing your gender marker also qualifies you to have a sealed record if you check the relevant boxes on the bottom of page 1. " : " ",
+      "You then need to sign the form with your current legal name on page 3. The “General Judgement” on page 4 should already be filled out, file it with your petition."
+    ] })
   ] }, "Oregon-Adult-Petition");
 }
 /*!
@@ -39337,32 +39360,32 @@ const adultNameChangeMap = [
     choice: "No"
   }),
   (applicant) => ({
-    fieldName: "16 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 356 }
   }),
   (applicant) => ({
-    fieldName: "17 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 430 }
   }),
   (applicant) => ({
-    fieldName: "18 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 490 }
   }),
   (applicant) => ({
-    fieldName: "19 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 550 }
   }),
   (applicant) => ({
-    fieldName: "20 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 632 }
   }),
   (applicant) => ({
-    fieldName: "f - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 734 }
   }),
   (applicant) => ({
-    fieldName: "22 - Checkboxes",
-    choice: applicant.hasCriminalRecord ? void 0 : "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 975 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
