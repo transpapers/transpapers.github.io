@@ -54,10 +54,10 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
           ? " Alaska does not have an “X” option for ID's, you will need to put either “Male” or “Female” in the top section. "
           : " "}
         Then select what type of ID or drivers license that you would like and
-        answer questions 1 thru 10 on the bottom half of the form. On question 2
-        though if you have had more names than what we have listed fill in the
-        others. Do <strong>not</strong> sign or date this form with your old
-        legal signature until you are instructed to by a DMV representative.{" "}
+        answer questions 1 thru 10 on the bottom half of the form. On question 2,
+        if you have had more names than what we have listed, fill in the others. 
+        Do <strong>not</strong> sign or date this form with your old legal 
+        signature until you are instructed to by a DMV representative.{" "}
         {age &&
           age < 18 &&
           " Your parent/guardian will need to fill out the top of page 2 in front of the DMV employee."}
