@@ -34,14 +34,12 @@ import { Jurisdiction } from "../types/jurisdiction";
 import { AnyLocality } from "../types/generic";
 import { 
   Locality,
-  /*
-  MichiganCounty,
-  NewYorkCounty,
-  TexasCounty,
-  OhioCounty,
+  //MichiganCounty,
+  //NewYorkCounty,
+  //TexasCounty,
+  //OhioCounty,
   RhodeIslandCityOrTown,
-  AlaskaAdministrativeDivision,
-  */
+  //AlaskaAdministrativeDivision,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -305,53 +303,31 @@ export function getLocality(jurisdictionKey: string | undefined, localityKey: st
   ) as AnyLocality;
 
   return foundLocality;
+}
 
-  /** FIXME This section is a temporary work around
-  switch (foundJurisdiction.name) {
-    case "Rhode Island":
-      {const foundLocality: RhodeIslandCityOrTown = localities.find(
-        (j) => j.name === localityKey,
-      ) as RhodeIslandCityOrTown
-
-      return foundLocality};
-    case "Alaska":
-      {const foundLocality: AlaskaAdministrativeDivision = localities.find(
-        (j) => j.name === localityKey,
-      ) as AlaskaAdministrativeDivision
-
-      return foundLocality};
-    case "New York":
-      {const foundLocality: NewYorkCounty = localities.find(
-        (j) => j.name === localityKey,
-      ) as NewYorkCounty
-
-      return foundLocality};
-    case "Texas":
-      {const foundLocality: TexasCounty = localities.find(
-        (j) => j.name === localityKey,
-      ) as TexasCounty
-
-      return foundLocality};
-    case "Michigan":
-      {const foundLocality: MichiganCounty = localities.find(
-        (j) => j.name === localityKey,
-      ) as MichiganCounty
-
-      return foundLocality};
-    case "Ohio":
-      {const foundLocality: OhioCounty = localities.find(
-        (j) => j.name === localityKey,
-      ) as OhioCounty
-
-      return foundLocality};
-    default:
-      {const foundLocality = localities.find(
-        (j) => j.name === localityKey,
-      );
-
-      return foundLocality};
+export function getRILocality(jurisdictionKey: string | undefined, localityKey: string | undefined): RhodeIslandCityOrTown | undefined {
+  if (!jurisdictionKey) {
+    return undefined;
   }
-  End Section */
+
+  if (!localityKey) {
+    return undefined;
+  }
+
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey,
+  );
+
+  if (!foundJurisdiction) {
+    return undefined;
+  }
+
+  const localities = foundJurisdiction.localities;
+  const foundLocality: RhodeIslandCityOrTown = localities.find(
+    (j) => j.name === localityKey,
+  ) as RhodeIslandCityOrTown;
+
+  return foundLocality;
 }
 
 /*!
