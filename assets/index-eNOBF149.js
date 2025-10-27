@@ -27856,10 +27856,10 @@ function getJurisdiction(jurisdictionKey) {
   return foundJurisdiction;
 }
 /*!
- * Find a locality given it's name and the jurisdiction name.
+ * Find a generic locality given it's name and the jurisdiction name.
  * @param {String} jurisdictionKey
  * @param {String} localityKey
- * @return {AnyJurisdiction | undefined}
+ * @return {AnyLocality | undefined}
  */
 function getLocality(jurisdictionKey, localityKey) {
   if (!jurisdictionKey) {
@@ -27880,7 +27880,38 @@ function getLocality(jurisdictionKey, localityKey) {
   );
   return foundLocality;
 }
+/*!
+ * Get an RI locality object to pull RI specific properties for forms.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {RhodeIslandCityOrTown | undefined}
+ */
 function getRILocality(jurisdictionKey, localityKey) {
+  if (!jurisdictionKey) {
+    return void 0;
+  }
+  if (!localityKey) {
+    return void 0;
+  }
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey
+  );
+  if (!foundJurisdiction) {
+    return void 0;
+  }
+  const localities = foundJurisdiction.localities;
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey
+  );
+  return foundLocality;
+}
+/*!
+ * Get an NY locality object to pull NY specific properties for forms.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {NewYorkCounty | undefined}
+ */
+function getNYLocality(jurisdictionKey, localityKey) {
   if (!jurisdictionKey) {
     return void 0;
   }
@@ -31617,7 +31648,10 @@ const michiganCounties = [
  */
 const changeOfNameMap = [
   (applicant) => ({
-    text: getRILocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.county,
+    text: getRILocality(
+      applicant.residentJurisdictionName,
+      applicant.residentLocalityName
+    )?.county,
     loc: { x: 145, y: 150 }
   }),
   (applicant) => ({
@@ -33624,8 +33658,13 @@ const rhodeislandCounties = [
  * @type {Formfill[]}
  */
 const adultNameSexPetitionMap = [
-  /** 'courtType' fieldName from counties.ts should go here.
-   */
+  (applicant) => ({
+    fieldName: "CourtType",
+    value: getNYLocality(
+      applicant.residentJurisdictionName,
+      applicant.residentLocalityName
+    )?.courtType
+  }),
   (applicant) => ({
     fieldName: "County",
     value: applicant.residentLocalityName
@@ -33698,8 +33737,13 @@ const adultNameSexPetitionMap = [
  * @type {Formfill[]}
  */
 const minorNameSexPetitionMap = [
-  /** 'courtType' fieldName from counties.ts should go here.
-   */
+  (applicant) => ({
+    fieldName: "CourtType",
+    value: getNYLocality(
+      applicant.residentJurisdictionName,
+      applicant.residentLocalityName
+    )?.courtType
+  }),
   (applicant) => ({
     fieldName: "County",
     value: applicant.residentLocalityName
