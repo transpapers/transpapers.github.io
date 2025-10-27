@@ -28,7 +28,7 @@ function MichiganBirthCertificateGuide({
 }: {
   person: Partial<Person>;
 }) {
-  const { age, isChangingLegalSex, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, isChangingLegalName, parentsAreOkay } = person;
 
   return (
     <section key="Michigan-BirthCertificate">
@@ -56,17 +56,24 @@ function MichiganBirthCertificateGuide({
         <strong>
           Application to Correct or Change a Michigan Birth Record
         </strong>{" "}
-        and check the applicable box underneath. Write your birth county in the
-        same section just below those checkboxes.
-        {/* The other options for doing this inside a JSX component are all worse. */}
+        and check the applicable box. Write your birth county in the same section 
+        next to your birth city.
         {isChangingLegalName
           ? " All signatures from now on can be done in your new name. "
-          : ""}
-        {age && age < 15
-          ? "Your parent/guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
-          : age && age < 18
-            ? "You will need to sign the State of Michigan Sex Designation Form on the “Signature of Person on Record” line. Your Parent/Guardian will need to sign both forms on the “Signature of Person Requesting Change” and the “Parent/Guardian Signature” lines respectively."
-            : "You will need to sign both forms on the “Signature of Person Requesting Change:” and the “Signature of Person on Record:” lines respectively."}
+          : " "}
+        {age && age < 18 
+          ? "Both parents listed on the birth certificate must sign in part 7. "
+          : "Sign on the top line of part 7. "}
+        {!parentsAreOkay && age && age < 18 ?
+          <>
+            If a parent is deceased or has had their parental rights removed 
+            attach copies of either a death certificate or court order removing 
+            parental rights. Legal guardians can sign if both parents are deceased 
+            or no longer have parental rights but they need to attach copies of 
+            their court issued guardianship documents. If you cannot get these
+            signatures wait until you are 18 and fill this form out as an adult.
+          </>
+        : ""}
       </p>
 
       {age && age < 18 ? (

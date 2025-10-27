@@ -581,100 +581,117 @@ export const birthCertMap: Formfill[] = [
       applicant.isChangingLegalName && !isMinor(applicant)
         ? applicant.chosenName.first
         : representativeName(applicant).first,
-    loc: { x: 48, y: 196 },
+    fieldName: "First name",
   }),
   (applicant) => ({
     text:
       applicant.isChangingLegalName && !isMinor(applicant)
         ? applicant.chosenName.middle
         : representativeName(applicant).middle,
-    loc: { x: 337, y: 196 },
+    fieldName: "Middle name",
   }),
   (applicant) => ({
     text:
       applicant.isChangingLegalName && !isMinor(applicant)
         ? applicant.chosenName.last
         : representativeName(applicant).last,
-    loc: { x: 588, y: 196 },
+    fieldName: "Last name",
   }),
-  (applicant) => ({ text: applicant.streetAddress, loc: { x: 48, y: 237 } }),
+  (applicant) => ({ 
+    text: applicant.streetAddress, 
+    fieldName: "address", 
+  }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.ResidentCityAndState),
-    loc: { x: 388, y: 237 },
+    fieldName: "city/state",
   }),
-  (applicant) => ({ text: applicant.zip, loc: { x: 662, y: 237 } }),
-  (applicant) => ({ text: applicant.phone, loc: { x: 48, y: 283 } }),
-  (applicant) => ({ text: applicant.email, loc: { x: 426, y: 283 } }),
+  (applicant) => ({ 
+    text: applicant.zip, 
+    fieldName: "zip", 
+  }),
+  (applicant) => ({ 
+    text: applicant.phone, 
+    fieldName: "Phone", 
+  }),
+  (applicant) => ({ 
+    text: applicant.email, 
+    fieldName: "email", 
+  }),
   (applicant) => ({
-    text: isMinor(applicant) ? "" : "X",
-    loc: { x: 52, y: 327 },
+    check: !isMinor(applicant),
+    fieldName: "Self Correcting my own record",
   }),
   (applicant) => ({
-    text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
-    loc: { x: 52, y: 355 },
+    check: isMinor(applicant) && applicant.parentsAreOkay,
+    fieldName: "Parent of the child",
   }),
-  () => ({ text: "X", loc: { x: 314, y: 409 } }),
+  () => ({ 
+    check: true, 
+    fieldName: "Court ordered legal name change Court order required", 
+  }),
   (applicant) => ({
     text: fullName(applicant.birthName)
       ? fullName(applicant.birthName)
       : fullName(applicant.legalName),
-    loc: { x: 48, y: 541 },
+    fieldName: "Full Name on Birth Certificate",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    loc: { x: 534, y: 541 },
+    fieldName: "DOB",
   }),
   (applicant) => ({
     text: applicant.birthCity,
-    loc: { x: 249, y: 636 },
+    fieldName: "place of birth",
   }),
   (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.M ? "X" : "",
-    loc: { x: 595, y: 630 },
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.F ? "X" : "",
-    loc: { x: 676, y: 630 },
-  }),
-  (applicant) => ({
-    text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { x: 770, y: 630 },
+    check: applicant.gender,
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "GENDER",
   }),
   (applicant) => ({
     text: fullName(applicant.mothersBirthName),
-    loc: { x: 48, y: 710 },
+    fieldName: "ParentMothers Full Name at Birth",
   }),
   (applicant) => ({
     text: formatDate(applicant.mothersBirthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    loc: { x: 554, y: 710 },
+    fieldName: "parent/mother dob",
   }),
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
-    loc: { x: 48, y: 754 },
+    fieldName: "ParentFathers Full Name at Birth",
   }),
   (applicant) => ({
     text: formatDate(applicant.fathersBirthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    loc: { x: 554, y: 754 },
+    fieldName: "parent/father dob",
   }),
   (applicant) => ({
     text:
       applicant.isChangingLegalName && fullName(applicant.birthName)
         ? fullName(applicant.birthName)
         : fullName(applicant.legalName),
-    loc: { x: 56, y: 800 },
+    fieldName: "1",
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    loc: { x: 433, y: 800 },
+    fieldName: "1_2",
   }),
   (applicant) => ({
     text: (() => {
@@ -689,7 +706,7 @@ export const birthCertMap: Formfill[] = [
         }
       }
     })(),
-    loc: { x: 56, y: 834 },
+    fieldName: "2",
   }),
   (applicant) => ({
     text: (() => {
@@ -704,11 +721,11 @@ export const birthCertMap: Formfill[] = [
         }
       }
     })(),
-    loc: { x: 433, y: 834 },
+    fieldName: "2_2",
   }),
   () => ({
-    text: new Date().toLocaleDateString(),
-    loc: { x: 620, y: 956 },
+    text: "50",
+    fieldName: "fill_4",
   }),
 ];
 
