@@ -36,7 +36,7 @@ import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 import { RhodeIslandCityOrTown } from "../../types/locality";
-import { allJurisdictions } from "../../jurisdiction/all";
+//import { allJurisdictions } from "../../jurisdiction/all";
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
