@@ -52,7 +52,7 @@ export const changeOfNameMap: Formfill[] = [
   (applicant) => ({
     text: (((allJurisdictions.find(
       (j) => j.name === applicant.residentJurisdictionName)?.localities.find(
-      (j) => j.name === applicant.residentLocalityName) as RhodeIslandCityOrTown).county)),
+      (j) => j.name === applicant.residentLocalityName) as RhodeIslandCityOrTown).county ?? "")),
     loc: { x: 145, y: 150 },
   }),
   (applicant) => ({
