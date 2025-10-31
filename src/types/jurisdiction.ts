@@ -19,6 +19,7 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
+import * as React from "react";
 import { type Process } from "./process";
 import { type Locality } from "./locality";
 import { type AnyProcess, type AnyJurisdiction } from "./generic";
@@ -62,6 +63,12 @@ export interface Jurisdiction<T extends Locality> {
    * Map of counties (or county equivalents.)
    */
   localities: T[];
+
+  /**
+   * Gives additional information for a given Jurisdiction.
+   * For example in step 2 for NY boroughs or AK districts.
+   */
+  moreInfo?: React.FunctionComponent;
 }
 
 export function getProcesses(name: string | undefined): AnyProcess[] {

@@ -60,6 +60,7 @@ function Step2() {
     return (
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <h2>What {residentJurisdiction.name} county do you live in?</h2>
+        {residentJurisdiction.moreInfo && (<p>{residentJurisdiction.moreInfo}</p>)}
         <ul className="wrap">
           {localities.map(({ name }) => (
             <li key={name}>

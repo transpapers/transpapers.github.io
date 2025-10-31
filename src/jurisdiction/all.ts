@@ -52,6 +52,7 @@ import {
 } from "./NewYork/process";
 import newyorkCounties from "./NewYork/localities";
 import { NewYorkCounty } from "../types/locality";
+import NewYorkBoroughInfo from "./NewYork/localityInfo";
 
 import {
   oregonBirthRecord,
@@ -123,6 +124,7 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
     newyorkPostamble,
   ],
   localities: newyorkCounties,
+  moreInfo: NewYorkBoroughInfo
 };
 
 export const oregon: Jurisdiction<Locality> = {
