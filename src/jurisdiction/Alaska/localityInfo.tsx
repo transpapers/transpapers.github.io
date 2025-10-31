@@ -23,7 +23,7 @@ import * as React from "react";
 
 function AlaskaDistrictInfo() {
   return (
-    <section key="NY-Info">
+    <section key="AK-Info">
       <p>
         Find out which court district to pick by checking this{" "}
         <a href="https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing">
