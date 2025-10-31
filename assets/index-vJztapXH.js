@@ -39404,7 +39404,7 @@ function AlaskaDistrictInfo() {
     " ",
     /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing", children: "map" }),
     "."
-  ] }) }, "NY-Info");
+  ] }) }, "AK-Info");
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
