@@ -36000,6 +36000,41 @@ const newyorkCounties = [
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
+function NewYorkBoroughInfo() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    "Attention NYC residents click on the county coressponding with your borough:",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: The Bronx = County: Bronx" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Brooklyn = County: Kings" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Manhatten = County: New York" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Queens = County: Queens" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Staten Island = County: Richmond" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+  ] }) }, "NY-Info");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
 /*!
  * Change of Name or Sex (Adult) (Oregon form unnumbered.)
  * Updated 7/2024.
@@ -42936,7 +42971,8 @@ const newYork = {
     newyorkGenderMarker,
     newyorkPostamble
   ],
-  localities: newyorkCounties
+  localities: newyorkCounties,
+  moreInfo: NewYorkBoroughInfo
 };
 const oregon = {
   name: "Oregon",
@@ -43430,6 +43466,7 @@ function Step2() {
         residentJurisdiction.name,
         " county do you live in?"
       ] }),
+      residentJurisdiction.moreInfo ? reactExports.createElement(residentJurisdiction.moreInfo) : "",
       /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "wrap", children: localities.map(({ name }) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "input",
