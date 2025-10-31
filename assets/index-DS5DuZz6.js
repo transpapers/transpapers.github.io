@@ -36001,19 +36001,21 @@ const newyorkCounties = [
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function NewYorkBoroughInfo() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-    "Attention NYC residents click on the county coressponding with your borough:",
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: The Bronx = County: Bronx" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Brooklyn = County: Kings" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Manhatten = County: New York" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Queens = County: Queens" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Staten Island = County: Richmond" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
-  ] }) }, "NY-Info");
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Attention NYC residents click on the county coressponding with your borough:" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: The Bronx = County: Bronx" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Brooklyn = County: Kings" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Manhatten = County: New York" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Queens = County: Queens" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Borough: Staten Island = County: Richmond" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+    ] })
+  ] }, "NY-Info");
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
@@ -39376,6 +39378,34 @@ const alaskanAdministrativeDivisions = [
     trueFiling: true
   }
 ];
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
+function AlaskaDistrictInfo() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    "Find out which court district to pick by checking this",
+    " ",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing", children: "map" }),
+    "."
+  ] }) }, "NY-Info");
+}
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckn
@@ -42998,7 +43028,8 @@ const alaska = {
     alaskaBirthRecord,
     alaskaPostamble
   ],
-  localities: alaskanAdministrativeDivisions
+  localities: alaskanAdministrativeDivisions,
+  moreInfo: AlaskaDistrictInfo
 };
 const illinois = {
   name: "Illinois",
