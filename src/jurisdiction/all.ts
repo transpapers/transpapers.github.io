@@ -72,6 +72,7 @@ import {
 } from "./Alaska/process";
 import alaskaCounties from "./Alaska/localities";
 import { AlaskaAdministrativeDivision } from "../types/locality";
+import AlaskaDistrictInfo from "./Alaska/localityInfo";
 
 import {
   illinoisBirthRecord,
@@ -124,7 +125,7 @@ export const newYork: Jurisdiction<NewYorkCounty> = {
     newyorkPostamble,
   ],
   localities: newyorkCounties,
-  moreInfo: NewYorkBoroughInfo
+  moreInfo: NewYorkBoroughInfo,
 };
 
 export const oregon: Jurisdiction<Locality> = {
@@ -153,6 +154,7 @@ export const alaska: Jurisdiction<AlaskaAdministrativeDivision> = {
     alaskaPostamble,
   ],
   localities: alaskaCounties,
+  moreInfo: AlaskaDistrictInfo,
 };
 
 export const illinois: Jurisdiction<Locality> = {

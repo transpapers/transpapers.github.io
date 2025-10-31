@@ -21,27 +21,17 @@
 
 import * as React from "react";
 
-function NewYorkBoroughInfo() {
+function AlaskaDistrictInfo() {
   return (
     <section key="NY-Info">
       <p>
-        Attention NYC residents click on the county coressponding with your borough:
-      </p>
-
-      <p>
-        <span>Borough: The Bronx = County: Bronx</span>
-        <br />
-        <span>Borough: Brooklyn = County: Kings</span>
-        <br />
-        <span>Borough: Manhatten = County: New York</span>
-        <br />
-        <span>Borough: Queens = County: Queens</span>
-        <br />
-        <span>Borough: Staten Island = County: Richmond</span>
-        <br />
+        Find out which court district to pick by checking this{" "}
+        <a href="https://www.google.com/maps/d/edit?mid=14txo6PxPSbxij-4IVtwl6zUR36-OUHk&usp=sharing">
+          map
+        </a>.
       </p>
     </section>
   );
 }
 
-export default NewYorkBoroughInfo;
+export default AlaskaDistrictInfo;
