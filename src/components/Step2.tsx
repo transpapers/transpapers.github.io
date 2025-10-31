@@ -57,12 +57,15 @@ function Step2() {
   if (residentJurisdiction) {
     const localities = residentJurisdiction.localities;
   
-  const extraInfo = React.createElement(residentJurisdiction.moreInfo ?? "");
+  //if (residentJurisdiction.moreInfo) {
+    //const extraInfo = React.createElement(residentJurisdiction.moreInfo);
+  //}
+
 
     return (
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
         <h2>What {residentJurisdiction.name} county do you live in?</h2>
-        {extraInfo}
+        {residentJurisdiction.moreInfo ? React.createElement(residentJurisdiction.moreInfo) : ""}
         <ul className="wrap">
           {localities.map(({ name }) => (
             <li key={name}>
