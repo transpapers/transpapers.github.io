@@ -57,7 +57,7 @@ function Step2() {
   if (residentJurisdiction) {
     const localities = residentJurisdiction.localities;
   
-  const extraInfo = React.createElement(residentJurisdiction.moreInfo);
+  const extraInfo = React.createElement(residentJurisdiction.moreInfo ?? "");
 
     return (
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
