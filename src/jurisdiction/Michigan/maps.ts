@@ -645,7 +645,7 @@ export const birthCertMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${applicant.birthCounty} county`,
+    text: `${applicant.birthCity ?? ""}, ${applicant.birthCounty ?? ""} county`,
     fieldName: "place of birth",
   }),
   (applicant) => ({

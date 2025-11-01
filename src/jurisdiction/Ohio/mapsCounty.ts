@@ -1494,7 +1494,7 @@ export const fairfieldNameMinorMap: Formfill[] = [
     fieldName: "Name at Birth",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}`,
+    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}`,
     loc: { page: 4, x: 70, y: 446 },
   }),
   (applicant) => ({

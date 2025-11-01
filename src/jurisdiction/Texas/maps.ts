@@ -263,7 +263,7 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     fieldName: "Date of birth",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
+    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { page: 1, x: 220, y: 361 },
   }),
   (applicant) => ({
@@ -417,7 +417,7 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 1, x: 210, y: 96 },
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
+    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { page: 1, x: 220, y: 333 },
   }),
   (applicant) => ({
@@ -576,7 +576,7 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 4, x: 315, y: 794 },
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
+    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { page: 4, x: 320, y: 893 },
   }),
   (applicant) => ({
@@ -1856,7 +1856,9 @@ export const nameChangeMinorFamilyInfoMap: Formfill[] = [
     fieldName: "19c SEX",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${applicant.birthCounty} county, ${applicant.birthJurisdictionName}`,
+    text: applicant.birthCounty ?
+      `${applicant.birthCity ?? ""}, ${applicant.birthCounty ?? ""} county, ${applicant.birthJurisdictionName ?? ""}`
+      : "",
     fieldName: "19d BIRTHPLACE CITY COUNTY AND STATE",
   }),
   (applicant) => ({

@@ -847,7 +847,7 @@ export const birthCertOrderMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${applicant.birthCounty} county`,
+    text: `${applicant.birthCity ?? ""}, ${applicant.birthCounty ?? ""} county`,
     fieldName: "City and County Where Birth Occurred",
   }),
   (applicant) => ({
@@ -999,7 +999,7 @@ export const birthCertUpdateMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${applicant.birthCounty} county`,
+    text: `${applicant.birthCity ?? ""}, ${applicant.birthCounty ?? ""} county`,
     fieldName: "City and County Where Birth Occurred",
   }),
   (applicant) => ({
@@ -1072,7 +1072,7 @@ export const birthCorrectionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${applicant.birthCounty}`,
+    text: `${applicant.birthCity ?? ""}, ${applicant.birthCounty ?? ""}`,
     fieldName: "Birthplace",
   }),
   (applicant) => ({
