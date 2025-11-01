@@ -28811,11 +28811,12 @@ function MichiganBirthCertificateGuide({
       ] }) : "."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "If at any point in the past you have undergone a different name change, such as part of an adoption, you will need to fill out the “Other Names Used:” section in part 4 and check the applicable box.",
+      "For the Application to Correct or Change a Michigan Birth Record if at any point in the past you have undergone a different name change, such as part of an adoption, you will need to fill out the “Other Names Used:” section in part 4 and check the applicable box.",
       isChangingLegalName ? " All signatures from now on can be done in your new name. " : " ",
       age && age < 18 ? "Both parents listed on the birth certificate must sign in part 7. " : "Sign on the top line of part 7. ",
       !parentsAreOkay && age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If a parent is deceased or has had their parental rights removed attach copies of either a death certificate or court order removing parental rights. Legal guardians can sign if both parents are deceased or no longer have parental rights but they need to attach copies of their court issued guardianship documents. If you cannot get these signatures wait until you are 18 and fill this form out as an adult." }) : ""
     ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: isChangingLegalSex && age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: age && age < 15 ? "The State of Michigan Sex Designation Form just needs a parent/guardians signature." : "The State of Michigan Sex Designation Form needs both your signature and a parent/guardians too." }) : "The State of Michigan Sex Designation Form just needs your signature." }),
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Your parent or guardian should complete the “Payment” section on page 2 as applicable. Then, they should mail the completed forms to:" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
