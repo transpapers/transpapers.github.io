@@ -28459,7 +28459,7 @@ const piiMap = [
     fieldName: "In the matter of"
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName === "Kent" ? "PC 51" : "PC 51c",
+    text: !applicant.isChangingLegalSex && !applicant.doNotPublish || applicant.residentLocalityName === "Kent" ? "PC 51" : "PC 51c",
     fieldName: "Name of formdocument that this MC 97a is being filed with 1"
   }),
   (applicant) => ({
@@ -28648,7 +28648,7 @@ const birthCertMap = [
     fieldName: "DOB"
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity ?? ""}, ${applicant.birthCounty ?? ""} county`,
     fieldName: "place of birth"
   }),
   (applicant) => ({
@@ -28811,11 +28811,7 @@ function MichiganBirthCertificateGuide({
       ] }) : "."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "If at any point in the past you have undergone a different name change, such as part of an adoption, you will need to fill out the “Other Names Used:” field on the Child's Info section of the",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Application to Correct or Change a Michigan Birth Record" }),
-      " ",
-      "and check the applicable box. Write your birth county in the same section next to your birth city.",
+      "If at any point in the past you have undergone a different name change, such as part of an adoption, you will need to fill out the “Other Names Used:” section in part 4 and check the applicable box.",
       isChangingLegalName ? " All signatures from now on can be done in your new name. " : " ",
       age && age < 18 ? "Both parents listed on the birth certificate must sign in part 7. " : "Sign on the top line of part 7. ",
       !parentsAreOkay && age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If a parent is deceased or has had their parental rights removed attach copies of either a death certificate or court order removing parental rights. Legal guardians can sign if both parents are deceased or no longer have parental rights but they need to attach copies of their court issued guardianship documents. If you cannot get these signatures wait until you are 18 and fill this form out as an adult." }) : ""
@@ -31933,6 +31929,10 @@ const primaryIDRhodeIslandMap = [
   (applicant) => ({
     text: `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
     fieldName: "Text3"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName ? "USA" : "",
+    fieldName: "COUNTRY"
   }),
   (applicant) => ({
     text: applicant.birthJurisdictionName,
@@ -37816,7 +37816,7 @@ const applicationNameAlaskaMap = [
     loc: { x: 187, y: 445 }
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.birthJurisdictionName,
     loc: { x: 433, y: 445 }
   }),
   (applicant) => ({
@@ -37907,7 +37907,7 @@ const minorWaivePublicationAlaskaMap = [
   })
 ];
 /*!
- * Request for Exemption from Payment of Fees (Alaska form TF-920.)
+ * Request for Exemption from Payment of Fees (Alaska form CIV-708.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */
@@ -39472,16 +39472,8 @@ const adultNameChangeMap = [
     fieldName: "11 - Date of Birth"
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { x: 255, y: 865 }
-  }),
-  (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    loc: { x: 540, y: 865 }
-  }),
-  (applicant) => ({
-    text: getJurisdiction(applicant.birthJurisdictionName)?.abbreviation ? "USA" : "",
-    loc: { x: 660, y: 865 }
   }),
   () => ({
     check: true,
@@ -39653,16 +39645,8 @@ const minorChildInfoMap = [
     fieldName: "7 - Date of Birth"
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { x: 277, y: 712 }
-  }),
-  (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    loc: { x: 585, y: 712 }
-  }),
-  (applicant) => ({
-    text: getJurisdiction(applicant.birthJurisdictionName)?.abbreviation ? "USA" : "",
-    loc: { x: 700, y: 712 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.FullAddress),
@@ -40164,7 +40148,7 @@ function IllinoisAdultPetitionGuide({ person }) {
       "just in case they are needed."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The “Request for Name Change” (ATJ 303.10) serves as the main petition for your name change. Fill in items 1c and 1e.",
+      "The “Request for Name Change” (ATJ 303.10) serves as the main petition for your name change. Fill in item 1c.",
       hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Check any boxes in section 2 that apply to you. You cannot file this petition if you have been convicted of a felony and have yet to finish your sentence, including any parole. If you check “Yes” on box 2e you ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "need" }),
@@ -40276,7 +40260,7 @@ function IllinoisChildInfoGuide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request for Name Change - Child Information (IL, NCM-CI 2004.5)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "For the “Request for Name Change - Child Information” (NCM-CI 2004.5) form your petitioner should fill in any blanks in 1c. We have a",
+      "For the “Request for Name Change - Child Information” (NCM-CI 2004.5) form we have a",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/2e9231f7-fbb8-4b96-af93-692750debf13/NC-M%20Request%20for%20Name%20Change%20Child%20Information.pdf", children: "blank" }),
       " ",
@@ -43113,6 +43097,10 @@ class Person {
    */
   birthCity;
   /**
+   * Applicant's county/parish of birth. Some states require this, others don't.
+   */
+  birthCounty;
+  /**
    * Applicant's jurisdiction of birth; state, territory, or foreign country.
    */
   birthJurisdiction;
@@ -43880,6 +43868,12 @@ const fields = {
     name: "birthCity",
     type: "string"
   },
+  birthCounty: {
+    title: "County of birth",
+    subtitle: "If it's not listed on your birth certificate use birth city to look it up.",
+    name: "birthCounty",
+    type: "string"
+  },
   assignedSex: {
     title: "Sex assigned at birth",
     name: "assignedSex",
@@ -43949,14 +43943,6 @@ const fields = {
     name: "residentCity",
     type: "string"
   },
-  /*
-  county: {
-    title: 'County',
-    name: 'county',
-    type: 'county',
-    required: true,
-  },
-  */
   zip: {
     title: "ZIP code",
     name: "zip",
