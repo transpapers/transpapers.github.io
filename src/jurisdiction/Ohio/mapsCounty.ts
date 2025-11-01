@@ -406,6 +406,10 @@ export const ashtabulaAdultMap: Formfill[] = [
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "CSBTH",
   }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "COBTH",
+  }),
   /** Webcheck Beckgound Check Form */
   () => ({
     text: "X",
@@ -526,6 +530,10 @@ export const ashtabulaMinorMap: Formfill[] = [
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "CSBTH",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "COBTH",
   }),
   (applicant) => ({
     text: applicant.parentsAreOkay
@@ -1238,6 +1246,10 @@ export const cuyahogaMap: Formfill[] = [
     fieldName: "City of Birth",
   }),
   (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County of Birth",
+  }),
+  (applicant) => ({
     text: applicant.birthJurisdictionName,
     fieldName: "State of Birth",
   }),
@@ -1296,7 +1308,7 @@ export const delawareMap: Formfill[] = [
 ];
 
 /*!
- * FairfieldName County Adult Packet (forms listed below)
+ * Fairfield Name County Adult Packet (forms listed below)
  * Updated 6/2025.
  * @type {Formfill[]}
  */
@@ -1384,7 +1396,7 @@ export const fairfieldNameAdultMap: Formfill[] = [
 ];
 
 /*!
- * FairfieldName County Minor Packet (forms listed below)
+ * Fairfield Name County Minor Packet (forms listed below)
  * Updated 6/2025.
  * @type {Formfill[]}
  */
@@ -1482,12 +1494,8 @@ export const fairfieldNameMinorMap: Formfill[] = [
     fieldName: "Name at Birth",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}`,
     loc: { page: 4, x: 70, y: 446 },
-  }),
-  (applicant) => ({
-    text: applicant.birthJurisdictionName,
-    loc: { page: 4, x: 585, y: 446 },
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -2180,6 +2188,10 @@ export const lickingAdultMap: Formfill[] = [
     loc: { page: 1, x: 175, y: 316 },
   }),
   (applicant) => ({
+    text: applicant.birthCounty,
+    loc: { page: 1, x: 380, y: 316 },
+  }),
+  (applicant) => ({
     text: applicant.birthJurisdictionName,
     loc: { page: 1, x: 630, y: 316 },
   }),
@@ -2272,6 +2284,10 @@ export const lickingMinorMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     loc: { page: 1, x: 185, y: 309 },
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    loc: { page: 1, x: 380, y: 309 },
   }),
   (applicant) => ({
     text: applicant.birthJurisdictionName,
@@ -2634,6 +2650,10 @@ export const marionAdultGenderMap: Formfill[] = [
     fieldName: "Check Box2",
   }),
   (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthCityAndState),
+    fieldName: "Birthplace",
+  }),
+  (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
@@ -2737,6 +2757,10 @@ export const marionMinorGenderMap: Formfill[] = [
   (applicant) => ({
     check: applicant.assignedSex === GenderMarker.F,
     fieldName: "Check Box2",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.BirthCityAndState),
+    fieldName: "Birthplace",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
@@ -2990,6 +3014,10 @@ export const montgomeryAdultMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "City of Birth",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County of Birth",
   }),
   (applicant) => ({
     text: applicant.birthJurisdictionName,
@@ -3255,6 +3283,10 @@ export const montgomeryMinorMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "City of Birth",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County of Birth",
   }),
   (applicant) => ({
     text: applicant.birthJurisdictionName,
@@ -3751,6 +3783,10 @@ export const summitAdultMap: Formfill[] = [
     fieldName: "City",
   }),
   (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County",
+  }),
+  (applicant) => ({
     text: applicant.birthJurisdictionName,
     fieldName: "State",
   }),
@@ -3921,6 +3957,10 @@ export const summitMinorMap: Formfill[] = [
     fieldName: "City_3",
   }),
   (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County",
+  }),
+  (applicant) => ({
     text: applicant.birthJurisdictionName,
     fieldName: "State_3",
   }),
@@ -4060,6 +4100,10 @@ export const warrenAdultMap: Formfill[] = [
     fieldName: "BirthCity",
   }),
   (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "BirthCounty",
+  }),
+  (applicant) => ({
     text: applicant.birthJurisdictionName,
     fieldName: "BirthState",
   }),
@@ -4095,6 +4139,10 @@ export const warrenMinorMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "BirthCity",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "BirthCounty",
   }),
   (applicant) => ({
     text: applicant.birthJurisdictionName,

@@ -39,7 +39,7 @@ function IllinoisAdultPetitionGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         The “Request for Name Change” (ATJ 303.10) serves as the main petition
-        for your name change. Fill in items 1c and 1e.
+        for your name change. Fill in item 1c.
         {hasCriminalRecord ? (
           <>
             Check any boxes in section 2 that apply to you. You cannot file this

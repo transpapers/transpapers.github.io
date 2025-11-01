@@ -410,7 +410,11 @@ export const adultChangeOfNameJudgementMap: Formfill[] = [
     fieldName: "CITY",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.birthCounty,
+    fieldName: "COUNTY",
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -476,7 +480,11 @@ export const minorChangeOfNameJudgementMap: Formfill[] = [
     fieldName: "CITY",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.birthCounty,
+    fieldName: "COUNTY",
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
     fieldName: "STATE",
   }),
   (applicant) => ({
@@ -839,7 +847,7 @@ export const birthCertOrderMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}, ${applicant.birthCounty} county`,
     fieldName: "City and County Where Birth Occurred",
   }),
   (applicant) => ({
@@ -991,7 +999,7 @@ export const birthCertUpdateMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}, ${applicant.birthCounty} county`,
     fieldName: "City and County Where Birth Occurred",
   }),
   (applicant) => ({
@@ -1064,7 +1072,7 @@ export const birthCorrectionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}, ${applicant.birthCounty}`,
     fieldName: "Birthplace",
   }),
   (applicant) => ({

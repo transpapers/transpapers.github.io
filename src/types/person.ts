@@ -72,6 +72,11 @@ export class Person {
   birthCity?: string;
 
   /**
+   * Applicant's county/parish of birth. Some states require this, others don't.
+   */
+  birthCounty?: string;
+
+  /**
    * Applicant's jurisdiction of birth; state, territory, or foreign country.
    */
   birthJurisdiction?: AnyJurisdiction;

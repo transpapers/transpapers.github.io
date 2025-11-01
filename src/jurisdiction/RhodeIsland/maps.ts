@@ -345,6 +345,10 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "Text3",
   }),
   (applicant) => ({
+    text: applicant.birthJurisdictionName ? "USA" : "",
+    fieldName: "COUNTRY",
+  }),
+  (applicant) => ({
     text: applicant.birthJurisdictionName,
     fieldName: "STATEPROVINCE",
   }),

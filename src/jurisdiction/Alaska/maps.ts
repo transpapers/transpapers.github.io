@@ -266,7 +266,7 @@ export const applicationNameAlaskaMap: Formfill[] = [
     loc: { x: 187, y: 445 },
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName,
+    text: applicant.birthJurisdictionName,
     loc: { x: 433, y: 445 },
   }),
   (applicant) => ({
@@ -360,7 +360,7 @@ export const minorWaivePublicationAlaskaMap: Formfill[] = [
 ];
 
 /*!
- * Request for Exemption from Payment of Fees (Alaska form TF-920.)
+ * Request for Exemption from Payment of Fees (Alaska form CIV-708.)
  * Updated 7/2024.
  * @type {Formfill[]}
  */

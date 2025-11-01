@@ -52,12 +52,7 @@ function MichiganBirthCertificateGuide({
       <p>
         If at any point in the past you have undergone a different name change,
         such as part of an adoption, you will need to fill out the &ldquo;Other
-        Names Used:&rdquo; field on the Child&apos;s Info section of the{" "}
-        <strong>
-          Application to Correct or Change a Michigan Birth Record
-        </strong>{" "}
-        and check the applicable box. Write your birth county in the same section 
-        next to your birth city.
+        Names Used:&rdquo; section in part 4 and check the applicable box.
         {isChangingLegalName
           ? " All signatures from now on can be done in your new name. "
           : " "}

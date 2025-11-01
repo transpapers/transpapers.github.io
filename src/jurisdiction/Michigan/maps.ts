@@ -442,7 +442,9 @@ export const piiMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      applicant.residentLocalityName === "Kent" 
+      (!applicant.isChangingLegalSex &&
+        !applicant.doNotPublish) ||
+        applicant.residentLocalityName === "Kent"
       ? "PC 51" : "PC 51c",
     fieldName: "Name of formdocument that this MC 97a is being filed with 1",
   }),
@@ -643,7 +645,7 @@ export const birthCertMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}, ${applicant.birthCounty} county`,
     fieldName: "place of birth",
   }),
   (applicant) => ({

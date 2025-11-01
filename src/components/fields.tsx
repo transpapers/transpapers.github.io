@@ -86,6 +86,12 @@ export const fields: Record<string, Field> = {
     name: "birthCity",
     type: "string",
   },
+  birthCounty: {
+    title: "County of birth",
+    subtitle: "If it's not listed on your birth certificate use birth city to look it up.",
+    name: "birthCounty",
+    type: "string",
+  },
   assignedSex: {
     title: "Sex assigned at birth",
     name: "assignedSex",
@@ -159,14 +165,6 @@ export const fields: Record<string, Field> = {
     name: "residentCity",
     type: "string",
   },
-  /*
-  county: {
-    title: 'County',
-    name: 'county',
-    type: 'county',
-    required: true,
-  },
-  */
   zip: {
     title: "ZIP code",
     name: "zip",

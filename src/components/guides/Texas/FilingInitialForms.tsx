@@ -187,8 +187,7 @@ function TexasFilingInitialFormsGuide({
             be asked for after the hearing. This form needs to be printed out{" "}
             <strong>double-sided</strong>, if that is not possible your
             petitioner should instead get one from the court and fill it out
-            like we have. They should also fill out box “19d” and then hand it
-            to the clerk who will fill out the rest.
+            like we have. Any remaining blanks will be filled out by the clerk.
           </>
         )}
         Without a hearing the court will send the “Order Changing Name of

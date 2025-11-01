@@ -47,10 +47,9 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
       <p>
         You will need to enter your social security number in section 3B and any
         drivers license numbers you have had over the past 10 years as well as
-        the state(s) you got them in into section 3D. Enter your birth county
-        into section 3E and your race, as shown on your birth certificate, into
-        section 3G. If your birth certificate doesn&apos;t have a race listed, put
-        “Not Shown”.
+        the state(s) you got them in into section 3D. Enter your race, as shown on 
+        your birth certificate, in section 3G. If your birth certificate 
+        doesn&apos;t have a race listed, put “Not Shown”.
         {hasCriminalRecord ? (
           <>
             Detail your criminal record in section 4, class C misdemeanors do
@@ -79,7 +78,7 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
         The second form you will need is the “Final Order to Change the
         Sex/Gender Identifier of an Adult” (TC-FM-GI1-200) which the judge will
         sign and give back if they approve the change. They want it to be
-        pre-filled so you will need to fill out sections 3D, 3E, 3F, and 3G with
+        pre-filled so you will need to fill out sections 3D, 3F, and 3G with
         the same information that was on the petition earlier.
         {hasCriminalRecord ? (
           <>

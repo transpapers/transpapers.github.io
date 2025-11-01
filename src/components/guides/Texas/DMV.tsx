@@ -63,7 +63,7 @@ function TexasDMVGuide({ person }: { person: Partial<Person> }) {
           ) : (
             ""
           )}
-          Get a passport with your {isChangingLegalName ? "new name and" : ""}{" "}
+          Get a passport with your {isChangingLegalName ? " new name and " : " "}
           updated gender marker, see the passport guide for more details on how.
           Then bring that, your social security card, and one of the documents
           from this list to your appointment. Make sure your old gender marker
@@ -81,8 +81,7 @@ function TexasDMVGuide({ person }: { person: Partial<Person> }) {
         form is needed in any case. For this form, if you selected “Driver
         License”, there is a required “Class” checkbox. This{" "}
         <a href="https://www.dps.texas.gov/section/driver-license/classes-driver-licenses">
-          * @licend The above is the entire license notice for the JavaScript
-          code in this file. link
+          link
         </a>{" "}
         has descriptions of each class to help you pick the correct box. If you
         are applying for the first time and are trying to get around the gender

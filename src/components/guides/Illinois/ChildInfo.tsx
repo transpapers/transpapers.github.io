@@ -31,7 +31,7 @@ function IllinoisChildInfoGuide({ person }: { person: Partial<Person> }) {
       <h3>Request for Name Change - Child Information (IL, NCM-CI 2004.5)</h3>
       <p>
         For the “Request for Name Change - Child Information” (NCM-CI 2004.5)
-        form your petitioner should fill in any blanks in 1c. We have a{" "}
+        form we have a{" "}
         <a href="https://ilcourtsaudio.blob.core.windows.net/antilles-resources/resources/2e9231f7-fbb8-4b96-af93-692750debf13/NC-M%20Request%20for%20Name%20Change%20Child%20Information.pdf">
           blank
         </a>{" "}

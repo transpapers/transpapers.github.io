@@ -99,10 +99,10 @@ function TexasUpdateBirthCertGuide({ person }: { person: Partial<Person> }) {
           ""
         )}
         In section 2 {age && age < 18 ? "your petitioner should" : ""} write
-        down your original birth certificate ID number if possible as well as
-        your county of birth. On the next page section 5 copy the number of
-        birth certificate copies you asked for from page 1. This form should{" "}
-        <strong>not</strong> be signed until a notary says to.
+        down your original birth certificate ID number if possible. On the next 
+        page section 5 write the number of birth certificate copies you asked for 
+        from page 1. This form should <strong>not</strong> be signed until a notary 
+        says to.
       </p>
 
       <p>

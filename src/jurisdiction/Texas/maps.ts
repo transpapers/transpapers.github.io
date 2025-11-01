@@ -102,6 +102,10 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "City_2",
   }),
   (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County_3",
+  }),
+  (applicant) => ({
     text: 
       applicant.birthJurisdictionName,
     fieldName: "State_2",
@@ -259,18 +263,8 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     fieldName: "Date of birth",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { page: 1, x: 220, y: 361 },
-  }),
-  (applicant) => ({
-    text: 
-      applicant.birthJurisdictionName,
-    loc: { page: 1, x: 540, y: 361 },
-  }),
-  (applicant) => ({
-    text: 
-      applicant.birthJurisdictionName ? "USA" : "",
-    loc: { page: 1, x: 695, y: 361 },
   }),
   (applicant) => ({
     fieldName: "County_3",
@@ -423,12 +417,8 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 1, x: 210, y: 96 },
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { page: 1, x: 220, y: 333 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.BirthStateAndCountry),
-    loc: { page: 1, x: 545, y: 333 },
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.M ? "X" : "",
@@ -586,12 +576,8 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 4, x: 315, y: 794 },
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}    ${applicant.birthCounty}    ${applicant.birthJurisdictionName}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { page: 4, x: 320, y: 893 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.BirthStateAndCountry),
-    loc: { page: 4, x: 595, y: 893 },
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.M ? "X" : "",
@@ -1870,7 +1856,7 @@ export const nameChangeMinorFamilyInfoMap: Formfill[] = [
     fieldName: "19c SEX",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: `${applicant.birthCity}, ${applicant.birthCounty} county, ${applicant.birthJurisdictionName}`,
     fieldName: "19d BIRTHPLACE CITY COUNTY AND STATE",
   }),
   (applicant) => ({
@@ -1926,6 +1912,10 @@ export const primaryIDTexasMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "Place of birth City",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County",
   }),
   (applicant) => ({
     text: 
@@ -2103,6 +2093,10 @@ export const birthCertNameCorrectionMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "Place of Birth City or town",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County",
   }),
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
@@ -2322,6 +2316,10 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "Place of Birth City or town",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County",
   }),
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
@@ -2556,6 +2554,10 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
   (applicant) => ({
     text: applicant.birthCity,
     fieldName: "Place of Birth City or town",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County",
   }),
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
