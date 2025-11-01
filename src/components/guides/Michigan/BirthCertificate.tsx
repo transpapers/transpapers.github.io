@@ -50,8 +50,9 @@ function MichiganBirthCertificateGuide({
       </p>
 
       <p>
-        If at any point in the past you have undergone a different name change,
-        such as part of an adoption, you will need to fill out the &ldquo;Other
+        For the Application to Correct or Change a Michigan Birth Record if at any 
+        point in the past you have undergone a different name change, such as part 
+        of an adoption, you will need to fill out the &ldquo;Other
         Names Used:&rdquo; section in part 4 and check the applicable box.
         {isChangingLegalName
           ? " All signatures from now on can be done in your new name. "
@@ -69,6 +70,20 @@ function MichiganBirthCertificateGuide({
             signatures wait until you are 18 and fill this form out as an adult.
           </>
         : ""}
+      </p>
+
+      <p>
+        {isChangingLegalSex && age && age < 18 ? (
+          <>
+            {age && age < 15 ? (
+              "The State of Michigan Sex Designation Form just needs a parent/guardians signature."
+            ):(
+              "The State of Michigan Sex Designation Form needs both your signature and a parent/guardians too."
+            )}
+          </>
+        ) : (
+          "The State of Michigan Sex Designation Form just needs your signature."
+        )}
       </p>
 
       {age && age < 18 ? (
