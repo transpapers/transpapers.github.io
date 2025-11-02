@@ -453,7 +453,7 @@ export function formatContactInfo(
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
-      if (!homeAddress?.apt) {
+      if (!homeAddress.apt) {
         return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
@@ -469,7 +469,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      if (!homeAddress?.apt) {
+      if (!homeAddress.apt) {
         return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
@@ -479,7 +479,7 @@ export function formatContactInfo(
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
-      if (!homeAddress?.apt) {
+      if (!homeAddress.apt) {
         return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
@@ -495,19 +495,19 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      if (!homeAddress?.apt) {
+      if (!homeAddress.apt) {
         return [
-          `${fullName(representativeName(applicant)) ?? ""}
-          ${applicant.homeAddress?.street ?? ""}
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}
           ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
-          ${applicant.phone}`,
+          ${applicant.phone ?? ""}`,
         ].join(separator);
       } else {
         return [
-          `${fullName(representativeName(applicant)) ?? ""}
-          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
           ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
-          ${applicant.phone}`,
+          ${applicant.phone ?? ""}`,
         ].join(separator);
       }
 
@@ -523,17 +523,17 @@ export function formatContactInfo(
       }
       if (!homeAddress?.apt) {
         return [
-          `${fullName(representativeName(applicant)) ?? ""}
-          ${applicant.homeAddress?.street ?? ""}
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}
           ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
-          ${applicant.phone}`,
+          ${applicant.phone ?? ""}`,
         ].join(separator);
       } else {
         return [
-          `${fullName(representativeName(applicant)) ?? ""}
-          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
           ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
-          ${applicant.phone}`,
+          ${applicant.phone ?? ""}`,
         ].join(separator);
       }
 
