@@ -432,25 +432,25 @@ export function formatContactInfo(
       return `${residentLocality.name}, ${residentJurisdiction.name}`;
 
     case ContactFormat.ResidentCityAndStateAndZip:
-      if (!homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
+      if (!homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
 
     case ContactFormat.ResidentCityAndLocalityAndStateAndZip:
-      if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress?.zip) {
+      if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.city}, ${residentLocality.name}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
 
     case ContactFormat.ResidentCityAndStateAndZipAndCountry:
-      if (!homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
+      if (!homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip} USA`;
 
     case ContactFormat.FullAddress:
-      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
+      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
@@ -461,14 +461,14 @@ export function formatContactInfo(
         !homeAddress?.city ||
         !residentLocality ||
         !residentJurisdiction ||
-        !homeAddress?.zip
+        !homeAddress.zip
       ) {
         return undefined;
       }
       return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
 
     case ContactFormat.FullAddressAndCountry:
-      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
+      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
@@ -478,7 +478,7 @@ export function formatContactInfo(
         !homeAddress?.street ||
         !homeAddress?.city ||
         !residentJurisdiction ||
-        !homeAddress?.zip ||
+        !homeAddress.zip ||
         !phone
       ) {
         return undefined;
@@ -486,7 +486,7 @@ export function formatContactInfo(
       return [
         fullName(representativeName(applicant)),
         applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress.zip ?? ""}`,
         applicant.phone,
       ].join(separator);
 
@@ -495,7 +495,7 @@ export function formatContactInfo(
         !homeAddress?.street ||
         !homeAddress?.city ||
         !residentJurisdiction ||
-        !homeAddress?.zip ||
+        !homeAddress.zip ||
         !phone
       ) {
         return undefined;
@@ -503,7 +503,7 @@ export function formatContactInfo(
       return [
         fullName(representativeName(applicant)),
         applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress.zip ?? ""}`,
         applicant.phone,
         "USA",
       ].join(separator);

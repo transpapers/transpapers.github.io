@@ -33,6 +33,7 @@ import {
   EmailField,
   CountyField,
   HomeAddressField,
+  MailAddressField,
 } from "./fieldsHtml";
 
 import { isMinor } from "../lib/util";
@@ -224,6 +225,12 @@ export function renderField(
   }
   if (field.type === "Name") {
     return <NameField field={field} register={register} />;
+  }
+  if (field.type === "homeAddress") {
+    return <HomeAddressField field={field} register={register} />;
+  }
+  if (field.type === "mailAddress") {
+    return <MailAddressField field={field} register={register} />;
   }
   if (field.type === "Date") {
     return <DateField field={field} register={register} />;
