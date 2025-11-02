@@ -45,12 +45,10 @@ describe("neededFieldNames()", () => {
       //"doNotPublish",
       "reasonForNameChange",
       "representativeName",
-      "residentCity",
       "residentJurisdictionName",
       "residentLocalityName",
       "sealBirthCertificate",
-      "streetAddress",
-      "zip",
+      "homeAddress",
     ];
 
     const received = neededFieldNames(michiganNameChange);
