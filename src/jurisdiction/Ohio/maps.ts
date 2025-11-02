@@ -773,7 +773,7 @@ export const feeWaiverMap: Formfill[] = [
     loc: { x: 245, y: 539 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 210, y: 580 },
   }),
   (applicant) => ({
@@ -1147,7 +1147,7 @@ export const birthCorrectionMap: Formfill[] = [
     fieldName: "ShouldRead1",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Date",
   }),
   (applicant) => ({

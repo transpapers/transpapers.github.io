@@ -135,7 +135,7 @@ export const adultNameChangeMap: Formfill[] = [
     fieldName: "73 - Email",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "74 - Address",
   }),
 ];
@@ -211,7 +211,7 @@ export const minorNameChangeMap: Formfill[] = [
     fieldName: "32 -  Print Your Name",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "33 - Address",
   }),
   (applicant) => ({
@@ -262,7 +262,7 @@ export const minorChildInfoMap: Formfill[] = [
     loc: { x: 277, y: 712 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "9 - Address",
   }),
   (applicant) => ({
@@ -405,7 +405,7 @@ export const requestCourtRecordsPrivateMap: Formfill[] = [
     fieldName: "79 - Email",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "80 - Address",
   }),
 ];
@@ -450,7 +450,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
     fieldName: "6 - Your Name",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "7 - Address",
   }),
   (applicant) => ({
@@ -462,7 +462,7 @@ export const feeWaiverApplicationMap: Formfill[] = [
     fieldName: "113 - Print Your Name",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "114 - Address",
   }),
   (applicant) => ({
@@ -526,7 +526,7 @@ export const efileExemptionMap: Formfill[] = [
     fieldName: "13",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "14",
   }),
 ];

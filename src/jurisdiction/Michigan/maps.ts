@@ -65,7 +65,7 @@ export const nameChangePrivateMap: Formfill[] = [
     fieldName: "Current first middle and last names type or print",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.ResidentFullContactInfo),
     fieldName: "Petitioners name address and telephone no",
   }),
   () => ({
@@ -275,7 +275,7 @@ export const nameChangeMap: Formfill[] = [
     fieldName: "Current first middle and last names type or print",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.ResidentFullContactInfo),
     fieldName: "Petitioners name address and telephone no",
   }),
   () => ({
@@ -508,7 +508,7 @@ export const feeWaiverMap: Formfill[] = [
     fieldName: "Text5",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullContactInfo),
+    text: formatContactInfo(applicant, cf.ResidentFullContactInfo),
     fieldName: "PlaintiffPetitioners name address and telephone no",
   }),
   (applicant) => ({

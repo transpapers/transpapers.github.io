@@ -626,7 +626,7 @@ export const voterOregonMap: Formfill[] = [
     fieldName: "Middle Name",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Residence Address",
   }),
   (applicant) => ({

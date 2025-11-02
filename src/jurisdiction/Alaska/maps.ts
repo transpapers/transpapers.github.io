@@ -103,7 +103,7 @@ export const adultNamePetitionAlaskaMap: Formfill[] = [
   }),
   () => ({ text: new Date().toLocaleDateString(), fieldName: "date2" }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "mailingAddress",
   }),
   (applicant) => ({
@@ -131,7 +131,7 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
     fieldName: "phoneNo",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "address",
   }),
   (applicant) => ({
@@ -286,7 +286,7 @@ export const applicationNameAlaskaMap: Formfill[] = [
     loc: { x: 50, y: 570 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 435, y: 570 },
   }),
   (applicant) => ({
@@ -314,7 +314,7 @@ export const adultWaivePublicationAlaskaMap: Formfill[] = [
     fieldName: "ITMO",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "mailing",
   }),
   (applicant) => ({
@@ -346,7 +346,7 @@ export const minorWaivePublicationAlaskaMap: Formfill[] = [
     fieldName: "petitioner",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "mailing",
   }),
   (applicant) => ({
@@ -406,7 +406,7 @@ export const additionalServiceAlaskaMap: Formfill[] = [
     fieldName: "yourName",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "mailingAddress",
   }),
 ];
@@ -454,7 +454,7 @@ export const primaryIDAlaskaMap: Formfill[] = [
     fieldName: "Text12",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Text15",
   }),
   (applicant) => ({

@@ -110,7 +110,7 @@ export const adultNameSexPetitionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddressAndCountry),
+    text: formatContactInfo(applicant, cf.ResidentFullAddressAndCountry),
     fieldName: "CurrentAddress",
   }),
   () => ({ text: new Date().toLocaleDateString(), fieldName: "SignatureDate" }),
@@ -193,7 +193,7 @@ export const minorNameSexPetitionMap: Formfill[] = [
     fieldName: "DOB",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddressAndCountry),
+    text: formatContactInfo(applicant, cf.ResidentFullAddressAndCountry),
     fieldName: "CurrentAddress",
   }),
   (applicant) => ({
@@ -237,7 +237,7 @@ export const feeWaiverNYStateMap: Formfill[] = [
     fieldName: "Plaintiffs",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "ApplicantAddress",
   }),
   () => ({
@@ -295,7 +295,7 @@ export const feeWaiverNYCMap: Formfill[] = [
     loc: { x: 223, y: 282 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 143, y: 314 },
   }),
   () => ({
@@ -627,7 +627,7 @@ export const birthCertAdultNYStateMap: Formfill[] = [
     loc: { x: 510, y: 663 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 103, y: 946 },
   }),
 ];
@@ -881,7 +881,7 @@ export const genderAffidavitAdultNYStateMap: Formfill[] = [
     loc: { x: 71, y: 188 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 106, y: 746 },
   }),
 ];
@@ -901,7 +901,7 @@ export const genderAffidavitMinorNYStateMap: Formfill[] = [
     loc: { x: 203, y: 241 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 103, y: 746 },
   }),
 ];

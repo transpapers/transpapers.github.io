@@ -369,14 +369,14 @@ export function getNYLocality(jurisdictionKey: string | undefined, localityKey: 
  * @return {string}
  */
 export enum ContactFormat {
-  FullContactInfo,
-  FullContactInfoAndCountry,
-  FullAddress,
-  FullAddressAndLocality,
-  FullAddressAndCountry,
   BirthCityAndState,
   BirthCityStateCountry,
   BirthStateAndCountry,
+  ResidentFullContactInfo,
+  ResidentFullContactInfoAndCountry,
+  ResidentFullAddress,
+  ResidentFullAddressAndLocality,
+  ResidentFullAddressAndCountry,
   ResidentCityAndState,
   ResidentLocalityAndState,
   ResidentCityAndStateAndZip,
@@ -449,13 +449,17 @@ export function formatContactInfo(
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip} USA`;
 
-    case ContactFormat.FullAddress:
+    case ContactFormat.ResidentFullAddress:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
-      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      if (!homeAddress?.apt) {
+        return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      }
 
-    case ContactFormat.FullAddressAndLocality:
+    case ContactFormat.ResidentFullAddressAndLocality:
       if (
         !homeAddress?.street ||
         !homeAddress.city ||
@@ -465,15 +469,23 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      if (!homeAddress?.apt) {
+        return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      }
 
-    case ContactFormat.FullAddressAndCountry:
+    case ContactFormat.ResidentFullAddressAndCountry:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
-      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
+      if (!homeAddress?.apt) {
+        return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
+      }
 
-    case ContactFormat.FullContactInfo:
+    case ContactFormat.ResidentFullContactInfo:
       if (
         !homeAddress?.street ||
         !homeAddress.city ||
@@ -483,14 +495,23 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return [
-        fullName(representativeName(applicant)),
-        applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
-        applicant.phone,
-      ].join(separator);
+      if (!homeAddress?.apt) {
+        return [
+          `${fullName(representativeName(applicant)) ?? ""}
+          ${applicant.homeAddress?.street ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+          ${applicant.phone}`,
+        ].join(separator);
+      } else {
+        return [
+          `${fullName(representativeName(applicant)) ?? ""}
+          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+          ${applicant.phone}`,
+        ].join(separator);
+      }
 
-    case ContactFormat.FullContactInfoAndCountry:
+    case ContactFormat.ResidentFullContactInfoAndCountry:
       if (
         !homeAddress?.street ||
         !homeAddress.city ||
@@ -500,13 +521,21 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      return [
-        fullName(representativeName(applicant)),
-        applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
-        applicant.phone,
-        "USA",
-      ].join(separator);
+      if (!homeAddress?.apt) {
+        return [
+          `${fullName(representativeName(applicant)) ?? ""}
+          ${applicant.homeAddress?.street ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+          ${applicant.phone}`,
+        ].join(separator);
+      } else {
+        return [
+          `${fullName(representativeName(applicant)) ?? ""}
+          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+          ${applicant.phone}`,
+        ].join(separator);
+      }
 
     default:
       return undefined;

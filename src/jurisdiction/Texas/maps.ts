@@ -406,7 +406,7 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { x: 565, y: 566 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddressAndLocality),
+    text: formatContactInfo(applicant, cf.ResidentFullAddressAndLocality),
     loc: { x: 245, y: 933 },
   }),
   (applicant) => ({
@@ -678,7 +678,7 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "Childs Current name",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Home Address",
   }),
   (applicant) => ({
@@ -730,7 +730,7 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
     fieldName: "My date of birth is",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "undefined_12",
   }),
   (applicant) => ({
@@ -744,7 +744,7 @@ export const nameChangeMinorBothParentsMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.parentsAreOkay
-      ? formatContactInfo(applicant, cf.FullAddress)
+      ? formatContactInfo(applicant, cf.ResidentFullAddress)
       : "",
     fieldName: "undefined_16",
   }),
@@ -785,7 +785,7 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     loc: { page: 1, x: 270, y: 154 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 1, x: 230, y: 190 },
   }),
   (applicant) => ({
@@ -837,7 +837,7 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     loc: { page: 2, x: 520, y: 163 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 2, x: 215, y: 208 },
   }),
   (applicant) => ({
@@ -846,7 +846,7 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.parentsAreOkay
-      ? formatContactInfo(applicant, cf.FullAddress)
+      ? formatContactInfo(applicant, cf.ResidentFullAddress)
       : "",
     loc: { page: 2, x: 215, y: 394 },
   }),
@@ -895,7 +895,7 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { x: 610, y: 778 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 230, y: 815 },
   }),
   (applicant) => ({
@@ -980,7 +980,7 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { page: 2, x: 185, y: 130 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 2, x: 205, y: 162 },
   }),
   (applicant) => ({
@@ -1105,7 +1105,7 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { page: 2, x: 610, y: 776 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 2, x: 230, y: 812 },
   }),
   (applicant) => ({
@@ -1210,7 +1210,7 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     loc: { page: 2, x: 270, y: 153 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 2, x: 230, y: 190 },
   }),
   (applicant) => ({
@@ -1258,7 +1258,7 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     loc: { page: 3, x: 520, y: 163 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 3, x: 215, y: 208 },
   }),
   (applicant) => ({
@@ -1335,7 +1335,7 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 1, x: 220, y: 270 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 1, x: 230, y: 311 },
   }),
   (applicant) => ({
@@ -1440,7 +1440,7 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 3, x: 185, y: 206 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 3, x: 200, y: 238 },
   }),
   (applicant) => ({
@@ -1462,7 +1462,7 @@ export const genderChangeMinorMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.parentsAreOkay
-      ? formatContactInfo(applicant, cf.FullAddress)
+      ? formatContactInfo(applicant, cf.ResidentFullAddress)
       : "",
     loc: { page: 3, x: 200, y: 571 },
   }),
@@ -1524,7 +1524,7 @@ export const genderChangeMinorMap: Formfill[] = [
     loc: { page: 6, x: 225, y: 337 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 6, x: 230, y: 378 },
   }),
   (applicant) => ({
@@ -1696,7 +1696,7 @@ export const feeWaiverMap: Formfill[] = [
     fieldName: "My date of birth / Mi fecha de nacimiento es",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "My address is / Mi direcci�n es 2",
   }),
   (applicant) => ({
@@ -1758,7 +1758,7 @@ export const feeWaiverMap: Formfill[] = [
     fieldName: "Year / A�o",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "My address is  Mi domicilio es",
   }),
   (applicant) => ({
@@ -2023,7 +2023,7 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     fieldName: "Name First Middle Last",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address Mailing Address City State Zip",
   }),
   (applicant) => ({
@@ -2246,7 +2246,7 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
     fieldName: "Name First Middle Last",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address Mailing Address City State Zip",
   }),
   (applicant) => ({
@@ -2484,7 +2484,7 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
     fieldName: "Name First Middle Last",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address Mailing Address City State Zip",
   }),
   (applicant) => ({
@@ -2729,7 +2729,7 @@ export const fanninCountyMap: Formfill[] = [
     loc: { x: 150, y: 247 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { x: 450, y: 932 },
   }),
   (applicant) => ({

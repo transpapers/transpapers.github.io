@@ -997,7 +997,7 @@ export const clermontAdultMap: Formfill[] = [
     fieldName: "AKA",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -1058,7 +1058,7 @@ export const clermontMinorMap: Formfill[] = [
     fieldName: "Minors AKA",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Minors Address",
   }),
   (applicant) => ({
@@ -1748,7 +1748,7 @@ export const geaugaMap: Formfill[] = [
     fieldName: "Text5",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Text7",
   }),
   (applicant) => ({
@@ -2406,7 +2406,7 @@ export const lucasAdultMap: Formfill[] = [
     fieldName: "p4applnm",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "p4appladdr",
   }),
   (applicant) => ({
@@ -2703,7 +2703,7 @@ export const marionAdultGenderMap: Formfill[] = [
     fieldName: "SHOULD_READ_1",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address",
   }),
   /** Affidavit to Correct Gender Marker in Birth Record for an Adult */
@@ -2812,7 +2812,7 @@ export const marionMinorGenderMap: Formfill[] = [
     fieldName: "SHOULD_READ_1",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address",
   }),
   /** Affidavit to Correct Gender Marker in Birth Record for an Adult */
@@ -3721,7 +3721,7 @@ export const sanduskyAdultMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Street Name City State Zip",
   }),
 ];
@@ -3754,7 +3754,7 @@ export const sanduskyMinorMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Street Name City State Zip",
   }),
 ];
@@ -4187,7 +4187,7 @@ export const wayneAdultMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.FullAddress),
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     fieldName: "Address",
   }),
   (applicant) => ({
