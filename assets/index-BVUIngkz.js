@@ -27955,11 +27955,9 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
   const {
     birthCity,
     birthJurisdictionName,
-    streetAddress,
-    residentCity,
+    homeAddress,
     residentJurisdictionName,
     residentLocalityName,
-    zip,
     phone
   } = applicant;
   const birthJurisdiction = getJurisdiction(birthJurisdictionName);
@@ -27982,63 +27980,63 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
       }
       return `${birthJurisdiction.abbreviation}, USA`;
     case 8:
-      if (!residentCity || !residentJurisdiction) {
+      if (!homeAddress?.city || !residentJurisdiction) {
         return void 0;
       }
-      return `${residentCity}, ${residentJurisdiction.abbreviation}`;
+      return `${homeAddress.city}, ${residentJurisdiction.abbreviation}`;
     case 9:
       if (!residentLocality || !residentJurisdiction) {
         return void 0;
       }
       return `${residentLocality.name}, ${residentJurisdiction.name}`;
     case 10:
-      if (!residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${residentCity}, ${residentJurisdiction.name}, ${zip}`;
+      return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
     case 11:
-      if (!residentCity || !residentLocality || !residentJurisdiction || !zip) {
+      if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${residentCity}, ${residentLocality.name}, ${residentJurisdiction.name}, ${zip}`;
+      return `${homeAddress.city}, ${residentLocality.name}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
     case 12:
-      if (!residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${residentCity}, ${residentJurisdiction.name}, ${zip} USA`;
+      return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip} USA`;
     case 2:
-      if (!streetAddress || !residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip}`;
+      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
     case 3:
-      if (!streetAddress || !residentCity || !residentLocality || !residentJurisdiction || !zip) {
+      if (!homeAddress?.street || !homeAddress.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${streetAddress} ${residentCity}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${zip}`;
+      return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
     case 4:
-      if (!streetAddress || !residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip} USA`;
+      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
     case 0:
-      if (!streetAddress || !residentCity || !residentJurisdiction || !zip || !phone) {
+      if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip || !phone) {
         return void 0;
       }
       return [
         fullName(representativeName(applicant)),
-        applicant.streetAddress,
-        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        applicant.homeAddress?.street,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
         applicant.phone
       ].join(separator);
     case 1:
-      if (!streetAddress || !residentCity || !residentJurisdiction || !zip || !phone) {
+      if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip || !phone) {
         return void 0;
       }
       return [
         fullName(representativeName(applicant)),
-        applicant.streetAddress,
-        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        applicant.homeAddress?.street,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
         applicant.phone,
         "USA"
       ].join(separator);
@@ -28260,7 +28258,7 @@ const nameChangePrivateMap = [
     fieldName: "Name type or print"
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.streetAddress : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.street : "",
     fieldName: "Address"
   }),
   (applicant) => ({
@@ -28411,7 +28409,7 @@ const nameChangeMap = [
     fieldName: "Name type or print"
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.streetAddress : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.street : "",
     fieldName: "Address"
   }),
   (applicant) => ({
@@ -28555,9 +28553,9 @@ const mdosSexMap = [
     text: applicant.legalName.suffix,
     loc: { x: 750, y: 388 }
   }),
-  (applicant) => ({ text: applicant.streetAddress, loc: { x: 57, y: 441 } }),
-  (applicant) => ({ text: applicant.residentCity, loc: { x: 351, y: 441 } }),
-  (applicant) => ({ text: applicant.zip, loc: { x: 701, y: 441 } }),
+  (applicant) => ({ text: applicant.homeAddress?.street, loc: { x: 57, y: 441 } }),
+  (applicant) => ({ text: applicant.homeAddress?.city, loc: { x: 351, y: 441 } }),
+  (applicant) => ({ text: applicant.homeAddress?.zip, loc: { x: 701, y: 441 } }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
@@ -28605,7 +28603,7 @@ const birthCertMap = [
     fieldName: "Last name"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "address"
   }),
   (applicant) => ({
@@ -28613,7 +28611,7 @@ const birthCertMap = [
     fieldName: "city/state"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "zip"
   }),
   (applicant) => ({
@@ -31660,11 +31658,11 @@ const changeOfNameMap = [
     fieldName: "6"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "7"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "8"
   }),
   (applicant) => ({
@@ -31672,7 +31670,7 @@ const changeOfNameMap = [
     fieldName: "9"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "10"
   }),
   (applicant) => ({
@@ -31908,11 +31906,11 @@ const primaryIDRhodeIslandMap = [
     fieldName: "EMAIL ADDRESS"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "STREET ADDRESS RESIDENCE ADDRESS"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITYTOWN"
   }),
   (applicant) => ({
@@ -31920,7 +31918,7 @@ const primaryIDRhodeIslandMap = [
     fieldName: "STATE"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE"
   }),
   (applicant) => ({
@@ -31973,11 +31971,11 @@ const genderIDMap = [
     fieldName: "DATE OF BIRTH MMDDYY"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "RESIDENCE ADDRESS STREET ADDRESS"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITYTOWN"
   }),
   (applicant) => ({
@@ -31985,7 +31983,7 @@ const genderIDMap = [
     fieldName: "STATE"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE"
   }),
   (applicant) => ({
@@ -33920,7 +33918,7 @@ const feeWaiverNYCMap = [
     loc: { x: 154, y: 914 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 500, y: 914 }
   }),
   (applicant) => ({
@@ -34014,11 +34012,11 @@ const primaryIDNewYorkMap = [
     fieldName: "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "ADDRESS WHERE YOU LIVE REQUIRED IF DIFFERENT FROM ADDRESS FOR MAIL DO NOT GIVE PO Post OfficeBOX THIS ADDRESS WILL APPEAR ON YOUR ENHANCED REAL ID IDENTITY DOCUMENT"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "ADDRESS WHERE YOU LIVE City or Town"
   }),
   (applicant) => ({
@@ -34026,7 +34024,7 @@ const primaryIDNewYorkMap = [
     fieldName: "ADDRESS WHERE YOU LIVE State"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code"
   }),
   (applicant) => ({
@@ -34299,7 +34297,7 @@ const birthCertNYCMap = [
     fieldName: "S1: Last Name"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "S1: City"
   }),
   (applicant) => ({
@@ -34307,7 +34305,7 @@ const birthCertNYCMap = [
     fieldName: "S1: State"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "S1: Zip Code"
   }),
   (applicant) => ({
@@ -34473,11 +34471,11 @@ const selfAttestationAdultNYCMap = [
     loc: { page: 1, x: 101, y: 204 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 204 }
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 101, y: 266 }
   }),
   (applicant) => ({
@@ -34485,7 +34483,7 @@ const selfAttestationAdultNYCMap = [
     loc: { page: 1, x: 436, y: 266 }
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 663, y: 266 }
   }),
   (applicant) => ({
@@ -34542,11 +34540,11 @@ const selfAttestationMinorNYCMap = [
     loc: { page: 1, x: 542, y: 146 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 210 }
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 101, y: 272 }
   }),
   (applicant) => ({
@@ -34554,7 +34552,7 @@ const selfAttestationMinorNYCMap = [
     loc: { page: 1, x: 436, y: 272 }
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 663, y: 272 }
   }),
   (applicant) => ({
@@ -36121,7 +36119,7 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 2, x: 403, y: 275 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 2, x: 103, y: 326 }
   }),
   (applicant) => ({
@@ -36224,7 +36222,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 2, x: 403, y: 413 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 2, x: 102, y: 482 }
   }),
   (applicant) => ({
@@ -36260,7 +36258,7 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 4, x: 403, y: 710 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 4, x: 103, y: 762 }
   }),
   (applicant) => ({
@@ -36342,7 +36340,7 @@ const feeWaiverOregonMap = [
     loc: { page: 3, x: 402, y: 636 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 3, x: 103, y: 688 }
   }),
   (applicant) => ({
@@ -36374,7 +36372,7 @@ const feeWaiverOregonMap = [
     loc: { page: 5, x: 403, y: 391 }
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 5, x: 103, y: 443 }
   }),
   (applicant) => ({
@@ -36405,11 +36403,11 @@ const birthCertOregonMap = [
     fieldName: "Applicant current legal last"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant residential address"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Applicant residential city"
   }),
   (applicant) => ({
@@ -36417,7 +36415,7 @@ const birthCertOregonMap = [
     fieldName: "App residential city/county"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "App res zip"
   }),
   (applicant) => ({
@@ -39934,11 +39932,11 @@ const dmvGenderDesignationMap = [
     fieldName: "4"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "6"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "8"
   }),
   (applicant) => ({
@@ -39946,7 +39944,7 @@ const dmvGenderDesignationMap = [
     fieldName: "9"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "10"
   }),
   (applicant) => ({
@@ -40070,7 +40068,7 @@ const birthCertCorrectionMap = [
     fieldName: "How it should read 2"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 545, y: 652 }
   }),
   (applicant) => ({
@@ -42059,11 +42057,11 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].phonenumber[0]"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "topmostSubform[0].Page5[0].streetaddress[0]"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]"
   }),
   (applicant) => ({
@@ -42071,7 +42069,7 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].state[0]"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "topmostSubform[0].Page5[0].zipcode[0]"
   }),
   (applicant) => ({
@@ -42180,7 +42178,7 @@ const ds5504Map = [
     fieldName: "App Phone 3"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB"
   }),
   (applicant) => ({
@@ -42188,7 +42186,7 @@ const ds5504Map = [
     fieldName: "App Mailing Address Line 2"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "App Mailing City"
   }),
   (applicant) => ({
@@ -42196,7 +42194,7 @@ const ds5504Map = [
     fieldName: "App Mailing State"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "App Mailing Zip"
   }),
   (applicant) => ({
@@ -42369,7 +42367,7 @@ const ds82Map = [
     fieldName: "App Phone 3"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "App Mailing Address Line 1"
   }),
   (applicant) => ({
@@ -42377,7 +42375,7 @@ const ds82Map = [
     fieldName: "App Mailing Address Line 2"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "App Mailing Address City"
   }),
   (applicant) => ({
@@ -42385,7 +42383,7 @@ const ds82Map = [
     fieldName: "App Mailing Address State"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "App Mailing Address Zip Code"
   }),
   (applicant) => ({
@@ -42502,7 +42500,7 @@ const ds11Map = [
     fieldName: "Applicant Email"
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant Address Street"
   }),
   (applicant) => ({
@@ -42510,7 +42508,7 @@ const ds11Map = [
     fieldName: "Address Line 2"
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Applicant Address City"
   }),
   (applicant) => ({
@@ -42518,7 +42516,7 @@ const ds11Map = [
     fieldName: "Applicant Address State"
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Applicant Address Zip Code"
   }),
   (applicant) => ({
@@ -43219,13 +43217,21 @@ class Person {
    */
   phone;
   /**
-   * Applicant's current street address, including "line 2."
+   * Applicant's current home address, without county or state.
    */
-  streetAddress;
+  homeAddress;
   /**
-   * Applicant's city of residence.
+  * If true the mailing address and residential address are 
+  * the same so fill using residential.
+  *
+  * @remarks Required for many forms for logic or sometimes outright as a checkbox.
+  */
+  streetEqualsMail;
+  /**
+   * Applicant's current mailing address, including state
+   * all as optional strings.
    */
-  residentCity;
+  mailAddress;
   /**
    * Applicant's jurisdiction (state or US territory) of residence.
    *
@@ -43251,10 +43257,6 @@ class Person {
    */
   residentLocalityName;
   /**
-   * Applicant's ZIP code.
-   */
-  zip;
-  /**
    * Applicant's email address.
    */
   email;
@@ -43266,7 +43268,7 @@ class Person {
    */
   representativeName;
   /**
-   * TODO DOCUMENT THIS
+   * The selected string determines which passport form to use.
    */
   passport;
 }
@@ -43316,10 +43318,14 @@ const sampleData = {
   },
   fathersBirthdate: "1970-01-01",
   phone: "313-867-5309",
-  streetAddress: "20 Monroe Street NW",
-  residentCity: "Grand Rapids",
+  homeAddress: {
+    apt: "BLDG B, Unit 301",
+    street: "20 Monroe Street NW",
+    city: "Grand Rapids",
+    zip: "49503"
+  },
+  streetEqualsMail: true,
   residentJurisdiction: michigan,
-  zip: "49503",
   email: "jdoe@goodmail.com",
   representativeName: {
     first: "RepFirst",
@@ -43755,6 +43761,60 @@ function NameField({
   ] }, `${field.name}:${key}-wrapper`)) }, `${field.name}-field`);
   return GenericField(field, innards);
 }
+function HomeAddressField({
+  field,
+  register
+}) {
+  const keys = ["apt", "street", "city", "zip"];
+  const innards = /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "homeAddress", children: keys.map((key) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "subfield", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "input",
+      {
+        id: `${field.name}:${key}`,
+        name: `${field.name}:${key}`,
+        size: 1,
+        ...register(`${field.name}:${key}`)
+      },
+      `${field.name}:${key}-input`
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "label",
+      {
+        htmlFor: `${field.name}:${key}`,
+        children: key
+      },
+      `${field.name}:${key}-label`
+    )
+  ] }, `${field.name}:${key}-wrapper`)) }, `${field.name}-field`);
+  return GenericField(field, innards);
+}
+function MailAddressField({
+  field,
+  register
+}) {
+  const keys = ["poBox", "mApt", "mStreet", "mCity", "mState", "mZip"];
+  const innards = /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mailAddress", children: keys.map((key) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "subfield", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "input",
+      {
+        id: `${field.name}:${key}`,
+        name: `${field.name}:${key}`,
+        size: 1,
+        ...register(`${field.name}:${key}`)
+      },
+      `${field.name}:${key}-input`
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "label",
+      {
+        htmlFor: `${field.name}:${key}`,
+        children: key
+      },
+      `${field.name}:${key}-label`
+    )
+  ] }, `${field.name}:${key}-wrapper`)) }, `${field.name}-field`);
+  return GenericField(field, innards);
+}
 function NumberField({
   field,
   register
@@ -43933,21 +43993,23 @@ const fields = {
     name: "phone",
     type: "string"
   },
-  streetAddress: {
-    title: "Street address",
-    subtitle: 'including apartment/PO box/"line 2"',
-    name: "streetAddress",
-    type: "string"
+  homeAddress: {
+    title: "Home Address",
+    subtitle: "Address where you live. The apartment field is optional.",
+    name: "homeAddress",
+    type: "homeAddress"
   },
-  residentCity: {
-    title: "City of residence",
-    name: "residentCity",
-    type: "string"
+  streetEqualsMail: {
+    title: "My home address is the same as my mailing address.",
+    subtitle: "If you check this leave the Mailing Address fields blank.",
+    name: "streetEqualsMail",
+    type: "boolean"
   },
-  zip: {
-    title: "ZIP code",
-    name: "zip",
-    type: "string"
+  mailAddress: {
+    title: "Mailing Address",
+    subtitle: "Address where you get your mail. Leave fields blank as needed.",
+    name: "mailAddress",
+    type: "mailAddress"
   },
   email: {
     title: "Email address",
@@ -43994,6 +44056,12 @@ function renderField(field, jurisdiction, register) {
   }
   if (field.type === "Name") {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(NameField, { field, register });
+  }
+  if (field.type === "homeAddress") {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(HomeAddressField, { field, register });
+  }
+  if (field.type === "mailAddress") {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(MailAddressField, { field, register });
   }
   if (field.type === "Date") {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(DateField, { field, register });
