@@ -450,7 +450,7 @@ export function formatContactInfo(
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip} USA`;
 
     case ContactFormat.FullAddress:
-      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
+      if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
@@ -458,7 +458,7 @@ export function formatContactInfo(
     case ContactFormat.FullAddressAndLocality:
       if (
         !homeAddress?.street ||
-        !homeAddress?.city ||
+        !homeAddress.city ||
         !residentLocality ||
         !residentJurisdiction ||
         !homeAddress.zip
@@ -468,7 +468,7 @@ export function formatContactInfo(
       return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
 
     case ContactFormat.FullAddressAndCountry:
-      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress.zip) {
+      if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
       }
       return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
@@ -476,7 +476,7 @@ export function formatContactInfo(
     case ContactFormat.FullContactInfo:
       if (
         !homeAddress?.street ||
-        !homeAddress?.city ||
+        !homeAddress.city ||
         !residentJurisdiction ||
         !homeAddress.zip ||
         !phone
@@ -486,14 +486,14 @@ export function formatContactInfo(
       return [
         fullName(representativeName(applicant)),
         applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress.zip ?? ""}`,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip}`,
         applicant.phone,
       ].join(separator);
 
     case ContactFormat.FullContactInfoAndCountry:
       if (
         !homeAddress?.street ||
-        !homeAddress?.city ||
+        !homeAddress.city ||
         !residentJurisdiction ||
         !homeAddress.zip ||
         !phone
@@ -503,7 +503,7 @@ export function formatContactInfo(
       return [
         fullName(representativeName(applicant)),
         applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress.zip ?? ""}`,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip}`,
         applicant.phone,
         "USA",
       ].join(separator);
