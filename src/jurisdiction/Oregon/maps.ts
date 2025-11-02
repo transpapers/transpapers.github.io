@@ -135,7 +135,7 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 403, y: 275 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 2, x: 103, y: 326 },
   }),
   (applicant) => ({
@@ -255,7 +255,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 403, y: 413 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 2, x: 102, y: 482 },
   }),
   (applicant) => ({
@@ -295,7 +295,7 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 4, x: 403, y: 710 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 4, x: 103, y: 762 },
   }),
   (applicant) => ({
@@ -390,7 +390,7 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 3, x: 402, y: 636 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 3, x: 103, y: 688 },
   }),
   (applicant) => ({
@@ -424,7 +424,7 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 5, x: 403, y: 391 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 5, x: 103, y: 443 },
   }),
   (applicant) => ({
@@ -462,11 +462,11 @@ export const birthCertOregonMap: Formfill[] = [
     fieldName: "Applicant current legal last",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant residential address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Applicant residential city",
   }),
   (applicant) => ({
@@ -474,7 +474,7 @@ export const birthCertOregonMap: Formfill[] = [
     fieldName: "App residential city/county",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "App res zip",
   }),
   (applicant) => ({

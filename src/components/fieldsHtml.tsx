@@ -157,6 +157,66 @@ export function NameField({
   return GenericField(field, innards);
 }
 
+export function HomeAddressField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
+  const keys = ["apt", "street", "city", "zip"];
+  const innards = (
+    <div className="homeAddress" key={`${field.name}-field`}>
+      {keys.map((key) => (
+        <div key={`${field.name}:${key}-wrapper`} className="subfield">
+          <input
+            key={`${field.name}:${key}-input`}
+            id={`${field.name}:${key}`}
+            name={`${field.name}:${key}`}
+            size={1}
+            {...register(`${field.name}:${key}`)}
+          />
+          <label
+            key={`${field.name}:${key}-label`}
+            htmlFor={`${field.name}:${key}`}
+          >
+            {key}
+          </label>
+        </div>
+      ))}
+    </div>
+  );
+
+  return GenericField(field, innards);
+}
+
+export function MailAddressField({
+  field,
+  register,
+}: FieldConstructorProps): JSX.Element {
+  const keys = ["poBox", "mApt", "mStreet", "mCity", "mState", "mZip"];
+  const innards = (
+    <div className="mailAddress" key={`${field.name}-field`}>
+      {keys.map((key) => (
+        <div key={`${field.name}:${key}-wrapper`} className="subfield">
+          <input
+            key={`${field.name}:${key}-input`}
+            id={`${field.name}:${key}`}
+            name={`${field.name}:${key}`}
+            size={1}
+            {...register(`${field.name}:${key}`)}
+          />
+          <label
+            key={`${field.name}:${key}-label`}
+            htmlFor={`${field.name}:${key}`}
+          >
+            {key}
+          </label>
+        </div>
+      ))}
+    </div>
+  );
+
+  return GenericField(field, innards);
+}
+
 export function NumberField({
   field,
   register,

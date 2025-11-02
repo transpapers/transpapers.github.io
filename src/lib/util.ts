@@ -392,11 +392,9 @@ export function formatContactInfo(
   const {
     birthCity,
     birthJurisdictionName,
-    streetAddress,
-    residentCity,
+    homeAddress,
     residentJurisdictionName,
     residentLocalityName,
-    zip,
     phone,
   } = applicant;
   const birthJurisdiction = getJurisdiction(birthJurisdictionName)
@@ -422,10 +420,10 @@ export function formatContactInfo(
       return `${birthJurisdiction.abbreviation}, USA`;
 
     case ContactFormat.ResidentCityAndState:
-      if (!residentCity || !residentJurisdiction) {
+      if (!homeAddress?.city || !residentJurisdiction) {
         return undefined;
       }
-      return `${residentCity}, ${residentJurisdiction.abbreviation}`;
+      return `${homeAddress.city}, ${residentJurisdiction.abbreviation}`;
 
     case ContactFormat.ResidentLocalityAndState:
       if (!residentLocality || !residentJurisdiction) {
@@ -434,78 +432,78 @@ export function formatContactInfo(
       return `${residentLocality.name}, ${residentJurisdiction.name}`;
 
     case ContactFormat.ResidentCityAndStateAndZip:
-      if (!residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
         return undefined;
       }
-      return `${residentCity}, ${residentJurisdiction.name}, ${zip}`;
+      return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
 
     case ContactFormat.ResidentCityAndLocalityAndStateAndZip:
-      if (!residentCity || !residentLocality || !residentJurisdiction || !zip) {
+      if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress?.zip) {
         return undefined;
       }
-      return `${residentCity}, ${residentLocality.name}, ${residentJurisdiction.name}, ${zip}`;
+      return `${homeAddress.city}, ${residentLocality.name}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
 
     case ContactFormat.ResidentCityAndStateAndZipAndCountry:
-      if (!residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
         return undefined;
       }
-      return `${residentCity}, ${residentJurisdiction.name}, ${zip} USA`;
+      return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip} USA`;
 
     case ContactFormat.FullAddress:
-      if (!streetAddress || !residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
         return undefined;
       }
-      return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip}`;
+      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
 
     case ContactFormat.FullAddressAndLocality:
       if (
-        !streetAddress ||
-        !residentCity ||
+        !homeAddress?.street ||
+        !homeAddress?.city ||
         !residentLocality ||
         !residentJurisdiction ||
-        !zip
+        !homeAddress?.zip
       ) {
         return undefined;
       }
-      return `${streetAddress} ${residentCity}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${zip}`;
+      return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
 
     case ContactFormat.FullAddressAndCountry:
-      if (!streetAddress || !residentCity || !residentJurisdiction || !zip) {
+      if (!homeAddress?.street || !homeAddress?.city || !residentJurisdiction || !homeAddress?.zip) {
         return undefined;
       }
-      return `${streetAddress} ${residentCity}, ${residentJurisdiction.abbreviation} ${zip} USA`;
+      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
 
     case ContactFormat.FullContactInfo:
       if (
-        !streetAddress ||
-        !residentCity ||
+        !homeAddress?.street ||
+        !homeAddress?.city ||
         !residentJurisdiction ||
-        !zip ||
+        !homeAddress?.zip ||
         !phone
       ) {
         return undefined;
       }
       return [
         fullName(representativeName(applicant)),
-        applicant.streetAddress,
-        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        applicant.homeAddress?.street,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
         applicant.phone,
       ].join(separator);
 
     case ContactFormat.FullContactInfoAndCountry:
       if (
-        !streetAddress ||
-        !residentCity ||
+        !homeAddress?.street ||
+        !homeAddress?.city ||
         !residentJurisdiction ||
-        !zip ||
+        !homeAddress?.zip ||
         !phone
       ) {
         return undefined;
       }
       return [
         fullName(representativeName(applicant)),
-        applicant.streetAddress,
-        `${applicant.residentCity ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.zip ?? ""}`,
+        applicant.homeAddress?.street,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
         applicant.phone,
         "USA",
       ].join(separator);

@@ -219,7 +219,7 @@ export const nameChangePrivateMap: Formfill[] = [
     fieldName: "Name type or print",
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.streetAddress : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.street : "",
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -386,7 +386,7 @@ export const nameChangeMap: Formfill[] = [
     fieldName: "Name type or print",
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.streetAddress : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.street : "",
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -540,9 +540,9 @@ export const mdosSexMap: Formfill[] = [
     text: applicant.legalName.suffix,
     loc: { x: 750, y: 388 },
   }),
-  (applicant) => ({ text: applicant.streetAddress, loc: { x: 57, y: 441 } }),
-  (applicant) => ({ text: applicant.residentCity, loc: { x: 351, y: 441 } }),
-  (applicant) => ({ text: applicant.zip, loc: { x: 701, y: 441 } }),
+  (applicant) => ({ text: applicant.homeAddress?.street, loc: { x: 57, y: 441 } }),
+  (applicant) => ({ text: applicant.homeAddress?.city, loc: { x: 351, y: 441 } }),
+  (applicant) => ({ text: applicant.homeAddress?.zip, loc: { x: 701, y: 441 } }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
@@ -600,7 +600,7 @@ export const birthCertMap: Formfill[] = [
     fieldName: "Last name",
   }),
   (applicant) => ({ 
-    text: applicant.streetAddress, 
+    text: applicant.homeAddress?.street, 
     fieldName: "address", 
   }),
   (applicant) => ({
@@ -608,7 +608,7 @@ export const birthCertMap: Formfill[] = [
     fieldName: "city/state",
   }),
   (applicant) => ({ 
-    text: applicant.zip, 
+    text: applicant.homeAddress?.zip, 
     fieldName: "zip", 
   }),
   (applicant) => ({ 

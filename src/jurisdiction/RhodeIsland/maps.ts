@@ -61,11 +61,11 @@ export const changeOfNameMap: Formfill[] = [
     fieldName: "6",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "7",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "8",
   }),
   (applicant) => ({
@@ -73,7 +73,7 @@ export const changeOfNameMap: Formfill[] = [
     fieldName: "9",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "10",
   }),
   (applicant) => ({
@@ -321,11 +321,11 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "EMAIL ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "STREET ADDRESS RESIDENCE ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITYTOWN",
   }),
   (applicant) => ({
@@ -333,7 +333,7 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "STATE",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE",
   }),
   (applicant) => ({
@@ -387,11 +387,11 @@ export const genderIDMap: Formfill[] = [
     fieldName: "DATE OF BIRTH MMDDYY",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "RESIDENCE ADDRESS STREET ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITYTOWN",
   }),
   (applicant) => ({
@@ -400,7 +400,7 @@ export const genderIDMap: Formfill[] = [
     fieldName: "STATE",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE",
   }),
   (applicant) => ({

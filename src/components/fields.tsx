@@ -32,6 +32,7 @@ import {
   TelField,
   EmailField,
   CountyField,
+  HomeAddressField,
 } from "./fieldsHtml";
 
 import { isMinor } from "../lib/util";
@@ -154,21 +155,23 @@ export const fields: Record<string, Field> = {
     name: "phone",
     type: "string",
   },
-  streetAddress: {
-    title: "Street address",
-    subtitle: 'including apartment/PO box/"line 2"',
-    name: "streetAddress",
-    type: "string",
+  homeAddress: {
+    title: "Home Address",
+    subtitle: "Address where you live. The apartment field is optional.",
+    name: "homeAddress",
+    type: "homeAddress",
   },
-  residentCity: {
-    title: "City of residence",
-    name: "residentCity",
-    type: "string",
+  streetEqualsMail: {
+    title: "My home address is the same as my mailing address.",
+    subtitle: "If you check this leave the Mailing Address fields blank.",
+    name: "streetEqualsMail",
+    type: "boolean",
   },
-  zip: {
-    title: "ZIP code",
-    name: "zip",
-    type: "string",
+  mailAddress: {
+    title: "Mailing Address",
+    subtitle: "Address where you get your mail. Leave fields blank as needed.",
+    name: "mailAddress",
+    type: "mailAddress",
   },
   email: {
     title: "Email address",

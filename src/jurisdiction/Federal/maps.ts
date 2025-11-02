@@ -146,11 +146,11 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].phonenumber[0]",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "topmostSubform[0].Page5[0].streetaddress[0]",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]",
   }),
   (applicant) => ({
@@ -158,7 +158,7 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].state[0]",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "topmostSubform[0].Page5[0].zipcode[0]",
   }),
   (applicant) => ({
@@ -273,7 +273,7 @@ export const ds5504Map: Formfill[] = [
     fieldName: "App Phone 3",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB",
   }),
   (applicant) => ({
@@ -283,7 +283,7 @@ export const ds5504Map: Formfill[] = [
     fieldName: "App Mailing Address Line 2",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "App Mailing City",
   }),
   (applicant) => ({
@@ -291,7 +291,7 @@ export const ds5504Map: Formfill[] = [
     fieldName: "App Mailing State",
   }),
   (applicant) => ({ 
-    text: applicant.zip, 
+    text: applicant.homeAddress?.zip, 
     fieldName: "App Mailing Zip", 
   }),
   (applicant) => ({
@@ -477,7 +477,7 @@ export const ds82Map: Formfill[] = [
     fieldName: "App Phone 3",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "App Mailing Address Line 1",
   }),
   (applicant) => ({
@@ -487,7 +487,7 @@ export const ds82Map: Formfill[] = [
     fieldName: "App Mailing Address Line 2",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "App Mailing Address City",
   }),
   (applicant) => ({
@@ -495,7 +495,7 @@ export const ds82Map: Formfill[] = [
     fieldName: "App Mailing Address State",
   }),
   (applicant) => ({ 
-    text: applicant.zip, 
+    text: applicant.homeAddress?.zip, 
     fieldName: "App Mailing Address Zip Code", 
   }),
   (applicant) => ({
@@ -624,7 +624,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Applicant Email", 
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant Address Street",
   }),
   (applicant) => ({
@@ -634,7 +634,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Address Line 2",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Applicant Address City",
   }),
   (applicant) => ({
@@ -642,7 +642,7 @@ export const ds11Map: Formfill[] = [
     fieldName: "Applicant Address State",
   }),
   (applicant) => ({ 
-    text: applicant.zip, 
+    text: applicant.homeAddress?.zip, 
     fieldName: "Applicant Address Zip Code", 
   }),
   (applicant) => ({
@@ -806,11 +806,11 @@ export const statusLetterMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: allCAPS(applicant.streetAddress),
+    text: allCAPS(applicant.homeAddress?.street),
     fieldName: "Current Mailing Address 1",
   }),
   (applicant) => ({
-    text: allCAPS(applicant.residentCity),
+    text: allCAPS(applicant.homeAddress?.city),
     fieldName: "Current Mailing Address - City",
   }),
   (applicant) => ({
@@ -819,7 +819,7 @@ export const statusLetterMap: Formfill[] = [
     fieldName: "Current Mailing Address - State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Current Mailing Address - Zip Code",
   }),
   (applicant) => ({

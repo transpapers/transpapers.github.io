@@ -319,7 +319,7 @@ export const feeWaiverNYCMap: Formfill[] = [
     loc: { x: 154, y: 914 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 500, y: 914 },
   }),
   (applicant) => ({
@@ -426,12 +426,12 @@ export const primaryIDNewYorkMap: Formfill[] = [
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName:
       "ADDRESS WHERE YOU LIVE REQUIRED IF DIFFERENT FROM ADDRESS FOR MAIL DO NOT GIVE PO Post OfficeBOX THIS ADDRESS WILL APPEAR ON YOUR ENHANCED REAL ID IDENTITY DOCUMENT",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "ADDRESS WHERE YOU LIVE City or Town",
   }),
   (applicant) => ({
@@ -440,7 +440,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
     fieldName: "ADDRESS WHERE YOU LIVE State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code",
   }),
   (applicant) => ({
@@ -749,7 +749,7 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S1: Last Name",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "S1: City",
   }),
   (applicant) => ({
@@ -758,7 +758,7 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S1: State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "S1: Zip Code",
   }),
   (applicant) => ({
@@ -939,11 +939,11 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
     loc: { page: 1, x: 101, y: 204 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 204 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 101, y: 266 },
   }),
   (applicant) => ({
@@ -952,7 +952,7 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
     loc: { page: 1, x: 436, y: 266 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 663, y: 266 },
   }),
   (applicant) => ({
@@ -1012,11 +1012,11 @@ export const selfAttestationMinorNYCMap: Formfill[] = [
     loc: { page: 1, x: 542, y: 146 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 210 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 101, y: 272 },
   }),
   (applicant) => ({
@@ -1025,7 +1025,7 @@ export const selfAttestationMinorNYCMap: Formfill[] = [
     loc: { page: 1, x: 436, y: 272 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 663, y: 272 },
   }),
   (applicant) => ({

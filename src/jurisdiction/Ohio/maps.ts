@@ -114,11 +114,11 @@ export const adultChangeOfNameMap: Formfill[] = [
     fieldName: "TYPE OF PRINTED NAME_2",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "ADDRESS_2",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITY_2",
   }),
   (applicant) => ({
@@ -126,7 +126,7 @@ export const adultChangeOfNameMap: Formfill[] = [
     fieldName: "STATE_2",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP_2",
   }),
   (applicant) => ({
@@ -197,11 +197,11 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "NAME",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
     fieldName: "ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentCity : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
     fieldName: "CITY",
   }),
   (applicant) => ({
@@ -211,7 +211,7 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "STATE",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.zip : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.zip : "",
     fieldName: "ZIP CODE",
   }),
   (applicant) => ({
@@ -223,11 +223,11 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "NAME AND ADDRESS OF PARENT",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
     fieldName: "ADDRESS_2",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentCity : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
     fieldName: "CITY_2",
   }),
   (applicant) => ({
@@ -237,7 +237,7 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "STATE_2",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.zip : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.zip : "",
     fieldName: "ZIP CODE_2",
   }),
   (applicant) => ({
@@ -250,11 +250,11 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "TYPE OF PRINTED NAME_2",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "ADDRESS_4",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITY_4",
   }),
   (applicant) => ({
@@ -262,7 +262,7 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "STATE_4",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE_4",
   }),
   (applicant) => ({
@@ -631,11 +631,11 @@ export const hearingNoticeMap: Formfill[] = [
     fieldName: "TYPED OR PRINTED NAME",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "ADDRESS",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "CITY",
   }),
   (applicant) => ({
@@ -643,7 +643,7 @@ export const hearingNoticeMap: Formfill[] = [
     fieldName: "STATE",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE",
   }),
   (applicant) => ({
@@ -817,7 +817,7 @@ export const birthCertOrderMap: Formfill[] = [
     fieldName: "Email",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
   (applicant) => ({
@@ -899,11 +899,11 @@ export const bmvGenderDeclarationMap: Formfill[] = [
     loc: { page: 1, x: 695, y: 188 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 45, y: 223 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 410, y: 223 },
   }),
   (applicant) => ({
@@ -912,7 +912,7 @@ export const bmvGenderDeclarationMap: Formfill[] = [
     loc: { page: 1, x: 630, y: 223 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 695, y: 223 },
   }),
   (applicant) => ({
@@ -969,7 +969,7 @@ export const birthCertUpdateMap: Formfill[] = [
     fieldName: "Email",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
   (applicant) => ({
@@ -1185,17 +1185,17 @@ export const voterRegistrationMap: Formfill[] = [
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtSuffix[0]",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingAddress[0]",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingCity[0]",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingZip[0]",
   }),

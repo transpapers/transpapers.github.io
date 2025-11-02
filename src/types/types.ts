@@ -36,6 +36,28 @@ export function isEmptyName(name: Name): boolean {
   return !name.first && !name.middle && !name.last && !name.suffix;
 }
 
+/*!
+ * The applicants residential street address, with optional apartment field.
+ */
+export class ResidentialAddress {
+  apt?: string = "";
+  street = "";
+  city = "";
+  zip = "";
+}
+
+/*!
+ * The applicants entire mailing address.
+ */
+export class MailingAddress {
+  poBox?: string = "";
+  mApt?: string = "";
+  mStreet?: string = "";
+  mCity?: string = "";
+  mState?: string = "";
+  mZip?: string = "";
+}
+
 export enum GenderMarker {
   M = "M",
   F = "F",

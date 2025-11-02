@@ -19,7 +19,7 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-import { Name, GenderMarker } from "./types";
+import { Name, GenderMarker, ResidentialAddress, MailingAddress } from "./types";
 
 import { AnyLocality, AnyJurisdiction } from "./generic";
 
@@ -210,14 +210,23 @@ export class Person {
   phone?: string;
 
   /**
-   * Applicant's current street address, including "line 2."
+   * Applicant's current home address, without county or state.
    */
-  streetAddress?: string;
+  homeAddress?: ResidentialAddress;
+
+    /**
+   * If true the mailing address and residential address are 
+   * the same so fill using residential.
+   *
+   * @remarks Required for many forms for logic or sometimes outright as a checkbox.
+   */
+  streetEqualsMail?: boolean;
 
   /**
-   * Applicant's city of residence.
+   * Applicant's current mailing address, including state
+   * all as optional strings.
    */
-  residentCity?: string;
+  mailAddress?: MailingAddress;
 
   /**
    * Applicant's jurisdiction (state or US territory) of residence.
@@ -248,11 +257,6 @@ export class Person {
   residentLocalityName?: string;
 
   /**
-   * Applicant's ZIP code.
-   */
-  zip?: string;
-
-  /**
    * Applicant's email address.
    */
   email?: string;
@@ -266,7 +270,7 @@ export class Person {
   representativeName?: Name;
 
   /**
-   * TODO DOCUMENT THIS
+   * The selected string determines which passport form to use.
    */
   passport?: string;
 }
@@ -329,12 +333,15 @@ export const sampleData: Person = {
 
   phone: "313-867-5309",
 
-  streetAddress: "20 Monroe Street NW",
+  homeAddress: { 
+    apt: "BLDG B, Unit 301",
+    street: "20 Monroe Street NW",
+    city: "Grand Rapids",
+    zip: "49503",
+  },
 
-  residentCity: "Grand Rapids",
+  streetEqualsMail: true,
   residentJurisdiction: michigan,
-
-  zip: "49503",
 
   email: "jdoe@goodmail.com",
 

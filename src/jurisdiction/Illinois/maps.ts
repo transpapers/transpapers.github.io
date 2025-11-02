@@ -554,11 +554,11 @@ export const dmvGenderDesignationMap: Formfill[] = [
     fieldName: "4",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "6",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "8",
   }),
   (applicant) => ({
@@ -567,7 +567,7 @@ export const dmvGenderDesignationMap: Formfill[] = [
     fieldName: "9",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "10",
   }),
   (applicant) => ({
@@ -698,7 +698,7 @@ export const birthCertCorrectionMap: Formfill[] = [
     fieldName: "How it should read 2",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 545, y: 652 },
   }),
   (applicant) => ({

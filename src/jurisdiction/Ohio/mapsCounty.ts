@@ -77,11 +77,11 @@ export const adamsAdultMap: Formfill[] = [
     loc: { x: 506, y: 459 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 127, y: 518 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { x: 127, y: 556 },
   }),
   (applicant) => ({
@@ -90,7 +90,7 @@ export const adamsAdultMap: Formfill[] = [
     loc: { x: 365, y: 556 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { x: 512, y: 556 },
   }),
   (applicant) => ({
@@ -120,11 +120,11 @@ export const adamsAdultMap: Formfill[] = [
     loc: { page: 2, x: 120, y: 294 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 2, x: 405, y: 294 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 2, x: 405, y: 346 },
   }),
   (applicant) => ({
@@ -133,7 +133,7 @@ export const adamsAdultMap: Formfill[] = [
     loc: { page: 2, x: 582, y: 346 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 2, x: 683, y: 346 },
   }),
   (applicant) => ({
@@ -164,7 +164,7 @@ export const adamsAdultMap: Formfill[] = [
     loc: { page: 3, x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 3, x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -263,11 +263,11 @@ export const adamsMinorMap: Formfill[] = [
     loc: { x: 506, y: 459 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 127, y: 518 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { x: 127, y: 556 },
   }),
   (applicant) => ({
@@ -276,7 +276,7 @@ export const adamsMinorMap: Formfill[] = [
     loc: { x: 365, y: 556 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { x: 512, y: 556 },
   }),
   (applicant) => ({
@@ -306,11 +306,11 @@ export const adamsMinorMap: Formfill[] = [
     loc: { page: 2, x: 120, y: 294 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 2, x: 405, y: 294 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 2, x: 405, y: 346 },
   }),
   (applicant) => ({
@@ -319,7 +319,7 @@ export const adamsMinorMap: Formfill[] = [
     loc: { page: 2, x: 582, y: 346 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 2, x: 683, y: 346 },
   }),
 ];
@@ -380,7 +380,7 @@ export const ashtabulaAdultMap: Formfill[] = [
     fieldName: "NEW",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "ST",
   }),
   (applicant) => ({
@@ -427,7 +427,7 @@ export const ashtabulaAdultMap: Formfill[] = [
     loc: { page: 1, x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -505,7 +505,7 @@ export const ashtabulaMinorMap: Formfill[] = [
     fieldName: "NEW",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "ST",
   }),
   (applicant) => ({
@@ -542,7 +542,7 @@ export const ashtabulaMinorMap: Formfill[] = [
     fieldName: "Name",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
     fieldName: "ST2",
   }),
   (applicant) => ({
@@ -576,7 +576,7 @@ export const auglaizeAdultMap: Formfill[] = [
     loc: { x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -675,7 +675,7 @@ export const butlerAdultMap: Formfill[] = [
     fieldName: "Typed Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -704,7 +704,7 @@ export const butlerAdultMap: Formfill[] = [
     fieldName: "AddendumPg1Bx1.7",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "AddendumPg1Bx1.8",
   }),
   (applicant) => ({
@@ -752,7 +752,7 @@ export const butlerAdultMap: Formfill[] = [
     loc: { x: 265, y: 183 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
   (applicant) => ({
@@ -760,7 +760,7 @@ export const butlerAdultMap: Formfill[] = [
     fieldName: "Telephone Number",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -769,7 +769,7 @@ export const butlerAdultMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip Code",
   }),
   () => ({
@@ -815,7 +815,7 @@ export const butlerMinorMap: Formfill[] = [
     fieldName: "Typed Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -844,7 +844,7 @@ export const butlerMinorMap: Formfill[] = [
     fieldName: "AddendumPg1Bx1.7",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "AddendumPg1Bx1.8",
   }),
   (applicant) => ({
@@ -895,11 +895,11 @@ export const champaignMap: Formfill[] = [
     loc: { x: 247, y: 244 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 240, y: 273 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { x: 206, y: 300 },
   }),
   (applicant) => ({
@@ -908,7 +908,7 @@ export const champaignMap: Formfill[] = [
     loc: { x: 407, y: 300 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { x: 635, y: 300 },
   }),
   (applicant) => ({
@@ -931,11 +931,11 @@ export const champaignMap: Formfill[] = [
     loc: { x: 403, y: 465 },
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.streetAddress : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.street : "",
     loc: { x: 228, y: 492 },
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.residentCity : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.city : "",
     loc: { x: 195, y: 520 },
   }),
   (applicant) => ({
@@ -945,7 +945,7 @@ export const champaignMap: Formfill[] = [
     loc: { x: 407, y: 520 },
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? applicant.zip : "",
+    text: isMinor(applicant) ? applicant.homeAddress?.zip : "",
     loc: { x: 644, y: 520 },
   }),
   /** Exhibit C */
@@ -1104,7 +1104,7 @@ export const coshoctonAdultMap: Formfill[] = [
     fieldName: "First_3",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Street",
   }),
   (applicant) => ({
@@ -1169,7 +1169,7 @@ export const coshoctonMinorMap: Formfill[] = [
     fieldName: "First",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Street",
   }),
   (applicant) => ({
@@ -1323,11 +1323,11 @@ export const fairfieldNameAdultMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -1336,7 +1336,7 @@ export const fairfieldNameAdultMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -1361,7 +1361,7 @@ export const fairfieldNameAdultMap: Formfill[] = [
     fieldName: "1_2",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "2_2",
   }),
   (applicant) => ({
@@ -1411,11 +1411,11 @@ export const fairfieldNameMinorMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -1424,7 +1424,7 @@ export const fairfieldNameMinorMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -1445,7 +1445,7 @@ export const fairfieldNameMinorMap: Formfill[] = [
     fieldName: "1_2",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "2_2",
   }),
   (applicant) => ({
@@ -1551,7 +1551,7 @@ export const franklinAdultMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -1648,7 +1648,7 @@ export const franklinMinorMap: Formfill[] = [
     fieldName: "Name",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -1674,7 +1674,7 @@ export const franklinMinorMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address_3",
   }),
   (applicant) => ({
@@ -1807,7 +1807,7 @@ export const greeneMap: Formfill[] = [
     fieldName: "1_2",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "2_2",
   }),
   (applicant) => ({
@@ -1832,11 +1832,11 @@ export const greeneMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -1845,7 +1845,7 @@ export const greeneMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -1874,7 +1874,7 @@ export const hamiltonMap: Formfill[] = [
     fieldName: "APPLICANT",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "APPLICANT_STREET",
   }),
   (applicant) => ({
@@ -1921,7 +1921,7 @@ export const hardinMap: Formfill[] = [
     loc: { x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -2006,7 +2006,7 @@ export const lakeAdultMap: Formfill[] = [
     fieldName: "Applicants Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant's Address",
   }),
   (applicant) => ({
@@ -2035,11 +2035,11 @@ export const lakeAdultMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2048,7 +2048,7 @@ export const lakeAdultMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -2081,7 +2081,7 @@ export const lakeMinorMap: Formfill[] = [
     fieldName: "Applicants Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant's Address",
   }),
   (applicant) => ({
@@ -2110,11 +2110,11 @@ export const lakeMinorMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2123,7 +2123,7 @@ export const lakeMinorMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -2196,11 +2196,11 @@ export const lickingAdultMap: Formfill[] = [
     loc: { page: 1, x: 630, y: 316 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 193, y: 361 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 480, y: 361 },
   }),
   (applicant) => ({
@@ -2209,7 +2209,7 @@ export const lickingAdultMap: Formfill[] = [
     loc: { page: 1, x: 630, y: 361 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 730, y: 361 },
   }),
   (applicant) => ({
@@ -2294,11 +2294,11 @@ export const lickingMinorMap: Formfill[] = [
     loc: { page: 1, x: 630, y: 309 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 258, y: 358 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { page: 1, x: 480, y: 358 },
   }),
   (applicant) => ({
@@ -2307,7 +2307,7 @@ export const lickingMinorMap: Formfill[] = [
     loc: { page: 1, x: 630, y: 358 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { page: 1, x: 745, y: 358 },
   }),
   (applicant) => ({
@@ -2381,7 +2381,7 @@ export const lucasAdultMap: Formfill[] = [
     fieldName: "amundefined",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "amPrint Fiduciary Name",
   }),
   (applicant) => ({
@@ -2433,7 +2433,7 @@ export const lucasAdultMap: Formfill[] = [
     loc: { page: 3, x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 3, x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -2519,7 +2519,7 @@ export const lucasMinorMap: Formfill[] = [
     fieldName: "amundefined",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "amPrint Fiduciary Name",
   }),
   (applicant) => ({
@@ -2559,11 +2559,11 @@ export const madisonMap: Formfill[] = [
     fieldName: "Typed or Printed Name_3",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address_3",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City_3",
   }),
   (applicant) => ({
@@ -2572,7 +2572,7 @@ export const madisonMap: Formfill[] = [
     fieldName: "State_3",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip_3",
   }),
   (applicant) => ({
@@ -2604,7 +2604,7 @@ export const mahoningMap: Formfill[] = [
     fieldName: "Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
   (applicant) => ({
@@ -2850,11 +2850,11 @@ export const medinaMap: Formfill[] = [
     fieldName: "Typed or printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2863,7 +2863,7 @@ export const medinaMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -2959,11 +2959,11 @@ export const montgomeryAdultMap: Formfill[] = [
     fieldName: "Applicant's  Signature",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant's Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Applicant's City",
   }),
   (applicant) => ({
@@ -2972,7 +2972,7 @@ export const montgomeryAdultMap: Formfill[] = [
     fieldName: "Applicant's State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Applicant's Zip",
   }),
   (applicant) => ({
@@ -3047,7 +3047,7 @@ export const montgomeryAdultMap: Formfill[] = [
     loc: { page: 4, x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 4, x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -3138,11 +3138,11 @@ export const montgomeryMinorMap: Formfill[] = [
     fieldName: "Parent 1 Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Parent 1 Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Parent 1 City",
   }),
   (applicant) => ({
@@ -3151,7 +3151,7 @@ export const montgomeryMinorMap: Formfill[] = [
     fieldName: "Parent 1 State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Parent 1 zip",
   }),
   (applicant) => ({
@@ -3211,11 +3211,11 @@ export const montgomeryMinorMap: Formfill[] = [
     fieldName: "Applicant's printed name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicant's Address",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "Applicant's City",
   }),
   (applicant) => ({
@@ -3224,7 +3224,7 @@ export const montgomeryMinorMap: Formfill[] = [
     fieldName: "Applicant's State",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Applicant's Zip",
   }),
   (applicant) => ({
@@ -3329,7 +3329,7 @@ export const ottawaAdultMap: Formfill[] = [
     fieldName: "Applicants Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicants Address",
   }),
   (applicant) => ({
@@ -3359,7 +3359,7 @@ export const ottawaAdultMap: Formfill[] = [
     fieldName: "Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address 1",
   }),
   (applicant) => ({
@@ -3402,7 +3402,7 @@ export const ottawaMinorMap: Formfill[] = [
     fieldName: "Applicants Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Applicants Address",
   }),
   (applicant) => ({
@@ -3431,11 +3431,11 @@ export const pikeAdultMap: Formfill[] = [
     loc: { x: 455, y: 890 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 455, y: 945 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { x: 455, y: 945 },
   }),
   (applicant) => ({
@@ -3444,7 +3444,7 @@ export const pikeAdultMap: Formfill[] = [
     loc: { x: 570, y: 945 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { x: 640, y: 945 },
   }),
   (applicant) => ({
@@ -3472,7 +3472,7 @@ export const pikeAdultMap: Formfill[] = [
     loc: { page: 1, x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { page: 1, x: 115, y: 273 },
   }),
   (applicant) => ({
@@ -3550,11 +3550,11 @@ export const pikeMinorMap: Formfill[] = [
     loc: { x: 455, y: 890 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 455, y: 945 },
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     loc: { x: 455, y: 945 },
   }),
   (applicant) => ({
@@ -3563,7 +3563,7 @@ export const pikeMinorMap: Formfill[] = [
     loc: { x: 570, y: 945 },
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     loc: { x: 640, y: 945 },
   }),
   (applicant) => ({
@@ -3659,7 +3659,7 @@ export const rossMap: Formfill[] = [
     fieldName: "Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -3825,11 +3825,11 @@ export const summitAdultMap: Formfill[] = [
     fieldName: "Applicants Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address_2",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City_3",
   }),
   (applicant) => ({
@@ -3838,7 +3838,7 @@ export const summitAdultMap: Formfill[] = [
     fieldName: "State_3",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip_2",
   }),
   (applicant) => ({
@@ -3907,11 +3907,11 @@ export const summitMinorMap: Formfill[] = [
     fieldName: "Name",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.streetAddress : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.residentCity : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
     fieldName: "City",
   }),
   (applicant) => ({
@@ -3921,7 +3921,7 @@ export const summitMinorMap: Formfill[] = [
     fieldName: "State",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.zip : "",
+    text: applicant.parentsAreOkay ? applicant.homeAddress?.zip : "",
     fieldName: "Zip",
   }),
   (applicant) => ({
@@ -3977,11 +3977,11 @@ export const summitMinorMap: Formfill[] = [
     fieldName: "Applicants Typed or Printed Name",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Address_4",
   }),
   (applicant) => ({
-    text: applicant.residentCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City_5",
   }),
   (applicant) => ({
@@ -3990,7 +3990,7 @@ export const summitMinorMap: Formfill[] = [
     fieldName: "State_5",
   }),
   (applicant) => ({
-    text: applicant.zip,
+    text: applicant.homeAddress?.zip,
     fieldName: "Zip_4",
   }),
   (applicant) => ({
@@ -4052,7 +4052,7 @@ export const trumbullAdultMap: Formfill[] = [
     fieldName: "Text1.0",
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     fieldName: "Text1.1",
   }),
   (applicant) => ({
@@ -4219,7 +4219,7 @@ export const williamsAdultMap: Formfill[] = [
     loc: { x: 140, y: 238 },
   }),
   (applicant) => ({
-    text: applicant.streetAddress,
+    text: applicant.homeAddress?.street,
     loc: { x: 115, y: 273 },
   }),
   (applicant) => ({
