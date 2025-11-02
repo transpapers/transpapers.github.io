@@ -27936,14 +27936,14 @@ function getNYLocality(jurisdictionKey, localityKey) {
  * @return {string}
  */
 var ContactFormat = /* @__PURE__ */ ((ContactFormat2) => {
-  ContactFormat2[ContactFormat2["FullContactInfo"] = 0] = "FullContactInfo";
-  ContactFormat2[ContactFormat2["FullContactInfoAndCountry"] = 1] = "FullContactInfoAndCountry";
-  ContactFormat2[ContactFormat2["FullAddress"] = 2] = "FullAddress";
-  ContactFormat2[ContactFormat2["FullAddressAndLocality"] = 3] = "FullAddressAndLocality";
-  ContactFormat2[ContactFormat2["FullAddressAndCountry"] = 4] = "FullAddressAndCountry";
-  ContactFormat2[ContactFormat2["BirthCityAndState"] = 5] = "BirthCityAndState";
-  ContactFormat2[ContactFormat2["BirthCityStateCountry"] = 6] = "BirthCityStateCountry";
-  ContactFormat2[ContactFormat2["BirthStateAndCountry"] = 7] = "BirthStateAndCountry";
+  ContactFormat2[ContactFormat2["BirthCityAndState"] = 0] = "BirthCityAndState";
+  ContactFormat2[ContactFormat2["BirthCityStateCountry"] = 1] = "BirthCityStateCountry";
+  ContactFormat2[ContactFormat2["BirthStateAndCountry"] = 2] = "BirthStateAndCountry";
+  ContactFormat2[ContactFormat2["ResidentFullContactInfo"] = 3] = "ResidentFullContactInfo";
+  ContactFormat2[ContactFormat2["ResidentFullContactInfoAndCountry"] = 4] = "ResidentFullContactInfoAndCountry";
+  ContactFormat2[ContactFormat2["ResidentFullAddress"] = 5] = "ResidentFullAddress";
+  ContactFormat2[ContactFormat2["ResidentFullAddressAndLocality"] = 6] = "ResidentFullAddressAndLocality";
+  ContactFormat2[ContactFormat2["ResidentFullAddressAndCountry"] = 7] = "ResidentFullAddressAndCountry";
   ContactFormat2[ContactFormat2["ResidentCityAndState"] = 8] = "ResidentCityAndState";
   ContactFormat2[ContactFormat2["ResidentLocalityAndState"] = 9] = "ResidentLocalityAndState";
   ContactFormat2[ContactFormat2["ResidentCityAndStateAndZip"] = 10] = "ResidentCityAndStateAndZip";
@@ -27964,17 +27964,17 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
   const residentJurisdiction = getJurisdiction(residentJurisdictionName);
   const residentLocality = getJurisdiction(residentLocalityName);
   switch (fmt) {
-    case 5:
+    case 0:
       if (!birthCity || !birthJurisdiction) {
         return void 0;
       }
       return `${birthCity}, ${birthJurisdiction.abbreviation}`;
-    case 6:
+    case 1:
       if (!birthCity || !birthJurisdiction) {
         return void 0;
       }
       return `${birthCity}, ${birthJurisdiction.abbreviation}, USA`;
-    case 7:
+    case 2:
       if (!birthJurisdiction) {
         return void 0;
       }
@@ -28004,42 +28004,71 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
         return void 0;
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip} USA`;
-    case 2:
+    case 5:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
-    case 3:
+      if (!homeAddress.apt) {
+        return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      }
+    case 6:
       if (!homeAddress?.street || !homeAddress.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
-    case 4:
+      if (!homeAddress.apt) {
+        return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      }
+    case 7:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
-      return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
-    case 0:
+      if (!homeAddress.apt) {
+        return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip} USA`;
+      }
+    case 3:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip || !phone) {
         return void 0;
       }
-      return [
-        fullName(representativeName(applicant)),
-        applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
-        applicant.phone
-      ].join(separator);
-    case 1:
+      if (!homeAddress.apt) {
+        return [
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+          ${applicant.phone ?? ""}`
+        ].join(separator);
+      } else {
+        return [
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+          ${applicant.phone ?? ""}`
+        ].join(separator);
+      }
+    case 4:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip || !phone) {
         return void 0;
       }
-      return [
-        fullName(representativeName(applicant)),
-        applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
-        applicant.phone,
-        "USA"
-      ].join(separator);
+      if (!homeAddress.apt) {
+        return [
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+          ${applicant.phone ?? ""}`
+        ].join(separator);
+      } else {
+        return [
+          fullName(representativeName(applicant)),
+          `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
+          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+          ${applicant.phone ?? ""}`
+        ].join(separator);
+      }
     default:
       return void 0;
   }
@@ -28116,7 +28145,7 @@ const nameChangePrivateMap = [
     fieldName: "Current first middle and last names type or print"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullContactInfo),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo),
     fieldName: "Petitioners name address and telephone no"
   }),
   () => ({
@@ -28307,7 +28336,7 @@ const nameChangeMap = [
     fieldName: "Current first middle and last names type or print"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullContactInfo),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo),
     fieldName: "Petitioners name address and telephone no"
   }),
   () => ({
@@ -28522,7 +28551,7 @@ const feeWaiverMap = [
     fieldName: "Text5"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullContactInfo),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo),
     fieldName: "PlaintiffPetitioners name address and telephone no"
   }),
   (applicant) => ({
@@ -31779,7 +31808,7 @@ const bciMap = [
     loc: { x: 199, y: 255 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 249, y: 281 }
   }),
   () => ({
@@ -31856,7 +31885,7 @@ const birthCertOneMap = [
     loc: { x: 659, y: 723 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 219, y: 772 }
   })
 ];
@@ -32069,7 +32098,7 @@ const birthCertTwoMap = [
     loc: { x: 659, y: 723 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 219, y: 772 }
   })
 ];
@@ -33721,7 +33750,7 @@ const adultNameSexPetitionMap = [
     fieldName: "DOB"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddressAndCountry),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndCountry),
     fieldName: "CurrentAddress"
   }),
   () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "SignatureDate" }),
@@ -33804,7 +33833,7 @@ const minorNameSexPetitionMap = [
     fieldName: "DOB"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddressAndCountry),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndCountry),
     fieldName: "CurrentAddress"
   }),
   (applicant) => ({
@@ -33843,7 +33872,7 @@ const feeWaiverNYStateMap = [
     fieldName: "Plaintiffs"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "ApplicantAddress"
   }),
   () => ({
@@ -33898,7 +33927,7 @@ const feeWaiverNYCMap = [
     loc: { x: 223, y: 282 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 143, y: 314 }
   }),
   () => ({
@@ -34194,7 +34223,7 @@ const birthCertAdultNYStateMap = [
     loc: { x: 510, y: 663 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 103, y: 946 }
   })
 ];
@@ -34422,7 +34451,7 @@ const genderAffidavitAdultNYStateMap = [
     loc: { x: 71, y: 188 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 106, y: 746 }
   })
 ];
@@ -34441,7 +34470,7 @@ const genderAffidavitMinorNYStateMap = [
     loc: { x: 203, y: 241 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 103, y: 746 }
   })
 ];
@@ -36560,7 +36589,7 @@ const voterOregonMap = [
     fieldName: "Middle Name"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "Residence Address"
   }),
   (applicant) => ({
@@ -37655,7 +37684,7 @@ const adultNamePetitionAlaskaMap = [
   }),
   () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "date2" }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "mailingAddress"
   }),
   (applicant) => ({
@@ -37682,7 +37711,7 @@ const minorNamePetitionAlaskaMap = [
     fieldName: "phoneNo"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "address"
   }),
   (applicant) => ({
@@ -37835,7 +37864,7 @@ const applicationNameAlaskaMap = [
     loc: { x: 50, y: 570 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { x: 435, y: 570 }
   }),
   (applicant) => ({
@@ -37862,7 +37891,7 @@ const adultWaivePublicationAlaskaMap = [
     fieldName: "ITMO"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "mailing"
   }),
   (applicant) => ({
@@ -37893,7 +37922,7 @@ const minorWaivePublicationAlaskaMap = [
     fieldName: "petitioner"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "mailing"
   }),
   (applicant) => ({
@@ -37951,7 +37980,7 @@ const additionalServiceAlaskaMap = [
     fieldName: "yourName"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "mailingAddress"
   })
 ];
@@ -37998,7 +38027,7 @@ const primaryIDAlaskaMap = [
     fieldName: "Text12"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "Text15"
   }),
   (applicant) => ({
@@ -39524,7 +39553,7 @@ const adultNameChangeMap = [
     fieldName: "73 - Email"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "74 - Address"
   })
 ];
@@ -39598,7 +39627,7 @@ const minorNameChangeMap = [
     fieldName: "32 -  Print Your Name"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "33 - Address"
   }),
   (applicant) => ({
@@ -39648,7 +39677,7 @@ const minorChildInfoMap = [
     loc: { x: 277, y: 712 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "9 - Address"
   }),
   (applicant) => ({
@@ -39788,7 +39817,7 @@ const requestCourtRecordsPrivateMap = [
     fieldName: "79 - Email"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "80 - Address"
   })
 ];
@@ -39831,7 +39860,7 @@ const feeWaiverApplicationMap = [
     fieldName: "6 - Your Name"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "7 - Address"
   }),
   (applicant) => ({
@@ -39843,7 +39872,7 @@ const feeWaiverApplicationMap = [
     fieldName: "113 - Print Your Name"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "114 - Address"
   }),
   (applicant) => ({
@@ -39905,7 +39934,7 @@ const efileExemptionMap = [
     fieldName: "13"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.FullAddress),
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "14"
   })
 ];
