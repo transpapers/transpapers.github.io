@@ -486,7 +486,7 @@ export function formatContactInfo(
       return [
         fullName(representativeName(applicant)),
         applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip}`,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
         applicant.phone,
       ].join(separator);
 
@@ -503,7 +503,7 @@ export function formatContactInfo(
       return [
         fullName(representativeName(applicant)),
         applicant.homeAddress?.street,
-        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip}`,
+        `${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}`,
         applicant.phone,
         "USA",
       ].join(separator);
