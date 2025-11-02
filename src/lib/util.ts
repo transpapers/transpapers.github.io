@@ -521,7 +521,7 @@ export function formatContactInfo(
       ) {
         return undefined;
       }
-      if (!homeAddress?.apt) {
+      if (!homeAddress.apt) {
         return [
           fullName(representativeName(applicant)),
           `${applicant.homeAddress?.street ?? ""}
