@@ -42161,32 +42161,6 @@ const ds5504Map = [
     fieldName: "App DOB YYYY"
   }),
   (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.M ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.M ? "X" : "";
-        default:
-          return void 0;
-      }
-    })(),
-    loc: { page: 4, x: 343, y: 286 }
-  }),
-  (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "X" : "";
-        default:
-          return void 0;
-      }
-    })(),
-    loc: { page: 4, x: 373, y: 284 }
-  }),
-  (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "App Place of Birth"
   }),
@@ -42350,32 +42324,6 @@ const ds82Map = [
     fieldName: "App DOB YYYY"
   }),
   (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.M ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.M ? "X" : "";
-        default:
-          return void 0;
-      }
-    })(),
-    loc: { page: 4, x: 343, y: 273 }
-  }),
-  (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "X" : "";
-        default:
-          return void 0;
-      }
-    })(),
-    loc: { page: 4, x: 370, y: 273 }
-  }),
-  (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "App Place of Birth"
   }),
@@ -42495,32 +42443,6 @@ const ds11Map = [
     fieldName: "Applicant DOB Y"
   }),
   (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.M ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.M ? "X" : "";
-        default:
-          return void 0;
-      }
-    })(),
-    loc: { page: 4, x: 339, y: 280 }
-  }),
-  (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "X" : "";
-        default:
-          return void 0;
-      }
-    })(),
-    loc: { page: 4, x: 363, y: 280 }
-  }),
-  (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
     fieldName: "Applicant Place of Birth"
   }),
@@ -42628,32 +42550,6 @@ const ds11Map = [
   })
 ];
 /*!
- * Attestation of Orr v. Trump Class Membership (federal form unnumbered)
- * @type {Formfill[]}
- */
-const passportAttestationMap = [
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { x: 129, y: 864 }
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { x: 129, y: 887 }
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
-    loc: { x: 129, y: 911 }
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
-    loc: { page: 1, x: 105, y: 387 }
-  }),
-  (applicant) => ({
-    text: isMinor(applicant) ? fullName(representativeName(applicant)) : "",
-    loc: { page: 1, x: 105, y: 482 }
-  })
-];
-/*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
@@ -42679,9 +42575,14 @@ function DS5504Guide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker.",
+      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
       " ",
-      !isChangingLegalName && isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "To update your incorrect gender marker, check the middle box on page 1." }) : ""
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " attempt to update the marker, it will be rejected. If you have always had a passport with your desired gender marker you are safe to renew. Otherwise do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " renew unless you have no other choice as the gender marker will be reverted to the first one they have on file.",
+      gender && gender === "X" ? " Any passport with an X marker will be automatically reverted no matter what. " : " ",
+      "If you are safe check your desired box in section 3. If you have no choice but to renew mark your assigned gender at birth."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification.",
@@ -42732,12 +42633,17 @@ function DS82Guide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
+      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " attempt to update the marker, it will be rejected. If you have always had a passport with your desired gender marker you are safe to renew. Otherwise do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " renew unless you have no other choice as the gender marker will be reverted to the first one they have on file.",
+      gender && gender === "X" ? " Any passport with an X marker will be automatically reverted no matter what. " : " ",
+      "If you are safe check your desired box in section 3. If you have no choice but to renew mark your assigned gender at birth."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification. On page 5 at the top you will need to select which documents you want.",
-      gender && gender === "X" ? " Leave section 3 unchecked, you can pick the X marker on another form. " : " ",
-      "Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your old passports information.",
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your old passports information.",
       isChangingLegalName ? " In section 11 write in the location and date of your name change as it appears on your court order. " : " ",
       "For the photo we suggest going to a business for the highest chance of success and stapling that to the form. Sign on the signature line below the picture section then write in the current date to the right of the signature in the indicated section. On page 6 complete sections 12 through 20 as they apply to you. For section 20 if you have no current travel plans write “none” in every box."
     ] }),
@@ -42777,25 +42683,23 @@ function DS82Guide({ person }) {
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 function DS11Guide({ person }) {
-  const { age, gender, isChangingLegalSex, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The court case Orr v. Trump has concluded and the state department is now required to update gender markers on passports again. It is safe to do so and the passport will reflect the correct marker."
+      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " attempt to update the marker unless you meet the following conditions. You will need to be someone who has never had a passport before and all of your ID documents that you are submittting need to have your updated name/gender marker with no evidence of the old info. If that is the case, check the box you want in section 3. If you do not meet this criteria we suggest that you stop applying for a passport. If that is not an option then mark your assigned sex at birth in section 3.",
+      gender && gender === "X" ? " X markers are no longer available, you will need to check M or F in section 3. " : " "
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want.",
-      gender && gender === "X" ? " Leave section 3 unchecked, you can pick the X marker on another form. " : " ",
-      "Then fill out your social security number in section 5. In section 6 if you are not a US citizen fill out your USCIS number from your green card or form I-551 if applicable. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already there. For the photo we suggest going to a business for the highest chance of success. ",
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. In section 6 if you are not a US citizen fill out your USCIS number from your green card  or form I-551 if applicable. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already there. For the photo we suggest going to a business for the highest chance of success. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Do not staple it to the form yet." }),
-      ' For section 10 on page 6 fill out your parents place of birth and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
+      " ",
+      'For section 10 on page 6 fill out your parents place of birth and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
     ] }),
-    isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply",
-      age && age < 18 ? " have a parent/guardian sign " : " sign ",
-      "on page 2."
-    ] }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Now you will need to go to a location that you can apply in with this DS-11 passport form, ",
       isChangingLegalSex ? " attestation form, " : "",
@@ -42921,12 +42825,6 @@ const passport = {
   target: Target.Passport,
   depends: [Target.PrimaryIdentification],
   documents: [
-    {
-      name: "Attestation of Orr v. Trump Class Membership",
-      filename: "Federal/Passport Attestation Form.pdf",
-      map: passportAttestationMap,
-      include: (applicant) => applicant.isChangingLegalSex
-    },
     {
       name: "Application for a Passport",
       id: "DS 5504",
