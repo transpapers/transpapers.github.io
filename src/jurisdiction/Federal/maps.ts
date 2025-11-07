@@ -227,32 +227,6 @@ export const ds5504Map: Formfill[] = [
     fieldName: "App DOB YYYY",
   }),
   (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.M ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.M ? "X" : "";
-        default:
-          return undefined;
-      }
-    })(),
-    loc: { page: 4, x: 343, y: 286 },
-  }),
-  (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "X" : "";
-        default:
-          return undefined;
-      }
-    })(),
-    loc: { page: 4, x: 373, y: 284 },
-  }),
-  (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "App Place of Birth",
   }),
@@ -431,32 +405,6 @@ export const ds82Map: Formfill[] = [
     fieldName: "App DOB YYYY",
   }),
   (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.M ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.M ? "X" : "";
-        default:
-          return undefined;
-      }
-    })(),
-    loc: { page: 4, x: 343, y: 273 },
-  }),
-  (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "X" : "";
-        default:
-          return undefined;
-      }
-    })(),
-    loc: { page: 4, x: 370, y: 273 },
-  }),
-  (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "App Place of Birth",
   }),
@@ -590,32 +538,6 @@ export const ds11Map: Formfill[] = [
     fieldName: "Applicant DOB Y",
   }),
   (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.M ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.M ? "X" : "";
-        default:
-          return undefined;
-      }
-    })(),
-    loc: { page: 4, x: 339, y: 280 },
-  }),
-  (applicant) => ({
-    choice: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "X" : "";
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "X" : "";
-        default:
-          return undefined;
-      }
-    })(),
-    loc: { page: 4, x: 363, y: 280 },
-  }),
-  (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "Applicant Place of Birth",
   }),
@@ -728,35 +650,6 @@ export const ds11Map: Formfill[] = [
   () => ({ 
     text: "X", 
     loc: { page: 5, x: 687, y: 237 }, 
-  }),
-];
-
-/*!
- * Attestation of Orr v. Trump Class Membership (federal form unnumbered)
- * @type {Formfill[]}
- */
-export const passportAttestationMap: Formfill[] = [
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { x: 129, y: 864 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { x: 129, y: 887 },
-  }),
-  (applicant) => ({
-    text: applicant.gender === GenderMarker.X ? "X" : "",
-    loc: { x: 129, y: 911 },
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName
-      ? fullName(applicant.chosenName)
-      : fullName(applicant.legalName),
-    loc: { page: 1, x: 105, y: 387 },
-  }),
-  (applicant) => ({
-    text: isMinor(applicant) ? fullName(representativeName(applicant)) : "",
-    loc: { page: 1, x: 105, y: 482 },
   }),
 ];
 

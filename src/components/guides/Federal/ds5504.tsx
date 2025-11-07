@@ -30,16 +30,20 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The court case Orr v. Trump has concluded
-        and the state department is now required to update gender markers on
-        passports again. It is safe to do so and the passport will reflect the
-        correct marker.{" "}
-        {!isChangingLegalName && isChangingLegalSex ? (
-          <>
-            To update your incorrect gender marker, check the middle box on 
-            page 1.
-          </>
-        ):("")}
+        <strong>Attention</strong>: The supreme court has permitted the state
+        department to discrimminate again for passport gender markers. Do{" "}
+        <strong>not</strong> attempt to update the marker, it will be rejected.
+        If you have always had a passport with your desired gender marker you are 
+        safe to renew. Otherwise do <strong>not</strong> renew unless you have no
+        other choice as the gender marker will be reverted to the first one they
+        have on file.
+        {gender && (gender as string) === "X" ? (
+          " Any passport with an X marker will be automatically reverted no matter what. "
+        ) : (
+          " "
+        )}
+        If you are safe check your desired box in section 3. If you have no choice
+        but to renew mark your assigned gender at birth.
       </p>
 
       <p>

@@ -25,50 +25,44 @@ import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
 function DS11Guide({ person }: { person: Partial<Person> }) {
-  const { age, gender, isChangingLegalSex, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The court case Orr v. Trump has concluded
-        and the state department is now required to update gender markers on
-        passports again. It is safe to do so and the passport will reflect the
-        correct marker.
+        <strong>Attention</strong>: The supreme court has permitted the state
+        department to discrimminate again for passport gender markers. Do{" "}
+        <strong>not</strong> attempt to update the marker unless you meet the
+        following conditions. You will need to be someone who has never had a
+        passport before and all of your ID documents that you are submittting
+        need to have your updated name/gender marker with no evidence of the
+        old info. If that is the case, check the box you want in section 3. 
+        If you do not meet this criteria we suggest that you stop applying for 
+        a passport. If that is not an option then mark your assigned sex at 
+        birth in section 3.
+        {gender && (gender as string) === "X" ? (
+          " X markers are no longer available, you will need to check M or F in section 3. "
+        ) : (
+          " "
+        )}
       </p>
 
       <p>
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-11) contain instructions and
         clarification. On page 5 at the top you will need to select which
-        documents you want. 
-        {gender && (gender as string) === "X" ? (
-          " Leave section 3 unchecked, you can pick the X marker on another form. "
-        ) : (
-          " "
-        )}
-        Then fill out your social security number in section 5. In section 6 if 
-        you are not a US citizen fill out your USCIS number from your green card 
-        or form I-551 if applicable. If you have changed your name multiple times 
-        before then you will need to add them to section 9 if they are not already 
-        there. For the photo we suggest going to a business for the highest chance 
-        of success. <strong>Do not staple it to the form yet.</strong> For section 
-        10 on page 6 fill out your parents place of birth and citizenship status. 
-        On page 6 complete sections 11 through 21 as they apply to you. For section 
-        18 if you have no current travel plans write &quot;none&quot; in every box.
+        documents you want. Then fill out your social security number in section 
+        5. In section 6 if you are not a US citizen fill out your USCIS number from 
+        your green card  or form I-551 if applicable. If you have changed your name 
+        multiple times before then you will need to add them to section 9 if they 
+        are not already there. For the photo we suggest going to a business for the 
+        highest chance of success. <strong>Do not staple it to the form yet.</strong> 
+        {" "}For section 10 on page 6 fill out your parents place of birth and 
+        citizenship status. On page 6 complete sections 11 through 21 as they apply 
+        to you. For section 18 if you have no current travel plans write 
+        &quot;none&quot; in every box.
       </p>
-
-      {isChangingLegalSex ? (
-        <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is
-          new and allows for updating gender markers once again. To complete the
-          form simply
-          {age && age < 18 ? " have a parent/guardian sign " : " sign "}
-          on page 2.
-        </p>
-      ) : (
-        ""
-      )}
 
       <p>
         Now you will need to go to a location that you can apply in with this

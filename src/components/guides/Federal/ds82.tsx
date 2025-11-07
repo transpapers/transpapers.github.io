@@ -32,26 +32,30 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The court case Orr v. Trump has concluded
-        and the state department is now required to update gender markers on
-        passports again. It is safe to do so and the passport will reflect the
-        correct marker.
+        <strong>Attention</strong>: The supreme court has permitted the state
+        department to discrimminate again for passport gender markers. Do{" "}
+        <strong>not</strong> attempt to update the marker, it will be rejected.
+        If you have always had a passport with your desired gender marker you are 
+        safe to renew. Otherwise do <strong>not</strong> renew unless you have no
+        other choice as the gender marker will be reverted to the first one they
+        have on file.
+        {gender && (gender as string) === "X" ? (
+          " Any passport with an X marker will be automatically reverted no matter what. "
+        ) : (
+          " "
+        )}
+        If you are safe check your desired box in section 3. If you have no choice
+        but to renew mark your assigned gender at birth.
       </p>
 
       <p>
         This step should be started after you have updated your primary ID.
         Pages 1-4 of your passport application (DS-82) contain instructions and
         clarification. On page 5 at the top you will need to select which
-        documents you want. 
-        {gender && (gender as string) === "X" ? (
-          " Leave section 3 unchecked, you can pick the X marker on another form. "
-        ) : (
-          " "
-        )}
-        Then fill out your social security number in section 5. If you have 
-        changed your name multiple times before then you will need to add them to 
-        section 9 if they are not already present. Fill out section 10 using your 
-        old passports information. 
+        documents you want. Then fill out your social security number in section 5. 
+        If you have changed your name multiple times before then you will need to 
+        add them to section 9 if they are not already present. Fill out section 10 
+        using your old passports information. 
         {isChangingLegalName ? (
           " In section 11 write in the location and date of your name change as it appears on your court order. "
         ):(" ")} 
