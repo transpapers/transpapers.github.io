@@ -27722,6 +27722,71 @@ function parsePhoneNumber() {
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
+function abbreviateJurisdiction(jurisdiction) {
+  if (jurisdiction === "") {
+    return "";
+  }
+  const map = {
+    Alabama: "AL",
+    Alaska: "AK",
+    Arizona: "AZ",
+    Arkansas: "AR",
+    California: "CA",
+    Colorado: "CO",
+    Connecticut: "CT",
+    Delaware: "DE",
+    "District of Columbia": "DC",
+    Florida: "FL",
+    Georgia: "GA",
+    Hawaii: "HI",
+    Idaho: "ID",
+    Illinois: "IL",
+    Indiana: "IN",
+    Iowa: "IA",
+    Kansas: "KS",
+    Kentucky: "KY",
+    Louisiana: "LA",
+    Maine: "ME",
+    Maryland: "MD",
+    Massachusetts: "MA",
+    Michigan: "MI",
+    Minnesota: "MN",
+    Mississippi: "MS",
+    Missouri: "MO",
+    Montana: "MT",
+    Nebraska: "NE",
+    Nevada: "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    Ohio: "OH",
+    Oklahoma: "OK",
+    Oregon: "OR",
+    Pennsylvania: "PA",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    Tennessee: "TN",
+    Texas: "TX",
+    Utah: "UT",
+    Vermont: "VT",
+    Virginia: "VA",
+    Washington: "WA",
+    "West Virginia": "WV",
+    Wisconsin: "WI",
+    Wyoming: "WY",
+    "American Samoa": "AS",
+    Guam: "GU",
+    "Northern Mariana Islands": "MP",
+    "Puerto Rico": "PR",
+    "US Virgin Islands": "VI",
+    "US Minor Outlying Islands": "UM"
+  };
+  return map[jurisdiction];
+}
 /*!
  * Calculate a person's numerical age from their birthdate, as a string.
  * Since a "date of birth" is a legal fiction and not a timestamp, we can do
@@ -27949,6 +28014,8 @@ var ContactFormat = /* @__PURE__ */ ((ContactFormat2) => {
   ContactFormat2[ContactFormat2["ResidentCityAndStateAndZip"] = 10] = "ResidentCityAndStateAndZip";
   ContactFormat2[ContactFormat2["ResidentCityAndLocalityAndStateAndZip"] = 11] = "ResidentCityAndLocalityAndStateAndZip";
   ContactFormat2[ContactFormat2["ResidentCityAndStateAndZipAndCountry"] = 12] = "ResidentCityAndStateAndZipAndCountry";
+  ContactFormat2[ContactFormat2["MailCityAndStateAndZip"] = 13] = "MailCityAndStateAndZip";
+  ContactFormat2[ContactFormat2["MailFullAddress"] = 14] = "MailFullAddress";
   return ContactFormat2;
 })(ContactFormat || {});
 function formatContactInfo(applicant, fmt, separator = ", ") {
@@ -27956,6 +28023,7 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
     birthCity,
     birthJurisdictionName,
     homeAddress,
+    mailAddress,
     residentJurisdictionName,
     residentLocalityName,
     phone
@@ -27994,6 +28062,11 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
         return void 0;
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
+    case 13:
+      if (!mailAddress?.mCity || !mailAddress.mState || !mailAddress.mZip) {
+        return void 0;
+      }
+      return `${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""}, ${mailAddress.mZip}`;
     case 11:
       if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
@@ -28012,6 +28085,23 @@ function formatContactInfo(applicant, fmt, separator = ", ") {
         return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      }
+    case 14:
+      if (!mailAddress?.mStreet || !mailAddress.mCity || !mailAddress.mState || !mailAddress.mZip) {
+        return void 0;
+      }
+      if (!mailAddress.mApt) {
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox ?? ""}, ${mailAddress.mApt ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+        } else {
+          return `${mailAddress.mStreet}, ${mailAddress.mApt ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+        }
+      } else {
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+        } else {
+          return `${mailAddress.mStreet} ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+        }
       }
     case 6:
       if (!homeAddress?.street || !homeAddress.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
@@ -28582,9 +28672,18 @@ const mdosSexMap = [
     text: applicant.legalName.suffix,
     loc: { x: 750, y: 388 }
   }),
-  (applicant) => ({ text: applicant.homeAddress?.street, loc: { x: 57, y: 441 } }),
-  (applicant) => ({ text: applicant.homeAddress?.city, loc: { x: 351, y: 441 } }),
-  (applicant) => ({ text: applicant.homeAddress?.zip, loc: { x: 701, y: 441 } }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    loc: { x: 57, y: 441 }
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    loc: { x: 351, y: 441 }
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    loc: { x: 701, y: 441 }
+  }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
@@ -28632,7 +28731,7 @@ const birthCertMap = [
     fieldName: "Last name"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     fieldName: "address"
   }),
   (applicant) => ({
@@ -31687,7 +31786,7 @@ const changeOfNameMap = [
     fieldName: "6"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     fieldName: "7"
   }),
   (applicant) => ({
@@ -31705,6 +31804,30 @@ const changeOfNameMap = [
   (applicant) => ({
     text: applicant.phone,
     fieldName: "11"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+            case false:
+              return applicant.mailAddress?.poBox ? `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mApt ?? ""}` : `${applicant.mailAddress?.mStreet ?? ""}, ${applicant.mailAddress?.mApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "12"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailCityAndStateAndZip) : "",
+    fieldName: "13"
   }),
   (applicant) => ({
     text: applicant.email,
@@ -31885,7 +32008,7 @@ const birthCertOneMap = [
     loc: { x: 659, y: 723 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     loc: { x: 219, y: 772 }
   })
 ];
@@ -31939,6 +32062,10 @@ const primaryIDRhodeIslandMap = [
     fieldName: "STREET ADDRESS RESIDENCE ADDRESS"
   }),
   (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName: "APTUNIT  or FLOOR"
+  }),
+  (applicant) => ({
     text: applicant.homeAddress?.city,
     fieldName: "CITYTOWN"
   }),
@@ -31949,6 +32076,26 @@ const primaryIDRhodeIslandMap = [
   (applicant) => ({
     text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mStreet : "",
+    fieldName: "STREET ADDRESS MAILING ADDRESS IF DIFFERENT FROM RESIDENCE APTUNIT  or FLOOR"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mApt : "",
+    fieldName: "Text4"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mCity : "",
+    fieldName: "CITYTOWN_2"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.mailAddress?.mState ?? "") : "",
+    fieldName: "STATE_2"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mZip : "",
+    fieldName: "ZIP CODE_2"
   }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
@@ -32002,6 +32149,10 @@ const genderIDMap = [
   (applicant) => ({
     text: applicant.homeAddress?.street,
     fieldName: "RESIDENCE ADDRESS STREET ADDRESS"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName: "APTUNIT  or FLOOR"
   }),
   (applicant) => ({
     text: applicant.homeAddress?.city,
@@ -32098,7 +32249,7 @@ const birthCertTwoMap = [
     loc: { x: 659, y: 723 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     loc: { x: 219, y: 772 }
   })
 ];
@@ -32678,10 +32829,10 @@ function RhodeIslandPC8_1Guide({ person }) {
         " this guide assumes that no one is contesting this name change and every living parent/guardian (including non-custodial) is willing to sign this form and attend your hearing. If not you and your supportive adult will need to get a lawyer or you will need to wait until you are 18. There are links to help find LGBT organizations and lawyers that will help you in the resources section at the bottom of this guide. In the case of a deceased parent/guardian get a certified copy of the death certificate during filing to explain why there is no other signature."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The first form to be filled out is the Change of Name (PC 8.1), because you are a minor a parent/guardian thats going to court with you will need to fill this out and file it on your behalf. On the bottom of the first section have a parent/guardian fill out their mailing address if it's different than your actual address. They should also fill in their occupation and (optionally) their marital status, just below the mothers name box. Right below that there is a checkbox. If it isn't already checked and they have changed their name by court order before, check the “Yes” box and attach a copy of the court order, otherwise check “No”. On the third section near the bottom of page 1 have your parent/guardian fill in any previous addresses that they have lived at.",
+        "The first form to be filled out is the Change of Name (PC 8.1), because you are a minor a parent/guardian thats going to court with you will need to fill this out and file it on your behalf. On the bottom of the first section they should fill in their occupation and (optionally) their marital status, just below the mothers name box. Right below that there is a checkbox. If it isn't already checked and they have changed their name by court order before, check the “Yes” box and attach a copy of the court order, otherwise check “No”. On the third section near the bottom of page 1 have your parent/guardian fill in any previous addresses that they have lived at.",
         parentsAreOkay ? "" : " On page 2 they neeed to fill out their relationship to you on the top right line."
       ] })
-    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The first form to be filled out is the Change of Name (PC 8.1). On the bottom of the first section fill out your mailing address if it's different than your actual address. Fill in your occupation and (optionally) your marital status, just below your mothers name. Right below that there is a checkbox. If it isn't already checked and you have changed your name by court order before, check the “Yes” box and attach a copy of the court order, otherwise check “No”. On the third section near the bottom of page 1 fill in any previous addresses you have lived at." }),
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The first form to be filled out is the Change of Name (PC 8.1). On the bottom of the first section fill in your occupation and (optionally) your marital status, just below your mothers name. Right below that there is a checkbox. If it isn't already checked and you have changed your name by court order before, check the “Yes” box and attach a copy of the court order, otherwise check “No”. On the third section near the bottom of page 1 fill in any previous addresses you have lived at." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       residentLocalityName === "Providence" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "You need to have lived in Providence for at least 6 months to file this form." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "You need to have lived in ",
@@ -33947,7 +34098,7 @@ const feeWaiverNYCMap = [
     loc: { x: 154, y: 914 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     loc: { x: 500, y: 914 }
   }),
   (applicant) => ({
@@ -34041,23 +34192,47 @@ const primaryIDNewYorkMap = [
     fieldName: "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
+    fieldName: "ADDRESS WHERE YOU GET YOUR MAIL Include Street Number and Name Rural Delivery and or box number If PO Post Office Box also fill in Address Where You Live below"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mApt ?? "",
+    fieldName: "ADDRESS WHERE YOU GET YOUR MAIL Apt Apartment No Number"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mCity,
+    fieldName: "ADDRESS WHERE YOU GET YOUR MAIL City or Town"
+  }),
+  (applicant) => ({
+    value: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+    fieldName: "ADDRESS WHERE YOU GET YOUR MAIL State"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mZip,
+    fieldName: "ADDRESS WHERE YOU GET YOUR MAIL Zip Code"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox ? applicant.homeAddress?.street : "",
     fieldName: "ADDRESS WHERE YOU LIVE REQUIRED IF DIFFERENT FROM ADDRESS FOR MAIL DO NOT GIVE PO Post OfficeBOX THIS ADDRESS WILL APPEAR ON YOUR ENHANCED REAL ID IDENTITY DOCUMENT"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: (applicant.streetEqualsMail || applicant.mailAddress?.poBox) && applicant.homeAddress?.apt ? applicant.homeAddress.apt : "",
+    fieldName: "ADDRESS WHERE YOU LIVE Apt Apartment No Number"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox ? applicant.homeAddress?.city : "",
     fieldName: "ADDRESS WHERE YOU LIVE City or Town"
   }),
   (applicant) => ({
-    value: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    value: applicant.streetEqualsMail || applicant.mailAddress?.poBox ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
     fieldName: "ADDRESS WHERE YOU LIVE State"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox ? applicant.homeAddress?.zip : "",
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code"
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox ? applicant.residentLocalityName : "",
     fieldName: "ADDRESS WHERE YOU LIVE County"
   }),
   (applicant) => ({
@@ -34076,11 +34251,7 @@ const vehicleRegistrationMap = [
     choice: "CHANGE A REGISTRATION"
   }),
   (applicant) => ({
-    text: applicant.isChangingLegalName ? `${applicant.chosenName.last},
-      ${applicant.chosenName.first},
-      ${applicant.chosenName.middle}` : `${applicant.legalName.last},
-      ${applicant.legalName.first},
-      ${applicant.legalName.middle}`,
+    text: applicant.isChangingLegalName ? `${applicant.chosenName.last}, ${applicant.chosenName.first}, ${applicant.chosenName.middle}` : `${applicant.legalName.last}, ${applicant.legalName.first}, ${applicant.legalName.middle}`,
     fieldName: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name"
   }),
   (applicant) => ({
@@ -34133,6 +34304,46 @@ const vehicleRegistrationMap = [
   (applicant) => ({
     text: phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mApt ?? "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Apt Apartment No Number"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mCity,
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL City or Town"
+  }),
+  (applicant) => ({
+    value: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL State"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mZip,
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Zip Code"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.street : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail && applicant.homeAddress?.apt ? applicant.homeAddress.apt : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS Apt Apartment No Number"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.city : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS City or Town"
+  }),
+  (applicant) => ({
+    value: !applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS State"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.zip : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS Zip Code"
   }),
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -34326,15 +34537,23 @@ const birthCertNYCMap = [
     fieldName: "S1: Last Name"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
+    fieldName: "S1: Mailing Address"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mApt ?? "",
+    fieldName: "S1: Apartment Number"
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mCity,
     fieldName: "S1: City"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "S1: State"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.mailAddress?.mZip,
     fieldName: "S1: Zip Code"
   }),
   (applicant) => ({
@@ -34500,7 +34719,7 @@ const selfAttestationAdultNYCMap = [
     loc: { page: 1, x: 101, y: 204 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 204 }
   }),
   (applicant) => ({
@@ -34569,7 +34788,7 @@ const selfAttestationMinorNYCMap = [
     loc: { page: 1, x: 542, y: 146 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 210 }
   }),
   (applicant) => ({
@@ -34670,7 +34889,7 @@ function NewYorkBirthCertUpdateGuide({ person }) {
           ":"
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "To change the name and/or gender marker on your birth certificate you will need a copy of the court order, the “Application for the Correction of a NYC Birth Certificate” (VR 172), and the “Attestation Form for Named Parents or Legal Guardians or a Registrant Younger Than 18 Years Old”. For the application a parent/guardian will need to fill out their apartment number (if applicable), marital status, and your birth certificate number at the top of page 2. They will also need to fill out your place of birth at the bottom of page 2. Any parents listed on the birth certificate will need to sign and date at the top of page 4. The only exceptions for this are if one or both of the parents listed on the birth certificate are deceased. If that is the case have certified copies of the death certificate(s) ready. If you have a legal guardian and neither parent listed is alive they need to sign and date the third signature box on page 4. The fee is $40 + (the number of requested copies x $15). For one copy the fee should be $55, fill in the fee information on page 4 accordingly."
+        "To change the name and/or gender marker on your birth certificate you will need a copy of the court order, the “Application for the Correction of a NYC Birth Certificate” (VR 172), and the “Attestation Form for Named Parents or Legal Guardians or a Registrant Younger Than 18 Years Old”. For the application a parent/guardian will need to fill out their marital status and your birth certificate number at the top of page 2. They will also need to fill out your place of birth at the bottom of page 2. Any parents listed on the birth certificate will need to sign and date at the top of page 4. The only exceptions for this are if one or both of the parents listed on the birth certificate are deceased. If that is the case have certified copies of the death certificate(s) ready. If you have a legal guardian and neither parent listed is alive they need to sign and date the third signature box on page 4. The fee is $40 + (the number of requested copies x $15). For one copy the fee should be $55, fill in the fee information on page 4 accordingly."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "For the self-attestation form have a parent/guardian fill in any blanks for sections 1 through 3. Section 4 can only be completed in front of a notary so do ",
@@ -34685,10 +34904,10 @@ function NewYorkBirthCertUpdateGuide({ person }) {
           ":"
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        "To change the name and/or gender marker on your birth certificate you will need a copy of your court order, the “Application for the Correction of a NYC Birth Certificate” (VR 172), and the “Self-Attestation Form for Registrants 18 Years of Age and Older”. Use black ink when filling out the forms. For the Application you will need to fill out your mailing address, apartment number (if applicable), Marital status, and birth certificate number at the top of page 2. You will also need to fill out your place of birth at the bottom of page 2. You can then sign and date on page 4 in the bottom signature box marked “Your Signature”. The fee is $40 + (the number of requested copies x $15). For one copy the fee should be $55, fill in the fee information on page 4 accordingly."
+        "To change the name and/or gender marker on your birth certificate you will need a copy of your court order, the “Application for the Correction of a NYC Birth Certificate” (VR 172), and the “Self-Attestation Form for Registrants 18 Years of Age and Older”. Use black ink when filling out the forms. For the Application you will need to fill out your marital status and birth certificate number at the top of page 2. You will also need to fill out your place of birth at the bottom of page 2. You can then sign and date on page 4 in the bottom signature box marked “Your Signature”. The fee is $40 + (the number of requested copies x $15). For one copy the fee should be $55, fill in the fee information on page 4 accordingly."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "For the self-attestation form you will need to enter your birth certificate number in the “certificate number” box. Also add an apartment number to the street address, if applicable. The Attestation part below must be signed in front of a notary so do",
+        "For the self-attestation form you will need to enter your birth certificate number in the “certificate number” box. The Attestation part below must be signed in front of a notary so do",
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
         " sign until then.",
@@ -34802,7 +35021,7 @@ function NewYorkDMVGuide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating Primary ID (NY)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "To update your primary ID you will need the “Application for Permit, Driver License or Non-Driver ID Card” (MV-44). Fill it out any blanks in the following sections digitally or using black ink. Check the box for what ID you want in the top left. If you have or ever had a New York ID fill out the “Identification Information” section. For any other state fill out the boxes just below and to the right of that section. Fill out the Height, Eye Color, and Social Security boxes. We left the “Address where you get your Mail” box intentionally blank just in case it's different than your lived address, please fill it in. If either address is different than the one they have on file check the boxes below that section. We have also left the veteran status and organ donor boxes blank for you to fill as needed. Do ",
+      "To update your primary ID you will need the “Application for Permit, Driver License or Non-Driver ID Card” (MV-44). Fill it out any blanks in the following sections digitally or using black ink. Check the box for what ID you want in the top left. If you have or ever had a New York ID fill out the “Identification Information” section. For any other state fill out the boxes just below and to the right of that section. Fill out the Height, Eye Color, and Social Security boxes. If your mailing or residential address is different than the one they have on file check the boxes below the address section. We have also left the veteran status and organ donor boxes blank for you to fill as needed. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " check the box in the Selective Service section. On Page 2 answer questions 1 through 4. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
@@ -36148,12 +36367,8 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 2, x: 403, y: 275 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { page: 2, x: 103, y: 326 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { page: 2, x: 350, y: 326 }
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -36251,12 +36466,8 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 2, x: 403, y: 413 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { page: 2, x: 102, y: 482 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { page: 2, x: 350, y: 482 }
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -36287,12 +36498,8 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 4, x: 403, y: 710 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { page: 4, x: 103, y: 762 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { page: 4, x: 350, y: 762 }
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -36369,12 +36576,8 @@ const feeWaiverOregonMap = [
     loc: { page: 3, x: 402, y: 636 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { page: 3, x: 103, y: 688 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { page: 3, x: 350, y: 688 }
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -36401,12 +36604,8 @@ const feeWaiverOregonMap = [
     loc: { page: 5, x: 403, y: 391 }
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     loc: { page: 5, x: 103, y: 443 }
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { page: 5, x: 350, y: 443 }
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -36432,7 +36631,7 @@ const birthCertOregonMap = [
     fieldName: "Applicant current legal last"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     fieldName: "Applicant residential address"
   }),
   (applicant) => ({
@@ -36446,6 +36645,10 @@ const birthCertOregonMap = [
   (applicant) => ({
     text: applicant.homeAddress?.zip,
     fieldName: "App res zip"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "Mailing Address if different"
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -36612,6 +36815,10 @@ const voterOregonMap = [
     fieldName: "Email"
   }),
   (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.MailFullAddress),
+    fieldName: "Mailing Address"
+  }),
+  (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "Preious Registration Name"
   })
@@ -36690,10 +36897,9 @@ function OregonBirthCertUpdateGuide({ person }) {
           "A court case is not required to update your information, instead it can be updated by changing your birth certificate information and updating everything else using that.",
           " "
         ] }) : "",
-        "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. If your parents/guardians mailing address is different from their listed address they will need to put it in number 3. They will also need to fill out items 6 and 15. Do ",
+        "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. Your parents/guardians will need to fill out items 6 and 15. Do ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-        " ",
-        "sign/date the form until a notary instructs you to do so."
+        " sign/date the form until a notary instructs you to do so."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Notaries can be found in court buildings, banks,",
@@ -36717,10 +36923,9 @@ function OregonBirthCertUpdateGuide({ person }) {
       ] })
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. If your mailing address is different from your listed address put it in number 3. You will then need to fill out item 15, specifically the number of copies that you want and what form you want them in. Do ",
+        "The form used to update a birth certificate is the “Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity”. You will need to fill out item 15, specifically the number of copies that you want and what form you want them in. Do ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-        " ",
-        "sign/date the form until a notary instructs you to do so."
+        " sign/date the form until a notary instructs you to do so."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Notaries can be found in court buildings, banks,",
@@ -37684,7 +37889,7 @@ const adultNamePetitionAlaskaMap = [
   }),
   () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "date2" }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     fieldName: "mailingAddress"
   }),
   (applicant) => ({
@@ -37711,7 +37916,7 @@ const minorNamePetitionAlaskaMap = [
     fieldName: "phoneNo"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     fieldName: "address"
   }),
   (applicant) => ({
@@ -37891,7 +38096,7 @@ const adultWaivePublicationAlaskaMap = [
     fieldName: "ITMO"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     fieldName: "mailing"
   }),
   (applicant) => ({
@@ -37922,7 +38127,7 @@ const minorWaivePublicationAlaskaMap = [
     fieldName: "petitioner"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     fieldName: "mailing"
   }),
   (applicant) => ({
@@ -37955,6 +38160,29 @@ const feeWaiverAlaskaMap = [
   () => ({
     check: true,
     fieldName: "filingFee"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "phone"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    fieldName: "DOB"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "residenceAddress"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : formatContactInfo(applicant, ContactFormat.MailFullAddress),
+    fieldName: "mailingAddress"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "email"
   })
 ];
 /*!
@@ -37980,7 +38208,7 @@ const additionalServiceAlaskaMap = [
     fieldName: "yourName"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
     fieldName: "mailingAddress"
   })
 ];
@@ -38027,7 +38255,15 @@ const primaryIDAlaskaMap = [
     fieldName: "Text12"
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : formatContactInfo(applicant, ContactFormat.MailFullAddress),
+    fieldName: "Text13"
+  }),
+  (applicant) => ({
+    check: applicant.streetEqualsMail,
+    fieldName: "Check Box14"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : "",
     fieldName: "Text15"
   }),
   (applicant) => ({
@@ -38115,6 +38351,23 @@ const birthCertRequestAlaskaMap = [
   (applicant) => ({
     text: applicant.phone,
     fieldName: "Phone number"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Street  PO Box"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip) : formatContactInfo(applicant, ContactFormat.MailCityAndStateAndZip),
+    fieldName: "City, State, Zip"
   }),
   () => ({
     check: true,
@@ -38326,7 +38579,7 @@ function AlaskaCIV708Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Posting in Adult Change of Name Case (AK, CIV-708)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The “Request to Waive Posting in Adult Change of Name Case” (CIV-708) allows you to ask the court to not publish details of your name change case to the Alaska Court Systems legal notice website and potentially further seal the case records as necessary. Simply filling out items 3 and 4 is enough to request removal of publication but if you need to further seal the records check the applicable boxes on item 2. Please give a description explaining why you need this action taken in item 3, the court is looking for things like stalkers, or known specific threats. Please be prompt but detailed in the reason and bring supporting evidence if you have it. Do ",
+      "The “Request to Waive Posting in Adult Change of Name Case” (CIV-708) allows you to ask the court to not publish details of your name change case to the Alaska Court Systems legal notice website and potentially further seal the case records as necessary. Simply filling out items 3 and 4 is enough to request removal of publication but if you need to further seal the records check the applicable boxes on item 2. Please give a description explaining why you need this action taken in item 3, the court is looking for things like stalkers or known specific threats. Please be prompt but detailed in the reason and bring supporting evidence if you have it. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign or date this form until instructed by a notary or court clerk."
     ] })
@@ -39686,34 +39939,28 @@ const minorChildInfoMap = [
     choice: "parent with custody/parental decision-making responsibility"
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "12 - Checkboxes",
-    choice: "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 382 }
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "13 - Checkboxes",
-    choice: "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 449 }
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "14 - Checkboxes",
-    choice: "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 516 }
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "15 - Checkboxes",
-    choice: "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 606 }
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "16 - Checkboxes",
-    choice: "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 717 }
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "18 - Checkboxes",
-    choice: "No"
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 2, x: 178, y: 180 }
   }),
   () => ({
     check: true,
@@ -39728,7 +39975,7 @@ const minorChildInfoMap = [
     fieldName: "36 - Checkboxes"
   }),
   (applicant) => ({
-    text: applicant.reasonForNameChange ?? applicant.reasonForNameChange,
+    text: applicant.reasonForNameChange,
     fieldName: "38 - Other"
   }),
   (applicant) => ({
@@ -39965,6 +40212,10 @@ const dmvGenderDesignationMap = [
     fieldName: "6"
   }),
   (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName: "7"
+  }),
+  (applicant) => ({
     text: applicant.homeAddress?.city,
     fieldName: "8"
   }),
@@ -40097,7 +40348,7 @@ const birthCertCorrectionMap = [
     fieldName: "How it should read 2"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
     loc: { page: 1, x: 545, y: 652 }
   }),
   (applicant) => ({
@@ -42086,19 +42337,28 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].phonenumber[0]"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "topmostSubform[0].Page5[0].streetaddress[0]"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mCity,
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]"
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName ?? "",
+    text: applicant.streetEqualsMail ? applicant.residentJurisdictionName : applicant.mailAddress?.mState,
     fieldName: "topmostSubform[0].Page5[0].state[0]"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mZip,
     fieldName: "topmostSubform[0].Page5[0].zipcode[0]"
   }),
   (applicant) => ({
@@ -42181,23 +42441,41 @@ const ds5504Map = [
     fieldName: "App Phone 3"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB"
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.streetEqualsMail ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt ?? ""}` : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt ?? ""}`;
+        case false:
+          return applicant.streetEqualsMail ? applicant.homeAddress?.apt : applicant.mailAddress?.mApt;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 2"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mCity,
     fieldName: "App Mailing City"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "App Mailing State"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mZip,
     fieldName: "App Mailing Zip"
   }),
   (applicant) => ({
@@ -42231,6 +42509,26 @@ const ds5504Map = [
       separator: "/"
     }),
     fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.street : "",
+    fieldName: "Permanent Address Street"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.apt : "",
+    fieldName: "Perm Apartment/Unit"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.city : "",
+    fieldName: "Permanent Address City"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
+    fieldName: "Permanent Address State"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.zip : "",
+    fieldName: "Permanent Address Zip Code"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? "X" : "",
@@ -42344,23 +42642,41 @@ const ds82Map = [
     fieldName: "App Phone 3"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 1"
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.streetEqualsMail ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt ?? ""}` : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt ?? ""}`;
+        case false:
+          return applicant.streetEqualsMail ? applicant.homeAddress?.apt : applicant.mailAddress?.mApt;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 2"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mCity,
     fieldName: "App Mailing Address City"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "App Mailing Address State"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mZip,
     fieldName: "App Mailing Address Zip Code"
   }),
   (applicant) => ({
@@ -42398,6 +42714,26 @@ const ds82Map = [
       separator: "/"
     }),
     fieldName: "Date of Birth 2"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.street : "",
+    fieldName: "Permanent Address Street"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.apt : "",
+    fieldName: "Perm Apartment/Unit"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.city : "",
+    fieldName: "Permanent Address City"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
+    fieldName: "Permanent Address State"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.zip : "",
+    fieldName: "Permanent Address Zip Code"
   })
 ];
 /*!
@@ -42451,23 +42787,41 @@ const ds11Map = [
     fieldName: "Applicant Email"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Applicant Address Street"
   }),
   (applicant) => ({
-    text: isMinor(applicant) ? `In Care Of - ${fullName(representativeName(applicant))}` : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.streetEqualsMail ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt ?? ""}` : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt ?? ""}`;
+        case false:
+          return applicant.streetEqualsMail ? applicant.homeAddress?.apt : applicant.mailAddress?.mApt;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Address Line 2"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mCity,
     fieldName: "Applicant Address City"
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "Applicant Address State"
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mZip,
     fieldName: "Applicant Address Zip Code"
   }),
   (applicant) => ({
@@ -42547,6 +42901,26 @@ const ds11Map = [
   () => ({
     text: "X",
     loc: { page: 5, x: 687, y: 237 }
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.street : "",
+    fieldName: "Permanent Address Street"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.apt : "",
+    fieldName: "Permanent Address Apartment/Unit"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.city : "",
+    fieldName: "Permanent Address City"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
+    fieldName: "Permanent Address State"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.homeAddress?.zip : "",
+    fieldName: "Permanent Address Zip Code"
   })
 ];
 /*!
@@ -42695,7 +43069,7 @@ function DS11Guide({ person }) {
       gender && gender === "X" ? " X markers are no longer available, you will need to check M or F in section 3. " : " "
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. In section 6 if you are not a US citizen fill out your USCIS number from your green card  or form I-551 if applicable. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already there. For the photo we suggest going to a business for the highest chance of success. ",
+      "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. In section 6 if you are NOT a US citizen fill out your USCIS number from your green card  or form I-551 if applicable. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already there. For the photo we suggest going to a business for the highest chance of success. ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Do not staple it to the form yet." }),
       " ",
       'For section 10 on page 6 fill out your parents place of birth and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
@@ -43920,11 +44294,11 @@ const fields = {
     name: "phone",
     type: "string"
   },
-  homeAddress: {
-    title: "Home Address",
-    subtitle: "Address where you live. The apartment field is optional.",
-    name: "homeAddress",
-    type: "homeAddress"
+  mailAddress: {
+    title: "Mailing Address",
+    subtitle: "Address where you get your mail. Leave fields blank as needed.",
+    name: "mailAddress",
+    type: "mailAddress"
   },
   streetEqualsMail: {
     title: "My home address is the same as my mailing address.",
@@ -43932,11 +44306,11 @@ const fields = {
     name: "streetEqualsMail",
     type: "boolean"
   },
-  mailAddress: {
-    title: "Mailing Address",
-    subtitle: "Address where you get your mail. Leave fields blank as needed.",
-    name: "mailAddress",
-    type: "mailAddress"
+  homeAddress: {
+    title: "Home Address",
+    subtitle: "Address where you live. The apartment field is optional.",
+    name: "homeAddress",
+    type: "homeAddress"
   },
   email: {
     title: "Email address",
