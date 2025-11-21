@@ -429,13 +429,12 @@ export const primaryIDNewYorkMap: Formfill[] = [
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox 
-      ? applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL Include Street Number and Name Rural Delivery and or box number If PO Post Office Box also fill in Address Where You Live below",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mApt ? applicant.mailAddress?.mApt : "",
+    text: applicant.mailAddress?.mApt ?? "",
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL Apt Apartment No Number",
   }),
@@ -462,7 +461,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
   }),
   (applicant) => ({
     text: (applicant.streetEqualsMail || applicant.mailAddress?.poBox) && applicant.homeAddress?.apt 
-      ? applicant.homeAddress?.apt : "",
+      ? applicant.homeAddress.apt : "",
     fieldName:
       "ADDRESS WHERE YOU LIVE Apt Apartment No Number",
   }),
@@ -563,13 +562,12 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox 
-      ? applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mApt ? applicant.mailAddress?.mApt : "",
+    text: applicant.mailAddress?.mApt ?? "",
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Apt Apartment No Number",
   }),
@@ -596,7 +594,7 @@ export const vehicleRegistrationMap: Formfill[] = [
   }),
   (applicant) => ({
     text: !applicant.streetEqualsMail && applicant.homeAddress?.apt 
-      ? applicant.homeAddress?.apt : "",
+      ? applicant.homeAddress.apt : "",
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS Apt Apartment No Number",
   }),
@@ -844,12 +842,11 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S1: Last Name",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ? 
-      applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
     fieldName: "S1: Mailing Address",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mApt ? applicant.mailAddress?.mApt : "",
+    text: applicant.mailAddress?.mApt ?? "",
     fieldName: "S1: Apartment Number",
   }),
   (applicant) => ({

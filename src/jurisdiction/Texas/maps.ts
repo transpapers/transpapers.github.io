@@ -1987,12 +1987,11 @@ export const primaryIDTexasMap: Formfill[] = [
         case true:
           switch (!applicant.mailAddress?.mApt) {
           case true:
-            return applicant.mailAddress?.poBox ?
-            applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet;
+            return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
           case false:
             return applicant.mailAddress?.poBox
-            ? `${applicant.mailAddress?.poBox}, ${applicant.mailAddress?.mApt}`
-            : `${applicant.mailAddress?.mStreet}, ${applicant.mailAddress?.mApt}`;
+            ? `${applicant.mailAddress.poBox}, ${applicant.mailAddress.mApt}`
+            : `${applicant.mailAddress?.mStreet ?? ""}, ${applicant.mailAddress?.mApt ?? ""}`;
           default:
             return "";
           }

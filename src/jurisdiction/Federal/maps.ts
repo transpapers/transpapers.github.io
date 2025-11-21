@@ -497,9 +497,7 @@ export const ds82Map: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox 
-            ? applicant.mailAddress.poBox 
-            : applicant.mailAddress?.mStreet;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
         default:
           return "";
       }
@@ -511,8 +509,8 @@ export const ds82Map: Formfill[] = [
       switch (isMinor(applicant)) {
         case true:
           return applicant.streetEqualsMail 
-            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt}` 
-            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt}`;
+            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt ?? ""}` 
+            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt ?? ""}`;
         case false:
           return applicant.streetEqualsMail 
             ? applicant.homeAddress?.apt 
@@ -671,9 +669,7 @@ export const ds11Map: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox 
-            ? applicant.mailAddress.poBox 
-            : applicant.mailAddress?.mStreet;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
         default:
           return "";
       }
@@ -685,8 +681,8 @@ export const ds11Map: Formfill[] = [
       switch (isMinor(applicant)) {
         case true:
           return applicant.streetEqualsMail 
-            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt}` 
-            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt}`;
+            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt ?? ""}` 
+            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt ?? ""}`;
         case false:
           return applicant.streetEqualsMail 
             ? applicant.homeAddress?.apt 
@@ -876,13 +872,13 @@ export const statusLetterMap: Formfill[] = [
       switch (applicant.streetEqualsMail) {
         case true:
           return applicant.homeAddress?.apt
-            ? `${allCAPS(applicant.homeAddress?.street)}, ${allCAPS(applicant.homeAddress?.apt)}`
+            ? `${allCAPS(applicant.homeAddress.street)}, ${allCAPS(applicant.homeAddress.apt)}`
             : allCAPS(applicant.homeAddress?.street);
         case false:
           switch (applicant.mailAddress?.poBox) {
             case undefined:
               return applicant.mailAddress?.mApt 
-                ? `${allCAPS(applicant.mailAddress?.mStreet)}, ${allCAPS(applicant.mailAddress?.mApt)}` 
+                ? `${allCAPS(applicant.mailAddress.mStreet)}, ${allCAPS(applicant.mailAddress.mApt)}` 
                 : applicant.mailAddress?.mStreet;
             default:
               return applicant.mailAddress?.poBox;
