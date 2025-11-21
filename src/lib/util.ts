@@ -449,7 +449,7 @@ export function formatContactInfo(
       if (!mailAddress?.mCity || !mailAddress.mState || !mailAddress.mZip) {
         return undefined;
       }
-      return `${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState ?? "")}, ${mailAddress.mZip}`;
+      return `${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""}, ${mailAddress.mZip}`;
 
     case ContactFormat.ResidentCityAndLocalityAndStateAndZip:
       if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
@@ -474,20 +474,20 @@ export function formatContactInfo(
       }
 
     case ContactFormat.MailFullAddress:
-      if (!mailAddress?.mStreet || !mailAddress?.mCity || !mailAddress?.mState || !mailAddress?.mZip) {
+      if (!mailAddress?.mStreet || !mailAddress.mCity || !mailAddress.mState || !mailAddress.mZip) {
         return undefined;
       }
-      if (!mailAddress?.mApt) {
-        if (!mailAddress?.poBox) {
-          return `${mailAddress.poBox}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState ?? "")} ${mailAddress.mZip}`;
+      if (!mailAddress.mApt) {
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         } else {
-          return `${mailAddress.mStreet}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState ?? "")} ${mailAddress.mZip}`;
+          return `${mailAddress.mStreet}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         }
       } else {
-        if (!mailAddress?.poBox) {
-          return `${mailAddress.poBox}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState ?? "")} ${mailAddress.mZip}`;
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         } else {
-          return `${mailAddress.mStreet} ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState ?? "")} ${mailAddress.mZip}`;
+          return `${mailAddress.mStreet} ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         }
       }
 
