@@ -49,6 +49,7 @@ describe("neededFieldNames()", () => {
       "residentLocalityName",
       "sealBirthCertificate",
       "homeAddress",
+      "mailAddress",
     ];
 
     const received = neededFieldNames(michiganNameChange);

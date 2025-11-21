@@ -615,11 +615,6 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS Zip Code",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail 
-      ? applicant.residentLocalityName : "",
-    fieldName: "ADDRESS WHERE YOU LIVE County",
-  }),
-  (applicant) => ({
     text: applicant.residentLocalityName,
     fieldName: "County of Residence",
   }),
