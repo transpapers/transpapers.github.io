@@ -321,7 +321,7 @@ export const feeWaiverNYCMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { x: 500, y: 914 },
   }),
@@ -1044,7 +1044,7 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 204 },
   }),
@@ -1119,7 +1119,7 @@ export const selfAttestationMinorNYCMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 210 },
   }),

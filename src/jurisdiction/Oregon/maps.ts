@@ -443,7 +443,7 @@ export const birthCertOregonMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Applicant residential address",
   }),

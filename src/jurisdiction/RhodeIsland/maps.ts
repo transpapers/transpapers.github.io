@@ -63,7 +63,7 @@ export const changeOfNameMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "7",
   }),

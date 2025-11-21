@@ -152,9 +152,7 @@ export const ssnMap: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox 
-            ? applicant.mailAddress.poBox 
-            : applicant.mailAddress?.mStreet;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
         default:
           return "";
       }
@@ -270,9 +268,7 @@ export const ds5504Map: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox 
-            ? applicant.mailAddress.poBox 
-            : applicant.mailAddress?.mStreet;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
         default:
           return "";
       }
@@ -284,8 +280,8 @@ export const ds5504Map: Formfill[] = [
       switch (isMinor(applicant)) {
         case true:
           return applicant.streetEqualsMail 
-            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt}` 
-            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt}`;
+            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt ?? ""}` 
+            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt ?? ""}`;
         case false:
           return applicant.streetEqualsMail 
             ? applicant.homeAddress?.apt 

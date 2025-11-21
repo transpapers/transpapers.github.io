@@ -697,7 +697,7 @@ export const birthCertCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 1, x: 545, y: 652 },
   }),

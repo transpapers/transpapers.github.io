@@ -601,9 +601,7 @@ export const birthCertRequestAlaskaMap: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox 
-            ? applicant.mailAddress.poBox 
-            : applicant.mailAddress?.mStreet;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
         default:
           return "";
       }

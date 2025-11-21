@@ -115,7 +115,7 @@ export const adultChangeOfNameMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "ADDRESS_2",
   }),
@@ -203,7 +203,7 @@ export const minorChangeOfNameMap: Formfill[] = [
       switch (applicant.parentsAreOkay) {
         case true:
           return applicant.homeAddress?.apt
-            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
             : applicant.homeAddress?.street;
         case false:
           return "";
@@ -240,7 +240,7 @@ export const minorChangeOfNameMap: Formfill[] = [
       switch (applicant.parentsAreOkay) {
         case true:
           return applicant.homeAddress?.apt
-            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
             : applicant.homeAddress?.street;
         case false:
           return "";
@@ -275,7 +275,7 @@ export const minorChangeOfNameMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "ADDRESS_4",
   }),
@@ -658,7 +658,7 @@ export const hearingNoticeMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "ADDRESS",
   }),
@@ -846,7 +846,7 @@ export const birthCertOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
@@ -930,7 +930,7 @@ export const bmvGenderDeclarationMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 1, x: 45, y: 223 },
   }),
@@ -1002,7 +1002,7 @@ export const birthCertUpdateMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),

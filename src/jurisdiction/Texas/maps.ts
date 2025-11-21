@@ -72,7 +72,7 @@ export const nameChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Text2",
   }),
@@ -187,7 +187,7 @@ export const nameChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "my date of birth is",
   }),
@@ -247,7 +247,7 @@ export const nameChangeOrderAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Street address",
   }),
@@ -530,7 +530,7 @@ export const genderChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 3, x: 200, y: 281 },
   }),
@@ -580,7 +580,7 @@ export const genderChangeAdultMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 4, x: 255, y: 696 },
   }),
@@ -1807,7 +1807,7 @@ export const caseInformationMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
@@ -1961,7 +1961,7 @@ export const primaryIDTexasMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Residence Address",
   }),
@@ -2210,7 +2210,7 @@ export const birthCertNameCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
@@ -2232,7 +2232,7 @@ export const birthCertNameCorrectionMap: Formfill[] = [
       switch (isMinor(applicant) && applicant.parentsAreOkay) {
         case true:
           return applicant.homeAddress?.apt
-            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
             : applicant.homeAddress?.street;
         case false:
           return "";
@@ -2454,7 +2454,7 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
@@ -2476,7 +2476,7 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
       switch (isMinor(applicant) && applicant.parentsAreOkay) {
         case true:
           return applicant.homeAddress?.apt
-            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
             : applicant.homeAddress?.street;
         case false:
           return "";
@@ -2728,7 +2728,7 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
@@ -2750,7 +2750,7 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
       switch (isMinor(applicant) && applicant.parentsAreOkay) {
         case true:
           return applicant.homeAddress?.apt
-            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
             : applicant.homeAddress?.street;
         case false:
           return "";
@@ -2790,7 +2790,7 @@ export const andersonCountyMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,
     loc: { page: 1, x: 405, y: 879 },
   }),

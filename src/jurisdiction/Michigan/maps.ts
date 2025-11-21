@@ -542,7 +542,7 @@ export const mdosSexMap: Formfill[] = [
   }),
   (applicant) => ({ 
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street, 
     loc: { x: 57, y: 441 } 
   }),
@@ -612,7 +612,7 @@ export const birthCertMap: Formfill[] = [
   }),
   (applicant) => ({ 
     text: applicant.homeAddress?.apt
-      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}`
       : applicant.homeAddress?.street,  
     fieldName: "address", 
   }),
