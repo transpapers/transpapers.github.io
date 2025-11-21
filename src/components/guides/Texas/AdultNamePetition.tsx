@@ -56,7 +56,6 @@ function TexasAdultNamePetitionGuide({ person }: { person: Partial<Person> }) {
       )}
 
       <p>
-        In section 5 you will need to sign and provide your mailing address.
         Section 6 has you sign under penalty of perjury meaning it is a crime to
         lie on this form so double check that everything is correct before
         signing. Finally sign and date at the bottom of section 6 to complete

@@ -271,34 +271,28 @@ export const minorChildInfoMap: Formfill[] = [
     choice: "parent with custody/parental decision-making responsibility",
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "12 - Checkboxes",
-    choice: "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 382 },
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "13 - Checkboxes",
-    choice: "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 449 },
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "14 - Checkboxes",
-    choice: "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 516 },
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "15 - Checkboxes",
-    choice: "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 606 },
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "16 - Checkboxes",
-    choice: "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 1, x: 178, y: 717 },
   }),
   (applicant) => ({
-    check: !applicant.hasCriminalRecord,
-    fieldName: "18 - Checkboxes",
-    choice: "No",
+    text: !applicant.hasCriminalRecord ? "X" : "",
+    loc: { page: 2, x: 178, y: 180 },
   }),
   () => ({
     check: true,
@@ -313,7 +307,7 @@ export const minorChildInfoMap: Formfill[] = [
     fieldName: "36 - Checkboxes",
   }),
   (applicant) => ({
-    text: applicant.reasonForNameChange ?? applicant.reasonForNameChange,
+    text: applicant.reasonForNameChange,
     fieldName: "38 - Other",
   }),
   (applicant) => ({
@@ -558,6 +552,10 @@ export const dmvGenderDesignationMap: Formfill[] = [
     fieldName: "6",
   }),
   (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName: "7",
+  }),
+  (applicant) => ({
     text: applicant.homeAddress?.city,
     fieldName: "8",
   }),
@@ -698,7 +696,9 @@ export const birthCertCorrectionMap: Formfill[] = [
     fieldName: "How it should read 2",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 1, x: 545, y: 652 },
   }),
   (applicant) => ({

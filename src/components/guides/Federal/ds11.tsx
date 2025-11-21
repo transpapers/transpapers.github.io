@@ -53,7 +53,7 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
         Pages 1-4 of your passport application (DS-11) contain instructions and
         clarification. On page 5 at the top you will need to select which
         documents you want. Then fill out your social security number in section 
-        5. In section 6 if you are not a US citizen fill out your USCIS number from 
+        5. In section 6 if you are NOT a US citizen fill out your USCIS number from 
         your green card  or form I-551 if applicable. If you have changed your name 
         multiple times before then you will need to add them to section 9 if they 
         are not already there. For the photo we suggest going to a business for the 

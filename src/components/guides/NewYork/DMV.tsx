@@ -37,10 +37,8 @@ function NewYorkDMVGuide({ person }: { person: Partial<Person> }) {
         New York ID fill out the &ldquo;Identification Information&rdquo;
         section. For any other state fill out the boxes just below and to the
         right of that section. Fill out the Height, Eye Color, and Social
-        Security boxes. We left the &ldquo;Address where you get your
-        Mail&rdquo; box intentionally blank just in case it&apos;s different
-        than your lived address, please fill it in. If either address is
-        different than the one they have on file check the boxes below that
+        Security boxes. If your mailing or residential address is different 
+        than the one they have on file check the boxes below the address
         section. We have also left the veteran status and organ donor boxes
         blank for you to fill as needed. Do <strong>not</strong> check the box
         in the Selective Service section. On Page 2 answer questions 1 through

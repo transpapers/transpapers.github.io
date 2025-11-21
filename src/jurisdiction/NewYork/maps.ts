@@ -32,6 +32,7 @@ import {
   ContactFormat as cf,
   formatContactInfo,
   getNYLocality,
+  abbreviateJurisdiction,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -319,7 +320,9 @@ export const feeWaiverNYCMap: Formfill[] = [
     loc: { x: 154, y: 914 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { x: 500, y: 914 },
   }),
   (applicant) => ({
@@ -426,25 +429,62 @@ export const primaryIDNewYorkMap: Formfill[] = [
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.mailAddress?.poBox 
+      ? applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet,
+    fieldName:
+      "ADDRESS WHERE YOU GET YOUR MAIL Include Street Number and Name Rural Delivery and or box number If PO Post Office Box also fill in Address Where You Live below",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mApt ? applicant.mailAddress?.mApt : "",
+    fieldName:
+      "ADDRESS WHERE YOU GET YOUR MAIL Apt Apartment No Number",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mCity,
+    fieldName:
+      "ADDRESS WHERE YOU GET YOUR MAIL City or Town",
+  }),
+  (applicant) => ({
+    value: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+    fieldName:
+      "ADDRESS WHERE YOU GET YOUR MAIL State",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mZip,
+    fieldName:
+      "ADDRESS WHERE YOU GET YOUR MAIL Zip Code",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
+      ? applicant.homeAddress?.street : "",
     fieldName:
       "ADDRESS WHERE YOU LIVE REQUIRED IF DIFFERENT FROM ADDRESS FOR MAIL DO NOT GIVE PO Post OfficeBOX THIS ADDRESS WILL APPEAR ON YOUR ENHANCED REAL ID IDENTITY DOCUMENT",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: (applicant.streetEqualsMail || applicant.mailAddress?.poBox) && applicant.homeAddress?.apt 
+      ? applicant.homeAddress?.apt : "",
+    fieldName:
+      "ADDRESS WHERE YOU LIVE Apt Apartment No Number",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
+      ? applicant.homeAddress?.city : "",
     fieldName: "ADDRESS WHERE YOU LIVE City or Town",
   }),
   (applicant) => ({
     value: 
-      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+      applicant.streetEqualsMail || applicant.mailAddress?.poBox 
+        ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
     fieldName: "ADDRESS WHERE YOU LIVE State",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
+      ? applicant.homeAddress?.zip : "",
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code",
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
+      ? applicant.residentLocalityName : "",
     fieldName: "ADDRESS WHERE YOU LIVE County",
   }),
   (applicant) => ({
@@ -467,12 +507,8 @@ export const vehicleRegistrationMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName
-      ? `${applicant.chosenName.last},
-      ${applicant.chosenName.first},
-      ${applicant.chosenName.middle}`
-      : `${applicant.legalName.last},
-      ${applicant.legalName.first},
-      ${applicant.legalName.middle}`,
+      ? `${applicant.chosenName.last}, ${applicant.chosenName.first}, ${applicant.chosenName.middle}`
+      : `${applicant.legalName.last}, ${applicant.legalName.first}, ${applicant.legalName.middle}`,
     fieldName: "NAME OF PRIMARY REGISTRANT Last First Middle or Business Name",
   }),
   (applicant) => ({
@@ -525,6 +561,65 @@ export const vehicleRegistrationMap: Formfill[] = [
   (applicant) => ({
     text: phoneStart(applicant.phone) + "-" + phoneEnd(applicant.phone),
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.poBox 
+      ? applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet,
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mApt ? applicant.mailAddress?.mApt : "",
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Apt Apartment No Number",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mCity,
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL City or Town",
+  }),
+  (applicant) => ({
+    value: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL State",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mZip,
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Zip Code",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail 
+      ? applicant.homeAddress?.street : "",
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail && applicant.homeAddress?.apt 
+      ? applicant.homeAddress?.apt : "",
+    fieldName:
+      "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS Apt Apartment No Number",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail
+      ? applicant.homeAddress?.city : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS City or Town",
+  }),
+  (applicant) => ({
+    value: 
+      !applicant.streetEqualsMail
+        ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS State",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail 
+      ? applicant.homeAddress?.zip : "",
+    fieldName: "THE ADDRESS WHERE PRIMARY REGISTRANT RESIDES IF DIFFERENT FROM THE MAILING ADDRESS Zip Code",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail 
+      ? applicant.residentLocalityName : "",
+    fieldName: "ADDRESS WHERE YOU LIVE County",
   }),
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -749,16 +844,25 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S1: Last Name",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.mailAddress?.poBox ? 
+      applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet,
+    fieldName: "S1: Mailing Address",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mApt ? applicant.mailAddress?.mApt : "",
+    fieldName: "S1: Apartment Number",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mCity,
     fieldName: "S1: City",
   }),
   (applicant) => ({
     text: 
-      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+      abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "S1: State",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.mailAddress?.mZip,
     fieldName: "S1: Zip Code",
   }),
   (applicant) => ({
@@ -939,7 +1043,9 @@ export const selfAttestationAdultNYCMap: Formfill[] = [
     loc: { page: 1, x: 101, y: 204 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 204 },
   }),
   (applicant) => ({
@@ -1012,7 +1118,9 @@ export const selfAttestationMinorNYCMap: Formfill[] = [
     loc: { page: 1, x: 542, y: 146 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 1, x: 353, y: 210 },
   }),
   (applicant) => ({

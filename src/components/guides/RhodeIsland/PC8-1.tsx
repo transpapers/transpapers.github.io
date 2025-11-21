@@ -49,15 +49,13 @@ function RhodeIslandPC8_1Guide({ person }: { person: Partial<Person> }) {
             The first form to be filled out is the Change of Name (PC 8.1),
             because you are a minor a parent/guardian thats going to court with
             you will need to fill this out and file it on your behalf. On the
-            bottom of the first section have a parent/guardian fill out their
-            mailing address if it&apos;s different than your actual address.
-            They should also fill in their occupation and (optionally) their
-            marital status, just below the mothers name box. Right below that
-            there is a checkbox. If it isn&apos;t already checked and they have
-            changed their name by court order before, check the “Yes” box and
-            attach a copy of the court order, otherwise check “No”. On the third
-            section near the bottom of page 1 have your parent/guardian fill in
-            any previous addresses that they have lived at.
+            bottom of the first section they should fill in their occupation 
+            and (optionally) their marital status, just below the mothers name 
+            box. Right below that there is a checkbox. If it isn&apos;t already 
+            checked and they have changed their name by court order before, check 
+            the “Yes” box and attach a copy of the court order, otherwise check 
+            “No”. On the third section near the bottom of page 1 have your 
+            parent/guardian fill in any previous addresses that they have lived at.
             {parentsAreOkay
               ? ""
               : " On page 2 they neeed to fill out their relationship to you on the top right line."}
@@ -66,14 +64,12 @@ function RhodeIslandPC8_1Guide({ person }: { person: Partial<Person> }) {
       ) : (
         <p>
           The first form to be filled out is the Change of Name (PC 8.1). On the
-          bottom of the first section fill out your mailing address if it&apos;s
-          different than your actual address. Fill in your occupation and
-          (optionally) your marital status, just below your mothers name. Right
-          below that there is a checkbox. If it isn&apos;t already checked and
-          you have changed your name by court order before, check the “Yes” box
-          and attach a copy of the court order, otherwise check “No”. On the
-          third section near the bottom of page 1 fill in any previous addresses
-          you have lived at.
+          bottom of the first section fill in your occupation and (optionally) 
+          your marital status, just below your mothers name. Right below that there 
+          is a checkbox. If it isn&apos;t already checked and you have changed your 
+          name by court order before, check the “Yes” box and attach a copy of the 
+          court order, otherwise check “No”. On the third section near the bottom of 
+          page 1 fill in any previous addresses you have lived at.
         </p>
       )}
 

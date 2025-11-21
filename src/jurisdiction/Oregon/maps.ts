@@ -135,12 +135,8 @@ export const adultNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 403, y: 275 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 2, x: 103, y: 326 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    loc: { page: 2, x: 350, y: 326 },
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -255,12 +251,8 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 2, x: 403, y: 413 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 2, x: 102, y: 482 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    loc: { page: 2, x: 350, y: 482 },
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -295,12 +287,8 @@ export const minorNameSexPetitionOregonMap: Formfill[] = [
     loc: { page: 4, x: 403, y: 710 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 4, x: 103, y: 762 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    loc: { page: 4, x: 350, y: 762 },
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -390,12 +378,8 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 3, x: 402, y: 636 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 3, x: 103, y: 688 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    loc: { page: 3, x: 350, y: 688 },
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -424,12 +408,8 @@ export const feeWaiverOregonMap: Formfill[] = [
     loc: { page: 5, x: 403, y: 391 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
     loc: { page: 5, x: 103, y: 443 },
-  }),
-  (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentCityAndStateAndZip),
-    loc: { page: 5, x: 350, y: 443 },
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -462,7 +442,9 @@ export const birthCertOregonMap: Formfill[] = [
     fieldName: "Applicant current legal last",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Applicant residential address",
   }),
   (applicant) => ({
@@ -476,6 +458,11 @@ export const birthCertOregonMap: Formfill[] = [
   (applicant) => ({
     text: applicant.homeAddress?.zip,
     fieldName: "App res zip",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.MailFullAddress) : "",
+    fieldName: "Mailing Address if different",
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -647,6 +634,10 @@ export const voterOregonMap: Formfill[] = [
   (applicant) => ({
     text: applicant.email,
     fieldName: "Email",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.MailFullAddress),
+    fieldName: "Mailing Address",
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),

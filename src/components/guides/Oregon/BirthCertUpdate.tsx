@@ -43,11 +43,9 @@ function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             ): ("")}
             The form used to update a birth certificate is the
             &ldquo;Application to Change the Name and/or Sex on a Record of
-            Live Birth to Support Gender Identity&rdquo;. If your
-            parents/guardians mailing address is different from their listed
-            address they will need to put it in number 3. They will also
-            need to fill out items 6 and 15. Do <strong>not</strong>{" "}
-            sign/date the form until a notary instructs you to do so.
+            Live Birth to Support Gender Identity&rdquo;. Your parents/guardians will 
+            need to fill out items 6 and 15. Do <strong>not</strong> sign/date the 
+            form until a notary instructs you to do so.
           </p>
 
           <p>
@@ -89,11 +87,10 @@ function OregonBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
           <p>
             The form used to update a birth certificate is the “Application
             to Change the Name and/or Sex on a Record of Live Birth to
-            Support Gender Identity”. If your mailing address is different
-            from your listed address put it in number 3. You will then need
-            to fill out item 15, specifically the number of copies that you
-            want and what form you want them in. Do <strong>not</strong>{" "}
-            sign/date the form until a notary instructs you to do so.
+            Support Gender Identity”. You will need to fill out item 15, 
+            specifically the number of copies that you want and what form 
+            you want them in. Do <strong>not</strong> sign/date the form 
+            until a notary instructs you to do so.
           </p>
 
           <p>

@@ -31,6 +31,7 @@ import {
   allCAPS,
   formatContactInfo,
   getJurisdiction,
+  abbreviateJurisdiction,
   ContactFormat as cf,
 } from "../../lib/util";
 
@@ -146,19 +147,36 @@ export const ssnMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page5[0].phonenumber[0]",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox 
+            ? applicant.mailAddress.poBox 
+            : applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "topmostSubform[0].Page5[0].streetaddress[0]",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail 
+      ? applicant.homeAddress?.city 
+      : applicant.mailAddress?.mCity,
     fieldName: "topmostSubform[0].Page5[0].mailingcity[0]",
   }),
   (applicant) => ({
-    text: applicant.residentJurisdictionName ?? "",
+    text: applicant.streetEqualsMail 
+      ? applicant.residentJurisdictionName 
+      : applicant.mailAddress?.mState,
     fieldName: "topmostSubform[0].Page5[0].state[0]",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail 
+      ? applicant.homeAddress?.zip 
+      : applicant.mailAddress?.mZip,
     fieldName: "topmostSubform[0].Page5[0].zipcode[0]",
   }),
   (applicant) => ({
@@ -247,25 +265,53 @@ export const ds5504Map: Formfill[] = [
     fieldName: "App Phone 3",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox 
+            ? applicant.mailAddress.poBox 
+            : applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 1 Street RFD PO Box or URB",
   }),
   (applicant) => ({
-    text: isMinor(applicant)
-      ? `In Care Of - ${fullName(representativeName(applicant))}`
-      : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.streetEqualsMail 
+            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt}` 
+            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt}`;
+        case false:
+          return applicant.streetEqualsMail 
+            ? applicant.homeAddress?.apt 
+            : applicant.mailAddress?.mApt;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 2",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail 
+      ? applicant.homeAddress?.city 
+      : applicant.mailAddress?.mCity,
     fieldName: "App Mailing City",
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: applicant.streetEqualsMail 
+      ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation
+      : abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "App Mailing State",
   }),
   (applicant) => ({ 
-    text: applicant.homeAddress?.zip, 
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.zip
+      : applicant.mailAddress?.mZip, 
     fieldName: "App Mailing Zip", 
   }),
   (applicant) => ({
@@ -305,6 +351,31 @@ export const ds5504Map: Formfill[] = [
       separator: "/",
     }),
     fieldName: "Date of Birth",
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.street : "", 
+    fieldName: "Permanent Address Street", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.apt : "", 
+    fieldName: "Perm Apartment/Unit", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.city : "", 
+    fieldName: "Permanent Address City", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "", 
+    fieldName: "Permanent Address State", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.zip : "", 
+    fieldName: "Permanent Address Zip Code", 
   }),
   (applicant) => ({ 
     text: applicant.isChangingLegalName ? "X" : "", 
@@ -425,26 +496,54 @@ export const ds82Map: Formfill[] = [
     fieldName: "App Phone 3",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox 
+            ? applicant.mailAddress.poBox 
+            : applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 1",
   }),
   (applicant) => ({
-    text: isMinor(applicant)
-      ? `In Care Of - ${fullName(representativeName(applicant))}`
-      : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.streetEqualsMail 
+            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt}` 
+            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt}`;
+        case false:
+          return applicant.streetEqualsMail 
+            ? applicant.homeAddress?.apt 
+            : applicant.mailAddress?.mApt;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "App Mailing Address Line 2",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail 
+      ? applicant.homeAddress?.city 
+      : applicant.mailAddress?.mCity,
     fieldName: "App Mailing Address City",
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: applicant.streetEqualsMail 
+      ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation
+      : abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "App Mailing Address State",
   }),
   (applicant) => ({ 
-    text: applicant.homeAddress?.zip, 
-    fieldName: "App Mailing Address Zip Code", 
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.zip
+      : applicant.mailAddress?.mZip, 
+    fieldName: "App Mailing Address Zip Code",
   }),
   (applicant) => ({
     text: (() => {
@@ -487,6 +586,31 @@ export const ds82Map: Formfill[] = [
       separator: "/",
     }),
     fieldName: "Date of Birth 2",
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.street : "", 
+    fieldName: "Permanent Address Street", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.apt : "", 
+    fieldName: "Perm Apartment/Unit", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.city : "", 
+    fieldName: "Permanent Address City", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "", 
+    fieldName: "Permanent Address State", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.zip : "", 
+    fieldName: "Permanent Address Zip Code", 
   }),
 ];
 
@@ -546,25 +670,53 @@ export const ds11Map: Formfill[] = [
     fieldName: "Applicant Email", 
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox 
+            ? applicant.mailAddress.poBox 
+            : applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Applicant Address Street",
   }),
   (applicant) => ({
-    text: isMinor(applicant)
-      ? `In Care Of - ${fullName(representativeName(applicant))}`
-      : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.streetEqualsMail 
+            ? `In Care Of - ${fullName(representativeName(applicant))} ${applicant.homeAddress?.apt}` 
+            : `In Care Of - ${fullName(representativeName(applicant))} ${applicant.mailAddress?.mApt}`;
+        case false:
+          return applicant.streetEqualsMail 
+            ? applicant.homeAddress?.apt 
+            : applicant.mailAddress?.mApt;
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Address Line 2",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.city,
+    text: applicant.streetEqualsMail 
+      ? applicant.homeAddress?.city 
+      : applicant.mailAddress?.mCity,
     fieldName: "Applicant Address City",
   }),
   (applicant) => ({
-    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    text: applicant.streetEqualsMail 
+      ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation
+      : abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
     fieldName: "Applicant Address State",
   }),
   (applicant) => ({ 
-    text: applicant.homeAddress?.zip, 
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.zip
+      : applicant.mailAddress?.mZip, 
     fieldName: "Applicant Address Zip Code", 
   }),
   (applicant) => ({
@@ -651,6 +803,31 @@ export const ds11Map: Formfill[] = [
     text: "X", 
     loc: { page: 5, x: 687, y: 237 }, 
   }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.street : "", 
+    fieldName: "Permanent Address Street", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.apt : "", 
+    fieldName: "Permanent Address Apartment/Unit", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.city : "", 
+    fieldName: "Permanent Address City", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "", 
+    fieldName: "Permanent Address State", 
+  }),
+  (applicant) => ({ 
+    text: !applicant.streetEqualsMail ?
+      applicant.homeAddress?.zip : "", 
+    fieldName: "Permanent Address Zip Code", 
+  }),
 ];
 
 /*!
@@ -699,20 +876,43 @@ export const statusLetterMap: Formfill[] = [
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: allCAPS(applicant.homeAddress?.street),
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.apt
+            ? `${allCAPS(applicant.homeAddress?.street)}, ${allCAPS(applicant.homeAddress?.apt)}`
+            : allCAPS(applicant.homeAddress?.street);
+        case false:
+          switch (applicant.mailAddress?.poBox) {
+            case undefined:
+              return applicant.mailAddress?.mApt 
+                ? `${allCAPS(applicant.mailAddress?.mStreet)}, ${allCAPS(applicant.mailAddress?.mApt)}` 
+                : applicant.mailAddress?.mStreet;
+            default:
+              return applicant.mailAddress?.poBox;
+            }
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Current Mailing Address 1",
   }),
   (applicant) => ({
-    text: allCAPS(applicant.homeAddress?.city),
+    text: applicant.streetEqualsMail 
+      ? allCAPS(applicant.homeAddress?.city) 
+      : allCAPS(applicant.mailAddress?.mCity),
     fieldName: "Current Mailing Address - City",
   }),
   (applicant) => ({
-    text: 
-      allCAPS(applicant.residentJurisdictionName ?? ""),
+    text: applicant.streetEqualsMail
+      ? allCAPS(applicant.residentJurisdictionName)
+      : allCAPS(applicant.mailAddress?.mState),
     fieldName: "Current Mailing Address - State",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.zip,
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.zip
+      : applicant.mailAddress?.mZip,
     fieldName: "Current Mailing Address - Zip Code",
   }),
   (applicant) => ({

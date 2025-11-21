@@ -35,7 +35,7 @@ function AlaskaCIV708Guide() {
         and 4 is enough to request removal of publication but if you need to
         further seal the records check the applicable boxes on item 2. Please
         give a description explaining why you need this action taken in item 3,
-        the court is looking for things like stalkers, or known specific
+        the court is looking for things like stalkers or known specific
         threats. Please be prompt but detailed in the reason and bring
         supporting evidence if you have it. Do <strong>not</strong> sign or date
         this form until instructed by a notary or court clerk.

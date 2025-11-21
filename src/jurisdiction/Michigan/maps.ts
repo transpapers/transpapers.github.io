@@ -540,9 +540,20 @@ export const mdosSexMap: Formfill[] = [
     text: applicant.legalName.suffix,
     loc: { x: 750, y: 388 },
   }),
-  (applicant) => ({ text: applicant.homeAddress?.street, loc: { x: 57, y: 441 } }),
-  (applicant) => ({ text: applicant.homeAddress?.city, loc: { x: 351, y: 441 } }),
-  (applicant) => ({ text: applicant.homeAddress?.zip, loc: { x: 701, y: 441 } }),
+  (applicant) => ({ 
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street, 
+    loc: { x: 57, y: 441 } 
+  }),
+  (applicant) => ({ 
+    text: applicant.homeAddress?.city, 
+    loc: { x: 351, y: 441 } 
+  }),
+  (applicant) => ({ 
+    text: applicant.homeAddress?.zip, 
+    loc: { x: 701, y: 441 } 
+  }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
@@ -600,7 +611,9 @@ export const birthCertMap: Formfill[] = [
     fieldName: "Last name",
   }),
   (applicant) => ({ 
-    text: applicant.homeAddress?.street, 
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,  
     fieldName: "address", 
   }),
   (applicant) => ({

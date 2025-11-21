@@ -11,6 +11,7 @@ import {
   phoneEnd,
   formatContactInfo,
   getJurisdiction,
+  abbreviateJurisdiction,
   ContactFormat as cf,
 } from "../../lib/util";
 
@@ -70,7 +71,9 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "The reason I want to change my name is 1",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Text2",
   }),
   (applicant) => ({
@@ -161,6 +164,12 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "Date",
   }),
   (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
+    fieldName: "Your Printed Name",
+  }),
+  (applicant) => ({
     text: applicant.email,
     fieldName: "City_3",
   }),
@@ -177,7 +186,9 @@ export const nameChangeAdultMap: Formfill[] = [
     fieldName: "My current legal name is",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "my date of birth is",
   }),
   (applicant) => ({
@@ -235,7 +246,9 @@ export const nameChangeOrderAdultMap: Formfill[] = [
     fieldName: "b",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Street address",
   }),
   (applicant) => ({
@@ -516,7 +529,9 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 3, x: 340, y: 244 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 3, x: 200, y: 281 },
   }),
   (applicant) => ({
@@ -540,6 +555,12 @@ export const genderChangeAdultMap: Formfill[] = [
     text: applicant.email,
     loc: { page: 3, x: 105, y: 498 },
   }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
+    loc: { page: 3, x: 103, y: 548 },
+  }),
   () => ({
     text: "X",
     loc: { page: 3, x: 128, y: 624 },
@@ -558,7 +579,9 @@ export const genderChangeAdultMap: Formfill[] = [
     loc: { page: 4, x: 300, y: 648 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 4, x: 255, y: 696 },
   }),
   (applicant) => ({
@@ -837,7 +860,9 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
     loc: { page: 2, x: 520, y: 163 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     loc: { page: 2, x: 215, y: 208 },
   }),
   (applicant) => ({
@@ -846,7 +871,7 @@ export const nameChangeMinorBothParentsOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.parentsAreOkay
-      ? formatContactInfo(applicant, cf.ResidentFullAddress)
+      ? formatContactInfo(applicant, cf.MailFullAddress)
       : "",
     loc: { page: 2, x: 215, y: 394 },
   }),
@@ -955,21 +980,10 @@ export const nameChangeMinorSingleParentMap: Formfill[] = [
     loc: { page: 1, x: 500, y: 700 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     loc: { page: 1, x: 105, y: 736 },
-  }),
-  (applicant) => ({
-    text: applicant.homeAddress?.city,
-    loc: { page: 1, x: 440, y: 736 },
-  }),
-  (applicant) => ({
-    text: 
-      applicant.residentJurisdictionName,
-    loc: { page: 1, x: 595, y: 736 },
-  }),
-  (applicant) => ({
-    text: applicant.homeAddress?.zip,
-    loc: { page: 1, x: 695, y: 736 },
   }),
   (applicant) => ({
     text: applicant.email,
@@ -1165,21 +1179,10 @@ export const nameChangeMinorGuardianMap: Formfill[] = [
     loc: { page: 3, x: 500, y: 700 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     loc: { page: 3, x: 105, y: 736 },
-  }),
-  (applicant) => ({
-    text: applicant.homeAddress?.city,
-    loc: { page: 3, x: 440, y: 736 },
-  }),
-  (applicant) => ({
-    text: 
-      applicant.residentJurisdictionName,
-    loc: { page: 3, x: 595, y: 736 },
-  }),
-  (applicant) => ({
-    text: applicant.homeAddress?.zip,
-    loc: { page: 3, x: 695, y: 736 },
   }),
   (applicant) => ({
     text: applicant.email,
@@ -1258,7 +1261,9 @@ export const nameChangeMinorGuardianOrderMap: Formfill[] = [
     loc: { page: 3, x: 520, y: 163 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     loc: { page: 3, x: 215, y: 208 },
   }),
   (applicant) => ({
@@ -1608,6 +1613,17 @@ export const genderChangeMinorMap: Formfill[] = [
         : applicant.birthJurisdictionName,
     loc: { page: 7, x: 265, y: 340 },
   }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
+    loc: { page: 7, x: 215, y: 646 },
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay 
+      ? formatContactInfo(applicant, cf.MailFullAddress) : "",
+    loc: { page: 7, x: 215, y: 765 },
+  }),
 ];
 
 /*!
@@ -1697,16 +1713,20 @@ export const feeWaiverMap: Formfill[] = [
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.ResidentFullAddress),
-    fieldName: "My address is / Mi direcci�n es 2",
+    fieldName: "My address is / Mi dirección es 2",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.MailFullAddress),
+    fieldName: "Mailing  Dirección Postal 2",
   }),
   (applicant) => ({
     text: applicant.phone,
-    fieldName: "My phone number  Mi n�mero telef�nico",
+    fieldName: "My phone number  Mi número telefónico",
   }),
   (applicant) => ({
     text: applicant.email,
     fieldName:
-      "My email I check often  Mi correo electr�nico que reviso con frecuencia",
+      "My email I check often  Mi correo electrónico que reviso con frecuencia",
   }),
   (applicant) => ({
     text: isMinor(applicant)
@@ -1748,14 +1768,14 @@ export const feeWaiverMap: Formfill[] = [
       format: [DATE.DAY],
       separator: "/",
     }),
-    fieldName: "Day / D�a",
+    fieldName: "Day / Día",
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.YEAR],
       separator: "/",
     }),
-    fieldName: "Year / A�o",
+    fieldName: "Year / Año",
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.ResidentFullAddress),
@@ -1786,7 +1806,9 @@ export const caseInformationMap: Formfill[] = [
     fieldName: "Email",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -1938,11 +1960,13 @@ export const primaryIDTexasMap: Formfill[] = [
     fieldName: "Mothers Maiden Name",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Residence Address",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -1956,6 +1980,42 @@ export const primaryIDTexasMap: Formfill[] = [
   (applicant) => ({
     text: applicant.residentJurisdictionName ? "USA" : "",
     fieldName: "County_2",
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mApt) {
+          case true:
+            return applicant.mailAddress?.poBox ?
+            applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet;
+          case false:
+            return applicant.mailAddress?.poBox
+            ? `${applicant.mailAddress?.poBox}, ${applicant.mailAddress?.mApt}`
+            : `${applicant.mailAddress?.mStreet}, ${applicant.mailAddress?.mApt}`;
+          default:
+            return "";
+          }
+        case false:
+          return "";
+        default:
+          return "";
+        }
+    })(),
+    fieldName: "Mailing Address",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mCity : "",
+    fieldName: "City_2",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ?
+      abbreviateJurisdiction(applicant.mailAddress?.mState ?? "") : "",
+    fieldName: "State_2",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mZip : "",
+    fieldName: "Zip Code_2",
   }),
   (applicant) => ({
     text: applicant.phone,
@@ -2023,7 +2083,9 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     fieldName: "Name First Middle Last",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     fieldName: "Address Mailing Address City State Zip",
   }),
   (applicant) => ({
@@ -2147,11 +2209,13 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     fieldName: "Printed Name",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2164,15 +2228,23 @@ export const birthCertNameCorrectionMap: Formfill[] = [
     fieldName: "Zip",
   }),
   (applicant) => ({
-    text:
-      isMinor(applicant) && applicant.parentsAreOkay
-        ? applicant.homeAddress?.street
-        : "",
+    text: (() => {
+      switch (isMinor(applicant) && applicant.parentsAreOkay) {
+        case true:
+          return applicant.homeAddress?.apt
+            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            : applicant.homeAddress?.street;
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Address",
   }),
   (applicant) => ({
     text:
-      isMinor(applicant) && applicant.parentsAreOkay ? applicant.birthCity : "",
+      isMinor(applicant) && applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2381,11 +2453,13 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
     fieldName: "Printed Name",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2398,15 +2472,23 @@ export const birthCertGenderCorrectionMap: Formfill[] = [
     fieldName: "Zip",
   }),
   (applicant) => ({
-    text:
-      isMinor(applicant) && applicant.parentsAreOkay
-        ? applicant.homeAddress?.street
-        : "",
+    text: (() => {
+      switch (isMinor(applicant) && applicant.parentsAreOkay) {
+        case true:
+          return applicant.homeAddress?.apt
+            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            : applicant.homeAddress?.street;
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Address",
   }),
   (applicant) => ({
     text:
-      isMinor(applicant) && applicant.parentsAreOkay ? applicant.birthCity : "",
+      isMinor(applicant) && applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2645,11 +2727,13 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
     fieldName: "Printed Name",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Address",
   }),
   (applicant) => ({
-    text: applicant.birthCity,
+    text: applicant.homeAddress?.city,
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2662,15 +2746,23 @@ export const birthCertNameAndGenderCorrectionMap: Formfill[] = [
     fieldName: "Zip",
   }),
   (applicant) => ({
-    text:
-      isMinor(applicant) && applicant.parentsAreOkay
-        ? applicant.homeAddress?.street
-        : "",
+    text: (() => {
+      switch (isMinor(applicant) && applicant.parentsAreOkay) {
+        case true:
+          return applicant.homeAddress?.apt
+            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            : applicant.homeAddress?.street;
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
     fieldName: "Address",
   }),
   (applicant) => ({
     text:
-      isMinor(applicant) && applicant.parentsAreOkay ? applicant.birthCity : "",
+      isMinor(applicant) && applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
     fieldName: "City",
   }),
   (applicant) => ({
@@ -2697,7 +2789,9 @@ export const andersonCountyMap: Formfill[] = [
     loc: { page: 1, x: 150, y: 272 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 1, x: 405, y: 879 },
   }),
   (applicant) => ({

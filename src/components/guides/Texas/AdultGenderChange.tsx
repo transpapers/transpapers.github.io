@@ -67,11 +67,10 @@ function TexasAdultGenderChangeGuide({ person }: { person: Partial<Person> }) {
       </p>
 
       <p>
-        Sign and date section 7 then fill in your mailing address. Use the
-        checklist in section 8 to gather any documents you might need. We have
-        provided a template letter to show your doctor/therapist and an
-        explanation of how to do this later in this section. We will cover
-        fingerprinting in the next section.
+        Sign and date section 7 then use the checklist in section 8 to gather any 
+        documents you might need. We have provided a template letter to show your 
+        doctor/therapist and an explanation of how to do this later in this section. 
+        We will cover fingerprinting in the next section.
       </p>
 
       <p>

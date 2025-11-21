@@ -35,12 +35,11 @@ function TexasFeeWaiverGuide({ person }: { person: Partial<Person> }) {
         be waived using the “Statement of Inability to Afford Payment of Court
         Costs or an Appeal Bond” (CB-CFFW-100).
         {age && age < 18
-          ? " Your petitioner should fill out their date of birth on page 2. If their"
-          : " If your"}{" "}
-        mailing address is different from the home address that should be filled
-        in on page 2. All dependents in your household need to be listed on page
-        3, minors only need their initials. Sections 4 through 8 ask for
-        detailed financial information that should be carefully filled out.
+          ? " Your petitioner should fill out their date of birth on page 2. "
+          : " "}
+        All dependents in your household need to be listed on page 3, minors 
+        only need their initials. Sections 4 through 8 ask for detailed financial 
+        information that should be carefully filled out.
       </p>
 
       <p>

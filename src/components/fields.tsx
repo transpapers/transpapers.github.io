@@ -156,11 +156,11 @@ export const fields: Record<string, Field> = {
     name: "phone",
     type: "string",
   },
-  homeAddress: {
-    title: "Home Address",
-    subtitle: "Address where you live. The apartment field is optional.",
-    name: "homeAddress",
-    type: "homeAddress",
+  mailAddress: {
+    title: "Mailing Address",
+    subtitle: "Address where you get your mail. Leave fields blank as needed.",
+    name: "mailAddress",
+    type: "mailAddress",
   },
   streetEqualsMail: {
     title: "My home address is the same as my mailing address.",
@@ -168,11 +168,11 @@ export const fields: Record<string, Field> = {
     name: "streetEqualsMail",
     type: "boolean",
   },
-  mailAddress: {
-    title: "Mailing Address",
-    subtitle: "Address where you get your mail. Leave fields blank as needed.",
-    name: "mailAddress",
-    type: "mailAddress",
+  homeAddress: {
+    title: "Home Address",
+    subtitle: "Address where you live. The apartment field is optional.",
+    name: "homeAddress",
+    type: "homeAddress",
   },
   email: {
     title: "Email address",

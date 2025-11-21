@@ -114,7 +114,9 @@ export const adultChangeOfNameMap: Formfill[] = [
     fieldName: "TYPE OF PRINTED NAME_2",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "ADDRESS_2",
   }),
   (applicant) => ({
@@ -197,7 +199,18 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "NAME",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
+    text: (() => {
+      switch (applicant.parentsAreOkay) {
+        case true:
+          return applicant.homeAddress?.apt
+            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            : applicant.homeAddress?.street;
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
     fieldName: "ADDRESS",
   }),
   (applicant) => ({
@@ -223,7 +236,18 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "NAME AND ADDRESS OF PARENT",
   }),
   (applicant) => ({
-    text: applicant.parentsAreOkay ? applicant.homeAddress?.street : "",
+    text: (() => {
+      switch (applicant.parentsAreOkay) {
+        case true:
+          return applicant.homeAddress?.apt
+            ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+            : applicant.homeAddress?.street;
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
     fieldName: "ADDRESS_2",
   }),
   (applicant) => ({
@@ -250,7 +274,9 @@ export const minorChangeOfNameMap: Formfill[] = [
     fieldName: "TYPE OF PRINTED NAME_2",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "ADDRESS_4",
   }),
   (applicant) => ({
@@ -631,7 +657,9 @@ export const hearingNoticeMap: Formfill[] = [
     fieldName: "TYPED OR PRINTED NAME",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "ADDRESS",
   }),
   (applicant) => ({
@@ -817,7 +845,9 @@ export const birthCertOrderMap: Formfill[] = [
     fieldName: "Email",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
   (applicant) => ({
@@ -899,7 +929,9 @@ export const bmvGenderDeclarationMap: Formfill[] = [
     loc: { page: 1, x: 695, y: 188 },
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     loc: { page: 1, x: 45, y: 223 },
   }),
   (applicant) => ({
@@ -969,7 +1001,9 @@ export const birthCertUpdateMap: Formfill[] = [
     fieldName: "Email",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "Street Address",
   }),
   (applicant) => ({
@@ -1190,6 +1224,11 @@ export const voterRegistrationMap: Formfill[] = [
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingAddress[0]",
   }),
   (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName:
+      "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingApartment[0]",
+  }),
+  (applicant) => ({
     text: applicant.homeAddress?.city,
     fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingCity[0]",
@@ -1198,6 +1237,11 @@ export const voterRegistrationMap: Formfill[] = [
     text: applicant.homeAddress?.zip,
     fieldName:
       "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingZip[0]",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, cf.MailFullAddress) : "",
+    fieldName:
+      "VoterRegistrationForm[0].TitleAndFormInstructions[0].InputInformation[0].txtVotingAddress2[0]",
   }),
   (applicant) => ({
     text: applicant.residentLocalityName,

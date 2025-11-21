@@ -29,6 +29,7 @@ import {
   representativeName,
   getJurisdiction,
   getRILocality,
+  abbreviateJurisdiction,
 } from "../../lib/util";
 
 import { ContactFormat as cf, formatContactInfo } from "../../lib/util";
@@ -61,7 +62,9 @@ export const changeOfNameMap: Formfill[] = [
     fieldName: "6",
   }),
   (applicant) => ({
-    text: applicant.homeAddress?.street,
+    text: applicant.homeAddress?.apt
+      ? `${applicant.homeAddress?.street}, ${applicant.homeAddress?.apt}`
+      : applicant.homeAddress?.street,
     fieldName: "7",
   }),
   (applicant) => ({
@@ -79,6 +82,34 @@ export const changeOfNameMap: Formfill[] = [
   (applicant) => ({
     text: applicant.phone,
     fieldName: "11",
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mApt) {
+          case true:
+            return applicant.mailAddress?.poBox ?
+            applicant.mailAddress?.poBox : applicant.mailAddress?.mStreet;
+          case false:
+            return applicant.mailAddress?.poBox
+            ? `${applicant.mailAddress?.poBox}, ${applicant.mailAddress?.mApt}`
+            : `${applicant.mailAddress?.mStreet}, ${applicant.mailAddress?.mApt}`;
+          default:
+            return "";
+          }
+        case false:
+          return "";
+        default:
+          return "";
+        }
+    })(),
+    fieldName: "12",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? 
+      formatContactInfo(applicant, cf.MailCityAndStateAndZip) : "",
+    fieldName: "13",
   }),
   (applicant) => ({
     text: applicant.email,
@@ -270,7 +301,9 @@ export const birthCertOneMap: Formfill[] = [
     loc: { x: 659, y: 723 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     loc: { x: 219, y: 772 },
   }),
 ];
@@ -325,6 +358,10 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "STREET ADDRESS RESIDENCE ADDRESS",
   }),
   (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName: "APTUNIT  or FLOOR",
+  }),
+  (applicant) => ({
     text: applicant.homeAddress?.city,
     fieldName: "CITYTOWN",
   }),
@@ -335,6 +372,27 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
   (applicant) => ({
     text: applicant.homeAddress?.zip,
     fieldName: "ZIP CODE",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mStreet : "",
+    fieldName: "STREET ADDRESS MAILING ADDRESS IF DIFFERENT FROM RESIDENCE APTUNIT  or FLOOR",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mApt : "",
+    fieldName: "Text4",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mCity : "",
+    fieldName: "CITYTOWN_2",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ?
+      abbreviateJurisdiction(applicant.mailAddress?.mState ?? "") : "",
+    fieldName: "STATE_2",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mZip : "",
+    fieldName: "ZIP CODE_2",
   }),
   (applicant) => ({
     text: phoneAreaCode(applicant.phone),
@@ -389,6 +447,10 @@ export const genderIDMap: Formfill[] = [
   (applicant) => ({
     text: applicant.homeAddress?.street,
     fieldName: "RESIDENCE ADDRESS STREET ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt,
+    fieldName: "APTUNIT  or FLOOR",
   }),
   (applicant) => ({
     text: applicant.homeAddress?.city,
@@ -491,7 +553,9 @@ export const birthCertTwoMap: Formfill[] = [
     loc: { x: 659, y: 723 },
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     loc: { x: 219, y: 772 },
   }),
 ];

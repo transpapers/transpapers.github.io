@@ -382,6 +382,8 @@ export enum ContactFormat {
   ResidentCityAndStateAndZip,
   ResidentCityAndLocalityAndStateAndZip,
   ResidentCityAndStateAndZipAndCountry,
+  MailCityAndStateAndZip,
+  MailFullAddress,
 }
 
 export function formatContactInfo(
@@ -393,6 +395,7 @@ export function formatContactInfo(
     birthCity,
     birthJurisdictionName,
     homeAddress,
+    mailAddress,
     residentJurisdictionName,
     residentLocalityName,
     phone,
@@ -437,6 +440,12 @@ export function formatContactInfo(
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
 
+    case ContactFormat.MailCityAndStateAndZip:
+      if (!mailAddress?.mCity || !mailAddress.mState || !mailAddress.mZip) {
+        return undefined;
+      }
+      return `${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState)}, ${mailAddress.mZip}`;
+
     case ContactFormat.ResidentCityAndLocalityAndStateAndZip:
       if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
         return undefined;
@@ -457,6 +466,24 @@ export function formatContactInfo(
         return `${homeAddress.street} ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+      }
+
+    case ContactFormat.MailFullAddress:
+      if (!mailAddress?.mStreet || !mailAddress?.mCity || !mailAddress?.mState || !mailAddress?.mZip) {
+        return undefined;
+      }
+      if (!mailAddress?.mApt) {
+        if (!mailAddress?.poBox) {
+          return `${mailAddress.poBox}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState)} ${mailAddress.mZip}`;
+        } else {
+          return `${mailAddress.mStreet}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState)} ${mailAddress.mZip}`;
+        }
+      } else {
+        if (!mailAddress?.poBox) {
+          return `${mailAddress.poBox}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState)} ${mailAddress.mZip}`;
+        } else {
+          return `${mailAddress.mStreet} ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState)} ${mailAddress.mZip}`;
+        }
       }
 
     case ContactFormat.ResidentFullAddressAndLocality:

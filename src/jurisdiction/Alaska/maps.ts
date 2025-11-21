@@ -103,7 +103,9 @@ export const adultNamePetitionAlaskaMap: Formfill[] = [
   }),
   () => ({ text: new Date().toLocaleDateString(), fieldName: "date2" }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     fieldName: "mailingAddress",
   }),
   (applicant) => ({
@@ -131,7 +133,9 @@ export const minorNamePetitionAlaskaMap: Formfill[] = [
     fieldName: "phoneNo",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     fieldName: "address",
   }),
   (applicant) => ({
@@ -314,7 +318,9 @@ export const adultWaivePublicationAlaskaMap: Formfill[] = [
     fieldName: "ITMO",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     fieldName: "mailing",
   }),
   (applicant) => ({
@@ -346,7 +352,9 @@ export const minorWaivePublicationAlaskaMap: Formfill[] = [
     fieldName: "petitioner",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     fieldName: "mailing",
   }),
   (applicant) => ({
@@ -381,6 +389,32 @@ export const feeWaiverAlaskaMap: Formfill[] = [
     check: true,
     fieldName: "filingFee",
   }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "phone",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? 
+      formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }) : "",
+    fieldName: "DOB",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    fieldName: "residenceAddress",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? "" 
+      : formatContactInfo(applicant, cf.MailFullAddress),
+    fieldName: "mailingAddress",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "email",
+  }),
 ];
 
 /*!
@@ -406,7 +440,9 @@ export const additionalServiceAlaskaMap: Formfill[] = [
     fieldName: "yourName",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
     fieldName: "mailingAddress",
   }),
 ];
@@ -454,7 +490,19 @@ export const primaryIDAlaskaMap: Formfill[] = [
     fieldName: "Text12",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.ResidentFullAddress),
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : formatContactInfo(applicant, cf.MailFullAddress),
+    fieldName: "Text13",
+  }),
+  (applicant) => ({
+    check: applicant.streetEqualsMail,
+    fieldName: "Check Box14",
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentFullAddress) 
+      : "",
     fieldName: "Text15",
   }),
   (applicant) => ({
@@ -546,6 +594,27 @@ export const birthCertRequestAlaskaMap: Formfill[] = [
   (applicant) => ({
     text: applicant.phone,
     fieldName: "Phone number",
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.streetEqualsMail) {
+        case true:
+          return applicant.homeAddress?.street;
+        case false:
+          return applicant.mailAddress?.poBox 
+            ? applicant.mailAddress.poBox 
+            : applicant.mailAddress?.mStreet;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Street  PO Box",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentCityAndStateAndZip) 
+      : formatContactInfo(applicant, cf.MailCityAndStateAndZip),
+    fieldName: "City, State, Zip",
   }),
   () => ({
     check: true,

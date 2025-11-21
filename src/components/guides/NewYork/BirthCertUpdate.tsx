@@ -47,16 +47,15 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             the Correction of a NYC Birth Certificate&rdquo; (VR 172), and the
             &ldquo;Attestation Form for Named Parents or Legal Guardians or a
             Registrant Younger Than 18 Years Old&rdquo;. For the application a
-            parent/guardian will need to fill out their apartment number (if
-            applicable), marital status, and your birth certificate number at
-            the top of page 2. They will also need to fill out your place of
-            birth at the bottom of page 2. Any parents listed on the birth
-            certificate will need to sign and date at the top of page 4. The
-            only exceptions for this are if one or both of the parents listed on
-            the birth certificate are deceased. If that is the case have
-            certified copies of the death certificate(s) ready. If you have a
-            legal guardian and neither parent listed is alive they need to sign
-            and date the third signature box on page 4. The fee is $40 + (the
+            parent/guardian will need to fill out their marital status and your 
+            birth certificate number at the top of page 2. They will also need to 
+            fill out your place of birth at the bottom of page 2. Any parents 
+            listed on the birth certificate will need to sign and date at the top 
+            of page 4. The only exceptions for this are if one or both of the 
+            parents listed on the birth certificate are deceased. If that is the 
+            case have certified copies of the death certificate(s) ready. If you 
+            have a legal guardian and neither parent listed is alive they need to 
+            sign and date the third signature box on page 4. The fee is $40 + (the
             number of requested copies x $15). For one copy the fee should be
             $55, fill in the fee information on page 4 accordingly.
           </p>
@@ -83,8 +82,7 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             the Correction of a NYC Birth Certificate&rdquo; (VR 172), and the
             &ldquo;Self-Attestation Form for Registrants 18 Years of Age and
             Older&rdquo;. Use black ink when filling out the forms. For the
-            Application you will need to fill out your mailing address,
-            apartment number (if applicable), Marital status, and birth
+            Application you will need to fill out your marital status and birth
             certificate number at the top of page 2. You will also need to fill
             out your place of birth at the bottom of page 2. You can then sign
             and date on page 4 in the bottom signature box marked “Your
@@ -95,9 +93,8 @@ function NewYorkBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
 
           <p>
             For the self-attestation form you will need to enter your birth
-            certificate number in the “certificate number” box. Also add an
-            apartment number to the street address, if applicable. The
-            Attestation part below must be signed in front of a notary so do{" "}
+            certificate number in the “certificate number” box. The Attestation 
+            part below must be signed in front of a notary so do{" "}
             <strong>not</strong> sign until then.
             {residentJurisdictionName === "New York"
               ? " For notary resources see the 'Getting Documents and a Notary' section above."
