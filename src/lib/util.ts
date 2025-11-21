@@ -479,13 +479,13 @@ export function formatContactInfo(
       }
       if (!mailAddress.mApt) {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.poBox ?? ""}, ${mailAddress.mApt ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         } else {
-          return `${mailAddress.mStreet}, ${mailAddress.mApt}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.mStreet}, ${mailAddress.mApt ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         }
       } else {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.poBox ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         } else {
           return `${mailAddress.mStreet} ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
         }
