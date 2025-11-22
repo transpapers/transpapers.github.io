@@ -394,7 +394,6 @@ export enum ContactFormat {
 export function formatContactInfo(
   applicant: Person,
   fmt: ContactFormat,
-  separator = ", ",
 ): string | undefined {
   const {
     birthCity,
