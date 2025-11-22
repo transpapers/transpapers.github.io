@@ -28126,12 +28126,14 @@ function formatContactInfo(applicant, fmt) {
         return void 0;
       }
       if (!homeAddress.apt) {
-        return `${fullName(representativeName(applicant))} 
-          ${applicant.homeAddress?.street ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+        return `
+          ${fullName(representativeName(applicant))} 
+          ${applicant.homeAddress?.street ?? ""} ${applicant.homeAddress?.city ?? ""}, ${residentJurisdiction.abbreviation} ${applicant.homeAddress?.zip ?? ""}
           ${applicant.phone ?? ""}`;
       } else {
-        return `${fullName(representativeName(applicant))}
-          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+        return `
+          ${fullName(representativeName(applicant))}
+          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""} ${applicant.homeAddress?.city ?? ""}, ${residentJurisdiction.abbreviation} ${applicant.homeAddress?.zip ?? ""}
           ${applicant.phone ?? ""}`;
       }
     case 4:
@@ -28139,12 +28141,14 @@ function formatContactInfo(applicant, fmt) {
         return void 0;
       }
       if (!homeAddress.apt) {
-        return `${fullName(representativeName(applicant))}
-          ${applicant.homeAddress?.street ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+        return `
+          ${fullName(representativeName(applicant))}
+          ${applicant.homeAddress?.street ?? ""} ${applicant.homeAddress?.city ?? ""}, ${residentJurisdiction.abbreviation} ${applicant.homeAddress?.zip ?? ""} USA
           ${applicant.phone ?? ""}`;
       } else {
-        return `${fullName(representativeName(applicant))}
-          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+        return `
+          ${fullName(representativeName(applicant))}
+          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""} ${applicant.homeAddress?.city ?? ""}, ${residentJurisdiction.abbreviation} ${applicant.homeAddress?.zip ?? ""} USA
           ${applicant.phone ?? ""}`;
       }
     default:
