@@ -25,7 +25,7 @@ function NewYorkBoroughInfo() {
   return (
     <section key="NY-Info">
       <p>
-        Attention NYC residents click on the county coressponding with your borough:
+        Attention NYC residents click on the county corresponding with your borough:
       </p>
 
       <p>

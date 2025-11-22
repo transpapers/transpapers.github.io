@@ -446,10 +446,10 @@ export function formatContactInfo(
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
 
     case ContactFormat.MailCityAndStateAndZip:
-      if (!mailAddress?.mCity || !mailAddress.mState || !mailAddress.mZip) {
+      if (!mailAddress?.mailCity || !mailAddress.mailState || !mailAddress.mailZip) {
         return undefined;
       }
-      return `${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""}, ${mailAddress.mZip}`;
+      return `${mailAddress.mailCity}, ${abbreviateJurisdiction(mailAddress.mailState) ?? ""}, ${mailAddress.mailZip}`;
 
     case ContactFormat.ResidentCityAndLocalityAndStateAndZip:
       if (!homeAddress?.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
@@ -474,20 +474,20 @@ export function formatContactInfo(
       }
 
     case ContactFormat.MailFullAddress:
-      if (!mailAddress?.mStreet || !mailAddress.mCity || !mailAddress.mState || !mailAddress.mZip) {
+      if (!mailAddress?.mailStreet || !mailAddress.mailCity || !mailAddress.mailState || !mailAddress.mailZip) {
         return undefined;
       }
-      if (!mailAddress.mApt) {
+      if (!mailAddress.mailApt) {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox ?? ""}, ${mailAddress.mApt ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.poBox ?? ""}, ${mailAddress.mailApt ?? ""}, ${mailAddress.mailCity}, ${abbreviateJurisdiction(mailAddress.mailState) ?? ""} ${mailAddress.mailZip}`;
         } else {
-          return `${mailAddress.mStreet}, ${mailAddress.mApt ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.mailStreet}, ${mailAddress.mailApt ?? ""}, ${mailAddress.mailCity}, ${abbreviateJurisdiction(mailAddress.mailState) ?? ""} ${mailAddress.mailZip}`;
         }
       } else {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox ?? ""}, ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.poBox ?? ""}, ${mailAddress.mailCity}, ${abbreviateJurisdiction(mailAddress.mailState) ?? ""} ${mailAddress.mailZip}`;
         } else {
-          return `${mailAddress.mStreet} ${mailAddress.mCity}, ${abbreviateJurisdiction(mailAddress.mState) ?? ""} ${mailAddress.mZip}`;
+          return `${mailAddress.mailStreet} ${mailAddress.mailCity}, ${abbreviateJurisdiction(mailAddress.mailState) ?? ""} ${mailAddress.mailZip}`;
         }
       }
 
@@ -528,19 +528,13 @@ export function formatContactInfo(
         return undefined;
       }
       if (!homeAddress.apt) {
-        return [
-          fullName(representativeName(applicant)),
-          `${applicant.homeAddress?.street ?? ""}
-          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
-          ${applicant.phone ?? ""}`,
-        ].join(separator);
+        return `${fullName(representativeName(applicant))} 
+          ${applicant.homeAddress?.street ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+          ${applicant.phone ?? ""}`;
       } else {
-        return [
-          fullName(representativeName(applicant)),
-          `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
-          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
-          ${applicant.phone ?? ""}`,
-        ].join(separator);
+        return `${fullName(representativeName(applicant))}
+          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""}
+          ${applicant.phone ?? ""}`;
       }
 
     case ContactFormat.ResidentFullContactInfoAndCountry:
@@ -554,19 +548,13 @@ export function formatContactInfo(
         return undefined;
       }
       if (!homeAddress.apt) {
-        return [
-          fullName(representativeName(applicant)),
-          `${applicant.homeAddress?.street ?? ""}
-          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
-          ${applicant.phone ?? ""}`,
-        ].join(separator);
+        return `${fullName(representativeName(applicant))}
+          ${applicant.homeAddress?.street ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+          ${applicant.phone ?? ""}`;
       } else {
-        return [
-          fullName(representativeName(applicant)),
-          `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""}
-          ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
-          ${applicant.phone ?? ""}`,
-        ].join(separator);
+        return `${fullName(representativeName(applicant))}
+          ${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress?.apt ?? ""} ${applicant.homeAddress?.city ?? ""}, ${applicant.residentJurisdiction?.abbreviation ?? ""} ${applicant.homeAddress?.zip ?? ""} USA
+          ${applicant.phone ?? ""}`;
       }
 
     default:
@@ -642,5 +630,7 @@ export function allCAPS(capString: string | undefined): string {
     return "";
   }
 
-  return capString.toUpperCase();
+  const upperString = capString.toLocaleUpperCase();
+
+  return upperString;
 }

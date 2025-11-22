@@ -82,7 +82,7 @@ export const adultNameChangeMap: Formfill[] = [
     fieldName: "11 - Date of Birth",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
+    text: `${applicant.birthCity ?? ""},    ${applicant.birthCounty ?? ""} county    ${applicant.birthJurisdictionName ?? ""},    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { x: 255, y: 865 },
   }),
   () => ({
@@ -258,7 +258,7 @@ export const minorChildInfoMap: Formfill[] = [
     fieldName: "7 - Date of Birth",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity ?? ""}    ${applicant.birthCounty ?? ""}    ${applicant.birthJurisdictionName ?? ""}    ${applicant.birthJurisdictionName ? "USA" : ""}`,
+    text: `${applicant.birthCity ?? ""},    ${applicant.birthCounty ?? ""} county    ${applicant.birthJurisdictionName ?? ""},    ${applicant.birthJurisdictionName ? "USA" : ""}`,
     loc: { x: 277, y: 712 },
   }),
   (applicant) => ({

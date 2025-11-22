@@ -636,7 +636,7 @@ export const voterOregonMap: Formfill[] = [
     fieldName: "Email",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.MailFullAddress),
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, cf.MailFullAddress) : "",
     fieldName: "Mailing Address",
   }),
   (applicant) => ({

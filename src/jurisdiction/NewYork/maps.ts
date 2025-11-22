@@ -77,10 +77,12 @@ export const adultNameSexPetitionMap: Formfill[] = [
   (applicant) => ({
     text: applicant.hasCriminalRecord ? "•" : "",
     loc: { page: 1, x: 685, y: 64 },
+    font: 36,
   }),
   (applicant) => ({
     text: !applicant.hasCriminalRecord ? "•" : "",
     loc: { page: 1, x: 753, y: 64 },
+    font: 36,
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.reasonForNameChange : "",
@@ -429,61 +431,61 @@ export const primaryIDNewYorkMap: Formfill[] = [
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
+    text: !applicant.mailAddress?.poBox ? applicant.mailAddress?.mailStreet : applicant.mailAddress.poBox,
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL Include Street Number and Name Rural Delivery and or box number If PO Post Office Box also fill in Address Where You Live below",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mApt ?? "",
+    text: applicant.mailAddress?.mailApt ?? "",
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL Apt Apartment No Number",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mCity,
+    text: applicant.mailAddress?.mailCity,
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL City or Town",
   }),
   (applicant) => ({
-    value: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+    value: abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL State",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mZip,
+    text: applicant.mailAddress?.mailZip,
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL Zip Code",
   }),
   (applicant) => ({
-    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
-      ? applicant.homeAddress?.street : "",
+    text: !applicant.streetEqualsMail || !applicant.mailAddress?.poBox 
+      ? "" : applicant.homeAddress?.street,
     fieldName:
       "ADDRESS WHERE YOU LIVE REQUIRED IF DIFFERENT FROM ADDRESS FOR MAIL DO NOT GIVE PO Post OfficeBOX THIS ADDRESS WILL APPEAR ON YOUR ENHANCED REAL ID IDENTITY DOCUMENT",
   }),
   (applicant) => ({
-    text: (applicant.streetEqualsMail || applicant.mailAddress?.poBox) && applicant.homeAddress?.apt 
-      ? applicant.homeAddress.apt : "",
+    text: !applicant.streetEqualsMail || !applicant.mailAddress?.poBox 
+      ? "" : applicant.homeAddress?.apt,
     fieldName:
       "ADDRESS WHERE YOU LIVE Apt Apartment No Number",
   }),
   (applicant) => ({
-    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
-      ? applicant.homeAddress?.city : "",
+    text: !applicant.streetEqualsMail || !applicant.mailAddress?.poBox 
+      ? "" : applicant.homeAddress?.city,
     fieldName: "ADDRESS WHERE YOU LIVE City or Town",
   }),
   (applicant) => ({
     value: 
-      applicant.streetEqualsMail || applicant.mailAddress?.poBox 
-        ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : "",
+      !applicant.streetEqualsMail || !applicant.mailAddress?.poBox 
+        ? "" : getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
     fieldName: "ADDRESS WHERE YOU LIVE State",
   }),
   (applicant) => ({
-    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
-      ? applicant.homeAddress?.zip : "",
+    text: !applicant.streetEqualsMail || !applicant.mailAddress?.poBox 
+      ? "" : applicant.homeAddress?.zip,
     fieldName: "ADDRESS WHERE YOU LIVE Zip Code",
   }),
   (applicant) => ({
-    text: applicant.streetEqualsMail || applicant.mailAddress?.poBox 
-      ? applicant.residentLocalityName : "",
+    text: !applicant.streetEqualsMail || !applicant.mailAddress?.poBox 
+      ? "" : applicant.residentLocalityName,
     fieldName: "ADDRESS WHERE YOU LIVE County",
   }),
   (applicant) => ({
@@ -562,27 +564,27 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
+    text: !applicant.mailAddress?.poBox ? applicant.mailAddress?.mailStreet : applicant.mailAddress.poBox,
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mApt ?? "",
+    text: applicant.mailAddress?.mailApt ?? "",
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Apt Apartment No Number",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mCity,
+    text: applicant.mailAddress?.mailCity,
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL City or Town",
   }),
   (applicant) => ({
-    value: abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+    value: abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL State",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mZip,
+    text: applicant.mailAddress?.mailZip,
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL Zip Code",
   }),
@@ -837,24 +839,24 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S1: Last Name",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet,
+    text: !applicant.mailAddress?.poBox ? applicant.mailAddress?.mailStreet : applicant.mailAddress.poBox,
     fieldName: "S1: Mailing Address",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mApt ?? "",
+    text: applicant.mailAddress?.mailApt ?? "",
     fieldName: "S1: Apartment Number",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mCity,
+    text: applicant.mailAddress?.mailCity,
     fieldName: "S1: City",
   }),
   (applicant) => ({
     text: 
-      abbreviateJurisdiction(applicant.mailAddress?.mState ?? ""),
+      abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
     fieldName: "S1: State",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.mZip,
+    text: applicant.mailAddress?.mailZip,
     fieldName: "S1: Zip Code",
   }),
   (applicant) => ({

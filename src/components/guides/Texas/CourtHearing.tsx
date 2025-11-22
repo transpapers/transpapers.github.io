@@ -129,7 +129,7 @@ function TexasCourtHearingGuide({ person }: { person: Partial<Person> }) {
           You may also be asked “Do you know of anyone who would oppose this
           name change?” The authors of this guide are not lawyers, but our
           understanding is that, having answered “no” to the “fraudulent
-          reasons” question, you can answer “no” to this one. In particular,
+          reasons” question, you can answer “no” to this one. In particular,{" "}
           <strong>
             you can safely disregard any “opposition” on purely transphobic
             grounds.

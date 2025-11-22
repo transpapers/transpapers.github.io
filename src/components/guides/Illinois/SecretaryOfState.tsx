@@ -60,7 +60,7 @@ function IllinoisSecretaryOfStateGuide({
         Bring your court order,
         {isChangingLegalSex ? " the Gender Designation Change Form, " : ""}
         the receipt from Social Security, and your current Drivers License/State
-        ID to the appointment. If you don&apos;t have a license see this{" "}
+        ID to the appointment. If you don&apos;t have one see this{" "}
         <a href="https://www.ilsos.gov/publications/pdf_publications/dsd_x173.pdf">
           link
         </a>{" "}

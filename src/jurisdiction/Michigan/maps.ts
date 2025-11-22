@@ -762,26 +762,26 @@ export const miSexMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.M ? "X" : "",
-    loc: { x: 159, y: 539 },
+    loc: { x: 160, y: 540 },
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.F ? "X" : "",
-    loc: { x: 159, y: 559 },
+    loc: { x: 160, y: 560 },
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.X ? "X" : "",
-    loc: { x: 159, y: 579 },
+    loc: { x: 160, y: 580 },
   }),
   (applicant) => ({
     text: applicant.gender === GenderMarker.M ? "X" : "",
-    loc: { x: 486, y: 539 },
+    loc: { x: 486, y: 540 },
   }),
   (applicant) => ({
     text: applicant.gender === GenderMarker.F ? "X" : "",
-    loc: { x: 486, y: 559 },
+    loc: { x: 486, y: 560 },
   }),
   (applicant) => ({
     text: applicant.gender === GenderMarker.X ? "X" : "",
-    loc: { x: 486, y: 579 },
+    loc: { x: 486, y: 580 },
   }),
 ];

@@ -51,11 +51,11 @@ export class ResidentialAddress {
  */
 export class MailingAddress {
   poBox?: string = "";
-  mApt?: string = "";
-  mStreet?: string = "";
-  mCity?: string = "";
-  mState?: string = "";
-  mZip?: string = "";
+  mailApt?: string = "";
+  mailStreet?: string = "";
+  mailCity?: string = "";
+  mailState?: string = "";
+  mailZip?: string = "";
 }
 
 export enum GenderMarker {

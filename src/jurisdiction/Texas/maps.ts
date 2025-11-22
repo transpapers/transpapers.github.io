@@ -1985,13 +1985,13 @@ export const primaryIDTexasMap: Formfill[] = [
     text: (() => {
       switch (!applicant.streetEqualsMail) {
         case true:
-          switch (!applicant.mailAddress?.mApt) {
+          switch (!applicant.mailAddress?.mailApt) {
           case true:
-            return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+            return !applicant.mailAddress?.poBox ? applicant.mailAddress?.mailStreet : applicant.mailAddress.poBox;
           case false:
             return applicant.mailAddress?.poBox
-            ? `${applicant.mailAddress.poBox}, ${applicant.mailAddress.mApt ?? ""}`
-            : `${applicant.mailAddress?.mStreet ?? ""}, ${applicant.mailAddress?.mApt ?? ""}`;
+            ? `${applicant.mailAddress.poBox}, ${applicant.mailAddress.mailApt ?? ""}`
+            : `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}`;
           default:
             return "";
           }
@@ -2004,16 +2004,16 @@ export const primaryIDTexasMap: Formfill[] = [
     fieldName: "Mailing Address",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mCity : "",
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mailCity : "",
     fieldName: "City_2",
   }),
   (applicant) => ({
     text: !applicant.streetEqualsMail ?
-      abbreviateJurisdiction(applicant.mailAddress?.mState ?? "") : "",
+      abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") : "",
     fieldName: "State_2",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mZip : "",
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mailZip : "",
     fieldName: "Zip Code_2",
   }),
   (applicant) => ({

@@ -43,7 +43,7 @@ function AlaskaDMVGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         Alternatively you {age && age < 18 && "and a parent/guardian"} can go to
-        a DMV location and request that they update the name on your license to
+        a DMV location and request that they update the name on your license/ID to
         your new name. That will count as notifying them. To do this you will
         need the “Driver License, Permit Or Identification Card Transaction
         Application” (form D1). For this form fill out any blanks we left in the

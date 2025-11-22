@@ -87,13 +87,13 @@ export const changeOfNameMap: Formfill[] = [
     text: (() => {
       switch (!applicant.streetEqualsMail) {
         case true:
-          switch (!applicant.mailAddress?.mApt) {
+          switch (!applicant.mailAddress?.mailApt) {
           case true:
-            return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mStreet;
+            return !applicant.mailAddress?.poBox ? applicant.mailAddress?.mailStreet : applicant.mailAddress.poBox;
           case false:
-            return applicant.mailAddress?.poBox
-            ? `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mApt ?? ""}`
-            : `${applicant.mailAddress?.mStreet ?? ""}, ${applicant.mailAddress?.mApt ?? ""}`;
+            return !applicant.mailAddress?.poBox
+            ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}`
+            : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
           default:
             return "";
           }
@@ -373,24 +373,24 @@ export const primaryIDRhodeIslandMap: Formfill[] = [
     fieldName: "ZIP CODE",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mStreet : "",
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mailStreet : "",
     fieldName: "STREET ADDRESS MAILING ADDRESS IF DIFFERENT FROM RESIDENCE APTUNIT  or FLOOR",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mApt : "",
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mailApt : "",
     fieldName: "Text4",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mCity : "",
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mailCity : "",
     fieldName: "CITYTOWN_2",
   }),
   (applicant) => ({
     text: !applicant.streetEqualsMail ?
-      abbreviateJurisdiction(applicant.mailAddress?.mState ?? "") : "",
+      abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") : "",
     fieldName: "STATE_2",
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mZip : "",
+    text: !applicant.streetEqualsMail ? applicant.mailAddress?.mailZip : "",
     fieldName: "ZIP CODE_2",
   }),
   (applicant) => ({

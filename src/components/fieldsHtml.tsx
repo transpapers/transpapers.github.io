@@ -191,7 +191,7 @@ export function MailAddressField({
   field,
   register,
 }: FieldConstructorProps): JSX.Element {
-  const keys = ["poBox", "mApt", "mStreet", "mCity", "mState", "mZip"];
+  const keys = ["poBox", "mailApt", "mailStreet", "mailCity", "mailState", "mailZip"];
   const innards = (
     <div className="mailAddress" key={`${field.name}-field`}>
       {keys.map((key) => (

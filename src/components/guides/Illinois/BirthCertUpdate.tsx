@@ -44,9 +44,7 @@ function IllinoisBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
         On the “Place of Birth or Death” line
         {age && age < 18 ? " have your petitioner " : " "}
         write in the exact location you were born in this format: hospital name,
-        city, and county. If you live in an apartment or have some other floor
-        or suite number add it in the third section where we put your street
-        address if it wasn&apos;t otherwise included.
+        city, and county.
         {age && age < 18 ? " Your petitioner should " : " Do "}
         <strong>not</strong> sign {age && age < 18 ? "" : " in your new name "}
         or date this until a notary says to.
