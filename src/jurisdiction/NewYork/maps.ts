@@ -431,7 +431,7 @@ export const primaryIDNewYorkMap: Formfill[] = [
       "OTHER CHANGE What is the change and the reason for it new license class wrong date of birth etc Et cetera",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet,
     fieldName:
       "ADDRESS WHERE YOU GET YOUR MAIL Include Street Number and Name Rural Delivery and or box number If PO Post Office Box also fill in Address Where You Live below",
   }),
@@ -564,7 +564,7 @@ export const vehicleRegistrationMap: Formfill[] = [
     fieldName: "PRIMARY REGISTRANT TELEPHONE or MOBILE PHONE NUMBER",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet,
     fieldName:
       "THE ADDRESS WHERE PRIMARY REGISTRANT GETS MAIL",
   }),
@@ -839,7 +839,7 @@ export const birthCertNYCMap: Formfill[] = [
     fieldName: "S1: Last Name",
   }),
   (applicant) => ({
-    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;,
+    text: applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet,
     fieldName: "S1: Mailing Address",
   }),
   (applicant) => ({
