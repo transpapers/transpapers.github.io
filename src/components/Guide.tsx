@@ -88,54 +88,6 @@ function getProcesses(
   const filteredProcs = allProcs;
   const applicant = useStore((state) => state.person);
 
-  if(applicant.isChangingLegalName) {
-    for (const nameProc of allProcs) {
-      if (nameProc.target === Target.NameChange) {
-        filteredProcs.push(nameProc)
-      }
-    }
-  }
-
-  if(applicant.isChangingLegalSex) {
-    for (const genderProc of allProcs) {
-      if (genderProc.target === Target.GenderMarker) {
-        filteredProcs.push(genderProc)
-      }
-    }
-  }
-
-  if(applicant.isChangingSocialSecurity) {
-    for (const socialProc of allProcs) {
-      if (socialProc.target === Target.SocialSecurity) {
-        filteredProcs.push(socialProc)
-      }
-    }
-  }
-
-  if(applicant.isChangingPrimaryID) {
-    for (const idProc of allProcs) {
-      if (idProc.target === Target.PrimaryIdentification) {
-        filteredProcs.push(idProc)
-      }
-    }
-  }
-
-  if(applicant.isChangingBirthCert) {
-    for (const birthProc of allProcs) {
-      if (birthProc.isBirth) {
-        filteredProcs.push(birthProc)
-      }
-    }
-  }
-
-  if(applicant.isChangingPassport) {
-    for (const passProc of allProcs) {
-      if (passProc.target === Target.Passport) {
-        filteredProcs.push(passProc)
-      }
-    }
-  }
-
   const processes: AnyProcess[] = [];
   const metTargets: Target[] = [];
 
@@ -154,7 +106,7 @@ function getProcesses(
 
         if (allMet) {
           addedSomethingThisTime = true;
-          processes.push(proc);
+          //processes.push(proc);
           metTargets.push(proc.target);
         }
       }
@@ -170,6 +122,54 @@ function getProcesses(
   const guideProcesses: AnyProcess[] = residentJurisdiction.processes.filter((p) => p.isJustGuide);
   for (const guideProc of guideProcesses) {
     processes.push(guideProc);
+  }
+
+  if(applicant.isChangingLegalName) {
+    for (const nameProc of allProcs) {
+      if (nameProc.target === Target.NameChange) {
+        processes.push(nameProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingLegalSex) {
+    for (const genderProc of allProcs) {
+      if (genderProc.target === Target.GenderMarker) {
+        processes.push(genderProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingSocialSecurity) {
+    for (const socialProc of allProcs) {
+      if (socialProc.target === Target.SocialSecurity) {
+        processes.push(socialProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingPrimaryID) {
+    for (const idProc of allProcs) {
+      if (idProc.target === Target.PrimaryIdentification) {
+        processes.push(idProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingBirthCert) {
+    for (const birthProc of allProcs) {
+      if (birthProc.isBirth) {
+        processes.push(birthProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingPassport) {
+    for (const passProc of allProcs) {
+      if (passProc.target === Target.Passport) {
+        processes.push(passProc)
+      }
+    }
   }
 
   return processes;
