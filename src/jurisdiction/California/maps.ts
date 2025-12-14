@@ -49,7 +49,7 @@ export const civilCaseCoverMap: Formfill[] = [
   (applicant) => ({
     text: 
       `${fullName(representativeName(applicant))}, 
-      ${formatContactInfo(applicant, cf.ResidentFullAddress)}`,
+      ${formatContactInfo(applicant, cf.ResidentFullAddress) ?? ""}`,
     fieldName: "CM-010[0].Page1[0].P1Caption[0].AttyPartyInfo[0].TextField1[0]",
   }),
   (applicant) => ({
@@ -79,7 +79,7 @@ export const civilCaseCoverMap: Formfill[] = [
     fieldName: "CM-010[0].Page1[0].P1Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "CM-010[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -171,7 +171,7 @@ export const nameChangeOnlyPetitionMap: Formfill[] = [
     fieldName: "NC-100[0].Page1[0].Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-100[0].Page1[0].Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -281,7 +281,7 @@ export const adultNameGenderPetitionMap: Formfill[] = [
     fieldName: "NC-300[0].Page1[0].Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-300[0].Page1[0].Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -414,7 +414,7 @@ export const minorNameGenderPetitionMap: Formfill[] = [
     fieldName: "NC-500[0].Page1[0].P1Header[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-500[0].Page1[0].P1Header[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -516,10 +516,12 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
+    //eslint-disable-next-line
     fieldName: "NNC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b1[0].Petitioner\.applies\.for\.item\.7b1\.ft[0]",
   }),
   (applicant) => ({
     text: fullName(applicant.chosenName),
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b2[0].Petitioner\.applies\.for\.item\.7b2\.ft[0]",
   }),
   (applicant) => ({
@@ -527,6 +529,7 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].Petitioner\.applies\.for\.item\.7b3\.ft[0]",
   }),
   (applicant) => ({
@@ -539,6 +542,7 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b4[0].Petitioner\.applies\.for\.item\.7b4\.ft[0]",
   }),
   (applicant) => ({
@@ -551,10 +555,12 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.ResidentFullAddressAndLocality),
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b6[0].Petitioner\.applies\.for\.item\.7b6\.address\.ft[0]",
   }),
   (applicant) => ({
     text: applicant.reasonForNameChange,
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7C[0].Petitioner\.applies\.for\.item\.7c\.\.reason\.ft[0]",
   }),
   (applicant) => ({
@@ -569,12 +575,14 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     text: 
       isMinor(applicant) && applicant.parentsAreOkay 
       ? fullName(representativeName(applicant)) : "",
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7E[0].Sublist7[0].SubLI7E1[0].Petitioner\.applies\.for\.item\.7e1\.ft[0]",
   }),
     (applicant) => ({
     text: 
       isMinor(applicant) && applicant.parentsAreOkay ?
       formatContactInfo(applicant, cf.ResidentFullAddress) : "",
+    //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7E[0].Sublist7[0].SubLI7E1[0].Petitioner\.applies\.for\.item\.7e1\.address\.ft[0]",
   }),
   (applicant) => ({
@@ -694,7 +702,7 @@ export const nameChangeOnlyNoticeMap: Formfill[] = [
     fieldName: "NC-120[0].Page1[0].P1Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-120[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -770,7 +778,7 @@ export const nameChangeOnlyConformMap: Formfill[] = [
     fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -847,7 +855,7 @@ export const minorNameGenderConformMap: Formfill[] = [
     fieldName: "NC-520[0].Page1[0].Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NNC-520[0].Page1[0].Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -927,7 +935,7 @@ export const nameChangeOnlyOrderMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page1[0].Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "topmostSubform[0].Page1[0].Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -999,7 +1007,7 @@ export const nameChangeOnlyOrderGuardianMap: Formfill[] = [
     fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -1071,7 +1079,7 @@ export const adultNameGenderOrderMap: Formfill[] = [
     fieldName: "NC-330[0].Page1[0].P1Header[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-330[0].Page1[0].P1Header[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -1112,6 +1120,7 @@ export const adultNameGenderOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    //eslint-disable-next-line
     fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]",
   }),
 ];
@@ -1172,7 +1181,7 @@ export const minorNameGenderOrderMap: Formfill[] = [
     fieldName: "NC-530G[0].Page1[0].P1Caption[0].CourtInfo[0].CrtMailingAdd[0]",
   }),
   (applicant) => ({
-    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip}`,
+    text: `${getLocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.court.city ?? ""}, ${getCALocality(applicant.residentJurisdictionName, applicant.residentLocalityName)?.courtZip ?? ""}`,
     fieldName: "NC-530G[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCityZip[0]",
   }),
   (applicant) => ({
@@ -1237,6 +1246,7 @@ export const minorNameGenderOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    //eslint-disable-next-line
     fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]",
   }),
 ];
@@ -1272,7 +1282,7 @@ export const feeWaiverMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1342,7 +1352,7 @@ export const feeWaiverOrderMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1408,7 +1418,7 @@ export const nameOnlyBirthCertMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1455,8 +1465,8 @@ export const nameOnlyBirthCertMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+      ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1544,7 +1554,7 @@ export const nameGenderBirthCertMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1591,8 +1601,8 @@ export const nameGenderBirthCertMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.last
-      ? `${applicant.birthName.last} ${applicant.birthName?.suffix ?? ""}`
-      : `${applicant.legalName.last} ${applicant.legalName?.suffix ?? ""}`,
+      ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}`
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1857,7 +1867,7 @@ export const amadorBackgroundCheckMap: Formfill[] = [
     fieldName: "Text1",
   }),
   (applicant) => ({
-    text: fullName(applicant.birthName) ?? "",
+    text: fullName(applicant.birthName),
     fieldName: "LAST NAME FIRST NAME MIDDLE NAME.1",
   }),
   (applicant) => ({
@@ -1994,7 +2004,7 @@ export const kernCaseNoticeMap: Formfill[] = [
   (applicant) => ({
     text: 
     `${fullName(representativeName(applicant))}, 
-    ${formatContactInfo(applicant, cf.ResidentFullAddress)}`,
+    ${formatContactInfo(applicant, cf.ResidentFullAddress) ?? ""}`,
     fieldName: "Attorney or Party",
   }),
   (applicant) => ({
@@ -2106,7 +2116,7 @@ export const losAngelesCaseTypeMap: Formfill[] = [
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 
-      : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
+      : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
     fieldName: "ADDRESSZIP CODE",
   }),
   (applicant) => ({
@@ -2130,8 +2140,8 @@ export const losAngelesCaseTypeMap: Formfill[] = [
 export const losAngelesCriminalHistoryMap: Formfill[] = [
   (applicant) => ({
     text: 
-    `${formatContactInfo(applicant, cf.ResidentFullContactInfo)}
-    ${applicant.email}`,
+    `${formatContactInfo(applicant, cf.ResidentFullContactInfo) ?? ""}
+    ${applicant.email ?? ""}`,
     fieldName: "ADDRESS01",
   }),
   (applicant) => ({
@@ -2420,7 +2430,7 @@ export const sanBenitoBackgroundCheckMap: Formfill[] = [
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 
-      : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
+      : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -2580,7 +2590,7 @@ export const siskiyouInfoMap: Formfill[] = [
     loc: { x: 175, y: 264 },
   }),
   (applicant) => ({
-    text: applicant.birthName.first ?? "",
+    text: applicant.birthName.first,
     loc: { x: 380, y: 264 },
   }),
   (applicant) => ({
@@ -2619,7 +2629,7 @@ export const siskiyouInfoMap: Formfill[] = [
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 
-      : `${applicant.homeAddress?.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
+      : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
     loc: { x: 577, y: 315 },
   }),
   (applicant) => ({
@@ -2654,7 +2664,7 @@ export const siskiyouBackgroundCheckMap: Formfill[] = [
     loc: { x: 535, y: 281 },
   }),
   (applicant) => ({
-    text: fullName(applicant.birthName) ?? "",
+    text: fullName(applicant.birthName),
     loc: { x: 95, y: 320 },
   }),
   (applicant) => ({
