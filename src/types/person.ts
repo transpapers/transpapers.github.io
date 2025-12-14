@@ -338,6 +338,10 @@ export const sampleData: Person = {
 
   isChangingLegalName: true,
   isChangingLegalSex: true,
+  isChangingBirthCert: true,
+  isChangingPassport: true,
+  isChangingPrimaryID: true,
+  isChangingSocialSecurity: true,
 
   mothersBirthName: {
     first: "Sarah",
@@ -357,7 +361,7 @@ export const sampleData: Person = {
     suffix: "Jr.",
   },
 
-  fathersBirthdate: "1970-01-01",
+  fathersBirthdate: "1969-12-30",
 
   phone: "313-867-5309",
 
