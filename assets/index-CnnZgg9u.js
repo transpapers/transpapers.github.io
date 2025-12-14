@@ -19503,11 +19503,11 @@ function Root() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "What is this?" }),
         " Transpapers is a trans-run, privacy-focused, free (",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://en.wikipedia.org/wiki/Free_software", children: /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "libre" }) }),
-        ") web service that aims to lessen the burden of filing all those forms to have the state legally affirm your gender. This may be necessary for your mental health, personal safety, and/or affirming medical care."
+        ") web service that aims to lessen the burden of filing all those forms to have the state legally affirm your name and/or gender. This may be necessary for your mental health, personal safety, and/or accessing affirming medical care."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "How do I use it?" }),
-        " Select your birth state, current state of residence, and the information you wish to change. Fill out the form that appears and press “Download gender-affirming documents”. Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered."
+        " Select your current state of residence, birth state, and the information you wish to change. Fill out the form that appears and press “Download gender-affirming documents”. Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Is it safe to enter my personal data?" }),
@@ -19522,15 +19522,16 @@ function Root() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "My state isn't listed." }),
-        " Transpapers is developed by two people with day jobs. It's a lot of work to automate the legal processes of fifty-five states and territories. Send us a request at the feedback form below and we'll add it to the list. If you're a programmer, send us a pull request."
+        " Transpapers is developed by two people with day jobs. It's a lot of work to automate the legal processes of fifty-five states and territories. Send us a request at the feedback form below and we'll add it to the list. If you're a programmer, send us a pull request on github."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Any bugs, issues, tips, etc. relating to legal processes should be reported at",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "our feedback form." }),
-        " Any bugs, issues, tips, etc. relating to the codebase should be reported on",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "our feedback form" }),
+        ". Any bugs, issues, tips, etc. relating to the codebase should be reported on",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io/issues", children: "GitHub." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io/issues", children: "GitHub" }),
+        "."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "View our source code on",
@@ -43466,6 +43467,30 @@ class Person {
    */
   isChangingLegalSex;
   /**
+   * Whether applicant is changing their birth certificate.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingBirthCert;
+  /**
+   * Whether applicant is changing their Primary ID.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingPrimaryID;
+  /**
+   * Whether applicant is changing their Passport.
+   *
+   * @remarks Filled from step 5 and finalizeApplicant.
+   */
+  isChangingPassport;
+  /**
+   * Whether applicant is changing their Social Security.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingSocialSecurity;
+  /**
    * Whether to withhold publication of the newspaper notice.
    *
    * @remarks Required to determine between confidential and public
@@ -43601,6 +43626,10 @@ const sampleData = {
   gender: GenderMarker.X,
   isChangingLegalName: true,
   isChangingLegalSex: true,
+  isChangingBirthCert: true,
+  isChangingPassport: true,
+  isChangingPrimaryID: true,
+  isChangingSocialSecurity: true,
   mothersBirthName: {
     first: "Sarah",
     middle: "MomsMiddle",
@@ -43616,7 +43645,7 @@ const sampleData = {
     last: "DadsDoe",
     suffix: "Jr."
   },
-  fathersBirthdate: "1970-01-01",
+  fathersBirthdate: "1969-12-30",
   phone: "313-867-5309",
   homeAddress: {
     apt: "BLDG B, Unit 301",
@@ -43721,9 +43750,25 @@ const useStore = create()(
             const isChangingLegalSex = state.processNames.includes(
               Target.GenderMarker
             );
+            const isChangingBirthCert = state.processNames.includes(
+              Target.BirthRecord
+            );
+            const isChangingPrimaryID = state.processNames.includes(
+              Target.PrimaryIdentification
+            );
+            const isChangingPassport = state.processNames.includes(
+              Target.Passport
+            );
+            const isChangingSocialSecurity = state.processNames.includes(
+              Target.SocialSecurity
+            );
             Object.assign(extraData, {
               isChangingLegalName,
-              isChangingLegalSex
+              isChangingLegalSex,
+              isChangingBirthCert,
+              isChangingPrimaryID,
+              isChangingPassport,
+              isChangingSocialSecurity
             });
             Object.assign(state.person, extraData);
           })
@@ -79204,12 +79249,14 @@ function compileInstructions(applicant, processes) {
 }
 function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
   const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
+  const filteredProcs = allProcs;
+  const applicant = useStore((state) => state.person);
   const processes = [];
   const metTargets = [];
   let count = 0;
   while (metTargets.length < setTargets.length && ++count < 100) {
     let addedSomethingThisTime = false;
-    for (const proc of allProcs) {
+    for (const proc of filteredProcs) {
       if (proc.target && !metTargets.includes(proc.target)) {
         const deps = proc.depends ?? [];
         const allMet = deps.reduce(
@@ -79218,7 +79265,6 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
         );
         if (allMet) {
           addedSomethingThisTime = true;
-          processes.push(proc);
           metTargets.push(proc.target);
         }
       }
@@ -79230,6 +79276,48 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
   const guideProcesses = residentJurisdiction.processes.filter((p) => p.isJustGuide);
   for (const guideProc of guideProcesses) {
     processes.push(guideProc);
+  }
+  if (applicant.isChangingLegalName) {
+    for (const nameProc of allProcs) {
+      if (nameProc.target === Target.NameChange) {
+        processes.push(nameProc);
+      }
+    }
+  }
+  if (applicant.isChangingLegalSex) {
+    for (const genderProc of allProcs) {
+      if (genderProc.target === Target.GenderMarker) {
+        processes.push(genderProc);
+      }
+    }
+  }
+  if (applicant.isChangingSocialSecurity) {
+    for (const socialProc of allProcs) {
+      if (socialProc.target === Target.SocialSecurity) {
+        processes.push(socialProc);
+      }
+    }
+  }
+  if (applicant.isChangingPrimaryID) {
+    for (const idProc of allProcs) {
+      if (idProc.target === Target.PrimaryIdentification) {
+        processes.push(idProc);
+      }
+    }
+  }
+  if (applicant.isChangingBirthCert) {
+    for (const birthProc of allProcs) {
+      if (birthProc.isBirth) {
+        processes.push(birthProc);
+      }
+    }
+  }
+  if (applicant.isChangingPassport) {
+    for (const passProc of allProcs) {
+      if (passProc.target === Target.Passport) {
+        processes.push(passProc);
+      }
+    }
   }
   return processes;
 }
