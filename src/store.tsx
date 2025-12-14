@@ -125,10 +125,26 @@ const useStore = create<ApplicationState & Action>()(
             const isChangingLegalSex = state.processNames.includes(
               Target.GenderMarker,
             );
+            const isChangingBirthCert = state.processNames.includes(
+              Target.BirthRecord,
+            );
+            const isChangingPrimaryID = state.processNames.includes(
+              Target.PrimaryIdentification,
+            );
+            const isChangingPassport = state.processNames.includes(
+              Target.Passport,
+            );
+            const isChangingSocialSecurity = state.processNames.includes(
+              Target.SocialSecurity,
+            );
 
             Object.assign(extraData, {
               isChangingLegalName,
               isChangingLegalSex,
+              isChangingBirthCert,
+              isChangingPrimaryID,
+              isChangingPassport,
+              isChangingSocialSecurity,
             });
 
             Object.assign(state.person, extraData);

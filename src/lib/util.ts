@@ -32,10 +32,11 @@ import { parsePhoneNumber } from "react-phone-number-input";
 import { allJurisdictions } from "../jurisdiction/all";
 import { Jurisdiction } from "../types/jurisdiction";
 import { AnyLocality } from "../types/generic";
-import { 
+import {
   Locality,
   NewYorkCounty,
   RhodeIslandCityOrTown,
+  CaliforniaCounty,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -364,6 +365,37 @@ export function getNYLocality(jurisdictionKey: string | undefined, localityKey: 
   const foundLocality: NewYorkCounty = localities.find(
     (j) => j.name === localityKey,
   ) as NewYorkCounty;
+
+  return foundLocality;
+}
+
+/*!
+ * Get an CA locality object to pull CA specific properties for forms.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {NewYorkCounty | undefined}
+ */
+export function getCALocality(jurisdictionKey: string | undefined, localityKey: string | undefined): CaliforniaCounty | undefined {
+  if (!jurisdictionKey) {
+    return undefined;
+  }
+
+  if (!localityKey) {
+    return undefined;
+  }
+
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey,
+  );
+
+  if (!foundJurisdiction) {
+    return undefined;
+  }
+
+  const localities = foundJurisdiction.localities;
+  const foundLocality: CaliforniaCounty = localities.find(
+    (j) => j.name === localityKey,
+  ) as CaliforniaCounty;
 
   return foundLocality;
 }

@@ -151,6 +151,34 @@ export class Person {
   isChangingLegalSex?: boolean;
 
   /**
+   * Whether applicant is changing their birth certificate.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingBirthCert?: boolean;
+
+  /**
+   * Whether applicant is changing their Primary ID.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingPrimaryID?: boolean;
+
+  /**
+   * Whether applicant is changing their Passport.
+   *
+   * @remarks Filled from step 5 and finalizeApplicant.
+   */
+  isChangingPassport?: boolean;
+
+  /**
+   * Whether applicant is changing their Social Security.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingSocialSecurity?: boolean;
+
+  /**
    * Whether to withhold publication of the newspaper notice.
    *
    * @remarks Required to determine between confidential and public

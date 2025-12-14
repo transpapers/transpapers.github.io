@@ -89,7 +89,7 @@ export const changeOfNameMap: Formfill[] = [
         case true:
           switch (!applicant.mailAddress?.mailApt) {
           case true:
-            return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;;
+            return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
           case false:
             return !applicant.mailAddress?.poBox
             ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}`

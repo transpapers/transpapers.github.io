@@ -83,8 +83,58 @@ function getProcesses(
   residentJurisdiction: AnyJurisdiction,
   birthJurisdiction: AnyJurisdiction,
   setTargets: Target[],
+  applicant: Person
 ): AnyProcess[] | undefined {
   const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
+  const filteredProcs = allProcs;
+
+  if(applicant.isChangingLegalName) {
+    for (const nameProc of allProcs) {
+      if (nameProc.target === Target.NameChange) {
+        filteredProcs.push(nameProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingLegalSex) {
+    for (const genderProc of allProcs) {
+      if (genderProc.target === Target.GenderMarker) {
+        filteredProcs.push(genderProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingSocialSecurity) {
+    for (const socialProc of allProcs) {
+      if (socialProc.target === Target.SocialSecurity) {
+        filteredProcs.push(socialProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingPrimaryID) {
+    for (const idProc of allProcs) {
+      if (idProc.target === Target.PrimaryIdentification) {
+        filteredProcs.push(idProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingBirthCert) {
+    for (const birthProc of allProcs) {
+      if (birthProc.isBirth) {
+        filteredProcs.push(birthProc)
+      }
+    }
+  }
+
+  if(applicant.isChangingPassport) {
+    for (const passProc of allProcs) {
+      if (passProc.target === Target.Passport) {
+        filteredProcs.push(passProc)
+      }
+    }
+  }
 
   const processes: AnyProcess[] = [];
   const metTargets: Target[] = [];
@@ -94,7 +144,7 @@ function getProcesses(
   while (metTargets.length < setTargets.length && ++count < 100) {
     let addedSomethingThisTime = false;
 
-    for (const proc of allProcs) {
+    for (const proc of filteredProcs) {
       if (proc.target && !metTargets.includes(proc.target)) {
         const deps = proc.depends ?? [];
         const allMet = deps.reduce(

@@ -152,7 +152,7 @@ export const ssnMap: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
         default:
           return "";
       }
@@ -268,7 +268,7 @@ export const ds5504Map: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
         default:
           return "";
       }
@@ -497,7 +497,7 @@ export const ds82Map: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
         default:
           return "";
       }
@@ -669,7 +669,7 @@ export const ds11Map: Formfill[] = [
         case true:
           return applicant.homeAddress?.street;
         case false:
-          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;;
+          return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
         default:
           return "";
       }

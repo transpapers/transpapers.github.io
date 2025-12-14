@@ -54,13 +54,13 @@ export default function Root() {
             <em>libre</em>
           </a>
           ) web service that aims to lessen the burden of filing all those forms
-          to have the state legally affirm your gender. This may be necessary
-          for your mental health, personal safety, and/or affirming medical
-          care.
+          to have the state legally affirm your name and/or gender. This may be 
+          necessary for your mental health, personal safety, and/or accessing 
+          affirming medical care.
         </p>
         <p>
-          <strong>How do I use it?</strong> Select your birth state, current
-          state of residence, and the information you wish to change. Fill out
+          <strong>How do I use it?</strong> Select your current state of 
+          residence, birth state, and the information you wish to change. Fill out
           the form that appears and press &ldquo;Download gender-affirming
           documents&rdquo;. Your browser will then download a PDF file
           comprising the forms you need to file, as well as a personalized guide
@@ -84,17 +84,17 @@ export default function Root() {
           by two people with day jobs. It&apos;s a lot of work to automate the
           legal processes of fifty-five states and territories. Send us a
           request at the feedback form below and we&apos;ll add it to the list.
-          If you&apos;re a programmer, send us a pull request.
+          If you&apos;re a programmer, send us a pull request on github.
         </p>
         <p>
           Any bugs, issues, tips, etc. relating to legal processes should be
           reported at{" "}
-          <a href="https://tinyurl.com/mgdc-feedback">our feedback form.</a> Any
+          <a href="https://tinyurl.com/mgdc-feedback">our feedback form</a>. Any
           bugs, issues, tips, etc. relating to the codebase should be reported
           on{" "}
           <a href="https://github.com/transpapers/transpapers.github.io/issues">
-            GitHub.
-          </a>
+            GitHub
+          </a>.
         </p>
         <p>
           View our source code on{" "}
