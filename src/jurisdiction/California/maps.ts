@@ -1282,7 +1282,7 @@ export const feeWaiverMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1352,7 +1352,7 @@ export const feeWaiverOrderMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1418,7 +1418,7 @@ export const nameOnlyBirthCertMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -1554,7 +1554,7 @@ export const nameGenderBirthCertMap: Formfill[] = [
         case false:
           return !applicant.homeAddress?.apt
             ? applicant.homeAddress?.street 
-            : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`;
+            : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -2116,7 +2116,7 @@ export const losAngelesCaseTypeMap: Formfill[] = [
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 
-      : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
+      : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
     fieldName: "ADDRESSZIP CODE",
   }),
   (applicant) => ({
@@ -2430,7 +2430,7 @@ export const sanBenitoBackgroundCheckMap: Formfill[] = [
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 
-      : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
+      : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
     fieldName: "Address",
   }),
   (applicant) => ({
@@ -2629,7 +2629,7 @@ export const siskiyouInfoMap: Formfill[] = [
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 
-      : `${applicant.homeAddress.street ?? ""}, ${applicant.homeAddress.apt ?? ""}`,
+      : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
     loc: { x: 577, y: 315 },
   }),
   (applicant) => ({
