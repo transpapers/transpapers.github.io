@@ -83,10 +83,10 @@ function getProcesses(
   residentJurisdiction: AnyJurisdiction,
   birthJurisdiction: AnyJurisdiction,
   setTargets: Target[],
-  applicant: Person
 ): AnyProcess[] | undefined {
   const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
   const filteredProcs = allProcs;
+  const applicant = useStore((state) => state.person);
 
   if(applicant.isChangingLegalName) {
     for (const nameProc of allProcs) {
