@@ -46,8 +46,9 @@ export type CaliforniaCounty = Locality & {
   multiCourt: boolean;
   courtByZip: boolean;
   allCourts?: caliCourt[];
-  zipList?: zipList[];
+  zipCourts?: Record<string, string>;
   newspaperList?: boolean;
+  publications?: Publication[];
 };
 
 export type TexasCounty = Locality & {
@@ -119,10 +120,6 @@ export interface caliCourt {
   phone: string;
   website?: string;
   specificCourtInfo?: string;
-}
-
-export interface zipList {
-  zipCourts: Record<string, string>;
 }
 
 export interface FingerprintLocation {

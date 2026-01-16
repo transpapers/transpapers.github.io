@@ -124,6 +124,7 @@ function getProcesses(
     processes.push(guideProc);
   }
 
+  //Provisional workaround for getting target system stuff removed as check in step 5.
   if(applicant.isChangingLegalName) {
     for (const nameProc of allProcs) {
       if (nameProc.target === Target.NameChange) {
