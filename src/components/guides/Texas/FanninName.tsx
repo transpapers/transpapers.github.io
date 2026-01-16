@@ -1,6 +1,6 @@
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
