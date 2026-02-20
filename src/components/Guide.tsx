@@ -118,12 +118,6 @@ function getProcesses(
     }
   }
 
-  //The below lines add isJustGuide sections back into the process list.
-  const guideProcesses: AnyProcess[] = residentJurisdiction.processes.filter((p) => p.isJustGuide);
-  for (const guideProc of guideProcesses) {
-    processes.push(guideProc);
-  }
-
   //Provisional workaround for getting target system stuff removed as check in step 5.
   if(applicant.isChangingLegalName) {
     for (const nameProc of allProcs) {
@@ -171,6 +165,12 @@ function getProcesses(
         processes.push(passProc)
       }
     }
+  }
+
+  //The below lines add isJustGuide sections back into the process list.
+  const guideProcesses: AnyProcess[] = residentJurisdiction.processes.filter((p) => p.isJustGuide);
+  for (const guideProc of guideProcesses) {
+    processes.push(guideProc);
   }
 
   return processes;
