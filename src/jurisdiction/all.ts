@@ -183,7 +183,7 @@ export const federal: Jurisdiction<Locality> = {
 
 export const elsewhere: Jurisdiction<Locality> = {
   name: "Elsewhere",
-  abbreviation: "FED",
+  abbreviation: "MI",
   processes: [elsewhereBirthRecord],
 
   localities: [],
