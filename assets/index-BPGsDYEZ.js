@@ -43247,10 +43247,48 @@ const passport = {
  * Transpapers. If not, see <https://www.gnu.org/licenses/>.
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
-({
+function ElsewhereBirthGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "This is for those born outside our covered areas" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you are reading this section that means that we do not yet have your place of birth in our systems. This means that we are unable to assist in processes like updating your birth certificate. If you were born in the USA you can make a request that your state be added",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://docs.google.com/forms/d/e/1FAIpQLSdsFASZLlzuD10ILk2xQar2Hu__iv4zCE-XpIGw9_EQck9Sjw/viewform?usp=sharing&ouid=116262791576704391708", children: "here" }),
+      ". If you were born in another country we will likely not be able to help you, our deepest apologies."
+    ] })
+  ] }, "Elsewhere-Birth");
+}
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
+const elsewhereBirthRecord = {
   target: Target.BirthRecord,
-  depends: [Target.NameChange]
-});
+  depends: [Target.NameChange],
+  documents: [
+    {
+      name: "Birth Note",
+      guide: ElsewhereBirthGuide
+    }
+  ],
+  isBirth: true
+};
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
  * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
@@ -43357,6 +43395,12 @@ const federal = {
   processes: [passport],
   localities: []
 };
+const elsewhere = {
+  name: "Elsewhere",
+  abbreviation: "MI",
+  processes: [elsewhereBirthRecord],
+  localities: []
+};
 const allJurisdictions = [
   alaska,
   illinois,
@@ -43364,6 +43408,7 @@ const allJurisdictions = [
   newYork,
   oregon,
   rhodeIsland,
+  elsewhere,
   federal
 ];
 /*!
