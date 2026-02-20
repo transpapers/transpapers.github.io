@@ -1485,6 +1485,14 @@ export const nameOnlyBirthCertMap: Formfill[] = [
     fieldName: "County of Birth",
   }),
   (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "Full Name of First Parent",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "Full Name of Second Parent if applicable",
+  }),
+  (applicant) => ({
     text: applicant.chosenName.first,
     fieldName: "First Name_2",
   }),
@@ -1621,6 +1629,14 @@ export const nameGenderBirthCertMap: Formfill[] = [
     fieldName: "County of Birth",
   }),
   (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "Full Name of First Parent",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "Full Name of Second Parent if applicable",
+  }),
+  (applicant) => ({
     check: (() => {
       switch (!applicant.birthName.first) {
         case true:
@@ -1726,6 +1742,10 @@ export const nameGenderBirthCertMap: Formfill[] = [
       }
     })(),
     fieldName: "Enter the New Corrected Name or ValueSex",
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "Enter the Reason for the Correction",
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),

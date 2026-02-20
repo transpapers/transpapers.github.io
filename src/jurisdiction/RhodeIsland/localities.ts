@@ -772,7 +772,7 @@ const rhodeislandCounties: RhodeIslandCityOrTown[] = [
         website: "https://www.eastbayri.com/",
       },
     ],
-    filingCost: "$142.00",
+    filingCost: "$154.00",
   },
   {
     name: "Warwick",
@@ -822,7 +822,7 @@ const rhodeislandCounties: RhodeIslandCityOrTown[] = [
         website: "https://www.ricentral.com/site/contact.html",
       },
     ],
-    filingCost: "$34.00",
+    filingCost: "$74.00",
   },
   {
     name: "West Warwick",
