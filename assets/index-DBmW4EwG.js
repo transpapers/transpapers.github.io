@@ -17871,7 +17871,7 @@ function RouterProvider2(props) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -17897,7 +17897,7 @@ function Header() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -19503,11 +19503,11 @@ function Root() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "What is this?" }),
         " Transpapers is a trans-run, privacy-focused, free (",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://en.wikipedia.org/wiki/Free_software", children: /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "libre" }) }),
-        ") web service that aims to lessen the burden of filing all those forms to have the state legally affirm your name and/or gender. This may be necessary for your mental health, personal safety, and/or accessing affirming medical care."
+        ") web service that aims to lessen the burden of filing all those forms to have the state legally affirm your gender. This may be necessary for your mental health, personal safety, and/or affirming medical care."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "How do I use it?" }),
-        " Select your current state of residence, birth state, and the information you wish to change. Fill out the form that appears and press “Download gender-affirming documents”. Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered."
+        " Select your birth state, current state of residence, and the information you wish to change. Fill out the form that appears and press “Download gender-affirming documents”. Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Is it safe to enter my personal data?" }),
@@ -19522,16 +19522,15 @@ function Root() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "My state isn't listed." }),
-        " Transpapers is developed by two people with day jobs. It's a lot of work to automate the legal processes of fifty-five states and territories. Send us a request at the feedback form below and we'll add it to the list. If you're a programmer, send us a pull request on github."
+        " Transpapers is developed by two people with day jobs. It's a lot of work to automate the legal processes of fifty-five states and territories. Send us a request at the feedback form below and we'll add it to the list. If you're a programmer, send us a pull request."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Any bugs, issues, tips, etc. relating to legal processes should be reported at",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "our feedback form" }),
-        ". Any bugs, issues, tips, etc. relating to the codebase should be reported on",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "our feedback form." }),
+        " Any bugs, issues, tips, etc. relating to the codebase should be reported on",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io/issues", children: "GitHub" }),
-        "."
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io/issues", children: "GitHub." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "View our source code on",
@@ -20394,7 +20393,7 @@ const persistImpl = (config, baseOptions) => (set2, get2, api) => {
 const persist = persistImpl;
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -27705,7 +27704,7 @@ function parsePhoneNumber() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -28180,7 +28179,7 @@ function numericalBirthYear(birthdate) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -28892,7 +28891,7 @@ const miSexMap = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -28972,7 +28971,7 @@ function MichiganBirthCertificateGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29027,7 +29026,7 @@ function MichiganCourtHearingGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29190,7 +29189,7 @@ function MichiganFilingInitialFormsGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29216,7 +29215,7 @@ function MichiganM97aGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29254,7 +29253,7 @@ function MichiganMC20Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29307,7 +29306,7 @@ function MichiganPC51cGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29356,7 +29355,7 @@ function MichiganPC51Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29426,7 +29425,7 @@ function MichiganPublicationGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29461,7 +29460,7 @@ function MichiganResourcesGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29523,7 +29522,7 @@ function MichiganSecretaryOfStateGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29584,7 +29583,7 @@ const targets = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -29723,7 +29722,7 @@ const michiganPostamble = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -31740,7 +31739,7 @@ const michiganCounties = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32327,7 +32326,7 @@ function RhodeIslandBirthCertRequestGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32411,7 +32410,7 @@ function RhodeIslandBirthCertUpdateGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32467,7 +32466,7 @@ function RhodeIslandCourtHearingGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32528,7 +32527,7 @@ function RhodeIslandDMVGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32796,7 +32795,7 @@ function RhodeIslandNotaryGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32843,7 +32842,7 @@ function RhodeIslandPC8_1Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -32882,7 +32881,7 @@ function RhodeIslandResourcesGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -33001,7 +33000,7 @@ const rhodeislandPostamble = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -33808,7 +33807,7 @@ const rhodeislandCounties = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -34852,7 +34851,7 @@ const selfAttestationMinorNYCMap = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -34995,7 +34994,7 @@ function NewYorkBirthCertUpdateGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35053,7 +35052,7 @@ function NewYorkDMVGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35216,7 +35215,7 @@ function NewYorkFilingGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35282,7 +35281,7 @@ function NewYorkNotaryGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35314,7 +35313,7 @@ function NYCFeeWaiverGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35346,7 +35345,7 @@ function NYStateFeeWaiverGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35385,7 +35384,7 @@ function NewYorkResourcesGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35423,7 +35422,7 @@ function NewYorkUCS_NC1Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35474,7 +35473,7 @@ function NewYorkUCS_NC2Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -35636,7 +35635,7 @@ const newyorkPostamble = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -36226,7 +36225,7 @@ const newyorkCounties = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -36263,7 +36262,7 @@ function NewYorkBoroughInfo() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -36822,7 +36821,7 @@ const voterOregonMap = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -36866,7 +36865,7 @@ function OregonAdultPetitionGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -36958,7 +36957,7 @@ function OregonBirthCertUpdateGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37006,7 +37005,7 @@ function OregonCourtHearingGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37048,7 +37047,7 @@ function OregonDMVGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37158,7 +37157,7 @@ function OregonEverythingElseGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37243,7 +37242,7 @@ function OregonFilingInitialFormsGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37295,7 +37294,7 @@ function OregonMinorPetitionGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37338,7 +37337,7 @@ function OregonResourcesGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37455,7 +37454,7 @@ const oregonPostamble = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -37801,7 +37800,7 @@ const oregonCounties = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38436,7 +38435,7 @@ const birthCertRequestAlaskaMap = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38469,7 +38468,7 @@ function AlaskaAdultPetitionGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38520,7 +38519,7 @@ function AlaskaBirthCertificateGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38554,7 +38553,7 @@ function AlaskaCIV695Guide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38584,7 +38583,7 @@ function AlaskaCIV708Guide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38670,7 +38669,7 @@ function AlaskaCourtHearingGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38728,7 +38727,7 @@ function AlaskaDMVGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38837,7 +38836,7 @@ function AlaskaEverythingElseGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -38974,7 +38973,7 @@ function AlaskaFilingInitialFormsGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -39014,7 +39013,7 @@ function AlaskaMinorPetitionGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -39049,7 +39048,7 @@ function AlaskaResourcesGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -39079,7 +39078,7 @@ function AlaskaVS405Guide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -39237,7 +39236,7 @@ const alaskaPostamble = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
 
  * This file is part of Transpapers.
  *
@@ -39659,7 +39658,7 @@ const alaskanAdministrativeDivisions = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -39687,7 +39686,7 @@ function AlaskaDistrictInfo() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckn
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckn
  *
  * This file is part of Transpapers.
  *
@@ -40356,7 +40355,7 @@ const birthCertCorrectionMap = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40395,7 +40394,7 @@ function IllinoisAdultOrderGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40444,7 +40443,7 @@ function IllinoisAdultPetitionGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40514,7 +40513,7 @@ function IllinoisBirthCertUpdateGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40568,7 +40567,7 @@ function IllinoisChildInfoGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40622,7 +40621,7 @@ function IllinoisCourtHearingGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40731,7 +40730,7 @@ function IllinoisEverythingElseGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40757,7 +40756,7 @@ function IllinoisFeeOrderGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40851,7 +40850,7 @@ function IllinoisFilingInitialFormsGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40890,7 +40889,7 @@ function IllinoisMinorOrderGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40933,7 +40932,7 @@ function IllinoisMinorPetitionGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -40997,7 +40996,7 @@ function IllinoisNotaryGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -41030,7 +41029,7 @@ function IllinoisParentInfoGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -41056,7 +41055,7 @@ function IllinoisPrivacyOrderGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -41099,7 +41098,7 @@ function IllinoisPrivacyRequestGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -41138,7 +41137,7 @@ function IllinoisResourcesGuide() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -41194,7 +41193,7 @@ function IllinoisSecretaryOfStateGuide({
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -41373,7 +41372,7 @@ const illinoisPostamble = {
 };
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -42211,7 +42210,7 @@ const illinoisCounties = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -42924,7 +42923,7 @@ const ds11Map = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -42982,7 +42981,7 @@ function DS5504Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43037,7 +43036,7 @@ function DS82Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43106,7 +43105,7 @@ function DS11Guide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43164,7 +43163,7 @@ function SocialSecurityGuide({ person }) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43230,7 +43229,31 @@ const passport = {
 });
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
+ *
+ * This file is part of Transpapers.
+ *
+ * Transpapers is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * Transpapers is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Transpapers. If not, see <https://www.gnu.org/licenses/>.
+ * @licend The above is the entire license notice for the JavaScript code in this file.
+ */
+({
+  target: Target.BirthRecord,
+  depends: [Target.NameChange]
+});
+/*!
+ * @licstart The following is the entire license notice for the JavaScript code in this file.
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43345,7 +43368,7 @@ const allJurisdictions = [
 ];
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43466,30 +43489,6 @@ class Person {
    * @remarks Filled from step 5 and finalizeApplicant.
    */
   isChangingLegalSex;
-  /**
-   * Whether applicant is changing their birth certificate.
-   *
-   * @remarks Filled from step 5.
-   */
-  isChangingBirthCert;
-  /**
-   * Whether applicant is changing their Primary ID.
-   *
-   * @remarks Filled from step 5.
-   */
-  isChangingPrimaryID;
-  /**
-   * Whether applicant is changing their Passport.
-   *
-   * @remarks Filled from step 5 and finalizeApplicant.
-   */
-  isChangingPassport;
-  /**
-   * Whether applicant is changing their Social Security.
-   *
-   * @remarks Filled from step 5.
-   */
-  isChangingSocialSecurity;
   /**
    * Whether to withhold publication of the newspaper notice.
    *
@@ -43626,10 +43625,6 @@ const sampleData = {
   gender: GenderMarker.X,
   isChangingLegalName: true,
   isChangingLegalSex: true,
-  isChangingBirthCert: true,
-  isChangingPassport: true,
-  isChangingPrimaryID: true,
-  isChangingSocialSecurity: true,
   mothersBirthName: {
     first: "Sarah",
     middle: "MomsMiddle",
@@ -43645,7 +43640,7 @@ const sampleData = {
     last: "DadsDoe",
     suffix: "Jr."
   },
-  fathersBirthdate: "1969-12-30",
+  fathersBirthdate: "1970-01-01",
   phone: "313-867-5309",
   homeAddress: {
     apt: "BLDG B, Unit 301",
@@ -43673,7 +43668,7 @@ const sampleData = {
 });
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -43750,25 +43745,9 @@ const useStore = create()(
             const isChangingLegalSex = state.processNames.includes(
               Target.GenderMarker
             );
-            const isChangingBirthCert = state.processNames.includes(
-              Target.BirthRecord
-            );
-            const isChangingPrimaryID = state.processNames.includes(
-              Target.PrimaryIdentification
-            );
-            const isChangingPassport = state.processNames.includes(
-              Target.Passport
-            );
-            const isChangingSocialSecurity = state.processNames.includes(
-              Target.SocialSecurity
-            );
             Object.assign(extraData, {
               isChangingLegalName,
-              isChangingLegalSex,
-              isChangingBirthCert,
-              isChangingPrimaryID,
-              isChangingPassport,
-              isChangingSocialSecurity
+              isChangingLegalSex
             });
             Object.assign(state.person, extraData);
           })
@@ -43882,19 +43861,7 @@ function Step3() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: (event) => void handleSubmit(onSubmit)(event), children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Where were you born?" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
-      ...bornValues,
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            ...register("birthJurisdictionName", { required: true }),
-            type: "radio",
-            value: void 0,
-            defaultChecked: void 0 === birthJurisdictionName
-          }
-        ),
-        "Somewhere else"
-      ] }) }, void 0)
+      ...bornValues
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "submit", value: "Next" })
   ] });
@@ -44000,7 +43967,7 @@ function Step5() {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -44424,7 +44391,7 @@ function renderField(field, jurisdiction, register) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -78999,7 +78966,7 @@ class PDFButton extends PDFField {
 PDFButton.of = (acroPushButton, ref, doc) => new PDFButton(acroPushButton, ref, doc);
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -79034,7 +79001,7 @@ function isFillable(field) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -79194,7 +79161,7 @@ async function collateDocuments(documents, applicant) {
 }
 /*!
  * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2026 Sasha Lišková and Stephanie Beckon
+ * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
  *
  * This file is part of Transpapers.
  *
@@ -79249,14 +79216,12 @@ function compileInstructions(applicant, processes) {
 }
 function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
   const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
-  const filteredProcs = allProcs;
-  const applicant = useStore((state) => state.person);
   const processes = [];
   const metTargets = [];
   let count = 0;
   while (metTargets.length < setTargets.length && ++count < 100) {
     let addedSomethingThisTime = false;
-    for (const proc of filteredProcs) {
+    for (const proc of allProcs) {
       if (proc.target && !metTargets.includes(proc.target)) {
         const deps = proc.depends ?? [];
         const allMet = deps.reduce(
@@ -79265,6 +79230,7 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
         );
         if (allMet) {
           addedSomethingThisTime = true;
+          processes.push(proc);
           metTargets.push(proc.target);
         }
       }
@@ -79276,48 +79242,6 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
   const guideProcesses = residentJurisdiction.processes.filter((p) => p.isJustGuide);
   for (const guideProc of guideProcesses) {
     processes.push(guideProc);
-  }
-  if (applicant.isChangingLegalName) {
-    for (const nameProc of allProcs) {
-      if (nameProc.target === Target.NameChange) {
-        processes.push(nameProc);
-      }
-    }
-  }
-  if (applicant.isChangingLegalSex) {
-    for (const genderProc of allProcs) {
-      if (genderProc.target === Target.GenderMarker) {
-        processes.push(genderProc);
-      }
-    }
-  }
-  if (applicant.isChangingSocialSecurity) {
-    for (const socialProc of allProcs) {
-      if (socialProc.target === Target.SocialSecurity) {
-        processes.push(socialProc);
-      }
-    }
-  }
-  if (applicant.isChangingPrimaryID) {
-    for (const idProc of allProcs) {
-      if (idProc.target === Target.PrimaryIdentification) {
-        processes.push(idProc);
-      }
-    }
-  }
-  if (applicant.isChangingBirthCert) {
-    for (const birthProc of allProcs) {
-      if (birthProc.isBirth) {
-        processes.push(birthProc);
-      }
-    }
-  }
-  if (applicant.isChangingPassport) {
-    for (const passProc of allProcs) {
-      if (passProc.target === Target.Passport) {
-        processes.push(passProc);
-      }
-    }
   }
   return processes;
 }
