@@ -85,6 +85,8 @@ import illinoisCounties from "./Illinois/localities";
 
 import { passport, socialSecurity } from "./Federal/process";
 
+import { elsewhereBirthRecord } from "./Elsewhere/process";
+
 export const michigan: Jurisdiction<MichiganCounty> = {
   name: "Michigan",
   abbreviation: "MI",
@@ -179,6 +181,14 @@ export const federal: Jurisdiction<Locality> = {
   localities: [],
 };
 
+export const elsewhere: Jurisdiction<Locality> = {
+  name: "Elsewhere",
+  abbreviation: "MI",
+  processes: [elsewhereBirthRecord],
+
+  localities: [],
+};
+
 export const allJurisdictions: AnyJurisdiction[] = [
   alaska,
   illinois,
@@ -186,6 +196,7 @@ export const allJurisdictions: AnyJurisdiction[] = [
   newYork,
   oregon,
   rhodeIsland,
+  elsewhere,
 
   federal,
 ];

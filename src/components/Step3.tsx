@@ -71,17 +71,6 @@ function Step3() {
       <h2>Where were you born?</h2>
       <ul>
         {...bornValues}
-        <li key={undefined}>
-          <label>
-            <input
-              {...register("birthJurisdictionName", { required: true })}
-              type="radio"
-              value={undefined}
-              defaultChecked={undefined === birthJurisdictionName}
-            />
-            Somewhere else
-          </label>
-        </li>
       </ul>
       <input type="submit" value="Next" />
     </form>
