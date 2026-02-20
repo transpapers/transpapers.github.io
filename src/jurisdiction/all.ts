@@ -196,6 +196,7 @@ export const allJurisdictions: AnyJurisdiction[] = [
   newYork,
   oregon,
   rhodeIsland,
+  elsewhere,
 
   federal,
 ];
