@@ -79,7 +79,6 @@ function Step3() {
               value={undefined}
               defaultChecked={undefined === birthJurisdictionName}
             />
-            Somewhere else
           </label>
         </li>
       </ul>
