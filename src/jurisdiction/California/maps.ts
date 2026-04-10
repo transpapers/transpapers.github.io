@@ -462,7 +462,7 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
   (applicant) => ({
     text: fullName(applicant.legalName),
     //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b1[0].Petitioner\.applies\.for\.item\.7b1\.ft[0]",
+    fieldName: `NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b1[0].Petitioner\.applies\.for\.item\.7b1\.ft[0]`,
   }),
   (applicant) => ({
     text: fullName(applicant.chosenName),
@@ -1094,7 +1094,7 @@ export const minorNameGenderOrderMap: Formfill[] = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     //eslint-disable-next-line
-    fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]",
+    fieldName: `NC-530G[0].Page2[0].List5[0].Li5b[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]`,
   }),
 ];
 
