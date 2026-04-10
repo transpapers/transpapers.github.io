@@ -179,7 +179,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-100 Name Petition All.pdf",
       guide: CaliforniaNC100Guide,
       map: nameChangeOnlyPetitionMap,
-      include: (applicant) => applicant.isChangingLegalSex === false,
+      include: (applicant) => !applicant.isChangingLegalSex,
     },
     {
       name: "Order to show cause - Change of Name",
@@ -187,7 +187,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-120 Hearing Notice.pdf",
       guide: CaliforniaNC120Guide,
       map: nameChangeOnlyNoticeMap,
-      include: (applicant) => applicant.isChangingLegalSex === false,
+      include: (applicant) => !applicant.isChangingLegalSex,
     },
     {
       name: "Declaration of Guardian",
@@ -195,8 +195,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-110G Guardian Declaration.pdf",
       guide: CaliforniaNC110GGuide,
       map: minorGuardianDeclarationMap,
-      include: (applicant) => isMinor(applicant) === true 
-        && applicant.parentsAreOkay === false,
+      include: (applicant) => isMinor(applicant) 
+        && !applicant.parentsAreOkay,
     },
     {
       name: "Decree Changing Name",
@@ -204,7 +204,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-130 Court Order.pdf",
       guide: CaliforniaNC130Guide,
       map: nameChangeOnlyOrderMap,
-      include: (applicant) => applicant.isChangingLegalSex === false,
+      include: (applicant) => !applicant.isChangingLegalSex,
     },
     {
       name: "Decree Changing Name of Minor (By Guardian)",
@@ -212,8 +212,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-130G Court Order Guardian.pdf",
       guide: CaliforniaNC130GGuide,
       map: nameChangeOnlyOrderGuardianMap,
-      include: (applicant) => isMinor(applicant) === true 
-        && applicant.parentsAreOkay === false,
+      include: (applicant) => isMinor(applicant)
+        && !applicant.parentsAreOkay,
     },
 
     //Name and Gender stuff here
@@ -223,8 +223,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-300 Adult Name Gender Petition.pdf",
       guide: CaliforniaNC300Guide,
       map: adultNameGenderPetitionMap,
-      include: (applicant) => isMinor(applicant) === false
-        && applicant.isChangingLegalSex === true,
+      include: (applicant) => !isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
     {
       name: "Order to Show Cause--Change of Name to Conform to Gender Identity",
@@ -232,8 +232,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-125 Gender Hearing Notice.pdf",
       guide: CaliforniaNC125Guide,
       map: nameChangeOnlyConformMap,
-      include: (applicant) => isMinor(applicant) === false
-        && applicant.isChangingLegalSex === true,
+      include: (applicant) => !isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
     {
       name: "Order Recognizing Change of Gender and Sex Identifier",
@@ -241,8 +241,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-330 Adult Name Gender Order.pdf",
       guide: CaliforniaNC330Guide,
       map: adultNameGenderOrderMap,
-      include: (applicant) => isMinor(applicant) === false
-        && applicant.isChangingLegalSex === true,
+      include: (applicant) => !isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
     {
       name: "Petition for Recognition of Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
@@ -250,8 +250,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-500 Minor Name Gender Petition.pdf",
       guide: CaliforniaNC500Guide,
       map: minorNameGenderPetitionMap,
-      include: (applicant) => isMinor(applicant) === true
-        && applicant.isChangingLegalSex === true,
+      include: (applicant) => isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
     {
       name: "Order to Show Cause--Recognition of Minor's Change of Gender and Issuance of New Birth Certificate",
@@ -259,8 +259,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-520 Minor Name Gender Hearing Notice.pdf",
       guide: CaliforniaNC520Guide,
       map: minorNameGenderConformMap,
-      include: (applicant) => isMinor(applicant) === true
-        && applicant.isChangingLegalSex === true,
+      include: (applicant) => isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
     {
       name: "Order Recognizing Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
@@ -268,8 +268,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-530 Minor Name Gender Order.pdf",
       guide: CaliforniaNC530Guide,
       map: minorNameGenderOrderMap,
-      include: (applicant) => isMinor(applicant) === true
-        && applicant.isChangingLegalSex === true,
+      include: (applicant) => isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
 
     //Background check or Criminal history stuff here
@@ -286,7 +286,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       id: "C-2",
       filename: "California/El Dorado Background Check 1.pdf",
       map: elDoradoWestSlopeMap,
-      include: (applicant) => isMinor(applicant) === false 
+      include: (applicant) => !isMinor(applicant) 
         && applicant.residentLocalityName === "El Dorado",
     },
     {
@@ -294,13 +294,13 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       id: "C-2S",
       filename: "California/El Dorado Background Check 2.pdf",
       map: elDoradoSLTMap,
-      include: (applicant) => isMinor(applicant) === false 
+      include: (applicant) => !isMinor(applicant) 
         && applicant.residentLocalityName === "El Dorado",
     },
     {
       name: "El Dorado County Background Check Guide",
       guide: ElDoradoBackgroundCheckGuide,
-      include: (applicant) => isMinor(applicant) === false 
+      include: (applicant) => !isMinor(applicant) 
         && applicant.residentLocalityName === "El Dorado",
     },
     {
@@ -419,7 +419,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/Orange Minor Name Notice.pdf",
       guide: OrangeRelatedCasesGuide,
       map: orangeCaseNoticeMap,
-      include: (applicant) => isMinor(applicant) === true
+      include: (applicant) => isMinor(applicant)
         && applicant.residentLocalityName === "Orange",
     },
     {
@@ -428,7 +428,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/Riverside Related Cases.pdf",
       guide: RiversideRelatedCasesGuide,
       map: riversideCaseNoticeMap,
-      include: (applicant) => isMinor(applicant) === true
+      include: (applicant) => isMinor(applicant)
         && applicant.residentLocalityName === "Riverside",
     },
     {
