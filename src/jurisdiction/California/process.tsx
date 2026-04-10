@@ -463,7 +463,7 @@ export const californiaPrimaryIdentification: Process<CaliforniaCounty> =
       {
         name: "DMV Statement of Facts",
         id: "REG 256",
-        filename: "California/REG-256 DMV Title Form.pdf",
+        filename: "California/REG-256 DMV Title Form_unlocked.pdf",
         map: DMVTitleMap,
         include: (applicant) => applicant.isChangingLegalName === true,
       },
