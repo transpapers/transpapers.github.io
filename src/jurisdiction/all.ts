@@ -215,12 +215,12 @@ export const elsewhere: Jurisdiction<Locality> = {
 
 export const allJurisdictions: AnyJurisdiction[] = [
   alaska,
-  california,
   illinois,
   michigan,
   newYork,
   oregon,
   rhodeIsland,
+  california,
   elsewhere,
 
   federal,
