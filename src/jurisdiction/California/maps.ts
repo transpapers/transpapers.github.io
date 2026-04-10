@@ -25,7 +25,6 @@ import {
   isMinor,
   representativeName,
   getJurisdiction,
-  getLocality,
   abbreviateJurisdiction,
   nameInitials,
   phoneAreaCode,
