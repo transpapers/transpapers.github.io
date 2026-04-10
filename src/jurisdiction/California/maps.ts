@@ -459,24 +459,20 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     check: isMinor(applicant),
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].person[1]",
   }),
-/*
   (applicant) => ({
     text: fullName(applicant.legalName),
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b1[0].Petitioner\.applies\.for\.item\.7b1\.ft[0]",
+    loc: { x: 256, y: 232 },
   }),
   (applicant) => ({
     text: fullName(applicant.chosenName),
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b2[0].Petitioner\.applies\.for\.item\.7b2\.ft[0]",
+    loc: { x: 268, y: 250 },
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].Petitioner\.applies\.for\.item\.7b3\.ft[0]",
+    loc: { x: 250, y: 266 },
   }),
   (applicant) => ({
     check: isMinor(applicant),
@@ -488,8 +484,7 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.BirthCityAndState),
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b4[0].Petitioner\.applies\.for\.item\.7b4\.ft[0]",
+    loc: { x: 250, y: 299 },
   }),
   (applicant) => ({
     check: applicant.assignedSex === GenderMarker.M,
@@ -501,13 +496,11 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.ResidentFullAddressAndLocality),
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b6[0].Petitioner\.applies\.for\.item\.7b6\.address\.ft[0]",
+    loc: { x: 119, y: 349 },
   }),
   (applicant) => ({
     text: applicant.reasonForNameChange,
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7C[0].Petitioner\.applies\.for\.item\.7c\.\.reason\.ft[0]",
+    loc: { x: 93, y: 386 },
   }),
   (applicant) => ({
     check: !isMinor(applicant),
@@ -521,15 +514,13 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     text: 
       isMinor(applicant) && applicant.parentsAreOkay 
       ? fullName(representativeName(applicant)) : "",
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7E[0].Sublist7[0].SubLI7E1[0].Petitioner\.applies\.for\.item\.7e1\.ft[0]",
+    loc: { x: 206, y: 513 },
   }),
     (applicant) => ({
     text: 
       isMinor(applicant) && applicant.parentsAreOkay ?
       formatContactInfo(applicant, cf.ResidentFullAddress) : "",
-    //eslint-disable-next-line
-    fieldName: "NC-110[0].Page1[0].List7[0].LI7E[0].Sublist7[0].SubLI7E1[0].Petitioner\.applies\.for\.item\.7e1\.address\.ft[0]",
+    loc: { x: 462, y: 513 },
   }),
   (applicant) => ({
     check: !isMinor(applicant) && !applicant.hasCriminalRecord,
@@ -547,7 +538,6 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     text: fullName(representativeName(applicant)),
     fieldName: "NC-110[0].Page1[0].PetitionerSign[0].T1444[0]",
   }),
-*/
 ];
 
 /*!
@@ -1093,13 +1083,10 @@ export const minorNameGenderOrderMap: Formfill[] = [
     check: applicant.isChangingLegalName,
     fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].Checkbox55[0]",
   }),
-/*
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    //eslint-disable-next-line
-    fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]",
+    loc: { page: 1, x: 275, y: 614 },
   }),
-*/
 ];
 
 /*!
