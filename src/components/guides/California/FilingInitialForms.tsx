@@ -21,8 +21,6 @@
 
 import * as React from "react";
 
-import { california } from "../../../jurisdiction/all";
-
 import { type Person } from "../../../types/person";
 import { type CaliforniaCounty } from "../../../types/locality";
 import { allJurisdictions } from "../../../jurisdiction/all";
