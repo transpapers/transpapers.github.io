@@ -478,7 +478,6 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].Petitioner\.applies\.for\.item\.7b3\.ft[0]",
   }),
-*/
   (applicant) => ({
     check: isMinor(applicant),
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].eighteen[0]",
@@ -548,6 +547,7 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     text: fullName(representativeName(applicant)),
     fieldName: "NC-110[0].Page1[0].PetitionerSign[0].T1444[0]",
   }),
+*/
 ];
 
 /*!
