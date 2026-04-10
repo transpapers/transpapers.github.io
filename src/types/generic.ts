@@ -27,22 +27,25 @@ import { type Jurisdiction } from "../types/jurisdiction";
 import { type Locality } from "../types/locality";
 
 import {
+  AlaskaAdministrativeDivision,
+  CaliforniaCounty,
   MichiganCounty,
   NewYorkCounty,
-  TexasCounty,
   OhioCounty,
   RhodeIslandCityOrTown,
-  AlaskaAdministrativeDivision,
+  TexasCounty,
 } from "../types/locality";
 
 export type AnyLocality =
   | Locality
+  | AlaskaAdministrativeDivision
+  | CaliforniaCounty
   | MichiganCounty
-  | RhodeIslandCityOrTown
   | NewYorkCounty
-  | TexasCounty
   | OhioCounty
-  | AlaskaAdministrativeDivision;
+  | RhodeIslandCityOrTown
+  | TexasCounty
+  ;
 
 // NOTE This cannot be effectively genericized (yet) because TypeScript does not
 // properly support higher-kinded types. (2025-06-05, but unlikely to ever happen.)
