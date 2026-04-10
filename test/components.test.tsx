@@ -113,6 +113,50 @@ import TexasMinorNameParentsPetitionGuide from "../src/components/guides/Texas/M
 import TexasResourcesGuide from "../src/components/guides/Texas/Resources";
 import TexasUpdateBirthCertGuide from "../src/components/guides/Texas/UpdateBithCert";
 
+import AlamedaCoverSheetGuide from "../src/components/guides/California/AlamedaCoverSheet";
+import AmadorBackgroundCheckGuide from "../src/components/guides/California/AmadorBCSheet";
+import AmadorIntakeSheetGuide from "../src/components/guides/California/AmadorIntakeSheet";
+import CaliforniaBirthCertNameGender from "../src/components/guides/California/BirthCertNameGender";
+import CaliforniaBirthCertNameOnly from "../src/components/guides/California/BirthCertNameOnly";
+import CaliforniaCoverSheetGuide from "../src/components/guides/California/CivilCoverSheet";
+import CaliforniaCourtHearingGuide from "../src/components/guides/California/CourtHearing";
+import CaliforniaDMVGuide from "../src/components/guides/California/DMV";
+import ElDoradoBackgroundCheckGuide from "../src/components/guides/California/ElDoradoBCSheets";
+import CaliforniaEverythingElseGuide from "../src/components/guides/California/EverythingElse";
+import CaliforniaFeeWaiverGuide from "../src/components/guides/California/FeeWaiver";
+import CaliforniaFeeWaiverOrderGuide from "../src/components/guides/California/FeeWaiverOrder";
+import CaliforniaFilingGuide from "../src/components/guides/California/FilingInitialForms";
+import CaliforniaNC110GGuide from "../src/components/guides/California/GuardianDeclaration";
+import KernRelatedCasesGuide from "../src/components/guides/California/KernRelatedCases";
+import LassenBCGuide from "../src/components/guides/California/LassenBCSheet";
+import LosAngelesBCGuide from "../src/components/guides/California/LosAngelesBCSheet";
+import LosAngelesCoverSheetGuide from "../src/components/guides/California/LosAngelesCivilSheet";
+import MendocinoBCGuide from "../src/components/guides/California/MendocinoBCSheet";
+import MontereyBCGuide from "../src/components/guides/California/MontereyBCSheet";
+import CaliforniaNC100Guide from "../src/components/guides/California/NC100NameOnlyAll";
+import CaliforniaNC110Guide from "../src/components/guides/California/NC110InfoAll";
+import CaliforniaNC120Guide from "../src/components/guides/California/NC120PublicationAll";
+import CaliforniaNC125Guide from "../src/components/guides/California/NC125GenderNotice";
+import CaliforniaNC130GGuide from "../src/components/guides/California/NC130GuardianOrder";
+import CaliforniaNC130Guide from "../src/components/guides/California/NC130OrderAll";
+import CaliforniaNC300Guide from "../src/components/guides/California/NC300Adult";
+import CaliforniaNC330Guide from "../src/components/guides/California/NC330OrderAdult";
+import CaliforniaNC500Guide from "../src/components/guides/California/NC500Minor";
+import CaliforniaNC520Guide from "../src/components/guides/California/NC520GenderMinor";
+import CaliforniaNC530Guide from "../src/components/guides/California/NC530OrderMinor";
+import OrangeRelatedCasesGuide from "../src/components/guides/California/OrangeRelatedCases";
+import PlacerBCGuide from "../src/components/guides/California/PlacerBCSheet";
+import CaliforniaResourcesGuide from "../src/components/guides/California/Resources";
+import RiversideCoverSheetGuide from "../src/components/guides/California/RiversideCoverSheet";
+import RiversideRelatedCasesGuide from "../src/components/guides/California/RiversideRelatedCases";
+import SanBenitoBCGuide from "../src/components/guides/California/SanBenitoBCSheet";
+import SantaBarbaraCoverSheetGuide from "../src/components/guides/California/SantaBarbaraCoverSheet";
+import SantaClaraBCGuide from "../src/components/guides/California/SantaClaraBCSheet";
+import SiskiyouBCGuide from "../src/components/guides/California/SiskiyouBCSheet";
+import SiskiyouInfoGuide from "../src/components/guides/California/SiskiyouInfoSheet";
+import SolanoBCGuide from "../src/components/guides/California/SolanoBCSheet";
+import YubaBCGuide from "../src/components/guides/California/YubaBCSheet";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -402,6 +446,181 @@ const texasGuideComponents = [
   {
     name: "TexasUpdateBirthCertGuide",
     component: <TexasUpdateBirthCertGuide person={sampleData} />,
+  },
+];
+
+const californiaGuideComponents = [
+  {
+    name: "AlamedaCoverSheetGuide",
+    component: <AlamedaCoverSheetGuide />,
+  },
+  {
+    name: "AmadorBackgroundCheckGuide",
+    component: <AmadorBackgroundCheckGuide />,
+  },
+  {
+    name: "AmadorIntakeSheetGuide",
+    component: <AmadorIntakeSheetGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaBirthCertNameGender",
+    component: <CaliforniaBirthCertNameGender person={sampleData} />,
+  },
+  {
+    name: "CaliforniaBirthCertNameOnly",
+    component: <CaliforniaBirthCertNameOnly person={sampleData} />,
+  },
+  {
+    name: "CaliforniaCoverSheetGuide",
+    component: <CaliforniaCoverSheetGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaCourtHearingGuide",
+    component: <CaliforniaCourtHearingGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaDMVGuide",
+    component: <CaliforniaDMVGuide person={sampleData} />,
+  },
+  {
+    name: "ElDoradoBackgroundCheckGuide",
+    component: <ElDoradoBackgroundCheckGuide />,
+  },
+  {
+    name: "CaliforniaEverythingElseGuide",
+    component: <CaliforniaEverythingElseGuide />,
+  },
+  {
+    name: "CaliforniaFeeWaiverGuide",
+    component: <CaliforniaFeeWaiverGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaFeeWaiverOrderGuide",
+    component: <CaliforniaFeeWaiverOrderGuide />,
+  },
+  {
+    name: "CaliforniaFilingGuide",
+    component: <CaliforniaFilingGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC110GGuide",
+    component: <CaliforniaNC110GGuide person={sampleData} />,
+  },
+  {
+    name: "KernRelatedCasesGuide",
+    component: <KernRelatedCasesGuide person={sampleData} />,
+  },
+  {
+    name: "LassenBCGuide",
+    component: <LassenBCGuide person={sampleData} />,
+  },
+  {
+    name: "LosAngelesBCGuide",
+    component: <LosAngelesBCGuide person={sampleData} />,
+  },
+  {
+    name: "LosAngelesCoverSheetGuide",
+    component: <LosAngelesCoverSheetGuide person={sampleData} />,
+  },
+  {
+    name: "MendocinoBCGuide",
+    component: <MendocinoBCGuide person={sampleData} />,
+  },
+  {
+    name: "MontereyBCGuide",
+    component: <MontereyBCGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC100Guide",
+    component: <CaliforniaNC100Guide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC110Guide",
+    component: <CaliforniaNC110Guide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC120Guide",
+    component: <CaliforniaNC120Guide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC125Guide",
+    component: <CaliforniaNC125Guide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC130GGuide",
+    component: <CaliforniaNC130GGuide />,
+  },
+  {
+    name: "CaliforniaNC130Guide",
+    component: <CaliforniaNC130Guide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaNC300GGuide",
+    component: <CaliforniaNC300Guide />,
+  },
+  {
+    name: "CaliforniaNC330Guide",
+    component: <CaliforniaNC330Guide />,
+  },
+  {
+    name: "CaliforniaNC500Guide",
+    component: <CaliforniaNC500Guide />,
+  },
+  {
+    name: "CaliforniaNC520Guide",
+    component: <CaliforniaNC520Guide />,
+  },
+  {
+    name: "CaliforniaNC530Guide",
+    component: <CaliforniaNC530Guide />,
+  },
+  {
+    name: "OrangeRelatedCasesGuide",
+    component: <OrangeRelatedCasesGuide />,
+  },
+  {
+    name: "PlacerBCGuide",
+    component: <PlacerBCGuide person={sampleData} />,
+  },
+  {
+    name: "CaliforniaResourcesGuide",
+    component: <CaliforniaResourcesGuide />,
+  },
+  {
+    name: "RiversideCoverSheetGuide",
+    component: <RiversideCoverSheetGuide person={sampleData} />,
+  },
+  {
+    name: "RiversideRelatedCasesGuide",
+    component: <RiversideRelatedCasesGuide />,
+  },
+  {
+    name: "SanBenitoBCGuide",
+    component: <SanBenitoBCGuide person={sampleData} />,
+  },
+  {
+    name: "SantaBarbaraCoverSheetGuide",
+    component: <SantaBarbaraCoverSheetGuide person={sampleData} />,
+  },
+  {
+    name: "SantaClaraBCGuide",
+    component: <SantaClaraBCGuide person={sampleData} />,
+  },
+  {
+    name: "SiskiyouBCGuide",
+    component: <SiskiyouBCGuide person={sampleData} />,
+  },
+  {
+    name: "SiskiyouInfoGuide",
+    component: <SiskiyouInfoGuide person={sampleData} />,
+  },
+  {
+    name: "SolanoBCGuide",
+    component: <SolanoBCGuide />,
+  },
+  {
+    name: "YubaBCGuide",
+    component: <YubaBCGuide />,
   },
 ];
 

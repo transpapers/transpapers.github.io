@@ -21,7 +21,7 @@
 
 import { type AnyJurisdiction } from "../types/generic";
 import { type Jurisdiction } from "../types/jurisdiction";
-import { type Locality } from "../types/locality";
+import { CaliforniaCounty, type Locality } from "../types/locality";
 
 import {
   michiganBirthRecord,
@@ -82,6 +82,15 @@ import {
   illinoisPostamble,
 } from "./Illinois/process";
 import illinoisCounties from "./Illinois/localities";
+
+import {
+  californiaBirthRecord,
+  californiaNameChange,
+  californiaPrimaryIdentification,
+  californiaGenderMarker,
+  californiaPostamble,
+} from "./California/process";
+import californiaCounties from "./California/localities";
 
 import { passport, socialSecurity } from "./Federal/process";
 
@@ -173,6 +182,20 @@ export const illinois: Jurisdiction<Locality> = {
   localities: illinoisCounties,
 };
 
+export const california: Jurisdiction<CaliforniaCounty> = {
+  name: "California",
+  abbreviation: "CA",
+  processes: [
+    californiaNameChange,
+    socialSecurity,
+    californiaPrimaryIdentification,
+    californiaGenderMarker,
+    californiaBirthRecord,
+    californiaPostamble,
+  ],
+  localities: californiaCounties,
+};
+
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   abbreviation: "FED",
@@ -191,6 +214,7 @@ export const elsewhere: Jurisdiction<Locality> = {
 
 export const allJurisdictions: AnyJurisdiction[] = [
   alaska,
+  california,
   illinois,
   michigan,
   newYork,

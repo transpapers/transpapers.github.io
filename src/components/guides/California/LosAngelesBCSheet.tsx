@@ -32,7 +32,8 @@ function LosAngelesBCGuide({ person }: { person: Partial<Person> }) {
       <p>
         Los Angeles county requires that the petitioner undergo a background check for
         a name change. {age && age < 18 ? "Your petitioner" : "You"} should fill out
-        any blanks left in the “To be completed by the petitioner” section. Then
+        any blanks left in the “To be completed by the petitioner” section 
+        {age && age < 18 ? " with their information, not yours" : ""}. Then
         {age && age < 18 ? " they" : " you"} can sign and date below that. Do{" "}
         <strong>not</strong> fill out anything below the signature line.
       </p>

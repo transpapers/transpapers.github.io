@@ -41,11 +41,9 @@ export type NewYorkCounty = Locality & {
 };
 
 export type CaliforniaCounty = Locality & {
-  courtMailAddress?: string;
-  courtZip: string;
   multiCourt: boolean;
   courtByZip: boolean;
-  allCourts?: caliCourt[];
+  allCourts: caliCourt[];
   zipCourts?: Record<string, string>;
   newspaperList?: boolean;
   publications?: Publication[];
@@ -116,10 +114,12 @@ export interface caliCourt {
   name: string;
   address: string;
   city: string;
-  circuit?: string;
   phone: string;
   website?: string;
   specificCourtInfo?: string;
+  courtZip?: string;
+  courtMailAddress?: string;
+  caCourtSpecificInfo?: string;
 }
 
 export interface FingerprintLocation {

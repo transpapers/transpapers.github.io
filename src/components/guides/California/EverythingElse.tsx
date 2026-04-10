@@ -21,10 +21,10 @@
 
 import * as React from "react";
 
-function OregonEverythingElseGuide() {
+function CaliforniaEverythingElseGuide() {
   return (
-    <section key="OR-EverythingElse">
-      <h3>Everything Else (OR)</h3>
+    <section key="CA-EverythingElse">
+      <h3>Everything Else (CA)</h3>
       <p>
         Once you have the court order and primary identification in your new
         name, you can change your name almost everywhere else without issue.
@@ -111,17 +111,11 @@ function OregonEverythingElseGuide() {
         order.
       </p>
       <p>
-        <strong>Voter Registration</strong>: If you are 16 or older you can
-        update online at this{" "}
-        <a href="https://secure.sos.state.or.us/orestar/vr/showVoterSearch.do?lang=eng&source=SOS">
-          link
-        </a>{" "}
-        or by completing the Oregon Voter Registration Card (SEL 500) and hand
-        delivering it to your county&apos;s local election office. If there are only
-        a few days until an election that you want to vote in we recommend the
-        second option. We have attached a partially filled form to this guide if
-        you need it, fill in any blanks on page 1. Page 2 contains the addresses
-        for all local election offices.
+        <strong>Voter Registration</strong>: California has automatic voter
+        registration which should have been handled with the primary ID
+        appointment. If it was not and you are eligable to vote go to this{" "}
+        <a href="https://registertovote.ca.gov/">website</a>. Then click the
+        “Register to Vote Now” link.
       </p>
       <p>
         <strong>Some other places to consider:</strong>
@@ -138,4 +132,4 @@ function OregonEverythingElseGuide() {
   );
 }
 
-export default OregonEverythingElseGuide;
+export default CaliforniaEverythingElseGuide;

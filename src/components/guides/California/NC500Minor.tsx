@@ -21,14 +21,11 @@
 
 import * as React from "react";
 
-import { type Person } from "../../../types/person";
-
-function CaliforniaNC100Guide({ person }: { person: Partial<Person> }) {
-  const { age } = person;
+function CaliforniaNC500Guide() {
 
   return (
-    <section key="California-NC100">
-      <h3>Petition for Change of Name (CA, NC-100)</h3>
+    <section key="California-NC500">
+      <h3>Petition for Change of Name (CA, NC-500)</h3>
 
       <p>
         This is the state form for name and gender marker changes. Any parent(s) or legal 
@@ -46,4 +43,4 @@ function CaliforniaNC100Guide({ person }: { person: Partial<Person> }) {
   );
 }
 
-export default CaliforniaNC100Guide;
+export default CaliforniaNC500Guide;

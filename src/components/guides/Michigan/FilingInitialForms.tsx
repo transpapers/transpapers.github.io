@@ -69,15 +69,13 @@ function MichiganFilingInitialFormsGuide({
             updated frequently.
           </p>
 
-          <p>
-            {age && age < 18 && (
-              <>
-                Whoever filled out the paperwork as your petitioner has to be
-                the one who files the paperwork at court if they are doing
-                in-person filing.
-              </>
-            )}
-          </p>
+          {age && age < 18 && (
+            <p>
+              Whoever filled out the paperwork as your petitioner has to be
+              the one who files the paperwork at court if they are doing
+              in-person filing.
+            </p>
+          )}
 
           {residentLocality.court.specificCourtInfo && (
             <p>{residentLocality.court.specificCourtInfo}</p>

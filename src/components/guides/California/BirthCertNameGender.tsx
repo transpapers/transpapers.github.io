@@ -29,6 +29,7 @@ function CaliforniaBirthCertNameGender({ person }: { person: Partial<Person> }) 
   return (
     <section key="California-BirthCertificateNameGender">
       <h3>Updating your Birth Certificate (CA, VS 24B)</h3>
+
       <p>
         This process is done by mail using the &ldquo;Application to Amend a Birth 
         Record&rdquo; (VS 24B) form. You will recieve a single copy of the updated 

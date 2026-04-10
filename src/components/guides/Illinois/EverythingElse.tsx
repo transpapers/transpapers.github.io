@@ -94,9 +94,7 @@ function IllinoisEverythingElseGuide() {
       </p>
       <p>
         <strong>Primary School Records</strong>: Each school will have different
-        requirements and protocols; contact them and see what theirs is. Be
-        aware that Michigan law does not require your high school to update your
-        educational records, so it is possible that they may refuse.
+        requirements and protocols; contact them and see what theirs is.
       </p>
       <p>
         <strong>College Records</strong>: Contact the Student Records Department

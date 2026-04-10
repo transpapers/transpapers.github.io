@@ -29,6 +29,19 @@ function CaliforniaBirthCertNameOnly({ person }: { person: Partial<Person> }) {
   return (
     <section key="California-BirthCertificateName">
       <h3>Updating your Birth Certificate (CA, VS 23 Birth)</h3>
+
+      <p>
+        <strong>Warning:</strong> This process will leave a record of the change on
+        the new birth certificate. The only way to ensure that there is no evidence of
+        a change is to update both the name and gender <strong>simultaneously</strong>.
+        There is no documentation or other proof required to update the gender on a
+        birth certificate. To update both use
+        <a href="https://www.cdph.ca.gov/CDPH%20Document%20Library/ControlledForms/VS24B.pdf">
+          this
+        </a>
+        form instead.
+      </p>
+
       <p>
         This process is done by mail using the &ldquo;Application to Amend a Birth Record
         After a Court Order Name Change&rdquo; (VS 23 Birth) form. You will recieve a 
