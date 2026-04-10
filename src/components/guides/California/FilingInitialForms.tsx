@@ -71,17 +71,13 @@ function CaliforniaFilingGuide({
           on your zip code these court(s) are acceptable to file at:
         </p>
 
-        {...Array.from(
-          california.localities
-          .filter((loc) => loc.name === residentLocalityName)
-          .map(({ allCourts }) => (
+        {...residentLocality.allCourts.map(({ name, address, phone }) => (
           <p key="{residentLocality.allCourts.name}">
-            {allCourts.name}: {allCourts.address}. 
+            {name}: {address}. 
             <br />
-            Phone Number: {allCourts.phone}
+            Phone Number: {phone}
           </p>
-          )),
-        )}
+        ))}
       </>
     ) : (
       <>
@@ -96,17 +92,13 @@ function CaliforniaFilingGuide({
           </p>
         }
 
-        {...Array.from(
-          california.localities
-          .filter((loc) => loc.name === residentLocalityName)
-          .map(({ allCourts }) => (
+        {...residentLocality.allCourts.map(({ name, address, phone }) => (
           <p key="{residentLocality.allCourts.name}">
-            {allCourts.name}: {allCourts.address}. 
+            {name}: {address}. 
             <br />
-            Phone Number: {allCourts.phone}
+            Phone Number: {phone}
           </p>
-          )),
-        )}
+        ))}
       </>
     )}
 
