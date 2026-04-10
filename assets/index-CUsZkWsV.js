@@ -1,3 +1,22 @@
+function _mergeNamespaces(n, m) {
+  for (var i = 0; i < m.length; i++) {
+    const e = m[i];
+    if (typeof e !== "string" && !Array.isArray(e)) {
+      for (const k in e) {
+        if (k !== "default" && !(k in n)) {
+          const d = Object.getOwnPropertyDescriptor(e, k);
+          if (d) {
+            Object.defineProperty(n, k, d.get ? d : {
+              enumerable: true,
+              get: () => e[k]
+            });
+          }
+        }
+      }
+    }
+  }
+  return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: "Module" }));
+}
 (function polyfill() {
   const relList = document.createElement("link").relList;
   if (relList && relList.supports && relList.supports("modulepreload")) return;
@@ -62,20 +81,11 @@ function getAugmentedNamespace(n) {
 }
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
-/**
- * @license React
- * react-jsx-runtime.production.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 var hasRequiredReactJsxRuntime_production;
 function requireReactJsxRuntime_production() {
   if (hasRequiredReactJsxRuntime_production) return reactJsxRuntime_production;
   hasRequiredReactJsxRuntime_production = 1;
-  var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
+  var REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment");
   function jsxProd(type, config, maybeKey) {
     var key = null;
     void 0 !== maybeKey && (key = "" + maybeKey);
@@ -111,20 +121,11 @@ function requireJsxRuntime() {
 var jsxRuntimeExports = requireJsxRuntime();
 var react = { exports: {} };
 var react_production = {};
-/**
- * @license React
- * react.production.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 var hasRequiredReact_production;
 function requireReact_production() {
   if (hasRequiredReact_production) return react_production;
   hasRequiredReact_production = 1;
-  var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
+  var REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
   function getIteratorFn(maybeIterable) {
     if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
     maybeIterable = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable["@@iterator"];
@@ -561,24 +562,19 @@ function requireReact() {
 }
 var reactExports = requireReact();
 const React = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
+const React4 = /* @__PURE__ */ _mergeNamespaces({
+  __proto__: null,
+  default: React
+}, [reactExports]);
 var client = { exports: {} };
 var reactDomClient_production = {};
 var scheduler = { exports: {} };
 var scheduler_production = {};
-/**
- * @license React
- * scheduler.production.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 var hasRequiredScheduler_production;
 function requireScheduler_production() {
   if (hasRequiredScheduler_production) return scheduler_production;
   hasRequiredScheduler_production = 1;
-  (function(exports) {
+  (function(exports$1) {
     function push(heap, node) {
       var index = heap.length;
       heap.push(node);
@@ -612,15 +608,15 @@ function requireScheduler_production() {
       var diff = a.sortIndex - b.sortIndex;
       return 0 !== diff ? diff : a.id - b.id;
     }
-    exports.unstable_now = void 0;
+    exports$1.unstable_now = void 0;
     if ("object" === typeof performance && "function" === typeof performance.now) {
       var localPerformance = performance;
-      exports.unstable_now = function() {
+      exports$1.unstable_now = function() {
         return localPerformance.now();
       };
     } else {
       var localDate = Date, initialTime = localDate.now();
-      exports.unstable_now = function() {
+      exports$1.unstable_now = function() {
         return localDate.now() - initialTime;
       };
     }
@@ -647,12 +643,12 @@ function requireScheduler_production() {
     }
     var isMessageLoopRunning = false, taskTimeoutID = -1, frameInterval = 5, startTime = -1;
     function shouldYieldToHost() {
-      return needsPaint ? true : exports.unstable_now() - startTime < frameInterval ? false : true;
+      return needsPaint ? true : exports$1.unstable_now() - startTime < frameInterval ? false : true;
     }
     function performWorkUntilDeadline() {
       needsPaint = false;
       if (isMessageLoopRunning) {
-        var currentTime = exports.unstable_now();
+        var currentTime = exports$1.unstable_now();
         startTime = currentTime;
         var hasMoreWork = true;
         try {
@@ -672,7 +668,7 @@ function requireScheduler_production() {
                     var continuationCallback = callback(
                       currentTask.expirationTime <= currentTime
                     );
-                    currentTime = exports.unstable_now();
+                    currentTime = exports$1.unstable_now();
                     if ("function" === typeof continuationCallback) {
                       currentTask.callback = continuationCallback;
                       advanceTimers(currentTime);
@@ -722,27 +718,27 @@ function requireScheduler_production() {
       };
     function requestHostTimeout(callback, ms) {
       taskTimeoutID = localSetTimeout(function() {
-        callback(exports.unstable_now());
+        callback(exports$1.unstable_now());
       }, ms);
     }
-    exports.unstable_IdlePriority = 5;
-    exports.unstable_ImmediatePriority = 1;
-    exports.unstable_LowPriority = 4;
-    exports.unstable_NormalPriority = 3;
-    exports.unstable_Profiling = null;
-    exports.unstable_UserBlockingPriority = 2;
-    exports.unstable_cancelCallback = function(task) {
+    exports$1.unstable_IdlePriority = 5;
+    exports$1.unstable_ImmediatePriority = 1;
+    exports$1.unstable_LowPriority = 4;
+    exports$1.unstable_NormalPriority = 3;
+    exports$1.unstable_Profiling = null;
+    exports$1.unstable_UserBlockingPriority = 2;
+    exports$1.unstable_cancelCallback = function(task) {
       task.callback = null;
     };
-    exports.unstable_forceFrameRate = function(fps) {
+    exports$1.unstable_forceFrameRate = function(fps) {
       0 > fps || 125 < fps ? console.error(
         "forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"
       ) : frameInterval = 0 < fps ? Math.floor(1e3 / fps) : 5;
     };
-    exports.unstable_getCurrentPriorityLevel = function() {
+    exports$1.unstable_getCurrentPriorityLevel = function() {
       return currentPriorityLevel;
     };
-    exports.unstable_next = function(eventHandler) {
+    exports$1.unstable_next = function(eventHandler) {
       switch (currentPriorityLevel) {
         case 1:
         case 2:
@@ -760,10 +756,10 @@ function requireScheduler_production() {
         currentPriorityLevel = previousPriorityLevel;
       }
     };
-    exports.unstable_requestPaint = function() {
+    exports$1.unstable_requestPaint = function() {
       needsPaint = true;
     };
-    exports.unstable_runWithPriority = function(priorityLevel, eventHandler) {
+    exports$1.unstable_runWithPriority = function(priorityLevel, eventHandler) {
       switch (priorityLevel) {
         case 1:
         case 2:
@@ -782,8 +778,8 @@ function requireScheduler_production() {
         currentPriorityLevel = previousPriorityLevel;
       }
     };
-    exports.unstable_scheduleCallback = function(priorityLevel, callback, options) {
-      var currentTime = exports.unstable_now();
+    exports$1.unstable_scheduleCallback = function(priorityLevel, callback, options) {
+      var currentTime = exports$1.unstable_now();
       "object" === typeof options && null !== options ? (options = options.delay, options = "number" === typeof options && 0 < options ? currentTime + options : currentTime) : options = currentTime;
       switch (priorityLevel) {
         case 1:
@@ -813,8 +809,8 @@ function requireScheduler_production() {
       options > currentTime ? (priorityLevel.sortIndex = options, push(timerQueue, priorityLevel), null === peek2(taskQueue) && priorityLevel === peek2(timerQueue) && (isHostTimeoutScheduled ? (localClearTimeout(taskTimeoutID), taskTimeoutID = -1) : isHostTimeoutScheduled = true, requestHostTimeout(handleTimeout, options - currentTime))) : (priorityLevel.sortIndex = timeout, push(taskQueue, priorityLevel), isHostCallbackScheduled || isPerformingWork || (isHostCallbackScheduled = true, isMessageLoopRunning || (isMessageLoopRunning = true, schedulePerformWorkUntilDeadline())));
       return priorityLevel;
     };
-    exports.unstable_shouldYield = shouldYieldToHost;
-    exports.unstable_wrapCallback = function(callback) {
+    exports$1.unstable_shouldYield = shouldYieldToHost;
+    exports$1.unstable_wrapCallback = function(callback) {
       var parentPriorityLevel = currentPriorityLevel;
       return function() {
         var previousPriorityLevel = currentPriorityLevel;
@@ -840,15 +836,6 @@ function requireScheduler() {
 }
 var reactDom = { exports: {} };
 var reactDom_production = {};
-/**
- * @license React
- * react-dom.production.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 var hasRequiredReactDom_production;
 function requireReactDom_production() {
   if (hasRequiredReactDom_production) return reactDom_production;
@@ -881,7 +868,7 @@ function requireReactDom_production() {
     },
     p: 0,
     findDOMNode: null
-  }, REACT_PORTAL_TYPE = Symbol.for("react.portal");
+  }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal");
   function createPortal$1(children, containerInfo, implementation) {
     var key = 3 < arguments.length && void 0 !== arguments[3] ? arguments[3] : null;
     return {
@@ -1016,15 +1003,6 @@ function requireReactDom() {
   }
   return reactDom.exports;
 }
-/**
- * @license React
- * react-dom-client.production.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 var hasRequiredReactDomClient_production;
 function requireReactDomClient_production() {
   if (hasRequiredReactDomClient_production) return reactDomClient_production;
@@ -1143,16 +1121,16 @@ function requireReactDomClient_production() {
     }
     return null;
   }
-  var assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
-  var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
-  var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
+  var assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = /* @__PURE__ */ Symbol.for("react.provider"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+  var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
+  var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
   var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
   function getIteratorFn(maybeIterable) {
     if (null === maybeIterable || "object" !== typeof maybeIterable) return null;
     maybeIterable = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable["@@iterator"];
     return "function" === typeof maybeIterable ? maybeIterable : null;
   }
-  var REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference");
+  var REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference");
   function getComponentNameFromType(type) {
     if (null == type) return null;
     if ("function" === typeof type)
@@ -12102,176 +12080,6 @@ function requireClient() {
 }
 var clientExports = requireClient();
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
-var dist = {};
-var hasRequiredDist;
-function requireDist() {
-  if (hasRequiredDist) return dist;
-  hasRequiredDist = 1;
-  Object.defineProperty(dist, "__esModule", { value: true });
-  dist.parse = parse2;
-  dist.serialize = serialize;
-  const cookieNameRegExp = /^[\u0021-\u003A\u003C\u003E-\u007E]+$/;
-  const cookieValueRegExp = /^[\u0021-\u003A\u003C-\u007E]*$/;
-  const domainValueRegExp = /^([.]?[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)([.][a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$/i;
-  const pathValueRegExp = /^[\u0020-\u003A\u003D-\u007E]*$/;
-  const __toString = Object.prototype.toString;
-  const NullObject = /* @__PURE__ */ (() => {
-    const C = function() {
-    };
-    C.prototype = /* @__PURE__ */ Object.create(null);
-    return C;
-  })();
-  function parse2(str, options) {
-    const obj = new NullObject();
-    const len = str.length;
-    if (len < 2)
-      return obj;
-    const dec = options?.decode || decode;
-    let index = 0;
-    do {
-      const eqIdx = str.indexOf("=", index);
-      if (eqIdx === -1)
-        break;
-      const colonIdx = str.indexOf(";", index);
-      const endIdx = colonIdx === -1 ? len : colonIdx;
-      if (eqIdx > endIdx) {
-        index = str.lastIndexOf(";", eqIdx - 1) + 1;
-        continue;
-      }
-      const keyStartIdx = startIndex(str, index, eqIdx);
-      const keyEndIdx = endIndex(str, eqIdx, keyStartIdx);
-      const key = str.slice(keyStartIdx, keyEndIdx);
-      if (obj[key] === void 0) {
-        let valStartIdx = startIndex(str, eqIdx + 1, endIdx);
-        let valEndIdx = endIndex(str, endIdx, valStartIdx);
-        const value = dec(str.slice(valStartIdx, valEndIdx));
-        obj[key] = value;
-      }
-      index = endIdx + 1;
-    } while (index < len);
-    return obj;
-  }
-  function startIndex(str, index, max) {
-    do {
-      const code = str.charCodeAt(index);
-      if (code !== 32 && code !== 9)
-        return index;
-    } while (++index < max);
-    return max;
-  }
-  function endIndex(str, index, min) {
-    while (index > min) {
-      const code = str.charCodeAt(--index);
-      if (code !== 32 && code !== 9)
-        return index + 1;
-    }
-    return min;
-  }
-  function serialize(name, val, options) {
-    const enc = options?.encode || encodeURIComponent;
-    if (!cookieNameRegExp.test(name)) {
-      throw new TypeError(`argument name is invalid: ${name}`);
-    }
-    const value = enc(val);
-    if (!cookieValueRegExp.test(value)) {
-      throw new TypeError(`argument val is invalid: ${val}`);
-    }
-    let str = name + "=" + value;
-    if (!options)
-      return str;
-    if (options.maxAge !== void 0) {
-      if (!Number.isInteger(options.maxAge)) {
-        throw new TypeError(`option maxAge is invalid: ${options.maxAge}`);
-      }
-      str += "; Max-Age=" + options.maxAge;
-    }
-    if (options.domain) {
-      if (!domainValueRegExp.test(options.domain)) {
-        throw new TypeError(`option domain is invalid: ${options.domain}`);
-      }
-      str += "; Domain=" + options.domain;
-    }
-    if (options.path) {
-      if (!pathValueRegExp.test(options.path)) {
-        throw new TypeError(`option path is invalid: ${options.path}`);
-      }
-      str += "; Path=" + options.path;
-    }
-    if (options.expires) {
-      if (!isDate(options.expires) || !Number.isFinite(options.expires.valueOf())) {
-        throw new TypeError(`option expires is invalid: ${options.expires}`);
-      }
-      str += "; Expires=" + options.expires.toUTCString();
-    }
-    if (options.httpOnly) {
-      str += "; HttpOnly";
-    }
-    if (options.secure) {
-      str += "; Secure";
-    }
-    if (options.partitioned) {
-      str += "; Partitioned";
-    }
-    if (options.priority) {
-      const priority = typeof options.priority === "string" ? options.priority.toLowerCase() : void 0;
-      switch (priority) {
-        case "low":
-          str += "; Priority=Low";
-          break;
-        case "medium":
-          str += "; Priority=Medium";
-          break;
-        case "high":
-          str += "; Priority=High";
-          break;
-        default:
-          throw new TypeError(`option priority is invalid: ${options.priority}`);
-      }
-    }
-    if (options.sameSite) {
-      const sameSite = typeof options.sameSite === "string" ? options.sameSite.toLowerCase() : options.sameSite;
-      switch (sameSite) {
-        case true:
-        case "strict":
-          str += "; SameSite=Strict";
-          break;
-        case "lax":
-          str += "; SameSite=Lax";
-          break;
-        case "none":
-          str += "; SameSite=None";
-          break;
-        default:
-          throw new TypeError(`option sameSite is invalid: ${options.sameSite}`);
-      }
-    }
-    return str;
-  }
-  function decode(str) {
-    if (str.indexOf("%") === -1)
-      return str;
-    try {
-      return decodeURIComponent(str);
-    } catch (e) {
-      return str;
-    }
-  }
-  function isDate(val) {
-    return __toString.call(val) === "[object Date]";
-  }
-  return dist;
-}
-requireDist();
-/**
- * react-router v7.6.3
- *
- * Copyright (c) Remix Software Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.md file in the root directory of this source tree.
- *
- * @license MIT
- */
 var __typeError = (msg) => {
   throw TypeError(msg);
 };
@@ -12279,15 +12087,24 @@ var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot
 var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
 var PopStateEventType = "popstate";
+function isLocation(obj) {
+  return typeof obj === "object" && obj != null && "pathname" in obj && "search" in obj && "hash" in obj && "state" in obj && "key" in obj;
+}
 function createBrowserHistory(options = {}) {
   function createBrowserLocation(window2, globalHistory) {
-    let { pathname, search, hash } = window2.location;
+    let maskedLocation = globalHistory.state?.masked;
+    let { pathname, search, hash } = maskedLocation || window2.location;
     return createLocation(
       "",
       { pathname, search, hash },
       // state defaults to `null` because `window.history.state` does
       globalHistory.state && globalHistory.state.usr || null,
-      globalHistory.state && globalHistory.state.key || "default"
+      globalHistory.state && globalHistory.state.key || "default",
+      maskedLocation ? {
+        pathname: window2.location.pathname,
+        search: window2.location.search,
+        hash: window2.location.hash
+      } : void 0
     );
   }
   function createBrowserHref(window2, to) {
@@ -12321,10 +12138,15 @@ function getHistoryState(location, index) {
   return {
     usr: location.state,
     key: location.key,
-    idx: index
+    idx: index,
+    masked: location.unstable_mask ? {
+      pathname: location.pathname,
+      search: location.search,
+      hash: location.hash
+    } : void 0
   };
 }
-function createLocation(current2, to, state = null, key) {
+function createLocation(current2, to, state = null, key, unstable_mask) {
   let location = {
     pathname: typeof current2 === "string" ? current2 : current2.pathname,
     search: "",
@@ -12335,7 +12157,8 @@ function createLocation(current2, to, state = null, key) {
     // full Locations now and avoid the need to run through this flow at all
     // But that's a pretty big refactor to the current test suite so going to
     // keep as is for the time being and just let any incoming keys take precedence
-    key: to && to.key || key || createKey()
+    key: to && to.key || key || createKey(),
+    unstable_mask
   };
   return location;
 }
@@ -12394,10 +12217,10 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   }
   function push(to, state) {
     action = "PUSH";
-    let location = createLocation(history.location, to, state);
+    let location = isLocation(to) ? to : createLocation(history.location, to, state);
     index = getIndex() + 1;
     let historyState = getHistoryState(location, index);
-    let url = history.createHref(location);
+    let url = history.createHref(location.unstable_mask || location);
     try {
       globalHistory.pushState(historyState, "", url);
     } catch (error2) {
@@ -12412,10 +12235,10 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   }
   function replace2(to, state) {
     action = "REPLACE";
-    let location = createLocation(history.location, to, state);
+    let location = isLocation(to) ? to : createLocation(history.location, to, state);
     index = getIndex();
     let historyState = getHistoryState(location, index);
-    let url = history.createHref(location);
+    let url = history.createHref(location.unstable_mask || location);
     globalHistory.replaceState(historyState, "", url);
     if (v5Compat && listener) {
       listener({ action, location: history.location, delta: 0 });
@@ -12468,15 +12291,19 @@ function createBrowserURLImpl(to, isAbsolute = false) {
     base = window.location.origin !== "null" ? window.location.origin : window.location.href;
   }
   invariant(base, "No window.location.(origin|href) available to create URL");
-  let href2 = typeof to === "string" ? to : createPath(to);
-  href2 = href2.replace(/ $/, "%20");
-  if (!isAbsolute && href2.startsWith("//")) {
-    href2 = base + href2;
+  let href = typeof to === "string" ? to : createPath(to);
+  href = href.replace(/ $/, "%20");
+  if (!isAbsolute && href.startsWith("//")) {
+    href = base + href;
   }
-  return new URL(href2, base);
+  return new URL(href, base);
 }
 var _map;
-var unstable_RouterContextProvider = class {
+var RouterContextProvider = class {
+  /**
+   * Create a new `RouterContextProvider` instance
+   * @param init An optional initial context map to populate the provider with
+   */
   constructor(init) {
     __privateAdd(this, _map, /* @__PURE__ */ new Map());
     if (init) {
@@ -12485,6 +12312,14 @@ var unstable_RouterContextProvider = class {
       }
     }
   }
+  /**
+   * Access a value from the context. If no value has been set for the context,
+   * it will return the context's `defaultValue` if provided, or throw an error
+   * if no `defaultValue` was set.
+   * @param context The context to get the value for
+   * @returns The value for the context, or the context's `defaultValue` if no
+   * value was set
+   */
   get(context) {
     if (__privateGet(this, _map).has(context)) {
       return __privateGet(this, _map).get(context);
@@ -12494,6 +12329,14 @@ var unstable_RouterContextProvider = class {
     }
     throw new Error("No value found for context");
   }
+  /**
+   * Set a value for the context. If the context already has a value set, this
+   * will overwrite it.
+   *
+   * @param context The context to set the value for
+   * @param value The value to set for the context
+   * @returns {void}
+   */
   set(context, value) {
     __privateGet(this, _map).set(context, value);
   }
@@ -12518,7 +12361,7 @@ var unsupportedLazyRouteFunctionKeys = /* @__PURE__ */ new Set([
   "path",
   "id",
   "index",
-  "unstable_middleware",
+  "middleware",
   "children"
 ]);
 function isUnsupportedLazyRouteFunctionKey(key) {
@@ -12529,7 +12372,7 @@ function isUnsupportedLazyRouteFunctionKey(key) {
 function isIndexRoute(route2) {
   return route2.index === true;
 }
-function convertRoutesToDataRoutes(routes, mapRouteProperties2, parentPath = [], manifest = {}) {
+function convertRoutesToDataRoutes(routes, mapRouteProperties2, parentPath = [], manifest = {}, allowInPlaceMutations = false) {
   return routes.map((route2, index) => {
     let treePath = [...parentPath, String(index)];
     let id = typeof route2.id === "string" ? route2.id : treePath.join("-");
@@ -12538,35 +12381,51 @@ function convertRoutesToDataRoutes(routes, mapRouteProperties2, parentPath = [],
       `Cannot specify children on an index route`
     );
     invariant(
-      !manifest[id],
+      allowInPlaceMutations || !manifest[id],
       `Found a route id collision on id "${id}".  Route id's must be globally unique within Data Router usages`
     );
     if (isIndexRoute(route2)) {
       let indexRoute = {
         ...route2,
-        ...mapRouteProperties2(route2),
         id
       };
-      manifest[id] = indexRoute;
+      manifest[id] = mergeRouteUpdates(
+        indexRoute,
+        mapRouteProperties2(indexRoute)
+      );
       return indexRoute;
     } else {
       let pathOrLayoutRoute = {
         ...route2,
-        ...mapRouteProperties2(route2),
         id,
         children: void 0
       };
-      manifest[id] = pathOrLayoutRoute;
+      manifest[id] = mergeRouteUpdates(
+        pathOrLayoutRoute,
+        mapRouteProperties2(pathOrLayoutRoute)
+      );
       if (route2.children) {
         pathOrLayoutRoute.children = convertRoutesToDataRoutes(
           route2.children,
           mapRouteProperties2,
           treePath,
-          manifest
+          manifest,
+          allowInPlaceMutations
         );
       }
       return pathOrLayoutRoute;
     }
+  });
+}
+function mergeRouteUpdates(route2, updates) {
+  return Object.assign(route2, {
+    ...updates,
+    ...typeof updates.lazy === "object" && updates.lazy != null ? {
+      lazy: {
+        ...route2.lazy,
+        ...updates.lazy
+      }
+    } : {}
   });
 }
 function matchRoutes(routes, locationArg, basename = "/") {
@@ -12598,11 +12457,12 @@ function convertRouteMatchToUiMatch(match, loaderData) {
     pathname,
     params,
     data: loaderData[route2.id],
+    loaderData: loaderData[route2.id],
     handle: route2.handle
   };
 }
-function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "") {
-  let flattenRoute = (route2, index, relativePath) => {
+function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "", _hasParentOptionalSegments = false) {
+  let flattenRoute = (route2, index, hasParentOptionalSegments = _hasParentOptionalSegments, relativePath) => {
     let meta = {
       relativePath: relativePath === void 0 ? route2.path || "" : relativePath,
       caseSensitive: route2.caseSensitive === true,
@@ -12610,6 +12470,9 @@ function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "")
       route: route2
     };
     if (meta.relativePath.startsWith("/")) {
+      if (!meta.relativePath.startsWith(parentPath) && hasParentOptionalSegments) {
+        return;
+      }
       invariant(
         meta.relativePath.startsWith(parentPath),
         `Absolute route path "${meta.relativePath}" nested under path "${parentPath}" is not valid. An absolute child route path must start with the combined path of all its parent routes.`
@@ -12625,7 +12488,13 @@ function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "")
         route2.index !== true,
         `Index routes must not have child routes. Please remove all child routes from route path "${path}".`
       );
-      flattenRoutes(route2.children, branches, routesMeta, path);
+      flattenRoutes(
+        route2.children,
+        branches,
+        routesMeta,
+        path,
+        hasParentOptionalSegments
+      );
     }
     if (route2.path == null && !route2.index) {
       return;
@@ -12641,7 +12510,7 @@ function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "")
       flattenRoute(route2, index);
     } else {
       for (let exploded of explodeOptionalSegments(route2.path)) {
-        flattenRoute(route2, index, exploded);
+        flattenRoute(route2, index, true, exploded);
       }
     }
   });
@@ -12801,11 +12670,18 @@ function compilePath(path, caseSensitive = false, end = true) {
   let params = [];
   let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^${}|()[\]]/g, "\\$&").replace(
     /\/:([\w-]+)(\?)?/g,
-    (_, paramName, isOptional) => {
+    (match, paramName, isOptional, index, str) => {
       params.push({ paramName, isOptional: isOptional != null });
-      return isOptional ? "/?([^\\/]+)?" : "/([^\\/]+)";
+      if (isOptional) {
+        let nextChar = str.charAt(index + match.length);
+        if (nextChar && nextChar !== "/") {
+          return "/([^\\/]*)";
+        }
+        return "(?:/([^\\/]*))?";
+      }
+      return "/([^\\/]+)";
     }
-  );
+  ).replace(/\/([\w-]+)\?(\/|$)/g, "(/$1)?$2");
   if (path.endsWith("*")) {
     params.push({ paramName: "*" });
     regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
@@ -12840,13 +12716,31 @@ function stripBasename(pathname, basename) {
   }
   return pathname.slice(startIndex) || "/";
 }
+function prependBasename({
+  basename,
+  pathname
+}) {
+  return pathname === "/" ? basename : joinPaths([basename, pathname]);
+}
+var ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+var isAbsoluteUrl = (url) => ABSOLUTE_URL_REGEX.test(url);
 function resolvePath(to, fromPathname = "/") {
   let {
     pathname: toPathname,
     search = "",
     hash = ""
   } = typeof to === "string" ? parsePath(to) : to;
-  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+  let pathname;
+  if (toPathname) {
+    toPathname = toPathname.replace(/\/\/+/g, "/");
+    if (toPathname.startsWith("/")) {
+      pathname = resolvePathname(toPathname.substring(1), "/");
+    } else {
+      pathname = resolvePathname(toPathname, fromPathname);
+    }
+  } else {
+    pathname = fromPathname;
+  }
   return {
     pathname,
     search: normalizeSearch(search),
@@ -12945,6 +12839,285 @@ var ErrorResponseImpl = class {
 function isRouteErrorResponse(error2) {
   return error2 != null && typeof error2.status === "number" && typeof error2.statusText === "string" && typeof error2.internal === "boolean" && "data" in error2;
 }
+function getRoutePattern(matches) {
+  return matches.map((m) => m.route.path).filter(Boolean).join("/").replace(/\/\/*/g, "/") || "/";
+}
+var isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
+function parseToInfo(_to, basename) {
+  let to = _to;
+  if (typeof to !== "string" || !ABSOLUTE_URL_REGEX.test(to)) {
+    return {
+      absoluteURL: void 0,
+      isExternal: false,
+      to
+    };
+  }
+  let absoluteURL = to;
+  let isExternal = false;
+  if (isBrowser) {
+    try {
+      let currentUrl = new URL(window.location.href);
+      let targetUrl = to.startsWith("//") ? new URL(currentUrl.protocol + to) : new URL(to);
+      let path = stripBasename(targetUrl.pathname, basename);
+      if (targetUrl.origin === currentUrl.origin && path != null) {
+        to = path + targetUrl.search + targetUrl.hash;
+      } else {
+        isExternal = true;
+      }
+    } catch (e) {
+      warning(
+        false,
+        `<Link to="${to}"> contains an invalid URL which will probably break when clicked - please update to a valid URL path.`
+      );
+    }
+  }
+  return {
+    absoluteURL,
+    isExternal,
+    to
+  };
+}
+var UninstrumentedSymbol = /* @__PURE__ */ Symbol("Uninstrumented");
+function getRouteInstrumentationUpdates(fns, route2) {
+  let aggregated = {
+    lazy: [],
+    "lazy.loader": [],
+    "lazy.action": [],
+    "lazy.middleware": [],
+    middleware: [],
+    loader: [],
+    action: []
+  };
+  fns.forEach(
+    (fn) => fn({
+      id: route2.id,
+      index: route2.index,
+      path: route2.path,
+      instrument(i) {
+        let keys = Object.keys(aggregated);
+        for (let key of keys) {
+          if (i[key]) {
+            aggregated[key].push(i[key]);
+          }
+        }
+      }
+    })
+  );
+  let updates = {};
+  if (typeof route2.lazy === "function" && aggregated.lazy.length > 0) {
+    let instrumented = wrapImpl(aggregated.lazy, route2.lazy, () => void 0);
+    if (instrumented) {
+      updates.lazy = instrumented;
+    }
+  }
+  if (typeof route2.lazy === "object") {
+    let lazyObject = route2.lazy;
+    ["middleware", "loader", "action"].forEach((key) => {
+      let lazyFn = lazyObject[key];
+      let instrumentations = aggregated[`lazy.${key}`];
+      if (typeof lazyFn === "function" && instrumentations.length > 0) {
+        let instrumented = wrapImpl(instrumentations, lazyFn, () => void 0);
+        if (instrumented) {
+          updates.lazy = Object.assign(updates.lazy || {}, {
+            [key]: instrumented
+          });
+        }
+      }
+    });
+  }
+  ["loader", "action"].forEach((key) => {
+    let handler = route2[key];
+    if (typeof handler === "function" && aggregated[key].length > 0) {
+      let original = handler[UninstrumentedSymbol] ?? handler;
+      let instrumented = wrapImpl(
+        aggregated[key],
+        original,
+        (...args) => getHandlerInfo(args[0])
+      );
+      if (instrumented) {
+        if (key === "loader" && original.hydrate === true) {
+          instrumented.hydrate = true;
+        }
+        instrumented[UninstrumentedSymbol] = original;
+        updates[key] = instrumented;
+      }
+    }
+  });
+  if (route2.middleware && route2.middleware.length > 0 && aggregated.middleware.length > 0) {
+    updates.middleware = route2.middleware.map((middleware) => {
+      let original = middleware[UninstrumentedSymbol] ?? middleware;
+      let instrumented = wrapImpl(
+        aggregated.middleware,
+        original,
+        (...args) => getHandlerInfo(args[0])
+      );
+      if (instrumented) {
+        instrumented[UninstrumentedSymbol] = original;
+        return instrumented;
+      }
+      return middleware;
+    });
+  }
+  return updates;
+}
+function instrumentClientSideRouter(router2, fns) {
+  let aggregated = {
+    navigate: [],
+    fetch: []
+  };
+  fns.forEach(
+    (fn) => fn({
+      instrument(i) {
+        let keys = Object.keys(i);
+        for (let key of keys) {
+          if (i[key]) {
+            aggregated[key].push(i[key]);
+          }
+        }
+      }
+    })
+  );
+  if (aggregated.navigate.length > 0) {
+    let navigate = router2.navigate[UninstrumentedSymbol] ?? router2.navigate;
+    let instrumentedNavigate = wrapImpl(
+      aggregated.navigate,
+      navigate,
+      (...args) => {
+        let [to, opts] = args;
+        return {
+          to: typeof to === "number" || typeof to === "string" ? to : to ? createPath(to) : ".",
+          ...getRouterInfo(router2, opts ?? {})
+        };
+      }
+    );
+    if (instrumentedNavigate) {
+      instrumentedNavigate[UninstrumentedSymbol] = navigate;
+      router2.navigate = instrumentedNavigate;
+    }
+  }
+  if (aggregated.fetch.length > 0) {
+    let fetch2 = router2.fetch[UninstrumentedSymbol] ?? router2.fetch;
+    let instrumentedFetch = wrapImpl(aggregated.fetch, fetch2, (...args) => {
+      let [key, , href, opts] = args;
+      return {
+        href: href ?? ".",
+        fetcherKey: key,
+        ...getRouterInfo(router2, opts ?? {})
+      };
+    });
+    if (instrumentedFetch) {
+      instrumentedFetch[UninstrumentedSymbol] = fetch2;
+      router2.fetch = instrumentedFetch;
+    }
+  }
+  return router2;
+}
+function wrapImpl(impls, handler, getInfo) {
+  if (impls.length === 0) {
+    return null;
+  }
+  return async (...args) => {
+    let result2 = await recurseRight(
+      impls,
+      getInfo(...args),
+      () => handler(...args),
+      impls.length - 1
+    );
+    if (result2.type === "error") {
+      throw result2.value;
+    }
+    return result2.value;
+  };
+}
+async function recurseRight(impls, info, handler, index) {
+  let impl = impls[index];
+  let result2;
+  if (!impl) {
+    try {
+      let value = await handler();
+      result2 = { type: "success", value };
+    } catch (e) {
+      result2 = { type: "error", value: e };
+    }
+  } else {
+    let handlerPromise = void 0;
+    let callHandler = async () => {
+      if (handlerPromise) {
+        console.error("You cannot call instrumented handlers more than once");
+      } else {
+        handlerPromise = recurseRight(impls, info, handler, index - 1);
+      }
+      result2 = await handlerPromise;
+      invariant(result2, "Expected a result");
+      if (result2.type === "error" && result2.value instanceof Error) {
+        return { status: "error", error: result2.value };
+      }
+      return { status: "success", error: void 0 };
+    };
+    try {
+      await impl(callHandler, info);
+    } catch (e) {
+      console.error("An instrumentation function threw an error:", e);
+    }
+    if (!handlerPromise) {
+      await callHandler();
+    }
+    await handlerPromise;
+  }
+  if (result2) {
+    return result2;
+  }
+  return {
+    type: "error",
+    value: new Error("No result assigned in instrumentation chain.")
+  };
+}
+function getHandlerInfo(args) {
+  let { request, context, params, unstable_pattern } = args;
+  return {
+    request: getReadonlyRequest(request),
+    params: { ...params },
+    unstable_pattern,
+    context: getReadonlyContext(context)
+  };
+}
+function getRouterInfo(router2, opts) {
+  return {
+    currentUrl: createPath(router2.state.location),
+    ..."formMethod" in opts ? { formMethod: opts.formMethod } : {},
+    ..."formEncType" in opts ? { formEncType: opts.formEncType } : {},
+    ..."formData" in opts ? { formData: opts.formData } : {},
+    ..."body" in opts ? { body: opts.body } : {}
+  };
+}
+function getReadonlyRequest(request) {
+  return {
+    method: request.method,
+    url: request.url,
+    headers: {
+      get: (...args) => request.headers.get(...args)
+    }
+  };
+}
+function getReadonlyContext(context) {
+  if (isPlainObject$2(context)) {
+    let frozen = { ...context };
+    Object.freeze(frozen);
+    return frozen;
+  } else {
+    return {
+      get: (ctx) => context.get(ctx)
+    };
+  }
+}
+var objectProtoNames = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
+function isPlainObject$2(thing) {
+  if (thing === null || typeof thing !== "object") {
+    return false;
+  }
+  const proto = Object.getPrototypeOf(thing);
+  return proto === Object.prototype || proto === null || Object.getOwnPropertyNames(proto).sort().join("\0") === objectProtoNames;
+}
 var validMutationMethodsArr = [
   "POST",
   "PUT",
@@ -12987,21 +13160,33 @@ var IDLE_BLOCKER = {
   reset: void 0,
   location: void 0
 };
-var ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
 var defaultMapRouteProperties = (route2) => ({
   hasErrorBoundary: Boolean(route2.hasErrorBoundary)
 });
 var TRANSITIONS_STORAGE_KEY = "remix-router-transitions";
-var ResetLoaderDataSymbol = Symbol("ResetLoaderData");
+var ResetLoaderDataSymbol = /* @__PURE__ */ Symbol("ResetLoaderData");
 function createRouter(init) {
   const routerWindow = init.window ? init.window : typeof window !== "undefined" ? window : void 0;
-  const isBrowser2 = typeof routerWindow !== "undefined" && typeof routerWindow.document !== "undefined" && typeof routerWindow.document.createElement !== "undefined";
+  const isBrowser3 = typeof routerWindow !== "undefined" && typeof routerWindow.document !== "undefined" && typeof routerWindow.document.createElement !== "undefined";
   invariant(
     init.routes.length > 0,
     "You must provide a non-empty routes array to createRouter"
   );
   let hydrationRouteProperties2 = init.hydrationRouteProperties || [];
-  let mapRouteProperties2 = init.mapRouteProperties || defaultMapRouteProperties;
+  let _mapRouteProperties = init.mapRouteProperties || defaultMapRouteProperties;
+  let mapRouteProperties2 = _mapRouteProperties;
+  if (init.unstable_instrumentations) {
+    let instrumentations = init.unstable_instrumentations;
+    mapRouteProperties2 = (route2) => {
+      return {
+        ..._mapRouteProperties(route2),
+        ...getRouteInstrumentationUpdates(
+          instrumentations.map((i) => i.route).filter(Boolean),
+          route2
+        )
+      };
+    };
+  }
   let manifest = {};
   let dataRoutes = convertRoutesToDataRoutes(
     init.routes,
@@ -13011,9 +13196,12 @@ function createRouter(init) {
   );
   let inFlightDataRoutes;
   let basename = init.basename || "/";
+  if (!basename.startsWith("/")) {
+    basename = `/${basename}`;
+  }
   let dataStrategyImpl = init.dataStrategy || defaultDataStrategyWithMiddleware;
   let future = {
-    unstable_middleware: false,
+    unstable_passThroughRequests: false,
     ...init.future
   };
   let unlistenHistory = null;
@@ -13026,12 +13214,14 @@ function createRouter(init) {
   let initialMatchesIsFOW = false;
   let initialErrors = null;
   let initialized;
+  let renderFallback;
   if (initialMatches == null && !init.patchRoutesOnNavigation) {
     let error2 = getInternalRouterError(404, {
       pathname: init.history.location.pathname
     });
     let { matches, route: route2 } = getShortCircuitMatches(dataRoutes);
     initialized = true;
+    renderFallback = !initialized;
     initialMatches = matches;
     initialErrors = { [route2.id]: error2 };
   } else {
@@ -13047,6 +13237,7 @@ function createRouter(init) {
     }
     if (!initialMatches) {
       initialized = false;
+      renderFallback = !initialized;
       initialMatches = [];
       let fogOfWar = checkFogOfWar(
         null,
@@ -13059,23 +13250,27 @@ function createRouter(init) {
       }
     } else if (initialMatches.some((m) => m.route.lazy)) {
       initialized = false;
-    } else if (!initialMatches.some((m) => m.route.loader)) {
+      renderFallback = !initialized;
+    } else if (!initialMatches.some((m) => routeHasLoaderOrMiddleware(m.route))) {
       initialized = true;
+      renderFallback = !initialized;
     } else {
       let loaderData = init.hydrationData ? init.hydrationData.loaderData : null;
       let errors = init.hydrationData ? init.hydrationData.errors : null;
+      let relevantMatches = initialMatches;
       if (errors) {
         let idx = initialMatches.findIndex(
           (m) => errors[m.route.id] !== void 0
         );
-        initialized = initialMatches.slice(0, idx + 1).every(
-          (m) => !shouldLoadRouteOnHydration(m.route, loaderData, errors)
-        );
-      } else {
-        initialized = initialMatches.every(
-          (m) => !shouldLoadRouteOnHydration(m.route, loaderData, errors)
-        );
+        relevantMatches = relevantMatches.slice(0, idx + 1);
       }
+      renderFallback = false;
+      initialized = true;
+      relevantMatches.forEach((m) => {
+        let status = getRouteHydrationStatus(m.route, loaderData, errors);
+        renderFallback = renderFallback || status.renderFallback;
+        initialized = initialized && !status.shouldLoad;
+      });
     }
   }
   let router2;
@@ -13084,6 +13279,7 @@ function createRouter(init) {
     location: init.history.location,
     matches: initialMatches,
     initialized,
+    renderFallback,
     navigation: IDLE_NAVIGATION,
     // Don't restore on initial updateState() if we were SSR'd
     restoreScrollPosition: init.hydrationData != null ? false : null,
@@ -13096,6 +13292,7 @@ function createRouter(init) {
     blockers: /* @__PURE__ */ new Map()
   };
   let pendingAction = "POP";
+  let pendingPopstateNavigationDfd = null;
   let pendingPreventScrollReset = false;
   let pendingNavigationController;
   let pendingViewTransitionEnabled = false;
@@ -13155,12 +13352,14 @@ function createRouter(init) {
               updateState({ blockers });
             }
           });
+          pendingPopstateNavigationDfd?.resolve();
+          pendingPopstateNavigationDfd = null;
           return;
         }
         return startNavigation(historyAction, location);
       }
     );
-    if (isBrowser2) {
+    if (isBrowser3) {
       restoreAppliedTransitions(routerWindow, appliedViewTransitions);
       let _saveAppliedTransitions = () => persistAppliedTransitions(routerWindow, appliedViewTransitions);
       routerWindow.addEventListener("pagehide", _saveAppliedTransitions);
@@ -13190,6 +13389,19 @@ function createRouter(init) {
     return () => subscribers.delete(fn);
   }
   function updateState(newState, opts = {}) {
+    if (newState.matches) {
+      newState.matches = newState.matches.map((m) => {
+        let route2 = manifest[m.route.id];
+        let matchRoute = m.route;
+        if (matchRoute.element !== route2.element || matchRoute.errorElement !== route2.errorElement || matchRoute.hydrateFallbackElement !== route2.hydrateFallbackElement) {
+          return {
+            ...m,
+            route: route2
+          };
+        }
+        return m;
+      });
+    }
     state = {
       ...state,
       ...newState
@@ -13213,6 +13425,7 @@ function createRouter(init) {
     [...subscribers].forEach(
       (subscriber) => subscriber(state, {
         deletedFetchers: unmountedFetchers,
+        newErrors: newState.errors ?? null,
         viewTransitionOpts: opts.viewTransitionOpts,
         flushSync: opts.flushSync === true
       })
@@ -13245,6 +13458,7 @@ function createRouter(init) {
       blockers = new Map(blockers);
       blockers.forEach((_, k) => blockers.set(k, IDLE_BLOCKER));
     }
+    let restoreScrollPosition = isUninterruptedRevalidation ? false : getSavedScrollPosition(location, newState.matches || state.matches);
     let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && location.state?._isRedirect !== true;
     if (inFlightDataRoutes) {
       dataRoutes = inFlightDataRoutes;
@@ -13293,12 +13507,10 @@ function createRouter(init) {
         historyAction: pendingAction,
         location,
         initialized: true,
+        renderFallback: false,
         navigation: IDLE_NAVIGATION,
         revalidation: "idle",
-        restoreScrollPosition: getSavedScrollPosition(
-          location,
-          newState.matches || state.matches
-        ),
+        restoreScrollPosition,
         preventScrollReset,
         blockers
       },
@@ -13312,13 +13524,21 @@ function createRouter(init) {
     pendingViewTransitionEnabled = false;
     isUninterruptedRevalidation = false;
     isRevalidationRequired = false;
+    pendingPopstateNavigationDfd?.resolve();
+    pendingPopstateNavigationDfd = null;
     pendingRevalidationDfd?.resolve();
     pendingRevalidationDfd = null;
   }
   async function navigate(to, opts) {
+    pendingPopstateNavigationDfd?.resolve();
+    pendingPopstateNavigationDfd = null;
     if (typeof to === "number") {
+      if (!pendingPopstateNavigationDfd) {
+        pendingPopstateNavigationDfd = createDeferred();
+      }
+      let promise = pendingPopstateNavigationDfd.promise;
       init.history.go(to);
-      return;
+      return promise;
     }
     let normalizedPath = normalizeTo(
       state.location,
@@ -13333,8 +13553,27 @@ function createRouter(init) {
       normalizedPath,
       opts
     );
+    let maskPath;
+    if (opts?.unstable_mask) {
+      let partialPath = typeof opts.unstable_mask === "string" ? parsePath(opts.unstable_mask) : {
+        ...state.location.unstable_mask,
+        ...opts.unstable_mask
+      };
+      maskPath = {
+        pathname: "",
+        search: "",
+        hash: "",
+        ...partialPath
+      };
+    }
     let currentLocation = state.location;
-    let nextLocation = createLocation(state.location, path, opts && opts.state);
+    let nextLocation = createLocation(
+      currentLocation,
+      path,
+      opts && opts.state,
+      void 0,
+      maskPath
+    );
     nextLocation = {
       ...nextLocation,
       ...init.history.encodeLocation(nextLocation)
@@ -13383,7 +13622,8 @@ function createRouter(init) {
       preventScrollReset,
       replace: opts && opts.replace,
       enableViewTransition: opts && opts.viewTransition,
-      flushSync
+      flushSync,
+      callSiteDefaultShouldRevalidate: opts && opts.unstable_defaultShouldRevalidate
     });
   }
   function revalidate() {
@@ -13460,9 +13700,7 @@ function createRouter(init) {
       pendingNavigationController.signal,
       opts && opts.submission
     );
-    let scopedContext = new unstable_RouterContextProvider(
-      init.unstable_getContext ? await init.unstable_getContext() : void 0
-    );
+    let scopedContext = init.getContext ? await init.getContext() : new RouterContextProvider();
     let pendingActionResult;
     if (opts && opts.pendingError) {
       pendingActionResult = [
@@ -13525,7 +13763,8 @@ function createRouter(init) {
       opts && opts.replace,
       opts && opts.initialHydration === true,
       flushSync,
-      pendingActionResult
+      pendingActionResult,
+      opts && opts.callSiteDefaultShouldRevalidate
     );
     if (shortCircuited) {
       return;
@@ -13551,6 +13790,19 @@ function createRouter(init) {
       if (discoverResult.type === "aborted") {
         return { shortCircuited: true };
       } else if (discoverResult.type === "error") {
+        if (discoverResult.partialMatches.length === 0) {
+          let { matches: matches2, route: route2 } = getShortCircuitMatches(dataRoutes);
+          return {
+            matches: matches2,
+            pendingActionResult: [
+              route2.id,
+              {
+                type: "error",
+                error: discoverResult.error
+              }
+            ]
+          };
+        }
         let boundaryId = findNearestBoundary(discoverResult.partialMatches).route.id;
         return {
           matches: discoverResult.partialMatches,
@@ -13596,6 +13848,7 @@ function createRouter(init) {
         mapRouteProperties2,
         manifest,
         request,
+        location,
         matches,
         actionMatch,
         initialHydration ? [] : hydrationRouteProperties2,
@@ -13603,6 +13856,7 @@ function createRouter(init) {
       );
       let results = await callDataStrategy(
         request,
+        location,
         dsMatches,
         scopedContext,
         null
@@ -13628,7 +13882,8 @@ function createRouter(init) {
         let location2 = normalizeRedirectLocation(
           result2.response.headers.get("Location"),
           new URL(request.url),
-          basename
+          basename,
+          init.history
         );
         replace2 = location2 === state.location.pathname + state.location.search;
       }
@@ -13657,7 +13912,7 @@ function createRouter(init) {
       pendingActionResult: [actionMatch.route.id, result2]
     };
   }
-  async function handleLoaders(request, location, matches, scopedContext, isFogOfWar, overrideNavigation, submission, fetcherSubmission, replace2, initialHydration, flushSync, pendingActionResult) {
+  async function handleLoaders(request, location, matches, scopedContext, isFogOfWar, overrideNavigation, submission, fetcherSubmission, replace2, initialHydration, flushSync, pendingActionResult, callSiteDefaultShouldRevalidate) {
     let loadingNavigation = overrideNavigation || getLoadingNavigation(location, submission);
     let activeSubmission = submission || fetcherSubmission || getSubmissionFromNavigation(loadingNavigation);
     let shouldUpdateNavigationState = !isUninterruptedRevalidation && !initialHydration;
@@ -13682,6 +13937,16 @@ function createRouter(init) {
       if (discoverResult.type === "aborted") {
         return { shortCircuited: true };
       } else if (discoverResult.type === "error") {
+        if (discoverResult.partialMatches.length === 0) {
+          let { matches: matches2, route: route2 } = getShortCircuitMatches(dataRoutes);
+          return {
+            matches: matches2,
+            loaderData: {},
+            errors: {
+              [route2.id]: discoverResult.error
+            }
+          };
+        }
         let boundaryId = findNearestBoundary(discoverResult.partialMatches).route.id;
         return {
           matches: discoverResult.partialMatches,
@@ -13726,10 +13991,13 @@ function createRouter(init) {
       routesToUse,
       basename,
       init.patchRoutesOnNavigation != null,
-      pendingActionResult
+      pendingActionResult,
+      callSiteDefaultShouldRevalidate
     );
     pendingNavigationLoadId = ++incrementingLoadId;
-    if (!init.dataStrategy && !dsMatches.some((m) => m.shouldLoad) && revalidatingFetchers.length === 0) {
+    if (!init.dataStrategy && !dsMatches.some((m) => m.shouldLoad) && !dsMatches.some(
+      (m) => m.route.middleware && m.route.middleware.length > 0
+    ) && revalidatingFetchers.length === 0) {
       let updatedFetchers2 = markFetchRedirectsDone();
       completeNavigation(
         location,
@@ -13776,6 +14044,7 @@ function createRouter(init) {
       dsMatches,
       revalidatingFetchers,
       request,
+      location,
       scopedContext
     );
     if (request.signal.aborted) {
@@ -13848,7 +14117,7 @@ function createRouter(init) {
     });
     return new Map(state.fetchers);
   }
-  async function fetch2(key, routeId, href2, opts) {
+  async function fetch2(key, routeId, href, opts) {
     abortFetcher(key);
     let flushSync = (opts && opts.flushSync) === true;
     let routesToUse = inFlightDataRoutes || dataRoutes;
@@ -13856,7 +14125,7 @@ function createRouter(init) {
       state.location,
       state.matches,
       basename,
-      href2,
+      href,
       routeId,
       opts?.relative
     );
@@ -13883,23 +14152,20 @@ function createRouter(init) {
       setFetcherError(key, routeId, error2, { flushSync });
       return;
     }
-    let match = getTargetMatch(matches, path);
-    let scopedContext = new unstable_RouterContextProvider(
-      init.unstable_getContext ? await init.unstable_getContext() : void 0
-    );
+    let scopedContext = init.getContext ? await init.getContext() : new RouterContextProvider();
     let preventScrollReset = (opts && opts.preventScrollReset) === true;
     if (submission && isMutationMethod(submission.formMethod)) {
       await handleFetcherAction(
         key,
         routeId,
         path,
-        match,
         matches,
         scopedContext,
         fogOfWar.active,
         flushSync,
         preventScrollReset,
-        submission
+        submission,
+        opts && opts.unstable_defaultShouldRevalidate
       );
       return;
     }
@@ -13908,7 +14174,6 @@ function createRouter(init) {
       key,
       routeId,
       path,
-      match,
       matches,
       scopedContext,
       fogOfWar.active,
@@ -13917,24 +14182,9 @@ function createRouter(init) {
       submission
     );
   }
-  async function handleFetcherAction(key, routeId, path, match, requestMatches, scopedContext, isFogOfWar, flushSync, preventScrollReset, submission) {
+  async function handleFetcherAction(key, routeId, path, requestMatches, scopedContext, isFogOfWar, flushSync, preventScrollReset, submission, callSiteDefaultShouldRevalidate) {
     interruptActiveLoads();
     fetchLoadMatches.delete(key);
-    function detectAndHandle405Error(m) {
-      if (!m.route.action && !m.route.lazy) {
-        let error2 = getInternalRouterError(405, {
-          method: submission.formMethod,
-          pathname: path,
-          routeId
-        });
-        setFetcherError(key, routeId, error2, { flushSync });
-        return true;
-      }
-      return false;
-    }
-    if (!isFogOfWar && detectAndHandle405Error(match)) {
-      return;
-    }
     let existingFetcher = state.fetchers.get(key);
     updateFetcherState(key, getSubmittingFetcher(submission, existingFetcher), {
       flushSync
@@ -13949,7 +14199,7 @@ function createRouter(init) {
     if (isFogOfWar) {
       let discoverResult = await discoverRoutes(
         requestMatches,
-        path,
+        new URL(fetchRequest.url).pathname,
         fetchRequest.signal,
         key
       );
@@ -13968,11 +14218,17 @@ function createRouter(init) {
         return;
       } else {
         requestMatches = discoverResult.matches;
-        match = getTargetMatch(requestMatches, path);
-        if (detectAndHandle405Error(match)) {
-          return;
-        }
       }
+    }
+    let match = getTargetMatch(requestMatches, path);
+    if (!match.route.action && !match.route.lazy) {
+      let error2 = getInternalRouterError(405, {
+        method: submission.formMethod,
+        pathname: path,
+        routeId
+      });
+      setFetcherError(key, routeId, error2, { flushSync });
+      return;
     }
     fetchControllers.set(key, abortController);
     let originatingLoadId = incrementingLoadId;
@@ -13980,6 +14236,7 @@ function createRouter(init) {
       mapRouteProperties2,
       manifest,
       fetchRequest,
+      path,
       requestMatches,
       match,
       hydrationRouteProperties2,
@@ -13987,11 +14244,20 @@ function createRouter(init) {
     );
     let actionResults = await callDataStrategy(
       fetchRequest,
+      path,
       fetchMatches,
       scopedContext,
       key
     );
     let actionResult = actionResults[match.route.id];
+    if (!actionResult) {
+      for (let match2 of fetchMatches) {
+        if (actionResults[match2.route.id]) {
+          actionResult = actionResults[match2.route.id];
+          break;
+        }
+      }
+    }
     if (fetchRequest.signal.aborted) {
       if (fetchControllers.get(key) === abortController) {
         fetchControllers.delete(key);
@@ -14056,7 +14322,8 @@ function createRouter(init) {
       routesToUse,
       basename,
       init.patchRoutesOnNavigation != null,
-      [match.route.id, actionResult]
+      [match.route.id, actionResult],
+      callSiteDefaultShouldRevalidate
     );
     revalidatingFetchers.filter((rf) => rf.key !== key).forEach((rf) => {
       let staleKey = rf.key;
@@ -14081,6 +14348,7 @@ function createRouter(init) {
       dsMatches,
       revalidatingFetchers,
       revalidationRequest,
+      nextLocation,
       scopedContext
     );
     if (abortController.signal.aborted) {
@@ -14148,7 +14416,7 @@ function createRouter(init) {
       isRevalidationRequired = false;
     }
   }
-  async function handleFetcherLoader(key, routeId, path, match, matches, scopedContext, isFogOfWar, flushSync, preventScrollReset, submission) {
+  async function handleFetcherLoader(key, routeId, path, matches, scopedContext, isFogOfWar, flushSync, preventScrollReset, submission) {
     let existingFetcher = state.fetchers.get(key);
     updateFetcherState(
       key,
@@ -14167,7 +14435,7 @@ function createRouter(init) {
     if (isFogOfWar) {
       let discoverResult = await discoverRoutes(
         matches,
-        path,
+        new URL(fetchRequest.url).pathname,
         fetchRequest.signal,
         key
       );
@@ -14186,15 +14454,16 @@ function createRouter(init) {
         return;
       } else {
         matches = discoverResult.matches;
-        match = getTargetMatch(matches, path);
       }
     }
+    let match = getTargetMatch(matches, path);
     fetchControllers.set(key, abortController);
     let originatingLoadId = incrementingLoadId;
     let dsMatches = getTargetedDataStrategyMatches(
       mapRouteProperties2,
       manifest,
       fetchRequest,
+      path,
       matches,
       match,
       hydrationRouteProperties2,
@@ -14202,6 +14471,7 @@ function createRouter(init) {
     );
     let results = await callDataStrategy(
       fetchRequest,
+      path,
       dsMatches,
       scopedContext,
       key
@@ -14241,6 +14511,10 @@ function createRouter(init) {
     preventScrollReset,
     replace: replace2
   } = {}) {
+    if (!isNavigation) {
+      pendingPopstateNavigationDfd?.resolve();
+      pendingPopstateNavigationDfd = null;
+    }
     if (redirect2.response.headers.has("X-Remix-Revalidate")) {
       isRevalidationRequired = true;
     }
@@ -14249,16 +14523,17 @@ function createRouter(init) {
     location = normalizeRedirectLocation(
       location,
       new URL(request.url),
-      basename
+      basename,
+      init.history
     );
     let redirectLocation = createLocation(state.location, location, {
       _isRedirect: true
     });
-    if (isBrowser2) {
+    if (isBrowser3) {
       let isDocumentReload = false;
       if (redirect2.response.headers.has("X-Remix-Reload-Document")) {
         isDocumentReload = true;
-      } else if (ABSOLUTE_URL_REGEX.test(location)) {
+      } else if (isAbsoluteUrl(location)) {
         const url = createBrowserURLImpl(location, true);
         isDocumentReload = // Hard reload if it's an absolute URL to a new origin
         url.origin !== routerWindow.location.origin || // Hard reload if it's an absolute URL that does not match our basename
@@ -14305,13 +14580,14 @@ function createRouter(init) {
       });
     }
   }
-  async function callDataStrategy(request, matches, scopedContext, fetcherKey) {
+  async function callDataStrategy(request, path, matches, scopedContext, fetcherKey) {
     let results;
     let dataResults = {};
     try {
       results = await callDataStrategyImpl(
         dataStrategyImpl,
         request,
+        path,
         matches,
         fetcherKey,
         scopedContext,
@@ -14329,6 +14605,21 @@ function createRouter(init) {
     if (request.signal.aborted) {
       return dataResults;
     }
+    if (!isMutationMethod(request.method)) {
+      for (let match of matches) {
+        if (results[match.route.id]?.type === "error") {
+          break;
+        }
+        if (!results.hasOwnProperty(match.route.id) && !state.loaderData.hasOwnProperty(match.route.id) && (!state.errors || !state.errors.hasOwnProperty(match.route.id)) && match.shouldCallHandler()) {
+          results[match.route.id] = {
+            type: "error",
+            result: new Error(
+              `No result returned from dataStrategy for route ${match.route.id}`
+            )
+          };
+        }
+      }
+    }
     for (let [routeId, result2] of Object.entries(results)) {
       if (isRedirectDataStrategyResult(result2)) {
         let response = result2.result;
@@ -14343,16 +14634,15 @@ function createRouter(init) {
           )
         };
       } else {
-        dataResults[routeId] = await convertDataStrategyResultToDataResult(
-          result2
-        );
+        dataResults[routeId] = await convertDataStrategyResultToDataResult(result2);
       }
     }
     return dataResults;
   }
-  async function callLoadersAndMaybeResolveData(matches, fetchersToLoad, request, scopedContext) {
+  async function callLoadersAndMaybeResolveData(matches, fetchersToLoad, request, location, scopedContext) {
     let loaderResultsPromise = callDataStrategy(
       request,
+      location,
       matches,
       scopedContext,
       null
@@ -14362,6 +14652,7 @@ function createRouter(init) {
         if (f.matches && f.match && f.request && f.controller) {
           let results = await callDataStrategy(
             f.request,
+            f.path,
             f.matches,
             scopedContext,
             f.key
@@ -14426,6 +14717,10 @@ function createRouter(init) {
     }
     return state.fetchers.get(key) || IDLE_FETCHER;
   }
+  function resetFetcher(key, opts) {
+    abortFetcher(key, opts?.reason);
+    updateFetcherState(key, getDoneFetcher(null));
+  }
   function deleteFetcher(key) {
     let fetcher = state.fetchers.get(key);
     if (fetchControllers.has(key) && !(fetcher && fetcher.state === "loading" && fetchReloadIds.has(key))) {
@@ -14448,10 +14743,10 @@ function createRouter(init) {
     }
     updateState({ fetchers: new Map(state.fetchers) });
   }
-  function abortFetcher(key) {
+  function abortFetcher(key, reason) {
     let controller = fetchControllers.get(key);
     if (controller) {
-      controller.abort();
+      controller.abort(reason);
       fetchControllers.delete(key);
     }
   }
@@ -14630,7 +14925,8 @@ function createRouter(init) {
               children,
               routesToUse,
               localManifest,
-              mapRouteProperties2
+              mapRouteProperties2,
+              false
             );
           }
         });
@@ -14645,22 +14941,42 @@ function createRouter(init) {
         return { type: "aborted" };
       }
       let newMatches = matchRoutes(routesToUse, pathname, basename);
+      let newPartialMatches = null;
       if (newMatches) {
-        return { type: "success", matches: newMatches };
+        if (Object.keys(newMatches[0].params).length === 0) {
+          return { type: "success", matches: newMatches };
+        } else {
+          newPartialMatches = matchRoutesImpl(
+            routesToUse,
+            pathname,
+            basename,
+            true
+          );
+          let matchedDeeper = newPartialMatches && partialMatches.length < newPartialMatches.length && compareMatches(
+            partialMatches,
+            newPartialMatches.slice(0, partialMatches.length)
+          );
+          if (!matchedDeeper) {
+            return { type: "success", matches: newMatches };
+          }
+        }
       }
-      let newPartialMatches = matchRoutesImpl(
-        routesToUse,
-        pathname,
-        basename,
-        true
-      );
-      if (!newPartialMatches || partialMatches.length === newPartialMatches.length && partialMatches.every(
-        (m, i) => m.route.id === newPartialMatches[i].route.id
-      )) {
+      if (!newPartialMatches) {
+        newPartialMatches = matchRoutesImpl(
+          routesToUse,
+          pathname,
+          basename,
+          true
+        );
+      }
+      if (!newPartialMatches || compareMatches(partialMatches, newPartialMatches)) {
         return { type: "success", matches: null };
       }
       partialMatches = newPartialMatches;
     }
+  }
+  function compareMatches(a, b) {
+    return a.length === b.length && a.every((m, i) => m.route.id === b[i].route.id);
   }
   function _internalSetRoutes(newRoutes) {
     manifest = {};
@@ -14671,7 +14987,7 @@ function createRouter(init) {
       manifest
     );
   }
-  function patchRoutes(routeId, children) {
+  function patchRoutes(routeId, children, unstable_allowElementMutations = false) {
     let isNonHMR = inFlightDataRoutes == null;
     let routesToUse = inFlightDataRoutes || dataRoutes;
     patchRoutesImpl(
@@ -14679,7 +14995,8 @@ function createRouter(init) {
       children,
       routesToUse,
       manifest,
-      mapRouteProperties2
+      mapRouteProperties2,
+      unstable_allowElementMutations
     );
     if (isNonHMR) {
       dataRoutes = [...dataRoutes];
@@ -14713,6 +15030,7 @@ function createRouter(init) {
     createHref: (to) => init.history.createHref(to),
     encodeLocation: (to) => init.history.encodeLocation(to),
     getFetcher,
+    resetFetcher,
     deleteFetcher: queueFetcherForDeletion,
     dispose,
     getBlocker,
@@ -14721,8 +15039,17 @@ function createRouter(init) {
     _internalFetchControllers: fetchControllers,
     // TODO: Remove setRoutes, it's temporary to avoid dealing with
     // updating the tree while validating the update algorithm.
-    _internalSetRoutes
+    _internalSetRoutes,
+    _internalSetStateDoNotUseOrYouWillBreakYourApp(newState) {
+      updateState(newState);
+    }
   };
+  if (init.unstable_instrumentations) {
+    router2 = instrumentClientSideRouter(
+      router2,
+      init.unstable_instrumentations.map((i) => i.router).filter(Boolean)
+    );
+  }
   return router2;
 }
 function isSubmissionNavigation(opts) {
@@ -14768,7 +15095,7 @@ function normalizeTo(location, matches, basename, to, fromRouteId, relative) {
     }
   }
   if (basename !== "/") {
-    path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
+    path.pathname = prependBasename({ basename, pathname: path.pathname });
   }
   return createPath(path);
 }
@@ -14879,7 +15206,7 @@ function normalizeNavigateOptions(isFetcher, path, opts) {
   parsedPath.search = `?${searchParams}`;
   return { path: createPath(parsedPath), submission };
 }
-function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest, history, state, matches, submission, location, lazyRoutePropertiesToSkip, initialHydration, isRevalidationRequired, cancelledFetcherLoads, fetchersQueuedForDeletion, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, hasPatchRoutesOnNavigation, pendingActionResult) {
+function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest, history, state, matches, submission, location, lazyRoutePropertiesToSkip, initialHydration, isRevalidationRequired, cancelledFetcherLoads, fetchersQueuedForDeletion, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, hasPatchRoutesOnNavigation, pendingActionResult, callSiteDefaultShouldRevalidate) {
   let actionResult = pendingActionResult ? isErrorResult(pendingActionResult[1]) ? pendingActionResult[1].error : pendingActionResult[1].data : void 0;
   let currentUrl = history.createURL(state.location);
   let nextUrl = history.createURL(location);
@@ -14902,6 +15229,7 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
     actionResult,
     actionStatus
   };
+  let pattern = getRoutePattern(matches);
   let dsMatches = matches.map((match, index) => {
     let { route: route2 } = match;
     let forceShouldLoad = null;
@@ -14909,14 +15237,15 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
       forceShouldLoad = false;
     } else if (route2.lazy) {
       forceShouldLoad = true;
-    } else if (route2.loader == null) {
+    } else if (!routeHasLoaderOrMiddleware(route2)) {
       forceShouldLoad = false;
     } else if (initialHydration) {
-      forceShouldLoad = shouldLoadRouteOnHydration(
+      let { shouldLoad: shouldLoad2 } = getRouteHydrationStatus(
         route2,
         state.loaderData,
         state.errors
       );
+      forceShouldLoad = shouldLoad2;
     } else if (isNewLoader(state.loaderData, state.matches[index], match)) {
       forceShouldLoad = true;
     }
@@ -14925,17 +15254,28 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
         mapRouteProperties2,
         manifest,
         request,
+        location,
+        pattern,
         match,
         lazyRoutePropertiesToSkip,
         scopedContext,
         forceShouldLoad
       );
     }
-    let defaultShouldRevalidate = shouldSkipRevalidation ? false : (
-      // Forced revalidation due to submission, useRevalidator, or X-Remix-Revalidate
-      isRevalidationRequired || currentUrl.pathname + currentUrl.search === nextUrl.pathname + nextUrl.search || // Search params affect all loaders
-      currentUrl.search !== nextUrl.search || isNewRouteInstance(state.matches[index], match)
-    );
+    let defaultShouldRevalidate = false;
+    if (typeof callSiteDefaultShouldRevalidate === "boolean") {
+      defaultShouldRevalidate = callSiteDefaultShouldRevalidate;
+    } else if (shouldSkipRevalidation) {
+      defaultShouldRevalidate = false;
+    } else if (isRevalidationRequired) {
+      defaultShouldRevalidate = true;
+    } else if (currentUrl.pathname + currentUrl.search === nextUrl.pathname + nextUrl.search) {
+      defaultShouldRevalidate = true;
+    } else if (currentUrl.search !== nextUrl.search) {
+      defaultShouldRevalidate = true;
+    } else if (isNewRouteInstance(state.matches[index], match)) {
+      defaultShouldRevalidate = true;
+    }
     let shouldRevalidateArgs = {
       ...baseShouldRevalidateArgs,
       defaultShouldRevalidate
@@ -14945,11 +15285,14 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
       mapRouteProperties2,
       manifest,
       request,
+      location,
+      pattern,
       match,
       lazyRoutePropertiesToSkip,
       scopedContext,
       shouldLoad,
-      shouldRevalidateArgs
+      shouldRevalidateArgs,
+      callSiteDefaultShouldRevalidate
     );
   });
   let revalidatingFetchers = [];
@@ -14992,6 +15335,7 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
         mapRouteProperties2,
         manifest,
         fetchRequest,
+        f.path,
         fetcherMatches,
         fetcherMatch,
         lazyRoutePropertiesToSkip,
@@ -15003,6 +15347,7 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
           mapRouteProperties2,
           manifest,
           fetchRequest,
+          f.path,
           fetcherMatches,
           fetcherMatch,
           lazyRoutePropertiesToSkip,
@@ -15010,15 +15355,24 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
         );
       }
     } else {
+      let defaultShouldRevalidate;
+      if (typeof callSiteDefaultShouldRevalidate === "boolean") {
+        defaultShouldRevalidate = callSiteDefaultShouldRevalidate;
+      } else if (shouldSkipRevalidation) {
+        defaultShouldRevalidate = false;
+      } else {
+        defaultShouldRevalidate = isRevalidationRequired;
+      }
       let shouldRevalidateArgs = {
         ...baseShouldRevalidateArgs,
-        defaultShouldRevalidate: shouldSkipRevalidation ? false : isRevalidationRequired
+        defaultShouldRevalidate
       };
       if (shouldRevalidateLoader(fetcherMatch, shouldRevalidateArgs)) {
         fetcherDsMatches = getTargetedDataStrategyMatches(
           mapRouteProperties2,
           manifest,
           fetchRequest,
+          f.path,
           fetcherMatches,
           fetcherMatch,
           lazyRoutePropertiesToSkip,
@@ -15041,22 +15395,26 @@ function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest,
   });
   return { dsMatches, revalidatingFetchers };
 }
-function shouldLoadRouteOnHydration(route2, loaderData, errors) {
+function routeHasLoaderOrMiddleware(route2) {
+  return route2.loader != null || route2.middleware != null && route2.middleware.length > 0;
+}
+function getRouteHydrationStatus(route2, loaderData, errors) {
   if (route2.lazy) {
-    return true;
+    return { shouldLoad: true, renderFallback: true };
   }
-  if (!route2.loader) {
-    return false;
+  if (!routeHasLoaderOrMiddleware(route2)) {
+    return { shouldLoad: false, renderFallback: false };
   }
   let hasData = loaderData != null && route2.id in loaderData;
   let hasError = errors != null && errors[route2.id] !== void 0;
   if (!hasData && hasError) {
-    return false;
+    return { shouldLoad: false, renderFallback: false };
   }
   if (typeof route2.loader === "function" && route2.loader.hydrate === true) {
-    return true;
+    return { shouldLoad: true, renderFallback: !hasData };
   }
-  return !hasData && !hasError;
+  let shouldLoad = !hasData && !hasError;
+  return { shouldLoad, renderFallback: shouldLoad };
 }
 function isNewLoader(currentLoaderData, currentMatch, match) {
   let isNew = (
@@ -15085,7 +15443,7 @@ function shouldRevalidateLoader(loaderMatch, arg) {
   }
   return arg.defaultShouldRevalidate;
 }
-function patchRoutesImpl(routeId, children, routesToUse, manifest, mapRouteProperties2) {
+function patchRoutesImpl(routeId, children, routesToUse, manifest, mapRouteProperties2, allowElementMutations) {
   let childrenToPatch;
   if (routeId) {
     let route2 = manifest[routeId];
@@ -15100,18 +15458,47 @@ function patchRoutesImpl(routeId, children, routesToUse, manifest, mapRoutePrope
   } else {
     childrenToPatch = routesToUse;
   }
-  let uniqueChildren = children.filter(
-    (newRoute) => !childrenToPatch.some(
-      (existingRoute) => isSameRoute(newRoute, existingRoute)
-    )
-  );
-  let newRoutes = convertRoutesToDataRoutes(
-    uniqueChildren,
-    mapRouteProperties2,
-    [routeId || "_", "patch", String(childrenToPatch?.length || "0")],
-    manifest
-  );
-  childrenToPatch.push(...newRoutes);
+  let uniqueChildren = [];
+  let existingChildren = [];
+  children.forEach((newRoute) => {
+    let existingRoute = childrenToPatch.find(
+      (existingRoute2) => isSameRoute(newRoute, existingRoute2)
+    );
+    if (existingRoute) {
+      existingChildren.push({ existingRoute, newRoute });
+    } else {
+      uniqueChildren.push(newRoute);
+    }
+  });
+  if (uniqueChildren.length > 0) {
+    let newRoutes = convertRoutesToDataRoutes(
+      uniqueChildren,
+      mapRouteProperties2,
+      [routeId || "_", "patch", String(childrenToPatch?.length || "0")],
+      manifest
+    );
+    childrenToPatch.push(...newRoutes);
+  }
+  if (allowElementMutations && existingChildren.length > 0) {
+    for (let i = 0; i < existingChildren.length; i++) {
+      let { existingRoute, newRoute } = existingChildren[i];
+      let existingRouteTyped = existingRoute;
+      let [newRouteTyped] = convertRoutesToDataRoutes(
+        [newRoute],
+        mapRouteProperties2,
+        [],
+        // Doesn't matter for mutated routes since they already have an id
+        {},
+        // Don't touch the manifest here since we're updating in place
+        true
+      );
+      Object.assign(existingRouteTyped, {
+        element: newRouteTyped.element ? newRouteTyped.element : existingRouteTyped.element,
+        errorElement: newRouteTyped.errorElement ? newRouteTyped.errorElement : existingRouteTyped.errorElement,
+        hydrateFallbackElement: newRouteTyped.hydrateFallbackElement ? newRouteTyped.hydrateFallbackElement : existingRouteTyped.hydrateFallbackElement
+      });
+    }
+  }
 }
 function isSameRoute(newRoute, existingRoute) {
   if ("id" in newRoute && "id" in existingRoute && newRoute.id === existingRoute.id) {
@@ -15123,9 +15510,9 @@ function isSameRoute(newRoute, existingRoute) {
   if ((!newRoute.children || newRoute.children.length === 0) && (!existingRoute.children || existingRoute.children.length === 0)) {
     return true;
   }
-  return newRoute.children.every(
+  return newRoute.children?.every(
     (aChild, i) => existingRoute.children?.some((bChild) => isSameRoute(aChild, bChild))
-  );
+  ) ?? false;
 }
 var lazyRoutePropertyCache = /* @__PURE__ */ new WeakMap();
 var loadLazyRouteProperty = ({
@@ -15291,109 +15678,122 @@ async function defaultDataStrategy(args) {
   return keyedResults;
 }
 async function defaultDataStrategyWithMiddleware(args) {
-  if (!args.matches.some((m) => m.route.unstable_middleware)) {
+  if (!args.matches.some((m) => m.route.middleware)) {
     return defaultDataStrategy(args);
   }
+  return runClientMiddlewarePipeline(args, () => defaultDataStrategy(args));
+}
+function runClientMiddlewarePipeline(args, handler) {
   return runMiddlewarePipeline(
     args,
-    false,
-    () => defaultDataStrategy(args),
-    (error2, routeId) => ({ [routeId]: { type: "error", result: error2 } })
+    handler,
+    (r) => {
+      if (isRedirectResponse(r)) {
+        throw r;
+      }
+      return r;
+    },
+    isDataStrategyResults,
+    errorHandler
   );
-}
-async function runMiddlewarePipeline(args, propagateResult, handler, errorHandler) {
-  let { matches, request, params, context } = args;
-  let middlewareState = {
-    handlerResult: void 0
-  };
-  try {
-    let tuples = matches.flatMap(
-      (m) => m.route.unstable_middleware ? m.route.unstable_middleware.map((fn) => [m.route.id, fn]) : []
-    );
-    let result2 = await callRouteMiddleware(
-      { request, params, context },
-      tuples,
-      propagateResult,
-      middlewareState,
-      handler
-    );
-    return propagateResult ? result2 : middlewareState.handlerResult;
-  } catch (e) {
-    if (!middlewareState.middlewareError) {
-      throw e;
+  function errorHandler(error2, routeId, nextResult) {
+    if (nextResult) {
+      return Promise.resolve(
+        Object.assign(nextResult.value, {
+          [routeId]: { type: "error", result: error2 }
+        })
+      );
+    } else {
+      let { matches } = args;
+      let maxBoundaryIdx = Math.min(
+        // Throwing route
+        Math.max(
+          matches.findIndex((m) => m.route.id === routeId),
+          0
+        ),
+        // or the shallowest route that needs to load data
+        Math.max(
+          matches.findIndex((m) => m.shouldCallHandler()),
+          0
+        )
+      );
+      let boundaryRouteId = findNearestBoundary(
+        matches,
+        matches[maxBoundaryIdx].route.id
+      ).route.id;
+      return Promise.resolve({
+        [boundaryRouteId]: { type: "error", result: error2 }
+      });
     }
-    let result2 = await errorHandler(
-      middlewareState.middlewareError.error,
-      middlewareState.middlewareError.routeId
-    );
-    if (!middlewareState.handlerResult) {
-      return result2;
-    }
-    return Object.assign(middlewareState.handlerResult, result2);
   }
 }
-async function callRouteMiddleware(args, middlewares, propagateResult, middlewareState, handler, idx = 0) {
+async function runMiddlewarePipeline(args, handler, processResult2, isResult, errorHandler) {
+  let { matches, ...dataFnArgs } = args;
+  let tuples = matches.flatMap(
+    (m) => m.route.middleware ? m.route.middleware.map((fn) => [m.route.id, fn]) : []
+  );
+  let result2 = await callRouteMiddleware(
+    dataFnArgs,
+    tuples,
+    handler,
+    processResult2,
+    isResult,
+    errorHandler
+  );
+  return result2;
+}
+async function callRouteMiddleware(args, middlewares, handler, processResult2, isResult, errorHandler, idx = 0) {
   let { request } = args;
   if (request.signal.aborted) {
-    if (request.signal.reason) {
-      throw request.signal.reason;
-    }
-    throw new Error(
-      `Request aborted without an \`AbortSignal.reason\`: ${request.method} ${request.url}`
-    );
+    throw request.signal.reason ?? new Error(`Request aborted: ${request.method} ${request.url}`);
   }
   let tuple = middlewares[idx];
   if (!tuple) {
-    middlewareState.handlerResult = await handler();
-    return middlewareState.handlerResult;
+    let result2 = await handler();
+    return result2;
   }
   let [routeId, middleware] = tuple;
-  let nextCalled = false;
-  let nextResult = void 0;
+  let nextResult;
   let next = async () => {
-    if (nextCalled) {
+    if (nextResult) {
       throw new Error("You may only call `next()` once per middleware");
     }
-    nextCalled = true;
-    await callRouteMiddleware(
-      args,
-      middlewares,
-      propagateResult,
-      middlewareState,
-      handler,
-      idx + 1
-    );
+    try {
+      let result2 = await callRouteMiddleware(
+        args,
+        middlewares,
+        handler,
+        processResult2,
+        isResult,
+        errorHandler,
+        idx + 1
+      );
+      nextResult = { value: result2 };
+      return nextResult.value;
+    } catch (error2) {
+      nextResult = { value: await errorHandler(error2, routeId, nextResult) };
+      return nextResult.value;
+    }
   };
   try {
-    let result2 = await middleware(
-      {
-        request: args.request,
-        params: args.params,
-        context: args.context
-      },
-      next
-    );
-    if (nextCalled) {
-      if (result2 === void 0) {
-        return nextResult;
-      } else {
-        return result2;
-      }
+    let value = await middleware(args, next);
+    let result2 = value != null ? processResult2(value) : void 0;
+    if (isResult(result2)) {
+      return result2;
+    } else if (nextResult) {
+      return result2 ?? nextResult.value;
     } else {
-      return next();
+      nextResult = { value: await next() };
+      return nextResult.value;
     }
   } catch (error2) {
-    if (!middlewareState.middlewareError) {
-      middlewareState.middlewareError = { routeId, error: error2 };
-    } else if (middlewareState.middlewareError.error !== error2) {
-      middlewareState.middlewareError = { routeId, error: error2 };
-    }
-    throw error2;
+    let response = await errorHandler(error2, routeId, nextResult);
+    return response;
   }
 }
 function getDataStrategyMatchLazyPromises(mapRouteProperties2, manifest, request, match, lazyRoutePropertiesToSkip) {
   let lazyMiddlewarePromise = loadLazyRouteProperty({
-    key: "unstable_middleware",
+    key: "middleware",
     route: match.route,
     manifest,
     mapRouteProperties: mapRouteProperties2
@@ -15411,7 +15811,7 @@ function getDataStrategyMatchLazyPromises(mapRouteProperties2, manifest, request
     handler: lazyRoutePromises.lazyHandlerPromise
   };
 }
-function getDataStrategyMatch(mapRouteProperties2, manifest, request, match, lazyRoutePropertiesToSkip, scopedContext, shouldLoad, unstable_shouldRevalidateArgs = null) {
+function getDataStrategyMatch(mapRouteProperties2, manifest, request, path, unstable_pattern, match, lazyRoutePropertiesToSkip, scopedContext, shouldLoad, shouldRevalidateArgs = null, callSiteDefaultShouldRevalidate) {
   let isUsingNewApi = false;
   let _lazyPromises = getDataStrategyMatchLazyPromises(
     mapRouteProperties2,
@@ -15424,24 +15824,35 @@ function getDataStrategyMatch(mapRouteProperties2, manifest, request, match, laz
     ...match,
     _lazyPromises,
     shouldLoad,
-    unstable_shouldRevalidateArgs,
-    unstable_shouldCallHandler(defaultShouldRevalidate) {
+    shouldRevalidateArgs,
+    shouldCallHandler(defaultShouldRevalidate) {
       isUsingNewApi = true;
-      if (!unstable_shouldRevalidateArgs) {
+      if (!shouldRevalidateArgs) {
         return shouldLoad;
+      }
+      if (typeof callSiteDefaultShouldRevalidate === "boolean") {
+        return shouldRevalidateLoader(match, {
+          ...shouldRevalidateArgs,
+          defaultShouldRevalidate: callSiteDefaultShouldRevalidate
+        });
       }
       if (typeof defaultShouldRevalidate === "boolean") {
         return shouldRevalidateLoader(match, {
-          ...unstable_shouldRevalidateArgs,
+          ...shouldRevalidateArgs,
           defaultShouldRevalidate
         });
       }
-      return shouldRevalidateLoader(match, unstable_shouldRevalidateArgs);
+      return shouldRevalidateLoader(match, shouldRevalidateArgs);
     },
     resolve(handlerOverride) {
-      if (isUsingNewApi || shouldLoad || handlerOverride && request.method === "GET" && (match.route.lazy || match.route.loader)) {
+      let { lazy, loader, middleware } = match.route;
+      let callHandler = isUsingNewApi || shouldLoad || handlerOverride && !isMutationMethod(request.method) && (lazy || loader);
+      let isMiddlewareOnlyRoute = middleware && middleware.length > 0 && !loader && !lazy;
+      if (callHandler && (isMutationMethod(request.method) || !isMiddlewareOnlyRoute)) {
         return callLoaderOrAction({
           request,
+          path,
+          unstable_pattern,
           match,
           lazyHandlerPromise: _lazyPromises?.handler,
           lazyRoutePromise: _lazyPromises?.route,
@@ -15453,14 +15864,14 @@ function getDataStrategyMatch(mapRouteProperties2, manifest, request, match, laz
     }
   };
 }
-function getTargetedDataStrategyMatches(mapRouteProperties2, manifest, request, matches, targetMatch, lazyRoutePropertiesToSkip, scopedContext, shouldRevalidateArgs = null) {
+function getTargetedDataStrategyMatches(mapRouteProperties2, manifest, request, path, matches, targetMatch, lazyRoutePropertiesToSkip, scopedContext, shouldRevalidateArgs = null) {
   return matches.map((match) => {
     if (match.route.id !== targetMatch.route.id) {
       return {
         ...match,
         shouldLoad: false,
-        unstable_shouldRevalidateArgs: shouldRevalidateArgs,
-        unstable_shouldCallHandler: () => false,
+        shouldRevalidateArgs,
+        shouldCallHandler: () => false,
         _lazyPromises: getDataStrategyMatchLazyPromises(
           mapRouteProperties2,
           manifest,
@@ -15475,6 +15886,8 @@ function getTargetedDataStrategyMatches(mapRouteProperties2, manifest, request, 
       mapRouteProperties2,
       manifest,
       request,
+      path,
+      getRoutePattern(matches),
       match,
       lazyRoutePropertiesToSkip,
       scopedContext,
@@ -15483,43 +15896,43 @@ function getTargetedDataStrategyMatches(mapRouteProperties2, manifest, request, 
     );
   });
 }
-async function callDataStrategyImpl(dataStrategyImpl, request, matches, fetcherKey, scopedContext, isStaticHandler) {
+async function callDataStrategyImpl(dataStrategyImpl, request, path, matches, fetcherKey, scopedContext, isStaticHandler) {
   if (matches.some((m) => m._lazyPromises?.middleware)) {
     await Promise.all(matches.map((m) => m._lazyPromises?.middleware));
   }
   let dataStrategyArgs = {
     request,
+    unstable_url: createDataFunctionUrl(request, path),
+    unstable_pattern: getRoutePattern(matches),
     params: matches[0].params,
     context: scopedContext,
     matches
   };
-  let unstable_runClientMiddleware = (cb) => {
+  let runClientMiddleware = (cb) => {
     let typedDataStrategyArgs = dataStrategyArgs;
-    return runMiddlewarePipeline(
-      typedDataStrategyArgs,
-      false,
-      () => cb({
+    return runClientMiddlewarePipeline(typedDataStrategyArgs, () => {
+      return cb({
         ...typedDataStrategyArgs,
         fetcherKey,
-        unstable_runClientMiddleware: () => {
+        runClientMiddleware: () => {
           throw new Error(
-            "Cannot call `unstable_runClientMiddleware()` from within an `unstable_runClientMiddleware` handler"
+            "Cannot call `runClientMiddleware()` from within an `runClientMiddleware` handler"
           );
         }
-      }),
-      (error2, routeId) => ({
-        [routeId]: { type: "error", result: error2 }
-      })
-    );
+      });
+    });
   };
   let results = await dataStrategyImpl({
     ...dataStrategyArgs,
     fetcherKey,
-    unstable_runClientMiddleware
+    runClientMiddleware
   });
   try {
     await Promise.all(
-      matches.flatMap((m) => [m._lazyPromises?.handler, m._lazyPromises?.route])
+      matches.flatMap((m) => [
+        m._lazyPromises?.handler,
+        m._lazyPromises?.route
+      ])
     );
   } catch (e) {
   }
@@ -15527,6 +15940,8 @@ async function callDataStrategyImpl(dataStrategyImpl, request, matches, fetcherK
 }
 async function callLoaderOrAction({
   request,
+  path,
+  unstable_pattern,
   match,
   lazyHandlerPromise,
   lazyRoutePromise,
@@ -15553,6 +15968,8 @@ async function callLoaderOrAction({
       return handler(
         {
           request,
+          unstable_url: createDataFunctionUrl(request, path),
+          unstable_pattern,
           params: match.params,
           context: scopedContext
         },
@@ -15624,21 +16041,19 @@ async function callLoaderOrAction({
   }
   return result2;
 }
+async function parseResponseBody(response) {
+  let contentType = response.headers.get("Content-Type");
+  if (contentType && /\bapplication\/json\b/.test(contentType)) {
+    return response.body == null ? null : response.json();
+  }
+  return response.text();
+}
 async function convertDataStrategyResultToDataResult(dataStrategyResult) {
   let { result: result2, type } = dataStrategyResult;
   if (isResponse(result2)) {
     let data2;
     try {
-      let contentType = result2.headers.get("Content-Type");
-      if (contentType && /\bapplication\/json\b/.test(contentType)) {
-        if (result2.body == null) {
-          data2 = null;
-        } else {
-          data2 = await result2.json();
-        }
-      } else {
-        data2 = await result2.text();
-      }
+      data2 = await parseResponseBody(result2);
     } catch (e) {
       return { type: "error", error: e };
     }
@@ -15669,11 +16084,7 @@ async function convertDataStrategyResultToDataResult(dataStrategyResult) {
       }
       return {
         type: "error",
-        error: new ErrorResponseImpl(
-          result2.init?.status || 500,
-          void 0,
-          result2.data
-        ),
+        error: dataWithResponseInitToErrorResponse(result2),
         statusCode: isRouteErrorResponse(result2) ? result2.status : void 0,
         headers: result2.init?.headers ? new Headers(result2.init.headers) : void 0
       };
@@ -15700,7 +16111,7 @@ function normalizeRelativeRoutingRedirectResponse(response, request, routeId, ma
     location,
     "Redirects returned/thrown from loaders/actions must have a Location header"
   );
-  if (!ABSOLUTE_URL_REGEX.test(location)) {
+  if (!isAbsoluteUrl(location)) {
     let trimmedMatches = matches.slice(
       0,
       matches.findIndex((m) => m.route.id === routeId) + 1
@@ -15715,14 +16126,37 @@ function normalizeRelativeRoutingRedirectResponse(response, request, routeId, ma
   }
   return response;
 }
-function normalizeRedirectLocation(location, currentUrl, basename) {
-  if (ABSOLUTE_URL_REGEX.test(location)) {
+var invalidProtocols = [
+  "about:",
+  "blob:",
+  "chrome:",
+  "chrome-untrusted:",
+  "content:",
+  "data:",
+  "devtools:",
+  "file:",
+  "filesystem:",
+  // eslint-disable-next-line no-script-url
+  "javascript:"
+];
+function normalizeRedirectLocation(location, currentUrl, basename, historyInstance) {
+  if (isAbsoluteUrl(location)) {
     let normalizedLocation = location;
     let url = normalizedLocation.startsWith("//") ? new URL(currentUrl.protocol + normalizedLocation) : new URL(normalizedLocation);
+    if (invalidProtocols.includes(url.protocol)) {
+      throw new Error("Invalid redirect location");
+    }
     let isSameBasename = stripBasename(url.pathname, basename) != null;
     if (url.origin === currentUrl.origin && isSameBasename) {
       return url.pathname + url.search + url.hash;
     }
+  }
+  try {
+    let url = historyInstance.createURL(location);
+    if (invalidProtocols.includes(url.protocol)) {
+      throw new Error("Invalid redirect location");
+    }
+  } catch (e) {
   }
   return location;
 }
@@ -15744,6 +16178,24 @@ function createClientSideRequest(history, location, signal, submission) {
     }
   }
   return new Request(url, init);
+}
+function createDataFunctionUrl(request, path) {
+  let url = new URL(request.url);
+  let parsed = typeof path === "string" ? parsePath(path) : path;
+  url.pathname = parsed.pathname || "/";
+  if (parsed.search) {
+    let searchParams = new URLSearchParams(parsed.search);
+    let indexValues = searchParams.getAll("index");
+    searchParams.delete("index");
+    for (let value of indexValues.filter(Boolean)) {
+      searchParams.append("index", value);
+    }
+    url.search = searchParams.size ? `?${searchParams.toString()}` : "";
+  } else {
+    url.search = "";
+  }
+  url.hash = parsed.hash || "";
+  return url;
 }
 function convertFormDataToSearchParams(formData) {
   let searchParams = new URLSearchParams();
@@ -15832,11 +16284,12 @@ function processLoaderData(state, matches, results, pendingActionResult, revalid
   );
   revalidatingFetchers.filter((f) => !f.matches || f.matches.some((m) => m.shouldLoad)).forEach((rf) => {
     let { key, match, controller } = rf;
-    let result2 = fetcherResults[key];
-    invariant(result2, "Did not find corresponding fetcher result");
     if (controller && controller.signal.aborted) {
       return;
-    } else if (isErrorResult(result2)) {
+    }
+    let result2 = fetcherResults[key];
+    invariant(result2, "Did not find corresponding fetcher result");
+    if (isErrorResult(result2)) {
       let boundaryMatch = findNearestBoundary(state.matches, match?.route.id);
       if (!(errors && errors[boundaryMatch.route.id])) {
         errors = {
@@ -15966,6 +16419,21 @@ function isHashChangeOnly(a, b) {
   }
   return false;
 }
+function dataWithResponseInitToErrorResponse(data2) {
+  return new ErrorResponseImpl(
+    data2.init?.status ?? 500,
+    data2.init?.statusText ?? "Internal Server Error",
+    data2.data
+  );
+}
+function isDataStrategyResults(result2) {
+  return result2 != null && typeof result2 === "object" && Object.entries(result2).every(
+    ([key, value]) => typeof key === "string" && isDataStrategyResult(value)
+  );
+}
+function isDataStrategyResult(result2) {
+  return result2 != null && typeof result2 === "object" && "type" in result2 && "result" in result2 && (result2.type === "data" || result2.type === "error");
+}
 function isRedirectDataStrategyResult(result2) {
   return isResponse(result2.result) && redirectStatusCodes.has(result2.result.status);
 }
@@ -15980,6 +16448,12 @@ function isDataWithResponseInit(value) {
 }
 function isResponse(value) {
   return value != null && typeof value.status === "number" && typeof value.statusText === "string" && typeof value.headers === "object" && typeof value.body !== "undefined";
+}
+function isRedirectStatusCode(statusCode) {
+  return redirectStatusCodes.has(statusCode);
+}
+function isRedirectResponse(result2) {
+  return isResponse(result2) && isRedirectStatusCode(result2.status) && result2.headers.has("Location");
 }
 function isValidMethod(method) {
   return validRequestMethods.has(method.toUpperCase());
@@ -16191,6 +16665,10 @@ var DataRouterContext = reactExports.createContext(null);
 DataRouterContext.displayName = "DataRouter";
 var DataRouterStateContext = reactExports.createContext(null);
 DataRouterStateContext.displayName = "DataRouterState";
+var RSCRouterContext = reactExports.createContext(false);
+function useIsRSCRouterContext() {
+  return reactExports.useContext(RSCRouterContext);
+}
 var ViewTransitionContext = reactExports.createContext({
   isTransitioning: false
 });
@@ -16217,6 +16695,37 @@ var RouteContext = reactExports.createContext({
 RouteContext.displayName = "Route";
 var RouteErrorContext = reactExports.createContext(null);
 RouteErrorContext.displayName = "RouteError";
+var ERROR_DIGEST_BASE = "REACT_ROUTER_ERROR";
+var ERROR_DIGEST_REDIRECT = "REDIRECT";
+var ERROR_DIGEST_ROUTE_ERROR_RESPONSE = "ROUTE_ERROR_RESPONSE";
+function decodeRedirectErrorDigest(digest) {
+  if (digest.startsWith(`${ERROR_DIGEST_BASE}:${ERROR_DIGEST_REDIRECT}:{`)) {
+    try {
+      let parsed = JSON.parse(digest.slice(28));
+      if (typeof parsed === "object" && parsed && typeof parsed.status === "number" && typeof parsed.statusText === "string" && typeof parsed.location === "string" && typeof parsed.reloadDocument === "boolean" && typeof parsed.replace === "boolean") {
+        return parsed;
+      }
+    } catch {
+    }
+  }
+}
+function decodeRouteErrorResponseDigest(digest) {
+  if (digest.startsWith(
+    `${ERROR_DIGEST_BASE}:${ERROR_DIGEST_ROUTE_ERROR_RESPONSE}:{`
+  )) {
+    try {
+      let parsed = JSON.parse(digest.slice(40));
+      if (typeof parsed === "object" && parsed && typeof parsed.status === "number" && typeof parsed.statusText === "string") {
+        return new ErrorResponseImpl(
+          parsed.status,
+          parsed.statusText,
+          parsed.data
+        );
+      }
+    } catch {
+    }
+  }
+}
 function useHref(to, { relative } = {}) {
   invariant(
     useInRouterContext(),
@@ -16319,7 +16828,7 @@ function useResolvedPath(to, { relative } = {}) {
     [to, routePathnamesJson, locationPathname, relative]
   );
 }
-function useRoutesImpl(routes, locationArg, dataRouterState, future) {
+function useRoutesImpl(routes, locationArg, dataRouterOpts) {
   invariant(
     useInRouterContext(),
     // TODO: This error is probably because they somehow have 2 versions of the
@@ -16372,19 +16881,28 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         params: Object.assign({}, parentParams, match.params),
         pathname: joinPaths([
           parentPathnameBase,
-          // Re-encode pathnames that were decoded inside matchRoutes
-          navigator2.encodeLocation ? navigator2.encodeLocation(match.pathname).pathname : match.pathname
+          // Re-encode pathnames that were decoded inside matchRoutes.
+          // Pre-encode `%`, `?` and `#` ahead of `encodeLocation` because it uses
+          // `new URL()` internally and we need to prevent it from treating
+          // them as separators
+          navigator2.encodeLocation ? navigator2.encodeLocation(
+            match.pathname.replace(/%/g, "%25").replace(/\?/g, "%3F").replace(/#/g, "%23")
+          ).pathname : match.pathname
         ]),
         pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([
           parentPathnameBase,
           // Re-encode pathnames that were decoded inside matchRoutes
-          navigator2.encodeLocation ? navigator2.encodeLocation(match.pathnameBase).pathname : match.pathnameBase
+          // Pre-encode `%`, `?` and `#` ahead of `encodeLocation` because it uses
+          // `new URL()` internally and we need to prevent it from treating
+          // them as separators
+          navigator2.encodeLocation ? navigator2.encodeLocation(
+            match.pathnameBase.replace(/%/g, "%25").replace(/\?/g, "%3F").replace(/#/g, "%23")
+          ).pathname : match.pathnameBase
         ])
       })
     ),
     parentMatches,
-    dataRouterState,
-    future
+    dataRouterOpts
   );
   return renderedMatches;
 }
@@ -16433,22 +16951,71 @@ var RenderErrorBoundary = class extends reactExports.Component {
     };
   }
   componentDidCatch(error2, errorInfo) {
-    console.error(
-      "React Router caught the following error during render",
-      error2,
-      errorInfo
-    );
+    if (this.props.onError) {
+      this.props.onError(error2, errorInfo);
+    } else {
+      console.error(
+        "React Router caught the following error during render",
+        error2
+      );
+    }
   }
   render() {
-    return this.state.error !== void 0 ? /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ reactExports.createElement(
+    let error2 = this.state.error;
+    if (this.context && typeof error2 === "object" && error2 && "digest" in error2 && typeof error2.digest === "string") {
+      const decoded = decodeRouteErrorResponseDigest(error2.digest);
+      if (decoded) error2 = decoded;
+    }
+    let result2 = error2 !== void 0 ? /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ reactExports.createElement(
       RouteErrorContext.Provider,
       {
-        value: this.state.error,
+        value: error2,
         children: this.props.component
       }
     )) : this.props.children;
+    if (this.context) {
+      return /* @__PURE__ */ reactExports.createElement(RSCErrorHandler, { error: error2 }, result2);
+    }
+    return result2;
   }
 };
+RenderErrorBoundary.contextType = RSCRouterContext;
+var errorRedirectHandledMap = /* @__PURE__ */ new WeakMap();
+function RSCErrorHandler({
+  children,
+  error: error2
+}) {
+  let { basename } = reactExports.useContext(NavigationContext);
+  if (typeof error2 === "object" && error2 && "digest" in error2 && typeof error2.digest === "string") {
+    let redirect2 = decodeRedirectErrorDigest(error2.digest);
+    if (redirect2) {
+      let existingRedirect = errorRedirectHandledMap.get(error2);
+      if (existingRedirect) throw existingRedirect;
+      let parsed = parseToInfo(redirect2.location, basename);
+      if (isBrowser && !errorRedirectHandledMap.get(error2)) {
+        if (parsed.isExternal || redirect2.reloadDocument) {
+          window.location.href = parsed.absoluteURL || parsed.to;
+        } else {
+          const redirectPromise = Promise.resolve().then(
+            () => window.__reactRouterDataRouter.navigate(parsed.to, {
+              replace: redirect2.replace
+            })
+          );
+          errorRedirectHandledMap.set(error2, redirectPromise);
+          throw redirectPromise;
+        }
+      }
+      return /* @__PURE__ */ reactExports.createElement(
+        "meta",
+        {
+          httpEquiv: "refresh",
+          content: `0;url=${parsed.absoluteURL || parsed.to}`
+        }
+      );
+    }
+  }
+  return children;
+}
 function RenderedRoute({ routeContext, match, children }) {
   let dataRouterContext = reactExports.useContext(DataRouterContext);
   if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
@@ -16456,7 +17023,8 @@ function RenderedRoute({ routeContext, match, children }) {
   }
   return /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: routeContext }, children);
 }
-function _renderMatches(matches, parentMatches = [], dataRouterState = null, future = null) {
+function _renderMatches(matches, parentMatches = [], dataRouterOpts) {
+  let dataRouterState = dataRouterOpts?.state;
   if (matches == null) {
     if (!dataRouterState) {
       return null;
@@ -16488,7 +17056,8 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
   }
   let renderFallback = false;
   let fallbackIndex = -1;
-  if (dataRouterState) {
+  if (dataRouterOpts && dataRouterState) {
+    renderFallback = dataRouterState.renderFallback;
     for (let i = 0; i < renderedMatches.length; i++) {
       let match = renderedMatches[i];
       if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
@@ -16498,7 +17067,9 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
         let { loaderData, errors: errors2 } = dataRouterState;
         let needsToRunLoader = match.route.loader && !loaderData.hasOwnProperty(match.route.id) && (!errors2 || errors2[match.route.id] === void 0);
         if (match.route.lazy || needsToRunLoader) {
-          renderFallback = true;
+          if (dataRouterOpts.isStatic) {
+            renderFallback = true;
+          }
           if (fallbackIndex >= 0) {
             renderedMatches = renderedMatches.slice(0, fallbackIndex + 1);
           } else {
@@ -16509,68 +17080,81 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
       }
     }
   }
-  return renderedMatches.reduceRight((outlet, match, index) => {
-    let error2;
-    let shouldRenderHydrateFallback = false;
-    let errorElement = null;
-    let hydrateFallbackElement = null;
-    if (dataRouterState) {
-      error2 = errors && match.route.id ? errors[match.route.id] : void 0;
-      errorElement = match.route.errorElement || defaultErrorElement;
-      if (renderFallback) {
-        if (fallbackIndex < 0 && index === 0) {
-          warningOnce(
-            "route-fallback",
-            false,
-            "No `HydrateFallback` element provided to render during initial hydration"
-          );
-          shouldRenderHydrateFallback = true;
-          hydrateFallbackElement = null;
-        } else if (fallbackIndex === index) {
-          shouldRenderHydrateFallback = true;
-          hydrateFallbackElement = match.route.hydrateFallbackElement || null;
+  let onErrorHandler = dataRouterOpts?.onError;
+  let onError = dataRouterState && onErrorHandler ? (error2, errorInfo) => {
+    onErrorHandler(error2, {
+      location: dataRouterState.location,
+      params: dataRouterState.matches?.[0]?.params ?? {},
+      unstable_pattern: getRoutePattern(dataRouterState.matches),
+      errorInfo
+    });
+  } : void 0;
+  return renderedMatches.reduceRight(
+    (outlet, match, index) => {
+      let error2;
+      let shouldRenderHydrateFallback = false;
+      let errorElement = null;
+      let hydrateFallbackElement = null;
+      if (dataRouterState) {
+        error2 = errors && match.route.id ? errors[match.route.id] : void 0;
+        errorElement = match.route.errorElement || defaultErrorElement;
+        if (renderFallback) {
+          if (fallbackIndex < 0 && index === 0) {
+            warningOnce(
+              "route-fallback",
+              false,
+              "No `HydrateFallback` element provided to render during initial hydration"
+            );
+            shouldRenderHydrateFallback = true;
+            hydrateFallbackElement = null;
+          } else if (fallbackIndex === index) {
+            shouldRenderHydrateFallback = true;
+            hydrateFallbackElement = match.route.hydrateFallbackElement || null;
+          }
         }
       }
-    }
-    let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
-    let getChildren = () => {
-      let children;
-      if (error2) {
-        children = errorElement;
-      } else if (shouldRenderHydrateFallback) {
-        children = hydrateFallbackElement;
-      } else if (match.route.Component) {
-        children = /* @__PURE__ */ reactExports.createElement(match.route.Component, null);
-      } else if (match.route.element) {
-        children = match.route.element;
-      } else {
-        children = outlet;
-      }
-      return /* @__PURE__ */ reactExports.createElement(
-        RenderedRoute,
+      let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
+      let getChildren = () => {
+        let children;
+        if (error2) {
+          children = errorElement;
+        } else if (shouldRenderHydrateFallback) {
+          children = hydrateFallbackElement;
+        } else if (match.route.Component) {
+          children = /* @__PURE__ */ reactExports.createElement(match.route.Component, null);
+        } else if (match.route.element) {
+          children = match.route.element;
+        } else {
+          children = outlet;
+        }
+        return /* @__PURE__ */ reactExports.createElement(
+          RenderedRoute,
+          {
+            match,
+            routeContext: {
+              outlet,
+              matches: matches2,
+              isDataRoute: dataRouterState != null
+            },
+            children
+          }
+        );
+      };
+      return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ reactExports.createElement(
+        RenderErrorBoundary,
         {
-          match,
-          routeContext: {
-            outlet,
-            matches: matches2,
-            isDataRoute: dataRouterState != null
-          },
-          children
+          location: dataRouterState.location,
+          revalidation: dataRouterState.revalidation,
+          component: errorElement,
+          error: error2,
+          children: getChildren(),
+          routeContext: { outlet: null, matches: matches2, isDataRoute: true },
+          onError
         }
-      );
-    };
-    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ reactExports.createElement(
-      RenderErrorBoundary,
-      {
-        location: dataRouterState.location,
-        revalidation: dataRouterState.revalidation,
-        component: errorElement,
-        error: error2,
-        children: getChildren(),
-        routeContext: { outlet: null, matches: matches2, isDataRoute: true }
-      }
-    ) : getChildren();
-  }, null);
+      ) : getChildren();
+    },
+    null
+  );
 }
 function getDataRouterConsoleError(hookName) {
   return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
@@ -16638,7 +17222,7 @@ function useNavigateStable() {
       warning(activeRef.current, navigateEffectWarning);
       if (!activeRef.current) return;
       if (typeof to === "number") {
-        router2.navigate(to);
+        await router2.navigate(to);
       } else {
         await router2.navigate(to, { fromRouteId: id, ...options });
       }
@@ -16659,6 +17243,16 @@ function warnOnce(condition, message) {
   if (!condition && !alreadyWarned2[message]) {
     alreadyWarned2[message] = true;
     console.warn(message);
+  }
+}
+var USE_OPTIMISTIC = "useOptimistic";
+var useOptimisticImpl = React4[USE_OPTIMISTIC];
+var stableUseOptimisticSetter = () => void 0;
+function useOptimisticSafe(val) {
+  if (useOptimisticImpl) {
+    return useOptimisticImpl(val);
+  } else {
+    return [val, stableUseOptimisticSetter];
   }
 }
 function mapRouteProperties(route2) {
@@ -16736,9 +17330,14 @@ var Deferred = class {
 };
 function RouterProvider({
   router: router2,
-  flushSync: reactDomFlushSyncImpl
+  flushSync: reactDomFlushSyncImpl,
+  onError,
+  unstable_useTransitions
 }) {
-  let [state, setStateImpl] = reactExports.useState(router2.state);
+  let unstable_rsc = useIsRSCRouterContext();
+  unstable_useTransitions = unstable_rsc || unstable_useTransitions;
+  let [_state, setStateImpl] = reactExports.useState(router2.state);
+  let [state, setOptimisticState] = useOptimisticSafe(_state);
   let [pendingState, setPendingState] = reactExports.useState();
   let [vtContext, setVtContext] = reactExports.useState({
     isTransitioning: false
@@ -16748,7 +17347,16 @@ function RouterProvider({
   let [interruption, setInterruption] = reactExports.useState();
   let fetcherData = reactExports.useRef(/* @__PURE__ */ new Map());
   let setState = reactExports.useCallback(
-    (newState, { deletedFetchers, flushSync, viewTransitionOpts }) => {
+    (newState, { deletedFetchers, newErrors, flushSync, viewTransitionOpts }) => {
+      if (newErrors && onError) {
+        Object.values(newErrors).forEach(
+          (error2) => onError(error2, {
+            location: newState.location,
+            params: newState.matches[0]?.params ?? {},
+            unstable_pattern: getRoutePattern(newState.matches)
+          })
+        );
+      }
       newState.fetchers.forEach((fetcher, key) => {
         if (fetcher.data !== void 0) {
           fetcherData.current.set(key, fetcher.data);
@@ -16767,15 +17375,22 @@ function RouterProvider({
       if (!viewTransitionOpts || !isViewTransitionAvailable) {
         if (reactDomFlushSyncImpl && flushSync) {
           reactDomFlushSyncImpl(() => setStateImpl(newState));
+        } else if (unstable_useTransitions === false) {
+          setStateImpl(newState);
         } else {
-          reactExports.startTransition(() => setStateImpl(newState));
+          reactExports.startTransition(() => {
+            if (unstable_useTransitions === true) {
+              setOptimisticState((s) => getOptimisticRouterState(s, newState));
+            }
+            setStateImpl(newState);
+          });
         }
         return;
       }
       if (reactDomFlushSyncImpl && flushSync) {
         reactDomFlushSyncImpl(() => {
           if (transition) {
-            renderDfd && renderDfd.resolve();
+            renderDfd?.resolve();
             transition.skipTransition();
           }
           setVtContext({
@@ -16800,7 +17415,7 @@ function RouterProvider({
         return;
       }
       if (transition) {
-        renderDfd && renderDfd.resolve();
+        renderDfd?.resolve();
         transition.skipTransition();
         setInterruption({
           state: newState,
@@ -16817,7 +17432,15 @@ function RouterProvider({
         });
       }
     },
-    [router2.window, reactDomFlushSyncImpl, transition, renderDfd]
+    [
+      router2.window,
+      reactDomFlushSyncImpl,
+      transition,
+      renderDfd,
+      unstable_useTransitions,
+      setOptimisticState,
+      onError
+    ]
   );
   reactExports.useLayoutEffect(() => router2.subscribe(setState), [router2, setState]);
   reactExports.useEffect(() => {
@@ -16830,7 +17453,16 @@ function RouterProvider({
       let newState = pendingState;
       let renderPromise = renderDfd.promise;
       let transition2 = router2.window.document.startViewTransition(async () => {
-        reactExports.startTransition(() => setStateImpl(newState));
+        if (unstable_useTransitions === false) {
+          setStateImpl(newState);
+        } else {
+          reactExports.startTransition(() => {
+            if (unstable_useTransitions === true) {
+              setOptimisticState((s) => getOptimisticRouterState(s, newState));
+            }
+            setStateImpl(newState);
+          });
+        }
         await renderPromise;
       });
       transition2.finished.finally(() => {
@@ -16841,7 +17473,13 @@ function RouterProvider({
       });
       setTransition(transition2);
     }
-  }, [pendingState, renderDfd, router2.window]);
+  }, [
+    pendingState,
+    renderDfd,
+    router2.window,
+    unstable_useTransitions,
+    setOptimisticState
+  ]);
   reactExports.useEffect(() => {
     if (renderDfd && pendingState && state.location.key === pendingState.location.key) {
       renderDfd.resolve();
@@ -16881,9 +17519,10 @@ function RouterProvider({
       router: router2,
       navigator: navigator2,
       static: false,
-      basename
+      basename,
+      onError
     }),
-    [router2, navigator2, basename]
+    [router2, navigator2, basename, onError]
   );
   return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement(DataRouterContext.Provider, { value: dataRouterContext }, /* @__PURE__ */ reactExports.createElement(DataRouterStateContext.Provider, { value: state }, /* @__PURE__ */ reactExports.createElement(FetchersContext.Provider, { value: fetcherData.current }, /* @__PURE__ */ reactExports.createElement(ViewTransitionContext.Provider, { value: vtContext }, /* @__PURE__ */ reactExports.createElement(
     Router,
@@ -16891,25 +17530,44 @@ function RouterProvider({
       basename,
       location: state.location,
       navigationType: state.historyAction,
-      navigator: navigator2
+      navigator: navigator2,
+      unstable_useTransitions
     },
     /* @__PURE__ */ reactExports.createElement(
       MemoizedDataRoutes,
       {
         routes: router2.routes,
         future: router2.future,
-        state
+        state,
+        isStatic: false,
+        onError
       }
     )
   ))))), null);
+}
+function getOptimisticRouterState(currentState, newState) {
+  return {
+    // Don't surface "current location specific" stuff mid-navigation
+    // (historyAction, location, matches, loaderData, errors, initialized,
+    // restoreScroll, preventScrollReset, blockers, etc.)
+    ...currentState,
+    // Only surface "pending/in-flight stuff"
+    // (navigation, revalidation, actionData, fetchers, )
+    navigation: newState.navigation.state !== "idle" ? newState.navigation : currentState.navigation,
+    revalidation: newState.revalidation !== "idle" ? newState.revalidation : currentState.revalidation,
+    actionData: newState.navigation.state !== "submitting" ? newState.actionData : currentState.actionData,
+    fetchers: newState.fetchers
+  };
 }
 var MemoizedDataRoutes = reactExports.memo(DataRoutes);
 function DataRoutes({
   routes,
   future,
-  state
+  state,
+  isStatic,
+  onError
 }) {
-  return useRoutesImpl(routes, void 0, state, future);
+  return useRoutesImpl(routes, void 0, { state, isStatic, onError });
 }
 function Router({
   basename: basenameProp = "/",
@@ -16917,7 +17575,8 @@ function Router({
   location: locationProp,
   navigationType = "POP",
   navigator: navigator2,
-  static: staticProp = false
+  static: staticProp = false,
+  unstable_useTransitions
 }) {
   invariant(
     !useInRouterContext(),
@@ -16929,9 +17588,10 @@ function Router({
       basename,
       navigator: navigator2,
       static: staticProp,
+      unstable_useTransitions,
       future: {}
     }),
-    [basename, navigator2, staticProp]
+    [basename, navigator2, staticProp, unstable_useTransitions]
   );
   if (typeof locationProp === "string") {
     locationProp = parsePath(locationProp);
@@ -16941,7 +17601,8 @@ function Router({
     search = "",
     hash = "",
     state = null,
-    key = "default"
+    key = "default",
+    unstable_mask
   } = locationProp;
   let locationContext = reactExports.useMemo(() => {
     let trailingPathname = stripBasename(pathname, basename);
@@ -16954,11 +17615,21 @@ function Router({
         search,
         hash,
         state,
-        key
+        key,
+        unstable_mask
       },
       navigationType
     };
-  }, [basename, pathname, search, hash, state, key, navigationType]);
+  }, [
+    basename,
+    pathname,
+    search,
+    hash,
+    state,
+    key,
+    navigationType,
+    unstable_mask
+  ]);
   warning(
     locationContext != null,
     `<Router basename="${basename}"> is not able to match the URL "${pathname}${search}${hash}" because it does not start with the basename, so the <Router> won't render anything.`
@@ -16971,7 +17642,7 @@ function Router({
 var defaultMethod = "get";
 var defaultEncType = "application/x-www-form-urlencoded";
 function isHtmlElement(object) {
-  return object != null && typeof object.tagName === "string";
+  return typeof HTMLElement !== "undefined" && object instanceof HTMLElement;
 }
 function isButtonElement(object) {
   return isHtmlElement(object) && object.tagName.toLowerCase() === "button";
@@ -17071,10 +17742,35 @@ function getFormSubmissionInfo(target, basename) {
   }
   return { action, method: method.toLowerCase(), encType, formData, body };
 }
+Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
 function invariant2(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
     throw new Error(message);
   }
+}
+function singleFetchUrl(reqUrl, basename, trailingSlashAware, extension) {
+  let url = typeof reqUrl === "string" ? new URL(
+    reqUrl,
+    // This can be called during the SSR flow via PrefetchPageLinksImpl so
+    // don't assume window is available
+    typeof window === "undefined" ? "server://singlefetch/" : window.location.origin
+  ) : reqUrl;
+  if (trailingSlashAware) {
+    if (url.pathname.endsWith("/")) {
+      url.pathname = `${url.pathname}_.${extension}`;
+    } else {
+      url.pathname = `${url.pathname}.${extension}`;
+    }
+  } else {
+    if (url.pathname === "/") {
+      url.pathname = `_root.${extension}`;
+    } else if (basename && stripBasename(url.pathname, basename) === "/") {
+      url.pathname = `${basename.replace(/\/$/, "")}/_root.${extension}`;
+    } else {
+      url.pathname = `${url.pathname.replace(/\/$/, "")}.${extension}`;
+    }
+  }
+  return url;
 }
 async function loadRouteModule(route2, routeModulesCache) {
   if (route2.id in routeModulesCache) {
@@ -17218,24 +17914,6 @@ function dedupeLinkDescriptors(descriptors, preloads) {
     return deduped;
   }, []);
 }
-Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
-var NO_BODY_STATUS_CODES = /* @__PURE__ */ new Set([100, 101, 204, 205]);
-function singleFetchUrl(reqUrl, basename) {
-  let url = typeof reqUrl === "string" ? new URL(
-    reqUrl,
-    // This can be called during the SSR flow via PrefetchPageLinksImpl so
-    // don't assume window is available
-    typeof window === "undefined" ? "server://singlefetch/" : window.location.origin
-  ) : reqUrl;
-  if (url.pathname === "/") {
-    url.pathname = "_root.data";
-  } else if (basename && stripBasename(url.pathname, basename) === "/") {
-    url.pathname = `${basename.replace(/\/$/, "")}/_root.data`;
-  } else {
-    url.pathname = `${url.pathname.replace(/\/$/, "")}.data`;
-  }
-  return url;
-}
 function useDataRouterContext2() {
   let context = reactExports.useContext(DataRouterContext);
   invariant2(
@@ -17328,10 +18006,8 @@ function composeEventHandlers(theirHandler, ourHandler) {
     }
   };
 }
-function PrefetchPageLinks({
-  page,
-  ...dataLinkProps
-}) {
+function PrefetchPageLinks({ page, ...linkProps }) {
+  let rsc = useIsRSCRouterContext();
   let { router: router2 } = useDataRouterContext2();
   let matches = reactExports.useMemo(
     () => matchRoutes(router2.routes, page, router2.basename),
@@ -17340,7 +18016,10 @@ function PrefetchPageLinks({
   if (!matches) {
     return null;
   }
-  return /* @__PURE__ */ reactExports.createElement(PrefetchPageLinksImpl, { page, matches, ...dataLinkProps });
+  if (rsc) {
+    return /* @__PURE__ */ reactExports.createElement(RSCPrefetchPageLinksImpl, { page, matches, ...linkProps });
+  }
+  return /* @__PURE__ */ reactExports.createElement(PrefetchPageLinksImpl, { page, matches, ...linkProps });
 }
 function useKeyedPrefetchLinks(matches) {
   let { manifest, routeModules } = useFrameworkContext();
@@ -17360,13 +18039,53 @@ function useKeyedPrefetchLinks(matches) {
   }, [matches, manifest, routeModules]);
   return keyedPrefetchLinks;
 }
+function RSCPrefetchPageLinksImpl({
+  page,
+  matches: nextMatches,
+  ...linkProps
+}) {
+  let location = useLocation();
+  let { future } = useFrameworkContext();
+  let { basename } = useDataRouterContext2();
+  let dataHrefs = reactExports.useMemo(() => {
+    if (page === location.pathname + location.search + location.hash) {
+      return [];
+    }
+    let url = singleFetchUrl(
+      page,
+      basename,
+      future.unstable_trailingSlashAwareDataRequests,
+      "rsc"
+    );
+    let hasSomeRoutesWithShouldRevalidate = false;
+    let targetRoutes = [];
+    for (let match of nextMatches) {
+      if (typeof match.route.shouldRevalidate === "function") {
+        hasSomeRoutesWithShouldRevalidate = true;
+      } else {
+        targetRoutes.push(match.route.id);
+      }
+    }
+    if (hasSomeRoutesWithShouldRevalidate && targetRoutes.length > 0) {
+      url.searchParams.set("_routes", targetRoutes.join(","));
+    }
+    return [url.pathname + url.search];
+  }, [
+    basename,
+    future.unstable_trailingSlashAwareDataRequests,
+    page,
+    location,
+    nextMatches
+  ]);
+  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, dataHrefs.map((href) => /* @__PURE__ */ reactExports.createElement("link", { key: href, rel: "prefetch", as: "fetch", href, ...linkProps })));
+}
 function PrefetchPageLinksImpl({
   page,
   matches: nextMatches,
   ...linkProps
 }) {
   let location = useLocation();
-  let { manifest, routeModules } = useFrameworkContext();
+  let { future, manifest, routeModules } = useFrameworkContext();
   let { basename } = useDataRouterContext2();
   let { loaderData, matches } = useDataRouterStateContext();
   let newMatchesForData = reactExports.useMemo(
@@ -17413,7 +18132,12 @@ function PrefetchPageLinksImpl({
     if (routesParams.size === 0) {
       return [];
     }
-    let url = singleFetchUrl(page, basename);
+    let url = singleFetchUrl(
+      page,
+      basename,
+      future.unstable_trailingSlashAwareDataRequests,
+      "data"
+    );
     if (foundOptOutRoute && routesParams.size > 0) {
       url.searchParams.set(
         "_routes",
@@ -17423,6 +18147,7 @@ function PrefetchPageLinksImpl({
     return [url.pathname + url.search];
   }, [
     basename,
+    future.unstable_trailingSlashAwareDataRequests,
     loaderData,
     location,
     manifest,
@@ -17436,10 +18161,18 @@ function PrefetchPageLinksImpl({
     [newMatchesForAssets, manifest]
   );
   let keyedPrefetchLinks = useKeyedPrefetchLinks(newMatchesForAssets);
-  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, dataHrefs.map((href2) => /* @__PURE__ */ reactExports.createElement("link", { key: href2, rel: "prefetch", as: "fetch", href: href2, ...linkProps })), moduleHrefs.map((href2) => /* @__PURE__ */ reactExports.createElement("link", { key: href2, rel: "modulepreload", href: href2, ...linkProps })), keyedPrefetchLinks.map(({ key, link }) => (
+  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, dataHrefs.map((href) => /* @__PURE__ */ reactExports.createElement("link", { key: href, rel: "prefetch", as: "fetch", href, ...linkProps })), moduleHrefs.map((href) => /* @__PURE__ */ reactExports.createElement("link", { key: href, rel: "modulepreload", href, ...linkProps })), keyedPrefetchLinks.map(({ key, link }) => (
     // these don't spread `linkProps` because they are full link descriptors
     // already with their own props
-    /* @__PURE__ */ reactExports.createElement("link", { key, ...link })
+    /* @__PURE__ */ reactExports.createElement(
+      "link",
+      {
+        key,
+        nonce: linkProps.nonce,
+        ...link,
+        crossOrigin: link.crossOrigin ?? linkProps.crossOrigin
+      }
+    )
   )));
 }
 function mergeRefs(...refs) {
@@ -17453,17 +18186,18 @@ function mergeRefs(...refs) {
     });
   };
 }
-var isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
+var isBrowser2 = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
 try {
-  if (isBrowser) {
-    window.__reactRouterVersion = "7.6.3";
+  if (isBrowser2) {
+    window.__reactRouterVersion = // @ts-expect-error
+    "7.14.0";
   }
 } catch (e) {
 }
 function createBrowserRouter(routes, opts) {
   return createRouter({
     basename: opts?.basename,
-    unstable_getContext: opts?.unstable_getContext,
+    getContext: opts?.getContext,
     future: opts?.future,
     history: createBrowserHistory({ window: opts?.window }),
     hydrationData: parseHydrationData(),
@@ -17472,7 +18206,8 @@ function createBrowserRouter(routes, opts) {
     hydrationRouteProperties,
     dataStrategy: opts?.dataStrategy,
     patchRoutesOnNavigation: opts?.patchRoutesOnNavigation,
-    window: opts?.window
+    window: opts?.window,
+    unstable_instrumentations: opts?.unstable_instrumentations
   }).initialize();
 }
 function parseHydrationData() {
@@ -17529,49 +18264,48 @@ var Link = reactExports.forwardRef(
     relative,
     reloadDocument,
     replace: replace2,
+    unstable_mask,
     state,
     target,
     to,
     preventScrollReset,
     viewTransition,
+    unstable_defaultShouldRevalidate,
     ...rest
   }, forwardedRef) {
-    let { basename } = reactExports.useContext(NavigationContext);
+    let { basename, navigator: navigator2, unstable_useTransitions } = reactExports.useContext(NavigationContext);
     let isAbsolute = typeof to === "string" && ABSOLUTE_URL_REGEX2.test(to);
-    let absoluteHref;
-    let isExternal = false;
-    if (typeof to === "string" && isAbsolute) {
-      absoluteHref = to;
-      if (isBrowser) {
-        try {
-          let currentUrl = new URL(window.location.href);
-          let targetUrl = to.startsWith("//") ? new URL(currentUrl.protocol + to) : new URL(to);
-          let path = stripBasename(targetUrl.pathname, basename);
-          if (targetUrl.origin === currentUrl.origin && path != null) {
-            to = path + targetUrl.search + targetUrl.hash;
-          } else {
-            isExternal = true;
-          }
-        } catch (e) {
-          warning(
-            false,
-            `<Link to="${to}"> contains an invalid URL which will probably break when clicked - please update to a valid URL path.`
-          );
-        }
+    let parsed = parseToInfo(to, basename);
+    to = parsed.to;
+    let href = useHref(to, { relative });
+    let location = useLocation();
+    let maskedHref = null;
+    if (unstable_mask) {
+      let resolved = resolveTo(
+        unstable_mask,
+        [],
+        location.unstable_mask ? location.unstable_mask.pathname : "/",
+        true
+      );
+      if (basename !== "/") {
+        resolved.pathname = resolved.pathname === "/" ? basename : joinPaths([basename, resolved.pathname]);
       }
+      maskedHref = navigator2.createHref(resolved);
     }
-    let href2 = useHref(to, { relative });
     let [shouldPrefetch, prefetchRef, prefetchHandlers] = usePrefetchBehavior(
       prefetch,
       rest
     );
     let internalOnClick = useLinkClickHandler(to, {
       replace: replace2,
+      unstable_mask,
       state,
       target,
       preventScrollReset,
       relative,
-      viewTransition
+      viewTransition,
+      unstable_defaultShouldRevalidate,
+      unstable_useTransitions
     });
     function handleClick(event) {
       if (onClick) onClick(event);
@@ -17579,6 +18313,7 @@ var Link = reactExports.forwardRef(
         internalOnClick(event);
       }
     }
+    let isSpaLink = !(parsed.isExternal || reloadDocument);
     let link = (
       // eslint-disable-next-line jsx-a11y/anchor-has-content
       /* @__PURE__ */ reactExports.createElement(
@@ -17586,15 +18321,15 @@ var Link = reactExports.forwardRef(
         {
           ...rest,
           ...prefetchHandlers,
-          href: absoluteHref || href2,
-          onClick: isExternal || reloadDocument ? onClick : handleClick,
+          href: (isSpaLink ? maskedHref : void 0) || parsed.absoluteURL || href,
+          onClick: isSpaLink ? handleClick : onClick,
           ref: mergeRefs(forwardedRef, prefetchRef),
           target,
           "data-discover": !isAbsolute && discover === "render" ? "true" : void 0
         }
       )
     );
-    return shouldPrefetch && !isAbsolute ? /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, link, /* @__PURE__ */ reactExports.createElement(PrefetchPageLinks, { page: href2 })) : link;
+    return shouldPrefetch && !isAbsolute ? /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, link, /* @__PURE__ */ reactExports.createElement(PrefetchPageLinks, { page: href })) : link;
   }
 );
 Link.displayName = "Link";
@@ -17679,8 +18414,10 @@ var Form = reactExports.forwardRef(
     relative,
     preventScrollReset,
     viewTransition,
+    unstable_defaultShouldRevalidate,
     ...props
   }, forwardedRef) => {
+    let { unstable_useTransitions } = reactExports.useContext(NavigationContext);
     let submit = useSubmit();
     let formAction = useFormAction(action, { relative });
     let formMethod = method.toLowerCase() === "get" ? "get" : "post";
@@ -17691,7 +18428,7 @@ var Form = reactExports.forwardRef(
       event.preventDefault();
       let submitter = event.nativeEvent.submitter;
       let submitMethod = submitter?.getAttribute("formmethod") || method;
-      submit(submitter || event.currentTarget, {
+      let doSubmit = () => submit(submitter || event.currentTarget, {
         fetcherKey,
         method: submitMethod,
         navigate,
@@ -17699,8 +18436,14 @@ var Form = reactExports.forwardRef(
         state,
         relative,
         preventScrollReset,
-        viewTransition
+        viewTransition,
+        unstable_defaultShouldRevalidate
       });
+      if (unstable_useTransitions && navigate !== false) {
+        reactExports.startTransition(() => doSubmit());
+      } else {
+        doSubmit();
+      }
     };
     return /* @__PURE__ */ reactExports.createElement(
       "form",
@@ -17727,10 +18470,13 @@ function useDataRouterContext3(hookName) {
 function useLinkClickHandler(to, {
   target,
   replace: replaceProp,
+  unstable_mask,
   state,
   preventScrollReset,
   relative,
-  viewTransition
+  viewTransition,
+  unstable_defaultShouldRevalidate,
+  unstable_useTransitions
 } = {}) {
   let navigate = useNavigate();
   let location = useLocation();
@@ -17740,13 +18486,20 @@ function useLinkClickHandler(to, {
       if (shouldProcessLinkClick(event, target)) {
         event.preventDefault();
         let replace2 = replaceProp !== void 0 ? replaceProp : createPath(location) === createPath(path);
-        navigate(to, {
+        let doNavigate = () => navigate(to, {
           replace: replace2,
+          unstable_mask,
           state,
           preventScrollReset,
           relative,
-          viewTransition
+          viewTransition,
+          unstable_defaultShouldRevalidate
         });
+        if (unstable_useTransitions) {
+          reactExports.startTransition(() => doNavigate());
+        } else {
+          doNavigate();
+        }
       }
     },
     [
@@ -17754,12 +18507,15 @@ function useLinkClickHandler(to, {
       navigate,
       path,
       replaceProp,
+      unstable_mask,
       state,
       target,
       to,
       preventScrollReset,
       relative,
-      viewTransition
+      viewTransition,
+      unstable_defaultShouldRevalidate,
+      unstable_useTransitions
     ]
   );
 }
@@ -17772,6 +18528,8 @@ function useSubmit() {
   );
   let { basename } = reactExports.useContext(NavigationContext);
   let currentRouteId = useRouteId();
+  let routerFetch = router2.fetch;
+  let routerNavigate = router2.navigate;
   return reactExports.useCallback(
     async (target, options = {}) => {
       let { action, method, encType, formData, body } = getFormSubmissionInfo(
@@ -17780,7 +18538,8 @@ function useSubmit() {
       );
       if (options.navigate === false) {
         let key = options.fetcherKey || getUniqueFetcherId();
-        await router2.fetch(key, currentRouteId, options.action || action, {
+        await routerFetch(key, currentRouteId, options.action || action, {
+          unstable_defaultShouldRevalidate: options.unstable_defaultShouldRevalidate,
           preventScrollReset: options.preventScrollReset,
           formData,
           body,
@@ -17789,7 +18548,8 @@ function useSubmit() {
           flushSync: options.flushSync
         });
       } else {
-        await router2.navigate(options.action || action, {
+        await routerNavigate(options.action || action, {
+          unstable_defaultShouldRevalidate: options.unstable_defaultShouldRevalidate,
           preventScrollReset: options.preventScrollReset,
           formData,
           body,
@@ -17803,7 +18563,7 @@ function useSubmit() {
         });
       }
     },
-    [router2, basename, currentRouteId]
+    [routerFetch, routerNavigate, basename, currentRouteId]
   );
 }
 function useFormAction(action, { relative } = {}) {
@@ -17833,7 +18593,7 @@ function useFormAction(action, { relative } = {}) {
   }
   return createPath(path);
 }
-function useViewTransitionState(to, opts = {}) {
+function useViewTransitionState(to, { relative } = {}) {
   let vtContext = reactExports.useContext(ViewTransitionContext);
   invariant(
     vtContext != null,
@@ -17843,7 +18603,7 @@ function useViewTransitionState(to, opts = {}) {
     "useViewTransitionState"
     /* useViewTransitionState */
   );
-  let path = useResolvedPath(to, { relative: opts.relative });
+  let path = useResolvedPath(to, { relative });
   if (!vtContext.isTransitioning) {
     return false;
   }
@@ -17851,70 +18611,16 @@ function useViewTransitionState(to, opts = {}) {
   let nextPath = stripBasename(vtContext.nextLocation.pathname, basename) || vtContext.nextLocation.pathname;
   return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
 }
-/* @__PURE__ */ new Set([
-  ...NO_BODY_STATUS_CODES,
-  304
-]);
 var reactDomExports = requireReactDom();
-/**
- * react-router v7.6.3
- *
- * Copyright (c) Remix Software Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.md file in the root directory of this source tree.
- *
- * @license MIT
- */
 function RouterProvider2(props) {
   return /* @__PURE__ */ reactExports.createElement(RouterProvider, { flushSync: reactDomExports.flushSync, ...props });
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function Header() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "⚧ Transpapers" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Almost-fully automated trans rights" })
   ] });
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function Noscript() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "noscript",
@@ -19503,11 +20209,11 @@ function Root() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "What is this?" }),
         " Transpapers is a trans-run, privacy-focused, free (",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://en.wikipedia.org/wiki/Free_software", children: /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "libre" }) }),
-        ") web service that aims to lessen the burden of filing all those forms to have the state legally affirm your gender. This may be necessary for your mental health, personal safety, and/or affirming medical care."
+        ") web service that aims to lessen the burden of filing all those forms to have the state legally affirm your name and/or gender. This may be necessary for your mental health, personal safety, and/or accessing affirming medical care."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "How do I use it?" }),
-        " Select your birth state, current state of residence, and the information you wish to change. Fill out the form that appears and press “Download gender-affirming documents”. Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered."
+        " Select your current state of residence, birth state, and the information you wish to change. Fill out the form that appears and press “Download gender-affirming documents”. Your browser will then download a PDF file comprising the forms you need to file, as well as a personalized guide to filing them. The forms will be prefilled using the information you entered."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Is it safe to enter my personal data?" }),
@@ -19522,15 +20228,16 @@ function Root() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "My state isn't listed." }),
-        " Transpapers is developed by two people with day jobs. It's a lot of work to automate the legal processes of fifty-five states and territories. Send us a request at the feedback form below and we'll add it to the list. If you're a programmer, send us a pull request."
+        " Transpapers is developed by two people with day jobs. It's a lot of work to automate the legal processes of fifty-five states and territories. Send us a request at the feedback form below and we'll add it to the list. If you're a programmer, send us a pull request on github."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Any bugs, issues, tips, etc. relating to legal processes should be reported at",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "our feedback form." }),
-        " Any bugs, issues, tips, etc. relating to the codebase should be reported on",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "our feedback form" }),
+        ". Any bugs, issues, tips, etc. relating to the codebase should be reported on",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io/issues", children: "GitHub." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io/issues", children: "GitHub" }),
+        "."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "View our source code on",
@@ -19541,9 +20248,9 @@ function Root() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("form", { onSubmit: (event) => void handleSubmit(onSubmit)(event), children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "submit", value: "Ready to get started?" }) })
   ] });
 }
-var NOTHING = Symbol.for("immer-nothing");
-var DRAFTABLE = Symbol.for("immer-draftable");
-var DRAFT_STATE = Symbol.for("immer-state");
+var NOTHING = /* @__PURE__ */ Symbol.for("immer-nothing");
+var DRAFTABLE = /* @__PURE__ */ Symbol.for("immer-draftable");
+var DRAFT_STATE = /* @__PURE__ */ Symbol.for("immer-state");
 function die(error2, ...args) {
   throw new Error(
     `[Immer] minified error nr: ${error2}. Full error at: https://bit.ly/3cXEKWf`
@@ -20391,29 +21098,6 @@ const persistImpl = (config, baseOptions) => (set2, get2, api) => {
   return stateFromStorage || configResult;
 };
 const persist = persistImpl;
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * A person's name.
- */
 class Name {
   first = "";
   middle = "";
@@ -20426,20 +21110,18 @@ var GenderMarker = /* @__PURE__ */ ((GenderMarker2) => {
   GenderMarker2["X"] = "X";
   return GenderMarker2;
 })(GenderMarker || {});
-/*!
- * A pixel location in a PDF document.
- *
- * @remarks When calculating locations, use a DPI value of 100 px/in.
- */
 var DateFormatPart = /* @__PURE__ */ ((DateFormatPart2) => {
   DateFormatPart2[DateFormatPart2["DAY"] = 0] = "DAY";
   DateFormatPart2[DateFormatPart2["MONTH"] = 1] = "MONTH";
   DateFormatPart2[DateFormatPart2["YEAR"] = 2] = "YEAR";
   return DateFormatPart2;
 })(DateFormatPart || {});
-/*!
- * A format specification for names.
- */
+var NameFormatPart = /* @__PURE__ */ ((NameFormatPart2) => {
+  NameFormatPart2[NameFormatPart2["FIRST"] = 0] = "FIRST";
+  NameFormatPart2[NameFormatPart2["MIDDLE"] = 1] = "MIDDLE";
+  NameFormatPart2[NameFormatPart2["LAST"] = 2] = "LAST";
+  return NameFormatPart2;
+})(NameFormatPart || {});
 const metadata$1 = { "version": 4, "country_calling_codes": { "1": ["US", "AG", "AI", "AS", "BB", "BM", "BS", "CA", "DM", "DO", "GD", "GU", "JM", "KN", "KY", "LC", "MP", "MS", "PR", "SX", "TC", "TT", "VC", "VG", "VI"], "7": ["RU", "KZ"], "20": ["EG"], "27": ["ZA"], "30": ["GR"], "31": ["NL"], "32": ["BE"], "33": ["FR"], "34": ["ES"], "36": ["HU"], "39": ["IT", "VA"], "40": ["RO"], "41": ["CH"], "43": ["AT"], "44": ["GB", "GG", "IM", "JE"], "45": ["DK"], "46": ["SE"], "47": ["NO", "SJ"], "48": ["PL"], "49": ["DE"], "51": ["PE"], "52": ["MX"], "53": ["CU"], "54": ["AR"], "55": ["BR"], "56": ["CL"], "57": ["CO"], "58": ["VE"], "60": ["MY"], "61": ["AU", "CC", "CX"], "62": ["ID"], "63": ["PH"], "64": ["NZ"], "65": ["SG"], "66": ["TH"], "81": ["JP"], "82": ["KR"], "84": ["VN"], "86": ["CN"], "90": ["TR"], "91": ["IN"], "92": ["PK"], "93": ["AF"], "94": ["LK"], "95": ["MM"], "98": ["IR"], "211": ["SS"], "212": ["MA", "EH"], "213": ["DZ"], "216": ["TN"], "218": ["LY"], "220": ["GM"], "221": ["SN"], "222": ["MR"], "223": ["ML"], "224": ["GN"], "225": ["CI"], "226": ["BF"], "227": ["NE"], "228": ["TG"], "229": ["BJ"], "230": ["MU"], "231": ["LR"], "232": ["SL"], "233": ["GH"], "234": ["NG"], "235": ["TD"], "236": ["CF"], "237": ["CM"], "238": ["CV"], "239": ["ST"], "240": ["GQ"], "241": ["GA"], "242": ["CG"], "243": ["CD"], "244": ["AO"], "245": ["GW"], "246": ["IO"], "247": ["AC"], "248": ["SC"], "249": ["SD"], "250": ["RW"], "251": ["ET"], "252": ["SO"], "253": ["DJ"], "254": ["KE"], "255": ["TZ"], "256": ["UG"], "257": ["BI"], "258": ["MZ"], "260": ["ZM"], "261": ["MG"], "262": ["RE", "YT"], "263": ["ZW"], "264": ["NA"], "265": ["MW"], "266": ["LS"], "267": ["BW"], "268": ["SZ"], "269": ["KM"], "290": ["SH", "TA"], "291": ["ER"], "297": ["AW"], "298": ["FO"], "299": ["GL"], "350": ["GI"], "351": ["PT"], "352": ["LU"], "353": ["IE"], "354": ["IS"], "355": ["AL"], "356": ["MT"], "357": ["CY"], "358": ["FI", "AX"], "359": ["BG"], "370": ["LT"], "371": ["LV"], "372": ["EE"], "373": ["MD"], "374": ["AM"], "375": ["BY"], "376": ["AD"], "377": ["MC"], "378": ["SM"], "380": ["UA"], "381": ["RS"], "382": ["ME"], "383": ["XK"], "385": ["HR"], "386": ["SI"], "387": ["BA"], "389": ["MK"], "420": ["CZ"], "421": ["SK"], "423": ["LI"], "500": ["FK"], "501": ["BZ"], "502": ["GT"], "503": ["SV"], "504": ["HN"], "505": ["NI"], "506": ["CR"], "507": ["PA"], "508": ["PM"], "509": ["HT"], "590": ["GP", "BL", "MF"], "591": ["BO"], "592": ["GY"], "593": ["EC"], "594": ["GF"], "595": ["PY"], "596": ["MQ"], "597": ["SR"], "598": ["UY"], "599": ["CW", "BQ"], "670": ["TL"], "672": ["NF"], "673": ["BN"], "674": ["NR"], "675": ["PG"], "676": ["TO"], "677": ["SB"], "678": ["VU"], "679": ["FJ"], "680": ["PW"], "681": ["WF"], "682": ["CK"], "683": ["NU"], "685": ["WS"], "686": ["KI"], "687": ["NC"], "688": ["TV"], "689": ["PF"], "690": ["TK"], "691": ["FM"], "692": ["MH"], "850": ["KP"], "852": ["HK"], "853": ["MO"], "855": ["KH"], "856": ["LA"], "880": ["BD"], "886": ["TW"], "960": ["MV"], "961": ["LB"], "962": ["JO"], "963": ["SY"], "964": ["IQ"], "965": ["KW"], "966": ["SA"], "967": ["YE"], "968": ["OM"], "970": ["PS"], "971": ["AE"], "972": ["IL"], "973": ["BH"], "974": ["QA"], "975": ["BT"], "976": ["MN"], "977": ["NP"], "992": ["TJ"], "993": ["TM"], "994": ["AZ"], "995": ["GE"], "996": ["KG"], "998": ["UZ"] }, "countries": { "AC": ["247", "00", "(?:[01589]\\d|[46])\\d{4}", [5, 6]], "AD": ["376", "00", "(?:1|6\\d)\\d{7}|[135-9]\\d{5}", [6, 8, 9], [["(\\d{3})(\\d{3})", "$1 $2", ["[135-9]"]], ["(\\d{4})(\\d{4})", "$1 $2", ["1"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["6"]]]], "AE": ["971", "00", "(?:[4-7]\\d|9[0-689])\\d{7}|800\\d{2,9}|[2-4679]\\d{7}", [5, 6, 7, 8, 9, 10, 11, 12], [["(\\d{3})(\\d{2,9})", "$1 $2", ["60|8"]], ["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["[236]|[479][2-8]"], "0$1"], ["(\\d{3})(\\d)(\\d{5})", "$1 $2 $3", ["[479]"]], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["5"], "0$1"]], "0"], "AF": ["93", "00", "[2-7]\\d{8}", [9], [["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[2-7]"], "0$1"]], "0"], "AG": ["1", "011", "(?:268|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([457]\\d{6})$|1", "268$1", 0, "268"], "AI": ["1", "011", "(?:264|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2457]\\d{6})$|1", "264$1", 0, "264"], "AL": ["355", "00", "(?:700\\d\\d|900)\\d{3}|8\\d{5,7}|(?:[2-5]|6\\d)\\d{7}", [6, 7, 8, 9], [["(\\d{3})(\\d{3,4})", "$1 $2", ["80|9"], "0$1"], ["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["4[2-6]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[2358][2-5]|4"], "0$1"], ["(\\d{3})(\\d{5})", "$1 $2", ["[23578]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["6"], "0$1"]], "0"], "AM": ["374", "00", "(?:[1-489]\\d|55|60|77)\\d{6}", [8], [["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["[89]0"], "0 $1"], ["(\\d{3})(\\d{5})", "$1 $2", ["2|3[12]"], "(0$1)"], ["(\\d{2})(\\d{6})", "$1 $2", ["1|47"], "(0$1)"], ["(\\d{2})(\\d{6})", "$1 $2", ["[3-9]"], "0$1"]], "0"], "AO": ["244", "00", "[29]\\d{8}", [9], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[29]"]]]], "AR": ["54", "00", "(?:11|[89]\\d\\d)\\d{8}|[2368]\\d{9}", [10, 11], [["(\\d{4})(\\d{2})(\\d{4})", "$1 $2-$3", ["2(?:2[024-9]|3[0-59]|47|6[245]|9[02-8])|3(?:3[28]|4[03-9]|5[2-46-8]|7[1-578]|8[2-9])", "2(?:[23]02|6(?:[25]|4[6-8])|9(?:[02356]|4[02568]|72|8[23]))|3(?:3[28]|4(?:[04679]|3[5-8]|5[4-68]|8[2379])|5(?:[2467]|3[237]|8[2-5])|7[1-578]|8(?:[2469]|3[2578]|5[4-8]|7[36-8]|8[5-8]))|2(?:2[24-9]|3[1-59]|47)", "2(?:[23]02|6(?:[25]|4(?:64|[78]))|9(?:[02356]|4(?:[0268]|5[2-6])|72|8[23]))|3(?:3[28]|4(?:[04679]|3[78]|5(?:4[46]|8)|8[2379])|5(?:[2467]|3[237]|8[23])|7[1-578]|8(?:[2469]|3[278]|5[56][46]|86[3-6]))|2(?:2[24-9]|3[1-59]|47)|38(?:[58][78]|7[378])|3(?:4[35][56]|58[45]|8(?:[38]5|54|76))[4-6]", "2(?:[23]02|6(?:[25]|4(?:64|[78]))|9(?:[02356]|4(?:[0268]|5[2-6])|72|8[23]))|3(?:3[28]|4(?:[04679]|3(?:5(?:4[0-25689]|[56])|[78])|58|8[2379])|5(?:[2467]|3[237]|8(?:[23]|4(?:[45]|60)|5(?:4[0-39]|5|64)))|7[1-578]|8(?:[2469]|3[278]|54(?:4|5[13-7]|6[89])|86[3-6]))|2(?:2[24-9]|3[1-59]|47)|38(?:[58][78]|7[378])|3(?:454|85[56])[46]|3(?:4(?:36|5[56])|8(?:[38]5|76))[4-6]"], "0$1", 1], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2-$3", ["1"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3", ["[68]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2-$3", ["[23]"], "0$1", 1], ["(\\d)(\\d{4})(\\d{2})(\\d{4})", "$2 15-$3-$4", ["9(?:2[2-469]|3[3-578])", "9(?:2(?:2[024-9]|3[0-59]|47|6[245]|9[02-8])|3(?:3[28]|4[03-9]|5[2-46-8]|7[1-578]|8[2-9]))", "9(?:2(?:[23]02|6(?:[25]|4[6-8])|9(?:[02356]|4[02568]|72|8[23]))|3(?:3[28]|4(?:[04679]|3[5-8]|5[4-68]|8[2379])|5(?:[2467]|3[237]|8[2-5])|7[1-578]|8(?:[2469]|3[2578]|5[4-8]|7[36-8]|8[5-8])))|92(?:2[24-9]|3[1-59]|47)", "9(?:2(?:[23]02|6(?:[25]|4(?:64|[78]))|9(?:[02356]|4(?:[0268]|5[2-6])|72|8[23]))|3(?:3[28]|4(?:[04679]|3[78]|5(?:4[46]|8)|8[2379])|5(?:[2467]|3[237]|8[23])|7[1-578]|8(?:[2469]|3[278]|5(?:[56][46]|[78])|7[378]|8(?:6[3-6]|[78]))))|92(?:2[24-9]|3[1-59]|47)|93(?:4[35][56]|58[45]|8(?:[38]5|54|76))[4-6]", "9(?:2(?:[23]02|6(?:[25]|4(?:64|[78]))|9(?:[02356]|4(?:[0268]|5[2-6])|72|8[23]))|3(?:3[28]|4(?:[04679]|3(?:5(?:4[0-25689]|[56])|[78])|5(?:4[46]|8)|8[2379])|5(?:[2467]|3[237]|8(?:[23]|4(?:[45]|60)|5(?:4[0-39]|5|64)))|7[1-578]|8(?:[2469]|3[278]|5(?:4(?:4|5[13-7]|6[89])|[56][46]|[78])|7[378]|8(?:6[3-6]|[78]))))|92(?:2[24-9]|3[1-59]|47)|93(?:4(?:36|5[56])|8(?:[38]5|76))[4-6]"], "0$1", 0, "$1 $2 $3-$4"], ["(\\d)(\\d{2})(\\d{4})(\\d{4})", "$2 15-$3-$4", ["91"], "0$1", 0, "$1 $2 $3-$4"], ["(\\d{3})(\\d{3})(\\d{5})", "$1-$2-$3", ["8"], "0$1"], ["(\\d)(\\d{3})(\\d{3})(\\d{4})", "$2 15-$3-$4", ["9"], "0$1", 0, "$1 $2 $3-$4"]], "0", 0, "0?(?:(11|2(?:2(?:02?|[13]|2[13-79]|4[1-6]|5[2457]|6[124-8]|7[1-4]|8[13-6]|9[1267])|3(?:02?|1[467]|2[03-6]|3[13-8]|[49][2-6]|5[2-8]|[67])|4(?:7[3-578]|9)|6(?:[0136]|2[24-6]|4[6-8]?|5[15-8])|80|9(?:0[1-3]|[19]|2\\d|3[1-6]|4[02568]?|5[2-4]|6[2-46]|72?|8[23]?))|3(?:3(?:2[79]|6|8[2578])|4(?:0[0-24-9]|[12]|3[5-8]?|4[24-7]|5[4-68]?|6[02-9]|7[126]|8[2379]?|9[1-36-8])|5(?:1|2[1245]|3[237]?|4[1-46-9]|6[2-4]|7[1-6]|8[2-5]?)|6[24]|7(?:[069]|1[1568]|2[15]|3[145]|4[13]|5[14-8]|7[2-57]|8[126])|8(?:[01]|2[15-7]|3[2578]?|4[13-6]|5[4-8]?|6[1-357-9]|7[36-8]?|8[5-8]?|9[124])))15)?", "9$1"], "AS": ["1", "011", "(?:[58]\\d\\d|684|900)\\d{7}", [10], 0, "1", 0, "([267]\\d{6})$|1", "684$1", 0, "684"], "AT": ["43", "00", "1\\d{3,12}|2\\d{6,12}|43(?:(?:0\\d|5[02-9])\\d{3,9}|2\\d{4,5}|[3467]\\d{4}|8\\d{4,6}|9\\d{4,7})|5\\d{4,12}|8\\d{7,12}|9\\d{8,12}|(?:[367]\\d|4[0-24-9])\\d{4,11}", [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], [["(\\d)(\\d{3,12})", "$1 $2", ["1(?:11|[2-9])"], "0$1"], ["(\\d{3})(\\d{2})", "$1 $2", ["517"], "0$1"], ["(\\d{2})(\\d{3,5})", "$1 $2", ["5[079]"], "0$1"], ["(\\d{3})(\\d{3,10})", "$1 $2", ["(?:31|4)6|51|6(?:48|5[0-3579]|[6-9])|7(?:20|32|8)|[89]", "(?:31|4)6|51|6(?:485|5[0-3579]|[6-9])|7(?:20|32|8)|[89]"], "0$1"], ["(\\d{4})(\\d{3,9})", "$1 $2", ["[2-467]|5[2-6]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["5"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4,7})", "$1 $2 $3", ["5"], "0$1"]], "0"], "AU": ["61", "001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011", "1(?:[0-79]\\d{7}(?:\\d(?:\\d{2})?)?|8[0-24-9]\\d{7})|[2-478]\\d{8}|1\\d{4,7}", [5, 6, 7, 8, 9, 10, 12], [["(\\d{2})(\\d{3,4})", "$1 $2", ["16"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2,4})", "$1 $2 $3", ["16"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["14|4"], "0$1"], ["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["[2378]"], "(0$1)"], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["1(?:30|[89])"]]], "0", 0, "(183[12])|0", 0, 0, 0, [["(?:(?:2(?:(?:[0-26-9]\\d|3[0-8]|5[0135-9])\\d|4(?:[02-9]\\d|10))|3(?:(?:[0-3589]\\d|6[1-9]|7[0-35-9])\\d|4(?:[0-578]\\d|90))|7(?:[013-57-9]\\d|2[0-8])\\d)\\d\\d|8(?:51(?:0(?:0[03-9]|[12479]\\d|3[2-9]|5[0-8]|6[1-9]|8[0-7])|1(?:[0235689]\\d|1[0-69]|4[0-589]|7[0-47-9])|2(?:0[0-79]|[18][13579]|2[14-9]|3[0-46-9]|[4-6]\\d|7[89]|9[0-4])|[34]\\d\\d)|(?:6[0-8]|[78]\\d)\\d{3}|9(?:[02-9]\\d{3}|1(?:(?:[0-58]\\d|6[0135-9])\\d|7(?:0[0-24-9]|[1-9]\\d)|9(?:[0-46-9]\\d|5[0-79])))))\\d{3}", [9]], ["4(?:79[01]|83[0-389]|94[0-478])\\d{5}|4(?:[0-36]\\d|4[047-9]|5[0-25-9]|7[02-8]|8[0-24-9]|9[0-37-9])\\d{6}", [9]], ["180(?:0\\d{3}|2)\\d{3}", [7, 10]], ["190[0-26]\\d{6}", [10]], 0, 0, 0, ["163\\d{2,6}", [5, 6, 7, 8, 9]], ["14(?:5(?:1[0458]|[23][458])|71\\d)\\d{4}", [9]], ["13(?:00\\d{6}(?:\\d{2})?|45[0-4]\\d{3})|13\\d{4}", [6, 8, 10, 12]]], "0011"], "AW": ["297", "00", "(?:[25-79]\\d\\d|800)\\d{4}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[25-9]"]]]], "AX": ["358", "00|99(?:[01469]|5(?:[14]1|3[23]|5[59]|77|88|9[09]))", "2\\d{4,9}|35\\d{4,5}|(?:60\\d\\d|800)\\d{4,6}|7\\d{5,11}|(?:[14]\\d|3[0-46-9]|50)\\d{4,8}", [5, 6, 7, 8, 9, 10, 11, 12], 0, "0", 0, 0, 0, 0, "18", 0, "00"], "AZ": ["994", "00", "365\\d{6}|(?:[124579]\\d|60|88)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["90"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["1[28]|2|365|46", "1[28]|2|365[45]|46", "1[28]|2|365(?:4|5[02])|46"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[13-9]"], "0$1"]], "0"], "BA": ["387", "00", "6\\d{8}|(?:[35689]\\d|49|70)\\d{6}", [8, 9], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["6[1-3]|[7-9]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2-$3", ["[3-5]|6[56]"], "0$1"], ["(\\d{2})(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3 $4", ["6"], "0$1"]], "0"], "BB": ["1", "011", "(?:246|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "246$1", 0, "246"], "BD": ["880", "00", "[1-469]\\d{9}|8[0-79]\\d{7,8}|[2-79]\\d{8}|[2-9]\\d{7}|[3-9]\\d{6}|[57-9]\\d{5}", [6, 7, 8, 9, 10], [["(\\d{2})(\\d{4,6})", "$1-$2", ["31[5-8]|[459]1"], "0$1"], ["(\\d{3})(\\d{3,7})", "$1-$2", ["3(?:[67]|8[013-9])|4(?:6[168]|7|[89][18])|5(?:6[128]|9)|6(?:[15]|28|4[14])|7[2-589]|8(?:0[014-9]|[12])|9[358]|(?:3[2-5]|4[235]|5[2-578]|6[0389]|76|8[3-7]|9[24])1|(?:44|66)[01346-9]"], "0$1"], ["(\\d{4})(\\d{3,6})", "$1-$2", ["[13-9]|2[23]"], "0$1"], ["(\\d)(\\d{7,8})", "$1-$2", ["2"], "0$1"]], "0"], "BE": ["32", "00", "4\\d{8}|[1-9]\\d{7}", [8, 9], [["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["(?:80|9)0"], "0$1"], ["(\\d)(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[239]|4[23]"], "0$1"], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[15-8]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["4"], "0$1"]], "0"], "BF": ["226", "00", "[025-7]\\d{7}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[025-7]"]]]], "BG": ["359", "00", "00800\\d{7}|[2-7]\\d{6,7}|[89]\\d{6,8}|2\\d{5}", [6, 7, 8, 9, 12], [["(\\d)(\\d)(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["2"], "0$1"], ["(\\d{3})(\\d{4})", "$1 $2", ["43[1-6]|70[1-9]"], "0$1"], ["(\\d)(\\d{3})(\\d{3,4})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2,3})", "$1 $2 $3", ["[356]|4[124-7]|7[1-9]|8[1-6]|9[1-7]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["(?:70|8)0"], "0$1"], ["(\\d{3})(\\d{3})(\\d{2})", "$1 $2 $3", ["43[1-7]|7"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[48]|9[08]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["9"], "0$1"]], "0"], "BH": ["973", "00", "[136-9]\\d{7}", [8], [["(\\d{4})(\\d{4})", "$1 $2", ["[13679]|8[02-4679]"]]]], "BI": ["257", "00", "(?:[267]\\d|31)\\d{6}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[2367]"]]]], "BJ": ["229", "00", "(?:01\\d|[24-689])\\d{7}", [8, 10], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[24-689]"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4 $5", ["0"]]]], "BL": ["590", "00", "(?:590\\d|7090)\\d{5}|(?:69|80|9\\d)\\d{7}", [9], 0, "0", 0, 0, 0, 0, 0, [["590(?:2[7-9]|3[3-7]|5[12]|87)\\d{4}"], ["(?:69(?:0\\d\\d|1(?:2[2-9]|3[0-5])|4(?:0[89]|1[2-6]|9\\d)|6(?:1[016-9]|5[0-4]|[67]\\d))|7090[0-4])\\d{4}"], ["80[0-5]\\d{6}"], 0, 0, 0, 0, 0, ["9(?:(?:39[5-7]|76[018])\\d|475[0-6])\\d{4}"]]], "BM": ["1", "011", "(?:441|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "441$1", 0, "441"], "BN": ["673", "00", "[2-578]\\d{6}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[2-578]"]]]], "BO": ["591", "00(?:1\\d)?", "8001\\d{5}|(?:[2-467]\\d|50)\\d{6}", [8, 9], [["(\\d)(\\d{7})", "$1 $2", ["[235]|4[46]"]], ["(\\d{8})", "$1", ["[67]"]], ["(\\d{3})(\\d{2})(\\d{4})", "$1 $2 $3", ["8"]]], "0", 0, "0(1\\d)?"], "BQ": ["599", "00", "(?:[34]1|7\\d)\\d{5}", [7], 0, 0, 0, 0, 0, 0, "[347]"], "BR": ["55", "00(?:1[245]|2[1-35]|31|4[13]|[56]5|99)", "[1-467]\\d{9,10}|55[0-46-9]\\d{8}|[34]\\d{7}|55\\d{7,8}|(?:5[0-46-9]|[89]\\d)\\d{7,9}", [8, 9, 10, 11], [["(\\d{4})(\\d{4})", "$1-$2", ["300|4(?:0[02]|37|86)", "300|4(?:0(?:0|20)|370|864)"]], ["(\\d{3})(\\d{2,3})(\\d{4})", "$1 $2 $3", ["(?:[358]|90)0"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2-$3", ["(?:[14689][1-9]|2[12478]|3[1-578]|5[13-5]|7[13-579])[2-57]"], "($1)"], ["(\\d{2})(\\d{5})(\\d{4})", "$1 $2-$3", ["[16][1-9]|[2-57-9]"], "($1)"]], "0", 0, "(?:0|90)(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?", "$2"], "BS": ["1", "011", "(?:242|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([3-8]\\d{6})$|1", "242$1", 0, "242"], "BT": ["975", "00", "[17]\\d{7}|[2-8]\\d{6}", [7, 8], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["[2-68]|7[246]"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["1[67]|7"]]]], "BW": ["267", "00", "(?:0800|(?:[37]|800)\\d)\\d{6}|(?:[2-6]\\d|90)\\d{5}", [7, 8, 10], [["(\\d{2})(\\d{5})", "$1 $2", ["90"]], ["(\\d{3})(\\d{4})", "$1 $2", ["[24-6]|3[15-9]"]], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[37]"]], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["0"]], ["(\\d{3})(\\d{4})(\\d{3})", "$1 $2 $3", ["8"]]]], "BY": ["375", "810", "(?:[12]\\d|33|44|902)\\d{7}|8(?:0[0-79]\\d{5,7}|[1-7]\\d{9})|8(?:1[0-489]|[5-79]\\d)\\d{7}|8[1-79]\\d{6,7}|8[0-79]\\d{5}|8\\d{5}", [6, 7, 8, 9, 10, 11], [["(\\d{3})(\\d{3})", "$1 $2", ["800"], "8 $1"], ["(\\d{3})(\\d{2})(\\d{2,4})", "$1 $2 $3", ["800"], "8 $1"], ["(\\d{4})(\\d{2})(\\d{3})", "$1 $2-$3", ["1(?:5[169]|6[3-5]|7[179])|2(?:1[35]|2[34]|3[3-5])", "1(?:5[169]|6(?:3[1-3]|4|5[125])|7(?:1[3-9]|7[0-24-6]|9[2-7]))|2(?:1[35]|2[34]|3[3-5])"], "8 0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2-$3-$4", ["1(?:[56]|7[467])|2[1-3]"], "8 0$1"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2-$3-$4", ["[1-4]"], "8 0$1"], ["(\\d{3})(\\d{3,4})(\\d{4})", "$1 $2 $3", ["[89]"], "8 $1"]], "8", 0, "0|80?", 0, 0, 0, 0, "8~10"], "BZ": ["501", "00", "(?:0800\\d|[2-8])\\d{6}", [7, 11], [["(\\d{3})(\\d{4})", "$1-$2", ["[2-8]"]], ["(\\d)(\\d{3})(\\d{4})(\\d{3})", "$1-$2-$3-$4", ["0"]]]], "CA": ["1", "011", "[2-9]\\d{9}|3\\d{6}", [7, 10], 0, "1", 0, 0, 0, 0, 0, [["(?:2(?:04|[23]6|[48]9|5[07]|63)|3(?:06|43|54|6[578]|82)|4(?:03|1[68]|[26]8|3[178]|50|74)|5(?:06|1[49]|48|79|8[147])|6(?:04|[18]3|39|47|72)|7(?:0[59]|42|53|78|8[02])|8(?:[06]7|19|25|7[39])|9(?:0[25]|42))[2-9]\\d{6}", [10]], ["", [10]], ["8(?:00|33|44|55|66|77|88)[2-9]\\d{6}", [10]], ["900[2-9]\\d{6}", [10]], ["52(?:3(?:[2-46-9][02-9]\\d|5(?:[02-46-9]\\d|5[0-46-9]))|4(?:[2-478][02-9]\\d|5(?:[034]\\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\\d)|9(?:[05-9]\\d|2[0-5]|49)))\\d{4}|52[34][2-9]1[02-9]\\d{4}|(?:5(?:2[125-9]|33|44|66|77|88)|6(?:22|33))[2-9]\\d{6}", [10]], 0, ["310\\d{4}", [7]], 0, ["600[2-9]\\d{6}", [10]]]], "CC": ["61", "001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011", "1(?:[0-79]\\d{8}(?:\\d{2})?|8[0-24-9]\\d{7})|[148]\\d{8}|1\\d{5,7}", [6, 7, 8, 9, 10, 12], 0, "0", 0, "([59]\\d{7})$|0", "8$1", 0, 0, [["8(?:51(?:0(?:02|31|60|89)|1(?:18|76)|223)|91(?:0(?:1[0-2]|29)|1(?:[28]2|50|79)|2(?:10|64)|3(?:[06]8|22)|4[29]8|62\\d|70[23]|959))\\d{3}", [9]], ["4(?:79[01]|83[0-389]|94[0-478])\\d{5}|4(?:[0-36]\\d|4[047-9]|5[0-25-9]|7[02-8]|8[0-24-9]|9[0-37-9])\\d{6}", [9]], ["180(?:0\\d{3}|2)\\d{3}", [7, 10]], ["190[0-26]\\d{6}", [10]], 0, 0, 0, 0, ["14(?:5(?:1[0458]|[23][458])|71\\d)\\d{4}", [9]], ["13(?:00\\d{6}(?:\\d{2})?|45[0-4]\\d{3})|13\\d{4}", [6, 8, 10, 12]]], "0011"], "CD": ["243", "00", "(?:(?:[189]|5\\d)\\d|2)\\d{7}|[1-68]\\d{6}", [7, 8, 9, 10], [["(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3", ["88"], "0$1"], ["(\\d{2})(\\d{5})", "$1 $2", ["[1-6]"], "0$1"], ["(\\d{2})(\\d{2})(\\d{4})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[89]"], "0$1"], ["(\\d{2})(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["5"], "0$1"]], "0"], "CF": ["236", "00", "(?:[27]\\d{3}|8776)\\d{4}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[278]"]]]], "CG": ["242", "00", "222\\d{6}|(?:0\\d|80)\\d{7}", [9], [["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["8"]], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[02]"]]]], "CH": ["41", "00", "8\\d{11}|[2-9]\\d{8}", [9, 12], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["8[047]|90"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[2-79]|81"], "0$1"], ["(\\d{3})(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4 $5", ["8"], "0$1"]], "0"], "CI": ["225", "00", "[02]\\d{9}", [10], [["(\\d{2})(\\d{2})(\\d)(\\d{5})", "$1 $2 $3 $4", ["2"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{4})", "$1 $2 $3 $4", ["0"]]]], "CK": ["682", "00", "[2-578]\\d{4}", [5], [["(\\d{2})(\\d{3})", "$1 $2", ["[2-578]"]]]], "CL": ["56", "(?:0|1(?:1[0-69]|2[02-5]|5[13-58]|69|7[0167]|8[018]))0", "12300\\d{6}|6\\d{9,10}|[2-9]\\d{8}", [9, 10, 11], [["(\\d{5})(\\d{4})", "$1 $2", ["219", "2196"], "($1)"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["44"]], ["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["2[1-36]"], "($1)"], ["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["9[2-9]"]], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["3[2-5]|[47]|5[1-3578]|6[13-57]|8(?:0[1-9]|[1-9])"], "($1)"], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["60|8"]], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"]], ["(\\d{3})(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3 $4", ["60"]]]], "CM": ["237", "00", "[26]\\d{8}|88\\d{6,7}", [8, 9], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["88"]], ["(\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4 $5", ["[26]|88"]]]], "CN": ["86", "00|1(?:[12]\\d|79)\\d\\d00", "(?:(?:1[03-689]|2\\d)\\d\\d|6)\\d{8}|1\\d{10}|[126]\\d{6}(?:\\d(?:\\d{2})?)?|86\\d{5,6}|(?:[3-579]\\d|8[0-57-9])\\d{5,9}", [7, 8, 9, 10, 11, 12], [["(\\d{2})(\\d{5,6})", "$1 $2", ["(?:10|2[0-57-9])[19]|3(?:[157]|35|49|9[1-68])|4(?:1[124-9]|2[179]|6[47-9]|7|8[23])|5(?:[1357]|2[37]|4[36]|6[1-46]|80)|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:07|1[236-8]|2[5-7]|[37]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|3|4[13]|5[1-5]|7[0-79]|9[0-35-9])|(?:4[35]|59|85)[1-9]", "(?:10|2[0-57-9])(?:1[02]|9[56])|8078|(?:3(?:[157]\\d|35|49|9[1-68])|4(?:1[124-9]|2[179]|[35][1-9]|6[47-9]|7\\d|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|3\\d|4[13]|5[1-5]|7[0-79]|9[0-35-9]))1", "10(?:1(?:0|23)|9[56])|2[0-57-9](?:1(?:00|23)|9[56])|80781|(?:3(?:[157]\\d|35|49|9[1-68])|4(?:1[124-9]|2[179]|[35][1-9]|6[47-9]|7\\d|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|3\\d|4[13]|5[1-5]|7[0-79]|9[0-35-9]))12", "10(?:1(?:0|23)|9[56])|2[0-57-9](?:1(?:00|23)|9[56])|807812|(?:3(?:[157]\\d|35|49|9[1-68])|4(?:1[124-9]|2[179]|[35][1-9]|6[47-9]|7\\d|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|3\\d|4[13]|5[1-5]|7[0-79]|9[0-35-9]))123", "10(?:1(?:0|23)|9[56])|2[0-57-9](?:1(?:00|23)|9[56])|(?:3(?:[157]\\d|35|49|9[1-68])|4(?:1[124-9]|2[179]|[35][1-9]|6[47-9]|7\\d|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:078|1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|3\\d|4[13]|5[1-5]|7[0-79]|9[0-35-9]))123"], "0$1"], ["(\\d{3})(\\d{5,6})", "$1 $2", ["3(?:[157]|35|49|9[1-68])|4(?:[17]|2[179]|6[47-9]|8[23])|5(?:[1357]|2[37]|4[36]|6[1-46]|80)|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|[379]|4[13]|5[1-5])|(?:4[35]|59|85)[1-9]", "(?:3(?:[157]\\d|35|49|9[1-68])|4(?:[17]\\d|2[179]|[35][1-9]|6[47-9]|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[1-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))[19]", "85[23](?:10|95)|(?:3(?:[157]\\d|35|49|9[1-68])|4(?:[17]\\d|2[179]|[35][1-9]|6[47-9]|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[14-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))(?:10|9[56])", "85[23](?:100|95)|(?:3(?:[157]\\d|35|49|9[1-68])|4(?:[17]\\d|2[179]|[35][1-9]|6[47-9]|8[23])|5(?:[1357]\\d|2[37]|4[36]|6[1-46]|80|9[1-9])|6(?:3[1-5]|6[0238]|9[12])|7(?:01|[1579]\\d|2[248]|3[014-9]|4[3-6]|6[023689])|8(?:1[236-8]|2[5-7]|[37]\\d|5[14-9]|8[36-8]|9[1-8])|9(?:0[1-3689]|1[1-79]|[379]\\d|4[13]|5[1-5]))(?:100|9[56])"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["(?:4|80)0"]], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["10|2(?:[02-57-9]|1[1-9])", "10|2(?:[02-57-9]|1[1-9])", "10[0-79]|2(?:[02-57-9]|1[1-79])|(?:10|21)8(?:0[1-9]|[1-9])"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["3(?:[3-59]|7[02-68])|4(?:[26-8]|3[3-9]|5[2-9])|5(?:3[03-9]|[468]|7[028]|9[2-46-9])|6|7(?:[0-247]|3[04-9]|5[0-4689]|6[2368])|8(?:[1-358]|9[1-7])|9(?:[013479]|5[1-5])|(?:[34]1|55|79|87)[02-9]"], "0$1", 1], ["(\\d{3})(\\d{7,8})", "$1 $2", ["9"]], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["80"], "0$1", 1], ["(\\d{3})(\\d{4})(\\d{4})", "$1 $2 $3", ["[3-578]"], "0$1", 1], ["(\\d{3})(\\d{4})(\\d{4})", "$1 $2 $3", ["1[3-9]"]], ["(\\d{2})(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3 $4", ["[12]"], "0$1", 1]], "0", 0, "(1(?:[12]\\d|79)\\d\\d)|0", 0, 0, 0, 0, "00"], "CO": ["57", "00(?:4(?:[14]4|56)|[579])", "(?:46|60\\d\\d)\\d{6}|(?:1\\d|[39])\\d{9}", [8, 10, 11], [["(\\d{4})(\\d{4})", "$1 $2", ["46"]], ["(\\d{3})(\\d{7})", "$1 $2", ["6|90"], "($1)"], ["(\\d{3})(\\d{7})", "$1 $2", ["3[0-357]|9[14]"]], ["(\\d)(\\d{3})(\\d{7})", "$1-$2-$3", ["1"], "0$1", 0, "$1 $2 $3"]], "0", 0, "0([3579]|4(?:[14]4|56))?"], "CR": ["506", "00", "(?:8\\d|90)\\d{8}|(?:[24-8]\\d{3}|3005)\\d{4}", [8, 10], [["(\\d{4})(\\d{4})", "$1 $2", ["[2-7]|8[3-9]"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3", ["[89]"]]], 0, 0, "(19(?:0[0-2468]|1[09]|20|66|77|99))"], "CU": ["53", "119", "(?:[2-7]|8\\d\\d)\\d{7}|[2-47]\\d{6}|[34]\\d{5}", [6, 7, 8, 10], [["(\\d{2})(\\d{4,6})", "$1 $2", ["2[1-4]|[34]"], "(0$1)"], ["(\\d)(\\d{6,7})", "$1 $2", ["7"], "(0$1)"], ["(\\d)(\\d{7})", "$1 $2", ["[56]"], "0$1"], ["(\\d{3})(\\d{7})", "$1 $2", ["8"], "0$1"]], "0"], "CV": ["238", "0", "(?:[2-59]\\d\\d|800)\\d{4}", [7], [["(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3", ["[2-589]"]]]], "CW": ["599", "00", "(?:[34]1|60|(?:7|9\\d)\\d)\\d{5}", [7, 8], [["(\\d{3})(\\d{4})", "$1 $2", ["[3467]"]], ["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["9[4-8]"]]], 0, 0, 0, 0, 0, "[69]"], "CX": ["61", "001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011", "1(?:[0-79]\\d{8}(?:\\d{2})?|8[0-24-9]\\d{7})|[148]\\d{8}|1\\d{5,7}", [6, 7, 8, 9, 10, 12], 0, "0", 0, "([59]\\d{7})$|0", "8$1", 0, 0, [["8(?:51(?:0(?:01|30|59|88)|1(?:17|46|75)|2(?:22|35))|91(?:00[6-9]|1(?:[28]1|49|78)|2(?:09|63)|3(?:12|26|75)|4(?:56|97)|64\\d|7(?:0[01]|1[0-2])|958))\\d{3}", [9]], ["4(?:79[01]|83[0-389]|94[0-478])\\d{5}|4(?:[0-36]\\d|4[047-9]|5[0-25-9]|7[02-8]|8[0-24-9]|9[0-37-9])\\d{6}", [9]], ["180(?:0\\d{3}|2)\\d{3}", [7, 10]], ["190[0-26]\\d{6}", [10]], 0, 0, 0, 0, ["14(?:5(?:1[0458]|[23][458])|71\\d)\\d{4}", [9]], ["13(?:00\\d{6}(?:\\d{2})?|45[0-4]\\d{3})|13\\d{4}", [6, 8, 10, 12]]], "0011"], "CY": ["357", "00", "(?:[279]\\d|[58]0)\\d{6}", [8], [["(\\d{2})(\\d{6})", "$1 $2", ["[257-9]"]]]], "CZ": ["420", "00", "(?:[2-578]\\d|60)\\d{7}|9\\d{8,11}", [9, 10, 11, 12], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[2-8]|9[015-7]"]], ["(\\d{2})(\\d{3})(\\d{3})(\\d{2})", "$1 $2 $3 $4", ["96"]], ["(\\d{2})(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["9"]], ["(\\d{3})(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["9"]]]], "DE": ["49", "00", "[2579]\\d{5,14}|49(?:[34]0|69|8\\d)\\d\\d?|49(?:37|49|60|7[089]|9\\d)\\d{1,3}|49(?:2[024-9]|3[2-689]|7[1-7])\\d{1,8}|(?:1|[368]\\d|4[0-8])\\d{3,13}|49(?:[015]\\d|2[13]|31|[46][1-8])\\d{1,9}", [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], [["(\\d{2})(\\d{3,13})", "$1 $2", ["3[02]|40|[68]9"], "0$1"], ["(\\d{3})(\\d{3,12})", "$1 $2", ["2(?:0[1-389]|1[124]|2[18]|3[14])|3(?:[35-9][15]|4[015])|906|(?:2[4-9]|4[2-9]|[579][1-9]|[68][1-8])1", "2(?:0[1-389]|12[0-8])|3(?:[35-9][15]|4[015])|906|2(?:[13][14]|2[18])|(?:2[4-9]|4[2-9]|[579][1-9]|[68][1-8])1"], "0$1"], ["(\\d{4})(\\d{2,11})", "$1 $2", ["[24-6]|3(?:[3569][02-46-9]|4[2-4679]|7[2-467]|8[2-46-8])|70[2-8]|8(?:0[2-9]|[1-8])|90[7-9]|[79][1-9]", "[24-6]|3(?:3(?:0[1-467]|2[127-9]|3[124578]|7[1257-9]|8[1256]|9[145])|4(?:2[135]|4[13578]|9[1346])|5(?:0[14]|2[1-3589]|6[1-4]|7[13468]|8[13568])|6(?:2[1-489]|3[124-6]|6[13]|7[12579]|8[1-356]|9[135])|7(?:2[1-7]|4[145]|6[1-5]|7[1-4])|8(?:21|3[1468]|6|7[1467]|8[136])|9(?:0[12479]|2[1358]|4[134679]|6[1-9]|7[136]|8[147]|9[1468]))|70[2-8]|8(?:0[2-9]|[1-8])|90[7-9]|[79][1-9]|3[68]4[1347]|3(?:47|60)[1356]|3(?:3[46]|46|5[49])[1246]|3[4579]3[1357]"], "0$1"], ["(\\d{3})(\\d{4})", "$1 $2", ["138"], "0$1"], ["(\\d{5})(\\d{2,10})", "$1 $2", ["3"], "0$1"], ["(\\d{3})(\\d{5,11})", "$1 $2", ["181"], "0$1"], ["(\\d{3})(\\d)(\\d{4,10})", "$1 $2 $3", ["1(?:3|80)|9"], "0$1"], ["(\\d{3})(\\d{7,8})", "$1 $2", ["1[67]"], "0$1"], ["(\\d{3})(\\d{7,12})", "$1 $2", ["8"], "0$1"], ["(\\d{5})(\\d{6})", "$1 $2", ["185", "1850", "18500"], "0$1"], ["(\\d{3})(\\d{4})(\\d{4})", "$1 $2 $3", ["7"], "0$1"], ["(\\d{4})(\\d{7})", "$1 $2", ["18[68]"], "0$1"], ["(\\d{4})(\\d{7})", "$1 $2", ["15[1279]"], "0$1"], ["(\\d{5})(\\d{6})", "$1 $2", ["15[03568]", "15(?:[0568]|31)"], "0$1"], ["(\\d{3})(\\d{8})", "$1 $2", ["18"], "0$1"], ["(\\d{3})(\\d{2})(\\d{7,8})", "$1 $2 $3", ["1(?:6[023]|7)"], "0$1"], ["(\\d{4})(\\d{2})(\\d{7})", "$1 $2 $3", ["15[279]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{8})", "$1 $2 $3", ["15"], "0$1"]], "0"], "DJ": ["253", "00", "(?:2\\d|77)\\d{6}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[27]"]]]], "DK": ["45", "00", "[2-9]\\d{7}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[2-9]"]]]], "DM": ["1", "011", "(?:[58]\\d\\d|767|900)\\d{7}", [10], 0, "1", 0, "([2-7]\\d{6})$|1", "767$1", 0, "767"], "DO": ["1", "011", "(?:[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, 0, 0, 0, "8001|8[024]9"], "DZ": ["213", "00", "(?:[1-4]|[5-79]\\d|80)\\d{7}", [8, 9], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[1-4]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["9"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[5-8]"], "0$1"]], "0"], "EC": ["593", "00", "1\\d{9,10}|(?:[2-7]|9\\d)\\d{7}", [8, 9, 10, 11], [["(\\d)(\\d{3})(\\d{4})", "$1 $2-$3", ["[2-7]"], "(0$1)", 0, "$1-$2-$3"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["9"], "0$1"], ["(\\d{4})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["1"]]], "0"], "EE": ["372", "00", "8\\d{9}|[4578]\\d{7}|(?:[3-8]\\d|90)\\d{5}", [7, 8, 10], [["(\\d{3})(\\d{4})", "$1 $2", ["[369]|4[3-8]|5(?:[0-2]|5[0-478]|6[45])|7[1-9]|88", "[369]|4[3-8]|5(?:[02]|1(?:[0-8]|95)|5[0-478]|6(?:4[0-4]|5[1-589]))|7[1-9]|88"]], ["(\\d{4})(\\d{3,4})", "$1 $2", ["[45]|8(?:00|[1-49])", "[45]|8(?:00[1-9]|[1-49])"]], ["(\\d{2})(\\d{2})(\\d{4})", "$1 $2 $3", ["7"]], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["8"]]]], "EG": ["20", "00", "[189]\\d{8,9}|[24-6]\\d{8}|[135]\\d{7}", [8, 9, 10], [["(\\d)(\\d{7,8})", "$1 $2", ["[23]"], "0$1"], ["(\\d{2})(\\d{6,7})", "$1 $2", ["1[35]|[4-6]|8[2468]|9[235-7]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["[89]"], "0$1"], ["(\\d{2})(\\d{8})", "$1 $2", ["1"], "0$1"]], "0"], "EH": ["212", "00", "[5-8]\\d{8}", [9], 0, "0", 0, 0, 0, 0, "528[89]"], "ER": ["291", "00", "[178]\\d{6}", [7], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["[178]"], "0$1"]], "0"], "ES": ["34", "00", "[5-9]\\d{8}", [9], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[89]00"]], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[5-9]"]]]], "ET": ["251", "00", "(?:11|[2-579]\\d)\\d{7}", [9], [["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[1-579]"], "0$1"]], "0"], "FI": ["358", "00|99(?:[01469]|5(?:[14]1|3[23]|5[59]|77|88|9[09]))", "[1-35689]\\d{4}|7\\d{10,11}|(?:[124-7]\\d|3[0-46-9])\\d{8}|[1-9]\\d{5,8}", [5, 6, 7, 8, 9, 10, 11, 12], [["(\\d{5})", "$1", ["20[2-59]"], "0$1"], ["(\\d{3})(\\d{3,7})", "$1 $2", ["(?:[1-3]0|[68])0|70[07-9]"], "0$1"], ["(\\d{2})(\\d{4,8})", "$1 $2", ["[14]|2[09]|50|7[135]"], "0$1"], ["(\\d{2})(\\d{6,10})", "$1 $2", ["7"], "0$1"], ["(\\d)(\\d{4,9})", "$1 $2", ["(?:19|[2568])[1-8]|3(?:0[1-9]|[1-9])|9"], "0$1"]], "0", 0, 0, 0, 0, "1[03-79]|[2-9]", 0, "00"], "FJ": ["679", "0(?:0|52)", "45\\d{5}|(?:0800\\d|[235-9])\\d{6}", [7, 11], [["(\\d{3})(\\d{4})", "$1 $2", ["[235-9]|45"]], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["0"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "FK": ["500", "00", "[2-7]\\d{4}", [5]], "FM": ["691", "00", "(?:[39]\\d\\d|820)\\d{4}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[389]"]]]], "FO": ["298", "00", "[2-9]\\d{5}", [6], [["(\\d{6})", "$1", ["[2-9]"]]], 0, 0, "(10(?:01|[12]0|88))"], "FR": ["33", "00", "[1-9]\\d{8}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"], "0 $1"], ["(\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4 $5", ["[1-79]"], "0$1"]], "0"], "GA": ["241", "00", "(?:[067]\\d|11)\\d{6}|[2-7]\\d{6}", [7, 8], [["(\\d)(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[2-7]"], "0$1"], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["0"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["11|[67]"], "0$1"]], 0, 0, "0(11\\d{6}|60\\d{6}|61\\d{6}|6[256]\\d{6}|7[467]\\d{6})", "$1"], "GB": ["44", "00", "[1-357-9]\\d{9}|[18]\\d{8}|8\\d{6}", [7, 9, 10], [["(\\d{3})(\\d{4})", "$1 $2", ["800", "8001", "80011", "800111", "8001111"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3", ["845", "8454", "84546", "845464"], "0$1"], ["(\\d{3})(\\d{6})", "$1 $2", ["800"], "0$1"], ["(\\d{5})(\\d{4,5})", "$1 $2", ["1(?:38|5[23]|69|76|94)", "1(?:(?:38|69)7|5(?:24|39)|768|946)", "1(?:3873|5(?:242|39[4-6])|(?:697|768)[347]|9467)"], "0$1"], ["(\\d{4})(\\d{5,6})", "$1 $2", ["1(?:[2-69][02-9]|[78])"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["[25]|7(?:0|6[02-9])", "[25]|7(?:0|6(?:[03-9]|2[356]))"], "0$1"], ["(\\d{4})(\\d{6})", "$1 $2", ["7"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["[1389]"], "0$1"]], "0", 0, 0, 0, 0, 0, [["(?:1(?:1(?:3(?:[0-58]\\d\\d|73[0-35])|4(?:(?:[0-5]\\d|70)\\d|69[7-9])|(?:(?:5[0-26-9]|[78][0-49])\\d|6(?:[0-4]\\d|50))\\d)|(?:2(?:(?:0[024-9]|2[3-9]|3[3-79]|4[1-689]|[58][02-9]|6[0-47-9]|7[013-9]|9\\d)\\d|1(?:[0-7]\\d|8[0-3]))|(?:3(?:0\\d|1[0-8]|[25][02-9]|3[02-579]|[468][0-46-9]|7[1-35-79]|9[2-578])|4(?:0[03-9]|[137]\\d|[28][02-57-9]|4[02-69]|5[0-8]|[69][0-79])|5(?:0[1-35-9]|[16]\\d|2[024-9]|3[015689]|4[02-9]|5[03-9]|7[0-35-9]|8[0-468]|9[0-57-9])|6(?:0[034689]|1\\d|2[0-35689]|[38][013-9]|4[1-467]|5[0-69]|6[13-9]|7[0-8]|9[0-24578])|7(?:0[0246-9]|2\\d|3[0236-8]|4[03-9]|5[0-46-9]|6[013-9]|7[0-35-9]|8[024-9]|9[02-9])|8(?:0[35-9]|2[1-57-9]|3[02-578]|4[0-578]|5[124-9]|6[2-69]|7\\d|8[02-9]|9[02569])|9(?:0[02-589]|[18]\\d|2[02-689]|3[1-57-9]|4[2-9]|5[0-579]|6[2-47-9]|7[0-24578]|9[2-57]))\\d)\\d)|2(?:0[013478]|3[0189]|4[017]|8[0-46-9]|9[0-2])\\d{3})\\d{4}|1(?:2(?:0(?:46[1-4]|87[2-9])|545[1-79]|76(?:2\\d|3[1-8]|6[1-6])|9(?:7(?:2[0-4]|3[2-5])|8(?:2[2-8]|7[0-47-9]|8[3-5])))|3(?:6(?:38[2-5]|47[23])|8(?:47[04-9]|64[0157-9]))|4(?:044[1-7]|20(?:2[23]|8\\d)|6(?:0(?:30|5[2-57]|6[1-8]|7[2-8])|140)|8(?:052|87[1-3]))|5(?:2(?:4(?:3[2-79]|6\\d)|76\\d)|6(?:26[06-9]|686))|6(?:06(?:4\\d|7[4-79])|295[5-7]|35[34]\\d|47(?:24|61)|59(?:5[08]|6[67]|74)|9(?:55[0-4]|77[23]))|7(?:26(?:6[13-9]|7[0-7])|(?:442|688)\\d|50(?:2[0-3]|[3-68]2|76))|8(?:27[56]\\d|37(?:5[2-5]|8[239])|843[2-58])|9(?:0(?:0(?:6[1-8]|85)|52\\d)|3583|4(?:66[1-8]|9(?:2[01]|81))|63(?:23|3[1-4])|9561))\\d{3}", [9, 10]], ["7(?:457[0-57-9]|700[01]|911[028])\\d{5}|7(?:[1-3]\\d\\d|4(?:[0-46-9]\\d|5[0-689])|5(?:0[0-8]|[13-9]\\d|2[0-35-9])|7(?:0[1-9]|[1-7]\\d|8[02-9]|9[0-689])|8(?:[014-9]\\d|[23][0-8])|9(?:[024-9]\\d|1[02-9]|3[0-689]))\\d{6}", [10]], ["80[08]\\d{7}|800\\d{6}|8001111"], ["(?:8(?:4[2-5]|7[0-3])|9(?:[01]\\d|8[2-49]))\\d{7}|845464\\d", [7, 10]], ["70\\d{8}", [10]], 0, ["(?:3[0347]|55)\\d{8}", [10]], ["76(?:464|652)\\d{5}|76(?:0[0-28]|2[356]|34|4[01347]|5[49]|6[0-369]|77|8[14]|9[139])\\d{6}", [10]], ["56\\d{8}", [10]]], 0, " x"], "GD": ["1", "011", "(?:473|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "473$1", 0, "473"], "GE": ["995", "00", "(?:[3-57]\\d\\d|800)\\d{6}", [9], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["70"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["32"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[57]"]], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[348]"], "0$1"]], "0"], "GF": ["594", "00", "(?:[56]94\\d|7093)\\d{5}|(?:80|9\\d)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[5-7]|9[47]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[89]"], "0$1"]], "0"], "GG": ["44", "00", "(?:1481|[357-9]\\d{3})\\d{6}|8\\d{6}(?:\\d{2})?", [7, 9, 10], 0, "0", 0, "([25-9]\\d{5})$|0", "1481$1", 0, 0, [["1481[25-9]\\d{5}", [10]], ["7(?:(?:781|839)\\d|911[17])\\d{5}", [10]], ["80[08]\\d{7}|800\\d{6}|8001111"], ["(?:8(?:4[2-5]|7[0-3])|9(?:[01]\\d|8[0-3]))\\d{7}|845464\\d", [7, 10]], ["70\\d{8}", [10]], 0, ["(?:3[0347]|55)\\d{8}", [10]], ["76(?:464|652)\\d{5}|76(?:0[0-28]|2[356]|34|4[01347]|5[49]|6[0-369]|77|8[14]|9[139])\\d{6}", [10]], ["56\\d{8}", [10]]]], "GH": ["233", "00", "(?:[235]\\d{3}|800)\\d{5}", [8, 9], [["(\\d{3})(\\d{5})", "$1 $2", ["8"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[235]"], "0$1"]], "0"], "GI": ["350", "00", "(?:[25]\\d|60)\\d{6}", [8], [["(\\d{3})(\\d{5})", "$1 $2", ["2"]]]], "GL": ["299", "00", "(?:19|[2-689]\\d|70)\\d{4}", [6], [["(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3", ["19|[2-9]"]]]], "GM": ["220", "00", "[2-9]\\d{6}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[2-9]"]]]], "GN": ["224", "00", "722\\d{6}|(?:3|6\\d)\\d{7}", [8, 9], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["3"]], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[67]"]]]], "GP": ["590", "00", "(?:590\\d|7090)\\d{5}|(?:69|80|9\\d)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[5-79]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"], "0$1"]], "0", 0, 0, 0, 0, 0, [["590(?:0[1-68]|[14][0-24-9]|2[0-68]|3[1-9]|5[3-579]|[68][0-689]|7[08]|9\\d)\\d{4}"], ["(?:69(?:0\\d\\d|1(?:2[2-9]|3[0-5])|4(?:0[89]|1[2-6]|9\\d)|6(?:1[016-9]|5[0-4]|[67]\\d))|7090[0-4])\\d{4}"], ["80[0-5]\\d{6}"], 0, 0, 0, 0, 0, ["9(?:(?:39[5-7]|76[018])\\d|475[0-6])\\d{4}"]]], "GQ": ["240", "00", "222\\d{6}|(?:3\\d|55|[89]0)\\d{7}", [9], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[235]"]], ["(\\d{3})(\\d{6})", "$1 $2", ["[89]"]]]], "GR": ["30", "00", "5005000\\d{3}|8\\d{9,11}|(?:[269]\\d|70)\\d{8}", [10, 11, 12], [["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["21|7"]], ["(\\d{4})(\\d{6})", "$1 $2", ["2(?:2|3[2-57-9]|4[2-469]|5[2-59]|6[2-9]|7[2-69]|8[2-49])|5"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["[2689]"]], ["(\\d{3})(\\d{3,4})(\\d{5})", "$1 $2 $3", ["8"]]]], "GT": ["502", "00", "80\\d{6}|(?:1\\d{3}|[2-7])\\d{7}", [8, 11], [["(\\d{4})(\\d{4})", "$1 $2", ["[2-8]"]], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"]]]], "GU": ["1", "011", "(?:[58]\\d\\d|671|900)\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "671$1", 0, "671"], "GW": ["245", "00", "[49]\\d{8}|4\\d{6}", [7, 9], [["(\\d{3})(\\d{4})", "$1 $2", ["40"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[49]"]]]], "GY": ["592", "001", "(?:[2-8]\\d{3}|9008)\\d{3}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[2-9]"]]]], "HK": ["852", "00(?:30|5[09]|[126-9]?)", "8[0-46-9]\\d{6,7}|9\\d{4,7}|(?:[2-7]|9\\d{3})\\d{7}", [5, 6, 7, 8, 9, 11], [["(\\d{3})(\\d{2,5})", "$1 $2", ["900", "9003"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[2-7]|8[1-4]|9(?:0[1-9]|[1-8])"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["8"]], ["(\\d{3})(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["9"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "HN": ["504", "00", "8\\d{10}|[237-9]\\d{7}", [8, 11], [["(\\d{4})(\\d{4})", "$1-$2", ["[237-9]"]]]], "HR": ["385", "00", "[2-69]\\d{8}|80\\d{5,7}|[1-79]\\d{7}|6\\d{6}", [7, 8, 9], [["(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3", ["6[01]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2,3})", "$1 $2 $3", ["8"], "0$1"], ["(\\d)(\\d{4})(\\d{3})", "$1 $2 $3", ["1"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["6|7[245]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["9"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[2-57]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["8"], "0$1"]], "0"], "HT": ["509", "00", "(?:[2-489]\\d|55)\\d{6}", [8], [["(\\d{2})(\\d{2})(\\d{4})", "$1 $2 $3", ["[2-589]"]]]], "HU": ["36", "00", "[235-7]\\d{8}|[1-9]\\d{7}", [8, 9], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["1"], "(06 $1)"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[27][2-9]|3[2-7]|4[24-9]|5[2-79]|6|8[2-57-9]|9[2-69]"], "(06 $1)"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[2-9]"], "06 $1"]], "06"], "ID": ["62", "00[89]", "00[1-9]\\d{9,14}|(?:[1-36]|8\\d{5})\\d{6}|00\\d{9}|[1-9]\\d{8,10}|[2-9]\\d{7}", [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["15"]], ["(\\d{2})(\\d{5,9})", "$1 $2", ["2[124]|[36]1"], "(0$1)"], ["(\\d{3})(\\d{5,7})", "$1 $2", ["800"], "0$1"], ["(\\d{3})(\\d{5,8})", "$1 $2", ["[2-79]"], "(0$1)"], ["(\\d{3})(\\d{3,4})(\\d{3})", "$1-$2-$3", ["8[1-35-9]"], "0$1"], ["(\\d{3})(\\d{6,8})", "$1 $2", ["1"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["804"], "0$1"], ["(\\d{3})(\\d)(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["80"], "0$1"], ["(\\d{3})(\\d{4})(\\d{4,5})", "$1-$2-$3", ["8"], "0$1"]], "0"], "IE": ["353", "00", "(?:1\\d|[2569])\\d{6,8}|4\\d{6,9}|7\\d{8}|8\\d{8,9}", [7, 8, 9, 10], [["(\\d{2})(\\d{5})", "$1 $2", ["2[24-9]|47|58|6[237-9]|9[35-9]"], "(0$1)"], ["(\\d{3})(\\d{5})", "$1 $2", ["[45]0"], "(0$1)"], ["(\\d)(\\d{3,4})(\\d{4})", "$1 $2 $3", ["1"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[2569]|4[1-69]|7[14]"], "(0$1)"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["70"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["81"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[78]"], "0$1"], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["1"]], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["4"], "(0$1)"], ["(\\d{2})(\\d)(\\d{3})(\\d{4})", "$1 $2 $3 $4", ["8"], "0$1"]], "0"], "IL": ["972", "0(?:0|1[2-9])", "1\\d{6}(?:\\d{3,5})?|[57]\\d{8}|[1-489]\\d{7}", [7, 8, 9, 10, 11, 12], [["(\\d{4})(\\d{3})", "$1-$2", ["125"]], ["(\\d{4})(\\d{2})(\\d{2})", "$1-$2-$3", ["121"]], ["(\\d)(\\d{3})(\\d{4})", "$1-$2-$3", ["[2-489]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3", ["[57]"], "0$1"], ["(\\d{4})(\\d{3})(\\d{3})", "$1-$2-$3", ["12"]], ["(\\d{4})(\\d{6})", "$1-$2", ["159"]], ["(\\d)(\\d{3})(\\d{3})(\\d{3})", "$1-$2-$3-$4", ["1[7-9]"]], ["(\\d{3})(\\d{1,2})(\\d{3})(\\d{4})", "$1-$2 $3-$4", ["15"]]], "0"], "IM": ["44", "00", "1624\\d{6}|(?:[3578]\\d|90)\\d{8}", [10], 0, "0", 0, "([25-8]\\d{5})$|0", "1624$1", 0, "74576|(?:16|7[56])24"], "IN": ["91", "00", "(?:000800|[2-9]\\d\\d)\\d{7}|1\\d{7,12}", [8, 9, 10, 11, 12, 13], [["(\\d{8})", "$1", ["5(?:0|2[23]|3[03]|[67]1|88)", "5(?:0|2(?:21|3)|3(?:0|3[23])|616|717|888)", "5(?:0|2(?:21|3)|3(?:0|3[23])|616|717|8888)"], 0, 1], ["(\\d{4})(\\d{4,5})", "$1 $2", ["180", "1800"], 0, 1], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["140"], 0, 1], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["11|2[02]|33|4[04]|79[1-7]|80[2-46]", "11|2[02]|33|4[04]|79(?:[1-6]|7[19])|80(?:[2-4]|6[0-589])", "11|2[02]|33|4[04]|79(?:[124-6]|3(?:[02-9]|1[0-24-9])|7(?:1|9[1-6]))|80(?:[2-4]|6[0-589])"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["1(?:2[0-249]|3[0-25]|4[145]|[68]|7[1257])|2(?:1[257]|3[013]|4[01]|5[0137]|6[0158]|78|8[1568])|3(?:26|4[1-3]|5[34]|6[01489]|7[02-46]|8[159])|4(?:1[36]|2[1-47]|5[12]|6[0-26-9]|7[0-24-9]|8[013-57]|9[014-7])|5(?:1[025]|22|[36][25]|4[28]|5[12]|[78]1)|6(?:12|[2-4]1|5[17]|6[13]|80)|7(?:12|3[134]|4[47]|61|88)|8(?:16|2[014]|3[126]|6[136]|7[078]|8[34]|91)|(?:43|59|75)[15]|(?:1[59]|29|67|72)[14]", "1(?:2[0-24]|3[0-25]|4[145]|[59][14]|6[1-9]|7[1257]|8[1-57-9])|2(?:1[257]|3[013]|4[01]|5[0137]|6[058]|78|8[1568]|9[14])|3(?:26|4[1-3]|5[34]|6[01489]|7[02-46]|8[159])|4(?:1[36]|2[1-47]|3[15]|5[12]|6[0-26-9]|7[0-24-9]|8[013-57]|9[014-7])|5(?:1[025]|22|[36][25]|4[28]|[578]1|9[15])|674|7(?:(?:2[14]|3[34]|5[15])[2-6]|61[346]|88[0-8])|8(?:70[2-6]|84[235-7]|91[3-7])|(?:1(?:29|60|8[06])|261|552|6(?:12|[2-47]1|5[17]|6[13]|80)|7(?:12|31|4[47])|8(?:16|2[014]|3[126]|6[136]|7[78]|83))[2-7]", "1(?:2[0-24]|3[0-25]|4[145]|[59][14]|6[1-9]|7[1257]|8[1-57-9])|2(?:1[257]|3[013]|4[01]|5[0137]|6[058]|78|8[1568]|9[14])|3(?:26|4[1-3]|5[34]|6[01489]|7[02-46]|8[159])|4(?:1[36]|2[1-47]|3[15]|5[12]|6[0-26-9]|7[0-24-9]|8[013-57]|9[014-7])|5(?:1[025]|22|[36][25]|4[28]|[578]1|9[15])|6(?:12(?:[2-6]|7[0-8])|74[2-7])|7(?:(?:2[14]|5[15])[2-6]|3171|61[346]|88(?:[2-7]|82))|8(?:70[2-6]|84(?:[2356]|7[19])|91(?:[3-6]|7[19]))|73[134][2-6]|(?:74[47]|8(?:16|2[014]|3[126]|6[136]|7[78]|83))(?:[2-6]|7[19])|(?:1(?:29|60|8[06])|261|552|6(?:[2-4]1|5[17]|6[13]|7(?:1|4[0189])|80)|7(?:12|88[01]))[2-7]"], "0$1", 1], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["1(?:[2-479]|5[0235-9])|[2-5]|6(?:1[1358]|2[2457-9]|3[2-5]|4[235-7]|5[2-689]|6[24578]|7[235689]|8[1-6])|7(?:1[013-9]|28|3[129]|4[1-35689]|5[29]|6[02-5]|70)|807", "1(?:[2-479]|5[0235-9])|[2-5]|6(?:1[1358]|2(?:[2457]|84|95)|3(?:[2-4]|55)|4[235-7]|5[2-689]|6[24578]|7[235689]|8[1-6])|7(?:1(?:[013-8]|9[6-9])|28[6-8]|3(?:17|2[0-49]|9[2-57])|4(?:1[2-4]|[29][0-7]|3[0-8]|[56]|8[0-24-7])|5(?:2[1-3]|9[0-6])|6(?:0[5689]|2[5-9]|3[02-8]|4|5[0-367])|70[13-7])|807[19]", "1(?:[2-479]|5(?:[0236-9]|5[013-9]))|[2-5]|6(?:2(?:84|95)|355|83)|73179|807(?:1|9[1-3])|(?:1552|6(?:1[1358]|2[2457]|3[2-4]|4[235-7]|5[2-689]|6[24578]|7[235689]|8[124-6])\\d|7(?:1(?:[013-8]\\d|9[6-9])|28[6-8]|3(?:2[0-49]|9[2-57])|4(?:1[2-4]|[29][0-7]|3[0-8]|[56]\\d|8[0-24-7])|5(?:2[1-3]|9[0-6])|6(?:0[5689]|2[5-9]|3[02-8]|4\\d|5[0-367])|70[13-7]))[2-7]"], "0$1", 1], ["(\\d{5})(\\d{5})", "$1 $2", ["[6-9]"], "0$1", 1], ["(\\d{4})(\\d{2,4})(\\d{4})", "$1 $2 $3", ["1(?:6|8[06])", "1(?:6|8[06]0)"], 0, 1], ["(\\d{4})(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["18"], 0, 1]], "0"], "IO": ["246", "00", "3\\d{6}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["3"]]]], "IQ": ["964", "00", "(?:1|7\\d\\d)\\d{7}|[2-6]\\d{7,8}", [8, 9, 10], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["1"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[2-6]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["7"], "0$1"]], "0"], "IR": ["98", "00", "[1-9]\\d{9}|(?:[1-8]\\d\\d|9)\\d{3,4}", [4, 5, 6, 7, 10], [["(\\d{4,5})", "$1", ["96"], "0$1"], ["(\\d{2})(\\d{4,5})", "$1 $2", ["(?:1[137]|2[13-68]|3[1458]|4[145]|5[1468]|6[16]|7[1467]|8[13467])[12689]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["9"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["[1-8]"], "0$1"]], "0"], "IS": ["354", "00|1(?:0(?:01|[12]0)|100)", "(?:38\\d|[4-9])\\d{6}", [7, 9], [["(\\d{3})(\\d{4})", "$1 $2", ["[4-9]"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["3"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "IT": ["39", "00", "0\\d{5,10}|1\\d{8,10}|3(?:[0-8]\\d{7,10}|9\\d{7,8})|(?:43|55|70)\\d{8}|8\\d{5}(?:\\d{2,4})?", [6, 7, 8, 9, 10, 11, 12], [["(\\d{2})(\\d{4,6})", "$1 $2", ["0[26]"]], ["(\\d{3})(\\d{3,6})", "$1 $2", ["0[13-57-9][0159]|8(?:03|4[17]|9[2-5])", "0[13-57-9][0159]|8(?:03|4[17]|9(?:2|3[04]|[45][0-4]))"]], ["(\\d{4})(\\d{2,6})", "$1 $2", ["0(?:[13-579][2-46-8]|8[236-8])"]], ["(\\d{4})(\\d{4})", "$1 $2", ["894"]], ["(\\d{2})(\\d{3,4})(\\d{4})", "$1 $2 $3", ["0[26]|5"]], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["1(?:44|[679])|[378]|43"]], ["(\\d{3})(\\d{3,4})(\\d{4})", "$1 $2 $3", ["0[13-57-9][0159]|14"]], ["(\\d{2})(\\d{4})(\\d{5})", "$1 $2 $3", ["0[26]"]], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["0"]], ["(\\d{3})(\\d{4})(\\d{4,5})", "$1 $2 $3", ["3"]]], 0, 0, 0, 0, 0, 0, [["0669[0-79]\\d{1,6}|0(?:1(?:[0159]\\d|[27][1-5]|31|4[1-4]|6[1356]|8[2-57])|2\\d\\d|3(?:[0159]\\d|2[1-4]|3[12]|[48][1-6]|6[2-59]|7[1-7])|4(?:[0159]\\d|[23][1-9]|4[245]|6[1-5]|7[1-4]|81)|5(?:[0159]\\d|2[1-5]|3[2-6]|4[1-79]|6[4-6]|7[1-578]|8[3-8])|6(?:[0-57-9]\\d|6[0-8])|7(?:[0159]\\d|2[12]|3[1-7]|4[2-46]|6[13569]|7[13-6]|8[1-59])|8(?:[0159]\\d|2[3-578]|3[1-356]|[6-8][1-5])|9(?:[0159]\\d|[238][1-5]|4[12]|6[1-8]|7[1-6]))\\d{2,7}", [6, 7, 8, 9, 10, 11]], ["3[2-9]\\d{7,8}|(?:31|43)\\d{8}", [9, 10]], ["80(?:0\\d{3}|3)\\d{3}", [6, 9]], ["(?:0878\\d{3}|89(?:2\\d|3[04]|4(?:[0-4]|[5-9]\\d\\d)|5[0-4]))\\d\\d|(?:1(?:44|6[346])|89(?:38|5[5-9]|9))\\d{6}", [6, 8, 9, 10]], ["1(?:78\\d|99)\\d{6}", [9, 10]], ["3[2-8]\\d{9,10}", [11, 12]], 0, 0, ["55\\d{8}", [10]], ["84(?:[08]\\d{3}|[17])\\d{3}", [6, 9]]]], "JE": ["44", "00", "1534\\d{6}|(?:[3578]\\d|90)\\d{8}", [10], 0, "0", 0, "([0-24-8]\\d{5})$|0", "1534$1", 0, 0, [["1534[0-24-8]\\d{5}"], ["7(?:(?:(?:50|82)9|937)\\d|7(?:00[378]|97\\d))\\d{5}"], ["80(?:07(?:35|81)|8901)\\d{4}"], ["(?:8(?:4(?:4(?:4(?:05|42|69)|703)|5(?:041|800))|7(?:0002|1206))|90(?:066[59]|1810|71(?:07|55)))\\d{4}"], ["701511\\d{4}"], 0, ["(?:3(?:0(?:07(?:35|81)|8901)|3\\d{4}|4(?:4(?:4(?:05|42|69)|703)|5(?:041|800))|7(?:0002|1206))|55\\d{4})\\d{4}"], ["76(?:464|652)\\d{5}|76(?:0[0-28]|2[356]|34|4[01347]|5[49]|6[0-369]|77|8[14]|9[139])\\d{6}"], ["56\\d{8}"]]], "JM": ["1", "011", "(?:[58]\\d\\d|658|900)\\d{7}", [10], 0, "1", 0, 0, 0, 0, "658|876"], "JO": ["962", "00", "(?:(?:[2689]|7\\d)\\d|32|53)\\d{6}", [8, 9], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["[2356]|87"], "(0$1)"], ["(\\d{3})(\\d{5,6})", "$1 $2", ["[89]"], "0$1"], ["(\\d{2})(\\d{7})", "$1 $2", ["70"], "0$1"], ["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["7"], "0$1"]], "0"], "JP": ["81", "010", "00[1-9]\\d{6,14}|[257-9]\\d{9}|(?:00|[1-9]\\d\\d)\\d{6}", [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], [["(\\d{3})(\\d{3})(\\d{3})", "$1-$2-$3", ["(?:12|57|99)0"], "0$1"], ["(\\d{4})(\\d)(\\d{4})", "$1-$2-$3", ["1(?:26|3[79]|4[56]|5[4-68]|6[3-5])|499|5(?:76|97)|746|8(?:3[89]|47|51)|9(?:80|9[16])", "1(?:267|3(?:7[247]|9[278])|466|5(?:47|58|64)|6(?:3[245]|48|5[4-68]))|499[2468]|5(?:76|97)9|7468|8(?:3(?:8[7-9]|96)|477|51[2-9])|9(?:802|9(?:1[23]|69))|1(?:45|58)[67]", "1(?:267|3(?:7[247]|9[278])|466|5(?:47|58|64)|6(?:3[245]|48|5[4-68]))|499[2468]|5(?:769|979[2-69])|7468|8(?:3(?:8[7-9]|96[2457-9])|477|51[2-9])|9(?:802|9(?:1[23]|69))|1(?:45|58)[67]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3", ["60"], "0$1"], ["(\\d)(\\d{4})(\\d{4})", "$1-$2-$3", ["[36]|4(?:2[09]|7[01])", "[36]|4(?:2(?:0|9[02-69])|7(?:0[019]|1))"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3", ["1(?:1|5[45]|77|88|9[69])|2(?:2[1-37]|3[0-269]|4[59]|5|6[24]|7[1-358]|8[1369]|9[0-38])|4(?:[28][1-9]|3[0-57]|[45]|6[248]|7[2-579]|9[29])|5(?:2|3[0459]|4[0-369]|5[29]|8[02389]|9[0-389])|7(?:2[02-46-9]|34|[58]|6[0249]|7[57]|9[2-6])|8(?:2[124589]|3[26-9]|49|51|6|7[0-468]|8[68]|9[019])|9(?:[23][1-9]|4[15]|5[138]|6[1-3]|7[156]|8[189]|9[1-489])", "1(?:1|5(?:4[018]|5[017])|77|88|9[69])|2(?:2(?:[127]|3[014-9])|3[0-269]|4[59]|5(?:[1-3]|5[0-69]|9[19])|62|7(?:[1-35]|8[0189])|8(?:[16]|3[0134]|9[0-5])|9(?:[028]|17))|4(?:2(?:[13-79]|8[014-6])|3[0-57]|[45]|6[248]|7[2-47]|8[1-9]|9[29])|5(?:2|3(?:[045]|9[0-8])|4[0-369]|5[29]|8[02389]|9[0-3])|7(?:2[02-46-9]|34|[58]|6[0249]|7[57]|9(?:[23]|4[0-59]|5[01569]|6[0167]))|8(?:2(?:[1258]|4[0-39]|9[0-2469])|3(?:[29]|60)|49|51|6(?:[0-24]|36|5[0-3589]|7[23]|9[01459])|7[0-468]|8[68])|9(?:[23][1-9]|4[15]|5[138]|6[1-3]|7[156]|8[189]|9(?:[1289]|3[34]|4[0178]))|(?:264|837)[016-9]|2(?:57|93)[015-9]|(?:25[0468]|422|838)[01]|(?:47[59]|59[89]|8(?:6[68]|9))[019]", "1(?:1|5(?:4[018]|5[017])|77|88|9[69])|2(?:2[127]|3[0-269]|4[59]|5(?:[1-3]|5[0-69]|9(?:17|99))|6(?:2|4[016-9])|7(?:[1-35]|8[0189])|8(?:[16]|3[0134]|9[0-5])|9(?:[028]|17))|4(?:2(?:[13-79]|8[014-6])|3[0-57]|[45]|6[248]|7[2-47]|9[29])|5(?:2|3(?:[045]|9(?:[0-58]|6[4-9]|7[0-35689]))|4[0-369]|5[29]|8[02389]|9[0-3])|7(?:2[02-46-9]|34|[58]|6[0249]|7[57]|9(?:[23]|4[0-59]|5[01569]|6[0167]))|8(?:2(?:[1258]|4[0-39]|9[0169])|3(?:[29]|60|7(?:[017-9]|6[6-8]))|49|51|6(?:[0-24]|36[2-57-9]|5(?:[0-389]|5[23])|6(?:[01]|9[178])|7(?:2[2-468]|3[78])|9[0145])|7[0-468]|8[68])|9(?:4[15]|5[138]|7[156]|8[189]|9(?:[1289]|3(?:31|4[357])|4[0178]))|(?:8294|96)[1-3]|2(?:57|93)[015-9]|(?:223|8699)[014-9]|(?:25[0468]|422|838)[01]|(?:48|8292|9[23])[1-9]|(?:47[59]|59[89]|8(?:68|9))[019]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{4})", "$1-$2-$3", ["[14]|[289][2-9]|5[3-9]|7[2-4679]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3", ["800"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4})", "$1-$2-$3", ["[257-9]"], "0$1"]], "0", 0, "(000[259]\\d{6})$|(?:(?:003768)0?)|0", "$1"], "KE": ["254", "000", "(?:[17]\\d\\d|900)\\d{6}|(?:2|80)0\\d{6,7}|[4-6]\\d{6,8}", [7, 8, 9, 10], [["(\\d{2})(\\d{5,7})", "$1 $2", ["[24-6]"], "0$1"], ["(\\d{3})(\\d{6})", "$1 $2", ["[17]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[89]"], "0$1"]], "0"], "KG": ["996", "00", "8\\d{9}|[235-9]\\d{8}", [9, 10], [["(\\d{4})(\\d{5})", "$1 $2", ["3(?:1[346]|[24-79])"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[235-79]|88"], "0$1"], ["(\\d{3})(\\d{3})(\\d)(\\d{2,3})", "$1 $2 $3 $4", ["8"], "0$1"]], "0"], "KH": ["855", "00[14-9]", "1\\d{9}|[1-9]\\d{7,8}", [8, 9, 10], [["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[1-9]"], "0$1"], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["1"]]], "0"], "KI": ["686", "00", "(?:[37]\\d|6[0-79])\\d{6}|(?:[2-48]\\d|50)\\d{3}", [5, 8], 0, "0"], "KM": ["269", "00", "[3478]\\d{6}", [7], [["(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3", ["[3478]"]]]], "KN": ["1", "011", "(?:[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-7]\\d{6})$|1", "869$1", 0, "869"], "KP": ["850", "00|99", "85\\d{6}|(?:19\\d|[2-7])\\d{7}", [8, 10], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["8"], "0$1"], ["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["[2-7]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"], "0$1"]], "0"], "KR": ["82", "00(?:[125689]|3(?:[46]5|91)|7(?:00|27|3|55|6[126]))", "00[1-9]\\d{8,11}|(?:[12]|5\\d{3})\\d{7}|[13-6]\\d{9}|(?:[1-6]\\d|80)\\d{7}|[3-6]\\d{4,5}|(?:00|7)0\\d{8}", [5, 6, 8, 9, 10, 11, 12, 13, 14], [["(\\d{2})(\\d{3,4})", "$1-$2", ["(?:3[1-3]|[46][1-4]|5[1-5])1"], "0$1"], ["(\\d{4})(\\d{4})", "$1-$2", ["1"]], ["(\\d)(\\d{3,4})(\\d{4})", "$1-$2-$3", ["2"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1-$2-$3", ["[36]0|8"], "0$1"], ["(\\d{2})(\\d{3,4})(\\d{4})", "$1-$2-$3", ["[1346]|5[1-5]"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4})", "$1-$2-$3", ["[57]"], "0$1"], ["(\\d{2})(\\d{5})(\\d{4})", "$1-$2-$3", ["5"], "0$1"]], "0", 0, "0(8(?:[1-46-8]|5\\d\\d))?"], "KW": ["965", "00", "18\\d{5}|(?:[2569]\\d|41)\\d{6}", [7, 8], [["(\\d{4})(\\d{3,4})", "$1 $2", ["[169]|2(?:[235]|4[1-35-9])|52"]], ["(\\d{3})(\\d{5})", "$1 $2", ["[245]"]]]], "KY": ["1", "011", "(?:345|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "345$1", 0, "345"], "KZ": ["7", "810", "(?:33622|8\\d{8})\\d{5}|[78]\\d{9}", [10, 14], 0, "8", 0, 0, 0, 0, "33|7", 0, "8~10"], "LA": ["856", "00", "[23]\\d{9}|3\\d{8}|(?:[235-8]\\d|41)\\d{6}", [8, 9, 10], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["2[13]|3[14]|[4-8]"], "0$1"], ["(\\d{2})(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3 $4", ["3"], "0$1"], ["(\\d{2})(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["[23]"], "0$1"]], "0"], "LB": ["961", "00", "[27-9]\\d{7}|[13-9]\\d{6}", [7, 8], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["[13-69]|7(?:[2-57]|62|8[0-6]|9[04-9])|8[02-9]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[27-9]"]]], "0"], "LC": ["1", "011", "(?:[58]\\d\\d|758|900)\\d{7}", [10], 0, "1", 0, "([2-8]\\d{6})$|1", "758$1", 0, "758"], "LI": ["423", "00", "[68]\\d{8}|(?:[2378]\\d|90)\\d{5}", [7, 9], [["(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3", ["[2379]|8(?:0[09]|7)", "[2379]|8(?:0(?:02|9)|7)"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["8"]], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["69"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["6"]]], "0", 0, "(1001)|0"], "LK": ["94", "00", "[1-9]\\d{8}", [9], [["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["7"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[1-689]"], "0$1"]], "0"], "LR": ["231", "00", "(?:[2457]\\d|33|88)\\d{7}|(?:2\\d|[4-6])\\d{6}", [7, 8, 9], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["4[67]|[56]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[2-578]"], "0$1"]], "0"], "LS": ["266", "00", "(?:[256]\\d\\d|800)\\d{5}", [8], [["(\\d{4})(\\d{4})", "$1 $2", ["[2568]"]]]], "LT": ["370", "00", "(?:[3469]\\d|52|[78]0)\\d{6}", [8], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["52[0-7]"], "(0-$1)", 1], ["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["[7-9]"], "0 $1", 1], ["(\\d{2})(\\d{6})", "$1 $2", ["37|4(?:[15]|6[1-8])"], "(0-$1)", 1], ["(\\d{3})(\\d{5})", "$1 $2", ["[3-6]"], "(0-$1)", 1]], "0", 0, "[08]"], "LU": ["352", "00", "35[013-9]\\d{4,8}|6\\d{8}|35\\d{2,4}|(?:[2457-9]\\d|3[0-46-9])\\d{2,9}", [4, 5, 6, 7, 8, 9, 10, 11], [["(\\d{2})(\\d{3})", "$1 $2", ["2(?:0[2-689]|[2-9])|[3-57]|8(?:0[2-9]|[13-9])|9(?:0[89]|[2-579])"]], ["(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3", ["2(?:0[2-689]|[2-9])|[3-57]|8(?:0[2-9]|[13-9])|9(?:0[89]|[2-579])"]], ["(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3", ["20[2-689]"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})", "$1 $2 $3 $4", ["2(?:[0367]|4[3-8])"]], ["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["80[01]|90[015]"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3 $4", ["20"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["6"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{1,2})", "$1 $2 $3 $4 $5", ["2(?:[0367]|4[3-8])"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{1,5})", "$1 $2 $3 $4", ["[3-57]|8[13-9]|9(?:0[89]|[2-579])|(?:2|80)[2-9]"]]], 0, 0, "(15(?:0[06]|1[12]|[35]5|4[04]|6[26]|77|88|99)\\d)"], "LV": ["371", "00", "(?:[268]\\d|90)\\d{6}", [8], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[269]|8[01]"]]]], "LY": ["218", "00", "[2-9]\\d{8}", [9], [["(\\d{2})(\\d{7})", "$1-$2", ["[2-9]"], "0$1"]], "0"], "MA": ["212", "00", "[5-8]\\d{8}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["5[45]"], "0$1"], ["(\\d{4})(\\d{5})", "$1-$2", ["5(?:2[2-46-9]|3[3-9]|9)|8(?:0[89]|92)"], "0$1"], ["(\\d{2})(\\d{7})", "$1-$2", ["8"], "0$1"], ["(\\d{3})(\\d{6})", "$1-$2", ["[5-7]"], "0$1"]], "0", 0, 0, 0, 0, 0, [["5(?:2(?:[0-25-79]\\d|3[1-578]|4[02-46-8]|8[0235-7])|3(?:[0-47]\\d|5[02-9]|6[02-8]|8[014-9]|9[3-9])|(?:4[067]|5[03])\\d)\\d{5}"], ["(?:6(?:[0-79]\\d|8[0-247-9])|7(?:[0167]\\d|2[0-467]|5[0-3]|8[0-7]))\\d{6}"], ["80[0-7]\\d{6}"], ["89\\d{7}"], 0, 0, 0, 0, ["(?:592(?:4[0-2]|93)|80[89]\\d\\d)\\d{4}"]]], "MC": ["377", "00", "(?:[3489]|6\\d)\\d{7}", [8, 9], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["4"], "0$1"], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[389]"]], ["(\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4 $5", ["6"], "0$1"]], "0"], "MD": ["373", "00", "(?:[235-7]\\d|[89]0)\\d{6}", [8], [["(\\d{3})(\\d{5})", "$1 $2", ["[89]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["22|3"], "0$1"], ["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["[25-7]"], "0$1"]], "0"], "ME": ["382", "00", "(?:20|[3-79]\\d)\\d{6}|80\\d{6,7}", [8, 9], [["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[2-9]"], "0$1"]], "0"], "MF": ["590", "00", "(?:590\\d|7090)\\d{5}|(?:69|80|9\\d)\\d{7}", [9], 0, "0", 0, 0, 0, 0, 0, [["590(?:0[079]|[14]3|[27][79]|3[03-7]|5[0-268]|87)\\d{4}"], ["(?:69(?:0\\d\\d|1(?:2[2-9]|3[0-5])|4(?:0[89]|1[2-6]|9\\d)|6(?:1[016-9]|5[0-4]|[67]\\d))|7090[0-4])\\d{4}"], ["80[0-5]\\d{6}"], 0, 0, 0, 0, 0, ["9(?:(?:39[5-7]|76[018])\\d|475[0-6])\\d{4}"]]], "MG": ["261", "00", "[23]\\d{8}", [9], [["(\\d{2})(\\d{2})(\\d{3})(\\d{2})", "$1 $2 $3 $4", ["[23]"], "0$1"]], "0", 0, "([24-9]\\d{6})$|0", "20$1"], "MH": ["692", "011", "329\\d{4}|(?:[256]\\d|45)\\d{5}", [7], [["(\\d{3})(\\d{4})", "$1-$2", ["[2-6]"]]], "1"], "MK": ["389", "00", "[2-578]\\d{7}", [8], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["2|34[47]|4(?:[37]7|5[47]|64)"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[347]"], "0$1"], ["(\\d{3})(\\d)(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[58]"], "0$1"]], "0"], "ML": ["223", "00", "[24-9]\\d{7}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[24-9]"]]]], "MM": ["95", "00", "1\\d{5,7}|95\\d{6}|(?:[4-7]|9[0-46-9])\\d{6,8}|(?:2|8\\d)\\d{5,8}", [6, 7, 8, 9, 10], [["(\\d)(\\d{2})(\\d{3})", "$1 $2 $3", ["16|2"], "0$1"], ["(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3", ["4(?:[2-46]|5[3-5])|5|6(?:[1-689]|7[235-7])|7(?:[0-4]|5[2-7])|8[1-5]|(?:60|86)[23]"], "0$1"], ["(\\d)(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[12]|452|678|86", "[12]|452|6788|86"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[4-7]|8[1-35]"], "0$1"], ["(\\d)(\\d{3})(\\d{4,6})", "$1 $2 $3", ["9(?:2[0-4]|[35-9]|4[137-9])"], "0$1"], ["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["8"], "0$1"], ["(\\d)(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["92"], "0$1"], ["(\\d)(\\d{5})(\\d{4})", "$1 $2 $3", ["9"], "0$1"]], "0"], "MN": ["976", "001", "[12]\\d{7,9}|[5-9]\\d{7}", [8, 9, 10], [["(\\d{2})(\\d{2})(\\d{4})", "$1 $2 $3", ["[12]1"], "0$1"], ["(\\d{4})(\\d{4})", "$1 $2", ["[5-9]"]], ["(\\d{3})(\\d{5,6})", "$1 $2", ["[12]2[1-3]"], "0$1"], ["(\\d{4})(\\d{5,6})", "$1 $2", ["[12](?:27|3[2-8]|4[2-68]|5[1-4689])", "[12](?:27|3[2-8]|4[2-68]|5[1-4689])[0-3]"], "0$1"], ["(\\d{5})(\\d{4,5})", "$1 $2", ["[12]"], "0$1"]], "0"], "MO": ["853", "00", "0800\\d{3}|(?:28|[68]\\d)\\d{6}", [7, 8], [["(\\d{4})(\\d{3})", "$1 $2", ["0"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[268]"]]]], "MP": ["1", "011", "[58]\\d{9}|(?:67|90)0\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "670$1", 0, "670"], "MQ": ["596", "00", "(?:596\\d|7091)\\d{5}|(?:69|[89]\\d)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[5-79]|8(?:0[6-9]|[36])"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"], "0$1"]], "0"], "MR": ["222", "00", "(?:[2-4]\\d\\d|800)\\d{5}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[2-48]"]]]], "MS": ["1", "011", "(?:[58]\\d\\d|664|900)\\d{7}", [10], 0, "1", 0, "([34]\\d{6})$|1", "664$1", 0, "664"], "MT": ["356", "00", "3550\\d{4}|(?:[2579]\\d\\d|800)\\d{5}", [8], [["(\\d{4})(\\d{4})", "$1 $2", ["[2357-9]"]]]], "MU": ["230", "0(?:0|[24-7]0|3[03])", "(?:[57]|8\\d\\d)\\d{7}|[2-468]\\d{6}", [7, 8, 10], [["(\\d{3})(\\d{4})", "$1 $2", ["[2-46]|8[013]"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[57]"]], ["(\\d{5})(\\d{5})", "$1 $2", ["8"]]], 0, 0, 0, 0, 0, 0, 0, "020"], "MV": ["960", "0(?:0|19)", "(?:800|9[0-57-9]\\d)\\d{7}|[34679]\\d{6}", [7, 10], [["(\\d{3})(\\d{4})", "$1-$2", ["[34679]"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["[89]"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "MW": ["265", "00", "(?:[1289]\\d|31|77)\\d{7}|1\\d{6}", [7, 9], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["1[2-9]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[137-9]"], "0$1"]], "0"], "MX": ["52", "0[09]", "[2-9]\\d{9}", [10], [["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["33|5[56]|81"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["[2-9]"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "MY": ["60", "00", "1\\d{8,9}|(?:3\\d|[4-9])\\d{7}", [8, 9, 10], [["(\\d)(\\d{3})(\\d{4})", "$1-$2 $3", ["[4-79]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1-$2 $3", ["1(?:[02469]|[378][1-9]|53)|8", "1(?:[02469]|[37][1-9]|53|8(?:[1-46-9]|5[7-9]))|8"], "0$1"], ["(\\d)(\\d{4})(\\d{4})", "$1-$2 $3", ["3"], "0$1"], ["(\\d)(\\d{3})(\\d{2})(\\d{4})", "$1-$2-$3-$4", ["1(?:[367]|80)"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1-$2 $3", ["15"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4})", "$1-$2 $3", ["1"], "0$1"]], "0"], "MZ": ["258", "00", "(?:2|8\\d)\\d{7}", [8, 9], [["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["2|8[2-79]"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["8"]]]], "NA": ["264", "00", "[68]\\d{7,8}", [8, 9], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["88"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["6"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["87"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["8"], "0$1"]], "0"], "NC": ["687", "00", "(?:050|[2-57-9]\\d\\d)\\d{3}", [6], [["(\\d{2})(\\d{2})(\\d{2})", "$1.$2.$3", ["[02-57-9]"]]]], "NE": ["227", "00", "[027-9]\\d{7}", [8], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["08"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[089]|2[013]|7[0467]"]]]], "NF": ["672", "00", "[13]\\d{5}", [6], [["(\\d{2})(\\d{4})", "$1 $2", ["1[0-3]"]], ["(\\d)(\\d{5})", "$1 $2", ["[13]"]]], 0, 0, "([0-258]\\d{4})$", "3$1"], "NG": ["234", "009", "(?:20|9\\d)\\d{8}|[78]\\d{9,13}", [10, 11, 12, 13, 14], [["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[7-9]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["20[129]"], "0$1"], ["(\\d{4})(\\d{2})(\\d{4})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{3})(\\d{4})(\\d{4,5})", "$1 $2 $3", ["[78]"], "0$1"], ["(\\d{3})(\\d{5})(\\d{5,6})", "$1 $2 $3", ["[78]"], "0$1"]], "0"], "NI": ["505", "00", "(?:1800|[25-8]\\d{3})\\d{4}", [8], [["(\\d{4})(\\d{4})", "$1 $2", ["[125-8]"]]]], "NL": ["31", "00", "(?:[124-7]\\d\\d|3(?:[02-9]\\d|1[0-8]))\\d{6}|8\\d{6,9}|9\\d{6,10}|1\\d{4,5}", [5, 6, 7, 8, 9, 10, 11], [["(\\d{3})(\\d{4,7})", "$1 $2", ["[89]0"], "0$1"], ["(\\d{2})(\\d{7})", "$1 $2", ["66"], "0$1"], ["(\\d)(\\d{8})", "$1 $2", ["6"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["1[16-8]|2[259]|3[124]|4[17-9]|5[124679]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[1-578]|91"], "0$1"], ["(\\d{3})(\\d{3})(\\d{5})", "$1 $2 $3", ["9"], "0$1"]], "0"], "NO": ["47", "00", "(?:0|[2-9]\\d{3})\\d{4}", [5, 8], [["(\\d{3})(\\d{2})(\\d{3})", "$1 $2 $3", ["8"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[2-79]"]]], 0, 0, 0, 0, 0, "[02-689]|7[0-8]"], "NP": ["977", "00", "(?:1\\d|9)\\d{9}|[1-9]\\d{7}", [8, 10, 11], [["(\\d)(\\d{7})", "$1-$2", ["1[2-6]"], "0$1"], ["(\\d{2})(\\d{6})", "$1-$2", ["1[01]|[2-8]|9(?:[1-59]|[67][2-6])"], "0$1"], ["(\\d{3})(\\d{7})", "$1-$2", ["9"]]], "0"], "NR": ["674", "00", "(?:222|444|(?:55|8\\d)\\d|666|777|999)\\d{4}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[24-9]"]]]], "NU": ["683", "00", "(?:[4-7]|888\\d)\\d{3}", [4, 7], [["(\\d{3})(\\d{4})", "$1 $2", ["8"]]]], "NZ": ["64", "0(?:0|161)", "[1289]\\d{9}|50\\d{5}(?:\\d{2,3})?|[27-9]\\d{7,8}|(?:[34]\\d|6[0-35-9])\\d{6}|8\\d{4,6}", [5, 6, 7, 8, 9, 10], [["(\\d{2})(\\d{3,8})", "$1 $2", ["8[1-79]"], "0$1"], ["(\\d{3})(\\d{2})(\\d{2,3})", "$1 $2 $3", ["50[036-8]|8|90", "50(?:[0367]|88)|8|90"], "0$1"], ["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["24|[346]|7[2-57-9]|9[2-9]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["2(?:10|74)|[589]"], "0$1"], ["(\\d{2})(\\d{3,4})(\\d{4})", "$1 $2 $3", ["1|2[028]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,5})", "$1 $2 $3", ["2(?:[169]|7[0-35-9])|7"], "0$1"]], "0", 0, 0, 0, 0, 0, 0, "00"], "OM": ["968", "00", "(?:1505|[279]\\d{3}|500)\\d{4}|800\\d{5,6}", [7, 8, 9], [["(\\d{3})(\\d{4,6})", "$1 $2", ["[58]"]], ["(\\d{2})(\\d{6})", "$1 $2", ["2"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[179]"]]]], "PA": ["507", "00", "(?:00800|8\\d{3})\\d{6}|[68]\\d{7}|[1-57-9]\\d{6}", [7, 8, 10, 11], [["(\\d{3})(\\d{4})", "$1-$2", ["[1-57-9]"]], ["(\\d{4})(\\d{4})", "$1-$2", ["[68]"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["8"]]]], "PE": ["51", "00|19(?:1[124]|77|90)00", "(?:[14-8]|9\\d)\\d{7}", [8, 9], [["(\\d{3})(\\d{5})", "$1 $2", ["80"], "(0$1)"], ["(\\d)(\\d{7})", "$1 $2", ["1"], "(0$1)"], ["(\\d{2})(\\d{6})", "$1 $2", ["[4-8]"], "(0$1)"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["9"]]], "0", 0, 0, 0, 0, 0, 0, "00", " Anexo "], "PF": ["689", "00", "4\\d{5}(?:\\d{2})?|8\\d{7,8}", [6, 8, 9], [["(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3", ["44"]], ["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["4|8[7-9]"]], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"]]]], "PG": ["675", "00|140[1-3]", "(?:180|[78]\\d{3})\\d{4}|(?:[2-589]\\d|64)\\d{5}", [7, 8], [["(\\d{3})(\\d{4})", "$1 $2", ["18|[2-69]|85"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[78]"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "PH": ["63", "00", "(?:[2-7]|9\\d)\\d{8}|2\\d{5}|(?:1800|8)\\d{7,9}", [6, 8, 9, 10, 11, 12, 13], [["(\\d)(\\d{5})", "$1 $2", ["2"], "(0$1)"], ["(\\d{4})(\\d{4,6})", "$1 $2", ["3(?:23|39|46)|4(?:2[3-6]|[35]9|4[26]|76)|544|88[245]|(?:52|64|86)2", "3(?:230|397|461)|4(?:2(?:35|[46]4|51)|396|4(?:22|63)|59[347]|76[15])|5(?:221|446)|642[23]|8(?:622|8(?:[24]2|5[13]))"], "(0$1)"], ["(\\d{5})(\\d{4})", "$1 $2", ["346|4(?:27|9[35])|883", "3469|4(?:279|9(?:30|56))|8834"], "(0$1)"], ["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["2"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[3-7]|8[2-8]"], "(0$1)"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["[89]"], "0$1"], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"]], ["(\\d{4})(\\d{1,2})(\\d{3})(\\d{4})", "$1 $2 $3 $4", ["1"]]], "0"], "PK": ["92", "00", "122\\d{6}|[24-8]\\d{10,11}|9(?:[013-9]\\d{8,10}|2(?:[01]\\d\\d|2(?:[06-8]\\d|1[01]))\\d{7})|(?:[2-8]\\d{3}|92(?:[0-7]\\d|8[1-9]))\\d{6}|[24-9]\\d{8}|[89]\\d{7}", [8, 9, 10, 11, 12], [["(\\d{3})(\\d{3})(\\d{2,7})", "$1 $2 $3", ["[89]0"], "0$1"], ["(\\d{4})(\\d{5})", "$1 $2", ["1"]], ["(\\d{3})(\\d{6,7})", "$1 $2", ["2(?:3[2358]|4[2-4]|9[2-8])|45[3479]|54[2-467]|60[468]|72[236]|8(?:2[2-689]|3[23578]|4[3478]|5[2356])|9(?:2[2-8]|3[27-9]|4[2-6]|6[3569]|9[25-8])", "9(?:2[3-8]|98)|(?:2(?:3[2358]|4[2-4]|9[2-8])|45[3479]|54[2-467]|60[468]|72[236]|8(?:2[2-689]|3[23578]|4[3478]|5[2356])|9(?:22|3[27-9]|4[2-6]|6[3569]|9[25-7]))[2-9]"], "(0$1)"], ["(\\d{2})(\\d{7,8})", "$1 $2", ["(?:2[125]|4[0-246-9]|5[1-35-7]|6[1-8]|7[14]|8[16]|91)[2-9]"], "(0$1)"], ["(\\d{5})(\\d{5})", "$1 $2", ["58"], "(0$1)"], ["(\\d{3})(\\d{7})", "$1 $2", ["3"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["2[125]|4[0-246-9]|5[1-35-7]|6[1-8]|7[14]|8[16]|91"], "(0$1)"], ["(\\d{3})(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["[24-9]"], "(0$1)"]], "0"], "PL": ["48", "00", "(?:6|8\\d\\d)\\d{7}|[1-9]\\d{6}(?:\\d{2})?|[26]\\d{5}", [6, 7, 8, 9, 10], [["(\\d{5})", "$1", ["19"]], ["(\\d{3})(\\d{3})", "$1 $2", ["11|20|64"]], ["(\\d{2})(\\d{2})(\\d{3})", "$1 $2 $3", ["(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])1", "(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])19"]], ["(\\d{3})(\\d{2})(\\d{2,3})", "$1 $2 $3", ["64"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["21|39|45|5[0137]|6[0469]|7[02389]|8(?:0[14]|8)"]], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["1[2-8]|[2-7]|8[1-79]|9[145]"]], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["8"]]]], "PM": ["508", "00", "[45]\\d{5}|(?:708|8\\d\\d)\\d{6}", [6, 9], [["(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3", ["[45]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["7"]], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"], "0$1"]], "0"], "PR": ["1", "011", "(?:[589]\\d\\d|787)\\d{7}", [10], 0, "1", 0, 0, 0, 0, "787|939"], "PS": ["970", "00", "[2489]2\\d{6}|(?:1\\d|5)\\d{8}", [8, 9, 10], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["[2489]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["5"], "0$1"], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["1"]]], "0"], "PT": ["351", "00", "1693\\d{5}|(?:[26-9]\\d|30)\\d{7}", [9], [["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["2[12]"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["16|[236-9]"]]]], "PW": ["680", "01[12]", "(?:[24-8]\\d\\d|345|900)\\d{4}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[2-9]"]]]], "PY": ["595", "00", "59\\d{4,6}|9\\d{5,10}|(?:[2-46-8]\\d|5[0-8])\\d{4,7}", [6, 7, 8, 9, 10, 11], [["(\\d{3})(\\d{3,6})", "$1 $2", ["[2-9]0"], "0$1"], ["(\\d{2})(\\d{5})", "$1 $2", ["[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]"], "(0$1)"], ["(\\d{3})(\\d{4,5})", "$1 $2", ["2[279]|3[13-5]|4[359]|5|6(?:[34]|7[1-46-8])|7[46-8]|85"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["2[14-68]|3[26-9]|4[1246-8]|6(?:1|75)|7[1-35]|8[1-36]"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["87"]], ["(\\d{3})(\\d{6})", "$1 $2", ["9(?:[5-79]|8[1-7])"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[2-8]"], "0$1"], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["9"]]], "0"], "QA": ["974", "00", "800\\d{4}|(?:2|800)\\d{6}|(?:0080|[3-7])\\d{7}", [7, 8, 9, 11], [["(\\d{3})(\\d{4})", "$1 $2", ["2[136]|8"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[3-7]"]]]], "RE": ["262", "00", "709\\d{6}|(?:26|[689]\\d)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[26-9]"], "0$1"]], "0", 0, 0, 0, 0, 0, [["26(?:2\\d\\d|3(?:0\\d|1[0-6]))\\d{4}"], ["(?:69(?:2\\d\\d|3(?:[06][0-6]|1[0-3]|2[0-2]|3[0-39]|4\\d|5[0-5]|7[0-37]|8[0-8]|9[0-479]))|7092[0-3])\\d{4}"], ["80\\d{7}"], ["89[1-37-9]\\d{6}"], 0, 0, 0, 0, ["9(?:399[0-3]|479[0-6]|76(?:2[278]|3[0-37]))\\d{4}"], ["8(?:1[019]|2[0156]|84|90)\\d{6}"]]], "RO": ["40", "00", "(?:[236-8]\\d|90)\\d{7}|[23]\\d{5}", [6, 9], [["(\\d{3})(\\d{3})", "$1 $2", ["2[3-6]", "2[3-6]\\d9"], "0$1"], ["(\\d{2})(\\d{4})", "$1 $2", ["219|31"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[23]1"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[236-9]"], "0$1"]], "0", 0, 0, 0, 0, 0, 0, 0, " int "], "RS": ["381", "00", "38[02-9]\\d{6,9}|6\\d{7,9}|90\\d{4,8}|38\\d{5,6}|(?:7\\d\\d|800)\\d{3,9}|(?:[12]\\d|3[0-79])\\d{5,10}", [6, 7, 8, 9, 10, 11, 12], [["(\\d{3})(\\d{3,9})", "$1 $2", ["(?:2[389]|39)0|[7-9]"], "0$1"], ["(\\d{2})(\\d{5,10})", "$1 $2", ["[1-36]"], "0$1"]], "0"], "RU": ["7", "810", "8\\d{13}|[347-9]\\d{9}", [10, 14], [["(\\d{4})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["7(?:1[0-8]|2[1-9])", "7(?:1(?:[0-356]2|4[29]|7|8[27])|2(?:1[23]|[2-9]2))", "7(?:1(?:[0-356]2|4[29]|7|8[27])|2(?:13[03-69]|62[013-9]))|72[1-57-9]2"], "8 ($1)", 1], ["(\\d{5})(\\d)(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["7(?:1[0-68]|2[1-9])", "7(?:1(?:[06][3-6]|[18]|2[35]|[3-5][3-5])|2(?:[13][3-5]|[24-689]|7[457]))", "7(?:1(?:0(?:[356]|4[023])|[18]|2(?:3[013-9]|5)|3[45]|43[013-79]|5(?:3[1-8]|4[1-7]|5)|6(?:3[0-35-9]|[4-6]))|2(?:1(?:3[178]|[45])|[24-689]|3[35]|7[457]))|7(?:14|23)4[0-8]|71(?:33|45)[1-79]"], "8 ($1)", 1], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["7"], "8 ($1)", 1], ["(\\d{3})(\\d{3})(\\d{2})(\\d{2})", "$1 $2-$3-$4", ["[349]|8(?:[02-7]|1[1-8])"], "8 ($1)", 1], ["(\\d{4})(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["8"], "8 ($1)"]], "8", 0, 0, 0, 0, "3[04-689]|[489]", 0, "8~10"], "RW": ["250", "00", "(?:06|[27]\\d\\d|[89]00)\\d{6}", [8, 9], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["0"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["2"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[7-9]"], "0$1"]], "0"], "SA": ["966", "00", "(?:[15]\\d|800|92)\\d{7}", [9, 10], [["(\\d{4})(\\d{5})", "$1 $2", ["9"]], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["5"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["8"]]], "0"], "SB": ["677", "0[01]", "[6-9]\\d{6}|[1-6]\\d{4}", [5, 7], [["(\\d{2})(\\d{5})", "$1 $2", ["6[89]|7|8[4-9]|9(?:[1-8]|9[0-8])"]]]], "SC": ["248", "010|0[0-2]", "(?:[2489]\\d|64)\\d{5}", [7], [["(\\d)(\\d{3})(\\d{3})", "$1 $2 $3", ["[246]|9[57]"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "SD": ["249", "00", "[19]\\d{8}", [9], [["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[19]"], "0$1"]], "0"], "SE": ["46", "00", "(?:[26]\\d\\d|9)\\d{9}|[1-9]\\d{8}|[1-689]\\d{7}|[1-4689]\\d{6}|2\\d{5}", [6, 7, 8, 9, 10, 12], [["(\\d{2})(\\d{2,3})(\\d{2})", "$1-$2 $3", ["20"], "0$1", 0, "$1 $2 $3"], ["(\\d{3})(\\d{4})", "$1-$2", ["9(?:00|39|44|9)"], "0$1", 0, "$1 $2"], ["(\\d{2})(\\d{3})(\\d{2})", "$1-$2 $3", ["[12][136]|3[356]|4[0246]|6[03]|90[1-9]"], "0$1", 0, "$1 $2 $3"], ["(\\d)(\\d{2,3})(\\d{2})(\\d{2})", "$1-$2 $3 $4", ["8"], "0$1", 0, "$1 $2 $3 $4"], ["(\\d{3})(\\d{2,3})(\\d{2})", "$1-$2 $3", ["1[2457]|2(?:[247-9]|5[0138])|3[0247-9]|4[1357-9]|5[0-35-9]|6(?:[125689]|4[02-57]|7[0-2])|9(?:[125-8]|3[02-5]|4[0-3])"], "0$1", 0, "$1 $2 $3"], ["(\\d{3})(\\d{2,3})(\\d{3})", "$1-$2 $3", ["9(?:00|39|44)"], "0$1", 0, "$1 $2 $3"], ["(\\d{2})(\\d{2,3})(\\d{2})(\\d{2})", "$1-$2 $3 $4", ["1[13689]|2[0136]|3[1356]|4[0246]|54|6[03]|90[1-9]"], "0$1", 0, "$1 $2 $3 $4"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1-$2 $3 $4", ["10|7"], "0$1", 0, "$1 $2 $3 $4"], ["(\\d)(\\d{3})(\\d{3})(\\d{2})", "$1-$2 $3 $4", ["8"], "0$1", 0, "$1 $2 $3 $4"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1-$2 $3 $4", ["[13-5]|2(?:[247-9]|5[0138])|6(?:[124-689]|7[0-2])|9(?:[125-8]|3[02-5]|4[0-3])"], "0$1", 0, "$1 $2 $3 $4"], ["(\\d{3})(\\d{2})(\\d{2})(\\d{3})", "$1-$2 $3 $4", ["9"], "0$1", 0, "$1 $2 $3 $4"], ["(\\d{3})(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1-$2 $3 $4 $5", ["[26]"], "0$1", 0, "$1 $2 $3 $4 $5"]], "0"], "SG": ["65", "0[0-3]\\d", "(?:(?:1\\d|8)\\d\\d|7000)\\d{7}|[3689]\\d{7}", [8, 10, 11], [["(\\d{4})(\\d{4})", "$1 $2", ["[369]|8(?:0[1-9]|[1-9])"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["8"]], ["(\\d{4})(\\d{4})(\\d{3})", "$1 $2 $3", ["7"]], ["(\\d{4})(\\d{3})(\\d{4})", "$1 $2 $3", ["1"]]]], "SH": ["290", "00", "(?:[256]\\d|8)\\d{3}", [4, 5], 0, 0, 0, 0, 0, 0, "[256]"], "SI": ["386", "00|10(?:22|66|88|99)", "[1-7]\\d{7}|8\\d{4,7}|90\\d{4,6}", [5, 6, 7, 8], [["(\\d{2})(\\d{3,6})", "$1 $2", ["8[09]|9"], "0$1"], ["(\\d{3})(\\d{5})", "$1 $2", ["59|8"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[37][01]|4[0139]|51|6"], "0$1"], ["(\\d)(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[1-57]"], "(0$1)"]], "0", 0, 0, 0, 0, 0, 0, "00"], "SJ": ["47", "00", "0\\d{4}|(?:[489]\\d|79)\\d{6}", [5, 8], 0, 0, 0, 0, 0, 0, "79"], "SK": ["421", "00", "[2-689]\\d{8}|[2-59]\\d{6}|[2-5]\\d{5}", [6, 7, 9], [["(\\d)(\\d{2})(\\d{3,4})", "$1 $2 $3", ["21"], "0$1"], ["(\\d{2})(\\d{2})(\\d{2,3})", "$1 $2 $3", ["[3-5][1-8]1", "[3-5][1-8]1[67]"], "0$1"], ["(\\d)(\\d{3})(\\d{3})(\\d{2})", "$1/$2 $3 $4", ["2"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[689]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1/$2 $3 $4", ["[3-5]"], "0$1"]], "0"], "SL": ["232", "00", "(?:[237-9]\\d|66)\\d{6}", [8], [["(\\d{2})(\\d{6})", "$1 $2", ["[236-9]"], "(0$1)"]], "0"], "SM": ["378", "00", "(?:0549|[5-7]\\d)\\d{6}", [8, 10], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[5-7]"]], ["(\\d{4})(\\d{6})", "$1 $2", ["0"]]], 0, 0, "([89]\\d{5})$", "0549$1"], "SN": ["221", "00", "(?:[378]\\d|93)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"]], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[379]"]]]], "SO": ["252", "00", "[346-9]\\d{8}|[12679]\\d{7}|[1-5]\\d{6}|[1348]\\d{5}", [6, 7, 8, 9], [["(\\d{2})(\\d{4})", "$1 $2", ["8[125]"]], ["(\\d{6})", "$1", ["[134]"]], ["(\\d)(\\d{6})", "$1 $2", ["[15]|2[0-79]|3[0-46-8]|4[0-7]"]], ["(\\d)(\\d{7})", "$1 $2", ["(?:2|90)4|[67]"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[348]|64|79|90"]], ["(\\d{2})(\\d{5,7})", "$1 $2", ["1|28|6[0-35-9]|7[67]|9[2-9]"]]], "0"], "SR": ["597", "00", "(?:[2-5]|68|[78]\\d|90)\\d{5}", [6, 7], [["(\\d{2})(\\d{2})(\\d{2})", "$1-$2-$3", ["56"]], ["(\\d{3})(\\d{3})", "$1-$2", ["[2-5]"]], ["(\\d{3})(\\d{4})", "$1-$2", ["[6-9]"]]]], "SS": ["211", "00", "[19]\\d{8}", [9], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[19]"], "0$1"]], "0"], "ST": ["239", "00", "(?:22|9\\d)\\d{5}", [7], [["(\\d{3})(\\d{4})", "$1 $2", ["[29]"]]]], "SV": ["503", "00", "[267]\\d{7}|(?:80\\d|900)\\d{4}(?:\\d{4})?", [7, 8, 11], [["(\\d{3})(\\d{4})", "$1 $2", ["[89]"]], ["(\\d{4})(\\d{4})", "$1 $2", ["[267]"]], ["(\\d{3})(\\d{4})(\\d{4})", "$1 $2 $3", ["[89]"]]]], "SX": ["1", "011", "7215\\d{6}|(?:[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "(5\\d{6})$|1", "721$1", 0, "721"], "SY": ["963", "00", "[1-39]\\d{8}|[1-5]\\d{7}", [8, 9], [["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[1-5]"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["9"], "0$1", 1]], "0"], "SZ": ["268", "00", "0800\\d{4}|(?:[237]\\d|900)\\d{6}", [8, 9], [["(\\d{4})(\\d{4})", "$1 $2", ["[0237]"]], ["(\\d{5})(\\d{4})", "$1 $2", ["9"]]]], "TA": ["290", "00", "8\\d{3}", [4], 0, 0, 0, 0, 0, 0, "8"], "TC": ["1", "011", "(?:[58]\\d\\d|649|900)\\d{7}", [10], 0, "1", 0, "([2-479]\\d{6})$|1", "649$1", 0, "649"], "TD": ["235", "00|16", "(?:22|[689]\\d|77)\\d{6}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[26-9]"]]], 0, 0, 0, 0, 0, 0, 0, "00"], "TG": ["228", "00", "[279]\\d{7}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[279]"]]]], "TH": ["66", "00[1-9]", "(?:001800|[2-57]|[689]\\d)\\d{7}|1\\d{7,9}", [8, 9, 10, 13], [["(\\d)(\\d{3})(\\d{4})", "$1 $2 $3", ["2"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[13-9]"], "0$1"], ["(\\d{4})(\\d{3})(\\d{3})", "$1 $2 $3", ["1"]]], "0"], "TJ": ["992", "810", "[0-57-9]\\d{8}", [9], [["(\\d{6})(\\d)(\\d{2})", "$1 $2 $3", ["331", "3317"]], ["(\\d{3})(\\d{2})(\\d{4})", "$1 $2 $3", ["44[02-479]|[34]7"]], ["(\\d{4})(\\d)(\\d{4})", "$1 $2 $3", ["3(?:[1245]|3[12])"]], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[0-57-9]"]]], 0, 0, 0, 0, 0, 0, 0, "8~10"], "TK": ["690", "00", "[2-47]\\d{3,6}", [4, 5, 6, 7]], "TL": ["670", "00", "7\\d{7}|(?:[2-47]\\d|[89]0)\\d{5}", [7, 8], [["(\\d{3})(\\d{4})", "$1 $2", ["[2-489]|70"]], ["(\\d{4})(\\d{4})", "$1 $2", ["7"]]]], "TM": ["993", "810", "(?:[1-6]\\d|71)\\d{6}", [8], [["(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "$1 $2-$3-$4", ["12"], "(8 $1)"], ["(\\d{3})(\\d)(\\d{2})(\\d{2})", "$1 $2-$3-$4", ["[1-5]"], "(8 $1)"], ["(\\d{2})(\\d{6})", "$1 $2", ["[67]"], "8 $1"]], "8", 0, 0, 0, 0, 0, 0, "8~10"], "TN": ["216", "00", "[2-57-9]\\d{7}", [8], [["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[2-57-9]"]]]], "TO": ["676", "00", "(?:0800|(?:[5-8]\\d\\d|999)\\d)\\d{3}|[2-8]\\d{4}", [5, 7], [["(\\d{2})(\\d{3})", "$1-$2", ["[2-4]|50|6[09]|7[0-24-69]|8[05]"]], ["(\\d{4})(\\d{3})", "$1 $2", ["0"]], ["(\\d{3})(\\d{4})", "$1 $2", ["[5-9]"]]]], "TR": ["90", "00", "4\\d{6}|8\\d{11,12}|(?:[2-58]\\d\\d|900)\\d{7}", [7, 10, 12, 13], [["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["512|8[01589]|90"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["5(?:[0-59]|61)", "5(?:[0-59]|61[06])", "5(?:[0-59]|61[06]1)"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[24][1-8]|3[1-9]"], "(0$1)", 1], ["(\\d{3})(\\d{3})(\\d{6,7})", "$1 $2 $3", ["80"], "0$1", 1]], "0"], "TT": ["1", "011", "(?:[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-46-8]\\d{6})$|1", "868$1", 0, "868"], "TV": ["688", "00", "(?:2|7\\d\\d|90)\\d{4}", [5, 6, 7], [["(\\d{2})(\\d{3})", "$1 $2", ["2"]], ["(\\d{2})(\\d{4})", "$1 $2", ["90"]], ["(\\d{2})(\\d{5})", "$1 $2", ["7"]]]], "TW": ["886", "0(?:0[25-79]|19)", "[2-689]\\d{8}|7\\d{9,10}|[2-8]\\d{7}|2\\d{6}", [7, 8, 9, 10, 11], [["(\\d{2})(\\d)(\\d{4})", "$1 $2 $3", ["202"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[258]0"], "0$1"], ["(\\d)(\\d{3,4})(\\d{4})", "$1 $2 $3", ["[23568]|4(?:0[02-48]|[1-47-9])|7[1-9]", "[23568]|4(?:0[2-48]|[1-47-9])|(?:400|7)[1-9]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[49]"], "0$1"], ["(\\d{2})(\\d{4})(\\d{4,5})", "$1 $2 $3", ["7"], "0$1"]], "0", 0, 0, 0, 0, 0, 0, 0, "#"], "TZ": ["255", "00[056]", "(?:[25-8]\\d|41|90)\\d{7}", [9], [["(\\d{3})(\\d{2})(\\d{4})", "$1 $2 $3", ["[89]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[24]"], "0$1"], ["(\\d{2})(\\d{7})", "$1 $2", ["5"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[67]"], "0$1"]], "0"], "UA": ["380", "00", "[89]\\d{9}|[3-9]\\d{8}", [9, 10], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["6[12][29]|(?:3[1-8]|4[136-8]|5[12457]|6[49])2|(?:56|65)[24]", "6[12][29]|(?:35|4[1378]|5[12457]|6[49])2|(?:56|65)[24]|(?:3[1-46-8]|46)2[013-9]"], "0$1"], ["(\\d{4})(\\d{5})", "$1 $2", ["3[1-8]|4(?:[1367]|[45][6-9]|8[4-6])|5(?:[1-5]|6[0135689]|7[4-6])|6(?:[12][3-7]|[459])", "3[1-8]|4(?:[1367]|[45][6-9]|8[4-6])|5(?:[1-5]|6(?:[015689]|3[02389])|7[4-6])|6(?:[12][3-7]|[459])"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[3-7]|89|9[1-9]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[89]"], "0$1"]], "0", 0, 0, 0, 0, 0, 0, "0~0"], "UG": ["256", "00[057]", "800\\d{6}|(?:[29]0|[347]\\d)\\d{7}", [9], [["(\\d{4})(\\d{5})", "$1 $2", ["202", "2024"], "0$1"], ["(\\d{3})(\\d{6})", "$1 $2", ["[27-9]|4(?:6[45]|[7-9])"], "0$1"], ["(\\d{2})(\\d{7})", "$1 $2", ["[34]"], "0$1"]], "0"], "US": ["1", "011", "[2-9]\\d{9}|3\\d{6}", [10], [["(\\d{3})(\\d{4})", "$1-$2", ["310"], 0, 1], ["(\\d{3})(\\d{3})(\\d{4})", "($1) $2-$3", ["[2-9]"], 0, 1, "$1-$2-$3"]], "1", 0, 0, 0, 0, 0, [["(?:3052(?:0[0-8]|[1-9]\\d)|5056(?:[0-35-9]\\d|4[0-68]))\\d{4}|(?:2742|305[3-9]|472[247-9]|505[2-57-9]|983[2-47-9])\\d{6}|(?:2(?:0[1-35-9]|1[02-9]|2[03-57-9]|3[1459]|4[08]|5[1-46]|6[0279]|7[0269]|8[13])|3(?:0[1-47-9]|1[02-9]|2[0135-79]|3[0-24679]|4[167]|5[0-2]|6[01349]|8[056])|4(?:0[124-9]|1[02-579]|2[3-5]|3[0245]|4[023578]|58|6[349]|7[0589]|8[04])|5(?:0[1-47-9]|1[0235-8]|20|3[0149]|4[01]|5[179]|6[1-47]|7[0-5]|8[0256])|6(?:0[1-35-9]|1[024-9]|2[03689]|3[016]|4[0156]|5[01679]|6[0-279]|78|8[0-29])|7(?:0[1-46-8]|1[2-9]|2[04-8]|3[0-247]|4[037]|5[47]|6[02359]|7[0-59]|8[156])|8(?:0[1-68]|1[02-8]|2[0168]|3[0-2589]|4[03578]|5[046-9]|6[02-5]|7[028])|9(?:0[1346-9]|1[02-9]|2[0589]|3[0146-8]|4[01357-9]|5[12469]|7[0-389]|8[04-69]))[2-9]\\d{6}"], [""], ["8(?:00|33|44|55|66|77|88)[2-9]\\d{6}"], ["900[2-9]\\d{6}"], ["52(?:3(?:[2-46-9][02-9]\\d|5(?:[02-46-9]\\d|5[0-46-9]))|4(?:[2-478][02-9]\\d|5(?:[034]\\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\\d)|9(?:[05-9]\\d|2[0-5]|49)))\\d{4}|52[34][2-9]1[02-9]\\d{4}|5(?:00|2[125-9]|33|44|66|77|88)[2-9]\\d{6}"], 0, 0, 0, ["305209\\d{4}"]]], "UY": ["598", "0(?:0|1[3-9]\\d)", "0004\\d{2,9}|[1249]\\d{7}|(?:[49]\\d|80)\\d{5}", [6, 7, 8, 9, 10, 11, 12, 13], [["(\\d{3})(\\d{3,4})", "$1 $2", ["0"]], ["(\\d{3})(\\d{4})", "$1 $2", ["[49]0|8"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["9"], "0$1"], ["(\\d{4})(\\d{4})", "$1 $2", ["[124]"]], ["(\\d{3})(\\d{3})(\\d{2,4})", "$1 $2 $3", ["0"]], ["(\\d{3})(\\d{3})(\\d{3})(\\d{2,4})", "$1 $2 $3 $4", ["0"]]], "0", 0, 0, 0, 0, 0, 0, "00", " int. "], "UZ": ["998", "00", "(?:20|33|[5-9]\\d)\\d{7}", [9], [["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["[235-9]"]]]], "VA": ["39", "00", "0\\d{5,10}|3[0-8]\\d{7,10}|55\\d{8}|8\\d{5}(?:\\d{2,4})?|(?:1\\d|39)\\d{7,8}", [6, 7, 8, 9, 10, 11, 12], 0, 0, 0, 0, 0, 0, "06698"], "VC": ["1", "011", "(?:[58]\\d\\d|784|900)\\d{7}", [10], 0, "1", 0, "([2-7]\\d{6})$|1", "784$1", 0, "784"], "VE": ["58", "00", "[68]00\\d{7}|(?:[24]\\d|[59]0)\\d{8}", [10], [["(\\d{3})(\\d{7})", "$1-$2", ["[24-689]"], "0$1"]], "0"], "VG": ["1", "011", "(?:284|[58]\\d\\d|900)\\d{7}", [10], 0, "1", 0, "([2-578]\\d{6})$|1", "284$1", 0, "284"], "VI": ["1", "011", "[58]\\d{9}|(?:34|90)0\\d{7}", [10], 0, "1", 0, "([2-9]\\d{6})$|1", "340$1", 0, "340"], "VN": ["84", "00", "[12]\\d{9}|[135-9]\\d{8}|[16]\\d{7}|[16-8]\\d{6}", [7, 8, 9, 10], [["(\\d{2})(\\d{5})", "$1 $2", ["80"], "0$1", 1], ["(\\d{4})(\\d{4,6})", "$1 $2", ["1"], 0, 1], ["(\\d{2})(\\d{3})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["6"], "0$1", 1], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[357-9]"], "0$1", 1], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["2[48]"], "0$1", 1], ["(\\d{3})(\\d{4})(\\d{3})", "$1 $2 $3", ["2"], "0$1", 1]], "0"], "VU": ["678", "00", "[57-9]\\d{6}|(?:[238]\\d|48)\\d{3}", [5, 7], [["(\\d{3})(\\d{4})", "$1 $2", ["[57-9]"]]]], "WF": ["681", "00", "(?:40|72|8\\d{4})\\d{4}|[89]\\d{5}", [6, 9], [["(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3", ["[47-9]"]], ["(\\d{3})(\\d{2})(\\d{2})(\\d{2})", "$1 $2 $3 $4", ["8"]]]], "WS": ["685", "0", "(?:[2-6]|8\\d{5})\\d{4}|[78]\\d{6}|[68]\\d{5}", [5, 6, 7, 10], [["(\\d{5})", "$1", ["[2-5]|6[1-9]"]], ["(\\d{3})(\\d{3,7})", "$1 $2", ["[68]"]], ["(\\d{2})(\\d{5})", "$1 $2", ["7"]]]], "XK": ["383", "00", "2\\d{7,8}|3\\d{7,11}|(?:4\\d\\d|[89]00)\\d{5}", [8, 9, 10, 11, 12], [["(\\d{3})(\\d{5})", "$1 $2", ["[89]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3})", "$1 $2 $3", ["[2-4]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["2|39"], "0$1"], ["(\\d{2})(\\d{7,10})", "$1 $2", ["3"], "0$1"]], "0"], "YE": ["967", "00", "(?:1|7\\d)\\d{7}|[1-7]\\d{6}", [7, 8, 9], [["(\\d)(\\d{3})(\\d{3,4})", "$1 $2 $3", ["[1-6]|7(?:[24-6]|8[0-7])"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["7"], "0$1"]], "0"], "YT": ["262", "00", "7093\\d{5}|(?:80|9\\d)\\d{7}|(?:26|63)9\\d{6}", [9], 0, "0", 0, 0, 0, 0, 0, [["269(?:0[0-467]|15|5[0-4]|6\\d|[78]0)\\d{4}"], ["(?:639(?:0[0-79]|1[019]|[267]\\d|3[09]|40|5[05-9]|9[04-79])|7093[5-7])\\d{4}"], ["80\\d{7}"], 0, 0, 0, 0, 0, ["9(?:(?:39|47)8[01]|769\\d)\\d{4}"]]], "ZA": ["27", "00", "[1-79]\\d{8}|8\\d{4,9}", [5, 6, 7, 8, 9, 10], [["(\\d{2})(\\d{3,4})", "$1 $2", ["8[1-4]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{2,3})", "$1 $2 $3", ["8[1-4]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["860"], "0$1"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["[1-9]"], "0$1"], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["8"], "0$1"]], "0"], "ZM": ["260", "00", "800\\d{6}|(?:21|[579]\\d|63)\\d{7}", [9], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[28]"], "0$1"], ["(\\d{2})(\\d{7})", "$1 $2", ["[579]"], "0$1"]], "0"], "ZW": ["263", "00", "2(?:[0-57-9]\\d{6,8}|6[0-24-9]\\d{6,7})|[38]\\d{9}|[35-8]\\d{8}|[3-6]\\d{7}|[1-689]\\d{6}|[1-3569]\\d{5}|[1356]\\d{4}", [5, 6, 7, 8, 9, 10], [["(\\d{3})(\\d{3,5})", "$1 $2", ["2(?:0[45]|2[278]|[49]8)|3(?:[09]8|17)|6(?:[29]8|37|75)|[23][78]|(?:33|5[15]|6[68])[78]"], "0$1"], ["(\\d)(\\d{3})(\\d{2,4})", "$1 $2 $3", ["[49]"], "0$1"], ["(\\d{3})(\\d{4})", "$1 $2", ["80"], "0$1"], ["(\\d{2})(\\d{7})", "$1 $2", ["24|8[13-59]|(?:2[05-79]|39|5[45]|6[15-8])2", "2(?:02[014]|4|[56]20|[79]2)|392|5(?:42|525)|6(?:[16-8]21|52[013])|8[13-59]"], "(0$1)"], ["(\\d{2})(\\d{3})(\\d{4})", "$1 $2 $3", ["7"], "0$1"], ["(\\d{3})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["2(?:1[39]|2[0157]|[378]|[56][14])|3(?:12|29)", "2(?:1[39]|2[0157]|[378]|[56][14])|3(?:123|29)"], "0$1"], ["(\\d{4})(\\d{6})", "$1 $2", ["8"], "0$1"], ["(\\d{2})(\\d{3,5})", "$1 $2", ["1|2(?:0[0-36-9]|12|29|[56])|3(?:1[0-689]|[24-6])|5(?:[0236-9]|1[2-4])|6(?:[013-59]|7[0-46-9])|(?:33|55|6[68])[0-69]|(?:29|3[09]|62)[0-79]"], "0$1"], ["(\\d{2})(\\d{3})(\\d{3,4})", "$1 $2 $3", ["29[013-9]|39|54"], "0$1"], ["(\\d{4})(\\d{3,5})", "$1 $2", ["(?:25|54)8", "258|5483"], "0$1"]], "0"] }, "nonGeographic": { "800": ["800", 0, "(?:00|[1-9]\\d)\\d{6}", [8], [["(\\d{4})(\\d{4})", "$1 $2", ["\\d"]]], 0, 0, 0, 0, 0, 0, [0, 0, ["(?:00|[1-9]\\d)\\d{6}"]]], "808": ["808", 0, "[1-9]\\d{7}", [8], [["(\\d{4})(\\d{4})", "$1 $2", ["[1-9]"]]], 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, ["[1-9]\\d{7}"]]], "870": ["870", 0, "7\\d{11}|[235-7]\\d{8}", [9, 12], [["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["[235-7]"]]], 0, 0, 0, 0, 0, 0, [0, ["(?:[356]|774[45])\\d{8}|7[6-8]\\d{7}"], 0, 0, 0, 0, 0, 0, ["2\\d{8}", [9]]]], "878": ["878", 0, "10\\d{10}", [12], [["(\\d{2})(\\d{5})(\\d{5})", "$1 $2 $3", ["1"]]], 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0, ["10\\d{10}"]]], "881": ["881", 0, "6\\d{9}|[0-36-9]\\d{8}", [9, 10], [["(\\d)(\\d{3})(\\d{5})", "$1 $2 $3", ["[0-37-9]"]], ["(\\d)(\\d{3})(\\d{5,6})", "$1 $2 $3", ["6"]]], 0, 0, 0, 0, 0, 0, [0, ["6\\d{9}|[0-36-9]\\d{8}"]]], "882": ["882", 0, "[13]\\d{6}(?:\\d{2,5})?|[19]\\d{7}|(?:[25]\\d\\d|4)\\d{7}(?:\\d{2})?", [7, 8, 9, 10, 11, 12], [["(\\d{2})(\\d{5})", "$1 $2", ["16|342"]], ["(\\d{2})(\\d{6})", "$1 $2", ["49"]], ["(\\d{2})(\\d{2})(\\d{4})", "$1 $2 $3", ["1[36]|9"]], ["(\\d{2})(\\d{4})(\\d{3})", "$1 $2 $3", ["3[23]"]], ["(\\d{2})(\\d{3,4})(\\d{4})", "$1 $2 $3", ["16"]], ["(\\d{2})(\\d{4})(\\d{4})", "$1 $2 $3", ["10|23|3(?:[15]|4[57])|4|51"]], ["(\\d{3})(\\d{4})(\\d{4})", "$1 $2 $3", ["34"]], ["(\\d{2})(\\d{4,5})(\\d{5})", "$1 $2 $3", ["[1-35]"]]], 0, 0, 0, 0, 0, 0, [0, ["342\\d{4}|(?:337|49)\\d{6}|(?:3(?:2|47|7\\d{3})|50\\d{3})\\d{7}", [7, 8, 9, 10, 12]], 0, 0, 0, ["348[57]\\d{7}", [11]], 0, 0, ["1(?:3(?:0[0347]|[13][0139]|2[035]|4[013568]|6[0459]|7[06]|8[15-8]|9[0689])\\d{4}|6\\d{5,10})|(?:345\\d|9[89])\\d{6}|(?:10|2(?:3|85\\d)|3(?:[15]|[69]\\d\\d)|4[15-8]|51)\\d{8}"]]], "883": ["883", 0, "(?:[1-4]\\d|51)\\d{6,10}", [8, 9, 10, 11, 12], [["(\\d{3})(\\d{3})(\\d{2,8})", "$1 $2 $3", ["[14]|2[24-689]|3[02-689]|51[24-9]"]], ["(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3", ["510"]], ["(\\d{3})(\\d{3})(\\d{4})", "$1 $2 $3", ["21"]], ["(\\d{4})(\\d{4})(\\d{4})", "$1 $2 $3", ["51[13]"]], ["(\\d{3})(\\d{3})(\\d{3})(\\d{3})", "$1 $2 $3 $4", ["[235]"]]], 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, 0, 0, 0, 0, ["(?:2(?:00\\d\\d|10)|(?:370[1-9]|51\\d0)\\d)\\d{7}|51(?:00\\d{5}|[24-9]0\\d{4,7})|(?:1[0-79]|2[24-689]|3[02-689]|4[0-4])0\\d{5,9}"]]], "888": ["888", 0, "\\d{11}", [11], [["(\\d{3})(\\d{3})(\\d{5})", "$1 $2 $3"]], 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, 0, 0, ["\\d{11}"]]], "979": ["979", 0, "[1359]\\d{8}", [9], [["(\\d)(\\d{4})(\\d{4})", "$1 $2 $3", ["[1359]"]]], 0, 0, 0, 0, 0, 0, [0, 0, 0, ["[1359]\\d{8}"]]] } };
 var propTypes = { exports: {} };
 var ReactPropTypesSecret_1;
@@ -20517,11 +21199,6 @@ function requirePropTypes() {
 var propTypesExports = /* @__PURE__ */ requirePropTypes();
 const PropTypes = /* @__PURE__ */ getDefaultExportFromCjs(propTypesExports);
 var classnames = { exports: {} };
-/*!
-	Copyright (c) 2018 Jed Watson.
-	Licensed under the MIT License (MIT), see
-	http://jedwatson.github.io/classnames
-*/
 var hasRequiredClassnames;
 function requireClassnames() {
   if (hasRequiredClassnames) return classnames.exports;
@@ -21123,7 +21800,7 @@ var V3 = "1.2.0";
 var V4 = "1.7.35";
 var DEFAULT_EXT_PREFIX = " ext. ";
 var CALLING_CODE_REG_EXP = /^\d+$/;
-var Metadata = /* @__PURE__ */ function() {
+var Metadata = /* @__PURE__ */ (function() {
   function Metadata2(metadata2) {
     _classCallCheck$9(this, Metadata2);
     validateMetadata(metadata2);
@@ -21336,8 +22013,8 @@ var Metadata = /* @__PURE__ */ function() {
     }
   }]);
   return Metadata2;
-}();
-var NumberingPlan = /* @__PURE__ */ function() {
+})();
+var NumberingPlan = /* @__PURE__ */ (function() {
   function NumberingPlan2(metadata2, globalMetadataObject) {
     _classCallCheck$9(this, NumberingPlan2);
     this.globalMetadataObject = globalMetadataObject;
@@ -21484,8 +22161,8 @@ var NumberingPlan = /* @__PURE__ */ function() {
     }
   }]);
   return NumberingPlan2;
-}();
-var Format = /* @__PURE__ */ function() {
+})();
+var Format = /* @__PURE__ */ (function() {
   function Format2(format2, metadata2) {
     _classCallCheck$9(this, Format2);
     this._format = format2;
@@ -21535,9 +22212,9 @@ var Format = /* @__PURE__ */ function() {
     }
   }]);
   return Format2;
-}();
+})();
 var FIRST_GROUP_ONLY_PREFIX_PATTERN = /^\(?\$1\)?$/;
-var Type = /* @__PURE__ */ function() {
+var Type = /* @__PURE__ */ (function() {
   function Type2(type, metadata2) {
     _classCallCheck$9(this, Type2);
     this.type = type;
@@ -21557,7 +22234,7 @@ var Type = /* @__PURE__ */ function() {
     }
   }]);
   return Type2;
-}();
+})();
 function getType$1(types, type) {
   switch (type) {
     case "FIXED_LINE":
@@ -22266,7 +22943,7 @@ function _createClass$8(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-var PhoneNumber = /* @__PURE__ */ function() {
+var PhoneNumber = /* @__PURE__ */ (function() {
   function PhoneNumber2(countryOrCountryCallingCode, nationalNumber, metadata2) {
     _classCallCheck$8(this, PhoneNumber2);
     if (!countryOrCountryCallingCode) {
@@ -22394,7 +23071,7 @@ var PhoneNumber = /* @__PURE__ */ function() {
     }
   }]);
   return PhoneNumber2;
-}();
+})();
 var isCountryCode = function isCountryCode2(value) {
   return /^[A-Z]{2}$/.test(value);
 };
@@ -22529,7 +23206,7 @@ function _getPrototypeOf$1(o) {
   };
   return _getPrototypeOf$1(o);
 }
-var ParseError = /* @__PURE__ */ function(_Error) {
+var ParseError = /* @__PURE__ */ (function(_Error) {
   _inherits$1(ParseError2, _Error);
   var _super = _createSuper(ParseError2);
   function ParseError2(code) {
@@ -22541,7 +23218,7 @@ var ParseError = /* @__PURE__ */ function(_Error) {
     return _this;
   }
   return _createClass$7(ParseError2);
-}(/* @__PURE__ */ _wrapNativeSuper(Error));
+})(/* @__PURE__ */ _wrapNativeSuper(Error));
 var EXTN_PATTERN = new RegExp("(?:" + createExtensionPattern() + ")$", "i");
 function extractExtension(number) {
   var start = number.search(EXTN_PATTERN);
@@ -23232,7 +23909,7 @@ function _createClass$6(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-var AsYouTypeState = /* @__PURE__ */ function() {
+var AsYouTypeState = /* @__PURE__ */ (function() {
   function AsYouTypeState2(_ref) {
     var onCountryChange = _ref.onCountryChange, onCallingCodeChange = _ref.onCallingCodeChange;
     _classCallCheck$6(this, AsYouTypeState2);
@@ -23329,7 +24006,7 @@ var AsYouTypeState = /* @__PURE__ */ function() {
     }
   }]);
   return AsYouTypeState2;
-}();
+})();
 function _createForOfIteratorHelperLoose$5(o, allowArrayLike) {
   var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (it) return (it = it.call(o)).next.bind(it);
@@ -23489,7 +24166,7 @@ function _createClass$5(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-var PatternParser = /* @__PURE__ */ function() {
+var PatternParser = /* @__PURE__ */ (function() {
   function PatternParser2() {
     _classCallCheck$5(this, PatternParser2);
   }
@@ -23625,7 +24302,7 @@ var PatternParser = /* @__PURE__ */ function() {
     }
   }]);
   return PatternParser2;
-}();
+})();
 function parseOneOfSet(pattern) {
   var values2 = [];
   var i = 0;
@@ -23706,7 +24383,7 @@ function _createClass$4(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-var PatternMatcher = /* @__PURE__ */ function() {
+var PatternMatcher = /* @__PURE__ */ (function() {
   function PatternMatcher2(pattern) {
     _classCallCheck$4(this, PatternMatcher2);
     this.matchTree = new PatternParser().parse(pattern);
@@ -23731,7 +24408,7 @@ var PatternMatcher = /* @__PURE__ */ function() {
     }
   }]);
   return PatternMatcher2;
-}();
+})();
 function _match(characters, tree, last2) {
   if (typeof tree === "string") {
     var characterString = characters.join("");
@@ -23925,7 +24602,7 @@ var CREATE_STANDALONE_DIGIT_PATTERN = function() {
 };
 var NON_ALTERING_FORMAT_REG_EXP = new RegExp("[" + VALID_PUNCTUATION + "]*\\$1[" + VALID_PUNCTUATION + "]*(\\$\\d[" + VALID_PUNCTUATION + "]*)*$");
 var MIN_LEADING_DIGITS_LENGTH = 3;
-var AsYouTypeFormatter = /* @__PURE__ */ function() {
+var AsYouTypeFormatter = /* @__PURE__ */ (function() {
   function AsYouTypeFormatter2(_ref) {
     _ref.state;
     var metadata2 = _ref.metadata;
@@ -24239,7 +24916,7 @@ var AsYouTypeFormatter = /* @__PURE__ */ function() {
     }
   }]);
   return AsYouTypeFormatter2;
-}();
+})();
 function _slicedToArray$1(arr, i) {
   return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$1();
 }
@@ -24312,7 +24989,7 @@ var VALID_FORMATTED_PHONE_NUMBER_DIGITS_PART_PATTERN = new RegExp("^" + VALID_FO
 var VALID_FORMATTED_PHONE_NUMBER_PART = "(?:[" + PLUS_CHARS + "][" + VALID_PUNCTUATION + VALID_DIGITS + "]*|[" + VALID_PUNCTUATION + VALID_DIGITS + "]+)";
 var AFTER_PHONE_NUMBER_DIGITS_END_PATTERN = new RegExp("[^" + VALID_PUNCTUATION + VALID_DIGITS + "]+.*$");
 var COMPLEX_NATIONAL_PREFIX = /[^\d\[\]]/;
-var AsYouTypeParser = /* @__PURE__ */ function() {
+var AsYouTypeParser = /* @__PURE__ */ (function() {
   function AsYouTypeParser2(_ref) {
     var defaultCountry = _ref.defaultCountry, defaultCallingCode = _ref.defaultCallingCode, metadata2 = _ref.metadata, onNationalSignificantNumberChange = _ref.onNationalSignificantNumberChange;
     _classCallCheck$2(this, AsYouTypeParser2);
@@ -24545,7 +25222,7 @@ var AsYouTypeParser = /* @__PURE__ */ function() {
     }
   }]);
   return AsYouTypeParser2;
-}();
+})();
 function extractFormattedPhoneNumber(text) {
   var startsAt = text.search(VALID_FORMATTED_PHONE_NUMBER_PART);
   if (startsAt < 0) {
@@ -24644,7 +25321,7 @@ function _createClass$1(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-var AsYouType = /* @__PURE__ */ function() {
+var AsYouType = /* @__PURE__ */ (function() {
   function AsYouType2(optionsOrDefaultCountry, metadata2) {
     _classCallCheck$1(this, AsYouType2);
     this.metadata = new Metadata(metadata2);
@@ -25003,7 +25680,7 @@ var AsYouType = /* @__PURE__ */ function() {
     }
   }]);
   return AsYouType2;
-}();
+})();
 function getCountries(metadata2) {
   return new Metadata(metadata2).getCountries();
 }
@@ -26599,7 +27276,7 @@ function _toPrimitive(t, r) {
   }
   return ("string" === r ? String : Number)(t);
 }
-var PhoneNumberInput_ = /* @__PURE__ */ function(_React$PureComponent) {
+var PhoneNumberInput_ = /* @__PURE__ */ (function(_React$PureComponent) {
   function PhoneNumberInput_2(props) {
     var _this;
     _classCallCheck(this, PhoneNumberInput_2);
@@ -26940,7 +27617,7 @@ var PhoneNumberInput_ = /* @__PURE__ */ function(_React$PureComponent) {
       }
     )
   }]);
-}(React.PureComponent);
+})(React.PureComponent);
 var PhoneNumberInput = /* @__PURE__ */ React.forwardRef(function(props, ref) {
   return /* @__PURE__ */ React.createElement(PhoneNumberInput_, _extends$1({}, withDefaultProps(props), {
     inputRef: ref
@@ -27702,26 +28379,6 @@ createPhoneInput(metadata$1);
 function parsePhoneNumber() {
   return call(parsePhoneNumber$2, arguments);
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function abbreviateJurisdiction(jurisdiction) {
   if (jurisdiction === "") {
     return "";
@@ -27787,13 +28444,6 @@ function abbreviateJurisdiction(jurisdiction) {
   };
   return map[jurisdiction];
 }
-/*!
- * Calculate a person's numerical age from their birthdate, as a string.
- * Since a "date of birth" is a legal fiction and not a timestamp, we can do
- * this without resorting to any funky time nonsense.
- * @param {string} birthdate - DOB, formatted as YYYY-MM-DD.
- * @return {number}
- */
 function numericalAge(birthdate) {
   if (!birthdate) {
     return Infinity;
@@ -27812,12 +28462,6 @@ function numericalAge(birthdate) {
   }
   return thisYear - birthYear;
 }
-/*!
- * Format a Date as a string
- * @param {string} date - date, formatted as YYYY-MM-DD.
- * @param {DateFormat} fmt - Ugh
- * @return {string}
- */
 function formatDate(date, fmt) {
   if (!date) {
     return "";
@@ -27861,22 +28505,12 @@ function phoneEnd(phoneNumber) {
   }
   return phoneDigits(phoneNumber).substring(6);
 }
-/*!
- * Format a full `name` as a string.
- * @param {Name} name
- * @return {string}
- */
 function fullName(name) {
   if (!name) {
     return "";
   }
   return [name.first, name.middle, name.last, name.suffix].filter((n) => n && n.length > 0).join(" ");
 }
-/*!
- * Determine whether a person is a minor (i.e., under 18.)
- * @param {Person} applicant
- * @return {boolean}
- */
 function isMinor(applicant) {
   if (applicant.age !== void 0) {
     return applicant.age < 18;
@@ -27886,12 +28520,6 @@ function isMinor(applicant) {
   }
   return numericalAge(applicant.birthdate) < 18;
 }
-/*!
- * Return the legal name of a person's legal representative (themself or their
- * parent/guardian) from the given `data`.
- * @param {Person} applicant
- * @return {Name}
- */
 function representativeName(applicant) {
   if (!isMinor(applicant)) {
     return applicant.legalName;
@@ -27906,11 +28534,6 @@ function representativeName(applicant) {
     suffix: ""
   };
 }
-/*!
- * Find a jurisdiction given it's name.
- * @param {String} jurisdictionKey
- * @return {AnyJurisdiction | undefined}
- */
 function getJurisdiction(jurisdictionKey) {
   if (!jurisdictionKey) {
     return void 0;
@@ -27920,12 +28543,6 @@ function getJurisdiction(jurisdictionKey) {
   );
   return foundJurisdiction;
 }
-/*!
- * Find a generic locality given it's name and the jurisdiction name.
- * @param {String} jurisdictionKey
- * @param {String} localityKey
- * @return {AnyLocality | undefined}
- */
 function getLocality(jurisdictionKey, localityKey) {
   if (!jurisdictionKey) {
     return void 0;
@@ -27945,12 +28562,6 @@ function getLocality(jurisdictionKey, localityKey) {
   );
   return foundLocality;
 }
-/*!
- * Get an RI locality object to pull RI specific properties for forms.
- * @param {String} jurisdictionKey
- * @param {String} localityKey
- * @return {RhodeIslandCityOrTown | undefined}
- */
 function getRILocality(jurisdictionKey, localityKey) {
   if (!jurisdictionKey) {
     return void 0;
@@ -27970,12 +28581,6 @@ function getRILocality(jurisdictionKey, localityKey) {
   );
   return foundLocality;
 }
-/*!
- * Get an NY locality object to pull NY specific properties for forms.
- * @param {String} jurisdictionKey
- * @param {String} localityKey
- * @return {NewYorkCounty | undefined}
- */
 function getNYLocality(jurisdictionKey, localityKey) {
   if (!jurisdictionKey) {
     return void 0;
@@ -27995,11 +28600,6 @@ function getNYLocality(jurisdictionKey, localityKey) {
   );
   return foundLocality;
 }
-/*!
- * Return a person's full contact info, i.e., full name, street address, and phone.
- * @param {Person} applicant
- * @return {string}
- */
 var ContactFormat = /* @__PURE__ */ ((ContactFormat2) => {
   ContactFormat2[ContactFormat2["BirthCityAndState"] = 0] = "BirthCityAndState";
   ContactFormat2[ContactFormat2["BirthCityStateCountry"] = 1] = "BirthCityStateCountry";
@@ -28155,12 +28755,6 @@ function formatContactInfo(applicant, fmt) {
       return void 0;
   }
 }
-/*!
- * Return entered string with leading "0" if it was single digit.
- * This is for adding 0's to the day or month for particular forms.
- * @param {string} zeroString
- * @return {string}
- */
 function addZero(zeroString) {
   if (!zeroString) {
     return "";
@@ -28170,6 +28764,23 @@ function addZero(zeroString) {
   }
   return zeroString;
 }
+function nameInitials(name, fmt) {
+  if (!name) {
+    return "";
+  }
+  const firstInitial = name.first.substring(0, 1).toUpperCase();
+  const middleInitial = name.middle.substring(0, 1).toUpperCase();
+  const lastInitial = name.last.substring(0, 1).toUpperCase();
+  return fmt.format.map((part) => {
+    if (part === NameFormatPart.FIRST) {
+      return firstInitial;
+    }
+    if (part === NameFormatPart.MIDDLE) {
+      return middleInitial;
+    }
+    return lastInitial;
+  }).join();
+}
 function numericalBirthYear(birthdate) {
   if (!birthdate) {
     return Infinity;
@@ -28177,32 +28788,6 @@ function numericalBirthYear(birthdate) {
   const birthYear = Number.parseInt(birthdate.substring(0, 4), 10);
   return birthYear;
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Petition for Name Change and Ex Parte Request for Nonpublication and
- * Confidential Record (Michigan form PC 51c.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const nameChangePrivateMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -28389,11 +28974,6 @@ const nameChangePrivateMap = [
     fieldName: "Name type or print_6"
   })
 ];
-/*!
- * Petition for Name Change (Michigan form PC 51.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const nameChangeMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -28540,10 +29120,6 @@ const nameChangeMap = [
     fieldName: "Name type or print_5"
   })
 ];
-/*!
- * Addendum to Personal Protected Identifying Information (Michigan form MC 97a.)
- * @type {Formfill[]}
- */
 const piiMap = [
   (applicant) => ({
     text: getLocality(
@@ -28584,11 +29160,6 @@ const piiMap = [
     fieldName: "DOB"
   })
 ];
-/*!
- * Order Following Hearing Regarding Petition For Name Change (Michigan form PC 52.)
- * Only required in Saginaw County
- * @type {Formfill[]}
- */
 const orderFollowingMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -28613,11 +29184,7 @@ const orderFollowingMap = [
     fieldName: "Current first middle and last names type or print"
   })
 ];
-/*!
- * Fee Waiver Request (Michigan form MC 20.)
- * @type {Formfill[]}
- */
-const feeWaiverMap = [
+const feeWaiverMap$1 = [
   (applicant) => ({
     text: getLocality(
       applicant.residentJurisdictionName,
@@ -28642,11 +29209,6 @@ const feeWaiverMap = [
   }),
   () => ({ text: (/* @__PURE__ */ new Date()).toLocaleDateString(), fieldName: "Date" })
 ];
-/*!
- * Michigan Dept. of State Sex Designation Form (Michigan form, unnumbered.)
- * This is for the Primary ID at the Secretary of State step.
- * @type {Formfill[]}
- */
 const mdosSexMap = [
   (applicant) => ({
     text: applicant.legalName.last,
@@ -28705,10 +29267,6 @@ const mdosSexMap = [
     loc: { x: 649, y: 959 }
   })
 ];
-/*!
- * Application to Change or Correct a Michigan Birth Record (Michigan form DCH-0847-CHGBX.)
- * @type {Formfill[]}
- */
 const birthCertMap = [
   (applicant) => ({
     text: applicant.isChangingLegalName && !isMinor(applicant) ? applicant.chosenName.first : representativeName(applicant).first,
@@ -28847,11 +29405,6 @@ const birthCertMap = [
     fieldName: "fill_4"
   })
 ];
-/*!
- * State of Michigan Sex Designation Form (Michigan form, unnumbered.)
- * This is for the Birth Certificate Update step.
- * @type {Formfill[]}
- */
 const miSexMap = [
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -28889,26 +29442,6 @@ const miSexMap = [
     loc: { x: 486, y: 580 }
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganBirthCertificateGuide({
   person
 }) {
@@ -28969,26 +29502,6 @@ function MichiganBirthCertificateGuide({
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You should receive a copy of your updated birth certificate in 5 to 6 weeks." })
   ] }, "Michigan-BirthCertificate");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganCourtHearingGuide({ person }) {
   const { age, isChangingLegalSex, doNotPublish } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -29024,26 +29537,6 @@ function MichiganCourtHearingGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the certified copy of the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
   ] }, "MI-CourtHearing");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (MI)" }),
@@ -29169,7 +29662,7 @@ function MichiganFilingInitialFormsGuide({
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "website", children: residentLocality.court.website }),
           ". This is to confirm their accepted payment types, Name Change Petition fee, and Certified Copy fee as these vary by county and are updated frequently."
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Whoever filled out the paperwork as your petitioner has to be the one who files the paperwork at court if they are doing in-person filing." }) }),
+        age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Whoever filled out the paperwork as your petitioner has to be the one who files the paperwork at court if they are doing in-person filing." }),
         residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
@@ -29187,52 +29680,12 @@ function MichiganFilingInitialFormsGuide({
     ] }, "MI-InitialForms");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganM97aGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Addendum to Protected Personal Identifying Information (MI, M97a)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This form is meant to keep sensitive information (birth name, birth date, etc.) out of the public court records. This form should already be complete." })
   ] }, "Michigan-M97a");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganMC20Guide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -29251,26 +29704,6 @@ function MichiganMC20Guide({ person }) {
     ] })
   ] }, "Michigan-MC20");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganPC51cGuide({ person }) {
   const { age, residentLocalityName, parentsAreOkay, hasCriminalRecord, isChangingLegalSex } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -29304,26 +29737,6 @@ function MichiganPC51cGuide({ person }) {
     ] }) : " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature.” Do the same on the bottom of page 3." })
   ] }, "Michigan-PC51c");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganPC51Guide({ person }) {
   const { age, residentLocalityName, parentsAreOkay, hasCriminalRecord } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -29353,26 +29766,6 @@ function MichiganPC51Guide({ person }) {
     ] }) : " Sign and date on page 2 with your legal name, in the field labeled “Petitioner's Signature”."
   ] }, "Michigan-PC51");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganPC52Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order Following Hearing Regarding Petition for Name Change (MI, PC52)" }),
@@ -29423,26 +29816,6 @@ function MichiganPublicationGuide({
     ] }, "MI-Publication");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (MI)" }),
@@ -29458,26 +29831,6 @@ function MichiganResourcesGuide() {
     ] })
   ] }, "MI-Resources");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function MichiganSecretaryOfStateGuide({
   person
 }) {
@@ -29520,26 +29873,6 @@ function MichiganSecretaryOfStateGuide({
     ] })
   ] }, "Michigan-SecretaryOfState");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 var Target = /* @__PURE__ */ ((Target2) => {
   Target2["BirthRecord"] = "birth-record";
   Target2["GenderMarker"] = "gender-marker";
@@ -29549,12 +29882,6 @@ var Target = /* @__PURE__ */ ((Target2) => {
   Target2["SocialSecurity"] = "social-security";
   return Target2;
 })(Target || {});
-/*!
- * Procedural information for filing.
- */
-/*!
- * A single document to be filed.
- */
 const targets = {
   [
     "birth-record"
@@ -29581,26 +29908,6 @@ const targets = {
     /* SocialSecurity */
   ]: "update my information with the Social Security Administration."
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const michiganNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -29641,7 +29948,7 @@ const michiganNameChange = {
       id: "MC 20",
       filename: "Michigan/mc20.pdf",
       guide: MichiganMC20Guide,
-      map: feeWaiverMap
+      map: feeWaiverMap$1
     },
     {
       name: "Filing Initial Documents",
@@ -29720,26 +30027,6 @@ const michiganPostamble = {
   ],
   isJustGuide: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const michiganCounties = [
   {
     name: "Alcona",
@@ -31737,31 +32024,6 @@ const michiganCounties = [
     ]
   }
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Change of Name (Rhode Island form PC8.1.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const changeOfNameMap = [
   (applicant) => ({
     text: getRILocality(
@@ -31903,10 +32165,6 @@ const changeOfNameMap = [
     loc: { page: 1, x: 662, y: 144 }
   })
 ];
-/*!
- * State of Rhode Island BCI Disclaimer Form (Rhode Island form, unnumbered.)
- * @type {Formfill[]}
- */
 const bciMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -31936,10 +32194,6 @@ const bciMap = [
     loc: { x: 113, y: 432 }
   })
 ];
-/*!
- * State of Rhode Island Application for a Certified Copy of a Birth Record Form (Rhode Island form, unnumbered.)
- * @type {Formfill[]}
- */
 const birthCertOneMap = [
   (applicant) => ({
     text: fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName),
@@ -32005,10 +32259,6 @@ const birthCertOneMap = [
     loc: { x: 219, y: 772 }
   })
 ];
-/*!
- * State of Rhode Island Application for License, Identification Card and Permit Form (Rhode Island form, LI-1.)
- * @type {Formfill[]}
- */
 const primaryIDRhodeIslandMap = [
   (applicant) => ({
     text: applicant.legalName.last,
@@ -32111,10 +32361,6 @@ const primaryIDRhodeIslandMap = [
     fieldName: "CITY"
   })
 ];
-/*!
- * State of Rhode Island Gender Designation on a License or Identification Card Form (Rhode Island form, unnumbered.)
- * @type {Formfill[]}
- */
 const genderIDMap = [
   (applicant) => ({
     text: applicant.legalName.last,
@@ -32177,10 +32423,6 @@ const genderIDMap = [
     })()
   })
 ];
-/*!
- * State of Rhode Island Application for a Certified Copy of a Birth Record Form (Rhode Island form, unnumbered.)
- * @type {Formfill[]}
- */
 const birthCertTwoMap = [
   (applicant) => ({
     text: fullName(applicant.birthName) ? fullName(applicant.birthName) : fullName(applicant.legalName),
@@ -32324,26 +32566,6 @@ function RhodeIslandBirthCertRequestGuide({
     ] }, "RhodeIsland-BC-Req");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandBirthCertUpdateGuide({
   person
 }) {
@@ -32408,26 +32630,6 @@ function RhodeIslandBirthCertUpdateGuide({
     ] })
   ] }, "RhodeIsland-BC-Update");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandCourtHearingGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -32464,26 +32666,6 @@ function RhodeIslandCourtHearingGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the certified copy of the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
   ] }, "RI-CourtHearing");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandDMVGuide({ person }) {
   const { age, isChangingLegalSex, isChangingLegalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -32525,26 +32707,6 @@ function RhodeIslandDMVGuide({ person }) {
     ] })
   ] }, "RI-DMV");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (RI)" }),
@@ -32793,26 +32955,6 @@ function RhodeIslandNotaryGuide({
     ] }, "RhodeIsland-Notary");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandPC8_1Guide({ person }) {
   const { age, residentLocalityName, parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -32840,26 +32982,6 @@ function RhodeIslandPC8_1Guide({ person }) {
     ] })
   ] }, "RhodeIsland-PC8-1");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function RhodeIslandResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (RI)" }),
@@ -32879,26 +33001,6 @@ function RhodeIslandResourcesGuide() {
     ] })
   ] }, "RI-Resources");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const rhodeislandNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -32998,26 +33100,6 @@ const rhodeislandPostamble = {
   ],
   isJustGuide: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const rhodeislandCounties = [
   {
     name: "Barrington",
@@ -33693,7 +33775,7 @@ const rhodeislandCounties = [
         website: "https://www.eastbayri.com/"
       }
     ],
-    filingCost: "$142.00"
+    filingCost: "$154.00"
   },
   {
     name: "Warwick",
@@ -33739,7 +33821,7 @@ const rhodeislandCounties = [
         website: "https://www.ricentral.com/site/contact.html"
       }
     ],
-    filingCost: "$34.00"
+    filingCost: "$74.00"
   },
   {
     name: "West Warwick",
@@ -33805,31 +33887,6 @@ const rhodeislandCounties = [
     filingCost: "$30.00"
   }
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Name Change and/or Sex Designation Change Petition for Individual Adult (New York form UCS-NC1.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const adultNameSexPetitionMap = [
   (applicant) => ({
     fieldName: "CourtType",
@@ -33906,11 +33963,6 @@ const adultNameSexPetitionMap = [
     choice: applicant.doNotPublish ? "Yes" : "No"
   })
 ];
-/*!
- * Name Change and/or Sex Designation Change Petition for Individual Minor (New York form UCS-NC2.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const minorNameSexPetitionMap = [
   (applicant) => ({
     fieldName: "CourtType",
@@ -34000,11 +34052,6 @@ const minorNameSexPetitionMap = [
     fieldName: "MinorConsentCounty"
   })
 ];
-/*!
- * Application to Waive Court Costs, Fees, and Expenses (NY State form UCS-FW1.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const feeWaiverNYStateMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ? `${applicant.residentLocalityName} county` : "",
@@ -34047,11 +34094,6 @@ const feeWaiverNYStateMap = [
     fieldName: "ApplicantName"
   })
 ];
-/*!
- * Affirmation in Support of an Application to Proceed as a Poor Person and to Waive Court Fees (NYC form CIV-GP-15-i.)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const feeWaiverNYCMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -34106,11 +34148,6 @@ const feeWaiverNYCMap = [
     loc: { x: 564, y: 972 }
   })
 ];
-/*!
- * Application for Permit, Driver License or Non-Driver ID Card (New York form MV-44.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const primaryIDNewYorkMap = [
   () => ({
     fieldName: "PURPOSE FOR APPLICATION",
@@ -34236,11 +34273,6 @@ const primaryIDNewYorkMap = [
     fieldName: "PLEASE PRINT NAME"
   })
 ];
-/*!
- * Vehicle Registration/Title of Application (MV-82)
- * Updated 5/2025.
- * @type {Formfill[]}
- */
 const vehicleRegistrationMap = [
   () => ({
     fieldName: "I WANT TO",
@@ -34350,11 +34382,6 @@ const vehicleRegistrationMap = [
     fieldName: "Print Name Here"
   })
 ];
-/*!
- * Application for Amendment of Certificate of Birth for Gender Designation for an Adult (New York State form DOH-5305.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const birthCertAdultNYStateMap = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
@@ -34434,11 +34461,6 @@ const birthCertAdultNYStateMap = [
     loc: { x: 103, y: 946 }
   })
 ];
-/*!
- * Parent/Legal Guardian Application for Amendment of Certificate of Birth for Gender Designation for a Minor (New York State form DOH-5306.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const birthCertMinorNYStateMap = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
@@ -34514,11 +34536,6 @@ const birthCertMinorNYStateMap = [
     loc: { x: 510, y: 617 }
   })
 ];
-/*!
- * Application for the Correction of a NYC Birth Certificate (NYC form VR 172.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const birthCertNYCMap = [
   (applicant) => ({
     text: isMinor(applicant) ? applicant.representativeName?.first : applicant.chosenName.first,
@@ -34655,11 +34672,6 @@ const birthCertNYCMap = [
     fieldName: "S5: Original or certified documents"
   })
 ];
-/*!
- * Notarized Affidavit of Gender Change for a Person 17 Years of Age or Older (New York State form DOH-5303.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const genderAffidavitAdultNYStateMap = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
@@ -34670,11 +34682,6 @@ const genderAffidavitAdultNYStateMap = [
     loc: { x: 106, y: 746 }
   })
 ];
-/*!
- * Parent/Legal Guardian Notarized Affidavit of Gender for a Person 16 Years of Age or Under (New York State form DOH-5304.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const genderAffidavitMinorNYStateMap = [
   (applicant) => ({
     text: fullName(applicant.representativeName),
@@ -34689,11 +34696,6 @@ const genderAffidavitMinorNYStateMap = [
     loc: { x: 103, y: 746 }
   })
 ];
-/*!
- * Self-Attestation Form for Registrants 18 Years of Age and Older (NYC form unnumbered.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const selfAttestationAdultNYCMap = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? applicant.chosenName.first : applicant.legalName.first,
@@ -34765,11 +34767,6 @@ const selfAttestationAdultNYCMap = [
     loc: { page: 1, x: 582, y: 550 }
   })
 ];
-/*!
- * Attestation Form for Named Parents or Legal Guardians of a Registrant Younger Than 18 Years Old (NYC form unnumbered.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const selfAttestationMinorNYCMap = [
   (applicant) => ({
     text: applicant.representativeName?.first,
@@ -34849,26 +34846,6 @@ const selfAttestationMinorNYCMap = [
     loc: { page: 2, x: 634, y: 231 }
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkBirthCertUpdateGuide({ person }) {
   const { age, parentsAreOkay, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -34992,26 +34969,6 @@ function NewYorkBirthCertUpdateGuide({ person }) {
     ] })
   ] }, "NewYork-BC-Update");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkDMVGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -35050,26 +35007,6 @@ function NewYorkDMVGuide({ person }) {
     ] })
   ] }, "NY-DMV");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (NY)" }),
@@ -35213,26 +35150,6 @@ function NewYorkFilingGuide({
     ] }, "NewYork-Filing");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkNotaryGuide({ person }) {
   const { age, birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -35279,26 +35196,6 @@ function NewYorkNotaryGuide({ person }) {
     ] })
   ] }, "NewYork-Notary");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NYCFeeWaiverGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -35311,26 +35208,6 @@ function NYCFeeWaiverGuide({ person }) {
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If a parent/guardian chooses to file this form, they need to circle “I am” or “am not” on item number 7. They also need to fill out items 8 & 9 then sign and date at the bottom." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you choose to file this form, circle “I am” or “am not” on item number 7. Fill out items 8 & 9 as well then sign and date at the bottom." })
   ] }, "NYC-Fee-Waiver");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NYStateFeeWaiverGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -35343,26 +35220,6 @@ function NYStateFeeWaiverGuide({ person }) {
     age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If a parent/guardian chooses to file this form, they need to fill out items 4, 5, and 6 as it applies to them. Then they can sign and date at the bottom of page 3." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you choose to file this form fill out items 4, 5, and 6 as needed. Then sign and date the bottom of page 3." })
   ] }, "NY-State-Fee-Waiver");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (NY)" }),
@@ -35382,26 +35239,6 @@ function NewYorkResourcesGuide() {
     ] })
   ] }, "NY-Resources");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkUCS_NC1Guide({ person }) {
   const { residentLocalityName, doNotPublish } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -35420,26 +35257,6 @@ function NewYorkUCS_NC1Guide({ person }) {
     ] })
   ] }, "NewYork-UCS-NC1");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkUCS_NC2Guide({ person }) {
   const { age, residentLocalityName, parentsAreOkay, doNotPublish } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -35471,26 +35288,6 @@ function NewYorkUCS_NC2Guide({ person }) {
     ] })
   ] }, "NewYork-UCS-NC2");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const newyorkNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -35633,26 +35430,6 @@ const newyorkPostamble = {
   ],
   isJustGuide: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const newyorkCounties = [
   {
     name: "Albany",
@@ -36223,26 +36000,6 @@ const newyorkCounties = [
     courtType: "County"
   }
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function NewYorkBoroughInfo() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Attention NYC residents click on the county corresponding with your borough:" }),
@@ -36260,31 +36017,6 @@ function NewYorkBoroughInfo() {
     ] })
   ] }, "NY-Info");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Change of Name or Sex (Adult) (Oregon form unnumbered.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const adultNameSexPetitionOregonMap = [
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
@@ -36387,11 +36119,6 @@ const adultNameSexPetitionOregonMap = [
     loc: { page: 3, x: 677, y: 211 }
   })
 ];
-/*!
- * Change of Name or Sex (Minor) (Oregon form unnumbered.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const minorNameSexPetitionOregonMap = [
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
@@ -36518,11 +36245,6 @@ const minorNameSexPetitionOregonMap = [
     loc: { page: 5, x: 681, y: 211 }
   })
 ];
-/*!
- * Application for Deferral or Waiver of Fees and Declaration in Support (Oregon form unnumbered.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const feeWaiverOregonMap = [
   (applicant) => ({
     text: !applicant.isChangingLegalSex ? applicant.residentLocalityName ?? "" : "",
@@ -36608,11 +36330,6 @@ const feeWaiverOregonMap = [
     loc: { page: 5, x: 601, y: 443 }
   })
 ];
-/*!
- * Application to Change the Name and/or Sex on a Record of Live Birth to Support Gender Identity (Oregon form OHA 2673.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const birthCertOregonMap = [
   (applicant) => ({
     text: isMinor(applicant) ? applicant.representativeName?.first : applicant.legalName.first,
@@ -36761,11 +36478,6 @@ const birthCertOregonMap = [
     fieldName: "Computer Issued"
   })
 ];
-/*!
- * Oregon Voter Registration Card (Oregon form SEL 500.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const voterOregonMap = [
   () => ({
     fieldName: "Citizen",
@@ -36819,26 +36531,6 @@ const voterOregonMap = [
     fieldName: "Preious Registration Name"
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonAdultPetitionGuide({ person }) {
   const { residentLocalityName, isChangingLegalSex, doNotPublish } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -36863,26 +36555,6 @@ function OregonAdultPetitionGuide({ person }) {
     ] })
   ] }, "Oregon-Adult-Petition");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonBirthCertUpdateGuide({ person }) {
   const { age, parentsAreOkay, birthJurisdictionName, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -36955,26 +36627,6 @@ function OregonBirthCertUpdateGuide({ person }) {
     ] })
   ] }, "Oregon-BC-Update");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonCourtHearingGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -37003,26 +36655,6 @@ function OregonCourtHearingGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If the change is granted make sure to have 2 or 3 certified copies of the court order purchased. Once you have the certified copies of the court order, you are ready to file with the Social Security Administration. Keep the original court order in a safe place." })
   ] }, "OR-CourtHearing");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonDMVGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -37045,26 +36677,6 @@ function OregonDMVGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Optionally, you may also update your vehicle registration(s). You will be given another form, which you should sign and initial in your new legal name. You will be charged a fee for each vehicle." })
   ] }, "Oregon-DMV");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (OR)" }),
@@ -37122,7 +36734,7 @@ function OregonEverythingElseGuide() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Primary School Records" }),
-      ": Each school will have different requirements and protocols; contact them and see what theirs is. Be aware that Michigan law does not require your high school to update your educational records, so it is possible that they may refuse."
+      ": Each school will have different requirements and protocols; contact them and see what theirs is."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "College Records" }),
@@ -37155,26 +36767,6 @@ function OregonEverythingElseGuide() {
     ] })
   ] }, "OR-EverythingElse");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonFeeWaiverGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -37240,26 +36832,6 @@ function OregonFilingInitialFormsGuide({
     ] }, "OR-InitialForms");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonMinorPetitionGuide({ person }) {
   const { residentLocalityName, isChangingLegalSex, isChangingLegalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -37292,26 +36864,6 @@ function OregonMinorPetitionGuide({ person }) {
     ] })
   ] }, "Oregon-Minor-Petition");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function OregonResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (OR)" }),
@@ -37335,26 +36887,6 @@ function OregonResourcesGuide() {
     ] })
   ] }, "OR-Resources");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const oregonNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -37452,26 +36984,6 @@ const oregonPostamble = {
   ],
   isJustGuide: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const oregonCounties = [
   {
     name: "Baker",
@@ -37798,31 +37310,6 @@ const oregonCounties = [
     }
   }
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Petition for Change of Name (Alaska form CIV-700.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const adultNamePetitionAlaskaMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -37897,11 +37384,6 @@ const adultNamePetitionAlaskaMap = [
     fieldName: "email"
   })
 ];
-/*!
- * Petition to Change Child's Name (Alaska form CIV-694.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const minorNamePetitionAlaskaMap = [
   (applicant) => ({
     text: fullName(applicant.representativeName),
@@ -37992,11 +37474,6 @@ const minorNamePetitionAlaskaMap = [
     loc: { page: 1, x: 427, y: 544 }
   })
 ];
-/*!
- * Parental Consent from Non-Petitioning Parent (Alaska form CIV-695.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const nonpetitionParentalConsentAlaskaMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -38015,11 +37492,6 @@ const nonpetitionParentalConsentAlaskaMap = [
     fieldName: "nameOf"
   })
 ];
-/*!
- * Application for Legal Name Change (Alaska form VS-405.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const applicationNameAlaskaMap = [
   (applicant) => ({
     text: applicant.birthName.first || applicant.legalName.first,
@@ -38077,11 +37549,6 @@ const applicationNameAlaskaMap = [
     loc: { x: 435, y: 620 }
   })
 ];
-/*!
- * Request to Waive Posting in Adult Change of Name Case (Alaska form CIV-708.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const adultWaivePublicationAlaskaMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -38104,11 +37571,6 @@ const adultWaivePublicationAlaskaMap = [
     fieldName: "myEmail"
   })
 ];
-/*!
- * Request to Waive Posting in Child's Change of Name Case (Alaska form CIV-709.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const minorWaivePublicationAlaskaMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -38135,11 +37597,6 @@ const minorWaivePublicationAlaskaMap = [
     fieldName: "myEmail"
   })
 ];
-/*!
- * Request for Exemption from Payment of Fees (Alaska form CIV-708.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const feeWaiverAlaskaMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -38181,11 +37638,6 @@ const feeWaiverAlaskaMap = [
     fieldName: "email"
   })
 ];
-/*!
- * Affidavit of Additional Service (Alaska form CIV-702.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const additionalServiceAlaskaMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -38208,11 +37660,6 @@ const additionalServiceAlaskaMap = [
     fieldName: "mailingAddress"
   })
 ];
-/*!
- * Drivers License, Permit, or Identification Card Transaction Application (Alaska form D-1.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const primaryIDAlaskaMap = [
   (applicant) => ({
     text: fullName(applicant.chosenName),
@@ -38288,11 +37735,6 @@ const primaryIDAlaskaMap = [
     fieldName: "Text64"
   })
 ];
-/*!
- * Certification for Change of Sex Designator on Driver License or Identification Card (Alaska form 427.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const primaryIDSexDesignationAlaskaMap = [
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -38322,11 +37764,6 @@ const primaryIDSexDesignationAlaskaMap = [
     fieldName: "Printed Name"
   })
 ];
-/*!
- * Alaska Birth Certificate Request Form (Alaska form unnumbered.)
- * Updated 7/2024.
- * @type {Formfill[]}
- */
 const birthCertRequestAlaskaMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -38433,26 +37870,6 @@ const birthCertRequestAlaskaMap = [
     fieldName: "ID Included"
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaAdultPetitionGuide({ person }) {
   const { hasCriminalRecord } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -38466,26 +37883,6 @@ function AlaskaAdultPetitionGuide({ person }) {
     ] })
   ] }, "Alaska-Adult-Petition");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaBirthCertificateGuide({ person }) {
   const { age, isChangingLegalSex, residentJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -38517,26 +37914,6 @@ function AlaskaBirthCertificateGuide({ person }) {
     ] })
   ] }, "Alaska-BirthCertificate");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaCIV695Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Parental Consent from Non-petitioning Parent (AK, CIV-695)" }),
@@ -38551,26 +37928,6 @@ function AlaskaCIV695Guide() {
     ] })
   ] }, "Alaska-CIV-695");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaCIV708Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Posting in Adult Change of Name Case (AK, CIV-708)" }),
@@ -38581,26 +37938,6 @@ function AlaskaCIV708Guide() {
     ] })
   ] }, "Alaska-CIV-708");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaCIV709Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Posting in Child's Change of Name Case (AK, CIV-709)" }),
@@ -38667,26 +38004,6 @@ function AlaskaCourtHearingGuide({ person }) {
     ] }, "AK-CourtHearing");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaDMVGuide({ person }) {
   const { age, isChangingLegalSex, gender, birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -38725,26 +38042,6 @@ function AlaskaDMVGuide({ person }) {
     ] })
   ] }, "Alaska-DMV");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (AK)" }),
@@ -38834,26 +38131,6 @@ function AlaskaEverythingElseGuide() {
     ] })
   ] }, "AK-EverythingElse");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaFeeWaiverGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -38971,26 +38248,6 @@ function AlaskaFilingInitialFormsGuide({
     ] }, "AK-InitialForms");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaMinorPetitionGuide({ person }) {
   const { parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -39011,26 +38268,6 @@ function AlaskaMinorPetitionGuide({ person }) {
     ] })
   ] }, "Alaska-Minor-Petition");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (AK)" }),
@@ -39046,26 +38283,6 @@ function AlaskaResourcesGuide() {
     ] })
   ] }, "AK-Resources");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaVS405Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Application for Legal Name Change (AK, VS-405)" }),
@@ -39076,26 +38293,6 @@ function AlaskaVS405Guide() {
     ] })
   ] }, "Alaska-VS-405");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const alaskaNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -39234,26 +38431,6 @@ const alaskaPostamble = {
   ],
   isJustGuide: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
-
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const alaskanAdministrativeDivisions = [
   {
     name: "Anchorage",
@@ -39656,26 +38833,6 @@ const alaskanAdministrativeDivisions = [
     trueFiling: true
   }
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function AlaskaDistrictInfo() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
     "Find out which court district to pick by checking this",
@@ -39684,31 +38841,6 @@ function AlaskaDistrictInfo() {
     "."
   ] }) }, "AK-Info");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckn
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Request for Name Change (Illinois form ATJ 303.10) (Adult)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const adultNameChangeMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -39807,11 +38939,6 @@ const adultNameChangeMap = [
     fieldName: "74 - Address"
   })
 ];
-/*!
- * Order for Name Change (Illinois form ATJ 305.7) (Adult)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const adultNameChangeOrderMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -39822,11 +38949,6 @@ const adultNameChangeOrderMap = [
     fieldName: "2 - Current Legal Name"
   })
 ];
-/*!
- * Request for Name Change (Illinois form NCM-R 2003.5) (Minor)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const minorNameChangeMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -39889,11 +39011,6 @@ const minorNameChangeMap = [
     fieldName: "36 - Email"
   })
 ];
-/*!
- * Request for Name Change - Child Information (Illinois form NCM-CI 2004.5)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const minorChildInfoMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -39996,11 +39113,6 @@ const minorChildInfoMap = [
     choice: "No"
   })
 ];
-/*!
- * Additional Parent Request for Name Change (Illinois form NCM-AP 2006.4)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const minorAdditionalParentMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40011,11 +39123,6 @@ const minorAdditionalParentMap = [
     fieldName: "2 - Name"
   })
 ];
-/*!
- * Order for Name Change (Illinois form NCM-O 2009.5) (Minor)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const minorNameChangeOrderMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40026,11 +39133,6 @@ const minorNameChangeOrderMap = [
     fieldName: "2 - Name"
   })
 ];
-/*!
- * Motion to Impound (Make Court Records Private) (Illinois form ATJ 308.1)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const requestCourtRecordsPrivateMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40065,11 +39167,6 @@ const requestCourtRecordsPrivateMap = [
     fieldName: "80 - Address"
   })
 ];
-/*!
- * Order on Motion to Impound (Make Court Records Private) (Illinois form ATJ 309.1)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const orderCourtRecordsPrivateMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40080,11 +39177,6 @@ const orderCourtRecordsPrivateMap = [
     loc: { x: 225, y: 283 }
   })
 ];
-/*!
- * Application for Waiver of Court Fees (Civil) (Illinois form WA-P 603.8)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const feeWaiverApplicationMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40128,11 +39220,6 @@ const feeWaiverApplicationMap = [
     fieldName: "117 - Email"
   })
 ];
-/*!
- * Order on Application for Waiver of Court Fees (Civil) (Illinois form WA-O 604.7)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const feeWaiverJudgementMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40147,11 +39234,6 @@ const feeWaiverJudgementMap = [
     fieldName: "5 - Your Name"
   })
 ];
-/*!
- * Certification for Exemption from E-Filing (Illinois form EW-C 3401.4)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const efileExemptionMap = [
   (applicant) => ({
     text: applicant.residentLocalityName ?? "",
@@ -40182,11 +39264,6 @@ const efileExemptionMap = [
     fieldName: "14"
   })
 ];
-/*!
- * Gender Designation Change Form (Illinois form DSD A 329.3)
- * Updated 6/2025.
- * @type {Formfill[]}
- */
 const dmvGenderDesignationMap = [
   (applicant) => ({
     text: applicant.legalName.last,
@@ -40243,11 +39320,6 @@ const dmvGenderDesignationMap = [
     fieldName: "cb1"
   })
 ];
-/*!
- * State of Illinois Affidavit and Certificate of Correction Request (Illinois form IOCI 19-184)
- * Updated 7/2025.
- * @type {Formfill[]}
- */
 const birthCertCorrectionMap = [
   () => ({
     check: true,
@@ -40353,26 +39425,6 @@ const birthCertCorrectionMap = [
     fieldName: "City state and ZIP code"
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisAdultOrderGuide({ person }) {
   const { birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40392,26 +39444,6 @@ function IllinoisAdultOrderGuide({ person }) {
     ] })
   ] }, "Illinois-AdultOrder");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisAdultPetitionGuide({ person }) {
   const { residentLocalityName, hasCriminalRecord } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40441,26 +39473,6 @@ function IllinoisAdultPetitionGuide({ person }) {
     ] })
   ] }, "Illinois-AdultPetition");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisBirthCertUpdateGuide({ person }) {
   const { age, isChangingLegalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40511,26 +39523,6 @@ function IllinoisBirthCertUpdateGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "It will take a few weeks to process. The returned birth certificate will display your new information and will not show any evidence that there was a change. The original certificate and the mailed items will be sealed away." })
   ] }, "Illinois-BirthCertificateUpdate");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisChildInfoGuide({ person }) {
   const { parentsAreOkay, hasCriminalRecord } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40565,26 +39557,6 @@ function IllinoisChildInfoGuide({ person }) {
     ] })
   ] }, "Illinois-ChildInfo");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisCourtHearingGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40619,26 +39591,6 @@ function IllinoisCourtHearingGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
   ] }, "IL-CourtHearing");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (IL)" }),
@@ -40696,7 +39648,7 @@ function IllinoisEverythingElseGuide() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Primary School Records" }),
-      ": Each school will have different requirements and protocols; contact them and see what theirs is. Be aware that Michigan law does not require your high school to update your educational records, so it is possible that they may refuse."
+      ": Each school will have different requirements and protocols; contact them and see what theirs is."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "College Records" }),
@@ -40728,52 +39680,12 @@ function IllinoisEverythingElseGuide() {
     ] })
   ] }, "IL-EverythingElse");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisFeeOrderGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order on Application for Waiver of Court Fees (Civil) (IL, WA-O 604.7)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Order on Application for Waiver of Court Fees (Civil)” (WA-O 604.7) is filed with a fee waiver application. This form is already complete." })
   ] }, "Illinois-FeeOrder");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisFeeWaiverGuide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40848,26 +39760,6 @@ function IllinoisFilingInitialFormsGuide({
     ] }, "Illinois-Filing");
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisMinorOrderGuide({ person }) {
   const { birthJurisdictionName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40887,26 +39779,6 @@ function IllinoisMinorOrderGuide({ person }) {
     ] })
   ] }, "Illinois-MinorOrder");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisMinorPetitionGuide({ person }) {
   const { residentLocalityName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40930,26 +39802,6 @@ function IllinoisMinorPetitionGuide({ person }) {
     ] })
   ] }, "Illinois-MinorPetition");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisNotaryGuide({ person }) {
   const { residentLocalityName, hasCriminalRecord, age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -40994,26 +39846,6 @@ function IllinoisNotaryGuide({ person }) {
     hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You will want to gather records of your criminal history including the charges, release paperwork, parole paperwork, or any documents showing that your sentence has been entirely served. Those can be added to the petition as supporting documents and will reduce the likelihood of a hearing." }) : ""
   ] }, "Illinois-Notary");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisParentInfoGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Additional Parent Request for Name Change (IL, NCM-AP 2006.4)" }),
@@ -41027,52 +39859,12 @@ function IllinoisParentInfoGuide() {
     ] })
   ] }, "Illinois-ParentInfo");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisPrivacyOrderGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order on Motion to Impound (Make Court Records Private) (IL, ATJ 309.1)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Order on Motion to Impound (Make Court Records Private)” (ATJ 309.1) is what the judge fills out to seal the court records. This form is already complete." })
   ] }, "Illinois-PrivacyOrder");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisPrivacyRequestGuide({ person }) {
   const { age, isChangingLegalSex } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -41096,26 +39888,6 @@ function IllinoisPrivacyRequestGuide({ person }) {
     ] })
   ] }, "Illinois-PrivacyRequest");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (IL)" }),
@@ -41135,26 +39907,6 @@ function IllinoisResourcesGuide() {
     ] })
   ] }, "IL-Resources");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function IllinoisSecretaryOfStateGuide({
   person
 }) {
@@ -41191,26 +39943,6 @@ function IllinoisSecretaryOfStateGuide({
     ] })
   ] }, "Illinois-SecretaryOfState");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const illinoisNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
@@ -41370,26 +40102,6 @@ const illinoisPostamble = {
   ],
   isJustGuide: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const illinoisCounties = [
   {
     name: "Adams",
@@ -42208,30 +40920,5656 @@ const illinoisCounties = [
     }
   }
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Application for a Social Security Card (federal form SS-5.)
- * @type {Formfill[]}
- */
+const civilCaseCoverMap = [
+  (applicant) => ({
+    text: `${fullName(representativeName(applicant))}, 
+      ${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""}`,
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].AttyPartyInfo[0].TextField1[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Email[1]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].TitlePartyName[0].Party1[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "CM-010[0].Page1[0].P1Caption[0].FormTitle[0].Civil[0].limited1[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "CM-010[0].Page1[0].List1[0].Li12[0].CheckBox2[1]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "CM-010[0].Page1[0].List2[0].is1[1]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "CM-010[0].Page1[0].List3[0].Lib[0].Ch2[0]"
+  }),
+  () => ({
+    text: "1",
+    fieldName: "CM-010[0].Page1[0].List4[0].item4[0].FillText1[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "CM-010[0].Page1[0].List5[0].item5[0].is[1]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "CM-010[0].Page1[0].sign[0].SigName[0]"
+  })
+];
+const nameChangeOnlyPetitionMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-100[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-100[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-100[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-100[0].Page1[0].List1[0].PetitionerPresentName[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName === "California",
+    fieldName: "NC-100[0].Page1[0].List1[0].LI1A[0].residence[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-100[0].Page1[0].List1[0].LI1B[0].residence[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-100[0].Page1[0].List1[0].LI1B[0].SubLIB[0].SubLiB2[0].TwoParents_rb[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-100[0].Page1[0].List2[0].Item2[0].SubItems[0].SubitemA[0].PresentName1[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-100[0].Page1[0].List2[0].Item2[0].SubItems[0].SubitemA[0].ProposedName1[0]"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "1" : "0",
+    fieldName: "NC-100[0].Page1[0].List4[0].Under18Count[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "NC-100[0].Page1[0].List6[0].NameChangeGender_cb[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex && !isMinor(applicant),
+    fieldName: "NC-100[0].Page1[0].List6[0].petitioner[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex && isMinor(applicant),
+    fieldName: "NC-100[0].Page1[0].List6[0].petitioner[1]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalSex && isMinor(applicant) ? fullName(applicant.chosenName) : "",
+    fieldName: "NC-100[0].Page1[0].List6[0].ConformToGenderOthName[0]"
+  })
+];
+const adultNameGenderPetitionMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-300[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-300[0].Page1[0].Caption[0].FormTitle[0].namechange[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page1[0].List1[0].FillText44[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-300[0].Page1[0].List1[0].Li1A[0].gender1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-300[0].Page1[0].List1[0].Li1B[0].gender1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-300[0].Page1[0].List1[0].Li1C[0].gender1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-300[0].Page1[0].List4[0].petitioner[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 216, y: 747 }
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName === "California",
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4A[0].#subform[0].#subform[1].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4A[0].#subform[0].#subform[2].petitioner_cb[1]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4A[0].#subform[0].#subform[2].#subform[3].#subform[4].petitioner_cb1[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4C[0].petitionerc[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page2[0].P2Caption[0].#subform[0].Party[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-300[0].Page2[0].List5[0].cacertificate[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-300[0].Page2[0].Declaration[0].Declaration[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-300[0].Page2[0].Declaration[0].Declaration[0].gender[1]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-300[0].Page2[0].Declaration[0].Declaration[0].gender[2]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page2[0].Declaration[0].PetitionerSign[0].T14[0]"
+  })
+];
+const minorNameGenderPetitionMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-500[0].Page1[0].P1Header[0].TitlePartyName[0].Party1_ft[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].FormTitle[0].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-500[0].Page1[0].List1[0].FillText16[0]"
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "NC-500[0].Page1[0].List1[0].Li1A[0].Requester_rb[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-500[0].Page1[0].List1[0].Li1A[0].FillText16[0]"
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "NC-500[0].Page1[0].List3[0].Li3B[0].parents[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-500[0].Page1[0].List5[0].Li5A[0].ReqGender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-500[0].Page1[0].List5[0].Li5B[0].ReqGender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-500[0].Page1[0].List5[0].Li5C[0].ReqGender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-500[0].Page2[0].List9[0].request[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-500[0].Page2[0].List9[0].TextField[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName === "California",
+    fieldName: "NC-500[0].Page2[0].List9[0].Li9B[0].Sublist9b[0].Li9B1[0].location[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-500[0].Page2[0].List9[0].Li9B[0].Sublist9b[0].Li9B2[0].location[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-500[0].Page2[0].Declaration[0].FillText44[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[1]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[2]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-500[0].Page2[0].Date[0].Date1[0].T14[0]"
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? `${fullName(representativeName(applicant))}, Parent` : "",
+    fieldName: "NC-500[0].Page2[0].Date[0].Date2[0].T14[0]"
+  })
+];
+const nameChangeOnlyInfoMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-110[0].Page1[0].Caption[0].Petitioner_ft[0]"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].person[0]"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].person[1]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 256, y: 232 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 268, y: 250 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 250, y: 266 }
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].eighteen[0]"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].eighteen[1]"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    loc: { x: 250, y: 299 }
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].SubLi7b5[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].SubLi7b5[0].gender[1]"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndLocality),
+    loc: { x: 119, y: 349 }
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    loc: { x: 93, y: 386 }
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7D[0].Sublist7d[0].Subli7d1[0].relationship[0]"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant) && applicant.parentsAreOkay,
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7D[0].Sublist7d[0].Subli7d2[0].relationship[0]"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? fullName(representativeName(applicant)) : "",
+    loc: { x: 206, y: 513 }
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : "",
+    loc: { x: 462, y: 513 }
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant) && !applicant.hasCriminalRecord,
+    fieldName: "NC-110[0].Page1[0].Declaration[0].SubDec[0].declaration1[0]"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant) && !applicant.hasCriminalRecord,
+    fieldName: "NC-110[0].Page1[0].Declaration[0].SubDec[0].declaration2[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-110[0].Page1[0].Declaration[0].DecSign[0].T14[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-110[0].Page1[0].PetitionerSign[0].T1444[0]"
+  })
+];
+const minorGuardianDeclarationMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TEXT.0.1.1"
+  }),
+  () => ({
+    text: "1",
+    fieldName: "TEXT.0.2.1.1"
+  }),
+  () => ({
+    text: "1",
+    fieldName: "TEXT.0.2.1.2"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TEXT.0.2.0.1"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndLocality),
+    fieldName: "TEXT.0.2.0.2.1"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "TEXT.0.2.0.3.1.1"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndLocality),
+    fieldName: "TEXT.0.2.0.3.1.2.1"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TEXT.0.2.0.3.1.3.1.1.1.2.1.0.1.1.1.1.2.1.1.1.1.0"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "TEXT.0.2.0.3.1.3.1.1.1.2.1.0.1.1.1.1.2.1.1.1.1.1"
+  })
+];
+const nameChangeOnlyNoticeMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-120[0].Page1[0].P1Caption[0].TitlePartyName[0].TextField29[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-120[0].Page1[0].List1[0].PetitionerPresentName[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-120[0].Page1[0].List1[0].Item1[0].Sublist1[0].LiA[0].PresentName1[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-120[0].Page1[0].List1[0].Item1[0].Sublist1[0].LiA[0].ProposedName1[0]"
+  })
+];
+const nameChangeOnlyConformMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-125_NC-225[0].Page1[0].Caption[0].TitlePartyName[0].Petitioner_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-125_NC-225[0].Page1[0].List1[0].PetitionerName_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-125_NC-225[0].Page1[0].List1[0].Li1A[0].PresentName1_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-125_NC-225[0].Page1[0].List1[0].Li1A[0].ProposedName1_ft[0]"
+  })
+];
+const minorNameGenderConformMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-520[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-520[0].Page1[0].Caption[0].TitlePartyName[0].Petitioner_ft[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-520[0].Page1[0].Caption[0].FormTitle[0].#area[0].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-520[0].Page1[0].List1[0].CheckBox19[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-520[0].Page1[0].List1[0].LiA[0].TextField[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-520[0].Page1[0].List1[0].LiA[0].TextField[1]"
+  })
+];
+const nameChangeOnlyOrderMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "topmostSubform[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "topmostSubform[0].Page1[0].PresentName1_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "topmostSubform[0].Page1[0].NewName1_ft[0]"
+  })
+];
+const nameChangeOnlyOrderGuardianMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "topmostSubform[0].Page1[0].StdP1Header_sf[0].TitlePartyName[0].TextField1[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "topmostSubform[0].Page1[0].PresentName_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "topmostSubform[0].Page1[0].NewName_ft[0]"
+  })
+];
+const adultNameGenderOrderMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-330[0].Page1[0].P1Header[0].Petition[0].Party1_ft[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].FormTitle[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page1[0].List3[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-330[0].Page2[0].List9[0].identifier[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-330[0].Page2[0].List9[0].identifier[1]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-330[0].Page2[0].List9[0].identifier[2]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page2[0].List10[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName: "NC-330[0].Page2[0].List10[0].PresentName[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].Checkbox10[0]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    //eslint-disable-next-line
+    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].TEXT.0.6.1.1.4.1.1.1.0.1.0.1.1.1.3.1.0[0]"
+  })
+];
+const minorNameGenderOrderMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].TitlePartyName[0].Party1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].FormTitle[0].ChangeNameDecree[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3B[0].MinorCurrentName[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].Sublist[0].Subli3c1[0].petitionerc[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].Sublist[0].Subli3c1[0].TextField6[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3E[0].checkbox34[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-530G[0].Page2[0].List4[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-530G[0].Page2[0].List4[0].PresentName[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-530G[0].Page2[0].List4[0].Li4a[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-530G[0].Page2[0].List4[0].Li4b[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-530G[0].Page2[0].List4[0].Li4c[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page2[0].List5[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName: "NC-530G[0].Page2[0].List5[0].PresentName[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].Checkbox55[0]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    loc: { page: 1, x: 275, y: 614 }
+  })
+];
+const feeWaiverMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "FW-001[0].Page1[0].RightCaption[0].CourtInfo[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerName1[0]"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerStrAddress[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerCity[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerState[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerZip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerTel[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "FW-001[0].Page1[0].List4[0].item4[0].WaiveSuperiorCrtFee[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-001[0].Page1[0].Sign[0].PetitionerName[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { page: 1, x: 145, y: 73 }
+  })
+];
+const feeWaiverOrderMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-003[0].Page1[0].PersonWaivingName_ft[0]"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "FW-003[0].Page1[0].FillText23[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "FW-003[0].Page1[0].FillText21[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "FW-003[0].Page1[0].FillText20[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "FW-003[0].Page1[0].FillText22[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "FW-003[0].Page1[0].Stamp_court_case[0].CourtInfo_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-003[0].Page2[0].PE_P2Header_gp[0].PersonWaivingName_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-003[0].#subform[2].PE_P2Header_gp[0].PersonWaivingName_ft[0]"
+  })
+];
+const DMVTitleMap = [
+  () => ({
+    check: true,
+    fieldName: "F. Changing name box"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "F. changing name from"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "F. Changing name to"
+  }),
+  (applicant) => ({
+    text: `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`,
+    fieldName: "PRINTED NAME"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME"
+  }),
+  (applicant) => ({
+    text: phoneAreaCode(applicant.phone),
+    fieldName: "App sign area code"
+  }),
+  (applicant) => ({
+    text: `${phoneStart(applicant.phone)}-${phoneEnd(applicant.phone)}`,
+    fieldName: "App sign phone no"
+  })
+];
+const nameOnlyBirthCertMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Street"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "City"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.residentJurisdictionName : applicant.mailAddress?.mailState,
+    fieldName: "State"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "Zip Code"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
+    fieldName: "First Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle ? applicant.birthName.middle : applicant.legalName.middle,
+    fieldName: "Middle Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Last Name"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "City of Birth if known"
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County of Birth"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "Full Name of First Parent"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "Full Name of Second Parent if applicable"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "First Name_2"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "Middle Name_2"
+  }),
+  (applicant) => ({
+    text: `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}`,
+    fieldName: "Last Name_2"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Printed Name"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address Street and Number City State and Zip"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Applicants Printed Name"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Registrant Name of person whose certificate you are requestingRow1"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? "Parent" : "";
+        case false:
+          return "Self";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Applicants Relationship to Registrant Must be an authorized personRow1"
+  })
+];
+const nameGenderBirthCertMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Street"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "City"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.residentJurisdictionName : applicant.mailAddress?.mailState,
+    fieldName: "State"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "Zip Code"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
+    fieldName: "First Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle ? applicant.birthName.middle : applicant.legalName.middle,
+    fieldName: "Middle Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Last Name"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "City of Birth if known"
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "County of Birth"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.mothersBirthName),
+    fieldName: "Full Name of First Parent"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.fathersBirthName),
+    fieldName: "Full Name of Second Parent if applicable"
+  }),
+  (applicant) => ({
+    check: (() => {
+      switch (!applicant.birthName.first) {
+        case true:
+          return applicant.legalName.first !== applicant.chosenName.first ? true : void 0;
+        case false:
+          return applicant.birthName.first !== applicant.chosenName.first ? true : void 0;
+        default:
+          return void 0;
+      }
+    })(),
+    fieldName: "Child's First Name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.birthName.first) {
+        case true:
+          return applicant.legalName.first !== applicant.chosenName.first ? applicant.chosenName.first : "";
+        case false:
+          return applicant.birthName.first !== applicant.chosenName.first ? applicant.chosenName.first : "";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Enter the New Corrected Name or ValueChild  s First Name"
+  }),
+  (applicant) => ({
+    check: (() => {
+      switch (!applicant.birthName.middle) {
+        case true:
+          return applicant.legalName.middle !== applicant.chosenName.middle ? true : void 0;
+        case false:
+          return applicant.birthName.middle !== applicant.chosenName.middle ? true : void 0;
+        default:
+          return void 0;
+      }
+    })(),
+    fieldName: "Child's Middle Name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.birthName.middle) {
+        case true:
+          return applicant.legalName.middle !== applicant.chosenName.middle ? applicant.chosenName.middle : "";
+        case false:
+          return applicant.birthName.middle !== applicant.chosenName.middle ? applicant.chosenName.middle : "";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Enter the New Corrected Name or ValueChild  s Middle Name"
+  }),
+  (applicant) => ({
+    check: (() => {
+      switch (!applicant.birthName.last) {
+        case true:
+          return applicant.legalName.last !== applicant.chosenName.last ? true : void 0;
+        case false:
+          return applicant.birthName.last !== applicant.chosenName.last ? true : void 0;
+        default:
+          return void 0;
+      }
+    })(),
+    fieldName: "Child's last name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.birthName.last) {
+        case true:
+          return applicant.legalName.last !== applicant.chosenName.last ? applicant.chosenName.last : "";
+        case false:
+          return applicant.birthName.last !== applicant.chosenName.last ? applicant.chosenName.last : "";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Enter the New Corrected Name or ValueChilds Last Name"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalSex,
+    fieldName: "Sex"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "Nonbinary (X)";
+      }
+    })(),
+    fieldName: "Enter the New Corrected Name or ValueSex"
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "Enter the Reason for the Correction"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Printed Name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? "Parent" : "";
+        case false:
+          return "Self";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Relationship"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address Street and Number City State and Zip"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Applicants Printed Name"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Registrant Name of person whose certificate you are requestingRow1"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? "Parent" : "";
+        case false:
+          return "Self";
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "Applicants Relationship to Registrant Must be an authorized personRow1"
+  })
+];
+const alamedaCoverMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 113, y: 66 }
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 385, y: 1023 }
+  })
+];
+const amadorIntakeMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 45, y: 418 }
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 193, y: 434 }
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) && fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    loc: { x: 45, y: 471 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
+    loc: { x: 45, y: 507 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.MailCityAndStateAndZip),
+    loc: { x: 45, y: 543 }
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { x: 45, y: 578 }
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    loc: { x: 45, y: 648 }
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    loc: { x: 45, y: 683 }
+  })
+];
+const amadorBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "LAST NAME FIRST NAME MIDDLE NAME.0.0"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "LAST NAME FIRST NAME MIDDLE NAME.0.1"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Text1"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName),
+    fieldName: "LAST NAME FIRST NAME MIDDLE NAME.1"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "RESIDENCE STREET ADDRESS CITYSTATE ZIP"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "PHONE NUMBER"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "MAILING ADDRESS IF DIFFERENT FROM RESIDENCE"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DATE OF BIRTH"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "AGE"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "PLACE OF BIRTH STATE OR COUNTRY"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "SEX"
+  }),
+  (applicant) => ({
+    fieldName: "I AM UNDER THE JURISDICTION OF THE DEPARTMENT OF",
+    choice: !applicant.hasCriminalRecord ? "NO_2" : void 0
+  }),
+  (applicant) => ({
+    fieldName: "PURSUANT TO PENAL CODE 290",
+    choice: !applicant.hasCriminalRecord ? "NO_3" : void 0
+  })
+];
+const elDoradoWestSlopeMap = [
+  () => ({
+    check: true,
+    fieldName: "2927 Meder Road, Cameron Park, CA 95682"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Text Field0"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Name of Applicant"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "AKA' S"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date & Place of Birth"
+  })
+];
+const elDoradoSLTMap = [
+  () => ({
+    check: true,
+    fieldName: "1354 Johnson Blvd, South Lake Tahoe, CA 96150"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Text Field0"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Name of Applicant"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "AKA' S"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date & Place of Birth"
+  })
+];
+const kernCaseNoticeMap = [
+  (applicant) => ({
+    text: `${fullName(representativeName(applicant))}, 
+    ${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""}`,
+    fieldName: "Attorney or Party"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone No"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email Address"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "CASE NAME"
+  }),
+  () => ({
+    check: true,
+    fieldName: "PETITIONERPLAINTIFF"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TYPE OR PRINT NAME OF PARTY OR ATTORNEY"
+  })
+];
+const lassenCriminalHistoryMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address 1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone No"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Petitioner / Plaintiff"
+  }),
+  (applicant) => ({
+    fieldName: "Sex",
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        default:
+          return "";
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Age"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    fieldName: "Place of Birth"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Current Address"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "Other name(s) used"
+  })
+];
+const losAngelesCaseTypeMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "SHORT TITLE"
+  }),
+  () => ({
+    check: true,
+    fieldName: "undefined_50"
+  }),
+  () => ({
+    check: true,
+    fieldName: "undefined_59"
+  }),
+  () => ({
+    check: true,
+    fieldName: "undefined_64"
+  }),
+  (applicant) => ({
+    text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
+    fieldName: "ADDRESSZIP CODE"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "CITY"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "STATE"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "ZIP"
+  })
+];
+const losAngelesCriminalHistoryMap = [
+  (applicant) => ({
+    text: `${formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo) ?? ""}
+    ${applicant.email ?? ""}`,
+    fieldName: "ADDRESS01"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? `${fullName(representativeName(applicant))} (${fullName(applicant.legalName)})` : fullName(representativeName(applicant)),
+    fieldName: "NAME OF PETITIONER Person having the name change"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return isMinor(applicant) ? "" : "Female";
+        case GenderMarker.M:
+          return isMinor(applicant) ? "" : "Male";
+        case GenderMarker.X:
+          return isMinor(applicant) ? "" : "X";
+      }
+    })(),
+    fieldName: "Sex"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : String(applicant.age),
+    fieldName: "Age"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    fieldName: "Place of Birth"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Current Address"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return "";
+        case false:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : "";
+      }
+    })(),
+    fieldName: "Other names used"
+  })
+];
+const mendocinoCriminalHistoryMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 65, y: 309 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 270, y: 309 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    loc: { x: 470, y: 309 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 670, y: 309 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    loc: { x: 65, y: 393 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    loc: { x: 65, y: 461 }
+  })
+];
+const montereyCriminalHistoryMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Applicants Current Name"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "Applicants Proposed New Name"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Applicants Date of Birth"
+  }),
+  (applicant) => ({
+    fieldName: "Group1",
+    choice: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Choice1";
+        case GenderMarker.F:
+          return "Choice2";
+        default:
+          return "";
+      }
+    })()
+  })
+];
+const orangeCaseNoticeMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text1.0.0"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text1.0.1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone Number"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "CASE TITLE"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TYPE OR PRINT NAME OF PETITIONEROR ATTORNEY"
+  })
+];
+const placerCriminalHistoryMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Full Name"
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) && fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "Also Known As"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "Male or"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "Female"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndCountry),
+    fieldName: "Current Residence Address Street City Country and Zip Code"
+  })
+];
+const riversideCoverSheetMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text9.0"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text9.1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Text9.4"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Text9.6"
+  }),
+  () => ({
+    fieldName: "Party1",
+    value: "Petitioner:"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Plaintiff or Petitioner Name"
+  }),
+  () => ({
+    fieldName: "Party2",
+    value: "In the Matter Of:"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Case Name, Defendant, or Respondent"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  })
+];
+const riversideCaseNoticeMap = [
+  //Add zip code checks for courts when system is working
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text5.0"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text5.1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Text5.4"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Text5.6"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text5.8"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text7.3"
+  })
+];
+const sanBenitoBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Last Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "First Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Middle Name"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "AKA 1"
+  }),
+  (applicant) => ({
+    text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
+    fieldName: "Address"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndState),
+    fieldName: "City/State"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "Zip"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "PHONE NUMBER"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "MAILING ADDRESS IF DIFFERENT FROM RESIDENCE"
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    fieldName: "DATE OF BIRTH"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "AGE"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "PLACE OF BIRTH STATE OR COUNTRY"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "SEX"
+  })
+];
+const santaBarbaraCoverSheetMap = [
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo),
+    fieldName: "ATTORNEY"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "PLAINTIFF"
+  }),
+  () => ({
+    check: true,
+    fieldName: "A defendant resides or has its principal place of business in this region at"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "BUSINESS2"
+  })
+];
+const santaClaraBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Text1"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "Text2"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Text3"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "Text4"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text7"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Text8"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "Text9"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Text11"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Text12"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "Text13"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "Text14"
+  })
+];
+const siskiyouInfoMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 175, y: 218 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 380, y: 218 }
+  }),
+  (applicant) => ({
+    text: nameInitials(applicant.legalName, {
+      format: [NameFormatPart.MIDDLE]
+    }),
+    loc: { x: 575, y: 218 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}` : "",
+    loc: { x: 175, y: 264 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first,
+    loc: { x: 380, y: 264 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle ? nameInitials(applicant.birthName, {
+      format: [NameFormatPart.MIDDLE]
+    }) : "",
+    loc: { x: 575, y: 264 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return "";
+        default:
+          return "";
+      }
+    })(),
+    loc: { x: 210, y: 315 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.MailCityAndStateAndZip),
+    loc: { x: 210, y: 335 }
+  }),
+  (applicant) => ({
+    text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
+    loc: { x: 577, y: 315 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
+    loc: { x: 575, y: 335 }
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    loc: { x: 210, y: 391 }
+  })
+];
+const siskiyouBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 80, y: 281 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 330, y: 281 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    loc: { x: 535, y: 281 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName),
+    loc: { x: 95, y: 320 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    loc: { x: 80, y: 428 }
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { x: 625, y: 428 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.MailFullAddress),
+    loc: { x: 80, y: 464 }
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    loc: { x: 80, y: 506 }
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    loc: { x: 225, y: 506 }
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    loc: { x: 277, y: 506 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    loc: { x: 406, y: 506 }
+  })
+];
+const solanoCoverSheetMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FULL NAME OF APPLICANT"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DATE OF BIRTH"
+  })
+];
+const yubaBackgroundCheckMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 65, y: 323 }
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 110, y: 545 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 355, y: 545 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    loc: { x: 605, y: 545 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    loc: { x: 125, y: 584 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 155, y: 642 }
+  })
+];
+function AlamedaCoverSheetGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Civil Case Cover Sheet Addendum (Alameda County, 202-19)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is an addendum to the Civil Case Cover Sheet specifically for Alameda county residents. When you decide which court to file at later in this guide check the appropriate box at the top of this sheet. This form is otherwise complete." })
+  ] }, "Alameda-202-19");
+}
+function AmadorBackgroundCheckGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Form Name Change (Amador County, CIV-136)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "In Amador county they require this form for a background check. Fill in any blanks we left on the form, if they do not apply write “DNA” instead." })
+  ] }, "Amador-CIV-136");
+}
+function AmadorIntakeSheetGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Amador Superior Court Case Intake Sheet (Amador County, MISC-049)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is a form unique to Amador county. If there are other cases that",
+      age && age < 18 ? " a petitioner is" : " you are",
+      " involved in list them at the top.",
+      age && age < 18 ? " A petitioner" : " You",
+      " should fill in any blanks in the “Plaintiff/Petitioner” section. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything on the “Defendent/Respondent” side as there are not any for this type of case.",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If you have more than one petitioner have them fill out their information as well below the first. If you have more than 2 petitioners check the box on the bottom left of the form and attach an additional sheet with their information." }) : ""
+    ] })
+  ] }, "Amador-MISC-049");
+}
+function CaliforniaBirthCertNameGender({ person }) {
+  const { age, parentsAreOkay } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Birth Certificate (CA, VS 24B)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This process is done by mail using the “Application to Amend a Birth Record” (VS 24B) form. You will recieve a single copy of the updated certificate unless you request more. To do so fill in the fee calculation box on the right for additional copies, otherwise just put $0 in that box. Total the fee directly below that." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "On page ",
+      age && age < 18 ? "your petitioner" : "you",
+      " should then sign and date at the bottom. You will need someone else to also sign at the bottom of page 2, a list of authorized person is available on the next page in the “Relationship to Registrant” section. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign or date anywhere else, that should only be done in front of a notary.",
+      age && age < 18 && !parentsAreOkay ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Have your petitioner fill in their relationship to you on the bottom of page 2 and the “Sworn Statement” section." }) : ""
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Notaries can be found in court buildings, banks, some",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS locations" }),
+      ", or ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+      ". All of these services have different fees and payment methods but all of them require a photo ID."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Once it is notarized ",
+      age && age < 18 ? "your petitioner" : "you",
+      " should make out a check or money order for the fee amount to “CDPH - Vital Records”. Then place this form, the payment, and a certified copy of your court order in an envelope and mail it to:"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "CDPH - Vital Records" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "MS 5015" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "P.O. Box 997410" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Sacramento, CA 95899-7410" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The estimated processing times are listed on the Vital Records website",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Processing-Times.aspx", children: "here" }),
+      "."
+    ] })
+  ] }, "California-BirthCertificateNameGender");
+}
+function CaliforniaBirthCertNameOnly({ person }) {
+  const { age, parentsAreOkay } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Birth Certificate (CA, VS 23 Birth)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Warning:" }),
+      " This process will leave a record of the change on the new birth certificate. The only way to ensure that there is no evidence of a change is to update both the name and gender ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "simultaneously" }),
+      ". There is no documentation or other proof required to update the gender on a birth certificate. To update both use",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdph.ca.gov/CDPH%20Document%20Library/ControlledForms/VS24B.pdf", children: "this" }),
+      "form instead."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This process is done by mail using the “Application to Amend a Birth Record After a Court Order Name Change” (VS 23 Birth) form. You will recieve a single copy of the updated certificate unless you request more. To do so fill in the fee calculation box for additional copies, otherwise just put $0 in that box. Total the fee directly below that." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "On page 2 fill out the “Court Order Information” section with your court orders information. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should then sign and date in section 3. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign or date anywhere else, that should only be done in front of a notary.",
+      age && age < 18 && !parentsAreOkay ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Have your petitioner fill in their relationship to you on the “Sworn Statement” section." }) : ""
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Notaries can be found in court buildings, banks, some",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS locations" }),
+      ", or ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+      ". All of these services have different fees and payment methods but all of them require a photo ID."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Once it is notarized ",
+      age && age < 18 ? "your petitioner" : "you",
+      " should make out a check or money order for the fee amount to “CDPH - Vital Records”. Then place this form, the payment, and a certified copy of your court order in an envelope and mail it to:"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "CDPH - Vital Records" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "MS 5015" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "P.O. Box 997410" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Sacramento, CA 95899-7410" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The estimated processing times are listed on the Vital Records website",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Processing-Times.aspx", children: "here" }),
+      "."
+    ] })
+  ] }, "California-BirthCertificateName");
+}
+function CaliforniaCoverSheetGuide({ person }) {
+  const { age, isChangingLegalSex } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Civil Case Cover Sheet (CA, CM-010)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is a cover sheet showing what type of case the court will hear. In California name ",
+      isChangingLegalSex ? "/gender" : "",
+      " changes are Unlimited Civil Cases. This form is not required in every county but was included just in case. All this form needs is your ",
+      age && age < 18 ? "parent/guardians" : "",
+      " signature on the bottom right of the first page."
+    ] })
+  ] }, "California-CM010");
+}
+function CaliforniaCourtHearingGuide({ person }) {
+  const { age, residentLocalityName } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Hearing (CA)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "On the day of your hearing, you",
+      age && age < 18 && "and your parent(s)",
+      " should dress appropriately for a courtroom, even if the hearing is virtual. The hearing may begin late, but it should only take a few minutes once it starts."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "You",
+      age && age < 18 && "and/or your parent(s)",
+      " will be sworn in and questioned. The questions vary between courts, but you can expect some of the following:"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your current legal name?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your desired legal name?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your date of birth?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        "Are you a resident of ",
+        residentLocalityName,
+        " county?"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "In your own words, why do you want to change your name?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you'd like the court to know?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
+        " ",
+        "(Compare the history of the phrase “speak now or forever hold your peace.”)"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "At this point the name change should be granted and the hearing should end promptly. The document that you will need to get afterward is the “Order for Name Change”, but we will call it the “court order”. You will probably be asked whether you want to pick up your court order at the court or have it mailed. The court should have the order ready for pickup within a few hours or the next day. Mailing the order will take several days. Be sure to request one or two extra certified copies of your court order if you haven't already." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order, you are ready to file with the Social Security administration. Keep the original court order in a safe place." })
+  ] }, "CA-CourtHearing");
+}
+function CaliforniaDMVGuide({
+  person
+}) {
+  const { age, isChangingLegalSex, isChangingLegalName } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Primary ID (CA)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This section covers the process of updating your primary identification (driver's license/state ID) and any vehicle registrations you may have. If this is not relevant to you, proceed to the next section. You will need to fill out an online application at this",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/dl-id-online-app-edl-44/", children: "link" }),
+      ". After that is done find your nearest field office",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/locations/field-offices/", children: "here" }),
+      ". You can then go without an appointment or make one",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/appointments/select-appointment-type/", children: "here" }),
+      ".",
+      " ",
+      age && age < 18 ? " A parent/guardian will need to go with you to this appointment." : "",
+      isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "California does ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " require any medical documentation or other proof to change a gender marker, simply select the one you want."
+      ] }) : ""
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " already have a driver's license or state ID, tell the clerk that you are applying for one. For first time applications for Real ID check this",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/real-id/real-id-checklist/", children: "list" }),
+      " ",
+      "for what documents you need to bring, for non-Real ID use this",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/file/federal-non-compliant-dl-id-card-documents-list-pdf/", children: "list" }),
+      " ",
+      "instead. The appointment should proceed normally but make sure the gender marker is set correctly before you leave."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you already have a driver's license or state ID bring it to the office then tell the clerk that you are updating the name and/or gender marker on it. They will ask for",
+      isChangingLegalName ? " the court-ordered name change and ID. " : " your ID. ",
+      "If at any point you experience issues or pushback politely insist on speaking to a supervisor for assistance."
+    ] }),
+    isChangingLegalName ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Optionally, you may also update the name on your vehicle registration(s). If so grab the “DMV Statement of Facts” (REG 256) form we provided. Fill out your license plate, vehicle ID number (VIN), and year/make fields at the top of both pages. Then sign in your new name and date at the bottom of page 2. Give this completed form to the clerk." }) : ""
+  ] }, "California-DMV");
+}
+function ElDoradoBackgroundCheckGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Information RE: Petition for Name Change (El Dorado County, C-2/C-2S)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "In El Dorado county they require a form for a background check. Since there are two locations to file in they made a seperate form for each. You can file at either location. Once you decide which court you want to file in keep the form that has the correct address checked and discard the other." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Ignore the Case number fields but do fill out any names you previously used on the “AKA” line. Then fill out your social security number below that and sign/date at the bottom." })
+  ] }, "El-Dorado-C-2");
+}
+function CaliforniaEverythingElseGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (CA)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order and primary identification in your new name, you can change your name almost everywhere else without issue. Some places will even allow for digital updates by scanning in the ID and court order. What follows is a list of places, in no particular order, where you may want to update your name. Any forms that you fill out should be signed in your new name." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Bank" }),
+      ": Bring your new ID and court order and request the name on your account(s) be changed. If you have a debit card or checkbook out of this account, then you will need to request new ones. Any joint account holders must also be present to sign."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Credit Card" }),
+      ": Most creditors will require you to snail mail or fax a photocopy of your ID and court order. If a particular company is stubborn in updating the account name, consider canceling the card and opening a new card with them or another provider."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Work" }),
+      ": If you have an HR system, bring your new ID, new social security card, and court order to them and ask them to update your name. If you get your health insurance through your work, you can have them send the updated information to them on your behalf."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Healthcare Providers" }),
+      ": You should be able to bring in only your new ID at your next in-person visit and go to the front secretaries to have your name updated in the system. Be aware that certain medical professionals will need to know your transition status."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Gas/Heating/Electricity Provider" }),
+      ": Should be able to be done by phone, email, or online."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Water/Sewer" }),
+      ": Should be able to be done by phone, email, or snail mail."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Internet Provider" }),
+      ": Should be able to be done online."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Garbage Service" }),
+      ": Should be able to be done by email or snail mail."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Mortgage" }),
+      ": Should be able to be done by email or snail mail."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Property/House Title" }),
+      ": Contact your local county Recorder's Office. A Grant or Quitclaim deed will need to be filed. Bring ID and court order."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Phone Service" }),
+      ": Go to the nearest store of your carrier network with your new ID and court order and request your information be updated."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Taxes (IRS)" }),
+      ": The IRS will be informed of your name change when you update your information with Social Security. You do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " need to contact them."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Primary School Records" }),
+      ": Each school will have different requirements and protocols; contact them and see what theirs is."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "College Records" }),
+      ": Contact the Student Records Department of your university. Your court order and new ID should work. You may also consider asking about updating your school profile and email."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Insurance" }),
+      ": Contact your insurer(s). Requirements will vary."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Government Assistance" }),
+      ": Contact your assistance agency to update their case file. You should only need a primary ID and court order."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Voter Registration" }),
+      ": California has automatic voter registration which should have been handled with the primary ID appointment. If it was not and you are eligable to vote go to this",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://registertovote.ca.gov/", children: "website" }),
+      ". Then click the “Register to Vote Now” link."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Some other places to consider:" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Retirement account" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Clubs/memberships" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Municipal tax authorities" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Online payment services (Venmo, Paypal, etc…)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Public transit accounts" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Monthly subscriptions (Netflix, Hulu, etc…)" })
+    ] })
+  ] }, "CA-EverythingElse");
+}
+function CaliforniaFeeWaiverGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Court Fees (CA, FW-001)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is optional. It is a request to waive the filing fee charged upon submitting the paperwork to the court. In California the filing fee for this varies but is usually around $450.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out sections 2, 5, and 6 the follow the directions at the top of page 2. If your household meets at least one of the criteria in sections 5a or 5b the judge will likely grant the waiver.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " may file the request at",
+      age && age < 18 ? " their" : " your",
+      " discretion; the worst they can do is deny it."
+    ] })
+  ] }, "California-Fee-Waiver");
+}
+function CaliforniaFeeWaiverOrderGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order on Court Fee Waiver (Superior Court) (CA, FW-003)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This form is filed with the Fee Waiver (FW-001). It is the courts decision to either grant or deny the waiver of fees. It will be sent back after filing. This form is already complete." })
+  ] }, "California-Fee-Waiver-Order");
+}
+function CaliforniaFilingGuide({
+  person
+}) {
+  const { age, residentJurisdictionName, residentLocalityName, parentsAreOkay } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (CA)" }),
+      age && age < 18 && parentsAreOkay === false ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "If you have a legal guardian their filing location will be in whatever court they recieved their guardianship from ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "instead of" }),
+        " the result(s) listed below. If the guardianship court was in another state they should use the location(s) listed below but be sure notify the clerk upon filing of the situation to make absolutely sure."
+      ] }) : "",
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        age && age < 18 ? "A parent/guardian " : "You ",
+        " should bring all of the completed forms from the first section as well as photo ID and payment. The fee in California for filing varies between courts and is updated frequently but is typically between $350 to $450 dollars without the fee waiver. Payment methods should still be brought in any case."
+      ] }),
+      residentLocality.courtByZip ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "The ",
+          residentLocalityName,
+          " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:"
+        ] }),
+        ...residentLocality.allCourts.map(({ name, address, phone }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          name,
+          ": ",
+          address,
+          ".",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          "Phone Number: ",
+          phone
+        ] }, "{residentLocality.allCourts.name}"))
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        residentLocality.multiCourt ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "In ",
+          residentLocalityName,
+          " county there are multiple courts a resident can file in, it does not matter which one:"
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "In ",
+          residentLocalityName,
+          " county everyone files here:"
+        ] }),
+        ...residentLocality.allCourts.map(({ name, address, phone }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          name,
+          ": ",
+          address,
+          ".",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          "Phone Number: ",
+          phone
+        ] }, "{residentLocality.allCourts.name}"))
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "If the court(s) listed above appear wrong or you simply want more information check this",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
+        ". It lists every filing location in the state as well as the jurisdictions they cover. Check you address to see which one(s) you fall under. Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010) and fill in the courts street address, city, zip code, and branch name near the top of the page if they are blank."
+      ] }),
+      residentLocalityName === "Alameda" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (202-19) and make a check next to the court you chose near the top of the page." }) : "",
+      residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum and Statement of Location” (LASC CIV 109) and go to page 4. On the third row from the bottom will be a checkmark with your case type and a “2, 7” on the right from that. If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. If the Stanley Mosk court is your only filing option circle either, it will not matter. Then on the last page there will be a section at the top that says “Reason:” with numbered checkboxes. Check the box that matches the number you circled. Finally in step 5 write the name of the court district you will be filing in. If you are unsure of what the district name is consult the map from the previous paragraph, if you click on the district the name will pop up on the top." }) : "",
+      residentLocalityName === "Santa Barbara" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (SC-2069) and make a check next to the court you chose near the top of the page." }) : "",
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
+        " ",
+        "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Once the paperwork has been filed, the court will likely make a judgment without a hearing and will mail the results. If so skip the “Court Hearing” section. While at the court be sure to ask the clerk if it is possible to pre-pay for 2 or 3 additional certified copies of the court order. By requesting additional copies now you can save a trip or call. Note: the cost for additional copies is small but ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " covered by the fee waiver. Use the copies in later sections and keep the original in a safe place."
+      ] })
+    ] }, "California-Filing");
+  }
+}
+function CaliforniaNC110GGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Declaration of Guardian (CA, NC-110G)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This form is only for minors whose parents are deceased or are otherwise in the custody of a guardian. Add the names of any additional petitioners to the top to match your petition form. Your guardian will need to fill out sections 7d through 7h as they apply to your situation then sign and date at the bottom. Then this form is complete." })
+  ] }, "California-NC110G");
+}
+function KernRelatedCasesGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Kern Party Identification and Notice of Related Case(s) (Kern County, FL-0122)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is a form unique to Kern county. ",
+      age && age < 18 ? "A petitioner " : "You ",
+      "should fill in any blanks in section 1. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " check the “Respondent/Defendent” box as there are not any for this type of case. If there are no other cases that ",
+      age && age < 18 ? " a petitioner is " : " you are ",
+      "involved in check the box in section 2. Otherwise fill out section 3. Finally",
+      age && age < 18 ? " a petitioner" : " you",
+      " should sign/date at the bottom."
+    ] })
+  ] }, "Kern-FL-0122");
+}
+function LassenBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Criminal History Assessment (Lassen county, LSC-CIV-050)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Lassen county requires that the petitioner undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out any blanks we left in section 1. Then this form is complete."
+    ] })
+  ] }, "Lassen-CIV-050");
+}
+function LosAngelesBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Criminal History Assessment (Los Angeles county, CIV 226)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Los Angeles county requires that the petitioner undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out any blanks left in the “To be completed by the petitioner” section",
+      age && age < 18 ? " with their information, not yours" : "",
+      ". Then",
+      age && age < 18 ? " they" : " you",
+      " can sign and date below that. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line."
+    ] })
+  ] }, "Los-Angeles-CIV-226");
+}
+function LosAngelesCoverSheetGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Civil Case Cover Sheet Addendum and Statement of Location (Los Angeles county, CIV 109)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Los Angeles county uses this cover sheet addendum to determine which court(s)",
+      age && age < 18 ? " your petitioner" : " you",
+      " are able to file in. We have checked the appropriate boxes for the case type and will have a list of courts to file at in a later section. When",
+      age && age < 18 ? " your petitioner has" : " you have",
+      " read that section and picked a court, write the name of the district we provide on the last page of this form in step 5. At that point ",
+      age && age < 18 ? "your petitioner" : "you",
+      " can sign and date this form to complete it."
+    ] })
+  ] }, "Los-Angeles-CIV109");
+}
+function MendocinoBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Declaration re: Change of Name (Mendocino county, MNC-110)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Mendocino county requires that the you",
+      age && age < 18 ? ", the minor, " : " ",
+      " undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out the “List any AKAs” line if blank. After that fill out the “Other Information” section. Finally ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " can sign and date below that. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line."
+    ] })
+  ] }, "Mendocino-MNC-110");
+}
+function MontereyBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Background Check Confidential (Monterey county, unnumbered)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Monterey county requires that the you",
+      age && age < 18 ? ", the minor, " : " ",
+      " undergo a background check for a name change. ",
+      age && age < 18 ? "You, the minor," : "You",
+      " should fill out the “Drivers License No:” and “State Issued:” fields if applicable. This form is then complete."
+    ] })
+  ] }, "Mendocino-MNC-110");
+}
+function CaliforniaNC100Guide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (CA, NC-100)" }),
+    age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name changes. Any parent(s) or legal guardian(s) can fill this form out and file it on your behalf. It is best, but not required, for every adult with custody over you to jointly file this petition together. To do this have each petitioners name in the “Petition of” section in the top left. Then fill out section 5 as it applies to your situation." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name changes. This form should already be complete." })
+  ] }, "California-NC100");
+}
+function CaliforniaNC110Guide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and Information About the Person Whose Name is to be Changed (CA, NC-110)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Add the names of any additional petitioners to the top to match your petition form. Then have a petitioner fill out sections 7d and 7e as needed." }) : "",
+      " ",
+      "You ",
+      age && age < 18 ? ",the minor," : "",
+      " should review the criteria in the “Declaration” section. Then check the appropriate boxes, sign, and date it.",
+      " ",
+      age && age < 18 ? "Your petitioner(s)" : "You",
+      " need to sign and date at the bottom.",
+      " ",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If your petitioners need more signature lines attach a sheet to this form and check the box on the bottom left." }) : ""
+    ] })
+  ] }, "California-NC110");
+}
+function CaliforniaNC120Guide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order to Show Cause - Change of Name (CA, NC-120)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      "If you have any living parents or other adults with custody of you that have not signed on as petitioners a completed copy of this form will need to be served to them. Instructions for how to serve this paperwork will be available when your petitioner files at court. Additional newspaper publication may also be required, if so it will be addressed during filing and a list of court approved newspapers will be available in a later part of this guide. For now simply add the names of any additional petitioners to the top to match your petition form, leave the rest as is. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign this form."
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      "This form is already complete, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it. Newspaper publication will likely be required, more information will be available in a later guide section."
+    ] }) })
+  ] }, "California-NC120");
+}
+function CaliforniaNC125Guide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order to Show Cause - Change of Name to Conform to Gender Identity (CA, NC-125)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      "If you have any living parents or other adults with custody of you that have not signed on as petitioners a completed copy of this form will need to be served to them. Instructions for how to serve this paperwork will be available when your petitioner files at court. For now simply add the names of any additional petitioners to the top to match your petition form, leave the rest as is. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " ",
+      "sign this form."
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      "This form is already complete, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it."
+    ] }) })
+  ] }, "California-NC125");
+}
+function CaliforniaNC130GGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Decree Changing Name of Minor (By Guardian) (CA, NC-130G)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is the order the judge signs to officially change a name, we call this document the “court order”. Only use this form if your petitioner is also your legal guardian, otherwise use the regular NC-130 Decree Changing Name. Add the names of any additional petitioners to the top to match your petition form. This form is otherwise complete, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it, thats for the judge to do."
+    ] })
+  ] }, "California-NC130G");
+}
+function CaliforniaNC130Guide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Decree Changing Name (CA, NC-130)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is the order the judge signs to officially change a name, we call this document the “court order”.",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Add the names of any additional petitioners to the top to match your petition form." }) : "",
+      " ",
+      "This form is ",
+      age && age < 18 ? "otherwise" : "already",
+      " complete, do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it, thats for the judge to do."
+    ] })
+  ] }, "California-NC130");
+}
+function CaliforniaNC300Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Recognition of Change of Gender and Sex Identifier (CA, NC-300)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name and gender marker changes. You need to sign and date thr form on page 2, then the form is complete." })
+  ] }, "California-NC300");
+}
+function CaliforniaNC330Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order Recognizing Change of Gender and Sex Identifier (CA, NC-330)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is the order the judge signs to officially change your name and gender marker, we call this document the “court order”. This form is already complete, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it, thats for the judge to do."
+    ] })
+  ] }, "California-NC130G");
+}
+function CaliforniaNC500Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (CA, NC-500)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is the state form for name and gender marker changes. Any parent(s) or legal guardian(s) can fill this form out and file it on your behalf. It is best, but not required, for every adult with custody over you to jointly file this petition together. To do this have each petitioners name in the “Petition of” section in the top left. Then fill out sections 1 and 3 as they apply to your situation. If a parent is alive and did ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign as a petitioner check the box in section 6. If your parents are deceased and a legal guardian is the petitioner check the box in section 7. Finally you and all of your petitioners need to sign and date on the appropriate line of page 2."
+    ] })
+  ] }, "California-NC500");
+}
+function CaliforniaNC520Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order to Show Cause - Recognition of Minors Change of Gender and Issuance of New Birth Certificate (CA, NC-520)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you have any living parents or other adults with custody of you that have not signed on as petitioners a completed copy of this form will need to be served to them. Instructions for how to serve this paperwork will be available when your petitioner files at court. For now add the names of any additional petitioners to the top to match your petition form. Then a petitioner should check any applicable box in section 2. Leave the rest as is. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign this form."
+    ] })
+  ] }, "California-NC520");
+}
+function CaliforniaNC530Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order recognizing Minors Change of Gender and Sex Identifier and for Issuance of New Birth Certiicate (CA, NC-530)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is the order the judge signs to officially change your name and gender marker, we call this document the “court order”. Add the names of any additional petitioners to the top to match your petition form. This form is otherwise complete, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it, thats for the judge to do."
+    ] })
+  ] }, "California-NC530");
+}
+function OrangeRelatedCasesGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Notice of Related Cases (Orange County, L-3008)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is a form unique to Orange county. Near the top of the form are two checkboxes for both filing locations within Orange county. If there are other court cases involving you, the minor, then your petitioner should check the “Lamoreaux” box otherwise they should check the “Central” box. If you or your petitioners have any open cases involving ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "any of you" }),
+      " fill out section 2. Otherwise check the box in section 1. Then your petitioner(s) can write the date on the “Date:” line and sign at the bottom."
+    ] })
+  ] }, "Orange-L-3008");
+}
+function PlacerBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Supplement (Placer county, PL-CV003)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Placer county requires that the petitioner undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out any blanks we left and double check the “Also Known As” line for accuracy. Then this form is complete."
+    ] })
+  ] }, "Placer-CV003");
+}
+function CaliforniaResourcesGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (CA)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://legal.eqca.org/", children: "Equality California" }),
+        ": Maintains an extensive and up to date list of legal resources for all of California to help with name and gender changes. This includes lawyers and legal groups for contested cases."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://transgenderlawcenter.org/resources/id/", children: "Transgender Law Center" }),
+        ": They are a legal group advocating for trans rights and maintain several guides and"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://community.lalgbtcenter.org/tgi-enby-resource-index/legal-resources/", children: "Los Angeles LGBT Center" }),
+        ": A Los Angeles county based organization that provides a full scope of resources including a list of legal resources available in the county to help with name and/or gender changes."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://saccenter.org/location-hours", children: "Sacramento LGBT Center" }),
+        ": Provides legal assistance for transgender people across most of northern california."
+      ] })
+    ] })
+  ] }, "CA-Resources");
+}
+function RiversideCoverSheetGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Civil Case Cover Sheet (Riverside County, RI-MC010)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This cover sheet is unique to Riverside county and is meant to replace the California Civil Case Cover Sheet (CM-010). All this form needs is your",
+      age && age < 18 ? " parent/guardians" : " ",
+      " date and signature at the bottom of the page."
+    ] })
+  ] }, "Riverside-MC010");
+}
+function RiversideRelatedCasesGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Notice of Related Cases (Riverside County, RI-CI040)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a form unique to Riverside county. Add the names of any petitioners whose names are not listed in the “Petition Of” section on the first and second page. Sections A through E deal with other court cases involving you, the minor. If there are any court cases involving you, the your petitioners need to fill out the appropriate section. If not then these sections can be skipped. Then all petitioners need to sign and date at the bottom of page 2 or on additional pages if there is no room." })
+  ] }, "Riverside-CI040");
+}
+function SanBenitoBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Background Information Form (San Benito county, CV-2)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "San Benito county requires that ",
+      age && age < 18 ? "you, the minor, " : "you ",
+      "undergo a background check for a name change.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left above the signature line, if they do not apply to you then write “NA” in the box instead of leaving it blank. Then",
+      age && age < 18 ? " your petitioner" : " you",
+      " can sign and date at the bottom. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line or add “NA” to those boxes."
+    ] })
+  ] }, "San-Benito-CV-2");
+}
+function SantaBarbaraCoverSheetGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Civil Case Cover Sheet Addendum (Santa Barbara County, SC-2069)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is an addendum to the Civil Case Cover Sheet specifically for Santa Barbara county residents. When we cover which court to file at later in this guide check the appropriate box at the top of this sheet. Then check the “North County” or “South County” box in the lower section based on the selected court. Finally",
+      age && age < 18 ? " your petitioner" : " you",
+      " should sign and date at the bottom."
+    ] })
+  ] }, "Santa-Barbara-SC-2069");
+}
+function SantaClaraBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Form (Santa Clara county, PB-4010)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Santa Clara county requires that ",
+      age && age < 18 ? "you, the minor, " : "you ",
+      "undergo a background check for a name change.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left above the signature line, if they do not apply to you then write “DNA” in the box instead of leaving it blank. Then",
+      age && age < 18 ? " your petitioner" : " you",
+      " can sign and date at the bottom. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line or add “DNA” to those boxes."
+    ] })
+  ] }, "Santa-Clara-PB-4010");
+}
+function SiskiyouBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Form (Siskiyou county, CV-6)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Siskiyou county requires that ",
+      age && age < 18 ? "you, the minor, " : "you ",
+      "undergo a background check for a name change.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left above the signature line, if they do not apply to you then write “DNA” in the box instead of leaving it blank. Then",
+      age && age < 18 ? " your petitioner" : " you",
+      " can sign and date at the bottom. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line or add “DNA” to those boxes."
+    ] })
+  ] }, "Siskiyou-CV-6");
+}
+function SiskiyouInfoGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Information Form (Siskiyou county, unnumbered)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Siskiyou county has a custom information form that they require.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left in the “Petitioner/Plantiff/Victim” section. If there are any other court cases involving you ",
+      age && age < 18 ? "or any of your petitioners" : "",
+      " then add them to the bottom of the “Petitioner/Plantiff/Victim” section. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything in the “Defendent/Respondent” section. This form is then complete."
+    ] })
+  ] }, "Siskiyou-Info-Form");
+}
+function SolanoBCGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Application for Change of Name (Solano County, 3009)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Solano county requires that you undergo a background check for a name change. Fill out the “Date” and “Social Security Number” fields but leave the “Case Number” field blank. This form is then complete." })
+  ] }, "Solano-3009");
+}
+function YubaBCGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS/CJIS Information Sheet (Yuba County, G04050B)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Yuba county requires that you undergo a background check for a name change. Fill out the “SSN”, “Drivers License No”, and “State of Issuance” fields as applicable. This form is then complete." })
+  ] }, "Yuba-G04050B");
+}
+const californiaNameChange = {
+  target: Target.NameChange,
+  depends: [Target.GenderMarker],
+  documents: [
+    //Cover sheet stuff here
+    {
+      name: "Civil Case Cover Sheet",
+      id: "CM-010",
+      filename: "California/Civil Cover Sheet.pdf",
+      guide: CaliforniaCoverSheetGuide,
+      map: civilCaseCoverMap
+    },
+    {
+      name: "Civil Case Cover Sheet Addendum",
+      id: "202-19",
+      filename: "California/Alameda Civil Addendum.pdf",
+      guide: AlamedaCoverSheetGuide,
+      map: alamedaCoverMap,
+      include: (applicant) => applicant.residentLocalityName === "Alameda"
+    },
+    {
+      name: "Amador Superior Court Case Intake Sheet",
+      id: "MISC-049",
+      filename: "California/Amador Intake Form.pdf",
+      guide: AmadorIntakeSheetGuide,
+      map: amadorIntakeMap,
+      include: (applicant) => applicant.residentLocalityName === "Amador"
+    },
+    {
+      name: "Civil Case Cover Sheet Addendum and Statement of Location",
+      id: "LASC CIV 109",
+      filename: "California/Los Angeles Civil Addendum.pdf",
+      guide: LosAngelesCoverSheetGuide,
+      map: losAngelesCaseTypeMap,
+      include: (applicant) => applicant.residentLocalityName === "Los Angeles"
+    },
+    {
+      name: "Riverside Cover Sheet",
+      id: "RI-MC010",
+      filename: "California/Riverside Cover Sheet.pdf",
+      guide: RiversideCoverSheetGuide,
+      map: riversideCoverSheetMap,
+      include: (applicant) => applicant.residentLocalityName === "Riverside"
+    },
+    {
+      name: "Civil Case Cover Sheet Addendum",
+      id: "SC-2069",
+      filename: "California/Santa Barbara Cover Addendum.pdf",
+      guide: SantaBarbaraCoverSheetGuide,
+      map: santaBarbaraCoverSheetMap,
+      include: (applicant) => applicant.residentLocalityName === "Santa Barbara"
+    },
+    {
+      name: "Siskiyou Information Sheet",
+      filename: "California/Siskiyou Information Sheet.pdf",
+      guide: SiskiyouInfoGuide,
+      map: siskiyouInfoMap,
+      include: (applicant) => applicant.residentLocalityName === "Siskiyou"
+    },
+    //Name Only (all) stuff here
+    {
+      name: "Petition for Change of Name",
+      id: "NC-100",
+      filename: "California/NC-100 Name Petition All.pdf",
+      guide: CaliforniaNC100Guide,
+      map: nameChangeOnlyPetitionMap,
+      include: (applicant) => !applicant.isChangingLegalSex
+    },
+    {
+      name: "Order to show cause - Change of Name",
+      id: "NC-120",
+      filename: "California/NC-120 Hearing Notice.pdf",
+      guide: CaliforniaNC120Guide,
+      map: nameChangeOnlyNoticeMap,
+      include: (applicant) => !applicant.isChangingLegalSex
+    },
+    {
+      name: "Declaration of Guardian",
+      id: "NC-110G",
+      filename: "California/NC-110G Guardian Declaration.pdf",
+      guide: CaliforniaNC110GGuide,
+      map: minorGuardianDeclarationMap,
+      include: (applicant) => isMinor(applicant) && !applicant.parentsAreOkay
+    },
+    {
+      name: "Decree Changing Name",
+      id: "NC-130",
+      filename: "California/NC-130 Court Order.pdf",
+      guide: CaliforniaNC130Guide,
+      map: nameChangeOnlyOrderMap,
+      include: (applicant) => !applicant.isChangingLegalSex
+    },
+    {
+      name: "Decree Changing Name of Minor (By Guardian)",
+      id: "NC-130G",
+      filename: "California/NC-130G Court Order Guardian.pdf",
+      guide: CaliforniaNC130GGuide,
+      map: nameChangeOnlyOrderGuardianMap,
+      include: (applicant) => isMinor(applicant) && !applicant.parentsAreOkay
+    },
+    //Name and Gender stuff here
+    {
+      name: "Petition for Recognition of Change of Gender and Sex Identifier",
+      id: "NC-300",
+      filename: "California/NC-300 Adult Name Gender Petition.pdf",
+      guide: CaliforniaNC300Guide,
+      map: adultNameGenderPetitionMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Order to Show Cause--Change of Name to Conform to Gender Identity",
+      id: "NC-125",
+      filename: "California/NC-125 Gender Hearing Notice.pdf",
+      guide: CaliforniaNC125Guide,
+      map: nameChangeOnlyConformMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Order Recognizing Change of Gender and Sex Identifier",
+      id: "NC-330",
+      filename: "California/NC-330 Adult Name Gender Order.pdf",
+      guide: CaliforniaNC330Guide,
+      map: adultNameGenderOrderMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Petition for Recognition of Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
+      id: "NC-500",
+      filename: "California/NC-500 Minor Name Gender Petition.pdf",
+      guide: CaliforniaNC500Guide,
+      map: minorNameGenderPetitionMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Order to Show Cause--Recognition of Minor's Change of Gender and Issuance of New Birth Certificate",
+      id: "NC-520",
+      filename: "California/NC-520 Minor Name Gender Hearing Notice.pdf",
+      guide: CaliforniaNC520Guide,
+      map: minorNameGenderConformMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Order Recognizing Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
+      id: "NC-530",
+      filename: "California/NC-530 Minor Name Gender Order.pdf",
+      guide: CaliforniaNC530Guide,
+      map: minorNameGenderOrderMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    //Background check or Criminal history stuff here
+    {
+      name: "Amador County CLETS Background Information Form Name Change",
+      id: "CIV-136",
+      filename: "California/Amador Name Background Check.pdf",
+      guide: AmadorBackgroundCheckGuide,
+      map: amadorBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Amador"
+    },
+    {
+      name: "El Dorado County Confidential Information RE: Petition for Name Change (West Slope)",
+      id: "C-2",
+      filename: "California/El Dorado Background Check 1.pdf",
+      map: elDoradoWestSlopeMap,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "El Dorado"
+    },
+    {
+      name: "El Dorado County Confidential Information RE: Petition for Name Change (SLT)",
+      id: "C-2S",
+      filename: "California/El Dorado Background Check 2.pdf",
+      map: elDoradoSLTMap,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "El Dorado"
+    },
+    {
+      name: "El Dorado County Background Check Guide",
+      guide: ElDoradoBackgroundCheckGuide,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "El Dorado"
+    },
+    {
+      name: "Lassen County Name Change Criminal History Assessment",
+      id: "LSC-CIV-050",
+      filename: "California/Lassen Name Criminal History.pdf",
+      guide: LassenBCGuide,
+      map: lassenCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Lassen"
+    },
+    {
+      name: "Los Angeles County Name Change Criminal History Assessment",
+      id: "LASC CIV 226",
+      filename: "California/Los Angeles Name Criminal History.pdf",
+      guide: LosAngelesBCGuide,
+      map: losAngelesCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Los Angeles"
+    },
+    {
+      name: "Declaration re: Change of Name",
+      id: "MNC-110",
+      filename: "California/Mendocino Name Criminal History.pdf",
+      guide: MendocinoBCGuide,
+      map: mendocinoCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Mendocino"
+    },
+    {
+      name: "Criminal History Assessment",
+      filename: "California/Monterey Name Criminal History.pdf",
+      guide: MontereyBCGuide,
+      map: montereyCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Monterey"
+    },
+    {
+      name: "Clets Background Information Supplement",
+      id: "PL-CV003",
+      filename: "California/Placer Name Criminal History.pdf",
+      guide: PlacerBCGuide,
+      map: placerCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Placer"
+    },
+    {
+      name: "Name Change Background Information Form",
+      id: "SB-CV-2",
+      filename: "California/San Benito Name Background Check.pdf",
+      guide: SanBenitoBCGuide,
+      map: sanBenitoBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "San Benito"
+    },
+    {
+      name: "CLETS Background Information Form",
+      id: "PB-4010",
+      filename: "California/Santa Clara Name Background Check.pdf",
+      guide: SantaClaraBCGuide,
+      map: santaClaraBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Santa Clara"
+    },
+    {
+      name: "CLETS Background Information Form",
+      id: "CCP 1279.5",
+      filename: "California/Siskiyou Name Background Check.pdf",
+      guide: SiskiyouBCGuide,
+      map: siskiyouBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Siskiyou"
+    },
+    {
+      name: "Application for Change of Name",
+      id: "3009",
+      filename: "California/Solano Name Background Check.pdf",
+      guide: SolanoBCGuide,
+      map: solanoCoverSheetMap,
+      include: (applicant) => applicant.residentLocalityName === "Solano"
+    },
+    {
+      name: "CLETS/CJIS Information Sheet",
+      id: "G04050B",
+      filename: "California/Yuba Name Background Check.pdf",
+      guide: YubaBCGuide,
+      map: yubaBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Yuba"
+    },
+    //Everything else here
+    {
+      name: "Name and Information About the Person Whose Name is to be Changed",
+      id: "NC-110",
+      filename: "California/NC-110 Info All.pdf",
+      guide: CaliforniaNC110Guide,
+      map: nameChangeOnlyInfoMap
+    },
+    {
+      name: "Request to Waive Court Fees",
+      id: "FW-001",
+      filename: "California/Fee Waiver.pdf",
+      guide: CaliforniaFeeWaiverGuide,
+      map: feeWaiverMap
+    },
+    {
+      name: "Order on Court Fee Waiver",
+      id: "FW-003",
+      filename: "California/Fee Waiver Order.pdf",
+      guide: CaliforniaFeeWaiverOrderGuide,
+      map: feeWaiverOrderMap
+    },
+    {
+      name: "Party Identification and Notice of Related Case(s)",
+      id: "KRN SUP CRT FL-0122",
+      filename: "California/Kern Minor Related Cases.pdf",
+      guide: KernRelatedCasesGuide,
+      map: kernCaseNoticeMap,
+      include: (applicant) => applicant.residentLocalityName === "Kern"
+    },
+    {
+      name: "Name Change Notice of Related Cases",
+      id: "L-3008",
+      filename: "California/Orange Minor Name Notice.pdf",
+      guide: OrangeRelatedCasesGuide,
+      map: orangeCaseNoticeMap,
+      include: (applicant) => isMinor(applicant) && applicant.residentLocalityName === "Orange"
+    },
+    {
+      name: "Notice of Related Cases",
+      id: "RI-CI040",
+      filename: "California/Riverside Related Cases.pdf",
+      guide: RiversideRelatedCasesGuide,
+      map: riversideCaseNoticeMap,
+      include: (applicant) => isMinor(applicant) && applicant.residentLocalityName === "Riverside"
+    },
+    {
+      name: "Filing Initial Documents",
+      guide: CaliforniaFilingGuide
+    },
+    {
+      name: "Court Hearing",
+      guide: CaliforniaCourtHearingGuide
+    }
+  ]
+};
+const californiaGenderMarker = {
+  target: Target.GenderMarker,
+  documents: []
+};
+const californiaPrimaryIdentification = {
+  target: Target.PrimaryIdentification,
+  depends: [Target.NameChange, Target.GenderMarker],
+  documents: [
+    {
+      name: "DMV Guide",
+      guide: CaliforniaDMVGuide
+    },
+    {
+      name: "DMV Statement of Facts",
+      id: "REG 256",
+      filename: "California/REG-256 DMV Title Form_unlocked.pdf",
+      map: DMVTitleMap,
+      include: (applicant) => applicant.isChangingLegalName === true
+    }
+  ]
+};
+const californiaBirthRecord = {
+  target: Target.BirthRecord,
+  depends: [
+    Target.NameChange,
+    Target.PrimaryIdentification,
+    Target.SocialSecurity
+  ],
+  documents: [
+    {
+      name: "Application to Amend a Birth Record After a Court Order Name Change",
+      id: "VS 23 Birth",
+      filename: "California/Birth Cert Name Only.pdf",
+      guide: CaliforniaBirthCertNameOnly,
+      map: nameOnlyBirthCertMap,
+      include: (applicant) => applicant.isChangingLegalSex === false
+    },
+    {
+      name: "Application to Amend a Birth Record",
+      id: "VS 24B",
+      filename: "California/Birth Cert Name and Gender.pdf",
+      guide: CaliforniaBirthCertNameGender,
+      map: nameGenderBirthCertMap,
+      include: (applicant) => applicant.isChangingLegalSex === true
+    }
+  ],
+  isBirth: true
+};
+const californiaPostamble = {
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport],
+  documents: [
+    {
+      name: "Everything Else",
+      guide: CaliforniaEverythingElseGuide
+    },
+    {
+      name: "Resources",
+      guide: CaliforniaResourcesGuide
+    }
+  ],
+  isJustGuide: true
+};
+const californiaCounties = [
+  {
+    name: "Alameda",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "René C. Davidson Courthouse",
+        address: "1225 Fallon St, Oakland, CA 94612",
+        city: "Oakland",
+        phone: "(510) 891-6000"
+      },
+      {
+        name: "Hayward Hall of Justice",
+        address: "24405 Amador St, Hayward, CA 94544",
+        city: "Hayward",
+        phone: "(510) 690-2700"
+      }
+    ]
+  },
+  {
+    name: "Alpine",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Alpine Superior Court",
+        address: "14777 CA-89, Markleeville, CA 96120",
+        city: "Markleeville",
+        phone: "(530) 694-2113",
+        courtMailAddress: "P.O. Box 518, Markleeville, CA 96120",
+        courtZip: "96120"
+      }
+    ]
+  },
+  {
+    name: "Amador",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Amador Superior Court",
+        address: "500 Argonaut Ln, Jackson, CA 95642",
+        city: "Jackson",
+        phone: "(209) 257-2600",
+        courtMailAddress: "500 Argonaut Ln, Jackson, CA 95642",
+        courtZip: "95642"
+      }
+    ]
+  },
+  {
+    name: "Butte",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Butte Superior Court",
+        address: "1775 Concord Ave, Chico, CA 95928",
+        city: "Chico",
+        phone: "(530) 532-7002",
+        courtMailAddress: "1775 Concord Ave, Chico, CA 95928",
+        courtZip: "95928"
+      }
+    ]
+  },
+  {
+    name: "Calaveras",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Calaveras Superior Court",
+        address: "400 Government Center Dr, San Andreas, CA 95249",
+        city: "San Andreas",
+        phone: "(209) 754-9800",
+        courtMailAddress: "400 Government Center Dr, San Andreas, CA 95249-9794",
+        courtZip: "95249"
+      }
+    ]
+  },
+  {
+    name: "Colusa",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Colusa Superior Court",
+        address: "532 Oak St, Colusa, CA 95932",
+        city: "Colusa",
+        phone: "(530) 458-5149",
+        courtMailAddress: "532 Oak St, Colusa, CA 95932",
+        courtZip: "95932"
+      }
+    ]
+  },
+  {
+    name: "Contra Costa",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Contra Costa Superior Court",
+        address: "725 Court St, Martinez, CA 94553",
+        city: "Martinez",
+        phone: "(925) 608-1000",
+        courtMailAddress: "725 Court St, Martinez, CA 94553",
+        courtZip: "94553"
+      }
+    ]
+  },
+  {
+    name: "Del Norte",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Del Norte Superior Court",
+        address: "450 H St #209, Crescent City, CA 95531",
+        city: "Crescent City",
+        phone: "(707) 464-8115",
+        courtMailAddress: "450 H St #209, Crescent City, CA 95531",
+        courtZip: "95531"
+      }
+    ]
+  },
+  {
+    name: "El Dorado",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Cameron Park Branch",
+        address: "3321 Cameron Park Dr, Cameron Park, CA 95682",
+        city: "Cameron Park",
+        phone: "(530) 621-5047"
+      },
+      {
+        name: "South Lake Tahoe Branch",
+        address: "1354 Johnson Blvd # 2, South Lake Tahoe, CA 96150",
+        city: "South Lake Tahoe",
+        phone: "(530) 573-3075"
+      }
+    ]
+  },
+  {
+    name: "Fresno",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Fresno Superior Court",
+        address: "1130 O St, Fresno, CA 93721",
+        city: "Fresno",
+        phone: "(559) 457-2000",
+        courtMailAddress: "1130 O St, Fresno, CA 93721-2220",
+        courtZip: "93721"
+      }
+    ]
+  },
+  {
+    name: "Glenn",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Glenn Superior Court",
+        address: "526 W Sycamore St, Willows, CA 95988",
+        city: "Willows",
+        phone: "(530) 934-6446",
+        courtMailAddress: "526 W Sycamore St, Willows, CA 95988",
+        courtZip: "95988"
+      }
+    ]
+  },
+  {
+    name: "Humboldt",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Humboldt Superior Court",
+        address: "421 I St, Eureka, CA 95501",
+        city: "Eureka",
+        phone: "(707) 445-7256",
+        courtMailAddress: "421 I St, Eureka, CA 95501",
+        courtZip: "95501"
+      }
+    ]
+  },
+  {
+    name: "Imperial",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Imperial Superior Court",
+        address: "939 Main St, El Centro, CA 92243",
+        city: "El Centro",
+        phone: "(760) 482-2200",
+        courtMailAddress: "939 Main St, El Centro, CA 92243",
+        courtZip: "92243"
+      }
+    ]
+  },
+  {
+    name: "Inyo",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Independence Superior Courthouse",
+        address: "168 N Edwards St, Independence, CA 93526",
+        city: "Independence",
+        phone: "(760) 872-3038"
+      },
+      {
+        name: "Bishop Superior Courthouse",
+        address: "301 W Line St, Bishop, CA 93514",
+        city: "Bishop",
+        phone: "(760) 872-3038"
+      }
+    ]
+  },
+  {
+    name: "Kern",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Bakersfield",
+        address: "1215 Truxtun Ave, Bakersfield, CA 93301",
+        city: "Bakersfield",
+        phone: "(661) 610-6000"
+      },
+      {
+        name: "Delano",
+        address: "1122 Jefferson St, Delano, CA 93215",
+        city: "Delano",
+        phone: "(661) 610-7300"
+      },
+      {
+        name: "Lamont",
+        address: "12014 Main St, Lamont, CA 93241",
+        city: "Lamont",
+        phone: "(661) 610-7100"
+      },
+      {
+        name: "Mojave",
+        address: "1773 CA-58 BUS, Mojave, CA 93501",
+        city: "Mojave",
+        phone: "(661) 610-7400"
+      },
+      {
+        name: "Ridgecrest",
+        address: "132 E Coso Ave, Ridgecrest, CA 93555",
+        city: "Ridgecrest",
+        phone: "(661) 610-7450"
+      },
+      {
+        name: "Shafter",
+        address: "325 Central Valley Hwy, Shafter, CA 93263",
+        city: "Shafter",
+        phone: "(661) 610-7200"
+      }
+    ],
+    zipCourts: {
+      93220: "Bakersfield",
+      93226: "Bakersfield",
+      93287: "Bakersfield",
+      93301: "Bakersfield",
+      93304: "Bakersfield",
+      93305: "Bakersfield",
+      93306: "Bakersfield",
+      93308: "Bakersfield",
+      93309: "Bakersfield",
+      93312: "Bakersfield",
+      93314: "Bakersfield",
+      93215: "Delano",
+      93250: "Delano",
+      93261: "Delano",
+      93203: "Lamont",
+      93222: "Lamont",
+      93224: "Lamont",
+      93225: "Lamont",
+      93241: "Lamont",
+      93243: "Lamont",
+      93252: "Lamont",
+      93268: "Lamont",
+      93276: "Lamont",
+      93302: "Lamont",
+      93383: "Lamont",
+      93501: "Mojave",
+      93505: "Mojave",
+      93516: "Mojave",
+      93519: "Mojave",
+      93523: "Mojave",
+      93524: "Mojave",
+      93531: "Mojave",
+      93560: "Mojave",
+      93561: "Mojave",
+      93205: "Ridgecrest",
+      93238: "Ridgecrest",
+      93240: "Ridgecrest",
+      93255: "Ridgecrest",
+      93285: "Ridgecrest",
+      93527: "Ridgecrest",
+      93528: "Ridgecrest",
+      93555: "Ridgecrest",
+      93206: "Shafter",
+      93249: "Shafter",
+      93263: "Shafter",
+      93461: "Shafter",
+      93251: "Split",
+      93280: "Split",
+      93283: "Split",
+      93307: "Split",
+      93311: "Split",
+      93313: "Split",
+      93518: "Split",
+      93554: "Split"
+    }
+  },
+  {
+    name: "Kings",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Kings Superior Court",
+        address: "1640 Kings County Dr, Hanford, CA 93230",
+        city: "Hanford",
+        phone: "(559) 582-1010",
+        courtMailAddress: "1640 Kings County Dr, Hanford, CA 93230",
+        courtZip: "93230"
+      }
+    ]
+  },
+  {
+    name: "Lake",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Lake Superior Court",
+        address: "255 N Forbes St #417, Lakeport, CA 95453",
+        city: "Lakeport",
+        phone: "(707) 263-2374",
+        courtMailAddress: "255 N Forbes St #417, Lakeport, CA 95453",
+        courtZip: "95453"
+      }
+    ]
+  },
+  {
+    name: "Lassen",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Lassen Superior Court",
+        address: "2610 Riverside Dr, Susanville, CA 96130",
+        city: "Susanville",
+        phone: "(530) 251-8205",
+        courtMailAddress: "2610 Riverside Dr, Susanville, CA 96130",
+        courtZip: "96130"
+      }
+    ]
+  },
+  {
+    name: "Los Angeles",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Stanley Mosk",
+        address: "111 N Hill St, Los Angeles, CA 90012",
+        city: "Los Angeles",
+        phone: "(213) 310-7000"
+      },
+      {
+        name: "Van Nuys",
+        address: "6230 Sylmar Ave, Van Nuys, CA 91401",
+        city: "Van Nuys",
+        phone: "(818) 901-4600"
+      },
+      {
+        name: "Alhambra or Pasadena",
+        address: "either 150 W Commonwealth Ave, Alhambra, CA 91801 or 300 E Walnut St, Pasadena, CA 91101",
+        city: "either Alhambra or Pasadena",
+        phone: "either (626) 293-2100 or (626) 396-3300"
+      },
+      {
+        name: "Pomona",
+        address: "400 Civic Center Plaza, Pomona, CA 91766",
+        city: "Pomona",
+        phone: "(909) 802-1100"
+      },
+      {
+        name: "Norwalk",
+        address: "12720 Norwalk Blvd, Norwalk, CA 90650",
+        city: "Norwalk",
+        phone: "(562) 345-3700"
+      },
+      {
+        name: "Long Beach",
+        address: "275 Magnolia Ave, Long Beach, CA 90802",
+        city: "Long Beach",
+        phone: "(562) 256-3100"
+      },
+      {
+        name: "Inglewood or Torrance",
+        address: "either 1 E Regent St 6th floor, Inglewood, CA 90301 or 825 Maple Ave, Torrance, CA 90503",
+        city: "either Inglewood or Torrance",
+        phone: "either (310) 419-1300 or (310) 787-3700"
+      },
+      {
+        name: "Beverly Hills or Santa Monica",
+        address: "either 9355 Burton Way, Beverly Hills, CA 90210 or 1725 Main St, Santa Monica, CA 90401",
+        city: "either Beverly Hills or Santa Monica",
+        phone: "either (310) 281-2400 or (310) 255-1840"
+      },
+      {
+        name: "Burbank or Glendale",
+        address: "either 300 E Olive Ave, Burbank, CA 91502 or 600 E Broadway, Glendale, CA 91206",
+        city: "either Burbank or Glendale",
+        phone: "either (818) 260-8400 or (818) 265-6400"
+      },
+      {
+        name: "Compton",
+        address: "200 W Compton Blvd, Compton, CA 90220",
+        city: "Compton",
+        phone: "(310) 761-4300"
+      },
+      {
+        name: "Chatsworth",
+        address: "9425 Penfield Ave, Chatsworth, CA 91311",
+        city: "Chatsworth",
+        phone: "(818) 407-2200"
+      },
+      {
+        name: "Lancaster",
+        address: "42011 4th St W, Lancaster, CA 93534",
+        city: "Lancaster",
+        phone: "(661) 483-5500"
+      }
+    ],
+    zipCourts: {
+      90004: "Stanley Mosk",
+      90005: "Stanley Mosk",
+      90006: "Stanley Mosk",
+      90007: "Stanley Mosk",
+      90010: "Stanley Mosk",
+      90011: "Stanley Mosk",
+      90012: "Stanley Mosk",
+      90013: "Stanley Mosk",
+      90014: "Stanley Mosk",
+      90015: "Stanley Mosk",
+      90016: "Stanley Mosk",
+      90017: "Stanley Mosk",
+      90018: "Stanley Mosk",
+      90019: "Stanley Mosk",
+      90020: "Stanley Mosk",
+      90021: "Stanley Mosk",
+      90022: "Stanley Mosk",
+      90026: "Stanley Mosk",
+      90027: "Stanley Mosk",
+      90028: "Stanley Mosk",
+      90029: "Stanley Mosk",
+      90031: "Stanley Mosk",
+      90032: "Stanley Mosk",
+      90033: "Stanley Mosk",
+      90036: "Stanley Mosk",
+      90037: "Stanley Mosk",
+      90039: "Stanley Mosk",
+      90041: "Stanley Mosk",
+      90042: "Stanley Mosk",
+      90057: "Stanley Mosk",
+      90062: "Stanley Mosk",
+      90065: "Stanley Mosk",
+      90068: "Stanley Mosk",
+      90071: "Stanley Mosk",
+      90079: "Stanley Mosk",
+      90089: "Stanley Mosk",
+      90090: "Stanley Mosk",
+      90640: "Stanley Mosk",
+      91303: "Van Nuys",
+      91307: "Van Nuys",
+      91316: "Van Nuys",
+      91335: "Van Nuys",
+      91356: "Van Nuys",
+      91361: "Van Nuys",
+      91362: "Van Nuys",
+      91364: "Van Nuys",
+      91367: "Van Nuys",
+      91371: "Van Nuys",
+      91401: "Van Nuys",
+      91402: "Van Nuys",
+      91403: "Van Nuys",
+      91405: "Van Nuys",
+      91406: "Van Nuys",
+      91411: "Van Nuys",
+      91436: "Van Nuys",
+      91001: "Alhambra or Pasadena",
+      91006: "Alhambra or Pasadena",
+      91007: "Alhambra or Pasadena",
+      91008: "Alhambra or Pasadena",
+      91016: "Alhambra or Pasadena",
+      91024: "Alhambra or Pasadena",
+      91030: "Alhambra or Pasadena",
+      91101: "Alhambra or Pasadena",
+      91103: "Alhambra or Pasadena",
+      91104: "Alhambra or Pasadena",
+      91105: "Alhambra or Pasadena",
+      91106: "Alhambra or Pasadena",
+      91107: "Alhambra or Pasadena",
+      91108: "Alhambra or Pasadena",
+      91754: "Alhambra or Pasadena",
+      91755: "Alhambra or Pasadena",
+      91775: "Alhambra or Pasadena",
+      91776: "Alhambra or Pasadena",
+      91780: "Alhambra or Pasadena",
+      91801: "Alhambra or Pasadena",
+      91803: "Alhambra or Pasadena",
+      91702: "Pomona",
+      91706: "Pomona",
+      91709: "Pomona",
+      91711: "Pomona",
+      91722: "Pomona",
+      91723: "Pomona",
+      91724: "Pomona",
+      91731: "Pomona",
+      91732: "Pomona",
+      91733: "Pomona",
+      91740: "Pomona",
+      91741: "Pomona",
+      91744: "Pomona",
+      91746: "Pomona",
+      91748: "Pomona",
+      91750: "Pomona",
+      91759: "Pomona",
+      91765: "Pomona",
+      91766: "Pomona",
+      91767: "Pomona",
+      91768: "Pomona",
+      91773: "Pomona",
+      91789: "Pomona",
+      91790: "Pomona",
+      91791: "Pomona",
+      91792: "Pomona",
+      90201: "Norwalk",
+      90240: "Norwalk",
+      90241: "Norwalk",
+      90242: "Norwalk",
+      90255: "Norwalk",
+      90270: "Norwalk",
+      90280: "Norwalk",
+      90602: "Norwalk",
+      90603: "Norwalk",
+      90604: "Norwalk",
+      90605: "Norwalk",
+      90606: "Norwalk",
+      90623: "Norwalk",
+      90630: "Norwalk",
+      90631: "Norwalk",
+      90638: "Norwalk",
+      90650: "Norwalk",
+      90670: "Norwalk",
+      90701: "Norwalk",
+      90703: "Norwalk",
+      90706: "Norwalk",
+      90712: "Norwalk",
+      90713: "Norwalk",
+      90715: "Norwalk",
+      90716: "Norwalk",
+      90704: "Long Beach",
+      90731: "Long Beach",
+      90732: "Long Beach",
+      90744: "Long Beach",
+      90755: "Long Beach",
+      90802: "Long Beach",
+      90803: "Long Beach",
+      90804: "Long Beach",
+      90806: "Long Beach",
+      90807: "Long Beach",
+      90808: "Long Beach",
+      90813: "Long Beach",
+      90814: "Long Beach",
+      90815: "Long Beach",
+      90822: "Long Beach",
+      90831: "Long Beach",
+      90045: "Inglewood or Torrance",
+      90245: "Inglewood or Torrance",
+      90249: "Inglewood or Torrance",
+      90250: "Inglewood or Torrance",
+      90254: "Inglewood or Torrance",
+      90260: "Inglewood or Torrance",
+      90266: "Inglewood or Torrance",
+      90274: "Inglewood or Torrance",
+      90275: "Inglewood or Torrance",
+      90277: "Inglewood or Torrance",
+      90278: "Inglewood or Torrance",
+      90293: "Inglewood or Torrance",
+      90301: "Inglewood or Torrance",
+      90302: "Inglewood or Torrance",
+      90303: "Inglewood or Torrance",
+      90304: "Inglewood or Torrance",
+      90305: "Inglewood or Torrance",
+      90503: "Inglewood or Torrance",
+      90504: "Inglewood or Torrance",
+      90505: "Inglewood or Torrance",
+      90506: "Inglewood or Torrance",
+      90024: "Beverly Hills or Santa Monica",
+      90025: "Beverly Hills or Santa Monica",
+      90049: "Beverly Hills or Santa Monica",
+      90064: "Beverly Hills or Santa Monica",
+      90066: "Beverly Hills or Santa Monica",
+      90067: "Beverly Hills or Santa Monica",
+      90073: "Beverly Hills or Santa Monica",
+      90077: "Beverly Hills or Santa Monica",
+      90094: "Beverly Hills or Santa Monica",
+      90095: "Beverly Hills or Santa Monica",
+      90210: "Beverly Hills or Santa Monica",
+      90211: "Beverly Hills or Santa Monica",
+      90212: "Beverly Hills or Santa Monica",
+      90230: "Beverly Hills or Santa Monica",
+      90232: "Beverly Hills or Santa Monica",
+      90263: "Beverly Hills or Santa Monica",
+      90265: "Beverly Hills or Santa Monica",
+      90272: "Beverly Hills or Santa Monica",
+      90290: "Beverly Hills or Santa Monica",
+      90291: "Beverly Hills or Santa Monica",
+      90292: "Beverly Hills or Santa Monica",
+      90401: "Beverly Hills or Santa Monica",
+      90402: "Beverly Hills or Santa Monica",
+      90403: "Beverly Hills or Santa Monica",
+      90404: "Beverly Hills or Santa Monica",
+      90405: "Beverly Hills or Santa Monica",
+      91020: "Burbank or Glendale",
+      91042: "Burbank or Glendale",
+      91046: "Burbank or Glendale",
+      91201: "Burbank or Glendale",
+      91202: "Burbank or Glendale",
+      91203: "Burbank or Glendale",
+      91204: "Burbank or Glendale",
+      91205: "Burbank or Glendale",
+      91206: "Burbank or Glendale",
+      91207: "Burbank or Glendale",
+      91208: "Burbank or Glendale",
+      91210: "Burbank or Glendale",
+      91214: "Burbank or Glendale",
+      91501: "Burbank or Glendale",
+      91502: "Burbank or Glendale",
+      91504: "Burbank or Glendale",
+      91505: "Burbank or Glendale",
+      91506: "Burbank or Glendale",
+      91601: "Burbank or Glendale",
+      91602: "Burbank or Glendale",
+      91604: "Burbank or Glendale",
+      91605: "Burbank or Glendale",
+      91606: "Burbank or Glendale",
+      91607: "Burbank or Glendale",
+      91608: "Burbank or Glendale",
+      90059: "Compton",
+      90061: "Compton",
+      90220: "Compton",
+      90221: "Compton",
+      90222: "Compton",
+      90262: "Compton",
+      90723: "Compton",
+      90745: "Compton",
+      90746: "Compton",
+      90747: "Compton",
+      91311: "Chatsworth",
+      91321: "Chatsworth",
+      91324: "Chatsworth",
+      91326: "Chatsworth",
+      91330: "Chatsworth",
+      91331: "Chatsworth",
+      91340: "Chatsworth",
+      91344: "Chatsworth",
+      91345: "Chatsworth",
+      91350: "Chatsworth",
+      91351: "Chatsworth",
+      91354: "Chatsworth",
+      91355: "Chatsworth",
+      91381: "Chatsworth",
+      91384: "Chatsworth",
+      91387: "Chatsworth",
+      91390: "Chatsworth",
+      93243: "Chatsworth",
+      92397: "Lancaster",
+      93534: "Lancaster",
+      93535: "Lancaster",
+      93536: "Lancaster",
+      93543: "Lancaster",
+      93544: "Lancaster",
+      93550: "Lancaster",
+      93551: "Lancaster",
+      93552: "Lancaster",
+      93553: "Lancaster",
+      93563: "Lancaster",
+      93591: "Lancaster",
+      90001: "Split",
+      90002: "Split",
+      90003: "Split",
+      90008: "Split",
+      90023: "Split",
+      90034: "Split",
+      90035: "Split",
+      90038: "Split",
+      90040: "Split",
+      90043: "Split",
+      90044: "Split",
+      90046: "Split",
+      90047: "Split",
+      90048: "Split",
+      90056: "Split",
+      90058: "Split",
+      90063: "Split",
+      90069: "Split",
+      90247: "Split",
+      90248: "Split",
+      90501: "Split",
+      90502: "Split",
+      90601: "Split",
+      90660: "Split",
+      90710: "Split",
+      90717: "Split",
+      90805: "Split",
+      90810: "Split",
+      91010: "Split",
+      91011: "Split",
+      91040: "Split",
+      91301: "Split",
+      91302: "Split",
+      91304: "Split",
+      91306: "Split",
+      91325: "Split",
+      91342: "Split",
+      91343: "Split",
+      91352: "Split",
+      91423: "Split",
+      91745: "Split",
+      93510: "Split",
+      93532: "Split"
+    }
+  },
+  {
+    name: "Madera",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Madera Superior Court",
+        address: "200 S G St, Madera, CA 93637",
+        city: "Madera",
+        phone: "(559) 416-5599",
+        courtMailAddress: "200 S G St, Madera, CA 93637",
+        courtZip: "93637"
+      }
+    ]
+  },
+  {
+    name: "Marin",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Marin Superior Court",
+        address: "3501 Civic Center, Vera Schultz Dr, San Rafael, CA 94903",
+        city: "San Rafael",
+        phone: "(415) 444-7000",
+        courtMailAddress: "P.O. Box 4988, San Rafael, CA 94913",
+        courtZip: "94903"
+      }
+    ]
+  },
+  {
+    name: "Mariposa",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Mariposa Superior Court",
+        address: "5088 Bullion St, Mariposa, CA 95338",
+        city: "Mariposa",
+        phone: "(209) 966-2005",
+        courtMailAddress: "PO Box 28, Mariposa, CA 95338",
+        courtZip: "95338"
+      }
+    ]
+  },
+  {
+    name: "Mendocino",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Fort Bragg",
+        address: "700 S Franklin St # 144, Fort Bragg, CA 95437",
+        city: "Fort Bragg",
+        phone: "(707) 468-2003"
+      },
+      {
+        name: "Ukiah",
+        address: "100 N State St, Ukiah, CA 95482",
+        city: "Ukiah",
+        phone: "(707) 468-2003"
+      }
+    ],
+    zipCourts: {
+      95410: "Fort Bragg",
+      95420: "Fort Bragg",
+      95427: "Fort Bragg",
+      95432: "Fort Bragg",
+      95437: "Fort Bragg",
+      95445: "Fort Bragg",
+      95456: "Fort Bragg",
+      95459: "Fort Bragg",
+      95460: "Fort Bragg",
+      95468: "Fort Bragg",
+      95488: "Fort Bragg",
+      95589: "Fort Bragg",
+      95415: "Ukiah",
+      95417: "Ukiah",
+      95425: "Ukiah",
+      95428: "Ukiah",
+      95429: "Ukiah",
+      95449: "Ukiah",
+      95454: "Ukiah",
+      95463: "Ukiah",
+      95466: "Ukiah",
+      95469: "Ukiah",
+      95470: "Ukiah",
+      95482: "Ukiah",
+      95490: "Ukiah",
+      95494: "Ukiah",
+      95585: "Ukiah",
+      95587: "Ukiah"
+    }
+  },
+  {
+    name: "Merced",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Merced Superior Court",
+        address: "627 W 21st St, Merced, CA 95340",
+        city: "Merced",
+        phone: "(209) 725-4100",
+        courtMailAddress: "627 W 21st St, Merced, CA 95340",
+        courtZip: "95340"
+      }
+    ]
+  },
+  {
+    name: "Modoc",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Modoc Superior Court",
+        address: "205 S East St, Alturas, CA 96101",
+        city: "Alturas",
+        phone: "(530) 233-6516",
+        courtMailAddress: "205 S East St, Alturas, CA 96101",
+        courtZip: "96101"
+      }
+    ]
+  },
+  {
+    name: "Mono",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Mammoth Lakes",
+        address: "100 Thompson Way, Mammoth Lakes, CA 93546",
+        city: "Mammoth Lakes",
+        phone: "(760) 924-5444"
+      },
+      {
+        name: "Bridgeport",
+        address: "278 Main St, Bridgeport, CA 93517",
+        city: "Bridgeport",
+        phone: "(760) 924-5444"
+      }
+    ],
+    zipCourts: {
+      93514: "Mammoth Lakes",
+      93546: "Mammoth Lakes",
+      93512: "Mammoth Lakes",
+      93529: "Mammoth Lakes",
+      93541: "Bridgeport",
+      93517: "Bridgeport",
+      96107: "Bridgeport",
+      96133: "Bridgeport"
+    }
+  },
+  {
+    name: "Monterey",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Monterey Superior Court",
+        address: "1200 Aguajito Rd, Monterey, CA 93940",
+        city: "Monterey",
+        phone: "(831) 647-5800",
+        courtMailAddress: "1200 Aguajito Rd, Monterey, CA 93940",
+        courtZip: "93940"
+      }
+    ]
+  },
+  {
+    name: "Napa",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Napa Superior Court",
+        address: "825 Brown St, Napa, CA 94559",
+        city: "Napa",
+        phone: "(707) 299-1100",
+        courtMailAddress: "825 Brown St, Napa, CA 94559",
+        courtZip: "94559"
+      }
+    ]
+  },
+  {
+    name: "Nevada",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Nevada City",
+        address: "201 Church St # 5, Nevada City, CA 95959",
+        city: "Nevada City",
+        phone: "(530) 362-4309"
+      },
+      {
+        name: "Truckee",
+        address: "10075 Levon Ave, Truckee, CA 96161",
+        city: "Truckee",
+        phone: "(530) 362-4309"
+      }
+    ],
+    zipCourts: {
+      95602: "Nevada City",
+      95715: "Nevada City",
+      95945: "Nevada City",
+      95946: "Nevada City",
+      95949: "Nevada City",
+      95959: "Nevada City",
+      95960: "Nevada City",
+      95975: "Nevada City",
+      95977: "Nevada City",
+      95986: "Nevada City",
+      95728: "Truckee",
+      96111: "Truckee",
+      96161: "Truckee"
+    }
+  },
+  {
+    name: "Orange",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Orange Superior Court",
+        address: "700 W Civic Center Dr, Santa Ana, CA 92701",
+        city: "Santa Ana",
+        phone: "(657) 622-5800",
+        courtMailAddress: "700 W Civic Center Dr, Santa Ana, CA 92701",
+        courtZip: "92701"
+      }
+    ]
+  },
+  {
+    name: "Placer",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Howard G. Gibson Courthouse",
+        address: "10820 Justice Center Dr, Roseville, CA 95678",
+        city: "Roseville",
+        phone: "(916) 408-6000"
+      },
+      {
+        name: "Tahoe Courthouse",
+        address: "2501 N Lake Blvd, Tahoe City, CA 96145",
+        city: "Tahoe City",
+        phone: "(530) 584-3460"
+      },
+      {
+        name: "Historic Courthouse",
+        address: "101 Maple St, Auburn, CA 95603",
+        city: "Auburn",
+        phone: "(916) 408-6000"
+      }
+    ]
+  },
+  {
+    name: "Plumas",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Plumas Superior Court",
+        address: "520 Main St #104, Quincy, CA 95971",
+        city: "Quincy",
+        phone: "(530) 283-6232",
+        courtMailAddress: "520 Main St #104, Quincy, CA 95971",
+        courtZip: "95971"
+      }
+    ]
+  },
+  {
+    name: "Riverside",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Corona",
+        address: "505 S Buena Vista Ave #201, Corona, CA 92882",
+        city: "Corona",
+        phone: "(951) 777-3147"
+      },
+      {
+        name: "Moreno Valley",
+        address: "13800 Heacock St #D201, Moreno Valley, CA 92553",
+        city: "Moreno Valley",
+        phone: "(951) 777-3147"
+      },
+      {
+        name: "Palm Springs",
+        address: "3255 E Tahquitz Canyon Way, Palm Springs, CA 92262",
+        city: "Palm Springs",
+        phone: "(760) 393-2617"
+      },
+      {
+        name: "Blythe",
+        address: "265 N Broadway, Blythe, CA 92225",
+        city: "Blythe",
+        phone: "(760 )393-2617"
+      },
+      {
+        name: "Menifee",
+        address: "27401 Menifee Ctr Dr, Menifee, CA 92584",
+        city: "Menifee",
+        phone: "(951) 777-3147"
+      }
+    ],
+    zipCourts: {
+      92877: "Corona",
+      92878: "Corona",
+      92879: "Corona",
+      92880: "Corona",
+      92881: "Corona",
+      92882: "Corona",
+      92883: "Corona",
+      91752: "Corona",
+      92860: "Corona",
+      92503: "Corona",
+      92504: "Corona",
+      92505: "Corona",
+      92509: "Corona",
+      92220: "Moreno Valley",
+      92223: "Moreno Valley",
+      92230: "Moreno Valley",
+      92282: "Moreno Valley",
+      92320: "Moreno Valley",
+      92324: "Moreno Valley",
+      92373: "Moreno Valley",
+      92549: "Moreno Valley",
+      92551: "Moreno Valley",
+      92552: "Moreno Valley",
+      92553: "Moreno Valley",
+      92554: "Moreno Valley",
+      92555: "Moreno Valley",
+      92556: "Moreno Valley",
+      92557: "Moreno Valley",
+      92561: "Moreno Valley",
+      92567: "Moreno Valley",
+      92570: "Moreno Valley",
+      92571: "Moreno Valley",
+      92572: "Moreno Valley",
+      92599: "Moreno Valley",
+      92501: "Moreno Valley",
+      92502: "Moreno Valley",
+      92506: "Moreno Valley",
+      92507: "Moreno Valley",
+      92508: "Moreno Valley",
+      92513: "Moreno Valley",
+      92514: "Moreno Valley",
+      92515: "Moreno Valley",
+      92516: "Moreno Valley",
+      92517: "Moreno Valley",
+      92518: "Moreno Valley",
+      92519: "Moreno Valley",
+      92521: "Moreno Valley",
+      92522: "Moreno Valley",
+      92234: "Palm Springs",
+      92235: "Palm Springs",
+      92236: "Palm Springs",
+      92239: "Palm Springs",
+      92240: "Palm Springs",
+      92241: "Palm Springs",
+      92201: "Palm Springs",
+      92202: "Palm Springs",
+      92203: "Palm Springs",
+      92247: "Palm Springs",
+      92248: "Palm Springs",
+      92253: "Palm Springs",
+      92254: "Palm Springs",
+      92258: "Palm Springs",
+      92210: "Palm Springs",
+      92211: "Palm Springs",
+      92255: "Palm Springs",
+      92260: "Palm Springs",
+      92261: "Palm Springs",
+      92262: "Palm Springs",
+      92263: "Palm Springs",
+      92264: "Palm Springs",
+      92270: "Palm Springs",
+      92274: "Palm Springs",
+      92276: "Palm Springs",
+      92277: "Palm Springs",
+      92225: "Blythe",
+      92226: "Blythe",
+      92028: "Menifee",
+      92536: "Menifee",
+      92539: "Menifee",
+      92543: "Menifee",
+      92544: "Menifee",
+      92545: "Menifee",
+      92546: "Menifee",
+      92548: "Menifee",
+      92530: "Menifee",
+      92531: "Menifee",
+      92532: "Menifee",
+      92584: "Menifee",
+      92585: "Menifee",
+      92586: "Menifee",
+      92587: "Menifee",
+      92562: "Menifee",
+      92563: "Menifee",
+      92564: "Menifee",
+      92581: "Menifee",
+      92582: "Menifee",
+      92583: "Menifee",
+      92589: "Menifee",
+      92590: "Menifee",
+      92591: "Menifee",
+      92592: "Menifee",
+      92593: "Menifee",
+      92595: "Menifee",
+      92596: "Menifee"
+    }
+  },
+  {
+    name: "Sacramento",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Sacramento Superior Court",
+        address: "813 6th St #212, Sacramento, CA 95814",
+        city: "Sacramento",
+        phone: "(916) 874-5522",
+        courtMailAddress: "813 6th St #212, Sacramento, CA 95814",
+        courtZip: "95814"
+      }
+    ]
+  },
+  {
+    name: "San Benito",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "San Benito Superior Court",
+        address: "450 4th St, Hollister, CA 95023",
+        city: "Hollister",
+        phone: "(831) 636-4057",
+        courtMailAddress: "450 4th St, Hollister, CA 95023",
+        courtZip: "95023"
+      }
+    ]
+  },
+  {
+    name: "San Bernardino",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Barstow",
+        address: "235 E Mountain View St, Barstow, CA 92311",
+        city: "Barstow",
+        phone: "(760) 718-3700"
+      },
+      {
+        name: "Joshua Tree",
+        address: "6527 White Feather Rd, Joshua Tree, CA 92252",
+        city: "Joshua Tree",
+        phone: "(760) 974-3047"
+      },
+      {
+        name: "Needles",
+        address: "1111 Bailey Ave, Needles, CA 92363",
+        city: "Needles",
+        phone: "(760) 718-3700"
+      },
+      {
+        name: "San Bernardino",
+        address: "247 W 3rd St, San Bernardino, CA 92415",
+        city: "San Bernardino",
+        phone: "(909) 384-1888"
+      }
+    ],
+    zipCourts: {
+      92301: "Barstow",
+      92307: "Barstow",
+      92308: "Barstow",
+      92309: "Barstow",
+      92311: "Barstow",
+      92314: "Barstow",
+      92315: "Barstow",
+      92327: "Barstow",
+      92333: "Barstow",
+      92338: "Barstow",
+      92342: "Barstow",
+      92344: "Barstow",
+      92347: "Barstow",
+      92356: "Barstow",
+      92365: "Barstow",
+      92368: "Barstow",
+      92372: "Barstow",
+      92386: "Barstow",
+      92392: "Barstow",
+      92394: "Barstow",
+      92395: "Barstow",
+      92397: "Barstow",
+      92398: "Barstow",
+      93516: "Barstow",
+      93555: "Barstow",
+      93558: "Barstow",
+      93562: "Barstow",
+      92252: "Joshua Tree",
+      92256: "Joshua Tree",
+      92268: "Joshua Tree",
+      92284: "Joshua Tree",
+      92242: "Needles",
+      92267: "Needles",
+      92280: "Needles",
+      92363: "Needles",
+      92364: "Needles",
+      91701: "San Bernardino",
+      91708: "San Bernardino",
+      91709: "San Bernardino",
+      91710: "San Bernardino",
+      91730: "San Bernardino",
+      91737: "San Bernardino",
+      91739: "San Bernardino",
+      91759: "San Bernardino",
+      91761: "San Bernardino",
+      91762: "San Bernardino",
+      91763: "San Bernardino",
+      91764: "San Bernardino",
+      91766: "San Bernardino",
+      91784: "San Bernardino",
+      91786: "San Bernardino",
+      92278: "San Bernardino",
+      92305: "San Bernardino",
+      92313: "San Bernardino",
+      92316: "San Bernardino",
+      92321: "San Bernardino",
+      92322: "San Bernardino",
+      92324: "San Bernardino",
+      92325: "San Bernardino",
+      92335: "San Bernardino",
+      92336: "San Bernardino",
+      92337: "San Bernardino",
+      92339: "San Bernardino",
+      92346: "San Bernardino",
+      92352: "San Bernardino",
+      92354: "San Bernardino",
+      92359: "San Bernardino",
+      92373: "San Bernardino",
+      92374: "San Bernardino",
+      92376: "San Bernardino",
+      92377: "San Bernardino",
+      92378: "San Bernardino",
+      92382: "San Bernardino",
+      92385: "San Bernardino",
+      92391: "San Bernardino",
+      92399: "San Bernardino",
+      92401: "San Bernardino",
+      92404: "San Bernardino",
+      92405: "San Bernardino",
+      92407: "San Bernardino",
+      92408: "San Bernardino",
+      92410: "San Bernardino",
+      92411: "San Bernardino",
+      92509: "San Bernardino",
+      92880: "San Bernardino",
+      92277: "Split",
+      92285: "Split",
+      92304: "Split",
+      92332: "Split",
+      92341: "Split",
+      92345: "Split",
+      92358: "Split",
+      92371: "Split"
+    }
+  },
+  {
+    name: "San Diego",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Central",
+        address: "330 W Broadway, San Diego, CA 92101",
+        city: "San Diego",
+        phone: "(619) 450-7275"
+      },
+      {
+        name: "North",
+        address: "325 S Melrose Dr, Vista, CA 92081",
+        city: "Vista",
+        phone: "(760) 201-8600"
+      }
+    ],
+    zipCourts: {
+      91901: "Central",
+      92037: "Central",
+      92123: "Central",
+      91902: "Central",
+      92038: "Central",
+      92124: "Central",
+      91903: "Central",
+      92039: "Central",
+      92126: "Central",
+      91905: "Central",
+      92040: "Central",
+      92127: "Central",
+      91906: "Central",
+      92128: "Central",
+      91908: "Central",
+      92129: "Central",
+      91909: "Central",
+      92130: "Central",
+      91910: "Central",
+      92131: "Central",
+      91911: "Central",
+      92132: "Central",
+      91912: "Central",
+      92134: "Central",
+      91913: "Central",
+      92135: "Central",
+      91914: "Central",
+      92136: "Central",
+      91915: "Central",
+      92137: "Central",
+      91916: "Central",
+      92138: "Central",
+      91917: "Central",
+      92139: "Central",
+      91921: "Central",
+      92140: "Central",
+      91931: "Central",
+      92064: "Central",
+      92142: "Central",
+      91932: "Central",
+      92065: "Central",
+      92143: "Central",
+      91933: "Central",
+      92145: "Central",
+      91934: "Central",
+      92147: "Central",
+      91935: "Central",
+      92149: "Central",
+      91941: "Central",
+      92150: "Central",
+      91942: "Central",
+      92070: "Central",
+      92152: "Central",
+      91943: "Central",
+      92071: "Central",
+      92153: "Central",
+      91944: "Central",
+      92072: "Central",
+      92154: "Central",
+      91945: "Central",
+      92074: "Central",
+      92155: "Central",
+      91946: "Central",
+      92158: "Central",
+      91947: "Central",
+      92159: "Central",
+      91948: "Central",
+      92160: "Central",
+      91950: "Central",
+      92161: "Central",
+      91951: "Central",
+      92162: "Central",
+      91962: "Central",
+      92163: "Central",
+      91963: "Central",
+      92164: "Central",
+      91976: "Central",
+      92165: "Central",
+      91977: "Central",
+      92166: "Central",
+      91978: "Central",
+      92167: "Central",
+      91979: "Central",
+      92090: "Central",
+      92168: "Central",
+      91980: "Central",
+      92169: "Central",
+      91987: "Central",
+      92092: "Central",
+      92170: "Central",
+      92093: "Central",
+      92171: "Central",
+      92172: "Central",
+      92101: "Central",
+      92173: "Central",
+      92102: "Central",
+      92174: "Central",
+      92103: "Central",
+      92175: "Central",
+      92104: "Central",
+      92176: "Central",
+      92105: "Central",
+      92177: "Central",
+      92106: "Central",
+      92178: "Central",
+      92014: "Central",
+      92107: "Central",
+      92179: "Central",
+      92108: "Central",
+      92182: "Central",
+      92019: "Central",
+      92109: "Central",
+      92184: "Central",
+      92020: "Central",
+      92110: "Central",
+      92186: "Central",
+      92021: "Central",
+      92111: "Central",
+      92187: "Central",
+      92022: "Central",
+      92112: "Central",
+      92190: "Central",
+      92113: "Central",
+      92191: "Central",
+      92114: "Central",
+      92192: "Central",
+      92115: "Central",
+      92193: "Central",
+      92116: "Central",
+      92194: "Central",
+      92117: "Central",
+      92195: "Central",
+      92118: "Central",
+      92196: "Central",
+      92119: "Central",
+      92197: "Central",
+      92120: "Central",
+      92198: "Central",
+      92121: "Central",
+      92199: "Central",
+      92036: "Central",
+      92122: "Central",
+      92672: "North",
+      92046: "North",
+      92049: "North",
+      92051: "North",
+      92052: "North",
+      92054: "North",
+      92055: "North",
+      92056: "North",
+      92057: "North",
+      92058: "North",
+      92059: "North",
+      92060: "North",
+      92061: "North",
+      92066: "North",
+      92067: "North",
+      92068: "North",
+      92069: "North",
+      92075: "North",
+      92078: "North",
+      92079: "North",
+      92081: "North",
+      92082: "North",
+      92083: "North",
+      92084: "North",
+      92085: "North",
+      92086: "North",
+      92088: "North",
+      92091: "North",
+      92003: "North",
+      92004: "North",
+      92096: "North",
+      92007: "North",
+      92008: "North",
+      92009: "North",
+      92010: "North",
+      92011: "North",
+      92013: "North",
+      92018: "North",
+      92023: "North",
+      92024: "North",
+      92025: "North",
+      92026: "North",
+      92027: "North",
+      92028: "North",
+      92029: "North",
+      92030: "North",
+      92033: "North"
+    }
+  },
+  {
+    name: "San Francisco",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "San Francisco Superior Court",
+        address: "400 McAllister St, San Francisco, CA 94102",
+        city: "San Francisco",
+        phone: "(415) 551-4000",
+        courtMailAddress: "400 McAllister St, San Francisco, CA 94102",
+        courtZip: "94102"
+      }
+    ]
+  },
+  {
+    name: "San Joaquin",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "San Joaquin Superior Court",
+        address: "180 E Weber Ave #200, Stockton, CA 95202",
+        city: "Stockton",
+        phone: "(209) 992-5693",
+        courtMailAddress: "180 E Weber Ave #200, Stockton, CA 95202",
+        courtZip: "95202"
+      }
+    ]
+  },
+  {
+    name: "San Luis Obispo",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "San Luis Obispo",
+        address: "1050 Monterey St, San Luis Obispo, CA 93408",
+        city: "San Luis Obispo",
+        phone: "(805) 706-3600"
+      },
+      {
+        name: "Paso Robles",
+        address: "901 Park St, Paso Robles, CA 93446",
+        city: "Paso Robles",
+        phone: "(805) 706-3600"
+      }
+    ],
+    zipCourts: {
+      93401: "San Luis Obispo",
+      93402: "San Luis Obispo",
+      93405: "San Luis Obispo",
+      93410: "San Luis Obispo",
+      93420: "San Luis Obispo",
+      93424: "San Luis Obispo",
+      93433: "San Luis Obispo",
+      93442: "San Luis Obispo",
+      93444: "San Luis Obispo",
+      93445: "San Luis Obispo",
+      93449: "San Luis Obispo",
+      93454: "San Luis Obispo",
+      93252: "Paso Robles",
+      93254: "Paso Robles",
+      93422: "Paso Robles",
+      93426: "Paso Robles",
+      93428: "Paso Robles",
+      93432: "Paso Robles",
+      93446: "Paso Robles",
+      93451: "Paso Robles",
+      93452: "Paso Robles",
+      93453: "Paso Robles",
+      93461: "Paso Robles",
+      93465: "Paso Robles",
+      93430: "Split"
+    }
+  },
+  {
+    name: "San Mateo",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "San Mateo Superior Court",
+        address: "400 County Center, Redwood City, CA 94063",
+        city: "Redwood City",
+        phone: "(650) 261-5100",
+        courtMailAddress: "400 County Center, Redwood City, CA 94063",
+        courtZip: "94063"
+      }
+    ]
+  },
+  {
+    name: "Santa Barbara",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: true,
+    allCourts: [
+      {
+        name: "Santa Barbara",
+        address: "1100 Anacapa St, Santa Barbara, CA 93101",
+        city: "Santa Barbara",
+        phone: "(805) 882-4520"
+      },
+      {
+        name: "Santa Maria",
+        address: "312 E Cook St c, Santa Maria, CA 93454",
+        city: "Santa Maria",
+        phone: "(805) 614-6414"
+      }
+    ],
+    zipCourts: {
+      93105: "Santa Barbara",
+      93108: "Santa Barbara",
+      93109: "Santa Barbara",
+      93110: "Santa Barbara",
+      93111: "Santa Barbara",
+      93013: "Santa Barbara",
+      93067: "Santa Barbara",
+      93101: "Santa Barbara",
+      93103: "Santa Barbara",
+      93252: "Santa Maria",
+      93254: "Santa Maria",
+      93454: "Santa Maria",
+      93458: "Santa Maria",
+      93434: "Santa Maria",
+      93436: "Santa Maria",
+      93437: "Santa Maria",
+      93429: "Santa Maria",
+      93455: "Santa Maria",
+      93440: "Santa Maria",
+      93427: "Santa Maria",
+      93441: "Santa Maria",
+      93463: "Split",
+      93460: "Split",
+      93117: "Split"
+    }
+  },
+  {
+    name: "Santa Clara",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Santa Clara Superior Court",
+        address: "191 N First St, San Jose, CA 95113",
+        city: "San Jose",
+        phone: "(408) 882-2100",
+        courtMailAddress: "191 N First St, San Jose, CA 95113",
+        courtZip: "95113"
+      }
+    ]
+  },
+  {
+    name: "Santa Cruz",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Santa Cruz Superior Court",
+        address: "701 Ocean St #110, Santa Cruz, CA 95060",
+        city: "Santa Cruz",
+        phone: "(831) 420-2200",
+        courtMailAddress: "701 Ocean St #110, Santa Cruz, CA 95060",
+        courtZip: "95060"
+      }
+    ]
+  },
+  {
+    name: "Shasta",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Shasta Superior Court",
+        address: "1500 Court St, Redding, CA 96001",
+        city: "Redding",
+        phone: "(530) 245-6789",
+        courtMailAddress: "1500 Court St, Redding, CA 96001",
+        courtZip: "96001"
+      }
+    ]
+  },
+  {
+    name: "Sierra",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Sierra Superior Court",
+        address: "100 Courthouse Square # 200, Downieville, CA 95936",
+        city: "Downieville",
+        phone: "(530) 289-3698",
+        courtMailAddress: "100 Courthouse Square # 200, Downieville, CA 95936",
+        courtZip: "95936"
+      }
+    ]
+  },
+  {
+    name: "Siskiyou",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Siskiyou Superior Court",
+        address: "411 4th St, Yreka, CA 96097",
+        city: "Yreka",
+        phone: "(530) 842-0411",
+        courtMailAddress: "411 4th St, Yreka, CA 96097",
+        courtZip: "96097"
+      }
+    ]
+  },
+  {
+    name: "Solano",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Solano Superior Court",
+        address: "580 Texas St, Fairfield, CA 94533",
+        city: "Fairfield",
+        phone: "(707) 207-7335",
+        courtMailAddress: "580 Texas St, Fairfield, CA 94533",
+        courtZip: "94533"
+      }
+    ]
+  },
+  {
+    name: "Sonoma",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Sonoma Superior Court",
+        address: "3055 Cleveland Ave, Santa Rosa, CA 95403",
+        city: "Santa Rosa",
+        phone: "(707) 521-6610",
+        courtMailAddress: "3055 Cleveland Ave, Santa Rosa, CA 95403",
+        courtZip: "95403"
+      }
+    ]
+  },
+  {
+    name: "Stanislaus",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Stanislaus Superior Court",
+        address: "801 10th St, Modesto, CA 95354",
+        city: "Modesto",
+        phone: "(209) 530-3100",
+        courtMailAddress: "PO Box 1098, Modesto, CA 95353",
+        courtZip: "95354"
+      }
+    ]
+  },
+  {
+    name: "Sutter",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Sutter Superior Court",
+        address: "1175 Civic Center Blvd, Yuba City, CA 95993",
+        city: "Yuba City",
+        phone: "(530) 822-3300",
+        courtMailAddress: "1175 Civic Center Blvd, Yuba City, CA 95993",
+        courtZip: "95993"
+      }
+    ]
+  },
+  {
+    name: "Tehama",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Tehama Superior Court",
+        address: "1740 Walnut St, Red Bluff, CA 96080",
+        city: "Red Bluff",
+        phone: "(530) 527-3484",
+        courtMailAddress: "1740 Walnut St, Red Bluff, CA 96080",
+        courtZip: "96080"
+      }
+    ]
+  },
+  {
+    name: "Trinity",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Trinity Superior Court",
+        address: "11 Court St, Weaverville, CA 96093",
+        city: "Weaverville",
+        phone: "(530) 623-1208",
+        courtMailAddress: "11 Court St, Weaverville, CA 96093",
+        courtZip: "96093"
+      }
+    ]
+  },
+  {
+    name: "Tulare",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: true,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Visalia County Civic Center",
+        address: "221 S Mooney Blvd # 201, Visalia, CA 93291",
+        city: "Visalia",
+        phone: "(559) 730-5000"
+      },
+      {
+        name: "Porterville Courthouse",
+        address: "300 E Olive Ave, Porterville, CA 93257",
+        city: "Porterville",
+        phone: "(559) 782-3700"
+      }
+    ]
+  },
+  {
+    name: "Tuolumne",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Tuolumne Superior Court",
+        address: "12855 Justice Ctr Dr, Sonora, CA 95370",
+        city: "Sonora",
+        phone: "(209) 533-5555",
+        courtMailAddress: "12855 Justice Ctr Dr, Sonora, CA 95370",
+        courtZip: "95370"
+      }
+    ]
+  },
+  {
+    name: "Ventura",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Ventura Superior Court",
+        address: "800 S Victoria Ave, Ventura, CA 93009",
+        city: "Ventura",
+        phone: "(805) 289-8525",
+        courtMailAddress: "PO Box 6489, Ventura, CA 93006",
+        courtZip: "93009"
+      }
+    ]
+  },
+  {
+    name: "Yolo",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Yolo Superior Court",
+        address: "1000 Main St, Woodland, CA 95695",
+        city: "Woodland",
+        phone: "(530) 406-6700",
+        courtMailAddress: "1000 Main St, Woodland, CA 95695",
+        courtZip: "95695"
+      }
+    ]
+  },
+  {
+    name: "Yuba",
+    court: {
+      address: "",
+      city: "",
+      phone: ""
+    },
+    multiCourt: false,
+    courtByZip: false,
+    allCourts: [
+      {
+        name: "Yuba Superior Court",
+        address: "215 5th St #200, Marysville, CA 95901",
+        city: "Marysville",
+        phone: "(530) 740-1800",
+        courtMailAddress: "215 5th St #200, Marysville, CA 95901",
+        courtZip: "95901"
+      }
+    ]
+  }
+];
 const ssnMap = [
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -42368,10 +46706,6 @@ const ssnMap = [
     fieldName: "topmostSubform[0].Page5[0].relationship[1]"
   })
 ];
-/*!
- * Application for a Passport (federal form DS 5504.)
- * @type {Formfill[]}
- */
 const ds5504Map = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? "X" : "",
@@ -42549,10 +46883,6 @@ const ds5504Map = [
     fieldName: "Changed Middle"
   })
 ];
-/*!
- * Application for a Passport (federal form DS 82.)
- * @type {Formfill[]}
- */
 const ds82Map = [
   () => ({
     text: "X",
@@ -42734,10 +47064,6 @@ const ds82Map = [
     fieldName: "Permanent Address Zip Code"
   })
 ];
-/*!
- * Application for a Passport (federal form DS 11.)
- * @type {Formfill[]}
- */
 const ds11Map = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? `${applicant.chosenName.last} ${applicant.chosenName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
@@ -42921,26 +47247,6 @@ const ds11Map = [
     fieldName: "Permanent Address Zip Code"
   })
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function DS5504Guide({ person }) {
   const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -42979,26 +47285,6 @@ function DS5504Guide({ person }) {
     ] })
   ] }, "Federal-Passport");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function DS82Guide({ person }) {
   const { isChangingLegalSex, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -43034,26 +47320,6 @@ function DS82Guide({ person }) {
     ] })
   ] }, "Federal-Passport");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function DS11Guide({ person }) {
   const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -43103,26 +47369,6 @@ function DS11Guide({ person }) {
     ] })
   ] }, "Federal-Passport");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function SocialSecurityGuide({ person }) {
   const { age, parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -43161,26 +47407,6 @@ function SocialSecurityGuide({ person }) {
     ] })
   ] }, "Federal-SocialSecurity");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const socialSecurity = {
   target: Target.SocialSecurity,
   depends: [Target.NameChange, Target.GenderMarker],
@@ -43227,26 +47453,6 @@ const passport = {
 ({
   depends: [Target.NameChange, Target.SocialSecurity]
 });
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function ElsewhereBirthGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "This is for those born outside our covered areas" }),
@@ -43258,26 +47464,6 @@ function ElsewhereBirthGuide() {
     ] })
   ] }, "Elsewhere-Birth");
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const elsewhereBirthRecord = {
   target: Target.BirthRecord,
   depends: [Target.NameChange],
@@ -43289,26 +47475,6 @@ const elsewhereBirthRecord = {
   ],
   isBirth: true
 };
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 const michigan = {
   name: "Michigan",
   abbreviation: "MI",
@@ -43389,6 +47555,19 @@ const illinois = {
   ],
   localities: illinoisCounties
 };
+const california = {
+  name: "California",
+  abbreviation: "CA",
+  processes: [
+    californiaNameChange,
+    socialSecurity,
+    californiaPrimaryIdentification,
+    californiaGenderMarker,
+    californiaBirthRecord,
+    californiaPostamble
+  ],
+  localities: californiaCounties
+};
 const federal = {
   name: "Federal",
   abbreviation: "FED",
@@ -43408,32 +47587,10 @@ const allJurisdictions = [
   newYork,
   oregon,
   rhodeIsland,
+  california,
   elsewhere,
   federal
 ];
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * Applicant's personal information.
- */
 class Person {
   /**
    * Applicant's legal name.
@@ -43534,6 +47691,30 @@ class Person {
    * @remarks Filled from step 5 and finalizeApplicant.
    */
   isChangingLegalSex;
+  /**
+   * Whether applicant is changing their birth certificate.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingBirthCert;
+  /**
+   * Whether applicant is changing their Primary ID.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingPrimaryID;
+  /**
+   * Whether applicant is changing their Passport.
+   *
+   * @remarks Filled from step 5 and finalizeApplicant.
+   */
+  isChangingPassport;
+  /**
+   * Whether applicant is changing their Social Security.
+   *
+   * @remarks Filled from step 5.
+   */
+  isChangingSocialSecurity;
   /**
    * Whether to withhold publication of the newspaper notice.
    *
@@ -43641,9 +47822,6 @@ class Person {
    */
   passport;
 }
-/*!
- * @type {Person}
- */
 const sampleData = {
   legalName: {
     first: "Jane",
@@ -43670,6 +47848,10 @@ const sampleData = {
   gender: GenderMarker.X,
   isChangingLegalName: true,
   isChangingLegalSex: true,
+  isChangingBirthCert: true,
+  isChangingPassport: true,
+  isChangingPrimaryID: true,
+  isChangingSocialSecurity: true,
   mothersBirthName: {
     first: "Sarah",
     middle: "MomsMiddle",
@@ -43685,7 +47867,7 @@ const sampleData = {
     last: "DadsDoe",
     suffix: "Jr."
   },
-  fathersBirthdate: "1970-01-01",
+  fathersBirthdate: "1969-12-30",
   phone: "313-867-5309",
   homeAddress: {
     apt: "BLDG B, Unit 301",
@@ -43704,33 +47886,10 @@ const sampleData = {
   },
   passport: "ds11"
 };
-/*!
- * @type {Person}
- */
 ({
   assignedSexTest: [GenderMarker.F, GenderMarker.M, GenderMarker.X],
   genderTest: [GenderMarker.F, GenderMarker.M, GenderMarker.X]
 });
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function assignDeepProperty(root2, key, value) {
   const path = key.split(":");
   const dirs = path.slice(0, -1);
@@ -43790,9 +47949,25 @@ const useStore = create()(
             const isChangingLegalSex = state.processNames.includes(
               Target.GenderMarker
             );
+            const isChangingBirthCert = state.processNames.includes(
+              Target.BirthRecord
+            );
+            const isChangingPrimaryID = state.processNames.includes(
+              Target.PrimaryIdentification
+            );
+            const isChangingPassport = state.processNames.includes(
+              Target.Passport
+            );
+            const isChangingSocialSecurity = state.processNames.includes(
+              Target.SocialSecurity
+            );
             Object.assign(extraData, {
               isChangingLegalName,
-              isChangingLegalSex
+              isChangingLegalSex,
+              isChangingBirthCert,
+              isChangingPrimaryID,
+              isChangingPassport,
+              isChangingSocialSecurity
             });
             Object.assign(state.person, extraData);
           })
@@ -44010,26 +48185,6 @@ function Step5() {
     ] });
   }
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function GenericField(field, innards) {
   const { name, title, subtitle, required } = field;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { htmlFor: name, children: [
@@ -44434,26 +48589,6 @@ function renderField(field, jurisdiction, register) {
   }
   return "";
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function makeHandler(array) {
   return {
     get(target, prop) {
@@ -44951,12 +49086,12 @@ var hasRequiredCommon;
 function requireCommon() {
   if (hasRequiredCommon) return common;
   hasRequiredCommon = 1;
-  (function(exports) {
+  (function(exports$1) {
     var TYPED_OK = typeof Uint8Array !== "undefined" && typeof Uint16Array !== "undefined" && typeof Int32Array !== "undefined";
     function _has(obj, key) {
       return Object.prototype.hasOwnProperty.call(obj, key);
     }
-    exports.assign = function(obj) {
+    exports$1.assign = function(obj) {
       var sources = Array.prototype.slice.call(arguments, 1);
       while (sources.length) {
         var source = sources.shift();
@@ -44974,7 +49109,7 @@ function requireCommon() {
       }
       return obj;
     };
-    exports.shrinkBuf = function(buf, size) {
+    exports$1.shrinkBuf = function(buf, size) {
       if (buf.length === size) {
         return buf;
       }
@@ -45022,20 +49157,20 @@ function requireCommon() {
         return [].concat.apply([], chunks);
       }
     };
-    exports.setTyped = function(on) {
+    exports$1.setTyped = function(on) {
       if (on) {
-        exports.Buf8 = Uint8Array;
-        exports.Buf16 = Uint16Array;
-        exports.Buf32 = Int32Array;
-        exports.assign(exports, fnTyped);
+        exports$1.Buf8 = Uint8Array;
+        exports$1.Buf16 = Uint16Array;
+        exports$1.Buf32 = Int32Array;
+        exports$1.assign(exports$1, fnTyped);
       } else {
-        exports.Buf8 = Array;
-        exports.Buf16 = Array;
-        exports.Buf32 = Array;
-        exports.assign(exports, fnUntyped);
+        exports$1.Buf8 = Array;
+        exports$1.Buf16 = Array;
+        exports$1.Buf32 = Array;
+        exports$1.assign(exports$1, fnUntyped);
       }
     };
-    exports.setTyped(TYPED_OK);
+    exports$1.setTyped(TYPED_OK);
   })(common);
   return common;
 }
@@ -45117,8 +49252,8 @@ function requireTrees() {
     this.max_code = 0;
     this.stat_desc = stat_desc;
   }
-  function d_code(dist2) {
-    return dist2 < 256 ? _dist_code[dist2] : _dist_code[256 + (dist2 >>> 7)];
+  function d_code(dist) {
+    return dist < 256 ? _dist_code[dist] : _dist_code[256 + (dist >>> 7)];
   }
   function put_short(s, w) {
     s.pending_buf[s.pending++] = w & 255;
@@ -45252,7 +49387,7 @@ function requireTrees() {
     var bits;
     var length;
     var code;
-    var dist2;
+    var dist;
     var bl_count = new Array(MAX_BITS + 1);
     length = 0;
     for (code = 0; code < LENGTH_CODES - 1; code++) {
@@ -45262,18 +49397,18 @@ function requireTrees() {
       }
     }
     _length_code[length - 1] = code;
-    dist2 = 0;
+    dist = 0;
     for (code = 0; code < 16; code++) {
-      base_dist[code] = dist2;
+      base_dist[code] = dist;
       for (n = 0; n < 1 << extra_dbits[code]; n++) {
-        _dist_code[dist2++] = code;
+        _dist_code[dist++] = code;
       }
     }
-    dist2 >>= 7;
+    dist >>= 7;
     for (; code < D_CODES; code++) {
-      base_dist[code] = dist2 << 7;
+      base_dist[code] = dist << 7;
       for (n = 0; n < 1 << extra_dbits[code] - 7; n++) {
-        _dist_code[256 + dist2++] = code;
+        _dist_code[256 + dist++] = code;
       }
     }
     for (bits = 0; bits <= MAX_BITS; bits++) {
@@ -45364,17 +49499,17 @@ function requireTrees() {
     s.heap[k] = v;
   }
   function compress_block(s, ltree, dtree) {
-    var dist2;
+    var dist;
     var lc;
     var lx = 0;
     var code;
     var extra;
     if (s.last_lit !== 0) {
       do {
-        dist2 = s.pending_buf[s.d_buf + lx * 2] << 8 | s.pending_buf[s.d_buf + lx * 2 + 1];
+        dist = s.pending_buf[s.d_buf + lx * 2] << 8 | s.pending_buf[s.d_buf + lx * 2 + 1];
         lc = s.pending_buf[s.l_buf + lx];
         lx++;
-        if (dist2 === 0) {
+        if (dist === 0) {
           send_code(s, lc, ltree);
         } else {
           code = _length_code[lc];
@@ -45384,13 +49519,13 @@ function requireTrees() {
             lc -= base_length[code];
             send_bits(s, lc, extra);
           }
-          dist2--;
-          code = d_code(dist2);
+          dist--;
+          code = d_code(dist);
           send_code(s, code, dtree);
           extra = extra_dbits[code];
           if (extra !== 0) {
-            dist2 -= base_dist[code];
-            send_bits(s, dist2, extra);
+            dist -= base_dist[code];
+            send_bits(s, dist, extra);
           }
         }
       } while (lx < s.last_lit);
@@ -45661,18 +49796,18 @@ function requireTrees() {
       bi_windup(s);
     }
   }
-  function _tr_tally(s, dist2, lc) {
-    s.pending_buf[s.d_buf + s.last_lit * 2] = dist2 >>> 8 & 255;
-    s.pending_buf[s.d_buf + s.last_lit * 2 + 1] = dist2 & 255;
+  function _tr_tally(s, dist, lc) {
+    s.pending_buf[s.d_buf + s.last_lit * 2] = dist >>> 8 & 255;
+    s.pending_buf[s.d_buf + s.last_lit * 2 + 1] = dist & 255;
     s.pending_buf[s.l_buf + s.last_lit] = lc & 255;
     s.last_lit++;
-    if (dist2 === 0) {
+    if (dist === 0) {
       s.dyn_ltree[lc * 2]++;
     } else {
       s.matches++;
-      dist2--;
+      dist--;
       s.dyn_ltree[(_length_code[lc] + LITERALS + 1) * 2]++;
-      s.dyn_dtree[d_code(dist2) * 2]++;
+      s.dyn_dtree[d_code(dist) * 2]++;
     }
     return s.last_lit === s.lit_bufsize - 1;
   }
@@ -47161,7 +51296,7 @@ function requireInffast() {
     var here;
     var op;
     var len;
-    var dist2;
+    var dist;
     var from;
     var from_source;
     var input, output;
@@ -47227,7 +51362,7 @@ function requireInffast() {
                   bits -= op;
                   op = here >>> 16 & 255;
                   if (op & 16) {
-                    dist2 = here & 65535;
+                    dist = here & 65535;
                     op &= 15;
                     if (bits < op) {
                       hold += input[_in++] << bits;
@@ -47237,8 +51372,8 @@ function requireInffast() {
                         bits += 8;
                       }
                     }
-                    dist2 += hold & (1 << op) - 1;
-                    if (dist2 > dmax) {
+                    dist += hold & (1 << op) - 1;
+                    if (dist > dmax) {
                       strm.msg = "invalid distance too far back";
                       state.mode = BAD;
                       break top;
@@ -47246,8 +51381,8 @@ function requireInffast() {
                     hold >>>= op;
                     bits -= op;
                     op = _out - beg;
-                    if (dist2 > op) {
-                      op = dist2 - op;
+                    if (dist > op) {
+                      op = dist - op;
                       if (op > whave) {
                         if (state.sane) {
                           strm.msg = "invalid distance too far back";
@@ -47264,7 +51399,7 @@ function requireInffast() {
                           do {
                             output[_out++] = s_window[from++];
                           } while (--op);
-                          from = _out - dist2;
+                          from = _out - dist;
                           from_source = output;
                         }
                       } else if (wnext < op) {
@@ -47282,7 +51417,7 @@ function requireInffast() {
                             do {
                               output[_out++] = s_window[from++];
                             } while (--op);
-                            from = _out - dist2;
+                            from = _out - dist;
                             from_source = output;
                           }
                         }
@@ -47293,7 +51428,7 @@ function requireInffast() {
                           do {
                             output[_out++] = s_window[from++];
                           } while (--op);
-                          from = _out - dist2;
+                          from = _out - dist;
                           from_source = output;
                         }
                       }
@@ -47310,7 +51445,7 @@ function requireInffast() {
                         }
                       }
                     } else {
-                      from = _out - dist2;
+                      from = _out - dist;
                       do {
                         output[_out++] = output[from++];
                         output[_out++] = output[from++];
@@ -47890,7 +52025,7 @@ function requireInflate$1() {
     state.distbits = 5;
   }
   function updatewindow(strm, src2, end, copy) {
-    var dist2;
+    var dist;
     var state = strm.state;
     if (state.window === null) {
       state.wsize = 1 << state.wbits;
@@ -47903,23 +52038,23 @@ function requireInflate$1() {
       state.wnext = 0;
       state.whave = state.wsize;
     } else {
-      dist2 = state.wsize - state.wnext;
-      if (dist2 > copy) {
-        dist2 = copy;
+      dist = state.wsize - state.wnext;
+      if (dist > copy) {
+        dist = copy;
       }
-      utils.arraySet(state.window, src2, end - copy, dist2, state.wnext);
-      copy -= dist2;
+      utils.arraySet(state.window, src2, end - copy, dist, state.wnext);
+      copy -= dist;
       if (copy) {
         utils.arraySet(state.window, src2, end - copy, copy, 0);
         state.wnext = copy;
         state.whave = state.wsize;
       } else {
-        state.wnext += dist2;
+        state.wnext += dist;
         if (state.wnext === state.wsize) {
           state.wnext = 0;
         }
         if (state.whave < state.wsize) {
-          state.whave += dist2;
+          state.whave += dist;
         }
       }
     }
@@ -49267,7 +53402,7 @@ var FontNames;
 var fontCache = {};
 var Font = (
   /** @class */
-  function() {
+  (function() {
     function Font2() {
       var _this = this;
       this.getWidthOfGlyph = function(glyphName) {
@@ -49298,14 +53433,14 @@ var Font = (
       return font;
     };
     return Font2;
-  }()
+  })()
 );
 const AllEncodingsCompressed = "eJztWsuy48iN/Ret74KZfHtX47meqfGjPHaXx4/wgpJ4JbooUU1JVXXb0f9u4JwESF13R7TD29koIpFi8gCJBHDA/Pvm+nraTuPmZ3/f5HHzs7/k8WlzvXS7fvPXp02eqyR/2vRfd2N3gqhUUfm0Od9P236+DoczxLWK66fNpZ93/fkGWaOy5mnTnUR67c57lRaZSItM/tnN/XnsX/DfIqg0JOk8HI4UK4BCAFzG+xWCQgXF02Y3nU4dJJVKKrx5mPgKBVMImOvYXY+QKJRCoHzXzxMErQrap810hqaloioF1e0L5kvFUwqe23Hu+Q+1TinWeZnuMwSKrRRsL8Nn/kOxlYLtOnzFWE1Viqmu/eceVioVaylYe1OwVKilQD0PCYgiLRtVcJz4kEItW13mNLi0UsCVAB77KyxTKeJKEPff3rsREkVcCeLD3He3HqArBV0J6G/v/fU2cK1WH23l0e3c7T71N9uUVv/c5i73bWlVs1Y0u5/3srO7aQb2EPUB+eUTva0TYgG5mGbbzZSUkJTpn75ygF4PThhq1SMGMds4HYZdN54n/rdWc8rv02bfH9I2hbqGsKbPnIYzHSc0qmTIxI6nuwpiAIQmU8F4Gy7jK8RwntAI1v3wedj39FmFECp508s4zUOyGmwpKrwbL8eOIlVU//Yf/S1J9C212Pa/uuSwbVDYlWzxf/aj/UtfWgm258t1GG1X1BVawfdnX0xdoRbjPCdBVGs1svo3R/tPVD1r2YL3k0kUfC04f9ldLkmk0NVwv+pO232SKXa126/vHAO5wPxNGivsRsZ/HDhWzLVg/iBuOSfMUTGrTX+b/qSIG0H8u+NEl1J4jcD7/XBI9kDcUYN/0/FNCDuNAP64skYOeLrykUsjElWC9+cmAEAB9NtrEijCplaE/YHvKuC5Iup8zxBAWtFrayakC2QC8uCbhggSskx9zXYNQSRkeuZWQBFKQowabNIfS/qeqOgSOFTINcC4DKcnE70H2zqElJAJ3k++dwgrIRPA47J5iCwr724RWELINFBTAAWiCL7SOogrIQj6abWBOH8hCPoL/4a4EoJgn9MWIq40lcY52cJAGbCHMgkpA3g9t7e0sRWgB1HnvjJYRez6yrSTlYJvRZmdCQhe80Pa24roNYL75uLo10WyKYHVeFLjYnImilM0qPDOJOKWNGlFCJsIrw/qsNv7OPY3SnNYSQ9DP46DLHylvGCcEFU08Nz6JIVx9Chd+93ENNhEWroSuC8SAi0WNznNpqH9+c5k1RQ0nIbi9/LnTzdmoKZAaAwaib/0g0Ti29wxG8gUgLey/O8eHmmqt4eiKTNYo416LPrLkcIWa2u06eZ5+mLBXCaoTp4m7pckBm41P8Qe0mUG6DUCYWY/fTmnCQbwkCa2043vrhA2gqakncwM3aGfe9GAj1Vw9qiuzPW2o4Or4PcxhmUu4atwAGKMy8wCscJhiDFfJh1lhY2K6mo250DrTJXOC82EUgVIkTMmOd0moqC5Dd24H15e0hRKJS0Cvg7Xm9RKgz9ErdWrTpfb6zV5Wx2ytwlDZLplUQ/8Ye72Qyq5RI5kqY4t6fe0iHOItdCYbo8zKOi0vLjvjrdjZ2IYRAPUZZ72910SI7vEiL9LaHSvrZFkipKOf02y8gc9vEbmKHQjRP95uH6ShZI9c9pao41otTPLICMETXSC5jLNupbP8bxo2Dy/DOfh9prk8BKNk935MPIo1jiKUSNQqiVSVSozBWYan5nmNMGz1+r6AleO8KJJwXdk2H8XwgVVP31AticBhdvqIZPwNPcvqWhqah74iIB6GsYuvbdGeYFS93yY775hPNh6giUlzNNXr/eaJmNYKrnLKznOt4ZsEQ6f5ZCfWVvJFK2Xs5BcP8ND23r5uJqDyaPmM90Oscl9a87aIC3HLCxz+uOzNFgOhA+P4XRq8hPTjP3Xhzn4oiYIm1svybSpOX03zDuJX4kqyAx3rrKZdZ3XNMggGh9lsUt/Fm+7m+1bGCxqOttPN/fOFiExKh+xnb1d0gz8qiiXmS0r5YxLaaULN/TaOsu4WEgTS3Fd1TCvlsvj9F1/PvQpPzHAZqiN9yZEntcyaDfet0mGOKLl5LGX6EMhU5ZGkf3QnVIWqvJA5FoG7KbLK1BcBcyLTfNYZGr7g8ar+WEWm63VgmSefX/q5k+r6Rplrdo/Heb+q00gKzcWUiVy3pY5RkGL7kept7/zSRS8Uc+Kw+nOV5ukqeu1KqtZ2Ds2a6yrWZghX/NS7q3OwQZ5WM0tgGCBPK7muPM6B2fP8wditayKMKG5YzW7rIvzkJcPs8vKOBGaRJxo+boMocrFfe407G0SJlJS7pO+KOrwqKkAcw4lp28Xi28vU7AM2Lfz9gUITKM8fJlcnoRtlJIvkwsSRtD2kXkuC8M2ytbX08vSME4ZHqd9cTQgojL5hXr60uhDxDJfTy7WQ3kXy2I9q+t+L7V+d3nZD+fDtrtdf7iZ8gPUNhVNSLOdFKmrqgg5UGR5ktUWkERW4ETnYSnQpK5PsqU2k3I5yZbCTGhJki0lmbJ2ypxOd8rYKXM23Slnp6yxclZkVZK1li1EVlMWmY0yyJokC5bIRdYm6sDCW/9X54knZEYnurpKJCEzNtHVdYqTmdGJrm6SiJRMsdWJmTS1MYWuSZwAHg3D5dSJO6tnpqPiNXIHapSQHkL9WNCyDwEZymTtQzyGcfx/rQVukWUP4RgGS29oG5RieEMSVKm67GISoHZUs0g6TKImlZMdbde2cDMFUCZBSBWevKlNIlRrBNQkEVpt0CXUSYTWGvzG1q5TldeFIklgFfiMvQ6tNXgMtk5IM+qSAjbJSpOh4wdUtYnQYgOqxkRosgFVayK02SJsYCJ02tRw9HkVodUG00UTodcG4+UmQrdN0dPhVYR2m8KPBhX1t/bkumgaofzWplwXDT2Oo9K2Lhp6dogUvT+HBpGC98fQxlDs/lSVCr/OVGZ7CGY3lXEIKyD3fylyrQS63P4VjTl0uRkGJxB+l5th2CBS5LkZhg0iRZ6bYdgPUqC5aYMEh8CSmzrsCinU3PRBKkNYyQ0qTgSiSmFQcSAQVAqDimSFmFIYVPaKFGphUNktUqiFQUVaUvLVFbaHSEZK47vC0LNfpOgLQ8+OkaIvDD2SjZbOXWHokWBQgJeGHkmlwaEz9EglKHFKQ48og8qmNPQgJEp0u9LQg4mAjJeGnm0rRV8aeratFH1p6EE8tBnQlYYebSutwLrS0KNrhRZYZegRbpV3dpWhR8tKSU9XGXr2rJTsdJXBTz0ruLjhT00rVaAyBVLTSjWoTIPUs1IVKlOBbSulAV1lOrBzpZS2q0wJNq8yhH7TovIOb1cb5tSXUny14Ut9KUYQUyS1phRgbaDZmEIiFrKThCnpIMMYGrZh0JBo7M01e+H65sZeUpPp6ZsbX4+dcH1xa1YgxYsIAWYF9rXBI1p/L9tiiL6ZmYGtrYpZybaz8caUCA1iA4iIPcEN0ZAQIuq70g2ZPCOQ7R+yE5riIjTojfMRESbsge1zHMhgsSlk5PR4u0WnQDraMOdEE7JTj7dbhAqpw4K3W4wKGZv3eHtempBkA+nHQldgrwXHM1jwCgj0pB7BwlcIbI7BnhbAAmsvHNJgISyw+MIxDRbEAqsvHNRgYSyw/GqZSE0j1l84rMFCWWABhuMaLJgFVmA4sMHCWUi8CRpZQAvkSzizwUJaIE/CoQ0W1ALpEU5tsLDGDzqg6yI0jaKzfxGaRuRBOLjBglsgAcpYHZhG5D04usECXCDdQd0WLMQFshwc6GBBLqQOETSyMBdIa3DMgwW6QD6Dcx4s1AXyDpSRYmoTsrpmzWKQyDJw0GWjTci2GCBZIAtkFDj+wSJZIJPA+Q8WygIJRCQkw8meFCJAsGAWCu8BiNAsjzTAXkKwEBfYg2IQqM3y7EFFauT/ZAcUGlk0DAU7nyzETPeSHBIa1aZmSe4IjWpTsyRphEa1qVmSTFMjU7Mki4ZGreEsSZ+hUWO6s7+bc4/8cdJlaNSYQdjTRbEbM3+c5BgaWTgOSA7stkSLiqFiCwbgLUiHinQX4C1Kh4pEl+BN94oEl+DNdBWJLcH74yS0AG8RPeCjRmRZ3JiR0ZWKrItbW7MmZWVlbG+vSVWxHY2tyW+lJTUy0yEVgdTKmmYlNplKagSDCMFlTIaH8GmVMWkpIj6sMsQv+Ae3UmUIX3AP6q0yRC94x/IOBC84B4+VyhC7yHTIELQRhGgM32hchmAM14hMRCpEMIZrNC6DJvAMWkxl0ASOQYOpDJqACrX+EmgCX9EQ8f3T5stwlggXf/otCfss8O19uvX7LfqmP3Z1AiRPP2JPY2pA/vTbFIhHqhFedB2s0/2v3bIAG1z14yH8CVcvwJFFoePr5cgbDv9/G+Pfvo2BUIP6ix0r8EO9ZYARuKFeMMAIvFA/gWMESqifiTACG9QrBTpCBFGK9wuMQKz0UgJGoH+C7L8xAvPTL40Y4au7gPkfjEAB9SYBRmB/eokAIxA/vT6AETifXh7ACHRPrwroqAFX0i/5GIEmCZb/xQj8Tu8LYARqp5cFMAKr03sCGIHQ6SUBjMDlBMsfMLIP//+HERicXlzACORNsPxJR2iW4I4FRj92EQa8TTuGInY3/vHrMSBwuoPX3TDot4c7osKPXJtBm0XLvsPc0XfRZkHNhxE4nLZsMQJ902/jDOQIkriXkAL7JhEyNh1ZemtZ98IxCZvebeCYZE3AHjkmUdMPGRyTpAm6v3FMgqY3EjgmOdPPZhyTmOlFBIwZxHEPgWNeJ9BbBxyz+af9c45J2PRMcEyyph8EOSZP03PMMTmaXjLgmN0+vWLAMfBpFfeZY7838AVjNilxLYJj4NOy7ZVjUju9zcHxv3/FiVcKULCpf9yGcb9qEOPL/6pp7GyO2cU+S7N2AaOzDMHKBXxO4/goyYBiZ3S7+yxxf0fNKud0r31a0gnddp4+9WfTpHJOt/r4yfIlfVDq5z7dgWABg8amf4SBnLxZQ9A0718keFqMZSGDNurhPoxjf5r84LGeQY/77d0vb3QvyYc1DTrd9nWo56movd196uyqy792faz2prfkJHyAHPiBONTe+kZ2ephrlhb4Ll0HSRfRNOLxqk5onB1LWu4kCPAGRmicIDOZ6j67Ro0T5V2/F6t1lDpTlkz6iMTpspj/JI53H83+jZNmt/+ybY2TZ1lRctmcUldonEDLxLEbGV5aZ9AwRnqAJmydSFu6c2dunU6/8yDIL5Og0+8W67VOp98xsL6kr1H8FglO/W45Uq1z6ncPXto6rX432zlpnVW/e6bAGfXPV0aOmXPqZwcbM+fUzw42Zs6pnx/BxsyJ9fMaV8ycW79fre3c+v1qbefW79+u7QT7/ePazrGf+UE7Zk6wf+Mmi8EJ9ocFQnCC/WGBEJxgf3gDgddNNIp/WC3Mb12i24cHXIEfkcs3FzGDM/UPnnJjcKb+cQXOmfrHFThn6h/fgItO1z8+4IjO2P+0LBOdsX9znHgBKUYn7Id+Pkklvh3TCgtpX9DFhbSvll1I+1t0C3NfTBcX5v4IeSHv5sYxX7g7H86dt+/Wbpw7c+8XsLkz934Bmztz79+AzZ2+9w+4cmfww2ptZ/DDam1n8MPbtZ3GDw9rs9ui3KZPblw4tz8vJiuc208LhMK5/bRAKJzbT28gFE7wp9XCTvCnR1zO8ZeLw7Fwjj8tTlw4x78v0Ern+PcFWukc//4GWulE//6AonSu/7paxrn+zZ2YnRclRK/rBXJsCAjxh2cKEAWVJ02ku/wOoFv2+12XkmnODwHgW4uQGVbZ0uM7mAJ1b/68/JlpUMnWdy5MF6/Vd5eL19YYSPd6FqPwBkNQo/h2NQxdQQ3bn/dpCxrGrqCW7U8rKZl/mfi0Xytk3Am66ZhYbg4y+KAVslDwbXdNL2d5qU5hnYBlTZaa6hs2t1qWdaeeTptcLco+hl5R7w4H5uOGcQbtEkpT18GusOI2xT9dYcVJf7zCSjmbD+Iud2s1NPRb9E+0UICmizb8ZK/+5JOLOulSqwaw5VJr2vB8dSFn89fvv/8H0oq1dA==";
 var decompressedEncodings = decompressJson(AllEncodingsCompressed);
 var allUnicodeMappings = JSON.parse(decompressedEncodings);
 var Encoding = (
   /** @class */
-  /* @__PURE__ */ function() {
+  /* @__PURE__ */ (function() {
     function Encoding2(name, unicodeMappings) {
       var _this = this;
       this.canEncodeUnicodeCodePoint = function(codePoint) {
@@ -49328,7 +53463,7 @@ var Encoding = (
       this.unicodeMappings = unicodeMappings;
     }
     return Encoding2;
-  }()
+  })()
 );
 var Encodings = {
   Symbol: new Encoding("Symbol", allUnicodeMappings.symbol),
@@ -54340,7 +58475,7 @@ UPNG.decode._inflate = function(data, buff) {
   var out = UPNG["inflateRaw"](new Uint8Array(data.buffer, 2, data.length - 6), buff);
   return out;
 };
-UPNG.inflateRaw = function() {
+UPNG.inflateRaw = (function() {
   var H = {};
   H.H = {};
   H.H.N = function(N, W) {
@@ -54545,10 +58680,10 @@ UPNG.inflateRaw = function() {
   H.H.i = function(N, W) {
     return (N[W >>> 3] | N[(W >>> 3) + 1] << 8 | N[(W >>> 3) + 2] << 16 | N[(W >>> 3) + 3] << 24) >>> (W & 7);
   };
-  H.H.m = function() {
+  H.H.m = (function() {
     var N = Uint16Array, W = Uint32Array;
     return { K: new N(16), j: new N(16), X: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15], S: [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 999, 999, 999], T: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0], q: new N(32), p: [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 65535, 65535], z: [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0], c: new W(32), J: new N(512), _: [], h: new N(32), $: [], w: new N(32768), C: [], v: [], d: new N(32768), D: [], u: new N(512), Q: [], r: new N(1 << 15), s: new W(286), Y: new W(30), a: new W(19), t: new W(15e3), k: new N(1 << 16), g: new N(1 << 15) };
-  }();
+  })();
   (function() {
     var N = H.H.m, W = 1 << 15;
     for (var R = 0; R < W; R++) {
@@ -54583,7 +58718,7 @@ UPNG.inflateRaw = function() {
     n(N.v, 320, 0);
   })();
   return H.H.N;
-}();
+})();
 UPNG.decode._readInterlace = function(data, out) {
   var w = out.width, h = out.height;
   var bpp = UPNG.decode._getBPP(out), cbpp = bpp >> 3, bpl = Math.ceil(w * bpp / 8);
@@ -55219,7 +59354,7 @@ UPNG.encode._filterLine = function(data, img, y, bpl, bpp, type) {
   }
 };
 UPNG.crc = {
-  table: function() {
+  table: (function() {
     var tab = new Uint32Array(256);
     for (var n = 0; n < 256; n++) {
       var c = n;
@@ -55230,7 +59365,7 @@ UPNG.crc = {
       tab[n] = c;
     }
     return tab;
-  }(),
+  })(),
   update: function(c, buf, off, len) {
     for (var i = 0; i < len; i++) c = UPNG.crc.table[(c ^ buf[off + i]) & 255] ^ c >>> 8;
     return c;
@@ -56647,13 +60782,13 @@ class FlateStream extends DecodeStream {
       if (code2 > 0) {
         code2 = this.getBits(code2);
       }
-      const dist2 = (code1 & 65535) + code2;
+      const dist = (code1 & 65535) + code2;
       if (pos + len >= limit) {
         buffer = this.ensureBuffer(pos + len);
         limit = buffer.length;
       }
       for (let k = 0; k < len; ++k, ++pos) {
-        buffer[pos] = buffer[pos - dist2];
+        buffer[pos] = buffer[pos - dist];
       }
     }
   }
@@ -57817,13 +61952,13 @@ var hasRequiredCore;
 function requireCore() {
   if (hasRequiredCore) return core$1.exports;
   hasRequiredCore = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory();
       }
     })(core, function() {
-      var CryptoJS2 = CryptoJS2 || function(Math2, undefined$1) {
+      var CryptoJS2 = CryptoJS2 || (function(Math2, undefined$1) {
         var crypto2;
         if (typeof window !== "undefined" && window.crypto) {
           crypto2 = window.crypto;
@@ -57863,7 +61998,7 @@ function requireCore() {
           }
           throw new Error("Native crypto module could not be used to get secure random number.");
         };
-        var create2 = Object.create || /* @__PURE__ */ function() {
+        var create2 = Object.create || /* @__PURE__ */ (function() {
           function F() {
           }
           return function(obj) {
@@ -57873,10 +62008,10 @@ function requireCore() {
             F.prototype = null;
             return subtype;
           };
-        }();
+        })();
         var C = {};
         var C_lib = C.lib = {};
-        var Base = C_lib.Base = /* @__PURE__ */ function() {
+        var Base = C_lib.Base = /* @__PURE__ */ (function() {
           return {
             /**
              * Creates a new object that inherits from this object.
@@ -57975,7 +62110,7 @@ function requireCore() {
               return this.init.prototype.extend(this);
             }
           };
-        }();
+        })();
         var WordArray = C_lib.WordArray = Base.extend({
           /**
            * Initializes a newly created word array.
@@ -58413,7 +62548,7 @@ function requireCore() {
         });
         var C_algo = C.algo = {};
         return C;
-      }(Math);
+      })(Math);
       return CryptoJS2;
     });
   })(core$1);
@@ -58425,7 +62560,7 @@ var hasRequiredX64Core;
 function requireX64Core() {
   if (hasRequiredX64Core) return x64Core$1.exports;
   hasRequiredX64Core = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -58682,7 +62817,7 @@ var hasRequiredLibTypedarrays;
 function requireLibTypedarrays() {
   if (hasRequiredLibTypedarrays) return libTypedarrays$1.exports;
   hasRequiredLibTypedarrays = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -58727,7 +62862,7 @@ var hasRequiredEncUtf16;
 function requireEncUtf16() {
   if (hasRequiredEncUtf16) return encUtf16$1.exports;
   hasRequiredEncUtf16 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -58845,7 +62980,7 @@ var hasRequiredEncBase64;
 function requireEncBase64() {
   if (hasRequiredEncBase64) return encBase64$1.exports;
   hasRequiredEncBase64 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -58953,7 +63088,7 @@ var hasRequiredEncBase64url;
 function requireEncBase64url() {
   if (hasRequiredEncBase64url) return encBase64url$1.exports;
   hasRequiredEncBase64url = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -59072,7 +63207,7 @@ var hasRequiredMd5;
 function requireMd5() {
   if (hasRequiredMd5) return md5$1.exports;
   hasRequiredMd5 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -59251,7 +63386,7 @@ var hasRequiredSha1;
 function requireSha1() {
   if (hasRequiredSha1) return sha1$1.exports;
   hasRequiredSha1 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -59342,7 +63477,7 @@ var hasRequiredSha256;
 function requireSha256() {
   if (hasRequiredSha256) return sha256$1.exports;
   hasRequiredSha256 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -59463,7 +63598,7 @@ var hasRequiredSha224;
 function requireSha224() {
   if (hasRequiredSha224) return sha224$1.exports;
   hasRequiredSha224 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireSha256());
@@ -59508,7 +63643,7 @@ var hasRequiredSha512;
 function requireSha512() {
   if (hasRequiredSha512) return sha512$1.exports;
   hasRequiredSha512 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireX64Core());
@@ -59790,7 +63925,7 @@ var hasRequiredSha384;
 function requireSha384() {
   if (hasRequiredSha384) return sha384$1.exports;
   hasRequiredSha384 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireX64Core(), requireSha512());
@@ -59836,7 +63971,7 @@ var hasRequiredSha3;
 function requireSha3() {
   if (hasRequiredSha3) return sha3$1.exports;
   hasRequiredSha3 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireX64Core());
@@ -60038,22 +64173,12 @@ var hasRequiredRipemd160;
 function requireRipemd160() {
   if (hasRequiredRipemd160) return ripemd160$1.exports;
   hasRequiredRipemd160 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
       }
     })(ripemd160, function(CryptoJS2) {
-      /** @preserve
-      			(c) 2012 by Cédric Mesnil. All rights reserved.
-      
-      			Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-      
-      			    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-      			    - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-      
-      			THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-      			*/
       (function(Math2) {
         var C = CryptoJS2;
         var C_lib = C.lib;
@@ -60519,7 +64644,7 @@ var hasRequiredHmac;
 function requireHmac() {
   if (hasRequiredHmac) return hmac$1.exports;
   hasRequiredHmac = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory) {
       {
         module.exports = factory(requireCore());
@@ -60626,7 +64751,7 @@ var hasRequiredPbkdf2;
 function requirePbkdf2() {
   if (hasRequiredPbkdf2) return pbkdf2$1.exports;
   hasRequiredPbkdf2 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireSha256(), requireHmac());
@@ -60724,7 +64849,7 @@ var hasRequiredEvpkdf;
 function requireEvpkdf() {
   if (hasRequiredEvpkdf) return evpkdf$1.exports;
   hasRequiredEvpkdf = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireSha1(), requireHmac());
@@ -60815,13 +64940,13 @@ var hasRequiredCipherCore;
 function requireCipherCore() {
   if (hasRequiredCipherCore) return cipherCore$1.exports;
   hasRequiredCipherCore = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEvpkdf());
       }
     })(cipherCore, function(CryptoJS2) {
-      CryptoJS2.lib.Cipher || function(undefined$1) {
+      CryptoJS2.lib.Cipher || (function(undefined$1) {
         var C = CryptoJS2;
         var C_lib = C.lib;
         var Base = C_lib.Base;
@@ -60955,7 +65080,7 @@ function requireCipherCore() {
            *
            *     var AES = CryptoJS.lib.Cipher._createHelper(CryptoJS.algo.AES);
            */
-          _createHelper: /* @__PURE__ */ function() {
+          _createHelper: /* @__PURE__ */ (function() {
             function selectCipherStrategy(key) {
               if (typeof key == "string") {
                 return PasswordBasedCipher;
@@ -60973,7 +65098,7 @@ function requireCipherCore() {
                 }
               };
             };
-          }()
+          })()
         });
         C_lib.StreamCipher = Cipher.extend({
           _doFinalize: function() {
@@ -61029,7 +65154,7 @@ function requireCipherCore() {
             this._iv = iv;
           }
         });
-        var CBC = C_mode.CBC = function() {
+        var CBC = C_mode.CBC = (function() {
           var CBC2 = BlockCipherMode.extend();
           CBC2.Encryptor = CBC2.extend({
             /**
@@ -61084,7 +65209,7 @@ function requireCipherCore() {
             }
           }
           return CBC2;
-        }();
+        })();
         var C_pad = C.pad = {};
         var Pkcs7 = C_pad.Pkcs7 = {
           /**
@@ -61448,7 +65573,7 @@ function requireCipherCore() {
             return plaintext;
           }
         });
-      }();
+      })();
     });
   })(cipherCore$1);
   return cipherCore$1.exports;
@@ -61459,13 +65584,13 @@ var hasRequiredModeCfb;
 function requireModeCfb() {
   if (hasRequiredModeCfb) return modeCfb$1.exports;
   hasRequiredModeCfb = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
       }
     })(modeCfb, function(CryptoJS2) {
-      CryptoJS2.mode.CFB = function() {
+      CryptoJS2.mode.CFB = (function() {
         var CFB = CryptoJS2.lib.BlockCipherMode.extend();
         CFB.Encryptor = CFB.extend({
           processBlock: function(words, offset) {
@@ -61499,7 +65624,7 @@ function requireModeCfb() {
           }
         }
         return CFB;
-      }();
+      })();
       return CryptoJS2.mode.CFB;
     });
   })(modeCfb$1);
@@ -61511,13 +65636,13 @@ var hasRequiredModeCtr;
 function requireModeCtr() {
   if (hasRequiredModeCtr) return modeCtr$1.exports;
   hasRequiredModeCtr = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
       }
     })(modeCtr, function(CryptoJS2) {
-      CryptoJS2.mode.CTR = function() {
+      CryptoJS2.mode.CTR = (function() {
         var CTR = CryptoJS2.lib.BlockCipherMode.extend();
         var Encryptor = CTR.Encryptor = CTR.extend({
           processBlock: function(words, offset) {
@@ -61539,7 +65664,7 @@ function requireModeCtr() {
         });
         CTR.Decryptor = Encryptor;
         return CTR;
-      }();
+      })();
       return CryptoJS2.mode.CTR;
     });
   })(modeCtr$1);
@@ -61551,18 +65676,13 @@ var hasRequiredModeCtrGladman;
 function requireModeCtrGladman() {
   if (hasRequiredModeCtrGladman) return modeCtrGladman$1.exports;
   hasRequiredModeCtrGladman = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
       }
     })(modeCtrGladman, function(CryptoJS2) {
-      /** @preserve
-       * Counter block mode compatible with  Dr Brian Gladman fileenc.c
-       * derived from CryptoJS.mode.CTR
-       * Jan Hruby jhruby.web@gmail.com
-       */
-      CryptoJS2.mode.CTRGladman = function() {
+      CryptoJS2.mode.CTRGladman = (function() {
         var CTRGladman = CryptoJS2.lib.BlockCipherMode.extend();
         function incWord(word) {
           if ((word >> 24 & 255) === 255) {
@@ -61619,7 +65739,7 @@ function requireModeCtrGladman() {
         });
         CTRGladman.Decryptor = Encryptor;
         return CTRGladman;
-      }();
+      })();
       return CryptoJS2.mode.CTRGladman;
     });
   })(modeCtrGladman$1);
@@ -61631,13 +65751,13 @@ var hasRequiredModeOfb;
 function requireModeOfb() {
   if (hasRequiredModeOfb) return modeOfb$1.exports;
   hasRequiredModeOfb = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
       }
     })(modeOfb, function(CryptoJS2) {
-      CryptoJS2.mode.OFB = function() {
+      CryptoJS2.mode.OFB = (function() {
         var OFB = CryptoJS2.lib.BlockCipherMode.extend();
         var Encryptor = OFB.Encryptor = OFB.extend({
           processBlock: function(words, offset) {
@@ -61657,7 +65777,7 @@ function requireModeOfb() {
         });
         OFB.Decryptor = Encryptor;
         return OFB;
-      }();
+      })();
       return CryptoJS2.mode.OFB;
     });
   })(modeOfb$1);
@@ -61669,13 +65789,13 @@ var hasRequiredModeEcb;
 function requireModeEcb() {
   if (hasRequiredModeEcb) return modeEcb$1.exports;
   hasRequiredModeEcb = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
       }
     })(modeEcb, function(CryptoJS2) {
-      CryptoJS2.mode.ECB = function() {
+      CryptoJS2.mode.ECB = (function() {
         var ECB = CryptoJS2.lib.BlockCipherMode.extend();
         ECB.Encryptor = ECB.extend({
           processBlock: function(words, offset) {
@@ -61688,7 +65808,7 @@ function requireModeEcb() {
           }
         });
         return ECB;
-      }();
+      })();
       return CryptoJS2.mode.ECB;
     });
   })(modeEcb$1);
@@ -61700,7 +65820,7 @@ var hasRequiredPadAnsix923;
 function requirePadAnsix923() {
   if (hasRequiredPadAnsix923) return padAnsix923$1.exports;
   hasRequiredPadAnsix923 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
@@ -61732,7 +65852,7 @@ var hasRequiredPadIso10126;
 function requirePadIso10126() {
   if (hasRequiredPadIso10126) return padIso10126$1.exports;
   hasRequiredPadIso10126 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
@@ -61760,7 +65880,7 @@ var hasRequiredPadIso97971;
 function requirePadIso97971() {
   if (hasRequiredPadIso97971) return padIso97971$1.exports;
   hasRequiredPadIso97971 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
@@ -61787,7 +65907,7 @@ var hasRequiredPadZeropadding;
 function requirePadZeropadding() {
   if (hasRequiredPadZeropadding) return padZeropadding$1.exports;
   hasRequiredPadZeropadding = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
@@ -61821,7 +65941,7 @@ var hasRequiredPadNopadding;
 function requirePadNopadding() {
   if (hasRequiredPadNopadding) return padNopadding$1.exports;
   hasRequiredPadNopadding = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
@@ -61844,7 +65964,7 @@ var hasRequiredFormatHex;
 function requireFormatHex() {
   if (hasRequiredFormatHex) return formatHex$1.exports;
   hasRequiredFormatHex = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireCipherCore());
@@ -61904,7 +66024,7 @@ var hasRequiredAes;
 function requireAes() {
   if (hasRequiredAes) return aes$1.exports;
   hasRequiredAes = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEncBase64(), requireMd5(), requireEvpkdf(), requireCipherCore());
@@ -62058,7 +66178,7 @@ var hasRequiredTripledes;
 function requireTripledes() {
   if (hasRequiredTripledes) return tripledes$1.exports;
   hasRequiredTripledes = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEncBase64(), requireMd5(), requireEvpkdf(), requireCipherCore());
@@ -62839,7 +66959,7 @@ var hasRequiredRc4;
 function requireRc4() {
   if (hasRequiredRc4) return rc4$1.exports;
   hasRequiredRc4 = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEncBase64(), requireMd5(), requireEvpkdf(), requireCipherCore());
@@ -62922,7 +67042,7 @@ var hasRequiredRabbit;
 function requireRabbit() {
   if (hasRequiredRabbit) return rabbit$1.exports;
   hasRequiredRabbit = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEncBase64(), requireMd5(), requireEvpkdf(), requireCipherCore());
@@ -63051,7 +67171,7 @@ var hasRequiredRabbitLegacy;
 function requireRabbitLegacy() {
   if (hasRequiredRabbitLegacy) return rabbitLegacy$1.exports;
   hasRequiredRabbitLegacy = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEncBase64(), requireMd5(), requireEvpkdf(), requireCipherCore());
@@ -63177,7 +67297,7 @@ var hasRequiredBlowfish;
 function requireBlowfish() {
   if (hasRequiredBlowfish) return blowfish$1.exports;
   hasRequiredBlowfish = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireEncBase64(), requireMd5(), requireEvpkdf(), requireCipherCore());
@@ -64365,7 +68485,7 @@ var hasRequiredCryptoJs;
 function requireCryptoJs() {
   if (hasRequiredCryptoJs) return cryptoJs$1.exports;
   hasRequiredCryptoJs = 1;
-  (function(module, exports) {
+  (function(module, exports$1) {
     (function(root2, factory, undef) {
       {
         module.exports = factory(requireCore(), requireX64Core(), requireLibTypedarrays(), requireEncUtf16(), requireEncBase64(), requireEncBase64url(), requireMd5(), requireSha1(), requireSha256(), requireSha224(), requireSha512(), requireSha384(), requireSha3(), requireRipemd160(), requireHmac(), requirePbkdf2(), requireEvpkdf(), requireCipherCore(), requireModeCfb(), requireModeCtr(), requireModeCtrGladman(), requireModeOfb(), requireModeEcb(), requirePadAnsix923(), requirePadIso10126(), requirePadIso97971(), requirePadZeropadding(), requirePadNopadding(), requireFormatHex(), requireAes(), requireTripledes(), requireRc4(), requireRabbit(), requireRabbitLegacy(), requireBlowfish());
@@ -66884,7 +71004,7 @@ var hasRequiredNamedReferences;
 function requireNamedReferences() {
   if (hasRequiredNamedReferences) return namedReferences;
   hasRequiredNamedReferences = 1;
-  (function(exports) {
+  (function(exports$1) {
     var __assign = namedReferences && namedReferences.__assign || function() {
       __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -66896,8 +71016,8 @@ function requireNamedReferences() {
       };
       return __assign.apply(this, arguments);
     };
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.namedReferences = exports.bodyRegExps = void 0;
+    Object.defineProperty(exports$1, "__esModule", { value: true });
+    exports$1.namedReferences = exports$1.bodyRegExps = void 0;
     var pairDivider = "~";
     var blockDivider = "~~";
     function generateNamedReferences(input, prev) {
@@ -66921,15 +71041,15 @@ function requireNamedReferences() {
       }
       return prev ? { entities: __assign(__assign({}, entities), prev.entities), characters: __assign(__assign({}, characters), prev.characters) } : { entities, characters };
     }
-    exports.bodyRegExps = {
+    exports$1.bodyRegExps = {
       xml: /&(?:#\d+|#[xX][\da-fA-F]+|[0-9a-zA-Z]+);?/g,
       html4: /&notin;|&(?:nbsp|iexcl|cent|pound|curren|yen|brvbar|sect|uml|copy|ordf|laquo|not|shy|reg|macr|deg|plusmn|sup2|sup3|acute|micro|para|middot|cedil|sup1|ordm|raquo|frac14|frac12|frac34|iquest|Agrave|Aacute|Acirc|Atilde|Auml|Aring|AElig|Ccedil|Egrave|Eacute|Ecirc|Euml|Igrave|Iacute|Icirc|Iuml|ETH|Ntilde|Ograve|Oacute|Ocirc|Otilde|Ouml|times|Oslash|Ugrave|Uacute|Ucirc|Uuml|Yacute|THORN|szlig|agrave|aacute|acirc|atilde|auml|aring|aelig|ccedil|egrave|eacute|ecirc|euml|igrave|iacute|icirc|iuml|eth|ntilde|ograve|oacute|ocirc|otilde|ouml|divide|oslash|ugrave|uacute|ucirc|uuml|yacute|thorn|yuml|quot|amp|lt|gt|#\d+|#[xX][\da-fA-F]+|[0-9a-zA-Z]+);?/g,
       html5: /&centerdot;|&copysr;|&divideontimes;|&gtcc;|&gtcir;|&gtdot;|&gtlPar;|&gtquest;|&gtrapprox;|&gtrarr;|&gtrdot;|&gtreqless;|&gtreqqless;|&gtrless;|&gtrsim;|&ltcc;|&ltcir;|&ltdot;|&lthree;|&ltimes;|&ltlarr;|&ltquest;|&ltrPar;|&ltri;|&ltrie;|&ltrif;|&notin;|&notinE;|&notindot;|&notinva;|&notinvb;|&notinvc;|&notni;|&notniva;|&notnivb;|&notnivc;|&parallel;|&timesb;|&timesbar;|&timesd;|&(?:AElig|AMP|Aacute|Acirc|Agrave|Aring|Atilde|Auml|COPY|Ccedil|ETH|Eacute|Ecirc|Egrave|Euml|GT|Iacute|Icirc|Igrave|Iuml|LT|Ntilde|Oacute|Ocirc|Ograve|Oslash|Otilde|Ouml|QUOT|REG|THORN|Uacute|Ucirc|Ugrave|Uuml|Yacute|aacute|acirc|acute|aelig|agrave|amp|aring|atilde|auml|brvbar|ccedil|cedil|cent|copy|curren|deg|divide|eacute|ecirc|egrave|eth|euml|frac12|frac14|frac34|gt|iacute|icirc|iexcl|igrave|iquest|iuml|laquo|lt|macr|micro|middot|nbsp|not|ntilde|oacute|ocirc|ograve|ordf|ordm|oslash|otilde|ouml|para|plusmn|pound|quot|raquo|reg|sect|shy|sup1|sup2|sup3|szlig|thorn|times|uacute|ucirc|ugrave|uml|uuml|yacute|yen|yuml|#\d+|#[xX][\da-fA-F]+|[0-9a-zA-Z]+);?/g
     };
-    exports.namedReferences = {};
-    exports.namedReferences["xml"] = generateNamedReferences(`lt~<~gt~>~quot~"~apos~'~amp~&`);
-    exports.namedReferences["html4"] = generateNamedReferences(`apos~'~OElig~Œ~oelig~œ~Scaron~Š~scaron~š~Yuml~Ÿ~circ~ˆ~tilde~˜~ensp~ ~emsp~ ~thinsp~ ~zwnj~‌~zwj~‍~lrm~‎~rlm~‏~ndash~–~mdash~—~lsquo~‘~rsquo~’~sbquo~‚~ldquo~“~rdquo~”~bdquo~„~dagger~†~Dagger~‡~permil~‰~lsaquo~‹~rsaquo~›~euro~€~fnof~ƒ~Alpha~Α~Beta~Β~Gamma~Γ~Delta~Δ~Epsilon~Ε~Zeta~Ζ~Eta~Η~Theta~Θ~Iota~Ι~Kappa~Κ~Lambda~Λ~Mu~Μ~Nu~Ν~Xi~Ξ~Omicron~Ο~Pi~Π~Rho~Ρ~Sigma~Σ~Tau~Τ~Upsilon~Υ~Phi~Φ~Chi~Χ~Psi~Ψ~Omega~Ω~alpha~α~beta~β~gamma~γ~delta~δ~epsilon~ε~zeta~ζ~eta~η~theta~θ~iota~ι~kappa~κ~lambda~λ~mu~μ~nu~ν~xi~ξ~omicron~ο~pi~π~rho~ρ~sigmaf~ς~sigma~σ~tau~τ~upsilon~υ~phi~φ~chi~χ~psi~ψ~omega~ω~thetasym~ϑ~upsih~ϒ~piv~ϖ~bull~•~hellip~…~prime~′~Prime~″~oline~‾~frasl~⁄~weierp~℘~image~ℑ~real~ℜ~trade~™~alefsym~ℵ~larr~←~uarr~↑~rarr~→~darr~↓~harr~↔~crarr~↵~lArr~⇐~uArr~⇑~rArr~⇒~dArr~⇓~hArr~⇔~forall~∀~part~∂~exist~∃~empty~∅~nabla~∇~isin~∈~notin~∉~ni~∋~prod~∏~sum~∑~minus~−~lowast~∗~radic~√~prop~∝~infin~∞~ang~∠~and~∧~or~∨~cap~∩~cup~∪~int~∫~there4~∴~sim~∼~cong~≅~asymp~≈~ne~≠~equiv~≡~le~≤~ge~≥~sub~⊂~sup~⊃~nsub~⊄~sube~⊆~supe~⊇~oplus~⊕~otimes~⊗~perp~⊥~sdot~⋅~lceil~⌈~rceil~⌉~lfloor~⌊~rfloor~⌋~lang~〈~rang~〉~loz~◊~spades~♠~clubs~♣~hearts~♥~diams~♦~~nbsp~ ~iexcl~¡~cent~¢~pound~£~curren~¤~yen~¥~brvbar~¦~sect~§~uml~¨~copy~©~ordf~ª~laquo~«~not~¬~shy~­~reg~®~macr~¯~deg~°~plusmn~±~sup2~²~sup3~³~acute~´~micro~µ~para~¶~middot~·~cedil~¸~sup1~¹~ordm~º~raquo~»~frac14~¼~frac12~½~frac34~¾~iquest~¿~Agrave~À~Aacute~Á~Acirc~Â~Atilde~Ã~Auml~Ä~Aring~Å~AElig~Æ~Ccedil~Ç~Egrave~È~Eacute~É~Ecirc~Ê~Euml~Ë~Igrave~Ì~Iacute~Í~Icirc~Î~Iuml~Ï~ETH~Ð~Ntilde~Ñ~Ograve~Ò~Oacute~Ó~Ocirc~Ô~Otilde~Õ~Ouml~Ö~times~×~Oslash~Ø~Ugrave~Ù~Uacute~Ú~Ucirc~Û~Uuml~Ü~Yacute~Ý~THORN~Þ~szlig~ß~agrave~à~aacute~á~acirc~â~atilde~ã~auml~ä~aring~å~aelig~æ~ccedil~ç~egrave~è~eacute~é~ecirc~ê~euml~ë~igrave~ì~iacute~í~icirc~î~iuml~ï~eth~ð~ntilde~ñ~ograve~ò~oacute~ó~ocirc~ô~otilde~õ~ouml~ö~divide~÷~oslash~ø~ugrave~ù~uacute~ú~ucirc~û~uuml~ü~yacute~ý~thorn~þ~yuml~ÿ~quot~"~amp~&~lt~<~gt~>`);
-    exports.namedReferences["html5"] = generateNamedReferences('Abreve~Ă~Acy~А~Afr~𝔄~Amacr~Ā~And~⩓~Aogon~Ą~Aopf~𝔸~ApplyFunction~⁡~Ascr~𝒜~Assign~≔~Backslash~∖~Barv~⫧~Barwed~⌆~Bcy~Б~Because~∵~Bernoullis~ℬ~Bfr~𝔅~Bopf~𝔹~Breve~˘~Bscr~ℬ~Bumpeq~≎~CHcy~Ч~Cacute~Ć~Cap~⋒~CapitalDifferentialD~ⅅ~Cayleys~ℭ~Ccaron~Č~Ccirc~Ĉ~Cconint~∰~Cdot~Ċ~Cedilla~¸~CenterDot~·~Cfr~ℭ~CircleDot~⊙~CircleMinus~⊖~CirclePlus~⊕~CircleTimes~⊗~ClockwiseContourIntegral~∲~CloseCurlyDoubleQuote~”~CloseCurlyQuote~’~Colon~∷~Colone~⩴~Congruent~≡~Conint~∯~ContourIntegral~∮~Copf~ℂ~Coproduct~∐~CounterClockwiseContourIntegral~∳~Cross~⨯~Cscr~𝒞~Cup~⋓~CupCap~≍~DD~ⅅ~DDotrahd~⤑~DJcy~Ђ~DScy~Ѕ~DZcy~Џ~Darr~↡~Dashv~⫤~Dcaron~Ď~Dcy~Д~Del~∇~Dfr~𝔇~DiacriticalAcute~´~DiacriticalDot~˙~DiacriticalDoubleAcute~˝~DiacriticalGrave~`~DiacriticalTilde~˜~Diamond~⋄~DifferentialD~ⅆ~Dopf~𝔻~Dot~¨~DotDot~⃜~DotEqual~≐~DoubleContourIntegral~∯~DoubleDot~¨~DoubleDownArrow~⇓~DoubleLeftArrow~⇐~DoubleLeftRightArrow~⇔~DoubleLeftTee~⫤~DoubleLongLeftArrow~⟸~DoubleLongLeftRightArrow~⟺~DoubleLongRightArrow~⟹~DoubleRightArrow~⇒~DoubleRightTee~⊨~DoubleUpArrow~⇑~DoubleUpDownArrow~⇕~DoubleVerticalBar~∥~DownArrow~↓~DownArrowBar~⤓~DownArrowUpArrow~⇵~DownBreve~̑~DownLeftRightVector~⥐~DownLeftTeeVector~⥞~DownLeftVector~↽~DownLeftVectorBar~⥖~DownRightTeeVector~⥟~DownRightVector~⇁~DownRightVectorBar~⥗~DownTee~⊤~DownTeeArrow~↧~Downarrow~⇓~Dscr~𝒟~Dstrok~Đ~ENG~Ŋ~Ecaron~Ě~Ecy~Э~Edot~Ė~Efr~𝔈~Element~∈~Emacr~Ē~EmptySmallSquare~◻~EmptyVerySmallSquare~▫~Eogon~Ę~Eopf~𝔼~Equal~⩵~EqualTilde~≂~Equilibrium~⇌~Escr~ℰ~Esim~⩳~Exists~∃~ExponentialE~ⅇ~Fcy~Ф~Ffr~𝔉~FilledSmallSquare~◼~FilledVerySmallSquare~▪~Fopf~𝔽~ForAll~∀~Fouriertrf~ℱ~Fscr~ℱ~GJcy~Ѓ~Gammad~Ϝ~Gbreve~Ğ~Gcedil~Ģ~Gcirc~Ĝ~Gcy~Г~Gdot~Ġ~Gfr~𝔊~Gg~⋙~Gopf~𝔾~GreaterEqual~≥~GreaterEqualLess~⋛~GreaterFullEqual~≧~GreaterGreater~⪢~GreaterLess~≷~GreaterSlantEqual~⩾~GreaterTilde~≳~Gscr~𝒢~Gt~≫~HARDcy~Ъ~Hacek~ˇ~Hat~^~Hcirc~Ĥ~Hfr~ℌ~HilbertSpace~ℋ~Hopf~ℍ~HorizontalLine~─~Hscr~ℋ~Hstrok~Ħ~HumpDownHump~≎~HumpEqual~≏~IEcy~Е~IJlig~Ĳ~IOcy~Ё~Icy~И~Idot~İ~Ifr~ℑ~Im~ℑ~Imacr~Ī~ImaginaryI~ⅈ~Implies~⇒~Int~∬~Integral~∫~Intersection~⋂~InvisibleComma~⁣~InvisibleTimes~⁢~Iogon~Į~Iopf~𝕀~Iscr~ℐ~Itilde~Ĩ~Iukcy~І~Jcirc~Ĵ~Jcy~Й~Jfr~𝔍~Jopf~𝕁~Jscr~𝒥~Jsercy~Ј~Jukcy~Є~KHcy~Х~KJcy~Ќ~Kcedil~Ķ~Kcy~К~Kfr~𝔎~Kopf~𝕂~Kscr~𝒦~LJcy~Љ~Lacute~Ĺ~Lang~⟪~Laplacetrf~ℒ~Larr~↞~Lcaron~Ľ~Lcedil~Ļ~Lcy~Л~LeftAngleBracket~⟨~LeftArrow~←~LeftArrowBar~⇤~LeftArrowRightArrow~⇆~LeftCeiling~⌈~LeftDoubleBracket~⟦~LeftDownTeeVector~⥡~LeftDownVector~⇃~LeftDownVectorBar~⥙~LeftFloor~⌊~LeftRightArrow~↔~LeftRightVector~⥎~LeftTee~⊣~LeftTeeArrow~↤~LeftTeeVector~⥚~LeftTriangle~⊲~LeftTriangleBar~⧏~LeftTriangleEqual~⊴~LeftUpDownVector~⥑~LeftUpTeeVector~⥠~LeftUpVector~↿~LeftUpVectorBar~⥘~LeftVector~↼~LeftVectorBar~⥒~Leftarrow~⇐~Leftrightarrow~⇔~LessEqualGreater~⋚~LessFullEqual~≦~LessGreater~≶~LessLess~⪡~LessSlantEqual~⩽~LessTilde~≲~Lfr~𝔏~Ll~⋘~Lleftarrow~⇚~Lmidot~Ŀ~LongLeftArrow~⟵~LongLeftRightArrow~⟷~LongRightArrow~⟶~Longleftarrow~⟸~Longleftrightarrow~⟺~Longrightarrow~⟹~Lopf~𝕃~LowerLeftArrow~↙~LowerRightArrow~↘~Lscr~ℒ~Lsh~↰~Lstrok~Ł~Lt~≪~Map~⤅~Mcy~М~MediumSpace~ ~Mellintrf~ℳ~Mfr~𝔐~MinusPlus~∓~Mopf~𝕄~Mscr~ℳ~NJcy~Њ~Nacute~Ń~Ncaron~Ň~Ncedil~Ņ~Ncy~Н~NegativeMediumSpace~​~NegativeThickSpace~​~NegativeThinSpace~​~NegativeVeryThinSpace~​~NestedGreaterGreater~≫~NestedLessLess~≪~NewLine~\n~Nfr~𝔑~NoBreak~⁠~NonBreakingSpace~ ~Nopf~ℕ~Not~⫬~NotCongruent~≢~NotCupCap~≭~NotDoubleVerticalBar~∦~NotElement~∉~NotEqual~≠~NotEqualTilde~≂̸~NotExists~∄~NotGreater~≯~NotGreaterEqual~≱~NotGreaterFullEqual~≧̸~NotGreaterGreater~≫̸~NotGreaterLess~≹~NotGreaterSlantEqual~⩾̸~NotGreaterTilde~≵~NotHumpDownHump~≎̸~NotHumpEqual~≏̸~NotLeftTriangle~⋪~NotLeftTriangleBar~⧏̸~NotLeftTriangleEqual~⋬~NotLess~≮~NotLessEqual~≰~NotLessGreater~≸~NotLessLess~≪̸~NotLessSlantEqual~⩽̸~NotLessTilde~≴~NotNestedGreaterGreater~⪢̸~NotNestedLessLess~⪡̸~NotPrecedes~⊀~NotPrecedesEqual~⪯̸~NotPrecedesSlantEqual~⋠~NotReverseElement~∌~NotRightTriangle~⋫~NotRightTriangleBar~⧐̸~NotRightTriangleEqual~⋭~NotSquareSubset~⊏̸~NotSquareSubsetEqual~⋢~NotSquareSuperset~⊐̸~NotSquareSupersetEqual~⋣~NotSubset~⊂⃒~NotSubsetEqual~⊈~NotSucceeds~⊁~NotSucceedsEqual~⪰̸~NotSucceedsSlantEqual~⋡~NotSucceedsTilde~≿̸~NotSuperset~⊃⃒~NotSupersetEqual~⊉~NotTilde~≁~NotTildeEqual~≄~NotTildeFullEqual~≇~NotTildeTilde~≉~NotVerticalBar~∤~Nscr~𝒩~Ocy~О~Odblac~Ő~Ofr~𝔒~Omacr~Ō~Oopf~𝕆~OpenCurlyDoubleQuote~“~OpenCurlyQuote~‘~Or~⩔~Oscr~𝒪~Otimes~⨷~OverBar~‾~OverBrace~⏞~OverBracket~⎴~OverParenthesis~⏜~PartialD~∂~Pcy~П~Pfr~𝔓~PlusMinus~±~Poincareplane~ℌ~Popf~ℙ~Pr~⪻~Precedes~≺~PrecedesEqual~⪯~PrecedesSlantEqual~≼~PrecedesTilde~≾~Product~∏~Proportion~∷~Proportional~∝~Pscr~𝒫~Qfr~𝔔~Qopf~ℚ~Qscr~𝒬~RBarr~⤐~Racute~Ŕ~Rang~⟫~Rarr~↠~Rarrtl~⤖~Rcaron~Ř~Rcedil~Ŗ~Rcy~Р~Re~ℜ~ReverseElement~∋~ReverseEquilibrium~⇋~ReverseUpEquilibrium~⥯~Rfr~ℜ~RightAngleBracket~⟩~RightArrow~→~RightArrowBar~⇥~RightArrowLeftArrow~⇄~RightCeiling~⌉~RightDoubleBracket~⟧~RightDownTeeVector~⥝~RightDownVector~⇂~RightDownVectorBar~⥕~RightFloor~⌋~RightTee~⊢~RightTeeArrow~↦~RightTeeVector~⥛~RightTriangle~⊳~RightTriangleBar~⧐~RightTriangleEqual~⊵~RightUpDownVector~⥏~RightUpTeeVector~⥜~RightUpVector~↾~RightUpVectorBar~⥔~RightVector~⇀~RightVectorBar~⥓~Rightarrow~⇒~Ropf~ℝ~RoundImplies~⥰~Rrightarrow~⇛~Rscr~ℛ~Rsh~↱~RuleDelayed~⧴~SHCHcy~Щ~SHcy~Ш~SOFTcy~Ь~Sacute~Ś~Sc~⪼~Scedil~Ş~Scirc~Ŝ~Scy~С~Sfr~𝔖~ShortDownArrow~↓~ShortLeftArrow~←~ShortRightArrow~→~ShortUpArrow~↑~SmallCircle~∘~Sopf~𝕊~Sqrt~√~Square~□~SquareIntersection~⊓~SquareSubset~⊏~SquareSubsetEqual~⊑~SquareSuperset~⊐~SquareSupersetEqual~⊒~SquareUnion~⊔~Sscr~𝒮~Star~⋆~Sub~⋐~Subset~⋐~SubsetEqual~⊆~Succeeds~≻~SucceedsEqual~⪰~SucceedsSlantEqual~≽~SucceedsTilde~≿~SuchThat~∋~Sum~∑~Sup~⋑~Superset~⊃~SupersetEqual~⊇~Supset~⋑~TRADE~™~TSHcy~Ћ~TScy~Ц~Tab~	~Tcaron~Ť~Tcedil~Ţ~Tcy~Т~Tfr~𝔗~Therefore~∴~ThickSpace~  ~ThinSpace~ ~Tilde~∼~TildeEqual~≃~TildeFullEqual~≅~TildeTilde~≈~Topf~𝕋~TripleDot~⃛~Tscr~𝒯~Tstrok~Ŧ~Uarr~↟~Uarrocir~⥉~Ubrcy~Ў~Ubreve~Ŭ~Ucy~У~Udblac~Ű~Ufr~𝔘~Umacr~Ū~UnderBar~_~UnderBrace~⏟~UnderBracket~⎵~UnderParenthesis~⏝~Union~⋃~UnionPlus~⊎~Uogon~Ų~Uopf~𝕌~UpArrow~↑~UpArrowBar~⤒~UpArrowDownArrow~⇅~UpDownArrow~↕~UpEquilibrium~⥮~UpTee~⊥~UpTeeArrow~↥~Uparrow~⇑~Updownarrow~⇕~UpperLeftArrow~↖~UpperRightArrow~↗~Upsi~ϒ~Uring~Ů~Uscr~𝒰~Utilde~Ũ~VDash~⊫~Vbar~⫫~Vcy~В~Vdash~⊩~Vdashl~⫦~Vee~⋁~Verbar~‖~Vert~‖~VerticalBar~∣~VerticalLine~|~VerticalSeparator~❘~VerticalTilde~≀~VeryThinSpace~ ~Vfr~𝔙~Vopf~𝕍~Vscr~𝒱~Vvdash~⊪~Wcirc~Ŵ~Wedge~⋀~Wfr~𝔚~Wopf~𝕎~Wscr~𝒲~Xfr~𝔛~Xopf~𝕏~Xscr~𝒳~YAcy~Я~YIcy~Ї~YUcy~Ю~Ycirc~Ŷ~Ycy~Ы~Yfr~𝔜~Yopf~𝕐~Yscr~𝒴~ZHcy~Ж~Zacute~Ź~Zcaron~Ž~Zcy~З~Zdot~Ż~ZeroWidthSpace~​~Zfr~ℨ~Zopf~ℤ~Zscr~𝒵~abreve~ă~ac~∾~acE~∾̳~acd~∿~acy~а~af~⁡~afr~𝔞~aleph~ℵ~amacr~ā~amalg~⨿~andand~⩕~andd~⩜~andslope~⩘~andv~⩚~ange~⦤~angle~∠~angmsd~∡~angmsdaa~⦨~angmsdab~⦩~angmsdac~⦪~angmsdad~⦫~angmsdae~⦬~angmsdaf~⦭~angmsdag~⦮~angmsdah~⦯~angrt~∟~angrtvb~⊾~angrtvbd~⦝~angsph~∢~angst~Å~angzarr~⍼~aogon~ą~aopf~𝕒~ap~≈~apE~⩰~apacir~⩯~ape~≊~apid~≋~approx~≈~approxeq~≊~ascr~𝒶~ast~*~asympeq~≍~awconint~∳~awint~⨑~bNot~⫭~backcong~≌~backepsilon~϶~backprime~‵~backsim~∽~backsimeq~⋍~barvee~⊽~barwed~⌅~barwedge~⌅~bbrk~⎵~bbrktbrk~⎶~bcong~≌~bcy~б~becaus~∵~because~∵~bemptyv~⦰~bepsi~϶~bernou~ℬ~beth~ℶ~between~≬~bfr~𝔟~bigcap~⋂~bigcirc~◯~bigcup~⋃~bigodot~⨀~bigoplus~⨁~bigotimes~⨂~bigsqcup~⨆~bigstar~★~bigtriangledown~▽~bigtriangleup~△~biguplus~⨄~bigvee~⋁~bigwedge~⋀~bkarow~⤍~blacklozenge~⧫~blacksquare~▪~blacktriangle~▴~blacktriangledown~▾~blacktriangleleft~◂~blacktriangleright~▸~blank~␣~blk12~▒~blk14~░~blk34~▓~block~█~bne~=⃥~bnequiv~≡⃥~bnot~⌐~bopf~𝕓~bot~⊥~bottom~⊥~bowtie~⋈~boxDL~╗~boxDR~╔~boxDl~╖~boxDr~╓~boxH~═~boxHD~╦~boxHU~╩~boxHd~╤~boxHu~╧~boxUL~╝~boxUR~╚~boxUl~╜~boxUr~╙~boxV~║~boxVH~╬~boxVL~╣~boxVR~╠~boxVh~╫~boxVl~╢~boxVr~╟~boxbox~⧉~boxdL~╕~boxdR~╒~boxdl~┐~boxdr~┌~boxh~─~boxhD~╥~boxhU~╨~boxhd~┬~boxhu~┴~boxminus~⊟~boxplus~⊞~boxtimes~⊠~boxuL~╛~boxuR~╘~boxul~┘~boxur~└~boxv~│~boxvH~╪~boxvL~╡~boxvR~╞~boxvh~┼~boxvl~┤~boxvr~├~bprime~‵~breve~˘~bscr~𝒷~bsemi~⁏~bsim~∽~bsime~⋍~bsol~\\~bsolb~⧅~bsolhsub~⟈~bullet~•~bump~≎~bumpE~⪮~bumpe~≏~bumpeq~≏~cacute~ć~capand~⩄~capbrcup~⩉~capcap~⩋~capcup~⩇~capdot~⩀~caps~∩︀~caret~⁁~caron~ˇ~ccaps~⩍~ccaron~č~ccirc~ĉ~ccups~⩌~ccupssm~⩐~cdot~ċ~cemptyv~⦲~centerdot~·~cfr~𝔠~chcy~ч~check~✓~checkmark~✓~cir~○~cirE~⧃~circeq~≗~circlearrowleft~↺~circlearrowright~↻~circledR~®~circledS~Ⓢ~circledast~⊛~circledcirc~⊚~circleddash~⊝~cire~≗~cirfnint~⨐~cirmid~⫯~cirscir~⧂~clubsuit~♣~colon~:~colone~≔~coloneq~≔~comma~,~commat~@~comp~∁~compfn~∘~complement~∁~complexes~ℂ~congdot~⩭~conint~∮~copf~𝕔~coprod~∐~copysr~℗~cross~✗~cscr~𝒸~csub~⫏~csube~⫑~csup~⫐~csupe~⫒~ctdot~⋯~cudarrl~⤸~cudarrr~⤵~cuepr~⋞~cuesc~⋟~cularr~↶~cularrp~⤽~cupbrcap~⩈~cupcap~⩆~cupcup~⩊~cupdot~⊍~cupor~⩅~cups~∪︀~curarr~↷~curarrm~⤼~curlyeqprec~⋞~curlyeqsucc~⋟~curlyvee~⋎~curlywedge~⋏~curvearrowleft~↶~curvearrowright~↷~cuvee~⋎~cuwed~⋏~cwconint~∲~cwint~∱~cylcty~⌭~dHar~⥥~daleth~ℸ~dash~‐~dashv~⊣~dbkarow~⤏~dblac~˝~dcaron~ď~dcy~д~dd~ⅆ~ddagger~‡~ddarr~⇊~ddotseq~⩷~demptyv~⦱~dfisht~⥿~dfr~𝔡~dharl~⇃~dharr~⇂~diam~⋄~diamond~⋄~diamondsuit~♦~die~¨~digamma~ϝ~disin~⋲~div~÷~divideontimes~⋇~divonx~⋇~djcy~ђ~dlcorn~⌞~dlcrop~⌍~dollar~$~dopf~𝕕~dot~˙~doteq~≐~doteqdot~≑~dotminus~∸~dotplus~∔~dotsquare~⊡~doublebarwedge~⌆~downarrow~↓~downdownarrows~⇊~downharpoonleft~⇃~downharpoonright~⇂~drbkarow~⤐~drcorn~⌟~drcrop~⌌~dscr~𝒹~dscy~ѕ~dsol~⧶~dstrok~đ~dtdot~⋱~dtri~▿~dtrif~▾~duarr~⇵~duhar~⥯~dwangle~⦦~dzcy~џ~dzigrarr~⟿~eDDot~⩷~eDot~≑~easter~⩮~ecaron~ě~ecir~≖~ecolon~≕~ecy~э~edot~ė~ee~ⅇ~efDot~≒~efr~𝔢~eg~⪚~egs~⪖~egsdot~⪘~el~⪙~elinters~⏧~ell~ℓ~els~⪕~elsdot~⪗~emacr~ē~emptyset~∅~emptyv~∅~emsp13~ ~emsp14~ ~eng~ŋ~eogon~ę~eopf~𝕖~epar~⋕~eparsl~⧣~eplus~⩱~epsi~ε~epsiv~ϵ~eqcirc~≖~eqcolon~≕~eqsim~≂~eqslantgtr~⪖~eqslantless~⪕~equals~=~equest~≟~equivDD~⩸~eqvparsl~⧥~erDot~≓~erarr~⥱~escr~ℯ~esdot~≐~esim~≂~excl~!~expectation~ℰ~exponentiale~ⅇ~fallingdotseq~≒~fcy~ф~female~♀~ffilig~ﬃ~fflig~ﬀ~ffllig~ﬄ~ffr~𝔣~filig~ﬁ~fjlig~fj~flat~♭~fllig~ﬂ~fltns~▱~fopf~𝕗~fork~⋔~forkv~⫙~fpartint~⨍~frac13~⅓~frac15~⅕~frac16~⅙~frac18~⅛~frac23~⅔~frac25~⅖~frac35~⅗~frac38~⅜~frac45~⅘~frac56~⅚~frac58~⅝~frac78~⅞~frown~⌢~fscr~𝒻~gE~≧~gEl~⪌~gacute~ǵ~gammad~ϝ~gap~⪆~gbreve~ğ~gcirc~ĝ~gcy~г~gdot~ġ~gel~⋛~geq~≥~geqq~≧~geqslant~⩾~ges~⩾~gescc~⪩~gesdot~⪀~gesdoto~⪂~gesdotol~⪄~gesl~⋛︀~gesles~⪔~gfr~𝔤~gg~≫~ggg~⋙~gimel~ℷ~gjcy~ѓ~gl~≷~glE~⪒~gla~⪥~glj~⪤~gnE~≩~gnap~⪊~gnapprox~⪊~gne~⪈~gneq~⪈~gneqq~≩~gnsim~⋧~gopf~𝕘~grave~`~gscr~ℊ~gsim~≳~gsime~⪎~gsiml~⪐~gtcc~⪧~gtcir~⩺~gtdot~⋗~gtlPar~⦕~gtquest~⩼~gtrapprox~⪆~gtrarr~⥸~gtrdot~⋗~gtreqless~⋛~gtreqqless~⪌~gtrless~≷~gtrsim~≳~gvertneqq~≩︀~gvnE~≩︀~hairsp~ ~half~½~hamilt~ℋ~hardcy~ъ~harrcir~⥈~harrw~↭~hbar~ℏ~hcirc~ĥ~heartsuit~♥~hercon~⊹~hfr~𝔥~hksearow~⤥~hkswarow~⤦~hoarr~⇿~homtht~∻~hookleftarrow~↩~hookrightarrow~↪~hopf~𝕙~horbar~―~hscr~𝒽~hslash~ℏ~hstrok~ħ~hybull~⁃~hyphen~‐~ic~⁣~icy~и~iecy~е~iff~⇔~ifr~𝔦~ii~ⅈ~iiiint~⨌~iiint~∭~iinfin~⧜~iiota~℩~ijlig~ĳ~imacr~ī~imagline~ℐ~imagpart~ℑ~imath~ı~imof~⊷~imped~Ƶ~in~∈~incare~℅~infintie~⧝~inodot~ı~intcal~⊺~integers~ℤ~intercal~⊺~intlarhk~⨗~intprod~⨼~iocy~ё~iogon~į~iopf~𝕚~iprod~⨼~iscr~𝒾~isinE~⋹~isindot~⋵~isins~⋴~isinsv~⋳~isinv~∈~it~⁢~itilde~ĩ~iukcy~і~jcirc~ĵ~jcy~й~jfr~𝔧~jmath~ȷ~jopf~𝕛~jscr~𝒿~jsercy~ј~jukcy~є~kappav~ϰ~kcedil~ķ~kcy~к~kfr~𝔨~kgreen~ĸ~khcy~х~kjcy~ќ~kopf~𝕜~kscr~𝓀~lAarr~⇚~lAtail~⤛~lBarr~⤎~lE~≦~lEg~⪋~lHar~⥢~lacute~ĺ~laemptyv~⦴~lagran~ℒ~langd~⦑~langle~⟨~lap~⪅~larrb~⇤~larrbfs~⤟~larrfs~⤝~larrhk~↩~larrlp~↫~larrpl~⤹~larrsim~⥳~larrtl~↢~lat~⪫~latail~⤙~late~⪭~lates~⪭︀~lbarr~⤌~lbbrk~❲~lbrace~{~lbrack~[~lbrke~⦋~lbrksld~⦏~lbrkslu~⦍~lcaron~ľ~lcedil~ļ~lcub~{~lcy~л~ldca~⤶~ldquor~„~ldrdhar~⥧~ldrushar~⥋~ldsh~↲~leftarrow~←~leftarrowtail~↢~leftharpoondown~↽~leftharpoonup~↼~leftleftarrows~⇇~leftrightarrow~↔~leftrightarrows~⇆~leftrightharpoons~⇋~leftrightsquigarrow~↭~leftthreetimes~⋋~leg~⋚~leq~≤~leqq~≦~leqslant~⩽~les~⩽~lescc~⪨~lesdot~⩿~lesdoto~⪁~lesdotor~⪃~lesg~⋚︀~lesges~⪓~lessapprox~⪅~lessdot~⋖~lesseqgtr~⋚~lesseqqgtr~⪋~lessgtr~≶~lesssim~≲~lfisht~⥼~lfr~𝔩~lg~≶~lgE~⪑~lhard~↽~lharu~↼~lharul~⥪~lhblk~▄~ljcy~љ~ll~≪~llarr~⇇~llcorner~⌞~llhard~⥫~lltri~◺~lmidot~ŀ~lmoust~⎰~lmoustache~⎰~lnE~≨~lnap~⪉~lnapprox~⪉~lne~⪇~lneq~⪇~lneqq~≨~lnsim~⋦~loang~⟬~loarr~⇽~lobrk~⟦~longleftarrow~⟵~longleftrightarrow~⟷~longmapsto~⟼~longrightarrow~⟶~looparrowleft~↫~looparrowright~↬~lopar~⦅~lopf~𝕝~loplus~⨭~lotimes~⨴~lowbar~_~lozenge~◊~lozf~⧫~lpar~(~lparlt~⦓~lrarr~⇆~lrcorner~⌟~lrhar~⇋~lrhard~⥭~lrtri~⊿~lscr~𝓁~lsh~↰~lsim~≲~lsime~⪍~lsimg~⪏~lsqb~[~lsquor~‚~lstrok~ł~ltcc~⪦~ltcir~⩹~ltdot~⋖~lthree~⋋~ltimes~⋉~ltlarr~⥶~ltquest~⩻~ltrPar~⦖~ltri~◃~ltrie~⊴~ltrif~◂~lurdshar~⥊~luruhar~⥦~lvertneqq~≨︀~lvnE~≨︀~mDDot~∺~male~♂~malt~✠~maltese~✠~map~↦~mapsto~↦~mapstodown~↧~mapstoleft~↤~mapstoup~↥~marker~▮~mcomma~⨩~mcy~м~measuredangle~∡~mfr~𝔪~mho~℧~mid~∣~midast~*~midcir~⫰~minusb~⊟~minusd~∸~minusdu~⨪~mlcp~⫛~mldr~…~mnplus~∓~models~⊧~mopf~𝕞~mp~∓~mscr~𝓂~mstpos~∾~multimap~⊸~mumap~⊸~nGg~⋙̸~nGt~≫⃒~nGtv~≫̸~nLeftarrow~⇍~nLeftrightarrow~⇎~nLl~⋘̸~nLt~≪⃒~nLtv~≪̸~nRightarrow~⇏~nVDash~⊯~nVdash~⊮~nacute~ń~nang~∠⃒~nap~≉~napE~⩰̸~napid~≋̸~napos~ŉ~napprox~≉~natur~♮~natural~♮~naturals~ℕ~nbump~≎̸~nbumpe~≏̸~ncap~⩃~ncaron~ň~ncedil~ņ~ncong~≇~ncongdot~⩭̸~ncup~⩂~ncy~н~neArr~⇗~nearhk~⤤~nearr~↗~nearrow~↗~nedot~≐̸~nequiv~≢~nesear~⤨~nesim~≂̸~nexist~∄~nexists~∄~nfr~𝔫~ngE~≧̸~nge~≱~ngeq~≱~ngeqq~≧̸~ngeqslant~⩾̸~nges~⩾̸~ngsim~≵~ngt~≯~ngtr~≯~nhArr~⇎~nharr~↮~nhpar~⫲~nis~⋼~nisd~⋺~niv~∋~njcy~њ~nlArr~⇍~nlE~≦̸~nlarr~↚~nldr~‥~nle~≰~nleftarrow~↚~nleftrightarrow~↮~nleq~≰~nleqq~≦̸~nleqslant~⩽̸~nles~⩽̸~nless~≮~nlsim~≴~nlt~≮~nltri~⋪~nltrie~⋬~nmid~∤~nopf~𝕟~notinE~⋹̸~notindot~⋵̸~notinva~∉~notinvb~⋷~notinvc~⋶~notni~∌~notniva~∌~notnivb~⋾~notnivc~⋽~npar~∦~nparallel~∦~nparsl~⫽⃥~npart~∂̸~npolint~⨔~npr~⊀~nprcue~⋠~npre~⪯̸~nprec~⊀~npreceq~⪯̸~nrArr~⇏~nrarr~↛~nrarrc~⤳̸~nrarrw~↝̸~nrightarrow~↛~nrtri~⋫~nrtrie~⋭~nsc~⊁~nsccue~⋡~nsce~⪰̸~nscr~𝓃~nshortmid~∤~nshortparallel~∦~nsim~≁~nsime~≄~nsimeq~≄~nsmid~∤~nspar~∦~nsqsube~⋢~nsqsupe~⋣~nsubE~⫅̸~nsube~⊈~nsubset~⊂⃒~nsubseteq~⊈~nsubseteqq~⫅̸~nsucc~⊁~nsucceq~⪰̸~nsup~⊅~nsupE~⫆̸~nsupe~⊉~nsupset~⊃⃒~nsupseteq~⊉~nsupseteqq~⫆̸~ntgl~≹~ntlg~≸~ntriangleleft~⋪~ntrianglelefteq~⋬~ntriangleright~⋫~ntrianglerighteq~⋭~num~#~numero~№~numsp~ ~nvDash~⊭~nvHarr~⤄~nvap~≍⃒~nvdash~⊬~nvge~≥⃒~nvgt~>⃒~nvinfin~⧞~nvlArr~⤂~nvle~≤⃒~nvlt~<⃒~nvltrie~⊴⃒~nvrArr~⤃~nvrtrie~⊵⃒~nvsim~∼⃒~nwArr~⇖~nwarhk~⤣~nwarr~↖~nwarrow~↖~nwnear~⤧~oS~Ⓢ~oast~⊛~ocir~⊚~ocy~о~odash~⊝~odblac~ő~odiv~⨸~odot~⊙~odsold~⦼~ofcir~⦿~ofr~𝔬~ogon~˛~ogt~⧁~ohbar~⦵~ohm~Ω~oint~∮~olarr~↺~olcir~⦾~olcross~⦻~olt~⧀~omacr~ō~omid~⦶~ominus~⊖~oopf~𝕠~opar~⦷~operp~⦹~orarr~↻~ord~⩝~order~ℴ~orderof~ℴ~origof~⊶~oror~⩖~orslope~⩗~orv~⩛~oscr~ℴ~osol~⊘~otimesas~⨶~ovbar~⌽~par~∥~parallel~∥~parsim~⫳~parsl~⫽~pcy~п~percnt~%~period~.~pertenk~‱~pfr~𝔭~phiv~ϕ~phmmat~ℳ~phone~☎~pitchfork~⋔~planck~ℏ~planckh~ℎ~plankv~ℏ~plus~+~plusacir~⨣~plusb~⊞~pluscir~⨢~plusdo~∔~plusdu~⨥~pluse~⩲~plussim~⨦~plustwo~⨧~pm~±~pointint~⨕~popf~𝕡~pr~≺~prE~⪳~prap~⪷~prcue~≼~pre~⪯~prec~≺~precapprox~⪷~preccurlyeq~≼~preceq~⪯~precnapprox~⪹~precneqq~⪵~precnsim~⋨~precsim~≾~primes~ℙ~prnE~⪵~prnap~⪹~prnsim~⋨~profalar~⌮~profline~⌒~profsurf~⌓~propto~∝~prsim~≾~prurel~⊰~pscr~𝓅~puncsp~ ~qfr~𝔮~qint~⨌~qopf~𝕢~qprime~⁗~qscr~𝓆~quaternions~ℍ~quatint~⨖~quest~?~questeq~≟~rAarr~⇛~rAtail~⤜~rBarr~⤏~rHar~⥤~race~∽̱~racute~ŕ~raemptyv~⦳~rangd~⦒~range~⦥~rangle~⟩~rarrap~⥵~rarrb~⇥~rarrbfs~⤠~rarrc~⤳~rarrfs~⤞~rarrhk~↪~rarrlp~↬~rarrpl~⥅~rarrsim~⥴~rarrtl~↣~rarrw~↝~ratail~⤚~ratio~∶~rationals~ℚ~rbarr~⤍~rbbrk~❳~rbrace~}~rbrack~]~rbrke~⦌~rbrksld~⦎~rbrkslu~⦐~rcaron~ř~rcedil~ŗ~rcub~}~rcy~р~rdca~⤷~rdldhar~⥩~rdquor~”~rdsh~↳~realine~ℛ~realpart~ℜ~reals~ℝ~rect~▭~rfisht~⥽~rfr~𝔯~rhard~⇁~rharu~⇀~rharul~⥬~rhov~ϱ~rightarrow~→~rightarrowtail~↣~rightharpoondown~⇁~rightharpoonup~⇀~rightleftarrows~⇄~rightleftharpoons~⇌~rightrightarrows~⇉~rightsquigarrow~↝~rightthreetimes~⋌~ring~˚~risingdotseq~≓~rlarr~⇄~rlhar~⇌~rmoust~⎱~rmoustache~⎱~rnmid~⫮~roang~⟭~roarr~⇾~robrk~⟧~ropar~⦆~ropf~𝕣~roplus~⨮~rotimes~⨵~rpar~)~rpargt~⦔~rppolint~⨒~rrarr~⇉~rscr~𝓇~rsh~↱~rsqb~]~rsquor~’~rthree~⋌~rtimes~⋊~rtri~▹~rtrie~⊵~rtrif~▸~rtriltri~⧎~ruluhar~⥨~rx~℞~sacute~ś~sc~≻~scE~⪴~scap~⪸~sccue~≽~sce~⪰~scedil~ş~scirc~ŝ~scnE~⪶~scnap~⪺~scnsim~⋩~scpolint~⨓~scsim~≿~scy~с~sdotb~⊡~sdote~⩦~seArr~⇘~searhk~⤥~searr~↘~searrow~↘~semi~;~seswar~⤩~setminus~∖~setmn~∖~sext~✶~sfr~𝔰~sfrown~⌢~sharp~♯~shchcy~щ~shcy~ш~shortmid~∣~shortparallel~∥~sigmav~ς~simdot~⩪~sime~≃~simeq~≃~simg~⪞~simgE~⪠~siml~⪝~simlE~⪟~simne~≆~simplus~⨤~simrarr~⥲~slarr~←~smallsetminus~∖~smashp~⨳~smeparsl~⧤~smid~∣~smile~⌣~smt~⪪~smte~⪬~smtes~⪬︀~softcy~ь~sol~/~solb~⧄~solbar~⌿~sopf~𝕤~spadesuit~♠~spar~∥~sqcap~⊓~sqcaps~⊓︀~sqcup~⊔~sqcups~⊔︀~sqsub~⊏~sqsube~⊑~sqsubset~⊏~sqsubseteq~⊑~sqsup~⊐~sqsupe~⊒~sqsupset~⊐~sqsupseteq~⊒~squ~□~square~□~squarf~▪~squf~▪~srarr~→~sscr~𝓈~ssetmn~∖~ssmile~⌣~sstarf~⋆~star~☆~starf~★~straightepsilon~ϵ~straightphi~ϕ~strns~¯~subE~⫅~subdot~⪽~subedot~⫃~submult~⫁~subnE~⫋~subne~⊊~subplus~⪿~subrarr~⥹~subset~⊂~subseteq~⊆~subseteqq~⫅~subsetneq~⊊~subsetneqq~⫋~subsim~⫇~subsub~⫕~subsup~⫓~succ~≻~succapprox~⪸~succcurlyeq~≽~succeq~⪰~succnapprox~⪺~succneqq~⪶~succnsim~⋩~succsim~≿~sung~♪~supE~⫆~supdot~⪾~supdsub~⫘~supedot~⫄~suphsol~⟉~suphsub~⫗~suplarr~⥻~supmult~⫂~supnE~⫌~supne~⊋~supplus~⫀~supset~⊃~supseteq~⊇~supseteqq~⫆~supsetneq~⊋~supsetneqq~⫌~supsim~⫈~supsub~⫔~supsup~⫖~swArr~⇙~swarhk~⤦~swarr~↙~swarrow~↙~swnwar~⤪~target~⌖~tbrk~⎴~tcaron~ť~tcedil~ţ~tcy~т~tdot~⃛~telrec~⌕~tfr~𝔱~therefore~∴~thetav~ϑ~thickapprox~≈~thicksim~∼~thkap~≈~thksim~∼~timesb~⊠~timesbar~⨱~timesd~⨰~tint~∭~toea~⤨~top~⊤~topbot~⌶~topcir~⫱~topf~𝕥~topfork~⫚~tosa~⤩~tprime~‴~triangle~▵~triangledown~▿~triangleleft~◃~trianglelefteq~⊴~triangleq~≜~triangleright~▹~trianglerighteq~⊵~tridot~◬~trie~≜~triminus~⨺~triplus~⨹~trisb~⧍~tritime~⨻~trpezium~⏢~tscr~𝓉~tscy~ц~tshcy~ћ~tstrok~ŧ~twixt~≬~twoheadleftarrow~↞~twoheadrightarrow~↠~uHar~⥣~ubrcy~ў~ubreve~ŭ~ucy~у~udarr~⇅~udblac~ű~udhar~⥮~ufisht~⥾~ufr~𝔲~uharl~↿~uharr~↾~uhblk~▀~ulcorn~⌜~ulcorner~⌜~ulcrop~⌏~ultri~◸~umacr~ū~uogon~ų~uopf~𝕦~uparrow~↑~updownarrow~↕~upharpoonleft~↿~upharpoonright~↾~uplus~⊎~upsi~υ~upuparrows~⇈~urcorn~⌝~urcorner~⌝~urcrop~⌎~uring~ů~urtri~◹~uscr~𝓊~utdot~⋰~utilde~ũ~utri~▵~utrif~▴~uuarr~⇈~uwangle~⦧~vArr~⇕~vBar~⫨~vBarv~⫩~vDash~⊨~vangrt~⦜~varepsilon~ϵ~varkappa~ϰ~varnothing~∅~varphi~ϕ~varpi~ϖ~varpropto~∝~varr~↕~varrho~ϱ~varsigma~ς~varsubsetneq~⊊︀~varsubsetneqq~⫋︀~varsupsetneq~⊋︀~varsupsetneqq~⫌︀~vartheta~ϑ~vartriangleleft~⊲~vartriangleright~⊳~vcy~в~vdash~⊢~vee~∨~veebar~⊻~veeeq~≚~vellip~⋮~verbar~|~vert~|~vfr~𝔳~vltri~⊲~vnsub~⊂⃒~vnsup~⊃⃒~vopf~𝕧~vprop~∝~vrtri~⊳~vscr~𝓋~vsubnE~⫋︀~vsubne~⊊︀~vsupnE~⫌︀~vsupne~⊋︀~vzigzag~⦚~wcirc~ŵ~wedbar~⩟~wedge~∧~wedgeq~≙~wfr~𝔴~wopf~𝕨~wp~℘~wr~≀~wreath~≀~wscr~𝓌~xcap~⋂~xcirc~◯~xcup~⋃~xdtri~▽~xfr~𝔵~xhArr~⟺~xharr~⟷~xlArr~⟸~xlarr~⟵~xmap~⟼~xnis~⋻~xodot~⨀~xopf~𝕩~xoplus~⨁~xotime~⨂~xrArr~⟹~xrarr~⟶~xscr~𝓍~xsqcup~⨆~xuplus~⨄~xutri~△~xvee~⋁~xwedge~⋀~yacy~я~ycirc~ŷ~ycy~ы~yfr~𝔶~yicy~ї~yopf~𝕪~yscr~𝓎~yucy~ю~zacute~ź~zcaron~ž~zcy~з~zdot~ż~zeetrf~ℨ~zfr~𝔷~zhcy~ж~zigrarr~⇝~zopf~𝕫~zscr~𝓏~~AMP~&~COPY~©~GT~>~LT~<~QUOT~"~REG~®', exports.namedReferences["html4"]);
+    exports$1.namedReferences = {};
+    exports$1.namedReferences["xml"] = generateNamedReferences(`lt~<~gt~>~quot~"~apos~'~amp~&`);
+    exports$1.namedReferences["html4"] = generateNamedReferences(`apos~'~OElig~Œ~oelig~œ~Scaron~Š~scaron~š~Yuml~Ÿ~circ~ˆ~tilde~˜~ensp~ ~emsp~ ~thinsp~ ~zwnj~‌~zwj~‍~lrm~‎~rlm~‏~ndash~–~mdash~—~lsquo~‘~rsquo~’~sbquo~‚~ldquo~“~rdquo~”~bdquo~„~dagger~†~Dagger~‡~permil~‰~lsaquo~‹~rsaquo~›~euro~€~fnof~ƒ~Alpha~Α~Beta~Β~Gamma~Γ~Delta~Δ~Epsilon~Ε~Zeta~Ζ~Eta~Η~Theta~Θ~Iota~Ι~Kappa~Κ~Lambda~Λ~Mu~Μ~Nu~Ν~Xi~Ξ~Omicron~Ο~Pi~Π~Rho~Ρ~Sigma~Σ~Tau~Τ~Upsilon~Υ~Phi~Φ~Chi~Χ~Psi~Ψ~Omega~Ω~alpha~α~beta~β~gamma~γ~delta~δ~epsilon~ε~zeta~ζ~eta~η~theta~θ~iota~ι~kappa~κ~lambda~λ~mu~μ~nu~ν~xi~ξ~omicron~ο~pi~π~rho~ρ~sigmaf~ς~sigma~σ~tau~τ~upsilon~υ~phi~φ~chi~χ~psi~ψ~omega~ω~thetasym~ϑ~upsih~ϒ~piv~ϖ~bull~•~hellip~…~prime~′~Prime~″~oline~‾~frasl~⁄~weierp~℘~image~ℑ~real~ℜ~trade~™~alefsym~ℵ~larr~←~uarr~↑~rarr~→~darr~↓~harr~↔~crarr~↵~lArr~⇐~uArr~⇑~rArr~⇒~dArr~⇓~hArr~⇔~forall~∀~part~∂~exist~∃~empty~∅~nabla~∇~isin~∈~notin~∉~ni~∋~prod~∏~sum~∑~minus~−~lowast~∗~radic~√~prop~∝~infin~∞~ang~∠~and~∧~or~∨~cap~∩~cup~∪~int~∫~there4~∴~sim~∼~cong~≅~asymp~≈~ne~≠~equiv~≡~le~≤~ge~≥~sub~⊂~sup~⊃~nsub~⊄~sube~⊆~supe~⊇~oplus~⊕~otimes~⊗~perp~⊥~sdot~⋅~lceil~⌈~rceil~⌉~lfloor~⌊~rfloor~⌋~lang~〈~rang~〉~loz~◊~spades~♠~clubs~♣~hearts~♥~diams~♦~~nbsp~ ~iexcl~¡~cent~¢~pound~£~curren~¤~yen~¥~brvbar~¦~sect~§~uml~¨~copy~©~ordf~ª~laquo~«~not~¬~shy~­~reg~®~macr~¯~deg~°~plusmn~±~sup2~²~sup3~³~acute~´~micro~µ~para~¶~middot~·~cedil~¸~sup1~¹~ordm~º~raquo~»~frac14~¼~frac12~½~frac34~¾~iquest~¿~Agrave~À~Aacute~Á~Acirc~Â~Atilde~Ã~Auml~Ä~Aring~Å~AElig~Æ~Ccedil~Ç~Egrave~È~Eacute~É~Ecirc~Ê~Euml~Ë~Igrave~Ì~Iacute~Í~Icirc~Î~Iuml~Ï~ETH~Ð~Ntilde~Ñ~Ograve~Ò~Oacute~Ó~Ocirc~Ô~Otilde~Õ~Ouml~Ö~times~×~Oslash~Ø~Ugrave~Ù~Uacute~Ú~Ucirc~Û~Uuml~Ü~Yacute~Ý~THORN~Þ~szlig~ß~agrave~à~aacute~á~acirc~â~atilde~ã~auml~ä~aring~å~aelig~æ~ccedil~ç~egrave~è~eacute~é~ecirc~ê~euml~ë~igrave~ì~iacute~í~icirc~î~iuml~ï~eth~ð~ntilde~ñ~ograve~ò~oacute~ó~ocirc~ô~otilde~õ~ouml~ö~divide~÷~oslash~ø~ugrave~ù~uacute~ú~ucirc~û~uuml~ü~yacute~ý~thorn~þ~yuml~ÿ~quot~"~amp~&~lt~<~gt~>`);
+    exports$1.namedReferences["html5"] = generateNamedReferences('Abreve~Ă~Acy~А~Afr~𝔄~Amacr~Ā~And~⩓~Aogon~Ą~Aopf~𝔸~ApplyFunction~⁡~Ascr~𝒜~Assign~≔~Backslash~∖~Barv~⫧~Barwed~⌆~Bcy~Б~Because~∵~Bernoullis~ℬ~Bfr~𝔅~Bopf~𝔹~Breve~˘~Bscr~ℬ~Bumpeq~≎~CHcy~Ч~Cacute~Ć~Cap~⋒~CapitalDifferentialD~ⅅ~Cayleys~ℭ~Ccaron~Č~Ccirc~Ĉ~Cconint~∰~Cdot~Ċ~Cedilla~¸~CenterDot~·~Cfr~ℭ~CircleDot~⊙~CircleMinus~⊖~CirclePlus~⊕~CircleTimes~⊗~ClockwiseContourIntegral~∲~CloseCurlyDoubleQuote~”~CloseCurlyQuote~’~Colon~∷~Colone~⩴~Congruent~≡~Conint~∯~ContourIntegral~∮~Copf~ℂ~Coproduct~∐~CounterClockwiseContourIntegral~∳~Cross~⨯~Cscr~𝒞~Cup~⋓~CupCap~≍~DD~ⅅ~DDotrahd~⤑~DJcy~Ђ~DScy~Ѕ~DZcy~Џ~Darr~↡~Dashv~⫤~Dcaron~Ď~Dcy~Д~Del~∇~Dfr~𝔇~DiacriticalAcute~´~DiacriticalDot~˙~DiacriticalDoubleAcute~˝~DiacriticalGrave~`~DiacriticalTilde~˜~Diamond~⋄~DifferentialD~ⅆ~Dopf~𝔻~Dot~¨~DotDot~⃜~DotEqual~≐~DoubleContourIntegral~∯~DoubleDot~¨~DoubleDownArrow~⇓~DoubleLeftArrow~⇐~DoubleLeftRightArrow~⇔~DoubleLeftTee~⫤~DoubleLongLeftArrow~⟸~DoubleLongLeftRightArrow~⟺~DoubleLongRightArrow~⟹~DoubleRightArrow~⇒~DoubleRightTee~⊨~DoubleUpArrow~⇑~DoubleUpDownArrow~⇕~DoubleVerticalBar~∥~DownArrow~↓~DownArrowBar~⤓~DownArrowUpArrow~⇵~DownBreve~̑~DownLeftRightVector~⥐~DownLeftTeeVector~⥞~DownLeftVector~↽~DownLeftVectorBar~⥖~DownRightTeeVector~⥟~DownRightVector~⇁~DownRightVectorBar~⥗~DownTee~⊤~DownTeeArrow~↧~Downarrow~⇓~Dscr~𝒟~Dstrok~Đ~ENG~Ŋ~Ecaron~Ě~Ecy~Э~Edot~Ė~Efr~𝔈~Element~∈~Emacr~Ē~EmptySmallSquare~◻~EmptyVerySmallSquare~▫~Eogon~Ę~Eopf~𝔼~Equal~⩵~EqualTilde~≂~Equilibrium~⇌~Escr~ℰ~Esim~⩳~Exists~∃~ExponentialE~ⅇ~Fcy~Ф~Ffr~𝔉~FilledSmallSquare~◼~FilledVerySmallSquare~▪~Fopf~𝔽~ForAll~∀~Fouriertrf~ℱ~Fscr~ℱ~GJcy~Ѓ~Gammad~Ϝ~Gbreve~Ğ~Gcedil~Ģ~Gcirc~Ĝ~Gcy~Г~Gdot~Ġ~Gfr~𝔊~Gg~⋙~Gopf~𝔾~GreaterEqual~≥~GreaterEqualLess~⋛~GreaterFullEqual~≧~GreaterGreater~⪢~GreaterLess~≷~GreaterSlantEqual~⩾~GreaterTilde~≳~Gscr~𝒢~Gt~≫~HARDcy~Ъ~Hacek~ˇ~Hat~^~Hcirc~Ĥ~Hfr~ℌ~HilbertSpace~ℋ~Hopf~ℍ~HorizontalLine~─~Hscr~ℋ~Hstrok~Ħ~HumpDownHump~≎~HumpEqual~≏~IEcy~Е~IJlig~Ĳ~IOcy~Ё~Icy~И~Idot~İ~Ifr~ℑ~Im~ℑ~Imacr~Ī~ImaginaryI~ⅈ~Implies~⇒~Int~∬~Integral~∫~Intersection~⋂~InvisibleComma~⁣~InvisibleTimes~⁢~Iogon~Į~Iopf~𝕀~Iscr~ℐ~Itilde~Ĩ~Iukcy~І~Jcirc~Ĵ~Jcy~Й~Jfr~𝔍~Jopf~𝕁~Jscr~𝒥~Jsercy~Ј~Jukcy~Є~KHcy~Х~KJcy~Ќ~Kcedil~Ķ~Kcy~К~Kfr~𝔎~Kopf~𝕂~Kscr~𝒦~LJcy~Љ~Lacute~Ĺ~Lang~⟪~Laplacetrf~ℒ~Larr~↞~Lcaron~Ľ~Lcedil~Ļ~Lcy~Л~LeftAngleBracket~⟨~LeftArrow~←~LeftArrowBar~⇤~LeftArrowRightArrow~⇆~LeftCeiling~⌈~LeftDoubleBracket~⟦~LeftDownTeeVector~⥡~LeftDownVector~⇃~LeftDownVectorBar~⥙~LeftFloor~⌊~LeftRightArrow~↔~LeftRightVector~⥎~LeftTee~⊣~LeftTeeArrow~↤~LeftTeeVector~⥚~LeftTriangle~⊲~LeftTriangleBar~⧏~LeftTriangleEqual~⊴~LeftUpDownVector~⥑~LeftUpTeeVector~⥠~LeftUpVector~↿~LeftUpVectorBar~⥘~LeftVector~↼~LeftVectorBar~⥒~Leftarrow~⇐~Leftrightarrow~⇔~LessEqualGreater~⋚~LessFullEqual~≦~LessGreater~≶~LessLess~⪡~LessSlantEqual~⩽~LessTilde~≲~Lfr~𝔏~Ll~⋘~Lleftarrow~⇚~Lmidot~Ŀ~LongLeftArrow~⟵~LongLeftRightArrow~⟷~LongRightArrow~⟶~Longleftarrow~⟸~Longleftrightarrow~⟺~Longrightarrow~⟹~Lopf~𝕃~LowerLeftArrow~↙~LowerRightArrow~↘~Lscr~ℒ~Lsh~↰~Lstrok~Ł~Lt~≪~Map~⤅~Mcy~М~MediumSpace~ ~Mellintrf~ℳ~Mfr~𝔐~MinusPlus~∓~Mopf~𝕄~Mscr~ℳ~NJcy~Њ~Nacute~Ń~Ncaron~Ň~Ncedil~Ņ~Ncy~Н~NegativeMediumSpace~​~NegativeThickSpace~​~NegativeThinSpace~​~NegativeVeryThinSpace~​~NestedGreaterGreater~≫~NestedLessLess~≪~NewLine~\n~Nfr~𝔑~NoBreak~⁠~NonBreakingSpace~ ~Nopf~ℕ~Not~⫬~NotCongruent~≢~NotCupCap~≭~NotDoubleVerticalBar~∦~NotElement~∉~NotEqual~≠~NotEqualTilde~≂̸~NotExists~∄~NotGreater~≯~NotGreaterEqual~≱~NotGreaterFullEqual~≧̸~NotGreaterGreater~≫̸~NotGreaterLess~≹~NotGreaterSlantEqual~⩾̸~NotGreaterTilde~≵~NotHumpDownHump~≎̸~NotHumpEqual~≏̸~NotLeftTriangle~⋪~NotLeftTriangleBar~⧏̸~NotLeftTriangleEqual~⋬~NotLess~≮~NotLessEqual~≰~NotLessGreater~≸~NotLessLess~≪̸~NotLessSlantEqual~⩽̸~NotLessTilde~≴~NotNestedGreaterGreater~⪢̸~NotNestedLessLess~⪡̸~NotPrecedes~⊀~NotPrecedesEqual~⪯̸~NotPrecedesSlantEqual~⋠~NotReverseElement~∌~NotRightTriangle~⋫~NotRightTriangleBar~⧐̸~NotRightTriangleEqual~⋭~NotSquareSubset~⊏̸~NotSquareSubsetEqual~⋢~NotSquareSuperset~⊐̸~NotSquareSupersetEqual~⋣~NotSubset~⊂⃒~NotSubsetEqual~⊈~NotSucceeds~⊁~NotSucceedsEqual~⪰̸~NotSucceedsSlantEqual~⋡~NotSucceedsTilde~≿̸~NotSuperset~⊃⃒~NotSupersetEqual~⊉~NotTilde~≁~NotTildeEqual~≄~NotTildeFullEqual~≇~NotTildeTilde~≉~NotVerticalBar~∤~Nscr~𝒩~Ocy~О~Odblac~Ő~Ofr~𝔒~Omacr~Ō~Oopf~𝕆~OpenCurlyDoubleQuote~“~OpenCurlyQuote~‘~Or~⩔~Oscr~𝒪~Otimes~⨷~OverBar~‾~OverBrace~⏞~OverBracket~⎴~OverParenthesis~⏜~PartialD~∂~Pcy~П~Pfr~𝔓~PlusMinus~±~Poincareplane~ℌ~Popf~ℙ~Pr~⪻~Precedes~≺~PrecedesEqual~⪯~PrecedesSlantEqual~≼~PrecedesTilde~≾~Product~∏~Proportion~∷~Proportional~∝~Pscr~𝒫~Qfr~𝔔~Qopf~ℚ~Qscr~𝒬~RBarr~⤐~Racute~Ŕ~Rang~⟫~Rarr~↠~Rarrtl~⤖~Rcaron~Ř~Rcedil~Ŗ~Rcy~Р~Re~ℜ~ReverseElement~∋~ReverseEquilibrium~⇋~ReverseUpEquilibrium~⥯~Rfr~ℜ~RightAngleBracket~⟩~RightArrow~→~RightArrowBar~⇥~RightArrowLeftArrow~⇄~RightCeiling~⌉~RightDoubleBracket~⟧~RightDownTeeVector~⥝~RightDownVector~⇂~RightDownVectorBar~⥕~RightFloor~⌋~RightTee~⊢~RightTeeArrow~↦~RightTeeVector~⥛~RightTriangle~⊳~RightTriangleBar~⧐~RightTriangleEqual~⊵~RightUpDownVector~⥏~RightUpTeeVector~⥜~RightUpVector~↾~RightUpVectorBar~⥔~RightVector~⇀~RightVectorBar~⥓~Rightarrow~⇒~Ropf~ℝ~RoundImplies~⥰~Rrightarrow~⇛~Rscr~ℛ~Rsh~↱~RuleDelayed~⧴~SHCHcy~Щ~SHcy~Ш~SOFTcy~Ь~Sacute~Ś~Sc~⪼~Scedil~Ş~Scirc~Ŝ~Scy~С~Sfr~𝔖~ShortDownArrow~↓~ShortLeftArrow~←~ShortRightArrow~→~ShortUpArrow~↑~SmallCircle~∘~Sopf~𝕊~Sqrt~√~Square~□~SquareIntersection~⊓~SquareSubset~⊏~SquareSubsetEqual~⊑~SquareSuperset~⊐~SquareSupersetEqual~⊒~SquareUnion~⊔~Sscr~𝒮~Star~⋆~Sub~⋐~Subset~⋐~SubsetEqual~⊆~Succeeds~≻~SucceedsEqual~⪰~SucceedsSlantEqual~≽~SucceedsTilde~≿~SuchThat~∋~Sum~∑~Sup~⋑~Superset~⊃~SupersetEqual~⊇~Supset~⋑~TRADE~™~TSHcy~Ћ~TScy~Ц~Tab~	~Tcaron~Ť~Tcedil~Ţ~Tcy~Т~Tfr~𝔗~Therefore~∴~ThickSpace~  ~ThinSpace~ ~Tilde~∼~TildeEqual~≃~TildeFullEqual~≅~TildeTilde~≈~Topf~𝕋~TripleDot~⃛~Tscr~𝒯~Tstrok~Ŧ~Uarr~↟~Uarrocir~⥉~Ubrcy~Ў~Ubreve~Ŭ~Ucy~У~Udblac~Ű~Ufr~𝔘~Umacr~Ū~UnderBar~_~UnderBrace~⏟~UnderBracket~⎵~UnderParenthesis~⏝~Union~⋃~UnionPlus~⊎~Uogon~Ų~Uopf~𝕌~UpArrow~↑~UpArrowBar~⤒~UpArrowDownArrow~⇅~UpDownArrow~↕~UpEquilibrium~⥮~UpTee~⊥~UpTeeArrow~↥~Uparrow~⇑~Updownarrow~⇕~UpperLeftArrow~↖~UpperRightArrow~↗~Upsi~ϒ~Uring~Ů~Uscr~𝒰~Utilde~Ũ~VDash~⊫~Vbar~⫫~Vcy~В~Vdash~⊩~Vdashl~⫦~Vee~⋁~Verbar~‖~Vert~‖~VerticalBar~∣~VerticalLine~|~VerticalSeparator~❘~VerticalTilde~≀~VeryThinSpace~ ~Vfr~𝔙~Vopf~𝕍~Vscr~𝒱~Vvdash~⊪~Wcirc~Ŵ~Wedge~⋀~Wfr~𝔚~Wopf~𝕎~Wscr~𝒲~Xfr~𝔛~Xopf~𝕏~Xscr~𝒳~YAcy~Я~YIcy~Ї~YUcy~Ю~Ycirc~Ŷ~Ycy~Ы~Yfr~𝔜~Yopf~𝕐~Yscr~𝒴~ZHcy~Ж~Zacute~Ź~Zcaron~Ž~Zcy~З~Zdot~Ż~ZeroWidthSpace~​~Zfr~ℨ~Zopf~ℤ~Zscr~𝒵~abreve~ă~ac~∾~acE~∾̳~acd~∿~acy~а~af~⁡~afr~𝔞~aleph~ℵ~amacr~ā~amalg~⨿~andand~⩕~andd~⩜~andslope~⩘~andv~⩚~ange~⦤~angle~∠~angmsd~∡~angmsdaa~⦨~angmsdab~⦩~angmsdac~⦪~angmsdad~⦫~angmsdae~⦬~angmsdaf~⦭~angmsdag~⦮~angmsdah~⦯~angrt~∟~angrtvb~⊾~angrtvbd~⦝~angsph~∢~angst~Å~angzarr~⍼~aogon~ą~aopf~𝕒~ap~≈~apE~⩰~apacir~⩯~ape~≊~apid~≋~approx~≈~approxeq~≊~ascr~𝒶~ast~*~asympeq~≍~awconint~∳~awint~⨑~bNot~⫭~backcong~≌~backepsilon~϶~backprime~‵~backsim~∽~backsimeq~⋍~barvee~⊽~barwed~⌅~barwedge~⌅~bbrk~⎵~bbrktbrk~⎶~bcong~≌~bcy~б~becaus~∵~because~∵~bemptyv~⦰~bepsi~϶~bernou~ℬ~beth~ℶ~between~≬~bfr~𝔟~bigcap~⋂~bigcirc~◯~bigcup~⋃~bigodot~⨀~bigoplus~⨁~bigotimes~⨂~bigsqcup~⨆~bigstar~★~bigtriangledown~▽~bigtriangleup~△~biguplus~⨄~bigvee~⋁~bigwedge~⋀~bkarow~⤍~blacklozenge~⧫~blacksquare~▪~blacktriangle~▴~blacktriangledown~▾~blacktriangleleft~◂~blacktriangleright~▸~blank~␣~blk12~▒~blk14~░~blk34~▓~block~█~bne~=⃥~bnequiv~≡⃥~bnot~⌐~bopf~𝕓~bot~⊥~bottom~⊥~bowtie~⋈~boxDL~╗~boxDR~╔~boxDl~╖~boxDr~╓~boxH~═~boxHD~╦~boxHU~╩~boxHd~╤~boxHu~╧~boxUL~╝~boxUR~╚~boxUl~╜~boxUr~╙~boxV~║~boxVH~╬~boxVL~╣~boxVR~╠~boxVh~╫~boxVl~╢~boxVr~╟~boxbox~⧉~boxdL~╕~boxdR~╒~boxdl~┐~boxdr~┌~boxh~─~boxhD~╥~boxhU~╨~boxhd~┬~boxhu~┴~boxminus~⊟~boxplus~⊞~boxtimes~⊠~boxuL~╛~boxuR~╘~boxul~┘~boxur~└~boxv~│~boxvH~╪~boxvL~╡~boxvR~╞~boxvh~┼~boxvl~┤~boxvr~├~bprime~‵~breve~˘~bscr~𝒷~bsemi~⁏~bsim~∽~bsime~⋍~bsol~\\~bsolb~⧅~bsolhsub~⟈~bullet~•~bump~≎~bumpE~⪮~bumpe~≏~bumpeq~≏~cacute~ć~capand~⩄~capbrcup~⩉~capcap~⩋~capcup~⩇~capdot~⩀~caps~∩︀~caret~⁁~caron~ˇ~ccaps~⩍~ccaron~č~ccirc~ĉ~ccups~⩌~ccupssm~⩐~cdot~ċ~cemptyv~⦲~centerdot~·~cfr~𝔠~chcy~ч~check~✓~checkmark~✓~cir~○~cirE~⧃~circeq~≗~circlearrowleft~↺~circlearrowright~↻~circledR~®~circledS~Ⓢ~circledast~⊛~circledcirc~⊚~circleddash~⊝~cire~≗~cirfnint~⨐~cirmid~⫯~cirscir~⧂~clubsuit~♣~colon~:~colone~≔~coloneq~≔~comma~,~commat~@~comp~∁~compfn~∘~complement~∁~complexes~ℂ~congdot~⩭~conint~∮~copf~𝕔~coprod~∐~copysr~℗~cross~✗~cscr~𝒸~csub~⫏~csube~⫑~csup~⫐~csupe~⫒~ctdot~⋯~cudarrl~⤸~cudarrr~⤵~cuepr~⋞~cuesc~⋟~cularr~↶~cularrp~⤽~cupbrcap~⩈~cupcap~⩆~cupcup~⩊~cupdot~⊍~cupor~⩅~cups~∪︀~curarr~↷~curarrm~⤼~curlyeqprec~⋞~curlyeqsucc~⋟~curlyvee~⋎~curlywedge~⋏~curvearrowleft~↶~curvearrowright~↷~cuvee~⋎~cuwed~⋏~cwconint~∲~cwint~∱~cylcty~⌭~dHar~⥥~daleth~ℸ~dash~‐~dashv~⊣~dbkarow~⤏~dblac~˝~dcaron~ď~dcy~д~dd~ⅆ~ddagger~‡~ddarr~⇊~ddotseq~⩷~demptyv~⦱~dfisht~⥿~dfr~𝔡~dharl~⇃~dharr~⇂~diam~⋄~diamond~⋄~diamondsuit~♦~die~¨~digamma~ϝ~disin~⋲~div~÷~divideontimes~⋇~divonx~⋇~djcy~ђ~dlcorn~⌞~dlcrop~⌍~dollar~$~dopf~𝕕~dot~˙~doteq~≐~doteqdot~≑~dotminus~∸~dotplus~∔~dotsquare~⊡~doublebarwedge~⌆~downarrow~↓~downdownarrows~⇊~downharpoonleft~⇃~downharpoonright~⇂~drbkarow~⤐~drcorn~⌟~drcrop~⌌~dscr~𝒹~dscy~ѕ~dsol~⧶~dstrok~đ~dtdot~⋱~dtri~▿~dtrif~▾~duarr~⇵~duhar~⥯~dwangle~⦦~dzcy~џ~dzigrarr~⟿~eDDot~⩷~eDot~≑~easter~⩮~ecaron~ě~ecir~≖~ecolon~≕~ecy~э~edot~ė~ee~ⅇ~efDot~≒~efr~𝔢~eg~⪚~egs~⪖~egsdot~⪘~el~⪙~elinters~⏧~ell~ℓ~els~⪕~elsdot~⪗~emacr~ē~emptyset~∅~emptyv~∅~emsp13~ ~emsp14~ ~eng~ŋ~eogon~ę~eopf~𝕖~epar~⋕~eparsl~⧣~eplus~⩱~epsi~ε~epsiv~ϵ~eqcirc~≖~eqcolon~≕~eqsim~≂~eqslantgtr~⪖~eqslantless~⪕~equals~=~equest~≟~equivDD~⩸~eqvparsl~⧥~erDot~≓~erarr~⥱~escr~ℯ~esdot~≐~esim~≂~excl~!~expectation~ℰ~exponentiale~ⅇ~fallingdotseq~≒~fcy~ф~female~♀~ffilig~ﬃ~fflig~ﬀ~ffllig~ﬄ~ffr~𝔣~filig~ﬁ~fjlig~fj~flat~♭~fllig~ﬂ~fltns~▱~fopf~𝕗~fork~⋔~forkv~⫙~fpartint~⨍~frac13~⅓~frac15~⅕~frac16~⅙~frac18~⅛~frac23~⅔~frac25~⅖~frac35~⅗~frac38~⅜~frac45~⅘~frac56~⅚~frac58~⅝~frac78~⅞~frown~⌢~fscr~𝒻~gE~≧~gEl~⪌~gacute~ǵ~gammad~ϝ~gap~⪆~gbreve~ğ~gcirc~ĝ~gcy~г~gdot~ġ~gel~⋛~geq~≥~geqq~≧~geqslant~⩾~ges~⩾~gescc~⪩~gesdot~⪀~gesdoto~⪂~gesdotol~⪄~gesl~⋛︀~gesles~⪔~gfr~𝔤~gg~≫~ggg~⋙~gimel~ℷ~gjcy~ѓ~gl~≷~glE~⪒~gla~⪥~glj~⪤~gnE~≩~gnap~⪊~gnapprox~⪊~gne~⪈~gneq~⪈~gneqq~≩~gnsim~⋧~gopf~𝕘~grave~`~gscr~ℊ~gsim~≳~gsime~⪎~gsiml~⪐~gtcc~⪧~gtcir~⩺~gtdot~⋗~gtlPar~⦕~gtquest~⩼~gtrapprox~⪆~gtrarr~⥸~gtrdot~⋗~gtreqless~⋛~gtreqqless~⪌~gtrless~≷~gtrsim~≳~gvertneqq~≩︀~gvnE~≩︀~hairsp~ ~half~½~hamilt~ℋ~hardcy~ъ~harrcir~⥈~harrw~↭~hbar~ℏ~hcirc~ĥ~heartsuit~♥~hercon~⊹~hfr~𝔥~hksearow~⤥~hkswarow~⤦~hoarr~⇿~homtht~∻~hookleftarrow~↩~hookrightarrow~↪~hopf~𝕙~horbar~―~hscr~𝒽~hslash~ℏ~hstrok~ħ~hybull~⁃~hyphen~‐~ic~⁣~icy~и~iecy~е~iff~⇔~ifr~𝔦~ii~ⅈ~iiiint~⨌~iiint~∭~iinfin~⧜~iiota~℩~ijlig~ĳ~imacr~ī~imagline~ℐ~imagpart~ℑ~imath~ı~imof~⊷~imped~Ƶ~in~∈~incare~℅~infintie~⧝~inodot~ı~intcal~⊺~integers~ℤ~intercal~⊺~intlarhk~⨗~intprod~⨼~iocy~ё~iogon~į~iopf~𝕚~iprod~⨼~iscr~𝒾~isinE~⋹~isindot~⋵~isins~⋴~isinsv~⋳~isinv~∈~it~⁢~itilde~ĩ~iukcy~і~jcirc~ĵ~jcy~й~jfr~𝔧~jmath~ȷ~jopf~𝕛~jscr~𝒿~jsercy~ј~jukcy~є~kappav~ϰ~kcedil~ķ~kcy~к~kfr~𝔨~kgreen~ĸ~khcy~х~kjcy~ќ~kopf~𝕜~kscr~𝓀~lAarr~⇚~lAtail~⤛~lBarr~⤎~lE~≦~lEg~⪋~lHar~⥢~lacute~ĺ~laemptyv~⦴~lagran~ℒ~langd~⦑~langle~⟨~lap~⪅~larrb~⇤~larrbfs~⤟~larrfs~⤝~larrhk~↩~larrlp~↫~larrpl~⤹~larrsim~⥳~larrtl~↢~lat~⪫~latail~⤙~late~⪭~lates~⪭︀~lbarr~⤌~lbbrk~❲~lbrace~{~lbrack~[~lbrke~⦋~lbrksld~⦏~lbrkslu~⦍~lcaron~ľ~lcedil~ļ~lcub~{~lcy~л~ldca~⤶~ldquor~„~ldrdhar~⥧~ldrushar~⥋~ldsh~↲~leftarrow~←~leftarrowtail~↢~leftharpoondown~↽~leftharpoonup~↼~leftleftarrows~⇇~leftrightarrow~↔~leftrightarrows~⇆~leftrightharpoons~⇋~leftrightsquigarrow~↭~leftthreetimes~⋋~leg~⋚~leq~≤~leqq~≦~leqslant~⩽~les~⩽~lescc~⪨~lesdot~⩿~lesdoto~⪁~lesdotor~⪃~lesg~⋚︀~lesges~⪓~lessapprox~⪅~lessdot~⋖~lesseqgtr~⋚~lesseqqgtr~⪋~lessgtr~≶~lesssim~≲~lfisht~⥼~lfr~𝔩~lg~≶~lgE~⪑~lhard~↽~lharu~↼~lharul~⥪~lhblk~▄~ljcy~љ~ll~≪~llarr~⇇~llcorner~⌞~llhard~⥫~lltri~◺~lmidot~ŀ~lmoust~⎰~lmoustache~⎰~lnE~≨~lnap~⪉~lnapprox~⪉~lne~⪇~lneq~⪇~lneqq~≨~lnsim~⋦~loang~⟬~loarr~⇽~lobrk~⟦~longleftarrow~⟵~longleftrightarrow~⟷~longmapsto~⟼~longrightarrow~⟶~looparrowleft~↫~looparrowright~↬~lopar~⦅~lopf~𝕝~loplus~⨭~lotimes~⨴~lowbar~_~lozenge~◊~lozf~⧫~lpar~(~lparlt~⦓~lrarr~⇆~lrcorner~⌟~lrhar~⇋~lrhard~⥭~lrtri~⊿~lscr~𝓁~lsh~↰~lsim~≲~lsime~⪍~lsimg~⪏~lsqb~[~lsquor~‚~lstrok~ł~ltcc~⪦~ltcir~⩹~ltdot~⋖~lthree~⋋~ltimes~⋉~ltlarr~⥶~ltquest~⩻~ltrPar~⦖~ltri~◃~ltrie~⊴~ltrif~◂~lurdshar~⥊~luruhar~⥦~lvertneqq~≨︀~lvnE~≨︀~mDDot~∺~male~♂~malt~✠~maltese~✠~map~↦~mapsto~↦~mapstodown~↧~mapstoleft~↤~mapstoup~↥~marker~▮~mcomma~⨩~mcy~м~measuredangle~∡~mfr~𝔪~mho~℧~mid~∣~midast~*~midcir~⫰~minusb~⊟~minusd~∸~minusdu~⨪~mlcp~⫛~mldr~…~mnplus~∓~models~⊧~mopf~𝕞~mp~∓~mscr~𝓂~mstpos~∾~multimap~⊸~mumap~⊸~nGg~⋙̸~nGt~≫⃒~nGtv~≫̸~nLeftarrow~⇍~nLeftrightarrow~⇎~nLl~⋘̸~nLt~≪⃒~nLtv~≪̸~nRightarrow~⇏~nVDash~⊯~nVdash~⊮~nacute~ń~nang~∠⃒~nap~≉~napE~⩰̸~napid~≋̸~napos~ŉ~napprox~≉~natur~♮~natural~♮~naturals~ℕ~nbump~≎̸~nbumpe~≏̸~ncap~⩃~ncaron~ň~ncedil~ņ~ncong~≇~ncongdot~⩭̸~ncup~⩂~ncy~н~neArr~⇗~nearhk~⤤~nearr~↗~nearrow~↗~nedot~≐̸~nequiv~≢~nesear~⤨~nesim~≂̸~nexist~∄~nexists~∄~nfr~𝔫~ngE~≧̸~nge~≱~ngeq~≱~ngeqq~≧̸~ngeqslant~⩾̸~nges~⩾̸~ngsim~≵~ngt~≯~ngtr~≯~nhArr~⇎~nharr~↮~nhpar~⫲~nis~⋼~nisd~⋺~niv~∋~njcy~њ~nlArr~⇍~nlE~≦̸~nlarr~↚~nldr~‥~nle~≰~nleftarrow~↚~nleftrightarrow~↮~nleq~≰~nleqq~≦̸~nleqslant~⩽̸~nles~⩽̸~nless~≮~nlsim~≴~nlt~≮~nltri~⋪~nltrie~⋬~nmid~∤~nopf~𝕟~notinE~⋹̸~notindot~⋵̸~notinva~∉~notinvb~⋷~notinvc~⋶~notni~∌~notniva~∌~notnivb~⋾~notnivc~⋽~npar~∦~nparallel~∦~nparsl~⫽⃥~npart~∂̸~npolint~⨔~npr~⊀~nprcue~⋠~npre~⪯̸~nprec~⊀~npreceq~⪯̸~nrArr~⇏~nrarr~↛~nrarrc~⤳̸~nrarrw~↝̸~nrightarrow~↛~nrtri~⋫~nrtrie~⋭~nsc~⊁~nsccue~⋡~nsce~⪰̸~nscr~𝓃~nshortmid~∤~nshortparallel~∦~nsim~≁~nsime~≄~nsimeq~≄~nsmid~∤~nspar~∦~nsqsube~⋢~nsqsupe~⋣~nsubE~⫅̸~nsube~⊈~nsubset~⊂⃒~nsubseteq~⊈~nsubseteqq~⫅̸~nsucc~⊁~nsucceq~⪰̸~nsup~⊅~nsupE~⫆̸~nsupe~⊉~nsupset~⊃⃒~nsupseteq~⊉~nsupseteqq~⫆̸~ntgl~≹~ntlg~≸~ntriangleleft~⋪~ntrianglelefteq~⋬~ntriangleright~⋫~ntrianglerighteq~⋭~num~#~numero~№~numsp~ ~nvDash~⊭~nvHarr~⤄~nvap~≍⃒~nvdash~⊬~nvge~≥⃒~nvgt~>⃒~nvinfin~⧞~nvlArr~⤂~nvle~≤⃒~nvlt~<⃒~nvltrie~⊴⃒~nvrArr~⤃~nvrtrie~⊵⃒~nvsim~∼⃒~nwArr~⇖~nwarhk~⤣~nwarr~↖~nwarrow~↖~nwnear~⤧~oS~Ⓢ~oast~⊛~ocir~⊚~ocy~о~odash~⊝~odblac~ő~odiv~⨸~odot~⊙~odsold~⦼~ofcir~⦿~ofr~𝔬~ogon~˛~ogt~⧁~ohbar~⦵~ohm~Ω~oint~∮~olarr~↺~olcir~⦾~olcross~⦻~olt~⧀~omacr~ō~omid~⦶~ominus~⊖~oopf~𝕠~opar~⦷~operp~⦹~orarr~↻~ord~⩝~order~ℴ~orderof~ℴ~origof~⊶~oror~⩖~orslope~⩗~orv~⩛~oscr~ℴ~osol~⊘~otimesas~⨶~ovbar~⌽~par~∥~parallel~∥~parsim~⫳~parsl~⫽~pcy~п~percnt~%~period~.~pertenk~‱~pfr~𝔭~phiv~ϕ~phmmat~ℳ~phone~☎~pitchfork~⋔~planck~ℏ~planckh~ℎ~plankv~ℏ~plus~+~plusacir~⨣~plusb~⊞~pluscir~⨢~plusdo~∔~plusdu~⨥~pluse~⩲~plussim~⨦~plustwo~⨧~pm~±~pointint~⨕~popf~𝕡~pr~≺~prE~⪳~prap~⪷~prcue~≼~pre~⪯~prec~≺~precapprox~⪷~preccurlyeq~≼~preceq~⪯~precnapprox~⪹~precneqq~⪵~precnsim~⋨~precsim~≾~primes~ℙ~prnE~⪵~prnap~⪹~prnsim~⋨~profalar~⌮~profline~⌒~profsurf~⌓~propto~∝~prsim~≾~prurel~⊰~pscr~𝓅~puncsp~ ~qfr~𝔮~qint~⨌~qopf~𝕢~qprime~⁗~qscr~𝓆~quaternions~ℍ~quatint~⨖~quest~?~questeq~≟~rAarr~⇛~rAtail~⤜~rBarr~⤏~rHar~⥤~race~∽̱~racute~ŕ~raemptyv~⦳~rangd~⦒~range~⦥~rangle~⟩~rarrap~⥵~rarrb~⇥~rarrbfs~⤠~rarrc~⤳~rarrfs~⤞~rarrhk~↪~rarrlp~↬~rarrpl~⥅~rarrsim~⥴~rarrtl~↣~rarrw~↝~ratail~⤚~ratio~∶~rationals~ℚ~rbarr~⤍~rbbrk~❳~rbrace~}~rbrack~]~rbrke~⦌~rbrksld~⦎~rbrkslu~⦐~rcaron~ř~rcedil~ŗ~rcub~}~rcy~р~rdca~⤷~rdldhar~⥩~rdquor~”~rdsh~↳~realine~ℛ~realpart~ℜ~reals~ℝ~rect~▭~rfisht~⥽~rfr~𝔯~rhard~⇁~rharu~⇀~rharul~⥬~rhov~ϱ~rightarrow~→~rightarrowtail~↣~rightharpoondown~⇁~rightharpoonup~⇀~rightleftarrows~⇄~rightleftharpoons~⇌~rightrightarrows~⇉~rightsquigarrow~↝~rightthreetimes~⋌~ring~˚~risingdotseq~≓~rlarr~⇄~rlhar~⇌~rmoust~⎱~rmoustache~⎱~rnmid~⫮~roang~⟭~roarr~⇾~robrk~⟧~ropar~⦆~ropf~𝕣~roplus~⨮~rotimes~⨵~rpar~)~rpargt~⦔~rppolint~⨒~rrarr~⇉~rscr~𝓇~rsh~↱~rsqb~]~rsquor~’~rthree~⋌~rtimes~⋊~rtri~▹~rtrie~⊵~rtrif~▸~rtriltri~⧎~ruluhar~⥨~rx~℞~sacute~ś~sc~≻~scE~⪴~scap~⪸~sccue~≽~sce~⪰~scedil~ş~scirc~ŝ~scnE~⪶~scnap~⪺~scnsim~⋩~scpolint~⨓~scsim~≿~scy~с~sdotb~⊡~sdote~⩦~seArr~⇘~searhk~⤥~searr~↘~searrow~↘~semi~;~seswar~⤩~setminus~∖~setmn~∖~sext~✶~sfr~𝔰~sfrown~⌢~sharp~♯~shchcy~щ~shcy~ш~shortmid~∣~shortparallel~∥~sigmav~ς~simdot~⩪~sime~≃~simeq~≃~simg~⪞~simgE~⪠~siml~⪝~simlE~⪟~simne~≆~simplus~⨤~simrarr~⥲~slarr~←~smallsetminus~∖~smashp~⨳~smeparsl~⧤~smid~∣~smile~⌣~smt~⪪~smte~⪬~smtes~⪬︀~softcy~ь~sol~/~solb~⧄~solbar~⌿~sopf~𝕤~spadesuit~♠~spar~∥~sqcap~⊓~sqcaps~⊓︀~sqcup~⊔~sqcups~⊔︀~sqsub~⊏~sqsube~⊑~sqsubset~⊏~sqsubseteq~⊑~sqsup~⊐~sqsupe~⊒~sqsupset~⊐~sqsupseteq~⊒~squ~□~square~□~squarf~▪~squf~▪~srarr~→~sscr~𝓈~ssetmn~∖~ssmile~⌣~sstarf~⋆~star~☆~starf~★~straightepsilon~ϵ~straightphi~ϕ~strns~¯~subE~⫅~subdot~⪽~subedot~⫃~submult~⫁~subnE~⫋~subne~⊊~subplus~⪿~subrarr~⥹~subset~⊂~subseteq~⊆~subseteqq~⫅~subsetneq~⊊~subsetneqq~⫋~subsim~⫇~subsub~⫕~subsup~⫓~succ~≻~succapprox~⪸~succcurlyeq~≽~succeq~⪰~succnapprox~⪺~succneqq~⪶~succnsim~⋩~succsim~≿~sung~♪~supE~⫆~supdot~⪾~supdsub~⫘~supedot~⫄~suphsol~⟉~suphsub~⫗~suplarr~⥻~supmult~⫂~supnE~⫌~supne~⊋~supplus~⫀~supset~⊃~supseteq~⊇~supseteqq~⫆~supsetneq~⊋~supsetneqq~⫌~supsim~⫈~supsub~⫔~supsup~⫖~swArr~⇙~swarhk~⤦~swarr~↙~swarrow~↙~swnwar~⤪~target~⌖~tbrk~⎴~tcaron~ť~tcedil~ţ~tcy~т~tdot~⃛~telrec~⌕~tfr~𝔱~therefore~∴~thetav~ϑ~thickapprox~≈~thicksim~∼~thkap~≈~thksim~∼~timesb~⊠~timesbar~⨱~timesd~⨰~tint~∭~toea~⤨~top~⊤~topbot~⌶~topcir~⫱~topf~𝕥~topfork~⫚~tosa~⤩~tprime~‴~triangle~▵~triangledown~▿~triangleleft~◃~trianglelefteq~⊴~triangleq~≜~triangleright~▹~trianglerighteq~⊵~tridot~◬~trie~≜~triminus~⨺~triplus~⨹~trisb~⧍~tritime~⨻~trpezium~⏢~tscr~𝓉~tscy~ц~tshcy~ћ~tstrok~ŧ~twixt~≬~twoheadleftarrow~↞~twoheadrightarrow~↠~uHar~⥣~ubrcy~ў~ubreve~ŭ~ucy~у~udarr~⇅~udblac~ű~udhar~⥮~ufisht~⥾~ufr~𝔲~uharl~↿~uharr~↾~uhblk~▀~ulcorn~⌜~ulcorner~⌜~ulcrop~⌏~ultri~◸~umacr~ū~uogon~ų~uopf~𝕦~uparrow~↑~updownarrow~↕~upharpoonleft~↿~upharpoonright~↾~uplus~⊎~upsi~υ~upuparrows~⇈~urcorn~⌝~urcorner~⌝~urcrop~⌎~uring~ů~urtri~◹~uscr~𝓊~utdot~⋰~utilde~ũ~utri~▵~utrif~▴~uuarr~⇈~uwangle~⦧~vArr~⇕~vBar~⫨~vBarv~⫩~vDash~⊨~vangrt~⦜~varepsilon~ϵ~varkappa~ϰ~varnothing~∅~varphi~ϕ~varpi~ϖ~varpropto~∝~varr~↕~varrho~ϱ~varsigma~ς~varsubsetneq~⊊︀~varsubsetneqq~⫋︀~varsupsetneq~⊋︀~varsupsetneqq~⫌︀~vartheta~ϑ~vartriangleleft~⊲~vartriangleright~⊳~vcy~в~vdash~⊢~vee~∨~veebar~⊻~veeeq~≚~vellip~⋮~verbar~|~vert~|~vfr~𝔳~vltri~⊲~vnsub~⊂⃒~vnsup~⊃⃒~vopf~𝕧~vprop~∝~vrtri~⊳~vscr~𝓋~vsubnE~⫋︀~vsubne~⊊︀~vsupnE~⫌︀~vsupne~⊋︀~vzigzag~⦚~wcirc~ŵ~wedbar~⩟~wedge~∧~wedgeq~≙~wfr~𝔴~wopf~𝕨~wp~℘~wr~≀~wreath~≀~wscr~𝓌~xcap~⋂~xcirc~◯~xcup~⋃~xdtri~▽~xfr~𝔵~xhArr~⟺~xharr~⟷~xlArr~⟸~xlarr~⟵~xmap~⟼~xnis~⋻~xodot~⨀~xopf~𝕩~xoplus~⨁~xotime~⨂~xrArr~⟹~xrarr~⟶~xscr~𝓍~xsqcup~⨆~xuplus~⨄~xutri~△~xvee~⋁~xwedge~⋀~yacy~я~ycirc~ŷ~ycy~ы~yfr~𝔶~yicy~ї~yopf~𝕪~yscr~𝓎~yucy~ю~zacute~ź~zcaron~ž~zcy~з~zdot~ż~zeetrf~ℨ~zfr~𝔷~zhcy~ж~zigrarr~⇝~zopf~𝕫~zscr~𝓏~~AMP~&~COPY~©~GT~>~LT~<~QUOT~"~REG~®', exports$1.namedReferences["html4"]);
   })(namedReferences);
   return namedReferences;
 }
@@ -73464,7 +77584,7 @@ class ARCFourCipher {
     return this.encryptBlock(data);
   }
 }
-const calculateMD5 = function calculateMD5Closure() {
+const calculateMD5 = (function calculateMD5Closure() {
   const r = new Uint8Array([
     7,
     12,
@@ -73669,7 +77789,7 @@ const calculateMD5 = function calculateMD5Closure() {
     ]);
   }
   return hash;
-}();
+})();
 class Word64 {
   constructor(highInteger, lowInteger) {
     this.high = highInteger | 0;
@@ -73746,7 +77866,7 @@ class Word64 {
     this.low = word.low;
   }
 }
-const calculateSHA256 = /* @__PURE__ */ function calculateSHA256Closure() {
+const calculateSHA256 = /* @__PURE__ */ (function calculateSHA256Closure() {
   function rotr(x, n) {
     return x >>> n | x << 32 - n;
   }
@@ -73922,8 +78042,8 @@ const calculateSHA256 = /* @__PURE__ */ function calculateSHA256Closure() {
     ]);
   }
   return hash;
-}();
-const calculateSHA512 = function calculateSHA512Closure() {
+})();
+const calculateSHA512 = (function calculateSHA512Closure() {
   function ch(result2, x, y, z, tmp) {
     result2.assign(x);
     result2.and(y);
@@ -74200,7 +78320,7 @@ const calculateSHA512 = function calculateSHA512Closure() {
     return result2;
   }
   return hash;
-}();
+})();
 function calculateSHA384(data, offset, length) {
   return calculateSHA512(
     data,
@@ -79009,26 +83129,6 @@ class PDFButton extends PDFField {
   }
 }
 PDFButton.of = (acroPushButton, ref, doc) => new PDFButton(acroPushButton, ref, doc);
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function isText(field) {
   return "text" in field;
 }
@@ -79044,26 +83144,6 @@ function isDropdown(field) {
 function isFillable(field) {
   return "fieldName" in field;
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
 function fillField(doc, field) {
   const form = doc.getForm();
   const { fieldName } = field;
@@ -79204,29 +83284,6 @@ async function collateDocuments(documents, applicant) {
   pages.flat().forEach((page) => result2.addPage(page));
   return result2.save();
 }
-/*!
- * @licstart The following is the entire license notice for the JavaScript code in this file.
- * Copyright (C) 2023-2025 Sasha Lišková and Stephanie Beckon
- *
- * This file is part of Transpapers.
- *
- * Transpapers is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * Transpapers is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * Transpapers. If not, see <https://www.gnu.org/licenses/>.
- * @licend The above is the entire license notice for the JavaScript code in this file.
- */
-/*!
- * A single US state or territory.
- */
 function getProcesses$1(name) {
   return allJurisdictions.find((jurisdiction) => jurisdiction.name === name)?.processes ?? [];
 }
@@ -79261,12 +83318,14 @@ function compileInstructions(applicant, processes) {
 }
 function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
   const allProcs = allProcesses(residentJurisdiction, birthJurisdiction);
+  const filteredProcs = allProcs;
+  const applicant = useStore((state) => state.person);
   const processes = [];
   const metTargets = [];
   let count = 0;
   while (metTargets.length < setTargets.length && ++count < 100) {
     let addedSomethingThisTime = false;
-    for (const proc of allProcs) {
+    for (const proc of filteredProcs) {
       if (proc.target && !metTargets.includes(proc.target)) {
         const deps = proc.depends ?? [];
         const allMet = deps.reduce(
@@ -79275,13 +83334,54 @@ function getProcesses(residentJurisdiction, birthJurisdiction, setTargets) {
         );
         if (allMet) {
           addedSomethingThisTime = true;
-          processes.push(proc);
           metTargets.push(proc.target);
         }
       }
     }
     if (!addedSomethingThisTime) {
       return void 0;
+    }
+  }
+  if (applicant.isChangingLegalName) {
+    for (const nameProc of allProcs) {
+      if (nameProc.target === Target.NameChange) {
+        processes.push(nameProc);
+      }
+    }
+  }
+  if (applicant.isChangingLegalSex) {
+    for (const genderProc of allProcs) {
+      if (genderProc.target === Target.GenderMarker) {
+        processes.push(genderProc);
+      }
+    }
+  }
+  if (applicant.isChangingSocialSecurity) {
+    for (const socialProc of allProcs) {
+      if (socialProc.target === Target.SocialSecurity) {
+        processes.push(socialProc);
+      }
+    }
+  }
+  if (applicant.isChangingPrimaryID) {
+    for (const idProc of allProcs) {
+      if (idProc.target === Target.PrimaryIdentification) {
+        processes.push(idProc);
+      }
+    }
+  }
+  if (applicant.isChangingBirthCert) {
+    for (const birthProc of allProcs) {
+      if (birthProc.isBirth) {
+        processes.push(birthProc);
+      }
+    }
+  }
+  if (applicant.isChangingPassport) {
+    for (const passProc of allProcs) {
+      if (passProc.target === Target.Passport) {
+        processes.push(passProc);
+      }
     }
   }
   const guideProcesses = residentJurisdiction.processes.filter((p) => p.isJustGuide);
