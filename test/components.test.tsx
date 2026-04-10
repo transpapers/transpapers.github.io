@@ -504,7 +504,7 @@ const californiaGuideComponents = [
   },
   {
     name: "CaliforniaNC110GGuide",
-    component: <CaliforniaNC110GGuide person={sampleData} />,
+    component: <CaliforniaNC110GGuide />,
   },
   {
     name: "KernRelatedCasesGuide",

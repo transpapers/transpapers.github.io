@@ -21,7 +21,7 @@
 
 import { type AnyJurisdiction } from "../types/generic";
 import { type Jurisdiction } from "../types/jurisdiction";
-import { CaliforniaCounty, type Locality } from "../types/locality";
+import { type Locality } from "../types/locality";
 
 import {
   michiganBirthRecord,
@@ -91,6 +91,7 @@ import {
   californiaPostamble,
 } from "./California/process";
 import californiaCounties from "./California/localities";
+import { CaliforniaCounty } from "../types/locality";
 
 import { passport, socialSecurity } from "./Federal/process";
 
