@@ -24,6 +24,13 @@ export interface Locality {
   court: Court;
 }
 
+/*
+ * If you add a new type of Locality, please make sure to update the
+ * AnyLocality type in src/types/generic.ts to appease the type checker. I'm
+ * sorry, there's no way to do this in TypeScript. I checked.
+ * 							- AVKL 2026-04-10
+ */
+
 export type AlaskaAdministrativeDivision = Locality & {
   doesNameChange: boolean;
   inPersonFiling: boolean;
@@ -34,37 +41,24 @@ export type AlaskaAdministrativeDivision = Locality & {
   trueFiling: boolean;
 };
 
-export type NewYorkCounty = Locality & {
-  borough?: string;
-  courtType: string;
-  isNYC?: boolean;
-};
-
 export type CaliforniaCounty = Locality & {
   multiCourt: boolean;
   courtByZip: boolean;
-  allCourts: caliCourt[];
+  allCourts: CaliforniaCourt[];
   zipCourts?: Record<string, string>;
   newspaperList?: boolean;
   publications?: Publication[];
 };
 
-export type TexasCounty = Locality & {
-  backgroundCheckRequired: boolean;
-  standingOrderRequired: boolean;
+export type MichiganCounty = Locality & {
+  fingerprintLocations: FingerprintLocation[];
+  publications: Publication[];
 };
 
-export type RhodeIslandCityOrTown = Locality & {
-  county: string;
-  advertisementRequired: boolean;
-  courtDoesAdvertisement: boolean;
-
-  backgroundCheckRequired: boolean;
-  courtDoesBackgroundCheck: boolean;
-
-  publications?: Publication[];
-
-  filingCost: string;
+export type NewYorkCounty = Locality & {
+  borough?: string;
+  courtType: string;
+  isNYC?: boolean;
 };
 
 export type OhioCounty = Locality & {
@@ -96,9 +90,23 @@ export type OhioCounty = Locality & {
   filingCost: string;
 };
 
-export type MichiganCounty = Locality & {
-  fingerprintLocations: FingerprintLocation[];
-  publications: Publication[];
+export type RhodeIslandCityOrTown = Locality & {
+  county: string;
+  advertisementRequired: boolean;
+  courtDoesAdvertisement: boolean;
+
+  backgroundCheckRequired: boolean;
+  courtDoesBackgroundCheck: boolean;
+
+  publications?: Publication[];
+
+  filingCost: string;
+};
+
+
+export type TexasCounty = Locality & {
+  backgroundCheckRequired: boolean;
+  standingOrderRequired: boolean;
 };
 
 export interface Court {
@@ -108,19 +116,14 @@ export interface Court {
   phone: string;
   website?: string;
   specificCourtInfo?: string;
-}
+};
 
-export interface caliCourt {
+export type CaliforniaCourt = Court & {
   name: string;
-  address: string;
-  city: string;
-  phone: string;
-  website?: string;
-  specificCourtInfo?: string;
   courtZip?: string;
   courtMailAddress?: string;
   caCourtSpecificInfo?: string;
-}
+};
 
 export interface FingerprintLocation {
   name: string;
