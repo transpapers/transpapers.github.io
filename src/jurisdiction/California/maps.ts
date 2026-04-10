@@ -459,11 +459,13 @@ export const nameChangeOnlyInfoMap: Formfill[] = [
     check: isMinor(applicant),
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].person[1]",
   }),
+/*
   (applicant) => ({
     text: fullName(applicant.legalName),
     //eslint-disable-next-line
     fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b1[0].Petitioner\.applies\.for\.item\.7b1\.ft[0]",
   }),
+*/
   (applicant) => ({
     text: fullName(applicant.chosenName),
     //eslint-disable-next-line
@@ -1091,11 +1093,13 @@ export const minorNameGenderOrderMap: Formfill[] = [
     check: applicant.isChangingLegalName,
     fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].Checkbox55[0]",
   }),
+/*
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
     //eslint-disable-next-line
     fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]",
   }),
+*/
 ];
 
 /*!
