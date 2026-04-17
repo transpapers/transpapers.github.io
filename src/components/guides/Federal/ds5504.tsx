@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function DS5504Guide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
+  const { age, isChangingLegalName, gender } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
