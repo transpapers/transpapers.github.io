@@ -25,7 +25,7 @@ import { type Person } from "../../../types/person";
 
 // TODO Give this a once-over for style.
 function DS11Guide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
+  const { age, isChangingLegalName, gender } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
@@ -67,9 +67,8 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
 
       <p>
         Now you will need to go to a location that you can apply in with this
-        DS-11 passport form, {isChangingLegalSex ? " attestation form, " : ""}
-        your primary id, a checkbook for fees, and your photo. You can find
-        application locations at his URL:{" "}
+        DS-11 passport form, your primary id, a checkbook for fees, and your 
+        photo. You can find application locations at his URL:{" "}
         <a href="https://iafdb.travel.state.gov/">
           https://iafdb.travel.state.gov/
         </a>

@@ -39,7 +39,8 @@ function CaliforniaResourcesGuide() {
             Transgender Law Center
           </a>
           : They are a legal group advocating for trans rights and maintain several
-          guides and 
+          guides and other legal resources to help with updating documents or other
+          legal issues.
         </li>
         <li>
           <a href="https://community.lalgbtcenter.org/tgi-enby-resource-index/legal-resources/">

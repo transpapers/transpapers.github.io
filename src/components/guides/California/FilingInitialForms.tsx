@@ -56,10 +56,10 @@ function CaliforniaFilingGuide({
     
       <p>
         {age && age < 18 ? "A parent/guardian " : "You "} should bring all of the completed
-        forms from the first section as well as photo ID and payment. The fee in California
-        for filing varies between courts and is updated frequently but is typically between
-        $350 to $450 dollars without the fee waiver. Payment methods should still be
-        brought in any case.
+        forms listed above as well as photo ID and payment. The fee in California for filing 
+        varies between courts and is updated frequently but is typically between $350 to 
+        $450 dollars without the fee waiver. Payment methods should still be brought in any 
+        case.
       </p>
 
     {residentLocality.courtByZip ? (
@@ -102,7 +102,7 @@ function CaliforniaFilingGuide({
 
       <p>
         If the court(s) listed above appear wrong or you simply want more
-        information check this 
+        information check this{" "}
         <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
             map
         </a>

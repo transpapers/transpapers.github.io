@@ -56,11 +56,6 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
             " Check the box or boxes applicable to your situation on the first page. "
         ):(" ")}
         On page 5 at the top you will need to select which documents you want.
-        {gender && (gender as string) === "X" ? (
-          " Leave section 3 unchecked, you can pick the X marker on another form. "
-        ) : (
-          " "
-        )}
         Then fill out your social security number in section 5. If you have 
         changed your name multiple times before then you will need to add them 
         to section 9 if they are not already present. Fill out section 10 using 
@@ -87,21 +82,8 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
         plans write &ldquo;none&rdquo; in every box.
       </p>
 
-      {isChangingLegalSex ? (
-        <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is
-          new and allows for updating gender markers once again. To complete the
-          form simply
-          {age && age < 18 ? " have a parent/guardian sign " : " sign "}
-          on page 2.
-        </p>
-      ) : (
-        ""
-      )}
-
       <p>
-        Now you will need to place the DS-5504 passport form,
-        {isChangingLegalSex ? " attestation form, " : ""} old passport, and a
+        Now you will need to place the DS-5504 passport form, old passport, and a
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is no fee involved unless you
         choose to expedite the process, to do so make out a check for $60 to the

@@ -91,7 +91,7 @@ function CaliforniaBirthCertNameOnly({ person }: { person: Partial<Person> }) {
       </p>
 
       <p>
-        The estimated processing times are listed on the Vital Records website
+        The estimated processing times are listed on the Vital Records website{" "}
         <a href="https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Processing-Times.aspx">
           here
         </a>. 

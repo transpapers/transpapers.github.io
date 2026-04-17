@@ -29,7 +29,7 @@ function CaliforniaNC300Guide() {
 
       <p>
         This is the state form for name and gender marker changes. You need to sign and date
-        thr form on page 2, then the form is complete.
+        the form on page 2, then the form is complete.
       </p>
 
     </section>

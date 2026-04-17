@@ -34,14 +34,14 @@ function CaliforniaBirthCertNameGender({ person }: { person: Partial<Person> }) 
         This process is done by mail using the &ldquo;Application to Amend a Birth 
         Record&rdquo; (VS 24B) form. You will recieve a single copy of the updated 
         certificate unless you request more. To do so fill in the fee calculation box 
-        on the right for additional copies, otherwise just put $0 in that box. Total the 
-        fee directly below that.
+        on the <strong>right</strong> for additional copies, otherwise just put $0 
+        in that box. Total the fee directly below that.
       </p>
 
       <p>
         On page {age && age < 18 ? "your petitioner" : "you"} should then sign
         and date at the bottom. You will need someone else to also sign at the bottom of 
-        page 2, a list of authorized person is available on the next page in the 
+        page 2, a list of authorized people is available on the next page in the 
         &ldquo;Relationship to Registrant&rdquo; section. Do <strong>not</strong> sign 
         or date anywhere else, that should only be done in front of a notary.
         {age && age < 18 && !parentsAreOkay ? 
@@ -80,7 +80,7 @@ function CaliforniaBirthCertNameGender({ person }: { person: Partial<Person> }) 
       </p>
 
       <p>
-        The estimated processing times are listed on the Vital Records website
+        The estimated processing times are listed on the Vital Records website{" "}
         <a href="https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Processing-Times.aspx">
           here
         </a>. 

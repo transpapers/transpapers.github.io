@@ -37,15 +37,15 @@ function CaliforniaDMVGuide({
         This section covers the process of updating your primary identification
         (driver&apos;s license/state ID) and any vehicle registrations you may have.
         If this is not relevant to you, proceed to the next section. You will
-        need to fill out an online application at this
+        need to fill out an online application at this{" "}
         <a href="https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/dl-id-online-app-edl-44/">
           link
         </a>
-        . After that is done find your nearest field office
+        . After that is done find your nearest field office{" "}
         <a href="https://www.dmv.ca.gov/portal/locations/field-offices/">
           here
         </a>
-        . You can then go without an appointment or make one
+        . You can then go without an appointment or make one{" "}
         <a href="https://www.dmv.ca.gov/portal/appointments/select-appointment-type/">
           here
         </a>
@@ -63,11 +63,11 @@ function CaliforniaDMVGuide({
       <p>
         If you do <strong>not</strong> already have a driver&apos;s license or 
         state ID, tell the clerk that you are applying for one. For first time
-        applications for Real ID check this 
+        applications for Real ID check this{" "}
         <a href="https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/real-id/real-id-checklist/">
           list
         </a>
-        {" "}for what documents you need to bring, for non-Real ID use this
+        {" "}for what documents you need to bring, for non-Real ID use this{" "}
         <a href="https://www.dmv.ca.gov/portal/file/federal-non-compliant-dl-id-card-documents-list-pdf/">
           list
         </a>

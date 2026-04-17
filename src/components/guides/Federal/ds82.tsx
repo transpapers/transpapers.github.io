@@ -26,7 +26,7 @@ import { type Person } from "../../../types/person";
 // TODO Give this a once-over for style.
 // TODO Unify this with the other two passport forms.
 function DS82Guide({ person }: { person: Partial<Person> }) {
-  const { isChangingLegalSex, isChangingLegalName, gender } = person;
+  const { isChangingLegalName, gender } = person;
   return (
     <section key="Federal-Passport">
       <h3>Obtaining Your Passport</h3>
@@ -69,19 +69,8 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
         write &ldquo;none&rdquo; in every box.
       </p>
 
-      {isChangingLegalSex ? (
-        <p>
-          The &ldquo;Attestation of Orr v. Trump Class Membership&rdquo; form is
-          new and allows for updating gender markers once again. To complete the
-          form simply sign on page 2.
-        </p>
-      ) : (
-        ""
-      )}
-
       <p>
-        Now you will need to place the DS-82 passport form,
-        {isChangingLegalSex ? " attestation form, " : ""} old passport, and a
+        Now you will need to place the DS-82 passport form, old passport, and a
         certified copy of your court order in an envelope. We suggest two stamps
         on the envelope for weight reasons. There is a fee involved which is
         dependent on your choices, go to section 5 of the following URL to see
