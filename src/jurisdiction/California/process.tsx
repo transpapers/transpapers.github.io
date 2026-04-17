@@ -24,7 +24,7 @@ import { isMinor } from "../../lib/util";
 import {
   civilCaseCoverMap,
   nameChangeOnlyPetitionMap,
-  //adultNameGenderPetitionMap,
+  adultNameGenderPetitionMap,
   //minorNameGenderPetitionMap,
   nameChangeOnlyInfoMap,
   minorGuardianDeclarationMap,
@@ -90,7 +90,7 @@ import CaliforniaNC120Guide from "../../components/guides/California/NC120Public
 //import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
 import CaliforniaNC130GGuide from "../../components/guides/California/NC130GuardianOrder";
 import CaliforniaNC130Guide from "../../components/guides/California/NC130OrderAll";
-//import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
+import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
 //import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
 //import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
 //import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
@@ -216,7 +216,6 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
         && !applicant.parentsAreOkay,
     },
 
-   /*
     //Name and Gender stuff here
     {
       name: "Petition for Recognition of Change of Gender and Sex Identifier",
@@ -227,6 +226,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => !isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
+   /*
     {
       name: "Order to Show Cause--Change of Name to Conform to Gender Identity",
       id: "NC-125",
