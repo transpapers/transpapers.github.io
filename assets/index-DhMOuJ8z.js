@@ -41171,6 +41171,120 @@ const adultNameGenderPetitionMap = [
     fieldName: "NC-300[0].Page2[0].Declaration[0].PetitionerSign[0].T14[0]"
   })
 ];
+const minorNameGenderPetitionMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-500[0].Page1[0].P1Header[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-500[0].Page1[0].P1Header[0].TitlePartyName[0].Party1_ft[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-500[0].Page1[0].P1Header[0].FormTitle[0].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-500[0].Page1[0].List1[0].FillText16[0]"
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "NC-500[0].Page1[0].List1[0].Li1A[0].Requester_rb[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-500[0].Page1[0].List1[0].Li1A[0].FillText16[0]"
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "NC-500[0].Page1[0].List3[0].Li3B[0].parents[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-500[0].Page1[0].List5[0].Li5A[0].ReqGender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-500[0].Page1[0].List5[0].Li5B[0].ReqGender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-500[0].Page1[0].List5[0].Li5C[0].ReqGender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-500[0].Page2[0].List9[0].request[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-500[0].Page2[0].List9[0].TextField[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName === "California",
+    fieldName: "NC-500[0].Page2[0].List9[0].Li9B[0].Sublist9b[0].Li9B1[0].location[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-500[0].Page2[0].List9[0].Li9B[0].Sublist9b[0].Li9B2[0].location[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-500[0].Page2[0].Declaration[0].FillText44[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[1]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[2]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-500[0].Page2[0].Date[0].Date1[0].T14[0]"
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? `${fullName(representativeName(applicant))}, Parent` : "",
+    fieldName: "NC-500[0].Page2[0].Date[0].Date2[0].T14[0]"
+  })
+];
 const nameChangeOnlyInfoMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -41406,6 +41520,64 @@ const nameChangeOnlyConformMap = [
     fieldName: "NC-125_NC-225[0].Page1[0].List1[0].Li1A[0].ProposedName1_ft[0]"
   })
 ];
+const minorNameGenderConformMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-520[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-520[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-520[0].Page1[0].Caption[0].TitlePartyName[0].Petitioner_ft[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-520[0].Page1[0].Caption[0].FormTitle[0].#area[0].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-520[0].Page1[0].List1[0].CheckBox19[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-520[0].Page1[0].List1[0].LiA[0].TextField[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-520[0].Page1[0].List1[0].LiA[0].TextField[1]"
+  })
+];
 const nameChangeOnlyOrderMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -41506,83 +41678,106 @@ const nameChangeOnlyOrderGuardianMap = [
     fieldName: "topmostSubform[0].Page1[0].NewName_ft[0]"
   })
 ];
-const adultNameGenderOrderMap = [
+const minorNameGenderOrderMap = [
   (applicant) => ({
-    text: fullName(applicant.legalName),
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Name[0]"
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Name[0]"
   }),
   (applicant) => ({
     text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Street[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Street[0]"
   }),
   (applicant) => ({
     text: applicant.homeAddress?.city,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].City[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].City[0]"
   }),
   (applicant) => ({
     text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].State[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].State[0]"
   }),
   (applicant) => ({
     text: applicant.homeAddress?.zip,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Zip[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Zip[0]"
   }),
   (applicant) => ({
     text: applicant.phone,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Phone[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Phone[0]"
   }),
   (applicant) => ({
     text: applicant.email,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Email[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].Email[0]"
   }),
   () => ({
     text: "Self-Represented",
-    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].AttyFor[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].AttyPartyInfo[0].AttyFor[0]"
   }),
   (applicant) => ({
     text: applicant.residentLocalityName,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].CourtInfo[0].CrtCounty[0]"
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].TitlePartyName[0].Party1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page1[0].P1Caption[0].FormTitle[0].ChangeNameDecree[0]"
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
-    fieldName: "NC-330[0].Page1[0].P1Header[0].Petition[0].Party1_ft[0]"
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3B[0].MinorCurrentName[0]"
   }),
   (applicant) => ({
     check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page1[0].P1Header[0].FormTitle[0].Checkbox[0]"
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].petitioner_cb[0]"
   }),
   (applicant) => ({
     check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page1[0].List3[0].Checkbox[0]"
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].Sublist[0].Subli3c1[0].petitionerc[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].Sublist[0].Subli3c1[0].TextField6[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-530G[0].Page1[0].List3[0].Li3E[0].checkbox34[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-530G[0].Page2[0].List4[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-530G[0].Page2[0].List4[0].PresentName[0]"
   }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.F,
-    fieldName: "NC-330[0].Page2[0].List9[0].identifier[0]"
+    fieldName: "NC-530G[0].Page2[0].List4[0].Li4a[0].gender[0]"
   }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.M,
-    fieldName: "NC-330[0].Page2[0].List9[0].identifier[1]"
+    fieldName: "NC-530G[0].Page2[0].List4[0].Li4b[0].gender[0]"
   }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.X,
-    fieldName: "NC-330[0].Page2[0].List9[0].identifier[2]"
+    fieldName: "NC-530G[0].Page2[0].List4[0].Li4c[0].gender[0]"
   }),
   (applicant) => ({
     check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page2[0].List10[0].Checkbox[0]"
+    fieldName: "NC-530G[0].Page2[0].List5[0].Checkbox[0]"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    fieldName: "NC-330[0].Page2[0].List10[0].PresentName[0]"
+    fieldName: "NC-530G[0].Page2[0].List5[0].PresentName[0]"
   }),
   (applicant) => ({
     check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].Checkbox10[0]"
+    fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].Checkbox55[0]"
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    //eslint-disable-next-line
-    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].TEXT.0.6.1.1.4.1.1.1.0.1.0.1.1.1.3.1.0[0]"
+    loc: { page: 1, x: 275, y: 614 }
   })
 ];
 const feeWaiverMap = [
@@ -43544,15 +43739,35 @@ function CaliforniaNC300Guide() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name and gender marker changes. You need to sign and date the form on page 2, then the form is complete." })
   ] }, "California-NC300");
 }
-function CaliforniaNC330Guide() {
+function CaliforniaNC500Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order Recognizing Change of Gender and Sex Identifier (CA, NC-330)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (CA, NC-500)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This form is the order the judge signs to officially change your name and gender marker, we call this document the “court order”. This form is already complete, do ",
+      "This is the state form for name and gender marker changes. Any parent(s) or legal guardian(s) can fill this form out and file it on your behalf. It is best, but not required, for every adult with custody over you to jointly file this petition together. To do this have each petitioners name in the “Petition of” section in the top left. Then fill out sections 1 and 3 as they apply to your situation. If a parent is alive and did ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign as a petitioner check the box in section 6. If your parents are deceased and a legal guardian is the petitioner check the box in section 7. Finally you and all of your petitioners need to sign and date on the appropriate line of page 2."
+    ] })
+  ] }, "California-NC500");
+}
+function CaliforniaNC520Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order to Show Cause - Recognition of Minors Change of Gender and Issuance of New Birth Certificate (CA, NC-520)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you have any living parents or other adults with custody of you that have not signed on as petitioners a completed copy of this form will need to be served to them. Instructions for how to serve this paperwork will be available when your petitioner files at court. For now add the names of any additional petitioners to the top to match your petition form. Then a petitioner should check any applicable box in section 2. Leave the rest as is. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign this form."
+    ] })
+  ] }, "California-NC520");
+}
+function CaliforniaNC530Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order recognizing Minors Change of Gender and Sex Identifier and for Issuance of New Birth Certiicate (CA, NC-530)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is the order the judge signs to officially change your name and gender marker, we call this document the “court order”. Add the names of any additional petitioners to the top to match your petition form. This form is otherwise complete, do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign it, thats for the judge to do."
     ] })
-  ] }, "California-NC130G");
+  ] }, "California-NC530");
 }
 function OrangeRelatedCasesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -43822,43 +44037,41 @@ const californiaNameChange = {
       map: nameChangeOnlyConformMap,
       include: (applicant) => applicant.isChangingLegalSex
     },
+    /*
     {
       name: "Order Recognizing Change of Gender and Sex Identifier",
       id: "NC-330",
       filename: "California/NC-330 Adult Name Gender Order.pdf",
       guide: CaliforniaNC330Guide,
       map: adultNameGenderOrderMap,
-      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex
+      include: (applicant) => !isMinor(applicant)
+        && applicant.isChangingLegalSex,
     },
-    /*
-     {
-       name: "Petition for Recognition of Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
-       id: "NC-500",
-       filename: "California/NC-500 Minor Name Gender Petition.pdf",
-       guide: CaliforniaNC500Guide,
-       map: minorNameGenderPetitionMap,
-       include: (applicant) => isMinor(applicant)
-         && applicant.isChangingLegalSex,
-     },
-     {
-       name: "Order to Show Cause--Recognition of Minor's Change of Gender and Issuance of New Birth Certificate",
-       id: "NC-520",
-       filename: "California/NC-520 Minor Name Gender Hearing Notice.pdf",
-       guide: CaliforniaNC520Guide,
-       map: minorNameGenderConformMap,
-       include: (applicant) => isMinor(applicant)
-         && applicant.isChangingLegalSex,
-     },
-     {
-       name: "Order Recognizing Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
-       id: "NC-530",
-       filename: "California/NC-530 Minor Name Gender Order.pdf",
-       guide: CaliforniaNC530Guide,
-       map: minorNameGenderOrderMap,
-       include: (applicant) => isMinor(applicant)
-         && applicant.isChangingLegalSex,
-     },
-     */
+    */
+    {
+      name: "Petition for Recognition of Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
+      id: "NC-500",
+      filename: "California/NC-500 Minor Name Gender Petition.pdf",
+      guide: CaliforniaNC500Guide,
+      map: minorNameGenderPetitionMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Order to Show Cause--Recognition of Minor's Change of Gender and Issuance of New Birth Certificate",
+      id: "NC-520",
+      filename: "California/NC-520 Minor Name Gender Hearing Notice.pdf",
+      guide: CaliforniaNC520Guide,
+      map: minorNameGenderConformMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex
+    },
+    {
+      name: "Order Recognizing Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
+      id: "NC-530",
+      filename: "California/NC-530 Minor Name Gender Order.pdf",
+      guide: CaliforniaNC530Guide,
+      map: minorNameGenderOrderMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex
+    },
     //Background check or Criminal history stuff here
     {
       name: "Amador County CLETS Background Information Form Name Change",
