@@ -1276,7 +1276,8 @@ export const DMVTitleMap: Formfill[] = [
  */
 export const nameOnlyBirthCertMap: Formfill[] = [
   (applicant) => ({
-    text: fullName(representativeName(applicant)),
+    text: isMinor(applicant) ? 
+      fullName(applicant.representativeName) : fullName(applicant.chosenName),
     fieldName: "Name",
   }),
   (applicant) => ({
@@ -1420,7 +1421,8 @@ export const nameOnlyBirthCertMap: Formfill[] = [
  */
 export const nameGenderBirthCertMap: Formfill[] = [
   (applicant) => ({
-    text: fullName(representativeName(applicant)),
+    text: isMinor(applicant) ? 
+      fullName(applicant.representativeName) : fullName(applicant.chosenName),
     fieldName: "Name",
   }),
   (applicant) => ({
