@@ -19,9 +19,10 @@
  * @licend The above is the entire license notice for the JavaScript code in this file.
  */
 
-import { isMinor } from "../../lib/util";
+//import { isMinor } from "../../lib/util";
 
 import {
+  /*
   civilCaseCoverMap,
   nameChangeOnlyPetitionMap,
   adultNameGenderPetitionMap,
@@ -37,9 +38,11 @@ import {
   minorNameGenderOrderMap,
   feeWaiverMap,
   feeWaiverOrderMap,
+  */
   DMVTitleMap,
   nameOnlyBirthCertMap,
   nameGenderBirthCertMap,
+  /*
   alamedaCoverMap,
   amadorIntakeMap,
   amadorBackgroundCheckMap,
@@ -62,21 +65,23 @@ import {
   siskiyouBackgroundCheckMap,
   solanoCoverSheetMap,
   yubaBackgroundCheckMap,
+  */
 } from "./maps";
 
-import AlamedaCoverSheetGuide from "../../components/guides/California/AlamedaCoverSheet";
-import AmadorBackgroundCheckGuide from "../../components/guides/California/AmadorBCSheet";
-import AmadorIntakeSheetGuide from "../../components/guides/California/AmadorIntakeSheet";
+//import AlamedaCoverSheetGuide from "../../components/guides/California/AlamedaCoverSheet";
+//import AmadorBackgroundCheckGuide from "../../components/guides/California/AmadorBCSheet";
+//import AmadorIntakeSheetGuide from "../../components/guides/California/AmadorIntakeSheet";
 import CaliforniaBirthCertNameGender from "../../components/guides/California/BirthCertNameGender";
 import CaliforniaBirthCertNameOnly from "../../components/guides/California/BirthCertNameOnly";
-import CaliforniaCoverSheetGuide from "../../components/guides/California/CivilCoverSheet";
+//import CaliforniaCoverSheetGuide from "../../components/guides/California/CivilCoverSheet";
 import CaliforniaCourtHearingGuide from "../../components/guides/California/CourtHearing";
 import CaliforniaDMVGuide from "../../components/guides/California/DMV";
-import ElDoradoBackgroundCheckGuide from "../../components/guides/California/ElDoradoBCSheets";
+//import ElDoradoBackgroundCheckGuide from "../../components/guides/California/ElDoradoBCSheets";
 import CaliforniaEverythingElseGuide from "../../components/guides/California/EverythingElse";
-import CaliforniaFeeWaiverGuide from "../../components/guides/California/FeeWaiver";
-import CaliforniaFeeWaiverOrderGuide from "../../components/guides/California/FeeWaiverOrder";
+//import CaliforniaFeeWaiverGuide from "../../components/guides/California/FeeWaiver";
+//import CaliforniaFeeWaiverOrderGuide from "../../components/guides/California/FeeWaiverOrder";
 import CaliforniaFilingGuide from "../../components/guides/California/FilingInitialForms";
+/*
 import CaliforniaNC110GGuide from "../../components/guides/California/GuardianDeclaration";
 import KernRelatedCasesGuide from "../../components/guides/California/KernRelatedCases";
 import LassenBCGuide from "../../components/guides/California/LassenBCSheet";
@@ -97,7 +102,9 @@ import CaliforniaNC520Guide from "../../components/guides/California/NC520Gender
 import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
 import OrangeRelatedCasesGuide from "../../components/guides/California/OrangeRelatedCases";
 import PlacerBCGuide from "../../components/guides/California/PlacerBCSheet";
+*/
 import CaliforniaResourcesGuide from "../../components/guides/California/Resources";
+/*
 import RiversideCoverSheetGuide from "../../components/guides/California/RiversideCoverSheet";
 import RiversideRelatedCasesGuide from "../../components/guides/California/RiversideRelatedCases";
 import SanBenitoBCGuide from "../../components/guides/California/SanBenitoBCSheet";
@@ -107,6 +114,7 @@ import SiskiyouBCGuide from "../../components/guides/California/SiskiyouBCSheet"
 import SiskiyouInfoGuide from "../../components/guides/California/SiskiyouInfoSheet";
 import SolanoBCGuide from "../../components/guides/California/SolanoBCSheet";
 import YubaBCGuide from "../../components/guides/California/YubaBCSheet";
+*/
 
 import { type CaliforniaCounty } from "../../types/locality";
 
