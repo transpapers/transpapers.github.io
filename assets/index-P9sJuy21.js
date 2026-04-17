@@ -43244,11 +43244,15 @@ function CaliforniaBirthCertNameGender({ person }) {
   const { age, parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Birth Certificate (CA, VS 24B)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This process is done by mail using the “Application to Amend a Birth Record” (VS 24B) form. You will recieve a single copy of the updated certificate unless you request more. To do so fill in the fee calculation box on the right for additional copies, otherwise just put $0 in that box. Total the fee directly below that." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This process is done by mail using the “Application to Amend a Birth Record” (VS 24B) form. You will recieve a single copy of the updated certificate unless you request more. To do so fill in the fee calculation box on the ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "right" }),
+      " for additional copies, otherwise just put $0 in that box. Total the fee directly below that."
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "On page ",
       age && age < 18 ? "your petitioner" : "you",
-      " should then sign and date at the bottom. You will need someone else to also sign at the bottom of page 2, a list of authorized person is available on the next page in the “Relationship to Registrant” section. Do ",
+      " should then sign and date at the bottom. You will need someone else to also sign at the bottom of page 2, a list of authorized people is available on the next page in the “Relationship to Registrant” section. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " sign or date anywhere else, that should only be done in front of a notary.",
       age && age < 18 && !parentsAreOkay ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Have your petitioner fill in their relationship to you on the bottom of page 2 and the “Sworn Statement” section." }) : ""
@@ -43277,6 +43281,7 @@ function CaliforniaBirthCertNameGender({ person }) {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The estimated processing times are listed on the Vital Records website",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Processing-Times.aspx", children: "here" }),
       "."
     ] })
@@ -43327,6 +43332,7 @@ function CaliforniaBirthCertNameOnly({ person }) {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The estimated processing times are listed on the Vital Records website",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdph.ca.gov/Programs/CHSI/Pages/Vital-Records-Processing-Times.aspx", children: "here" }),
       "."
     ] })
@@ -43391,10 +43397,13 @@ function CaliforniaDMVGuide({
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Updating your Primary ID (CA)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This section covers the process of updating your primary identification (driver's license/state ID) and any vehicle registrations you may have. If this is not relevant to you, proceed to the next section. You will need to fill out an online application at this",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/dl-id-online-app-edl-44/", children: "link" }),
       ". After that is done find your nearest field office",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/locations/field-offices/", children: "here" }),
       ". You can then go without an appointment or make one",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/appointments/select-appointment-type/", children: "here" }),
       ".",
       " ",
@@ -43409,9 +43418,11 @@ function CaliforniaDMVGuide({
       "If you do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " already have a driver's license or state ID, tell the clerk that you are applying for one. For first time applications for Real ID check this",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/real-id/real-id-checklist/", children: "list" }),
       " ",
       "for what documents you need to bring, for non-Real ID use this",
+      " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.dmv.ca.gov/portal/file/federal-non-compliant-dl-id-card-documents-list-pdf/", children: "list" }),
       " ",
       "instead. The appointment should proceed normally but make sure the gender marker is set correctly before you leave."
@@ -43562,7 +43573,7 @@ function CaliforniaFilingGuide({
       ] }) : "",
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         age && age < 18 ? "A parent/guardian " : "You ",
-        " should bring all of the completed forms from the first section as well as photo ID and payment. The fee in California for filing varies between courts and is updated frequently but is typically between $350 to $450 dollars without the fee waiver. Payment methods should still be brought in any case."
+        " should bring all of the completed forms listed above as well as photo ID and payment. The fee in California for filing varies between courts and is updated frequently but is typically between $350 to $450 dollars without the fee waiver. Payment methods should still be brought in any case."
       ] }),
       residentLocality.courtByZip ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -43601,6 +43612,7 @@ function CaliforniaFilingGuide({
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "If the court(s) listed above appear wrong or you simply want more information check this",
+        " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
         ". It lists every filing location in the state as well as the jurisdictions they cover. Check you address to see which one(s) you fall under. Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010) and fill in the courts street address, city, zip code, and branch name near the top of the page if they are blank."
       ] }),
@@ -43803,7 +43815,7 @@ function CaliforniaNC130Guide({ person }) {
 function CaliforniaNC300Guide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Recognition of Change of Gender and Sex Identifier (CA, NC-300)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name and gender marker changes. You need to sign and date thr form on page 2, then the form is complete." })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name and gender marker changes. You need to sign and date the form on page 2, then the form is complete." })
   ] }, "California-NC300");
 }
 function CaliforniaNC330Guide() {
@@ -43877,7 +43889,7 @@ function CaliforniaResourcesGuide() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://transgenderlawcenter.org/resources/id/", children: "Transgender Law Center" }),
-        ": They are a legal group advocating for trans rights and maintain several guides and"
+        ": They are a legal group advocating for trans rights and maintain several guides and other legal resources to help with updating documents or other legal issues."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://community.lalgbtcenter.org/tgi-enby-resource-index/legal-resources/", children: "Los Angeles LGBT Center" }),
@@ -47248,7 +47260,7 @@ const ds11Map = [
   })
 ];
 function DS5504Guide({ person }) {
-  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
+  const { age, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -47265,28 +47277,19 @@ function DS5504Guide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification.",
       !isChangingLegalName ? " Check the box or boxes applicable to your situation on the first page. " : " ",
-      "On page 5 at the top you will need to select which documents you want.",
-      gender && gender === "X" ? " Leave section 3 unchecked, you can pick the X marker on another form. " : " ",
-      "Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your passports information. For the photo we suggest going to a business for the highest chance of success and stapling that to the form."
+      "On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your passports information. For the photo we suggest going to a business for the highest chance of success and stapling that to the form."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: age && age < 16 ? " A parent/guardian should sign on the second line below the picture section." : " Sign the document on the first line below the picture section and have a parent/guardian sign on the second line." }) : " Sign the document on the first line below the picture section." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Write in the current date to the right of the signatures in the indicated section. On page 6 complete any blank sections from 11 through 23 as they apply to you. For section 19 if you have no current travel plans write “none” in every box." }),
-    isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply",
-      age && age < 18 ? " have a parent/guardian sign " : " sign ",
-      "on page 2."
-    ] }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Now you will need to place the DS-5504 passport form,",
-      isChangingLegalSex ? " attestation form, " : "",
-      " old passport, and a certified copy of your court order in an envelope. We suggest two stamps on the envelope for weight reasons. There is no fee involved unless you choose to expedite the process, to do so make out a check for $60 to the US Department of State. Otherwise place all of the above documents in the envelope and locate the mailing address you need on the form (page 3). It will likely take a few months for them to process a nonexpedited request, you can keep tabs on it using this url:",
+      "Now you will need to place the DS-5504 passport form, old passport, and a certified copy of your court order in an envelope. We suggest two stamps on the envelope for weight reasons. There is no fee involved unless you choose to expedite the process, to do so make out a check for $60 to the US Department of State. Otherwise place all of the above documents in the envelope and locate the mailing address you need on the form (page 3). It will likely take a few months for them to process a nonexpedited request, you can keep tabs on it using this url:",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://passportstatus.state.gov/", children: "https://passportstatus.state.gov/" })
     ] })
   ] }, "Federal-Passport");
 }
 function DS82Guide({ person }) {
-  const { isChangingLegalSex, isChangingLegalName, gender } = person;
+  const { isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -47305,11 +47308,8 @@ function DS82Guide({ person }) {
       isChangingLegalName ? " In section 11 write in the location and date of your name change as it appears on your court order. " : " ",
       "For the photo we suggest going to a business for the highest chance of success and stapling that to the form. Sign on the signature line below the picture section then write in the current date to the right of the signature in the indicated section. On page 6 complete sections 12 through 20 as they apply to you. For section 20 if you have no current travel plans write “none” in every box."
     ] }),
-    isChangingLegalSex ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Attestation of Orr v. Trump Class Membership” form is new and allows for updating gender markers once again. To complete the form simply sign on page 2." }) : "",
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Now you will need to place the DS-82 passport form,",
-      isChangingLegalSex ? " attestation form, " : "",
-      " old passport, and a certified copy of your court order in an envelope. We suggest two stamps on the envelope for weight reasons. There is a fee involved which is dependent on your choices, go to section 5 of the following URL to see the breakdown:",
+      "Now you will need to place the DS-82 passport form, old passport, and a certified copy of your court order in an envelope. We suggest two stamps on the envelope for weight reasons. There is a fee involved which is dependent on your choices, go to section 5 of the following URL to see the breakdown:",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://travel.state.gov/content/travel/en/passports/have-passport/renew.html", children: "https://travel.state.gov/content/travel/en/passports/have-passport/renew.html" })
     ] }),
@@ -47321,7 +47321,7 @@ function DS82Guide({ person }) {
   ] }, "Federal-Passport");
 }
 function DS11Guide({ person }) {
-  const { age, isChangingLegalSex, isChangingLegalName, gender } = person;
+  const { age, isChangingLegalName, gender } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -47340,9 +47340,7 @@ function DS11Guide({ person }) {
       'For section 10 on page 6 fill out your parents place of birth and citizenship status. On page 6 complete sections 11 through 21 as they apply to you. For section 18 if you have no current travel plans write "none" in every box.'
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "Now you will need to go to a location that you can apply in with this DS-11 passport form, ",
-      isChangingLegalSex ? " attestation form, " : "",
-      "your primary id, a checkbook for fees, and your photo. You can find application locations at his URL:",
+      "Now you will need to go to a location that you can apply in with this DS-11 passport form, your primary id, a checkbook for fees, and your photo. You can find application locations at his URL:",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://iafdb.travel.state.gov/", children: "https://iafdb.travel.state.gov/" }),
       "."
