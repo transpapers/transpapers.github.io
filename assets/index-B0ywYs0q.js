@@ -41472,6 +41472,138 @@ const nameGenderBirthCertMap = [
     fieldName: "Applicants Relationship to Registrant Must be an authorized personRow1"
   })
 ];
+const amadorBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "LAST NAME FIRST NAME MIDDLE NAME.0.0"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "LAST NAME FIRST NAME MIDDLE NAME.0.1"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Text1"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName),
+    fieldName: "LAST NAME FIRST NAME MIDDLE NAME.1"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "RESIDENCE STREET ADDRESS CITYSTATE ZIP"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "PHONE NUMBER"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "MAILING ADDRESS IF DIFFERENT FROM RESIDENCE"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DATE OF BIRTH"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "AGE"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "PLACE OF BIRTH STATE OR COUNTRY"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "SEX"
+  }),
+  (applicant) => ({
+    fieldName: "I AM UNDER THE JURISDICTION OF THE DEPARTMENT OF",
+    choice: !applicant.hasCriminalRecord ? "NO_2" : void 0
+  }),
+  (applicant) => ({
+    fieldName: "PURSUANT TO PENAL CODE 290",
+    choice: !applicant.hasCriminalRecord ? "NO_3" : void 0
+  })
+];
+const elDoradoWestSlopeMap = [
+  () => ({
+    check: true,
+    fieldName: "2927 Meder Road, Cameron Park, CA 95682"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Text Field0"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Name of Applicant"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "AKA' S"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date & Place of Birth"
+  })
+];
+const elDoradoSLTMap = [
+  () => ({
+    check: true,
+    fieldName: "1354 Johnson Blvd, South Lake Tahoe, CA 96150"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Text Field0"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Name of Applicant"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "AKA' S"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Phone Number"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date & Place of Birth"
+  })
+];
 const kernCaseNoticeMap = [
   (applicant) => ({
     text: `${fullName(representativeName(applicant))}, 
@@ -41503,6 +41635,182 @@ const kernCaseNoticeMap = [
     fieldName: "TYPE OR PRINT NAME OF PARTY OR ATTORNEY"
   })
 ];
+const lassenCriminalHistoryMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Address 1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone No"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Petitioner / Plaintiff"
+  }),
+  (applicant) => ({
+    fieldName: "Sex",
+    value: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        default:
+          return "";
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Age"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    fieldName: "Place of Birth"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Current Address"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "Other name(s) used"
+  })
+];
+const losAngelesCriminalHistoryMap = [
+  (applicant) => ({
+    text: `${formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo) ?? ""}
+    ${applicant.email ?? ""}`,
+    fieldName: "ADDRESS01"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? `${fullName(representativeName(applicant))} (${fullName(applicant.legalName)})` : fullName(representativeName(applicant)),
+    fieldName: "NAME OF PETITIONER Person having the name change"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return isMinor(applicant) ? "" : "Female";
+        case GenderMarker.M:
+          return isMinor(applicant) ? "" : "Male";
+        case GenderMarker.X:
+          return isMinor(applicant) ? "" : "X";
+      }
+    })(),
+    fieldName: "Sex"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : String(applicant.age),
+    fieldName: "Age"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    fieldName: "Place of Birth"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Current Address"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return "";
+        case false:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : "";
+      }
+    })(),
+    fieldName: "Other names used"
+  })
+];
+const mendocinoCriminalHistoryMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 65, y: 309 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 270, y: 309 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    loc: { x: 470, y: 309 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 670, y: 309 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    loc: { x: 65, y: 393 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    loc: { x: 65, y: 461 }
+  })
+];
+const montereyCriminalHistoryMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Applicants Current Name"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "Applicants Proposed New Name"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Applicants Date of Birth"
+  }),
+  (applicant) => ({
+    fieldName: "Group1",
+    choice: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.M:
+          return "Choice1";
+        case GenderMarker.F:
+          return "Choice2";
+        default:
+          return "";
+      }
+    })()
+  })
+];
 const orangeCaseNoticeMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -41527,6 +41835,35 @@ const orangeCaseNoticeMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
     fieldName: "TYPE OR PRINT NAME OF PETITIONEROR ATTORNEY"
+  })
+];
+const placerCriminalHistoryMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Full Name"
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) && fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "Also Known As"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Date of Birth"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "Male or"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "Female"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndCountry),
+    fieldName: "Current Residence Address Street City Country and Zip Code"
   })
 ];
 const riversideCaseNoticeMap = [
@@ -41556,6 +41893,236 @@ const riversideCaseNoticeMap = [
     fieldName: "Text7.3"
   })
 ];
+const sanBenitoBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Last Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "First Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Middle Name"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "AKA 1"
+  }),
+  (applicant) => ({
+    text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
+    fieldName: "Address"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentCityAndState),
+    fieldName: "City/State"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "Zip"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "PHONE NUMBER"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "MAILING ADDRESS IF DIFFERENT FROM RESIDENCE"
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    fieldName: "DATE OF BIRTH"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "AGE"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "PLACE OF BIRTH STATE OR COUNTRY"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "SEX"
+  })
+];
+const santaClaraBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Text1"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "Text2"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Text3"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    fieldName: "Text4"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text7"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Text8"
+  }),
+  (applicant) => ({
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    fieldName: "Text9"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Text11"
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    fieldName: "Text12"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "Text13"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    fieldName: "Text14"
+  })
+];
+const siskiyouBackgroundCheckMap = [
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 80, y: 281 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 330, y: 281 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    loc: { x: 535, y: 281 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.birthName),
+    loc: { x: 95, y: 320 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    loc: { x: 80, y: 428 }
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    loc: { x: 625, y: 428 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.MailFullAddress),
+    loc: { x: 80, y: 464 }
+  }),
+  (applicant) => ({
+    text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }) : "",
+    loc: { x: 80, y: 506 }
+  }),
+  (applicant) => ({
+    text: String(applicant.age),
+    loc: { x: 225, y: 506 }
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    loc: { x: 277, y: 506 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "F";
+        case GenderMarker.M:
+          return "M";
+        case GenderMarker.X:
+          return "X";
+      }
+    })(),
+    loc: { x: 406, y: 506 }
+  })
+];
+const solanoCoverSheetMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FULL NAME OF APPLICANT"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DATE OF BIRTH"
+  })
+];
+const yubaBackgroundCheckMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 65, y: 323 }
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    loc: { x: 110, y: 545 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    loc: { x: 355, y: 545 }
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    loc: { x: 605, y: 545 }
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    loc: { x: 125, y: 584 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 155, y: 642 }
+  })
+];
+function AmadorBackgroundCheckGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Form Name Change (Amador County, CIV-136)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "In Amador county they require this form for a background check. Fill in any blanks we left on the form, if they do not apply write “DNA” instead." })
+  ] }, "Amador-CIV-136");
+}
 function CaliforniaBirthCertNameGender({ person }) {
   const { age, parentsAreOkay } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -41737,6 +42304,13 @@ function CaliforniaDMVGuide({
     ] }),
     isChangingLegalName ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Optionally, you may also update the name on your vehicle registration(s). If so grab the “DMV Statement of Facts” (REG 256) form we provided. Fill out your license plate, vehicle ID number (VIN), and year/make fields at the top of both pages. Then sign in your new name and date at the bottom of page 2. Give this completed form to the clerk." }) : ""
   ] }, "California-DMV");
+}
+function ElDoradoBackgroundCheckGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Information RE: Petition for Name Change (El Dorado County, C-2/C-2S)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "In El Dorado county they require a form for a background check. Since there are two locations to file in they made a seperate form for each. You can file at either location. Once you decide which court you want to file in keep the form that has the correct address checked and discard the other." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Ignore the Case number fields but do fill out any names you previously used on the “AKA” line. Then fill out your social security number below that and sign/date at the bottom." })
+  ] }, "El-Dorado-C-2");
 }
 function CaliforniaEverythingElseGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -41945,6 +42519,65 @@ function KernRelatedCasesGuide({ person }) {
     ] })
   ] }, "Kern-FL-0122");
 }
+function LassenBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Criminal History Assessment (Lassen county, LSC-CIV-050)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Lassen county requires that the petitioner undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out any blanks we left in section 1. Then this form is complete."
+    ] })
+  ] }, "Lassen-CIV-050");
+}
+function LosAngelesBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Criminal History Assessment (Los Angeles county, CIV 226)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Los Angeles county requires that the petitioner undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out any blanks left in the “To be completed by the petitioner” section",
+      age && age < 18 ? " with their information, not yours" : "",
+      ". Then",
+      age && age < 18 ? " they" : " you",
+      " can sign and date below that. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line."
+    ] })
+  ] }, "Los-Angeles-CIV-226");
+}
+function MendocinoBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Declaration re: Change of Name (Mendocino county, MNC-110)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Mendocino county requires that the you",
+      age && age < 18 ? ", the minor, " : " ",
+      " undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out the “List any AKAs” line if blank. After that fill out the “Other Information” section. Finally ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " can sign and date below that. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line."
+    ] })
+  ] }, "Mendocino-MNC-110");
+}
+function MontereyBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Background Check Confidential (Monterey county, unnumbered)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Monterey county requires that the you",
+      age && age < 18 ? ", the minor, " : " ",
+      " undergo a background check for a name change. ",
+      age && age < 18 ? "You, the minor," : "You",
+      " should fill out the “Drivers License No:” and “State Issued:” fields if applicable. This form is then complete."
+    ] })
+  ] }, "Mendocino-MNC-110");
+}
 function CaliforniaNC110Guide({ person }) {
   const { age } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -41972,6 +42605,17 @@ function OrangeRelatedCasesGuide() {
       " fill out section 2. Otherwise check the box in section 1. Then your petitioner(s) can write the date on the “Date:” line and sign at the bottom."
     ] })
   ] }, "Orange-L-3008");
+}
+function PlacerBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Supplement (Placer county, PL-CV003)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Placer county requires that the petitioner undergo a background check for a name change. ",
+      age && age < 18 ? "Your petitioner" : "You",
+      " should fill out any blanks we left and double check the “Also Known As” line for accuracy. Then this form is complete."
+    ] })
+  ] }, "Placer-CV003");
 }
 function CaliforniaResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
@@ -42001,6 +42645,69 @@ function RiversideRelatedCasesGuide() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Notice of Related Cases (Riverside County, RI-CI040)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a form unique to Riverside county. Add the names of any petitioners whose names are not listed in the “Petition Of” section on the first and second page. Sections A through E deal with other court cases involving you, the minor. If there are any court cases involving you, the your petitioners need to fill out the appropriate section. If not then these sections can be skipped. Then all petitioners need to sign and date at the bottom of page 2 or on additional pages if there is no room." })
   ] }, "Riverside-CI040");
+}
+function SanBenitoBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Background Information Form (San Benito county, CV-2)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "San Benito county requires that ",
+      age && age < 18 ? "you, the minor, " : "you ",
+      "undergo a background check for a name change.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left above the signature line, if they do not apply to you then write “NA” in the box instead of leaving it blank. Then",
+      age && age < 18 ? " your petitioner" : " you",
+      " can sign and date at the bottom. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line or add “NA” to those boxes."
+    ] })
+  ] }, "San-Benito-CV-2");
+}
+function SantaClaraBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Form (Santa Clara county, PB-4010)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Santa Clara county requires that ",
+      age && age < 18 ? "you, the minor, " : "you ",
+      "undergo a background check for a name change.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left above the signature line, if they do not apply to you then write “DNA” in the box instead of leaving it blank. Then",
+      age && age < 18 ? " your petitioner" : " you",
+      " can sign and date at the bottom. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line or add “DNA” to those boxes."
+    ] })
+  ] }, "Santa-Clara-PB-4010");
+}
+function SiskiyouBCGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS Background Information Form (Siskiyou county, CV-6)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Siskiyou county requires that ",
+      age && age < 18 ? "you, the minor, " : "you ",
+      "undergo a background check for a name change.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out any blanks we left above the signature line, if they do not apply to you then write “DNA” in the box instead of leaving it blank. Then",
+      age && age < 18 ? " your petitioner" : " you",
+      " can sign and date at the bottom. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything below the signature line or add “DNA” to those boxes."
+    ] })
+  ] }, "Siskiyou-CV-6");
+}
+function SolanoBCGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Application for Change of Name (Solano County, 3009)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Solano county requires that you undergo a background check for a name change. Fill out the “Date” and “Social Security Number” fields but leave the “Case Number” field blank. This form is then complete." })
+  ] }, "Solano-3009");
+}
+function YubaBCGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "CLETS/CJIS Information Sheet (Yuba County, G04050B)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Yuba county requires that you undergo a background check for a name change. Fill out the “SSN”, “Drivers License No”, and “State of Issuance” fields as applicable. This form is then complete." })
+  ] }, "Yuba-G04050B");
 }
 const californiaNameChange = {
   target: Target.NameChange,
@@ -42162,118 +42869,114 @@ const californiaNameChange = {
           include: (applicant) => isMinor(applicant)
             && applicant.isChangingLegalSex,
         },
-    
-        //Background check or Criminal history stuff here
-        {
-          name: "Amador County CLETS Background Information Form Name Change",
-          id: "CIV-136",
-          filename: "California/Amador Name Background Check.pdf",
-          guide: AmadorBackgroundCheckGuide,
-          map: amadorBackgroundCheckMap,
-          include: (applicant) => applicant.residentLocalityName === "Amador",
-        },
-        {
-          name: "El Dorado County Confidential Information RE: Petition for Name Change (West Slope)",
-          id: "C-2",
-          filename: "California/El Dorado Background Check 1.pdf",
-          map: elDoradoWestSlopeMap,
-          include: (applicant) => !isMinor(applicant) 
-            && applicant.residentLocalityName === "El Dorado",
-        },
-        {
-          name: "El Dorado County Confidential Information RE: Petition for Name Change (SLT)",
-          id: "C-2S",
-          filename: "California/El Dorado Background Check 2.pdf",
-          map: elDoradoSLTMap,
-          include: (applicant) => !isMinor(applicant) 
-            && applicant.residentLocalityName === "El Dorado",
-        },
-        {
-          name: "El Dorado County Background Check Guide",
-          guide: ElDoradoBackgroundCheckGuide,
-          include: (applicant) => !isMinor(applicant) 
-            && applicant.residentLocalityName === "El Dorado",
-        },
-        {
-          name: "Lassen County Name Change Criminal History Assessment",
-          id: "LSC-CIV-050",
-          filename: "California/Lassen Name Criminal History.pdf",
-          guide: LassenBCGuide,
-          map: lassenCriminalHistoryMap,
-          include: (applicant) => applicant.residentLocalityName === "Lassen",
-        },
-        {
-          name: "Los Angeles County Name Change Criminal History Assessment",
-          id: "LASC CIV 226",
-          filename: "California/Los Angeles Name Criminal History.pdf",
-          guide: LosAngelesBCGuide,
-          map: losAngelesCriminalHistoryMap,
-          include: (applicant) => applicant.residentLocalityName === "Los Angeles",
-        },
-        {
-          name: "Declaration re: Change of Name",
-          id: "MNC-110",
-          filename: "California/Mendocino Name Criminal History.pdf",
-          guide: MendocinoBCGuide,
-          map: mendocinoCriminalHistoryMap,
-          include: (applicant) => applicant.residentLocalityName === "Mendocino",
-        },
-        {
-          name: "Criminal History Assessment",
-          filename: "California/Monterey Name Criminal History.pdf",
-          guide: MontereyBCGuide,
-          map: montereyCriminalHistoryMap,
-          include: (applicant) => applicant.residentLocalityName === "Monterey",
-        },
-        {
-          name: "Clets Background Information Supplement",
-          id: "PL-CV003",
-          filename: "California/Placer Name Criminal History.pdf",
-          guide: PlacerBCGuide,
-          map: placerCriminalHistoryMap,
-          include: (applicant) => applicant.residentLocalityName === "Placer",
-        },
-        {
-          name: "Name Change Background Information Form",
-          id: "SB-CV-2",
-          filename: "California/San Benito Name Background Check.pdf",
-          guide: SanBenitoBCGuide,
-          map: sanBenitoBackgroundCheckMap,
-          include: (applicant) => applicant.residentLocalityName === "San Benito",
-        },
-        {
-          name: "CLETS Background Information Form",
-          id: "PB-4010",
-          filename: "California/Santa Clara Name Background Check.pdf",
-          guide: SantaClaraBCGuide,
-          map: santaClaraBackgroundCheckMap,
-          include: (applicant) => applicant.residentLocalityName === "Santa Clara",
-        },
-        {
-          name: "CLETS Background Information Form",
-          id: "CCP 1279.5",
-          filename: "California/Siskiyou Name Background Check.pdf",
-          guide: SiskiyouBCGuide,
-          map: siskiyouBackgroundCheckMap,
-          include: (applicant) => applicant.residentLocalityName === "Siskiyou",
-        },
-        {
-          name: "Application for Change of Name",
-          id: "3009",
-          filename: "California/Solano Name Background Check.pdf",
-          guide: SolanoBCGuide,
-          map: solanoCoverSheetMap,
-          include: (applicant) => applicant.residentLocalityName === "Solano",
-        },
-        {
-          name: "CLETS/CJIS Information Sheet",
-          id: "G04050B",
-          filename: "California/Yuba Name Background Check.pdf",
-          guide: YubaBCGuide,
-          map: yubaBackgroundCheckMap,
-          include: (applicant) => applicant.residentLocalityName === "Yuba",
-        },
         */
+    //Background check or Criminal history stuff here
+    {
+      name: "Amador County CLETS Background Information Form Name Change",
+      id: "CIV-136",
+      filename: "California/Amador Name Background Check.pdf",
+      guide: AmadorBackgroundCheckGuide,
+      map: amadorBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Amador"
+    },
+    {
+      name: "El Dorado County Confidential Information RE: Petition for Name Change (West Slope)",
+      id: "C-2",
+      filename: "California/El Dorado Background Check 1.pdf",
+      map: elDoradoWestSlopeMap,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "El Dorado"
+    },
+    {
+      name: "El Dorado County Confidential Information RE: Petition for Name Change (SLT)",
+      id: "C-2S",
+      filename: "California/El Dorado Background Check 2.pdf",
+      map: elDoradoSLTMap,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "El Dorado"
+    },
+    {
+      name: "El Dorado County Background Check Guide",
+      guide: ElDoradoBackgroundCheckGuide,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "El Dorado"
+    },
+    {
+      name: "Lassen County Name Change Criminal History Assessment",
+      id: "LSC-CIV-050",
+      filename: "California/Lassen Name Criminal History.pdf",
+      guide: LassenBCGuide,
+      map: lassenCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Lassen"
+    },
+    {
+      name: "Los Angeles County Name Change Criminal History Assessment",
+      id: "LASC CIV 226",
+      filename: "California/Los Angeles Name Criminal History.pdf",
+      guide: LosAngelesBCGuide,
+      map: losAngelesCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Los Angeles"
+    },
+    {
+      name: "Declaration re: Change of Name",
+      id: "MNC-110",
+      filename: "California/Mendocino Name Criminal History.pdf",
+      guide: MendocinoBCGuide,
+      map: mendocinoCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Mendocino"
+    },
+    {
+      name: "Criminal History Assessment",
+      filename: "California/Monterey Name Criminal History.pdf",
+      guide: MontereyBCGuide,
+      map: montereyCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Monterey"
+    },
+    {
+      name: "Clets Background Information Supplement",
+      id: "PL-CV003",
+      filename: "California/Placer Name Criminal History.pdf",
+      guide: PlacerBCGuide,
+      map: placerCriminalHistoryMap,
+      include: (applicant) => applicant.residentLocalityName === "Placer"
+    },
+    {
+      name: "Name Change Background Information Form",
+      id: "SB-CV-2",
+      filename: "California/San Benito Name Background Check.pdf",
+      guide: SanBenitoBCGuide,
+      map: sanBenitoBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "San Benito"
+    },
+    {
+      name: "CLETS Background Information Form",
+      id: "PB-4010",
+      filename: "California/Santa Clara Name Background Check.pdf",
+      guide: SantaClaraBCGuide,
+      map: santaClaraBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Santa Clara"
+    },
+    {
+      name: "CLETS Background Information Form",
+      id: "CCP 1279.5",
+      filename: "California/Siskiyou Name Background Check.pdf",
+      guide: SiskiyouBCGuide,
+      map: siskiyouBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Siskiyou"
+    },
+    {
+      name: "Application for Change of Name",
+      id: "3009",
+      filename: "California/Solano Name Background Check.pdf",
+      guide: SolanoBCGuide,
+      map: solanoCoverSheetMap,
+      include: (applicant) => applicant.residentLocalityName === "Solano"
+    },
+    {
+      name: "CLETS/CJIS Information Sheet",
+      id: "G04050B",
+      filename: "California/Yuba Name Background Check.pdf",
+      guide: YubaBCGuide,
+      map: yubaBackgroundCheckMap,
+      include: (applicant) => applicant.residentLocalityName === "Yuba"
+    },
     //Everything else here
     {
       name: "Name and Information About the Person Whose Name is to be Changed",
