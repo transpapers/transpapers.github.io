@@ -24,7 +24,7 @@ import * as React from "react";
 function CaliforniaNC330Guide() {
 
   return (
-    <section key="California-NC130G">
+    <section key="California-NC330">
       <h3>Order Recognizing Change of Gender and Sex Identifier (CA, NC-330)</h3>
 
       <p>
