@@ -29,7 +29,7 @@ import {
   nameChangeOnlyInfoMap,
   minorGuardianDeclarationMap,
   nameChangeOnlyNoticeMap,
-  //nameChangeOnlyConformMap,
+  nameChangeOnlyConformMap,
   //minorNameGenderConformMap,
   nameChangeOnlyOrderMap,
   nameChangeOnlyOrderGuardianMap,
@@ -87,7 +87,7 @@ import MontereyBCGuide from "../../components/guides/California/MontereyBCSheet"
 import CaliforniaNC100Guide from "../../components/guides/California/NC100NameOnlyAll";
 import CaliforniaNC110Guide from "../../components/guides/California/NC110InfoAll";
 import CaliforniaNC120Guide from "../../components/guides/California/NC120PublicationAll";
-//import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
+import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
 import CaliforniaNC130GGuide from "../../components/guides/California/NC130GuardianOrder";
 import CaliforniaNC130Guide from "../../components/guides/California/NC130OrderAll";
 import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
@@ -226,7 +226,6 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => !isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
-   /*
     {
       name: "Order to Show Cause--Change of Name to Conform to Gender Identity",
       id: "NC-125",
@@ -236,6 +235,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => !isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
+   /*
     {
       name: "Order Recognizing Change of Gender and Sex Identifier",
       id: "NC-330",
