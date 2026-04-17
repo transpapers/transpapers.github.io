@@ -41061,6 +41061,116 @@ const nameChangeOnlyPetitionMap = [
     fieldName: "NC-100[0].Page1[0].List6[0].ConformToGenderOthName[0]"
   })
 ];
+const adultNameGenderPetitionMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-300[0].Page1[0].Caption[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-300[0].Page1[0].Caption[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-300[0].Page1[0].Caption[0].FormTitle[0].namechange[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page1[0].List1[0].FillText44[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-300[0].Page1[0].List1[0].Li1A[0].gender1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-300[0].Page1[0].List1[0].Li1B[0].gender1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-300[0].Page1[0].List1[0].Li1C[0].gender1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-300[0].Page1[0].List4[0].petitioner[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 216, y: 747 }
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName === "California",
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4A[0].#subform[0].#subform[1].petitioner_cb[0]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4A[0].#subform[0].#subform[2].petitioner_cb[1]"
+  }),
+  (applicant) => ({
+    check: applicant.residentJurisdictionName !== "California",
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4A[0].#subform[0].#subform[2].#subform[3].#subform[4].petitioner_cb1[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4C[0].petitionerc[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page2[0].P2Caption[0].#subform[0].Party[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-300[0].Page2[0].List5[0].cacertificate[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-300[0].Page2[0].Declaration[0].Declaration[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-300[0].Page2[0].Declaration[0].Declaration[0].gender[1]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-300[0].Page2[0].Declaration[0].Declaration[0].gender[2]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-300[0].Page2[0].Declaration[0].PetitionerSign[0].T14[0]"
+  })
+];
 const nameChangeOnlyInfoMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -43279,6 +43389,12 @@ function CaliforniaNC130Guide({ person }) {
     ] })
   ] }, "California-NC130");
 }
+function CaliforniaNC300Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Recognition of Change of Gender and Sex Identifier (CA, NC-300)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name and gender marker changes. You need to sign and date the form on page 2, then the form is complete." })
+  ] }, "California-NC300");
+}
 function OrangeRelatedCasesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Notice of Related Cases (Orange County, L-3008)" }),
@@ -43530,17 +43646,16 @@ const californiaNameChange = {
       map: nameChangeOnlyOrderGuardianMap,
       include: (applicant) => isMinor(applicant) && !applicant.parentsAreOkay
     },
+    //Name and Gender stuff here
+    {
+      name: "Petition for Recognition of Change of Gender and Sex Identifier",
+      id: "NC-300",
+      filename: "California/NC-300 Adult Name Gender Petition.pdf",
+      guide: CaliforniaNC300Guide,
+      map: adultNameGenderPetitionMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex
+    },
     /*
-     //Name and Gender stuff here
-     {
-       name: "Petition for Recognition of Change of Gender and Sex Identifier",
-       id: "NC-300",
-       filename: "California/NC-300 Adult Name Gender Petition.pdf",
-       guide: CaliforniaNC300Guide,
-       map: adultNameGenderPetitionMap,
-       include: (applicant) => !isMinor(applicant)
-         && applicant.isChangingLegalSex,
-     },
      {
        name: "Order to Show Cause--Change of Name to Conform to Gender Identity",
        id: "NC-125",
