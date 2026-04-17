@@ -232,8 +232,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       filename: "California/NC-125 Gender Hearing Notice.pdf",
       guide: CaliforniaNC125Guide,
       map: nameChangeOnlyConformMap,
-      include: (applicant) => !isMinor(applicant)
-        && applicant.isChangingLegalSex,
+      include: (applicant) => applicant.isChangingLegalSex,
     },
    /*
     {
