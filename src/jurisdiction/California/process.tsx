@@ -24,17 +24,17 @@ import { isMinor } from "../../lib/util";
 import {
   //civilCaseCoverMap,
   //nameChangeOnlyPetitionMap,
-  //adultNameGenderPetitionMap,
-  //minorNameGenderPetitionMap,
+  adultNameGenderPetitionMap,
+  minorNameGenderPetitionMap,
   nameChangeOnlyInfoMap,
   //minorGuardianDeclarationMap,
   //nameChangeOnlyNoticeMap,
-  //nameChangeOnlyConformMap,
-  //minorNameGenderConformMap,
+  nameChangeOnlyConformMap,
+  minorNameGenderConformMap,
   //nameChangeOnlyOrderMap,
   //nameChangeOnlyOrderGuardianMap,
-  //adultNameGenderOrderMap,
-  //minorNameGenderOrderMap,
+  adultNameGenderOrderMap,
+  minorNameGenderOrderMap,
   feeWaiverMap,
   feeWaiverOrderMap,
   DMVTitleMap,
@@ -87,14 +87,14 @@ import MontereyBCGuide from "../../components/guides/California/MontereyBCSheet"
 //import CaliforniaNC100Guide from "../../components/guides/California/NC100NameOnlyAll";
 import CaliforniaNC110Guide from "../../components/guides/California/NC110InfoAll";
 //import CaliforniaNC120Guide from "../../components/guides/California/NC120PublicationAll";
-//import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
+import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
 //import CaliforniaNC130GGuide from "../../components/guides/California/NC130GuardianOrder";
 //import CaliforniaNC130Guide from "../../components/guides/California/NC130OrderAll";
-//import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
-//import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
-//import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
-//import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
-//import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
+import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
+import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
+import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
+import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
+import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
 import OrangeRelatedCasesGuide from "../../components/guides/California/OrangeRelatedCases";
 import PlacerBCGuide from "../../components/guides/California/PlacerBCSheet";
 import CaliforniaResourcesGuide from "../../components/guides/California/Resources";
@@ -216,6 +216,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => isMinor(applicant)
         && !applicant.parentsAreOkay,
     },
+    */
 
     //Name and Gender stuff here
     {
@@ -272,7 +273,6 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
-    */
 
     //Background check or Criminal history stuff here
     {
