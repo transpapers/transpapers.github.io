@@ -41506,6 +41506,85 @@ const nameChangeOnlyOrderGuardianMap = [
     fieldName: "topmostSubform[0].Page1[0].NewName_ft[0]"
   })
 ];
+const adultNameGenderOrderMap = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Name[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.apt ? `${applicant.homeAddress.street}, ${applicant.homeAddress.apt}` : applicant.homeAddress?.street,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Street[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].City[0]"
+  }),
+  (applicant) => ({
+    text: getJurisdiction(applicant.residentJurisdictionName)?.abbreviation,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].State[0]"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Zip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Phone[0]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].Email[0]"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "NC-330[0].Page1[0].P1Header[0].AttyPartyInfo[0].AttyFor[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].CourtInfo[0].CrtCounty[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-330[0].Page1[0].P1Header[0].Petition[0].Party1_ft[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page1[0].P1Header[0].FormTitle[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page1[0].List3[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.F,
+    fieldName: "NC-330[0].Page2[0].List9[0].identifier[0]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.M,
+    fieldName: "NC-330[0].Page2[0].List9[0].identifier[1]"
+  }),
+  (applicant) => ({
+    check: applicant.gender === GenderMarker.X,
+    fieldName: "NC-330[0].Page2[0].List9[0].identifier[2]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page2[0].List10[0].Checkbox[0]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName: "NC-330[0].Page2[0].List10[0].PresentName[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].Checkbox10[0]"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    //eslint-disable-next-line
+    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].TEXT.0.6.1.1.4.1.1.1.0.1.0.1.1.1.3.1.0[0]"
+  })
+];
 const feeWaiverMap = [
   (applicant) => ({
     text: applicant.residentLocalityName,
@@ -43465,6 +43544,16 @@ function CaliforniaNC300Guide() {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is the state form for name and gender marker changes. You need to sign and date the form on page 2, then the form is complete." })
   ] }, "California-NC300");
 }
+function CaliforniaNC330Guide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order Recognizing Change of Gender and Sex Identifier (CA, NC-330)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is the order the judge signs to officially change your name and gender marker, we call this document the “court order”. This form is already complete, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign it, thats for the judge to do."
+    ] })
+  ] }, "California-NC130G");
+}
 function OrangeRelatedCasesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Notice of Related Cases (Orange County, L-3008)" }),
@@ -43733,16 +43822,15 @@ const californiaNameChange = {
       map: nameChangeOnlyConformMap,
       include: (applicant) => applicant.isChangingLegalSex
     },
+    {
+      name: "Order Recognizing Change of Gender and Sex Identifier",
+      id: "NC-330",
+      filename: "California/NC-330 Adult Name Gender Order.pdf",
+      guide: CaliforniaNC330Guide,
+      map: adultNameGenderOrderMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex
+    },
     /*
-     {
-       name: "Order Recognizing Change of Gender and Sex Identifier",
-       id: "NC-330",
-       filename: "California/NC-330 Adult Name Gender Order.pdf",
-       guide: CaliforniaNC330Guide,
-       map: adultNameGenderOrderMap,
-       include: (applicant) => !isMinor(applicant)
-         && applicant.isChangingLegalSex,
-     },
      {
        name: "Petition for Recognition of Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
        id: "NC-500",
