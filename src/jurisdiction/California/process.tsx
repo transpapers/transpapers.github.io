@@ -22,54 +22,54 @@
 import { isMinor } from "../../lib/util";
 
 import {
-  //civilCaseCoverMap,
-  //nameChangeOnlyPetitionMap,
-  adultNameGenderPetitionMap,
-  minorNameGenderPetitionMap,
+  civilCaseCoverMap,
+  nameChangeOnlyPetitionMap,
+  //adultNameGenderPetitionMap,
+  //minorNameGenderPetitionMap,
   nameChangeOnlyInfoMap,
-  //minorGuardianDeclarationMap,
-  //nameChangeOnlyNoticeMap,
-  nameChangeOnlyConformMap,
-  minorNameGenderConformMap,
-  //nameChangeOnlyOrderMap,
-  //nameChangeOnlyOrderGuardianMap,
-  adultNameGenderOrderMap,
-  minorNameGenderOrderMap,
+  minorGuardianDeclarationMap,
+  nameChangeOnlyNoticeMap,
+  //nameChangeOnlyConformMap,
+  //minorNameGenderConformMap,
+  nameChangeOnlyOrderMap,
+  nameChangeOnlyOrderGuardianMap,
+  //adultNameGenderOrderMap,
+  //minorNameGenderOrderMap,
   feeWaiverMap,
   feeWaiverOrderMap,
   DMVTitleMap,
   nameOnlyBirthCertMap,
   nameGenderBirthCertMap,
-  //alamedaCoverMap,
-  //amadorIntakeMap,
+  alamedaCoverMap,
+  amadorIntakeMap,
   amadorBackgroundCheckMap,
   elDoradoWestSlopeMap,
   elDoradoSLTMap,
   kernCaseNoticeMap,
   lassenCriminalHistoryMap,
-  //losAngelesCaseTypeMap,
+  losAngelesCaseTypeMap,
   losAngelesCriminalHistoryMap,
   mendocinoCriminalHistoryMap,
   montereyCriminalHistoryMap,
   orangeCaseNoticeMap,
   placerCriminalHistoryMap,
-  //riversideCoverSheetMap,
+  riversideCoverSheetMap,
   riversideCaseNoticeMap,
   sanBenitoBackgroundCheckMap,
-  //santaBarbaraCoverSheetMap,
+  santaBarbaraCoverSheetMap,
   santaClaraBackgroundCheckMap,
-  //siskiyouInfoMap,
+  siskiyouInfoMap,
   siskiyouBackgroundCheckMap,
   solanoCoverSheetMap,
   yubaBackgroundCheckMap,
 } from "./maps";
 
-//import AlamedaCoverSheetGuide from "../../components/guides/California/AlamedaCoverSheet";
+import AlamedaCoverSheetGuide from "../../components/guides/California/AlamedaCoverSheet";
 import AmadorBackgroundCheckGuide from "../../components/guides/California/AmadorBCSheet";
-//import AmadorIntakeSheetGuide from "../../components/guides/California/AmadorIntakeSheet";
+import AmadorIntakeSheetGuide from "../../components/guides/California/AmadorIntakeSheet";
 import CaliforniaBirthCertNameGender from "../../components/guides/California/BirthCertNameGender";
 import CaliforniaBirthCertNameOnly from "../../components/guides/California/BirthCertNameOnly";
-//import CaliforniaCoverSheetGuide from "../../components/guides/California/CivilCoverSheet";
+import CaliforniaCoverSheetGuide from "../../components/guides/California/CivilCoverSheet";
 import CaliforniaCourtHearingGuide from "../../components/guides/California/CourtHearing";
 import CaliforniaDMVGuide from "../../components/guides/California/DMV";
 import ElDoradoBackgroundCheckGuide from "../../components/guides/California/ElDoradoBCSheets";
@@ -77,34 +77,34 @@ import CaliforniaEverythingElseGuide from "../../components/guides/California/Ev
 import CaliforniaFeeWaiverGuide from "../../components/guides/California/FeeWaiver";
 import CaliforniaFeeWaiverOrderGuide from "../../components/guides/California/FeeWaiverOrder";
 import CaliforniaFilingGuide from "../../components/guides/California/FilingInitialForms";
-//import CaliforniaNC110GGuide from "../../components/guides/California/GuardianDeclaration";
+import CaliforniaNC110GGuide from "../../components/guides/California/GuardianDeclaration";
 import KernRelatedCasesGuide from "../../components/guides/California/KernRelatedCases";
 import LassenBCGuide from "../../components/guides/California/LassenBCSheet";
 import LosAngelesBCGuide from "../../components/guides/California/LosAngelesBCSheet";
-//import LosAngelesCoverSheetGuide from "../../components/guides/California/LosAngelesCivilSheet";
+import LosAngelesCoverSheetGuide from "../../components/guides/California/LosAngelesCivilSheet";
 import MendocinoBCGuide from "../../components/guides/California/MendocinoBCSheet";
 import MontereyBCGuide from "../../components/guides/California/MontereyBCSheet";
-//import CaliforniaNC100Guide from "../../components/guides/California/NC100NameOnlyAll";
+import CaliforniaNC100Guide from "../../components/guides/California/NC100NameOnlyAll";
 import CaliforniaNC110Guide from "../../components/guides/California/NC110InfoAll";
-//import CaliforniaNC120Guide from "../../components/guides/California/NC120PublicationAll";
-import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
-//import CaliforniaNC130GGuide from "../../components/guides/California/NC130GuardianOrder";
-//import CaliforniaNC130Guide from "../../components/guides/California/NC130OrderAll";
-import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
-import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
-import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
-import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
-import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
+import CaliforniaNC120Guide from "../../components/guides/California/NC120PublicationAll";
+//import CaliforniaNC125Guide from "../../components/guides/California/NC125GenderNotice";
+import CaliforniaNC130GGuide from "../../components/guides/California/NC130GuardianOrder";
+import CaliforniaNC130Guide from "../../components/guides/California/NC130OrderAll";
+//import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
+//import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
+//import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
+//import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
+//import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
 import OrangeRelatedCasesGuide from "../../components/guides/California/OrangeRelatedCases";
 import PlacerBCGuide from "../../components/guides/California/PlacerBCSheet";
 import CaliforniaResourcesGuide from "../../components/guides/California/Resources";
-//import RiversideCoverSheetGuide from "../../components/guides/California/RiversideCoverSheet";
+import RiversideCoverSheetGuide from "../../components/guides/California/RiversideCoverSheet";
 import RiversideRelatedCasesGuide from "../../components/guides/California/RiversideRelatedCases";
 import SanBenitoBCGuide from "../../components/guides/California/SanBenitoBCSheet";
-//import SantaBarbaraCoverSheetGuide from "../../components/guides/California/SantaBarbaraCoverSheet";
+import SantaBarbaraCoverSheetGuide from "../../components/guides/California/SantaBarbaraCoverSheet";
 import SantaClaraBCGuide from "../../components/guides/California/SantaClaraBCSheet";
 import SiskiyouBCGuide from "../../components/guides/California/SiskiyouBCSheet";
-//import SiskiyouInfoGuide from "../../components/guides/California/SiskiyouInfoSheet";
+import SiskiyouInfoGuide from "../../components/guides/California/SiskiyouInfoSheet";
 import SolanoBCGuide from "../../components/guides/California/SolanoBCSheet";
 import YubaBCGuide from "../../components/guides/California/YubaBCSheet";
 
@@ -116,7 +116,6 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
-    /*
     //Cover sheet stuff here
     {
       name: "Civil Case Cover Sheet",
@@ -216,8 +215,8 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => isMinor(applicant)
         && !applicant.parentsAreOkay,
     },
-    */
 
+   /*
     //Name and Gender stuff here
     {
       name: "Petition for Recognition of Change of Gender and Sex Identifier",
@@ -273,6 +272,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
+    */
 
     //Background check or Criminal history stuff here
     {
