@@ -29161,7 +29161,7 @@ const orderFollowingMap = [
     fieldName: "Current first middle and last names type or print"
   })
 ];
-const feeWaiverMap = [
+const feeWaiverMap$1 = [
   (applicant) => ({
     text: getLocality(
       applicant.residentJurisdictionName,
@@ -29925,7 +29925,7 @@ const michiganNameChange = {
       id: "MC 20",
       filename: "Michigan/mc20.pdf",
       guide: MichiganMC20Guide,
-      map: feeWaiverMap
+      map: feeWaiverMap$1
     },
     {
       name: "Filing Initial Documents",
@@ -40897,6 +40897,203 @@ const illinoisCounties = [
     }
   }
 ];
+const nameChangeOnlyInfoMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-110[0].Page1[0].Caption[0].Petitioner_ft[0]"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].person[0]"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].person[1]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 256, y: 232 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 268, y: 250 }
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    loc: { x: 250, y: 266 }
+  }),
+  (applicant) => ({
+    check: isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].eighteen[0]"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].Subli7b3[0].eighteen[1]"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
+    loc: { x: 250, y: 299 }
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].SubLi7b5[0].gender[0]"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7B[0].Subli7b[0].SubLi7b5[0].gender[1]"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddressAndLocality),
+    loc: { x: 119, y: 349 }
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    loc: { x: 93, y: 386 }
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant),
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7D[0].Sublist7d[0].Subli7d1[0].relationship[0]"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant) && applicant.parentsAreOkay,
+    fieldName: "NC-110[0].Page1[0].List7[0].LI7D[0].Sublist7d[0].Subli7d2[0].relationship[0]"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? fullName(representativeName(applicant)) : "",
+    loc: { x: 206, y: 513 }
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentFullAddress) : "",
+    loc: { x: 462, y: 513 }
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant) && !applicant.hasCriminalRecord,
+    fieldName: "NC-110[0].Page1[0].Declaration[0].SubDec[0].declaration1[0]"
+  }),
+  (applicant) => ({
+    check: !isMinor(applicant) && !applicant.hasCriminalRecord,
+    fieldName: "NC-110[0].Page1[0].Declaration[0].SubDec[0].declaration2[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "NC-110[0].Page1[0].Declaration[0].DecSign[0].T14[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-110[0].Page1[0].PetitionerSign[0].T1444[0]"
+  })
+];
+const feeWaiverMap = [
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "FW-001[0].Page1[0].RightCaption[0].CourtInfo[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerName1[0]"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerStrAddress[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerCity[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerState[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerZip[0]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "FW-001[0].Page1[0].List1[0].item1[0].PetitionerTel[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "FW-001[0].Page1[0].List4[0].item4[0].WaiveSuperiorCrtFee[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-001[0].Page1[0].Sign[0].PetitionerName[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { page: 1, x: 145, y: 73 }
+  })
+];
+const feeWaiverOrderMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-003[0].Page1[0].PersonWaivingName_ft[0]"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (!applicant.streetEqualsMail) {
+        case true:
+          switch (!applicant.mailAddress?.mailApt) {
+            case true:
+              return applicant.mailAddress?.poBox ?? applicant.mailAddress?.mailStreet;
+            case false:
+              return !applicant.mailAddress?.poBox ? `${applicant.mailAddress?.mailStreet ?? ""}, ${applicant.mailAddress?.mailApt ?? ""}` : `${applicant.mailAddress.poBox ?? ""}, ${applicant.mailAddress.mailApt ?? ""}`;
+            default:
+              return "";
+          }
+        case false:
+          return !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
+        default:
+          return "";
+      }
+    })(),
+    fieldName: "FW-003[0].Page1[0].FillText23[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "FW-003[0].Page1[0].FillText21[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? getJurisdiction(applicant.residentJurisdictionName)?.abbreviation : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "FW-003[0].Page1[0].FillText20[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "FW-003[0].Page1[0].FillText22[0]"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "FW-003[0].Page1[0].Stamp_court_case[0].CourtInfo_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-003[0].Page2[0].PE_P2Header_gp[0].PersonWaivingName_ft[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "FW-003[0].#subform[2].PE_P2Header_gp[0].PersonWaivingName_ft[0]"
+  })
+];
 const DMVTitleMap = [
   () => ({
     check: true,
@@ -40933,7 +41130,7 @@ const DMVTitleMap = [
 ];
 const nameOnlyBirthCertMap = [
   (applicant) => ({
-    text: fullName(representativeName(applicant)),
+    text: isMinor(applicant) ? fullName(applicant.representativeName) : fullName(applicant.chosenName),
     fieldName: "Name"
   }),
   (applicant) => ({
@@ -41055,7 +41252,7 @@ const nameOnlyBirthCertMap = [
 ];
 const nameGenderBirthCertMap = [
   (applicant) => ({
-    text: fullName(representativeName(applicant)),
+    text: isMinor(applicant) ? fullName(applicant.representativeName) : fullName(applicant.chosenName),
     fieldName: "Name"
   }),
   (applicant) => ({
@@ -41273,6 +41470,90 @@ const nameGenderBirthCertMap = [
       }
     })(),
     fieldName: "Applicants Relationship to Registrant Must be an authorized personRow1"
+  })
+];
+const kernCaseNoticeMap = [
+  (applicant) => ({
+    text: `${fullName(representativeName(applicant))}, 
+    ${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""}`,
+    fieldName: "Attorney or Party"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone No"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email Address"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "CASE NAME"
+  }),
+  () => ({
+    check: true,
+    fieldName: "PETITIONERPLAINTIFF"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Name"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TYPE OR PRINT NAME OF PARTY OR ATTORNEY"
+  })
+];
+const orangeCaseNoticeMap = [
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text1.0.0"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text1.0.1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone Number"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "CASE TITLE"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "TYPE OR PRINT NAME OF PETITIONEROR ATTORNEY"
+  })
+];
+const riversideCaseNoticeMap = [
+  //Add zip code checks for courts when system is working
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text5.0"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "Text5.1"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Text5.4"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Text5.6"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text5.8"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "Text7.3"
   })
 ];
 function CaliforniaBirthCertNameGender({ person }) {
@@ -41546,6 +41827,27 @@ function CaliforniaEverythingElseGuide() {
     ] })
   ] }, "CA-EverythingElse");
 }
+function CaliforniaFeeWaiverGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request to Waive Court Fees (CA, FW-001)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This form is optional. It is a request to waive the filing fee charged upon submitting the paperwork to the court. In California the filing fee for this varies but is usually around $450.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " should fill out sections 2, 5, and 6 the follow the directions at the top of page 2. If your household meets at least one of the criteria in sections 5a or 5b the judge will likely grant the waiver.",
+      age && age < 18 ? " Your petitioner" : " You",
+      " may file the request at",
+      age && age < 18 ? " their" : " your",
+      " discretion; the worst they can do is deny it."
+    ] })
+  ] }, "California-Fee-Waiver");
+}
+function CaliforniaFeeWaiverOrderGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Order on Court Fee Waiver (Superior Court) (CA, FW-003)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This form is filed with the Fee Waiver (FW-001). It is the courts decision to either grant or deny the waiver of fees. It will be sent back after filing. This form is already complete." })
+  ] }, "California-Fee-Waiver-Order");
+}
 function CaliforniaFilingGuide({
   person
 }) {
@@ -41626,6 +41928,51 @@ function CaliforniaFilingGuide({
     ] }, "California-Filing");
   }
 }
+function KernRelatedCasesGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Kern Party Identification and Notice of Related Case(s) (Kern County, FL-0122)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is a form unique to Kern county. ",
+      age && age < 18 ? "A petitioner " : "You ",
+      "should fill in any blanks in section 1. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " check the “Respondent/Defendent” box as there are not any for this type of case. If there are no other cases that ",
+      age && age < 18 ? " a petitioner is " : " you are ",
+      "involved in check the box in section 2. Otherwise fill out section 3. Finally",
+      age && age < 18 ? " a petitioner" : " you",
+      " should sign/date at the bottom."
+    ] })
+  ] }, "Kern-FL-0122");
+}
+function CaliforniaNC110Guide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name and Information About the Person Whose Name is to be Changed (CA, NC-110)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Add the names of any additional petitioners to the top to match your petition form. Then have a petitioner fill out sections 7d and 7e as needed." }) : "",
+      " ",
+      "You ",
+      age && age < 18 ? ",the minor," : "",
+      " should review the criteria in the “Declaration” section. Then check the appropriate boxes, sign, and date it.",
+      " ",
+      age && age < 18 ? "Your petitioner(s)" : "You",
+      " need to sign and date at the bottom.",
+      " ",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If your petitioners need more signature lines attach a sheet to this form and check the box on the bottom left." }) : ""
+    ] })
+  ] }, "California-NC110");
+}
+function OrangeRelatedCasesGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Name Change Notice of Related Cases (Orange County, L-3008)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This is a form unique to Orange county. Near the top of the form are two checkboxes for both filing locations within Orange county. If there are other court cases involving you, the minor, then your petitioner should check the “Lamoreaux” box otherwise they should check the “Central” box. If you or your petitioners have any open cases involving ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "any of you" }),
+      " fill out section 2. Otherwise check the box in section 1. Then your petitioner(s) can write the date on the “Date:” line and sign at the bottom."
+    ] })
+  ] }, "Orange-L-3008");
+}
 function CaliforniaResourcesGuide() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (CA)" }),
@@ -41648,6 +41995,12 @@ function CaliforniaResourcesGuide() {
       ] })
     ] })
   ] }, "CA-Resources");
+}
+function RiversideRelatedCasesGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Notice of Related Cases (Riverside County, RI-CI040)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a form unique to Riverside county. Add the names of any petitioners whose names are not listed in the “Petition Of” section on the first and second page. Sections A through E deal with other court cases involving you, the minor. If there are any court cases involving you, the your petitioners need to fill out the appropriate section. If not then these sections can be skipped. Then all petitioners need to sign and date at the bottom of page 2 or on additional pages if there is no room." })
+  ] }, "Riverside-CI040");
 }
 const californiaNameChange = {
   target: Target.NameChange,
@@ -41920,56 +42273,53 @@ const californiaNameChange = {
           map: yubaBackgroundCheckMap,
           include: (applicant) => applicant.residentLocalityName === "Yuba",
         },
-    
-        //Everything else here
-        {
-          name: "Name and Information About the Person Whose Name is to be Changed",
-          id: "NC-110",
-          filename: "California/NC-110 Info All.pdf",
-          guide: CaliforniaNC110Guide,
-          map: nameChangeOnlyInfoMap,
-        },
-        {
-          name: "Request to Waive Court Fees",
-          id: "FW-001",
-          filename: "California/Fee Waiver.pdf",
-          guide: CaliforniaFeeWaiverGuide,
-          map: feeWaiverMap,
-        },
-        {
-          name: "Order on Court Fee Waiver",
-          id: "FW-003",
-          filename: "California/Fee Waiver Order.pdf",
-          guide: CaliforniaFeeWaiverOrderGuide,
-          map: feeWaiverOrderMap,
-        },
-        {
-          name: "Party Identification and Notice of Related Case(s)",
-          id: "KRN SUP CRT FL-0122",
-          filename: "California/Kern Minor Related Cases.pdf",
-          guide: KernRelatedCasesGuide,
-          map: kernCaseNoticeMap,
-          include: (applicant) => applicant.residentLocalityName === "Kern",
-        },
-        {
-          name: "Name Change Notice of Related Cases",
-          id: "L-3008",
-          filename: "California/Orange Minor Name Notice.pdf",
-          guide: OrangeRelatedCasesGuide,
-          map: orangeCaseNoticeMap,
-          include: (applicant) => isMinor(applicant)
-            && applicant.residentLocalityName === "Orange",
-        },
-        {
-          name: "Notice of Related Cases",
-          id: "RI-CI040",
-          filename: "California/Riverside Related Cases.pdf",
-          guide: RiversideRelatedCasesGuide,
-          map: riversideCaseNoticeMap,
-          include: (applicant) => isMinor(applicant)
-            && applicant.residentLocalityName === "Riverside",
-        },
         */
+    //Everything else here
+    {
+      name: "Name and Information About the Person Whose Name is to be Changed",
+      id: "NC-110",
+      filename: "California/NC-110 Info All.pdf",
+      guide: CaliforniaNC110Guide,
+      map: nameChangeOnlyInfoMap
+    },
+    {
+      name: "Request to Waive Court Fees",
+      id: "FW-001",
+      filename: "California/Fee Waiver.pdf",
+      guide: CaliforniaFeeWaiverGuide,
+      map: feeWaiverMap
+    },
+    {
+      name: "Order on Court Fee Waiver",
+      id: "FW-003",
+      filename: "California/Fee Waiver Order.pdf",
+      guide: CaliforniaFeeWaiverOrderGuide,
+      map: feeWaiverOrderMap
+    },
+    {
+      name: "Party Identification and Notice of Related Case(s)",
+      id: "KRN SUP CRT FL-0122",
+      filename: "California/Kern Minor Related Cases.pdf",
+      guide: KernRelatedCasesGuide,
+      map: kernCaseNoticeMap,
+      include: (applicant) => applicant.residentLocalityName === "Kern"
+    },
+    {
+      name: "Name Change Notice of Related Cases",
+      id: "L-3008",
+      filename: "California/Orange Minor Name Notice.pdf",
+      guide: OrangeRelatedCasesGuide,
+      map: orangeCaseNoticeMap,
+      include: (applicant) => isMinor(applicant) && applicant.residentLocalityName === "Orange"
+    },
+    {
+      name: "Notice of Related Cases",
+      id: "RI-CI040",
+      filename: "California/Riverside Related Cases.pdf",
+      guide: RiversideRelatedCasesGuide,
+      map: riversideCaseNoticeMap,
+      include: (applicant) => isMinor(applicant) && applicant.residentLocalityName === "Riverside"
+    },
     {
       name: "Filing Initial Documents",
       guide: CaliforniaFilingGuide
