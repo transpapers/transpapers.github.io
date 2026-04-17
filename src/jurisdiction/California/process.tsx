@@ -25,16 +25,16 @@ import {
   civilCaseCoverMap,
   nameChangeOnlyPetitionMap,
   adultNameGenderPetitionMap,
-  //minorNameGenderPetitionMap,
+  minorNameGenderPetitionMap,
   nameChangeOnlyInfoMap,
   minorGuardianDeclarationMap,
   nameChangeOnlyNoticeMap,
   nameChangeOnlyConformMap,
-  //minorNameGenderConformMap,
+  minorNameGenderConformMap,
   nameChangeOnlyOrderMap,
   nameChangeOnlyOrderGuardianMap,
-  adultNameGenderOrderMap,
-  //minorNameGenderOrderMap,
+  //adultNameGenderOrderMap,
+  minorNameGenderOrderMap,
   feeWaiverMap,
   feeWaiverOrderMap,
   DMVTitleMap,
@@ -91,10 +91,10 @@ import CaliforniaNC125Guide from "../../components/guides/California/NC125Gender
 import CaliforniaNC130GGuide from "../../components/guides/California/NC130GuardianOrder";
 import CaliforniaNC130Guide from "../../components/guides/California/NC130OrderAll";
 import CaliforniaNC300Guide from "../../components/guides/California/NC300Adult";
-import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
-//import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
-//import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
-//import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
+//import CaliforniaNC330Guide from "../../components/guides/California/NC330OrderAdult";
+import CaliforniaNC500Guide from "../../components/guides/California/NC500Minor";
+import CaliforniaNC520Guide from "../../components/guides/California/NC520GenderMinor";
+import CaliforniaNC530Guide from "../../components/guides/California/NC530OrderMinor";
 import OrangeRelatedCasesGuide from "../../components/guides/California/OrangeRelatedCases";
 import PlacerBCGuide from "../../components/guides/California/PlacerBCSheet";
 import CaliforniaResourcesGuide from "../../components/guides/California/Resources";
@@ -234,6 +234,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       map: nameChangeOnlyConformMap,
       include: (applicant) => applicant.isChangingLegalSex,
     },
+    /*
     {
       name: "Order Recognizing Change of Gender and Sex Identifier",
       id: "NC-330",
@@ -243,7 +244,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => !isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
-   /*
+    */
     {
       name: "Petition for Recognition of Minor's Change of Gender and Sex Identifier and for Issuance of New Birth Certificate",
       id: "NC-500",
@@ -271,7 +272,6 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => isMinor(applicant)
         && applicant.isChangingLegalSex,
     },
-    */
 
     //Background check or Criminal history stuff here
     {
