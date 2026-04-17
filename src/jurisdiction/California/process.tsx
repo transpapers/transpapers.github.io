@@ -116,6 +116,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
+    /*
     //Cover sheet stuff here
     {
       name: "Civil Case Cover Sheet",
@@ -431,6 +432,7 @@ export const californiaNameChange: Process<CaliforniaCounty> = {
       include: (applicant) => isMinor(applicant)
         && applicant.residentLocalityName === "Riverside",
     },
+    */
     {
       name: "Filing Initial Documents",
       guide: CaliforniaFilingGuide,
