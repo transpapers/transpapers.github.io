@@ -41750,14 +41750,11 @@ const adultNameGenderOrderMap = [
   (applicant) => ({
     check: applicant.isChangingLegalName,
     fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].Checkbox10[0]"
-  })
-  /*
+  }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    //eslint-disable-next-line
-    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].TEXT\.0\.6\.1\.1\.4\.1\.1\.1\.0\.1\.0\.1\.1\.1\.3\.1\.0[0]",
-  }),
-  */
+    loc: { page: 1, x: 320, y: 308 }
+  })
 ];
 const minorNameGenderOrderMap = [
   (applicant) => ({
