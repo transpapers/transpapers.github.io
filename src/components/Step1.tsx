@@ -50,7 +50,7 @@ function Step1() {
 
   const choicesElements = Array.from(
     allJurisdictions
-      .filter((jurisdiction) => jurisdiction.name !== "Federal")
+      .filter((jurisdiction) => jurisdiction.name !== "Federal" && jurisdiction.name !== "Elsewhere")
       .map(({ name }) => (
         <li key={name}>
           <label>
