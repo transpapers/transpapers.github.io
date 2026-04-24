@@ -42662,14 +42662,6 @@ const losAngelesCaseTypeMap = [
     check: true,
     fieldName: "undefined_50"
   }),
-  () => ({
-    check: true,
-    fieldName: "undefined_59"
-  }),
-  () => ({
-    check: true,
-    fieldName: "undefined_64"
-  }),
   (applicant) => ({
     text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
     fieldName: "ADDRESSZIP CODE"
@@ -43371,7 +43363,7 @@ function CaliforniaCoverSheetGuide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Civil Case Cover Sheet (CA, CM-010)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "This is a cover sheet showing what type of case the court will hear. In California name ",
+      "This is a cover sheet showing what type of case the court will hear. In California name",
       isChangingLegalSex ? "/gender" : "",
       " changes are Unlimited Civil Cases. This form is not required in every county but was included just in case. All this form needs is your ",
       age && age < 18 ? "parent/guardians" : "",
@@ -43622,10 +43614,12 @@ function CaliforniaFilingGuide({
             residentLocalityName,
             " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:",
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             courtResults?.name,
-            ", located at: ",
+            ", located at ",
             courtResults?.address,
             ".",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             "Phone Number: ",
             courtResults?.phone,
@@ -43636,13 +43630,7 @@ function CaliforniaFilingGuide({
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
             ". It lists every filing location in the state as well as the jurisdictions they cover. Check your address to see which one(s) you fall under."
           ] }),
-          residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-            "If you are unsure of which court to file in even after looking at the results and map you can always file at the Stanley Mosk Courthouse. Any LA county resident can file there. In the map it is the court with the yellow pin, click that pin on the",
-            " ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
-            " ",
-            "for more information."
-          ] }) : ""
+          residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you are unsure of which court to file in even after looking at the results and map you can always file at the Stanley Mosk Courthouse. Any LA county resident can file there. In the map it is the court with the yellow pin, click that pin on the map for more information." }) : ""
         ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           residentLocality.multiCourt ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
             "In ",
@@ -43671,7 +43659,11 @@ function CaliforniaFilingGuide({
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010) and fill in the courts street address, city, zip code, and branch name near the top of the page if they are blank." }),
         residentLocalityName === "Alameda" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (202-19) and make a check next to the court you chose near the top of the page." }) : "",
-        residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum and Statement of Location” (LASC CIV 109) and go to page 4. On the third row from the bottom will be a checkmark with your case type and a “2, 7” on the right from that. If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. If the Stanley Mosk court is your only filing option circle either, it will not matter. Then on the last page there will be a section at the top that says “Reason:” with numbered checkboxes. Check the box that matches the number you circled. Finally in step 5 write the name of the court district you will be filing in. If you are unsure of what the district name is consult the map from the previous paragraph, if you click on the district the name will pop up on the top." }) : "",
+        residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum and Statement of Location” (LASC CIV 109) and go to page 4. On the third row from the bottom will be a checkmark with your case type and a “2, 7” on the right from that.",
+          foundCourtName !== "Stanley Mosk" ? " If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. " : "Since the Stanley Mosk court is your only filing option circle the 7. ",
+          "Then on the last page there will be a section at the top that says “Reason:” with numbered checkboxes. Check the box that matches the number you circled. Finally in step 5 write the name of the court district you will be filing in. If you are unsure of what the district name is consult the map from the court information above, if you click on the district the name will pop up on the top."
+        ] }) : "",
         residentLocalityName === "Santa Barbara" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (SC-2069) and make a check next to the court you chose near the top of the page." }) : "",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
@@ -43748,7 +43740,7 @@ function LosAngelesCoverSheetGuide({ person }) {
       age && age < 18 ? " your petitioner" : " you",
       " are able to file in. We have checked the appropriate boxes for the case type and will have a list of courts to file at in a later section. When",
       age && age < 18 ? " your petitioner has" : " you have",
-      " read that section and picked a court, write the name of the district we provide on the last page of this form in step 5. At that point ",
+      " read that section and picked a court, we will provide instructions to finish this form. At that point ",
       age && age < 18 ? "your petitioner" : "you",
       " can sign and date this form to complete it."
     ] })
@@ -47320,7 +47312,7 @@ function DS5504Guide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The supreme court has permitted the state department to discriminate again for passport gender markers. Do",
+      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " attempt to update the marker, it will be rejected. If you have always had a passport with your desired gender marker and none of the original documents used to get one have your old info you are safe to renew. Otherwise do ",
@@ -47349,7 +47341,7 @@ function DS82Guide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The supreme court has permitted the state department to discriminate again for passport gender markers. Do",
+      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " attempt to update the marker, it will be rejected. If you have always had a passport with your desired gender marker and none of the original documents used to get one have your old info you are safe to renew. Otherwise do ",
@@ -47381,7 +47373,7 @@ function DS11Guide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The supreme court has permitted the state department to discriminate again for passport gender markers. Do",
+      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
       " attempt to update the marker unless you meet the following conditions. You will need to be someone who has never had a passport before and all of your ID documents that you are submittting need to have your updated name/gender marker with no evidence of the old info. If that is the case, check the box you want in section 3. If you do not meet this criteria we suggest that you stop applying for a passport. If that is not an option then mark your assigned sex at birth in section 3.",
