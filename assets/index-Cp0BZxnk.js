@@ -28444,6 +28444,35 @@ function abbreviateJurisdiction(jurisdiction) {
   };
   return map[jurisdiction];
 }
+function caliZipCodeMatch(zipCode, countyName, stateName) {
+  if (zipCode === "") {
+    return "";
+  }
+  if (zipCode === void 0) {
+    return "";
+  }
+  if (stateName === void 0) {
+    return "";
+  }
+  if (countyName === void 0) {
+    return "";
+  }
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === stateName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === countyName
+    );
+    const map = residentLocality.zipCourts;
+    if (map) {
+      return map[zipCode];
+    } else {
+      return "";
+    }
+  }
+}
 function numericalAge(birthdate) {
   if (!birthdate) {
     return Infinity;
@@ -43554,7 +43583,7 @@ function CaliforniaFeeWaiverOrderGuide() {
 function CaliforniaFilingGuide({
   person
 }) {
-  const { age, residentJurisdictionName, residentLocalityName, parentsAreOkay } = person;
+  const { age, residentJurisdictionName, residentLocalityName, parentsAreOkay, homeAddress } = person;
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName
   );
@@ -43563,72 +43592,99 @@ function CaliforniaFilingGuide({
     const residentLocality = localities.find(
       (j) => j.name === residentLocalityName
     );
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (CA)" }),
-      age && age < 18 && parentsAreOkay === false ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If you have a legal guardian their filing location will be in whatever court they recieved their guardianship from ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "instead of" }),
-        " the result(s) listed below. If the guardianship court was in another state they should use the location(s) listed below but be sure notify the clerk upon filing of the situation to make absolutely sure."
-      ] }) : "",
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        age && age < 18 ? "A parent/guardian " : "You ",
-        " should bring all of the completed forms listed above as well as photo ID and payment. The fee in California for filing varies between courts and is updated frequently but is typically between $350 to $450 dollars without the fee waiver. Payment methods should still be brought in any case."
-      ] }),
-      residentLocality.courtByZip ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    if (homeAddress) {
+      const foundCourtName = caliZipCodeMatch(homeAddress.zip, residentLocalityName, residentJurisdictionName);
+      const courtResults = residentLocality.allCourts.find((court) => court.name === foundCourtName);
+      return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (CA)" }),
+        age && age < 18 && parentsAreOkay === false ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "If you have a legal guardian their filing location will be in whatever court they recieved their guardianship from ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "instead of" }),
+          " the result(s) listed below. If the guardianship court was in another state they should use the location(s) listed below but be sure notify the clerk upon filing of the situation to make absolutely sure."
+        ] }) : "",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "The ",
-          residentLocalityName,
-          " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:"
+          age && age < 18 ? "A parent/guardian " : "You ",
+          " should bring all of the completed forms listed above as well as photo ID and payment. The fee in California for filing varies between courts and is updated frequently but is typically between $350 to $450 dollars without the fee waiver. Payment methods should still be brought in any case."
         ] }),
-        ...residentLocality.allCourts.map(({ name, address, phone }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          name,
-          ": ",
-          address,
-          ".",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-          "Phone Number: ",
-          phone
-        ] }, "{residentLocality.allCourts.name}"))
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        residentLocality.multiCourt ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "In ",
-          residentLocalityName,
-          " county there are multiple courts a resident can file in, it does not matter which one:"
-        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          "In ",
-          residentLocalityName,
-          " county everyone files here:"
+        residentLocality.courtByZip ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "The ",
+            residentLocalityName,
+            " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:"
+          ] }),
+          foundCourtName === "Split" || foundCourtName === "" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "The zip code lookup used to identify your filing court could not return a valid result. Either your zip code is split between multiple court jurisdictions or the zip code was entered incorrectly. Either way please consult this",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
+            ". It lists every filing location in the state as well as the jurisdictions they cover. Check your address to see which one(s) you fall under."
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "The ",
+            residentLocalityName,
+            " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            courtResults?.name,
+            ", located at: ",
+            courtResults?.address,
+            ".",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            "Phone Number: ",
+            courtResults?.phone,
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            "If the court(s) listed above appear wrong or you simply want more information check this",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
+            ". It lists every filing location in the state as well as the jurisdictions they cover. Check your address to see which one(s) you fall under."
+          ] }),
+          residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "If you are unsure of which court to file in even after looking at the results and map you can always file at the Stanley Mosk Courthouse. Any LA county resident can file there. In the map it is the court with the yellow pin, click that pin on the",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
+            " ",
+            "for more information."
+          ] }) : ""
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          residentLocality.multiCourt ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "In ",
+            residentLocalityName,
+            " county there are multiple courts a resident can file in, it does not matter which one:"
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "In ",
+            residentLocalityName,
+            " county everyone files here:"
+          ] }),
+          ...residentLocality.allCourts.map(({ name, address, phone }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            name,
+            ": ",
+            address,
+            ".",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            "Phone Number: ",
+            phone,
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            "If the court(s) listed above appear wrong or you simply want more information check this",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
+            ". It lists every filing location in the state as well as the jurisdictions they cover. Check your address to see which one(s) you fall under."
+          ] }, "{residentLocality.allCourts.name}"))
         ] }),
-        ...residentLocality.allCourts.map(({ name, address, phone }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-          name,
-          ": ",
-          address,
-          ".",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-          "Phone Number: ",
-          phone
-        ] }, "{residentLocality.allCourts.name}"))
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "If the court(s) listed above appear wrong or you simply want more information check this",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
-        ". It lists every filing location in the state as well as the jurisdictions they cover. Check you address to see which one(s) you fall under. Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010) and fill in the courts street address, city, zip code, and branch name near the top of the page if they are blank."
-      ] }),
-      residentLocalityName === "Alameda" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (202-19) and make a check next to the court you chose near the top of the page." }) : "",
-      residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum and Statement of Location” (LASC CIV 109) and go to page 4. On the third row from the bottom will be a checkmark with your case type and a “2, 7” on the right from that. If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. If the Stanley Mosk court is your only filing option circle either, it will not matter. Then on the last page there will be a section at the top that says “Reason:” with numbered checkboxes. Check the box that matches the number you circled. Finally in step 5 write the name of the court district you will be filing in. If you are unsure of what the district name is consult the map from the previous paragraph, if you click on the district the name will pop up on the top." }) : "",
-      residentLocalityName === "Santa Barbara" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (SC-2069) and make a check next to the court you chose near the top of the page." }) : "",
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
-        " ",
-        "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Once the paperwork has been filed, the court will likely make a judgment without a hearing and will mail the results. If so skip the “Court Hearing” section. While at the court be sure to ask the clerk if it is possible to pre-pay for 2 or 3 additional certified copies of the court order. By requesting additional copies now you can save a trip or call. Note: the cost for additional copies is small but ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-        " covered by the fee waiver. Use the copies in later sections and keep the original in a safe place."
-      ] })
-    ] }, "California-Filing");
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010) and fill in the courts street address, city, zip code, and branch name near the top of the page if they are blank." }),
+        residentLocalityName === "Alameda" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (202-19) and make a check next to the court you chose near the top of the page." }) : "",
+        residentLocalityName === "Los Angeles" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum and Statement of Location” (LASC CIV 109) and go to page 4. On the third row from the bottom will be a checkmark with your case type and a “2, 7” on the right from that. If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. If the Stanley Mosk court is your only filing option circle either, it will not matter. Then on the last page there will be a section at the top that says “Reason:” with numbered checkboxes. Check the box that matches the number you circled. Finally in step 5 write the name of the court district you will be filing in. If you are unsure of what the district name is consult the map from the previous paragraph, if you click on the district the name will pop up on the top." }) : "",
+        residentLocalityName === "Santa Barbara" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (SC-2069) and make a check next to the court you chose near the top of the page." }) : "",
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
+          " ",
+          "We recommend that you direct any questions you may have to the court's legal assistance center, a local LGBT organization, or an attorney."
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          "Once the paperwork has been filed, the court will likely make a judgment without a hearing and will mail the results. If so skip the “Court Hearing” section. While at the court be sure to ask the clerk if it is possible to pre-pay for 2 or 3 additional certified copies of the court order. By requesting additional copies now you can save a trip or call. Note: the cost for additional copies is small but ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+          " covered by the fee waiver. Use the copies in later sections and keep the original in a safe place."
+        ] })
+      ] }, "California-Filing");
+    }
   }
 }
 function CaliforniaNC110GGuide() {
