@@ -42,7 +42,8 @@ function CaliforniaFilingGuide({
   ) as CaliforniaCounty;
 
   if (homeAddress) {
-    const foundCourt = caliZipCodeMatch(homeAddress.zip, residentLocalityName, residentJurisdictionName)
+    const foundCourtName = caliZipCodeMatch(homeAddress.zip, residentLocalityName, residentJurisdictionName)
+    const courtResults = residentLocality.allCourts.find(court => court.name === foundCourtName);
   
 
   return (
@@ -74,7 +75,7 @@ function CaliforniaFilingGuide({
           on your zip code these court(s) are acceptable to file at:
         </p>
 
-        {foundCourt === "Split" || foundCourt === "" ?
+        {foundCourtName === "Split" || foundCourtName === "" ?
         <p>
           The zip code lookup used to identify your filing court could not return a valid result.
           Either your zip code is split between multiple court jurisdictions or the zip code was 
@@ -86,15 +87,13 @@ function CaliforniaFilingGuide({
           they cover. Check your address to see which one(s) you fall under.
         </p>
         :
-
-        {...Array.from(
-          residentLocality.allCourts
-          .filter((foundCourt) => foundCourt)
-          .map(({ name, address, phone }) => (
-          <p key="{foundCourt}">
-            {name}: {address}. 
+         <p>
+            The {residentLocalityName} county superior courts determine venue by zip code. Based
+            on your zip code these court(s) are acceptable to file at:
             <br />
-            Phone Number: {phone}
+            {courtResults?.name}, located at: {courtResults?.address}.
+            <br />
+            Phone Number: {courtResults?.phone}
             <br />
             <br />
             If the court(s) listed above appear wrong or you simply want more information check 
@@ -105,27 +104,6 @@ function CaliforniaFilingGuide({
             . It lists every filing location in the state as well as the jurisdictions 
             they cover. Check your address to see which one(s) you fall under.
           </p>
-          )),
-        )}
-
-        /*
-        {...residentLocality.allCourts.map(({ address, phone }) => (
-          <p key="{foundCourt}">
-            {foundCourt}: {address}. 
-            <br />
-            Phone Number: {phone}
-            <br />
-            <br />
-            If the court(s) listed above appear wrong or you simply want more information check 
-            this{" "}
-            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
-              map
-            </a>
-            . It lists every filing location in the state as well as the jurisdictions 
-            they cover. Check your address to see which one(s) you fall under.
-          </p>
-        ))}
-        */
         }
 
         {residentLocalityName === "Los Angeles" ? 
