@@ -48044,7 +48044,7 @@ function Step1() {
     await navigate("/step2");
   };
   const choicesElements = Array.from(
-    allJurisdictions.filter((jurisdiction) => jurisdiction.name !== "Federal").map(({ name }) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
+    allJurisdictions.filter((jurisdiction) => jurisdiction.name !== "Federal" && jurisdiction.name !== "Elsewhere").map(({ name }) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
