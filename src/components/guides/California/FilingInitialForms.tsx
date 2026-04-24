@@ -86,6 +86,29 @@ function CaliforniaFilingGuide({
           they cover. Check your address to see which one(s) you fall under.
         </p>
         :
+
+        {...Array.from(
+          residentLocality.allCourts
+          .filter((foundCourt) => foundCourt)
+          .map(({ name, address, phone }) => (
+          <p key="{foundCourt}">
+            {name}: {address}. 
+            <br />
+            Phone Number: {phone}
+            <br />
+            <br />
+            If the court(s) listed above appear wrong or you simply want more information check 
+            this{" "}
+            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
+              map
+            </a>
+            . It lists every filing location in the state as well as the jurisdictions 
+            they cover. Check your address to see which one(s) you fall under.
+          </p>
+          )),
+        )}
+
+        /*
         {...residentLocality.allCourts.map(({ address, phone }) => (
           <p key="{foundCourt}">
             {foundCourt}: {address}. 
@@ -102,14 +125,15 @@ function CaliforniaFilingGuide({
             they cover. Check your address to see which one(s) you fall under.
           </p>
         ))}
+        */
         }
 
         {residentLocalityName === "Los Angeles" ? 
           <p>
             If you are unsure of which court to file in even after looking at the results and
             map you can always file at the Stanley Mosk Courthouse. Any LA county resident can
-            file for a name change there. In the map it is the court with the yellow pin, click
-            the pin on the{" "}
+            file there. In the map it is the court with the yellow pin, click that pin on 
+            the{" "}
             <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
               map
             </a> 
