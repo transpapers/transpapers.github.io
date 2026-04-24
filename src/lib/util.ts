@@ -110,6 +110,44 @@ export function abbreviateJurisdiction(
   return map[jurisdiction];
 }
 
+export function caliZipCodeMatch(
+  zipCode: string | undefined, countyName: string | undefined, stateName: string | undefined,
+): string | undefined {
+  
+  if (zipCode === "") {
+    return "";
+  }
+
+  if (zipCode === undefined) {
+    return "";
+  }
+
+  if (stateName === undefined) {
+    return "";
+  }
+
+  if (countyName === undefined) {
+    return "";
+  }
+
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === stateName,
+  );
+
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality: CaliforniaCounty = localities.find(
+    (j) => j.name === countyName,) as CaliforniaCounty;
+
+  const map: Record<string, string> | undefined = residentLocality.zipCourts;
+
+  if (map) {
+    return map[zipCode];
+  } else {
+    return "";
+  }
+}}
+
 /*!
  * Calculate a person's numerical age from their birthdate, as a string.
  * Since a "date of birth" is a legal fiction and not a timestamp, we can do

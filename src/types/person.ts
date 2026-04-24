@@ -30,6 +30,7 @@ import {
   newYork,
   oregon,
   rhodeIsland,
+  california,
 } from "../jurisdiction/all";
 
 /*!
@@ -421,6 +422,7 @@ export const sampleCombinationData = {
     newYork,
     oregon,
     rhodeIsland,
+    california,
   ],
 
   birthdateTest: ["2010-01-23", "1990-11-23"],
@@ -465,6 +467,7 @@ export const sampleCombinationData = {
     newYork,
     oregon,
     rhodeIsland,
+    california,
   ],
   zip: "49503",
 

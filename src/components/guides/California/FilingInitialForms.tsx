@@ -24,13 +24,14 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 import { type CaliforniaCounty } from "../../../types/locality";
 import { allJurisdictions } from "../../../jurisdiction/all";
+import { caliZipCodeMatch } from "../../../lib/util";
 
 function CaliforniaFilingGuide({
   person,
 }: {
   person: Person;
 }) {
-  const { age, residentJurisdictionName, residentLocalityName, parentsAreOkay } = person;
+  const { age, residentJurisdictionName, residentLocalityName, parentsAreOkay, homeAddress } = person;
   const residentJurisdiction = allJurisdictions.find(
     (j) => j.name === residentJurisdictionName,
   );
@@ -39,6 +40,10 @@ function CaliforniaFilingGuide({
     const residentLocality: CaliforniaCounty = localities.find(
     (j) => j.name === residentLocalityName,
   ) as CaliforniaCounty;
+
+  if (homeAddress) {
+    const foundCourt = caliZipCodeMatch(homeAddress.zip, residentLocalityName, residentJurisdictionName)
+  
 
   return (
     <section key="California-Filing">
@@ -69,13 +74,48 @@ function CaliforniaFilingGuide({
           on your zip code these court(s) are acceptable to file at:
         </p>
 
-        {...residentLocality.allCourts.map(({ name, address, phone }) => (
-          <p key="{residentLocality.allCourts.name}">
-            {name}: {address}. 
+        {foundCourt === "Split" || foundCourt === "" ?
+        <p>
+          The zip code lookup used to identify your filing court could not return a valid result.
+          Either your zip code is split between multiple court jurisdictions or the zip code was 
+          entered incorrectly. Either way please consult this{" "}
+          <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
+            map
+          </a>
+          . It lists every filing location in the state as well as the jurisdictions 
+          they cover. Check your address to see which one(s) you fall under.
+        </p>
+        :
+        {...residentLocality.allCourts.map(({ address, phone }) => (
+          <p key="{foundCourt}">
+            {foundCourt}: {address}. 
             <br />
             Phone Number: {phone}
+            <br />
+            <br />
+            If the court(s) listed above appear wrong or you simply want more information check 
+            this{" "}
+            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
+              map
+            </a>
+            . It lists every filing location in the state as well as the jurisdictions 
+            they cover. Check your address to see which one(s) you fall under.
           </p>
         ))}
+        }
+
+        {residentLocalityName === "Los Angeles" ? 
+          <p>
+            If you are unsure of which court to file in even after looking at the results and
+            map you can always file at the Stanley Mosk Courthouse. Any LA county resident can
+            file for a name change there. In the map it is the court with the yellow pin, click
+            the pin on the{" "}
+            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
+              map
+            </a> 
+            {" "}for more information.
+          </p>
+        :""}
       </>
     ) : (
       <>
@@ -95,22 +135,24 @@ function CaliforniaFilingGuide({
             {name}: {address}. 
             <br />
             Phone Number: {phone}
+            <br />
+            <br />
+            If the court(s) listed above appear wrong or you simply want more information check 
+            this{" "}
+            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
+              map
+            </a>
+            . It lists every filing location in the state as well as the jurisdictions 
+            they cover. Check your address to see which one(s) you fall under.
           </p>
         ))}
       </>
     )}
 
       <p>
-        If the court(s) listed above appear wrong or you simply want more
-        information check this{" "}
-        <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
-            map
-        </a>
-        . It lists every filing location in the state as well as the jurisdictions 
-        they cover. Check you address to see which one(s) you fall under. Once you
-        are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010)
-        and fill in the courts street address, city, zip code, and branch name near
-        the top of the page if they are blank.
+        Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010)
+        and fill in the courts street address, city, zip code, and branch name near the 
+        top of the page if they are blank.
       </p>
 
       {residentLocalityName === "Alameda" ? (
@@ -167,6 +209,6 @@ function CaliforniaFilingGuide({
 
     </section>
   );
-}}
+}}}
 
 export default CaliforniaFilingGuide;
