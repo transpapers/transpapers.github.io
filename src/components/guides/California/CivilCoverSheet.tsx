@@ -32,7 +32,7 @@ function CaliforniaCoverSheetGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         This is a cover sheet showing what type of case the court will hear. In California
-        name {isChangingLegalSex ? "/gender" : ""} changes are Unlimited Civil Cases. This
+        name{isChangingLegalSex ? "/gender" : ""} changes are Unlimited Civil Cases. This
         form is not required in every county but was included just in case. All this form
         needs is your {age && age < 18 ? "parent/guardians" : ""} signature on the bottom
         right of the first page.

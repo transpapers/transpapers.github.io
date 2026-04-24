@@ -91,7 +91,9 @@ function CaliforniaFilingGuide({
             The {residentLocalityName} county superior courts determine venue by zip code. Based
             on your zip code these court(s) are acceptable to file at:
             <br />
-            {courtResults?.name}, located at: {courtResults?.address}.
+            <br />
+            {courtResults?.name}, located at {courtResults?.address}.
+            <br />
             <br />
             Phone Number: {courtResults?.phone}
             <br />
@@ -111,11 +113,7 @@ function CaliforniaFilingGuide({
             If you are unsure of which court to file in even after looking at the results and
             map you can always file at the Stanley Mosk Courthouse. Any LA county resident can
             file there. In the map it is the court with the yellow pin, click that pin on 
-            the{" "}
-            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
-              map
-            </a> 
-            {" "}for more information.
+            the map for more information.
           </p>
         :""}
       </>
@@ -170,14 +168,19 @@ function CaliforniaFilingGuide({
            Additionally, once you have picked a court to file at grab the “Civil Case Cover
            Sheet Addendum and Statement of Location” (LASC CIV 109) and go to
            page 4. On the third row from the bottom will be a checkmark with your
-           case type and a “2, 7” on the right from that. If you picked the 
-           Stanley Mosk court to file at then circle the 2, otherwise circle the 7.
-           If the Stanley Mosk court is your only filing option circle either, it
-           will not matter. Then on the last page there will be a section at the
+           case type and a “2, 7” on the right from that. 
+           
+           {foundCourtName !== "Stanley Mosk" ?
+             " If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. "
+           :
+             "Since the Stanley Mosk court is your only filing option circle the 7. "
+           }
+
+           Then on the last page there will be a section at the
            top that says “Reason:” with numbered checkboxes. Check the box that
            matches the number you circled. Finally in step 5 write the name of the
            court district you will be filing in. If you are unsure of what the
-           district name is consult the map from the previous paragraph, if you
+           district name is consult the map from the court information above, if you
            click on the district the name will pop up on the top.
          </p>
       ):("")}

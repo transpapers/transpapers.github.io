@@ -31,7 +31,7 @@ function DS5504Guide({ person }: { person: Partial<Person> }) {
 
       <p>
         <strong>Attention</strong>: The supreme court has permitted the state
-        department to discriminate again for passport gender markers. Do{" "}
+        department to discrimminate again for passport gender markers. Do{" "}
         <strong>not</strong> attempt to update the marker, it will be rejected.
         If you have always had a passport with your desired gender marker and 
         none of the original documents used to get one have your old info you are 

@@ -32,7 +32,7 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
 
       <p>
         <strong>Attention</strong>: The supreme court has permitted the state
-        department to discriminate again for passport gender markers. Do{" "}
+        department to discrimminate again for passport gender markers. Do{" "}
         <strong>not</strong> attempt to update the marker unless you meet the
         following conditions. You will need to be someone who has never had a
         passport before and all of your ID documents that you are submittting

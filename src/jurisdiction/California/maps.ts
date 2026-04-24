@@ -2004,14 +2004,6 @@ export const losAngelesCaseTypeMap: Formfill[] = [
     check: true,
     fieldName: "undefined_50",
   }),
-  () => ({
-    check: true,
-    fieldName: "undefined_59",
-  }),
-  () => ({
-    check: true,
-    fieldName: "undefined_64",
-  }),
   (applicant) => ({
     text: !applicant.homeAddress?.apt
       ? applicant.homeAddress?.street 

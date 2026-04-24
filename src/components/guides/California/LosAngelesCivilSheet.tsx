@@ -36,9 +36,9 @@ function LosAngelesCoverSheetGuide({ person }: { person: Partial<Person> }) {
         checked the appropriate boxes for the case type and will have a list of courts
         to file at in a later section. When 
         {age && age < 18 ? " your petitioner has" : " you have"} read that section and 
-        picked a court, write the name of the district we provide on the last page of this 
-        form in step 5. At that point {age && age < 18 ? "your petitioner" : "you"} can 
-        sign and date this form to complete it.
+        picked a court, we will provide instructions to finish this form. At that 
+        point {age && age < 18 ? "your petitioner" : "you"} can sign and date this form 
+        to complete it.
       </p>
 
     </section>
