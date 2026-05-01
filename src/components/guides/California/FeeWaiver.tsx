@@ -36,6 +36,12 @@ function CaliforniaFeeWaiverGuide({ person }: { person: Partial<Person> }) {
         {age && age < 18 ? " Your petitioner" : " You"} should fill out sections 2, 5, and
         6 the follow the directions at the top of page 2. If your household meets at least 
         one of the criteria in sections 5a or 5b the judge will likely grant the waiver.
+        </p>
+
+        <p>
+        If you checked anything in 5a skip the second page. If you checked anything in 5b
+        and did <strong>not</strong> check anything in 5a, fill out sections 7, 8, and 9.
+        If you <strong>only</strong> checked section 5c fill out sections 7 though 11.
         {age && age < 18 ? " Your petitioner" : " You"} may file the request at 
         {age && age < 18 ? " their" : " your"} discretion; the worst they can do is deny 
         it.

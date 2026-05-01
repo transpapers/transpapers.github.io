@@ -32,8 +32,9 @@ function PlacerBCGuide({ person }: { person: Partial<Person> }) {
       <p>
         Placer county requires that the petitioner undergo a background check for
         a name change. {age && age < 18 ? "Your petitioner" : "You"} should fill out
-        any blanks we left and double check the “Also Known As” line for accuracy. 
-        Then this form is complete.
+        the Social Security and Drivers License Number lines if applicable. Then 
+        double check the “Also Known As” line for accuracy. This form is then
+        complete.
       </p>
     </section>
   );

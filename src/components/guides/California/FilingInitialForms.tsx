@@ -75,7 +75,7 @@ function CaliforniaFilingGuide({
           on your zip code these court(s) are acceptable to file at:
         </p>
 
-        {foundCourtName === "Split" || foundCourtName === "" ?
+        {foundCourtName === "Split" || foundCourtName === "" || foundCourtName === undefined ?
         <p>
           The zip code lookup used to identify your filing court could not return a valid result.
           Either your zip code is split between multiple court jurisdictions or the zip code was 
@@ -88,25 +88,22 @@ function CaliforniaFilingGuide({
         </p>
         :
          <p>
-            The {residentLocalityName} county superior courts determine venue by zip code. Based
-            on your zip code these court(s) are acceptable to file at:
-            <br />
-            <br />
             {courtResults?.name}, located at {courtResults?.address}.
             <br />
             <br />
             Phone Number: {courtResults?.phone}
-            <br />
-            <br />
-            If the court(s) listed above appear wrong or you simply want more information check 
-            this{" "}
-            <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
-              map
-            </a>
-            . It lists every filing location in the state as well as the jurisdictions 
-            they cover. Check your address to see which one(s) you fall under.
           </p>
         }
+
+        <p>
+          If the court(s) listed above appear wrong or you simply want more information check 
+          this{" "}
+          <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
+            map
+          </a>
+          . It lists every filing location in the state as well as the jurisdictions 
+          they cover. Check your address to see which one(s) you fall under.
+        </p>
 
         {residentLocalityName === "Los Angeles" ? 
           <p>
@@ -135,8 +132,9 @@ function CaliforniaFilingGuide({
             {name}: {address}. 
             <br />
             Phone Number: {phone}
-            <br />
-            <br />
+          </p>
+        ))}
+          <p>
             If the court(s) listed above appear wrong or you simply want more information check 
             this{" "}
             <a href="https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing">
@@ -145,7 +143,6 @@ function CaliforniaFilingGuide({
             . It lists every filing location in the state as well as the jurisdictions 
             they cover. Check your address to see which one(s) you fall under.
           </p>
-        ))}
       </>
     )}
 
@@ -188,8 +185,10 @@ function CaliforniaFilingGuide({
       {residentLocalityName === "Santa Barbara" ? (
          <p>
            Additionally, once you have picked a court to file at grab the “Civil Case Cover
-           Sheet Addendum” (SC-2069) and make a check next to the court you 
-           chose near the top of the page.
+           Sheet Addendum” (SC-2069) and make a check next to the court you chose near the 
+           top of the page. On the bottom half of the page check the “North County” if it 
+           is the Santa Maria court or the “South County” box if it is the Santa Barbara 
+           court.
          </p>
       ):("")}
 

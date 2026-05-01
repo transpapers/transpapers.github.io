@@ -564,16 +564,16 @@ export function formatContactInfo(
       if (
         !homeAddress?.street ||
         !homeAddress.city ||
-        !residentLocality ||
+        !residentLocalityName ||
         !residentJurisdiction ||
         !homeAddress.zip
       ) {
         return undefined;
       }
       if (!homeAddress.apt) {
-        return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+        return `${homeAddress.street} ${homeAddress.city}, ${residentLocalityName} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       } else {
-        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocalityName} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       }
 
     case ContactFormat.ResidentFullAddressAndCountry:
