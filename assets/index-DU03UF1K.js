@@ -28733,13 +28733,13 @@ function formatContactInfo(applicant, fmt) {
         }
       }
     case 6:
-      if (!homeAddress?.street || !homeAddress.city || !residentLocality || !residentJurisdiction || !homeAddress.zip) {
+      if (!homeAddress?.street || !homeAddress.city || !residentLocalityName || !residentJurisdiction || !homeAddress.zip) {
         return void 0;
       }
       if (!homeAddress.apt) {
-        return `${homeAddress.street} ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+        return `${homeAddress.street} ${homeAddress.city}, ${residentLocalityName} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       } else {
-        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocality.name} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
+        return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentLocalityName} ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       }
     case 7:
       if (!homeAddress?.street || !homeAddress.city || !residentJurisdiction || !homeAddress.zip) {
@@ -40972,7 +40972,7 @@ const civilCaseCoverMap = [
     fieldName: "CM-010[0].Page1[0].P1Caption[0].CourtInfo[0].CrtCounty[0]"
   }),
   (applicant) => ({
-    text: fullName(representativeName(applicant)),
+    text: applicant.isChangingLegalSex ? "For Change of Name and Gender" : " For Change of Name",
     fieldName: "CM-010[0].Page1[0].P1Caption[0].TitlePartyName[0].Party1[0]"
   }),
   () => ({
@@ -41129,7 +41129,8 @@ const adultNameGenderPetitionMap = [
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
-    fieldName: "NC-300[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]"
+    fieldName: "NC-300[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]",
+    font: 9
   }),
   (applicant) => ({
     check: applicant.isChangingLegalName,
@@ -41173,15 +41174,27 @@ const adultNameGenderPetitionMap = [
   }),
   () => ({
     check: true,
+    fieldName: "NC-300[0].Page1[0].List4[0].Li4B[0].CheckBox19[0]"
+  }),
+  () => ({
+    check: true,
     fieldName: "NC-300[0].Page1[0].List4[0].Li4C[0].petitionerc[0]"
   }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
+    text: applicant.isChangingLegalSex ? "For Change of Name and Gender" : " For Change of Name",
     fieldName: "NC-300[0].Page2[0].P2Caption[0].#subform[0].Party[0]"
   }),
   () => ({
     check: true,
     fieldName: "NC-300[0].Page2[0].List5[0].cacertificate[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NC-300[0].Page2[0].List5[0].Li5A[0].petitioner_cb1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.isChangingLegalName,
+    fieldName: "NC-300[0].Page2[0].List5[0].Li5A[0].petitioner_cb2[0]"
   }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.F,
@@ -41317,7 +41330,7 @@ const minorNameGenderPetitionMap = [
 const nameChangeOnlyInfoMap = [
   (applicant) => ({
     text: fullName(representativeName(applicant)),
-    fieldName: "NC-110[0].Page1[0].Caption[0].Petitioner_ft[0]"
+    loc: { x: 297, y: 73 }
   }),
   (applicant) => ({
     check: !isMinor(applicant),
@@ -41753,36 +41766,8 @@ const adultNameGenderOrderMap = [
     fieldName: "NC-330[0].Page1[0].P1Header[0].FormTitle[0].Checkbox[0]"
   }),
   (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page1[0].List3[0].Checkbox[0]"
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "NC-330[0].Page2[0].List9[0].identifier[0]"
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
-    fieldName: "NC-330[0].Page2[0].List9[0].identifier[1]"
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "NC-330[0].Page2[0].List9[0].identifier[2]"
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page2[0].List10[0].Checkbox[0]"
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    fieldName: "NC-330[0].Page2[0].List10[0].PresentName[0]"
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-330[0].Page2[0].List10[0].Li10A[0].Checkbox10[0]"
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    loc: { page: 1, x: 320, y: 308 }
+    text: fullName(applicant.legalName),
+    fieldName: "NC-330[0].Page2[0].P2Caption[0].TitlePartyName[0].Party1_ft[0]"
   })
 ];
 const minorNameGenderOrderMap = [
@@ -42462,7 +42447,7 @@ const amadorBackgroundCheckMap = [
     fieldName: "PHONE NUMBER"
   }),
   (applicant) => ({
-    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : "",
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailFullAddress) : formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
     fieldName: "MAILING ADDRESS IF DIFFERENT FROM RESIDENCE"
   }),
   (applicant) => ({
@@ -42570,7 +42555,7 @@ const elDoradoSLTMap = [
 ];
 const kernCaseNoticeMap = [
   (applicant) => ({
-    text: `${fullName(representativeName(applicant))}, 
+    text: `${fullName(representativeName(applicant))},
     ${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""}`,
     fieldName: "Attorney or Party"
   }),
@@ -42581,6 +42566,10 @@ const kernCaseNoticeMap = [
   (applicant) => ({
     text: applicant.email,
     fieldName: "Email Address"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "Name of Party Represented"
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -42611,6 +42600,10 @@ const lassenCriminalHistoryMap = [
   (applicant) => ({
     text: applicant.phone,
     fieldName: "Telephone No"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "Attorney For"
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -42655,12 +42648,12 @@ const lassenCriminalHistoryMap = [
 ];
 const losAngelesCaseTypeMap = [
   (applicant) => ({
-    text: fullName(representativeName(applicant)),
+    text: applicant.isChangingLegalSex ? "Petition for Change of Name and Gender" : "Petition for Change of Name",
     fieldName: "SHORT TITLE"
   }),
   () => ({
-    check: true,
-    fieldName: "undefined_50"
+    text: "x",
+    loc: { page: 3, x: 284, y: 861 }
   }),
   (applicant) => ({
     text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
@@ -42684,6 +42677,10 @@ const losAngelesCriminalHistoryMap = [
     text: `${formatContactInfo(applicant, ContactFormat.ResidentFullContactInfo) ?? ""}
     ${applicant.email ?? ""}`,
     fieldName: "ADDRESS01"
+  }),
+  () => ({
+    text: "Self-Represented",
+    fieldName: "ATTORNEY FOR"
   }),
   (applicant) => ({
     text: isMinor(applicant) ? `${fullName(representativeName(applicant))} (${fullName(applicant.legalName)})` : fullName(representativeName(applicant)),
@@ -42882,12 +42879,20 @@ const riversideCoverSheetMap = [
     fieldName: "Plaintiff or Petitioner Name"
   }),
   () => ({
+    fieldName: "vs",
+    value: " "
+  }),
+  () => ({
     fieldName: "Party2",
     value: "In the Matter Of:"
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
     fieldName: "Case Name, Defendant, or Respondent"
+  }),
+  () => ({
+    fieldName: "Document1",
+    value: " "
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -43110,71 +43115,71 @@ const siskiyouInfoMap = [
           return "";
       }
     })(),
-    loc: { x: 210, y: 315 }
+    loc: { x: 210, y: 313 }
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, ContactFormat.MailCityAndStateAndZip),
-    loc: { x: 210, y: 335 }
+    text: !applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.MailCityAndStateAndZip) : formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
+    loc: { x: 210, y: 333 }
   }),
   (applicant) => ({
     text: !applicant.homeAddress?.apt ? applicant.homeAddress?.street : `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`,
-    loc: { x: 577, y: 315 }
+    loc: { x: 577, y: 313 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentCityAndStateAndZip),
-    loc: { x: 575, y: 335 }
+    loc: { x: 575, y: 333 }
   }),
   (applicant) => ({
     text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }) : "",
-    loc: { x: 210, y: 391 }
+    loc: { x: 210, y: 390 }
   })
 ];
 const siskiyouBackgroundCheckMap = [
   (applicant) => ({
     text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
-    loc: { x: 80, y: 281 }
+    loc: { x: 80, y: 264 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
-    loc: { x: 330, y: 281 }
+    loc: { x: 330, y: 264 }
   }),
   (applicant) => ({
     text: applicant.legalName.middle,
-    loc: { x: 535, y: 281 }
+    loc: { x: 535, y: 264 }
   }),
   (applicant) => ({
     text: fullName(applicant.birthName),
-    loc: { x: 95, y: 320 }
+    loc: { x: 95, y: 303 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
-    loc: { x: 80, y: 428 }
+    loc: { x: 80, y: 411 }
   }),
   (applicant) => ({
     text: applicant.phone,
-    loc: { x: 625, y: 428 }
+    loc: { x: 625, y: 411 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.MailFullAddress),
-    loc: { x: 80, y: 464 }
+    loc: { x: 80, y: 447 }
   }),
   (applicant) => ({
     text: !isMinor(applicant) ? formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }) : "",
-    loc: { x: 80, y: 506 }
+    loc: { x: 80, y: 489 }
   }),
   (applicant) => ({
     text: String(applicant.age),
-    loc: { x: 225, y: 506 }
+    loc: { x: 225, y: 489 }
   }),
   (applicant) => ({
     text: applicant.birthJurisdictionName,
-    loc: { x: 277, y: 506 }
+    loc: { x: 277, y: 489 }
   }),
   (applicant) => ({
     text: (() => {
@@ -43187,7 +43192,7 @@ const siskiyouBackgroundCheckMap = [
           return "X";
       }
     })(),
-    loc: { x: 406, y: 506 }
+    loc: { x: 406, y: 489 }
   })
 ];
 const solanoCoverSheetMap = [
@@ -43206,30 +43211,30 @@ const solanoCoverSheetMap = [
 const yubaBackgroundCheckMap = [
   (applicant) => ({
     text: fullName(applicant.legalName),
-    loc: { x: 65, y: 323 }
+    loc: { x: 65, y: 322 }
   }),
   (applicant) => ({
     text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
-    loc: { x: 110, y: 545 }
+    loc: { x: 110, y: 544 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
-    loc: { x: 355, y: 545 }
+    loc: { x: 355, y: 544 }
   }),
   (applicant) => ({
     text: applicant.legalName.middle,
-    loc: { x: 605, y: 545 }
+    loc: { x: 605, y: 544 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
-    loc: { x: 125, y: 584 }
+    loc: { x: 125, y: 582 }
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 155, y: 642 }
+    loc: { x: 155, y: 640 }
   })
 ];
 function AlamedaCoverSheetGuide() {
@@ -43558,7 +43563,14 @@ function CaliforniaFeeWaiverGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This form is optional. It is a request to waive the filing fee charged upon submitting the paperwork to the court. In California the filing fee for this varies but is usually around $450.",
       age && age < 18 ? " Your petitioner" : " You",
-      " should fill out sections 2, 5, and 6 the follow the directions at the top of page 2. If your household meets at least one of the criteria in sections 5a or 5b the judge will likely grant the waiver.",
+      " should fill out sections 2, 5, and 6 the follow the directions at the top of page 2. If your household meets at least one of the criteria in sections 5a or 5b the judge will likely grant the waiver."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "If you checked anything in 5a skip the second page. If you checked anything in 5b and did ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " check anything in 5a, fill out sections 7, 8, and 9. If you ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "only" }),
+      " checked section 5c fill out sections 7 though 11.",
       age && age < 18 ? " Your petitioner" : " You",
       " may file the request at",
       age && age < 18 ? " their" : " your",
@@ -43604,17 +43616,12 @@ function CaliforniaFilingGuide({
             residentLocalityName,
             " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:"
           ] }),
-          foundCourtName === "Split" || foundCourtName === "" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+          foundCourtName === "Split" || foundCourtName === "" || foundCourtName === void 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
             "The zip code lookup used to identify your filing court could not return a valid result. Either your zip code is split between multiple court jurisdictions or the zip code was entered incorrectly. Either way please consult this",
             " ",
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
             ". It lists every filing location in the state as well as the jurisdictions they cover. Check your address to see which one(s) you fall under."
           ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-            "The ",
-            residentLocalityName,
-            " county superior courts determine venue by zip code. Based on your zip code these court(s) are acceptable to file at:",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             courtResults?.name,
             ", located at ",
             courtResults?.address,
@@ -43622,9 +43629,9 @@ function CaliforniaFilingGuide({
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             "Phone Number: ",
-            courtResults?.phone,
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            courtResults?.phone
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
             "If the court(s) listed above appear wrong or you simply want more information check this",
             " ",
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
@@ -43648,14 +43655,14 @@ function CaliforniaFilingGuide({
             ".",
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             "Phone Number: ",
-            phone,
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            phone
+          ] }, "{residentLocality.allCourts.name}")),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
             "If the court(s) listed above appear wrong or you simply want more information check this",
             " ",
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1Q_vnd6T1KIGtC-YjS2_qK9p2JVIzlzs&usp=sharing", children: "map" }),
             ". It lists every filing location in the state as well as the jurisdictions they cover. Check your address to see which one(s) you fall under."
-          ] }, "{residentLocality.allCourts.name}"))
+          ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you are sure what court to file at grap the “Civil Case Cover Sheet” (CM-010) and fill in the courts street address, city, zip code, and branch name near the top of the page if they are blank." }),
         residentLocalityName === "Alameda" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (202-19) and make a check next to the court you chose near the top of the page." }) : "",
@@ -43664,7 +43671,7 @@ function CaliforniaFilingGuide({
           foundCourtName !== "Stanley Mosk" ? " If you picked the Stanley Mosk court to file at then circle the 2, otherwise circle the 7. " : "Since the Stanley Mosk court is your only filing option circle the 7. ",
           "Then on the last page there will be a section at the top that says “Reason:” with numbered checkboxes. Check the box that matches the number you circled. Finally in step 5 write the name of the court district you will be filing in. If you are unsure of what the district name is consult the map from the court information above, if you click on the district the name will pop up on the top."
         ] }) : "",
-        residentLocalityName === "Santa Barbara" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (SC-2069) and make a check next to the court you chose near the top of the page." }) : "",
+        residentLocalityName === "Santa Barbara" ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Additionally, once you have picked a court to file at grab the “Civil Case Cover Sheet Addendum” (SC-2069) and make a check next to the court you chose near the top of the page. On the bottom half of the page check the “North County” if it is the Santa Maria court or the “South County” box if it is the Santa Barbara court." }) : "",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "By state law, court clerks are barred from answering questions about the forms." }),
           " ",
@@ -43922,7 +43929,7 @@ function PlacerBCGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Placer county requires that the petitioner undergo a background check for a name change. ",
       age && age < 18 ? "Your petitioner" : "You",
-      " should fill out any blanks we left and double check the “Also Known As” line for accuracy. Then this form is complete."
+      " should fill out the Social Security and Drivers License Number lines if applicable. Then double check the “Also Known As” line for accuracy. This form is then complete."
     ] })
   ] }, "Placer-CV003");
 }
