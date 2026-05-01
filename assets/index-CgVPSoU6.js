@@ -41129,8 +41129,7 @@ const adultNameGenderPetitionMap = [
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
-    fieldName: "NC-300[0].Page1[0].Caption[0].TitlePartyName[0].TextField1[0]",
-    font: 9
+    loc: { x: 167, y: 289 }
   }),
   (applicant) => ({
     check: applicant.isChangingLegalName,
