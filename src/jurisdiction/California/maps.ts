@@ -430,6 +430,10 @@ export const minorNameGenderPetitionMap: Formfill[] = [
     text: fullName(applicant.legalName),
     fieldName: "NC-500[0].Page2[0].Declaration[0].FillText44[0]",
   }),
+  () => ({
+    check: true,
+    fieldName: "NC-500[0].Page2[0].List10[0].CheckBox10[0]",
+  }),
   (applicant) => ({
     check: applicant.gender === GenderMarker.F,
     fieldName: "NC-500[0].Page2[0].Declaration[0].dgender[0]",
@@ -1015,60 +1019,8 @@ export const minorNameGenderOrderMap: Formfill[] = [
     fieldName: "NC-530G[0].Page1[0].P1Caption[0].FormTitle[0].ChangeNameDecree[0]",
   }),
   (applicant) => ({
-    text: fullName(applicant.legalName),
-    fieldName: "NC-530G[0].Page1[0].List3[0].Li3B[0].MinorCurrentName[0]",
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].petitioner_cb[0]",
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].Sublist[0].Subli3c1[0].petitionerc[0]",
-  }),
-  (applicant) => ({
-    text: fullName(applicant.chosenName),
-    fieldName: "NC-530G[0].Page1[0].List3[0].Li3C[0].Sublist[0].Subli3c1[0].TextField6[0]",
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-530G[0].Page1[0].List3[0].Li3E[0].checkbox34[0]",
-  }),
-  () => ({
-    check: true,
-    fieldName: "NC-530G[0].Page2[0].List4[0].Checkbox[0]",
-  }),
-  (applicant) => ({
-    text: fullName(applicant.legalName),
-    fieldName: "NC-530G[0].Page2[0].List4[0].PresentName[0]",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.F,
-    fieldName: "NC-530G[0].Page2[0].List4[0].Li4a[0].gender[0]",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.M,
-    fieldName: "NC-530G[0].Page2[0].List4[0].Li4b[0].gender[0]",
-  }),
-  (applicant) => ({
-    check: applicant.gender === GenderMarker.X,
-    fieldName: "NC-530G[0].Page2[0].List4[0].Li4c[0].gender[0]",
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-530G[0].Page2[0].List5[0].Checkbox[0]",
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
-    fieldName: "NC-530G[0].Page2[0].List5[0].PresentName[0]",
-  }),
-  (applicant) => ({
-    check: applicant.isChangingLegalName,
-    fieldName: "NC-530G[0].Page2[0].List5[0].Li5a[0].Checkbox55[0]",
-  }),
-  (applicant) => ({
-    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    loc: { page: 1, x: 275, y: 614 },
+    text: fullName(representativeName(applicant)),
+    fieldName: "NC-530G[0].Page2[0].P2Caption[0].TitlePartyName[0].Party1[0]",
   }),
 ];
 
@@ -1952,27 +1904,27 @@ export const lassenCriminalHistoryMap: Formfill[] = [
     value: (() => {
       switch (applicant.assignedSex) {
         case GenderMarker.F:
-          return "Female";
+          return isMinor(applicant) ? "" : "Female";
         case GenderMarker.M:
-          return "Male";
+          return isMinor(applicant) ? "" : "Male";
         default:
           return "";
       }
     })(),
   }),
   (applicant) => ({
-    text: formatDate(applicant.birthdate, {
+    text: isMinor(applicant) ? "" : formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    text: String(applicant.age),
+    text: isMinor(applicant) ? "" : String(applicant.age),
     fieldName: "Age",
   }),
   (applicant) => ({
-    text: formatContactInfo(applicant, cf.BirthCityAndState),
+    text: isMinor(applicant) ? "" : formatContactInfo(applicant, cf.BirthCityAndState),
     fieldName: "Place of Birth",
   }),
   (applicant) => ({
@@ -1980,7 +1932,14 @@ export const lassenCriminalHistoryMap: Formfill[] = [
     fieldName: "Current Address",
   }),
   (applicant) => ({
-    text: fullName(applicant.birthName) ? fullName(applicant.birthName) : "",
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return "";
+        case false:
+          return fullName(applicant.birthName) ? fullName(applicant.birthName) : "";
+      }
+    })(),
     fieldName: "Other name(s) used",
   }),
 ];
@@ -2212,18 +2171,18 @@ export const placerCriminalHistoryMap: Formfill[] = [
     fieldName: "Also Known As",
   }),
   (applicant) => ({
-    text: formatDate(applicant.birthdate, {
+    text: isMinor(applicant) ? "" : formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
     fieldName: "Date of Birth",
   }),
   (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.M,
+    check: isMinor(applicant) ? undefined : applicant.assignedSex === GenderMarker.M,
     fieldName: "Male or",
   }),
   (applicant) => ({
-    check: applicant.assignedSex === GenderMarker.F,
+    check: isMinor(applicant) ? undefined : applicant.assignedSex === GenderMarker.F,
     fieldName: "Female",
   }),
   (applicant) => ({
@@ -2524,7 +2483,9 @@ export const siskiyouInfoMap: Formfill[] = [
             return "";
           }
         case false:
-          return "";
+          return !applicant.homeAddress?.apt
+            ? applicant.homeAddress?.street 
+      :     `${applicant.homeAddress.street}, ${applicant.homeAddress.apt ?? ""}`;
         default:
           return "";
         }
@@ -2564,31 +2525,31 @@ export const siskiyouInfoMap: Formfill[] = [
 export const siskiyouBackgroundCheckMap: Formfill[] = [
   (applicant) => ({
     text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
-    loc: { x: 80, y: 264 },
+    loc: { x: 80, y: 261 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
-    loc: { x: 330, y: 264 },
+    loc: { x: 330, y: 261 },
   }),
   (applicant) => ({
     text: applicant.legalName.middle,
-    loc: { x: 535, y: 264 },
+    loc: { x: 535, y: 261 },
   }),
   (applicant) => ({
     text: fullName(applicant.birthName),
-    loc: { x: 95, y: 303 },
+    loc: { x: 95, y: 300 },
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.ResidentFullAddress),
-    loc: { x: 80, y: 411 },
+    loc: { x: 80, y: 407 },
   }),
   (applicant) => ({
     text: applicant.phone,
-    loc: { x: 625, y: 411 },
+    loc: { x: 625, y: 407 },
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, cf.MailFullAddress),
-    loc: { x: 80, y: 447 },
+    loc: { x: 80, y: 444 },
   }),
   (applicant) => ({
     text: !isMinor(applicant) ?
@@ -2631,7 +2592,8 @@ export const solanoCoverSheetMap: Formfill[] = [
     fieldName: "FULL NAME OF APPLICANT",
   }),
   (applicant) => ({
-    text: formatDate(applicant.birthdate, {
+    text: applicant.age && applicant.age > 13 ? "" : 
+      formatDate(applicant.birthdate, {
       format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
       separator: "/",
     }),
