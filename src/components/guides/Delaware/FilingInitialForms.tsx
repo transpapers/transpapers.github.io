@@ -44,7 +44,7 @@ function DelawareFilingGuide({
     <section key="Delaware-Filing">
       <h3>Filing Initial Forms (DE)</h3>
       <p>
-        The filing location is the {residentLocalityName}{" "}
+        The filing location is the {residentLocalityName} County{" "}
         {age && age < 18 ? "Family Court" : "Court of Common Pleas"} located
         at{" "}
         {age && age < 18 

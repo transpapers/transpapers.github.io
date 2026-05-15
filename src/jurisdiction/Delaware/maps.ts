@@ -105,7 +105,7 @@ export const adultNamePetition: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.hasCriminalRecord ? "" : "x",
-    loc: { page: 1, x: 284, y: 255 },
+    loc: { page: 1, x: 284, y: 254 },
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "New Castle" ? "x" : "",
@@ -593,7 +593,7 @@ export const parentInfoSheet: Formfill[] = [
 export const feeWaiver: Formfill[] = [
   (applicant) => ({
     text: applicant.residentLocalityName === "New Castle" ? "X" : "",
-    loc: { x: 264, y: 88 },
+    loc: { x: 261, y: 88 },
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "Kent" ? "X" : "",
@@ -668,7 +668,7 @@ export const feeWaiver: Formfill[] = [
  */
 export const birthCertRequest: Formfill[] = [
   (applicant) => ({
-    text: fullName(applicant.birthName) !== ""
+    text: fullName(applicant.birthName) === "" || fullName(applicant.birthName) === undefined
       ? fullName(applicant.legalName) 
       : fullName(applicant.birthName),
     loc: { x: 202, y: 278 },
@@ -706,7 +706,7 @@ export const birthCertRequest: Formfill[] = [
   }),
   (applicant) => ({
     text: isMinor(applicant) ? "" : "X",
-    loc: { x: 69, y: 550 },
+    loc: { x: 69, y: 549 },
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
@@ -748,7 +748,7 @@ export const birthCertRequest: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail
-      ? `${applicant.residentJurisdiction?.abbreviation ?? ""}, ${applicant.homeAddress?.zip ?? ""}`
+      ? `${abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") ?? ""}, ${applicant.homeAddress?.zip ?? ""}`
       : `${abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") ?? ""}, ${applicant.mailAddress?.mailZip ?? ""}`,
     loc: { x: 652, y: 953 },
   }),

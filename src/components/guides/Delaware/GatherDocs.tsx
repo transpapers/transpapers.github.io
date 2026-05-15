@@ -34,7 +34,7 @@ function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
         the court. If you do not have one already you will need to get one. 
       </p>
 
-      {birthJurisdictionName === "Delaware" && birthCounty ? (
+      {birthJurisdictionName === "Delaware" ? (
         <>
           <p>
             Since you were born in Delaware you can get a copy through the Delaware Vital 
@@ -71,38 +71,10 @@ function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
             either a drivers license, state ID, or passport. Make sure to copy both sides of 
             the drivers license or state ID, for a passport only the page with
             {age && age < 18 ? " their" : " your"} photo needs to be copied. Then place the 
-            form, ID photocopy, and check into an envelope. Then stamp it and mail it to:
+            form, ID photocopy, and check into an envelope. Then stamp it and mail it to one
+            of the three office locations listed at the top of the form, it does not matter
+            which one.
           </p>
-
-          {birthCounty === "Kent" && 
-            <p>
-              <span>Office of Vital Statistics</span>
-              <br />
-              <span>Jesse Cooper Building</span>
-              <br />
-              <span>417 Federal St, Dover, DE 19901</span>
-            </p>
-          }
-
-          {birthCounty === "New Castle" && 
-            <p>
-              <span>Office of Vital Statistics</span>
-              <br />
-              <span>Chopin Building</span>
-              <br />
-              <span>258 Chapman Rd, Newark, DE 19702</span>
-            </p>
-          }
-
-          {birthCounty === "Sussex" && 
-            <p>
-              <span>Office of Vital Statistics</span>
-              <br />
-              <span>Adams State Service Center</span>
-              <br />
-              <span>544 S Bedford St, Georgetown, DE 19947</span>
-            </p>
-          }
         </>
       ) : (
         <p>

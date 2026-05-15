@@ -102,10 +102,10 @@ function RhodeIslandNotaryGuide({
         list of notaries{" "}
         <a href="https://business.sos.ri.gov/PublicNotarySearch/Home">here</a>.
         Notaries can also be found in court buildings, banks, some{" "}
-        <a href="UPS locations">
-          https://www.theupsstore.com/tools/find-a-store
+        <a href="https://www.theupsstore.com/tools/find-a-store">
+          UPS Locations
         </a>
-        , or <a href="online">https://www.notarize.com/</a>. All of these
+        , or <a href="https://www.notarize.com/">online</a>. All of these
         services have different fees and payment methods but all of them require
         a photo ID.
       </p>
