@@ -157,6 +157,20 @@ import SiskiyouInfoGuide from "../src/components/guides/California/SiskiyouInfoS
 import SolanoBCGuide from "../src/components/guides/California/SolanoBCSheet";
 import YubaBCGuide from "../src/components/guides/California/YubaBCSheet";
 
+import DelawareAdultPetitionGuide from "../src/components/guides/Delaware/AdultPetition";
+import DelawareBirthCertUpdateGuide from "../src/components/guides/Delaware/BirthCertUpdate";
+import DelawareCourtHearingGuide from "../src/components/guides/Delaware/CourtHearing";
+import DelawareDMVGuide from "../src/components/guides/Delaware/DMV";
+import DelawareEverythingElseGuide from "../src/components/guides/Delaware/EverythingElse";
+import DelawareFeeWaiverGuide from "../src/components/guides/Delaware/FeeWaiver";
+import DelawareFilingGuide from "../src/components/guides/Delaware/FilingInitialForms";
+import DelawareGatherDocsGuide from "../src/components/guides/Delaware/GatherDocs";
+import DelawareMinorInfoGuide from "../src/components/guides/Delaware/MinorInfo";
+import DelawareMinorPetitionGuide from "../src/components/guides/Delaware/MinorPetition";
+import DelawareNotaryGuide from "../src/components/guides/Delaware/Notary";
+import DelawareParentInfoGuide from "../src/components/guides/Delaware/ParentInfo";
+import DelawareResourcesGuide from "../src/components/guides/Delaware/Resources";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -621,6 +635,61 @@ const californiaGuideComponents = [
   {
     name: "YubaBCGuide",
     component: <YubaBCGuide />,
+  },
+];
+
+const delawareGuideComponents = [
+  {
+    name: "DelawareAdultPetitionGuide",
+    component: <DelawareAdultPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareBirthCertUpdateGuide",
+    component: <DelawareBirthCertUpdateGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareCourtHearingGuide",
+    component: <DelawareCourtHearingGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareDMVGuide",
+    component: <DelawareDMVGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareEverythingElseGuide",
+    component: <DelawareEverythingElseGuide />,
+  },
+  {
+    name: "DelawareFeeWaiverGuide",
+    component: <DelawareFeeWaiverGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareFilingGuide",
+    component: <DelawareFilingGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareGatherDocsGuide",
+    component: <DelawareGatherDocsGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareMinorInfoGuide",
+    component: <DelawareMinorInfoGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareMinorPetitionGuide",
+    component: <DelawareMinorPetitionGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareNotaryGuide",
+    component: <DelawareNotaryGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareParentInfoGuide",
+    component: <DelawareParentInfoGuide person={sampleData} />,
+  },
+  {
+    name: "DelawareResourcesGuide",
+    component: <DelawareResourcesGuide />,
   },
 ];
 

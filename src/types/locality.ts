@@ -50,6 +50,11 @@ export type CaliforniaCounty = Locality & {
   publications?: Publication[];
 };
 
+export type DelawareCounty = Locality & {
+  minorCourt: Court;
+  adultCourtEmail: string;
+};
+
 export type MichiganCounty = Locality & {
   fingerprintLocations: FingerprintLocation[];
   publications: Publication[];

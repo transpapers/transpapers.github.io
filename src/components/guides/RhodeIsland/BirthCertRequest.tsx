@@ -89,8 +89,11 @@ function RhodeIslandBirthCertRequestGuide({
               <a href="https://www.vitalchek.com/order_main.aspx?eventtype=BIRTH">
                 VitalChek
               </a>{" "}
-              or go through your birth state/territory&apos;s Vital Records
-              department. If you were born in another country it will be through
+              or go through your birth state/territory&apos;s {" "}
+              <a href="https://www.cdc.gov/nchs/w2w/index.htm">
+                Vital Records department
+              </a>
+              . If you were born in another country it will be through
               your birth country&apos;s records department instead to get proof
               of birth. Any document not in English needs a professional
               translation.

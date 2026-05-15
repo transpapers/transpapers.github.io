@@ -29,6 +29,7 @@ import { type Locality } from "../types/locality";
 import {
   AlaskaAdministrativeDivision,
   CaliforniaCounty,
+  DelawareCounty,
   MichiganCounty,
   NewYorkCounty,
   OhioCounty,
@@ -40,6 +41,7 @@ export type AnyLocality =
   | Locality
   | AlaskaAdministrativeDivision
   | CaliforniaCounty
+  | DelawareCounty
   | MichiganCounty
   | NewYorkCounty
   | OhioCounty

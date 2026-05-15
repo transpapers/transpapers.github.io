@@ -93,6 +93,16 @@ import {
 import californiaCounties from "./California/localities";
 import { CaliforniaCounty } from "../types/locality";
 
+import {
+  delawareBirthRecord,
+  delawareGenderMarker,
+  delawareNameChange,
+  delawarePrimaryIdentification,
+  delawarePostamble,
+} from "./Delaware/process";
+import delawareCounties from "./Delaware/localities";
+import { DelawareCounty } from "../types/locality";
+
 import { passport, socialSecurity } from "./Federal/process";
 
 import { elsewhereBirthRecord } from "./Elsewhere/process";
@@ -197,6 +207,20 @@ export const california: Jurisdiction<CaliforniaCounty> = {
   localities: californiaCounties,
 };
 
+export const delaware: Jurisdiction<DelawareCounty> = {
+  name: "Delaware",
+  abbreviation: "DE",
+  processes: [
+    delawareNameChange,
+    socialSecurity,
+    delawarePrimaryIdentification,
+    delawareGenderMarker,
+    delawareBirthRecord,
+    delawarePostamble,
+  ],
+  localities: delawareCounties,
+};
+
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   abbreviation: "FED",
@@ -221,6 +245,7 @@ export const allJurisdictions: AnyJurisdiction[] = [
   oregon,
   rhodeIsland,
   california,
+  delaware,
   elsewhere,
 
   federal,
