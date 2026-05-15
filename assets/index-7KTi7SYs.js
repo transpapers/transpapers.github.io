@@ -46600,15 +46600,15 @@ const californiaCounties = [
 const adultNamePetition = [
   (applicant) => ({
     text: applicant.residentLocalityName === "New Castle" ? "x" : "",
-    loc: { x: 144, y: 123 }
+    loc: { x: 144, y: 122 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "Kent" ? "x" : "",
-    loc: { x: 389, y: 123 }
+    loc: { x: 390, y: 122 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "Sussex" ? "x" : "",
-    loc: { x: 566, y: 123 }
+    loc: { x: 566, y: 122 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -46616,62 +46616,62 @@ const adultNamePetition = [
   }),
   (applicant) => ({
     text: fullName(applicant.chosenName),
-    loc: { x: 85, y: 336 }
+    loc: { x: 85, y: 334 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
-    loc: { x: 393, y: 460 }
+    loc: { x: 393, y: 458 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName,
-    loc: { x: 250, y: 502 }
+    loc: { x: 250, y: 499 }
   }),
   (applicant) => ({
     text: applicant.phone,
-    loc: { x: 487, y: 593 }
+    loc: { x: 487, y: 591 }
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 383, y: 643 }
+    loc: { x: 383, y: 641 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
-    loc: { x: 145, y: 685 }
+    loc: { x: 145, y: 682 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
-    loc: { x: 527, y: 776 }
+    loc: { x: 527, y: 774 }
   }),
   (applicant) => ({
     text: fullName(applicant.chosenName),
-    loc: { x: 105, y: 817 }
+    loc: { x: 105, y: 816 }
   }),
   (applicant) => ({
     text: applicant.reasonForNameChange,
-    loc: { x: 90, y: 950 }
+    loc: { x: 90, y: 948 }
   }),
   (applicant) => ({
     text: applicant.hasCriminalRecord ? "" : "x",
-    loc: { page: 1, x: 284, y: 215 }
+    loc: { page: 1, x: 284, y: 213 }
   }),
   (applicant) => ({
     text: applicant.hasCriminalRecord ? "" : "x",
-    loc: { page: 1, x: 284, y: 257 }
+    loc: { page: 1, x: 284, y: 255 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "New Castle" ? "x" : "",
-    loc: { page: 2, x: 144, y: 123 }
+    loc: { page: 2, x: 144, y: 122 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "Kent" ? "x" : "",
-    loc: { page: 2, x: 389, y: 123 }
+    loc: { page: 2, x: 389, y: 122 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "Sussex" ? "x" : "",
-    loc: { page: 2, x: 566, y: 123 }
+    loc: { page: 2, x: 566, y: 122 }
   }),
   (applicant) => ({
     text: fullName(applicant.legalName),
@@ -46679,7 +46679,7 @@ const adultNamePetition = [
   }),
   (applicant) => ({
     text: fullName(applicant.chosenName),
-    loc: { page: 2, x: 85, y: 336 }
+    loc: { page: 2, x: 85, y: 334 }
   })
 ];
 const minorNamePetition = [
@@ -47102,16 +47102,16 @@ const parentInfoSheet = [
 ];
 const feeWaiver = [
   (applicant) => ({
-    text: applicant.residentLocalityName === "New Castle" ? "x" : "",
-    loc: { x: 262, y: 89 }
+    text: applicant.residentLocalityName === "New Castle" ? "X" : "",
+    loc: { x: 264, y: 88 }
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName === "Kent" ? "x" : "",
-    loc: { x: 427, y: 89 }
+    text: applicant.residentLocalityName === "Kent" ? "X" : "",
+    loc: { x: 429, y: 88 }
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName === "Sussex" ? "x" : "",
-    loc: { x: 543, y: 89 }
+    text: applicant.residentLocalityName === "Sussex" ? "X" : "",
+    loc: { x: 545, y: 88 }
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
@@ -47135,11 +47135,11 @@ const feeWaiver = [
   }),
   () => ({
     text: "x",
-    loc: { x: 100, y: 483 }
+    loc: { x: 102, y: 482 }
   }),
-  () => ({
-    text: "minor name change",
-    loc: { x: 475, y: 486 }
+  (applicant) => ({
+    text: isMinor(applicant) ? "minor name change" : "name change",
+    loc: { x: 475, y: 484 }
   }),
   (applicant) => ({
     text: isMinor(applicant) ? fullName(applicant.legalName) : "",
@@ -47151,56 +47151,56 @@ const feeWaiver = [
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
-    loc: { page: 1, x: 212, y: 1011 }
+    loc: { page: 2, x: 208, y: 61 }
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName === "New Castle" ? "x" : "",
-    loc: { page: 3, x: 262, y: 93 }
+    text: applicant.residentLocalityName === "New Castle" ? "X" : "",
+    loc: { x: 264, y: 88 }
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName === "Kent" ? "x" : "",
-    loc: { page: 3, x: 427, y: 93 }
+    text: applicant.residentLocalityName === "Kent" ? "X" : "",
+    loc: { x: 429, y: 88 }
   }),
   (applicant) => ({
-    text: applicant.residentLocalityName === "Sussex" ? "x" : "",
-    loc: { page: 3, x: 543, y: 93 }
+    text: applicant.residentLocalityName === "Sussex" ? "X" : "",
+    loc: { x: 545, y: 88 }
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
-    loc: { page: 3, x: 76, y: 143 }
+    loc: { page: 3, x: 76, y: 141 }
   })
 ];
 const birthCertRequest = [
   (applicant) => ({
-    text: fullName(applicant.birthName) ? fullName(applicant.legalName) : fullName(applicant.birthName),
+    text: fullName(applicant.birthName) !== "" ? fullName(applicant.legalName) : fullName(applicant.birthName),
     loc: { x: 202, y: 278 }
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.M ? "X" : "",
-    loc: { x: 104, y: 323 }
+    loc: { x: 104, y: 322 }
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.F ? "X" : "",
-    loc: { x: 165, y: 323 }
+    loc: { x: 165, y: 322 }
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 450, y: 326 }
+    loc: { x: 450, y: 324 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.BirthCityAndState),
-    loc: { x: 205, y: 359 }
+    loc: { x: 205, y: 357 }
   }),
   (applicant) => ({
     text: fullName(applicant.mothersBirthName),
-    loc: { x: 205, y: 417 }
+    loc: { x: 205, y: 402 }
   }),
   (applicant) => ({
     text: fullName(applicant.fathersBirthName),
-    loc: { x: 205, y: 460 }
+    loc: { x: 205, y: 458 }
   }),
   () => ({
     text: "1",
@@ -47208,15 +47208,15 @@ const birthCertRequest = [
   }),
   (applicant) => ({
     text: isMinor(applicant) ? "" : "X",
-    loc: { x: 69, y: 551 }
+    loc: { x: 69, y: 550 }
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
-    loc: { x: 69, y: 565 }
+    loc: { x: 69, y: 564 }
   }),
   (applicant) => ({
     text: fullName(representativeName(applicant)),
-    loc: { x: 343, y: 892 }
+    loc: { x: 343, y: 891 }
   }),
   (applicant) => ({
     text: (() => {
@@ -47236,23 +47236,23 @@ const birthCertRequest = [
           return "";
       }
     })(),
-    loc: { x: 173, y: 934 }
+    loc: { x: 173, y: 933 }
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
-    loc: { x: 173, y: 954 }
+    loc: { x: 173, y: 953 }
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail ? `${applicant.residentJurisdiction?.abbreviation ?? ""}, ${applicant.homeAddress?.zip ?? ""}` : `${abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") ?? ""}, ${applicant.mailAddress?.mailZip ?? ""}`,
-    loc: { x: 652, y: 954 }
+    loc: { x: 652, y: 953 }
   }),
   (applicant) => ({
     text: applicant.email,
-    loc: { x: 170, y: 976 }
+    loc: { x: 170, y: 975 }
   }),
   (applicant) => ({
     text: applicant.phone,
-    loc: { x: 660, y: 976 }
+    loc: { x: 660, y: 975 }
   })
 ];
 const DMVTitleMap = [
@@ -47328,66 +47328,66 @@ const DMVTitleMap = [
 const birthCertGenderProvider = [
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
-    loc: { x: 309, y: 451 }
+    loc: { x: 309, y: 449 }
   }),
   (applicant) => ({
     text: fullName(applicant.birthName),
-    loc: { x: 294, y: 544 }
+    loc: { x: 294, y: 542 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
-    loc: { x: 381, y: 568 }
+    loc: { x: 381, y: 566 }
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
       separator: "/"
     }),
-    loc: { x: 256, y: 592 }
+    loc: { x: 256, y: 590 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
-    loc: { x: 162, y: 615 }
+    loc: { x: 162, y: 613 }
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
-    loc: { x: 160, y: 708 }
+    loc: { x: 160, y: 706 }
   }),
   (applicant) => ({
     text: (() => {
       switch (applicant.assignedSex) {
         case GenderMarker.M:
-          return "Male";
+          return "M";
         case GenderMarker.F:
-          return "Female";
+          return "F";
         default:
           return "";
       }
     })(),
-    loc: { x: 240, y: 732 }
+    loc: { x: 240, y: 730 }
   }),
   (applicant) => ({
     text: (() => {
       switch (applicant.gender) {
         case GenderMarker.M:
-          return "Male";
+          return "M";
         case GenderMarker.F:
-          return "Female";
+          return "F";
         default:
           return "";
       }
     })(),
-    loc: { x: 298, y: 732 }
+    loc: { x: 298, y: 730 }
   })
 ];
 const birthCertGenderAffidavit = [
   (applicant) => ({
     text: isMinor(applicant) ? fullName(representativeName(applicant)) : fullName(applicant.birthName),
-    loc: { x: 539, y: 118 }
+    loc: { x: 539, y: 116 }
   }),
   (applicant) => ({
     text: isMinor(applicant) ? fullName(representativeName(applicant)) : fullName(applicant.chosenName),
-    loc: { x: 478, y: 156 }
+    loc: { x: 478, y: 154 }
   }),
   (applicant) => ({
     text: (() => {
@@ -47400,7 +47400,7 @@ const birthCertGenderAffidavit = [
           return "";
       }
     })(),
-    loc: { x: 416, y: 193 }
+    loc: { x: 416, y: 191 }
   }),
   (applicant) => ({
     text: addZero(
@@ -47409,7 +47409,7 @@ const birthCertGenderAffidavit = [
         separator: ""
       })
     ),
-    loc: { x: 244, y: 232 }
+    loc: { x: 244, y: 230 }
   }),
   (applicant) => ({
     text: addZero(
@@ -47418,38 +47418,38 @@ const birthCertGenderAffidavit = [
         separator: ""
       })
     ),
-    loc: { x: 275, y: 232 }
+    loc: { x: 275, y: 230 }
   }),
   (applicant) => ({
     text: formatDate(applicant.birthdate, {
       format: [DateFormatPart.YEAR],
       separator: ""
     }),
-    loc: { x: 303, y: 232 }
+    loc: { x: 303, y: 230 }
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.M ? "X" : "",
-    loc: { x: 566, y: 229 }
+    loc: { x: 565, y: 229 }
   }),
   (applicant) => ({
     text: applicant.assignedSex === GenderMarker.F ? "X" : "",
-    loc: { x: 620, y: 229 }
+    loc: { x: 619, y: 229 }
   }),
   (applicant) => ({
     text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
-    loc: { x: 145, y: 269 }
+    loc: { x: 145, y: 267 }
   }),
   (applicant) => ({
     text: !isMinor(applicant) ? fullName(applicant.chosenName) : "",
-    loc: { x: 286, y: 344 }
+    loc: { x: 286, y: 342 }
   }),
   (applicant) => ({
     text: !isMinor(applicant) && applicant.assignedSex === GenderMarker.M ? "X" : "",
-    loc: { x: 156, y: 380 }
+    loc: { x: 155, y: 379 }
   }),
   (applicant) => ({
     text: !isMinor(applicant) && applicant.assignedSex === GenderMarker.F ? "X" : "",
-    loc: { x: 227, y: 380 }
+    loc: { x: 226, y: 379 }
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
@@ -47457,7 +47457,7 @@ const birthCertGenderAffidavit = [
   }),
   (applicant) => ({
     text: isMinor(applicant) ? fullName(applicant.chosenName) : "",
-    loc: { x: 396, y: 438 }
+    loc: { x: 396, y: 436 }
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.assignedSex === GenderMarker.M ? "X" : "",
@@ -47497,7 +47497,7 @@ function DelawareAdultPetitionGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "The “Petition for Name Change” is the main form for this process. You must have lived in ",
       residentLocalityName,
-      " for at least 6 months to file this form.",
+      " county for at least 6 months to file this form.",
       " ",
       hasCriminalRecord ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "On page 2 check the applicable boxes in section 7. If you checked the “Does” box fill out section 8. If you checked the “Is” box fill out section 9. Otherwise skip both. In any case, sign your current legal name and date at the bottom." }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Skip sections 7 through 9 and sign your current legal name and date below section 9." }),
       " ",
@@ -47517,7 +47517,7 @@ function DelawareBirthCertUpdateGuide({ person }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Note" }),
         ": There is a new law that is under consideration,",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "HB375", children: "https://www.billtrack50.com/billdetail/1998788" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.billtrack50.com/billdetail/1998788", children: "HB375" }),
         " ",
         ", that would make this process much easier by removing the need to get medical approval.",
         " ",
@@ -47525,7 +47525,7 @@ function DelawareBirthCertUpdateGuide({ person }) {
         " ",
         "If it passes send us a",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "tip", children: "https://tinyurl.com/mgdc-feedback" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "tip" }),
         " ",
         " and this note will update on the date of passage as well as the date of implementation. For now though use the steps below to update your gender marker."
       ] }),
@@ -47553,9 +47553,9 @@ function DelawareBirthCertUpdateGuide({ person }) {
       residentJurisdictionName !== "Delaware" || !isChangingLegalName ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Notaries are needed to witness signatures and provide their own. Notaries can be found in court buildings, banks, some",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "UPS locations", children: "https://www.theupsstore.com/tools/find-a-store" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
         ", or ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "online", children: "https://www.notarize.com/" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
         ". All of these services have different fees and payment methods but all of them require a photo ID."
       ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         age && age < 18 ? "Your parent/guardian" : "You",
@@ -47652,17 +47652,17 @@ function DelawareCourtHearingGuide({ person }) {
   ] }, "DE-CourtHearing");
 }
 function DelawareDMVGuide({ person }) {
-  const { age, isChangingLegalSex, birthName, gender, birthJurisdictionName, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, birthName, legalName, gender, birthJurisdictionName, isChangingLegalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Primary ID (DE)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This section covers the process of updating your primary identification (driver’s license/state ID) and any vehicle registrations you may have. If this is not relevant to you, then skip this section. You can update your ID at any DMV in the state, this",
       " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "link", children: "https://dmv.de.gov/About/contact_info/index.shtml" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dmv.de.gov/About/contact_info/index.shtml", children: "link" }),
       " ",
       "has the location and contact information for all of them. If you opt for the Wilmington location you will need to make an appointment at this",
       " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "link", children: "https://appointments.dmv.de.gov/" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://appointments.dmv.de.gov/", children: "link" }),
       ", the rest are walk-in. It costs $10 to update an existing license or state ID and $40 to apply for the first time."
     ] }),
     isChangingLegalSex && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -47670,7 +47670,7 @@ function DelawareDMVGuide({ person }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Note" }),
         ": There is a new law that is under consideration,",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "HB375", children: "https://www.billtrack50.com/billdetail/1998788" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.billtrack50.com/billdetail/1998788", children: "HB375" }),
         " ",
         ", that would make this process much easier by removing the need to get medical approval.",
         " ",
@@ -47678,14 +47678,14 @@ function DelawareDMVGuide({ person }) {
         " ",
         "If it passes send us a",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "tip", children: "https://tinyurl.com/mgdc-feedback" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "tip" }),
         " ",
         " and this note will update on the date of passage as well as the date of implementation. For now though use the steps below to update your gender marker."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "If you are applying for a license or ID for the first time they will use the gender marker on your",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "proof of ID", children: "https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table", children: "proof of ID" }),
         " ",
         ", usually your birth certificate.",
         " ",
@@ -47712,20 +47712,20 @@ function DelawareDMVGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "If you have a Delaware drivers license or state ID already you will need to bring it. If you are applying for the first time you will need to bring an ID on this",
       " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "list", children: "https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table", children: "list" }),
       " ",
       "under the “Proof of Identity/Legal Presence” section.",
       " ",
       isChangingLegalName && "You will also need to bring a certified copy of your court order.",
       " ",
-      birthName && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      birthName !== legalName && birthName !== void 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "Since your name has changed multiple times you will need to bring a certified copy of every change just like ",
         age && age < 18 ? "your Petitioner" : "you",
         " did for the court. For first time ID applications the fee is $40, to update an existing ID the fee is $10."
       ] }),
       age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "You will need at least one parent/legal guardian to accompany you to the DMV for this process." })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Optionally you may also update the name on your vehicle registration(s) and title(s). You will need to bring along your vehicle's current certificate of title, registration card, and valid proof of Delaware liability insurance to do this. Ask the clerk for a new certificate of title and registration card and be prepared to pay an additional $35." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Optionally, you may also update the name on your vehicle registration(s) and title(s). You will need to bring along your vehicle's current certificate of title, registration card, and valid proof of Delaware liability insurance to do this. Ask the clerk for a new certificate of title and registration card and be prepared to pay an additional $35." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If your vehicle has a lien, tell the clerk and they will give you an MV35 form. Fill it out with your new name and give that to the lienholder. They will mail it to the DMV who will notify you when to pick up the documents and pay $55." })
   ] }, "Delaware-DMV");
 }
@@ -47804,7 +47804,7 @@ function DelawareEverythingElseGuide() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Voter Registration" }),
       ": Delaware has automatic voter registration so this should have been updated when you updated your primary ID. If it didn’t or you are a first time registrant you can update or register online",
       " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "here", children: "https://ivote.de.gov/VoterView" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ivote.de.gov/VoterView", children: "here" }),
       "."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Some other places to consider:" }) }),
@@ -47906,17 +47906,17 @@ function DelawareFilingGuide({
         "gather, the notarized forms, the photocopies of the notarized forms, a scanned copy of ",
         age && age < 18 ? "their" : "your",
         " photo ID (both sides), and the fee waiver (plus photocopy) into an envelope. If",
-        age && age < 18 ? " your petitioner" : " you",
-        " is not using the fee waiver a check/money order made out to the",
+        age && age < 18 ? " your petitioner is" : " you are",
+        " not using the fee waiver a check/money order made out to the",
         " ",
         age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           "“",
           residentLocalityName,
-          " Family Court”"
+          " County Family Court”"
         ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           "“",
           residentLocalityName,
-          " Court of Common Pleas”"
+          " County Court of Common Pleas”"
         ] }),
         " ",
         "for the filing fee amount will be needed instead. Call the court at the number provided above for the filing fee amount. Then mail it to the address we provided above."
@@ -47934,8 +47934,10 @@ function DelawareFilingGuide({
         " ",
         hasCriminalRecord && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "There is a small chance that the court requests a background check for you, if so your petitioner should follow the court's instructions if this occurs." })
       ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Once everything has been filed you will need to wait. If the court grants the change without a hearing they will send you a court order and two certified copies of said order. If that happens skip the  “Court Hearing” section. Otherwise they will send you a hearing date. In any case this will likely take a few weeks. If nothing has arrived by the 4th week since filing, call the court at the number provided above. If the fee waiver was filed and rejected the court will notify you and you will need to pay the filing fee in order for the case to continue.",
+        "Once everything has been filed you will need to wait. If the court grants the change without a hearing they will send you a court order and a few certified copies of said order. If that happens skip the  “Court Hearing” section. Otherwise they will send you a hearing date. In any case this will likely take a few weeks. If nothing has arrived by the 4th week since filing, call the court at the number provided above. If the fee waiver was filed and rejected the court will notify you and you will need to pay the filing fee in order for the case to continue.",
+        " ",
         hasCriminalRecord && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "There is a small chance that the court requests a background check. If so, you should follow the court's instructions for this process." }),
+        " ",
         "Once the name change is granted you will have ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "30 days" }),
         " to update it at the Social Security office and then the DMV."
@@ -47945,11 +47947,11 @@ function DelawareFilingGuide({
   }
 }
 function DelawareGatherDocsGuide({ person }) {
-  const { age, birthJurisdictionName, parentsAreOkay, birthCounty, birthName } = person;
+  const { age, birthJurisdictionName, parentsAreOkay, birthCounty, birthName, legalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Gather Documents for Filing (DE)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "A certified copy of your birth certificate will be needed in order to file at the court. If you do not have one already you will need to get one." }),
-    birthJurisdictionName === "Delaware" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    birthJurisdictionName === "Delaware" && birthCounty ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Since you were born in Delaware you can get a copy through the Delaware Vital Statistics department or",
         " ",
@@ -47959,7 +47961,7 @@ function DelawareGatherDocsGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "If ",
         age && age < 18 ? "your petitioner decides" : "you decide",
-        " to use this form please fill in the name of the hospital you were born at , if known.",
+        " to use this form please fill in the name of the hospital you were born at, if known.",
         " ",
         age && age < 18 && !parentsAreOkay ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If you have a legal guardian making this request they need to check the “I am the legal guardian” box in the “Relationship to the person whose birth certificate you are requesting” section and attach a certified copy of their court ordered guardianship papers." }) : "",
         " ",
@@ -47978,7 +47980,7 @@ function DelawareGatherDocsGuide({ person }) {
         age && age < 18 ? " your Petitioner" : " you",
         " will need to make a photocopy of either a drivers license, state ID, or passport. Make sure to copy both sides of the drivers license or state ID, for a passport only the page with",
         age && age < 18 ? " their" : " your",
-        " photo needs to be copied. Then place the form, ID photocopy, and check into an envelope, stamp it, and mail it to:"
+        " photo needs to be copied. Then place the form, ID photocopy, and check into an envelope. Then stamp it and mail it to:"
       ] }),
       birthCounty === "Kent" && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Office of Vital Statistics" }),
@@ -48013,7 +48015,7 @@ function DelawareGatherDocsGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.cdc.gov/nchs/w2w/index.htm", children: "Vital Records department" }),
       ". If you were born in another country it will be through your birth country's records department instead to get proof of birth. Any document not in English needs a professional translation."
     ] }),
-    birthName && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+    birthName !== legalName && birthName !== void 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Since your current name does not match the one on your original birth certificate ",
       age && age < 18 ? "your Petitioner" : "you",
       " will need to bring certified copies documenting every name change. This would include documents like adoption papers, marriage certificates, divorce documents, or other court orders."
@@ -48087,11 +48089,11 @@ function DelawareNotaryGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Notaries are needed to witness signatures and provide their own. Notaries can be found in court buildings, banks, some",
       " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "UPS locations", children: "https://www.theupsstore.com/tools/find-a-store" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
       ", or ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "online", children: "https://www.notarize.com/" }),
-      ". All of these services have different fees and payment methods but all of them require a photo ID ",
-      age && age < 18 && "for everyone signing",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+      ". All of these services have different fees and payment methods but all of them require a photo ID",
+      age && age < 18 && " for everyone signing",
       ".",
       " ",
       age && age > 13 && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If you, the minor, don’t have a photo ID your birth certificate will work instead." }),
@@ -48102,7 +48104,9 @@ function DelawareNotaryGuide({ person }) {
       " ",
       "Once every form is signed and notarized",
       age && age < 18 ? " your Petitioner" : " you",
-      " will need to make 2 photocopies of every form. The original and one photocopy will be filed at the court, the last photocopy is for safekeeping."
+      " will need to make 2 photocopies of every form. The original and ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "one" }),
+      " photocopy will be filed at the court, the last photocopy is for safekeeping."
     ] })
   ] }, "Delaware-Notary");
 }
