@@ -822,11 +822,18 @@ export const DMVTitleMap: Formfill[] = [
   }),
   (applicant) => ({
     fieldName: "undefined",
-    choice: applicant.gender === GenderMarker.M ? "MALE" : undefined,
-  }),
-  (applicant) => ({
-    fieldName: "undefined",
-    choice: applicant.gender === GenderMarker.F ? "FEMALE" : undefined,
+    choice: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "FEMALE";
+        case GenderMarker.M:
+          return "MALE";
+        case GenderMarker.X:
+          return undefined;
+        default:
+          return undefined;
+      }
+    })(),
   }),
 ];
 
@@ -915,10 +922,17 @@ export const birthCertGenderAffidavit: Formfill[] = [
     loc: { x: 478, y: 156 },
   }),
   (applicant) => ({
-    text: isMinor(applicant) && applicant.isChangingLegalName
-      ? fullName(applicant.chosenName) 
-      : fullName(applicant.legalName),
-    loc: { x: 478, y: 156 },
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return isMinor(applicant) ? fullName(applicant.chosenName) : "";
+        case false:
+          return isMinor(applicant) ? fullName(applicant.legalName) : "";
+        default:
+          return "";
+      }
+    })(),
+    loc: { x: 416, y: 193 },
   }),
   (applicant) => ({
     text: addZero(

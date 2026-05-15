@@ -114,7 +114,7 @@ function DelawareCourtHearingGuide({ person }: { person: Partial<Person> }) {
         {age && age < 18 && 
           <>
             Once the name change is granted you and your petitioner will have{" "}
-            <stong>30 days</stong> to update it at the Social Security office and 
+            <strong>30 days</strong> to update it at the Social Security office and 
             then the DMV.
           </>
         }
