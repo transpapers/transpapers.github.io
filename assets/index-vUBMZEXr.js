@@ -32951,9 +32951,9 @@ function RhodeIslandNotaryGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://business.sos.ri.gov/PublicNotarySearch/Home", children: "here" }),
         ". Notaries can also be found in court buildings, banks, some",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "UPS locations", children: "https://www.theupsstore.com/tools/find-a-store" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
         ", or ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "online", children: "https://www.notarize.com/" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
         ". All of these services have different fees and payment methods but all of them require a photo ID."
       ] }),
       residentLocality.courtDoesBackgroundCheck ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -46659,7 +46659,7 @@ const adultNamePetition = [
   }),
   (applicant) => ({
     text: applicant.hasCriminalRecord ? "" : "x",
-    loc: { page: 1, x: 284, y: 255 }
+    loc: { page: 1, x: 284, y: 254 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "New Castle" ? "x" : "",
@@ -47103,7 +47103,7 @@ const parentInfoSheet = [
 const feeWaiver = [
   (applicant) => ({
     text: applicant.residentLocalityName === "New Castle" ? "X" : "",
-    loc: { x: 264, y: 88 }
+    loc: { x: 261, y: 88 }
   }),
   (applicant) => ({
     text: applicant.residentLocalityName === "Kent" ? "X" : "",
@@ -47172,7 +47172,7 @@ const feeWaiver = [
 ];
 const birthCertRequest = [
   (applicant) => ({
-    text: fullName(applicant.birthName) !== "" ? fullName(applicant.legalName) : fullName(applicant.birthName),
+    text: fullName(applicant.birthName) === "" ? fullName(applicant.legalName) : fullName(applicant.birthName),
     loc: { x: 202, y: 278 }
   }),
   (applicant) => ({
@@ -47208,7 +47208,7 @@ const birthCertRequest = [
   }),
   (applicant) => ({
     text: isMinor(applicant) ? "" : "X",
-    loc: { x: 69, y: 550 }
+    loc: { x: 69, y: 549 }
   }),
   (applicant) => ({
     text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
@@ -47243,7 +47243,7 @@ const birthCertRequest = [
     loc: { x: 173, y: 953 }
   }),
   (applicant) => ({
-    text: applicant.streetEqualsMail ? `${applicant.residentJurisdiction?.abbreviation ?? ""}, ${applicant.homeAddress?.zip ?? ""}` : `${abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") ?? ""}, ${applicant.mailAddress?.mailZip ?? ""}`,
+    text: applicant.streetEqualsMail ? `${abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") ?? ""}, ${applicant.homeAddress?.zip ?? ""}` : `${abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") ?? ""}, ${applicant.mailAddress?.mailZip ?? ""}`,
     loc: { x: 652, y: 953 }
   }),
   (applicant) => ({
@@ -47865,6 +47865,7 @@ function DelawareFilingGuide({
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "The filing location is the ",
         residentLocalityName,
+        " County",
         " ",
         age && age < 18 ? "Family Court" : "Court of Common Pleas",
         " located at",
@@ -47947,11 +47948,11 @@ function DelawareFilingGuide({
   }
 }
 function DelawareGatherDocsGuide({ person }) {
-  const { age, birthJurisdictionName, parentsAreOkay, birthCounty, birthName, legalName } = person;
+  const { age, birthJurisdictionName, parentsAreOkay, birthName, legalName } = person;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Gather Documents for Filing (DE)" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "A certified copy of your birth certificate will be needed in order to file at the court. If you do not have one already you will need to get one." }),
-    birthJurisdictionName === "Delaware" && birthCounty ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    birthJurisdictionName === "Delaware" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "Since you were born in Delaware you can get a copy through the Delaware Vital Statistics department or",
         " ",
@@ -47980,28 +47981,7 @@ function DelawareGatherDocsGuide({ person }) {
         age && age < 18 ? " your Petitioner" : " you",
         " will need to make a photocopy of either a drivers license, state ID, or passport. Make sure to copy both sides of the drivers license or state ID, for a passport only the page with",
         age && age < 18 ? " their" : " your",
-        " photo needs to be copied. Then place the form, ID photocopy, and check into an envelope. Then stamp it and mail it to:"
-      ] }),
-      birthCounty === "Kent" && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Office of Vital Statistics" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Jesse Cooper Building" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "417 Federal St, Dover, DE 19901" })
-      ] }),
-      birthCounty === "New Castle" && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Office of Vital Statistics" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Chopin Building" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "258 Chapman Rd, Newark, DE 19702" })
-      ] }),
-      birthCounty === "Sussex" && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Office of Vital Statistics" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Adams State Service Center" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "544 S Bedford St, Georgetown, DE 19947" })
+        " photo needs to be copied. Then place the form, ID photocopy, and check into an envelope. Then stamp it and mail it to one of the three office locations listed at the top of the form, it does not matter which one."
       ] })
     ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "If you don't have a useable copy you will need to either",
