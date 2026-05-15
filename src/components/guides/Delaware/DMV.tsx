@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
-  const { age, isChangingLegalSex, birthName, gender, birthJurisdictionName, isChangingLegalName } = person;
+  const { age, isChangingLegalSex, birthName, legalName, gender, birthJurisdictionName, isChangingLegalName } = person;
 
   return (
     <section key="Delaware-DMV">
@@ -34,13 +34,13 @@ function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
         (driver’s license/state ID) and any vehicle registrations you may have. If 
         this is not relevant to you, then skip this section. You can update your ID at 
         any DMV in the state, this{" "}
-        <a href="link">
-          https://dmv.de.gov/About/contact_info/index.shtml
+        <a href="https://dmv.de.gov/About/contact_info/index.shtml">
+          link
         </a> 
         {" "}has the location and contact information for all of them. If you opt 
         for the Wilmington location you will need to make an appointment at this{" "}
-        <a href="link">
-          https://appointments.dmv.de.gov/
+        <a href="https://appointments.dmv.de.gov/">
+          link
         </a> 
         , the rest are walk-in. It costs $10 to update an existing license or state 
         ID and $40 to apply for the first time.
@@ -50,16 +50,16 @@ function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
         <>
           <p>
             <strong>Note</strong>: There is a new law that is under consideration,{" "}
-            <a href="HB375">
-              https://www.billtrack50.com/billdetail/1998788
+            <a href="https://www.billtrack50.com/billdetail/1998788">
+              HB375
             </a> 
             {" "}, that would make this process much easier by removing the need to get 
             medical approval.{" "}
             {gender && (gender as string) === "X" && 
               "It will also add an “X” option for the gender marker."}
             {" "}If it passes send us a{" "}
-            <a href="tip">
-              https://tinyurl.com/mgdc-feedback
+            <a href="https://tinyurl.com/mgdc-feedback">
+              tip
             </a> 
             {" "} and this note will update on the date of passage as well as the date of 
             implementation. For now though use the steps below to update your gender 
@@ -69,8 +69,8 @@ function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
           <p>
             If you are applying for a license or ID for the first time they will use the 
             gender marker on your{" "}
-            <a href="proof of ID">
-              https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table
+            <a href="https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table">
+              proof of ID
             </a> 
             {" "}, usually your birth certificate.{" "}
             {birthJurisdictionName === "Delaware" ? 
@@ -121,14 +121,14 @@ function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
       <p>
         If you have a Delaware drivers license or state ID already you will need to bring 
         it. If you are applying for the first time you will need to bring an ID on this{" "}
-        <a href="list">
-          https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table
+        <a href="https://dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_doc_table">
+          list
         </a> 
         {" "}under the “Proof of Identity/Legal Presence” section.{" "}
         {isChangingLegalName && 
           "You will also need to bring a certified copy of your court order."}
         {" "}
-        {birthName && 
+        {birthName !== legalName && birthName !== undefined  && 
           <>
             Since your name has changed multiple times you will need to bring a certified 
             copy of every change just like {age && age < 18 ? "your Petitioner" : "you"} did
@@ -145,7 +145,7 @@ function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
       </p>
 
       <p>
-        Optionally you may also update the name on your vehicle registration(s) and 
+        Optionally, you may also update the name on your vehicle registration(s) and 
         title(s). You will need to bring along your vehicle&apos;s current certificate of 
         title, registration card, and valid proof of Delaware liability insurance to do 
         this. Ask the clerk for a new certificate of title and registration card and be 

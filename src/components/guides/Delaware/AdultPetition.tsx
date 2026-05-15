@@ -31,8 +31,8 @@ function DelawareAdultPetitionGuide({ person }: { person: Partial<Person> }) {
       <h3>Petition for Name Change (DE, unnumbered)</h3>
       <p>
         The “Petition for Name Change” is the main form for this process. You must 
-        have lived in {residentLocalityName} for at least 6 months to file this form.
-        {" "}
+        have lived in {residentLocalityName} county for at least 6 months to file 
+        this form.{" "}
         {hasCriminalRecord ? (
           <>
             On page 2 check the applicable boxes in section 7. If you checked the 
@@ -46,9 +46,8 @@ function DelawareAdultPetitionGuide({ person }: { person: Partial<Person> }) {
             below section 9.
           </>
         )}
-        {" "}
-        Do <strong>not</strong> fill out anything on page 3 until a notary tells 
-        you to.
+        {" "}Do <strong>not</strong> fill out anything on page 3 until a notary 
+        tells you to.
       </p>
 
     </section>

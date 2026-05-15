@@ -106,15 +106,15 @@ function DelawareFilingGuide({
         gather, the notarized forms, the photocopies of the notarized forms, a 
         scanned copy of {age && age < 18 ? "their" : "your"} photo ID (both sides), 
         and the fee waiver (plus photocopy) into an envelope. If
-        {age && age < 18 ? " your petitioner" : " you"} is not using the fee waiver 
+        {age && age < 18 ? " your petitioner is" : " you are"} not using the fee waiver 
         a check/money order made out to the{" "}
         {age && age < 18 ? (
           <>
-            “{residentLocalityName} Family Court”
+            “{residentLocalityName} County Family Court”
           </>
         ) : (
           <>
-            “{residentLocalityName} Court of Common Pleas”
+            “{residentLocalityName} County Court of Common Pleas”
           </>
         )}
         {" "}for the filing fee amount will be needed instead. Call the court at the 
@@ -163,19 +163,19 @@ function DelawareFilingGuide({
       ) : (
         <p>
           Once everything has been filed you will need to wait. If the court grants 
-          the change without a hearing they will send you a court order and two 
+          the change without a hearing they will send you a court order and a few 
           certified copies of said order. If that happens skip the  “Court Hearing” 
           section. Otherwise they will send you a hearing date. In any case this 
           will likely take a few weeks. If nothing has arrived by the 4th week since 
           filing, call the court at the number provided above. If the fee waiver was 
           filed and rejected the court will notify you and you will need to pay the 
-          filing fee in order for the case to continue.
+          filing fee in order for the case to continue.{" "}
           {hasCriminalRecord && 
             <>
               There is a small chance that the court requests a background check. If 
               so, you should follow the court&apos;s instructions for this process.
             </>
-          }
+          }{" "}
           Once the name change is granted you will have <strong>30 days</strong> to 
           update it at the Social Security office and then the DMV.
         </p>

@@ -37,16 +37,16 @@ function DelawareBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
         <>
           <p>
             <strong>Note</strong>: There is a new law that is under consideration,{" "}
-            <a href="HB375">
-              https://www.billtrack50.com/billdetail/1998788
+            <a href="https://www.billtrack50.com/billdetail/1998788">
+              HB375
             </a> 
             {" "}, that would make this process much easier by removing the need to get 
             medical approval.{" "}
             {gender && (gender as string) === "X" && 
               "It will also add an “X” option for the gender marker."}
             {" "}If it passes send us a{" "}
-            <a href="tip">
-              https://tinyurl.com/mgdc-feedback
+            <a href="https://tinyurl.com/mgdc-feedback">
+              tip
             </a> 
             {" "} and this note will update on the date of passage as well as the date of 
             implementation. For now though use the steps below to update your gender 
@@ -96,10 +96,10 @@ function DelawareBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
           <p>
             Notaries are needed to witness signatures and provide their own. Notaries can
             be found in court buildings, banks, some{" "}
-            <a href="UPS locations">
-              https://www.theupsstore.com/tools/find-a-store
+            <a href="https://www.theupsstore.com/tools/find-a-store">
+              UPS Locations
             </a>
-            , or <a href="online">https://www.notarize.com/</a>. All of these
+            , or <a href="https://www.notarize.com/">online</a>. All of these
             services have different fees and payment methods but all of them require
             a photo ID.
           </p>

@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
-  const { age, birthJurisdictionName, parentsAreOkay, birthCounty, birthName } = person;
+  const { age, birthJurisdictionName, parentsAreOkay, birthCounty, birthName, legalName } = person;
 
   return (
     <section key="Delaware-GatherDocs">
@@ -34,7 +34,7 @@ function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
         the court. If you do not have one already you will need to get one. 
       </p>
 
-      {birthJurisdictionName === "Delaware" ? (
+      {birthJurisdictionName === "Delaware" && birthCounty ? (
         <>
           <p>
             Since you were born in Delaware you can get a copy through the Delaware Vital 
@@ -48,7 +48,7 @@ function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
 
           <p>
             If {age && age < 18 ? "your petitioner decides" : "you decide"} to use this form
-            please fill in the name of the hospital you were born at , if known.{" "}
+            please fill in the name of the hospital you were born at, if known.{" "}
             {age && age < 18 && !parentsAreOkay ? (
               <>
                 If you have a legal guardian making this request they need to check the “I 
@@ -71,7 +71,7 @@ function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
             either a drivers license, state ID, or passport. Make sure to copy both sides of 
             the drivers license or state ID, for a passport only the page with
             {age && age < 18 ? " their" : " your"} photo needs to be copied. Then place the 
-            form, ID photocopy, and check into an envelope, stamp it, and mail it to:
+            form, ID photocopy, and check into an envelope. Then stamp it and mail it to:
           </p>
 
           {birthCounty === "Kent" && 
@@ -122,7 +122,7 @@ function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
         </p>
       )}
 
-      {birthName && 
+      {birthName !== legalName && birthName !== undefined && 
         <p>
           Since your current name does not match the one on your original birth 
           certificate {age && age < 18 ? "your Petitioner" : "you"} will need to 

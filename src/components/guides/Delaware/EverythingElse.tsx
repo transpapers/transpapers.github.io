@@ -115,8 +115,8 @@ function DelawareEverythingElseGuide() {
         registration so this should have been updated when you updated your 
         primary ID. If it didn’t or you are a first time registrant you can 
         update or register online{" "}
-        <a href="here">
-          https://ivote.de.gov/VoterView
+        <a href="https://ivote.de.gov/VoterView">
+          here
         </a>.
       </p>
       <p>

@@ -32,12 +32,12 @@ function DelawareNotaryGuide({ person }: { person: Partial<Person> }) {
       <p>
         Notaries are needed to witness signatures and provide their own. Notaries can
         be found in court buildings, banks, some{" "}
-        <a href="UPS locations">
-          https://www.theupsstore.com/tools/find-a-store
+        <a href="https://www.theupsstore.com/tools/find-a-store">
+          UPS Locations
         </a>
-        , or <a href="online">https://www.notarize.com/</a>. All of these
+        , or <a href="https://www.notarize.com/">online</a>. All of these
         services have different fees and payment methods but all of them require
-        a photo ID {age && age < 18 && "for everyone signing"}.{" "}
+        a photo ID{age && age < 18 && " for everyone signing"}.{" "}
         {age && age > 13 && age < 18 &&
           <>
             If you, the minor, don’t have a photo ID your birth certificate will 
@@ -63,8 +63,8 @@ function DelawareNotaryGuide({ person }: { person: Partial<Person> }) {
         }{" "}
         Once every form is signed and notarized 
         {age && age < 18 ? " your Petitioner" : " you"} will need to make 2 photocopies 
-        of every form. The original and one photocopy will be filed at the court, the 
-        last photocopy is for safekeeping.
+        of every form. The original and <strong>one</strong> photocopy will be filed at 
+        the court, the last photocopy is for safekeeping.
       </p>
 
     </section>
