@@ -24,7 +24,7 @@ import * as React from "react";
 import { type Person } from "../../../types/person";
 
 function DelawareGatherDocsGuide({ person }: { person: Partial<Person> }) {
-  const { age, birthJurisdictionName, parentsAreOkay, birthCounty, birthName, legalName } = person;
+  const { age, birthJurisdictionName, parentsAreOkay, birthName, legalName } = person;
 
   return (
     <section key="Delaware-GatherDocs">
