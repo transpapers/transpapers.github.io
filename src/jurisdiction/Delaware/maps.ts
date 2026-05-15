@@ -576,7 +576,7 @@ export const parentInfoSheet: Formfill[] = [
     loc: { page: 1, x: 458, y: 315 },
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${applicant.birthJurisdiction?.abbreviation}`,
+    text: `${applicant.birthCity ?? ""}, ${applicant.birthJurisdiction?.abbreviation ?? ""}`,
     loc: { page: 1, x: 683, y: 315 },
   }),
   (applicant) => ({
@@ -668,7 +668,9 @@ export const feeWaiver: Formfill[] = [
  */
 export const birthCertRequest: Formfill[] = [
   (applicant) => ({
-    text: fullName(applicant.birthName) ?? fullName(applicant.legalName),
+    text: fullName(applicant.birthName) 
+      ? fullName(applicant.legalName) 
+      : fullName(applicant.birthName),
     loc: { x: 202, y: 278 },
   }),
   (applicant) => ({
@@ -747,7 +749,7 @@ export const birthCertRequest: Formfill[] = [
   (applicant) => ({
     text: applicant.streetEqualsMail
       ? `${applicant.residentJurisdiction?.abbreviation ?? ""}, ${applicant.homeAddress?.zip ?? ""}`
-      : `${abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "")}, ${applicant.mailAddress?.mailZip ?? ""}`,
+      : `${abbreviateJurisdiction(applicant.mailAddress?.mailState ?? "") ?? ""}, ${applicant.mailAddress?.mailZip ?? ""}`,
     loc: { x: 652, y: 954 },
   }),
   (applicant) => ({

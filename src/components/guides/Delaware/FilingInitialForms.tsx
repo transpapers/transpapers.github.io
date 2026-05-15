@@ -155,7 +155,7 @@ function DelawareFilingGuide({
           {hasCriminalRecord && 
             <>
               There is a small chance that the court requests a background check for 
-              you, if so your petitioner should follow the court's instructions if 
+              you, if so your petitioner should follow the court&apos;s instructions if 
               this occurs.
             </>
           }
@@ -173,7 +173,7 @@ function DelawareFilingGuide({
           {hasCriminalRecord && 
             <>
               There is a small chance that the court requests a background check. If 
-              so, you should follow the court's instructions for this process.
+              so, you should follow the court&apos;s instructions for this process.
             </>
           }
           Once the name change is granted you will have <strong>30 days</strong> to 

@@ -54,7 +54,7 @@ function DelawareBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
           </p>
 
           <p>
-            The first form you will need is the “Healthcare Provider's Affidavit for Sex 
+            The first form you will need is the “Healthcare Provider&apos;s Affidavit for Sex 
             Change on Birth Certificate”. You will need to bring this form to a licensed 
             therapist, counselor, physician, nurse, or social worker. They can then fill 
             it out on your behalf.{" "}
@@ -68,11 +68,11 @@ function DelawareBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
             It is important to note that you do <strong>not</strong> need any specific 
             medical treatment or surgeries for this person to be able to sign the form. 
             Do <strong>not</strong> have anything in the “Notary Acknowledgment” filled 
-            out, that's for a notary later.
+            out, that&apos;s for a notary later.
           </p>
 
           <p>
-            The second form is the “Requester's Affidavit for Sex Change on Birth 
+            The second form is the “Requester&apos;s Affidavit for Sex Change on Birth 
             Certificate” which is for you to fill out.{" "}
             {age && age < 18 && !parentsAreOkay &&
               <>

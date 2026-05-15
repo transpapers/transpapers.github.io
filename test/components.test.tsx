@@ -715,6 +715,7 @@ const allComponents = [
   ...illinoisGuideComponents,
   ...texasGuideComponents,
   ...californiaGuideComponents,
+  ...delawareGuideComponents
   ...federalGuideComponents,
 ];
 

@@ -146,7 +146,7 @@ function DelawareDMVGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         Optionally you may also update the name on your vehicle registration(s) and 
-        title(s). You will need to bring along your vehicle's current certificate of 
+        title(s). You will need to bring along your vehicle&apos;s current certificate of 
         title, registration card, and valid proof of Delaware liability insurance to do 
         this. Ask the clerk for a new certificate of title and registration card and be 
         prepared to pay an additional $35.
