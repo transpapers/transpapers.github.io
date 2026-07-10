@@ -510,8 +510,6 @@ export function formatContactInfo(
         }
       } else {
         if (!mailAddress.poBox) {
-          return undefined;
-        } else {
           return `${mailAddress.mailStreet}`;
         }
       }
