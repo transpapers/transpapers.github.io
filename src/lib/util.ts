@@ -504,13 +504,13 @@ export function formatContactInfo(
       }
       if (!mailAddress.mailApt) {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox ?? ""} ${mailAddress.mailApt ?? ""}`;
+          return `${mailAddress.poBox} ${mailAddress.mailApt}`;
         } else {
-          return `${mailAddress.mailStreet}, ${mailAddress.mailApt ?? ""}`;
+          return `${mailAddress.mailStreet}, ${mailAddress.mailApt}`;
         }
       } else {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox ?? ""}`;
+          return `${mailAddress.poBox}`;
         } else {
           return `${mailAddress.mailStreet}`;
         }

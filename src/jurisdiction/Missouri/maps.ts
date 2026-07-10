@@ -1315,7 +1315,7 @@ export const birthCertCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: isMinor(applicant)  
-      ? `${applicant.representativeName?.last} ${applicant.representativeName?.suffix ?? ""}` 
+      ? `${applicant.representativeName?.last ?? ""} ${applicant.representativeName?.suffix ?? ""}` 
       : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}` ,
     fieldName: "Affiant Last Name",
   }),
