@@ -510,9 +510,9 @@ export function formatContactInfo(
         }
       } else {
         if (!mailAddress.poBox) {
-          return `${mailAddress.mailStreet}`;
+          return mailAddress.poBox;
         } else {
-          return `${mailAddress.poBox}`;
+          return mailAddress.mailStreet;
         }
       }
 
@@ -521,7 +521,7 @@ export function formatContactInfo(
         return undefined;
       }
       if (!homeAddress.apt) {
-        return undefined;
+        return `${homeAddress.street}`;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}`;
       }
