@@ -593,6 +593,7 @@ const rhodeislandCounties: RhodeIslandCityOrTown[] = [
       city: "Pawtucket",
       phone: "(401) 728-0500",
       website: "https://pawtucketri.com/city-clerks-office/probate-court",
+      specificCourtInfo: "Warning: We have recieved reports that this judge is transphobic, please consider bringing allies to any hearing whether that be friends, family, or people from our resources section."
     },
     advertisementRequired: true,
     courtDoesAdvertisement: true,

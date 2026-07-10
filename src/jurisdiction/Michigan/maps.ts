@@ -35,7 +35,6 @@ import { Formfill } from "../../types/formfill";
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
 // then state documents (which need no map information);
-// then finally federal forms.
 
 /*!
  * Petition for Name Change and Ex Parte Request for Nonpublication and

@@ -457,8 +457,10 @@ export enum ContactFormat {
   ResidentCityAndStateAndZip,
   ResidentCityAndLocalityAndStateAndZip,
   ResidentCityAndStateAndZipAndCountry,
+  ResidentStreet,
   MailCityAndStateAndZip,
   MailFullAddress,
+  MailStreet,
 }
 
 export function formatContactInfo(
@@ -495,6 +497,34 @@ export function formatContactInfo(
         return undefined;
       }
       return `${birthJurisdiction.abbreviation}, USA`;
+    
+    case ContactFormat.MailStreet:
+      if (!mailAddress?.mailStreet) {
+        return undefined;
+      }
+      if (!mailAddress.mailApt) {
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox ?? ""} ${mailAddress.mailApt ?? ""}`;
+        } else {
+          return `${mailAddress.mailStreet}, ${mailAddress.mailApt ?? ""}`;
+        }
+      } else {
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox ?? ""}`;
+        } else {
+          return `${mailAddress.mailStreet}`;
+        }
+      }
+
+    case ContactFormat.ResidentStreet:
+      if (!homeAddress?.street) {
+        return undefined;
+      }
+      if (!homeAddress.apt) {
+        return `${homeAddress.street}`;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}`;
+      }
 
     case ContactFormat.ResidentCityAndState:
       if (!homeAddress?.city || !residentJurisdiction) {
@@ -706,4 +736,18 @@ export function allCAPS(capString: string | undefined): string {
   const upperString = capString.toLocaleUpperCase();
 
   return upperString;
+}
+
+/*!
+ * Return a number of █'s equal to entered string length.
+ * This is for redacting names and other information accurately.
+ * @param {string} redactString
+ * @return {string}
+ */
+export function redactInfo(redactString: string): string {
+  if (!redactString) {
+    return "";
+  }
+
+  return "█".repeat(redactString.length);
 }

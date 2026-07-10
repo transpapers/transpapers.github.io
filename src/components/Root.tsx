@@ -48,6 +48,24 @@ export default function Root() {
         </p>
 
         <p>
+          <strong>Other places to find us:</strong>{" "}
+          <br />
+          <a href="https://transpapers.substack.com/">
+            Transpapers Development Blog
+          </a>
+          {" - "}This is where we put any extra information that we have about certain
+          states or the process of adding them that did not neatly fit into the guides.
+          <br />
+          <br />
+          <a href="https://bsky.app/profile/transpapers.bsky.social">
+            Transpapers Bluesky
+          </a>
+          {" - "}This account is for any important updates such as when we add states or
+          when there are major legal changes to state/federal systems that we need to
+          announce.
+        </p>
+
+        <p>
           <strong>What is this?</strong> Transpapers is a trans-run,
           privacy-focused, free (
           <a href="https://en.wikipedia.org/wiki/Free_software">
@@ -99,8 +117,8 @@ export default function Root() {
         <p>
           View our source code on{" "}
           <a href="https://github.com/transpapers/transpapers.github.io">
-            GitHub.
-          </a>
+            GitHub
+          </a>.
         </p>
       </section>
       <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>

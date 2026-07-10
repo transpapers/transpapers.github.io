@@ -60,6 +60,15 @@ export type MichiganCounty = Locality & {
   publications: Publication[];
 };
 
+export type MissouriCounty = Locality & {
+  filingFee: string;
+  nameHearing: boolean;
+  publications: Publication[];
+  onlineFileOnly: boolean;
+  onlineFileLink?: string;
+  genderChanges: boolean;
+};
+
 export type NewYorkCounty = Locality & {
   borough?: string;
   courtType: string;

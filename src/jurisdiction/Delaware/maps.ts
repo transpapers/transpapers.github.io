@@ -668,9 +668,9 @@ export const feeWaiver: Formfill[] = [
  */
 export const birthCertRequest: Formfill[] = [
   (applicant) => ({
-    text: fullName(applicant.birthName) === ""
-      ? fullName(applicant.legalName) 
-      : fullName(applicant.birthName),
+    text: applicant.birthName.first
+      ? fullName(applicant.birthName) 
+      : fullName(applicant.legalName),
     loc: { x: 202, y: 278 },
   }),
   (applicant) => ({

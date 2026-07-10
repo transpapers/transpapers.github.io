@@ -31,6 +31,7 @@ import {
   CaliforniaCounty,
   DelawareCounty,
   MichiganCounty,
+  MissouriCounty,
   NewYorkCounty,
   OhioCounty,
   RhodeIslandCityOrTown,
@@ -43,6 +44,7 @@ export type AnyLocality =
   | CaliforniaCounty
   | DelawareCounty
   | MichiganCounty
+  | MissouriCounty
   | NewYorkCounty
   | OhioCounty
   | RhodeIslandCityOrTown
