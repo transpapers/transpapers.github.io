@@ -23,12 +23,7 @@ import {
   formatDate,
   fullName,
   isMinor,
-  phoneAreaCode,
-  phoneEnd,
-  phoneStart,
-  addZero,
   representativeName,
-  getJurisdiction,
   ContactFormat as cf,
   formatContactInfo,
   abbreviateJurisdiction,
@@ -833,8 +828,8 @@ export const feeWaiverMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${formatContactInfo(applicant, cf.ResidentFullAddress)},
-      ${applicant.phone}`,
+      `${formatContactInfo(applicant, cf.ResidentFullAddress) ?? ""},
+      ${applicant.phone ?? ""}`,
     fieldName: "Petitioners AddressTelephone",
   }),
 ];
@@ -1221,8 +1216,8 @@ export const birthCertCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.last 
-      ? `${applicant.birthName.last} ${applicant.birthName.suffix}` 
-      : `${applicant.legalName.last} ${applicant.legalName.suffix}` ,
+      ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}` 
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}` ,
     fieldName: "Last Name",
   }),
   (applicant) => ({
@@ -1320,8 +1315,8 @@ export const birthCertCorrectionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: isMinor(applicant)  
-      ? `${applicant.representativeName?.last} ${applicant.representativeName?.suffix}` 
-      : `${applicant.legalName.last} ${applicant.legalName.suffix}` ,
+      ? `${applicant.representativeName?.last} ${applicant.representativeName?.suffix ?? ""}` 
+      : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}` ,
     fieldName: "Affiant Last Name",
   }),
   (applicant) => ({
