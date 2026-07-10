@@ -511,6 +511,8 @@ export function formatContactInfo(
       } else {
         if (!mailAddress.poBox) {
           return `${mailAddress.mailStreet}`;
+        } else {
+          return `${mailAddress.poBox}`;
         }
       }
 
