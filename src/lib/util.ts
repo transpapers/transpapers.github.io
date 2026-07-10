@@ -504,13 +504,13 @@ export function formatContactInfo(
       }
       if (!mailAddress.mailApt) {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox} ${mailAddress.mailApt}`;
+          return `${mailAddress.poBox ?? ""} ${mailAddress.mailApt ?? ""}`;
         } else {
-          return `${mailAddress.mailStreet}, ${mailAddress.mailApt}`;
+          return `${mailAddress.mailStreet}, ${mailAddress.mailApt ?? ""}`;
         }
       } else {
         if (!mailAddress.poBox) {
-          return `${mailAddress.poBox}`;
+          return undefined;
         } else {
           return `${mailAddress.mailStreet}`;
         }
@@ -521,7 +521,7 @@ export function formatContactInfo(
         return undefined;
       }
       if (!homeAddress.apt) {
-        return `${homeAddress.street}`;
+        return undefined;
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}`;
       }
