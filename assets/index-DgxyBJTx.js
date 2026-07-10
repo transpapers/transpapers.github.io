@@ -20206,6 +20206,19 @@ function Root() {
         "(27 December 2023)."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Other places to find us:" }),
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://transpapers.substack.com/", children: "Transpapers Development Blog" }),
+        " - ",
+        "This is where we put any extra information that we have about certain states or the process of adding them that did not neatly fit into the guides.",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://bsky.app/profile/transpapers.bsky.social", children: "Transpapers Bluesky" }),
+        " - ",
+        "This account is for any important updates such as when we add states or when there are major legal changes to state/federal systems that we need to announce."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "What is this?" }),
         " Transpapers is a trans-run, privacy-focused, free (",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://en.wikipedia.org/wiki/Free_software", children: /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "libre" }) }),
@@ -20242,7 +20255,8 @@ function Root() {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "View our source code on",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io", children: "GitHub." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/transpapers/transpapers.github.io", children: "GitHub" }),
+        "."
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("form", { onSubmit: (event) => void handleSubmit(onSubmit)(event), children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "submit", value: "Ready to get started?" }) })
@@ -28643,8 +28657,10 @@ var ContactFormat = /* @__PURE__ */ ((ContactFormat2) => {
   ContactFormat2[ContactFormat2["ResidentCityAndStateAndZip"] = 10] = "ResidentCityAndStateAndZip";
   ContactFormat2[ContactFormat2["ResidentCityAndLocalityAndStateAndZip"] = 11] = "ResidentCityAndLocalityAndStateAndZip";
   ContactFormat2[ContactFormat2["ResidentCityAndStateAndZipAndCountry"] = 12] = "ResidentCityAndStateAndZipAndCountry";
-  ContactFormat2[ContactFormat2["MailCityAndStateAndZip"] = 13] = "MailCityAndStateAndZip";
-  ContactFormat2[ContactFormat2["MailFullAddress"] = 14] = "MailFullAddress";
+  ContactFormat2[ContactFormat2["ResidentStreet"] = 13] = "ResidentStreet";
+  ContactFormat2[ContactFormat2["MailCityAndStateAndZip"] = 14] = "MailCityAndStateAndZip";
+  ContactFormat2[ContactFormat2["MailFullAddress"] = 15] = "MailFullAddress";
+  ContactFormat2[ContactFormat2["MailStreet"] = 16] = "MailStreet";
   return ContactFormat2;
 })(ContactFormat || {});
 function formatContactInfo(applicant, fmt) {
@@ -28676,6 +28692,32 @@ function formatContactInfo(applicant, fmt) {
         return void 0;
       }
       return `${birthJurisdiction.abbreviation}, USA`;
+    case 16:
+      if (!mailAddress?.mailStreet) {
+        return void 0;
+      }
+      if (!mailAddress.mailApt) {
+        if (!mailAddress.poBox) {
+          return `${mailAddress.poBox ?? ""} ${mailAddress.mailApt ?? ""}`;
+        } else {
+          return `${mailAddress.mailStreet}, ${mailAddress.mailApt ?? ""}`;
+        }
+      } else {
+        if (!mailAddress.poBox) {
+          return mailAddress.mailStreet;
+        } else {
+          return mailAddress.poBox;
+        }
+      }
+    case 13:
+      if (!homeAddress?.street) {
+        return void 0;
+      }
+      if (!homeAddress.apt) {
+        return homeAddress.street;
+      } else {
+        return `${homeAddress.street}, ${homeAddress.apt}`;
+      }
     case 8:
       if (!homeAddress?.city || !residentJurisdiction) {
         return void 0;
@@ -28691,7 +28733,7 @@ function formatContactInfo(applicant, fmt) {
         return void 0;
       }
       return `${homeAddress.city}, ${residentJurisdiction.name}, ${homeAddress.zip}`;
-    case 13:
+    case 14:
       if (!mailAddress?.mailCity || !mailAddress.mailState || !mailAddress.mailZip) {
         return void 0;
       }
@@ -28715,7 +28757,7 @@ function formatContactInfo(applicant, fmt) {
       } else {
         return `${homeAddress.street}, ${homeAddress.apt}, ${homeAddress.city}, ${residentJurisdiction.abbreviation} ${homeAddress.zip}`;
       }
-    case 14:
+    case 15:
       if (!mailAddress?.mailStreet || !mailAddress.mailCity || !mailAddress.mailState || !mailAddress.mailZip) {
         return void 0;
       }
@@ -33647,7 +33689,8 @@ const rhodeislandCounties = [
       address: "137 Roosevelt Ave, Pawtucket, RI 02860",
       city: "Pawtucket",
       phone: "(401) 728-0500",
-      website: "https://pawtucketri.com/city-clerks-office/probate-court"
+      website: "https://pawtucketri.com/city-clerks-office/probate-court",
+      specificCourtInfo: "Warning: We have recieved reports that this judge is transphobic, please consider bringing allies to any hearing whether that be friends, family, or people from our resources section."
     },
     advertisementRequired: true,
     courtDoesAdvertisement: true,
@@ -47172,7 +47215,7 @@ const feeWaiver = [
 ];
 const birthCertRequest = [
   (applicant) => ({
-    text: fullName(applicant.birthName) === "" ? fullName(applicant.legalName) : fullName(applicant.birthName),
+    text: applicant.birthName.first ? fullName(applicant.birthName) : fullName(applicant.legalName),
     loc: { x: 202, y: 278 }
   }),
   (applicant) => ({
