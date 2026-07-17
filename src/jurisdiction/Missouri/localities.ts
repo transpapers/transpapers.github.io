@@ -29,6 +29,8 @@ const missouriCounties: MissouriCounty[] = [
       city: "",
       phone: "",
       website: "",
+      specificCourtInfo: "",
+      circuit: "",
     },
     filingFee: "",
     nameHearing: false,
@@ -36,9 +38,32 @@ const missouriCounties: MissouriCounty[] = [
       name: "",
       website: "",
     }],
+    courtPublishes: false,
+    inPersonFileOnly: false,
     onlineFileOnly: false,
     genderChanges: false,
-  }
+  },
+  {
+    name: "Adair",
+    court: {
+      address: "106 W Washington St, Kirksville, MO 63501",
+      city: "Kirksville",
+      phone: "(660) 665-2283",
+      website: "",
+      specificCourtInfo: "Reports indicate that court orders can take anywhere from a week to multiple months to arrive, call the court as needed if it is taking awhile to arrive to keep tabs on it.",
+      circuit: "2nd",
+    },
+    filingFee: "$100.50",
+    nameHearing: true,
+    publications: [{
+      name: "Kirksville Daily Express",
+      website: "https://www.kirksvilledailyexpress.com/contact-us/",
+    }],
+    courtPublishes: false,
+    inPersonFileOnly: true,
+    onlineFileOnly: false,
+    genderChanges: false,
+  },
 ];
 
 export default missouriCounties;

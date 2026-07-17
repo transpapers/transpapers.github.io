@@ -819,9 +819,6 @@ export const feeWaiverMap: Formfill[] = [
     text: applicant.residentLocalityName,
     fieldName: "COUNTY NAME",
   }),
-  /*
-  This formfill is imcomplete, need minor question answer to complete
-  */
   (applicant) => ({
     text: fullName(applicant.legalName),
     fieldName: "Petitioner Name",
@@ -1197,9 +1194,6 @@ export const minorPublicationMap: Formfill[] = [
  * Affidavit for Correction of a Birth, Death, or Fetal Death Record (Missouri form 580-0645) (All)
  * Updated 6/2026.
  * @type {Formfill[]}
- * 
- * !!! This form is, to my knowledge, not needed. I am keeping it here just in case. !!!
- * 
  */
 export const birthCertCorrectionMap: Formfill[] = [
   () => ({
@@ -1328,7 +1322,7 @@ export const birthCertCorrectionMap: Formfill[] = [
           return "Self";
       }
     })(),
-    fieldName: "Should Read.1",
+    fieldName: "Relationship to Registrant",
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail 
