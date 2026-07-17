@@ -67,7 +67,7 @@ export type MissouriCounty = Locality & {
   courtPublishes: boolean;
   inPersonFileOnly: boolean;
   onlineFileOnly: boolean;
-  onlineFileLink?: string;
+  mailAddress: string;
   genderChanges: boolean;
 };
 
