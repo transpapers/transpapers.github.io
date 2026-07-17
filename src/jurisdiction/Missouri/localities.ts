@@ -50,7 +50,7 @@ const missouriCounties: MissouriCounty[] = [
       city: "Kirksville",
       phone: "(660) 665-2283",
       website: "",
-      specificCourtInfo: "Reports indicate that court orders can take anywhere from a week to multiple months to arrive, call the court as needed if it is taking awhile to arrive to keep tabs on it.",
+      specificCourtInfo: "Court employees indicated that court orders can take anywhere from a week to multiple months to arrive, call the court as needed if it is taking awhile to arrive to keep tabs on it.",
       circuit: "2nd",
     },
     filingFee: "$100.50",
