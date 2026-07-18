@@ -1192,7 +1192,7 @@ export const minorPublicationMap: Formfill[] = [
 
 /*!
  * Affidavit for Correction of a Birth, Death, or Fetal Death Record (Missouri form 580-0645) (All)
- * Updated 6/2026.
+ * Updated 7/2026.
  * @type {Formfill[]}
  */
 export const birthCertCorrectionMap: Formfill[] = [
@@ -1351,5 +1351,120 @@ export const birthCertCorrectionMap: Formfill[] = [
   (applicant) => ({
     text: isMinor(applicant) ? "" : applicant.phone,
     fieldName: "Affiant Phone Number",
+  }),
+];
+
+/*!
+ * Missouri Voter Registration Application (Missouri form 231-0169) (Age 17.5 and up)
+ * Updated 7/2026.
+ * @type {Formfill[]}
+ */
+export const voterRegistrationMap: Formfill[] = [
+   () => ({
+    fieldName: "CITIZEN",
+    value: "YES",
+  }),
+  () => ({
+    fieldName: "18 Years Old",
+    value: "YES_2",
+  }),
+  () => ({
+    check: true,
+    fieldName: "NAME CHANGE",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME",
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    loc: { x: 600, y: 610 },
+  }),
+  (applicant) => ({
+    fieldName: "Gender",
+    value: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.M ? "MALE" : undefined;
+        case false:
+          return applicant.assignedSex === GenderMarker.M ? "MALE" : undefined;
+      }
+    })(),
+  }),
+  (applicant) => ({
+    fieldName: "Gender",
+    value: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.F ? "FEMALE" : undefined;
+        case false:
+          return applicant.assignedSex === GenderMarker.F ? "FEMALE" : undefined;
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentStreet),
+    fieldName: "RESIDENTIAL ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "RESIDENTIAL CITY",
+  }),
+   (applicant) => ({
+    fieldName: "County",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis";
+        case "":
+          return applicant.residentLocalityName;
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "RESIDENTIAL ZIP",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : formatContactInfo(applicant, cf.MailStreet),
+    fieldName: "MAIL ADDRESS",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : applicant.mailAddress?.mailCity,
+    fieldName: "MAIL CITY",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? "" : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "MAIL STATE",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : applicant.mailAddress?.mailZip,
+    fieldName: "MAIL ZIP",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "DATE OF BIRTH",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "DAYTIME PHONE",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "EMAIL ADDRESS",
   }),
 ];

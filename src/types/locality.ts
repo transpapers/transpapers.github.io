@@ -65,8 +65,9 @@ export type MissouriCounty = Locality & {
   nameHearing: boolean;
   publications: Publication[];
   courtPublishes: boolean;
-  inPersonFileOnly: boolean;
-  onlineFileOnly: boolean;
+  inPersonFile: boolean;
+  onlineFile: boolean;
+  mailFile: boolean;
   mailAddress: string;
   genderChanges: boolean;
 };
