@@ -62,7 +62,7 @@ export type MichiganCounty = Locality & {
 
 export type MissouriCounty = Locality & {
   filingFee: string;
-  nameHearing: boolean;
+  nameHearing: string;
   publications: Publication[];
   courtPublishes: boolean;
   inPersonFile: boolean;
@@ -70,6 +70,7 @@ export type MissouriCounty = Locality & {
   mailFile: boolean;
   mailAddress: string;
   genderChanges: boolean;
+  voteClerkAddress: string;
 };
 
 export type NewYorkCounty = Locality & {

@@ -2038,6 +2038,7 @@ const michiganCounties: MichiganCounty[] = [
       circuit: "3rd",
       phone: "(313) 224-0157",
       website: "https://www.3rdcc.org/forms",
+      specificCourtInfo: "The counter where you file at is on the second floor, room 201. You can use any entrance and security checkpoint to get in."
     },
     fingerprintLocations: [
       {
