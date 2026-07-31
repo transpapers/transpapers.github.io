@@ -23,6 +23,31 @@ import { MissouriCounty } from "../../types/locality";
 
 const missouriCounties: MissouriCounty[] = [
   {
+    name: "",
+    court: {
+      address: "",
+      city: "",
+      phone: "",
+      website: "",
+      specificCourtInfo: "",
+      circuit: "",
+    },
+    filingFee: "",
+    publications: [{
+      name: "",
+      website: "",
+    }],
+    courtPublishes: false,
+    inPersonFile: false,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress:
+    `
+    `,
+  },
+  {
     name: "Adair",
     court: {
       address: "106 W Washington St, Kirksville, MO 63501",
@@ -32,7 +57,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "2nd",
     },
     filingFee: "$100.50",
-    nameHearing: "Required",
     publications: [{
       name: "Kirksville Daily Express",
       website: "https://www.kirksvilledailyexpress.com/contact-us/",
@@ -57,7 +81,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "5th",
     },
     filingFee: "$98.50",
-    nameHearing: "Not Required",
     publications: [{
       name: "Savannah Reporter",
       website: "https://www.savrep.com/submit-a-legal-notice/",
@@ -82,7 +105,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "4th",
     },
     filingFee: "$102.50",
-    nameHearing: "Required",
     publications: [{
       name: "Atchison County Mail",
       website: "https://farmerpublishing.com/advertise-with-us/",
@@ -108,7 +130,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "12th",
     },
     filingFee: "$100.50",
-    nameHearing: "Required",
     publications: [{
       name: "",
       website: "",
@@ -133,7 +154,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "39th",
     },
     filingFee: "$100.50",
-    nameHearing: "Required",
     publications: [{
       name: "Cassville Democrat",
       website: "https://www.cassville-democrat.com/submit-a-classified/",
@@ -159,7 +179,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "28th",
     },
     filingFee: "$100.50",
-    nameHearing: "Maybe Required",
     publications: [{
       name: "Lamar Democrat",
       website: "https://www.lamardemocrat.com/about",
@@ -185,7 +204,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "27th",
     },
     filingFee: "$98.50",
-    nameHearing: "Required",
     publications: [{
       name: "",
       website: "",
@@ -211,7 +229,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "27th",
     },
     filingFee: "$100.50",
-    nameHearing: "Maybe Required",
     publications: [{
       name: "",
       website: "",
@@ -237,7 +254,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "32nd",
     },
     filingFee: "$100.50",
-    nameHearing: "Required",
     publications: [{
       name: "Banner Press",
       website: "https://www.thebannerpress.com/contact-us",
@@ -263,7 +279,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "13th",
     },
     filingFee: "$185.50",
-    nameHearing: "Maybe Required",
     publications: [{
       name: "",
       website: "",
@@ -285,12 +300,9 @@ const missouriCounties: MissouriCounty[] = [
       address: "411 Jules St, St Joseph, MO 64501",
       city: "St Joseph",
       phone: "(816) 271-1462",
-      website: "",
-      specificCourtInfo: "",
       circuit: "5th",
     },
     filingFee: "$93.50",
-    nameHearing: "",
     publications: [
       {
         name: "St. Joseph Daily Courier",
@@ -323,7 +335,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "36th",
     },
     filingFee: "$100.50",
-    nameHearing: "Required",
     publications: [{
       name: "Daily American Republic",
       website: "https://www.darnews.com/contact-us",
@@ -349,7 +360,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "43rd",
     },
     filingFee: "$102.50",
-    nameHearing: "Required",
     publications: [{
       name: "Caldwell County News",
       website: "http://www.mycaldwellcounty.com/contact",
@@ -365,6 +375,138 @@ const missouriCounties: MissouriCounty[] = [
      PO BOX 67
      KINGSTON, MO 64650`,
   },
+  // *********************************** Gap Here *********************************** //
+  {
+    name: "Carroll",
+    court: {
+      address: "8 S Main St, Carrollton, MO 64633",
+      city: "Carrollton",
+      phone: "(660) 542-0615",
+      circuit: "8th",
+    },
+    filingFee: "$98.00",
+    publications: [{
+      name: "Carrollton Democrat",
+      website: "https://www.carrolltondemocrat.com/contact-us/",
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress:
+    `Carroll County Clerk's Office
+    8 SOUTH MAIN, SUITE 6
+    CARROLLTON, MO 64633`,
+  },
+  // *********************************** Gap Here *********************************** //
+  {
+    name: "Cass",
+    court: {
+      address: "2501 W Mechanic St, Harrisonville, MO 64701",
+      city: "Harrisonville",
+      phone: "(816) 380-8227",
+      specificCourtInfo: "This court requires a $150 publication deposit in addition to the $130.50 filing fee, you will need to pay this $150 deposit even if you get the filing fee waived by the fee waiver form. You will be partially refunded after publication has been completed.",
+      circuit: "17th",
+    },
+    filingFee: "$130.50",
+    publications: [{
+      name: "",
+      website: "",
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress:
+    `Cass County Clerk's Office
+    102 E Wall St
+    Harrisonville, MO 64701`,
+  },
+  {
+    name: "Cedar",
+    court: {
+      address: "113 South St, Stockton, MO 65785",
+      city: "Stockton",
+      phone: "(417) 276-6700",
+      specificCourtInfo: "",
+      circuit: "28th",
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "",
+      website: "",
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress:
+    `Cedar County Clerk's Office
+    113 SOUTH ST.
+    STOCKTON, MO 65785`,
+  },
+// *********************************** Gap Here *********************************** //
+  {
+    name: "Jackson",
+    court: {
+      address: "415 E 12th St Unit 300, Kansas City, MO 64106",
+      city: "Kansas City",
+      phone: "(816) 881-3000",
+      specificCourtInfo: "",
+      circuit: "16th",
+    },
+    filingFee: "$142.50",
+    publications: [{
+      name: "",
+      website: "",
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "415 E 12th St., Attn: Civil Records, 3rd Floor, Kansas City, MO 64106",
+    genderChanges: false,
+    voteClerkAddress:
+    `Kansas City Board Of Elections
+    4407 Dr. Martin Luther King, Jr. Blvd.
+    KANSAS CITY, MO 64130
+    or
+    Jackson County Election Board
+    P.O. Box 296
+    Independence, MO 64051`,
+  },
+// *********************************** Gap Here *********************************** //
+  {
+    name: "St. Louis (City)",
+    court: {
+      address: "10 N Tucker Blvd, St. Louis, MO 63101",
+      city: "St. Louis",
+      phone: "(314) 622-4500",
+      specificCourtInfo: "",
+      circuit: "22nd",
+    },
+    filingFee: "$177.50",
+    publications: [{
+      name: "St. Louis Daily Record",
+      website: "https://molawyersmedia.com/submit-your-public-notice/",
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "Civil Circuit Court Building, 10 N Tucker Blvd, St. Louis, MO 63101",
+    genderChanges: false,
+    voteClerkAddress:
+    `St. Louis City Election Board
+    300 North Tucker Blvd. 1st floor
+    St. Louis, MO 63101`,
+  },
   {
     name: "",
     court: {
@@ -376,7 +518,6 @@ const missouriCounties: MissouriCounty[] = [
       circuit: "",
     },
     filingFee: "",
-    nameHearing: "",
     publications: [{
       name: "",
       website: "",

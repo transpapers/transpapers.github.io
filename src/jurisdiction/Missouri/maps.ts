@@ -34,6 +34,7 @@ import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
 // State forms come first, in the order they should be filed;
+// then county/city specific forms which are listed in alphabetical order based on county/city name
 // then state documents (which need no map information);
 
 /*!
@@ -1466,5 +1467,256 @@ export const voterRegistrationMap: Formfill[] = [
   (applicant) => ({
     text: applicant.email,
     fieldName: "EMAIL ADDRESS",
+  }),
+];
+
+
+// ***************************** County/City Forms from here on down ****************************//
+
+/*!
+ * Family Court Information Sheet (Jackson County form CIRCT 1452) (Minor)
+ * Updated 7/2026.
+ * @type {Formfill[]}
+ */
+export const jacksonInfoSheetMinor: Formfill[] = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "form1[0].#subform[0].TextField1[0]",
+  }),
+  () => ({
+    check: true,
+    fieldName: "form1[0].#subform[0].CheckBox2[0]",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "form1[0].#subform[0].TextField2[0]",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentFullAddress) ,
+    fieldName: "form1[0].#subform[0].TextField2[3]",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.MailFullAddress) ,
+    fieldName: "form1[0].#subform[0].TextField2[5]",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "form1[0].#subform[0].TextField2[11]",
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}, ${applicant.legalName.first}, ${applicant.legalName.middle}`,
+    fieldName: "form1[0].#subform[0].TextField3[0]",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "form1[0].#subform[0].TextField3[4]",
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first 
+      ? fullName(applicant.birthName) 
+      : fullName(applicant.legalName),
+    fieldName: "form1[0].#subform[0].TextField4[1]",
+  }),
+];
+
+/*!
+ * Confidential Case Filing Information Sheet - Non-Domestic Relations 
+ * (St. Louis City form unnumbered) (Adult)
+ * Updated 7/2026.
+ * @type {Formfill[]}
+ */
+export const stLouisCityInfoSheetAdult: Formfill[] = [
+  () => ({
+    text: "St. Louis",
+    fieldName: "F[0].P1[0].TextField1[5]",
+  }),
+  () => ({
+    text: "Petitioner v. Respondent",
+    fieldName: "F[0].P1[0].TextField1[0]",
+  }),
+  () => ({
+    text: "DD",
+    fieldName: "F[0].P1[0].TextField1[1]",
+    // Case type info found here: https://www.courts.mo.gov/file.jsp?id=411
+  }),
+  () => ({
+    text: "Change of Name",
+    fieldName: "F[0].P1[0].TextField1[2]",
+  }),
+  () => ({
+    text: "PETP",
+    fieldName: "F[0].P1[0].TextField1[7]",
+    // Party info found here: https://www.courts.mo.gov/file.jsp?id=491
+  }),
+  () => ({
+    text: "Petitioner Acting Pro Se",
+    fieldName: "F[0].P1[0].TextField1[6]",
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "F[0].P1[0].TextField2[0]",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "F[0].P1[0].TextField2[1]",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "F[0].P1[0].TextField2[2]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentStreet) 
+      : formatContactInfo(applicant, cf.MailStreet),
+    fieldName: "F[0].P1[0].TextField3[1]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.city
+      : applicant.mailAddress?.mailCity,
+    fieldName: "F[0].P1[0].TextField4[4]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail
+      ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "")
+      : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "F[0].P1[0].TextField4[5]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.zip
+      : applicant.mailAddress?.mailZip,
+    fieldName: "F[0].P1[0].TextField4[6]",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "F[0].P1[0].DateTimeField1[1]",
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "F[0].P1[0].CheckBox1[0]",
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "F[0].P1[0].CheckBox1[1]",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "F[0].P1[0].TextField1[3]",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "F[0].P1[0].TextField4[24]",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "F[0].P1[0].TextField4[25]",
+  }),
+];
+
+/*!
+ * Confidential Case Filing Information Sheet - Domestic Relations 
+ * (St. Louis City form unnumbered) (Minor)
+ * Updated 7/2026.
+ * @type {Formfill[]}
+ */
+export const stLouisCityInfoSheetMinor: Formfill[] = [
+  () => ({
+    text: "St. Louis",
+    fieldName: "F[0].P1[0].TextField1[3]",
+  }),
+  () => ({
+    text: "Petitioner v. Respondent",
+    fieldName: "F[0].P1[0].TextField1[0]",
+  }),
+  () => ({
+    text: "QD",
+    fieldName: "F[0].P1[0].TextField1[1]",
+    // Case type info found here: https://www.courts.mo.gov/file.jsp?id=411
+  }),
+  () => ({
+    text: "Change of Name",
+    fieldName: "F[0].P1[0].TextField1[2]",
+  }),
+  () => ({
+    text: "NOFP",
+    fieldName: "F[0].P1[0].TextField1[5]",
+    // Party info found here: https://www.courts.mo.gov/file.jsp?id=491
+  }),
+  () => ({
+    text: "Next Friend Acting Pro Se",
+    fieldName: "F[0].P1[0].TextField1[4]",
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "F[0].P1[0].TextField2[0]",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "F[0].P1[0].TextField2[1]",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "F[0].P1[0].TextField2[2]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail 
+      ? formatContactInfo(applicant, cf.ResidentStreet) 
+      : formatContactInfo(applicant, cf.MailStreet),
+    fieldName: "F[0].P1[0].TextField3[0]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.city
+      : applicant.mailAddress?.mailCity,
+    fieldName: "F[0].P1[0].TextField4[4]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail
+      ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "")
+      : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "F[0].P1[0].TextField4[5]",
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail
+      ? applicant.homeAddress?.zip
+      : applicant.mailAddress?.mailZip,
+    fieldName: "F[0].P1[0].TextField4[6]",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "F[0].P1[0].DateTimeField1[1]",
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "F[0].P1[0].CheckBox1[0]",
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "F[0].P1[0].CheckBox1[1]",
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "F[0].#subform[1].TextField2[0]",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "F[0].#subform[1].DateTimeField1[0]",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "F[0].#subform[1].TextField1[0]",
   }),
 ];

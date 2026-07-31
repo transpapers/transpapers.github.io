@@ -62,7 +62,6 @@ export type MichiganCounty = Locality & {
 
 export type MissouriCounty = Locality & {
   filingFee: string;
-  nameHearing: string;
   publications: Publication[];
   courtPublishes: boolean;
   inPersonFile: boolean;
