@@ -37,6 +37,7 @@ import {
   NewYorkCounty,
   RhodeIslandCityOrTown,
   CaliforniaCounty,
+  MissouriCounty,
 } from "../types/locality";
 
 export function abbreviateJurisdiction(
@@ -434,6 +435,37 @@ export function getCALocality(jurisdictionKey: string | undefined, localityKey: 
   const foundLocality: CaliforniaCounty = localities.find(
     (j) => j.name === localityKey,
   ) as CaliforniaCounty;
+
+  return foundLocality;
+}
+
+/*!
+ * Get an MO locality object to pull MO specific properties for forms.
+ * @param {String} jurisdictionKey
+ * @param {String} localityKey
+ * @return {MissouriCounty | undefined}
+ */
+export function getMOLocality(jurisdictionKey: string | undefined, localityKey: string | undefined): MissouriCounty | undefined {
+  if (!jurisdictionKey) {
+    return undefined;
+  }
+
+  if (!localityKey) {
+    return undefined;
+  }
+
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey,
+  );
+
+  if (!foundJurisdiction) {
+    return undefined;
+  }
+
+  const localities = foundJurisdiction.localities;
+  const foundLocality: MissouriCounty = localities.find(
+    (j) => j.name === localityKey,
+  ) as MissouriCounty;
 
   return foundLocality;
 }

@@ -103,6 +103,16 @@ import {
 import delawareCounties from "./Delaware/localities";
 import { DelawareCounty } from "../types/locality";
 
+import {
+  missouriBirthRecord,
+  missouriGenderMarker,
+  missouriNameChange,
+  missouriPrimaryIdentification,
+  missouriPostamble,
+} from "./Missouri/process";
+import missouriCounties from "./Missouri/localities";
+import { MissouriCounty } from "../types/locality";
+
 import { passport, socialSecurity } from "./Federal/process";
 
 import { elsewhereBirthRecord } from "./Elsewhere/process";
@@ -221,6 +231,20 @@ export const delaware: Jurisdiction<DelawareCounty> = {
   localities: delawareCounties,
 };
 
+export const missouri: Jurisdiction<MissouriCounty> = {
+  name: "Missouri",
+  abbreviation: "MO",
+  processes: [
+    missouriNameChange,
+    socialSecurity,
+    missouriGenderMarker,
+    missouriPrimaryIdentification,
+    missouriBirthRecord,
+    missouriPostamble,
+  ],
+  localities: missouriCounties,
+};
+
 export const federal: Jurisdiction<Locality> = {
   name: "Federal",
   abbreviation: "FED",
@@ -231,7 +255,7 @@ export const federal: Jurisdiction<Locality> = {
 
 export const elsewhere: Jurisdiction<Locality> = {
   name: "Elsewhere",
-  abbreviation: "MI",
+  abbreviation: "EL",
   processes: [elsewhereBirthRecord],
 
   localities: [],

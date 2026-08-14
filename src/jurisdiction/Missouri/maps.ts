@@ -1192,6 +1192,146 @@ export const minorPublicationMap: Formfill[] = [
 ];
 
 /*!
+ * DHSS Name Only Cover Letter (Missouri form unnumbered) (Adult)
+ * Updated 8/2026.
+ * @type {Formfill[]}
+ */
+export const adultNameCoverMap: Formfill[] = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 116, y: 172 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 278 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 278 },
+  }),
+];
+
+/*!
+ * DHSS Name Only Cover Letter (Missouri form unnumbered) (Minor)
+ * Updated 8/2026.
+ * @type {Formfill[]}
+ */
+export const minorNameCoverMap: Formfill[] = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 380, y: 172 },
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 363, y: 206 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 313 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 313 },
+  }),
+];
+
+/*!
+ * DHSS Name and Gender Cover Letter (Missouri form unnumbered) (Adult)
+ * Updated 8/2026.
+ * @type {Formfill[]}
+ */
+export const adultNameGenderCoverMap: Formfill[] = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 116, y: 172 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 278 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 278 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return ""; 
+      }
+    })(),
+    loc: { x: 102, y: 313 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 192, y: 313 },
+  }),
+];
+
+/*!
+ * DHSS Name and Gender Cover Letter (Missouri form unnumbered) (Minor)
+ * Updated 8/2026.
+ * @type {Formfill[]}
+ */
+export const minorNameGenderCoverMap: Formfill[] = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 376, y: 172 },
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 363, y: 206 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 313 },
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 313 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return ""; 
+      }
+    })(),
+    loc: { x: 102, y: 347 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 192, y: 347 },
+  }),
+];
+
+/*!
  * Affidavit for Correction of a Birth, Death, or Fetal Death Record (Missouri form 580-0645) (All)
  * Updated 7/2026.
  * @type {Formfill[]}

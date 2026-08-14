@@ -171,6 +171,31 @@ import DelawareNotaryGuide from "../src/components/guides/Delaware/Notary";
 import DelawareParentInfoGuide from "../src/components/guides/Delaware/ParentInfo";
 import DelawareResourcesGuide from "../src/components/guides/Delaware/Resources";
 
+import MissouriBirthCertGuide  from "../src/components/guides/Missouri/BirthCertificate";
+import MissouriConfidentialInfoGuide from "../src/components/guides/Missouri/ConfidentialInfoSheet";
+import MissouriCourtHearingGuide from "../src/components/guides/Missouri/CourtHearing";
+import MissouriDMVGuide from "../src/components/guides/Missouri/DMV";
+import MissouriEverythingElseGuide from "../src/components/guides/Missouri/EverythingElse";
+import MissouriFeeWaiverGuide from "../src/components/guides/Missouri/FeeWaiver";
+import MissouriFilingGuide from "../src/components/guides/Missouri/FilingInitialForms";
+import MissouriGenderChangeGuide from "../src/components/guides/Missouri/GenderChange";
+import JacksonCountyInfoGuide from "../src/components/guides/Missouri/JacksonInfoSheet";
+import MissouriConsentMinorGuide from "../src/components/guides/Missouri/NameConsentMinor";
+import MissouriOrderAdultGuide from "../src/components/guides/Missouri/NameOrderAdult";
+import MissouriOrderMinorGuide from "../src/components/guides/Missouri/NameOrderMinor";
+import MissouriPetitionAdultGuide from "../src/components/guides/Missouri/NamePetitionAdult";
+import MissouriPetitionMinorGuide from "../src/components/guides/Missouri/NamePetitionMinor";
+import MissouriNotaryGuide from "../src/components/guides/Missouri/Notary";
+import MissouriParentConsentMinorGuide from "../src/components/guides/Missouri/ParentConsentMinor";
+import MissouriPublicationGuide from "../src/components/guides/Missouri/Publication";
+import MissouriPublicationAdultGuide from "../src/components/guides/Missouri/PublicationAdult";
+import MissouriPublicationMinorGuide from "../src/components/guides/Missouri/PublicationMinor";
+import MissouriRedactingGuide from "../src/components/guides/Missouri/RedactingForms";
+import MissouriRedactionCertGuide from "../src/components/guides/Missouri/RedactionCertification";
+import MissouriResourcesGuide from "../src/components/guides/Missouri/Resources";
+import StLouisAdultInfoGuide from "../src/components/guides/Missouri/StLouisAdultInfo";
+import StLouisMinorInfoGuide from "../src/components/guides/Missouri/StLouisMinorInfo";
+
 import DS5504Guide from "../src/components/guides/Federal/ds5504";
 import DS82Guide from "../src/components/guides/Federal/ds82";
 import DS11Guide from "../src/components/guides/Federal/ds11";
@@ -693,6 +718,105 @@ const delawareGuideComponents = [
   },
 ];
 
+const missouriGuideComponents = [
+  {
+    name: "MissouriBirthCertGuide",
+    component: <MissouriBirthCertGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriConfidentialInfoGuide",
+    component: <MissouriConfidentialInfoGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriCourtHearingGuide",
+    component: <MissouriCourtHearingGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriDMVGuide",
+    component: <MissouriDMVGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriEverythingElseGuide",
+    component: <MissouriEverythingElseGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriFeeWaiverGuide",
+    component: <MissouriFeeWaiverGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriFilingGuide",
+    component: <MissouriFilingGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriGenderChangeGuide",
+    component: <MissouriGenderChangeGuide  person={sampleData} />,
+  },
+  {
+    name: "JacksonCountyInfoGuide",
+    component: <JacksonCountyInfoGuide />,
+  },
+  {
+    name: "MissouriConsentMinorGuide",
+    component: <MissouriConsentMinorGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriOrderAdultGuide",
+    component: <MissouriOrderAdultGuide />,
+  },
+  {
+    name: "MissouriOrderMinorGuide",
+    component: <MissouriOrderMinorGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriPetitionAdultGuide",
+    component: <MissouriPetitionAdultGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriPetitionMinorGuide",
+    component: <MissouriPetitionMinorGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriNotaryGuide",
+    component: <MissouriNotaryGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriParentConsentMinorGuide",
+    component: <MissouriParentConsentMinorGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriPublicationGuide",
+    component: <MissouriPublicationGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriPublicationAdultGuide",
+    component: <MissouriPublicationAdultGuide />,
+  },
+  {
+    name: "MissouriPublicationMinorGuide",
+    component: <MissouriPublicationMinorGuide />,
+  },
+  {
+    name: "MissouriRedactingGuide",
+    component: <MissouriRedactingGuide  person={sampleData} />,
+  },
+  {
+    name: "MissouriRedactionCertGuide",
+    component: <MissouriRedactionCertGuide />,
+  },
+  {
+    name: "MissouriResourcesGuide",
+    component: <MissouriResourcesGuide />,
+  },
+  {
+    name: "StLouisAdultInfoGuide",
+    component: <StLouisAdultInfoGuide />,
+  },
+  {
+    name: "StLouisMinorInfoGuide",
+    component: <StLouisMinorInfoGuide />,
+  },
+];
+
 const federalGuideComponents = [
   { name: "DS5504Guide", component: <DS5504Guide person={sampleData} /> },
   { name: "DS82Guide", component: <DS82Guide person={sampleData} /> },
@@ -716,6 +840,7 @@ const allComponents = [
   ...texasGuideComponents,
   ...californiaGuideComponents,
   ...delawareGuideComponents,
+  ...missouriGuideComponents,
   ...federalGuideComponents,
 ];
 
