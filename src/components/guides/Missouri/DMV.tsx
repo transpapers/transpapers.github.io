@@ -32,17 +32,17 @@ function MissouriDMVGuide({ person }: { person: Partial<Person> }) {
 
       <p>
         This section covers the process of updating your primary identification 
-        (driver’s license/state ID). If this is not relevant to you, then skip this 
+        (driver&apos;s license/state ID). If this is not relevant to you, then skip this 
         section. You can update your ID at any License Office in the state; this{" "}
         <a href="https://dor.mo.gov/license-office-locator/">
           link
         </a>
         {" "}has a map of all of them. Every office listed on that map should be 
         walk-in, though some allow you to call to set up an appointment and skip the 
-        line. If you are updating your current driver's license/state ID bring that 
+        line. If you are updating your current driver&apos;s license/state ID bring that 
         along with your receipt from social security
         {isChangingLegalSex === true ? ", gender change order, " : " "}
-        and court order. If you don’t have a driver's license or state ID, you will 
+        and court order. If you don’t have a driver&apos;s license or state ID, you will 
         need some additional ID documents in place of one. Use this{" "}
         <a href="https://dor.mo.gov/driver-license/issuance/real-id/interactive-guide.html">
           link

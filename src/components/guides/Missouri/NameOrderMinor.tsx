@@ -30,7 +30,7 @@ function MissouriOrderMinorGuide({ person }: { person: Partial<Person> }) {
     <section key="Missouri-CAFC472">
       <h3>Judgment for Change of Name of Minor Child (MO, CAFC472)</h3>
       <p>
-        The “Judgment for Change of Name of Minor Child" (Form CAFC472) is the 
+        The “Judgment for Change of Name of Minor Child” (Form CAFC472) is the 
         document the judge will sign to grant the name change. You, the minor, 
         should decide with your parents whether you want to attend the court 
         hearing or not. Your attendance is encouraged but not required, as the 

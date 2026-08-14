@@ -44,7 +44,7 @@ function MissouriPetitionMinorGuide({ person }: { person: Partial<Person> }) {
         {parentsAreOkay === false && 
           <>
             If both of your parents are deceased, a legal guardian can file this 
-            petition instead. They will need to bring official copies of both parents' 
+            petition instead. They will need to bring official copies of both parents&apos; 
             death certificates when they file.{" "}
           </>
         }

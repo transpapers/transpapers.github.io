@@ -65,7 +65,7 @@ function MissouriRedactingGuide({ person }: { person: Partial<Person> }) {
         <p>
           You, the minor, need to have your next friend redact your name and date of 
           birth every time it appears on any form; this includes both your legal name 
-          and your desired name. On the “Judgment for Change of Name of Minor Child" 
+          and your desired name. On the “Judgment for Change of Name of Minor Child” 
           (Form CAFC472), this should be in the following areas: on the top of page 1, 
           page 2 section 7, page 2 section 8, and page 2 section 10.
         </p>
@@ -73,7 +73,7 @@ function MissouriRedactingGuide({ person }: { person: Partial<Person> }) {
 
     {age && age < 18 &&
         <p>
-          On the “Petition, Consent and Order for Parent's Appointment as Next Friend” 
+          On the “Petition, Consent and Order for Parent&apos;s Appointment as Next Friend” 
           (Form CAFC411), your next friend should redact your name and date of birth 
           on the top of page 1, both “In re” and in section 1.
           {age && age > 13 && 
@@ -92,7 +92,7 @@ function MissouriRedactingGuide({ person }: { person: Partial<Person> }) {
     <p>
       The last thing that will need to be redacted is a <strong>photocopy</strong> of
       whatever ID {age && age > 17 ? "you" : "your next friend"} will be using when 
-      filing. If the ID is a driver's license or state ID, the identification number 
+      filing. If the ID is a driver&apos;s license or state ID, the identification number 
       and birthdate need to be redacted. For passports, the photocopy only needs to 
       include the page with all of the identifying information. On that page, redact 
       the passport number and date of birth.

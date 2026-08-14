@@ -45,7 +45,7 @@ function MissouriFilingGuide({
       <h3>Filing Initial Forms (MO)</h3>
       <p>
         {age && age > 17 ? "You are " : "Your next friend is "} now ready to file 
-        at {residentLocalityName === "Marion" || "Jasper" ? "a " : "the "}
+        at {residentLocalityName === "Marion" || residentLocalityName === "Jasper" ? "a " : "the "}
         {residentLocalityName} 
         {residentLocalityName === "St. Louis (City)" ? " city" : " county"} circuit court
         {residentLocalityName === "Jasper" ? 
@@ -91,7 +91,7 @@ function MissouriFilingGuide({
         <p>{residentLocality.court.specificCourtInfo}</p>
       )}
 
-      {residentLocality.onlineFile === true && 
+      {residentLocality.onlineFile && 
         <p>
           The {residentLocalityName} circuit court will accept online filings.
           {age && age > 17 ? " You" : " Your next friend"} will need to scan all of your 
@@ -109,7 +109,7 @@ function MissouriFilingGuide({
         </p>
       }
 
-      {residentLocality.inPersonFile === true && 
+      {residentLocality.inPersonFile && 
         <p>
           The {residentLocalityName} circuit court will accept in-person filings.
           {age && age > 17 ? " You" : " Your next friend"} will need to bring all of the 
@@ -120,7 +120,7 @@ function MissouriFilingGuide({
         </p>
       }
 
-      {residentLocality.mailFile === true && 
+      {residentLocality.mailFile && 
         <p>
           The {residentLocalityName} circuit court will accept mail-in filings.
           {age && age > 17 ? " You" : " Your next friend"} will need to place all of the 
@@ -128,7 +128,7 @@ function MissouriFilingGuide({
           photo ID, the redacted photocopies of everything into an envelope. In addition
           {age && age > 17 ? " you" : " they"} will need either the fee waiver form or a 
           check/money order made out to “{residentLocalityName} circuit court” for{" "}
-          {residentLocality.filingFee} to the court. Write the court's mailing address,{" "}
+          {residentLocality.filingFee} to the court. Write the court&apos;s mailing address,{" "}
           {residentLocality.mailAddress}, on the front of the envelope. Then you will 
           need to take the envelope to your local post office and pay $4 to have it sent 
           by certified mail, so you will have proof that they received it.
@@ -145,7 +145,7 @@ function MissouriFilingGuide({
           </>
         :
           <>
-            “Judgment for Change of Name of Minor Child" (Form CAFC472)
+            “Judgment for Change of Name of Minor Child” (Form CAFC472)
           </>
         }
         , which we will call the “court order” from now on. If you got a notice for a 

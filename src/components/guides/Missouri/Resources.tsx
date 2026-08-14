@@ -62,7 +62,7 @@ function MissouriResourcesGuide() {
             Missouri Kansas Queer Law
           </a>
           : This experienced law firm works with clients throughout Missouri on both name 
-          and gender changes and will assist those who cannot get a gender change doctor's 
+          and gender changes and will assist those who cannot get a gender change doctor&apos;s 
           letter with the words “surgical procedure”. Contact them through their website 
           or by emailing office@mokanqueerlaw.com.
         </li>

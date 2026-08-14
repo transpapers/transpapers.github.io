@@ -28,9 +28,9 @@ function MissouriConsentMinorGuide({ person }: { person: Partial<Person> }) {
 
   return (
     <section key="Missouri-CAFC411">
-      <h3>Petition, Consent and Order for Parent's Appointment as Next Friend (MO, CAFC411)</h3>
+      <h3>Petition, Consent and Order for Parent&apos;s Appointment as Next Friend (MO, CAFC411)</h3>
       <p>
-        The “Petition, Consent and Order for Parent's Appointment as Next Friend” 
+        The “Petition, Consent and Order for Parent&apos;s Appointment as Next Friend” 
         (Form CAFC411) is for {age && age > 13 ? "you, the minor, and" : ""} your
         next friend to give consent.{" "}
         {age && age > 13 ? 

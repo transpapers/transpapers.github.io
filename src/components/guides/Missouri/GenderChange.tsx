@@ -43,8 +43,8 @@ function MissouriGenderChangeGuide({ person }: { person: Partial<Person> }) {
         state IDs, but requires proof of some form of surgical procedure, a 
         gender-change court order, and some form of name change to do so. 
         (Specifically, Missouri law requires: “Receipt of a certified copy of an order 
-        of a court of competent jurisdiction indicating the sex of an individual born 
-        in this state has been changed by surgical procedure and that such individual’s 
+        of a court of competent jurisdiction indicating the sex of an individual born
+        in this state has been changed by surgical procedure and that such individual’s 
         name has been changed.”{" "}
         <a href="https://revisor.mo.gov/main/OneSection.aspx?section=193.215">
           RSMo. § 193.215.9
@@ -54,7 +54,7 @@ function MissouriGenderChangeGuide({ person }: { person: Partial<Person> }) {
       </p>
 
       <p>
-        As long as you can get a doctor's letter (preferably from an M.D. or D.O.) 
+        As long as you can get a doctor&apos;s letter (preferably from an M.D. or D.O.) 
         stating that you have undergone some sort of surgical procedure for the 
         purpose of your transition, that should be enough. However, if you have not 
         undergone surgery or cannot obtain a letter with the word “surgery” in it, 
@@ -64,7 +64,7 @@ function MissouriGenderChangeGuide({ person }: { person: Partial<Person> }) {
       </p>
 
       <p>
-        Once you have that doctor's letter, it’s time to start looking at courts. 
+        Once you have that doctor&apos;s letter, it’s time to start looking at courts. 
         Unlike name changes, a legal gender marker change can be filed in any circuit 
         court in Missouri, meaning we can direct you to the ones that have been flagged 
         as friendly for gender changes by experienced local lawyers. These are:

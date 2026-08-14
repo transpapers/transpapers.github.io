@@ -59,7 +59,7 @@ function MissouriParentConsentMinorGuide({ person }: { person: Partial<Person> }
             respondent parent’s address in this section.{" "}
           </>
         }
-        Page 3 should be left <strong>blank</strong>; that's for a notary and the 
+        Page 3 should be left <strong>blank</strong>; that&apos;s for a notary and the 
         respondent parent later.
       </p>
     </section>
