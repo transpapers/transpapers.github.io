@@ -48344,6 +48344,29 @@ const delawareCounties = [
     adultCourtEmail: "CCPSussex_CivilFilings@delaware.gov"
   }
 ];
+({
+  target: Target.NameChange,
+  depends: [Target.GenderMarker]
+});
+({
+  target: Target.GenderMarker
+});
+({
+  target: Target.PrimaryIdentification,
+  depends: [Target.NameChange, Target.GenderMarker]
+});
+({
+  target: Target.BirthRecord,
+  depends: [
+    Target.NameChange,
+    Target.PrimaryIdentification,
+    Target.SocialSecurity
+  ]
+});
+({
+  target: Target.BirthRecord,
+  depends: [Target.PrimaryIdentification, Target.Passport]
+});
 const ssnMap = [
   (applicant) => ({
     text: applicant.chosenName.first,
