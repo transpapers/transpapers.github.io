@@ -47558,22 +47558,6 @@ function DelawareBirthCertUpdateGuide({ person }) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This process can be done either in-person or by mail." }),
     isChangingLegalSex && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Note" }),
-        ": There is a new law that is under consideration,",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.billtrack50.com/billdetail/1998788", children: "HB375" }),
-        " ",
-        ", that would make this process much easier by removing the need to get medical approval.",
-        " ",
-        gender && gender === "X" && "It will also add an “X” option for the gender marker.",
-        " ",
-        "If it passes send us a",
-        " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://tinyurl.com/mgdc-feedback", children: "tip" }),
-        " ",
-        " and this note will update on the date of passage as well as the date of implementation. For now though use the steps below to update your gender marker."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
         "The first form you will need is the “Healthcare Provider's Affidavit for Sex Change on Birth Certificate”. You will need to bring this form to a licensed therapist, counselor, physician, nurse, or social worker. They can then fill it out on your behalf.",
         " ",
         gender && gender === "X" && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Unfortunately Delaware currently does not have an “X” designation, you will need to tell your provider to mark either “Male” or “Female” in the certification paragraph near the bottom of the first page." }),
