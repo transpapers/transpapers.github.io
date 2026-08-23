@@ -36,24 +36,6 @@ function DelawareBirthCertUpdateGuide({ person }: { person: Partial<Person> }) {
       {isChangingLegalSex &&
         <>
           <p>
-            <strong>Note</strong>: There is a new law that is under consideration,{" "}
-            <a href="https://www.billtrack50.com/billdetail/1998788">
-              HB375
-            </a> 
-            {" "}, that would make this process much easier by removing the need to get 
-            medical approval.{" "}
-            {gender && (gender as string) === "X" && 
-              "It will also add an “X” option for the gender marker."}
-            {" "}If it passes send us a{" "}
-            <a href="https://tinyurl.com/mgdc-feedback">
-              tip
-            </a> 
-            {" "} and this note will update on the date of passage as well as the date of 
-            implementation. For now though use the steps below to update your gender 
-            marker.
-          </p>
-
-          <p>
             The first form you will need is the “Healthcare Provider&apos;s Affidavit for Sex 
             Change on Birth Certificate”. You will need to bring this form to a licensed 
             therapist, counselor, physician, nurse, or social worker. They can then fill 
