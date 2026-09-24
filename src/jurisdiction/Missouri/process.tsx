@@ -216,7 +216,9 @@ export const missouriNameChange: Process<MissouriCounty> = {
       map: adultPublicationMap,
       include: (applicant) => !isMinor(applicant) 
         && getMOLocality(applicant.residentJurisdictionName, 
-            applicant.residentLocalityName)?.courtPublishes === true,
+            applicant.residentLocalityName)?.courtPublishes === true 
+        && applicant.residentLocalityName !== "Madison"
+        && applicant.residentLocalityName !== "Washington",
     },
     {
       name: "Request for Publication after Judgment of Change of Name for Minor Child",
@@ -225,7 +227,9 @@ export const missouriNameChange: Process<MissouriCounty> = {
       map: minorPublicationMap,
       include: (applicant) => isMinor(applicant)
         && getMOLocality(applicant.residentJurisdictionName, 
-            applicant.residentLocalityName)?.courtPublishes === true,
+            applicant.residentLocalityName)?.courtPublishes === true
+        && applicant.residentLocalityName !== "Madison"
+        && applicant.residentLocalityName !== "Washington",
     },
   ],
 };
