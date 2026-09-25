@@ -65,7 +65,6 @@ function MissouriResourcesGuide() {
           the country. They may be able to assist in difficult name change cases or provide 
           representation for a gender marker change case.
         </li>
-        <br />
         <li>
         <br />
         <br />
