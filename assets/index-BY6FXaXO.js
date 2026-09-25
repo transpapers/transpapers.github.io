@@ -48347,148 +48347,6 @@ const delawareCounties = [
     adultCourtEmail: "CCPSussex_CivilFilings@delaware.gov"
   }
 ];
-const adultNamePetitionMap = [
-  (applicant) => ({
-    fieldName: "Circuit_Court_County",
-    value: (() => {
-      switch (applicant.residentLocalityName) {
-        case "St. Louis (City)":
-          return "St. Louis City";
-        case "St. Louis (County)":
-          return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
-      }
-    })()
-  }),
-  (applicant) => ({
-    text: applicant.legalName.first,
-    fieldName: "Petitioner_Legal_First_Name"
-  }),
-  (applicant) => ({
-    text: applicant.legalName.middle,
-    fieldName: "Current_Legal_Middle_Name"
-  }),
-  (applicant) => ({
-    text: applicant.legalName.last,
-    fieldName: "Current_Legal_Last_Name"
-  }),
-  (applicant) => ({
-    text: applicant.legalName.suffix,
-    fieldName: "Current_Legal_Suffix"
-  }),
-  (applicant) => ({
-    text: applicant.birthName.first ? "X" : "",
-    loc: { x: 85, y: 561 }
-  }),
-  (applicant) => ({
-    text: applicant.birthName.first ? "" : "X",
-    loc: { x: 85, y: 610 }
-  }),
-  (applicant) => ({
-    text: applicant.birthName.first,
-    fieldName: "Birth_Legal_First_Name"
-  }),
-  (applicant) => ({
-    text: applicant.birthName.middle,
-    fieldName: "Birth_Legal_Middle_Name"
-  }),
-  (applicant) => ({
-    text: applicant.birthName.last,
-    fieldName: "Birth_Legal_Last_Name"
-  }),
-  (applicant) => ({
-    text: applicant.birthName.suffix,
-    fieldName: "Birth_Legal_Suffix"
-  }),
-  (applicant) => ({
-    text: applicant.chosenName.first,
-    fieldName: "Change_First_Name"
-  }),
-  (applicant) => ({
-    text: applicant.chosenName.middle,
-    fieldName: "Change_Middle_Name"
-  }),
-  (applicant) => ({
-    text: applicant.chosenName.last,
-    fieldName: "Change_Last_Name"
-  }),
-  (applicant) => ({
-    text: applicant.chosenName.suffix,
-    fieldName: "Change_Suffix"
-  }),
-  () => ({
-    text: "X",
-    loc: { x: 85, y: 765 }
-  }),
-  (applicant) => ({
-    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
-    fieldName: "Mailing_Street"
-  }),
-  (applicant) => ({
-    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
-    fieldName: "Mailing_City"
-  }),
-  (applicant) => ({
-    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
-    fieldName: "Mailing_State"
-  }),
-  (applicant) => ({
-    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
-    fieldName: "Mailing_Zip"
-  }),
-  (applicant) => ({
-    text: applicant.phone,
-    fieldName: "Telephone_Number_Area_Code"
-  }),
-  (applicant) => ({
-    text: applicant.email,
-    fieldName: "Email_Address_Optional"
-  }),
-  (applicant) => ({
-    text: formatDate(applicant.birthdate, {
-      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
-      separator: "/"
-    }),
-    fieldName: "Birth_Date"
-  }),
-  (applicant) => ({
-    text: applicant.birthCity,
-    fieldName: "Birth_City"
-  }),
-  (applicant) => ({
-    text: applicant.birthJurisdictionName,
-    fieldName: "Birth_State"
-  }),
-  (applicant) => ({
-    text: applicant.birthJurisdictionName ? "USA" : "",
-    fieldName: "Birth_Country"
-  }),
-  (applicant) => ({
-    text: applicant.reasonForNameChange,
-    fieldName: "Change_Name_Reason"
-  }),
-  () => ({
-    text: "X",
-    loc: { page: 1, x: 167, y: 667 }
-  }),
-  (applicant) => ({
-    text: applicant.residentJurisdictionName,
-    fieldName: "Residence_State"
-  }),
-  (applicant) => ({
-    text: applicant.residentLocalityName,
-    fieldName: "Residence_County"
-  }),
-  (applicant) => ({
-    text: applicant.birthName.first ? "" : "X",
-    loc: { page: 1, x: 85, y: 843 }
-  }),
-  (applicant) => ({
-    text: applicant.birthName.first ? "X" : "",
-    loc: { page: 1, x: 85, y: 878 }
-  })
-];
 const minorNamePetitionMap = [
   (applicant) => ({
     fieldName: "nmpCountyList",
@@ -50226,6 +50084,7 @@ function MissouriFilingGuide({
           " ",
           "for the exact court boundaries. To check things like hours of operation or accepted payment types, call the Hannibal court at (573) 221-0198 and the Palmyra court at (573) 769-2550."
         ] }) : residentLocalityName === "Jackson" && age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: ". Jackson County has 2 valid filing locations for minor cases, the Kansas City location at 625 E 26th St, Kansas City, MO 64108 and the Independence location at 308 W Kansas Ave, Independence, MO 64050. It does not matter which one is used; just make sure to check the appropriate box at the top of the “Family Court Information Sheet” (form CIRCT 1452). To check things like hours of operation or accepted payment types, call the courts at (816) 474-3606 and (816) 881-3522, respectively." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          " ",
           "located at ",
           residentLocality.court.address,
           ". To check things like hours of operation or accepted payment types, call the court at ",
@@ -50306,7 +50165,7 @@ function MissouriGenderChangeGuide({ person }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://revisor.mo.gov/main/OneSection.aspx?section=193.215", children: "RSMo. § 193.215.9" }),
       ".) The law is vague on what counts as a “surgical procedure” and name change, which can work both for and against us."
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "As long as you can get a doctor's letter (preferably from an M.D. or D.O.) stating that you have undergone some sort of surgical procedure for the purpose of your transition, that should be enough. However, if you have not undergone surgery or cannot obtain a letter with the word “surgery” in it, there are some lawyers in Missouri who may still be willing to work with you to explore your options. We have marked them specially on the list of attorneys below." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "As long as you can get a doctor's letter (preferably from an M.D. or D.O.) stating that you have undergone some sort of surgical procedure for the purpose of your transition, that should be enough. However, if you have not undergone surgery or cannot obtain a letter with the word “surgery” in it, there are some lawyers in Missouri who may still be willing to work with you to explore your options. We have marked them specially on the list of attorneys in the “Resources” section at the end of this guide." }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "Once you have that doctor's letter, it’s time to start looking at courts. Unlike name changes, a legal gender marker change can be filed in any circuit court in Missouri, meaning we can direct you to the ones that have been flagged as friendly for gender changes by experienced local lawyers. These are:",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
@@ -50412,33 +50271,6 @@ function MissouriOrderMinorGuide({ person }) {
       "; that is for a judge to fill out. Make extra sure that all of the information on this form is correct and legible."
     ] })
   ] }, "Missouri-CAFC472");
-}
-function MissouriPetitionAdultGuide({ person }) {
-  const { residentLocalityName, birthJurisdictionName, legalName, birthName } = person;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (MO, CAFC401)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "In Missouri, there is a 90 day wait period for new residents to change their name. You can change it as soon as that wait period passes and you can prove residency with something like an ID or utility bill in your current legal name with a ",
-      residentLocalityName,
-      residentLocalityName === "St. Louis (City)" ? " city" : " county",
-      " address."
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      "The “Petition for Change of Name” (CAFC401) is the main form for this process. On page 2, fill out numbers 6, 7, and 8 if applicable.",
-      " ",
-      birthJurisdictionName === "Elsewhere" && "Fill out your state/country of birth in #10 if it is blank. ",
-      legalName?.first !== birthName?.first && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "Since your current name does not match the one on your original birth certificate, you will need to fill out #16 and bring certified copies documenting ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "every name change" }),
-        ". This would include documents like your original birth certificate, adoption papers, marriage certificates, divorce documents, or other court orders.",
-        " "
-      ] }),
-      "Fill out sections 17 through 19 on page 3 as they apply to you. If section 20 applies to you, fill that out as well; otherwise, skip it. Do",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " fill out or sign anything on page 5 until a notary instructs you to do so."
-    ] })
-  ] }, "Missouri-CAFC401");
 }
 function MissouriPetitionMinorGuide({ person }) {
   const { residentLocalityName, birthJurisdictionName, legalName, birthName, parentsAreOkay } = person;
@@ -50666,20 +50498,40 @@ function MissouriResourcesGuide() {
         "for more information and a list of other local resources."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://centerproject.org/resources/name-gender-changes/", children: "The Center Project" }),
         ": They provide assistance with updating name and gender markers for trans and nonbinary people in mid-Missouri. They also offer inclusive notary services."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.shb.com/about/diversity", children: "Shook Hardy & Bacon" }),
         ": They provide a free (pro bono) name and gender marker clinic called Project Affirmation. They have offices in St. Louis and Kansas City but work throughout the country. They may be able to assist in difficult name change cases or provide representation for a gender marker change case."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.mokanqueerlaw.com/", children: "Missouri Kansas Queer Law" }),
         ": This experienced law firm works with clients throughout Missouri on both name and gender changes and will assist those who cannot get a gender change doctor's letter with the words “surgical procedure”. Contact them through their website or by emailing office@mokanqueerlaw.com."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.kansashealthsystem.com/care/specialties/gender-affirming-medicine", children: "The University of Kansas Gender Clinic" }),
         ": They provide gender affirming care and can assist with doctor’s letters for gender changes if you are a patient in their system."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Johnda Boyce is an attorney in the Kansas City area. She has experience with name and gender marker changes. Contact her for more information by emailing johndaboyce@gmail.com." })
     ] })
@@ -50702,14 +50554,14 @@ const missouriNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
-    {
-      name: "Petition for Change of Name",
-      id: "CAFC401",
-      filename: "Missouri/Adult Name Change Petition.pdf",
-      guide: MissouriPetitionAdultGuide,
-      map: adultNamePetitionMap,
-      include: (applicant) => !isMinor(applicant)
-    },
+    //{
+    //name: "Petition for Change of Name",
+    //id: "CAFC401",
+    //filename: "Missouri/Adult Name Change Petition.pdf",
+    //guide: MissouriPetitionAdultGuide,
+    //map: adultNamePetitionMap,
+    //include: (applicant) => !isMinor(applicant),
+    //},
     {
       name: "Petition for Change of Name by Parent (For Minor Child)",
       id: "CAFC402",
@@ -50959,7 +50811,7 @@ const missouriCounties = [
       website: "https://www.kirksvilledailyexpress.com/contact-us/"
     }],
     courtPublishes: false,
-    inPersonFile: false,
+    inPersonFile: true,
     onlineFile: false,
     mailFile: true,
     mailAddress: "PO Box 690, Kirksville MO",
@@ -50982,7 +50834,7 @@ const missouriCounties = [
       website: "https://www.savrep.com/submit-a-legal-notice/"
     }],
     courtPublishes: false,
-    inPersonFile: false,
+    inPersonFile: true,
     onlineFile: false,
     mailFile: true,
     mailAddress: "PO Box 318, Savannah MO 64485",
