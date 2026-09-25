@@ -50878,7 +50878,7 @@ const missouriNameChange = {
       include: (applicant) => !isMinor(applicant) && getMOLocality(
         applicant.residentJurisdictionName,
         applicant.residentLocalityName
-      )?.courtPublishes === true
+      )?.courtPublishes === false
     },
     {
       name: "Request for Publication Minor",
@@ -50886,7 +50886,7 @@ const missouriNameChange = {
       include: (applicant) => isMinor(applicant) && getMOLocality(
         applicant.residentJurisdictionName,
         applicant.residentLocalityName
-      )?.courtPublishes === true
+      )?.courtPublishes === false
     },
     {
       name: "Confidential Case Filing Information Sheet",
@@ -50959,7 +50959,7 @@ const missouriNameChange = {
       include: (applicant) => !isMinor(applicant) && getMOLocality(
         applicant.residentJurisdictionName,
         applicant.residentLocalityName
-      )?.courtPublishes === true && applicant.residentLocalityName !== "Madison" && applicant.residentLocalityName !== "Washington"
+      )?.courtPublishes === false && applicant.residentLocalityName !== "Madison" && applicant.residentLocalityName !== "Washington"
     },
     {
       name: "Request for Publication after Judgment of Change of Name for Minor Child",
@@ -50969,7 +50969,7 @@ const missouriNameChange = {
       include: (applicant) => isMinor(applicant) && getMOLocality(
         applicant.residentJurisdictionName,
         applicant.residentLocalityName
-      )?.courtPublishes === true && applicant.residentLocalityName !== "Madison" && applicant.residentLocalityName !== "Washington"
+      )?.courtPublishes === false && applicant.residentLocalityName !== "Madison" && applicant.residentLocalityName !== "Washington"
     }
   ]
 };
