@@ -28643,6 +28643,25 @@ function getNYLocality(jurisdictionKey, localityKey) {
   );
   return foundLocality;
 }
+function getMOLocality(jurisdictionKey, localityKey) {
+  if (!jurisdictionKey) {
+    return void 0;
+  }
+  if (!localityKey) {
+    return void 0;
+  }
+  const foundJurisdiction = allJurisdictions.find(
+    (j) => j.name === jurisdictionKey
+  );
+  if (!foundJurisdiction) {
+    return void 0;
+  }
+  const localities = foundJurisdiction.localities;
+  const foundLocality = localities.find(
+    (j) => j.name === localityKey
+  );
+  return foundLocality;
+}
 var ContactFormat = /* @__PURE__ */ ((ContactFormat2) => {
   ContactFormat2[ContactFormat2["BirthCityAndState"] = 0] = "BirthCityAndState";
   ContactFormat2[ContactFormat2["BirthCityStateCountry"] = 1] = "BirthCityStateCountry";
@@ -29255,7 +29274,7 @@ const orderFollowingMap = [
     fieldName: "Current first middle and last names type or print"
   })
 ];
-const feeWaiverMap$1 = [
+const feeWaiverMap$2 = [
   (applicant) => ({
     text: getLocality(
       applicant.residentJurisdictionName,
@@ -30019,7 +30038,7 @@ const michiganNameChange = {
       id: "MC 20",
       filename: "Michigan/mc20.pdf",
       guide: MichiganMC20Guide,
-      map: feeWaiverMap$1
+      map: feeWaiverMap$2
     },
     {
       name: "Filing Initial Documents",
@@ -39396,7 +39415,7 @@ const dmvGenderDesignationMap = [
     fieldName: "cb1"
   })
 ];
-const birthCertCorrectionMap = [
+const birthCertCorrectionMap$1 = [
   () => ({
     check: true,
     fieldName: "Requesting Correction to: - Birth"
@@ -40158,7 +40177,7 @@ const illinoisBirthRecord = {
       name: "State of Illinois Affidavit and Certificate of Correction Request",
       id: "IOCI 19-184",
       filename: "Illinois/Birth Certificate Correction Request.pdf",
-      map: birthCertCorrectionMap
+      map: birthCertCorrectionMap$1
     }
   ],
   isBirth: true
@@ -41870,7 +41889,7 @@ const minorNameGenderOrderMap = [
     fieldName: "NC-530G[0].Page2[0].P2Caption[0].TitlePartyName[0].Party1[0]"
   })
 ];
-const feeWaiverMap = [
+const feeWaiverMap$1 = [
   (applicant) => ({
     text: applicant.residentLocalityName,
     fieldName: "FW-001[0].Page1[0].RightCaption[0].CourtInfo[0]"
@@ -44337,7 +44356,7 @@ const californiaNameChange = {
       id: "FW-001",
       filename: "California/Fee Waiver.pdf",
       guide: CaliforniaFeeWaiverGuide,
-      map: feeWaiverMap
+      map: feeWaiverMap$1
     },
     {
       name: "Order on Court Fee Waiver",
@@ -48328,29 +48347,5461 @@ const delawareCounties = [
     adultCourtEmail: "CCPSussex_CivilFilings@delaware.gov"
   }
 ];
-({
+const adultNamePetitionMap = [
+  (applicant) => ({
+    fieldName: "Circuit_Court_County",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "Petitioner_Legal_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Current_Legal_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "Current_Legal_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "Current_Legal_Suffix"
+  }),
+  (applicant) => ({
+    fieldName: "Birth_Legal_Name",
+    choice: applicant.birthName.first ? "different from current" : "Same as current"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first,
+    fieldName: "Birth_Legal_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle,
+    fieldName: "Birth_Legal_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last,
+    fieldName: "Birth_Legal_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.suffix,
+    fieldName: "Birth_Legal_Suffix"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "Change_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "Change_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "Change_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "Change_Suffix"
+  }),
+  () => ({
+    fieldName: "Petition_Filing_Count",
+    choice: "First petition"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "Mailing_Street"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "Mailing_City"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "Mailing_State"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "Mailing_Zip"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone_Number_Area_Code"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email_Address_Optional"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Birth_Date"
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "Birth_City"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "Birth_State"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName ? "USA" : "",
+    fieldName: "Birth_Country"
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "Change_Name_Reason"
+  }),
+  () => ({
+    fieldName: "Residence_Country",
+    choice: "United States"
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdictionName,
+    fieldName: "Residence_State"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "Residence_County"
+  }),
+  (applicant) => ({
+    fieldName: "Name_Change_History",
+    choice: applicant.birthName.first ? "Previously been changed" : "Never been changed"
+  })
+];
+const minorNamePetitionMap = [
+  (applicant) => ({
+    fieldName: "nmpCountyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "nmpPetitionerFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "nmpPetitionerMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "nmpPetitionerLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "nmpPetitionerSuffix"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.first,
+    fieldName: "nmpYourFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.middle,
+    fieldName: "nmpYourMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.last,
+    fieldName: "nmpYourLastName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.suffix,
+    fieldName: "nmpYourSuffix"
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 101, y: 539 }
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "nmpYourStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "nmpYourCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "nmpYourState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "nmpYourZip"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "nmpOtherParentStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "nmpOtherParentCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "nmpOtherParentState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "nmpOtherParentZip"
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 1, x: 101, y: 97 }
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "nmpChildWantsFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "nmpChildWantsMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "nmpChildWantsLastName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "nmpChildWantsSuffix"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "nmpChildsStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "nmpChildsCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "nmpChildsState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "nmpChildsZip"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "nmpChildsPhone"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "nmpChildsEmail"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "nmpChildsDOB"
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "nmpChildPlaceOfBirthCity"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "nmpChildPlaceOfBirthState"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName ? "USA" : "",
+    fieldName: "nmpChildPlaceOfBirth"
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "nmpReasonsChildWantsChange"
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 1, x: 241, y: 801 }
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdictionName,
+    fieldName: "nmpChildResidesWhichState"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "nmpChildResidesCounty"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "" : "X",
+    loc: { page: 2, x: 102, y: 98 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "X" : "",
+    loc: { page: 2, x: 102, y: 118 }
+  })
+];
+const minorConsentMap = [
+  (applicant) => ({
+    fieldName: "nmnfCountyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "nmnfPetitionerFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "nmnfPetitionerMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "nmnfPetitionerLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "nmnfPetitionerSuffix"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "nmnfPetitionerDOB"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age < 14 ? "X" : "",
+    loc: { x: 103, y: 539 }
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "X" : "",
+    loc: { x: 103, y: 558 }
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.first,
+    fieldName: "nmnfPetitionerFirstName2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.middle,
+    fieldName: "nmnfPetitionerMiddleName2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.last,
+    fieldName: "nmnfPetitionerLastName2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.suffix,
+    fieldName: "nmnfPetitionerSuffix2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.first,
+    fieldName: "nmnfYourFirstName2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.middle,
+    fieldName: "nmnfYourMiddleName2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.last,
+    fieldName: "nmnfYour LastName2"
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.suffix,
+    fieldName: "nmnfYourSuffix2"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.first,
+    fieldName: "nmnfYourFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.middle,
+    fieldName: "nmnfYourMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.last,
+    fieldName: "nmnfYour LastName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.suffix,
+    fieldName: "nmnfYourSuffix"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "nmnfYourStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "nmnfYourCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "nmnfYourState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "nmnfYourZip"
+  }),
+  (applicant) => ({
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 1, x: 105, y: 248 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    loc: { page: 1, x: 435, y: 512 }
+  })
+];
+const minorParentConsentMap = [
+  (applicant) => ({
+    fieldName: "nmcCountyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "nmcPetitionerFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "nmcPetitionerMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "nmcPetitionerLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "nmcPetitionerSuffix"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "nmcYourStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "nmcYourCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "nmcYourState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail && applicant.parentsAreOkay ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "nmcYourZip"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.first,
+    fieldName: "nmcOtherParentFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.middle,
+    fieldName: "nmcOtherParentMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.last,
+    fieldName: "nmcOtherParentsLastName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.suffix,
+    fieldName: "nmcOtherParentSuffix"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "nmcOtherParentStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "nmcOtherParentCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "nmcOtherParentState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "nmcOtherParentZip"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "nmcChildWantsFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "nmcChildWantsMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "nmcChildWantsLastName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "nmcChildWantsSuffix"
+  })
+];
+const adultNameOrderMap = [
+  (applicant) => ({
+    fieldName: "CountyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "petitionersFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "petitionersMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "petitionersLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "petitionersSuffix"
+  }),
+  () => ({
+    check: true,
+    fieldName: "appearsInPerson"
+  }),
+  (applicant) => ({
+    fieldName: "page1Group1",
+    choice: applicant.birthName.first ? "My full legal name at birth (prior to first marriage) was" : "My full legal name at birth (prior to first marriage) was same as current full legal name."
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first,
+    fieldName: "petitionersFirstNameAtBirth"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle,
+    fieldName: "petitionersMiddleNameAtBirth"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last,
+    fieldName: "petitionersLastNameAtBirth"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.suffix,
+    fieldName: "petitionersJrSrIIIAtBirth"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "petitionersRequestedFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "petitionersRequestedMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "petitionersRequestedLastName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "petitionersRequestedJrSrIII"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "birthDate"
+  })
+];
+const minorNameOrderMap = [
+  (applicant) => ({
+    fieldName: "nmjCountyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "nmjPetitionerFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "nmjPetitionerMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "nmjPetitionerLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "nmjPetitionerSuffix"
+  }),
+  (applicant) => ({
+    check: applicant.age !== void 0 && applicant.age >= 14,
+    fieldName: "nmjPetIs14AgreesToNextFriendListed"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.representativeName),
+    fieldName: "nmjNameOfNextFriend"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.first,
+    fieldName: "nmjNextFriendFname"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.middle,
+    fieldName: "nmjNextFriendMname"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.last,
+    fieldName: "nmjNextFriendLName"
+  }),
+  (applicant) => ({
+    text: applicant.representativeName?.suffix,
+    fieldName: "nmjNextFriendSuffix"
+  }),
+  () => ({
+    check: true,
+    fieldName: "nmjNextFriendAppearsInPerson"
+  }),
+  (applicant) => ({
+    check: applicant.parentsAreOkay,
+    fieldName: "nmjOtherParentAppearsInPerson"
+  }),
+  () => ({
+    check: true,
+    fieldName: "nmjOtherParentFiledConsent"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "nmjChildWantsFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "nmjChildWantsMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "nmjChildWantsLastName"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "nmjChildWantsSuffix"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "nmjChildsDOB"
+  })
+];
+const feeWaiverMap = [
+  (applicant) => ({
+    text: applicant.residentLocality?.court.circuit,
+    fieldName: "Judicial Circuit Court Number"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "COUNTY NAME"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "Petitioner Name"
+  }),
+  (applicant) => ({
+    text: `${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""},
+      ${applicant.phone ?? ""}`,
+    fieldName: "Petitioners AddressTelephone"
+  })
+];
+const confidentialInfoMap = [
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "City of St. Louis";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })(),
+    fieldName: "CountyCity of St Louis"
+  }),
+  () => ({
+    text: "Petitioner v. Respondent",
+    fieldName: "Style of Case"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "QD" : "DD",
+    fieldName: "Case Type Code"
+    // Case type info found here: https://www.courts.mo.gov/file.jsp?id=411
+  }),
+  () => ({
+    text: "Change of Name",
+    fieldName: "Case Type Description"
+  }),
+  (applicant) => ({
+    check: isMinor(applicant) ? void 0 : true,
+    fieldName: "PETP"
+    // Party info found here: https://www.courts.mo.gov/file.jsp?id=491
+  }),
+  (applicant) => ({
+    check: isMinor(applicant) ? true : void 0,
+    fieldName: "PET Other"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "NOFP" : "",
+    fieldName: "P_Party Type Code"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "Next Friend Acting Pro Se (with no attorney)" : "",
+    fieldName: "P_Party Type Description"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "P Last Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "P_First Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "P_Middle name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "P_suffix"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentStreet),
+    fieldName: "P_Address"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "P_City"
+  }),
+  (applicant) => ({
+    text: abbreviateJurisdiction(applicant.residentJurisdictionName ?? ""),
+    fieldName: "P_State"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "P_Zip"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "P_Contact Telephone Number"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "P Email_Address"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "P DOB"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "P_Male"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "P_Female"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : "",
+    fieldName: "R_Address"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? applicant.homeAddress?.city : "",
+    fieldName: "R_City"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : "",
+    fieldName: "R_State"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? applicant.homeAddress?.zip : "",
+    fieldName: "R_Zip"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "SUBMITTED_BY"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.phone,
+    fieldName: "PHONE_SUBMITTED_BY"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.email,
+    fieldName: "EMAIL_SUBMITTED_BY"
+  })
+];
+const redactionCertificationMap = [
+  (applicant) => ({
+    text: applicant.residentLocality?.court.circuit,
+    fieldName: "JUDICIAL_CIRCUIT"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "COUNTY_NAME"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "NAME"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "ADDRESS"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "Change of Name (QD)" : "Change of Name (DD)",
+    fieldName: "CASE_TYPE"
+    // Case type info found here: https://www.courts.mo.gov/file.jsp?id=411
+  }),
+  () => ({
+    text: "Petitioner v. Respondent",
+    fieldName: "STYLE_OF_CASE"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "CAFC472, CAFC411, & CAFC412" : "CAFC401",
+    fieldName: "DOCUMENT_FILED"
+  })
+];
+const adultPublicationMap = [
+  (applicant) => ({
+    fieldName: "countyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "petitionersFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "petitionersMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "petitionersLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "petitionersSuffixJrSrIII"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "petitionersStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "petitionersCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "petitionersState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "petitionersZip"
+  }),
+  (applicant) => ({
+    fieldName: "countyListWithoutCounty",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis";
+        case "":
+          return applicant.residentLocalityName;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "petitionersFirstNameAfterChange"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "petitionersMiddleNameAfterChange"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "petitionersLastNameAfterChange"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "petitionersSuffixJrSrIIIAfterChange"
+  })
+];
+const minorPublicationMap = [
+  (applicant) => ({
+    fieldName: "countyList",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "petitionersFirstName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "petitionersMiddleName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "petitionersLastName"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "petitionersSuffixJrSrIII"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "petitionersStreet"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "petitionersCity"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "petitionersState"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "petitionersZip"
+  }),
+  (applicant) => ({
+    fieldName: "countyListWithoutCounty",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis";
+        case "":
+          return applicant.residentLocalityName;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "petitionersFirstNameAfterChange"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "petitionersMiddleNameAfterChange"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "petitionersLastNameAfterChange"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "petitionersSuffixJrSrIIIAfterChange"
+  })
+];
+const adultNameCoverMap = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 116, y: 172 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 278 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 278 }
+  })
+];
+const minorNameCoverMap = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 380, y: 172 }
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 363, y: 206 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 313 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 313 }
+  })
+];
+const adultNameGenderCoverMap = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 116, y: 172 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 278 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 278 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 102, y: 313 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 192, y: 313 }
+  })
+];
+const minorNameGenderCoverMap = [
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 376, y: 172 }
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    loc: { x: 363, y: 206 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    loc: { x: 102, y: 313 }
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    loc: { x: 364, y: 313 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 102, y: 347 }
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 192, y: 347 }
+  })
+];
+const birthCertCorrectionMap = [
+  () => ({
+    text: "x",
+    loc: { x: 37, y: 262 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
+    fieldName: "First Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle ? applicant.birthName.middle : applicant.legalName.middle,
+    fieldName: "Middle Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last ? `${applicant.birthName.last} ${applicant.birthName.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Last Name"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH],
+      separator: ""
+    }),
+    fieldName: "DOB - Month"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.DAY],
+      separator: ""
+    }),
+    fieldName: "DOB - Day"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.YEAR],
+      separator: ""
+    }),
+    fieldName: "DOB - Year"
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.F ? "x" : "",
+    loc: { x: 648, y: 272 }
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "x" : "",
+    loc: { x: 700, y: 272 }
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "x" : "",
+    loc: { x: 741, y: 272 }
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? "Name" : "",
+    fieldName: "Item Number or Item Name.0"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.isChangingLegalName) {
+        case true:
+          return applicant.birthName.first ? fullName(applicant.birthName) : fullName(applicant.legalName);
+        case false:
+          return "";
+      }
+    })(),
+    fieldName: "Instead of.0"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.chosenName),
+    fieldName: "Should Read.0"
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalSex ? "Sex" : "",
+    fieldName: "Item Number or Item Name.1"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+      }
+    })(),
+    fieldName: "Instead of.1"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+      }
+    })(),
+    fieldName: "Should Read.1"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.representativeName?.first : applicant.legalName.first,
+    fieldName: "Affiant First Name"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? applicant.representativeName?.middle : applicant.legalName.middle,
+    fieldName: "Affiant Middle Name"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? `${applicant.representativeName?.last ?? ""} ${applicant.representativeName?.suffix ?? ""}` : `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "Affiant Last Name"
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? "Parent" : "";
+        case false:
+          return "Self";
+      }
+    })(),
+    fieldName: "Relationship to Registrant"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "Affiant Mailing Address"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "Affiant Mailing City"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "Affiant Mailing State"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "Affiant Mailing Zip Code"
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.phone,
+    fieldName: "Affiant Phone Number"
+  })
+];
+const voterRegistrationMap = [
+  () => ({
+    fieldName: "CITIZEN",
+    choice: "YES"
+  }),
+  () => ({
+    fieldName: "18 Years Old",
+    choice: "YES_2"
+  }),
+  () => ({
+    check: true,
+    fieldName: "NAME CHANGE"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "LAST NAME"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "FIRST NAME"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "MIDDLE NAME"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    loc: { x: 600, y: 610 }
+  }),
+  (applicant) => ({
+    fieldName: "Gender",
+    choice: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          return applicant.gender === GenderMarker.M ? "MALE" : "FEMALE";
+        case false:
+          return applicant.assignedSex === GenderMarker.M ? "MALE" : "FEMALE";
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentStreet),
+    fieldName: "RESIDENTIAL ADDRESS"
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "RESIDENTIAL CITY"
+  }),
+  (applicant) => ({
+    fieldName: "County",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis";
+        case "":
+          return applicant.residentLocalityName;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "RESIDENTIAL ZIP"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "MAIL ADDRESS"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : applicant.mailAddress?.mailCity,
+    fieldName: "MAIL CITY"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "MAIL STATE"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? "" : applicant.mailAddress?.mailZip,
+    fieldName: "MAIL ZIP"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "DATE OF BIRTH"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "DAYTIME PHONE"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "EMAIL ADDRESS"
+  })
+];
+const jacksonInfoSheetMinor = [
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "form1[0].#subform[0].TextField1[0]"
+  }),
+  () => ({
+    check: true,
+    fieldName: "form1[0].#subform[0].CheckBox2[0]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "form1[0].#subform[0].TextField2[0]"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.ResidentFullAddress),
+    fieldName: "form1[0].#subform[0].TextField2[3]"
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, ContactFormat.MailFullAddress),
+    fieldName: "form1[0].#subform[0].TextField2[5]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "form1[0].#subform[0].TextField2[11]"
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}, ${applicant.legalName.first}, ${applicant.legalName.middle}`,
+    fieldName: "form1[0].#subform[0].TextField3[0]"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "form1[0].#subform[0].TextField3[4]"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? fullName(applicant.birthName) : fullName(applicant.legalName),
+    fieldName: "form1[0].#subform[0].TextField4[1]"
+  })
+];
+const stLouisCityInfoSheetAdult = [
+  () => ({
+    text: "St. Louis",
+    fieldName: "F[0].P1[0].TextField1[5]"
+  }),
+  () => ({
+    text: "Petitioner v. Respondent",
+    fieldName: "F[0].P1[0].TextField1[0]"
+  }),
+  () => ({
+    text: "DD",
+    fieldName: "F[0].P1[0].TextField1[1]"
+    // Case type info found here: https://www.courts.mo.gov/file.jsp?id=411
+  }),
+  () => ({
+    text: "Change of Name",
+    fieldName: "F[0].P1[0].TextField1[2]"
+  }),
+  () => ({
+    text: "PETP",
+    fieldName: "F[0].P1[0].TextField1[7]"
+    // Party info found here: https://www.courts.mo.gov/file.jsp?id=491
+  }),
+  () => ({
+    text: "Petitioner Acting Pro Se",
+    fieldName: "F[0].P1[0].TextField1[6]"
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "F[0].P1[0].TextField2[0]"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "F[0].P1[0].TextField2[1]"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "F[0].P1[0].TextField2[2]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "F[0].P1[0].TextField3[1]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "F[0].P1[0].TextField4[4]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "F[0].P1[0].TextField4[5]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "F[0].P1[0].TextField4[6]"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "F[0].P1[0].DateTimeField1[1]"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "F[0].P1[0].CheckBox1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "F[0].P1[0].CheckBox1[1]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "F[0].P1[0].TextField1[3]"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "F[0].P1[0].TextField4[24]"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "F[0].P1[0].TextField4[25]"
+  })
+];
+const stLouisCityInfoSheetMinor = [
+  () => ({
+    text: "St. Louis",
+    fieldName: "F[0].P1[0].TextField1[3]"
+  }),
+  () => ({
+    text: "Petitioner v. Respondent",
+    fieldName: "F[0].P1[0].TextField1[0]"
+  }),
+  () => ({
+    text: "QD",
+    fieldName: "F[0].P1[0].TextField1[1]"
+    // Case type info found here: https://www.courts.mo.gov/file.jsp?id=411
+  }),
+  () => ({
+    text: "Change of Name",
+    fieldName: "F[0].P1[0].TextField1[2]"
+  }),
+  () => ({
+    text: "NOFP",
+    fieldName: "F[0].P1[0].TextField1[5]"
+    // Party info found here: https://www.courts.mo.gov/file.jsp?id=491
+  }),
+  () => ({
+    text: "Next Friend Acting Pro Se",
+    fieldName: "F[0].P1[0].TextField1[4]"
+  }),
+  (applicant) => ({
+    text: `${applicant.legalName.last} ${applicant.legalName.suffix ?? ""}`,
+    fieldName: "F[0].P1[0].TextField2[0]"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "F[0].P1[0].TextField2[1]"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "F[0].P1[0].TextField2[2]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "F[0].P1[0].TextField3[0]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "F[0].P1[0].TextField4[4]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "F[0].P1[0].TextField4[5]"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "F[0].P1[0].TextField4[6]"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "F[0].P1[0].DateTimeField1[1]"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.M,
+    fieldName: "F[0].P1[0].CheckBox1[0]"
+  }),
+  (applicant) => ({
+    check: applicant.assignedSex === GenderMarker.F,
+    fieldName: "F[0].P1[0].CheckBox1[1]"
+  }),
+  (applicant) => ({
+    text: fullName(applicant.legalName),
+    fieldName: "F[0].#subform[1].TextField2[0]"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "F[0].#subform[1].DateTimeField1[0]"
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "F[0].#subform[1].TextField1[0]"
+  })
+];
+function MissouriBirthCertGuide({ person }) {
+  const { gender, age, residentJurisdictionName, isChangingLegalName, isChangingLegalSex } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Order Gender Change (MO)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Warning" }),
+      ": We have received reports that individuals within the Missouri Department of Health and Senior Services are being increasingly antagonistic and transphobic. That being said, we have still been able to successfully get requests processed at this time. Monitor the status of your request closely and follow our instructions carefully, as they will attempt to deny any request that they can for any reason. This warning will update if the situation changes."
+    ] }),
+    gender && gender === "X" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Note" }),
+      ": Missouri does not currently support an “X” marker on any ID document, so it is not possible to change to that marker here. Only “M” (i.e., male) or “F” (i.e., female) is accepted. We apologize. If you want to change to one of those, you can reload the website and select that marker to receive the updated “Affidavit for Correction of a Birth, Death, or Fetal Death Record” (form 580-0645) and DHSS Cover letter. Ignore everything else."
+    ] }) : "",
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This process is done by mail. The first thing to do is to find the “Affidavit for Correction of a Birth, Death, or Fetal Death Record” (form 580-0645) we provided.",
+      age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Have the parent/guardian listed in step 4 fill out any blanks we left in that step; they should ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " sign their name until a notary tells them to do so."
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Double-check that the information on the form is correct and bring it to a notary; do ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+        " sign the form until a notary tells you to do so."
+      ] })
+    ] }),
+    isChangingLegalName === false || residentJurisdictionName !== "Missouri" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Notaries can be found in court buildings, banks, some",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+      ", or ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+      ". All of these services have different fees and payment methods but all of them require a photo ID."
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Go back to the “Finding a Notary” section and use the links there to locate another notary to handle the “Affidavit for Correction of a Birth, Death, or Fetal Death Record” (form 580-0645). Once",
+      age && age < 18 ? " your parent/guardian has" : " you have",
+      " met with the notary, proceed on"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Then grab the DHSS Cover letter we provided and",
+      " ",
+      age && age < 18 && "have both you and your parent/guardian ",
+      " sign and date it. Then place that cover letter, the notarized affidavit form,",
+      isChangingLegalSex === true ? ", a certified copy of the gender change order, " : ", ",
+      "and a certified copy of the court order into an envelope. Have a $30 check or money order made out to “Missouri Department of Health and Senior Services” and placed in the envelope as well (this will cover the $15 fee to process the court order and the $15 fee for a copy of the new birth certificate).",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Do not send cash." }),
+      " Then write the following address on the front of the envelope:"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "DHSS - Bureau of Vital Records," }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Missouri Department of Health and Senior Services," }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "930 Wildwood Drive," }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Jefferson City, MO 65109" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Take the envelope to your local post office and pay $4 to have it sent by certified mail, so you will have proof that they received it. It will take several weeks for the change to be processed, but the returned (amended) birth certificate will include evidence of your former information by indicating which field(s) were changed (e.g., Sex, First Name). If you need to contact Vital Records, you can call them at (573) 751-6387 or email them at VitalRecordsInfo@health.mo.gov to inquire about your request." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "After you have submitted your application (via certified or priority mail), we recommend calling Vital Records to ask what date they’re working on and continuing to call to check up on your application’s status." })
+  ] }, "MO-Gender-Change");
+}
+function MissouriConfidentialInfoGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Case Filing Information Sheet (MO, FI-10)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Confidential Case Filing Information Sheet” (Form FI-10) is for sensitive information that the court considers confidential about your case. On page 1",
+      age && age > 17 ? " " : " your next friend should ",
+      " write in your social security number on the bottom right. On page 2",
+      age && age > 17 ? " " : " your next friend should ",
+      " check at least one box corresponding to your race. This can be self-identified or as listed on an official document. If it is self-identified, check the “petitioner” box in the “Race & Ethnicity Source” section and the “self-identified” box below that. Otherwise, check the institution that provided the official document and the “observed/perceived” box below that."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Skip the “Respondent Information” and “Additional Parties” sections" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Fill out any blanks we left in the “Respondent Information” section. If your respondent parent is using an attorney to help them with this process, check the “RES” box. Otherwise, check the “RESP” box. Skip the “Additional Parties” section" }),
+      " ",
+      " and proceed directly to the “Employer Information” section at the bottom of page 4. If you ",
+      age && age > 17 ? " " : ", the minor, or the respondent parent ",
+      "are employed, fill out this section.",
+      " ",
+      age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "You can skip the “Children” section as well." }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "In the “Children” section, you, the minor, only need to provide your information, as you are the only child requesting a name change." }),
+      " ",
+      " Lastly, fill out any blanks we left in the “Submitted by:” section on page 6."
+    ] })
+  ] }, "Missouri-FI-10");
+}
+function MissouriCourtHearingGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Hearing (MO)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "On the day of your hearing, you",
+      age && age < 18 && "and your parent(s)",
+      " should dress appropriately for a courtroom, even if the hearing is virtual. The hearing may begin late, but it should only take a few minutes once it starts. Please note that your hearing is public and it is possible for others to attend, including objectors. If this is a concern for any of you, consider bringing supportive friends/family."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "You",
+      age && age < 18 && "and/or your parent(s)",
+      " will be sworn in and questioned. The questions vary between courts, but you can expect some of the following:"
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your current legal name?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your desired legal name?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your current address?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "What is your date of birth?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Where were you born?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Do the names of your parents on this petition match the names of your parents on your birth certificate?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are you doing this for fraudulent reasons?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Are there any money judgements against you or anyone suing you for money?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "(If you are married) Does your spouse consent to your name change?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Is there anything else you'd like the court to know?" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        "You may also be asked “Do you know of anyone who would oppose this name change?” The authors of this guide are not lawyers, but our understanding is that, having answered “no” to the “fraudulent reasons” question, you can answer “no” to this one. In particular,",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you can safely disregard any “opposition” on purely transphobic grounds." }),
+        " ",
+        "(Compare the history of the phrase “speak now or forever hold your peace.”)"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "At this point the name change should be granted and the hearing should end promptly. Once you have the certified copies of the court order, you are ready to file with the Social Security administration." })
+  ] }, "MO-CourtHearing");
+}
+function MissouriDMVGuide({ person }) {
+  const { isChangingLegalSex, age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Primary ID (MO)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "This section covers the process of updating your primary identification (driver's license/state ID). If this is not relevant to you, then skip this section. You can update your ID at any License Office in the state; this",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dor.mo.gov/license-office-locator/", children: "link" }),
+      " ",
+      "has a map of all of them. Every office listed on that map should be walk-in, though some allow you to call to set up an appointment and skip the line. If you are updating your current driver's license/state ID bring that along with your receipt from social security",
+      isChangingLegalSex === true ? ", gender change order, " : " ",
+      "and court order. If you don’t have a driver's license or state ID, you will need some additional ID documents in place of one. Use this",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://dor.mo.gov/driver-license/issuance/real-id/interactive-guide.html", children: "link" }),
+      " ",
+      "to find out what those are.",
+      " ",
+      age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "You will need at least one parent/legal guardian to accompany you for this process.",
+        " "
+      ] }),
+      "The fee will be somewhere between $10 and $30, depending on the type of ID and change being made."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "If you encounter a clerk who is hostile or who does not know the process, ask for their manager to handle it. If this does not work try another location, remember you can do this at any License Office in the state." })
+  ] }, "MO-License-Office");
+}
+function MissouriEverythingElseGuide({
+  person
+}) {
+  const { residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Everything Else (MO)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have the court order and primary identification in your new name, you should be able to  change your name almost everywhere else without issue. Some places will even allow for digital updates by scanning in your new ID and court order. What follows is a list of places, in no particular order, where you may want to update your name. Any forms that you fill out should be signed in your new legal name." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Bank" }),
+        ": Bring your new ID and court order and request that the name on your account(s) be changed. If you have a debit card or checkbook linked to this account, you will need to request new ones. Any joint account holders must also be present to sign."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Credit Card" }),
+        ": Most creditors will require you to snail mail or fax a photocopy of your ID and court order. If a particular company is stubborn in updating the account name, consider canceling the card and opening a new card with them or another provider."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Work" }),
+        ": If you have an HR system, bring your new ID, new social security card, and court order to them and ask them to update your name. If you get your health insurance through your work, you can have your employer  send the updated information to your health insurer on your behalf."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Healthcare Providers" }),
+        ": You should be able to bring only your new ID to your next in-person visit and go to the front desk to have your name updated in the system. Be aware that certain medical professionals will still need to know your transition status."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Property/House Title" }),
+        ": Go to your local county recorder’s office and state that you want to correct the name on your property. They should issue a correction deed that you can fill out and submit to update your name."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Phone Service" }),
+        ": Go to the nearest store of your carrier network with your new ID and court order and request that your information be updated."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Taxes (IRS)" }),
+        ": The IRS will be informed of your name change when you update your information with Social Security. You do not need to contact them directly."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Voter Registration" }),
+        ": To update your voter registration or to register for the first time, you will need to finish filling out the “Missouri Voter Registration Application” (Form 231-0169) we provided. Specifically, fill out any blanks we left and boxes 7, 8, 13, and 15 if applicable. Then sign and date in box 14. If this is your first time registering, read section 6 in the “Other Information” section and include one of the mentioned items with this application. There is",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "no fee" }),
+        " for this process. Mail this application to the following address:",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        residentLocality.voteClerkAddress
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Primary School Records" }),
+        ": Each school will have different requirements and protocols; contact them and see what theirs are. Usually, they will change records based on an updated birth certificate."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "College Records" }),
+        ": Contact the Student Records Department of your university. Required documents will vary by institution. You may also consider updating your school profile and email, if applicable."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Government Assistance" }),
+        ": Contact your assistance agency to update their case file. You should only need a primary ID and a court order."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Some other places to consider:" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Gas/heating provider" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Electricity provider" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Water/sewer company" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Internet provider" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Garbage service" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Mortgage" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Retirement account" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Clubs/memberships" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Municipal tax authorities" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Online payment services (Venmo, PayPal, etc.)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Public transit accounts" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Monthly subscriptions (Netflix, Hulu, etc.)" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Voicemail" })
+      ] })
+    ] }, "MO-EverythingElse");
+  }
+}
+function MissouriFeeWaiverGuide({
+  person
+}) {
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Motion and Affidavit in Support of Request to Proceed As a Poor Person (MO, GN10)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "The “Motion and Affidavit in Support of Request to Proceed As a Poor Person” (Form GN10) is an optional form that may waive the filing fee. In",
+        " ",
+        residentLocalityName,
+        residentLocalityName === "St. Louis (City)" ? " city" : " county",
+        ", the filing fee should be ",
+        residentLocality.filingFee,
+        ".",
+        age && age > 17 ? " You may file this request at your " : " Your next friend may file this request at their ",
+        "discretion; the worst they can do is deny it. To complete the form",
+        age && age > 17 ? " you " : " your next friend ",
+        " should fill out the",
+        age && age > 17 ? " " : " respondent section and ",
+        " the household financial information. Then sign and date at the bottom."
+      ] })
+    ] }, "Missouri-GN10");
+  }
+}
+function MissouriFilingGuide({
+  person
+}) {
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Filing Initial Forms (MO)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        age && age > 17 ? "You are " : "Your next friend is ",
+        " now ready to file at ",
+        residentLocalityName === "Marion" || residentLocalityName === "Jasper" ? "a " : "the ",
+        residentLocalityName,
+        residentLocalityName === "St. Louis (City)" ? " city" : " county",
+        " circuit court",
+        residentLocalityName === "Jasper" ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: ". Jasper County has 2 valid filing locations; the Carthage location at 302 S Main St #206, Carthage, MO 64836 and the Joplin location located at 633 S Pearl Ave, Joplin, MO 64801. It does not matter which one is used. To check things like hours of operation or accepted payment types, call the Carthage court at (417) 358-0450 and the Joplin court at (417) 625-4310." }) : residentLocalityName === "Marion" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          ". Marion County has 2 valid filing locations; the Hannibal location at 906 Broadway #105, Hannibal, MO 63401 and the Palmyra location at 100 S Main St #207, Palmyra, MO 63461. The Hannibal Circuit Court only serves Miller and Mason townships; the Palmyra Circuit Court serves the rest of the county. See this",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.google.com/maps/d/u/0/edit?mid=1b17SgI7EVDsLqBK-LIbDDWF2OHUOG84&usp=sharing", children: "map" }),
+          " ",
+          "for the exact court boundaries. To check things like hours of operation or accepted payment types, call the Hannibal court at (573) 221-0198 and the Palmyra court at (573) 769-2550."
+        ] }) : residentLocalityName === "Jackson" && age && age < 18 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: ". Jackson County has 2 valid filing locations for minor cases, the Kansas City location at 625 E 26th St, Kansas City, MO 64108 and the Independence location at 308 W Kansas Ave, Independence, MO 64050. It does not matter which one is used; just make sure to check the appropriate box at the top of the “Family Court Information Sheet” (form CIRCT 1452). To check things like hours of operation or accepted payment types, call the courts at (816) 474-3606 and (816) 881-3522, respectively." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          "located at ",
+          residentLocality.court.address,
+          ". To check things like hours of operation or accepted payment types, call the court at ",
+          residentLocality.court.phone,
+          "."
+        ] })
+      ] }),
+      residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
+      residentLocality.onlineFile && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "The ",
+        residentLocalityName,
+        " circuit court will accept online filings.",
+        age && age > 17 ? " You" : " Your next friend",
+        " will need to scan all of your documents onto your computer separately, label them as their form names as we did above, and then go to this",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "link", children: residentLocality.court.website }),
+        " ",
+        " to upload them. Two copies of the photo ID, redacted and un-redacted, will need to be uploaded as well. There is an instruction video that goes over this process",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.courts.mo.gov/page.jsp?id=5240", children: "here" }),
+        "."
+      ] }),
+      residentLocality.inPersonFile && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "The ",
+        residentLocalityName,
+        " circuit court will accept in-person filings.",
+        age && age > 17 ? " You" : " Your next friend",
+        " will need to bring all of the documents we had ",
+        age && age > 17 ? "you" : "them",
+        " gather, the notarized forms, photo ID, the redacted photocopies of everything. In addition",
+        age && age > 17 ? " you" : " they",
+        " will need either the fee waiver form or an accepted payment method for ",
+        residentLocality.filingFee,
+        " to the court. Some courts will require you to watch a self-representation awareness video, that video is",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.courts.mo.gov/page.jsp?id=5240", children: "here" }),
+        "."
+      ] }),
+      residentLocality.mailFile && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "The ",
+        residentLocalityName,
+        " circuit court will accept mail-in filings.",
+        age && age > 17 ? " You" : " Your next friend",
+        " will need to place all of the documents we had ",
+        age && age > 17 ? "you" : "them",
+        " gather, the notarized forms, photo ID, the redacted photocopies of everything into an envelope. In addition",
+        age && age > 17 ? " you" : " they",
+        " will need either the fee waiver form or a check/money order made out to “",
+        residentLocalityName,
+        " circuit court” for",
+        " ",
+        residentLocality.filingFee,
+        " to the court. Write the court's mailing address,",
+        " ",
+        residentLocality.mailAddress,
+        ", on the front of the envelope. Then you will need to take the envelope to your local post office and pay $4 to have it sent by certified mail, so you will have proof that they received it."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Once everything has been filed, you ",
+        age && age > 17 && "and your next friend ",
+        "will need to wait for the court to send you mail. It will be one of two things: either a notice for a hearing or a signed",
+        " ",
+        age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "“Judgment for Change of Name of Adult Individual” (Form CAFC470)" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "“Judgment for Change of Name of Minor Child” (Form CAFC472)" }),
+        ", which we will call the “court order” from now on. If you got a notice for a hearing, proceed to the next section.  If you got a signed court order, skip that section and proceed to the next one instead. Regardless of which outcome, make sure you stop by the court to get 2 or 3 extra certified copies of the court order (after you get it) before you head to social security. Keep the original in a safe place."
+      ] })
+    ] }, "Missouri-Filing");
+  }
+}
+function MissouriGenderChangeGuide({ person }) {
+  const { gender } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Court Order Gender Change (MO)" }),
+    gender && gender === "X" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Note" }),
+      ": Missouri does not currently support an “X” marker on any ID document, so it is not possible to change to that marker here. Only “M” (i.e., male) or “F” (i.e., female) is accepted. We apologize."
+    ] }) : "",
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Missouri currently allows updates to gender markers on birth certificates and state IDs, but requires proof of some form of surgical procedure, a gender-change court order, and some form of name change to do so. (Specifically, Missouri law requires: “Receipt of a certified copy of an order of a court of competent jurisdiction indicating the sex of an individual born in this state has been changed by surgical procedure and that such individual’s name has been changed.”",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://revisor.mo.gov/main/OneSection.aspx?section=193.215", children: "RSMo. § 193.215.9" }),
+      ".) The law is vague on what counts as a “surgical procedure” and name change, which can work both for and against us."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "As long as you can get a doctor's letter (preferably from an M.D. or D.O.) stating that you have undergone some sort of surgical procedure for the purpose of your transition, that should be enough. However, if you have not undergone surgery or cannot obtain a letter with the word “surgery” in it, there are some lawyers in Missouri who may still be willing to work with you to explore your options. We have marked them specially on the list of attorneys below." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Once you have that doctor's letter, it’s time to start looking at courts. Unlike name changes, a legal gender marker change can be filed in any circuit court in Missouri, meaning we can direct you to the ones that have been flagged as friendly for gender changes by experienced local lawyers. These are:",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "St. Louis (City)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "10 N Tucker Blvd, St. Louis, MO 63101" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Phone #: (314) 622-4500" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "St. Louis (County)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "105 S Central Ave, Clayton, MO 63105" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Phone #: (314) 615-8029" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Boone County" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "705 E Walnut St, Columbia, MO 65201" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Phone #: (573) 886-4000" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Greene County" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "1010 N Boonville Ave, Springfield, MO 65802" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Phone #: (417) 868-4000" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Jackson County" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "415 E 12th St Unit 300, Kansas City, MO 64106" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Phone #: (816) 881-3000" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Platte County" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "415 3rd St, Platte City, MO 64079" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Phone #: (816) 858-2232" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "You will need a lawyer for this process." }),
+      " Missouri courts do not provide standard forms for gender marker changes, so you will need to work with a lawyer to draft a custom petition and navigate the legal process. The ACLU of Missouri has provided a list of local supportive attorneys/firms who can help with gender marker and/or more complex name change cases; we have placed that list in our Resources section. We will update this list as new connections/referrals become available."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Once you have your gender change court order, as well as a few certified copies, you are ready to proceed with updating the gender marker on your birth certificate and primary state ID." })
+  ] }, "MO-Gender-Change");
+}
+function JacksonCountyInfoGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Family Court Information Sheet (Jackson County, CIRCT 1452)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Jackson County has made their own local form that they require in addition to the above forms; it is the “Family Court Information Sheet” (form CIRCT 1452). At the top of the sheet, there is a checkbox for the courthouse “at Kansas City” or “at Independence.” This is for which court your next friend will file at; skip this for now. You, the minor, should fill out your Social Security Number, Driver’s License Number, and any Employer information in the “Petitioner” section of the form if applicable. Your next friend or the respondent parent should fill out the information in the “Respondent” section and in the “In Re the Matter of:” section. Since you are a minor subject to this hearing, your social security number also goes next to your name and date of birth below the “Petitioner” section. If you live with the respondent parent, check the box to the right in that same section, do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " check the “petitioner” box as ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "you" }),
+      " are the petitioner. Have your next friend or the respondent parent fill out the questions regarding welfare, other court cases, and any other names that you or the respondent parent have ever gone by. You, the respondent parent, and the next friend should all sign this document, then put down the date. This form is then complete."
+    ] })
+  ] }, "Jackson-County-CIRCT-1452");
+}
+function MissouriConsentMinorGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition, Consent and Order for Parent's Appointment as Next Friend (MO, CAFC411)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Petition, Consent and Order for Parent's Appointment as Next Friend” (Form CAFC411) is for ",
+      age && age > 13 ? "you, the minor, and" : "",
+      " your next friend to give consent.",
+      " ",
+      age && age > 13 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "You, the minor, need to sign on page 1 just above #3." }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "You, the minor, are too young to sign the consent on this form; please leave the minor signature line blank." }),
+      " ",
+      "Your next friend should fill in any blanks we left on #4 through #6, and then sign and date below #6."
+    ] })
+  ] }, "Missouri-CAFC411");
+}
+function MissouriOrderAdultGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Judgment for Change of Name (For Adult Individual) (MO, CACF470)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Judgment for Change of Name (For Adult Individual)” (Form CAFC470) is the document the judge will sign to grant the name change. If you don’t want to go to the courthouse to pick this up after your name change is granted, you can fill out the bottom right section on page 2 titled “A certified copy of this judgment is to be mailed to the following person(s)”. Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out anything else; the rest is for the judge. Make extra sure that all of the information on this form is correct and legible."
+    ] })
+  ] }, "Missouri-CAFC470");
+}
+function MissouriOrderMinorGuide({ person }) {
+  const { parentsAreOkay } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Judgment for Change of Name of Minor Child (MO, CAFC472)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Judgment for Change of Name of Minor Child” (Form CAFC472) is the document the judge will sign to grant the name change. You, the minor, should decide with your parents whether you want to attend the court hearing or not. Your attendance is encouraged but not required, as the judge may want to make sure that you want this change. Your next friend can answer in your place if needed, though. If you are attending the court hearing, you should check the “appears in person” box below your name in section 1, otherwise, check the “appears by Next Friend” box. Your next friend should check either the “is the mother of Petitioner” or “is the father of Petitioner” box below their name in section 1. The respondent parent’s name and mother/father checkbox should be filled out below that on the “Other parent” line.",
+      " ",
+      parentsAreOkay === false && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "We have also left the “appears in person” and “appears by Attorney” boxes blank in case your respondent parent cannot make it to the hearing and hires a lawyer to stand in. Please check one of those two boxes.",
+        " "
+      ] }),
+      "Leave the second page ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "blank" }),
+      "; that is for a judge to fill out. Make extra sure that all of the information on this form is correct and legible."
+    ] })
+  ] }, "Missouri-CAFC472");
+}
+function MissouriPetitionAdultGuide({ person }) {
+  const { residentLocalityName, birthJurisdictionName, legalName, birthName } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (MO, CAFC401)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "In Missouri, there is a 90 day wait period for new residents to change their name. You can change it as soon as that wait period passes and you can prove residency with something like an ID or utility bill in your current legal name with a ",
+      residentLocalityName,
+      residentLocalityName === "St. Louis (City)" ? " city" : " county",
+      " address."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Petition for Change of Name” (CAFC401) is the main form for this process. On page 2, fill out numbers 6, 7, and 8 if applicable.",
+      " ",
+      birthJurisdictionName === "Elsewhere" && "Fill out your state/country of birth in #10 if it is blank. ",
+      legalName?.first !== birthName?.first && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Since your current name does not match the one on your original birth certificate, you will need to fill out #16 and bring certified copies documenting ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "every name change" }),
+        ". This would include documents like your original birth certificate, adoption papers, marriage certificates, divorce documents, or other court orders.",
+        " "
+      ] }),
+      "Fill out sections 17 through 19 on page 3 as they apply to you. If section 20 applies to you, fill that out as well; otherwise, skip it. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out or sign anything on page 5 until a notary instructs you to do so."
+    ] })
+  ] }, "Missouri-CAFC401");
+}
+function MissouriPetitionMinorGuide({ person }) {
+  const { residentLocalityName, birthJurisdictionName, legalName, birthName, parentsAreOkay } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name by Parent (For Minor Child) (MO, CAFC402)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "In Missouri, there is a 90 day wait period for new residents to change their name. You can change it as soon as that wait period passes and your parents can prove residency with something like an ID or utility bill with a",
+      " ",
+      residentLocalityName,
+      residentLocalityName === "St. Louis (City)" ? " city" : " county",
+      " address."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Petition for Change of Name by Parent (For Minor Child)” (CAFC402) is the main form for this process. If you, the minor, are a Missouri resident, the parent named on this form can file on your behalf.",
+      " ",
+      parentsAreOkay === false && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "If both of your parents are deceased, a legal guardian can file this petition instead. They will need to bring official copies of both parents' death certificates when they file.",
+        " "
+      ] }),
+      "This person then becomes your “Next Friend” on this form and will be going through this process with you. All living parents listed on your birth certificate must give consent in order for this petition to be uncontested. This is done by one parent being your next friend and the other signing the “Consent to Minor Child’s Change of Name” form later. This guide assumes that all living parents are consenting. If a parent does not give consent, then this matter becomes contested, which is beyond the scope of this guide. If that happens, we ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "strongly" }),
+      " recommend you consult a lawyer; see our resources section for help if that is the case."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "For the petition, on page 1, your next friend should fill out #3 and #5.",
+      " ",
+      parentsAreOkay === false && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "If one or both of your parents are deceased, then your next friend can skip anything regarding the “respondent parent.” They will just need to bring an official copy of the death certificate(s) when they file.",
+        " "
+      ] }),
+      birthJurisdictionName === "Elsewhere" && "On page 2, your next friend should fill out your state and/or country of birth in #11. ",
+      legalName?.first !== birthName?.first && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Since your current name does not match the one on your original birth certificate, your next friend will need to fill out #17 on page 3 and bring certified copies documenting ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "every name change" }),
+        ". This would include documents like your original birth certificate, adoption papers, amended birth certificates, or other court orders.",
+        " "
+      ] }),
+      "Finally, your next friend should fill out #18 through #20 as they apply to you, the minor. They should ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " sign on page 4 until a notary instructs them to do so."
+    ] })
+  ] }, "Missouri-CAFC402");
+}
+function MissouriNotaryGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Finding a Notary (MO)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Notaries are needed to witness signatures and provide their own for the",
+      " ",
+      age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "“Petition for Change of Name” form." }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "“Petition for Change of Name by Parent” and “Consent to Minor Child’s Change of Name” forms. These forms can both be notarized in a single appointment or in two separate appointments by your next friend and respondent parent, respectively." }),
+      " ",
+      "Notaries can be found in court buildings, banks, some",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.theupsstore.com/tools/find-a-store", children: "UPS Locations" }),
+      ", some public libraries (",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.slcl.org/library-services/notary-services", children: "example" }),
+      "), or ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.notarize.com/", children: "online" }),
+      ". The Center Project in Columbia provides trans-inclusive notary services as well; you can set up an appointment with them on their",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://centerproject.org/resources/name-gender-changes/", children: "website" }),
+      ". You can also visit the LGBTQ Notary Association’s",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://lgbtnotary.com/", children: "website" }),
+      " ",
+      "for in-person and virtual options. All of these services have different fees and payment methods but all of them require a photo ID",
+      age && age < 18 && " for everyone signing",
+      ".",
+      " ",
+      age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "If you, the minor, don’t have a photo ID your birth certificate will work instead." })
+    ] })
+  ] }, "Missouri-Notary");
+}
+function MissouriParentConsentMinorGuide({ person }) {
+  const { parentsAreOkay } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Consent to Minor Child’s Change of Name (MO, CAFC412)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Consent to Minor Child’s Change of Name” (Form CAFC412) is for the parent who is ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " the next friend on the petition; we will call them the “respondent parent.”",
+      " ",
+      parentsAreOkay === false && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "If one or both of your parents are deceased, then your next friend can skip this form.",
+        " "
+      ] }),
+      "The respondent parent should fill out their information in #1 through #3 and then check the box at the top of page 2. The next friend should fill out any blanks left in #4. After #6 on page 2 is a “Proof of Service on Other Parties” section.",
+      " ",
+      parentsAreOkay === false ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "If your parents are on good terms, your next friend can just hand this form to them and they can fill out the date, the respondent parent’s name, and the respondent parent’s address in this section together. If they are not on good terms, official service will be required and we recommend a lawyer for that; see our resources section for help if that is the case.",
+        " "
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Your parents don’t need to serve each other; they can just fill out this form together and write the date, the respondent parent’s name, and the respondent parent’s address in this section.",
+        " "
+      ] }),
+      "Page 3 should be left ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "blank" }),
+      "; that's for a notary and the respondent parent later."
+    ] })
+  ] }, "Missouri-CAFC412");
+}
+function MissouriPublicationGuide({
+  person
+}) {
+  const { age, residentJurisdictionName, residentLocalityName } = person;
+  const residentJurisdiction = allJurisdictions.find(
+    (j) => j.name === residentJurisdictionName
+  );
+  if (residentJurisdiction) {
+    const localities = residentJurisdiction.localities;
+    const residentLocality = localities.find(
+      (j) => j.name === residentLocalityName
+    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Publication (MO)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Once you have your court order",
+        age && age > 17 ? " you need" : " your next friend needs",
+        " to immediately contact a newspaper to publish notice of your legal name change. To do this, take the",
+        " ",
+        age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "“Request for Publication after Judgment of Change of Name for Adult Individual” (Form CAFC480)" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "“Request for Publication after Judgment of Change of Name for Minor Child” (Form CAFC482)" }),
+        " ",
+        " that we had you set to the side and fill it out. For the case number and division number, use the numbers provided on your court order. In the section that reads “made entered on the record on,” use the date the judge signed your court order.",
+        age && age > 17 ? " You" : " Your next friend",
+        " should sign at the bottom now before you enter the name of the newspaper. Lastly, you will need to write the name of the newspaper in which this will be published. In",
+        " ",
+        residentLocalityName,
+        residentLocalityName === "St. Louis (City)" ? " city" : " county",
+        ", the court recommends the following:"
+      ] }),
+      ...residentLocality.publications.map(({ name, website }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          "Newspaper: ",
+          name
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          "Website:",
+          " ",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "{website}", title: "link", children: website })
+        ] })
+      ] }, "{residentLocality.publications.name}")),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Under Missouri law, if a court grants your legal name change, you must give public notice of the change (i.e., first publication)",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "within 20 days" }),
+        " of the court order date. So if a newspaper declines to publish or does not respond in a timely manner, move on to another. If there are no others left in the county, check the neighboring counties. If all else fails, you can publish in the",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://molawyersmedia.com/submit-your-public-notice/", children: "St. Louis Daily Record" }),
+        "."
+      ] })
+    ] }, "Missouri-Publication");
+  }
+}
+function MissouriPublicationAdultGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request for Publication after Judgment of Change of Name for Adult Individual (MO, CACF480)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Request for Publication after Judgment of Change of Name for Adult Individual” (Form CAFC480) is for later; set this form aside for now." })
+  ] }, "Missouri-CAFC480");
+}
+function MissouriPublicationMinorGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Request for Publication after Judgment of Change of Name for Minor Child (MO, CACF482)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Request for Publication after Judgment of Change of Name for Minor Child” (Form CAFC482) is for later; set this form aside for now." })
+  ] }, "Missouri-CAFC482");
+}
+function MissouriRedactingGuide({ person }) {
+  const { age } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Redacting Forms (MO)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Most court documents are viewable by the public when filed. Missouri courts handle this by having 2 versions of most of their forms: (1) a redacted version that is viewable by the public and (2) an un-redacted version that is confidential. This also applies to any documents that you might submit with the forms, such as a driver’s license. In this section, we will list which forms and documents require a redacted copy and what to redact on each." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "When we tell you to redact something in an instruction, what we want you to do is make a photocopy of the completed form or document and use a black marker to redact the ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopy" }),
+      ". Do ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "NOT" }),
+      " redact the ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "original" }),
+      " form or document. If the information shows through the marker, you can run the document you just redacted back through the photocopier to fix that."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "As a general note: if a person listed on any form you are filing has an order of protection or restraining order, their name, address, and contact information must be redacted." }),
+    age && age > 17 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "On the “Petition for Change of Name” (CAFC401), redact your date of birth on page 2, section 9. If you listed any children on pages 3 or 4 (section 20), redact their names but not their addresses." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "You, the minor, need to have your next friend redact your name and date of birth every time it appears on any form; this includes both your legal name and your desired name. On the “Judgment for Change of Name of Minor Child” (Form CAFC472), this should be in the following areas: on the top of page 1, page 2 section 7, page 2 section 8, and page 2 section 10." }),
+    age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "On the “Petition, Consent and Order for Parent's Appointment as Next Friend” (Form CAFC411), your next friend should redact your name and date of birth on the top of page 1, both “In re” and in section 1.",
+      age && age > 13 && " Your name and signature should also be redacted in section 2 of the same page."
+    ] }),
+    age && age < 18 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "On the “Consent to Minor Child’s Change of Name” (Form CAFC412), your next friend should redact your name on the top of page 1 and on page 2, sections 5 & 6." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The last thing that will need to be redacted is a ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "photocopy" }),
+      " of whatever ID ",
+      age && age > 17 ? "you" : "your next friend",
+      " will be using when filing. If the ID is a driver's license or state ID, the identification number and birthdate need to be redacted. For passports, the photocopy only needs to include the page with all of the identifying information. On that page, redact the passport number and date of birth."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "Now that all of the documents are redacted",
+      age && age > 17 ? " you" : " your next friend",
+      " should sign and date the “Redaction Certification” (Form GN320) at the bottom. If there is a mistake with a redacted form or document, the court clerk will alert",
+      age && age > 17 ? " you" : " your next friend",
+      " after filing."
+    ] })
+  ] }, "Missouri-Redact");
+}
+function MissouriRedactionCertGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Redaction Certification (MO, GN320)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "The “Redaction Certification” (Form GN320) is for later; set this form aside for now." })
+  ] }, "Missouri-GN320");
+}
+function MissouriResourcesGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Resources (MO)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.aclu-mo.org/", children: "ACLU of Missouri" }),
+        ": They assisted in setting up this guide and will be involved in maintaining it moving forward. Check out their",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.aclu-mo.org/issues/lgbtqrights/", children: "LGBTQ+ justice page" }),
+        " ",
+        "and",
+        " ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.aclu-mo.org/know-your-rights/your-rights-as-a-trans-person/", children: "Know-Your-Rights page for Trans, Gender Non-Conforming, Nonbinary & Intersex Missourians" }),
+        " ",
+        "for more information and a list of other local resources."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://centerproject.org/resources/name-gender-changes/", children: "The Center Project" }),
+        ": They provide assistance with updating name and gender markers for trans and nonbinary people in mid-Missouri. They also offer inclusive notary services."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.shb.com/about/diversity", children: "Shook Hardy & Bacon" }),
+        ": They provide a free (pro bono) name and gender marker clinic called Project Affirmation. They have offices in St. Louis and Kansas City but work throughout the country. They may be able to assist in difficult name change cases or provide representation for a gender marker change case."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.mokanqueerlaw.com/", children: "Missouri Kansas Queer Law" }),
+        ": This experienced law firm works with clients throughout Missouri on both name and gender changes and will assist those who cannot get a gender change doctor's letter with the words “surgical procedure”. Contact them through their website or by emailing office@mokanqueerlaw.com."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.kansashealthsystem.com/care/specialties/gender-affirming-medicine", children: "The University of Kansas Gender Clinic" }),
+        ": They provide gender affirming care and can assist with doctor’s letters for gender changes if you are a patient in their system."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Johnda Boyce is an attorney in the Kansas City area. She has experience with name and gender marker changes. Contact her for more information by emailing johndaboyce@gmail.com." })
+    ] })
+  ] }, "MO-Resources");
+}
+function StLouisAdultInfoGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Case Filing Information Sheet - Non-Domestic Relations (St. Louis - City, unnumbered)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "St. Louis (City) has made their own local form that they require in addition to the above forms. It is the “Confidential Case Filing Information Sheet - Non-Domestic Relations” form. The only thing you need to do is write your social security number on the “SSN:” line. Then this form is complete." })
+  ] }, "St-Louis-Adult-Info");
+}
+function StLouisMinorInfoGuide() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Confidential Case Filing Information Sheet - Domestic Relations (St. Louis - City, unnumbered)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "St. Louis (City) has made their own local form that they require in addition to the above forms. It is the “Confidential Case Filing Information Sheet - Domestic Relations” form. Your next friend should fill out your social security number in the “Petitioner section” on the “SSN:” line. In the respondent section fill out the other living parent/guardians information if applicable. For the “Party Type Code” and “Party Type Description” it will depend on whether or not they have an attorney. “RES” and “Respondent” if yes and “RESP” and “Respondent Acting Pro Se” if not." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "On the second page, fill out the “Employer Information” section if you, the minor, are employed. In the next section, your next friend should write in your social security number again, as you are a minor affected by the outcome of this case. Finally on the bottom of the page your next friend should fill out their address and contact information. This form is now complete." })
+  ] }, "St-Louis-Minor-Info");
+}
+const missouriNameChange = {
   target: Target.NameChange,
-  depends: [Target.GenderMarker]
-});
-({
-  target: Target.GenderMarker
-});
-({
+  depends: [Target.GenderMarker],
+  documents: [
+    {
+      name: "Petition for Change of Name",
+      id: "CAFC401",
+      filename: "Missouri/Adult Name Change Petition.pdf",
+      guide: MissouriPetitionAdultGuide,
+      map: adultNamePetitionMap,
+      include: (applicant) => !isMinor(applicant)
+    },
+    {
+      name: "Petition for Change of Name by Parent (For Minor Child)",
+      id: "CAFC402",
+      filename: "Missouri/Minor Name Change Petition.pdf",
+      guide: MissouriPetitionMinorGuide,
+      map: minorNamePetitionMap,
+      include: (applicant) => isMinor(applicant)
+    },
+    {
+      name: "Petition, Consent and Order for Parent's Appointment as Next Friend",
+      id: "CAFC411",
+      filename: "Missouri/Minor Name Change Petitioner Appointment.pdf",
+      guide: MissouriConsentMinorGuide,
+      map: minorConsentMap,
+      include: (applicant) => isMinor(applicant)
+    },
+    {
+      name: "Consent to Minor Child’s Change of Name",
+      id: "CAFC412",
+      filename: "Missouri/Minor Name Change Parent Consent.pdf",
+      guide: MissouriParentConsentMinorGuide,
+      map: minorParentConsentMap,
+      include: (applicant) => isMinor(applicant)
+    },
+    {
+      name: "Judgment for Change of Name (For Adult Individual)",
+      id: "CAFC470",
+      filename: "Missouri/Adult Name Change Order.pdf",
+      guide: MissouriOrderAdultGuide,
+      map: adultNameOrderMap,
+      include: (applicant) => !isMinor(applicant)
+    },
+    {
+      name: "Judgment for Change of Name of Minor Child",
+      id: "CAFC472",
+      filename: "Missouri/Minor Name Change Order.pdf",
+      guide: MissouriOrderMinorGuide,
+      map: minorNameOrderMap,
+      include: (applicant) => isMinor(applicant)
+    },
+    {
+      name: "Motion and Affidavit in Support of Request to Proceed As a Poor Person",
+      id: "GN10",
+      filename: "Missouri/Fee Waiver.pdf",
+      guide: MissouriFeeWaiverGuide,
+      map: feeWaiverMap
+    },
+    {
+      name: "Request for Publication Adult",
+      guide: MissouriPublicationAdultGuide,
+      include: (applicant) => !isMinor(applicant) && getMOLocality(
+        applicant.residentJurisdictionName,
+        applicant.residentLocalityName
+      )?.courtPublishes === true
+    },
+    {
+      name: "Request for Publication Minor",
+      guide: MissouriPublicationMinorGuide,
+      include: (applicant) => isMinor(applicant) && getMOLocality(
+        applicant.residentJurisdictionName,
+        applicant.residentLocalityName
+      )?.courtPublishes === true
+    },
+    {
+      name: "Confidential Case Filing Information Sheet",
+      id: "FI-10",
+      filename: "Missouri/Confidential Info Sheet.pdf",
+      guide: MissouriConfidentialInfoGuide,
+      map: confidentialInfoMap
+    },
+    {
+      name: "Redaction Certification Note",
+      guide: MissouriRedactionCertGuide
+    },
+    {
+      name: "Family Court Information Sheet",
+      id: "CIRCT 1452",
+      filename: "Missouri/Jackson County Information Sheet.pdf",
+      guide: JacksonCountyInfoGuide,
+      map: jacksonInfoSheetMinor,
+      include: (applicant) => isMinor(applicant) && applicant.residentLocalityName === "Jackson"
+    },
+    {
+      name: "Confidential Case Filing Information Sheet - Non-Domestic Relations",
+      filename: "Missouri/St Louis City Info Sheet Adults.pdf",
+      guide: StLouisAdultInfoGuide,
+      map: stLouisCityInfoSheetAdult,
+      include: (applicant) => !isMinor(applicant) && applicant.residentLocalityName === "St. Louis (City)"
+    },
+    {
+      name: "Confidential Case Filing Information Sheet - Domestic Relations",
+      filename: "Missouri/St Louis City Info Sheet Minors.pdf",
+      guide: StLouisMinorInfoGuide,
+      map: stLouisCityInfoSheetMinor,
+      include: (applicant) => isMinor(applicant) && applicant.residentLocalityName === "St. Louis (City)"
+    },
+    {
+      name: "Finding a Notary",
+      guide: MissouriNotaryGuide
+    },
+    {
+      name: "Redacting Forms",
+      guide: MissouriRedactingGuide
+    },
+    {
+      name: "Redaction Certification",
+      id: "GN320",
+      filename: "Missouri/Redaction Certification.pdf",
+      map: redactionCertificationMap
+    },
+    {
+      name: "Filing Initial Documents",
+      guide: MissouriFilingGuide
+    },
+    {
+      name: "Court Hearing",
+      guide: MissouriCourtHearingGuide
+    },
+    {
+      name: "Publication",
+      guide: MissouriPublicationGuide,
+      include: (applicant) => getMOLocality(
+        applicant.residentJurisdictionName,
+        applicant.residentLocalityName
+      )?.courtPublishes === true
+    },
+    {
+      name: "Request for Publication after Judgment of Change of Name for Adult Individual",
+      id: "CAFC480",
+      filename: "Missouri/Adult Name Change Publication.pdf",
+      map: adultPublicationMap,
+      include: (applicant) => !isMinor(applicant) && getMOLocality(
+        applicant.residentJurisdictionName,
+        applicant.residentLocalityName
+      )?.courtPublishes === true && applicant.residentLocalityName !== "Madison" && applicant.residentLocalityName !== "Washington"
+    },
+    {
+      name: "Request for Publication after Judgment of Change of Name for Minor Child",
+      id: "CAFC482",
+      filename: "Missouri/Minor Name Change Publication.pdf",
+      map: minorPublicationMap,
+      include: (applicant) => isMinor(applicant) && getMOLocality(
+        applicant.residentJurisdictionName,
+        applicant.residentLocalityName
+      )?.courtPublishes === true && applicant.residentLocalityName !== "Madison" && applicant.residentLocalityName !== "Washington"
+    }
+  ]
+};
+const missouriGenderMarker = {
+  target: Target.GenderMarker,
+  documents: [
+    {
+      name: "Gender Change",
+      guide: MissouriGenderChangeGuide
+    }
+  ]
+};
+const missouriPrimaryIdentification = {
   target: Target.PrimaryIdentification,
-  depends: [Target.NameChange, Target.GenderMarker]
-});
-({
+  depends: [Target.NameChange, Target.GenderMarker],
+  documents: [
+    {
+      name: "DMV Guide",
+      guide: MissouriDMVGuide
+    }
+  ]
+};
+const missouriBirthRecord = {
   target: Target.BirthRecord,
   depends: [
     Target.NameChange,
     Target.PrimaryIdentification,
     Target.SocialSecurity
-  ]
-});
-({
+  ],
+  documents: [
+    {
+      name: "Birth Certificate",
+      guide: MissouriBirthCertGuide
+    },
+    {
+      name: "Affidavit for Correction of a Birth, Death, or Fetal Death Record",
+      id: "580-0645",
+      filename: "Missouri/Birth Cert Correction.pdf",
+      map: birthCertCorrectionMap
+    },
+    {
+      name: "DHSS Adult Name Cover Letter",
+      filename: "Missouri/DHSS Adult Name Cover Letter.pdf",
+      map: adultNameCoverMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex === false
+    },
+    {
+      name: "DHSS Adult Name Gender Cover Letter",
+      filename: "Missouri/DHSS Adult Name Gender Cover Letter.pdf",
+      map: adultNameGenderCoverMap,
+      include: (applicant) => !isMinor(applicant) && applicant.isChangingLegalSex === true
+    },
+    {
+      name: "DHSS Minor Name Cover Letter",
+      filename: "Missouri/DHSS Minor Name Cover Letter.pdf",
+      map: minorNameCoverMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex === false
+    },
+    {
+      name: "DHSS Minor Name Gender Cover Letter",
+      filename: "Missouri/DHSS Minor Name Gender Cover Letter.pdf",
+      map: minorNameGenderCoverMap,
+      include: (applicant) => isMinor(applicant) && applicant.isChangingLegalSex === true
+    }
+  ],
+  isBirth: true
+};
+const missouriPostamble = {
   target: Target.BirthRecord,
-  depends: [Target.PrimaryIdentification, Target.Passport]
-});
+  depends: [Target.PrimaryIdentification, Target.Passport],
+  documents: [
+    {
+      name: "Everything Else",
+      guide: MissouriEverythingElseGuide
+    },
+    {
+      name: "Resources",
+      guide: MissouriResourcesGuide
+    },
+    {
+      name: "Missouri Voter Registration Application",
+      id: "231-0169",
+      filename: "Missouri/Voter Registration.pdf",
+      map: voterRegistrationMap
+    }
+  ],
+  isJustGuide: true
+};
+const missouriCounties = [
+  {
+    name: "Adair",
+    court: {
+      address: "106 W Washington St, Kirksville, MO 63501",
+      city: "Kirksville",
+      phone: "(660) 665-2283",
+      specificCourtInfo: "Court employees indicated that court orders can take anywhere from a week to multiple months to be approved, call the court as needed if it is taking awhile to arrive to keep tabs on it.",
+      circuit: "2nd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Kirksville Daily Express",
+      website: "https://www.kirksvilledailyexpress.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: false,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "PO Box 690, Kirksville MO",
+    genderChanges: false,
+    voteClerkAddress: `Adair County Clerk's Office
+       106 W Washington St
+       Kirksville, MO 63501`
+  },
+  {
+    name: "Andrew",
+    court: {
+      address: "411 Court St, Savannah, MO 64485",
+      city: "Savannah",
+      phone: "(816) 324-3921",
+      circuit: "5th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Savannah Reporter",
+      website: "https://www.savrep.com/submit-a-legal-notice/"
+    }],
+    courtPublishes: false,
+    inPersonFile: false,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "PO Box 318, Savannah MO 64485",
+    genderChanges: false,
+    voteClerkAddress: `Andrew County Clerk's Office
+     PO BOX 206
+     SAVANNAH, MO 64485`
+  },
+  {
+    name: "Atchison",
+    court: {
+      address: "400 S Washington St, Rock Port, MO 64482",
+      city: "Rock Port",
+      phone: "(660) 744-6214",
+      circuit: "4th"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Atchison County Mail",
+      website: "https://farmerpublishing.com/advertise-with-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Atchison County Clerk's Office
+     PO BOX 280
+     ROCK PORT, MO 64482`
+  },
+  {
+    name: "Audrain",
+    court: {
+      address: "101 N Jefferson St, Mexico, MO 65265",
+      city: "Mexico",
+      phone: "(573) 473-5820",
+      specificCourtInfo: "Please note that the filing location is on the 2nd floor of the courthouse. This court requires a $250 publication deposit in addition to the $100.50 filing fee, you will need to pay this $250 deposit even if you get the filing fee waived by the fee waiver form. You will be partially refunded after publication has been completed.",
+      circuit: "12th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Audrain County Clerk's Office
+     101 N. JEFFERSON, RM 101
+     MEXICO, MO 65265`
+  },
+  {
+    name: "Barry",
+    court: {
+      address: "102 West St, Cassville, MO 65625",
+      city: "Cassville",
+      phone: "(417) 847-3133",
+      circuit: "39th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Cassville Democrat",
+      website: "https://www.cassville-democrat.com/submit-a-classified/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Barry County Clerk's Office
+     700 MAIN STREET, STE 2
+     CASSVILLE, MO 65625`
+  },
+  {
+    name: "Barton",
+    court: {
+      address: "1004 Gulf St, Lamar, MO 64759",
+      city: "Lamar",
+      phone: "(417) 682-3529",
+      specificCourtInfo: "This court will NOT accept personal checks for the filing fee.",
+      circuit: "28th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Lamar Democrat",
+      website: "https://www.lamardemocrat.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1004 Gulf, Room 204, Lamar MO 64759",
+    genderChanges: false,
+    voteClerkAddress: `Barton County Clerk's Office
+     1004 GULF, RM 103
+     LAMAR, MO 64759`
+  },
+  {
+    name: "Bates",
+    court: {
+      address: "1 N Delaware St, Butler, MO 64730",
+      city: "Butler",
+      phone: "(660) 386-7776",
+      specificCourtInfo: "This court requires a $100 publication deposit in addition to the $98.50 filing fee, you will need to pay this $100 deposit even if you get the filing fee waived by the fee waiver form. You will be partially refunded after publication has been completed.",
+      circuit: "27th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Bates County Clerk's Office
+     103 W. Dakota Street, Room 1
+     Butler, MO 64730`
+  },
+  {
+    name: "Benton",
+    court: {
+      address: "316 Van Buren St, Warsaw, MO 65355",
+      city: "Warsaw",
+      phone: "(660) 428-2900",
+      specificCourtInfo: "The court will handle the publication of your name change for you and will give the newspaper your contact information so you can pay them.",
+      circuit: "27th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Benton County Clerk's Office
+     PO BOX 1238
+     WARSAW, MO 65355`
+  },
+  {
+    name: "Bollinger",
+    court: {
+      address: "204 High St #5, Marble Hill, MO 63764",
+      city: "Marble Hill",
+      phone: "(573) 238-1900",
+      specificCourtInfo: "This judge is known to usually reject the fee waiver unless it is filed by a legal aid, be prepared to pay the full filing fee.",
+      circuit: "32nd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Banner Press",
+      website: "https://www.thebannerpress.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Bollinger County Clerk's Office
+     PO BOX 169
+     MARBLE HILL, MO 63764`
+  },
+  {
+    name: "Boone",
+    court: {
+      address: "705 E Walnut St, Columbia, MO 65201",
+      city: "Columbia",
+      phone: "(573) 886-4000",
+      specificCourtInfo: "The specific location to file is the family and civil office on the right of the main hallway in the courthouse.",
+      circuit: "13th"
+    },
+    filingFee: "$185.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Boone County Clerk's Office
+     801 E. Walnut, Room 236
+     Columbia, MO 65201`
+  },
+  {
+    name: "Buchanan",
+    court: {
+      address: "411 Jules St, St Joseph, MO 64501",
+      city: "St Joseph",
+      phone: "(816) 271-1462",
+      circuit: "5th"
+    },
+    filingFee: "$93.50",
+    publications: [
+      {
+        name: "St. Joseph Daily Courier",
+        website: "https://pulselegal.com/pay-for-a-legal-notice/"
+      },
+      {
+        name: "News Press St. Joseph",
+        website: "https://www.newspressnow.com/advertising/contactus/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Buchanan County Clerk's Office
+     411 JULES STREET, ROOM 121
+     SAINT JOSEPH, MO 64501`
+  },
+  {
+    name: "Butler",
+    court: {
+      address: "100 N Main St, Poplar Bluff, MO 63901",
+      city: "Poplar Bluff",
+      phone: "(573) 686-8082",
+      circuit: "36th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Daily American Republic",
+      website: "https://www.darnews.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Butler County Clerk's Office
+     100 N. Main St., Room #202
+     Poplar Bluff, MO 63901`
+  },
+  {
+    name: "Caldwell",
+    court: {
+      address: "49 E Main St, Kingston, MO 64650",
+      city: "Kingston",
+      phone: "(816) 586-2571",
+      specificCourtInfo: "This court would prefer that you file in person so that they can ensure that everything is correct at the time of filing rather than at the the hearing but filing by mail is also a valid option, there is no penalty for doing so.",
+      circuit: "43rd"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Caldwell County News",
+      website: "http://www.mycaldwellcounty.com/contact"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "PO Box 68, Kingston, 64650",
+    genderChanges: false,
+    voteClerkAddress: `Caldwell County Clerk's Office
+     PO BOX 67
+     KINGSTON, MO 64650`
+  },
+  {
+    name: "Callaway",
+    court: {
+      address: "5 E 2nd St, Fulton, MO 65251",
+      city: "Fulton",
+      phone: "(573) 642-0780",
+      circuit: "13th"
+    },
+    filingFee: "$208.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Callaway County Clerk's Office
+     10 E 5TH STREET ROOM 104
+     FULTON, MO 65251`
+  },
+  {
+    name: "Camden",
+    court: {
+      address: "1 Ct Cir NW, Camdenton, MO 65020",
+      city: "Camdenton",
+      phone: "(573) 346-4440",
+      specificCourtInfo: "The judge will tell you which newspaper to use for the publication step.",
+      circuit: "26th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "N/A the judge should tell you",
+      website: "https://www.google.com/?gws_rd=ssl"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Camden County Clerk's Office
+     1 COURT CIRCLE NW, STE 2
+     CAMDENTON, MO 65020`
+  },
+  {
+    name: "Cape Girardeau",
+    court: {
+      address: "203 N High St # 129, Jackson, MO 63755",
+      city: "Jackson",
+      phone: "(573) 335-8253",
+      specificCourtInfo: "While the court will accept mail-in filings they would prefer in-person so they can correct errors upon filing.",
+      circuit: "32nd"
+    },
+    filingFee: "$102.50",
+    publications: [
+      {
+        name: "The Cash-Book Journal",
+        website: "https://thecash-book.com/contact-us/"
+      },
+      {
+        name: "The Southeast Missourian",
+        website: "https://www.semissourian.com/contact-us"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "203 N High St # 129, Jackson, MO 63755",
+    genderChanges: false,
+    voteClerkAddress: `Cape Girardeau County Clerk's Office
+     100 Court Street, Ste. 301
+     Jackson, MO 63755`
+  },
+  {
+    name: "Carroll",
+    court: {
+      address: "8 S Main St, Carrollton, MO 64633",
+      city: "Carrollton",
+      phone: "(660) 542-0615",
+      circuit: "8th"
+    },
+    filingFee: "$98.00",
+    publications: [{
+      name: "Carrollton Democrat",
+      website: "https://www.carrolltondemocrat.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Carroll County Clerk's Office
+     8 SOUTH MAIN, SUITE 6
+     CARROLLTON, MO 64633`
+  },
+  {
+    name: "Carter",
+    court: {
+      address: "1122 Main St, Van Buren, MO 63965",
+      city: "Van Buren",
+      phone: "(573) 323-4527",
+      specificCourtInfo: "The contact email for the newspaper is taylor@thecurrentriverobserver.com.",
+      circuit: "36th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Current River Observer",
+      website: "https://www.facebook.com/thecurrentriverobserver/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1122 Main St, Van Buren, MO 63965",
+    genderChanges: false,
+    voteClerkAddress: `Carter County Clerk's Office
+     PO BOX 517
+     VAN BUREN, MO 63965`
+  },
+  {
+    name: "Cass",
+    court: {
+      address: "2501 W Mechanic St, Harrisonville, MO 64701",
+      city: "Harrisonville",
+      phone: "(816) 380-8227",
+      specificCourtInfo: "This court requires a $150 publication deposit in addition to the $130.50 filing fee, you will need to pay this $150 deposit even if you get the filing fee waived by the fee waiver form. You will be partially refunded after publication has been completed.",
+      circuit: "17th"
+    },
+    filingFee: "$130.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Cass County Clerk's Office
+     102 E Wall St
+     Harrisonville, MO 64701`
+  },
+  {
+    name: "Cedar",
+    court: {
+      address: "113 South St, Stockton, MO 65785",
+      city: "Stockton",
+      phone: "(417) 276-6700",
+      specificCourtInfo: "The judge will tell you which newspaper to use for the publication step.",
+      circuit: "28th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "N/A the judge should tell you",
+      website: "https://www.google.com/?gws_rd=ssl"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Cedar County Clerk's Office
+     113 SOUTH ST.
+     STOCKTON, MO 65785`
+  },
+  {
+    name: "Chariton",
+    court: {
+      address: "306 S Cherry St, Keytesville, MO 65261",
+      city: "Keytesville",
+      phone: "(660) 288-3602",
+      circuit: "9th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Chariton Marquee",
+      website: "https://charitonmarquee.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "306 S Cherry St, Keytesville, MO 65261",
+    genderChanges: false,
+    voteClerkAddress: `Chariton County Clerk's Office
+     306 S CHERRY ST
+     KEYTESVILLE, MO 65261`
+  },
+  {
+    name: "Christian",
+    court: {
+      address: "110 W Elm St #202, Ozark, MO 65721",
+      city: "Ozark",
+      phone: "(417) 582-5140",
+      specificCourtInfo: "While the court will accept mail-in filings they would prefer in-person so they can correct errors upon filing.",
+      circuit: "38th"
+    },
+    filingFee: "",
+    publications: [{
+      name: "Daily Events",
+      website: "https://www.thedailyevents.com/Contact.html"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "110 W Elm St #202, Ozark, MO 65721",
+    genderChanges: false,
+    voteClerkAddress: `Christian County Clerk's Office
+     100 W. CHURCH, ROOM 304
+     OZARK, MO 65721`
+  },
+  {
+    name: "Clark",
+    court: {
+      address: "111 W Court St, Kahoka, MO 63445",
+      city: "Kahoka",
+      phone: "(660) 727-8240",
+      circuit: "1st"
+    },
+    filingFee: "$150.00",
+    publications: [
+      {
+        name: "Hometown Journal",
+        website: "https://www.htjournal.net/contact"
+      },
+      {
+        name: "The Media",
+        website: "https://www.kahokamedia.com/contact-us/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Clark County Clerk's Office
+     111 E COURT ST, STE. 110
+     KAHOKA, MO 63445`
+  },
+  {
+    name: "Clay",
+    court: {
+      address: "11 S Water St, Liberty, MO 64068",
+      city: "Liberty",
+      phone: "(816) 407-3900",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order ONLY. Do NOT send cash or personal check.",
+      circuit: "7th"
+    },
+    filingFee: "$160.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "11 S Water St, Liberty, MO 64068",
+    genderChanges: false,
+    voteClerkAddress: `Board Of Elections
+     100 WEST MISSISSIPPI ST.
+     LIBERTY, MO 64068`
+  },
+  {
+    name: "Clinton",
+    court: {
+      address: "207 N Main St, Plattsburg, MO 64477",
+      city: "Plattsburg",
+      phone: "(816) 539-3731",
+      specificCourtInfo: "The $500 filing fee is 4 to 5x the fee that other Missouri courts have, we are unsure why but have verified that this fee is accurate. It would be a good idea to use the fee waiver form to try and avoid paying this absurdly high fee.",
+      circuit: "43rd"
+    },
+    filingFee: "$500.00",
+    publications: [
+      {
+        name: "Citizen Observer",
+        website: "https://www.mycameronnews.com/contact/"
+      },
+      {
+        name: "Clinton County Leader",
+        website: "https://clintoncountyleader.com/contact/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "207 N Main St, Plattsburg, MO 64477",
+    genderChanges: false,
+    voteClerkAddress: `Clinton County Clerk's Office
+     207 N. MAIN ST., ROOM 103
+     PLATTSBURG, MO 64477`
+  },
+  {
+    name: "Cole",
+    court: {
+      address: "301 E High St, Jefferson City, MO 65101",
+      city: "Jefferson City",
+      phone: "(573) 634-9150",
+      circuit: "19th"
+    },
+    filingFee: "$137.00",
+    publications: [{
+      name: "News Tribune",
+      website: "https://www.newstribune.com/staff/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "301 E High St, Jefferson City, MO 65101",
+    genderChanges: false,
+    voteClerkAddress: `Cole County Clerk's Office
+     311 E HIGH ST ROOM 201
+     JEFFERSON CITY, MO 65101`
+  },
+  {
+    name: "Cooper",
+    court: {
+      address: "200 Main St, Boonville, MO 65233",
+      city: "Boonville",
+      phone: "(660) 882-2232",
+      circuit: "18th"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Boonvile Daily News",
+      website: "https://www.boonvilledailynews.com/submit-a-legal-notice/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Cooper County Clerk's Office
+     200 MAIN ST. RM. 23
+     BOONVILLE, MO 65233`
+  },
+  {
+    name: "Crawford",
+    court: {
+      address: "111 S 3rd St, Steelville, MO 65565",
+      city: "Steelville",
+      phone: "(573) 775-2866",
+      specificCourtInfo: "While the court will accept mail-in filings they would prefer in-person so they can correct errors upon filing. If you select mail-in filing, send the filing fee by money order ONLY. Do NOT send cash or personal check.",
+      circuit: "42nd"
+    },
+    filingFee: "$110.50",
+    publications: [
+      {
+        name: "Cuba Free Press",
+        website: "https://www.threeriverspublishing.com/three-rivers/about-us/index.html"
+      },
+      {
+        name: "Sullivan Independent",
+        website: "https://www.mysullivannews.com/contact"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "111 S 3rd St, Steelville, MO 65565",
+    genderChanges: false,
+    voteClerkAddress: `Crawford County Clerk's Office
+     PO BOX AS
+     STEELVILLE, MO 65565`
+  },
+  {
+    name: "Dade",
+    court: {
+      address: "300 W Water St, Greenfield, MO 65661",
+      city: "Greenfield",
+      phone: "(417) 637-2271",
+      specificCourtInfo: "While the court will accept mail-in filings they would prefer in-person so they can correct errors upon filing. They can also notarize your forms on-site during filing.",
+      circuit: "28th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Greenfield Vedette",
+      website: "https://www.greenfieldvedette.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "300 W Water St, Greenfield, MO 65661",
+    genderChanges: false,
+    voteClerkAddress: `Dade County Clerk's Office
+     300 W. Water St.
+     GREENFIELD, MO 65661`
+  },
+  {
+    name: "Dallas",
+    court: {
+      address: "102 Cedar Dr, Buffalo, MO 65622",
+      city: "Buffalo",
+      phone: "(417) 345-2632",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order ONLY. Do NOT send cash or personal check.",
+      circuit: "30th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Buffalo Reflex",
+      website: "https://buffaloreflex.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "102 Cedar Dr, Buffalo, MO 65622",
+    genderChanges: false,
+    voteClerkAddress: `Dallas County Clerk's Office
+     PO BOX 436
+     BUFFALO, MO 65622`
+  },
+  {
+    name: "Daviess",
+    court: {
+      address: "102 N Main St, Gallatin, MO 64640",
+      city: "Gallatin",
+      phone: "(660) 663-3300",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order or cashiers check ONLY. Do NOT send cash or personal check.",
+      circuit: "43rd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Tri-County Weekly",
+      website: "https://www.jamesporttricountyweekly.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "102 N Main St, Gallatin, MO 64640",
+    genderChanges: false,
+    voteClerkAddress: `Daviess County Clerk's Office
+     102 N Main St
+     Gallatin, MO 64640`
+  },
+  {
+    name: "DeKalb",
+    court: {
+      address: "109 W Main St, Maysville, MO 64469",
+      city: "Maysville",
+      phone: "(816) 449-5402",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order ONLY. Do NOT send cash or personal check. Also the Dekalb County Record-Herald does not have a proper website that we can find, call them at (816) 449-2121 to set up publication.",
+      circuit: "43rd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "DeKalb County Record-Herald",
+      website: "https://www.google.com/maps/place/Dekalb+County+Record+Herald/@39.8903778,-94.3591724,21z/data=!4m6!3m5!1s0x87c1d579d2f59953:0x21cfef6de34b9671!8m2!3d39.890446!4d-94.3590589!16s%2Fg%2F1tjv40rh?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "109 W Main St, Maysville, MO 64469",
+    genderChanges: false,
+    voteClerkAddress: `De Kalb County Clerk's Office
+     PO BOX 248
+     MAYSVILLE, MO 64469`
+  },
+  {
+    name: "Dent",
+    court: {
+      address: "400 N Main St, Salem, MO 65560",
+      city: "Salem",
+      phone: "(573) 729-3931",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order ONLY. Do NOT send cash or personal check.",
+      circuit: "42nd"
+    },
+    filingFee: "$107",
+    publications: [{
+      name: "Salem News",
+      website: "https://thesalemnewsonline.com/services/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "400 N Main St, Salem, MO 65560",
+    genderChanges: false,
+    voteClerkAddress: `Dent County Clerk's Office
+     400 N. MAIN ST.
+     SALEM, MO 65560`
+  },
+  {
+    name: "Douglas",
+    court: {
+      address: "203 E Lincoln Ave, Ava, MO 65608",
+      city: "Ava",
+      phone: "(417) 683-4714",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order ONLY. Do NOT send cash or personal check.",
+      circuit: "44th"
+    },
+    filingFee: "$93.50",
+    publications: [{
+      name: "Douglas County Herald",
+      website: "https://www.douglascountyherald.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "203 E Lincoln Ave, Ava, MO 65608",
+    genderChanges: false,
+    voteClerkAddress: `Douglas County Clerk's Office
+     P.O BOX 398
+     AVA, MO 65608`
+  },
+  {
+    name: "Dunklin",
+    court: {
+      address: "1175 Floyd St, Kennett, MO 63857",
+      city: "Kennett",
+      phone: "(573) 888-2456",
+      specificCourtInfo: "If you select mail-in filing, send the filing fee by money order or cashiers check ONLY. Do NOT send cash or personal check. The clerk we spoke with was willing to contact the Campbell Courier newspaper on your behalf and/or set up a virtual hearing with the judge if needed. The contact email for the Campbell Courier newspaper is campbellcourier@bpsnetworks.com.",
+      circuit: "35th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Campbell Courier",
+      website: "https://www.facebook.com/campbellcourier/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1175 Floyd St, Kennett, MO 63857",
+    genderChanges: false,
+    voteClerkAddress: `Dunklin County Clerk's Office
+     PO BOX 188
+     KENNETT, MO 63857`
+  },
+  {
+    name: "Franklin",
+    court: {
+      address: "401 E Main St, Union, MO 63084",
+      city: "Union",
+      phone: "(636) 583-7365",
+      circuit: "20th"
+    },
+    filingFee: "$130.50",
+    publications: [
+      {
+        name: "The Missourian",
+        website: "https://www.missourian.com/contact/"
+      },
+      {
+        name: "Sullivan Independent",
+        website: "https://www.mysullivannews.com/contact"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "401 E Main St, Union, MO 63084",
+    genderChanges: false,
+    voteClerkAddress: `Franklin County Clerk's Office
+     400 E LOCUST ST, ROOM 201
+     UNION, MO 63084`
+  },
+  {
+    name: "Gasconade",
+    court: {
+      address: "119 E 1st St, Hermann, MO 65041",
+      city: "Hermann",
+      phone: "(573) 486-2632",
+      circuit: "20th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Gasconade County Republican",
+      website: "https://www.gasconadecountyrepublican.com/republican/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "119 E 1st St, Hermann, MO 65041",
+    genderChanges: false,
+    voteClerkAddress: `Gasconade County Clerk's Office
+     119 E. 1ST ST., RM 2
+     HERMANN, MO 65041`
+  },
+  {
+    name: "Gentry",
+    court: {
+      address: "200 W Clay St, Albany, MO 64402",
+      city: "Albany",
+      phone: "(660) 726-3618",
+      specificCourtInfo: "The contact email for the Tre-County Ledger newspaper is news@tricountynews.net.",
+      circuit: "4th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Tri-County Ledger",
+      website: "https://www.facebook.com/p/Tri-County-Ledger-61560910300989/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "200 W Clay St, Albany, MO 64402",
+    genderChanges: false,
+    voteClerkAddress: `Gentry County Clerk's Office
+     200 W Clay St
+     Albany, MO 64402`
+  },
+  {
+    name: "Greene",
+    court: {
+      address: "1010 N Boonville Ave, Springfield, MO 65802",
+      city: "Springfield",
+      phone: "(417) 868-4000",
+      specificCourtInfo: "The filing fee includes the publication fee, they handle the entire publication process. These judges also have decent odds to just sign your name change order and mail it to you rather than hold a hearing but that is decided case by case.",
+      circuit: "31st"
+    },
+    filingFee: "$207.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1010 N Boonville Ave, Springfield, MO 65802",
+    genderChanges: false,
+    voteClerkAddress: `Greene County Clerk's Office
+     940 North Boonville, Room 113
+     SPRINGFIELD, MO 65802`
+  },
+  {
+    name: "Grundy",
+    court: {
+      address: "700 Main St, Trenton, MO 64683",
+      city: "Trenton",
+      phone: "(660) 359-4040",
+      circuit: "3rd"
+    },
+    filingFee: "$150",
+    publications: [
+      {
+        name: "Trenton Telegraph",
+        website: "https://www.trentontelegraph.com/contact-us/"
+      },
+      {
+        name: "Tri-County Weekly",
+        website: "https://www.jamesporttricountyweekly.com/about"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Grundy County Clerk's Office
+     700 MAIN STREET
+     TRENTON, MO 64683`
+  },
+  {
+    name: "Harrison",
+    court: {
+      address: "1500 Central St, Bethany, MO 64424",
+      city: "Bethany",
+      phone: "(660) 425-6425",
+      circuit: "3rd"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Bethany Republican-Clipper",
+      website: "https://www.bethanyclipper.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1500 Central St, Bethany, MO 64424",
+    genderChanges: false,
+    voteClerkAddress: `Harrison County Clerk's Office
+     PO BOX 525
+     BETHANY, MO 64424`
+  },
+  {
+    name: "Henry",
+    court: {
+      address: "100 W Franklin St, Clinton, MO 64735",
+      city: "Clinton",
+      phone: "(660) 885-7200",
+      specificCourtInfo: "This court will typically not hold a hearing and will instead simply sign the order and mail it to you.",
+      circuit: "27th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Clinton Daily Democrat",
+      website: "https://clintondailydemocrat.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 W Franklin St, Clinton, MO 64735",
+    genderChanges: false,
+    voteClerkAddress: `Henry County Clerk's Office
+     100 W FRANKLIN
+     CLINTON, MO 64735`
+  },
+  {
+    name: "Hickory",
+    court: {
+      address: "100 Polk St, Hermitage, MO 65668",
+      city: "Hermitage",
+      phone: "(417) 745-6421",
+      specificCourtInfo: "While the court will accept mail-in filings they would prefer in-person so they can correct errors upon filing. If you select mail-in filing, send the filing fee by money order or cashiers check ONLY. Do NOT send cash or personal check.",
+      circuit: "30th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "The Index",
+      website: "https://hermitageindex.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 Polk St, Hermitage, MO 65668",
+    genderChanges: false,
+    voteClerkAddress: `Hickory County Clerk's Office
+     PO BOX 3
+     HERMITAGE, MO 65668`
+  },
+  {
+    name: "Holt",
+    court: {
+      address: "102 W Nodaway St, Oregon, MO 64473",
+      city: "Oregon",
+      phone: "(660) 446-3301",
+      circuit: "4th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Mound City News",
+      website: "http://www.moundcitynews.com/node/216"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "102 W Nodaway St, Oregon, MO 64473",
+    genderChanges: false,
+    voteClerkAddress: `Holt County Clerk's Office
+     PO BOX 437
+     OREGON, MO 64473`
+  },
+  {
+    name: "Howard",
+    court: {
+      address: "1 Courthouse Sq, Fayette, MO 65248",
+      city: "Fayette",
+      phone: "(660) 248-2194",
+      specificCourtInfo: "While the court will accept mail-in filings they would prefer in-person so they can correct errors upon filing. If you select mail-in filing, send the filing fee by money order or cashiers check ONLY. Do NOT send cash or personal check.",
+      circuit: "14th"
+    },
+    filingFee: "$140",
+    publications: [{
+      name: "The Fayette Advertiser",
+      website: "https://www.fayettenewspapers.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1 Courthouse Sq, Fayette, MO 65248",
+    genderChanges: false,
+    voteClerkAddress: `Howard County Clerk's Office
+     HOWARD COUNTY COURTHOUSE #1 COURTHOUSE SQUARE
+     FAYETTE, MO 65248`
+  },
+  {
+    name: "Howell",
+    court: {
+      address: "106 Courthouse, West Plains, MO 65775",
+      city: "West Plains",
+      phone: "(417) 256-4050",
+      specificCourtInfo: "Howell County News states that they are a very christain conservative paper so I would suggest going with the West Plains Daily Quill for publishing.",
+      circuit: "37th"
+    },
+    filingFee: "$130.50",
+    publications: [
+      {
+        name: "Howell County News",
+        website: "https://www.howellcountynews.com/about-us"
+      },
+      {
+        name: "West Plains Daily Quill",
+        website: "https://www.westplainsdailyquill.net/contact/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "106 Courthouse, West Plains, MO 65775",
+    genderChanges: false,
+    voteClerkAddress: `Howell County Clerk's Office
+     35 COURT SQUARE, RM 200
+     WEST PLAINS, MO 65775`
+  },
+  {
+    name: "Iron",
+    court: {
+      address: "250 S Main St, Ironton, MO 63650",
+      city: "Ironton",
+      phone: "(573) 546-2511",
+      circuit: "42nd"
+    },
+    filingFee: "$110",
+    publications: [{
+      name: "The Mountain Echo",
+      website: "https://www.myironcountynews.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "250 S Main St, Ironton, MO 63650",
+    genderChanges: false,
+    voteClerkAddress: `Iron County Clerk's Office
+     PO BOX 42
+     IRONTON, MO 63650`
+  },
+  {
+    name: "Jackson",
+    court: {
+      address: "415 E 12th St Unit 300, Kansas City, MO 64106",
+      city: "Kansas City",
+      phone: "(816) 881-3000",
+      specificCourtInfo: "",
+      circuit: "16th"
+    },
+    filingFee: "$142.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "415 E 12th St., Attn: Civil Records, 3rd Floor, Kansas City, MO 64106",
+    genderChanges: false,
+    voteClerkAddress: `Kansas City Board Of Elections
+    4407 Dr. Martin Luther King, Jr. Blvd.
+    KANSAS CITY, MO 64130
+    or
+    Jackson County Election Board
+    P.O. Box 296
+    Independence, MO 64051`
+  },
+  {
+    name: "Jasper",
+    court: {
+      address: "302 S Main St #206, Carthage, MO 64836 and 633 S Pearl Ave, Joplin, MO 64801",
+      city: "Carthage and Joplin",
+      phone: "(417) 358-0450 and (417) 625-4310",
+      specificCourtInfo: "If you are filing by mail they will NOT accept personal checks or cash, pay by cashier's check or money order only. One of the judges is particular regarding which newspapers you can publish in, ask if the Sarcoxie Record is ok during your hearing if a newspaper is not specified. To contact the Sarcoxie Record call them at (417) 548-3311 or email then at fstop@centurytel.net.",
+      circuit: "29th"
+    },
+    filingFee: "$127.50",
+    publications: [{
+      name: "Sarcoxie Record",
+      website: "https://www.facebook.com/Sarcoxie/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "302 S Main St #206, Carthage, MO 64836 or 633 S Pearl Ave, Joplin, MO 64801",
+    genderChanges: false,
+    voteClerkAddress: `Jasper County Clerk's Office
+     302 S MAIN ST, ROOM 102
+     CARTHAGE, MO 64836`
+  },
+  {
+    name: "Jefferson",
+    court: {
+      address: "300 Main St #1, Hillsboro, MO 63050",
+      city: "Hillsboro",
+      phone: "(636) 797-5555",
+      circuit: "23rd"
+    },
+    filingFee: "$128.50",
+    publications: [
+      {
+        name: "The Countian",
+        website: "https://molawyersmedia.com/about/contact-us/"
+      },
+      {
+        name: "Jefferson County Reporter",
+        website: "https://pulselegal.com/jefferson-county-reporter/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "300 Main St #1, Hillsboro, MO 63050",
+    genderChanges: false,
+    voteClerkAddress: `Jefferson County Clerk's Office
+     729 Maple Street PO Box 100
+     Hillsboro, MO 63050`
+  },
+  {
+    name: "Johnson",
+    court: {
+      address: "101 W Market St, Warrensburg, MO 64093",
+      city: "Warrensburg",
+      phone: "(660) 422-7413",
+      specificCourtInfo: "The fee is split between the filing fee ($100.50) and the publication deposit ($150). The deposit cannot be waived by the fee waiver but you may get some of it back depending on the publication cost. The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "17th"
+    },
+    filingFee: "$250.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "101 W Market St, Warrensburg, MO 64093",
+    genderChanges: false,
+    voteClerkAddress: `Johnson County Clerk's Office
+     300 N Holden St, Suite 204
+     Warrensburg, MO 64093`
+  },
+  {
+    name: "Knox",
+    court: {
+      address: "107 North 4th, Edina, MO 63537",
+      city: "Edina",
+      phone: "(660) 397-2305",
+      circuit: "2nd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "The Edina Sentinal",
+      website: "https://www.edinasentinel.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Knox County Clerk's Office
+     107 N FOURTH ST
+     EDINA, MO 63537`
+  },
+  {
+    name: "Laclede",
+    court: {
+      address: "200 N Adams Ave, Lebanon, MO 65536",
+      city: "Lebanon",
+      phone: "(417) 532-2471",
+      specificCourtInfo: "If the judge does NOT give you a newspaper to publish in during your hearing double check that the Laclede County Record is ok with them, we were unable to get a clerk from this court to confirm.",
+      circuit: "26th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Laclede County Record",
+      website: "https://www.laclederecord.com/advertise/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "200 N Adams Ave, Lebanon, MO 65536",
+    genderChanges: false,
+    voteClerkAddress: `Laclede County Clerk's Office
+     200 N ADAMS AVE
+     LEBANON, MO 65536`
+  },
+  {
+    name: "Lafayette",
+    court: {
+      address: "116 S 10th St, Lexington, MO 64067",
+      city: "Lexington",
+      phone: "(660) 259-6101",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "15th"
+    },
+    filingFee: "$100.50",
+    publications: [
+      {
+        name: "The Higginsville Advance",
+        website: "https://www.lafayettemonews.com/contact-us/"
+      },
+      {
+        name: "The Lexington News",
+        website: "https://www.lafayettemonews.com/contact-us/"
+      },
+      {
+        name: "The Odessan",
+        website: "https://theodessan.net/contact"
+      },
+      {
+        name: "The Santa Fe Times",
+        website: "https://www.lafayettemonews.com/contact-us/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "116 S 10th St, Lexington, MO 64067",
+    genderChanges: false,
+    voteClerkAddress: `Lafayette County Clerk's Office
+     1001 MAIN STREET
+     LEXINGTON, MO 64067`
+  },
+  {
+    name: "Lawrence",
+    court: {
+      address: "240 N Main St Ste 110, Mt Vernon, MO 65712",
+      city: "Mt Vernon",
+      phone: "(417) 466-2471",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "39th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Lawrence County Record",
+      website: "https://www.lawrencecountyrecord.com/contact"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "240 N Main St Ste 110, Mt Vernon, MO 65712",
+    genderChanges: false,
+    voteClerkAddress: `Lawrence County Clerk's Office
+     1 COURTHOUSE SQUARE, SUITE 101
+     MT. VERNON, MO 65712`
+  },
+  {
+    name: "Lewis",
+    court: {
+      address: "100 E Lafayette St, Monticello, MO 63457",
+      city: "Monticello",
+      phone: "(573) 767-5352",
+      circuit: "2nd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Press-News Journal",
+      website: "https://www.lewispnj.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 E Lafayette St, Monticello, MO 63457",
+    genderChanges: false,
+    voteClerkAddress: `Lewis County Clerk's Office
+     PO BOX 67
+     MONTICELLO, MO 63457`
+  },
+  {
+    name: "Lincoln",
+    court: {
+      address: "45 Business Park Dr, Troy, MO 63379",
+      city: "Troy",
+      phone: "(636) 528-6300",
+      specificCourtInfo: "If your paperwork is in order there should not be a hearing, the judge will simply sign your order and mail it to you.",
+      circuit: "45th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Troy Free Press",
+      website: "https://www.troyfreepress.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Lincoln County Clerk's Office
+     201 MAIN ST
+     TROY, MO 63379`
+  },
+  {
+    name: "Linn",
+    court: {
+      address: "108 N High St, Linneus, MO 64653",
+      city: "Linneus",
+      phone: "(660) 895-5212",
+      circuit: "9th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Linn County Leader",
+      website: "https://www.linncountyleader.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "108 N High St, Linneus, MO 64653",
+    genderChanges: false,
+    voteClerkAddress: `Linn County Clerk's Office
+     PO BOX 92
+     LINNEUS, MO 64653`
+  },
+  {
+    name: "Livingston",
+    court: {
+      address: "700 Webster St, Chillicothe, MO 64601",
+      city: "Chillicothe",
+      phone: "(660) 646-8000",
+      specificCourtInfo: "The fee is split between the filing fee ($100.50) and the publication deposit ($399.50). The deposit cannot be waived by the fee waiver but you may get some of it back depending on the publication cost.",
+      circuit: "43rd"
+    },
+    filingFee: "$500",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Livingston County Clerk's Office
+     700 WEBSTER ST
+     CHILLICOTHE, MO 64601`
+  },
+  {
+    name: "Macon",
+    court: {
+      address: "101 E Washington St, Macon, MO 63552",
+      city: "Macon",
+      phone: "(660) 385-4631",
+      circuit: "41st"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Home Press",
+      website: "https://www.maconhomepress.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "101 E Washington St, Macon, MO 63552",
+    genderChanges: false,
+    voteClerkAddress: `Macon County Clerk's Office
+     101 E WASHINGTON ST, STE B
+     MACON, MO 63552`
+  },
+  {
+    name: "Madison",
+    court: {
+      address: "1 Court Square, Fredericktown, MO 63645",
+      city: "Fredericktown",
+      phone: "(573) 783-2176",
+      specificCourtInfo: "This court uses a custom publication form that the judge will fill out and hand to you during the hearing. This is to reduce your publication costs.",
+      circuit: "24th"
+    },
+    filingFee: "$95.50",
+    publications: [{
+      name: "Democrat News",
+      website: "https://www.democratnewsonline.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Madison County Clerk's Office
+     1 COURTHOUSE SQ,
+     FREDERICKTOWN, MO 63645`
+  },
+  {
+    name: "Maries",
+    court: {
+      address: "211 4th St #2, Vienna, MO 65582",
+      city: "Vienna",
+      phone: "(573) 422-3388",
+      circuit: "25th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Maries County Advocate",
+      website: "https://mariescountyadvocate.com/advocate/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "211 4th St #2, Vienna, MO 65582",
+    genderChanges: false,
+    voteClerkAddress: `Maries County Clerk's Office
+     PO BOX 205
+     VIENNA, MO 65582`
+  },
+  {
+    name: "Marion",
+    court: {
+      address: "100 S Main St #207, Palmyra, MO 63461 and 906 Broadway #105, Hannibal, MO 63401",
+      city: "Palmyra and Hannibal",
+      phone: "(573) 769-2550 and (573) 221-0198",
+      circuit: "10th"
+    },
+    filingFee: "$175",
+    publications: [{
+      name: "Palmyra Spectator",
+      website: "https://www.palmyra-spectator.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Marion County Clerk's Office
+     100 S. MAIN STREET, SUITE 107
+     PALMYRA, MO 63461`
+  },
+  {
+    name: "McDonald",
+    court: {
+      address: "602 Main St, Pineville, MO 64856",
+      city: "Pineville",
+      phone: "(417) 223-7512",
+      circuit: "40th"
+    },
+    filingFee: "$97.50",
+    publications: [{
+      name: "McDonald County Press",
+      website: "https://mdcp.nwaonline.com/contactus/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "602 Main St, Pineville, MO 64856",
+    genderChanges: false,
+    voteClerkAddress: `McDonald County Clerk's Office
+     PO BOX 665
+     PINEVILLE, MO 64856`
+  },
+  {
+    name: "Mercer",
+    court: {
+      address: "802 E Main St, Princeton, MO 64673",
+      city: "Princeton",
+      phone: "(660) 748-4335",
+      specificCourtInfo: "For the newspaper website link look at the right side and use the contact information for the Post-Telegraph rather than the contact form.",
+      circuit: "3rd"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Post-Telegraph",
+      website: "https://northmissourinews.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "802 E Main St, Princeton, MO 64673",
+    genderChanges: false,
+    voteClerkAddress: `Mercer County Clerk's Office
+     802 E MAIN ST
+     PRINCETON, MO 64673`
+  },
+  {
+    name: "Miller",
+    court: {
+      address: "2001 State Rte 52, Tuscumbia, MO 65082",
+      city: "Tuscumbia",
+      phone: "(573) 369-1980",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash. If you are filing an adult petition you will likely recieve your judgement automatically in the mail, minors will likely need to attend a hearing with their next friend and respondent parent.",
+      circuit: "26th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "The Advertiser",
+      website: "https://eldonadvertiser.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "2001 State Rte 52, Tuscumbia, MO 65082",
+    genderChanges: false,
+    voteClerkAddress: `Miller County Clerk's Office
+     PO BOX 12
+     TUSCUMBIA, MO 65082`
+  },
+  {
+    name: "Mississippi",
+    court: {
+      address: "200 N Main St, Charleston, MO 63834",
+      city: "Charleston",
+      phone: "(573) 683-2161",
+      specificCourtInfo: "If you mail in your petition this court will ONLY accept money orders, no other payment method.",
+      circuit: "33rd"
+    },
+    filingFee: "$130.50",
+    publications: [{
+      name: "The Standard Democrat",
+      website: "https://www.standard-democrat.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "200 N Main St, Charleston, MO 63834",
+    genderChanges: false,
+    voteClerkAddress: `Mississippi County Clerk's Office
+     200 N MAIN ST
+     CHARLESTON, MO 63834`
+  },
+  {
+    name: "Moniteau",
+    court: {
+      address: "200 E Main St, California, MO 65018",
+      city: "California",
+      phone: "(573) 796-4661",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "26th"
+    },
+    filingFee: "$132.50",
+    publications: [
+      {
+        name: "California Democrat",
+        website: "https://www.californiademocrat.com/staff/"
+      },
+      {
+        name: "Tipton Times",
+        website: "https://tiptontimes.com/contact-us/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "200 E Main St, California, MO 65018",
+    genderChanges: false,
+    voteClerkAddress: `Moniteau County Clerk's Office
+     200 EAST MAIN
+     CALIFORNIA, MO 65018`
+  },
+  {
+    name: "Monroe",
+    court: {
+      address: "300 N Main St #201, Paris, MO 65275",
+      city: "Paris",
+      phone: "(877) 433-3061",
+      circuit: "10th"
+    },
+    filingFee: "$105.50",
+    publications: [
+      {
+        name: "Lake Gazette",
+        website: "https://www.lakegazette.net/contact-us/"
+      },
+      {
+        name: "Monroe County Appeal",
+        website: "https://www.monroe-ralls.com/contact"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Monroe County Clerk's Office
+     300 N MAIN ST, RM 204
+     PARIS, MO 65275`
+  },
+  {
+    name: "Montgomery",
+    court: {
+      address: "211 E 3rd St, Montgomery City, MO 63361",
+      city: "Montgomery City",
+      phone: "(573) 564-3341",
+      circuit: "12th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Montgomery Standard",
+      website: "https://www.mystandardnews.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Montgomery County Clerk's Office
+     211 E THIRD ST.
+     MONTGOMERY CITY, MO 63361`
+  },
+  {
+    name: "Morgan",
+    court: {
+      address: "211 E Newton St #4, Versailles, MO 65084",
+      city: "Versailles",
+      phone: "(573) 378-4413",
+      specificCourtInfo: "The contact email for the Morgan County Statesman newspaper is news@morgancountystatesman.com, the phone number is (573) 378-5441.",
+      circuit: "26th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Morgan County Statesman",
+      website: "https://www.facebook.com/TheMorganCountyStatesman/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "211 E Newton St #4, Versailles, MO 65084",
+    genderChanges: false,
+    voteClerkAddress: `Morgan County Clerk's Office
+     100 E. NEWTON ST.
+     VERSAILLES, MO 65084`
+  },
+  {
+    name: "New Madrid",
+    court: {
+      address: "450 Main St, New Madrid, MO 63869",
+      city: "New Madrid",
+      phone: "(573) 748-2228",
+      specificCourtInfo: "If you mail in your petition this court will ONLY accept money orders, no other payment method.",
+      circuit: "34th"
+    },
+    filingFee: "$93.50",
+    publications: [{
+      name: "Standard Democrat",
+      website: "https://www.standard-democrat.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "450 Main St, New Madrid, MO 63869",
+    genderChanges: false,
+    voteClerkAddress: `New Madrid County Clerk's Office
+     450 MAIN ST.
+     NEW MADRID, MO 63869`
+  },
+  {
+    name: "Newton",
+    court: {
+      address: "101 S Wood St #201, Neosho, MO 64850",
+      city: "Neosho",
+      phone: "(417) 451-8221",
+      specificCourtInfo: "If you mail in your petition this court will ONLY accept money orders, no other payment method.",
+      circuit: "40th"
+    },
+    filingFee: "$97.50",
+    publications: [{
+      name: "Neosho Daily News",
+      website: "https://neoshodaily.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "101 S Wood St #201, Neosho, MO 64850",
+    genderChanges: false,
+    voteClerkAddress: `Newton County Clerk's Office
+     P.O. Box 488
+     Neosho, MO 64850`
+  },
+  {
+    name: "Nodaway",
+    court: {
+      address: "305 N Main St, Maryville, MO 64468",
+      city: "Maryville",
+      phone: "(660) 582-4221",
+      specificCourtInfo: "",
+      circuit: "4th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Maryville Forum",
+      website: "https://www.maryvilleforum.com/site/contact.html"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "305 N Main St, Maryville, MO 64468",
+    genderChanges: false,
+    voteClerkAddress: `Nodaway County Clerk's Office
+     403 NORTH MARKET RM 211
+     MARYVILLE, MO 64468`
+  },
+  {
+    name: "Oregon",
+    court: {
+      address: "1 Court Sq, Alton, MO 65606",
+      city: "Alton",
+      phone: "(417) 778-7460",
+      circuit: "37th"
+    },
+    filingFee: "$130.50",
+    publications: [{
+      name: "South Missourian",
+      website: "https://www.southmissouriannews.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Oregon County Clerk's Office
+     PO BOX 324
+     ALTON, MO 65606`
+  },
+  {
+    name: "Osage",
+    court: {
+      address: "106 E Main St, Linn, MO 65051",
+      city: "Linn",
+      phone: "(573) 897-3114",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "20th"
+    },
+    filingFee: "$130.50",
+    publications: [{
+      name: "Unterrified Democrat",
+      website: "https://www.unterrifieddemocrat.com/democrat/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "106 E Main St, Linn, MO 65051",
+    genderChanges: false,
+    voteClerkAddress: `Osage County Clerk's Office
+     PO BOX 826
+     LINN, MO 65051`
+  },
+  {
+    name: "Ozark",
+    court: {
+      address: "1 Court Sq, Gainesville, MO 65655",
+      city: "Gainesville",
+      phone: "(417) 679-4232",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "44th"
+    },
+    filingFee: "$93.50",
+    publications: [{
+      name: "Ozark County Times",
+      website: "https://www.ozarkcountytimes.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1 Court Sq, Gainesville, MO 65655",
+    genderChanges: false,
+    voteClerkAddress: `Ozark County Clerk's Office
+     P.O. BOX 416
+     GAINESVILLE, MO 65655`
+  },
+  {
+    name: "Permiscot",
+    court: {
+      address: "610 Ward Ave, Caruthersville, MO 63830",
+      city: "Caruthersville",
+      phone: "(573) 333-0187",
+      specificCourtInfo: "The clerk at the court also has the contact information for the newspaper if needed.",
+      circuit: "34th"
+    },
+    filingFee: "$93.50",
+    publications: [{
+      name: "Pemiscott Press",
+      website: "https://www.pemiscotpress.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "PO Box 34, Caruthersville, MO 63830",
+    genderChanges: false,
+    voteClerkAddress: `Pemiscot County Clerk's Office
+     610 Ward Ave., Suite 2A
+     Caruthersville, MO 63830`
+  },
+  {
+    name: "Perry",
+    court: {
+      address: "400 W St Joseph St #4, Perryville, MO 63775",
+      city: "Perryville",
+      phone: "(573) 547-6581",
+      circuit: "32nd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "The Republic Monitor",
+      website: "https://republicmonitor.com/contact/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "400 W St Joseph St #4, Perryville, MO 63775",
+    genderChanges: false,
+    voteClerkAddress: `Perry County Clerk's Office
+     15 W STE MARIE STREET STE 2
+     PERRYVILLE, MO 63775`
+  },
+  {
+    name: "Pettis",
+    court: {
+      address: "415 S Ohio Ave, Sedalia, MO 65301",
+      city: "Sedalia",
+      phone: "(660) 826-5000",
+      circuit: "18th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "The Sedalia Democrat",
+      website: "https://www.sedaliademocrat.com/contact/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "415 S Ohio Ave, Sedalia, MO 65301",
+    genderChanges: false,
+    voteClerkAddress: `Pettis County Clerk's Office
+     215 E. 5th Street
+     Sedalia, MO 65301`
+  },
+  {
+    name: "Phelps",
+    court: {
+      address: "200 N Main St, Rolla, MO 65401",
+      city: "Rolla",
+      phone: "(573) 458-6000",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "25th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Phelps County Focus",
+      website: "https://phelpscountyfocus.com/services/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "200 N Main St, Rolla, MO 65401",
+    genderChanges: false,
+    voteClerkAddress: `Phelps County Clerk's Office
+     200 N MAIN ST STE 133
+     ROLLA, MO 65401`
+  },
+  {
+    name: "Pike",
+    court: {
+      address: "115 W Main St #4, Bowling Green, MO 63334",
+      city: "Bowling Green",
+      phone: "(573) 324-5582",
+      specificCourtInfo: "",
+      circuit: "45th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Pike County News",
+      website: "https://www.pikecountynews.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "115 W Main St #4, Bowling Green, MO 63334",
+    genderChanges: false,
+    voteClerkAddress: `Pike County Clerk's Office
+     115 W MAIN ST
+     BOWLING GREEN, MO 63334`
+  },
+  {
+    name: "Platte",
+    court: {
+      address: "415 3rd St, Platte City, MO 64079",
+      city: "Platte City",
+      phone: "(816) 858-2232",
+      specificCourtInfo: "This court only accepts payment by cash, cashiers check, or money order. Credit, debit, and personal checks are NOT accepted. The fee waiver may not cover the publication costs included in the filing fee. The court prefers in person filing so they can correct any mistakes then and there.",
+      circuit: "6th"
+    },
+    filingFee: "$175.50",
+    publications: [{
+      name: "",
+      website: ""
+    }],
+    courtPublishes: true,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "415 3rd St, Platte City, MO 64079",
+    genderChanges: false,
+    voteClerkAddress: `Board Of Elections Platte County
+     PO BOX 560
+     PLATTE CITY, MO 64079`
+  },
+  {
+    name: "Polk",
+    court: {
+      address: "102 E Broadway St, Bolivar, MO 65613",
+      city: "Bolivar",
+      phone: "(417) 777-6599",
+      specificCourtInfo: "",
+      circuit: "30th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "Bolivar Herald-Free Press",
+      website: "https://bolivarmonews.com/contact-us/index.html"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "102 E Broadway St, Bolivar, MO 65613",
+    genderChanges: false,
+    voteClerkAddress: `Polk County Clerk's Office
+     102 E BROADWAY, RM 11
+     BOLIVAR, MO 65613`
+  },
+  {
+    name: "Pulaski",
+    court: {
+      address: "301 U.S. Route 66, Waynesville, MO 65583",
+      city: "Waynesville",
+      phone: "(573) 774-4701",
+      specificCourtInfo: "If you do a mail in petition without the fee waiver the court will only accept a money order as payment for the filing fee.",
+      circuit: "25th"
+    },
+    filingFee: "$132.50",
+    publications: [{
+      name: "The Dixon Pilot",
+      website: "https://www.dixonpilot.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "301 U.S. Route 66, Waynesville, MO 65583",
+    genderChanges: false,
+    voteClerkAddress: `Pulaski County Clerk's Office
+     301 HISTORIC 66 E, STE 101
+     WAYNESVILLE, MO 65583`
+  },
+  {
+    name: "Putnam",
+    court: {
+      address: "1601 Main St #101, Unionville, MO 63565",
+      city: "Unionville",
+      phone: "(660) 947-2117",
+      circuit: "3rd"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Unionville Republican",
+      website: "https://northmissourinews.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "1601 Main St #101, Unionville, MO 63565",
+    genderChanges: false,
+    voteClerkAddress: `Putnam County Clerk's Office
+     1601 MAIN ST. ROOM 101
+     UNIONVILLE, MO 63565`
+  },
+  {
+    name: "Ralls",
+    court: {
+      address: "311 S Main St, New London, MO 63459",
+      city: "New London",
+      phone: "(573) 985-7111",
+      circuit: "10th"
+    },
+    filingFee: "$175",
+    publications: [{
+      name: "Monroe Ralls",
+      website: "https://www.monroe-ralls.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "311 S Main St, New London, MO 63459",
+    genderChanges: false,
+    voteClerkAddress: `Ralls County Clerk's Office
+     P.O. Box 400
+     New London, MO 63459`
+  },
+  {
+    name: "Randolph",
+    court: {
+      address: "372 State Hwy JJ Ste 2b, Huntsville, MO 65259",
+      city: "Huntsville",
+      phone: "(844) 277-6555",
+      circuit: "14th"
+    },
+    filingFee: "$105",
+    publications: [{
+      name: "Monitor Index",
+      website: "https://www.moberlymonitor.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "372 State Hwy JJ Ste 2b, Huntsville, MO 65259",
+    genderChanges: false,
+    voteClerkAddress: `Randolph County Clerk's Office
+     372 Highway JJ, Suite 2B
+     Huntsville, MO 65259`
+  },
+  {
+    name: "Ray",
+    court: {
+      address: "100 W Main St, Richmond, MO 64085",
+      city: "Richmond",
+      phone: "(816) 776-4502",
+      specificCourtInfo: "The contact email for the Lawson review newspaper is lawsonreview@gmail.com their phone number is (816) 296-3412.",
+      circuit: "8th"
+    },
+    filingFee: "$100.50",
+    publications: [
+      {
+        name: "Excelsior Springs Standard",
+        website: "https://www.excelsiorspringsstandard.com/form/contact-the-standard"
+      },
+      {
+        name: "Lawson Review",
+        website: "https://www.facebook.com/LawsonReview1979/"
+      },
+      {
+        name: "Richmond News",
+        website: "https://www.richmond-dailynews.com/contact"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 W Main St, Richmond, MO 64085",
+    genderChanges: false,
+    voteClerkAddress: `Ray County Clerk's Office
+     100 WEST MAIN STREET
+     RICHMOND, MO 64085`
+  },
+  {
+    name: "Reynolds",
+    court: {
+      address: "2319 Green St, Centerville, MO 63633",
+      city: "Centerville",
+      phone: "(573) 648-2494",
+      circuit: "42nd"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Reynolds County Courier",
+      website: "https://www.reynoldscountycourier.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "2319 Green St, Centerville, MO 63633",
+    genderChanges: false,
+    voteClerkAddress: `Reynolds County Clerk's Office
+     P. O. BOX 10
+     CENTERVILLE, MO 63633`
+  },
+  {
+    name: "Ripley",
+    court: {
+      address: "100 Court House Square, Doniphan, MO 63935",
+      city: "Doniphan",
+      phone: "(573) 996-5500",
+      specificCourtInfo: "If you mail in your petition this court will ONLY accept money orders, no other payment method.",
+      circuit: "36th"
+    },
+    filingFee: "$100.50",
+    publications: [
+      {
+        name: "Daily American Republic",
+        website: "https://www.darnews.com/contact-us"
+      },
+      {
+        name: "Prospect News",
+        website: "https://www.theprospectnews.com/contact-us"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 Court House Square, Doniphan, MO 63935",
+    genderChanges: false,
+    voteClerkAddress: `Ripley County Clerk's Office
+     100 COURTHOUSE SQUARE, SUITE #2
+     DONIPHAN, MO 63935`
+  },
+  {
+    name: "Saline",
+    court: {
+      address: "19 E Arrow St # 301, Marshall, MO 65340",
+      city: "Marshall",
+      phone: "(660) 886-6988",
+      specificCourtInfo: "If you mail in your petition this court will ONLY accept money orders, no other payment method. The Sweet Springs Herald contact email is sweetspringsherald@gmail.com and their phone number is (660) 335-6366.",
+      circuit: "15th"
+    },
+    filingFee: "$175",
+    publications: [
+      {
+        name: "Marshall Democrat-News",
+        website: "https://www.marshallnews.com/contact-us/"
+      },
+      {
+        name: "Slater Main Street News",
+        website: "https://www.slatermainstreetnews.com/contact-us/"
+      },
+      {
+        name: "Sweet Springs Herald",
+        website: "https://www.facebook.com/TheSweetSpringsHerald/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "19 E Arrow St # 301, Marshall, MO 65340",
+    genderChanges: false,
+    voteClerkAddress: `Saline County Clerk's Office
+     9 E North St
+     MARSHALL, MO 65340`
+  },
+  {
+    name: "Schuyler",
+    court: {
+      address: "102 S Congress St Suite 103, Lancaster, MO 63548",
+      city: "Lancaster",
+      phone: "(660) 956-9058",
+      specificCourtInfo: "If you are born in Missouri this court sends a copy of your name change judgement and an Application to update you birth certificate to the Missouri Vital Records as part of the name change process and charges an additional $30 for it somewhere in the process. This is not covered by the fee waiver.",
+      circuit: "1st"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Schuyler County Times",
+      website: "https://www.schuylercountytimes.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Schuyler County Clerk's Office
+     PO Box 187
+     Lancaster, MO 63548`
+  },
+  {
+    name: "Scotland",
+    court: {
+      address: "117 S Market St, Memphis, MO 63555",
+      city: "Memphis",
+      phone: "(660) 465-8605",
+      specificCourtInfo: "This court sends out the application to the newspaper on your behalf but you still have to pay the newspaper yourself.",
+      circuit: "1st"
+    },
+    filingFee: "$150",
+    publications: [{
+      name: "Memphis Democrat",
+      website: "https://www.memphisdemocrat.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Scotland County Clerk's Office
+     231 S MARKET ST., ROOM 2
+     MEMPHIS, MO 63555`
+  },
+  {
+    name: "Scott",
+    court: {
+      address: "131 S Winchester St, Benton, MO 63736",
+      city: "Benton",
+      phone: "(573) 545-3549",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash.",
+      circuit: "33rd"
+    },
+    filingFee: "$130.50",
+    publications: [{
+      name: "Sikeston Standard Democrat",
+      website: "https://www.standard-democrat.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "131 S Winchester St, Benton, MO 63736",
+    genderChanges: false,
+    voteClerkAddress: `Scott County Clerk's Office
+     PO BOX 188
+     BENTON, MO 63736`
+  },
+  {
+    name: "Shannon",
+    court: {
+      address: "18529 Main St, Eminence, MO 65466",
+      city: "Eminence",
+      phone: "(573) 226-3414",
+      circuit: "37th"
+    },
+    filingFee: "$128.50",
+    publications: [{
+      name: "The Current Wave",
+      website: "https://www.currentwave.news/contact"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "18529 Main St, Eminence, MO 65466",
+    genderChanges: false,
+    voteClerkAddress: `Shannon County Clerk's Office
+     PO Box 187
+     Eminence, MO 65466`
+  },
+  {
+    name: "Shelby",
+    court: {
+      address: "100 E Main St, Shelbyville, MO 63469",
+      city: "Shelbyville",
+      phone: "(573) 633-2151",
+      circuit: "41st"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Shelby County Herald",
+      website: "https://www.shelbycountyherald.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 E Main St, Shelbyville, MO 63469",
+    genderChanges: false,
+    voteClerkAddress: `Shelby County Clerk's Office
+     P.O. Box 186
+     Shelbyville, MO 63469`
+  },
+  {
+    name: "St. Charles",
+    court: {
+      address: "300 N 2nd St, St Charles, MO 63301",
+      city: "St Charles",
+      phone: "(636) 949-3080",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes and you can leave the same day with a court date, if you select mail in filing do not send cash.",
+      circuit: "11th"
+    },
+    filingFee: "$128.50",
+    publications: [
+      {
+        name: "St. Charles Business Record",
+        website: "https://molawyersmedia.com/about/contact-us/"
+      },
+      {
+        name: "St. Charles County Journal",
+        website: "https://pulselegal.com/saint-charles-county-journal/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "300 N 2nd St, St Charles, MO 63301",
+    genderChanges: false,
+    voteClerkAddress: `St. Charles County Clerk's Office
+     397 TURNER BLVD
+     ST. PETERS, MO 63376`
+  },
+  {
+    name: "St. Clair",
+    court: {
+      address: "655 2nd St, Osceola, MO 64776",
+      city: "Osceola",
+      phone: "(417) 646-2226",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes and you can leave the same day with a court date. If you select mail in filing do not send cash or personal check, only cashiers check or money orders are accepted.",
+      circuit: "27th"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "St. Clair County Courier",
+      website: "https://stclaircourier.com/lakesun/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "655 2nd St, Osceola, MO 64776",
+    genderChanges: false,
+    voteClerkAddress: `St. Clair County Clerk's Office
+     P. O. BOX 525
+     OSCEOLA, MO 64776`
+  },
+  {
+    name: "St. Francois",
+    court: {
+      address: "1 N Washington St #102, Farmington, MO 63640",
+      city: "Farmington",
+      phone: "(573) 756-5755",
+      circuit: "24th"
+    },
+    filingFee: "$95.50",
+    publications: [{
+      name: "Daily Journal",
+      website: "https://www.dailyjournalonline.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `St. Francois County Clerk's Office
+     1101 WEBER RD, STE 302
+     FARMINGTON, MO 63640`
+  },
+  {
+    name: "St. Louis (City)",
+    court: {
+      address: "10 N Tucker Blvd, St. Louis, MO 63101",
+      city: "St. Louis",
+      phone: "(314) 622-4500",
+      circuit: "22nd"
+    },
+    filingFee: "$177.50",
+    publications: [{
+      name: "St. Louis Daily Record",
+      website: "https://molawyersmedia.com/submit-your-public-notice/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "Civil Circuit Court Building, 10 N Tucker Blvd, St. Louis, MO 63101",
+    genderChanges: false,
+    voteClerkAddress: `St. Louis City Election Board
+    300 North Tucker Blvd. 1st floor
+    St. Louis, MO 63101`
+  },
+  {
+    name: "St. Louis (County)",
+    court: {
+      address: "105 S Central Ave, Clayton, MO 63105",
+      city: "Clayton",
+      phone: "(314) 615-8029",
+      specificCourtInfo: "You can also find contact information for the newspaper options here: https://stlcountycourts.com/courts-departments/probate-court/publication-options/",
+      circuit: "21st"
+    },
+    filingFee: "$135.50",
+    publications: [
+      {
+        name: "Legal Ledger",
+        website: "https://pulselegal.com/st-louis-legal-ledger/"
+      },
+      {
+        name: "St. Louis Countian",
+        website: "https://molawyersmedia.com/submit-your-public-notice/"
+      },
+      {
+        name: "St. Louis Post Dispatch",
+        website: "https://www.stltoday.com/contact/#tracking-source=menu-nav"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "105 S Central Ave, Clayton, MO 63105",
+    genderChanges: false,
+    voteClerkAddress: `St. Louis County Board Of Elections
+     725 Northwest Plaza Dr.
+     St. Louis, MO 63074`
+  },
+  {
+    name: "Ste. Genevieve",
+    court: {
+      address: "55 3rd St, Ste. Genevieve, MO 63670",
+      city: "Ste. Genevieve",
+      phone: "(573) 883-2265",
+      specificCourtInfo: "If you mail in your petition this court will ONLY accept money orders, no other payment method. There is a chance that this judge may simply approve the paperwork and mail it back without a hearing.",
+      circuit: "24th"
+    },
+    filingFee: "$98.50",
+    publications: [{
+      name: "Ste. Genevieve Herald",
+      website: "https://www.stegenherald.com/contact-us#1d000f97-5c99-488d-b9d5-73ed74d96a8c"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "55 3rd St, Ste. Genevieve, MO 63670",
+    genderChanges: false,
+    voteClerkAddress: `Ste. Genevieve County Clerk's Office
+     55 S THIRD STREET, ROOM 2
+     STE GENEVIEVE, MO 63670`
+  },
+  {
+    name: "Stoddard",
+    court: {
+      address: "403 S Prairie St, Bloomfield, MO 63825",
+      city: "Bloomfield",
+      phone: "(573) 568-4640",
+      specificCourtInfo: "The contact email for the Bernie Banner, which is generally regarded as the cheaper of the 2 publication options, is thebanner@bpsnetworks.com and the phone number is (573) 293-6974.",
+      circuit: "35th"
+    },
+    filingFee: "$102.50",
+    publications: [
+      {
+        name: "Bernie Banner",
+        website: "https://www.facebook.com/p/Bernie-Banner-100046026585959/"
+      },
+      {
+        name: "Dexter Statesman",
+        website: "https://www.dexterstatesman.com/contact-us"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "403 S Prairie St, Bloomfield, MO 63825",
+    genderChanges: false,
+    voteClerkAddress: `Stoddard County Clerk's Office
+     PO BOX 110
+     BLOOMFIELD, MO 63825`
+  },
+  {
+    name: "Stone",
+    court: {
+      address: "110 S Maple St Ste F, Galena, MO 65656",
+      city: "Galena",
+      phone: "(417) 357-6115",
+      specificCourtInfo: "The sole in-county newspaper went out of business so the court offers 3 out of county options, if a new newspaper gets going in Stone county this will change. Send us a tip if it does.",
+      circuit: "39th"
+    },
+    filingFee: "$100.50",
+    publications: [
+      {
+        name: "Aurora Advertiser",
+        website: "https://auroraadvertiser.net/contact-us/"
+      },
+      {
+        name: "Branson Globe",
+        website: "https://www.bransonglobe.com/contact-subscribe"
+      },
+      {
+        name: "Branson Tri-Lakes News",
+        website: "https://www.bransontrilakesnews.com/site/contact.html"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "110 S Maple St Ste F, Galena, MO 65656",
+    genderChanges: false,
+    voteClerkAddress: `Stone County Clerk's Office
+     PO BOX 45
+     GALENA, MO 65656`
+  },
+  {
+    name: "Sullivan",
+    court: {
+      address: "109 N Main St, Milan, MO 63556",
+      city: "Milan",
+      phone: "(660) 265-4717",
+      circuit: "9th"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Milan Standard",
+      website: "https://www.themilanstandard.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Sullivan County Clerk's Office
+     109 N Main St. Ste. 5
+     Milan, MO 63556`
+  },
+  {
+    name: "Taney",
+    court: {
+      address: "266 Main St, Forsyth, MO 65653",
+      city: "Forsyth",
+      phone: "(417) 546-7200",
+      circuit: "46th"
+    },
+    filingFee: "$90.50",
+    publications: [{
+      name: "Branson Globe",
+      website: "https://www.bransonglobe.com/contact-subscribe"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "266 Main St, Forsyth, MO 65653",
+    genderChanges: false,
+    voteClerkAddress: `Taney County Clerk's Office
+     P.O. BOX 156
+     FORSYTH, MO 65653`
+  },
+  {
+    name: "Texas",
+    court: {
+      address: "519 N Grand Ave, Houston, MO 65483",
+      city: "Houston",
+      phone: "(417) 967-3742",
+      circuit: "25th"
+    },
+    filingFee: "$132.50",
+    publications: [
+      {
+        name: "Houston Herald",
+        website: "https://houstonherald.com/contact-us/"
+      },
+      {
+        name: "Licking News",
+        website: "https://www.thelickingnews.net/contact-us/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "519 N Grand Ave, Houston, MO 65483",
+    genderChanges: false,
+    voteClerkAddress: `Texas County Clerk's Office
+     210 N Grand, Ste. 311
+     Houston, MO 65483`
+  },
+  {
+    name: "Vernon",
+    court: {
+      address: "100 W Cherry St, Nevada, MO 64772",
+      city: "Nevada",
+      phone: "(417) 448-2550",
+      specificCourtInfo: "These clerks will likely be unhelpful with any questions that you may have during filing based on our calls with them, see the resources section or a local LGBT group for help instead if needed.",
+      circuit: "28th"
+    },
+    filingFee: "$102.50",
+    publications: [{
+      name: "Nevada Daily Mail",
+      website: "https://www.nevadadailymail.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "100 W Cherry St, Nevada, MO 64772",
+    genderChanges: false,
+    voteClerkAddress: `Vernon County Clerk's Office
+     100 W CHERRY SUITE 6
+     NEVADA, MO 64772`
+  },
+  {
+    name: "Warren",
+    court: {
+      address: "104 Booneslick Rd, Warrenton, MO 63383",
+      city: "Warrenton",
+      phone: "(636) 456-3363",
+      specificCourtInfo: "The court prefers in person filing so they can correct any mistakes then and there, if you select mail in filing do not send cash. This court will also automatically file to update your birth certificate after the name change if you are born in Missouri, they charge an extra $15 for this and that is NOT covered by the fee waiver to my knowledge.",
+      circuit: "12th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Warren County Record",
+      website: "https://www.warrencountyrecord.com/contact-us/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "104 Booneslick Rd, Warrenton, MO 63383",
+    genderChanges: false,
+    voteClerkAddress: `Warren County Clerk's Office
+     101 MOCKINGBIRD LN STE 302
+     WARRENTON, MO 63383`
+  },
+  {
+    name: "Washington",
+    court: {
+      address: "102 N Missouri St # D, Potosi, MO 63664",
+      city: "Potosi",
+      phone: "(573) 438-6111",
+      specificCourtInfo: "This court has a custom publication application that they will give you after the hearing to reduce your pubication cost, since they do this we have removed the states publication application from your forms.",
+      circuit: "24th"
+    },
+    filingFee: "$95.50",
+    publications: [{
+      name: "The Independent Journal",
+      website: "https://www.theijnews.com/about"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "102 N Missouri St # D, Potosi, MO 63664",
+    genderChanges: false,
+    voteClerkAddress: `Washington County Clerk's Office
+     102 N Missouri St.
+     Potosi, MO 63664`
+  },
+  {
+    name: "Wayne",
+    court: {
+      address: "104 Walnut St, Greenville, MO 63944",
+      city: "Greenville",
+      phone: "(573) 224-5600",
+      circuit: "42nd"
+    },
+    filingFee: "$110",
+    publications: [{
+      name: "Wayne County Journal Banner",
+      website: "https://www.waynecojournalbanner.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "104 Walnut St, Greenville, MO 63944",
+    genderChanges: false,
+    voteClerkAddress: `Wayne County Clerk's Office
+     P. O. BOX 48
+     GREENVILLE, MO 63944`
+  },
+  {
+    name: "Webster",
+    court: {
+      address: "101 S Crittenden St, Marshfield, MO 65706",
+      city: "Marshfield",
+      phone: "(417) 859-2006",
+      circuit: "30th"
+    },
+    filingFee: "$138.50",
+    publications: [
+      {
+        name: "Marshfield Mail",
+        website: "https://marshfieldmail.com/contact-us/index.html"
+      },
+      {
+        name: "Webster County Citizen",
+        website: "https://www.webstercountycitizen.com/site/contact.html/"
+      }
+    ],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Webster County Clerk's Office
+     101 S. CRITTENDEN ST., RM. 12
+     MARSHFIELD, MO 65706`
+  },
+  {
+    name: "Worth",
+    court: {
+      address: "11 W 4th St, Grant City, MO 64456",
+      city: "Grant City",
+      phone: "(660) 564-2210",
+      circuit: "4th"
+    },
+    filingFee: "$100.50",
+    publications: [{
+      name: "Sherican Express",
+      website: "https://sheridanexpress.blogspot.com/"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: false,
+    mailAddress: "",
+    genderChanges: false,
+    voteClerkAddress: `Worth County Clerk's Office
+     PO Box 450
+     Grant City, MO 64456`
+  },
+  {
+    name: "Wright",
+    court: {
+      address: "125 Court Square, Hartville, MO 65667",
+      city: "Hartville",
+      phone: "(417) 741-7121",
+      circuit: "44th"
+    },
+    filingFee: "$93.50",
+    publications: [{
+      name: "Wright County Journal",
+      website: "https://wrightcountyjournal.com/contact-us"
+    }],
+    courtPublishes: false,
+    inPersonFile: true,
+    onlineFile: false,
+    mailFile: true,
+    mailAddress: "125 Court Square, Hartville, MO 65667",
+    genderChanges: false,
+    voteClerkAddress: `Wright County Clerk's Office
+     PO BOX 98
+     HARTVILLE, MO 65667`
+  }
+];
 const ssnMap = [
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -49348,6 +54799,19 @@ const delaware = {
   ],
   localities: delawareCounties
 };
+const missouri = {
+  name: "Missouri",
+  abbreviation: "MO",
+  processes: [
+    missouriNameChange,
+    socialSecurity,
+    missouriGenderMarker,
+    missouriPrimaryIdentification,
+    missouriBirthRecord,
+    missouriPostamble
+  ],
+  localities: missouriCounties
+};
 const federal = {
   name: "Federal",
   abbreviation: "FED",
@@ -49369,6 +54833,7 @@ const allJurisdictions = [
   rhodeIsland,
   california,
   delaware,
+  missouri,
   elsewhere,
   federal
 ];
