@@ -27,6 +27,7 @@ import {
   ContactFormat as cf,
   formatContactInfo,
   abbreviateJurisdiction,
+  getMOLocality,
 } from "../../lib/util";
 
 import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
@@ -51,7 +52,7 @@ export const adultNamePetitionMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 394, y: 49 },
@@ -223,7 +224,7 @@ export const minorNamePetitionMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 355, y: 70 },
@@ -423,7 +424,7 @@ export const minorConsentMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 },
@@ -555,7 +556,7 @@ export const minorParentConsentMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 },
@@ -672,7 +673,7 @@ export const adultNameOrderMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 },
@@ -703,7 +704,7 @@ export const adultNameOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { x: 106, y: 610 },
+    loc: { x: 105, y: 610 },
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -760,7 +761,7 @@ export const minorNameOrderMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 },
@@ -849,7 +850,8 @@ export const minorNameOrderMap: Formfill[] = [
  */
 export const feeWaiverMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocality?.court.circuit,
+    text: getMOLocality(applicant.residentJurisdictionName, 
+      applicant.residentLocalityName)?.court.circuit,
     fieldName: "Judicial Circuit Court Number",
   }),
   (applicant) => ({
@@ -883,7 +885,7 @@ export const confidentialInfoMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     fieldName: "CountyCity of St Louis",
@@ -1061,7 +1063,7 @@ export const adultPublicationMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 62 },
@@ -1152,7 +1154,7 @@ export const minorPublicationMap: Formfill[] = [
         case "St. Louis (County)":
           return "St. Louis County";
         default:
-          return `${applicant.residentLocalityName} County`;
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 },
