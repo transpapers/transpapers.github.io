@@ -270,6 +270,7 @@ export const allJurisdictions: AnyJurisdiction[] = [
   rhodeIsland,
   california,
   delaware,
+  missouri,
   elsewhere,
 
   federal,

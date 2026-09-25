@@ -105,7 +105,7 @@ function MissouriFilingGuide({
           process
           <a href="https://www.courts.mo.gov/page.jsp?id=5240">
             here
-          </a>
+          </a>.
         </p>
       }
 
@@ -116,7 +116,11 @@ function MissouriFilingGuide({
           documents we had {age && age > 17 ? "you" : "them"} gather, the notarized forms, 
           photo ID, the redacted photocopies of everything. In addition 
           {age && age > 17 ? " you" : " they"} will need either the fee waiver form or an 
-          accepted payment method for {residentLocality.filingFee} to the court.
+          accepted payment method for {residentLocality.filingFee} to the court. Some courts
+          will require you to watch a self-representation awareness video, that video is
+          <a href="https://www.courts.mo.gov/page.jsp?id=5240">
+            here
+          </a>.
         </p>
       }
 

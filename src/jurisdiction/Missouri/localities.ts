@@ -23,31 +23,6 @@ import { MissouriCounty } from "../../types/locality";
 
 const missouriCounties: MissouriCounty[] = [
   {
-    name: "",
-    court: {
-      address: "",
-      city: "",
-      phone: "",
-      website: "",
-      specificCourtInfo: "",
-      circuit: "",
-    },
-    filingFee: "",
-    publications: [{
-      name: "",
-      website: "",
-    }],
-    courtPublishes: false,
-    inPersonFile: false,
-    onlineFile: false,
-    mailFile: false,
-    mailAddress: "",
-    genderChanges: false,
-    voteClerkAddress:
-    `
-    `,
-  },
-  {
     name: "Adair",
     court: {
       address: "106 W Washington St, Kirksville, MO 63501",
@@ -662,7 +637,7 @@ const missouriCounties: MissouriCounty[] = [
       address: "207 N Main St, Plattsburg, MO 64477",
       city: "Plattsburg",
       phone: "(816) 539-3731",
-      specificCourtInfo: "The $500 filing fee is 4 to 5x the fee that other Missouri courts have, we are unsure why but have verified that this fee is accurate.",
+      specificCourtInfo: "The $500 filing fee is 4 to 5x the fee that other Missouri courts have, we are unsure why but have verified that this fee is accurate. It would be a good idea to use the fee waiver form to try and avoid paying this absurdly high fee.",
       circuit: "43rd",
     },
     filingFee: "$500.00",
