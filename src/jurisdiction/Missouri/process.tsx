@@ -319,6 +319,7 @@ export const missouriPostamble: Process<MissouriCounty> = {
       id: "231-0169",
       filename: "Missouri/Voter Registration.pdf",
       map: voterRegistrationMap,
+      include: (applicant) => !isMinor(applicant),
     },
   ],
   isJustGuide: true,
