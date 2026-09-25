@@ -48623,7 +48623,7 @@ const minorNamePetitionMap = [
   }),
   () => ({
     text: "X",
-    loc: { x: 101, y: 539 }
+    loc: { x: 101, y: 537 }
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
@@ -48726,7 +48726,7 @@ const minorNamePetitionMap = [
   }),
   () => ({
     text: "X",
-    loc: { page: 1, x: 241, y: 801 }
+    loc: { page: 1, x: 241, y: 800 }
   }),
   (applicant) => ({
     text: applicant.residentJurisdictionName,
@@ -48738,11 +48738,11 @@ const minorNamePetitionMap = [
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { page: 2, x: 102, y: 98 }
+    loc: { page: 2, x: 102, y: 97 }
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "X" : "",
-    loc: { page: 2, x: 102, y: 118 }
+    loc: { page: 2, x: 102, y: 117 }
   })
 ];
 const minorConsentMap = [
@@ -48791,35 +48791,35 @@ const minorConsentMap = [
     loc: { x: 103, y: 558 }
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.first,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.first,
     fieldName: "nmnfPetitionerFirstName2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.middle,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.middle,
     fieldName: "nmnfPetitionerMiddleName2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.last,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.last,
     fieldName: "nmnfPetitionerLastName2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.suffix,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.suffix,
     fieldName: "nmnfPetitionerSuffix2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.first,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.first,
     fieldName: "nmnfYourFirstName2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.middle,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.middle,
     fieldName: "nmnfYourMiddleName2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.last,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.last,
     fieldName: "nmnfYour LastName2"
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.suffix,
+    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.suffix,
     fieldName: "nmnfYourSuffix2"
   }),
   (applicant) => ({
@@ -49283,7 +49283,10 @@ const confidentialInfoMap = [
 ];
 const redactionCertificationMap = [
   (applicant) => ({
-    text: applicant.residentLocality?.court.circuit,
+    text: getMOLocality(
+      applicant.residentJurisdictionName,
+      applicant.residentLocalityName
+    )?.court.circuit,
     fieldName: "JUDICIAL_CIRCUIT"
   }),
   (applicant) => ({
@@ -51056,7 +51059,8 @@ const missouriPostamble = {
       name: "Missouri Voter Registration Application",
       id: "231-0169",
       filename: "Missouri/Voter Registration.pdf",
-      map: voterRegistrationMap
+      map: voterRegistrationMap,
+      include: (applicant) => !isMinor(applicant)
     }
   ],
   isJustGuide: true
