@@ -73,8 +73,12 @@ export const adultNamePetitionMap: Formfill[] = [
     fieldName: "Current_Legal_Suffix",
   }),
   (applicant) => ({
-    fieldName: "Birth_Legal_Name",
-    choice: applicant.birthName.first ? "different from current" : "Same as current",
+    text: applicant.birthName.first ? "X" : "",
+    loc: { x: 85, y: 561 },
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "" : "X",
+    loc: { x: 85, y: 610 },
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -109,8 +113,8 @@ export const adultNamePetitionMap: Formfill[] = [
     fieldName: "Change_Suffix",
   }),
   () => ({
-    fieldName: "Petition_Filing_Count",
-    choice: "First petition",
+    text: "X",
+    loc: { x: 85, y: 765 },
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail 
@@ -168,8 +172,8 @@ export const adultNamePetitionMap: Formfill[] = [
     fieldName: "Change_Name_Reason",
   }),
   () => ({
-    fieldName: "Residence_Country",
-    choice: "United States",
+    text: "X",
+    loc: { page: 1, x: 167, y: 667 },
   }),
   (applicant) => ({
     text: applicant.residentJurisdictionName,
@@ -180,8 +184,12 @@ export const adultNamePetitionMap: Formfill[] = [
     fieldName: "Residence_County",
   }),
   (applicant) => ({
-    fieldName: "Name_Change_History",
-    choice: applicant.birthName.first ? "Previously been changed" : "Never been changed",
+    text: applicant.birthName.first ? "" : "X",
+    loc: { page: 1, x: 85, y: 843 },
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "X" : "",
+    loc: { page: 1, x: 85, y: 878 },
   }),
 ];
 
@@ -673,9 +681,13 @@ export const adultNameOrderMap: Formfill[] = [
     check: true,
     fieldName: "appearsInPerson",
   }),
+    (applicant) => ({
+    text: applicant.birthName.first ? "X" : "",
+    loc: { x: 106, y: 486 },
+  }),
   (applicant) => ({
-    fieldName: "page1Group1",
-    choice: applicant.birthName.first ? "My full legal name at birth (prior to first marriage) was" : "My full legal name at birth (prior to first marriage) was same as current full legal name.",
+    text: applicant.birthName.first ? "" : "X",
+    loc: { x: 106, y: 623 },
   }),
   (applicant) => ({
     text: applicant.birthName.first,
