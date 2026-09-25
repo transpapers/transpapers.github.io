@@ -237,8 +237,8 @@ export const minorNamePetitionMap: Formfill[] = [
     fieldName: "nmpYourSuffix",
   }),
   () => ({
-    fieldName: "nmpWhichPetition",
-    check: true,
+    text: "X",
+    loc: { x: 101, y: 539 },
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail 
@@ -289,8 +289,8 @@ export const minorNamePetitionMap: Formfill[] = [
     fieldName: "nmpOtherParentZip",
   }),
   () => ({
-    fieldName: "nmpOtherParentSigned412",
-    choice: "The other parent of the child has signed Consent to Minor Child's Change of Name CAFC412, which is attached hereto.",
+    text: "X",
+    loc: { page: 1, x: 101, y: 97 },
   }),
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -367,6 +367,10 @@ export const minorNamePetitionMap: Formfill[] = [
     fieldName: "nmpChildResidesWhichCountry",
     choice: "The child resides in the United States.",
   }),
+  () => ({
+    text: "X",
+    loc: { page: 1, x: 241, y: 801 },
+  }),
   (applicant) => ({
     text: applicant.residentJurisdictionName,
     fieldName: "nmpChildResidesWhichState",
@@ -376,8 +380,12 @@ export const minorNamePetitionMap: Formfill[] = [
     fieldName: "nmpChildResidesCounty",
   }),
   (applicant) => ({
-    fieldName: "nmpChangedNameBeforeOrNot",
-    choice: applicant.birthName.first ? "The child's name has previously been changed as follows:" : "The child's name has never been changed.",
+    text: applicant.birthName.first ? "" : "X",
+    loc: { page: 2, x: 102, y: 98 },
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "X" : "",
+    loc: { page: 2, x: 102, y: 118 },
   }),
 ];
 
@@ -423,44 +431,44 @@ export const minorConsentMap: Formfill[] = [
     }),
     fieldName: "nmnfPetitionerDOB",
   }),
-  //(applicant) => ({
-    //fieldName: "nmnfChildAge",
-    //choice: applicant.age && applicant.age < 14 ? "The child whose name is to be changed is age 0 to 13 years." : "The child whose name is to be changed is age 14 to 17 years.",
-  //}),
   (applicant) => ({
-    fieldName: "nmnfChildAge",
-    check: applicant.age && applicant.age < 14 ? true : false,
+    text: applicant.age && applicant.age < 14 ? "X" : "",
+    loc: { x: 103, y: 539 },
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.first,
+    text: applicant.age && applicant.age > 13 ? "X" : "",
+    loc: { x: 103, y: 558 },
+  }),
+  (applicant) => ({
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.first,
     fieldName: "nmnfPetitionerFirstName2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.middle,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.middle,
     fieldName: "nmnfPetitionerMiddleName2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.last,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.last,
     fieldName: "nmnfPetitionerLastName2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.suffix,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.legalName.suffix,
     fieldName: "nmnfPetitionerSuffix2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.first,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.first,
     fieldName: "nmnfYourFirstName2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.middle,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.middle,
     fieldName: "nmnfYourMiddleName2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.last,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.last,
     fieldName: "nmnfYour LastName2",
   }),
   (applicant) => ({
-    text: applicant.age && applicant.age < 14 ? "" : applicant.representativeName?.suffix,
+    text: applicant.age && applicant.age > 13 ? "" : applicant.representativeName?.suffix,
     fieldName: "nmnfYourSuffix2",
   }),
   (applicant) => ({
@@ -504,8 +512,8 @@ export const minorConsentMap: Formfill[] = [
     fieldName: "nmnfYourZip",
   }),
   (applicant) => ({
-    fieldName: "nmnfResidesWithWhom",
-    choice: applicant.parentsAreOkay ? "The child resides with me." : undefined,
+    text: applicant.parentsAreOkay ? "X" : "",
+    loc: { page: 1, x: 105, y: 248 },
   }),
   (applicant) => ({
     text: fullName(applicant.representativeName),
@@ -1342,8 +1350,8 @@ export const minorNameGenderCoverMap: Formfill[] = [
  */
 export const birthCertCorrectionMap: Formfill[] = [
   () => ({
-    fieldName: "Correction Type",
-    check: true,
+    text: "x",
+    loc: { x: 37, y: 262 },
   }),
   (applicant) => ({
     text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
@@ -1381,17 +1389,16 @@ export const birthCertCorrectionMap: Formfill[] = [
     fieldName: "DOB - Year",
   }),
   (applicant) => ({
-    fieldName: "Sex",
-    value: (() => {
-      switch (applicant.assignedSex) {
-        case GenderMarker.F:
-          return "Female";
-        case GenderMarker.M:
-          return "Male";
-        case GenderMarker.X:
-          return "Unknown";
-      }
-    })(),
+    text: applicant.assignedSex === GenderMarker.F ? "x" : "",
+    loc: { x: 648, y: 272 },
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.M ? "x" : "",
+    loc: { x: 700, y: 272 },
+  }),
+  (applicant) => ({
+    text: applicant.assignedSex === GenderMarker.X ? "x" : "",
+    loc: { x: 741, y: 272 },
   }),
   (applicant) => ({
     text: applicant.isChangingLegalName ? "Name" : "",
@@ -1511,7 +1518,7 @@ export const voterRegistrationMap: Formfill[] = [
   }),
   () => ({
     fieldName: "18 Years Old",
-    value: "YES_2",
+    choice: "YES_2",
   }),
   () => ({
     check: true,
