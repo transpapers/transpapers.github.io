@@ -93,6 +93,8 @@ function MissouriFilingGuide({
 
       {residentLocality.onlineFile && 
         <p>
+          <strong>Online Filing</strong>
+          <br />
           The {residentLocalityName} circuit court will accept online filings.
           {age && age > 17 ? " You" : " Your next friend"} will need to scan all of your 
           documents onto your computer separately, label them as their form names as we did 
@@ -102,7 +104,7 @@ function MissouriFilingGuide({
           </a>
           {" "} to upload them. Two copies of the photo ID, redacted and un-redacted, will 
           need to be uploaded as well. There is an instruction video that goes over this 
-          process
+          process{" "}
           <a href="https://www.courts.mo.gov/page.jsp?id=5240">
             here
           </a>.
@@ -111,6 +113,8 @@ function MissouriFilingGuide({
 
       {residentLocality.inPersonFile && 
         <p>
+          <strong>In-Person Filing</strong>
+          <br />
           The {residentLocalityName} circuit court will accept in-person filings.
           {age && age > 17 ? " You" : " Your next friend"} will need to bring all of the 
           documents we had {age && age > 17 ? "you" : "them"} gather, the notarized forms, 
@@ -126,6 +130,8 @@ function MissouriFilingGuide({
 
       {residentLocality.mailFile && 
         <p>
+          <strong>Mail Filing</strong>
+          <br />
           The {residentLocalityName} circuit court will accept mail-in filings.
           {age && age > 17 ? " You" : " Your next friend"} will need to place all of the 
           documents we had {age && age > 17 ? "you" : "them"} gather, the notarized forms, 

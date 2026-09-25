@@ -1359,7 +1359,7 @@ export const minorNameGenderCoverMap: Formfill[] = [
 export const birthCertCorrectionMap: Formfill[] = [
   () => ({
     text: "x",
-    loc: { x: 37, y: 262 },
+    loc: { x: 38, y: 262 },
   }),
   (applicant) => ({
     text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
