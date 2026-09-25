@@ -137,14 +137,14 @@ export const missouriNameChange: Process<MissouriCounty> = {
       guide: MissouriPublicationAdultGuide,
       include: (applicant) => !isMinor(applicant) 
         && getMOLocality(applicant.residentJurisdictionName, 
-            applicant.residentLocalityName)?.courtPublishes === true,
+            applicant.residentLocalityName)?.courtPublishes === false,
     },
     {
       name: "Request for Publication Minor",
       guide: MissouriPublicationMinorGuide,
       include: (applicant) => isMinor(applicant)
         && getMOLocality(applicant.residentJurisdictionName, 
-            applicant.residentLocalityName)?.courtPublishes === true,
+            applicant.residentLocalityName)?.courtPublishes === false,
     },
     {
       name: "Confidential Case Filing Information Sheet",
@@ -216,7 +216,7 @@ export const missouriNameChange: Process<MissouriCounty> = {
       map: adultPublicationMap,
       include: (applicant) => !isMinor(applicant) 
         && getMOLocality(applicant.residentJurisdictionName, 
-            applicant.residentLocalityName)?.courtPublishes === true 
+            applicant.residentLocalityName)?.courtPublishes === false 
         && applicant.residentLocalityName !== "Madison"
         && applicant.residentLocalityName !== "Washington",
     },
@@ -227,7 +227,7 @@ export const missouriNameChange: Process<MissouriCounty> = {
       map: minorPublicationMap,
       include: (applicant) => isMinor(applicant)
         && getMOLocality(applicant.residentJurisdictionName, 
-            applicant.residentLocalityName)?.courtPublishes === true
+            applicant.residentLocalityName)?.courtPublishes === false
         && applicant.residentLocalityName !== "Madison"
         && applicant.residentLocalityName !== "Washington",
     },
