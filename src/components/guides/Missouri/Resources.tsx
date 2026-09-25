@@ -41,8 +41,10 @@ function MissouriResourcesGuide() {
           </a>
           {" "}for more information and a list of other local resources.
         </li>
+        <li>
         <br />
         <br />
+        </li>
         <li>
           <a href="https://centerproject.org/resources/name-gender-changes/">
             The Center Project
@@ -50,8 +52,10 @@ function MissouriResourcesGuide() {
           : They provide assistance with updating name and gender markers for trans and 
           nonbinary people in mid-Missouri. They also offer inclusive notary services.
         </li>
+        <li>
         <br />
         <br />
+        </li>
         <li>
           <a href="https://www.shb.com/about/diversity">
             Shook Hardy & Bacon
@@ -62,7 +66,10 @@ function MissouriResourcesGuide() {
           representation for a gender marker change case.
         </li>
         <br />
+        <li>
         <br />
+        <br />
+        </li>
         <li>
           <a href="https://www.mokanqueerlaw.com/">
             Missouri Kansas Queer Law
@@ -72,8 +79,10 @@ function MissouriResourcesGuide() {
           letter with the words “surgical procedure”. Contact them through their website 
           or by emailing office@mokanqueerlaw.com.
         </li>
+        <li>
         <br />
         <br />
+        </li>
         <li>
           <a href="https://www.kansashealthsystem.com/care/specialties/gender-affirming-medicine">
             The University of Kansas Gender Clinic
@@ -81,8 +90,10 @@ function MissouriResourcesGuide() {
           : They provide gender affirming care and can assist with doctor’s letters for 
           gender changes if you are a patient in their system.
         </li>
+        <li>
         <br />
         <br />
+        </li>
         <li>
           Johnda Boyce is an attorney in the Kansas City area. She has experience with name 
           and gender marker changes. Contact her for more information by emailing 
