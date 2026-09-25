@@ -50,7 +50,7 @@ export const adultNamePetitionMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -222,7 +222,7 @@ export const minorNamePetitionMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -422,7 +422,7 @@ export const minorConsentMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -554,7 +554,7 @@ export const minorParentConsentMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -671,7 +671,7 @@ export const adultNameOrderMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -759,7 +759,7 @@ export const minorNameOrderMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -882,7 +882,7 @@ export const confidentialInfoMap: Formfill[] = [
           return "City of St. Louis";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -1060,7 +1060,7 @@ export const adultPublicationMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -1113,7 +1113,7 @@ export const adultPublicationMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis";
-        case "":
+        default:
           return applicant.residentLocalityName;
       }
     })(),
@@ -1151,7 +1151,7 @@ export const minorPublicationMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
+        default:
           return `${applicant.residentLocalityName} County`;
       }
     })(),
@@ -1204,7 +1204,7 @@ export const minorPublicationMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis";
-        case "":
+        default:
           return applicant.residentLocalityName;
       }
     })(),
@@ -1591,7 +1591,7 @@ export const voterRegistrationMap: Formfill[] = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis";
-        case "":
+        default:
           return applicant.residentLocalityName;
       }
     })(),
