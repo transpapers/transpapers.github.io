@@ -50358,6 +50358,7 @@ function MissouriFilingGuide({
         " will need either the fee waiver form or an accepted payment method for ",
         residentLocality.filingFee,
         " to the court. Some courts will require you to watch a self-representation awareness video, that video is",
+        " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.courts.mo.gov/page.jsp?id=5240", children: "here" }),
         "."
       ] }),
