@@ -48413,8 +48413,7 @@ const delawareCounties = [
 ];
 const adultNamePetitionMap = [
   (applicant) => ({
-    fieldName: "Circuit_Court_County",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -48423,7 +48422,8 @@ const adultNamePetitionMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 394, y: 49 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -48571,8 +48571,7 @@ const adultNamePetitionMap = [
 ];
 const minorNamePetitionMap = [
   (applicant) => ({
-    fieldName: "nmpCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -48581,7 +48580,8 @@ const minorNamePetitionMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 355, y: 70 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -48741,8 +48741,7 @@ const minorNamePetitionMap = [
 ];
 const minorConsentMap = [
   (applicant) => ({
-    fieldName: "nmnfCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -48751,7 +48750,8 @@ const minorConsentMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 356, y: 70 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -48859,8 +48859,7 @@ const minorConsentMap = [
 ];
 const minorParentConsentMap = [
   (applicant) => ({
-    fieldName: "nmcCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -48869,7 +48868,8 @@ const minorParentConsentMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 356, y: 70 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -48954,8 +48954,7 @@ const minorParentConsentMap = [
 ];
 const adultNameOrderMap = [
   (applicant) => ({
-    fieldName: "CountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -48964,7 +48963,8 @@ const adultNameOrderMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 356, y: 70 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -48988,11 +48988,11 @@ const adultNameOrderMap = [
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "X" : "",
-    loc: { x: 106, y: 486 }
+    loc: { x: 106, y: 565 }
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { x: 106, y: 623 }
+    loc: { x: 106, y: 610 }
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -49036,8 +49036,7 @@ const adultNameOrderMap = [
 ];
 const minorNameOrderMap = [
   (applicant) => ({
-    fieldName: "nmjCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -49046,7 +49045,8 @@ const minorNameOrderMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 356, y: 70 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -49138,7 +49138,8 @@ const feeWaiverMap = [
     fieldName: "Petitioner Name"
   }),
   (applicant) => ({
-    text: `${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""},
+    text: `
+      ${formatContactInfo(applicant, ContactFormat.ResidentFullAddress) ?? ""},
       ${applicant.phone ?? ""}`,
     fieldName: "Petitioners AddressTelephone"
   })
@@ -49304,8 +49305,7 @@ const redactionCertificationMap = [
 ];
 const adultPublicationMap = [
   (applicant) => ({
-    fieldName: "countyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -49314,7 +49314,8 @@ const adultPublicationMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 356, y: 62 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -49349,8 +49350,7 @@ const adultPublicationMap = [
     fieldName: "petitionersZip"
   }),
   (applicant) => ({
-    fieldName: "countyListWithoutCounty",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -49359,7 +49359,8 @@ const adultPublicationMap = [
         case "":
           return applicant.residentLocalityName;
       }
-    })()
+    })(),
+    loc: { x: 73, y: 692 }
   }),
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -49380,8 +49381,7 @@ const adultPublicationMap = [
 ];
 const minorPublicationMap = [
   (applicant) => ({
-    fieldName: "countyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -49390,7 +49390,8 @@ const minorPublicationMap = [
         case "":
           return `${applicant.residentLocalityName} County`;
       }
-    })()
+    })(),
+    loc: { x: 356, y: 70 }
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -49425,8 +49426,7 @@ const minorPublicationMap = [
     fieldName: "petitionersZip"
   }),
   (applicant) => ({
-    fieldName: "countyListWithoutCounty",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -49435,7 +49435,8 @@ const minorPublicationMap = [
         case "":
           return applicant.residentLocalityName;
       }
-    })()
+    })(),
+    loc: { x: 73, y: 675 }
   }),
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -49758,8 +49759,7 @@ const voterRegistrationMap = [
     fieldName: "RESIDENTIAL CITY"
   }),
   (applicant) => ({
-    fieldName: "County",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -49768,7 +49768,8 @@ const voterRegistrationMap = [
         case "":
           return applicant.residentLocalityName;
       }
-    })()
+    })(),
+    loc: { x: 562, y: 649 }
   }),
   (applicant) => ({
     text: applicant.homeAddress?.zip,
