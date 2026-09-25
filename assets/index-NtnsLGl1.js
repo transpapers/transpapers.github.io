@@ -48459,11 +48459,13 @@ const adultNamePetitionMap = [
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "X" : "",
-    loc: { x: 85, y: 561 }
+    loc: { x: 85, y: 561 },
+    font: 16
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { x: 85, y: 610 }
+    loc: { x: 85, y: 610 },
+    font: 16
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -48499,7 +48501,8 @@ const adultNamePetitionMap = [
   }),
   () => ({
     text: "X",
-    loc: { x: 85, y: 765 }
+    loc: { x: 85, y: 765 },
+    font: 16
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
@@ -48550,7 +48553,8 @@ const adultNamePetitionMap = [
   }),
   () => ({
     text: "X",
-    loc: { page: 1, x: 167, y: 667 }
+    loc: { page: 1, x: 167, y: 667 },
+    font: 16
   }),
   (applicant) => ({
     text: applicant.residentJurisdictionName,
@@ -48562,11 +48566,13 @@ const adultNamePetitionMap = [
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { page: 1, x: 85, y: 843 }
+    loc: { page: 1, x: 85, y: 843 },
+    font: 16
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "X" : "",
-    loc: { page: 1, x: 85, y: 878 }
+    loc: { page: 1, x: 85, y: 878 },
+    font: 16
   })
 ];
 const minorNamePetitionMap = [
