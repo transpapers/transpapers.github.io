@@ -48347,6 +48347,148 @@ const delawareCounties = [
     adultCourtEmail: "CCPSussex_CivilFilings@delaware.gov"
   }
 ];
+const adultNamePetitionMap = [
+  (applicant) => ({
+    fieldName: "Circuit_Court_County",
+    value: (() => {
+      switch (applicant.residentLocalityName) {
+        case "St. Louis (City)":
+          return "St. Louis City";
+        case "St. Louis (County)":
+          return "St. Louis County";
+        case "":
+          return `${applicant.residentLocalityName} County`;
+      }
+    })()
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "Petitioner_Legal_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
+    fieldName: "Current_Legal_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "Current_Legal_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "Current_Legal_Suffix"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "X" : "",
+    loc: { x: 85, y: 561 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "" : "X",
+    loc: { x: 85, y: 610 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first,
+    fieldName: "Birth_Legal_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.middle,
+    fieldName: "Birth_Legal_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.last,
+    fieldName: "Birth_Legal_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.suffix,
+    fieldName: "Birth_Legal_Suffix"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.first,
+    fieldName: "Change_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.middle,
+    fieldName: "Change_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.last,
+    fieldName: "Change_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.chosenName.suffix,
+    fieldName: "Change_Suffix"
+  }),
+  () => ({
+    text: "X",
+    loc: { x: 85, y: 765 }
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? formatContactInfo(applicant, ContactFormat.ResidentStreet) : formatContactInfo(applicant, ContactFormat.MailStreet),
+    fieldName: "Mailing_Street"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.city : applicant.mailAddress?.mailCity,
+    fieldName: "Mailing_City"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "Mailing_State"
+  }),
+  (applicant) => ({
+    text: applicant.streetEqualsMail ? applicant.homeAddress?.zip : applicant.mailAddress?.mailZip,
+    fieldName: "Mailing_Zip"
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "Telephone_Number_Area_Code"
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "Email_Address_Optional"
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DateFormatPart.MONTH, DateFormatPart.DAY, DateFormatPart.YEAR],
+      separator: "/"
+    }),
+    fieldName: "Birth_Date"
+  }),
+  (applicant) => ({
+    text: applicant.birthCity,
+    fieldName: "Birth_City"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName,
+    fieldName: "Birth_State"
+  }),
+  (applicant) => ({
+    text: applicant.birthJurisdictionName ? "USA" : "",
+    fieldName: "Birth_Country"
+  }),
+  (applicant) => ({
+    text: applicant.reasonForNameChange,
+    fieldName: "Change_Name_Reason"
+  }),
+  () => ({
+    text: "X",
+    loc: { page: 1, x: 167, y: 667 }
+  }),
+  (applicant) => ({
+    text: applicant.residentJurisdictionName,
+    fieldName: "Residence_State"
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "Residence_County"
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "" : "X",
+    loc: { page: 1, x: 85, y: 843 }
+  }),
+  (applicant) => ({
+    text: applicant.birthName.first ? "X" : "",
+    loc: { page: 1, x: 85, y: 878 }
+  })
+];
 const minorNamePetitionMap = [
   (applicant) => ({
     fieldName: "nmpCountyList",
@@ -49351,7 +49493,7 @@ const minorNameGenderCoverMap = [
 const birthCertCorrectionMap = [
   () => ({
     text: "x",
-    loc: { x: 37, y: 262 }
+    loc: { x: 38, y: 262 }
   }),
   (applicant) => ({
     text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
@@ -50094,6 +50236,8 @@ function MissouriFilingGuide({
       ] }),
       residentLocality.court.specificCourtInfo && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: residentLocality.court.specificCourtInfo }),
       residentLocality.onlineFile && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Online Filing" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         "The ",
         residentLocalityName,
         " circuit court will accept online filings.",
@@ -50103,10 +50247,13 @@ function MissouriFilingGuide({
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: residentLocality.court.website, title: "link", children: residentLocality.court.website }),
         " ",
         " to upload them. Two copies of the photo ID, redacted and un-redacted, will need to be uploaded as well. There is an instruction video that goes over this process",
+        " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.courts.mo.gov/page.jsp?id=5240", children: "here" }),
         "."
       ] }),
       residentLocality.inPersonFile && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "In-Person Filing" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         "The ",
         residentLocalityName,
         " circuit court will accept in-person filings.",
@@ -50122,6 +50269,8 @@ function MissouriFilingGuide({
         "."
       ] }),
       residentLocality.mailFile && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Mail Filing" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         "The ",
         residentLocalityName,
         " circuit court will accept mail-in filings.",
@@ -50271,6 +50420,33 @@ function MissouriOrderMinorGuide({ person }) {
       "; that is for a judge to fill out. Make extra sure that all of the information on this form is correct and legible."
     ] })
   ] }, "Missouri-CAFC472");
+}
+function MissouriPetitionAdultGuide({ person }) {
+  const { residentLocalityName, birthJurisdictionName, legalName, birthName } = person;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Petition for Change of Name (MO, CAFC401)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "In Missouri, there is a 90 day wait period for new residents to change their name. You can change it as soon as that wait period passes and you can prove residency with something like an ID or utility bill in your current legal name with a ",
+      residentLocalityName,
+      residentLocalityName === "St. Louis (City)" ? " city" : " county",
+      " address."
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+      "The “Petition for Change of Name” (CAFC401) is the main form for this process. On page 2, fill out numbers 6, 7, and 8 if applicable.",
+      " ",
+      birthJurisdictionName === "Elsewhere" && "Fill out your state/country of birth in #10 if it is blank. ",
+      legalName?.first !== birthName?.first && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        "Since your current name does not match the one on your original birth certificate, you will need to fill out #16 and bring certified copies documenting ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "every name change" }),
+        ". This would include documents like your original birth certificate, adoption papers, marriage certificates, divorce documents, or other court orders.",
+        " "
+      ] }),
+      "Fill out sections 17 through 19 on page 3 as they apply to you. If section 20 applies to you, fill that out as well; otherwise, skip it. Do",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
+      " fill out or sign anything on page 5 until a notary instructs you to do so."
+    ] })
+  ] }, "Missouri-CAFC401");
 }
 function MissouriPetitionMinorGuide({ person }) {
   const { residentLocalityName, birthJurisdictionName, legalName, birthName, parentsAreOkay } = person;
@@ -50554,14 +50730,14 @@ const missouriNameChange = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
-    //{
-    //name: "Petition for Change of Name",
-    //id: "CAFC401",
-    //filename: "Missouri/Adult Name Change Petition.pdf",
-    //guide: MissouriPetitionAdultGuide,
-    //map: adultNamePetitionMap,
-    //include: (applicant) => !isMinor(applicant),
-    //},
+    {
+      name: "Petition for Change of Name",
+      id: "CAFC401",
+      filename: "Missouri/Adult Name Change Petition.pdf",
+      guide: MissouriPetitionAdultGuide,
+      map: adultNamePetitionMap,
+      include: (applicant) => !isMinor(applicant)
+    },
     {
       name: "Petition for Change of Name by Parent (For Minor Child)",
       id: "CAFC402",
