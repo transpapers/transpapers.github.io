@@ -34,6 +34,10 @@ function AlaskaResourcesGuide() {
           resources such as a Legal Support group for document updating.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://www.acluak.org/en/issues/lgbt-rights">Alaska ACLU</a>
           : They are an LGBT affirming legal group for Alaska that can help with
           finding a lawyer if needed.

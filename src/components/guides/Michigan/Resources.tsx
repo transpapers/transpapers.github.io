@@ -34,6 +34,10 @@ function MichiganResourcesGuide() {
           provides general support and resources to the trans community.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://corktownhealth.org/transgender-name-clinic-available/">
             Transgender Name Change Clinic
           </a>

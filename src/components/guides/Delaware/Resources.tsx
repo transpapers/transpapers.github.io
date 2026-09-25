@@ -34,6 +34,10 @@ function DelawareResourcesGuide() {
           part of this process including those who can do so free of charge.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://www.facebook.com/equalitydelaware">
             Equality Delaware
           </a>
@@ -41,6 +45,10 @@ function DelawareResourcesGuide() {
           connect to different resources for both transgender care and legal aid. 
           You can contact them to be directed to local resources to help update 
           your documents.
+        </li>
+        <li>
+        <br />
+        <br />
         </li>
         <li>
           <a href="https://transitionsde.com/">

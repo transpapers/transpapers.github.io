@@ -31,6 +31,10 @@ function OregonResourcesGuide() {
           : They can help you find an LGBT supportive lawyer if needed.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://www.basicrights.org/resources">
             Basic Rights Oregon
           </a>
@@ -38,11 +42,19 @@ function OregonResourcesGuide() {
           residents to other resources for their specific situation.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://outsidein.org/health-services/transgender-and-gender-non-conforming/">
             Outside In
           </a>
           : Helps provide financial aid and other resources for name/gender
           marker changes in Multnomah, Clackamas, and Washington counties.
+        </li>
+        <li>
+        <br />
+        <br />
         </li>
         <li>
           <a href="https://transponder.community/legal-id-change-program/">

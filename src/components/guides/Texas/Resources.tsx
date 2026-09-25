@@ -33,9 +33,17 @@ function TexasResourcesGuide() {
           changes.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://lambdalegal.org/helpdesk/">Lambda Legal</a>: They are
           a national organization that provides legal assistance to many
           marginalized groups including trans people.
+        </li>
+        <li>
+        <br />
+        <br />
         </li>
         <li>
           <a href="https://www.transtexas.org/">

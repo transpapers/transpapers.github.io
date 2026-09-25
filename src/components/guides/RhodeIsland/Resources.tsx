@@ -35,12 +35,20 @@ function RhodeIslandResourcesGuide() {
           other Trans resources in the Rhode Island area.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://www.glad.org/know-your-rights/glad-answers/">
             GLAD Law
           </a>
           : A New England based organization that assists with legal name
           changes among other legal help. They can help with complex cases by
           providing legal advice or services.
+        </li>
+        <li>
+        <br />
+        <br />
         </li>
         <li>
           <a href="https://www.thundermisthealth.org/services/trans-health-access/">

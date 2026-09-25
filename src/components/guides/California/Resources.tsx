@@ -35,6 +35,10 @@ function CaliforniaResourcesGuide() {
           lawyers and legal groups for contested cases.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://transgenderlawcenter.org/resources/id/">
             Transgender Law Center
           </a>
@@ -43,12 +47,20 @@ function CaliforniaResourcesGuide() {
           legal issues.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://community.lalgbtcenter.org/tgi-enby-resource-index/legal-resources/">
             Los Angeles LGBT Center
           </a>
           : A Los Angeles county based organization that provides a full scope of resources
           including a list of legal resources available in the county to help with name
           and/or gender changes.
+        </li>
+        <li>
+        <br />
+        <br />
         </li>
         <li>
           <a href="https://saccenter.org/location-hours">

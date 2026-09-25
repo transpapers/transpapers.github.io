@@ -34,11 +34,19 @@ function IllinoisResourcesGuide() {
           representation anywhere in the state.
         </li>
         <li>
+        <br />
+        <br />
+        </li>
+        <li>
           <a href="https://gsc.uic.edu/trans-resource-guide/legal-services-and-education/">
             University of Chicago
           </a>
           : They have a free legal assistance program to all Illinois residents
           with a special focus on Name and Gender updates.
+        </li>
+        <li>
+        <br />
+        <br />
         </li>
         <li>
           <a href="https://www.tjlp.org/">
