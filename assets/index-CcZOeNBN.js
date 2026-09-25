@@ -29915,6 +29915,10 @@ function MichiganResourcesGuide() {
         ": Helps people with the name change process in Kent county and provides general support and resources to the trans community."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://corktownhealth.org/transgender-name-clinic-available/", children: "Transgender Name Change Clinic" }),
         ": Helps low income trans people changing their name and gender markers in Oakland, Macomb, and Wayne Counties."
       ] })
@@ -33085,8 +33089,16 @@ function RhodeIslandResourcesGuide() {
         ": Helps people through the document updating process as well as some of the fees associated with it. They also connect to a variety of other Trans resources in the Rhode Island area."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.glad.org/know-your-rights/glad-answers/", children: "GLAD Law" }),
         ": A New England based organization that assists with legal name changes among other legal help. They can help with complex cases by providing legal advice or services."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.thundermisthealth.org/services/trans-health-access/", children: "Thundermist Health" }),
@@ -35324,8 +35336,16 @@ function NewYorkResourcesGuide() {
         ": Maintains an extensive and up to date list of LGBT resources in New York City. This includes both legal assistance and healthcare resources for transgender people."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.glad.org/know-your-rights/glad-answers/", children: "GLAD Law" }),
         ": A New England based organization that assists with legal name changes among other legal help. They can help with complex cases by providing legal advice or services."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://ag.ny.gov/resources/individuals/health-care-insurance/transgender-nonbinary-intersex-health-care", children: "The New York State Attorney General" }),
@@ -36968,12 +36988,24 @@ function OregonResourcesGuide() {
         ": They can help you find an LGBT supportive lawyer if needed."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.basicrights.org/resources", children: "Basic Rights Oregon" }),
         ": They provide a wide range of resources and help connect LGBT Oregon residents to other resources for their specific situation."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://outsidein.org/health-services/transgender-and-gender-non-conforming/", children: "Outside In" }),
         ": Helps provide financial aid and other resources for name/gender marker changes in Multnomah, Clackamas, and Washington counties."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://transponder.community/legal-id-change-program/", children: "Transponder" }),
@@ -38370,6 +38402,10 @@ function AlaskaResourcesGuide() {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.identityalaska.org/resources/id-changes", children: "Identity Alaska" }),
         ": They are an LGBT health clinic that also offers other community resources such as a Legal Support group for document updating."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.acluak.org/en/issues/lgbt-rights", children: "Alaska ACLU" }),
@@ -39992,8 +40028,16 @@ function IllinoisResourcesGuide() {
         ": They are a law group that helps anyone find legal aid and representation anywhere in the state."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://gsc.uic.edu/trans-resource-guide/legal-services-and-education/", children: "University of Chicago" }),
         ": They have a free legal assistance program to all Illinois residents with a special focus on Name and Gender updates."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.tjlp.org/", children: "Transformative Justice Law Project of Illinois" }),
@@ -43966,12 +44010,24 @@ function CaliforniaResourcesGuide() {
         ": Maintains an extensive and up to date list of legal resources for all of California to help with name and gender changes. This includes lawyers and legal groups for contested cases."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://transgenderlawcenter.org/resources/id/", children: "Transgender Law Center" }),
         ": They are a legal group advocating for trans rights and maintain several guides and other legal resources to help with updating documents or other legal issues."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://community.lalgbtcenter.org/tgi-enby-resource-index/legal-resources/", children: "Los Angeles LGBT Center" }),
         ": A Los Angeles county based organization that provides a full scope of resources including a list of legal resources available in the county to help with name and/or gender changes."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://saccenter.org/location-hours", children: "Sacramento LGBT Center" }),
@@ -48159,8 +48215,16 @@ function DelawareResourcesGuide() {
         ": They have numerous resources for looking up attorneys to help with any part of this process including those who can do so free of charge."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.facebook.com/equalitydelaware", children: "Equality Delaware" }),
         ": They are a statewide LGBT advocacy group dedicated to helping the community connect to different resources for both transgender care and legal aid. You can contact them to be directed to local resources to help update your documents."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {})
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://transitionsde.com/", children: "Transitions Delaware" }),
