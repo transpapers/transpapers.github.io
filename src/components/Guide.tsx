@@ -268,7 +268,9 @@ function Guide() {
           You should print both this webpage and the PDF containing your
           compiled documents.
         </strong>{" "}
-        Please review the forms and guide side by side.
+        Please review the forms and guide side by side. Although many of these
+        guides have been reviewed by lawyers please remember that we are not
+        lawyers and this is not legal advice.
       </p>
 
       {guidePushedLength === 0 ? (

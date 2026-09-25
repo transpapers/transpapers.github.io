@@ -62,6 +62,22 @@ export const adultNamePetitionMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.legalName.middle,
+    fieldName: "Petitioner_Legal_Middle_Name",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "Petitioner_Legal_Last_Name",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "Petitioner_Legal_Suffix",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "Current_Legal_First_Name",
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
     fieldName: "Current_Legal_Middle_Name",
   }),
   (applicant) => ({
