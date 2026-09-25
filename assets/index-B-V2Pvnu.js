@@ -54838,14 +54838,14 @@ const elsewhere = {
 };
 const allJurisdictions = [
   alaska,
+  california,
+  delaware,
   illinois,
   michigan,
+  missouri,
   newYork,
   oregon,
   rhodeIsland,
-  california,
-  delaware,
-  missouri,
   elsewhere,
   federal
 ];
