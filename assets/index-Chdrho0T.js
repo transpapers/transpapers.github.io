@@ -48431,6 +48431,22 @@ const adultNamePetitionMap = [
   }),
   (applicant) => ({
     text: applicant.legalName.middle,
+    fieldName: "Petitioner_Legal_Middle_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.last,
+    fieldName: "Petitioner_Legal_Last_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.suffix,
+    fieldName: "Petitioner_Legal_Suffix"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.first,
+    fieldName: "Current_Legal_First_Name"
+  }),
+  (applicant) => ({
+    text: applicant.legalName.middle,
     fieldName: "Current_Legal_Middle_Name"
   }),
   (applicant) => ({
@@ -90814,7 +90830,7 @@ function Guide() {
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "You should print both this webpage and the PDF containing your compiled documents." }),
       " ",
-      "Please review the forms and guide side by side."
+      "Please review the forms and guide side by side. Although many of these guides have been reviewed by lawyers please remember that we are not lawyers and this is not legal advice."
     ] }),
     guidePushedLength === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
