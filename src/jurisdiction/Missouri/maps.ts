@@ -44,8 +44,7 @@ import { Formfill } from "../../types/formfill";
  */
 export const adultNamePetitionMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "Circuit_Court_County",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -55,6 +54,7 @@ export const adultNamePetitionMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 394, y: 49 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -216,8 +216,7 @@ export const adultNamePetitionMap: Formfill[] = [
  */
 export const minorNamePetitionMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "nmpCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -227,6 +226,7 @@ export const minorNamePetitionMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 355, y: 70 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -416,8 +416,7 @@ export const minorNamePetitionMap: Formfill[] = [
  */
 export const minorConsentMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "nmnfCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -427,6 +426,7 @@ export const minorConsentMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 356, y: 70 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -548,8 +548,7 @@ export const minorConsentMap: Formfill[] = [
  */
 export const minorParentConsentMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "nmcCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -559,6 +558,7 @@ export const minorParentConsentMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 356, y: 70 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -665,8 +665,7 @@ export const minorParentConsentMap: Formfill[] = [
  */
 export const adultNameOrderMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "CountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -676,6 +675,7 @@ export const adultNameOrderMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 356, y: 70 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -699,11 +699,11 @@ export const adultNameOrderMap: Formfill[] = [
   }),
     (applicant) => ({
     text: applicant.birthName.first ? "X" : "",
-    loc: { x: 106, y: 486 },
+    loc: { x: 106, y: 565 },
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { x: 106, y: 623 },
+    loc: { x: 106, y: 610 },
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -753,8 +753,7 @@ export const adultNameOrderMap: Formfill[] = [
  */
 export const minorNameOrderMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "nmjCountyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -764,6 +763,7 @@ export const minorNameOrderMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 356, y: 70 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -862,7 +862,8 @@ export const feeWaiverMap: Formfill[] = [
   }),
   (applicant) => ({
     text: 
-      `${formatContactInfo(applicant, cf.ResidentFullAddress) ?? ""},
+      `
+      ${formatContactInfo(applicant, cf.ResidentFullAddress) ?? ""},
       ${applicant.phone ?? ""}`,
     fieldName: "Petitioners AddressTelephone",
   }),
@@ -1053,8 +1054,7 @@ export const redactionCertificationMap: Formfill[] = [
  */
 export const adultPublicationMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "countyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -1064,6 +1064,7 @@ export const adultPublicationMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 356, y: 62 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -1106,8 +1107,7 @@ export const adultPublicationMap: Formfill[] = [
     fieldName: "petitionersZip",
   }),
   (applicant) => ({
-    fieldName: "countyListWithoutCounty",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -1117,6 +1117,7 @@ export const adultPublicationMap: Formfill[] = [
           return applicant.residentLocalityName;
       }
     })(),
+    loc: { x: 73, y: 692 },
   }),
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -1144,8 +1145,7 @@ export const adultPublicationMap: Formfill[] = [
  */
 export const minorPublicationMap: Formfill[] = [
   (applicant) => ({
-    fieldName: "countyList",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -1155,6 +1155,7 @@ export const minorPublicationMap: Formfill[] = [
           return `${applicant.residentLocalityName} County`;
       }
     })(),
+    loc: { x: 356, y: 70 },
   }),
   (applicant) => ({
     text: applicant.legalName.first,
@@ -1197,8 +1198,7 @@ export const minorPublicationMap: Formfill[] = [
     fieldName: "petitionersZip",
   }),
   (applicant) => ({
-    fieldName: "countyListWithoutCounty",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -1208,6 +1208,7 @@ export const minorPublicationMap: Formfill[] = [
           return applicant.residentLocalityName;
       }
     })(),
+    loc: { x: 73, y: 675 },
   }),
   (applicant) => ({
     text: applicant.chosenName.first,
@@ -1584,8 +1585,7 @@ export const voterRegistrationMap: Formfill[] = [
     fieldName: "RESIDENTIAL CITY",
   }),
    (applicant) => ({
-    fieldName: "County",
-    value: (() => {
+    text: (() => {
       switch (applicant.residentLocalityName) {
         case "St. Louis (City)":
           return "St. Louis City";
@@ -1595,6 +1595,7 @@ export const voterRegistrationMap: Formfill[] = [
           return applicant.residentLocalityName;
       }
     })(),
+    loc: { x: 562, y: 649 },
   }),
   (applicant) => ({
     text: applicant.homeAddress?.zip,
