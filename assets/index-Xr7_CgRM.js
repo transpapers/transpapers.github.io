@@ -48419,8 +48419,8 @@ const adultNamePetitionMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 394, y: 49 }
@@ -48583,8 +48583,8 @@ const minorNamePetitionMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 355, y: 70 }
@@ -48753,8 +48753,8 @@ const minorConsentMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 }
@@ -48871,8 +48871,8 @@ const minorParentConsentMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 }
@@ -48966,8 +48966,8 @@ const adultNameOrderMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 }
@@ -48998,7 +48998,7 @@ const adultNameOrderMap = [
   }),
   (applicant) => ({
     text: applicant.birthName.first ? "" : "X",
-    loc: { x: 106, y: 610 }
+    loc: { x: 105, y: 610 }
   }),
   (applicant) => ({
     text: applicant.birthName.first,
@@ -49048,8 +49048,8 @@ const minorNameOrderMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 }
@@ -49132,7 +49132,10 @@ const minorNameOrderMap = [
 ];
 const feeWaiverMap = [
   (applicant) => ({
-    text: applicant.residentLocality?.court.circuit,
+    text: getMOLocality(
+      applicant.residentJurisdictionName,
+      applicant.residentLocalityName
+    )?.court.circuit,
     fieldName: "Judicial Circuit Court Number"
   }),
   (applicant) => ({
@@ -49158,8 +49161,8 @@ const confidentialInfoMap = [
           return "City of St. Louis";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     fieldName: "CountyCity of St Louis"
@@ -49317,8 +49320,8 @@ const adultPublicationMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 62 }
@@ -49362,7 +49365,7 @@ const adultPublicationMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis";
-        case "":
+        default:
           return applicant.residentLocalityName;
       }
     })(),
@@ -49393,8 +49396,8 @@ const minorPublicationMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis County";
-        case "":
-          return `${applicant.residentLocalityName} County`;
+        default:
+          return `${applicant.residentLocalityName ?? ""} County`;
       }
     })(),
     loc: { x: 356, y: 70 }
@@ -49438,7 +49441,7 @@ const minorPublicationMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis";
-        case "":
+        default:
           return applicant.residentLocalityName;
       }
     })(),
@@ -49771,7 +49774,7 @@ const voterRegistrationMap = [
           return "St. Louis City";
         case "St. Louis (County)":
           return "St. Louis";
-        case "":
+        default:
           return applicant.residentLocalityName;
       }
     })(),
