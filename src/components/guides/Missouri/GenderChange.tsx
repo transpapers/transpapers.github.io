@@ -60,7 +60,7 @@ function MissouriGenderChangeGuide({ person }: { person: Partial<Person> }) {
         undergone surgery or cannot obtain a letter with the word “surgery” in it, 
         there are some lawyers in Missouri who may still be willing to work with you 
         to explore your options. We have marked them specially on the list of attorneys 
-        below.
+        in the “Resources” section at the end of this guide.
       </p>
 
       <p>

@@ -81,7 +81,7 @@ function MissouriFilingGuide({
         </>
         :
         <>
-          located at {residentLocality.court.address}. To check things like hours of operation 
+          {" "}located at {residentLocality.court.address}. To check things like hours of operation 
           or accepted payment types, call the court at {residentLocality.court.phone}.
         </>
         }

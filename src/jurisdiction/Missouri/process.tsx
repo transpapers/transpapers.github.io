@@ -22,7 +22,7 @@
 import { isMinor, getMOLocality } from "../../lib/util";
 
 import {
-  adultNamePetitionMap,
+  //adultNamePetitionMap,
   minorNamePetitionMap,
   minorConsentMap,
   minorParentConsentMap,
@@ -56,7 +56,7 @@ import JacksonCountyInfoGuide from "../../components/guides/Missouri/JacksonInfo
 import MissouriConsentMinorGuide from "../../components/guides/Missouri/NameConsentMinor";
 import MissouriOrderAdultGuide from "../../components/guides/Missouri/NameOrderAdult";
 import MissouriOrderMinorGuide from "../../components/guides/Missouri/NameOrderMinor";
-import MissouriPetitionAdultGuide from "../../components/guides/Missouri/NamePetitionAdult";
+//import MissouriPetitionAdultGuide from "../../components/guides/Missouri/NamePetitionAdult";
 import MissouriPetitionMinorGuide from "../../components/guides/Missouri/NamePetitionMinor";
 import MissouriNotaryGuide from "../../components/guides/Missouri/Notary";
 import MissouriParentConsentMinorGuide from "../../components/guides/Missouri/ParentConsentMinor";
@@ -77,14 +77,14 @@ export const missouriNameChange: Process<MissouriCounty> = {
   target: Target.NameChange,
   depends: [Target.GenderMarker],
   documents: [
-    {
-      name: "Petition for Change of Name",
-      id: "CAFC401",
-      filename: "Missouri/Adult Name Change Petition.pdf",
-      guide: MissouriPetitionAdultGuide,
-      map: adultNamePetitionMap,
-      include: (applicant) => !isMinor(applicant),
-    },
+    //{
+      //name: "Petition for Change of Name",
+      //id: "CAFC401",
+      //filename: "Missouri/Adult Name Change Petition.pdf",
+      //guide: MissouriPetitionAdultGuide,
+      //map: adultNamePetitionMap,
+      //include: (applicant) => !isMinor(applicant),
+    //},
     {
       name: "Petition for Change of Name by Parent (For Minor Child)",
       id: "CAFC402",
