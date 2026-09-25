@@ -238,7 +238,7 @@ export const minorNamePetitionMap: Formfill[] = [
   }),
   () => ({
     fieldName: "nmpWhichPetition",
-    choice: "This is the first petition that has been filed in this case. (Original petition)",
+    check: true,
   }),
   (applicant) => ({
     text: applicant.streetEqualsMail 
@@ -423,9 +423,13 @@ export const minorConsentMap: Formfill[] = [
     }),
     fieldName: "nmnfPetitionerDOB",
   }),
+  //(applicant) => ({
+    //fieldName: "nmnfChildAge",
+    //choice: applicant.age && applicant.age < 14 ? "The child whose name is to be changed is age 0 to 13 years." : "The child whose name is to be changed is age 14 to 17 years.",
+  //}),
   (applicant) => ({
     fieldName: "nmnfChildAge",
-    choice: applicant.age && applicant.age < 14 ? "The child whose name is to be changed is age 0 to 13 years." : "The child whose name is to be changed is age 14 to 17 years.",
+    check: applicant.age && applicant.age < 14 ? true : false,
   }),
   (applicant) => ({
     text: applicant.age && applicant.age < 14 ? "" : applicant.legalName.first,
@@ -787,7 +791,7 @@ export const minorNameOrderMap: Formfill[] = [
   }),
   (applicant) => ({
     text: applicant.chosenName.middle,
-    fieldName: "pnmjChildWantsMiddleName",
+    fieldName: "nmjChildWantsMiddleName",
   }),
   (applicant) => ({
     text: applicant.chosenName.last,
@@ -1339,7 +1343,7 @@ export const minorNameGenderCoverMap: Formfill[] = [
 export const birthCertCorrectionMap: Formfill[] = [
   () => ({
     fieldName: "Correction Type",
-    value: "Birth",
+    check: true,
   }),
   (applicant) => ({
     text: applicant.birthName.first ? applicant.birthName.first : applicant.legalName.first,
@@ -1503,7 +1507,7 @@ export const birthCertCorrectionMap: Formfill[] = [
 export const voterRegistrationMap: Formfill[] = [
    () => ({
     fieldName: "CITIZEN",
-    value: "YES",
+    choice: "YES",
   }),
   () => ({
     fieldName: "18 Years Old",
@@ -1534,20 +1538,9 @@ export const voterRegistrationMap: Formfill[] = [
     value: (() => {
       switch (applicant.isChangingLegalSex) {
         case true:
-          return applicant.gender === GenderMarker.M ? "MALE" : undefined;
+          return applicant.gender === GenderMarker.M ? "MALE" : "FEMALE";
         case false:
-          return applicant.assignedSex === GenderMarker.M ? "MALE" : undefined;
-      }
-    })(),
-  }),
-  (applicant) => ({
-    fieldName: "Gender",
-    value: (() => {
-      switch (applicant.isChangingLegalSex) {
-        case true:
-          return applicant.gender === GenderMarker.F ? "FEMALE" : undefined;
-        case false:
-          return applicant.assignedSex === GenderMarker.F ? "FEMALE" : undefined;
+          return applicant.assignedSex === GenderMarker.M ? "MALE" : "FEMALE";
       }
     })(),
   }),
