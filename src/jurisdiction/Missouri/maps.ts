@@ -364,10 +364,6 @@ export const minorNamePetitionMap: Formfill[] = [
     fieldName: "nmpReasonsChildWantsChange",
   }),
   () => ({
-    fieldName: "nmpChildResidesWhichCountry",
-    choice: "The child resides in the United States.",
-  }),
-  () => ({
     text: "X",
     loc: { page: 1, x: 241, y: 801 },
   }),
@@ -1542,7 +1538,7 @@ export const voterRegistrationMap: Formfill[] = [
   }),
   (applicant) => ({
     fieldName: "Gender",
-    value: (() => {
+    choice: (() => {
       switch (applicant.isChangingLegalSex) {
         case true:
           return applicant.gender === GenderMarker.M ? "MALE" : "FEMALE";
