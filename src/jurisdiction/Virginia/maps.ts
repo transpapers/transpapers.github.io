@@ -30,7 +30,7 @@ import {
   getVALocality,
 } from "../../lib/util";
 
-import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
+import { /*GenderMarker,*/ DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
@@ -179,7 +179,7 @@ export const adultNamePetitionMap: Formfill[] = [
     fieldName: "User.PetitionerDOB",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${abbreviateJurisdiction(applicant.birthJurisdictionName ?? "")}`,
+    text: `${applicant.birthCity ?? ""}, ${abbreviateJurisdiction(applicant.birthJurisdictionName ?? "") ?? ""}`,
     fieldName: "User.PetitionerPlaceOfBirtg",
   }),
   (applicant) => ({
@@ -357,7 +357,7 @@ export const minorNamePetitionMap: Formfill[] = [
     fieldName: "User.PetitionerDOB",
   }),
   (applicant) => ({
-    text: `${applicant.birthCity}, ${abbreviateJurisdiction(applicant.birthJurisdictionName ?? "")}`,
+    text: `${applicant.birthCity ?? ""}, ${abbreviateJurisdiction(applicant.birthJurisdictionName ?? "") ?? ""}`,
     fieldName: "User.PetitionerPlaceOfBirtg",
   }),
   (applicant) => ({
