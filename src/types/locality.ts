@@ -126,6 +126,11 @@ export type TexasCounty = Locality & {
   standingOrderRequired: boolean;
 };
 
+export type VirginiaCityOrCounty = Locality & {
+  CountyTrueCityFalse: boolean;
+  FilingLocality: string;
+};
+
 export interface Court {
   address: string;
   city: string;

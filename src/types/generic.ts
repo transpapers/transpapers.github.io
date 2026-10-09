@@ -36,6 +36,7 @@ import {
   OhioCounty,
   RhodeIslandCityOrTown,
   TexasCounty,
+  VirginiaCityOrCounty,
 } from "../types/locality";
 
 export type AnyLocality =
@@ -49,6 +50,7 @@ export type AnyLocality =
   | OhioCounty
   | RhodeIslandCityOrTown
   | TexasCounty
+  | VirginiaCityOrCounty
   ;
 
 // NOTE This cannot be effectively genericized (yet) because TypeScript does not
