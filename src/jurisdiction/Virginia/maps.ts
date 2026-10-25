@@ -30,7 +30,7 @@ import {
   getVALocality,
 } from "../../lib/util";
 
-import { /*GenderMarker,*/ DateFormatPart as DATE } from "../../types/types";
+import { GenderMarker, DateFormatPart as DATE } from "../../types/types";
 import { Formfill } from "../../types/formfill";
 
 // Maps appear in the order they will be collated.
@@ -45,7 +45,9 @@ import { Formfill } from "../../types/formfill";
  */
 export const VACoverSheetMap: Formfill[] = [
   (applicant) => ({
-    text: applicant.residentLocalityName,
+    text: 
+      getVALocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.FilingLocality,
     fieldName: "User.CourtName",
   }),
   (applicant) => ({
@@ -552,5 +554,316 @@ export const minorNameOrderMap: Formfill[] = [
   (applicant) => ({
     text: applicant.parentsAreOkay ? formatContactInfo(applicant, cf.ResidentFullAddress) : "",
     loc: { x: 90, y: 277 },
+  }),
+];
+
+/*!
+ * Petition for Proceeding in Civil Case without Payment of Fees or Costs 
+ * (Virginia form CC-1414) (All)
+ * Updated 10/2026.
+ * @type {Formfill[]}
+ */
+export const feeWaiverMap: Formfill[] = [
+  (applicant) => ({
+    text: 
+      getVALocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.FilingLocality,
+    fieldName: "User.CourtName",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "User.Name1",
+  }),
+  (applicant) => ({
+    text: fullName(representativeName(applicant)),
+    fieldName: "User.PrintNamePetitioner",
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? formatContactInfo(applicant, cf.ResidentFullAddress) : "";
+        case false:
+          return formatContactInfo(applicant, cf.ResidentFullAddress);
+      }
+    })(),
+    fieldName: "User.PetitionerResidenceAddress",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.phone,
+    fieldName: "User.PetitionerTelephone",
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.email,
+    fieldName: "User.PetitionerEmail",
+  }),
+];
+
+/*!
+ * Driver’s Licence and Identification Card Application (Virginia form DL 1P) (All)
+ * Updated 10/2026.
+ * @type {Formfill[]}
+ */
+export const DMVMap: Formfill[] = [
+  () => ({
+    fieldName: "form1[0].PrimaryPage[0].ApplicationType[0].Part3[0].RadioButtonList[0]",
+    choice: "0",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].LegalName[0]",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].DateTimeField3[0]",
+  }),
+  (applicant) => ({
+    text: applicant.phone,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].TelNum[0]",
+  }),
+  (applicant) => ({
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].GenderInd[0]",
+    choice: (() => {
+      switch (applicant.isChangingLegalSex) {
+        case true:
+          switch (applicant.gender) {
+            case GenderMarker.M:
+              return "0";
+            case GenderMarker.F:
+              return "1";
+            case GenderMarker.X:
+              return "2";
+          }
+        case false:
+          switch (applicant.assignedSex) {
+            case GenderMarker.M:
+              return "0";
+            case GenderMarker.F:
+              return "1";
+            case GenderMarker.X:
+              return "2";
+          }
+      }
+    })(),
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.ResidentStreet),
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].StreetAddress[0]",
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.city,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].City[0]",
+  }),
+  (applicant) => ({
+    text: abbreviateJurisdiction(applicant.residentJurisdictionName ?? ""),
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].State[0]",
+  }),
+  (applicant) => ({
+    text: applicant.homeAddress?.zip,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].Zip[0]",
+  }),
+  (applicant) => ({
+    text: formatContactInfo(applicant, cf.MailStreet),
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].StreetAddress2[0]",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mailCity,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].City2[0]",
+  }),
+  (applicant) => ({
+    text: abbreviateJurisdiction(applicant.mailAddress?.mailState ?? ""),
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].State2[0]",
+  }),
+  (applicant) => ({
+    text: applicant.mailAddress?.mailZip,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].Zip2[0]",
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].#area[1].NameChange[0]",
+  }),
+  (applicant) => ({
+    text: applicant.email,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].EmailAddr[0]",
+  }),
+  (applicant) => ({
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].#area[0].RadioButtonList[0]",
+    choice: 
+      getVALocality(applicant.residentJurisdictionName, 
+        applicant.residentLocalityName)?.CountyTrueCityFalse ? "1" : "0",
+  }),
+  (applicant) => ({
+    text: applicant.residentLocalityName,
+    fieldName: "form1[0].PrimaryPage[0].Applicant_Info[0].BasicInfo[0].#area[0].TextField1[0]",
+  }),
+  (applicant) => ({
+    fieldName: "form1[0].Page2[0].Parent-Gaurdian-Consent[0].Signatures[0].Certify-Applicant-Under18[0].YesNo[0]",
+    choice: isMinor(applicant) && !applicant.hasCriminalRecord ? "1" : undefined,
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
+    fieldName: "form1[0].Page2[0].Certification[0].Cert[0].TextField2[1]",
+  }),
+];
+
+/*!
+ * Birth Certificate Amendment Request Form (Virginia form VS43) (All)
+ * Updated 10/2026.
+ * @type {Formfill[]}
+ */
+export const birthCertUpdateMap: Formfill[] = [
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return fullName(representativeName(applicant));
+        case false:
+          return applicant.isChangingLegalName ?
+            fullName(applicant.chosenName) : fullName(applicant.legalName);
+      }
+    })(),
+    loc: { x: 178, y: 207 },
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.phone,
+    loc: { x: 683, y: 207 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? formatContactInfo(applicant, cf.ResidentStreet) : "";
+        case false:
+          return formatContactInfo(applicant, cf.ResidentStreet);
+      }
+    })(),
+    loc: { x: 153, y: 240 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? applicant.homeAddress?.city : "";
+        case false:
+          return applicant.homeAddress?.city;
+      }
+    })(),
+    loc: { x: 459, y: 240 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? 
+            abbreviateJurisdiction(applicant.residentJurisdictionName ?? "") : "";
+        case false:
+          return abbreviateJurisdiction(applicant.residentJurisdictionName ?? "");
+      }
+    })(),
+    loc: { x: 635, y: 240 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (isMinor(applicant)) {
+        case true:
+          return applicant.parentsAreOkay ? applicant.homeAddress?.zip : "";
+        case false:
+          return applicant.homeAddress?.zip;
+      }
+    })(),
+    loc: { x: 735, y: 240 },
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : applicant.email,
+    loc: { x: 148, y: 273 },
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) ? "" : "X",
+    loc: { x: 42, y: 331 },
+  }),
+  (applicant) => ({
+    text: isMinor(applicant) && applicant.parentsAreOkay ? "X" : "",
+    loc: { x: 216, y: 331 },
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? "Registrant's name" : "",
+    loc: { x: 35, y: 596 },
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.legalName) : "",
+    loc: { x: 260, y: 596 },
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : "",
+    loc: { x: 570, y: 596 },
+  }),
+  (applicant) => ({
+    text: applicant.isChangingLegalSex ? "Registrant's sex" : "",
+    loc: { x: 35, y: 625 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.assignedSex) {
+        case GenderMarker.F:
+          return applicant.isChangingLegalSex ? "Female" : "";
+        case GenderMarker.M:
+          return applicant.isChangingLegalSex ? "Male" : "";
+        case GenderMarker.X:
+          return "Nonbinary (X)";
+      }
+    })(),
+    loc: { x: 260, y: 625 },
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return applicant.isChangingLegalSex ? "Female" : "";
+        case GenderMarker.M:
+          return applicant.isChangingLegalSex ? "Male" : "";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    loc: { x: 570, y: 625 },
+  }),
+];
+
+/*!
+ * Form for Changing Sex Designation (Virginia form VS42) (All)
+ * Updated 10/2026.
+ * @type {Formfill[]}
+ */
+export const birthCertGenderMarkerMap: Formfill[] = [
+  (applicant) => ({
+    text: applicant.isChangingLegalName ? fullName(applicant.chosenName) : fullName(applicant.legalName),
+    fieldName: "Patient Full Name",
+  }),
+  (applicant) => ({
+    text: formatDate(applicant.birthdate, {
+      format: [DATE.MONTH, DATE.DAY, DATE.YEAR],
+      separator: "/",
+    }),
+    fieldName: "Patient's Date of Birth",
+  }),
+  (applicant) => ({
+    text: applicant.birthCounty,
+    fieldName: "Place of Birth (City/County)",
+  }),
+  (applicant) => ({
+    text: (() => {
+      switch (applicant.gender) {
+        case GenderMarker.F:
+          return "Female";
+        case GenderMarker.M:
+          return "Male";
+        case GenderMarker.X:
+          return "";
+      }
+    })(),
+    fieldName: "Enter male or female",
   }),
 ];

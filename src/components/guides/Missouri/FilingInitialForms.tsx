@@ -159,11 +159,12 @@ function MissouriFilingGuide({
           </>
         }
         , which we will call the “court order” from now on. If you got a notice for a 
-        hearing, proceed to the next section.  If you got a signed court order, skip that 
-        section and proceed to the next one instead. Regardless of which outcome, make 
-        sure you stop by the court to get 2 or 3 extra certified copies of the court order 
-        (after you get it) before you head to social security. Keep the original in a safe 
-        place.
+        hearing, proceed to the next section for the court hearing. If you got a signed 
+        court order, skip that section and proceed to the next one instead. Once you get 
+        a court order regardless of if it&apos;s now or after a hearing make sure you 
+        stop by the court or call to get 2 to 3 certified copies <strong>before</strong> you 
+        head to social security. Use the copies to change your name there and everywhere 
+        else, keep the original in a safe place.
       </p>
     </section>
   );

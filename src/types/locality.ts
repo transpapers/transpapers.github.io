@@ -129,6 +129,9 @@ export type TexasCounty = Locality & {
 export type VirginiaCityOrCounty = Locality & {
   CountyTrueCityFalse: boolean;
   FilingLocality: string;
+  HasNoCourt: boolean;
+  inPersonFile: boolean;
+  mailFile: boolean;
 };
 
 export interface Court {
