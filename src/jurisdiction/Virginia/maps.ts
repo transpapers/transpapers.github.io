@@ -636,6 +636,8 @@ export const DMVMap: Formfill[] = [
               return "1";
             case GenderMarker.X:
               return "2";
+            default:
+              return undefined;
           }
         case false:
           switch (applicant.assignedSex) {
@@ -645,6 +647,8 @@ export const DMVMap: Formfill[] = [
               return "1";
             case GenderMarker.X:
               return "2";
+            default:
+              return undefined;
           }
       }
     })(),
