@@ -54625,11 +54625,11 @@ function DS5504Guide({ person }) {
       ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " attempt to update the marker, it will be rejected. If you have always had a passport with your desired gender marker and none of the original documents used to get one have your old info you are safe to renew. Otherwise do ",
+      " attempt to update the marker, it will be rejected. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " renew unless you have no other choice as the gender marker will be reverted to the first one they have on file.",
+      " renew unless you have no other choice as the gender marker will be reverted to the first one they have on file. Even if they do not have one on file they will look for any changes in your documentation, both present and past, to try and revert the marker.",
       gender && gender === "X" ? " Any passport with an X marker will be automatically reverted no matter what. " : " ",
-      "If you are safe check your desired box in section 3. If you have no choice but to renew mark your assigned gender at birth. This message will update as the situation changes."
+      "If you have no choice but to renew mark your assigned sex at birth in section 3. This message will update as the situation changes."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-5504) contain instructions and clarification.",
@@ -54654,11 +54654,11 @@ function DS82Guide({ person }) {
       ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " attempt to update the marker, it will be rejected. If you have always had a passport with your desired gender marker and none of the original documents used to get one have your old info you are safe to renew. Otherwise do ",
+      " attempt to update the marker, it will be rejected. Do ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " renew unless you have no other choice as the gender marker will be reverted to the first one they have on file.",
+      " renew unless you have no other choice as the gender marker will be reverted to the first one they have on file. Even if they do not have one on file they will look for any changes in your documentation, both present and past, to try and revert the marker.",
       gender && gender === "X" ? " Any passport with an X marker will be automatically reverted no matter what. " : " ",
-      "If you are safe check your desired box in section 3. If you have no choice but to renew mark your assigned gender at birth. This message will update as the situation changes."
+      "If you have no choice but to renew mark your assigned sex at birth in section 3. This message will update as the situation changes."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-82) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already present. Fill out section 10 using your old passports information.",
@@ -54682,13 +54682,13 @@ function DS11Guide({ person }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Obtaining Your Passport" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Attention" }),
-      ": The supreme court has permitted the state department to discrimminate again for passport gender markers. Do",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Warning" }),
+      ": The supreme court has permitted the state department to discriminate again for passport gender markers. Do",
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "not" }),
-      " attempt to update the marker unless you meet the following conditions. You will need to be someone who has never had a passport before and all of your ID documents that you are submittting need to have your updated name/gender marker with no evidence of the old info. If that is the case, check the box you want in section 3. If you do not meet this criteria we suggest that you stop applying for a passport. If that is not an option then mark your assigned sex at birth in section 3.",
+      " attempt to update the gender marker. The state department will take every measure possible to determine if you have changed your name/gender marker on any document and use that as justification to send a passport with the sex marker assigned at birth. If you can avoid getting or renewing a passport we advise you to do so.",
       gender && gender === "X" ? " X markers are no longer available, you will need to check M or F in section 3. " : " ",
-      "This message will update as the situation changes."
+      "If you have no choice but to continue mark your assigned sex at birth in section 3. This message will update as the situation changes."
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
       "This step should be started after you have updated your primary ID. Pages 1-4 of your passport application (DS-11) contain instructions and clarification. On page 5 at the top you will need to select which documents you want. Then fill out your social security number in section 5. In section 6 if you are NOT a US citizen fill out your USCIS number from your green card  or form I-551 if applicable. If you have changed your name multiple times before then you will need to add them to section 9 if they are not already there. For the photo we suggest going to a business for the highest chance of success. ",
