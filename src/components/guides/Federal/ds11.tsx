@@ -31,22 +31,20 @@ function DS11Guide({ person }: { person: Partial<Person> }) {
       <h3>Obtaining Your Passport</h3>
 
       <p>
-        <strong>Attention</strong>: The supreme court has permitted the state
-        department to discrimminate again for passport gender markers. Do{" "}
-        <strong>not</strong> attempt to update the marker unless you meet the
-        following conditions. You will need to be someone who has never had a
-        passport before and all of your ID documents that you are submittting
-        need to have your updated name/gender marker with no evidence of the
-        old info. If that is the case, check the box you want in section 3. 
-        If you do not meet this criteria we suggest that you stop applying for 
-        a passport. If that is not an option then mark your assigned sex at 
-        birth in section 3.
+        <strong>Warning</strong>: The supreme court has permitted the state
+        department to discriminate again for passport gender markers. Do{" "}
+        <strong>not</strong> attempt to update the gender marker. The state
+        department will take every measure possible to determine if you have
+        changed your name/gender marker on any document and use that as
+        justification to send a passport with the sex marker assigned at birth.
+        If you can avoid getting or renewing a passport we advise you to do so.
         {gender && (gender as string) === "X" ? (
           " X markers are no longer available, you will need to check M or F in section 3. "
         ) : (
           " "
         )}
-        This message will update as the situation changes.
+        If you have no choice but to continue mark your assigned sex at birth in 
+        section 3. This message will update as the situation changes.
       </p>
 
       <p>

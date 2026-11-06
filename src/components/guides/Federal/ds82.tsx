@@ -35,19 +35,17 @@ function DS82Guide({ person }: { person: Partial<Person> }) {
         <strong>Attention</strong>: The supreme court has permitted the state
         department to discrimminate again for passport gender markers. Do{" "}
         <strong>not</strong> attempt to update the marker, it will be rejected.
-        If you have always had a passport with your desired gender marker and 
-        none of the original documents used to get one have your old info you are 
-        safe to renew. Otherwise do <strong>not</strong> renew unless you have no
-        other choice as the gender marker will be reverted to the first one they
-        have on file.
+        Do <strong>not</strong> renew unless you have no other choice as the 
+        gender marker will be reverted to the first one they have on file. Even
+        if they do not have one on file they will look for any changes in your 
+        documentation, both present and past, to try and revert the marker.
         {gender && (gender as string) === "X" ? (
           " Any passport with an X marker will be automatically reverted no matter what. "
         ) : (
           " "
         )}
-        If you are safe check your desired box in section 3. If you have no choice
-        but to renew mark your assigned gender at birth. This message will update 
-        as the situation changes.
+        If you have no choice but to renew mark your assigned sex at birth in 
+        section 3. This message will update as the situation changes.
       </p>
 
       <p>
